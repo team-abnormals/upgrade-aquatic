@@ -1,0 +1,25 @@
+Build: 1.13.2-25.0.21 - Sat Feb 16 22:38:47 GMT 2019
+	cpw: Actually dispatch handleWorldDataSave. Closes #5492
+=========
+Build: 1.13.2-25.0.20 - Sat Feb 16 22:25:46 GMT 2019
+	bonzoweb: Add back missing patch for Item.BLOCK_TO_ITEM
+	cpw: Fix assetIndexes for 1.13.1
+=========
+Build: 1.13.2-25.0.17 - Sat Feb 16 22:01:07 GMT 2019
+	gegy1000: Fix lazy ModContainer evaluation skipping thrown loadingExceptions
+	cpw: Fix travis build for 1.13.x branch
+=========
+Build: 1.13.2-25.0.14 - Sat Feb 16 21:49:32 GMT 2019
+	cpw: Fixes #5446 Listening for the same registry event in two different mods
+=========
+Build: 1.13.2-25.0.13 - Sat Feb 16 02:57:34 GMT 2019
+	cpw: Fix the MDK..
+=========
+Build: 1.13.2-25.0.12 - Sat Feb 16 02:45:43 GMT 2019
+	cpw: Fix network syncing of SERVER config. Enable COMMON Config. Fix network
+=========
+Build: 1.13.2-25.0.11 - Sat Feb 16 01:01:01 GMT 2019
+	cpw: Fix serverlang loading issue, by frontloading MC and Forge langs, so
+=========
+Build: 1.13.2-25.0.10 - Fri Feb 15 06:11:58 GMT 2019
+	cpw: Use MC VERSION in the dependencies string for the extra jar
