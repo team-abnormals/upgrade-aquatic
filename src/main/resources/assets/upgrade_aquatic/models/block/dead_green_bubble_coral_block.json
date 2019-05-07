@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "upgrade_aquatic:block/dead_green_bubble_coral_block"
+    }
+}

@@ -1,0 +1,20 @@
+{
+    "type": "crafting_shaped",
+    "pattern": [
+        " ##",
+        " /#",
+        "/  "
+    ],
+    "key": {
+        "#": {
+            "item": "upgrade_aquatic:megalocanth_tooth"
+        },
+        "/": {
+            "item": "upgrade_aquatic:prismarine_rod"
+        }
+    },
+    "result": {
+		"item": "minecraft:trident",
+        "count": 1
+	}
+}

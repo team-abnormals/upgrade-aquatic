@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=east": { "model": "upgrade_aquatic:block/dead_staghorn_coral_wall_fan", "y": 90 },
+        "facing=south": { "model": "upgrade_aquatic:block/dead_staghorn_coral_wall_fan", "y": 180 },
+        "facing=west": { "model": "upgrade_aquatic:block/dead_staghorn_coral_wall_fan", "y": 270 },
+        "facing=north": { "model": "upgrade_aquatic:block/dead_staghorn_coral_wall_fan", "y": 0 }
+    }
+}

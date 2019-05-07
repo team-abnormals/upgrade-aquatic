@@ -1,0 +1,6 @@
+{
+    "parent": "block/coral_wall_fan",
+    "textures": {
+        "fan": "upgrade_aquatic:block/dead_acan_coral_fan"
+    }
+}

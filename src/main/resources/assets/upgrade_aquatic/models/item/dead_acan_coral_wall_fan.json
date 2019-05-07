@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "upgrade_aquatic:block/dead_acan_coral_fan"
+    }
+}
