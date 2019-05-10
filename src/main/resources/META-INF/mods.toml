@@ -8,7 +8,7 @@ issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
     version="1.0"
     displayName="Upgrade Aquatic"
     authors="SmellyModder, Cameron"
-    description=''''''
+    description='''A mod that improves upon the content of 1.13 Update Aquatic.'''
     displayURL=""
     [[dependencies.upgrade_aquatic]]
         modId="forge"
