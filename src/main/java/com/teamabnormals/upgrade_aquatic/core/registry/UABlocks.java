@@ -43,7 +43,6 @@ public class UABlocks {
 	public static Block GREEN_BUBBLE_CORAL            = new BlockUACoral(DEAD_GREEN_BUBBLE_CORAL, UAProperties.CORAL_BASE(MaterialColor.GREEN)).setRegistryName(Reference.MODID, "green_bubble_coral");
 	public static Block ANTIPATHES_CORAL              = new BlockUACoral(DEAD_ANTIPATHES_CORAL, UAProperties.CORAL_BASE(MaterialColor.LIGHT_BLUE)).setRegistryName(Reference.MODID, "antipathes_coral");
 	public static Block STAGHORN_CORAL                = new BlockUACoral(DEAD_STAGHORN_CORAL, UAProperties.CORAL_BASE(MaterialColor.GRAY_TERRACOTTA)).setRegistryName(Reference.MODID, "staghorn_coral");
-	
 	public static Block DEAD_ACAN_CORAL_WALL_FAN      = new BlockUACoralWallFanDead(UAProperties.DEAD_CORAL).setRegistryName("dead_acan_coral_wall_fan");
 	public static Block DEAD_PILLAR_CORAL_WALL_FAN    = new BlockUACoralWallFanDead(UAProperties.DEAD_CORAL).setRegistryName("dead_pillar_coral_wall_fan");
 	public static Block DEAD_LIME_BRAIN_CORAL_WALL_FAN = new BlockUACoralWallFanDead(UAProperties.DEAD_CORAL).setRegistryName("dead_lime_brain_coral_wall_fan");
@@ -56,7 +55,6 @@ public class UABlocks {
 	public static Block GREEN_BUBBLE_CORAL_WALL_FAN   = new BlockUACoralWallFan(DEAD_GREEN_BUBBLE_CORAL_WALL_FAN, UAProperties.CORAL_BASE(MaterialColor.GREEN)).setRegistryName("green_bubble_coral_wall_fan");
 	public static Block ANTIPATHES_CORAL_WALL_FAN     = new BlockUACoralWallFan(DEAD_ANTIPATHES_CORAL_WALL_FAN, UAProperties.CORAL_BASE(MaterialColor.LIGHT_BLUE)).setRegistryName("antipathes_coral_wall_fan");
 	public static Block STAGHORN_CORAL_WALL_FAN       = new BlockUACoralWallFan(DEAD_STAGHORN_CORAL_WALL_FAN, UAProperties.CORAL_BASE(MaterialColor.GRAY_TERRACOTTA)).setRegistryName("staghorn_coral_wall_fan");
-	
 	public static Block DEAD_ACAN_CORAL_FAN           = new BlockUACoralFanDead().setRegistryName(Reference.MODID, "dead_acan_coral_fan");
 	public static Block DEAD_PILLAR_CORAL_FAN         = new BlockUACoralFanDead().setRegistryName(Reference.MODID, "dead_pillar_coral_fan");
 	public static Block DEAD_LIME_BRAIN_CORAL_FAN     = new BlockUACoralFanDead().setRegistryName(Reference.MODID, "dead_lime_brain_coral_fan");
@@ -70,8 +68,10 @@ public class UABlocks {
 	public static Block ANTIPATHES_CORAL_FAN          = new BlockUACoralFan(DEAD_ANTIPATHES_CORAL_FAN, UAProperties.CORAL_BASE(MaterialColor.LIGHT_BLUE)).setRegistryName(Reference.MODID, "antipathes_coral_fan");
 	public static Block STAGHORN_CORAL_FAN            = new BlockUACoralFan(DEAD_STAGHORN_CORAL_FAN, UAProperties.CORAL_BASE(MaterialColor.GRAY_TERRACOTTA)).setRegistryName(Reference.MODID, "staghorn_coral_fan");
 	
+	public static Block GUARDIAN_SPINE                = new BlockSpine(UAProperties.SPINES).setRegistryName(Reference.MODID, "guardian_spine");
+	
 	@SubscribeEvent
-    public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
+	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
 		final Block blocks[] = {
 			DEAD_ACAN_CORAL_BLOCK, DEAD_PILLAR_CORAL_BLOCK, DEAD_LIME_BRAIN_CORAL_BLOCK, DEAD_GREEN_BUBBLE_CORAL_BLOCK, DEAD_ANTIPATHES_CORAL_BLOCK, DEAD_STAGHORN_CORAL_BLOCK, 
 			ACAN_CORAL_BLOCK, PILLAR_CORAL_BLOCK, LIME_BRAIN_CORAL_BLOCK, GREEN_BUBBLE_CORAL_BLOCK, ANTIPATHES_CORAL_BLOCK, STAGHORN_CORAL_BLOCK,
@@ -80,13 +80,13 @@ public class UABlocks {
 			DEAD_ACAN_CORAL_WALL_FAN, DEAD_PILLAR_CORAL_WALL_FAN, DEAD_LIME_BRAIN_CORAL_WALL_FAN, DEAD_GREEN_BUBBLE_CORAL_WALL_FAN, DEAD_ANTIPATHES_CORAL_WALL_FAN, DEAD_STAGHORN_CORAL_WALL_FAN,
 			ACAN_CORAL_WALL_FAN, PILLAR_CORAL_WALL_FAN, LIME_BRAIN_CORAL_WALL_FAN, GREEN_BUBBLE_CORAL_WALL_FAN, ANTIPATHES_CORAL_WALL_FAN, STAGHORN_CORAL_WALL_FAN,
 			DEAD_ACAN_CORAL_FAN, DEAD_PILLAR_CORAL_FAN, DEAD_LIME_BRAIN_CORAL_FAN, DEAD_GREEN_BUBBLE_CORAL_FAN, DEAD_ANTIPATHES_CORAL_FAN, DEAD_STAGHORN_CORAL_FAN,
-			ACAN_CORAL_FAN, PILLAR_CORAL_FAN, LIME_BRAIN_CORAL_FAN, GREEN_BUBBLE_CORAL_FAN, ANTIPATHES_CORAL_FAN, STAGHORN_CORAL_FAN
+			ACAN_CORAL_FAN, PILLAR_CORAL_FAN, LIME_BRAIN_CORAL_FAN, GREEN_BUBBLE_CORAL_FAN, ANTIPATHES_CORAL_FAN, STAGHORN_CORAL_FAN, GUARDIAN_SPINE
 		};
 		event.getRegistry().registerAll(blocks);
 	}
 	
 	@SubscribeEvent
-    public static void onRegisterItemBlocks(RegistryEvent.Register<Item> event) {
+	public static void onRegisterItemBlocks(RegistryEvent.Register<Item> event) {
 		final IForgeRegistry<Item> registry = event.getRegistry();
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(DEAD_ACAN_CORAL_BLOCK, ItemGroup.BUILDING_BLOCKS));
@@ -113,7 +113,6 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(GREEN_BUBBLE_CORAL, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(ANTIPATHES_CORAL, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(STAGHORN_CORAL, ItemGroup.BUILDING_BLOCKS));
-		
 		registry.register(RegistryUtils.createWallOrFloorItem(DEAD_ACAN_CORAL_FAN, DEAD_ACAN_CORAL_WALL_FAN, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createWallOrFloorItem(DEAD_PILLAR_CORAL_FAN, DEAD_PILLAR_CORAL_WALL_FAN, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createWallOrFloorItem(DEAD_LIME_BRAIN_CORAL_FAN, DEAD_LIME_BRAIN_CORAL_WALL_FAN, ItemGroup.BUILDING_BLOCKS));
@@ -126,5 +125,7 @@ public class UABlocks {
 		registry.register(RegistryUtils.createWallOrFloorItem(GREEN_BUBBLE_CORAL_FAN, GREEN_BUBBLE_CORAL_WALL_FAN, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createWallOrFloorItem(ANTIPATHES_CORAL_FAN, ANTIPATHES_CORAL_WALL_FAN, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createWallOrFloorItem(STAGHORN_CORAL_FAN, STAGHORN_CORAL_WALL_FAN, ItemGroup.BUILDING_BLOCKS));
+	
+		registry.register(RegistryUtils.createSimpleItemBlock(GUARDIAN_SPINE, ItemGroup.DECORATIONS));
 	}
 }

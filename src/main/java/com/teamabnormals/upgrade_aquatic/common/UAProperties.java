@@ -12,4 +12,5 @@ public class UAProperties {
 	public static Block.Properties CORAL_BASE(MaterialColor color) {
 		return Block.Properties.create(Material.CORAL, color).doesNotBlockMovement().sound(SoundType.CORAL);
 	}
+	public static final Block.Properties SPINES = Block.Properties.create(Material.PISTON);
 }
