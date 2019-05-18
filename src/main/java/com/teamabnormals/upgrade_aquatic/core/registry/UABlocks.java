@@ -69,6 +69,7 @@ public class UABlocks {
 	public static Block STAGHORN_CORAL_FAN            = new BlockUACoralFan(DEAD_STAGHORN_CORAL_FAN, UAProperties.CORAL_BASE(MaterialColor.GRAY_TERRACOTTA)).setRegistryName(Reference.MODID, "staghorn_coral_fan");
 	
 	public static Block GUARDIAN_SPINE                = new BlockSpine(UAProperties.SPINES).setRegistryName(Reference.MODID, "guardian_spine");
+	public static Block ELDER_EYE                     = new BlockElderEye(UAProperties.ELDER_PRISMARINE).setRegistryName(Reference.MODID, "elder_eye");
 	
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
@@ -80,7 +81,8 @@ public class UABlocks {
 			DEAD_ACAN_CORAL_WALL_FAN, DEAD_PILLAR_CORAL_WALL_FAN, DEAD_LIME_BRAIN_CORAL_WALL_FAN, DEAD_GREEN_BUBBLE_CORAL_WALL_FAN, DEAD_ANTIPATHES_CORAL_WALL_FAN, DEAD_STAGHORN_CORAL_WALL_FAN,
 			ACAN_CORAL_WALL_FAN, PILLAR_CORAL_WALL_FAN, LIME_BRAIN_CORAL_WALL_FAN, GREEN_BUBBLE_CORAL_WALL_FAN, ANTIPATHES_CORAL_WALL_FAN, STAGHORN_CORAL_WALL_FAN,
 			DEAD_ACAN_CORAL_FAN, DEAD_PILLAR_CORAL_FAN, DEAD_LIME_BRAIN_CORAL_FAN, DEAD_GREEN_BUBBLE_CORAL_FAN, DEAD_ANTIPATHES_CORAL_FAN, DEAD_STAGHORN_CORAL_FAN,
-			ACAN_CORAL_FAN, PILLAR_CORAL_FAN, LIME_BRAIN_CORAL_FAN, GREEN_BUBBLE_CORAL_FAN, ANTIPATHES_CORAL_FAN, STAGHORN_CORAL_FAN, GUARDIAN_SPINE
+			ACAN_CORAL_FAN, PILLAR_CORAL_FAN, LIME_BRAIN_CORAL_FAN, GREEN_BUBBLE_CORAL_FAN, ANTIPATHES_CORAL_FAN, STAGHORN_CORAL_FAN, 
+			GUARDIAN_SPINE, ELDER_EYE
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -127,5 +129,6 @@ public class UABlocks {
 		registry.register(RegistryUtils.createWallOrFloorItem(STAGHORN_CORAL_FAN, STAGHORN_CORAL_WALL_FAN, ItemGroup.BUILDING_BLOCKS));
 	
 		registry.register(RegistryUtils.createSimpleItemBlock(GUARDIAN_SPINE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_EYE, ItemGroup.REDSTONE));
 	}
 }

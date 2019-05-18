@@ -13,4 +13,5 @@ public class UAProperties {
 		return Block.Properties.create(Material.CORAL, color).doesNotBlockMovement().sound(SoundType.CORAL);
 	}
 	public static final Block.Properties SPINES = Block.Properties.create(Material.PISTON);
+	public static final Block.Properties ELDER_PRISMARINE = Block.Properties.create(Material.CIRCUITS, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 35F);
 }
