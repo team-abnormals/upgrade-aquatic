@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent;
@@ -129,6 +130,6 @@ public class UABlocks {
 		registry.register(RegistryUtils.createWallOrFloorItem(STAGHORN_CORAL_FAN, STAGHORN_CORAL_WALL_FAN, ItemGroup.BUILDING_BLOCKS));
 	
 		registry.register(RegistryUtils.createSimpleItemBlock(GUARDIAN_SPINE, ItemGroup.DECORATIONS));
-		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_EYE, ItemGroup.REDSTONE));
+		registry.register(RegistryUtils.createItemBlockWithRarity(ELDER_EYE, ItemGroup.REDSTONE, EnumRarity.RARE));
 	}
 }

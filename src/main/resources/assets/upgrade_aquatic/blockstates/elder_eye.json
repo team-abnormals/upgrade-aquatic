@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "minecraft:block/spruce_door_top" }
+        "": { "model": "upgrade_aquatic:block/elder_eye" }
     }
 }

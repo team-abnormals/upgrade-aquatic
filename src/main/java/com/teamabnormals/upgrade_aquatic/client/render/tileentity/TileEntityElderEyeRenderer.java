@@ -20,6 +20,7 @@ public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityEld
 	
 	private static final ResourceLocation GUARDIAN_BEAM_TEXTURE = new ResourceLocation(":textures/entity/guardian_beam.png");
 	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/block/guardian_eye.png");
+	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/block/guardian_eye_dim.png");
 	private ModelElderEye model;
 	
 	public TileEntityElderEyeRenderer() {
@@ -42,7 +43,11 @@ public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityEld
             GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
             GlStateManager.matrixMode(5888);
         } else {
-            this.bindTexture(ELDER_EYE_TEXTURE);
+        	if(eyeState.get(BlockElderEye.ACTIVE)) {
+        		this.bindTexture(ELDER_EYE_TEXTURE);
+        	} else {
+        		this.bindTexture(ELDER_EYE_DIM_TEXTURE);
+        	}
         }
         
         GlStateManager.pushMatrix();
@@ -56,15 +61,24 @@ public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityEld
         	GlStateManager.translatef((float) x - 0.5F, (float) y + 1.5F, (float) z + 1.5F);
         } else if(eyeState.get(BlockElderEye.FACING) == EnumFacing.WEST) {
         	GlStateManager.translatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 1.5F);
+        } else if (eyeState.get(BlockElderEye.FACING) == EnumFacing.UP) {
+        	GlStateManager.translatef((float) x + 0.5F, (float) y + 0.25F, (float) z + 0.25F);
+        } else {
+        	GlStateManager.translatef((float) x + 0.5F, (float) y + 1.75F, (float) z + 1.75F);
         }
-        
         GlStateManager.scalef(1.0F, -1.0F, -1.0F);
 
         float angle = eyeState.get(BlockElderEye.FACING).getHorizontalAngle();
         
         if (Math.abs(angle) > 1.0E-5D) {
         	GlStateManager.translatef(0.5F, 0.5F, 0.5F);
-        	GlStateManager.rotatef(angle, 0.0F, 1.0F, 0.0F);
+        	if(eyeState.get(BlockElderEye.FACING) == EnumFacing.UP) {
+        		GlStateManager.rotatef(-90F, 1.0F, 0.0F, 0.0F);
+        	} else if(eyeState.get(BlockElderEye.FACING) == EnumFacing.DOWN) {
+        		GlStateManager.rotatef(90F, 1.0F, 0.0F, 0.0F);
+        	} else {
+        		GlStateManager.rotatef(angle, 0.0F, 1.0F, 0.0F);
+        	}
         	GlStateManager.translatef(-0.5F, -0.5F, -0.5F);
         }
         

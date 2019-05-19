@@ -10,6 +10,7 @@ import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.init.Fluids;
@@ -20,27 +21,32 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
 
 public class BlockElderEye extends BlockDirectional implements IBucketPickupHandler, ILiquidContainer {
 
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
+	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-	protected static final VoxelShape field_196316_c = Block.makeCuboidShape(1.0D, 0.0D, 0.0D, 15.0D, 14.0D, 15.0D);
+	protected static final VoxelShape BOX_SIZE = Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D);
+	protected static final VoxelShape DOWN_BOX_SIZE = Block.makeCuboidShape(4.0D, 8.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 	
 	public BlockElderEye(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState()
 			.with(FACING, EnumFacing.SOUTH)
 			.with(POWERED, Boolean.valueOf(false))
+			.with(ACTIVE, Boolean.valueOf(false))
 			.with(WATERLOGGED, Boolean.valueOf(false)));
 	}
 	
 	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-		return field_196316_c;
+		return state.get(FACING) == EnumFacing.DOWN ? DOWN_BOX_SIZE : BOX_SIZE;
 	}
 
 	public boolean canProvidePower(IBlockState state) {
@@ -72,7 +78,7 @@ public class BlockElderEye extends BlockDirectional implements IBucketPickupHand
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
-		builder.add(FACING, POWERED, WATERLOGGED);
+		builder.add(FACING, POWERED, ACTIVE, WATERLOGGED);
 	}
 
 	public IBlockState getStateForPlacement(BlockItemUseContext context) {
@@ -82,11 +88,17 @@ public class BlockElderEye extends BlockDirectional implements IBucketPickupHand
 			.with(FACING, context.getNearestLookingDirection().getOpposite());
 	}
 	
+	@Override
+	public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		worldIn.setBlockState(pos, state.with(ACTIVE, !state.get(ACTIVE)).with(POWERED, false));
+		return true;
+	}
+	
 	public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
-	    return stateIn;
+		return stateIn;
 	}
 
 	@SuppressWarnings("deprecation")

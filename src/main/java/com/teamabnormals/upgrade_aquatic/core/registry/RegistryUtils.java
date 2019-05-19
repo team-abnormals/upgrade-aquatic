@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
@@ -12,6 +13,10 @@ public class RegistryUtils {
 	
 	public static ItemBlock createSimpleItemBlock(Block blockForInput, ItemGroup itemGroup) {
 		return (ItemBlock) new ItemBlock(blockForInput, new Item.Properties().group(itemGroup)).setRegistryName(blockForInput.getRegistryName());
+	}
+	
+	public static ItemBlock createItemBlockWithRarity(Block blockForInput, ItemGroup itemGroup, EnumRarity rarity) {
+		return (ItemBlock) new ItemBlock(blockForInput, new Item.Properties().group(itemGroup).rarity(rarity)).setRegistryName(blockForInput.getRegistryName());
 	}
 	
 	public static ItemBlock createWallOrFloorItem(Block floorBlock, Block wallBlock, ItemGroup itemGroup) {
