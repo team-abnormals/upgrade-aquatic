@@ -13,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 
 public class TileEntityElderEye extends TileEntity implements ITickable {
@@ -78,5 +79,9 @@ public class TileEntityElderEye extends TileEntity implements ITickable {
 			}
 		}
 		return i;
+	}
+	
+	public BlockPos getBlockPosForRange(EnumFacing direction) {
+		return pos.offset(direction, this.calcRange(direction));
 	}
 }
