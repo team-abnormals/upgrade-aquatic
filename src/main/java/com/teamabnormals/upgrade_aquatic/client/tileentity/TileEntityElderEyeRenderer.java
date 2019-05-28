@@ -1,6 +1,6 @@
-package com.teamabnormals.upgrade_aquatic.client.render.tileentity;
+package com.teamabnormals.upgrade_aquatic.client.tileentity;
 
-import com.teamabnormals.upgrade_aquatic.client.render.model.ModelElderEye;
+import com.teamabnormals.upgrade_aquatic.client.model.ModelElderEye;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;

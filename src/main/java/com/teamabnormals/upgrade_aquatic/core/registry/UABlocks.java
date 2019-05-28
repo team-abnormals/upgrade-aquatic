@@ -14,6 +14,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 import com.teamabnormals.upgrade_aquatic.common.UAProperties;
 import com.teamabnormals.upgrade_aquatic.common.blocks.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)

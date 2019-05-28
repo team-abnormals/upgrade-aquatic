@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.client.render.model;
+package com.teamabnormals.upgrade_aquatic.client.model;
 
 import net.minecraft.client.renderer.entity.model.ModelBase;
 import net.minecraft.client.renderer.entity.model.ModelRenderer;
