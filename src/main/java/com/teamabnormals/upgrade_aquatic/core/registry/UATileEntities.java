@@ -28,7 +28,7 @@ public class UATileEntities {
 		
         @SubscribeEvent
         public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
-            registerTileEntityType(event.getRegistry(), register("iron_chest", TileEntityType.Builder.create(TileEntityElderEye::new)), Reference.ELDER_EYE);
+            registerTileEntityType(event.getRegistry(), register("elder_eye", TileEntityType.Builder.create(TileEntityElderEye::new)), Reference.ELDER_EYE);
         }
         
     }
