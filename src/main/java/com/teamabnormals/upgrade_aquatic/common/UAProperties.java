@@ -12,6 +12,6 @@ public class UAProperties {
 	public static Block.Properties CORAL_BASE(MaterialColor color) {
 		return Block.Properties.create(Material.CORAL, color).doesNotBlockMovement().sound(SoundType.CORAL);
 	}
-	public static final Block.Properties SPINES = Block.Properties.create(Material.PISTON);
-	public static final Block.Properties ELDER_PRISMARINE = Block.Properties.create(Material.CIRCUITS, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 35F);
+	public static final Block.Properties SPINES = Block.Properties.create(Material.ORGANIC);
+	public static final Block.Properties ELDER_PRISMARINE = Block.Properties.create(Material.ORGANIC, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(2.0F, 35F);
 }
