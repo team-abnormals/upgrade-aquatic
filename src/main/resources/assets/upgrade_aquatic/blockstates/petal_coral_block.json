@@ -1,5 +1,5 @@
 {
     "variants": {
-        "": { "model": "upgrade_aquatic:block/antipathes_coral_block" }
+        "": { "model": "upgrade_aquatic:block/petal_coral_block" }
     }
 }
