@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.registry.util;
 
+import com.teamabnormals.upgrade_aquatic.common.items.itemblocks.ItemBlockUpsideDown;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.Block;
@@ -15,6 +16,10 @@ public class RegistryUtils {
 	
 	public static BlockItem createWallOrFloorItem(Block floorBlock, Block wallBlock, ItemGroup itemGroup) {
 		return (BlockItem) new WallOrFloorItem(floorBlock, wallBlock, new Item.Properties().group(itemGroup)).setRegistryName(floorBlock.getRegistryName());
+	}
+	
+	public static BlockItem createUpsideDownBlockItem(Block block, ItemGroup itemGroup) {
+		return (BlockItem) new ItemBlockUpsideDown(block, new Item.Properties().group(itemGroup)).setRegistryName(block.getRegistryName());
 	}
 	
 	public static Item createSimpleItem(String name, ItemGroup itemGroup) {
