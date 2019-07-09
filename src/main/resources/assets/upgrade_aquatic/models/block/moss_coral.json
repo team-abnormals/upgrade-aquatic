@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "upgrade_aquatic:block/moss_coral"
+    }
+}

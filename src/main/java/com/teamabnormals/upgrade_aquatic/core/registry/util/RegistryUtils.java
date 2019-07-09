@@ -4,25 +4,17 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemSpawnEgg;
-import net.minecraft.item.ItemWallOrFloor;
+import net.minecraft.item.Rarity;
+import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.WallOrFloorItem;
 
 public class RegistryUtils {
 	
-	public static ItemBlock createSimpleItemBlock(Block blockForInput, ItemGroup itemGroup) {
-		return (ItemBlock) new ItemBlock(blockForInput, new Item.Properties().group(itemGroup)).setRegistryName(blockForInput.getRegistryName());
-	}
-	
-	public static ItemBlock createItemBlockWithRarity(Block blockForInput, ItemGroup itemGroup, EnumRarity rarity) {
-		return (ItemBlock) new ItemBlock(blockForInput, new Item.Properties().group(itemGroup).rarity(rarity)).setRegistryName(blockForInput.getRegistryName());
-	}
-	
-	public static ItemBlock createWallOrFloorItem(Block floorBlock, Block wallBlock, ItemGroup itemGroup) {
-		return (ItemBlock) new ItemWallOrFloor(floorBlock, wallBlock, new Item.Properties().group(itemGroup)).setRegistryName(floorBlock.getRegistryName());
+	public static BlockItem createWallOrFloorItem(Block floorBlock, Block wallBlock, ItemGroup itemGroup) {
+		return (BlockItem) new WallOrFloorItem(floorBlock, wallBlock, new Item.Properties().group(itemGroup)).setRegistryName(floorBlock.getRegistryName());
 	}
 	
 	public static Item createSimpleItem(String name, ItemGroup itemGroup) {
@@ -30,7 +22,15 @@ public class RegistryUtils {
 	}
 	
 	public static Item createSpawnEggForEntity(@SuppressWarnings("rawtypes") EntityType entityType, int eggColor1, int eggColor2, ItemGroup itemGroup) {
-		return new ItemSpawnEgg(entityType, eggColor1, eggColor2, new Item.Properties().group(itemGroup)).setRegistryName(entityType.getRegistryName() + "_spawn_egg");
+		return new SpawnEggItem(entityType, eggColor1, eggColor2, new Item.Properties().group(itemGroup)).setRegistryName(entityType.getRegistryName() + "_spawn_egg");
+	}
+
+	public static BlockItem createSimpleItemBlock(Block block, ItemGroup itemGroup) {
+		return (BlockItem) new BlockItem(block, new Item.Properties().group(itemGroup)).setRegistryName(block.getRegistryName());
+	}
+
+	public static Item createItemBlockWithRarity(Block blockForInput, ItemGroup itemGroup, Rarity rarity) {
+		return (BlockItem) new BlockItem(blockForInput, new Item.Properties().group(itemGroup).rarity(rarity)).setRegistryName(blockForInput.getRegistryName());
 	}
 	
 }
