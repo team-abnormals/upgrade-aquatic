@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:brain_coral"
+          "name": "upgrade_aquatic:elder_prismarine_coral"
         }
       ],
       "conditions": [

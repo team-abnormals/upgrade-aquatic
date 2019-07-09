@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "upgrade_aquatic:star_coral"
+          "name": "upgrade_aquatic:petal_coral"
         }
       ],
       "conditions": [

@@ -1,5 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.common.blocks;
 
+import java.util.Random;
+
+import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -9,10 +13,17 @@ import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockCoralShower extends CoralPlantBlock {
+	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 1.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
 	public BlockCoralShower(Block deadBlock, Properties props) {
 		super(deadBlock, props);
@@ -21,6 +32,23 @@ public class BlockCoralShower extends CoralPlantBlock {
 	@Override
 	public int getLightValue(BlockState state) {
 		return 3;
+	}
+	
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+		return SHAPE;
+	}
+	
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+		double xOffset = rand.nextBoolean() ? -(Math.random() * 0.4) : (Math.random() * 0.4);
+		double yOffset = rand.nextBoolean() ? -(Math.random() * 0.4) : (Math.random() * 0.4);
+		double zOffset = rand.nextBoolean() ? -(Math.random() * 0.4) : (Math.random() * 0.4);
+		double d0 = (double) pos.getX() + 0.5D + xOffset;
+		double d1 = (double) pos.getY() + 0.5D + yOffset;
+		double d2 = (double) pos.getZ() + 0.5D + zOffset;
+		UAParticles.PRISMARINE_SHOWER.spawn(worldIn, d0, d1, d2, 0d, 0.004d, 0d);
 	}
 	
 	@Override

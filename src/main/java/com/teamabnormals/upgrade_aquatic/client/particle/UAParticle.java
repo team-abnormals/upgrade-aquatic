@@ -47,7 +47,7 @@ public abstract class UAParticle extends TexturedParticle implements IParticleRe
     
     @Override
     protected float func_217562_e() {
-    	return 0;
+    	return 1F;
     }
     
     @Override
@@ -57,7 +57,7 @@ public abstract class UAParticle extends TexturedParticle implements IParticleRe
     
     @Override
     protected float func_217564_d() {
-    	return 0;
+    	return 1F;
     }
 
     @Override
