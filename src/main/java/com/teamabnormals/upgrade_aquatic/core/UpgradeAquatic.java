@@ -15,7 +15,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(value = Reference.MODID)
 public class UpgradeAquatic {
-	
 	public static UpgradeAquatic instance;
 	public static TileEntityType<TileEntityElderEye> ELDER_EYE;
 	public static ServerProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
