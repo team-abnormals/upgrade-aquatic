@@ -5,6 +5,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CoralPlantBlock;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -14,6 +16,17 @@ public class BlockCoralShower extends CoralPlantBlock {
 
 	public BlockCoralShower(Block deadBlock, Properties props) {
 		super(deadBlock, props);
+	}
+	
+	@Override
+	public int getLightValue(BlockState state) {
+		return 3;
+	}
+	
+	@Override
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
 	}
 
 	@Override
