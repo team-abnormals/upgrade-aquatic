@@ -36,6 +36,6 @@ public class UpgradeAquatic {
 	@SubscribeEvent
 	@SuppressWarnings("unchecked")
 	public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-		event.getRegistry().register(ELDER_EYE = (TileEntityType<TileEntityElderEye>) TileEntityType.Builder.func_223042_a(TileEntityElderEye::new, UABlocks.ELDER_EYE).build(null).setRegistryName(Reference.MODID, "elder_eye"));
+		event.getRegistry().register(ELDER_EYE = (TileEntityType<TileEntityElderEye>) TileEntityType.Builder.create(TileEntityElderEye::new, UABlocks.ELDER_EYE).build(null).setRegistryName(Reference.MODID, "elder_eye"));
 	}
 }
