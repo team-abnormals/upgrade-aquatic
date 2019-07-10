@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.DirectionalBlock;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
@@ -13,6 +14,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.state.BooleanProperty;
@@ -30,6 +32,7 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
@@ -73,6 +76,11 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 			.with(ELDER, elder)
 			.with(FACING, Direction.SOUTH)
 		);
+	}
+	
+	@Override
+	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+		return state.get(DRAWN);
 	}
 	
 	@Override
@@ -144,11 +152,12 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity && state.get(DRAWN)) {
 			entityIn.setMotionMultiplier(state, new Vec3d(0.25D, 0.5D, 0.25D));
-			if(state.get(ELDER)) ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 3));
-			if (!worldIn.isRemote && (entityIn.lastTickPosX != entityIn.posX || entityIn.lastTickPosZ != entityIn.posZ)) {
+			if(state.get(ELDER)) ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 10));
+			if (!worldIn.isRemote && (entityIn.lastTickPosX != entityIn.posX || entityIn.lastTickPosZ != entityIn.posZ || entityIn.lastTickPosY != entityIn.posY)) {
 				double d0 = Math.abs(entityIn.posX - entityIn.lastTickPosX);
 				double d1 = Math.abs(entityIn.posZ - entityIn.lastTickPosZ);
-				if (d0 >= 0.003D || d1 >= 0.003D) {
+				double d2 = Math.abs(entityIn.posY - entityIn.lastTickPosY);
+				if (d0 >= 0.003D || d1 >= 0.003D || d2 >= 0.003D) {
 					if(state.get(ELDER)) {
 						entityIn.attackEntityFrom(DamageSource.CACTUS, 3.0F);
 					} else {
@@ -197,7 +206,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 		if (stateIn.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
-	    return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	    return stateIn.get(FACING).getOpposite() == facing && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
@@ -238,5 +247,15 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 		} else {
 			return false;
 	    }
+	}
+	
+	@Override
+	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		return func_220185_b(worldIn, pos, state.get(FACING).getOpposite());
+	}
+	
+	public static boolean func_220185_b(IWorldReader p_220185_0_, BlockPos p_220185_1_, Direction p_220185_2_) {
+		BlockPos blockpos = p_220185_1_.offset(p_220185_2_);
+		return Block.hasSolidSide(p_220185_0_.getBlockState(blockpos), p_220185_0_, blockpos, p_220185_2_.getOpposite());
 	}
 }

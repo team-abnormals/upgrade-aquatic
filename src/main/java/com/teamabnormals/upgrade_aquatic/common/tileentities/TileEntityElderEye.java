@@ -66,6 +66,7 @@ public class TileEntityElderEye extends TileEntity implements ITickableTileEntit
 
 			if(state.get(BlockElderEye.POWERED) != hasEntity && state.get(BlockElderEye.ACTIVE)) {
 				world.setBlockState(pos, state.getBlockState().with(BlockElderEye.POWERED, hasEntity));
+				((BlockElderEye)state.getBlock()).updateRedstoneNeighbors(state, getWorld(), getPos());
 			}
 		}
 	}

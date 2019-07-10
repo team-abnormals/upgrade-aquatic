@@ -47,16 +47,6 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader p_220071_2_, BlockPos p_220071_3_, ISelectionContext p_220071_4_) {
-		return state.get(FACING) == Direction.DOWN ? DOWN_BOX_SIZE : BOX_SIZE;
-	}
-	
-	@Override
-	public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.get(FACING) == Direction.DOWN ? DOWN_BOX_SIZE : BOX_SIZE;
-	}
-	
-	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
 		return state.get(FACING) == Direction.DOWN ? DOWN_BOX_SIZE : BOX_SIZE;
 	}
@@ -66,11 +56,11 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	}
 
 	public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.getWeakPower(blockAccess, pos, side);
+		return blockState.get(POWERED) && blockState.get(FACING) == side ? 15 : 0;
 	}
 
 	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.get(POWERED).booleanValue() ? 15 : 0;
+		return blockState.get(POWERED) ? 15 : 0;
 	}
 	
 	@Nullable
@@ -100,9 +90,26 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 			.with(FACING, context.getNearestLookingDirection().getOpposite());
 	}
 	
+	@SuppressWarnings("deprecation")
+	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+		 if (!isMoving && state.getBlock() != newState.getBlock()) {
+			 if (state.get(POWERED)) {
+				 this.updateRedstoneNeighbors(state, worldIn, pos);
+			 }
+
+			 super.onReplaced(state, worldIn, pos, newState, isMoving);
+		 }
+	 }
+	
 	@Override
 	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
-		worldIn.setBlockState(pos, state.with(ACTIVE, !state.get(ACTIVE)).with(POWERED, false));
+		boolean flag = state.get(ACTIVE);
+		if(flag) {
+			worldIn.setBlockState(pos, state.with(ACTIVE, false).with(POWERED, false));
+		} else {
+			worldIn.setBlockState(pos, state.with(ACTIVE, true).with(POWERED, false));
+		}
+		this.updateRedstoneNeighbors(state, worldIn, pos);
 		return true;
 	}
 	
@@ -110,7 +117,13 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 		if (stateIn.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
+		this.updateRedstoneNeighbors(stateIn, worldIn.getWorld(), currentPos);
 		return stateIn;
+	}
+	
+	public void updateRedstoneNeighbors(BlockState p_196378_1_, World p_196378_2_, BlockPos p_196378_3_) {
+		p_196378_2_.notifyNeighborsOfStateChange(p_196378_3_, this);
+		p_196378_2_.notifyNeighborsOfStateChange(p_196378_3_.offset(p_196378_1_.get(FACING).getOpposite(), 1), this);
 	}
 
 	@SuppressWarnings("deprecation")
