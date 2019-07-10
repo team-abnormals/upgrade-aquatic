@@ -1,6 +1,6 @@
 {
-  "block.upgrade_aquatic.guardian_spine": "Guardian Spine",
-  "block.upgrade_aquatic.elder_guardian_spine": "Elder Guardian Spine",
+  "block.upgrade_aquatic.guardian_spine": "Guardian Spinee",
+  "block.upgrade_aquatic.elder_guardian_spine": "Elder Guardian Spinee",
   "block.upgrade_aquatic.bubble_block": "Bubble Block",
   "block.upgrade_aquatic.dead_acan_coral": "Dead Acan Coral",
   "block.upgrade_aquatic.dead_acan_coral_block": "Dead Acan Coral Block",
@@ -66,5 +66,9 @@
   "block.upgrade_aquatic.prismarine_coral_shower": "Prismarine Coral Shower",
   "block.upgrade_aquatic.elder_eye": "Elder Eye",
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
-  "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drowned Villager Spawn Egg"
+  "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drowned Villager Spawn Egg",
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Guardian Spine",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Guardian Spine whilst trying to escape %2$s",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by an Elder Guardian Spine",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s was spiked to death by an Elder Guardian Spine whilst trying to escape %2$s"
 }

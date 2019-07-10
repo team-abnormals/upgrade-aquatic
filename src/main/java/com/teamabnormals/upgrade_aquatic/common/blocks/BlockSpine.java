@@ -2,6 +2,8 @@ package com.teamabnormals.upgrade_aquatic.common.blocks;
 
 import java.util.Random;
 
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UADamageSources;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,6 +12,7 @@ import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
@@ -20,12 +23,13 @@ import net.minecraft.potion.Effects;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.Direction.AxisDirection;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -152,16 +156,18 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity && state.get(DRAWN)) {
 			entityIn.setMotionMultiplier(state, new Vec3d(0.25D, 0.5D, 0.25D));
-			if(state.get(ELDER)) ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 10));
+			if(!entityIn.isInvulnerable()) {
+				if(state.get(ELDER)) ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 40));
+			}
 			if (!worldIn.isRemote && (entityIn.lastTickPosX != entityIn.posX || entityIn.lastTickPosZ != entityIn.posZ || entityIn.lastTickPosY != entityIn.posY)) {
 				double d0 = Math.abs(entityIn.posX - entityIn.lastTickPosX);
 				double d1 = Math.abs(entityIn.posZ - entityIn.lastTickPosZ);
 				double d2 = Math.abs(entityIn.posY - entityIn.lastTickPosY);
 				if (d0 >= 0.003D || d1 >= 0.003D || d2 >= 0.003D) {
 					if(state.get(ELDER)) {
-						entityIn.attackEntityFrom(DamageSource.CACTUS, 3.0F);
+						entityIn.attackEntityFrom(UADamageSources.ELDER_GUARDIAN_SPINE, 3.0F);
 					} else {
-						entityIn.attackEntityFrom(DamageSource.CACTUS, 2.0F);
+						entityIn.attackEntityFrom(UADamageSources.GUARDIAN_SPINE, 2.0F);
 					}
 				}
 			}
@@ -187,6 +193,8 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 				if (flag) {
 					worldIn.getPendingBlockTicks().scheduleTick(pos, this, 1);
 				} else {
+					float pitch = state.get(ELDER) ? 0.85F : 1.0F;
+					worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 0.3F, pitch);
 					worldIn.setBlockState(pos, state.cycle(DRAWN), 2);
 				}
 			}
@@ -196,6 +204,8 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isRemote) {
 			if (state.get(DRAWN) && !worldIn.isBlockPowered(pos)) {
+				float pitch = state.get(ELDER) ? 0.85F : 1.0F;
+				worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.3F, pitch);
 				worldIn.setBlockState(pos, state.cycle(DRAWN), 2);
 			}
 		}

@@ -21,6 +21,8 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -105,8 +107,10 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
 		boolean flag = state.get(ACTIVE);
 		if(flag) {
+			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_CONDUIT_DEACTIVATE, SoundCategory.BLOCKS, 0.3F, 1.0F);
 			worldIn.setBlockState(pos, state.with(ACTIVE, false).with(POWERED, false));
 		} else {
+			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_CONDUIT_ACTIVATE, SoundCategory.BLOCKS, 0.3F, 1.0F);
 			worldIn.setBlockState(pos, state.with(ACTIVE, true).with(POWERED, false));
 		}
 		this.updateRedstoneNeighbors(state, worldIn, pos);
