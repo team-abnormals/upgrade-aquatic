@@ -28,7 +28,6 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ToolType;
 
 public class BlockElderEye extends DirectionalBlock implements IBucketPickupHandler, ILiquidContainer {
 
@@ -45,11 +44,6 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 			.with(POWERED, Boolean.valueOf(false))
 			.with(ACTIVE, Boolean.valueOf(false))
 			.with(WATERLOGGED, Boolean.valueOf(false)));
-	}
-	
-	@Override
-	public ToolType getHarvestTool(BlockState state) {
-		return ToolType.PICKAXE;
 	}
 	
 	@Override
@@ -76,7 +70,7 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	}
 
 	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.get(POWERED).booleanValue() && blockState.get(FACING) == side ? 15 : 0;
+		return blockState.get(POWERED).booleanValue() ? 15 : 0;
 	}
 	
 	@Nullable

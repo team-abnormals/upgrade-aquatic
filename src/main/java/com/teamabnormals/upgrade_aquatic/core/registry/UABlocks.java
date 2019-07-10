@@ -113,7 +113,7 @@ public class UABlocks {
 	public static Block PRISMARINE_CORAL_SHOWER       = new BlockCoralShower(ELDER_PRISMARINE_CORAL_SHOWER, UAProperties.CORAL_BASE(MaterialColor.DIAMOND)).setRegistryName(Reference.MODID, "prismarine_coral_shower");
 	
 	public static Block GUARDIAN_SPINE                = new BlockSpine(UAProperties.SPINES).setRegistryName(Reference.MODID, "guardian_spine");
-	public static Block ELDER_EYE                     = new BlockElderEye(UAProperties.ELDER_PRISMARINE).setRegistryName(Reference.MODID, "elder_eye");
+	public static Block ELDER_EYE                     = new BlockElderEye(UAProperties.ELDER_EYE).setRegistryName(Reference.MODID, "elder_eye");
 	
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {

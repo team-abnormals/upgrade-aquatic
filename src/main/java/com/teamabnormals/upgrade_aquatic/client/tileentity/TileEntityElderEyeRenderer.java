@@ -36,7 +36,7 @@ public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityEld
             this.bindTexture(DESTROY_STAGES[destroyStage]);
             GlStateManager.matrixMode(5890);
             GlStateManager.pushMatrix();
-            GlStateManager.scalef(4F, 4F, 1F);
+            GlStateManager.scalef(2F, 2F, 1F);
             GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
             GlStateManager.matrixMode(5888);
         } else {

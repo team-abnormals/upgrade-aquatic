@@ -51,10 +51,12 @@ public class TileEntityElderEye extends TileEntity implements ITickableTileEntit
 					for(int b = 1; b < Math.abs(IntStream.of(posCheck).sum()); b++) {
 						
 						if(!world.getBlockState(this.pos.offset(facing, b)).isAir()) {
-							entityCount--;
-							if(entityCount <= 0) {
-								hasEntity = false;
-								break;
+							if(world.getBlockState(this.pos.offset(facing, b)).getMaterial() != Material.WATER) {
+								entityCount--;
+								if(entityCount <= 0) {
+									hasEntity = false;
+									break;
+								}
 							}
 						}
 						
