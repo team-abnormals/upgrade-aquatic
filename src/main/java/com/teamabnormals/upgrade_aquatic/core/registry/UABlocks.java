@@ -205,8 +205,8 @@ public class UABlocks {
 		registry.register(RegistryUtils.createUpsideDownBlockItem(ELDER_PRISMARINE_CORAL_SHOWER, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createUpsideDownBlockItem(PRISMARINE_CORAL_SHOWER, ItemGroup.DECORATIONS));
 		
-		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_GUARDIAN_SPINE, ItemGroup.DECORATIONS));
-		registry.register(RegistryUtils.createSimpleItemBlock(GUARDIAN_SPINE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_GUARDIAN_SPINE, ItemGroup.REDSTONE));
+		registry.register(RegistryUtils.createSimpleItemBlock(GUARDIAN_SPINE, ItemGroup.REDSTONE));
 		registry.register(RegistryUtils.createItemBlockWithRarity(ELDER_EYE, ItemGroup.REDSTONE, Rarity.RARE));
 	}
 }
