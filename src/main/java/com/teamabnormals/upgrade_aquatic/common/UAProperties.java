@@ -18,7 +18,7 @@ public class UAProperties {
 		return Block.Properties.create(Material.CORAL, MaterialColor.DIAMOND).doesNotBlockMovement().lightValue(3).sound(SoundType.WET_GRASS);
 	}
 	
-	public static final Block.Properties SPINES = Block.Properties.create(Material.ORGANIC);
+	public static final Block.Properties SPINES = Block.Properties.create(Material.ORGANIC).doesNotBlockMovement().hardnessAndResistance(1.5F);
 	public static final Block.Properties ELDER_EYE = Block.Properties.create(Material.ORGANIC, MaterialColor.WHITE_TERRACOTTA).sound(SoundType.WET_GRASS).hardnessAndResistance(1.0F);
 	
 }

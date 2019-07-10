@@ -30,7 +30,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class BlockElderEye extends DirectionalBlock implements IBucketPickupHandler, ILiquidContainer {
-
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -43,7 +42,8 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 			.with(FACING, Direction.SOUTH)
 			.with(POWERED, Boolean.valueOf(false))
 			.with(ACTIVE, Boolean.valueOf(false))
-			.with(WATERLOGGED, Boolean.valueOf(false)));
+			.with(WATERLOGGED, Boolean.valueOf(false))
+		);
 	}
 	
 	@Override

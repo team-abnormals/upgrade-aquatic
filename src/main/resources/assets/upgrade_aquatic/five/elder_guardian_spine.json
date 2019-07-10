@@ -1,5 +1,15 @@
 {
-	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"display": {
+		"thirdperson_righthand": {
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"head": {
+			"rotation": [-60, 0, 0],
+			"translation": [0, 5, -9]
+		}
+	},
+	"ambientocclusion": false,
 	"textures": {
 		"0": "five/elder_guardian_spine",
 		"particle": "five/elder_guardian_spine"
