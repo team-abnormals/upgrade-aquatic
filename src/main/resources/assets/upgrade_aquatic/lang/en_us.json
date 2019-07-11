@@ -1,74 +1,109 @@
 {
-  "block.upgrade_aquatic.guardian_spine": "Guardian Spinee",
-  "block.upgrade_aquatic.elder_guardian_spine": "Elder Guardian Spinee",
+  "_comment": "Blocks",
+  
+
+  "block.upgrade_aquatic.guardian_spine": "Guardian Spine",
+  "block.upgrade_aquatic.elder_guardian_spine": "Elder Guardian Spine",
+  
   "block.upgrade_aquatic.bubble_block": "Bubble Block",
+  
   "block.upgrade_aquatic.dead_acan_coral": "Dead Acan Coral",
   "block.upgrade_aquatic.dead_acan_coral_block": "Dead Acan Coral Block",
   "block.upgrade_aquatic.dead_acan_coral_fan": "Dead Acan Coral Fan",
+  
   "block.upgrade_aquatic.acan_coral": "Acan Coral",
   "block.upgrade_aquatic.acan_coral_block": "Acan Coral Block",
   "block.upgrade_aquatic.acan_coral_fan": "Acan Coral Fan",
+  
   "block.upgrade_aquatic.elder_prismarine_coral": "Elder Prismarine Coral",
   "block.upgrade_aquatic.elder_prismarine_coral_block": "Elder Prismarine Coral Block",
   "block.upgrade_aquatic.elder_prismarine_coral_fan": "Elder Prismarine Coral Fan",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Elder Prismarine Coral Shower",
+  
   "block.upgrade_aquatic.prismarine_coral": "Prismarine Coral",
   "block.upgrade_aquatic.prismarine_coral_block": "Prismarine Coral Block",
   "block.upgrade_aquatic.prismarine_coral_fan": "Prismarine Coral Fan",
+  "block.upgrade_aquatic.prismarine_coral_shower": "Prismarine Coral Shower",
+  
   "block.upgrade_aquatic.dead_silk_coral": "Dead Silk Coral",
   "block.upgrade_aquatic.dead_silk_coral_block": "Dead Silk Coral Block",
   "block.upgrade_aquatic.dead_silk_coral_fan": "Dead Silk Coral Fan",
+  
   "block.upgrade_aquatic.silk_coral": "Silk Coral",
   "block.upgrade_aquatic.silk_coral_block": "Silk Coral Block",
   "block.upgrade_aquatic.silk_coral_fan": "Silk Coral Fan",
+  
   "block.upgrade_aquatic.dead_pillow_coral": "Dead Pillow Coral",
   "block.upgrade_aquatic.dead_pillow_coral_block": "Dead Pillow Coral Block",
   "block.upgrade_aquatic.dead_pillow_coral_fan": "Dead Pillow Coral Fan",
+  
   "block.upgrade_aquatic.pillow_coral": "Pillow Coral",
   "block.upgrade_aquatic.pillow_coral_block": "Pillow Coral Block",
   "block.upgrade_aquatic.pillow_coral_fan": "Pillow Coral Fan",
+  
   "block.upgrade_aquatic.dead_rock_coral": "Dead Rock Coral",
   "block.upgrade_aquatic.dead_rock_coral_block": "Dead Rock Coral Block",
   "block.upgrade_aquatic.dead_rock_coral_fan": "Dead Rock Coral Fan",
+  
   "block.upgrade_aquatic.rock_coral": "Rock Coral",
   "block.upgrade_aquatic.rock_coral_block": "Rock Coral Block",
   "block.upgrade_aquatic.rock_coral_fan": "Rock Coral Fan",
+  
   "block.upgrade_aquatic.dead_finger_coral": "Dead Finger Coral",
   "block.upgrade_aquatic.dead_finger_coral_block": "Dead Finger Coral Block",
   "block.upgrade_aquatic.dead_finger_coral_fan": "Dead Finger Coral Fan",
+  
   "block.upgrade_aquatic.finger_coral": "Finger Coral",
   "block.upgrade_aquatic.finger_coral_block": "Finger Coral Block",
   "block.upgrade_aquatic.finger_coral_fan": "Finger Coral Fan",
+  
   "block.upgrade_aquatic.dead_star_coral": "Dead Star Coral",
   "block.upgrade_aquatic.dead_star_coral_block": "Dead Star Coral Block",
   "block.upgrade_aquatic.dead_star_coral_fan": "Dead Star Coral Fan",
+  
   "block.upgrade_aquatic.star_coral": "Star Coral",
   "block.upgrade_aquatic.star_coral_block": "Star Coral Block",
   "block.upgrade_aquatic.star_coral_fan": "Star Coral Fan",
+  
   "block.upgrade_aquatic.dead_moss_coral": "Dead Moss Coral",
   "block.upgrade_aquatic.dead_moss_coral_block": "Dead Moss Coral Block",
   "block.upgrade_aquatic.dead_moss_coral_fan": "Dead Moss Coral Fan",
+  
   "block.upgrade_aquatic.moss_coral": "Moss Coral",
   "block.upgrade_aquatic.moss_coral_block": "Moss Coral Block",
   "block.upgrade_aquatic.moss_coral_fan": "Moss Coral Fan",
+  
   "block.upgrade_aquatic.dead_petal_coral": "Dead Petal Coral",
   "block.upgrade_aquatic.dead_petal_coral_block": "Dead Petal Coral Block",
   "block.upgrade_aquatic.dead_petal_coral_fan": "Dead Petal Coral Fan",
+  
   "block.upgrade_aquatic.petal_coral": "Petal Coral",
   "block.upgrade_aquatic.petal_coral_block": "Petal Coral Block",
   "block.upgrade_aquatic.petal_coral_fan": "Petal Coral Fan",
+  
   "block.upgrade_aquatic.dead_branch_coral": "Dead Branch Coral",
   "block.upgrade_aquatic.dead_branch_coral_block": "Dead Branch Coral Block",
   "block.upgrade_aquatic.dead_branch_coral_fan": "Dead Branch Coral Fan",
+  
   "block.upgrade_aquatic.branch_coral": "Branch Coral",
   "block.upgrade_aquatic.branch_coral_block": "Branch Coral Block",
   "block.upgrade_aquatic.branch_coral_fan": "Branch Coral Fan",
-  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Elder Prismarine Coral Shower",
-  "block.upgrade_aquatic.prismarine_coral_shower": "Prismarine Coral Shower",
+  
+  "_comment": "Items",
+
   "block.upgrade_aquatic.elder_eye": "Elder Eye",
+  
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
+
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drowned Villager Spawn Egg",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Nautilus Spawn Egg",
+  
+  "_comment": "Entities",
+  
   "entity.upgrade_aquatic.nautilus": "Nautilus",
+  
+  "_comment": "Deaths",
+  
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Guardian Spine",
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Guardian Spine whilst trying to escape %2$s",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by an Elder Guardian Spine",

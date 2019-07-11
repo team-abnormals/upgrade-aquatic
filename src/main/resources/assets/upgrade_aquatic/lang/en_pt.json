@@ -1,74 +1,111 @@
 {
+  "_comment": "Blocks",
+  
+
   "block.upgrade_aquatic.guardian_spine": "Sea Lurker Spine",
   "block.upgrade_aquatic.elder_guardian_spine": "Great Sea Lurker Spine",
+  
   "block.upgrade_aquatic.bubble_block": "Cluster O' Bubbles",
-  "block.upgrade_aquatic.dead_acan_coral": "Dead Ringed Coral",
+  
+ "block.upgrade_aquatic.dead_acan_coral": "Dead Ringed Coral",
   "block.upgrade_aquatic.dead_acan_coral_block": "Chunk O' Dead Ringed Coral",
   "block.upgrade_aquatic.dead_acan_coral_fan": "Dead Ringed Coral Waf'r",
+  
   "block.upgrade_aquatic.acan_coral": "Ringed Coral",
   "block.upgrade_aquatic.acan_coral_block": "Chunk O' Ringed Coral",
   "block.upgrade_aquatic.acan_coral_fan": "Ringed Coral Waf'r",
+  
   "block.upgrade_aquatic.elder_prismarine_coral": "Great Prismarine Coral",
   "block.upgrade_aquatic.elder_prismarine_coral_block": "Chunk O' Great Prismarine Coral",
   "block.upgrade_aquatic.elder_prismarine_coral_fan": "Great Prismarine Coral Waf'r",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Great Prismarine Coral Spread'r",
+  
   "block.upgrade_aquatic.prismarine_coral": "Prismarine Coral",
   "block.upgrade_aquatic.prismarine_coral_block": "Chunk O' Prismarine Coral",
   "block.upgrade_aquatic.prismarine_coral_fan": "Prismarine Coral Waf'r",
+  "block.upgrade_aquatic.prismarine_coral_shower": "Prismarine Coral Spread'r",
+  
   "block.upgrade_aquatic.dead_silk_coral": "Dead Silk Coral",
   "block.upgrade_aquatic.dead_silk_coral_block": "Chunk O' Dead Silk Coral",
   "block.upgrade_aquatic.dead_silk_coral_fan": "Dead Silk Coral Waf'r",
+  
   "block.upgrade_aquatic.silk_coral": "Silk Coral",
   "block.upgrade_aquatic.silk_coral_block": "Chunk O' Silk Coral",
   "block.upgrade_aquatic.silk_coral_fan": "Silk Coral Waf'r",
+  
   "block.upgrade_aquatic.dead_pillow_coral": "Dead Pillow Coral",
   "block.upgrade_aquatic.dead_pillow_coral_block": "Chunk O' Dead Pillow Coral",
   "block.upgrade_aquatic.dead_pillow_coral_fan": "Dead Pillow Coral Waf'r",
+  
   "block.upgrade_aquatic.pillow_coral": "Pillow Coral",
   "block.upgrade_aquatic.pillow_coral_block": "Chunk O' Pillow Coral",
   "block.upgrade_aquatic.pillow_coral_fan": "Pillow Coral Waf'r",
+  
   "block.upgrade_aquatic.dead_rock_coral": "Dead Pebble Coral",
   "block.upgrade_aquatic.dead_rock_coral_block": "Chunk O' Dead Pebble Coral",
   "block.upgrade_aquatic.dead_rock_coral_fan": "Dead Pebble Coral Waf'r",
+  
   "block.upgrade_aquatic.rock_coral": "Pebble Coral",
   "block.upgrade_aquatic.rock_coral_block": "Chunk O' Pebble Coral",
   "block.upgrade_aquatic.rock_coral_fan": "Pebble Coral Waf'r",
+  
   "block.upgrade_aquatic.dead_finger_coral": "Dead Finger Coral",
   "block.upgrade_aquatic.dead_finger_coral_block": "Chunk O' Dead Finger Coral",
   "block.upgrade_aquatic.dead_finger_coral_fan": "Dead Finger Coral Waf'r",
+  
   "block.upgrade_aquatic.finger_coral": "Finger Coral",
   "block.upgrade_aquatic.finger_coral_block": "Chunk O' Finger Coral",
   "block.upgrade_aquatic.finger_coral_fan": "Finger Coral Waf'r",
+  
   "block.upgrade_aquatic.dead_star_coral": "Dead Guts Coral",
   "block.upgrade_aquatic.dead_star_coral_block": "Chunk O' Dead Guts Coral",
   "block.upgrade_aquatic.dead_star_coral_fan": "Dead Guts Coral Waf'r",
+  
   "block.upgrade_aquatic.star_coral": "Guts Coral",
   "block.upgrade_aquatic.star_coral_block": "Chunk O' Guts Coral",
   "block.upgrade_aquatic.star_coral_fan": "Guts Coral Waf'r",
+  
   "block.upgrade_aquatic.dead_moss_coral": "Dead Slimy Coral",
   "block.upgrade_aquatic.dead_moss_coral_block": "Chunk O' Dead Slimy Coral",
   "block.upgrade_aquatic.dead_moss_coral_fan": "Dead Slimy Coral Waf'r",
+  
   "block.upgrade_aquatic.moss_coral": "Slimy Coral",
   "block.upgrade_aquatic.moss_coral_block": "Chunk O' Slimy Coral",
   "block.upgrade_aquatic.moss_coral_fan": "Slimy Coral Waf'r",
+  
   "block.upgrade_aquatic.dead_petal_coral": "Dead Petal Coral",
   "block.upgrade_aquatic.dead_petal_coral_block": "Chunk O' Dead Petal Coral",
   "block.upgrade_aquatic.dead_petal_coral_fan": "Dead Petal Coral Waf'r",
+  
   "block.upgrade_aquatic.petal_coral": "Petal Coral",
   "block.upgrade_aquatic.petal_coral_block": "Chunk O' Petal Coral",
   "block.upgrade_aquatic.petal_coral_fan": "Petal Coral Waf'r",
+  
   "block.upgrade_aquatic.dead_branch_coral": "Dead Twig Coral",
   "block.upgrade_aquatic.dead_branch_coral_block": "Chunk O' Dead Twig Coral",
   "block.upgrade_aquatic.dead_branch_coral_fan": "Dead Twig Coral Waf'r",
+  
   "block.upgrade_aquatic.branch_coral": "Twig Coral",
   "block.upgrade_aquatic.branch_coral_block": "Chunk O' Twig Coral",
   "block.upgrade_aquatic.branch_coral_fan": "Twig Coral Waf'r",
-  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Great Prismarine Coral Spread'r",
-  "block.upgrade_aquatic.prismarine_coral_shower": "Prismarine Coral Spread'r",
+  
+  "_comment": "Items",
+
   "block.upgrade_aquatic.elder_eye": "Eye O' Great Sea Lurker",
+  
   "item.upgrade_aquatic.prismarine_rod": "Cane O' Prismarine",
+  
+  "item.minecraft.nautilus_shell": "Shell O' Livin' Fossil",
+
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Sunken Landlubber Cackle Fruit"
-  "item.upgrade_aquatic.nautilus_spawn_egg": "Sea Beast Spawn Egg",
-  "entity.upgrade_aquatic.nautilus": "Sea Beast",
+  "item.upgrade_aquatic.nautilus_spawn_egg": "Livin' Fossil Spawn Egg",
+  
+  "_comment": "Entities",
+  
+  "entity.upgrade_aquatic.nautilus": "Livin' Fossil",
+  
+  "_comment": "Deaths",
+  
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Sea Lurker Spine",
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Sea Lurker Spine while runnin' from %2$s",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by a Great Sea Lurker Spine",
