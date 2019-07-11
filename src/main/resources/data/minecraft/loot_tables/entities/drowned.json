@@ -40,7 +40,7 @@
       "conditions": [
       	{
           "condition": "minecraft:random_chance_with_looting",
-          "chance": 0.40,
+          "chance": 0.10,
           "looting_multiplier": 0.01
         }
       ]
