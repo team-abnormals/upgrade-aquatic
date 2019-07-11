@@ -74,14 +74,18 @@ public class ModelNautilus<T extends EntityNautilus> extends EntityModel<T> {
     @Override
     public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
     	float f = 1.0F;
-        if (!entityIn.isInWater()) {
-           f = 1.5F;
-        }
+    	if (!entityIn.isInWater() || entityIn.isMoving()) {
+        	f = 1.5F;
+    	}
 
         this.tents_left.rotateAngleY = -f * 0.10F * MathHelper.cos(0.2F * ageInTicks);
         this.tents_right.rotateAngleY = -f * 0.10F * -MathHelper.cos(0.2F * ageInTicks);
         this.tents_top.rotateAngleX = -f * 0.10F * MathHelper.sin(0.2F * ageInTicks);
         this.tents_bottom.rotateAngleX = -f * 0.10F * -MathHelper.sin(0.2F * ageInTicks);
+        
+        if(entityIn.isMoving()) {
+        	this.shell.rotateAngleX = -1.0F * 0.12F * MathHelper.sin(0.2F * ageInTicks);
+        }
     }
 
     /**
