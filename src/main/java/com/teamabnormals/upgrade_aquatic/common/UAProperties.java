@@ -14,6 +14,10 @@ public class UAProperties {
 		return Block.Properties.create(Material.CORAL, color).doesNotBlockMovement().sound(SoundType.WET_GRASS);
 	}
 	
+	public static Block.Properties CORAL_FAN_BASE(MaterialColor color) {
+		return Block.Properties.create(Material.OCEAN_PLANT, color).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.WET_GRASS);
+	}
+	
 	public static Block.Properties PRISMARINE_CORAL_BASE() {
 		return Block.Properties.create(Material.CORAL, MaterialColor.DIAMOND).doesNotBlockMovement().lightValue(3).sound(SoundType.WET_GRASS);
 	}
