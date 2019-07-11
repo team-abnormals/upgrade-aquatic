@@ -67,4 +67,10 @@
   "block.upgrade_aquatic.elder_eye": "Eye O' Great Sea Lurker",
   "item.upgrade_aquatic.prismarine_rod": "Cane O' Prismarine",
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Sunken Landlubber Cackle Fruit"
+  "item.upgrade_aquatic.nautilus_spawn_egg": "Sea Beast Spawn Egg",
+  "entity.upgrade_aquatic.nautilus": "Sea Beast",
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Sea Lurker Spine",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Sea Lurker Spine while runnin' from %2$s",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by a Great Sea Lurker Spine",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s was spiked to death by a Great Sea Lurker Spine while runnin' from %2$s"
 }
