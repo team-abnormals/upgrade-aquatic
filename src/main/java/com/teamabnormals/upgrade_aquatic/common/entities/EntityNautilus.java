@@ -302,7 +302,7 @@ public class EntityNautilus extends WaterMobEntity {
 				if(nautilus.eyesInWater){
 					this.nautilus.setMotion(
 						this.nautilus.getMotion().x + (double)this.nautilus.getAIMoveSpeed() * dx * 0.06D * 0.1D,
-						(double)this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 0.3D,
+						(double)this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 0.25D,
 						this.nautilus.getMotion().z + (double)this.nautilus.getAIMoveSpeed() * dz * 0.06D * 0.1D
 					);
 				} else {
