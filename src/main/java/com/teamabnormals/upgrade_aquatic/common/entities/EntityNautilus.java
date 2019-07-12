@@ -177,7 +177,7 @@ public class EntityNautilus extends WaterMobEntity {
 	
 	@Override
 	public void livingTick() {
-		if (this.isMoving() && this.isInWater()) {
+		if (this.isMoving() && this.isInWater() && this.eyesInWater) {
 			Vec3d vec3d1 = this.getLook(0.0F);
 
 			if(this.getEntityWorld().getGameTime() % 2 == 0) {

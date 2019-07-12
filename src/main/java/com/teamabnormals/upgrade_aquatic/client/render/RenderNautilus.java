@@ -7,6 +7,7 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -30,7 +31,7 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 		super.applyRotations(entityLiving, ageInTicks, rotationYaw, partialTicks);
 		float f = 0.3F * MathHelper.sin(0.6F * ageInTicks);
 		GlStateManager.rotatef(f, 0.0F, 1.0F, 0.0F);
-		if (!entityLiving.isInWater()) {
+		if (!entityLiving.isInWater() && !entityLiving.areEyesInFluid(FluidTags.WATER)) {
 			GlStateManager.translatef(0.2F, 0.14F, 0.0F);
 			GlStateManager.rotatef(90.0F, 0.0F, 0.0F, 1.0F);
 		}
