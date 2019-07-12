@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.teamabnormals.upgrade_aquatic.core.proxy.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.tileentity.TileEntityType;
@@ -29,6 +30,7 @@ public class UpgradeAquatic {
 	private void preInit(final FMLCommonSetupEvent event) {
 		proxy.preInit();
 		EntityNautilus.addSpawn();
+		UADispenseBehaviorRegistry.registerAll();
 	}
 
 	@SuppressWarnings("unused")

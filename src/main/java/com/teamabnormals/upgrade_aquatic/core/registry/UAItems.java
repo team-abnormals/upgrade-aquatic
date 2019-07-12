@@ -1,9 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
+import com.teamabnormals.upgrade_aquatic.common.items.ItemNautilusBucket;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.FishBucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.event.RegistryEvent;
@@ -13,7 +13,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UAItems {
-	public static Item NAUTILUS_BUCKET   = new FishBucketItem(UAEntities.NAUTILUS, Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)).setRegistryName(Reference.MODID, "nautilus_bucket");
+	public static Item NAUTILUS_BUCKET   = new ItemNautilusBucket(UAEntities.NAUTILUS, Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)).setRegistryName(Reference.MODID, "nautilus_bucket");
 	
 	@SubscribeEvent
 	public static void onRegisterItems(RegistryEvent.Register<Item> event) {

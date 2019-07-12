@@ -48,6 +48,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 public class EntityNautilus extends WaterMobEntity {
 	private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> FLEEING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
 	
 	public EntityNautilus(EntityType<? extends EntityNautilus> type, World worldIn) {
 		super(type, worldIn);
@@ -110,6 +111,7 @@ public class EntityNautilus extends WaterMobEntity {
 		super.registerData();
 		this.dataManager.register(MOVING, false);
 		this.dataManager.register(FLEEING, false);
+		this.dataManager.register(FROM_BUCKET, false);
 	}
 	
 	public boolean isFleeing() {
@@ -127,17 +129,27 @@ public class EntityNautilus extends WaterMobEntity {
 	public void setMoving(boolean p_203706_1_) {
 		this.dataManager.set(MOVING, p_203706_1_);
 	}
+	
+	private boolean isFromBucket() {
+		return this.dataManager.get(FROM_BUCKET);
+	}
+	
+	public void setFromBucket(boolean p_203706_1_) {
+		this.dataManager.set(FROM_BUCKET, p_203706_1_);
+	}
 
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		compound.putBoolean("Moving", this.isMoving());
 		compound.putBoolean("Fleeing", this.isMoving());
+		compound.putBoolean("FromBucket", this.isFromBucket());
 	}
 	
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
 		this.setMoving(compound.getBoolean("Moving"));
 		this.setMoving(compound.getBoolean("Fleeing"));
+		this.setFromBucket(compound.getBoolean("FromBucket"));
 	}
 	
 	protected void setBucketData(ItemStack bucket) {
@@ -148,6 +160,16 @@ public class EntityNautilus extends WaterMobEntity {
 	
 	protected ItemStack getBucket() {
 		return new ItemStack(UAItems.NAUTILUS_BUCKET);
+	}
+	
+	@Override
+	public boolean func_213392_I() {
+		return this.isFromBucket();
+	}
+	
+	@Override
+	public boolean canDespawn(double distanceToClosestPlayer) {
+		return !this.isFromBucket() && !this.hasCustomName();
 	}
 	
 	@Override
@@ -277,11 +299,19 @@ public class EntityNautilus extends WaterMobEntity {
 				this.nautilus.renderYawOffset = this.nautilus.rotationYaw;
 				float f1 = (float)(this.speed * this.nautilus.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
 				this.nautilus.setAIMoveSpeed(MathHelper.lerp(0.125F, this.nautilus.getAIMoveSpeed(), f1));
-				this.nautilus.setMotion(
-					this.nautilus.getMotion().x + (double)this.nautilus.getAIMoveSpeed() * dx * 0.06D * 0.1D,
-					(double)this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 0.3D,
-					this.nautilus.getMotion().z + (double)this.nautilus.getAIMoveSpeed() * dz * 0.06D * 0.1D
-				);
+				if(nautilus.eyesInWater){
+					this.nautilus.setMotion(
+						this.nautilus.getMotion().x + (double)this.nautilus.getAIMoveSpeed() * dx * 0.06D * 0.1D,
+						(double)this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 0.3D,
+						this.nautilus.getMotion().z + (double)this.nautilus.getAIMoveSpeed() * dz * 0.06D * 0.1D
+					);
+				} else {
+					this.nautilus.setMotion(
+						this.nautilus.getMotion().x + (double)this.nautilus.getAIMoveSpeed() * dx * 0.06D * 0.1D,
+						(double)this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 2,
+						this.nautilus.getMotion().z + (double)this.nautilus.getAIMoveSpeed() * dz * 0.06D * 0.1D
+					);
+				}
 				
 				nautilus.setMoving(true);
 			} else {
