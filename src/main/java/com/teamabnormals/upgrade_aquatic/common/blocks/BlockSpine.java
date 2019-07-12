@@ -6,7 +6,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UADamageSources;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.DirectionalBlock;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
@@ -38,7 +37,6 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
@@ -218,7 +216,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 		if (stateIn.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
-	    return stateIn.get(FACING).getOpposite() == facing && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	    return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
@@ -266,13 +264,4 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 		return PathNodeType.LAVA;
 	}
 	
-	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		return func_220185_b(worldIn, pos, state.get(FACING).getOpposite());
-	}
-	
-	public static boolean func_220185_b(IWorldReader p_220185_0_, BlockPos p_220185_1_, Direction p_220185_2_) {
-		BlockPos blockpos = p_220185_1_.offset(p_220185_2_);
-		return Block.hasSolidSide(p_220185_0_.getBlockState(blockpos), p_220185_0_, blockpos, p_220185_2_.getOpposite());
-	}
 }
