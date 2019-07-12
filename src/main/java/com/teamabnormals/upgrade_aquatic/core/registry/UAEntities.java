@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import java.util.List;
+import java.util.Random;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Preconditions;
@@ -12,9 +13,12 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -57,4 +61,9 @@ public class UAEntities {
             event.getRegistry().register(spawnEgg);
         }
     }
+
+	public boolean spawnConditionNautilus(EntityType<? extends EntityNautilus> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random p_223363_4_) {
+		BlockPos blockpos = pos.down();
+        return spawnReason == SpawnReason.SPAWNER || world.getWorld().getBlockState(blockpos).canEntitySpawn(world, blockpos, entityType);
+	}
 }

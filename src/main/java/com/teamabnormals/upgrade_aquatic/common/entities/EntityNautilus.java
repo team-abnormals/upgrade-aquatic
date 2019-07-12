@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
@@ -31,6 +32,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -38,7 +40,8 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class EntityNautilus extends WaterMobEntity {
 	private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
-
+	private static final DataParameter<Boolean> FLEEING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
+	
 	public EntityNautilus(EntityType<? extends EntityNautilus> type, World worldIn) {
 		super(type, worldIn);
 		this.moveController = new EntityNautilus.MoveHelperController(this);
@@ -58,8 +61,36 @@ public class EntityNautilus extends WaterMobEntity {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.65D));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, SquidEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<PlayerEntity>(this, PlayerEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test) {
+			
+			@Override
+			public void startExecuting() {
+				((EntityNautilus)this.entity).setFleeing(true);
+				super.startExecuting();
+			}
+			
+			@Override
+			public void resetTask() {
+				((EntityNautilus)this.entity).setFleeing(false);
+				super.resetTask();
+			}
+			
+		});
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<SquidEntity>(this, SquidEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test) {
+			
+			@Override
+			public void startExecuting() {
+				((EntityNautilus)this.entity).setFleeing(true);
+				super.startExecuting();
+			}
+			
+			@Override
+			public void resetTask() {
+				((EntityNautilus)this.entity).setFleeing(false);
+				super.resetTask();
+			}
+			
+		});
 		this.goalSelector.addGoal(4, new EntityNautilus.SwimGoal(this));
 	}
 	
@@ -71,6 +102,15 @@ public class EntityNautilus extends WaterMobEntity {
 	protected void registerData() {
 		super.registerData();
 		this.dataManager.register(MOVING, false);
+		this.dataManager.register(FLEEING, false);
+	}
+	
+	public boolean isFleeing() {
+		return this.dataManager.get(FLEEING);
+	}
+	
+	public void setFleeing(boolean p_203706_1_) {
+		this.dataManager.set(FLEEING, p_203706_1_);
 	}
 
 	public boolean isMoving() {
@@ -84,11 +124,13 @@ public class EntityNautilus extends WaterMobEntity {
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		compound.putBoolean("Moving", this.isMoving());
+		compound.putBoolean("Fleeing", this.isMoving());
 	}
 	
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
 		this.setMoving(compound.getBoolean("Moving"));
+		this.setMoving(compound.getBoolean("Fleeing"));
 	}
 	
 	@Override
@@ -154,6 +196,11 @@ public class EntityNautilus extends WaterMobEntity {
 		}
 	}
 	
+	@Override
+	public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
+		return super.canSpawn(worldIn, spawnReasonIn);
+	}
+	
 	public static boolean isDeveloperWorkspace() {
 	    final String target = System.getenv().get("target");
 	    if (target == null) {
@@ -181,8 +228,8 @@ public class EntityNautilus extends WaterMobEntity {
 				double d2 = this.posZ - this.nautilus.posZ;
 				double d3 = (double)MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 				d1 = d1 / d3;
-				double dx = d0 / d3;
-				double dz = d2 / d3;
+				double dx = nautilus.isFleeing() ? d0 / d3 : 0;
+				double dz = nautilus.isFleeing() ? d2 / d3 : 0;
 				float f = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
 				this.nautilus.rotationYaw = this.limitAngle(this.nautilus.rotationYaw, f, 90.0F);
 				this.nautilus.renderYawOffset = this.nautilus.rotationYaw;
@@ -207,7 +254,7 @@ public class EntityNautilus extends WaterMobEntity {
 		private final EntityNautilus nautilus;
 
 		public SwimGoal(EntityNautilus nautilus) {
-			super(nautilus, 1.1D, 30);
+			super(nautilus, 1.1D, 35);
 			this.nautilus = nautilus;
 		}
 

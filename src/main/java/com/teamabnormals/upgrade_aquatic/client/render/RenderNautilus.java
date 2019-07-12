@@ -31,7 +31,7 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 		float f = 0.3F * MathHelper.sin(0.6F * ageInTicks);
 		GlStateManager.rotatef(f, 0.0F, 1.0F, 0.0F);
 		if (!entityLiving.isInWater()) {
-			GlStateManager.translatef(0.2F, 0.1F, 0.0F);
+			GlStateManager.translatef(0.2F, 0.14F, 0.0F);
 			GlStateManager.rotatef(90.0F, 0.0F, 0.0F, 1.0F);
 		}
 	}
