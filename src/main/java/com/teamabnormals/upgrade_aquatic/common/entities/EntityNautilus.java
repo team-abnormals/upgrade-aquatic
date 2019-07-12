@@ -6,7 +6,9 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -21,6 +23,9 @@ import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -30,6 +35,8 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
@@ -133,6 +140,41 @@ public class EntityNautilus extends WaterMobEntity {
 		this.setMoving(compound.getBoolean("Fleeing"));
 	}
 	
+	protected void setBucketData(ItemStack bucket) {
+		if (this.hasCustomName()) {
+			bucket.setDisplayName(this.getCustomName());
+		}
+	}
+	
+	protected ItemStack getBucket() {
+		return new ItemStack(UAItems.NAUTILUS_BUCKET);
+	}
+	
+	@Override
+	protected boolean processInteract(PlayerEntity player, Hand hand) {
+		ItemStack itemstack = player.getHeldItem(hand);
+		if (itemstack.getItem() == Items.WATER_BUCKET && this.isAlive()) {
+			this.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
+			itemstack.shrink(1);
+			ItemStack itemstack1 = this.getBucket();
+			this.setBucketData(itemstack1);
+			if (!this.world.isRemote) {
+				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity)player, itemstack1);
+			}
+
+			if (itemstack.isEmpty()) {
+				player.setHeldItem(hand, itemstack1);
+			} else if (!player.inventory.addItemStackToInventory(itemstack1)) {
+				player.dropItem(itemstack1, false);
+			}
+
+			this.remove();
+			return true;
+		} else {
+			return super.processInteract(player, hand);
+		}
+	}
+	
 	@Override
 	public void livingTick() {
 		if (this.isMoving() && this.isInWater()) {
@@ -166,7 +208,7 @@ public class EntityNautilus extends WaterMobEntity {
 	
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return sizeIn.height * 0.90F;
+		return sizeIn.height * 0.65F;
 	}
 	
 	@Override
@@ -187,7 +229,7 @@ public class EntityNautilus extends WaterMobEntity {
 			String methodName = EntityNautilus.isDeveloperWorkspace() ? "addSpawn" : "func_201866_a";
 			Method addSpawn = ObfuscationReflectionHelper.findMethod(Biome.class, methodName, EntityClassification.class, Biome.SpawnListEntry.class);
 			try {
-				addSpawn.invoke(biome, EntityClassification.CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 10, 10, 15));
+				addSpawn.invoke(biome, EntityClassification.CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 10, 1, 3));
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
 			} catch (InvocationTargetException e) {
@@ -254,7 +296,7 @@ public class EntityNautilus extends WaterMobEntity {
 		private final EntityNautilus nautilus;
 
 		public SwimGoal(EntityNautilus nautilus) {
-			super(nautilus, 1.1D, 35);
+			super(nautilus, 1.0D, 30);
 			this.nautilus = nautilus;
 		}
 
