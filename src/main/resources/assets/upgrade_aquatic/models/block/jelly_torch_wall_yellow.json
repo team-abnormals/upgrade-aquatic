@@ -1,8 +1,8 @@
 {
 	"credit": "five",
 	"textures": {
-		"0": "upgrade_aquatic:block/blue_jelly_torch",
-		"particle": "upgrade_aquatic:block/blue_jelly_torch"
+		"0": "upgrade_aquatic:block/jelly_torch_yellow",
+		"particle": "upgrade_aquatic:block/jelly_torch_yellow"
 	},
 	"elements": [
 		{
