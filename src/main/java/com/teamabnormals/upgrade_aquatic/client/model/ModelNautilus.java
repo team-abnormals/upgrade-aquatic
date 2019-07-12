@@ -83,7 +83,7 @@ public class ModelNautilus<T extends EntityNautilus> extends EntityModel<T> {
         this.tents_top.rotateAngleX = -f * 0.10F * MathHelper.sin(0.2F * ageInTicks);
         this.tents_bottom.rotateAngleX = -f * 0.10F * -MathHelper.sin(0.2F * ageInTicks);
         
-        if(entityIn.isMoving()) {
+        if(entityIn.isMoving() && entityIn.isInWater()) {
         	this.shell.rotateAngleX = -1.0F * 0.12F * MathHelper.sin(0.2F * ageInTicks);
         }
     }

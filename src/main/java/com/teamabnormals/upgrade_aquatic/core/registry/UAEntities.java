@@ -43,7 +43,7 @@ public class UAEntities {
     }
     
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void registerPenguins(RegistryEvent.Register<EntityType<?>> event) {
+    public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
         for (@SuppressWarnings("rawtypes") EntityType entity : entities) {
             Preconditions.checkNotNull(entity.getRegistryName(), "registryName");
             event.getRegistry().register(entity);

@@ -13,16 +13,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -31,11 +28,9 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -62,9 +57,10 @@ public class EntityNautilus extends WaterMobEntity {
 	
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.8D, 1.6D, EntityPredicates.NOT_SPECTATING::test));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, SquidEntity.class, 8.0F, 1.8D, 1.6D, EntityPredicates.NOT_SPECTATING::test));
-		this.goalSelector.addGoal(3, new EntityNautilus.SwimGoal(this));
+		this.goalSelector.addGoal(0, new PanicGoal(this, 1.65D));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test));
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, SquidEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test));
+		this.goalSelector.addGoal(4, new EntityNautilus.SwimGoal(this));
 	}
 	
 	@Override
@@ -128,17 +124,12 @@ public class EntityNautilus extends WaterMobEntity {
 	
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
-		return sizeIn.height * 0.95F;
+		return sizeIn.height * 0.90F;
 	}
 	
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 4;
-	}
-	
-	@Override
-	public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
-		return super.canSpawn(worldIn, spawnReasonIn);
 	}
 	
 	public static void addSpawn() {
@@ -190,12 +181,18 @@ public class EntityNautilus extends WaterMobEntity {
 				double d2 = this.posZ - this.nautilus.posZ;
 				double d3 = (double)MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 				d1 = d1 / d3;
+				double dx = d0 / d3;
+				double dz = d2 / d3;
 				float f = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
 				this.nautilus.rotationYaw = this.limitAngle(this.nautilus.rotationYaw, f, 90.0F);
 				this.nautilus.renderYawOffset = this.nautilus.rotationYaw;
 				float f1 = (float)(this.speed * this.nautilus.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
 				this.nautilus.setAIMoveSpeed(MathHelper.lerp(0.125F, this.nautilus.getAIMoveSpeed(), f1));
-				this.nautilus.setMotion(this.nautilus.getMotion().add(0.0D, (double)this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 0.25D, 0.0D));
+				this.nautilus.setMotion(
+					this.nautilus.getMotion().x + (double)this.nautilus.getAIMoveSpeed() * dx * 0.06D * 0.1D,
+					(double)this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 0.3D,
+					this.nautilus.getMotion().z + (double)this.nautilus.getAIMoveSpeed() * dz * 0.06D * 0.1D
+				);
 				
 				nautilus.setMoving(true);
 			} else {
