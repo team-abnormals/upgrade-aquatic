@@ -4,6 +4,8 @@
 
   "block.upgrade_aquatic.guardian_spine": "Guardian Spine",
   "block.upgrade_aquatic.elder_guardian_spine": "Elder Guardian Spine",
+
+  "block.upgrade_aquatic.elder_eye": "Elder Eye",
   
   "block.upgrade_aquatic.bubble_block": "Bubble Block",
   
@@ -90,10 +92,9 @@
   "block.upgrade_aquatic.branch_coral_fan": "Branch Coral Fan",
   
   "_comment": "Items",
-
-  "block.upgrade_aquatic.elder_eye": "Elder Eye",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
+  
   "item.upgrade_aquatic.nautilus_bucket": "Bucket of Nautilus",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drowned Villager Spawn Egg",
