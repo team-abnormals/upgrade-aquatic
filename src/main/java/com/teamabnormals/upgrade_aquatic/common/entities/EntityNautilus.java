@@ -1,7 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -15,7 +13,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
@@ -23,6 +20,7 @@ import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -39,11 +37,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class EntityNautilus extends WaterMobEntity {
 	private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
@@ -85,6 +81,21 @@ public class EntityNautilus extends WaterMobEntity {
 			
 		});
 		this.goalSelector.addGoal(2, new AvoidEntityGoal<SquidEntity>(this, SquidEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test) {
+			
+			@Override
+			public void startExecuting() {
+				((EntityNautilus)this.entity).setFleeing(true);
+				super.startExecuting();
+			}
+			
+			@Override
+			public void resetTask() {
+				((EntityNautilus)this.entity).setFleeing(false);
+				super.resetTask();
+			}
+			
+		});
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<DrownedEntity>(this, DrownedEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test) {
 			
 			@Override
 			public void startExecuting() {
@@ -248,29 +259,8 @@ public class EntityNautilus extends WaterMobEntity {
 		spawnableBiomes.add(Biomes.WARM_OCEAN);
 		
 		for(Biome biome : spawnableBiomes) {
-			String methodName = EntityNautilus.isDeveloperWorkspace() ? "addSpawn" : "func_201866_a";
-			Method addSpawn = ObfuscationReflectionHelper.findMethod(Biome.class, methodName, EntityClassification.class, Biome.SpawnListEntry.class);
-			try {
-				addSpawn.invoke(biome, EntityClassification.CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 10, 1, 3));
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			} catch (InvocationTargetException e) {
-				e.printStackTrace();
-			}
+			biome.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 5, 1, 4));
 		}
-	}
-	
-	@Override
-	public boolean canSpawn(IWorld worldIn, SpawnReason spawnReasonIn) {
-		return super.canSpawn(worldIn, spawnReasonIn);
-	}
-	
-	public static boolean isDeveloperWorkspace() {
-	    final String target = System.getenv().get("target");
-	    if (target == null) {
-	        return false;
-	    }
-	    return target.contains("userdev");
 	}
 	
 	static class MoveHelperController extends MovementController {

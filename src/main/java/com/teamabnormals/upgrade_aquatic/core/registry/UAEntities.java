@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import java.util.List;
+import java.util.Random;
 
 import com.google.common.base.CaseFormat;
 import com.google.common.base.Preconditions;
@@ -9,12 +10,19 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -48,6 +56,7 @@ public class UAEntities {
             Preconditions.checkNotNull(entity.getRegistryName(), "registryName");
             event.getRegistry().register(entity);
         }
+        EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
     }
 
     @SubscribeEvent
@@ -57,4 +66,9 @@ public class UAEntities {
             event.getRegistry().register(spawnEgg);
         }
     }
+    
+    private static boolean ravineMobCondition(EntityType<? extends MobEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    	return pos.getY() <= 30 && world.getBlockState(pos).getBlock() == Blocks.WATER;
+    }
+    
 }
