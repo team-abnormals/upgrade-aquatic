@@ -1,14 +1,16 @@
 {
 	"credit": "five",
+	"ambientocclusion": false,
 	"textures": {
-		"0": "upgrade_aquatic:block/jelly_torch_yellow",
+		"1": "upgrade_aquatic:block/jelly_torch_yellow",
 		"particle": "upgrade_aquatic:block/jelly_torch_yellow"
 	},
 	"elements": [
 		{
 			"name": "blob",
-			"from": [7, 0, 7],
-			"to": [9, 9, 9],
+			"from": [1, 9, 6],
+			"to": [5, 13, 10],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [3, 11, 8]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 9], "texture": "#0"},
 				"east": {"uv": [6, 0, 8, 9], "texture": "#0"},
@@ -20,15 +22,17 @@
 		},
 		{
 			"name": "rod",
-			"from": [6, 6, 6],
-			"to": [10, 10, 10],
+			"from": [-1, 3.5, 7],
+			"to": [1, 12.5, 9],
+			"shade": false,
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [0, 3.5, 8]},
 			"faces": {
-				"north": {"uv": [4, 9, 8, 13], "texture": "#0"},
-				"east": {"uv": [0, 9, 4, 13], "texture": "#0"},
-				"south": {"uv": [12, 9, 16, 13], "texture": "#0"},
-				"west": {"uv": [8, 9, 12, 13], "texture": "#0"},
-				"up": {"uv": [12, 0, 16, 4], "texture": "#0"},
-				"down": {"uv": [12, 4, 16, 8], "texture": "#0"}
+				"north": {"uv": [0, 0, 2, 9], "texture": "#1"},
+				"east": {"uv": [6, 0, 8, 9], "texture": "#1"},
+				"south": {"uv": [2, 0, 4, 9], "texture": "#1"},
+				"west": {"uv": [4, 0, 6, 9], "texture": "#1"},
+				"up": {"uv": [10, 0, 12, 2], "texture": "#1"},
+				"down": {"uv": [10, 2, 12, 4], "texture": "#1"}
 			}
 		}
 	]
