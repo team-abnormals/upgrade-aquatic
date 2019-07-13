@@ -1,0 +1,127 @@
+{
+  "_comment": "Blocks",
+
+  "block.upgrade_aquatic.guardian_spine": "needel",
+  "block.upgrade_aquatic.elder_guardian_spine": "old needell",
+
+  "block.upgrade_aquatic.elder_eye": "Ehhlda I",
+  
+  "block.upgrade_aquatic.bubble_block": "bubel blok",
+  
+  "block.upgrade_aquatic.dead_acan_coral": "Ded holes koral",
+  "block.upgrade_aquatic.dead_acan_coral_block": "Ded holes koral cube",
+  "block.upgrade_aquatic.dead_acan_coral_fan": "Ded holes koral fen",
+  
+  "block.upgrade_aquatic.acan_coral": "holes koral",
+  "block.upgrade_aquatic.acan_coral_block": "holes koral cube",
+  "block.upgrade_aquatic.acan_coral_fan": "holes koral fen",
+  
+  "block.upgrade_aquatic.elder_prismarine_coral": "Old Prizmarine koral",
+  "block.upgrade_aquatic.elder_prismarine_coral_block": "Old Prizmarine koral cube",
+  "block.upgrade_aquatic.elder_prismarine_coral_fan": "Old Prizmarine koral fen",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Old Prizmarine koral Shower",
+  
+  "block.upgrade_aquatic.prismarine_coral": "Prizmarine koral",
+  "block.upgrade_aquatic.prismarine_coral_block": "Prizmarine koral cube",
+  "block.upgrade_aquatic.prismarine_coral_fan": "Prizmarine koral fen",
+  "block.upgrade_aquatic.prismarine_coral_shower": "Prizmarine koral Shower",
+  
+  "block.upgrade_aquatic.dead_silk_coral": "Ded sillc koral",
+  "block.upgrade_aquatic.dead_silk_coral_block": "Ded sillc koral cube",
+  "block.upgrade_aquatic.dead_silk_coral_fan": "Ded sillc koral fen",
+  
+  "block.upgrade_aquatic.silk_coral": "sillc koral",
+  "block.upgrade_aquatic.silk_coral_block": "sillc koral cube",
+  "block.upgrade_aquatic.silk_coral_fan": "sillc koral fen",
+  
+  "block.upgrade_aquatic.dead_pillow_coral": "Ded soft koral",
+  "block.upgrade_aquatic.dead_pillow_coral_block": "Ded soft koral cube",
+  "block.upgrade_aquatic.dead_pillow_coral_fan": "Ded soft koral fen",
+  
+  "block.upgrade_aquatic.pillow_coral": "soft koral",
+  "block.upgrade_aquatic.pillow_coral_block": "soft koral cube",
+  "block.upgrade_aquatic.pillow_coral_fan": "soft koral fen",
+  
+  "block.upgrade_aquatic.dead_rock_coral": "Ded rok koral",
+  "block.upgrade_aquatic.dead_rock_coral_block": "Ded rok koral cube",
+  "block.upgrade_aquatic.dead_rock_coral_fan": "Ded rok koral fen",
+  
+  "block.upgrade_aquatic.rock_coral": "rok koral",
+  "block.upgrade_aquatic.rock_coral_block": "rok koral cube",
+  "block.upgrade_aquatic.rock_coral_fan": "rok koral fen",
+  
+  "block.upgrade_aquatic.dead_finger_coral": "Ded paw koral",
+  "block.upgrade_aquatic.dead_finger_coral_block": "Ded paw koral cube",
+  "block.upgrade_aquatic.dead_finger_coral_fan": "Ded paw koral fen",
+  
+  "block.upgrade_aquatic.finger_coral": "paw koral",
+  "block.upgrade_aquatic.finger_coral_block": "paw koral cube",
+  "block.upgrade_aquatic.finger_coral_fan": "paw koral fen",
+  
+  "block.upgrade_aquatic.dead_star_coral": "Ded gummy worm koral",
+  "block.upgrade_aquatic.dead_star_coral_block": "Ded gummy worm koral cube",
+  "block.upgrade_aquatic.dead_star_coral_fan": "Ded gummy worm koral fen",
+  
+  "block.upgrade_aquatic.star_coral": "gummy worm koral",
+  "block.upgrade_aquatic.star_coral_block": "gummy worm koral cube",
+  "block.upgrade_aquatic.star_coral_fan": "gummy worm koral fen",
+  
+  "block.upgrade_aquatic.dead_moss_coral": "Ded yucky koral",
+  "block.upgrade_aquatic.dead_moss_coral_block": "Ded yucky koral cube",
+  "block.upgrade_aquatic.dead_moss_coral_fan": "Ded yucky koral fen",
+  
+  "block.upgrade_aquatic.moss_coral": "yucky koral",
+  "block.upgrade_aquatic.moss_coral_block": "yucky koral cube",
+  "block.upgrade_aquatic.moss_coral_fan": "yucky koral fen",
+  
+  "block.upgrade_aquatic.dead_petal_coral": "Ded flowah koral",
+  "block.upgrade_aquatic.dead_petal_coral_block": "Ded flowah koral cube",
+  "block.upgrade_aquatic.dead_petal_coral_fan": "Ded flowah koral fen",
+  
+  "block.upgrade_aquatic.petal_coral": "flowah koral",
+  "block.upgrade_aquatic.petal_coral_block": "flowah koral cube",
+  "block.upgrade_aquatic.petal_coral_fan": "flowah koral fen",
+  
+  "block.upgrade_aquatic.dead_branch_coral": "Ded scratcin poast koral",
+  "block.upgrade_aquatic.dead_branch_coral_block": "Ded scratcin poast koral cube",
+  "block.upgrade_aquatic.dead_branch_coral_fan": "Ded scratcin poast koral fen",
+  
+  "block.upgrade_aquatic.branch_coral": "scratcin poast koral",
+  "block.upgrade_aquatic.branch_coral_block": "scratcin poast koral cube",
+  "block.upgrade_aquatic.branch_coral_fan": "scratcin poast koral fen",
+  
+  "block.upgrade_aquatic.jelly_torch_pink": "strorbery wobly stik",
+  "block.upgrade_aquatic.jelly_torch_purple": "grayp wobbly stik",
+  "block.upgrade_aquatic.jelly_torch_blue": "bloo bery wobly stick",
+  "block.upgrade_aquatic.jelly_torch_green": "apel wobbly stick",
+  "block.upgrade_aquatic.jelly_torch_yellow": "bernarner wobly stik",
+  "block.upgrade_aquatic.jelly_torch_orange": "oreng wobbly stik",
+  "block.upgrade_aquatic.jelly_torch_red": "rarsberry wobblee stick",
+  "block.upgrade_aquatic.jelly_torch_pink wall": "strorbery wobly stik wall",
+  "block.upgrade_aquatic.jelly_torch_purple": "grayp wobbly stik wall",
+  "block.upgrade_aquatic.jelly_torch_blue": "bloo bery wobly stick wall",
+  "block.upgrade_aquatic.jelly_torch_green": "apel wobbly stick wall",
+  "block.upgrade_aquatic.jelly_torch_yellow": "bernarner wobly stik wall",
+  "block.upgrade_aquatic.jelly_torch_orange": "oreng wobbly stik wall",
+  "block.upgrade_aquatic.jelly_torch_red": "rarsberry wobblee stick wall",
+  
+  "_comment": "Items",
+  
+  "item.upgrade_aquatic.prismarine_rod": "prizmarine stik",
+  
+  "item.upgrade_aquatic.nautilus_bucket": "Nortiluz buket!!!",
+
+  "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drawn Villagur spon ec",
+  "item.upgrade_aquatic.nautilus_spawn_egg": "Shel Thingy spon eg",
+  
+  "_comment": "Entities",
+  
+  "entity.upgrade_aquatic.nautilus": "shel Thingy",
+  
+  "_comment": "Deaths",
+  
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s waz hurted bai big needel",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s waz hurted bai big needle runing frum %2$s",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s waz hurted bai old big needle",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s az hurted bai big needle runing frum %2$s"
+}
