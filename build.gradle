@@ -20,7 +20,7 @@ archivesBaseName = 'upgrade_aquatic'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190621-1.14.2'
+    mappings channel: 'snapshot', version: '20190704-1.14.3'
    	
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 

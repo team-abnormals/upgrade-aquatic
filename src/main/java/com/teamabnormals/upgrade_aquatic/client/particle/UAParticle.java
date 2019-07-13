@@ -41,23 +41,23 @@ public abstract class UAParticle extends TexturedParticle implements IParticleRe
     protected void onPreRender(BufferBuilder buffer, ActiveRenderInfo activeInfo, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {}
 
     @Override
-    protected float func_217560_f() {
-    	return 0F;
+    protected float getMinU() {
+        return 0f;
     }
-    
+
     @Override
-    protected float func_217562_e() {
-    	return 1F;
+    protected float getMaxU() {
+        return 1f;
     }
-    
+
     @Override
-    protected float func_217563_c() {
-    	return 0;
+    protected float getMinV() {
+        return 0f;
     }
-    
+
     @Override
-    protected float func_217564_d() {
-    	return 1F;
+    protected float getMaxV() {
+        return 1f;
     }
 
     @Override
