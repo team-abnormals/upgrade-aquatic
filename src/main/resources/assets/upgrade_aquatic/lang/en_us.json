@@ -91,6 +91,21 @@
   "block.upgrade_aquatic.branch_coral_block": "Branch Coral Block",
   "block.upgrade_aquatic.branch_coral_fan": "Branch Coral Fan",
   
+  "block.upgrade_aquatic.jelly_torch_pink": "Pink Jelly Torch",
+  "block.upgrade_aquatic.jelly_torch_purple": "Purple Jelly Torch",
+  "block.upgrade_aquatic.jelly_torch_blue": "Blue Jelly Torch",
+  "block.upgrade_aquatic.jelly_torch_green": "Green Jelly Torch",
+  "block.upgrade_aquatic.jelly_torch_yellow": "Yellow Jelly Torch",
+  "block.upgrade_aquatic.jelly_torch_orange": "Orange Jelly Torch",
+  "block.upgrade_aquatic.jelly_torch_red": "Red Jelly Torch",
+  "block.upgrade_aquatic.jelly_torc_wall_pink": "Pink Jelly Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_purple": "Purple Jelly Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_blue": "Blue Jelly Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_green": "Green Jelly Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Yellow Jelly Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_orange": "Orange Jelly Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_red": "Red Jelly Torch Wall",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",

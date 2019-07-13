@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=east": { "model": "upgrade_aquatic:block/jelly_torch_wall_red" },
+        "facing=south": { "model": "upgrade_aquatic:block/jelly_torch_wall_red", "y": 90 },
+        "facing=west": { "model": "upgrade_aquatic:block/jelly_torch_wall_red", "y": 180 },
+        "facing=north": { "model": "upgrade_aquatic:block/jelly_torch_wall_red", "y": 270 }
+    }
+}

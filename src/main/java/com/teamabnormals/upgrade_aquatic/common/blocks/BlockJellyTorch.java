@@ -2,7 +2,6 @@ package com.teamabnormals.upgrade_aquatic.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
 import net.minecraft.block.TorchBlock;
@@ -26,7 +25,7 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
 		BLUE, 
 		GREEN, 
 		YELLOW, 
-		ORANGE, 
+		ORANGE,
 		RED;
 	}
 	private final JellyTorchType torchType;
@@ -48,12 +47,11 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
 		return BlockRenderLayer.TRANSLUCENT;
 	}
 	
-	@SuppressWarnings("deprecation")
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
-	    return worldIn.getBlockState(currentPos.down()).isAir() ? stateIn : Blocks.AIR.getDefaultState();
+	    return super.updatePostPlacement(stateIn, facing, stateIn, worldIn, currentPos, facingPos);
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {

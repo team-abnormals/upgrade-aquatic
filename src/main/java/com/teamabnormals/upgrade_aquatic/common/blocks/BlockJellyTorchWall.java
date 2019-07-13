@@ -12,6 +12,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -54,6 +56,7 @@ public class BlockJellyTorchWall extends BlockJellyTorch {
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         BlockState blockstate = this.getDefaultState();
         IWorldReader iworldreader = context.getWorld();
+        IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
         BlockPos blockpos = context.getPos();
         Direction[] adirection = context.getNearestLookingDirections();
         for (Direction direction : adirection) {
@@ -61,7 +64,7 @@ public class BlockJellyTorchWall extends BlockJellyTorch {
                 Direction direction1 = direction.getOpposite();
                 blockstate = blockstate.with(HORIZONTAL_FACING, direction1);
                 if (blockstate.isValidPosition(iworldreader, blockpos)) {
-                    return blockstate;
+                    return blockstate.with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
                 }
             }
         }
@@ -69,13 +72,14 @@ public class BlockJellyTorchWall extends BlockJellyTorch {
     }
 
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        return facing.getOpposite() == stateIn.get(HORIZONTAL_FACING) && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
+    	IFluidState ifluidstate = worldIn.getFluidState(currentPos);
+    	return facing.getOpposite() == stateIn.get(HORIZONTAL_FACING) && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn.with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
-        
+    	
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {
