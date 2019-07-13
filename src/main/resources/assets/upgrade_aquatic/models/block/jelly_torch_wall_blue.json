@@ -2,7 +2,7 @@
 	"credit": "five",
 	"ambientocclusion": false,
 	"textures": {
-		"1": "upgrade_aquatic:block/jelly_torch_blue",
+		"0": "upgrade_aquatic:block/jelly_torch_blue",
 		"particle": "upgrade_aquatic:block/jelly_torch_blue"
 	},
 	"elements": [
@@ -27,12 +27,12 @@
 			"shade": false,
 			"rotation": {"angle": -22.5, "axis": "z", "origin": [0, 3.5, 8]},
 			"faces": {
-				"north": {"uv": [0, 0, 2, 9], "texture": "#1"},
-				"east": {"uv": [6, 0, 8, 9], "texture": "#1"},
-				"south": {"uv": [2, 0, 4, 9], "texture": "#1"},
-				"west": {"uv": [4, 0, 6, 9], "texture": "#1"},
-				"up": {"uv": [10, 0, 12, 2], "texture": "#1"},
-				"down": {"uv": [10, 2, 12, 4], "texture": "#1"}
+				"north": {"uv": [0, 0, 2, 9], "texture": "#0"},
+				"east": {"uv": [6, 0, 8, 9], "texture": "#0"},
+				"south": {"uv": [2, 0, 4, 9], "texture": "#0"},
+				"west": {"uv": [4, 0, 6, 9], "texture": "#0"},
+				"up": {"uv": [10, 0, 12, 2], "texture": "#0"},
+				"down": {"uv": [10, 2, 12, 4], "texture": "#0"}
 			}
 		}
 	],
