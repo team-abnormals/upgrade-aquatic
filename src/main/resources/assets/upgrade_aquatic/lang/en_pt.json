@@ -1,7 +1,6 @@
 {
   "_comment": "Blocks",
   
-
   "block.upgrade_aquatic.guardian_spine": "Sea Lurker Spine",
   "block.upgrade_aquatic.elder_guardian_spine": "Great Sea Lurker Spine",
   
@@ -91,15 +90,29 @@
   "block.upgrade_aquatic.branch_coral_block": "Chunk o' Twig Coral",
   "block.upgrade_aquatic.branch_coral_fan": "Twig Coral Waf'r",
   
+  "block.upgrade_aquatic.jelly_torch_pink": "Pink Glowin' Mucus Torch",
+  "block.upgrade_aquatic.jelly_torch_purple": "Purple Glowin' Mucus Torch",
+  "block.upgrade_aquatic.jelly_torch_blue": "Blue Glowin' Mucus Torch",
+  "block.upgrade_aquatic.jelly_torch_green": "Green Glowin' Mucus Torch",
+  "block.upgrade_aquatic.jelly_torch_yellow": "Yellow Glowin' Mucus Torch",
+  "block.upgrade_aquatic.jelly_torch_orange": "Orange Glowin' Mucus Torch",
+  "block.upgrade_aquatic.jelly_torch_red": "Scarlet Glowin' Mucus Torch",
+  "block.upgrade_aquatic.jelly_torc_wall_pink": "Pink Glowin' Mucus Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_purple": "Purple Glowin' Mucus Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_blue": "Blue Glowin' Mucus Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_green": "Green Glowin' Mucus Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Yellow Glowin' Mucus Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_orange": "Orange Glowin' Mucus Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_red": "Scarlet Glowin' Mucus Torch Wall",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Cane o' Prismarine",
   
   "item.upgrade_aquatic.nautilus_bucket": "Pail o' Livin' Fossil",
-  
   "item.minecraft.nautilus_shell": "Husk o' Livin' Fossil",
 
-  "item.upgrade_aquatic.drowned_villager_spawn_egg": "Sunken Landlubber Cackle Fruit"
+  "item.upgrade_aquatic.drowned_villager_spawn_egg": "Sunken Landlubber Cackle Fruit",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Livin' Fossil Spawn Egg",
   
   "_comment": "Entities",
