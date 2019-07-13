@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -79,7 +80,17 @@ public class BlockJellyTorchWall extends BlockJellyTorch {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
-    	
+        Direction direction = state.get(HORIZONTAL_FACING);
+        double xOffset = random.nextBoolean() ? -(Math.random() * 0.075) : (Math.random() * 0.075);
+		double yOffset = random.nextBoolean() ? -(Math.random() * 0.075) : (Math.random() * 0.075);
+		double zOffset = random.nextBoolean() ? -(Math.random() * 0.075) : (Math.random() * 0.075);
+        double d0 = (double) pos.getX() + 0.5d + xOffset;
+        double d1 = (double) pos.getY() + 0.45d + yOffset;
+        double d2 = (double) pos.getZ() + 0.5d + zOffset;
+        double d3 = 0.18d;
+        double d4 = 0.3d;
+        Direction facing = direction.getOpposite();
+        UAParticles.JELLY_TORCH.spawn(world, d0 + d4 * (double) facing.getXOffset(), d1 + d3, d2 + d4 * (double) facing.getZOffset(), 0d, 0.004d, 0d, torchType.ordinal());
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {

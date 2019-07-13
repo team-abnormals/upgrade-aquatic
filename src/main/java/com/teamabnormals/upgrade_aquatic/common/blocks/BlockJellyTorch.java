@@ -1,5 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.common.blocks;
 
+import java.util.Random;
+
+import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IBucketPickupHandler;
@@ -17,6 +21,9 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler, ILiquidContainer {
 	public enum JellyTorchType {
@@ -36,6 +43,18 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
 		this.torchType = torchType;
 		this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, false));
 	}
+	
+	@Override
+    @OnlyIn(Dist.CLIENT)
+    public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
+		double xOffset = rand.nextBoolean() ? -(Math.random() * 0.1) : (Math.random() * 0.1);
+		double yOffset = rand.nextBoolean() ? -(Math.random() * 0.1) : (Math.random() * 0.1);
+		double zOffset = rand.nextBoolean() ? -(Math.random() * 0.1) : (Math.random() * 0.1);
+        double d0 = (double) pos.getX() + 0.5d + xOffset;
+        double d1 = (double) pos.getY() + 0.5d + yOffset;
+        double d2 = (double) pos.getZ() + 0.5d + zOffset;
+        UAParticles.JELLY_TORCH.spawn(world, d0, d1, d2, 0d, 0.0d, 0d, torchType.ordinal());
+    }
 
 	@Override
 	public void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

@@ -7,7 +7,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public enum UAParticles {
-	PRISMARINE_SHOWER, ELDER_PRISMARINE_SHOWER;
+	PRISMARINE_SHOWER, ELDER_PRISMARINE_SHOWER, JELLY_TORCH;
 	
 	UAParticles() {}
 
@@ -23,6 +23,8 @@ public enum UAParticles {
     			return new ParticlePrismarineShower.Factory();
     		case ELDER_PRISMARINE_SHOWER:
     			return new ParticleElderPrismarineShower.Factory();
+    		case JELLY_TORCH:
+    			return new ParticleJellyTorch.Factory();
     	}
 		return this.getDefaultParticle().getFactory();
     }
