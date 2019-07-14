@@ -33,7 +33,8 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
 		GREEN, 
 		YELLOW, 
 		ORANGE,
-		RED;
+		RED,
+		WHITE;
 	}
 	private final JellyTorchType torchType;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
