@@ -105,6 +105,8 @@
   "block.upgrade_aquatic.jelly_torch_wall_orange": "Orange Glowin' Mucus Torch Wall",
   "block.upgrade_aquatic.jelly_torch_wall_red": "Scarlet Glowin' Mucus Torch Wall",
   
+  "block.upgrade_aquatic.embedded_ammonite": "Husk o' Buried Fossil",  
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Cane o' Prismarine",
@@ -114,6 +116,7 @@
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Sunken Landlubber Cackle Fruit",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Livin' Fossil Spawn Egg",
+  
   
   "_comment": "Entities",
   

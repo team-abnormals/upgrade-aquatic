@@ -105,6 +105,8 @@
   "block.upgrade_aquatic.jelly_torch_orange": "oreng wobbly stik wall",
   "block.upgrade_aquatic.jelly_torch_red": "rarsberry wobblee stick wall",
   
+  "block.upgrade_aquatic.embedded_ammonite": "stoan shel",  
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "prizmarine stik",
