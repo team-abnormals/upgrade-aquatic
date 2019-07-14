@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.core;
 
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
+import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.core.proxy.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
@@ -31,6 +32,7 @@ public class UpgradeAquatic {
 		proxy.preInit();
 		EntityNautilus.addSpawn();
 		UADispenseBehaviorRegistry.registerAll();
+		UAWorldGen.registerGenerators();
 	}
 
 	@SuppressWarnings("unused")

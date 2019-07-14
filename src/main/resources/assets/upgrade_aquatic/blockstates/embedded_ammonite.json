@@ -1,0 +1,16 @@
+{
+    "variants": {
+        "": [
+            { "model": "upgrade_aquatic:block/embedded_ammonite" },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "y": 90 },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "y": 180 },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "y": 270 },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "x": 90 },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "x": 180 },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "x": 270 },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "y": 90, "x": 90 },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "y": 180, "x": 180 },
+            { "model": "upgrade_aquatic:block/embedded_ammonite", "y": 270, "x": 270 }
+        ]
+    }
+}

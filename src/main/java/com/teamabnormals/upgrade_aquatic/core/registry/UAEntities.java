@@ -10,7 +10,6 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
@@ -68,7 +67,7 @@ public class UAEntities {
     }
     
     private static boolean ravineMobCondition(EntityType<? extends MobEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    	return pos.getY() <= 30 && world.getBlockState(pos).getBlock() == Blocks.WATER;
+    	return pos.getY() <= 40;
     }
     
 }

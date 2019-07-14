@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "upgrade_aquatic:embedded_ammonite"
+  },
+  "result": "minecraft:nautilus_shell",
+  "experience": 0.25,
+  "cookingtime": 100
+}

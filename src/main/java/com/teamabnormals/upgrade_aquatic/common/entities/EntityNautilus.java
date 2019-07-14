@@ -246,7 +246,7 @@ public class EntityNautilus extends WaterMobEntity {
 	
 	@Override
 	public int getMaxSpawnedInChunk() {
-		return 4;
+		return 8;
 	}
 	
 	public static void addSpawn() {
@@ -259,7 +259,7 @@ public class EntityNautilus extends WaterMobEntity {
 		spawnableBiomes.add(Biomes.WARM_OCEAN);
 		
 		for(Biome biome : spawnableBiomes) {
-			biome.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 5, 1, 4));
+			biome.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 10, 1, 4));
 		}
 	}
 	

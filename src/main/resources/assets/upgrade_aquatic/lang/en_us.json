@@ -105,6 +105,8 @@
   "block.upgrade_aquatic.jelly_torch_wall_orange": "Orange Jelly Torch Wall",
   "block.upgrade_aquatic.jelly_torch_wall_red": "Red Jelly Torch Wall",
   
+  "block.upgrade_aquatic.embedded_ammonite": "Embedded Ammonite",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
