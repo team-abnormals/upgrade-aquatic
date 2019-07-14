@@ -1,0 +1,127 @@
+{
+  "_comment": "Blocks",
+
+  "block.upgrade_aquatic.guardian_spine": "Шип стража",
+  "block.upgrade_aquatic.elder_guardian_spine": "Шип древнего стража",
+
+  "block.upgrade_aquatic.elder_eye": "Древний глаз",
+  
+  "block.upgrade_aquatic.bubble_block": "Bubble Block",
+  
+  "block.upgrade_aquatic.dead_acan_coral": "Мёртвый акановый коралл",
+  "block.upgrade_aquatic.dead_acan_coral_block": "Блок мёртвого аканового коралла",
+  "block.upgrade_aquatic.dead_acan_coral_fan": "Мёртвый веерный акановый коралл",
+  
+  "block.upgrade_aquatic.acan_coral": "Акановый коралл",
+  "block.upgrade_aquatic.acan_coral_block": "Блок аканового коралла",
+  "block.upgrade_aquatic.acan_coral_fan": "Веерный акановый коралл",
+  
+  "block.upgrade_aquatic.elder_prismarine_coral": "Древний призмариновый коралл",
+  "block.upgrade_aquatic.elder_prismarine_coral_block": "Блок древнего призмаринового коралла",
+  "block.upgrade_aquatic.elder_prismarine_coral_fan": "Веерный древний призмариновый коралл",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Древний призмариновый источник",
+  
+  "block.upgrade_aquatic.prismarine_coral": "Призмариновый коралл",
+  "block.upgrade_aquatic.prismarine_coral_block": "Блок призмаринового коралла",
+  "block.upgrade_aquatic.prismarine_coral_fan": "Веерный призмариновый коралл",
+  "block.upgrade_aquatic.prismarine_coral_shower": "Призмариновый источник",
+  
+  "block.upgrade_aquatic.dead_silk_coral": "Мёртвый шелковистый коралл",
+  "block.upgrade_aquatic.dead_silk_coral_block": "Блок мёртвого шелковистого коралла",
+  "block.upgrade_aquatic.dead_silk_coral_fan": "Мёртвый веерный шелковистый коралл",
+  
+  "block.upgrade_aquatic.silk_coral": "Шелковистый коралл",
+  "block.upgrade_aquatic.silk_coral_block": "Блок шелковистого коралла",
+  "block.upgrade_aquatic.silk_coral_fan": "Веерный шелковистый коралл",
+  
+  "block.upgrade_aquatic.dead_pillow_coral": "Мёртвый подушечный коралл",
+  "block.upgrade_aquatic.dead_pillow_coral_block": "Блок мёртвого подушечного коралла",
+  "block.upgrade_aquatic.dead_pillow_coral_fan": "Мёртвый веерный подушечный коралл",
+  
+  "block.upgrade_aquatic.pillow_coral": "Подушечный коралл",
+  "block.upgrade_aquatic.pillow_coral_block": "Блок подушечного коралла",
+  "block.upgrade_aquatic.pillow_coral_fan": "Веерный подушечный коралл",
+  
+  "block.upgrade_aquatic.dead_rock_coral": "Мёртвый каменистый коралл",
+  "block.upgrade_aquatic.dead_rock_coral_block": "Блок мёртвого каменистого коралла",
+  "block.upgrade_aquatic.dead_rock_coral_fan": "Мёртвый веерный каменистый коралл",
+  
+  "block.upgrade_aquatic.rock_coral": "Каменистый коралл",
+  "block.upgrade_aquatic.rock_coral_block": "Блок каменистого коралла",
+  "block.upgrade_aquatic.rock_coral_fan": "Веерный каменистый коралл",
+  
+  "block.upgrade_aquatic.dead_finger_coral": "Мёртвый пальцевидный коралл",
+  "block.upgrade_aquatic.dead_finger_coral_block": "Блок мёртвого пальцевидного коралла",
+  "block.upgrade_aquatic.dead_finger_coral_fan": "Мёртвый веерный пальцевидный коралл",
+  
+  "block.upgrade_aquatic.finger_coral": "Пальцевидный коралл",
+  "block.upgrade_aquatic.finger_coral_block": "Блок пальцевидного коралла",
+  "block.upgrade_aquatic.finger_coral_fan": "Веерный пальцевидный коралл",
+  
+  "block.upgrade_aquatic.dead_star_coral": "Мёртвый коралл-звезда",
+  "block.upgrade_aquatic.dead_star_coral_block": "Блок мёртвого коралла-звезды",
+  "block.upgrade_aquatic.dead_star_coral_fan": "Мёртвый веерный коралл-звезда",
+  
+  "block.upgrade_aquatic.star_coral": "Коралл-звезда",
+  "block.upgrade_aquatic.star_coral_block": "Блок коралла-звезды",
+  "block.upgrade_aquatic.star_coral_fan": "Веерный коралл-звезда",
+  
+  "block.upgrade_aquatic.dead_moss_coral": "Мёртвый коралловый мох",
+  "block.upgrade_aquatic.dead_moss_coral_block": "Блок мёртвого кораллового мха",
+  "block.upgrade_aquatic.dead_moss_coral_fan": "Мёртвый веерный коралловый мох",
+  
+  "block.upgrade_aquatic.moss_coral": "Коралловый мох",
+  "block.upgrade_aquatic.moss_coral_block": "Блок кораллового мха",
+  "block.upgrade_aquatic.moss_coral_fan": "Веерный коралловый мох",
+  
+  "block.upgrade_aquatic.dead_petal_coral": "Мёртвый лепестковый коралл",
+  "block.upgrade_aquatic.dead_petal_coral_block": "Блок мёртвого лепесткового коралла",
+  "block.upgrade_aquatic.dead_petal_coral_fan": "Мёртвый веерный лепестковый коралл",
+  
+  "block.upgrade_aquatic.petal_coral": "Лепестковый коралл",
+  "block.upgrade_aquatic.petal_coral_block": "Блок лепесткового коралла",
+  "block.upgrade_aquatic.petal_coral_fan": "Веерный лепестковый коралл",
+  
+  "block.upgrade_aquatic.dead_branch_coral": "Мёртвый ветвистый коралл",
+  "block.upgrade_aquatic.dead_branch_coral_block": "Блок мёртвого ветвистого коралла",
+  "block.upgrade_aquatic.dead_branch_coral_fan": "Мёртвый веерный ветвистый коралл",
+  
+  "block.upgrade_aquatic.branch_coral": "Ветвистый коралл",
+  "block.upgrade_aquatic.branch_coral_block": "Блок ветвистого коралла",
+  "block.upgrade_aquatic.branch_coral_fan": "Веерный ветвистый коралл",
+  
+  "block.upgrade_aquatic.jelly_torch_pink": "Розовый морской факел",
+  "block.upgrade_aquatic.jelly_torch_purple": "Фиолетовый морской факел",
+  "block.upgrade_aquatic.jelly_torch_blue": "Синий морской факел",
+  "block.upgrade_aquatic.jelly_torch_green": "Зелёный морской факел",
+  "block.upgrade_aquatic.jelly_torch_yellow": "Жёлтый морской факел",
+  "block.upgrade_aquatic.jelly_torch_orange": "Оранжевый морской факел",
+  "block.upgrade_aquatic.jelly_torch_red": "Красный морской факел",
+  "block.upgrade_aquatic.jelly_torc_wall_pink": "Розовый морской факел на стене",
+  "block.upgrade_aquatic.jelly_torch_wall_purple": "Фиолетовый морской факел на стене",
+  "block.upgrade_aquatic.jelly_torch_wall_blue": "Синий морской факел на стене",
+  "block.upgrade_aquatic.jelly_torch_wall_green": "Зелёный морской факел на стене",
+  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Жёлтый морской факел на стене",
+  "block.upgrade_aquatic.jelly_torch_wall_orange": "Оранжевый морской факел на стене",
+  "block.upgrade_aquatic.jelly_torch_wall_red": "Красный морской факел на стене",
+  
+  "_comment": "Предметы",
+  
+  "item.upgrade_aquatic.prismarine_rod": "Призмариновый стержень",
+  
+  "item.upgrade_aquatic.nautilus_bucket": "Наутилус в ведре",
+
+  "item.upgrade_aquatic.drowned_villager_spawn_egg": "Яйцо призыва крестьянина-утопленника",
+  "item.upgrade_aquatic.nautilus_spawn_egg": "Яйцо призыва наутилуса",
+  
+  "_comment": "Сущности",
+  
+  "entity.upgrade_aquatic.nautilus": "Наутилус",
+  
+  "_comment": "Смерти",
+  
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s был заколот шипом стража",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s был заколот шипом стража, пока боролся с %2$s",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s был заколот шипом древнего стража",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s был заколот шипом древнего стража, пока боролся с %2$s"
+}
