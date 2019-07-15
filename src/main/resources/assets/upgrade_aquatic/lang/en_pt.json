@@ -109,6 +109,24 @@
   
   "block.upgrade_aquatic.embedded_ammonite": "Husk o' Buried Fossil",  
   
+  "block.upgrade_aquatic.bedroll_leather": "Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_white": "White Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_black": "Black Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_red": "Scarlet Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_blue": "Blue Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_green": "Green Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_lime": "Lime Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_light_blue": "Light Blue Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_gray": "Gray Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_light_gray": "Light Gray Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_pink": "Pink Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_purple": "Purple Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_magenta": "Magenta Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_cyan": "Cyan Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_orange": "Orange Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_yellow": "Yellow Scoundrel's Nest",
+  "block.upgrade_aquatic.bedroll_brown": "Brown Scoundrel's Nest",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Cane o' Prismarine",

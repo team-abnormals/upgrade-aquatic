@@ -109,6 +109,24 @@
   
   "block.upgrade_aquatic.embedded_ammonite": "stoan shel",  
   
+  "block.upgrade_aquatic.bedroll_leather": "kity Kat bed",
+  "block.upgrade_aquatic.bedroll_white": "wite kity kat bed",
+  "block.upgrade_aquatic.bedroll_black": "blak kity Kat bed",
+  "block.upgrade_aquatic.bedroll_red": "red kity kat bed",
+  "block.upgrade_aquatic.bedroll_blue": "blu Kity kat bed",
+  "block.upgrade_aquatic.bedroll_green": "green kity kat bed",
+  "block.upgrade_aquatic.bedroll_lime": "lym kity kat bed",
+  "block.upgrade_aquatic.bedroll_light_blue": "lite Blu kity kat bed",
+  "block.upgrade_aquatic.bedroll_gray": "gray kity kat bed",
+  "block.upgrade_aquatic.bedroll_light_gray": "lite Gray kity kat bed",
+  "block.upgrade_aquatic.bedroll_pink": "pinc kity kat bed",
+  "block.upgrade_aquatic.bedroll_purple": "purpel kity kat bed",
+  "block.upgrade_aquatic.bedroll_magenta": "majentr kity kat bed",
+  "block.upgrade_aquatic.bedroll_cyan": "sian kity kat Bed",
+  "block.upgrade_aquatic.bedroll_orange": "oreng kity kat bed",
+  "block.upgrade_aquatic.bedroll_yellow": "yelo kity kat bed",
+  "block.upgrade_aquatic.bedroll_brown": "broun kity kat bed",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "prizmarine stik",
