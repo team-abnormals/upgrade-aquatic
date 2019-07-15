@@ -109,6 +109,9 @@
   
   "block.upgrade_aquatic.embedded_ammonite": "Embedded Ammonite",
   
+  "block.upgrade_aquatic.bedroll_leather": "Bedroll",
+  "block.upgrade_aquatic.bedroll_white": "White Bedroll",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",

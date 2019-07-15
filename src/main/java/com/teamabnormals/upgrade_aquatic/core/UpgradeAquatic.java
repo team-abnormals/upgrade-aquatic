@@ -1,10 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
+import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityBedroll;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.core.proxy.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -19,7 +21,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod(value = Reference.MODID)
 public class UpgradeAquatic {
 	public static UpgradeAquatic instance;
-	public static TileEntityType<TileEntityElderEye> ELDER_EYE;
 	public static ServerProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 	
 	public UpgradeAquatic() {
@@ -41,6 +42,7 @@ public class UpgradeAquatic {
 	@SubscribeEvent
 	@SuppressWarnings("unchecked")
 	public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-		event.getRegistry().register(ELDER_EYE = (TileEntityType<TileEntityElderEye>) TileEntityType.Builder.create(TileEntityElderEye::new, UABlocks.ELDER_EYE).build(null).setRegistryName(Reference.MODID, "elder_eye"));
+		event.getRegistry().register(UATileEntities.ELDER_EYE = (TileEntityType<TileEntityElderEye>) TileEntityType.Builder.create(TileEntityElderEye::new, UABlocks.ELDER_EYE).build(null).setRegistryName(Reference.MODID, "elder_eye"));
+		event.getRegistry().register(UATileEntities.BEDROLL = (TileEntityType<TileEntityBedroll>) TileEntityType.Builder.create(TileEntityBedroll::new, UABlocks.BEDROLL_WHITE).build(null).setRegistryName(Reference.MODID, "bedroll"));
 	}
 }

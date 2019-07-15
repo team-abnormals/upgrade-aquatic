@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
@@ -135,6 +136,24 @@ public class UABlocks {
 	public static Block JELLY_TORCH_WALL_WHITE        = new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.WHITE).setRegistryName(Reference.MODID, "jelly_torch_wall_white");
 	public static Block EMBEDDED_AMMONITE             = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "embedded_ammonite");
 	
+	public static Block BEDROLL_LEATHER               = new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_leather");
+	public static Block BEDROLL_WHITE                 = new BlockBedroll(DyeColor.WHITE, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_white");
+	public static Block BEDROLL_ORANGE 				  = new BlockBedroll(DyeColor.ORANGE, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_orange");
+    public static Block BEDROLL_MAGENTA               = new BlockBedroll(DyeColor.MAGENTA, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_magenta");
+    public static Block BEDROLL_LIGHT_BLUE            = new BlockBedroll(DyeColor.LIGHT_BLUE, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_light_blue");
+    public static Block BEDROLL_YELLOW                = new BlockBedroll(DyeColor.YELLOW, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_yellow");
+    public static Block BEDROLL_LIME                  = new BlockBedroll(DyeColor.LIME, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_lime");
+    public static Block BEDROLL_PINK                  = new BlockBedroll(DyeColor.PINK, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_pink");
+    public static Block BEDROLL_GRAY                  = new BlockBedroll(DyeColor.GRAY, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_gray");
+    public static Block BEDROLL_LIGHT_GRAY            = new BlockBedroll(DyeColor.LIGHT_GRAY, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_light_gray");
+    public static Block BEDROLL_CYAN                  = new BlockBedroll(DyeColor.CYAN, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_cyan");
+    public static Block BEDROLL_PURPLE                = new BlockBedroll(DyeColor.PURPLE, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_purple");
+    public static Block BEDROLL_BLUE                  = new BlockBedroll(DyeColor.BLUE, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_blue");
+    public static Block BEDROLL_BROWN                 = new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_brown");
+    public static Block BEDROLL_GREEN                 = new BlockBedroll(DyeColor.GREEN, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_green");
+    public static Block BEDROLL_RED                   = new BlockBedroll(DyeColor.RED, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_red");
+    public static Block BEDROLL_BLACK                 = new BlockBedroll(DyeColor.BLACK, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_black");
+	
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
 		final Block blocks[] = {
@@ -149,7 +168,7 @@ public class UABlocks {
 			GUARDIAN_SPINE, ELDER_GUARDIAN_SPINE, ELDER_EYE,
 			JELLY_TORCH_PINK, JELLY_TORCH_WALL_PINK, JELLY_TORCH_PURPLE, JELLY_TORCH_WALL_PURPLE, JELLY_TORCH_BLUE, JELLY_TORCH_WALL_BLUE,
 			JELLY_TORCH_GREEN, JELLY_TORCH_WALL_GREEN, JELLY_TORCH_YELLOW, JELLY_TORCH_WALL_YELLOW, JELLY_TORCH_ORANGE, JELLY_TORCH_WALL_ORANGE, JELLY_TORCH_RED, JELLY_TORCH_WALL_RED, JELLY_TORCH_WHITE, JELLY_TORCH_WALL_WHITE,
-			EMBEDDED_AMMONITE
+			EMBEDDED_AMMONITE, BEDROLL_WHITE, BEDROLL_LEATHER
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -239,5 +258,8 @@ public class UABlocks {
 		registry.register(RegistryUtils.createWallOrFloorItem(JELLY_TORCH_RED, JELLY_TORCH_WALL_RED, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createWallOrFloorItem(JELLY_TORCH_WHITE, JELLY_TORCH_WALL_WHITE, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createSimpleItemBlock(EMBEDDED_AMMONITE, ItemGroup.BUILDING_BLOCKS));
+		
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_LEATHER, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_WHITE, ItemGroup.DECORATIONS));
 	}
 }

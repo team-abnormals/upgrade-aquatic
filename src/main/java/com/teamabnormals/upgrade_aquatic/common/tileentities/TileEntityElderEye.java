@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -19,7 +19,7 @@ import net.minecraft.util.math.MathHelper;
 public class TileEntityElderEye extends TileEntity implements ITickableTileEntity {
 	
 	public TileEntityElderEye() {
-		super(UpgradeAquatic.ELDER_EYE);
+		super(UATileEntities.ELDER_EYE);
 	}
 
 	@Override
