@@ -66,7 +66,7 @@ public class UAEntities {
     }
     
     private static boolean ravineMobCondition(EntityType<? extends MobEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    	return pos.getY() <= 40;
+    	return pos.getY() <= 30;
     }
     
 }

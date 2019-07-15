@@ -30,7 +30,7 @@ public class WorldGenAmmonite {
 		generatableBiomes.add(Biomes.DEEP_FROZEN_OCEAN);
 		for(Biome biome : generatableBiomes) {
 			// Vein/Chunk Count, MinHeight, MaxHeightBase, MaxHeight
-			CountRangeConfig placement = new CountRangeConfig(75, 20, 0, 73);
+			CountRangeConfig placement = new CountRangeConfig(50, 20, 0, 73);
 			biome.addFeature(Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, UABlocks.EMBEDDED_AMMONITE.getDefaultState(), 3), Placement.COUNT_BIASED_RANGE, placement));
 		}
 		

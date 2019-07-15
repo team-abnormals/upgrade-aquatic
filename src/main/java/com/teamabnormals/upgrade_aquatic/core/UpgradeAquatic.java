@@ -1,8 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
-import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityBedroll;
-import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
+import com.teamabnormals.upgrade_aquatic.common.tileentities.*;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.core.proxy.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
