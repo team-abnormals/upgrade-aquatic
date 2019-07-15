@@ -111,6 +111,21 @@
   
   "block.upgrade_aquatic.bedroll_leather": "Bedroll",
   "block.upgrade_aquatic.bedroll_white": "White Bedroll",
+  "block.upgrade_aquatic.bedroll_black": "Black Bedroll",
+  "block.upgrade_aquatic.bedroll_red": "Red Bedroll",
+  "block.upgrade_aquatic.bedroll_blue": "Blue Bedroll",
+  "block.upgrade_aquatic.bedroll_green": "Green Bedroll",
+  "block.upgrade_aquatic.bedroll_lime": "Lime Bedroll",
+  "block.upgrade_aquatic.bedroll_light_blue": "Light Blue Bedroll",
+  "block.upgrade_aquatic.bedroll_gray": "Gray Bedroll",
+  "block.upgrade_aquatic.bedroll_light_gray": "Light Gray Bedroll",
+  "block.upgrade_aquatic.bedroll_pink": "Pink Bedroll",
+  "block.upgrade_aquatic.bedroll_purple": "Purple Bedroll",
+  "block.upgrade_aquatic.bedroll_magenta": "Magenta Bedroll",
+  "block.upgrade_aquatic.bedroll_cyan": "Cyan Bedroll",
+  "block.upgrade_aquatic.bedroll_orange": "Orange Bedroll",
+  "block.upgrade_aquatic.bedroll_yellow": "Yellow Bedroll",
+  "block.upgrade_aquatic.bedroll_brown": "Brown Bedroll",
   
   "_comment": "Items",
   

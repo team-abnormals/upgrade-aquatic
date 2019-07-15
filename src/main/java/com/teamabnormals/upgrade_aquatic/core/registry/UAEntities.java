@@ -23,7 +23,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -49,7 +48,7 @@ public class UAEntities {
         return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, entityClass.getSimpleName()).replace("entity_", "");
     }
     
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
         for (@SuppressWarnings("rawtypes") EntityType entity : entities) {
             Preconditions.checkNotNull(entity.getRegistryName(), "registryName");

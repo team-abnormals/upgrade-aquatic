@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "upgrade_aquatic:items/bedroll_white"
+        "layer0": "upgrade_aquatic:item/bedroll_item_white"
     }
 }

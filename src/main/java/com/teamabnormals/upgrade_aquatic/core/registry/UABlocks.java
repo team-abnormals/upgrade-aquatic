@@ -168,7 +168,7 @@ public class UABlocks {
 			GUARDIAN_SPINE, ELDER_GUARDIAN_SPINE, ELDER_EYE,
 			JELLY_TORCH_PINK, JELLY_TORCH_WALL_PINK, JELLY_TORCH_PURPLE, JELLY_TORCH_WALL_PURPLE, JELLY_TORCH_BLUE, JELLY_TORCH_WALL_BLUE,
 			JELLY_TORCH_GREEN, JELLY_TORCH_WALL_GREEN, JELLY_TORCH_YELLOW, JELLY_TORCH_WALL_YELLOW, JELLY_TORCH_ORANGE, JELLY_TORCH_WALL_ORANGE, JELLY_TORCH_RED, JELLY_TORCH_WALL_RED, JELLY_TORCH_WHITE, JELLY_TORCH_WALL_WHITE,
-			EMBEDDED_AMMONITE, BEDROLL_WHITE, BEDROLL_LEATHER
+			EMBEDDED_AMMONITE, BEDROLL_LEATHER, BEDROLL_WHITE, BEDROLL_BLACK, BEDROLL_GRAY, BEDROLL_LIGHT_GRAY, BEDROLL_PINK, BEDROLL_MAGENTA, BEDROLL_PURPLE, BEDROLL_BLUE, BEDROLL_CYAN, BEDROLL_LIGHT_BLUE, BEDROLL_GREEN, BEDROLL_LIME, BEDROLL_ORANGE, BEDROLL_RED, BEDROLL_YELLOW, BEDROLL_BROWN
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -261,5 +261,20 @@ public class UABlocks {
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_LEATHER, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_WHITE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_BLACK, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_RED, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_LIGHT_BLUE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_BLUE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_PINK, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_PURPLE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_MAGENTA, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_GREEN, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_LIME, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_GRAY, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_LIGHT_GRAY, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_ORANGE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_YELLOW, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_CYAN, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_BROWN, ItemGroup.DECORATIONS));
 	}
 }
