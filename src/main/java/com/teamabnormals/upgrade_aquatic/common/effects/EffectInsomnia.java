@@ -4,7 +4,6 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.InstantEffect;
 import net.minecraft.stats.StatisticsManager;
