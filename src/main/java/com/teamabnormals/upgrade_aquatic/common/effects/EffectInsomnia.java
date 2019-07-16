@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.InstantEffect;
 import net.minecraft.stats.StatisticsManager;
@@ -20,8 +21,8 @@ public class EffectInsomnia extends InstantEffect {
     public void performEffect(LivingEntity entityLivingBase, int amplifier) {
     	if (entityLivingBase instanceof ServerPlayerEntity) {
     		ServerPlayerEntity playerMP = (ServerPlayerEntity) entityLivingBase;
-            StatisticsManager statisticsManager = playerMP.getStats();
-            statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), -(24000 * (amplifier + 1)));
-        }
+    		StatisticsManager statisticsManager = playerMP.getStats();
+    		statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), (24000 * (amplifier + 1)));
+    	}
     }
 }

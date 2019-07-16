@@ -140,6 +140,28 @@
   
   "entity.upgrade_aquatic.nautilus": "Nautilus",
   
+  "_comment": "Potions and Effects",
+  
+  "effect.upgrade_aquatic.insomnia": "Insomnia",
+  "item.minecraft.potion.effect.insomnia": "Potion of Insomnia",
+  "item.minecraft.potion.effect.insomnia_strong": "Potion of Insomnia",
+  "item.minecraft.splash_potion.effect.insomnia": "Splash Potion of Insomnia",
+  "item.minecraft.splash_potion.effect.insomnia_strong": "Splash Potion of Insomnia",
+  "item.minecraft.lingering_potion.effect.insomnia": "Lingering Potion of Insomnia",
+  "item.minecraft.lingering_potion.effect.insomnia_strong": "Lingering Potion of Insomnia",
+  "item.minecraft.tipped_arrow.effect.insomnia": "Arrow of Insomnia",
+  "item.minecraft.tipped_arrow.effect.insomnia_strong": "Arrow of Insomnia",
+  
+  "effect.upgrade_aquatic.restfulness": "Restfulness",
+  "item.minecraft.potion.effect.restfulness": "Potion of Restfulness",
+  "item.minecraft.potion.effect.restfulness_strong": "Potion of Restfulness",
+  "item.minecraft.splash_potion.effect.restfulness": "Splash Potion of Restfulness",
+  "item.minecraft.splash_potion.effect.restfulness_strong": "Splash Potion of Restfulness",
+  "item.minecraft.lingering_potion.effect.restfulness": "Lingering Potion of Restfulness",
+  "item.minecraft.lingering_potion.effect.restfulness_strong": "Lingering Potion of Restfulness",
+  "item.minecraft.tipped_arrow.effect.restfulness": "Arrow of Restfulness",
+  "item.minecraft.tipped_arrow.effect.restfulness_strong": "Arrow of Restfulness",
+ 	
   "_comment": "Deaths",
   
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Guardian Spine",

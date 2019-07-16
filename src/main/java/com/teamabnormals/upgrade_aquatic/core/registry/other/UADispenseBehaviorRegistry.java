@@ -40,7 +40,7 @@ public class UADispenseBehaviorRegistry {
         }
     };
     static IDispenseItemBehavior bucketFishItemBehavior = new DefaultDispenseItemBehavior() {
-
+    	
         @Override
         protected ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
             BlockPos blockPos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
