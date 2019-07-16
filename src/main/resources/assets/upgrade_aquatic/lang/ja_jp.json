@@ -1,0 +1,149 @@
+{
+  "_comment": "Blocks",
+
+  "block.upgrade_aquatic.guardian_spine": "ガーディアンの刺",
+  "block.upgrade_aquatic.elder_guardian_spine": "エルダーガーディアンの刺",
+
+  "block.upgrade_aquatic.elder_eye": "エルダーアイ",
+  
+  "block.upgrade_aquatic.bubble_block": "バブルブロック",
+  
+  "block.upgrade_aquatic.dead_acan_coral": "死んだアカンサンゴ",
+  "block.upgrade_aquatic.dead_acan_coral_block": "死んだアカンサンゴブロック",
+  "block.upgrade_aquatic.dead_acan_coral_fan": "死んだアカンウチワサンゴ",
+  
+  "block.upgrade_aquatic.acan_coral": "アカンサンゴ",
+  "block.upgrade_aquatic.acan_coral_block": "アカンサンゴブロック",
+  "block.upgrade_aquatic.acan_coral_fan": "アカンウチワサンゴ",
+  
+  "block.upgrade_aquatic.elder_prismarine_coral": "エルダープリスマリンサンゴ",
+  "block.upgrade_aquatic.elder_prismarine_coral_block": "エルダープリスマリンサンゴブロック",
+  "block.upgrade_aquatic.elder_prismarine_coral_fan": "エルダープリスマリンウチワサンゴ",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "エルダープリスマリン吊りサンゴ",
+  
+  "block.upgrade_aquatic.prismarine_coral": "プリスマリンサンゴ",
+  "block.upgrade_aquatic.prismarine_coral_block": "プリスマリンサンゴブロック",
+  "block.upgrade_aquatic.prismarine_coral_fan": "プリスマリンウチワサンゴ",
+  "block.upgrade_aquatic.prismarine_coral_shower": "プリスマリン吊りサンゴ",
+  
+  "block.upgrade_aquatic.dead_silk_coral": "死んだシルクサンゴ",
+  "block.upgrade_aquatic.dead_silk_coral_block": "死んだシルクサンゴブロック",
+  "block.upgrade_aquatic.dead_silk_coral_fan": "死んだシルクウチワサンゴ",
+  
+  "block.upgrade_aquatic.silk_coral": "シルクサンゴ",
+  "block.upgrade_aquatic.silk_coral_block": "シルクサンゴブロック",
+  "block.upgrade_aquatic.silk_coral_fan": "シルクウチワサンゴ",
+  
+  "block.upgrade_aquatic.dead_pillow_coral": "死んだピローサンゴ",
+  "block.upgrade_aquatic.dead_pillow_coral_block": "死んだピローサンゴブロック",
+  "block.upgrade_aquatic.dead_pillow_coral_fan": "死んだピローウチワサンゴ",
+  
+  "block.upgrade_aquatic.pillow_coral": "ピローサンゴ",
+  "block.upgrade_aquatic.pillow_coral_block": "ピローサンゴブロック",
+  "block.upgrade_aquatic.pillow_coral_fan": "ピローウチワサンゴ",
+  
+  "block.upgrade_aquatic.dead_rock_coral": "死んだロックサンゴ",
+  "block.upgrade_aquatic.dead_rock_coral_block": "死んだロックサンゴブロック",
+  "block.upgrade_aquatic.dead_rock_coral_fan": "死んだロックウチワサンゴ",
+  
+  "block.upgrade_aquatic.rock_coral": "ロックサンゴ",
+  "block.upgrade_aquatic.rock_coral_block": "ロックサンゴブロック",
+  "block.upgrade_aquatic.rock_coral_fan": "ロックウチワサンゴ",
+  
+  "block.upgrade_aquatic.dead_finger_coral": "死んだフィンガーサンゴ",
+  "block.upgrade_aquatic.dead_finger_coral_block": "死んだフィンガーサンゴブロック",
+  "block.upgrade_aquatic.dead_finger_coral_fan": "死んだフィンガーウチワサンゴ",
+  
+  "block.upgrade_aquatic.finger_coral": "フィンガーサンゴ",
+  "block.upgrade_aquatic.finger_coral_block": "フィンガーサンゴブロック",
+  "block.upgrade_aquatic.finger_coral_fan": "フィンガーウチワサンゴ",
+  
+  "block.upgrade_aquatic.dead_star_coral": "死んだモンタストレアサンゴ",
+  "block.upgrade_aquatic.dead_star_coral_block": "死んだモンタストレアサンゴブロック",
+  "block.upgrade_aquatic.dead_star_coral_fan": "死んだモンタストレアウチワサンゴ",
+  
+  "block.upgrade_aquatic.star_coral": "モンタストレアサンゴ",
+  "block.upgrade_aquatic.star_coral_block": "モンタストレアサンゴブロック",
+  "block.upgrade_aquatic.star_coral_fan": "モンタストレアウチワサンゴ",
+  
+  "block.upgrade_aquatic.dead_moss_coral": "死んだコケサンゴ",
+  "block.upgrade_aquatic.dead_moss_coral_block": "死んだコケサンゴブロック",
+  "block.upgrade_aquatic.dead_moss_coral_fan": "死んだコケウチワサンゴ",
+  
+  "block.upgrade_aquatic.moss_coral": "コケサンゴ",
+  "block.upgrade_aquatic.moss_coral_block": "コケサンゴブロック",
+  "block.upgrade_aquatic.moss_coral_fan": "コケウチワサンゴ",
+  
+  "block.upgrade_aquatic.dead_petal_coral": "死んだペタルサンゴ",
+  "block.upgrade_aquatic.dead_petal_coral_block": "死んだペタルサンゴブロック",
+  "block.upgrade_aquatic.dead_petal_coral_fan": "死んだペタルウチワサンゴ",
+  
+  "block.upgrade_aquatic.petal_coral": "ペタルサンゴ",
+  "block.upgrade_aquatic.petal_coral_block": "ペタルサンゴブロック",
+  "block.upgrade_aquatic.petal_coral_fan": "ペタルウチワサンゴ",
+  
+  "block.upgrade_aquatic.dead_branch_coral": "死んだ枝サンゴ",
+  "block.upgrade_aquatic.dead_branch_coral_block": "死んだ枝サンゴブロック",
+  "block.upgrade_aquatic.dead_branch_coral_fan": "死んだ枝ウチワサンゴ",
+  
+  "block.upgrade_aquatic.branch_coral": "枝サンゴ",
+  "block.upgrade_aquatic.branch_coral_block": "枝サンゴブロック",
+  "block.upgrade_aquatic.branch_coral_fan": "枝ウチワサンゴ",
+  
+  "block.upgrade_aquatic.jelly_torch_pink": "桃色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_purple": "紫色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_blue": "青色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_green": "緑色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_yellow": "黄色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_orange": "橙色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_red": "赤色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_white": "白色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_wall_pink": "壁桃色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_wall_purple": "壁紫色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_wall_blue": "壁青色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_wall_green": "壁緑色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_wall_yellow": "壁黄色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_wall_orange": "壁橙色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_wall_red": "壁赤色ジェリーの松明",
+  "block.upgrade_aquatic.jelly_torch_wall_white": "壁白色ジェリーの松明",
+  
+  "block.upgrade_aquatic.embedded_ammonite": "埋め込まれたアンモナイト",
+  
+  "block.upgrade_aquatic.bedroll_leather": "寝袋",
+  "block.upgrade_aquatic.bedroll_white": "白色の寝袋",
+  "block.upgrade_aquatic.bedroll_black": "黒色の寝袋",
+  "block.upgrade_aquatic.bedroll_red": "赤色の寝袋",
+  "block.upgrade_aquatic.bedroll_blue": "青色の寝袋",
+  "block.upgrade_aquatic.bedroll_green": "緑色の寝袋",
+  "block.upgrade_aquatic.bedroll_lime": "黄緑色の寝袋",
+  "block.upgrade_aquatic.bedroll_light_blue": "空色の寝袋",
+  "block.upgrade_aquatic.bedroll_gray": "灰色の寝袋",
+  "block.upgrade_aquatic.bedroll_light_gray": "薄灰色の寝袋",
+  "block.upgrade_aquatic.bedroll_pink": "桃色の寝袋",
+  "block.upgrade_aquatic.bedroll_purple": "紫色の寝袋",
+  "block.upgrade_aquatic.bedroll_magenta": "赤紫色の寝袋",
+  "block.upgrade_aquatic.bedroll_cyan": "青緑色の寝袋",
+  "block.upgrade_aquatic.bedroll_orange": "橙色の寝袋",
+  "block.upgrade_aquatic.bedroll_yellow": "黄色の寝袋",
+  "block.upgrade_aquatic.bedroll_brown": "茶色の寝袋",
+  
+  "_comment": "Items",
+  
+  "item.upgrade_aquatic.prismarine_rod": "プリズマリンロッド",
+  
+  "item.upgrade_aquatic.nautilus_bucket": "オウムガイ入りバケツ",
+
+  "item.upgrade_aquatic.drowned_villager_spawn_egg": "村人ドラウンドのスポーンエッグ",
+  "item.upgrade_aquatic.nautilus_spawn_egg": "オウムガイのスポーンエッグ",
+  
+  "_comment": "Entities",
+  
+  "entity.upgrade_aquatic.nautilus": "オウムガイ",
+  
+  "_comment": "Deaths",
+  
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$sがガーディアンの刺に刺し殺された",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$sは%2$sから逃げようとしてガーディアンの刺に刺されてしまった",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$sがエルダーガーディアンの刺に刺し殺された",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$sは%2$sから逃げようとしてエルダーガーディアンの刺に刺されてしまった"
+}
