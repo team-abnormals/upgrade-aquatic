@@ -15,7 +15,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<EntityNautilus>> {
-	private static final ResourceLocation NAUTILUS_TEXTURE = new ResourceLocation(Reference.MODID, "textures/entity/nautilus.png");
+	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] { 
+		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus.png"),
+		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_smelly.png"),
+		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_mca.png"),
+		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_five.png"),
+	};
 
 	public RenderNautilus(EntityRendererManager renderManager) {
         super(renderManager, new ModelNautilus<>(), 0.5F);
@@ -23,7 +28,15 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityNautilus entity) {
-		return NAUTILUS_TEXTURE;
+		String name = entity.getName().getString().toLowerCase().trim();
+		if (name.equals("smelly") || name.equals("thefaceofgaming")) {
+			return TEXTURES[1];
+		} else if (name.equals("abnormal") || name.equals("cameron")) {
+			return TEXTURES[2];
+		} else if(name.equals("five") || name.equals("epic")) {
+			return TEXTURES[3];
+		}
+		return TEXTURES[0];
 	}
 	
 	@Override

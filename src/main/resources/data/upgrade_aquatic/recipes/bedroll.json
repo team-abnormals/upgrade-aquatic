@@ -1,0 +1,19 @@
+{
+    "type": "crafting_shaped",
+    "pattern": [
+        "LLW",
+        "LLL"
+    ],
+    "key": {
+        "L": {
+            "item": "minecraft:leather"
+        },
+        "W": {
+            "item": "minecraft:white_wool"
+        }
+    },
+    "result": {
+      "item": "upgrade_aquatic:bedroll_leather",
+	  "count": 1
+    }
+}
