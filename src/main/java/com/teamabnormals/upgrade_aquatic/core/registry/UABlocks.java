@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
@@ -35,16 +34,16 @@ public class UABlocks {
 	public static Block DEAD_SILK_CORAL_BLOCK         = new Block(UAProperties.DEAD_CORAL_BLOCK).setRegistryName(Reference.MODID, "dead_silk_coral_block");
 	public static Block ELDER_PRISMARINE_CORAL_BLOCK  = new Block(UAProperties.DEAD_CORAL_BLOCK).setRegistryName(Reference.MODID, "elder_prismarine_coral_block");
 
-	public static Block ACAN_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_ACAN_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.CYAN).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "acan_coral_block");
-	public static Block FINGER_CORAL_BLOCK            = new BlockUACoralBlock(DEAD_FINGER_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "finger_coral_block");
-	public static Block STAR_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_STAR_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.LIME).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "star_coral_block");
-	public static Block MOSS_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_MOSS_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.GREEN).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "moss_coral_block");
-	public static Block PETAL_CORAL_BLOCK             = new BlockUACoralBlock(DEAD_PETAL_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.LIGHT_BLUE).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "petal_coral_block");
-	public static Block BRANCH_CORAL_BLOCK            = new BlockUACoralBlock(DEAD_BRANCH_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.GRAY_TERRACOTTA).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "branch_coral_block");
-	public static Block ROCK_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_ROCK_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.BROWN_TERRACOTTA).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "rock_coral_block");
-	public static Block PILLOW_CORAL_BLOCK            = new BlockUACoralBlock(DEAD_PILLOW_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "pillow_coral_block");
-	public static Block SILK_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_SILK_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.PURPLE_TERRACOTTA).hardnessAndResistance(1.5F, 6.0F).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "silk_coral_block");
-	public static Block PRISMARINE_CORAL_BLOCK        = new BlockUACoralBlock(ELDER_PRISMARINE_CORAL_BLOCK, Block.Properties.create(Material.CORAL, MaterialColor.DIAMOND).hardnessAndResistance(1.5F, 6.0F).lightValue(3).sound(SoundType.CORAL)).setRegistryName(Reference.MODID, "prismarine_coral_block");
+	public static Block ACAN_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_ACAN_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.CYAN)).setRegistryName(Reference.MODID, "acan_coral_block");
+	public static Block FINGER_CORAL_BLOCK            = new BlockUACoralBlock(DEAD_FINGER_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.ORANGE_TERRACOTTA)).setRegistryName(Reference.MODID, "finger_coral_block");
+	public static Block STAR_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_STAR_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.LIME)).setRegistryName(Reference.MODID, "star_coral_block");
+	public static Block MOSS_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_MOSS_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.GREEN)).setRegistryName(Reference.MODID, "moss_coral_block");
+	public static Block PETAL_CORAL_BLOCK             = new BlockUACoralBlock(DEAD_PETAL_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.LIGHT_BLUE)).setRegistryName(Reference.MODID, "petal_coral_block");
+	public static Block BRANCH_CORAL_BLOCK            = new BlockUACoralBlock(DEAD_BRANCH_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.GRAY_TERRACOTTA)).setRegistryName(Reference.MODID, "branch_coral_block");
+	public static Block ROCK_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_ROCK_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.BROWN)).setRegistryName(Reference.MODID, "rock_coral_block");
+	public static Block PILLOW_CORAL_BLOCK            = new BlockUACoralBlock(DEAD_PILLOW_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.WHITE_TERRACOTTA)).setRegistryName(Reference.MODID, "pillow_coral_block");
+	public static Block SILK_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_SILK_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.PURPLE)).setRegistryName(Reference.MODID, "silk_coral_block");
+	public static Block PRISMARINE_CORAL_BLOCK        = new BlockUACoralBlock(ELDER_PRISMARINE_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.DIAMOND).lightValue(3)).setRegistryName(Reference.MODID, "prismarine_coral_block");
 	
 	public static Block DEAD_ACAN_CORAL               = new BlockUACoralDead(UAProperties.DEAD_CORAL).setRegistryName(Reference.MODID, "dead_acan_coral");
 	public static Block DEAD_FINGER_CORAL             = new BlockUACoralDead(UAProperties.DEAD_CORAL).setRegistryName(Reference.MODID, "dead_finger_coral");

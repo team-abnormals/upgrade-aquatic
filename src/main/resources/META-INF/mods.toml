@@ -1,5 +1,6 @@
 modLoader="javafml"
 loaderVersion="[24,)"
+logoFile="logo.png" #optional
 issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
 
 [[mods]]

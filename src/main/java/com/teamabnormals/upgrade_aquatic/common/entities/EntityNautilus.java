@@ -259,7 +259,7 @@ public class EntityNautilus extends WaterMobEntity {
 		spawnableBiomes.add(Biomes.WARM_OCEAN);
 		
 		for(Biome biome : spawnableBiomes) {
-			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 10, 1, 4));
+			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 16, 1, 4));
 		}
 	}
 	
