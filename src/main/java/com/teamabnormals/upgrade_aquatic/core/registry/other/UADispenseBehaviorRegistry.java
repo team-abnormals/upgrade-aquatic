@@ -13,6 +13,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -51,12 +53,14 @@ public class UADispenseBehaviorRegistry {
                     if (mob instanceof AbstractFishEntity) {
                         ItemStack bucket = ((AbstractFishEntity) mob).getFishBucket();
                         mob.remove();
+                        world.playSound((PlayerEntity) null, source.getBlockPos(), SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                         return bucket;
                     }
                     //TODO: Shouldn't Nautilus extend AbstractFishEntity so we don't have to do special casing for it?
                     if (mob instanceof EntityNautilus) {
                         ItemStack bucket = ((EntityNautilus) mob).getBucket();
                         mob.remove();
+                        world.playSound(source.getX(), source.getY(), source.getZ(), SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
                         return bucket;
                     }
                 }
