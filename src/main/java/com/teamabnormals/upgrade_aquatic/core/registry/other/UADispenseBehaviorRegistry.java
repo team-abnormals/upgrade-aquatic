@@ -26,9 +26,7 @@ public class UADispenseBehaviorRegistry {
     static IDispenseItemBehavior fishDispenseItemBehavior = new DefaultDispenseItemBehavior() {
         private final DefaultDispenseItemBehavior field_218405_b = new DefaultDispenseItemBehavior();
 
-        /**
-         * Dispense the specified stack, play the dispense sound and spawn particles.
-         */
+        @Override
         public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
             BucketItem bucketitem = (BucketItem) stack.getItem();
             BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
@@ -56,7 +54,7 @@ public class UADispenseBehaviorRegistry {
                         world.playSound((PlayerEntity) null, source.getBlockPos(), SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                         return bucket;
                     }
-                    //TODO: Shouldn't Nautilus extend AbstractFishEntity so we don't have to do special casing for it?
+                    //TODO: Make Nautilus and other entities that are bucketable use an interface
                     if (mob instanceof EntityNautilus) {
                         ItemStack bucket = ((EntityNautilus) mob).getBucket();
                         mob.remove();
