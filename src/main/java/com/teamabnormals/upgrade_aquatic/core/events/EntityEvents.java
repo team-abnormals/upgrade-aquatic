@@ -33,7 +33,6 @@ public class EntityEvents {
 	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
 		PlayerEntity player = event.getEntityPlayer();
 		if(player.getEntityWorld().getBlockState(event.getNewSpawn()).getBlock() instanceof BlockBedroll) {
-			//player.setBedPosition(BlockPos.ZERO);
 			event.setCanceled(true);
 		}
 	}
