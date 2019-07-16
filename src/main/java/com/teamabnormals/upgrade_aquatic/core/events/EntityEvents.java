@@ -34,9 +34,9 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
 		PlayerEntity player = event.getEntityPlayer();
-		if(player.getEntityWorld().getBlockState(event.getNewSpawn()).getBlock() instanceof BlockBedroll && player.getEntityWorld().getBlockState(event.getNewSpawn()).getBlock() != null) {
-			player.setBedPosition(BlockPos.ZERO);
-			event.setResult(Result.DENY);
+		if(player.getEntityWorld().getBlockState(event.getNewSpawn()).getBlock() instanceof BlockBedroll) {
+			//player.setBedPosition(BlockPos.ZERO);
+			event.setCanceled(true);
 		}
 	}
 	
