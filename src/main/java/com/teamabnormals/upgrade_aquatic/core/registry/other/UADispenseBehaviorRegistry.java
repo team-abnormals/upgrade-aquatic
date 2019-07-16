@@ -1,15 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.core.registry.other;
 
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
+import com.teamabnormals.upgrade_aquatic.api.entities.IBucketableEntity;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
-
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -17,7 +15,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -31,7 +28,7 @@ public class UADispenseBehaviorRegistry {
             BucketItem bucketitem = (BucketItem) stack.getItem();
             BlockPos blockpos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
             World world = source.getWorld();
-            if (bucketitem.tryPlaceContainedLiquid((PlayerEntity) null, world, blockpos, (BlockRayTraceResult) null)) {
+            if (bucketitem.tryPlaceContainedLiquid(null, world, blockpos, null)) {
                 bucketitem.onLiquidPlaced(world, stack, blockpos);
                 return new ItemStack(Items.BUCKET);
             } else {
@@ -51,12 +48,11 @@ public class UADispenseBehaviorRegistry {
                     if (mob instanceof AbstractFishEntity) {
                         ItemStack bucket = ((AbstractFishEntity) mob).getFishBucket();
                         mob.remove();
-                        world.playSound((PlayerEntity) null, source.getBlockPos(), SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                        world.playSound(null, source.getBlockPos(), SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
                         return bucket;
                     }
-                    //TODO: Make Nautilus and other entities that are bucketable use an interface
-                    if (mob instanceof EntityNautilus) {
-                        ItemStack bucket = ((EntityNautilus) mob).getBucket();
+                    if (mob instanceof IBucketableEntity) {
+                        ItemStack bucket = ((IBucketableEntity) mob).getBucket();
                         mob.remove();
                         world.playSound(source.getX(), source.getY(), source.getZ(), SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
                         return bucket;
