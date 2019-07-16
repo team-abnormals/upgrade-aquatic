@@ -169,7 +169,7 @@ public class EntityNautilus extends WaterMobEntity {
 		}
 	}
 	
-	protected ItemStack getBucket() {
+	public ItemStack getBucket() {
 		return new ItemStack(UAItems.NAUTILUS_BUCKET);
 	}
 	
