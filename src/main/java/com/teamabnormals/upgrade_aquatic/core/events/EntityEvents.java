@@ -6,14 +6,17 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.monster.DrownedEntity;
+import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,6 +34,20 @@ public class EntityEvents {
 		Entity entity = event.getEntity();
 		if(entity instanceof DrownedEntity) {
 			((CreatureEntity) entity).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreatureEntity)entity, TurtleEntity.class, 6.0F, 1.0D, 1.2D));
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onEntityUpdate(LivingUpdateEvent event) {
+		LivingEntity entity = event.getEntityLiving();
+		if(entity instanceof PhantomEntity) {
+			if(((PhantomEntity) entity).getAttackTarget() instanceof ServerPlayerEntity) {
+				ServerPlayerEntity playerMP = (ServerPlayerEntity) ((PhantomEntity) entity).getAttackTarget();
+				StatisticsManager statisticsManager = playerMP.getStats();
+				if(statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) < 72000) {
+					((PhantomEntity) entity).setAttackTarget(null);
+				}
+			}
 		}
 	}
 	
