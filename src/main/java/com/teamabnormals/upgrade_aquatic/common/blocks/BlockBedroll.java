@@ -141,11 +141,6 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 		return p_208070_0_ == BedPart.FOOT ? p_208070_1_ : p_208070_1_.getOpposite();
 	}
 	
-	@Override
-	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
-		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
-	}
-	
 	@SuppressWarnings("deprecation")
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
@@ -155,32 +150,30 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 	
 	@Override
+	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+	}
+
+	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
 		BedPart bedpart = state.get(PART);
-		boolean flag = bedpart == BedPart.HEAD;
-		BlockPos blockpos = pos.offset(func_208070_a(bedpart, state.get(HORIZONTAL_FACING)));
-		BlockState BlockState = worldIn.getBlockState(blockpos);
-		
-		if (BlockState.getBlock() == this && BlockState.get(PART) != bedpart) {
-			
-			if (state.get(WATERLOGGED)) {
-				worldIn.setBlockState(blockpos, Blocks.WATER.getDefaultState(), 35);
-			} else {
-				worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-			}
-			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(BlockState));
-			
+		BlockPos blockpos = pos.offset(getDirectionToOther(bedpart, state.get(HORIZONTAL_FACING)));
+		BlockState blockstate = worldIn.getBlockState(blockpos);
+		if (blockstate.getBlock() == this && blockstate.get(PART) != bedpart) {
+			worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			if (!worldIn.isRemote && !player.isCreative()) {
-				if (flag) {
-					worldIn.destroyBlock(pos, true);
-				} else {
-					worldIn.destroyBlock(blockpos, true);
-				}
+				ItemStack itemstack = player.getHeldItemMainhand();
+				spawnDrops(state, worldIn, pos, (TileEntity)null, player, itemstack);
 			}
+
 			player.addStat(Stats.BLOCK_MINED.get(this));
 		}
-		
 		super.onBlockHarvested(worldIn, pos, state, player);
+	}
+	   
+	private static Direction getDirectionToOther(BedPart p_208070_0_, Direction p_208070_1_) {
+		return p_208070_0_ == BedPart.FOOT ? p_208070_1_ : p_208070_1_.getOpposite();
 	}
 	
 	@Nullable
