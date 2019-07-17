@@ -29,24 +29,25 @@ public class OverlayInsomnia {
 			ClientPlayerEntity player = MC.player;
 			StatisticsManager statisticsManager = player.getStats();
 			int sleepTime = statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
+			int configuredTime = Config.CLIENT.daysTillRenderInsomniaOverlay.get();
 			float opacity = 0;
 			//TODO: Make formula to predict values
-			if(sleepTime == 72000) {
+			if(sleepTime == 24000 * configuredTime) {
 				opacity = 0.25F;
-			} else if(sleepTime == 72100) {
+			} else if(sleepTime == 24000 * configuredTime + 100) {
 				opacity = 0.45F;
-			} else if(sleepTime == 72200) {
+			} else if(sleepTime == 24000 * configuredTime + 200) {
 				opacity = 0.65F;
-			} else if(sleepTime == 72300) {
+			} else if(sleepTime == 24000 * configuredTime + 300) {
 				opacity = 0.85F;
-			} else if(sleepTime == 72400) {
+			} else if(sleepTime == 24000 * configuredTime + 400) {
 				opacity = 0.90F;
-			} else if(sleepTime >= 72500) {
+			} else if(sleepTime >= 24000 * configuredTime + 500) {
 				opacity = 1F;
-			} else if(sleepTime < 72000) {
+			} else if(sleepTime < 24000 * configuredTime) {
 				opacity = 0F;
 			}
-			if(MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.renderInsomniaOverlay.get()) {
+			if(MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0) {
 				GlStateManager.pushMatrix();
 			
 				MC.textureManager.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/overlay/insomnia.png"));

@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core.config;
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
 
@@ -13,16 +13,16 @@ public class Config {
      * Client specific configuration
      */
 	public static class Client {
-		public final BooleanValue renderInsomniaOverlay;
+		public final ConfigValue<Integer> daysTillRenderInsomniaOverlay;
 		
 		Client(ForgeConfigSpec.Builder builder) {
 			builder.comment("Client only settings for Upgrade Aquatic")
             .push("client");
 			
-			renderInsomniaOverlay = builder
-				.comment("Toggle off to make the insomnia overlay not render")
-				.translation("upgrade_aquatic.configgui.renderInsomniaOverlay")
-				.define("renderInsomniaOverlay", true);
+			daysTillRenderInsomniaOverlay = builder
+				.comment("The amount of days till the insomnia overlay is rendered. Put Zero for no rendering at all")
+				.translation("upgrade_aquatic.configgui.daysTillRenderInsomniaOverlay")
+				.define("daysTillRenderInsomniaOverlay", 3);
 			
 			builder.pop();
 		}

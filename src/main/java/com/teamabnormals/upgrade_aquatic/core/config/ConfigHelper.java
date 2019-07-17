@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.config;
 
 import net.minecraftforge.fml.config.ModConfig;
-import static com.teamabnormals.upgrade_aquatic.core.config.ConfigHolder.renderInsomniaOverlay;
+import static com.teamabnormals.upgrade_aquatic.core.config.ConfigHolder.daysTillRenderInsomniaOverlay;
 
 public class ConfigHelper {
 	
@@ -10,7 +10,7 @@ public class ConfigHelper {
 	public static void updateClientConfig(ModConfig config) {
 		clientConfig = config;
 		
-		renderInsomniaOverlay = Config.CLIENT.renderInsomniaOverlay.get();
+		daysTillRenderInsomniaOverlay = Config.CLIENT.daysTillRenderInsomniaOverlay.get();
 	}
 	
 }
