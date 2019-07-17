@@ -48,13 +48,13 @@ public class UADispenseBehaviorRegistry {
                     if (mob instanceof AbstractFishEntity) {
                         ItemStack bucket = ((AbstractFishEntity) mob).getFishBucket();
                         mob.remove();
-                        world.playSound(null, source.getBlockPos(), SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                        world.playSound(null, blockPos, SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 0.5F, 1.0F);
                         return bucket;
                     }
                     if (mob instanceof IBucketableEntity) {
                         ItemStack bucket = ((IBucketableEntity) mob).getBucket();
                         mob.remove();
-                        world.playSound(source.getX(), source.getY(), source.getZ(), SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                        world.playSound(null, blockPos, SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 0.5F, 1.0F);
                         return bucket;
                     }
                 }
