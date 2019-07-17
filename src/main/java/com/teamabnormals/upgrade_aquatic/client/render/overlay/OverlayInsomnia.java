@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.render.overlay;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.teamabnormals.upgrade_aquatic.core.config.Config;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.client.Minecraft;
@@ -45,7 +46,7 @@ public class OverlayInsomnia {
 			} else if(sleepTime < 72000) {
 				opacity = 0F;
 			}
-			if(MC.gameSettings.thirdPersonView == 0) {
+			if(MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.renderInsomniaOverlay.get()) {
 				GlStateManager.pushMatrix();
 			
 				MC.textureManager.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/overlay/insomnia.png"));

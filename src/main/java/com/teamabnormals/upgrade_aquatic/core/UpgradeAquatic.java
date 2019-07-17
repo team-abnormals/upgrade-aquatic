@@ -2,9 +2,13 @@ package com.teamabnormals.upgrade_aquatic.core;
 
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCSetRestTime;
-import com.teamabnormals.upgrade_aquatic.common.tileentities.*;
+import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityBedroll;
+import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
-import com.teamabnormals.upgrade_aquatic.core.proxy.*;
+import com.teamabnormals.upgrade_aquatic.core.config.Config;
+import com.teamabnormals.upgrade_aquatic.core.config.ConfigHelper;
+import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
+import com.teamabnormals.upgrade_aquatic.core.proxy.ServerProxy;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
@@ -14,9 +18,12 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -36,11 +43,22 @@ public class UpgradeAquatic {
 	
 	public UpgradeAquatic() {
 		instance = this;
+		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
 		this.setupMessages();
 		
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::preInit);
 		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
+		
+		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
+			final ModConfig config = event.getConfig();
+			if (config.getSpec() == Config.CLIENTSPEC) {
+				ConfigHelper.updateClientConfig(config);
+			}
+		});
+		
+		ModLoadingContext modLoadingContext = ModLoadingContext.get();
+		modLoadingContext.registerConfig(ModConfig.Type.CLIENT, Config.CLIENTSPEC);
 	}
 	
 	private void preInit(final FMLCommonSetupEvent event) {
