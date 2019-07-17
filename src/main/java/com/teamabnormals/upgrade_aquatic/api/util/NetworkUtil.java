@@ -9,7 +9,6 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 public class NetworkUtil {
 	
-	@OnlyIn(Dist.DEDICATED_SERVER)
 	public static void updateCPlayerRestTime(int entityId, int sleepTime) {
 		UpgradeAquatic.CHANNEL.send(PacketDistributor.ALL.noArg(), new MessageCSetRestTime(entityId, sleepTime));
 	}
