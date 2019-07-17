@@ -7,15 +7,12 @@ import com.teamabnormals.upgrade_aquatic.common.effects.EffectInsomnia;
 import com.teamabnormals.upgrade_aquatic.common.effects.EffectRestfulness;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtils;
+import net.minecraft.potion.PotionBrewing;
 import net.minecraft.potion.Potions;
-import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -51,8 +48,10 @@ public class UAEffects {
 	}
 	
 	public static void registerRecipes() {
-		BrewingRecipeRegistry.addRecipe(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), Potions.AWKWARD), Ingredient.fromItems(Items.COCOA_BEANS), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), RESTFULNESS_NORMAL));
-		BrewingRecipeRegistry.addRecipe(PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), RESTFULNESS_NORMAL), Ingredient.fromItems(Items.GLOWSTONE_DUST), PotionUtils.addPotionToItemStack(new ItemStack(Items.POTION), RESTFULNESS_STRONG));
+		PotionBrewing.addMix(Potions.AWKWARD, Items.COCOA_BEANS, RESTFULNESS_NORMAL);
+		PotionBrewing.addMix(RESTFULNESS_NORMAL, Items.GLOWSTONE_DUST, RESTFULNESS_STRONG);
+		PotionBrewing.addMix(RESTFULNESS_NORMAL, Items.FERMENTED_SPIDER_EYE, INSOMNIA_NORMAL);
+		PotionBrewing.addMix(INSOMNIA_NORMAL, Items.GLOWSTONE_DUST, INSOMNIA_STRONG);
 	}
 	
 	private static Effect registerEffect(Effect effect) {
