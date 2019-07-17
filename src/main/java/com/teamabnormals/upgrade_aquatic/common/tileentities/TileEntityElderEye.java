@@ -9,6 +9,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.ItemFrameEntity;
 import net.minecraft.entity.item.PaintingEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -43,7 +44,7 @@ public class TileEntityElderEye extends TileEntity implements ITickableTileEntit
 				for(int i = 0; i < entities.size(); i++) {
 					Entity entity = entities.get(i);
 					
-					if(entity instanceof PaintingEntity) {
+					if(entity instanceof PaintingEntity || entity instanceof ItemFrameEntity) {
 						entityCount--;
 					}
 					
