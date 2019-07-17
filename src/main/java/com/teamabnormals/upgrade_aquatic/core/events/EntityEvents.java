@@ -4,7 +4,6 @@ import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
@@ -49,15 +48,6 @@ public class EntityEvents {
 			ServerPlayerEntity player = (ServerPlayerEntity) event.player;
 			StatisticsManager statisticsManager = player.getStats();
 			NetworkUtil.updateCPlayerRestTime(event.player.getEntityId(), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
-		}
-		if(event.player instanceof ServerPlayerEntity) {
-			ServerPlayerEntity player = (ServerPlayerEntity) event.player;
-			StatisticsManager statisticsManager = player.getStats();
-			System.out.println("server" + statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
-		} else if(event.player instanceof ClientPlayerEntity) {
-			ClientPlayerEntity player = (ClientPlayerEntity) event.player;
-			StatisticsManager statisticsManager = player.getStats();
-			System.out.println("client" + statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
 		}
 	}
 	

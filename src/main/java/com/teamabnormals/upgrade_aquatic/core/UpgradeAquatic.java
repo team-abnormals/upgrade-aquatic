@@ -6,6 +6,7 @@ import com.teamabnormals.upgrade_aquatic.common.tileentities.*;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.core.proxy.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
@@ -46,6 +47,7 @@ public class UpgradeAquatic {
 		proxy.preInit();
 		EntityNautilus.addSpawn();
 		UADispenseBehaviorRegistry.registerAll();
+		UAEffects.registerRecipes();
 		UAWorldGen.registerGenerators();
 	}
 

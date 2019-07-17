@@ -9,6 +9,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.PaintingEntity;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -41,6 +42,14 @@ public class TileEntityElderEye extends TileEntity implements ITickableTileEntit
 				
 				for(int i = 0; i < entities.size(); i++) {
 					Entity entity = entities.get(i);
+					
+					if(entity instanceof PaintingEntity) {
+						entityCount--;
+					}
+					
+					if(entityCount <= 0) {
+						hasEntity = false;
+					}
 
 					int[] posCheck = {
 						facing.getXOffset() * (MathHelper.floor(entity.posX) - this.pos.getX()),

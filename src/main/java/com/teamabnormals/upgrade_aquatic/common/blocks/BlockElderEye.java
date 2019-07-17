@@ -58,7 +58,7 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	}
 
 	public int getStrongPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
-		return blockState.get(POWERED) && blockState.get(FACING) == side ? 15 : 0;
+		return blockState.get(POWERED) ? 15 : 0;
 	}
 
 	public int getWeakPower(BlockState blockState, IBlockReader blockAccess, BlockPos pos, Direction side) {
@@ -127,7 +127,10 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	
 	public void updateRedstoneNeighbors(BlockState p_196378_1_, World p_196378_2_, BlockPos p_196378_3_) {
 		p_196378_2_.notifyNeighborsOfStateChange(p_196378_3_, this);
-		p_196378_2_.notifyNeighborsOfStateChange(p_196378_3_.offset(p_196378_1_.get(FACING).getOpposite(), 1), this);
+		p_196378_2_.notifyNeighborsOfStateChange(p_196378_3_.offset(Direction.NORTH), this);
+		p_196378_2_.notifyNeighborsOfStateChange(p_196378_3_.offset(Direction.SOUTH), this);
+		p_196378_2_.notifyNeighborsOfStateChange(p_196378_3_.offset(Direction.WEST), this);
+		p_196378_2_.notifyNeighborsOfStateChange(p_196378_3_.offset(Direction.EAST), this);
 	}
 
 	@SuppressWarnings("deprecation")
