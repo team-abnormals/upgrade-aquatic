@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -47,7 +48,7 @@ public class OverlayInsomnia {
 			} else if(sleepTime < 24000 * configuredTime) {
 				opacity = 0F;
 			}
-			if(MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0) {
+			if(MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.dimension == DimensionType.OVERWORLD) {
 				GlStateManager.pushMatrix();
 			
 				MC.textureManager.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/overlay/insomnia.png"));
