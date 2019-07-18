@@ -53,6 +53,7 @@ public class OverlayInsomnia {
 				MC.textureManager.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/overlay/insomnia.png"));
 				GlStateManager.enableBlend();
 				GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+				GlStateManager.color3f(1.0F, 1.0F, 1.0F);
 				GlStateManager.color4f(1.0F, 1.0F, 1.0F, opacity);
 				Tessellator tessellator = Tessellator.getInstance();
 				BufferBuilder bufferbuilder = tessellator.getBuffer();
