@@ -1,0 +1,171 @@
+{
+  "_comment": "Blocks",
+
+  "block.upgrade_aquatic.guardian_spine": "Épine de gardien",
+  "block.upgrade_aquatic.elder_guardian_spine": "Épine d'ancien gardien",
+
+  "block.upgrade_aquatic.elder_eye": "Œil ancien",
+  
+  "block.upgrade_aquatic.bubble_block": "Bloc de bulles",
+  
+  "block.upgrade_aquatic.dead_acan_coral": "Corail Acanthastrea mort",
+  "block.upgrade_aquatic.dead_acan_coral_block": "Block de corail Acanthastrea mort,
+  "block.upgrade_aquatic.dead_acan_coral_fan": "Gorgogne Acanthastrea morte",
+  
+  "block.upgrade_aquatic.acan_coral": "Corail Acanthastrea",
+  "block.upgrade_aquatic.acan_coral_block": "Block de corail Acanthastrea",
+  "block.upgrade_aquatic.acan_coral_fan": "Gorgogne Acanthastrea",
+  
+  "block.upgrade_aquatic.elder_prismarine_coral": "Corail de prismarine ancien",
+  "block.upgrade_aquatic.elder_prismarine_coral_block": "Bloc de corail de prismarine ancien",
+  "block.upgrade_aquatic.elder_prismarine_coral_fan": "Gorgogne de prismarine ancienne",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Douche de prismarine ancienne",
+  
+  "block.upgrade_aquatic.prismarine_coral": "Corail de prismarine",
+  "block.upgrade_aquatic.prismarine_coral_block": "Bloc de corail de prismarine",
+  "block.upgrade_aquatic.prismarine_coral_fan": "Gorgogne de prismarine",
+  "block.upgrade_aquatic.prismarine_coral_shower": "Douche de prismarine",
+  
+  "block.upgrade_aquatic.dead_silk_coral": "Corail soyeux mort",
+  "block.upgrade_aquatic.dead_silk_coral_block": "Bloc de corail soyeux mort",
+  "block.upgrade_aquatic.dead_silk_coral_fan": "Gorgogne soyeuse morte",
+  
+  "block.upgrade_aquatic.silk_coral": "Corail soyeux",
+  "block.upgrade_aquatic.silk_coral_block": "Bloc de corail soyeux",
+  "block.upgrade_aquatic.silk_coral_fan": "Gorgogne soyeuse",
+  
+  "block.upgrade_aquatic.dead_pillow_coral": "Corail oreiller mort",
+  "block.upgrade_aquatic.dead_pillow_coral_block": "Bloc de corail oreiller mort",
+  "block.upgrade_aquatic.dead_pillow_coral_fan": "Gorgogne oreiller morte",
+  
+  "block.upgrade_aquatic.pillow_coral": "Corail oreiller",
+  "block.upgrade_aquatic.pillow_coral_block": "Bloc de corail oreiller",
+  "block.upgrade_aquatic.pillow_coral_fan": "Gorgogne oreiller",
+  
+  "block.upgrade_aquatic.dead_rock_coral": "Corail rocheux mort",
+  "block.upgrade_aquatic.dead_rock_coral_block": "Bloc de corail rocheux mort",
+  "block.upgrade_aquatic.dead_rock_coral_fan": "Gorgogne rocheuse morte",
+  
+  "block.upgrade_aquatic.rock_coral": "Corail rocheux",
+  "block.upgrade_aquatic.rock_coral_block": "Bloc de corail rocheux",
+  "block.upgrade_aquatic.rock_coral_fan": "Gorgogne rocheuse",
+  
+  "block.upgrade_aquatic.dead_finger_coral": "Corail doigt mort",
+  "block.upgrade_aquatic.dead_finger_coral_block": "Bloc de corail doigt mort",
+  "block.upgrade_aquatic.dead_finger_coral_fan": "Gorgogne doigt morte",
+  
+  "block.upgrade_aquatic.finger_coral": "Corail doigt",
+  "block.upgrade_aquatic.finger_coral_block": "Bloc de corail doigt",
+  "block.upgrade_aquatic.finger_coral_fan": "Gorgogne doigt",
+  
+  "block.upgrade_aquatic.dead_star_coral": "Corail étoilé mort",
+  "block.upgrade_aquatic.dead_star_coral_block": "Bloc de corail étoilé mort",
+  "block.upgrade_aquatic.dead_star_coral_fan": "Gorgogne étoilée morte",
+  
+  "block.upgrade_aquatic.star_coral": "Corail étoilé",
+  "block.upgrade_aquatic.star_coral_block": "Bloc de corail étoilé",
+  "block.upgrade_aquatic.star_coral_fan": "Gorgogne étoilée",
+  
+  "block.upgrade_aquatic.dead_moss_coral": "Corail mousseux mort",
+  "block.upgrade_aquatic.dead_moss_coral_block": "Bloc de corail mousseux mort",
+  "block.upgrade_aquatic.dead_moss_coral_fan": "Gorgogne mousseuse morte",
+  
+  "block.upgrade_aquatic.moss_coral": "Corail mousseux",
+  "block.upgrade_aquatic.moss_coral_block": "Bloc de corail mousseux",
+  "block.upgrade_aquatic.moss_coral_fan": "Gorgogne mousseuse",
+  
+  "block.upgrade_aquatic.dead_petal_coral": "Corail pétale mort",
+  "block.upgrade_aquatic.dead_petal_coral_block": "Bloc de corail pétale mort",
+  "block.upgrade_aquatic.dead_petal_coral_fan": "Gorgogne pétale morte",
+  
+  "block.upgrade_aquatic.petal_coral": "Corail pétale",
+  "block.upgrade_aquatic.petal_coral_block": "Bloc de corail pétale",
+  "block.upgrade_aquatic.petal_coral_fan": "Gorgogne pétale",
+  
+  "block.upgrade_aquatic.dead_branch_coral": "Corail branchu mort",
+  "block.upgrade_aquatic.dead_branch_coral_block": "Bloc de corail branchu mort",
+  "block.upgrade_aquatic.dead_branch_coral_fan": "Gorgogne branchue morte",
+  
+  "block.upgrade_aquatic.branch_coral": "Corail branchu",
+  "block.upgrade_aquatic.branch_coral_block": "Bloc de corail branchu",
+  "block.upgrade_aquatic.branch_coral_fan": "Gorgogne branchue",
+  
+  "block.upgrade_aquatic.jelly_torch_pink": "Torche gélifiée rose",
+  "block.upgrade_aquatic.jelly_torch_purple": "Torche gélifiée violette",
+  "block.upgrade_aquatic.jelly_torch_blue": "Torche gélifiée bleue",
+  "block.upgrade_aquatic.jelly_torch_green": "Torche gélifiée verte",
+  "block.upgrade_aquatic.jelly_torch_yellow": "Torche gélifiée jaune",
+  "block.upgrade_aquatic.jelly_torch_orange": "Torche gélifiée orange",
+  "block.upgrade_aquatic.jelly_torch_red": "Torche gélifiée rouge",
+  "block.upgrade_aquatic.jelly_torch_white": "Torche gélifiée blanche",
+  "block.upgrade_aquatic.jelly_torch_wall_pink": "Torche gélifiée rose au mur",
+  "block.upgrade_aquatic.jelly_torch_wall_purple": "Torche gélifiée violette au mur",
+  "block.upgrade_aquatic.jelly_torch_wall_blue": "Torche gélifiée bleue au mur",
+  "block.upgrade_aquatic.jelly_torch_wall_green": "Torche gélifiée verte au mur",
+  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Torche gélifiée jaune au mur",
+  "block.upgrade_aquatic.jelly_torch_wall_orange": "Torche gélifiée orange au mur",
+  "block.upgrade_aquatic.jelly_torch_wall_red": "Torche gélifiée rouge au mur",
+  "block.upgrade_aquatic.jelly_torch_wall_white": "Torche gélifiée blanche au mur",
+  
+  "block.upgrade_aquatic.embedded_ammonite": "Ammonite fossilisée",
+  
+  "block.upgrade_aquatic.bedroll_leather": "Sac de couchage",
+  "block.upgrade_aquatic.bedroll_white": "Sac de couchage blanc",
+  "block.upgrade_aquatic.bedroll_black": "Sac de couchage noir",
+  "block.upgrade_aquatic.bedroll_red": "Sac de couchage rouge",
+  "block.upgrade_aquatic.bedroll_blue": "Sac de couchage bleu",
+  "block.upgrade_aquatic.bedroll_green": "Sac de couchage vert",
+  "block.upgrade_aquatic.bedroll_lime": "Sac de couchage vert clair",
+  "block.upgrade_aquatic.bedroll_light_blue": "Sac de couchage bleu clair",
+  "block.upgrade_aquatic.bedroll_gray": "Sac de couchage gris",
+  "block.upgrade_aquatic.bedroll_light_gray": "Sac de couchage gris clair",
+  "block.upgrade_aquatic.bedroll_pink": "Sac de couchage rose",
+  "block.upgrade_aquatic.bedroll_purple": "Sac de couchage violet",
+  "block.upgrade_aquatic.bedroll_magenta": "Sac de couchage magenta",
+  "block.upgrade_aquatic.bedroll_cyan": "Sac de couchage cyan",
+  "block.upgrade_aquatic.bedroll_orange": "Sac de couchage orange",
+  "block.upgrade_aquatic.bedroll_yellow": "Sac de couchage jaune",
+  "block.upgrade_aquatic.bedroll_brown": "Sac de couchage marron",
+  
+  "_comment": "Items",
+  
+  "item.upgrade_aquatic.prismarine_rod": "Bâton de prismarine",
+  
+  "item.upgrade_aquatic.nautilus_bucket": "Nautile dans un seau",
+
+  "item.upgrade_aquatic.drowned_villager_spawn_egg": "Œuf d'apparition de villageois noyé",
+  "item.upgrade_aquatic.nautilus_spawn_egg": "Œuf d'apparition de nautile",
+  
+  "_comment": "Entities",
+  
+  "entity.upgrade_aquatic.nautilus": "Nautile",
+  
+  "_comment": "Potions and Effects",
+  
+  "effect.upgrade_aquatic.insomnia": "Insomnie",
+  "item.minecraft.potion.effect.insomnia": "Potion d'insomnie",
+  "item.minecraft.potion.effect.insomnia_strong": "Potion d'insomnie",
+  "item.minecraft.splash_potion.effect.insomnia": "Potion d'insomnie volatile",
+  "item.minecraft.splash_potion.effect.insomnia_strong": "Potion d'insomnie volatile",
+  "item.minecraft.lingering_potion.effect.insomnia": "Potion d'insomnie persistante",
+  "item.minecraft.lingering_potion.effect.insomnia_strong": "Potion d'insomnie persistante",
+  "item.minecraft.tipped_arrow.effect.insomnia": "Flèche d'insomnie",
+  "item.minecraft.tipped_arrow.effect.insomnia_strong": "Flèche d'insomnie",
+  
+  "effect.upgrade_aquatic.restfulness": "Détente",
+  "item.minecraft.potion.effect.restfulness": "Potion de repos",
+  "item.minecraft.potion.effect.restfulness_strong": "Potion de repos",
+  "item.minecraft.splash_potion.effect.restfulness": "Potion de repos volatile",
+  "item.minecraft.splash_potion.effect.restfulness_strong": "Potion de repos volatile",
+  "item.minecraft.lingering_potion.effect.restfulness": "Potion de repos persistante",
+  "item.minecraft.lingering_potion.effect.restfulness_strong": "Potion de repos persistante",
+  "item.minecraft.tipped_arrow.effect.restfulness": "Flèche de repos",
+  "item.minecraft.tipped_arrow.effect.restfulness_strong": "Flèche de repos",
+ 	
+  "_comment": "Deaths",
+  
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s a été piqué à mort par une épine de gardien",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s a été piqué à mort par une épine de gardien en essayant d'échapper à %2$s",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s a été piqué à mort par une épine d'ancien gardien",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s a été piqué à mort par une épine d'ancien gardien en essayant d'échapper à %2$s"
+}
