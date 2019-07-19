@@ -17,6 +17,9 @@ public class WorldGenAmmonite {
 	
 	public static void setupGeneration() {
 		List<Biome> generatableBiomes = Lists.newArrayList();
+		generatableBiomes.add(Biomes.BEACH);
+		generatableBiomes.add(Biomes.SNOWY_BEACH);
+		generatableBiomes.add(Biomes.MUSHROOM_FIELD_SHORE);
 		generatableBiomes.add(Biomes.STONE_SHORE);
 		generatableBiomes.add(Biomes.DEEP_OCEAN);
 		generatableBiomes.add(Biomes.OCEAN);

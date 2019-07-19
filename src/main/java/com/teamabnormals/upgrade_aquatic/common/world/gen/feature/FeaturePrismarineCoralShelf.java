@@ -111,7 +111,6 @@ public class FeaturePrismarineCoralShelf extends Feature<NoFeatureConfig> {
 	
 	public static void addToOceans() {
 		List<Biome> generatableBiomes = Lists.newArrayList();
-		generatableBiomes.add(Biomes.STONE_SHORE);
 		generatableBiomes.add(Biomes.DEEP_OCEAN);
 		generatableBiomes.add(Biomes.OCEAN);
 		generatableBiomes.add(Biomes.DEEP_LUKEWARM_OCEAN);
