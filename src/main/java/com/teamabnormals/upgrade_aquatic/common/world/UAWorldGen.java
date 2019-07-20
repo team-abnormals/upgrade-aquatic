@@ -1,13 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.common.world;
 
-import com.teamabnormals.upgrade_aquatic.common.world.gen.WorldGenAmmonite;
-import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePrismarineCoralShelf;
+import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureAmmonite;
+import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePrismarineCoral;
 
 public class UAWorldGen {
 
 	public static void registerGenerators() {
-		WorldGenAmmonite.setupGeneration();
-		FeaturePrismarineCoralShelf.addToOceans();
+		FeatureAmmonite.setupGeneration();
+		FeaturePrismarineCoral.addToOceans();
 	}
 	
 }

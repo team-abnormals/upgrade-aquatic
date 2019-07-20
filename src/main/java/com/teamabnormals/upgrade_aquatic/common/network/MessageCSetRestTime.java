@@ -8,7 +8,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
-import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 public class MessageCSetRestTime {
@@ -32,16 +31,14 @@ public class MessageCSetRestTime {
 	}
 	
 	public static void handle(MessageCSetRestTime message, Supplier<NetworkEvent.Context> ctx) {
-		if (ctx.get().getDirection().getReceptionSide() == LogicalSide.CLIENT) {
-			ctx.get().enqueueWork(() -> {
-				Entity entity = Minecraft.getInstance().player.world.getEntityByID(message.entityId);
-				if(entity instanceof ClientPlayerEntity) {
-					ClientPlayerEntity playerC = ((ClientPlayerEntity) entity);
-					StatisticsManager statisticsManagerC = playerC.getStats();
-					statisticsManagerC.setValue(playerC, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), message.sleepTime);
-				}
-			});
+		ctx.get().enqueueWork(() -> {
+			Entity entity = Minecraft.getInstance().player.world.getEntityByID(message.entityId);
+			if(entity instanceof ClientPlayerEntity) {
+				ClientPlayerEntity playerC = ((ClientPlayerEntity) entity);
+				StatisticsManager statisticsManagerC = playerC.getStats();
+				statisticsManagerC.setValue(playerC, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), message.sleepTime);
+			}
 			ctx.get().setPacketHandled(true);
-		}
+		});
 	}
 }

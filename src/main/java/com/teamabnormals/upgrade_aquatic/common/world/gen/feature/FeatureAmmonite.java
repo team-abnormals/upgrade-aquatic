@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.common.world.gen;
+package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
 
-public class WorldGenAmmonite {
+public class FeatureAmmonite {
 	
 	public static void setupGeneration() {
 		List<Biome> generatableBiomes = Lists.newArrayList();

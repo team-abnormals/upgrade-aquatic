@@ -24,6 +24,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -43,11 +44,11 @@ public class UpgradeAquatic {
 	
 	public UpgradeAquatic() {
 		instance = this;
+		
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
-		this.setupMessages();
-		
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::preInit);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
 		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
@@ -61,12 +62,16 @@ public class UpgradeAquatic {
 		modLoadingContext.registerConfig(ModConfig.Type.CLIENT, Config.CLIENTSPEC);
 	}
 	
-	private void preInit(final FMLCommonSetupEvent event) {
+	private void setupCommon(final FMLCommonSetupEvent event) {
 		proxy.preInit();
 		EntityNautilus.addSpawn();
 		UADispenseBehaviorRegistry.registerAll();
 		UAEffects.registerRecipes();
 		UAWorldGen.registerGenerators();
+	}
+	
+	private void setupClient(FMLClientSetupEvent event) {
+		this.setupMessages();
 	}
 
 	@SuppressWarnings("unused")
