@@ -1,9 +1,10 @@
 package com.teamabnormals.upgrade_aquatic.core.events;
 
-import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +14,8 @@ import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.network.play.server.SStatisticsPacket;
+import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -64,7 +67,9 @@ public class EntityEvents {
 		if(!event.player.world.isRemote && event.player.world.getGameTime() % 5 == 0 && event.player instanceof ServerPlayerEntity) {
 			ServerPlayerEntity player = (ServerPlayerEntity) event.player;
 			StatisticsManager statisticsManager = player.getStats();
-			NetworkUtil.updateCPlayerRestTime(event.player.getEntityId(), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
+			Object2IntMap<Stat<?>> object2intmap = new Object2IntOpenHashMap<>();
+			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
+			player.connection.sendPacket(new SStatisticsPacket(object2intmap));
 		}
 	}
 	

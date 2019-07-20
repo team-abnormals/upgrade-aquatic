@@ -36,11 +36,11 @@ public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
 
 	@Override
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		if(rand.nextDouble() < 0.60D) {
+//		if(rand.nextDouble() <= 1) {
 			FeaturePrismarineCoralShelf.placeFeature(worldIn, generator, rand, pos, config);
-		} else {
-			FeaturePrismarineStalactite.placeFeature(worldIn, generator, rand, pos, config);
-		}
+//		} else {
+//			FeaturePrismarineStalactite.placeFeature(worldIn, generator, rand, pos, config);
+//		}
 		return false;
 	}
 	
@@ -57,7 +57,7 @@ public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
 		generatableBiomes.add(Biomes.FROZEN_OCEAN);
 		generatableBiomes.add(Biomes.DEEP_FROZEN_OCEAN);
 		for(Biome biome : generatableBiomes) {
-			biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, Biome.createDecoratedFeature(UAFeatures.PRISMARINE_CORAL, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0145F)));
+			biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, Biome.createDecoratedFeature(UAFeatures.PRISMARINE_CORAL, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F)));
 		}
 	}
 	

@@ -1,7 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
-import com.teamabnormals.upgrade_aquatic.common.network.MessageCSetRestTime;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityBedroll;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
@@ -24,7 +23,6 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -45,10 +43,11 @@ public class UpgradeAquatic {
 	public UpgradeAquatic() {
 		instance = this;
 		
+		this.setupMessages();
+		
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 		FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
 		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
@@ -69,10 +68,6 @@ public class UpgradeAquatic {
 		UAEffects.registerRecipes();
 		UAWorldGen.registerGenerators();
 	}
-	
-	private void setupClient(FMLClientSetupEvent event) {
-		this.setupMessages();
-	}
 
 	@SuppressWarnings("unused")
 	private void Init(final FMLCommonSetupEvent event) {}
@@ -85,9 +80,6 @@ public class UpgradeAquatic {
 	}
 	
 	void setupMessages() {
-    	CHANNEL.messageBuilder(MessageCSetRestTime.class, 0)
-    	.encoder(MessageCSetRestTime::serialize).decoder(MessageCSetRestTime::deserialize)
-    	.consumer(MessageCSetRestTime::handle)
-    	.add();
+    	
 	}
 }
