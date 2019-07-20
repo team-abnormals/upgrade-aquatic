@@ -64,7 +64,7 @@ public class EntityEvents {
 		if(!event.player.world.isRemote && event.player.world.getGameTime() % 5 == 0 && event.player instanceof ServerPlayerEntity) {
 			ServerPlayerEntity player = (ServerPlayerEntity) event.player;
 			StatisticsManager statisticsManager = player.getStats();
-			NetworkUtil.updateCPlayerRestTime(event.player.getEntityId(), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)), player);
+			NetworkUtil.updateCPlayerRestTime(event.player.getEntityId(), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
 		}
 	}
 	
