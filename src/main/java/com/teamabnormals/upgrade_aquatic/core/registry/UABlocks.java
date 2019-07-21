@@ -153,6 +153,11 @@ public class UABlocks {
     public static Block BEDROLL_RED                   = new BlockBedroll(DyeColor.RED, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_red");
     public static Block BEDROLL_BLACK                 = new BlockBedroll(DyeColor.BLACK, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_black");
 	
+    public static Block PICKERELWEED_BLUE 	 	      = new BlockPickerelWeed(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_blue");
+    public static Block PICKERELWEED_TALL_BLUE 	 	  = new BlockPickerelWeedDouble(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_tall_blue");
+    public static Block PICKERELWEED_PURPLE 	 	  = new BlockPickerelWeed(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_purple");
+    public static Block PICKERELWEED_TALL_PURPLE      = new BlockPickerelWeedDouble(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_tall_purple");
+    
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
 		final Block blocks[] = {
@@ -167,7 +172,8 @@ public class UABlocks {
 			GUARDIAN_SPINE, ELDER_GUARDIAN_SPINE, ELDER_EYE,
 			JELLY_TORCH_PINK, JELLY_TORCH_WALL_PINK, JELLY_TORCH_PURPLE, JELLY_TORCH_WALL_PURPLE, JELLY_TORCH_BLUE, JELLY_TORCH_WALL_BLUE,
 			JELLY_TORCH_GREEN, JELLY_TORCH_WALL_GREEN, JELLY_TORCH_YELLOW, JELLY_TORCH_WALL_YELLOW, JELLY_TORCH_ORANGE, JELLY_TORCH_WALL_ORANGE, JELLY_TORCH_RED, JELLY_TORCH_WALL_RED, JELLY_TORCH_WHITE, JELLY_TORCH_WALL_WHITE,
-			EMBEDDED_AMMONITE, BEDROLL_LEATHER, BEDROLL_WHITE, BEDROLL_BLACK, BEDROLL_GRAY, BEDROLL_LIGHT_GRAY, BEDROLL_PINK, BEDROLL_MAGENTA, BEDROLL_PURPLE, BEDROLL_BLUE, BEDROLL_CYAN, BEDROLL_LIGHT_BLUE, BEDROLL_GREEN, BEDROLL_LIME, BEDROLL_ORANGE, BEDROLL_RED, BEDROLL_YELLOW, BEDROLL_BROWN
+			EMBEDDED_AMMONITE, BEDROLL_LEATHER, BEDROLL_WHITE, BEDROLL_BLACK, BEDROLL_GRAY, BEDROLL_LIGHT_GRAY, BEDROLL_PINK, BEDROLL_MAGENTA, BEDROLL_PURPLE, BEDROLL_BLUE, BEDROLL_CYAN, BEDROLL_LIGHT_BLUE, BEDROLL_GREEN, BEDROLL_LIME, BEDROLL_ORANGE, BEDROLL_RED, BEDROLL_YELLOW, BEDROLL_BROWN,
+			PICKERELWEED_BLUE, PICKERELWEED_TALL_BLUE, PICKERELWEED_PURPLE, PICKERELWEED_TALL_PURPLE
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -275,5 +281,8 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_YELLOW, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_CYAN, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_BROWN, ItemGroup.DECORATIONS));
+		
+		registry.register(RegistryUtils.createSimpleItemBlock(PICKERELWEED_BLUE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PICKERELWEED_PURPLE, ItemGroup.DECORATIONS));
 	}
 }

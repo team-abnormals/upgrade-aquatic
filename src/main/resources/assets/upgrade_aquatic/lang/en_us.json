@@ -127,6 +127,11 @@
   "block.upgrade_aquatic.bedroll_yellow": "Yellow Bedroll",
   "block.upgrade_aquatic.bedroll_brown": "Brown Bedroll",
   
+  "block.upgrade_aquatic.pickerel_weed_blue": "Blue Pirckerelweed",
+  "block.upgrade_aquatic.pickerel_weed_purple": "Purple Pirckerelweed",
+  "block.upgrade_aquatic.pickerel_weed_tall_blue": "Double Blue Pirckerelweed",
+  "block.upgrade_aquatic.pickerel_weed_tall_purple": "Double Purple Pirckerelweed",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
@@ -135,6 +140,9 @@
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drowned Villager Spawn Egg",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Nautilus Spawn Egg",
+  
+  "item.upgrade_aquatic.boiled_pickerelweed_purple": "Boiled Purple Pickerelweed",
+  "item.upgrade_aquatic.boiled_pickerelweed_blue": "Boiled Blue Pickerelweed",
   
   "_comment": "Entities",
   

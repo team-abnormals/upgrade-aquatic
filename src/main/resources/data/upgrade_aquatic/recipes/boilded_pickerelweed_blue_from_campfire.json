@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "upgrade_aquatic:pickerel_weed_blue"
+  },
+  "result": "upgrade_aquatic:boiled_pickerelweed_blue",
+  "experience": 0.25,
+  "cookingtime": 350
+}

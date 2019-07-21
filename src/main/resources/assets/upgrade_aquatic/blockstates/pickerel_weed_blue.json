@@ -1,0 +1,6 @@
+{
+   	"variants": {
+       	"waterlogged=true": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_blue"},
+        "waterlogged=false": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_land_blue"}
+    }
+}

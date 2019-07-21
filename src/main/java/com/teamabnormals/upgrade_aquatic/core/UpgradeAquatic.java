@@ -35,10 +35,10 @@ public class UpgradeAquatic {
 	public static final String NETWORK_PROTOCOL = "1";
 	
 	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(Reference.MODID, "net"))
-			.networkProtocolVersion(() -> NETWORK_PROTOCOL)
-			.clientAcceptedVersions(NETWORK_PROTOCOL::equals)
-			.serverAcceptedVersions(NETWORK_PROTOCOL::equals)
-			.simpleChannel();
+		.networkProtocolVersion(() -> NETWORK_PROTOCOL)
+		.clientAcceptedVersions(NETWORK_PROTOCOL::equals)
+		.serverAcceptedVersions(NETWORK_PROTOCOL::equals)
+		.simpleChannel();
 	
 	public UpgradeAquatic() {
 		instance = this;
