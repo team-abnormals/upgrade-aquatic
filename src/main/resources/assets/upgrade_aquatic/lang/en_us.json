@@ -132,6 +132,9 @@
   "block.upgrade_aquatic.pickerel_weed_tall_blue": "Double Blue Pickerelweed",
   "block.upgrade_aquatic.pickerel_weed_tall_purple": "Double Purple Pickerelweed",
   
+  "block.upgrade_aquatic.potted_pickerelweed_blue": "Potted Blue Pickerelweed",
+  "block.upgrade_aquatic.potted_pickerelweed_purple": "Potted Purple Pickerelweed",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",

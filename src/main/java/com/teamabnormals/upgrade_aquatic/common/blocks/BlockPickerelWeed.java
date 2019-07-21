@@ -49,9 +49,16 @@ public class BlockPickerelWeed extends Block implements IGrowable, IWaterLoggabl
 	}
 	
 	@Override
+	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+		if(random.nextFloat() <= 0.09F && state.get(WATERLOGGED)) {
+			this.grow(worldIn, random, pos, state);
+		}
+	}
+	
+	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity) {
-			entityIn.setMotionMultiplier(state, new Vec3d((double)0.75F, 0.75D, (double)0.75F));
+			entityIn.setMotionMultiplier(state, new Vec3d(0.95D, 0.95D, 0.95D));
 		}
 	}
 	
@@ -113,11 +120,6 @@ public class BlockPickerelWeed extends Block implements IGrowable, IWaterLoggabl
 		return true;
 	}
 	
-	@Override
-	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-		return true;
-	}
-
 	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
 		return true;
 	}

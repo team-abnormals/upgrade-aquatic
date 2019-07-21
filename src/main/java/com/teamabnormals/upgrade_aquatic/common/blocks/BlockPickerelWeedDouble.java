@@ -49,7 +49,7 @@ public class BlockPickerelWeedDouble extends Block implements IWaterLoggable {
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity) {
-			entityIn.setMotionMultiplier(state, new Vec3d((double)0.75F, 0.75D, (double)0.75F));
+			entityIn.setMotionMultiplier(state, new Vec3d(0.95D, 0.95D, 0.95D));
 		}
 	}
 	
@@ -124,11 +124,6 @@ public class BlockPickerelWeedDouble extends Block implements IWaterLoggable {
 
 	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XZ;
-	}
-	
-	@Override
-	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-		return true;
 	}
 
 	@OnlyIn(Dist.CLIENT)
