@@ -4,6 +4,6 @@
     "item": "upgrade_aquatic:pickerel_weed_purple"
   },
   "result": "upgrade_aquatic:boiled_pickerelweed_purple",
-  "experience": 0.25,
+  "experience": 0.1,
   "cookingtime": 200
 }
