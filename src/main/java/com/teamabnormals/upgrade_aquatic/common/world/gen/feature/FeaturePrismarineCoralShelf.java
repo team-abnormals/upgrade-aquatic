@@ -37,13 +37,18 @@ public class FeaturePrismarineCoralShelf extends FeaturePrismarineCoral {
 			int a = rand.nextInt(4) + 2;
 		    int c = rand.nextInt(5) + 3;
 		    int b = 4;
+		    boolean elders[] = {
+		    	rand.nextDouble() <= 0.35D ? true : false,
+		    	rand.nextDouble() <= 0.35D ? true : false,
+		    	rand.nextDouble() <= 0.35D ? true : false
+		    };
 			if(rand.nextInt(6) < 2 && pos.getY() > 11) {
 				pos = pos.offset(direction.getOpposite());
-				addShelf(world, pos, rand, a, b, c);
+				addShelf(world, pos, rand, a, b, c, elders[0]);
 				if(rand.nextBoolean()) {
-					addShelf(world, pos.offset(direction.getOpposite()).up(rand.nextInt(2) + 2), rand, 3, 3, c + 1);
+					addShelf(world, pos.offset(direction.getOpposite()).up(rand.nextInt(2) + 2), rand, 3, 3, c + 1, elders[1]);
 					if(rand.nextBoolean()) {
-						addShelf(world, pos.offset(direction.getOpposite()).down(rand.nextInt(2) + 2), rand, 3, 4, c + 1);
+						addShelf(world, pos.offset(direction.getOpposite()).down(rand.nextInt(2) + 2), rand, 3, 4, c + 1, elders[2]);
 					}
 				}
 			}
@@ -66,7 +71,7 @@ public class FeaturePrismarineCoralShelf extends FeaturePrismarineCoral {
 		return false;
 	}
 	
-	private static void addShelf(IWorld world, BlockPos pos, Random rand, int a, int b, int c) {
+	private static void addShelf(IWorld world, BlockPos pos, Random rand, int a, int b, int c, boolean isElder) {
 		MathUtil.Equation r = (theta) -> {
 			return (Math.cos(b * theta) / c + 1) * a;
 		};
@@ -75,22 +80,22 @@ public class FeaturePrismarineCoralShelf extends FeaturePrismarineCoral {
 				double radius = r.compute(Math.atan2(j, i));
 				BlockPos placingPos = pos.add(i, 0, j);
 				if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN && (i * i + j * j) < radius * radius) {
-					world.setBlockState(placingPos, CORAL_BLOCK_BLOCK, 2);
+					world.setBlockState(placingPos, CORAL_BLOCK_BLOCK(isElder), 2);
 					if(rand.nextBoolean()) {
 						boolean gen = rand.nextBoolean();
 						if(gen && world.getBlockState(placingPos.up()).getMaterial().isReplaceable()) {
-							world.setBlockState(placingPos.up(), CORAL_BLOCK, 2);
+							world.setBlockState(placingPos.up(), CORAL_BLOCK(isElder), 2);
 						} else if(!gen && world.getBlockState(placingPos.up()).getMaterial().isReplaceable()) {
-							world.setBlockState(placingPos.up(), CORAL_FAN, 2);
+							world.setBlockState(placingPos.up(), CORAL_FAN(isElder), 2);
 						}
 						if(world.getBlockState(placingPos.down()).getMaterial().isReplaceable()) {
-							world.setBlockState(placingPos.down(), CORAL_SHOWER, 2);
+							world.setBlockState(placingPos.down(), CORAL_SHOWER(isElder), 2);
 						}
 						for(Direction direction : Direction.Plane.HORIZONTAL) {
 							if (rand.nextFloat() < 0.85F) {
 				            	BlockPos blockpos1 = placingPos.offset(direction);
 				            	if (world.getBlockState(blockpos1).getBlock() == Blocks.WATER) {
-				            		BlockState blockstate1 = CORAL_WALL_FAN.with(DeadCoralWallFanBlock.FACING, direction);
+				            		BlockState blockstate1 = CORAL_WALL_FAN(isElder).with(DeadCoralWallFanBlock.FACING, direction);
 				            		world.setBlockState(blockpos1, blockstate1, 2);
 				            	}
 							}

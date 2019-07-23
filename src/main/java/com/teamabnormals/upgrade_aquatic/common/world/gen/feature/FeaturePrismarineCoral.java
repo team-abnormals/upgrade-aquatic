@@ -24,11 +24,21 @@ import net.minecraft.world.gen.placement.CaveEdgeConfig;
 import net.minecraft.world.gen.placement.Placement;
 
 public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
-	protected static final BlockState CORAL_BLOCK_BLOCK = UABlocks.PRISMARINE_CORAL_BLOCK.getDefaultState();
-	protected static final BlockState CORAL_BLOCK = UABlocks.PRISMARINE_CORAL.getDefaultState();
-	protected static final BlockState CORAL_FAN = UABlocks.PRISMARINE_CORAL_FAN.getDefaultState();
-	protected static final BlockState CORAL_WALL_FAN = UABlocks.PRISMARINE_CORAL_WALL_FAN.getDefaultState();
-	protected static final BlockState CORAL_SHOWER = UABlocks.PRISMARINE_CORAL_SHOWER.getDefaultState();
+	protected static final BlockState CORAL_BLOCK_BLOCK(boolean elder) {
+		return !elder ? UABlocks.PRISMARINE_CORAL_BLOCK.getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_BLOCK.getDefaultState();
+	}
+	protected static final BlockState CORAL_BLOCK(boolean elder) {
+		return !elder ? UABlocks.PRISMARINE_CORAL.getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL.getDefaultState();
+	}
+	protected static final BlockState CORAL_FAN(boolean elder) {
+		return !elder ? UABlocks.PRISMARINE_CORAL_FAN.getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_FAN.getDefaultState();
+	}
+	protected static final BlockState CORAL_WALL_FAN(boolean elder) {
+		return !elder ? UABlocks.PRISMARINE_CORAL_WALL_FAN.getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.getDefaultState();
+	}
+	protected static final BlockState CORAL_SHOWER(boolean elder) {
+		return !elder ? UABlocks.PRISMARINE_CORAL_SHOWER.getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.getDefaultState();
+	}
 
 	public FeaturePrismarineCoral(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
