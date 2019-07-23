@@ -15,10 +15,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class LootEvents {
-	private static final Set<ResourceLocation> PICKERELWEED_LOOT_INJECTIONS = Sets.newHashSet(
-		LootTables.CHESTS_WOODLAND_MANSION, LootTables.CHESTS_PILLAGER_OUTPOST, LootTables.CHESTS_SHIPWRECK_SUPPLY
-	);
-	
+	private static final Set<ResourceLocation> PICKERELWEED_LOOT_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_SHIPWRECK_SUPPLY);
 	private static final Set<ResourceLocation> PICKERELWEED_FISHING_LOOT_INJECTIONS = Sets.newHashSet(LootTables.GAMEPLAY_FISHING_JUNK);
 	
 	@SubscribeEvent
