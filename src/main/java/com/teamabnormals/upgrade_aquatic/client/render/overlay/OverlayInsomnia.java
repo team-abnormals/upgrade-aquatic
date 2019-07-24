@@ -32,7 +32,6 @@ public class OverlayInsomnia {
 			int sleepTime = statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
 			int configuredTime = Config.CLIENT.daysTillRenderInsomniaOverlay.get();
 			float opacity = 0;
-			//TODO: Make formula to predict values
 			if(sleepTime == 24000 * configuredTime) {
 				opacity = 0.25F;
 			} else if(sleepTime == 24000 * configuredTime + 100) {

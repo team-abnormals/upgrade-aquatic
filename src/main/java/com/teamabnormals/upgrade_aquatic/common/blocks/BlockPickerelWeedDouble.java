@@ -1,5 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.blocks;
 
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+
 import afu.org.checkerframework.checker.nullness.qual.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -7,6 +9,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
@@ -21,6 +24,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -47,9 +51,14 @@ public class BlockPickerelWeedDouble extends Block implements IWaterLoggable {
 	}
 	
 	@Override
+	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
+		return this == UABlocks.PICKERELWEED_TALL_BLUE ? new ItemStack(UABlocks.PICKERELWEED_BLUE) : new ItemStack(UABlocks.PICKERELWEED_PURPLE);
+	}
+	
+	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity) {
-			entityIn.setMotionMultiplier(state, new Vec3d(0.95D, 0.95D, 0.95D));
+			entityIn.setMotionMultiplier(state, new Vec3d(0.985D, 0.985D, 0.985D));
 		}
 	}
 	

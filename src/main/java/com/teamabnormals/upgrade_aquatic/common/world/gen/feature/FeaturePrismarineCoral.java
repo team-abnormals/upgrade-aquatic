@@ -54,7 +54,7 @@ public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
 		return false;
 	}
 	
-	public static void addToOceans() {
+	public static void addAmmonites() {
 		List<Biome> generatableBiomes = Lists.newArrayList();
 		generatableBiomes.add(Biomes.DEEP_OCEAN);
 		generatableBiomes.add(Biomes.OCEAN);

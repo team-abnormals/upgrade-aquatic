@@ -37,7 +37,7 @@ public class BlockPickerelWeed extends Block implements IGrowable, IWaterLoggabl
 	
 	public BlockPickerelWeed(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, Boolean.valueOf(true)));
+		this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, Boolean.valueOf(false)));
 	}
 	
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
@@ -50,7 +50,7 @@ public class BlockPickerelWeed extends Block implements IGrowable, IWaterLoggabl
 	
 	@Override
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
-		if(random.nextFloat() <= 0.09F && state.get(WATERLOGGED)) {
+		if(random.nextFloat() <= 0.03F && state.get(WATERLOGGED)) {
 			this.grow(worldIn, random, pos, state);
 		}
 	}
@@ -58,7 +58,7 @@ public class BlockPickerelWeed extends Block implements IGrowable, IWaterLoggabl
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity) {
-			entityIn.setMotionMultiplier(state, new Vec3d(0.95D, 0.95D, 0.95D));
+			entityIn.setMotionMultiplier(state, new Vec3d(0.975D, 0.975D, 0.975D));
 		}
 	}
 	
