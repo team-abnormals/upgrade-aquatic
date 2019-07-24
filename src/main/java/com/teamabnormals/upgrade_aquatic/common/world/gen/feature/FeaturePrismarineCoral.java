@@ -13,6 +13,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
@@ -55,19 +56,10 @@ public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
 	}
 	
 	public static void addAmmonites() {
-		List<Biome> generatableBiomes = Lists.newArrayList();
-		generatableBiomes.add(Biomes.DEEP_OCEAN);
-		generatableBiomes.add(Biomes.OCEAN);
-		generatableBiomes.add(Biomes.DEEP_LUKEWARM_OCEAN);
-		generatableBiomes.add(Biomes.LUKEWARM_OCEAN);
-		generatableBiomes.add(Biomes.DEEP_WARM_OCEAN);
-		generatableBiomes.add(Biomes.WARM_OCEAN);
-		generatableBiomes.add(Biomes.DEEP_COLD_OCEAN);
-		generatableBiomes.add(Biomes.COLD_OCEAN);
-		generatableBiomes.add(Biomes.FROZEN_OCEAN);
-		generatableBiomes.add(Biomes.DEEP_FROZEN_OCEAN);
-		for(Biome biome : generatableBiomes) {
-			biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, Biome.createDecoratedFeature(UAFeatures.PRISMARINE_CORAL, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F)));
+		for(Biome biome : Biome.BIOMES) {
+			if(biome.getCategory() == Category.OCEAN) {
+				biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, Biome.createDecoratedFeature(UAFeatures.PRISMARINE_CORAL, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F)));
+			}
 		}
 	}
 	

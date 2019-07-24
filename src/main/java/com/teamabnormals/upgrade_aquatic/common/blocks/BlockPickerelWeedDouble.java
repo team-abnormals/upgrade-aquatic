@@ -1,11 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.common.blocks;
 
+import java.util.Random;
+
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import afu.org.checkerframework.checker.nullness.qual.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.IGrowable;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -35,7 +38,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BlockPickerelWeedDouble extends Block implements IWaterLoggable {
+public class BlockPickerelWeedDouble extends Block implements IGrowable, IWaterLoggable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -64,7 +67,7 @@ public class BlockPickerelWeedDouble extends Block implements IWaterLoggable {
 	
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
-		return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL || block == Blocks.FARMLAND;
+		return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL || block == Blocks.CLAY;
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -144,6 +147,43 @@ public class BlockPickerelWeedDouble extends Block implements IWaterLoggable {
 	@OnlyIn(Dist.CLIENT)
 	public long getPositionRandom(BlockState state, BlockPos pos) {
 		return MathHelper.getCoordinateRandom(pos.getX(), pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+	}
+
+	@Override
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return true;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+		return true;
+	}
+
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
+		if (!worldIn.isRemote) {
+			label79:
+			for(int i = 0; i < 128; ++i) {
+				BlockPos blockpos = pos;
+				BlockState blockstate = this == UABlocks.PICKERELWEED_TALL_BLUE ? UABlocks.PICKERELWEED_BLUE.getDefaultState() : UABlocks.PICKERELWEED_PURPLE.getDefaultState();
+
+				for(int j = 0; j < i / 16; ++j) {
+					blockpos = blockpos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
+					if (Block.isOpaque(worldIn.getBlockState(blockpos).getCollisionShape(worldIn, blockpos))) {
+						continue label79;
+					}
+				}
+				
+				if (blockstate.isValidPosition(worldIn, blockpos) && worldIn.getBlockState(blockpos).getMaterial().isReplaceable()) {
+					BlockState blockstate1 = worldIn.getBlockState(blockpos);
+					if(blockstate1.getFluidState().isTagged(FluidTags.WATER) && worldIn.getFluidState(blockpos).getLevel() == 8) {
+						worldIn.setBlockState(blockpos, blockstate.with(WATERLOGGED, true), 3);
+					} else {
+						worldIn.setBlockState(blockpos, blockstate.with(WATERLOGGED, false), 3);
+					}
+				}
+			}
+		}
 	}
 
 }

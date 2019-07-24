@@ -18,7 +18,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.TempCategory;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.FlowerForestBiome;
 import net.minecraft.world.biome.SwampBiome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
@@ -40,8 +40,8 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 	@Override
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		Biome biome = worldIn.getBiome(pos);
-		if (worldIn.isAirBlock(pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.isValidPosition(worldIn, pos.down())) {
-			if(biome == Biomes.RIVER || biome instanceof SwampBiome) {
+		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.isValidPosition(worldIn, pos.down())) {
+			if(biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP || biome instanceof FlowerForestBiome) {
 				boolean purpleGen;
 				if(biome instanceof SwampBiome) {
 					purpleGen = rand.nextFloat() >= 0.60D ? true : false;
@@ -49,7 +49,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 					purpleGen = rand.nextFloat() >= 0.60D ? false : true;
 				}
 				if(rand.nextInt() <= 0.90D) {
-					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(6));
+					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(8));
 				}
 			} else {
 				boolean purpleGen;
@@ -62,7 +62,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 				}
 				
 				if(rand.nextInt() <= 0.35D) {
-					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(6));
+					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(8));
 				}
 			}
 			return true;
@@ -97,6 +97,14 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 				patterns[2] = 6;
 			case 5:
 				patterns[0] = 3;
+				patterns[1] = 4;
+				patterns[2] = 6;
+			case 6:
+				patterns[0] = 5;
+				patterns[1] = 4;
+				patterns[2] = 6;
+			case 7:
+				patterns[0] = 5;
 				patterns[1] = 4;
 				patterns[2] = 6;
 		}
@@ -137,6 +145,13 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 		}
 	}
 	
+	public boolean isValidBlock(IWorld world, BlockPos pos) {
+		if(world.isAirBlock(pos) || world.getBlockState(pos).getFluidState().isTagged(FluidTags.WATER)) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean shouldPlace(IWorld world, BlockPos pos) {
 		if(world.getFluidState(pos.down().west()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().east()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().north()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().south()).isTagged(FluidTags.WATER)) {
 			return true;
@@ -147,7 +162,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 	public static void addPickerelweed() {
 		for(Biome biome : Biome.BIOMES) {
 			if(biome.getCategory() != Category.DESERT && biome.getCategory() != Category.ICY) {
-				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(27)));
+				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
 			}
 		}
 	}
