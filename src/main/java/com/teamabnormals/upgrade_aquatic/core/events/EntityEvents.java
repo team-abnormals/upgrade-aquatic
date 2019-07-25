@@ -14,10 +14,16 @@ import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.play.server.SStatisticsPacket;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
@@ -64,12 +70,24 @@ public class EntityEvents {
 	
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event) {
+		PlayerEntity player = event.player;
+		ItemStack headSlotStack = player.getItemStackFromSlot(EquipmentSlotType.HEAD);
 		if(!event.player.world.isRemote && event.player.world.getGameTime() % 5 == 0 && event.player instanceof ServerPlayerEntity) {
-			ServerPlayerEntity player = (ServerPlayerEntity) event.player;
-			StatisticsManager statisticsManager = player.getStats();
+			ServerPlayerEntity sPlayer = (ServerPlayerEntity) event.player;
+			StatisticsManager statisticsManager = sPlayer.getStats();
 			Object2IntMap<Stat<?>> object2intmap = new Object2IntOpenHashMap<>();
 			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
-			player.connection.sendPacket(new SStatisticsPacket(object2intmap));
+			sPlayer.connection.sendPacket(new SStatisticsPacket(object2intmap));
+		}
+		if(!player.world.isRemote && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
+			if(player.areEyesInFluid(FluidTags.WATER)) {
+				player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 210));
+				if(player.world.getGameTime() % 20 == 0) {
+					headSlotStack.damageItem(1, player, (p_213341_0_) -> {
+						p_213341_0_.sendBreakAnimation(EquipmentSlotType.HEAD);
+					});
+				}
+			}
 		}
 	}
 	

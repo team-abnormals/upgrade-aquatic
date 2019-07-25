@@ -10,6 +10,9 @@ import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
 
+/**
+ * @author - SmellyModder(Luke Tonon)
+ */
 public class FeatureAmmonite {
 	
 	public static void setupGeneration() {

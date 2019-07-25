@@ -29,6 +29,9 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
 
+/**
+ * @author - SmellyModder(Luke Tonon)
+ */
 public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 	private static final BlockState BLUE_PICKERELWEED = UABlocks.PICKERELWEED_BLUE.getDefaultState();
 	private static final BlockState PURPLE_PICKERELWEED = UABlocks.PICKERELWEED_PURPLE.getDefaultState();

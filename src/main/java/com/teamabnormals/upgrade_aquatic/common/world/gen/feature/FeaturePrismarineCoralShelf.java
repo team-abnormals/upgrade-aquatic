@@ -17,6 +17,9 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
+/**
+ * @author - SmellyModder(Luke Tonon)
+ */
 public class FeaturePrismarineCoralShelf extends FeaturePrismarineCoral {
 
 	public FeaturePrismarineCoralShelf(Function<Dynamic<?>, ? extends NoFeatureConfig> config) {
