@@ -116,7 +116,7 @@ public class OverlayInsomnia {
 					}
 					MC.textureManager.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/overlay/scute_bubble.png"));
 					//Render Unused
-					double amount = MathHelper.clamp(10 - Math.ceil((double) durability / maxDurability * 10.0) + 1, 1, 10);
+					double amount = MathHelper.clamp(10 - Math.floor((double) durability / maxDurability * 10.0), 1, 10);
 					for (int i = 0; i < amount; i++) {
 						int l = left - (i * 8) - 9;
 						int l2 = l + 9;
