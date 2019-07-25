@@ -5,6 +5,8 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -80,9 +82,10 @@ public class EntityEvents {
 			sPlayer.connection.sendPacket(new SStatisticsPacket(object2intmap));
 		}
 		if(!player.world.isRemote && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
+			int timeTillDamage = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 20 * (1 + EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 20;
 			if(player.areEyesInFluid(FluidTags.WATER)) {
 				player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 210));
-				if(player.world.getGameTime() % 20 == 0) {
+				if(player.world.getGameTime() % timeTillDamage == 0) {
 					headSlotStack.damageItem(1, player, (p_213341_0_) -> {
 						p_213341_0_.sendBreakAnimation(EquipmentSlotType.HEAD);
 					});

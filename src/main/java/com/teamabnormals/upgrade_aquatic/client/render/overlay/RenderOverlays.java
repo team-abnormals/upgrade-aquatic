@@ -23,7 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID, value = Dist.CLIENT)
-public class OverlayInsomnia {
+public class RenderOverlays {
 	private static final Minecraft MC = Minecraft.getInstance();
 	
 	@SubscribeEvent

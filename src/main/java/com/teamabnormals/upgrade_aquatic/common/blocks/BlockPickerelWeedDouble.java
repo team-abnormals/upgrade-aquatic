@@ -162,7 +162,7 @@ public class BlockPickerelWeedDouble extends Block implements IGrowable, IWaterL
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		if (!worldIn.isRemote) {
-			label79:
+			cont:
 			for(int i = 0; i < 128; ++i) {
 				BlockPos blockpos = pos;
 				BlockState blockstate = this == UABlocks.PICKERELWEED_TALL_BLUE ? UABlocks.PICKERELWEED_BLUE.getDefaultState() : UABlocks.PICKERELWEED_PURPLE.getDefaultState();
@@ -170,11 +170,11 @@ public class BlockPickerelWeedDouble extends Block implements IGrowable, IWaterL
 				for(int j = 0; j < i / 16; ++j) {
 					blockpos = blockpos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
 					if (Block.isOpaque(worldIn.getBlockState(blockpos).getCollisionShape(worldIn, blockpos))) {
-						continue label79;
+						continue cont;
 					}
 				}
 				
-				if (blockstate.isValidPosition(worldIn, blockpos) && worldIn.getBlockState(blockpos).getMaterial().isReplaceable()) {
+				if (blockstate.isValidPosition(worldIn, blockpos) && worldIn.getBlockState(blockpos).getMaterial().isReplaceable() && rand.nextFloat() <= 0.10F) {
 					BlockState blockstate1 = worldIn.getBlockState(blockpos);
 					if(blockstate1.getFluidState().isTagged(FluidTags.WATER) && worldIn.getFluidState(blockpos).getLevel() == 8) {
 						worldIn.setBlockState(blockpos, blockstate.with(WATERLOGGED, true), 3);

@@ -1,8 +1,11 @@
 {
   "pools": [
     {
-      "name": "main",
-      "rolls": 1,
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -17,7 +20,7 @@
               }
             }
           ],
-          "name": "upgrade_aquatic:pickerel_weed_blue"
+          "name": "upgrade_aquatic:pickerel_weed_purple"
         },
         {
           "type": "minecraft:item",
@@ -32,7 +35,7 @@
               }
             }
           ],
-          "name": "upgrade_aquatic:pickerel_weed_purple"
+          "name": "upgrade_aquatic:pickerel_weed_blue"
         }
       ]
     }
