@@ -126,8 +126,8 @@ public class EntityPickerel extends EntityBucketableWaterMob {
 
 	public static void addSpawn() {
         for (Biome biome : Biome.BIOMES) {
-        	if(biome.getCategory() == Category.RIVER) {
-        		biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 8, 2, 4));
+        	if(biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP) {
+        		biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PICKEREL, 8, 2, 4));
         	}
         }
 	}
