@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.blocks;
 
 import java.util.Random;
 
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPickerel;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import afu.org.checkerframework.checker.nullness.qual.Nullable;
@@ -28,7 +29,6 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -59,9 +59,9 @@ public class BlockPickerelWeedDouble extends Block implements IGrowable, IWaterL
 	}
 	
 	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		if (entityIn instanceof LivingEntity) {
-			entityIn.setMotionMultiplier(state, new Vec3d(0.985D, 0.985D, 0.985D));
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
+		if (entity instanceof LivingEntity && !(entity instanceof EntityPickerel)) {
+			entity.setMotion(entity.getMotion().mul(0.6D, 0.6D, 0.6D));
 		}
 	}
 	

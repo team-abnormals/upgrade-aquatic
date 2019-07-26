@@ -85,9 +85,7 @@ public class UpgradeAquatic {
 		event.getRegistry().register(UATileEntities.BEDROLL = (TileEntityType<TileEntityBedroll>) TileEntityType.Builder.create(TileEntityBedroll::new, UABlocks.BEDROLL_WHITE).build(null).setRegistryName(Reference.MODID, "bedroll"));
 	}
 	
-	void setupMessages() {
-    	
-	}
+	void setupMessages() {}
 	
 	void changeVanillaVariables() {
 		ConduitTileEntity.field_205042_e = new Block[] {

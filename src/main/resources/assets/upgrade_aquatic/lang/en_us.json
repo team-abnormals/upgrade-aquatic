@@ -140,16 +140,21 @@
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
   
   "item.upgrade_aquatic.nautilus_bucket": "Bucket of Nautilus",
+  "item.upgrade_aquatic.pickerel_bucket": "Bucket of Pickerel",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drowned Villager Spawn Egg",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Nautilus Spawn Egg",
+  "item.upgrade_aquatic.pickerel_spawn_egg": "Pickerel Spawn Egg",
   
   "item.upgrade_aquatic.boiled_pickerelweed_purple": "Boiled Purple Pickerelweed",
   "item.upgrade_aquatic.boiled_pickerelweed_blue": "Boiled Blue Pickerelweed",
+  "item.upgrade_aquatic.pickerel": "Pickerel",
+  "item.upgrade_aquatic.pickerel_cooked": "Cooked Pickerel",
   
   "_comment": "Entities",
   
   "entity.upgrade_aquatic.nautilus": "Nautilus",
+  "entity.upgrade_aquatic.pickerel": "Pickerel",
   
   "_comment": "Potions and Effects",
   
