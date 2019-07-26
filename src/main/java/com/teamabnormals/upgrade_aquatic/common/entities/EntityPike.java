@@ -179,9 +179,9 @@ public class EntityPike extends EntityBucketableWaterMob {
 	public static String getNameById(int id) {
 		switch(id) {
 			case 1:
-				return "amur_pickerel";
+				return "amur_pike";
 			case 2:
-				return "redfine_pickerel";
+				return "redfin_pickerel";
 			case 3:
 				return "brown_nothern_pike";
 			case 4:

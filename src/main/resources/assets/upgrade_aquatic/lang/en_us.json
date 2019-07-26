@@ -151,10 +151,24 @@
   "item.upgrade_aquatic.pike": "Raw Pike",
   "item.upgrade_aquatic.pike_cooked": "Cooked Pike",
   
+  "_comment": "Tooltips",
+  
+  "tooltip.upgrade_aquatic.amur_pike": "Amur Pike",  
+  "tooltip.upgrade_aquatic.redfin_pickerel": "Redfin Pickerel",  
+  "tooltip.upgrade_aquatic.brown_nothern_pike": "Brown Northern Pike",  
+  "tooltip.upgrade_aquatic.mahogany_nothern_pike": "Mahogany Northern Pike",  
+  "tooltip.upgrade_aquatic.jade_northern_pike": "Jade Northern Pike",  
+  "tooltip.upgrade_aquatic.olive_northern_pike": "Olive Northern Pike",  
+  "tooltip.upgrade_aquatic.spectral_pike": "Spectral Pike",  
+  "tooltip.upgrade_aquatic.spotted_brown_nothern_pike": "Spotted Brown Northern Pike",  
+  "tooltip.upgrade_aquatic.spotted_mahogany_nothern_pike": "Spotted Mahogany Northern Pike",  
+  "tooltip.upgrade_aquatic.spotted_jade_northern_pike": "Spotted Jade Northern Pike",  
+  "tooltip.upgrade_aquatic.spotted_olive_northern_pike": "Spotted Olive Northern Pike",  
+  
   "_comment": "Entities",
   
   "entity.upgrade_aquatic.nautilus": "Nautilus",
-  "entity.upgrade_aquatic.pickerel": "Pickerel",
+  "entity.upgrade_aquatic.pike": "Pike",
   
   "_comment": "Potions and Effects",
   
