@@ -7,7 +7,7 @@ import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityPickerel;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -34,7 +34,7 @@ public class UAEntities {
 	private static List<Item> spawnEggs = Lists.newArrayList();
 	
 	public static final EntityType<EntityNautilus> NAUTILUS = createEntity(EntityNautilus.class, EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F, 14596231, 16744272);
-	public static final EntityType<EntityPickerel> PICKEREL = createEntity(EntityPickerel.class, EntityPickerel::new, EntityClassification.CREATURE, "pickerel", 0.7F, 0.4F, 4806944, 13002040);
+	public static final EntityType<EntityPike> PIKE = createEntity(EntityPike.class, EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F, 4806944, 13002040);
 	
 	private static <T extends Entity> EntityType<T> createEntity(Class<T> entityClass, EntityType.IFactory<T> factory, EntityClassification entityClassification, String name, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation(Reference.MODID, name);
@@ -59,7 +59,7 @@ public class UAEntities {
             event.getRegistry().register(entity);
         }
         EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
-        EntitySpawnPlacementRegistry.register(PICKEREL, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::pickerelCondition);
+        EntitySpawnPlacementRegistry.register(PIKE, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::pickerelCondition);
     }
 
     @SubscribeEvent
@@ -73,7 +73,7 @@ public class UAEntities {
     	return pos.getY() <= 30;
     }
     
-    private static boolean pickerelCondition(EntityType<? extends EntityPickerel> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    private static boolean pickerelCondition(EntityType<? extends EntityPike> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
     	return world.getBlockState(pos).getBlock() instanceof BlockPickerelWeed || world.getBlockState(pos).getBlock() instanceof BlockPickerelWeedDouble;
     }
 }

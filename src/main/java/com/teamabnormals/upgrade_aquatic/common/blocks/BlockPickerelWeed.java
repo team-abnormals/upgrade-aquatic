@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityPickerel;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
@@ -57,7 +57,7 @@ public class BlockPickerelWeed extends Block implements IGrowable, IWaterLoggabl
 	
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
-		if (entity instanceof LivingEntity && !(entity instanceof EntityPickerel)) {
+		if (entity instanceof LivingEntity && !(entity instanceof EntityPike)) {
 			entity.setMotion(entity.getMotion().mul(0.6D, 0.6D, 0.6D));
 		}
 	}

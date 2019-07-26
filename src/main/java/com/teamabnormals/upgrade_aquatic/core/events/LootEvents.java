@@ -23,7 +23,8 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class LootEvents {
 	private static final Set<ResourceLocation> PICKERELWEED_LOOT_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_SHIPWRECK_SUPPLY);
-	private static final Set<ResourceLocation> PICKERELWEED_FISHING_LOOT_INJECTIONS = Sets.newHashSet(LootTables.GAMEPLAY_FISHING_JUNK);
+	private static final Set<ResourceLocation> PICKERELWEED_FISHINGJUNK_LOOT_INJECTIONS = Sets.newHashSet(LootTables.GAMEPLAY_FISHING_JUNK);
+	private static final Set<ResourceLocation> FISHING_FISH_LOOT = Sets.newHashSet(LootTables.GAMEPLAY_FISHING_FISH);
 	
 	@SubscribeEvent
 	public static void onInjectLoot(LootTableLoadEvent event) {
@@ -31,8 +32,12 @@ public class LootEvents {
 			LootPool pool = LootPool.builder().addEntry(TableLootEntry.func_216171_a(new ResourceLocation(Reference.MODID, "injections/pickerelweed_structures")).weight(1).quality(0)).build();
 			event.getTable().addPool(pool);
 		}
-		if(PICKERELWEED_FISHING_LOOT_INJECTIONS.contains(event.getName())) {
+		if(PICKERELWEED_FISHINGJUNK_LOOT_INJECTIONS.contains(event.getName())) {
 			LootPool pool = LootPool.builder().addEntry(TableLootEntry.func_216171_a(new ResourceLocation(Reference.MODID, "injections/pickerelweed_fishjunk")).weight(1).quality(0)).build();
+			event.getTable().addPool(pool);
+		}
+		if(FISHING_FISH_LOOT.contains(event.getName())) {
+			LootPool pool = LootPool.builder().addEntry(TableLootEntry.func_216171_a(new ResourceLocation(Reference.MODID, "injections/fishing_fish_injection")).weight(1).quality(0)).build();
 			event.getTable().addPool(pool);
 		}
 	}

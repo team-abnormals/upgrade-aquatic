@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.blocks;
 
 import java.util.Random;
 
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityPickerel;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import afu.org.checkerframework.checker.nullness.qual.Nullable;
@@ -60,7 +60,7 @@ public class BlockPickerelWeedDouble extends Block implements IGrowable, IWaterL
 	
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
-		if (entity instanceof LivingEntity && !(entity instanceof EntityPickerel)) {
+		if (entity instanceof LivingEntity && !(entity instanceof EntityPike)) {
 			entity.setMotion(entity.getMotion().mul(0.6D, 0.6D, 0.6D));
 		}
 	}

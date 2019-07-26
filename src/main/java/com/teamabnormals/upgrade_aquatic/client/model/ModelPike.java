@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityPickerel;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class ModelPickerel<T extends EntityPickerel> extends EntityModel<T> {
+public class ModelPike<T extends EntityPike> extends EntityModel<T> {
     public RendererModel body_front;
     public RendererModel neck;
     public RendererModel body_back;
@@ -27,7 +27,7 @@ public class ModelPickerel<T extends EntityPickerel> extends EntityModel<T> {
     public RendererModel left_dorsal;
     public RendererModel right_dorsal;
 
-    public ModelPickerel() {
+    public ModelPike() {
         this.textureWidth = 32;
         this.textureHeight = 32;
         this.left_fin_2 = new RendererModel(this, 10, 27);
@@ -62,7 +62,7 @@ public class ModelPickerel<T extends EntityPickerel> extends EntityModel<T> {
         this.left_dorsal.setRotationPoint(1.1F, 5.0F, 5.0F);
         this.left_dorsal.addBox(0.0F, 0.0F, 0.0F, 0, 2, 4, 0.0F);
         this.setRotateAngle(left_dorsal, 0.0F, 0.0F, -0.8726646259971648F);
-        this.neck = new RendererModel(this, 21, 12);
+        this.neck = new RendererModel(this, 20, 12);
         this.neck.setRotationPoint(-1.5F, -0.5F, -6.5F);
         this.neck.addBox(0.0F, 0.0F, 0.0F, 3, 4, 3, 0.0F);
         this.right_dorsal = new RendererModel(this, 24, 26);

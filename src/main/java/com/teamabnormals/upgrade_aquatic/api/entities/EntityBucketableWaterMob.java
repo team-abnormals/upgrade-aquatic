@@ -1,6 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.api.entities;
 
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.WaterMobEntity;
@@ -18,7 +17,7 @@ import net.minecraft.world.World;
 
 public abstract class EntityBucketableWaterMob extends WaterMobEntity implements IBucketableEntity {
 
-    private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(EntityBucketableWaterMob.class, DataSerializers.BOOLEAN);
 
     public EntityBucketableWaterMob(EntityType<? extends EntityBucketableWaterMob> type, World world) {
         super(type, world);

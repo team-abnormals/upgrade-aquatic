@@ -81,8 +81,8 @@ public class EntityEvents {
 			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
 			sPlayer.connection.sendPacket(new SStatisticsPacket(object2intmap));
 		}
-		if(!player.world.isRemote && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
-			int timeTillDamage = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 20 * (1 + EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 20;
+		if(player.isServerWorld() && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
+			int timeTillDamage = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 40 * (1 + EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 40;
 			if(player.areEyesInFluid(FluidTags.WATER)) {
 				player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 210));
 				if(player.world.getGameTime() % timeTillDamage == 0) {
