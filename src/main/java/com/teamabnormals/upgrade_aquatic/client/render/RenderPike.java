@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelPike;
+import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerSpectralPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -17,6 +18,7 @@ public class RenderPike extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
 
 	public RenderPike(EntityRendererManager manager) {
 		super(manager, new ModelPike<>(), 0.6F);
+		this.addLayer(new RenderLayerSpectralPike<>(this));
 	}
 
 	@Override
@@ -36,10 +38,17 @@ public class RenderPike extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
 	}
 	
 	@Override
-	protected void preRenderCallback(EntityPike entitylivingbaseIn, float partialTickTime) {
+	protected void preRenderCallback(EntityPike entity, float partialTickTime) {
 		GlStateManager.scalef(1F, 1F, 1F);
-		float f1 = entitylivingbaseIn.getPikeType() >= 0 && entitylivingbaseIn.getPikeType() <= 3 ? 1.5F : 1.0F;
-		GlStateManager.scalef(f1, f1, f1);
+		float scale;
+		if(entity.getPikeType() == 0) {
+			scale = 1F;
+		} else if(entity.getPikeType() == 1) {
+			scale = 1.2F;
+		} else {
+			scale = 1.5F;
+		}
+		GlStateManager.scalef(scale, scale, scale);
 	}
 	
 }

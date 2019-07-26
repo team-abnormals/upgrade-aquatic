@@ -1,6 +1,74 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "upgrade_aquatic:item/pickerel_bucket"
-    }
+        "layer0": "upgrade_aquatic:item/bucket/pike_bucket_1"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "variant": 1
+            },
+            "model": "upgrade_aquatic:item/pike_bucket"
+        },
+        {
+            "predicate": {
+                "variant": 2
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_2"
+        },
+        {
+            "predicate": {
+                "variant": 3
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_3"
+        },
+        {
+            "predicate": {
+                "variant": 4
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_4"
+        },
+        {
+            "predicate": {
+                "variant": 5
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_5"
+        },
+        {
+            "predicate": {
+                "variant": 6
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_6"
+        },
+        {
+            "predicate": {
+                "variant": 7
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_7"
+        },
+        {
+            "predicate": {
+                "variant": 8
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_8"
+        },
+        {
+            "predicate": {
+                "variant": 9
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_9"
+        },
+        {
+            "predicate": {
+                "variant": 10
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_10"
+        },
+        {
+            "predicate": {
+                "variant": 11
+            },
+            "model": "upgrade_aquatic:item/buckets/pickerel_bucket_11"
+        }
+    ]
 }

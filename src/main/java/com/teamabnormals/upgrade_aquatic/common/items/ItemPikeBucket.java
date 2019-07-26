@@ -1,0 +1,46 @@
+package com.teamabnormals.upgrade_aquatic.common.items;
+
+import java.util.List;
+
+import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+public class ItemPikeBucket extends ItemMobBucket {
+
+	public ItemPikeBucket(EntityType<? extends EntityBucketableWaterMob> entityType, Fluid p_i49022_2_, Properties builder) {
+		super(entityType, p_i49022_2_, builder);
+		this.addPropertyOverride(new ResourceLocation("variant"), (stack, world, entity) -> {
+			CompoundNBT compoundnbt = stack.getTag();
+			if (compoundnbt != null && compoundnbt.contains("BucketVariantTag", 3)) {
+				return compoundnbt.getInt("BucketVariantTag");
+			}
+			return 2;
+		});
+	}
+
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		CompoundNBT compoundnbt = stack.getTag();
+		if (compoundnbt != null && compoundnbt.contains("BucketVariantTag", 3)) {
+			int i = compoundnbt.getInt("BucketVariantTag");
+			TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
+			
+			tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + EntityPike.getNameById(i)).applyTextStyles(atextformatting)));
+		}
+	}
+	
+}

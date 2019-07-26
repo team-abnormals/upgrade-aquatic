@@ -1,11 +1,16 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
+import java.util.function.Predicate;
+
 import javax.annotation.Nullable;
 
 import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -64,6 +69,16 @@ public class EntityPike extends EntityBucketableWaterMob {
 		super.registerGoals();
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.NOT_SPECTATING::test));
+		if(this.getPikeType() != 7) {
+			this.goalSelector.addGoal(2, new AvoidEntityGoal<EntityPike>(this, EntityPike.class, 8.0F, 1.6D, 1.4D, IS_SPECTRAL::test) {
+				
+				@Override
+				public boolean shouldExecute() {
+					return super.shouldExecute() && entity != null && ((EntityPike)entity).getPikeType() != 7;
+				}
+				
+			});
+		}
 		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.1D, 40));
 	}
 	
@@ -77,6 +92,15 @@ public class EntityPike extends EntityBucketableWaterMob {
 	public ItemStack getBucket() {
 		return new ItemStack(UAItems.PIKE_BUCKET);
 	}
+	
+	@Override
+	protected void setBucketData(ItemStack bucket) {
+        if (this.hasCustomName()) {
+            bucket.setDisplayName(this.getCustomName());
+        }
+        CompoundNBT compoundnbt = bucket.getOrCreateTag();
+        compoundnbt.putInt("BucketVariantTag", this.getPikeType());
+    }
 	
 	@Override
     public int getMaxSpawnedInChunk() {
@@ -123,10 +147,16 @@ public class EntityPike extends EntityBucketableWaterMob {
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		int type = this.getRandomTypeForBiome(worldIn);
+		if(dataTag != null && dataTag.contains("BucketVariantTag", 3)) {
+			this.setPikeType(dataTag.getInt("BucketVariantTag"));
+			return spawnDataIn;
+		}
 		if (spawnDataIn instanceof EntityPike.PikeData) {
 			type = ((EntityPike.PikeData)spawnDataIn).typeData;
 		} else {
-			spawnDataIn = new EntityPike.PikeData(type);
+			if(!this.isFromBucket()) {
+				spawnDataIn = new EntityPike.PikeData(type);
+			}
 		}
 		
 		this.setPikeType(type);
@@ -135,18 +165,43 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
 	public EntitySize getSize(Pose poseIn) {
-		int scale = this.getPikeType() >= 0 && this.getPikeType() <= 3 ? 4 : 6;
-		return super.getSize(poseIn).scale(0.225F * 6);
+		float scale = 0F;
+		if(this.getPikeType() == 0) {
+			scale = 7F;
+		} else if(this.getPikeType() == 1) {
+			scale = 8F;
+		} else {
+			scale = 10F;
+		}
+		return super.getSize(poseIn).scale(0.225F * scale);
 	}
 	
-	public String getNameById(int id) {
+	public static String getNameById(int id) {
 		switch(id) {
-			case 0:
-				return "Red Fin Pickerel";
 			case 1:
-				return "idk";
+				return "amur_pickerel";
+			case 2:
+				return "redfine_pickerel";
+			case 3:
+				return "brown_nothern_pike";
+			case 4:
+				return "mahogany_northern_pike";
+			case 5:
+				return "jade_northern_pike";
+			case 6:
+				return "olive_northern_pike";
+			case 7:
+				return "spectral_pike";
+			case 8:
+				return "spotted_brown_northern_pike";
+			case 9:
+				return "spotted_mahogany_northern_pike";
+			case 10:
+				return "spotted_jade_northern_pike";
+			case 11:
+				return "spotted_olive_northern_pike";
 		}
-		return "Red Fin Pickerel";
+		return "";
 	}
 	
 	public int getPikeType() {
@@ -159,10 +214,52 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	private int getRandomTypeForBiome(IWorld world) {
 		Biome biome = world.getBiome(new BlockPos(this));
+		int probability = rand.nextInt(101);
 		if(biome.getCategory() == Category.SWAMP) {
-			return rand.nextBoolean() ? 1 : 2;
+			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? 7 : -1) : rand.nextInt(3) == 0 ? 2 : 1;
+			if(decidedVariant == -1) {
+				float chance = rand.nextFloat();
+				if(chance <= 1 && chance >= 0.5) {
+					decidedVariant = rand.nextInt(6) == 0 ? 8 : 3;
+				} else if(chance < 0.5 && chance >= 0.35) {
+					decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
+				} else if(chance < 0.35 && chance > 0.25) {
+					decidedVariant = rand.nextInt(6) == 0 ? 11 : 6;
+				} else {
+					decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
+				}
+			}
+			return decidedVariant;
+		} else if(biome.getCategory() == Category.RIVER) {
+			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : -1 : -1) : rand.nextInt(4) == 0 ? 2 : -1;
+			if(decidedVariant == -1) {
+				float chance = rand.nextFloat();
+				if(chance <= 1 && chance >= 0.5) {
+					decidedVariant = rand.nextInt(6) == 0 ? 8 : 3;
+				} else if(chance < 0.5 && chance >= 0.35) {
+					decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
+				} else if(chance < 0.35 && chance > 0.25) {
+					decidedVariant = rand.nextInt(6) == 0 ? 11 : 6;
+				} else {
+					decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
+				}
+			}
+			return decidedVariant;
 		}
-		return 0;
+		int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : - 1: -1) : rand.nextInt(4) == 0 ? 5 : -1;
+		if(decidedVariant == -1) {
+			float chance = rand.nextFloat();
+			if(chance <= 1 && chance >= 0.5) {
+				decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
+			} else if(chance < 0.5 && chance >= 0.35) {
+				decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
+			} else if(chance < 0.35 && chance > 0.25) {
+				decidedVariant = rand.nextInt(6) == 0 ? 11 : 6;
+			} else {
+				decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
+			}
+		}
+		return decidedVariant;
 	}
 	
 	@Override
@@ -199,6 +296,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 	@Override
 	protected SoundEvent getSwimSound() {
 		return SoundEvents.ENTITY_FISH_SWIM;
+	}
+	
+	public static final Predicate<Entity> IS_SPECTRAL = (p_200818_0_) -> {
+		return ((EntityPike)p_200818_0_).getPikeType() == 7 && !((EntityPike)p_200818_0_).isHidingInPickerelweed();
+	};
+	
+	public boolean isHidingInPickerelweed() {
+		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelWeed || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelWeedDouble;
 	}
 
 	public static void addSpawn() {

@@ -44,7 +44,7 @@ public abstract class EntityBucketableWaterMob extends WaterMobEntity implements
         this.setFromBucket(compound.getBoolean("FromBucket"));
     }
 
-    private boolean isFromBucket() {
+    public boolean isFromBucket() {
         return this.dataManager.get(FROM_BUCKET);
     }
 
