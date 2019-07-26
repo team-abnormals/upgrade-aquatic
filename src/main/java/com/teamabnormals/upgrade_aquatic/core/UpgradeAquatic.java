@@ -15,6 +15,9 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.tileentity.ConduitTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -45,6 +48,7 @@ public class UpgradeAquatic {
 		instance = this;
 		
 		this.setupMessages();
+		this.changeVanillaProperties();
 		
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
@@ -83,5 +87,14 @@ public class UpgradeAquatic {
 	
 	void setupMessages() {
     	
+	}
+	
+	void changeVanillaVariables() {
+		ConduitTileEntity.field_205042_e = new Block[] {
+			UABlocks.PRISMARINE_CORAL, UABlocks.PRISMARINE_CORAL_BLOCK, UABlocks.PRISMARINE_CORAL_FAN, UABlocks.PRISMARINE_CORAL_SHOWER, UABlocks.PRISMARINE_CORAL_WALL_FAN,
+			UABlocks.ELDER_PRISMARINE_CORAL, UABlocks.ELDER_PRISMARINE_CORAL_BLOCK, UABlocks.ELDER_PRISMARINE_CORAL_FAN, UABlocks.ELDER_PRISMARINE_CORAL_SHOWER, UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN,
+			Blocks.PRISMARINE, Blocks.PRISMARINE_SLAB, Blocks.PRISMARINE_STAIRS, Blocks.PRISMARINE_WALL, Blocks.DARK_PRISMARINE, Blocks.DARK_PRISMARINE_SLAB, Blocks.DARK_PRISMARINE_SLAB, Blocks.DARK_PRISMARINE_STAIRS,
+			Blocks.SEA_LANTERN, Blocks.PRISMARINE_BRICKS, Blocks.PRISMARINE_BRICK_SLAB, Blocks.PRISMARINE_BRICK_STAIRS
+		};
 	}
 }
