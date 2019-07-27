@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelPike;
+import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerPikeCarriedItem;
 import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerSpectralPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
@@ -19,6 +20,7 @@ public class RenderPike extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
 	public RenderPike(EntityRendererManager manager) {
 		super(manager, new ModelPike<>(), 0.6F);
 		this.addLayer(new RenderLayerSpectralPike<>(this));
+		this.addLayer(new RenderLayerPikeCarriedItem(this));
 	}
 
 	@Override
