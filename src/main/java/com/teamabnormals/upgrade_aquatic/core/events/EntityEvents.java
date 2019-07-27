@@ -1,6 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.core.events;
 
+import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -14,6 +16,8 @@ import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.TurtleEntity;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
+import net.minecraft.entity.passive.fish.SalmonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -45,6 +49,13 @@ public class EntityEvents {
 		Entity entity = event.getEntity();
 		if(entity instanceof DrownedEntity) {
 			((CreatureEntity) entity).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreatureEntity)entity, TurtleEntity.class, 6.0F, 1.0D, 1.2D));
+		}
+		if(entity instanceof AbstractFishEntity) {
+			if(entity instanceof SalmonEntity) {
+				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, EntityPike.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_HIDING_IN_PICKERELWEED::test));
+			} else {
+				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, EntityPike.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_SPECTRAL::test));
+			}
 		}
 	}
 	

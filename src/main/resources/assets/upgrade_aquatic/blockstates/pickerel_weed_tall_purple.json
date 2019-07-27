@@ -1,8 +1,8 @@
 {
    	"variants": {
-       	"waterlogged=true,half=upper": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_top_purple"},
-        "waterlogged=false,half=upper": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_top_land_purple"},
-        "waterlogged=true,half=lower": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_bottom_purple"},
-        "waterlogged=false,half=lower": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_bottom_land_purple"}
+       	"fake_waterlogged=true,half=upper": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_top_purple"},
+        "fake_waterlogged=false,half=upper": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_top_land_purple"},
+        "fake_waterlogged=true,half=lower": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_bottom_purple"},
+        "fake_waterlogged=false,half=lower": { "model": "upgrade_aquatic:block/pickerelweed/pickerel_weed_bottom_land_purple"}
     }
 }

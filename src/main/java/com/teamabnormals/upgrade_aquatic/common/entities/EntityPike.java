@@ -1,16 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
-import java.util.function.Predicate;
-
 import javax.annotation.Nullable;
 
 import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
+import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -62,6 +60,7 @@ public class EntityPike extends EntityBucketableWaterMob {
     protected void registerAttributes() {
         super.registerAttributes();
         this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D);
+        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.9D);
     }
 	
 	@Override
@@ -70,7 +69,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25D));
 		this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, PlayerEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.NOT_SPECTATING::test));
 		if(this.getPikeType() != 7) {
-			this.goalSelector.addGoal(2, new AvoidEntityGoal<EntityPike>(this, EntityPike.class, 8.0F, 1.6D, 1.4D, IS_SPECTRAL::test) {
+			this.goalSelector.addGoal(2, new AvoidEntityGoal<EntityPike>(this, EntityPike.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_SPECTRAL::test) {
 				
 				@Override
 				public boolean shouldExecute() {
@@ -79,7 +78,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 				
 			});
 		}
-		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.1D, 40));
+		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.1D, 40) {
+			
+			@Override
+			public boolean shouldExecute() {
+				return ((EntityPike)creature).isHidingInPickerelweed() ? super.shouldExecute() && creature.getRNG().nextInt(6) == 0 : super.shouldExecute();
+			}
+			
+		});
 	}
 	
 	@Override
@@ -183,7 +189,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 			case 2:
 				return "redfin_pickerel";
 			case 3:
-				return "brown_nothern_pike";
+				return "brown_northern_pike";
 			case 4:
 				return "mahogany_northern_pike";
 			case 5:
@@ -298,10 +304,6 @@ public class EntityPike extends EntityBucketableWaterMob {
 		return SoundEvents.ENTITY_FISH_SWIM;
 	}
 	
-	public static final Predicate<Entity> IS_SPECTRAL = (p_200818_0_) -> {
-		return ((EntityPike)p_200818_0_).getPikeType() == 7 && !((EntityPike)p_200818_0_).isHidingInPickerelweed();
-	};
-	
 	public boolean isHidingInPickerelweed() {
 		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelWeed || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelWeedDouble;
 	}
@@ -324,7 +326,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 
 		public void tick() {
 			if (this.pike.areEyesInFluid(FluidTags.WATER)) {
-				this.pike.setMotion(this.pike.getMotion().add(0.0D, 0.005D, 0.0D));
+				this.pike.setMotion(this.pike.getMotion().add(0.0D, 0.001D, 0.0D));
 			}
 
 			if (this.action == MovementController.Action.MOVE_TO && !this.pike.getNavigator().noPath()) {
@@ -338,7 +340,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 				this.pike.renderYawOffset = this.pike.rotationYaw;
 				float f1 = (float)(this.speed * this.pike.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
 				this.pike.setAIMoveSpeed(MathHelper.lerp(0.125F, this.pike.getAIMoveSpeed(), f1));
-				this.pike.setMotion(this.pike.getMotion().add(0.0D, (double)this.pike.getAIMoveSpeed() * d1 * 0.1D, 0.0D));
+				this.pike.setMotion(this.pike.getMotion().add(0.0D, (double)this.pike.getAIMoveSpeed() * d1 * 0.04D, 0.0D));
 			} else {
 				this.pike.setAIMoveSpeed(0.0F);
 			}
