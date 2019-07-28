@@ -1,6 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
+import java.util.EnumSet;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
@@ -24,12 +26,14 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.entity.passive.fish.SalmonEntity;
+import net.minecraft.entity.passive.fish.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -41,9 +45,11 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -55,20 +61,21 @@ import net.minecraft.world.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootParameterSets;
-import net.minecraft.world.storage.loot.LootParameters;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTables;
+import net.minecraft.world.storage.loot.*;
 
 public class EntityPike extends EntityBucketableWaterMob {
 	private static final DataParameter<Integer> PIKE_TYPE = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> CAUGHT_ENTITY = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
+	private static final Predicate<ItemEntity> CAN_PICKUP = (entity) -> {
+		return entity.getItem().getItem().isIn(ItemTags.FISHES) && !entity.cannotPickup() && entity.isAlive();
+	};
+	private int eatTicks;
 	
 	public EntityPike(EntityType<? extends EntityPike> type, World world) {
 		super(type, world);
 		this.moveController = new MoveHelperController(this);
 		this.setActiveHand(Hand.MAIN_HAND);
+		this.setCanPickUpLoot(true);
 	}
 	
 	public EntityPike(World world, double posX, double posY, double posZ) {
@@ -106,8 +113,9 @@ public class EntityPike extends EntityBucketableWaterMob {
 			}
 			
 		});
-		this.goalSelector.addGoal(5, new EntityPike.PikeAttackGoal(this, 1.0D, true));
-		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, SalmonEntity.class, true));
+		this.goalSelector.addGoal(4, new EntityPike.PikeAttackGoal(this, 12D, true));
+		this.goalSelector.addGoal(4, new EntityPike.FindItemsGoal());
+		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, AbstractFishEntity.class, true));
 	}
 	
 	@Override
@@ -183,15 +191,35 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
 	public void livingTick() {
+		eatTicks++;
 		if (!this.isInWater() && this.onGround && this.collidedVertically) {
 			this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
 			this.isAirBorne = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
 		}
-		Entity entity = this.world.getEntityByID(this.dataManager.get(CAUGHT_ENTITY));
-		if(this.world.getGameTime() % 20 == 0 && entity != null) {
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
+		
+		if(this.world.getGameTime() % 20 == 0 && this.getCaughtEntity() != null) {
+			this.world.playSound(null, this.getPosition(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
+			this.getCaughtEntity().attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
+		}
+		
+		if(this.getCaughtEntity() != null) {
+			this.getCaughtEntity().startRiding(this);
+		}
+		
+		ItemStack itemstack = this.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+		if (this.canEatItem(itemstack)) {
+			if (this.eatTicks > 600) {
+				ItemStack itemstackFood = itemstack.onItemUseFinish(this.world, this);
+				if (!itemstack.isEmpty()) {
+					this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstackFood);
+				}
+				this.eatTicks = 0;
+			} else if (this.eatTicks > 560 && this.rand.nextFloat() < 0.1F) {
+				this.playSound(this.getEatSound(itemstack), 1.0F, 1.0F);
+				this.world.setEntityState(this, (byte)45);
+			}
 		}
 		super.livingTick();
 	}
@@ -244,6 +272,47 @@ public class EntityPike extends EntityBucketableWaterMob {
 		}
 		
 		return spawnDataIn;
+	}
+	
+	private void spitOutItem(ItemStack stackIn) {
+		if (!stackIn.isEmpty() && !this.world.isRemote) {
+			ItemEntity itementity = new ItemEntity(this.world, this.posX + this.getLookVec().x, this.posY + 1.0D, this.posZ + this.getLookVec().z, stackIn);
+			itementity.setPickupDelay(40);
+			itementity.setThrowerId(this.getUniqueID());
+			this.playSound(SoundEvents.ENTITY_FOX_SPIT, 1.0F, 1.0F);
+			this.world.addEntity(itementity);
+			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
+		}
+	}
+	
+	private boolean canEatItem(ItemStack itemstack) {
+		return itemstack.getItem().isIn(ItemTags.FISHES);
+	}
+	
+	@Override
+	public void updatePassenger(Entity passenger) {
+		if(!this.getPassengers().isEmpty()) {
+			float distance = 0.7F;
+			
+			double dx = Math.cos((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
+			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
+			
+			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.posZ + dz);
+			
+			this.getPassengers().get(0).setPosition(riderPos.x, riderPos.y, riderPos.z);
+		} else {
+			super.updatePassenger(passenger);
+		}
+	}
+	
+	@Override
+	public double getMountedYOffset() {
+		return this.getSize(getPose()).height * 0.075D;
+	}
+	
+	@Override
+	public boolean canBeRiddenInWater() {
+		return true;
 	}
 	
 	@Override
@@ -418,26 +487,64 @@ public class EntityPike extends EntityBucketableWaterMob {
 				float f1 = (float)(this.speed * this.pike.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
 				this.pike.setAIMoveSpeed(MathHelper.lerp(0.125F, this.pike.getAIMoveSpeed(), f1));
 				this.pike.setMotion(this.pike.getMotion().add(0.0D, (double)this.pike.getAIMoveSpeed() * d1 * 0.04D, 0.0D));
-			} else {
-				this.pike.setAIMoveSpeed(0.0F);
 			}
 		}
+		
+	}
+	
+	class FindItemsGoal extends Goal {
+		
+		public FindItemsGoal() {
+			this.setMutexFlags(EnumSet.of(Goal.Flag.MOVE));
+		}
+
+		public boolean shouldExecute() {
+			if (!EntityPike.this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty()) {
+				return false;
+			} else if (EntityPike.this.getAttackTarget() == null && EntityPike.this.getRevengeTarget() == null) {
+				if (EntityPike.this.getRNG().nextInt(10) != 0) {
+					return false;
+				} else {
+					List<ItemEntity> list = EntityPike.this.world.getEntitiesWithinAABB(ItemEntity.class, EntityPike.this.getBoundingBox().grow(8.0D, 8.0D, 8.0D), EntityPike.CAN_PICKUP);
+					return !list.isEmpty() && EntityPike.this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty();
+				}
+			} else {
+				return false;
+			}
+		}
+		
+		public void tick() {
+			List<ItemEntity> list = EntityPike.this.world.getEntitiesWithinAABB(ItemEntity.class, EntityPike.this.getBoundingBox().grow(8.0D, 8.0D, 8.0D), EntityPike.CAN_PICKUP);
+			ItemStack itemstack = EntityPike.this.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+			if (itemstack.isEmpty() && !list.isEmpty()) {
+				EntityPike.this.getNavigator().tryMoveToEntityLiving(list.get(0), (double)1.2F);
+			}
+
+		}
+
+		public void startExecuting() {
+			List<ItemEntity> list = EntityPike.this.world.getEntitiesWithinAABB(ItemEntity.class, EntityPike.this.getBoundingBox().grow(8.0D, 8.0D, 8.0D), EntityPike.CAN_PICKUP);
+			if (!list.isEmpty()) {
+				EntityPike.this.getNavigator().tryMoveToEntityLiving(list.get(0), (double)1.2F);
+			}
+		}
+		
 	}
 	
 	static class PikeAttackGoal extends MeleeAttackGoal {
-
+		
 		public PikeAttackGoal(CreatureEntity creature, double speedIn, boolean useLongMemory) {
 			super(creature, speedIn, useLongMemory);
 		}
 		
 		@Override
 		public boolean shouldExecute() {
-			return ((EntityPike)field_75441_b).getCaughtEntity() == null && super.shouldExecute();
+			return ((EntityPike)field_75441_b).getCaughtEntity() == null && !(field_75441_b.getAttackTarget() instanceof PufferfishEntity) && super.shouldExecute();
 		}
 		
 		@Override
 		public boolean shouldContinueExecuting() {
-			return super.shouldContinueExecuting();
+			return field_75441_b.isInWater() && super.shouldContinueExecuting();
 		}
 		
 		@Override
@@ -446,12 +553,16 @@ public class EntityPike extends EntityBucketableWaterMob {
 			if (distToEnemySqr <= d && this.attackTick <= 0) {
 				this.attackTick = 20;
 				((EntityPike)this.field_75441_b).setCaughtEntity(enemy.getEntityId());
+				this.field_75441_b.setAttackTarget(null);
 			}
 		}
 		
 		@Override
-		public void resetTask() {
-			super.resetTask();
+		public void startExecuting() {
+			if(field_75441_b.getItemStackFromSlot(EquipmentSlotType.MAINHAND) != null) {
+				((EntityPike)this.field_75441_b).spitOutItem(field_75441_b.getItemStackFromSlot(EquipmentSlotType.MAINHAND));
+			}
+			super.startExecuting();
 		}
 		
 	}
