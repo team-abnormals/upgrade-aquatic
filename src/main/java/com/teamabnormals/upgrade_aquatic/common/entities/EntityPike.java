@@ -11,18 +11,25 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
+import net.minecraft.entity.passive.fish.SalmonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -36,6 +43,7 @@ import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -55,10 +63,12 @@ import net.minecraft.world.storage.loot.LootTables;
 
 public class EntityPike extends EntityBucketableWaterMob {
 	private static final DataParameter<Integer> PIKE_TYPE = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
-
+	private static final DataParameter<Integer> CAUGHT_ENTITY = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
+	
 	public EntityPike(EntityType<? extends EntityPike> type, World world) {
 		super(type, world);
 		this.moveController = new MoveHelperController(this);
+		this.setActiveHand(Hand.MAIN_HAND);
 	}
 	
 	public EntityPike(World world, double posX, double posY, double posZ) {
@@ -96,12 +106,15 @@ public class EntityPike extends EntityBucketableWaterMob {
 			}
 			
 		});
+		this.goalSelector.addGoal(5, new EntityPike.PikeAttackGoal(this, 1.0D, true));
+		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, SalmonEntity.class, true));
 	}
 	
 	@Override
 	protected void registerData() {
 		super.registerData();
 		this.dataManager.register(PIKE_TYPE, 0);
+		this.dataManager.register(CAUGHT_ENTITY, 0);
 	}
 
 	@Override
@@ -115,8 +128,43 @@ public class EntityPike extends EntityBucketableWaterMob {
             bucket.setDisplayName(this.getCustomName());
         }
         CompoundNBT compoundnbt = bucket.getOrCreateTag();
+        CompoundNBT compoundnbt1 = new CompoundNBT();
         compoundnbt.putInt("BucketVariantTag", this.getPikeType());
+        if (!this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty()) {
+        	this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).write(compoundnbt1);
+        }
+        compoundnbt.put("PikeHeldItem", compoundnbt1);
     }
+	
+	private void setCaughtEntity(int entityId) {
+		this.dataManager.set(CAUGHT_ENTITY, entityId);
+	}
+
+	public boolean hasCaughtEntity() {
+		return this.dataManager.get(CAUGHT_ENTITY) != 0;
+	}
+	
+	public void notifyDataManagerChange(DataParameter<?> key) {
+		super.notifyDataManagerChange(key);
+		if (CAUGHT_ENTITY.equals(key)) {
+			
+		}
+	}
+	
+	@Nullable
+	public LivingEntity getCaughtEntity() {
+		if (!this.hasCaughtEntity()) {
+			return null;
+		} else {
+			Entity entity = this.world.getEntityByID(this.dataManager.get(CAUGHT_ENTITY));
+			if (entity == null) {
+				return null;
+			} else if (entity != null && entity instanceof AbstractFishEntity) {
+				return (AbstractFishEntity)entity;
+			}
+		}
+		return null;
+	}
 	
 	@Override
     public int getMaxSpawnedInChunk() {
@@ -140,6 +188,10 @@ public class EntityPike extends EntityBucketableWaterMob {
 			this.onGround = false;
 			this.isAirBorne = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
+		}
+		Entity entity = this.world.getEntityByID(this.dataManager.get(CAUGHT_ENTITY));
+		if(this.world.getGameTime() % 20 == 0 && entity != null) {
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
 		}
 		super.livingTick();
 	}
@@ -165,6 +217,10 @@ public class EntityPike extends EntityBucketableWaterMob {
 		int type = this.getRandomTypeForBiome(worldIn);
 		if(dataTag != null && dataTag.contains("BucketVariantTag", 3)) {
 			this.setPikeType(dataTag.getInt("BucketVariantTag"));
+			if(dataTag.contains("PikeHeldItem")) {
+				this.setActiveHand(Hand.MAIN_HAND);
+				this.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.read(dataTag.getCompound("PikeHeldItem")));
+			}
 			return spawnDataIn;
 		}
 		if (spawnDataIn instanceof EntityPike.PikeData) {
@@ -177,12 +233,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 		
 		this.setPikeType(type);
 		
-		LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
-		lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, this).withParameter(LootParameters.THIS_ENTITY, this);
-		LootTable loottable = this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING);
-		List<ItemStack> list = loottable.generate(lootcontext$builder.build(LootParameterSets.FISHING));
-		for(ItemStack itemstack : list) {
-            this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstack);
+		if(this.getRNG().nextFloat() <= 0.10F) {
+			LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
+			lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, this).withParameter(LootParameters.THIS_ENTITY, this);
+			LootTable loottable = this.getRNG().nextFloat() >= 0.1F ? this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_JUNK) : this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_TREASURE);
+			List<ItemStack> list = loottable.generate(lootcontext$builder.build(LootParameterSets.FISHING));
+			for(ItemStack itemstack : list) {
+				this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstack);
+			}
 		}
 		
 		return spawnDataIn;
@@ -364,6 +422,38 @@ public class EntityPike extends EntityBucketableWaterMob {
 				this.pike.setAIMoveSpeed(0.0F);
 			}
 		}
+	}
+	
+	static class PikeAttackGoal extends MeleeAttackGoal {
+
+		public PikeAttackGoal(CreatureEntity creature, double speedIn, boolean useLongMemory) {
+			super(creature, speedIn, useLongMemory);
+		}
+		
+		@Override
+		public boolean shouldExecute() {
+			return ((EntityPike)field_75441_b).getCaughtEntity() == null && super.shouldExecute();
+		}
+		
+		@Override
+		public boolean shouldContinueExecuting() {
+			return super.shouldContinueExecuting();
+		}
+		
+		@Override
+		protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
+			double d = this.getAttackReachSqr(enemy);
+			if (distToEnemySqr <= d && this.attackTick <= 0) {
+				this.attackTick = 20;
+				((EntityPike)this.field_75441_b).setCaughtEntity(enemy.getEntityId());
+			}
+		}
+		
+		@Override
+		public void resetTask() {
+			super.resetTask();
+		}
+		
 	}
 	
 	public static class PikeData implements ILivingEntityData {

@@ -11,10 +11,10 @@ import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.HandSide;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -29,10 +29,8 @@ public class RenderLayerPikeCarriedItem extends LayerRenderer<EntityPike, ModelP
 
 	@Override
 	public void render(EntityPike entityIn, float p_212842_2_, float p_212842_3_, float p_212842_4_, float p_212842_5_, float f, float f1, float p_212842_8_) {
-		boolean flag = entityIn.getPrimaryHand() == HandSide.RIGHT;
-		ItemStack itemstack = flag ? entityIn.getHeldItemOffhand() : entityIn.getHeldItemMainhand();
-		ItemStack itemstack1 = flag ? entityIn.getHeldItemMainhand() : entityIn.getHeldItemOffhand();
-		if (!itemstack.isEmpty() || !itemstack1.isEmpty()) {
+		ItemStack itemstack = entityIn.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+		if (!itemstack.isEmpty()) {
 			this.renderItem(entityIn, itemstack, f, f1);
 		}
 	}
