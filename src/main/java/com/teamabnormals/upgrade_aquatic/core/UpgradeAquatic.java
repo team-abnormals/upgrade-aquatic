@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityBedroll;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
@@ -69,6 +70,7 @@ public class UpgradeAquatic {
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		proxy.preInit();
 		EntityNautilus.addSpawn();
+		EntityPike.addSpawn();
 		UADispenseBehaviorRegistry.registerAll();
 		UAEffects.registerRecipes();
 		UAWorldGen.registerGenerators();

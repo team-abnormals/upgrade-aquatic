@@ -32,6 +32,13 @@ public class UAParticleSprites {
 		new ResourceLocation("upgrade_aquatic:textures/particles/elder_prismarine_coral_crystal_6.png")
 	};
 	
+	public static ResourceLocation[] SPECTRAL_FRAMES = new ResourceLocation[] {
+		new ResourceLocation("upgrade_aquatic:textures/particles/spectral_consume_1.png"),
+		new ResourceLocation("upgrade_aquatic:textures/particles/spectral_consume_2.png"),
+		new ResourceLocation("upgrade_aquatic:textures/particles/spectral_consume_3.png"),
+		new ResourceLocation("upgrade_aquatic:textures/particles/spectral_consume_4.png"),
+	};
+	
 	public static final EnumMap<BlockJellyTorch.JellyTorchType, List<ResourceLocation>> JELLY_TORCHES = new EnumMap<>(BlockJellyTorch.JellyTorchType.class);
 
     static {

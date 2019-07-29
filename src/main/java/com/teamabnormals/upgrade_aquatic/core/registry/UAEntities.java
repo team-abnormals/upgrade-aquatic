@@ -74,6 +74,15 @@ public class UAEntities {
     }
     
     private static boolean pickerelCondition(EntityType<? extends EntityPike> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    	return world.getBlockState(pos).getBlock() instanceof BlockPickerelWeed || world.getBlockState(pos).getBlock() instanceof BlockPickerelWeedDouble;
+		for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
+			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
+				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
+					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeedDouble) {
+						if(random.nextFloat() <= 0.25F) return true;
+					}
+				}
+			}
+		}
+		return random.nextFloat() <= 0.05F ? true : false;
     }
 }

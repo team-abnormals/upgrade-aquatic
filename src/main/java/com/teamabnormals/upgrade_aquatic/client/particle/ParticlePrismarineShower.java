@@ -21,19 +21,19 @@ public class ParticlePrismarineShower extends UAParticle {
     private int lastTick = 0;
     
     public ParticlePrismarineShower(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
-        super(world, posX, posY, posZ, motionX, motionY, motionZ);
-        this.motionX = this.motionX * 0.009999999776482582d + motionX;
-        this.motionY = this.motionY * 0.009999999776482582d + motionY;
-        this.motionZ = this.motionZ * 0.009999999776482582d + motionZ;
-        this.scale = this.particleScale = 0.5f;
-        this.rotSpeed = ((float)Math.random() - 0.5F) * 0.1F;
-        this.particleAngle = (float)Math.random() * ((float)Math.PI * 2F);
-        this.angle = (float)Math.random() * ((float)Math.PI * 2F);
-        this.particleGravity = 0.035F;
-        this.particleRed = 1f;
-        this.particleGreen = 1f;
-        this.particleBlue = 1f;
-        this.maxAge = (int) (15d / (Math.random() * 0.8d + 0.2d)) + 4;
+    	super(world, posX, posY, posZ, motionX, motionY, motionZ);
+    	this.motionX = this.motionX * 0.009999999776482582d + motionX;
+    	this.motionY = this.motionY * 0.009999999776482582d + motionY;
+    	this.motionZ = this.motionZ * 0.009999999776482582d + motionZ;
+    	this.scale = this.particleScale = 0.5f;
+    	this.rotSpeed = ((float)Math.random() - 0.5F) * 0.1F;
+    	this.particleAngle = (float)Math.random() * ((float)Math.PI * 2F);
+    	this.angle = (float)Math.random() * ((float)Math.PI * 2F);
+    	this.particleGravity = 0.035F;
+    	this.particleRed = 1f;
+    	this.particleGreen = 1f;
+    	this.particleBlue = 1f;
+    	this.maxAge = (int) (15d / (Math.random() * 0.8d + 0.2d)) + 4;
     }
 
     @Override

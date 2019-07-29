@@ -8,6 +8,7 @@ import javax.vecmath.Vector3f;
 import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
+import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
@@ -42,7 +43,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
@@ -68,6 +68,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	private static final DataParameter<Integer> PIKE_TYPE = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> CAUGHT_ENTITY = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> DROP_ITEM = EntityDataManager.createKey(EntityPike.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> ATTACK_COOLDOWN = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	private int eatTicks;
 	
 	public EntityPike(EntityType<? extends EntityPike> type, World world) {
@@ -76,11 +77,6 @@ public class EntityPike extends EntityBucketableWaterMob {
 		this.setActiveHand(Hand.MAIN_HAND);
 		this.setCanPickUpLoot(true);
 	}
-	
-	public EntityPike(World world, double posX, double posY, double posZ) {
-        this(UAEntities.PIKE, world);
-        this.setPosition(posX, posY, posZ);
-    }
 	
 	@Override
     protected void registerAttributes() {
@@ -114,7 +110,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 		});
 		this.goalSelector.addGoal(4, new EntityPike.HideInPickerelweedGoal(this));
 		this.goalSelector.addGoal(4, new EntityPike.PikeAttackGoal(this, 12D, true));
-		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, AbstractFishEntity.class, true));
+		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<AbstractFishEntity>(this, AbstractFishEntity.class, true) {
+			
+			@Override
+			public boolean shouldExecute() {
+				return ((EntityPike)this.goalOwner).getAttackCooldown() <= 0 && super.shouldExecute();
+			}
+			
+		});
 	}
 	
 	@Override
@@ -123,6 +126,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		this.dataManager.register(PIKE_TYPE, 0);
 		this.dataManager.register(CAUGHT_ENTITY, 0);
 		this.dataManager.register(DROP_ITEM, true);
+		this.dataManager.register(ATTACK_COOLDOWN, 0);
 	}
 
 	@Override
@@ -170,7 +174,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
     public int getMaxSpawnedInChunk() {
-        return 8;
+        return 2;
     }
 	
 	@Override
@@ -200,8 +204,8 @@ public class EntityPike extends EntityBucketableWaterMob {
 					if(this.getCaughtEntity().getHealth() <= 1) {
 						if(this.getPikeType() == 7) {
 							if (this.world.isRemote) {
-								for(int i = 0; i < 2; ++i) {
-									this.getCaughtEntity().world.addParticle(ParticleTypes.BUBBLE, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
+								for(int i = 0; i < 3; ++i) {
+									UAParticles.SPECTRAL_CONSUME.spawn(this.world, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
 								}
 							}
 						}
@@ -213,14 +217,18 @@ public class EntityPike extends EntityBucketableWaterMob {
 				if(this.getCaughtEntity().getHealth() <= 1) {
 					if(this.getPikeType() == 7) {
 						if (this.world.isRemote) {
-							for(int i = 0; i < 2; ++i) {
-								this.getCaughtEntity().world.addParticle(ParticleTypes.BUBBLE, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
+							for(int i = 0; i < 3; ++i) {
+								UAParticles.SPECTRAL_CONSUME.spawn(this.world, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
 							}
 						}
 					}
 				}
 				this.getCaughtEntity().attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
 			}
+		}
+		
+		if(this.getAttackCooldown() > 0) {
+			this.setAttackCooldown(this.getAttackCooldown() - 1);
 		}
 		
 		if(this.getCaughtEntity() != null) {
@@ -234,6 +242,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 				if (!itemstack.isEmpty()) {
 					this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstackFood);
 				}
+				this.heal(6);
 				this.eatTicks = 0;
 			} else if (this.eatTicks > 560 && this.rand.nextFloat() < 0.1F) {
 				this.playSound(this.getEatSound(itemstack), 1.0F, 1.0F);
@@ -439,6 +448,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 		return "";
 	}
 	
+	public int getAttackCooldown() {
+		return this.dataManager.get(ATTACK_COOLDOWN);
+	}
+	
+	public void setAttackCooldown(int ticks) {
+		this.dataManager.set(ATTACK_COOLDOWN, ticks);
+	}
+	
 	public boolean shouldDropItem() {
 		return this.dataManager.get(DROP_ITEM);
 	}
@@ -510,6 +527,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		super.writeAdditional(compound);
 		compound.putInt("PikeType", this.getPikeType());
 		compound.putBoolean("DoesDropItem", this.shouldDropItem());
+		compound.putInt("AttackCooldown", this.getAttackCooldown());
 	}
 	
 	@Override
@@ -517,6 +535,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		super.readAdditional(compound);
 		this.setPikeType(compound.getInt("PikeType"));
 		this.setToDropItem(compound.getBoolean("DoesDropItem"));
+		this.setAttackCooldown(compound.getInt("AttackCooldown"));
 	}
 	
 	@Override
@@ -549,8 +568,12 @@ public class EntityPike extends EntityBucketableWaterMob {
 
 	public static void addSpawn() {
         for (Biome biome : Biome.BIOMES) {
-        	if(biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP) {
-        		biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 8, 2, 4));
+        	if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER) {
+        		if(biome.getCategory() == Category.SWAMP) {
+        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 4, 1, 2));
+        		} else {
+        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 2, 1, 2));
+        		}
         	}
         }
 	}
@@ -642,7 +665,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		
 		@Override
 		public boolean shouldExecute() {
-			return field_75441_b.getAttackTarget() != null && !field_75441_b.getAttackTarget().isRidingOrBeingRiddenBy(field_75441_b) && !field_75441_b.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && field_75441_b.isInWater() && ((EntityPike)field_75441_b).getCaughtEntity() == null && !(field_75441_b.getAttackTarget() instanceof PufferfishEntity) && super.shouldExecute();
+			return ((EntityPike)this.field_75441_b).getAttackCooldown() <= 0 && field_75441_b.getAttackTarget() != null && !field_75441_b.getAttackTarget().isRidingOrBeingRiddenBy(field_75441_b) && !field_75441_b.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && field_75441_b.isInWater() && ((EntityPike)field_75441_b).getCaughtEntity() == null && !(field_75441_b.getAttackTarget() instanceof PufferfishEntity) && super.shouldExecute();
 		}
 		
 		@Override
@@ -658,18 +681,11 @@ public class EntityPike extends EntityBucketableWaterMob {
 				enemy.getPosition().getY() - field_75441_b.getPosition().getY(),
 				enemy.getPosition().getZ() - field_75441_b.getPosition().getZ()
 			);
-			double distance = Math.sqrt(
-				Math.pow(difference.x, 2D) +
-				Math.pow(difference.y, 2D) +
-				Math.pow(difference.z, 2D)
-			);
-			/*
-			 * Prevents Entity from grabbing other pike's fish infinite blocks away
-			 */
-			boolean isCloseToEntity = distance <= 2;
+			boolean isCloseToEntity = difference.length() <= 2;
 			if (isCloseToEntity && distToEnemySqr <= d && this.attackTick <= 0) {
 				this.attackTick = 20;
 				if(field_75441_b.getAttackTarget() != null && !field_75441_b.getAttackTarget().isRidingOrBeingRiddenBy(field_75441_b)) {
+					((EntityPike)this.field_75441_b).setAttackCooldown(field_75441_b.getRNG().nextInt(551) + 50);
 					((EntityPike)this.field_75441_b).setCaughtEntity(enemy.getEntityId());
 				}
 				this.field_75441_b.setAttackTarget(null);
