@@ -48,6 +48,14 @@
         }
       }
     },
+    "pike_bucket": {
+      "trigger": "minecraft:filled_bucket",
+      "conditions": {
+        "item": {
+          "item": "upgrade_aquatic:pike_bucket"
+        }
+      }
+    },
     "salmon_bucket": {
       "trigger": "minecraft:filled_bucket",
       "conditions": {

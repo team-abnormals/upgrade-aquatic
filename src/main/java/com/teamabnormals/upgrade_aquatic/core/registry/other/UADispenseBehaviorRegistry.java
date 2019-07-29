@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.registry.other;
 
 import com.teamabnormals.upgrade_aquatic.api.entities.IBucketableEntity;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
@@ -8,9 +9,11 @@ import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -52,7 +55,21 @@ public class UADispenseBehaviorRegistry {
                         return bucket;
                     }
                     if (mob instanceof IBucketableEntity) {
-                        ItemStack bucket = ((IBucketableEntity) mob).getBucket();
+                    	if(mob instanceof EntityPike) {
+                    		ItemStack bucket = ((IBucketableEntity) mob).getBucket();
+                    		CompoundNBT nbt = bucket.getOrCreateTag();
+                    		CompoundNBT compoundnbt1 = new CompoundNBT();
+                    		nbt.putInt("BucketVariantTag", ((EntityPike) mob).getPikeType());
+                    		if (!mob.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty()) {
+                    			mob.getItemStackFromSlot(EquipmentSlotType.MAINHAND).write(compoundnbt1);
+                    		}
+                    		nbt.put("PikeHeldItem", compoundnbt1);
+                    		nbt.putBoolean("ShouldDropItem", ((EntityPike) mob).shouldDropItem());
+                    		mob.remove();
+                            world.playSound(null, blockPos, SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 0.5F, 1.0F);
+                    		return bucket;
+                    	}
+                    	ItemStack bucket = ((IBucketableEntity) mob).getBucket();
                         mob.remove();
                         world.playSound(null, blockPos, SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 0.5F, 1.0F);
                         return bucket;
@@ -64,7 +81,8 @@ public class UADispenseBehaviorRegistry {
     };
 
     public static void registerAll() {
-        DispenserBlock.registerDispenseBehavior(UAItems.NAUTILUS_BUCKET, fishDispenseItemBehavior);
-        DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, bucketFishItemBehavior);
+    	DispenserBlock.registerDispenseBehavior(UAItems.NAUTILUS_BUCKET, fishDispenseItemBehavior);
+    	DispenserBlock.registerDispenseBehavior(UAItems.PIKE_BUCKET, fishDispenseItemBehavior);
+    	DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, bucketFishItemBehavior);
     }
 }
