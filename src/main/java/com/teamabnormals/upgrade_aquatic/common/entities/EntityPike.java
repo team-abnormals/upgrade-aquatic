@@ -58,7 +58,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.ServerWorld;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -148,14 +148,6 @@ public class EntityPike extends EntityBucketableWaterMob {
         compoundnbt.put("PikeHeldItem", compoundnbt1);
         compoundnbt.putBoolean("ShouldDropItem", this.shouldDropItem());
     }
-	
-	private void setCaughtEntity(int entityId) {
-		this.dataManager.set(CAUGHT_ENTITY, entityId);
-	}
-
-	public boolean hasCaughtEntity() {
-		return this.dataManager.get(CAUGHT_ENTITY) != 0;
-	}
 	
 	@Nullable
 	public LivingEntity getCaughtEntity() {
@@ -448,6 +440,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 		return "";
 	}
 	
+	private void setCaughtEntity(int entityId) {
+		this.dataManager.set(CAUGHT_ENTITY, entityId);
+	}
+
+	public boolean hasCaughtEntity() {
+		return this.dataManager.get(CAUGHT_ENTITY) != 0;
+	}
+	
 	public int getAttackCooldown() {
 		return this.dataManager.get(ATTACK_COOLDOWN);
 	}
@@ -570,9 +570,9 @@ public class EntityPike extends EntityBucketableWaterMob {
         for (Biome biome : Biome.BIOMES) {
         	if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER) {
         		if(biome.getCategory() == Category.SWAMP) {
-        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 4, 1, 2));
+        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 10, 1, 2));
         		} else {
-        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 2, 1, 2));
+        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 5, 1, 2));
         		}
         	}
         }
@@ -665,37 +665,37 @@ public class EntityPike extends EntityBucketableWaterMob {
 		
 		@Override
 		public boolean shouldExecute() {
-			return ((EntityPike)this.field_75441_b).getAttackCooldown() <= 0 && field_75441_b.getAttackTarget() != null && !field_75441_b.getAttackTarget().isRidingOrBeingRiddenBy(field_75441_b) && !field_75441_b.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && field_75441_b.isInWater() && ((EntityPike)field_75441_b).getCaughtEntity() == null && !(field_75441_b.getAttackTarget() instanceof PufferfishEntity) && super.shouldExecute();
+			return ((EntityPike)this.attacker).getAttackCooldown() <= 0 && attacker.getAttackTarget() != null && !attacker.getAttackTarget().isRidingOrBeingRiddenBy(attacker) && !attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && attacker.isInWater() && ((EntityPike)attacker).getCaughtEntity() == null && !(attacker.getAttackTarget() instanceof PufferfishEntity) && super.shouldExecute();
 		}
 		
 		@Override
 		public boolean shouldContinueExecuting() {
-			return !field_75441_b.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && field_75441_b.isInWater() && super.shouldContinueExecuting();
+			return !attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && attacker.isInWater() && super.shouldContinueExecuting();
 		}
 		
 		@Override
 		protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
 			double d = this.getAttackReachSqr(enemy);
 			Vector3f difference = new Vector3f(
-				enemy.getPosition().getX() - field_75441_b.getPosition().getX(),
-				enemy.getPosition().getY() - field_75441_b.getPosition().getY(),
-				enemy.getPosition().getZ() - field_75441_b.getPosition().getZ()
+				enemy.getPosition().getX() - attacker.getPosition().getX(),
+				enemy.getPosition().getY() - attacker.getPosition().getY(),
+				enemy.getPosition().getZ() - attacker.getPosition().getZ()
 			);
 			boolean isCloseToEntity = difference.length() <= 2;
 			if (isCloseToEntity && distToEnemySqr <= d && this.attackTick <= 0) {
 				this.attackTick = 20;
-				if(field_75441_b.getAttackTarget() != null && !field_75441_b.getAttackTarget().isRidingOrBeingRiddenBy(field_75441_b)) {
-					((EntityPike)this.field_75441_b).setAttackCooldown(field_75441_b.getRNG().nextInt(551) + 50);
-					((EntityPike)this.field_75441_b).setCaughtEntity(enemy.getEntityId());
+				if(attacker.getAttackTarget() != null && !attacker.getAttackTarget().isRidingOrBeingRiddenBy(attacker)) {
+					((EntityPike)this.attacker).setAttackCooldown(attacker.getRNG().nextInt(551) + 50);
+					((EntityPike)this.attacker).setCaughtEntity(enemy.getEntityId());
 				}
-				this.field_75441_b.setAttackTarget(null);
+				this.attacker.setAttackTarget(null);
 			}
 		}
 		
 		@Override
 		public void startExecuting() {
-			if(field_75441_b.getItemStackFromSlot(EquipmentSlotType.MAINHAND) != null) {
-				((EntityPike)this.field_75441_b).spitOutItem(field_75441_b.getItemStackFromSlot(EquipmentSlotType.MAINHAND));
+			if(attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND) != null) {
+				((EntityPike)this.attacker).spitOutItem(attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND));
 			}
 			super.startExecuting();
 		}

@@ -28,11 +28,11 @@ public class LootEvents {
 	@SubscribeEvent
 	public static void onInjectLoot(LootTableLoadEvent event) {
 		if (PICKERELWEED_LOOT_INJECTIONS.contains(event.getName())) {
-			LootPool pool = LootPool.builder().addEntry(TableLootEntry.func_216171_a(new ResourceLocation(Reference.MODID, "injections/pickerelweed_structures")).weight(1).quality(0)).build();
+			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(Reference.MODID, "injections/pickerelweed_structures")).weight(1).quality(0)).build();
 			event.getTable().addPool(pool);
 		}
 		if(PICKERELWEED_FISHINGJUNK_LOOT_INJECTIONS.contains(event.getName())) {
-			LootPool pool = LootPool.builder().addEntry(TableLootEntry.func_216171_a(new ResourceLocation(Reference.MODID, "injections/pickerelweed_fishjunk")).weight(1).quality(0)).build();
+			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(Reference.MODID, "injections/pickerelweed_fishjunk")).weight(1).quality(0)).build();
 			event.getTable().addPool(pool);
 		}
 	}

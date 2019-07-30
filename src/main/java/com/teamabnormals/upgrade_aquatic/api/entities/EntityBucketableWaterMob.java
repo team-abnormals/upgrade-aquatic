@@ -83,7 +83,8 @@ public abstract class EntityBucketableWaterMob extends WaterMobEntity implements
     }
 
     @Override
-    protected boolean func_213392_I() {
-        return this.isFromBucket();
+    public boolean preventDespawn() {
+    	return this.isFromBucket();
     }
+    
 }

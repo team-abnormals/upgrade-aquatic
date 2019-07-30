@@ -57,7 +57,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new PanicGoal(this, 1.65D));
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<PlayerEntity>(this, PlayerEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test) {
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<PlayerEntity>(this, PlayerEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
 
             @Override
             public void startExecuting() {
@@ -72,7 +72,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
             }
 
         });
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<SquidEntity>(this, SquidEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test) {
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<SquidEntity>(this, SquidEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
 
             @Override
             public void startExecuting() {
@@ -87,7 +87,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
             }
 
         });
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<DrownedEntity>(this, DrownedEntity.class, 9.0F, 4.4D, 3.9D, EntityPredicates.NOT_SPECTATING::test) {
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<DrownedEntity>(this, DrownedEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
 
             @Override
             public void startExecuting() {
@@ -195,7 +195,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
         for (Biome biome : Biome.BIOMES) {
         	if(biome.getCategory() == Category.OCEAN) {
         		if(biome.getTempCategory() != TempCategory.COLD) {
-        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 16, 1, 4));
+        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 4, 1, 4));
         		}
         	}
         }
@@ -220,31 +220,15 @@ public class EntityNautilus extends EntityBucketableWaterMob {
                 double d2 = this.posZ - this.nautilus.posZ;
                 double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
                 d1 = d1 / d3;
-                double dx = nautilus.isFleeing() ? d0 / d3 : 0;
-                double dz = nautilus.isFleeing() ? d2 / d3 : 0;
                 float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
                 this.nautilus.rotationYaw = this.limitAngle(this.nautilus.rotationYaw, f, 90.0F);
                 this.nautilus.renderYawOffset = this.nautilus.rotationYaw;
                 float f1 = (float) (this.speed * this.nautilus.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
                 this.nautilus.setAIMoveSpeed(MathHelper.lerp(0.125F, this.nautilus.getAIMoveSpeed(), f1));
-                if (nautilus.eyesInWater) {
-                    this.nautilus.setMotion(
-                      this.nautilus.getMotion().x + (double) this.nautilus.getAIMoveSpeed() * dx * 0.06D * 0.1D,
-                      (double) this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 0.25D,
-                      this.nautilus.getMotion().z + (double) this.nautilus.getAIMoveSpeed() * dz * 0.06D * 0.1D
-                    );
-                } else {
-                    this.nautilus.setMotion(
-                      this.nautilus.getMotion().x + (double) this.nautilus.getAIMoveSpeed() * dx * 0.06D * 0.1D,
-                      (double) this.nautilus.getAIMoveSpeed() * d1 * 0.1D * 2,
-                      this.nautilus.getMotion().z + (double) this.nautilus.getAIMoveSpeed() * dz * 0.06D * 0.1D
-                    );
-                }
-
+                this.nautilus.setMotion(this.nautilus.getMotion().add(0.0D, (double)this.nautilus.getAIMoveSpeed() * d1 * 0.03D, 0.0D));
                 nautilus.setMoving(true);
             } else {
-                this.nautilus.setAIMoveSpeed(0.0F);
-                nautilus.setMoving(false);
+            	nautilus.setMoving(false);
             }
         }
     }

@@ -1,3 +1,188 @@
+Build: 1.14.4-28.0.21 - Sat Jul 27 16:48:19 GMT 2019
+	cpw:
+		Fix vanilla bug that hardcore death doesn't clean up properly, leaving a
+		running server and a broken GUI. Vanilla bug MC-148865
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.20 - Sat Jul 27 09:35:20 GMT 2019
+	lex:
+		Fixed network ticking player entity while it is dead. And explicitly
+		prevent overworld from unloading. Closes #5978
+
+=========
+Build: 1.14.4-28.0.19 - Sat Jul 27 00:02:37 GMT 2019
+	cpw:
+		Crash report extended to show ModLauncher FML and Forge data.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.18 - Fri Jul 26 04:35:17 GMT 2019
+	cpw:
+		Fix potion transformer to look up the right name depending on context.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.17 - Fri Jul 26 03:02:48 GMT 2019
+	cpw:
+		Added a coremod, shush, don't tell Lex.
+		Seriously, this is how to do targeted changes to specific classes.
+		In this case, adding a fieldtomethod redirect for EffectInstance.potion 
+		to allow substitution.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.16 - Fri Jul 26 01:00:15 GMT 2019
+	lex:
+		Fix @ObjectHolderRegistry not properly detecting vanilla class level
+		references. Closes #5958
+
+	lex:
+		Fix Slimes not splitting on death Closes #5973
+
+=========
+Build: 1.14.4-28.0.14 - Wed Jul 24 18:15:36 GMT 2019
+	lex:
+		Fixed missed patch causing blocks to not dropping EXP and BreakEvent to
+		not fire.
+
+=========
+Build: 1.14.4-28.0.13 - Tue Jul 23 02:23:28 GMT 2019
+	gigaherz:
+		Fix & Improve state comparison when checking vanilla block replacements
+		(#5922)
+
+=========
+Build: 1.14.4-28.0.12 - Mon Jul 22 22:45:51 GMT 2019
+	lex:
+		Keep player cap data until they have revived. Closes #5956
+
+=========
+Build: 1.14.4-28.0.11 - Sun Jul 21 01:04:23 GMT 2019
+	cpw:
+		Fix datafixer exception catch: Closes #5951
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Fix objloader registering at wrong time. Closes #5847. Added test class
+		as suggested in the issue.
+		Note: most tests are commented out at the present time, pending rework.
+		Tests that work, work.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.9 - Sat Jul 20 23:38:35 GMT 2019
+	Barteks2x:
+		Fix RegistryObject when used with generic registry entry classes
+
+	cpw:
+		Realms' removal has removed the need for additional jar transformation.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Fix error when ModsDiscoverer visits a non existent mods dir.
+		Closes cpw/modlauncher#30
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.5 - Sat Jul 20 23:20:18 GMT 2019
+	cpw:
+		Make I18N format errors less spammy, also remove single apostrophes from
+		current translations in en_us.json. Other langs may still have problems.
+		Closes #5952 Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.4 - Sat Jul 20 21:55:28 GMT 2019
+	jojohostert:
+		Fix spam during startup (#5957)
+
+=========
+Build: 1.14.4-28.0.3 - Sat Jul 20 19:59:31 GMT 2019
+	ichttt:
+		Fix forge 1.14.4 startup in obfed enviroment (#5955)
+
+=========
+Build: 1.14.4-28.0.2 - Sat Jul 20 16:06:15 GMT 2019
+	thaun1:
+		Updated Example Version Range for 1.14.4 (#5950)
+		* Updated Example Version Range for 1.14.4
+		
+		* Also changed loader version and version range
+
+=========
+Build: 1.14.4-28.0.1 - Sat Jul 20 06:27:42 GMT 2019
+	lex:
+		Fix javac compile issues.
+
+	cpw:
+		Provisional update to 1.14.4. Missing a lot of playerinteractionmanager
+		patches because everything moved and I'm tired.
+		Fix up immediate problems.
+		bump to 28.
+
+=========
+Build: 1.14.3-27.0.60 - Fri Jul 19 16:08:38 GMT 2019
+	cpw:
+		Update mappings to 20190719 in prep for 1.14.4..
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.3-27.0.59 - Thu Jul 18 21:22:01 GMT 2019
+	github:
+		Remove OnlyIn Client Distribution from Effect and EffectType methods.
+		(#5925)
+
+=========
+Build: 1.14.3-27.0.58 - Thu Jul 18 21:15:19 GMT 2019
+	lex:
+		Change default BrewingRecipe to use an Ingredient for the input instead
+		of ItemStack. Closes #5944 Add AT for GameRules.register Closes #5946
+		Fix Forge Blockstate loader model path is inconsistent with vanilla
+		blockstates Closes #5892 Fix client crashing when opting not to load a
+		world when there's missing blocks Closes #5886
+
+=========
+Build: 1.14.3-27.0.57 - Wed Jul 17 05:38:23 GMT 2019
+	lex:
+		Fix CheckSpawn event logic for natural spawns.
+
+=========
+Build: 1.14.3-27.0.56 - Tue Jul 16 23:03:04 GMT 2019
+	lex:
+		Fixed item breaking particles not capturing current state of the
+		ItemStack. Closes #5934
+
+=========
+Build: 1.14.3-27.0.55 - Tue Jul 16 19:47:33 GMT 2019
+	ewewukek:
+		Fix RenderSpecificHandEvent firing with wrong hand stack (#5927)
+
+=========
+Build: 1.14.3-27.0.54 - Tue Jul 16 19:41:28 GMT 2019
+	mods.itsmeow:
+		 [1.14.x] Fix text positioning issues caused by scaling loading screen 
+		(#5932)
+
+=========
+Build: 1.14.3-27.0.53 - Tue Jul 16 18:53:16 GMT 2019
+	lex:
+		Fixed PlayerSleepInBedEvent pos is always null Closes #5936 Fixed
+		decompile error causing Endless Loop in ModelBackery if model errors
+		exist. Fixed NPEs related to teleporting players without portals.
+
+=========
+Build: 1.14.3-27.0.52 - Tue Jul 16 16:59:45 GMT 2019
+	lex:
+		Add simple concurrency protection to Server world list. Closes #5938 and
+		#5739
+
+=========
+Build: 1.14.3-27.0.51 - Mon Jul 15 02:48:45 GMT 2019
+	cpw:
+		Update modlauncher to the 3.x series.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
 Build: 1.14.3-27.0.50 - Thu Jul 11 03:14:20 GMT 2019
 	tterrag1098:
 		Rework GuiModList mod info to use custom scrolling panel impl

@@ -127,7 +127,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
 							if(i * i + j * j > (radius - 1) * (radius - 1)) {
 								IFluidState ifluidstate = world.getFluidState(placingPos);
-								if(PURPLE_PICKERELWEED.isValidPosition(world, placingPos) && world.getRandom().nextDouble() <= 0.85D) {
+								if(PURPLE_PICKERELWEED.isValidPosition(world, placingPos) && world.getBlockState(placingPos.up()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
 									if(purple) {
 										world.setBlockState(placingPos, PURPLE_PICKERELWEED.with(BlockPickerelWeed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
 									} else {
