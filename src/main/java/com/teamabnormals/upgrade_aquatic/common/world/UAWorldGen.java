@@ -8,7 +8,7 @@ public class UAWorldGen {
 
 	public static void registerGenerators() {
 		FeatureAmmonite.setupGeneration();
-		FeaturePrismarineCoral.addAmmonites();
+		FeaturePrismarineCoral.addFeature();
 		FeaturePickerelweed.addPickerelweed();
 	}
 	

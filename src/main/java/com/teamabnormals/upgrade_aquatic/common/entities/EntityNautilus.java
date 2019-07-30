@@ -1,5 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -14,9 +17,9 @@ import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -31,8 +34,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.TempCategory;
+import net.minecraft.world.biome.Biomes;
 
 public class EntityNautilus extends EntityBucketableWaterMob {
     private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
@@ -192,12 +194,15 @@ public class EntityNautilus extends EntityBucketableWaterMob {
     }
 
     public static void addSpawn() {
-        for (Biome biome : Biome.BIOMES) {
-        	if(biome.getCategory() == Category.OCEAN) {
-        		if(biome.getTempCategory() != TempCategory.COLD) {
-        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 4, 1, 4));
-        		}
-        	}
+    	List<Biome> spawnableBiomes = Lists.newArrayList();
+        spawnableBiomes.add(Biomes.DEEP_OCEAN);
+        spawnableBiomes.add(Biomes.OCEAN);
+        spawnableBiomes.add(Biomes.DEEP_LUKEWARM_OCEAN);
+        spawnableBiomes.add(Biomes.LUKEWARM_OCEAN);
+        spawnableBiomes.add(Biomes.DEEP_WARM_OCEAN);
+        spawnableBiomes.add(Biomes.WARM_OCEAN);
+        for (Biome biome : spawnableBiomes) {
+        	biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 100, 1, 4));
         }
     }
 

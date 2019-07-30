@@ -53,6 +53,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -166,7 +167,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
     public int getMaxSpawnedInChunk() {
-        return 2;
+        return 3;
     }
 	
 	@Override
@@ -285,7 +286,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		
 		this.setPikeType(type);
 		
-		if(this.getRNG().nextFloat() <= 0.10F) {
+		if(this.getRNG().nextFloat() <= 0.10F && !world.isRemote && this.isServerWorld()) {
 			LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
 			lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, this).withParameter(LootParameters.THIS_ENTITY, this);
 			LootTable loottable = this.getRNG().nextFloat() >= 0.1F ? this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_JUNK) : this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_TREASURE);
@@ -570,9 +571,9 @@ public class EntityPike extends EntityBucketableWaterMob {
         for (Biome biome : Biome.BIOMES) {
         	if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER) {
         		if(biome.getCategory() == Category.SWAMP) {
-        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 10, 1, 2));
+        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 1, 1, 2));
         		} else {
-        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 5, 1, 2));
+        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 10, 1, 2));
         		}
         	}
         }
@@ -686,6 +687,16 @@ public class EntityPike extends EntityBucketableWaterMob {
 				this.attackTick = 20;
 				if(attacker.getAttackTarget() != null && !attacker.getAttackTarget().isRidingOrBeingRiddenBy(attacker)) {
 					((EntityPike)this.attacker).setAttackCooldown(attacker.getRNG().nextInt(551) + 50);
+					AxisAlignedBB bb = new AxisAlignedBB(attacker.getPosition()).grow(16.0D);
+					List<Entity> entities = attacker.world.getEntitiesWithinAABB(Entity.class, bb);
+					for(int i = 0; i < entities.size(); i++) {
+						Entity entity = entities.get(i);
+						if(entity instanceof EntityPike) {
+							if(((EntityPike)entity).getCaughtEntity() != null && ((EntityPike)entity).getCaughtEntity().getEntityId() == enemy.getEntityId()) {
+								((EntityPike)entity).setCaughtEntity(0);
+							}
+						}
+					}
 					((EntityPike)this.attacker).setCaughtEntity(enemy.getEntityId());
 				}
 				this.attacker.setAttackTarget(null);
