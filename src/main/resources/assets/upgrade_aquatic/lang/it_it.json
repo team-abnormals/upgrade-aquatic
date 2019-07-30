@@ -127,18 +127,48 @@
   "block.upgrade_aquatic.bedroll_yellow": "Sacco a Pelo Giallo",
   "block.upgrade_aquatic.bedroll_brown": "Sacco a Pelo Marrone",
   
+  "block.upgrade_aquatic.pickerel_weed_blue": "Pontederia Blu",
+  "block.upgrade_aquatic.pickerel_weed_purple": "Pontederia Viola",
+  "block.upgrade_aquatic.pickerel_weed_tall_blue": "Pontederia Blu Alta",
+  "block.upgrade_aquatic.pickerel_weed_tall_purple": "Pontederia Viola Alta",
+  
+  "block.upgrade_aquatic.potted_pickerelweed_blue": "Pontederia Viola in un Vaso",
+  "block.upgrade_aquatic.potted_pickerelweed_purple": "Pontederia Blu in un Vaso",
+  
   "_comment": "Oggetti",
   
   "item.upgrade_aquatic.prismarine_rod": "Bastone di Prismarino",
   
   "item.upgrade_aquatic.nautilus_bucket": "Secchio con Nautilus",
+   "item.upgrade_aquatic.pike_bucket": "Secchio con Luccio",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Uovo di Villico Affogato",
-  "item.upgrade_aquatic.nautilus_spawn_egg": "Uovo di Nautilus",
+  "item.upgrade_aquatic.nautilus_spawn_egg": "Uovo generatore di Nautilus",
+  "item.upgrade_aquatic.pike_spawn_egg": "Uovo generatore di Luccio",
+  
+  "item.upgrade_aquatic.boiled_pickerelweed_purple": "Pontederia Viola Bollita",
+  "item.upgrade_aquatic.boiled_pickerelweed_blue": "Pontederia Blu Bollita",
+  "item.upgrade_aquatic.pike": "Luccio Crudo",
+  "item.upgrade_aquatic.pike_cooked": "Luccio Cotto",
+    
+  "_comment": "Note",
+  
+  "tooltip.upgrade_aquatic.amur_pike": "Luccio dell'amur",  
+  "tooltip.upgrade_aquatic.redfin_pickerel": "Pickerel Rosso",  
+  "tooltip.upgrade_aquatic.brown_northern_pike": "Luccio Marrone del Nord",  
+  "tooltip.upgrade_aquatic.mahogany_northern_pike": "Luccio Mogano del Nord",  
+  "tooltip.upgrade_aquatic.jade_northern_pike": "Luccio Giada del Nord",  
+  "tooltip.upgrade_aquatic.olive_northern_pike": "Luccio Olivastro del Nord",  
+  "tooltip.upgrade_aquatic.spectral_pike": "Luccio Spettrale",  
+  "tooltip.upgrade_aquatic.spotted_brown_northern_pike": "Luccio Marrone del Nord a macchie",  
+  "tooltip.upgrade_aquatic.spotted_mahogany_northern_pike": "Luccio Mogano del Nord a macchie",  
+  "tooltip.upgrade_aquatic.spotted_jade_northern_pike": "Luccio Giada del Nord a macchie",  
+  "tooltip.upgrade_aquatic.spotted_olive_northern_pike": "Luccio Olivastro del Nord a macchie",
   
   "_comment": "Entità",
   
   "entity.upgrade_aquatic.nautilus": "Nautilus",
+  "entity.upgrade_aquatic.pike": "Luccio",
   
   "_comment": "Pozioni ed Effetti",
   
@@ -169,3 +199,4 @@
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s è stato trafitto a morte da una Spina di Guardiano Antico",
   "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s è stato trafitto a morte da una Spina di Guardiano Antico mentre fuggiva da %2$s"
 }
+
