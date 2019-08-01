@@ -132,8 +132,13 @@
   "block.upgrade_aquatic.pickerel_weed_tall_blue": "Double Blue Pickerelweed",
   "block.upgrade_aquatic.pickerel_weed_tall_purple": "Double Purple Pickerelweed",
   
+  "block.upgrade_aquatic.searocket_white": "White Searocket",
+  "block.upgrade_aquatic.searocket_pink": "Pink Searocket",
+  
   "block.upgrade_aquatic.potted_pickerelweed_blue": "Potted Blue Pickerelweed",
   "block.upgrade_aquatic.potted_pickerelweed_purple": "Potted Purple Pickerelweed",
+  "block.upgrade_aquatic.potted_searocket_white": "Potted White Searocket",
+  "block.upgrade_aquatic.potted_searocket_pink": "Potted Pink Searocket",
   
   "_comment": "Items",
   

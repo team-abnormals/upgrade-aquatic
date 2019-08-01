@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:searocket_white"
+    }
+  ],
+  "result": {
+    "item": "minecraft:white_dye",
+    "count": 1
+  }
+}

@@ -26,9 +26,14 @@ public class UAProperties {
 		return Block.Properties.create(Material.CORAL, MaterialColor.DIAMOND).doesNotBlockMovement().lightValue(3).sound(SoundType.WET_GRASS);
 	}
 	
+	public static final Block.Properties SEAROCKET(boolean pink) {
+		return pink ? Block.Properties.create(Material.PLANTS, MaterialColor.PINK).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
+	}
+	
 	public static final Block.Properties SPINES       = Block.Properties.create(Material.ORGANIC).doesNotBlockMovement().hardnessAndResistance(1.5F);
 	public static final Block.Properties ELDER_EYE    = Block.Properties.create(Material.ORGANIC, MaterialColor.WHITE_TERRACOTTA).sound(SoundType.WET_GRASS).hardnessAndResistance(1.0F);
 	public static final Block.Properties BEDROLL      = Block.Properties.create(Material.WOOL).hardnessAndResistance(0.2F, 0.3F).sound(SoundType.CLOTH);
 	public static final Block.Properties PICKERELWEED = Block.Properties.create(Material.PLANTS, MaterialColor.GRASS).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
+	
 	
 }

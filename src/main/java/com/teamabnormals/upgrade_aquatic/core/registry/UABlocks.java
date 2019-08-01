@@ -160,8 +160,13 @@ public class UABlocks {
     public static Block PICKERELWEED_PURPLE 	 	  = new BlockPickerelWeed(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_purple");
     public static Block PICKERELWEED_TALL_PURPLE      = new BlockPickerelWeedDouble(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_tall_purple");
     
+    public static Block SEAROCKET_WHITE               = new BlockSearocket(UAProperties.SEAROCKET(false)).setRegistryName(Reference.MODID, "searocket_white");
+    public static Block SEAROCKET_PINK				  = new BlockSearocket(UAProperties.SEAROCKET(true)).setRegistryName(Reference.MODID, "searocket_pink");
+    
     public static Block POTTED_PICKERELWEED_BLUE 	  = new FlowerPotBlock(PICKERELWEED_BLUE, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)).setRegistryName(Reference.MODID, "potted_pickerelweed_blue");
     public static Block POTTED_PICKERELWEED_PURPLE 	  = new FlowerPotBlock(PICKERELWEED_PURPLE, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)).setRegistryName(Reference.MODID, "potted_pickerelweed_purple");
+    public static Block POTTED_SEAROCKET_WHITE 	      = new FlowerPotBlock(SEAROCKET_WHITE, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)).setRegistryName(Reference.MODID, "potted_searocket_white");
+    public static Block POTTED_SEAROCKET_PINK 	      = new FlowerPotBlock(SEAROCKET_PINK, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)).setRegistryName(Reference.MODID, "potted_searocket_pink");
     
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
@@ -178,7 +183,9 @@ public class UABlocks {
 			JELLY_TORCH_PINK, JELLY_TORCH_WALL_PINK, JELLY_TORCH_PURPLE, JELLY_TORCH_WALL_PURPLE, JELLY_TORCH_BLUE, JELLY_TORCH_WALL_BLUE,
 			JELLY_TORCH_GREEN, JELLY_TORCH_WALL_GREEN, JELLY_TORCH_YELLOW, JELLY_TORCH_WALL_YELLOW, JELLY_TORCH_ORANGE, JELLY_TORCH_WALL_ORANGE, JELLY_TORCH_RED, JELLY_TORCH_WALL_RED, JELLY_TORCH_WHITE, JELLY_TORCH_WALL_WHITE,
 			EMBEDDED_AMMONITE, BEDROLL_LEATHER, BEDROLL_WHITE, BEDROLL_BLACK, BEDROLL_GRAY, BEDROLL_LIGHT_GRAY, BEDROLL_PINK, BEDROLL_MAGENTA, BEDROLL_PURPLE, BEDROLL_BLUE, BEDROLL_CYAN, BEDROLL_LIGHT_BLUE, BEDROLL_GREEN, BEDROLL_LIME, BEDROLL_ORANGE, BEDROLL_RED, BEDROLL_YELLOW, BEDROLL_BROWN,
-			PICKERELWEED_BLUE, PICKERELWEED_TALL_BLUE, PICKERELWEED_PURPLE, PICKERELWEED_TALL_PURPLE, POTTED_PICKERELWEED_BLUE, POTTED_PICKERELWEED_PURPLE
+			PICKERELWEED_BLUE, PICKERELWEED_TALL_BLUE, PICKERELWEED_PURPLE, PICKERELWEED_TALL_PURPLE,
+			SEAROCKET_WHITE, SEAROCKET_PINK,
+			POTTED_PICKERELWEED_BLUE, POTTED_PICKERELWEED_PURPLE, POTTED_SEAROCKET_WHITE, POTTED_SEAROCKET_PINK
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -289,5 +296,7 @@ public class UABlocks {
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(PICKERELWEED_BLUE, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createSimpleItemBlock(PICKERELWEED_PURPLE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(SEAROCKET_WHITE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(SEAROCKET_PINK, ItemGroup.DECORATIONS));
 	}
 }
