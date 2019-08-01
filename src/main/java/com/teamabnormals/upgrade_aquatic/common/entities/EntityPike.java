@@ -27,6 +27,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
@@ -81,10 +82,10 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	@Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.9D);
+	protected void registerAttributes() {
+		super.registerAttributes();
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
+		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.9D);
     }
 	
 	@Override
@@ -120,6 +121,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 			}
 			
 		});
+		this.targetSelector.addGoal(5, new HurtByTargetGoal(this));
 	}
 	
 	@Override
@@ -138,17 +140,17 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
 	protected void setBucketData(ItemStack bucket) {
-        if (this.hasCustomName()) {
-            bucket.setDisplayName(this.getCustomName());
-        }
-        CompoundNBT compoundnbt = bucket.getOrCreateTag();
-        CompoundNBT compoundnbt1 = new CompoundNBT();
-        compoundnbt.putInt("BucketVariantTag", this.getPikeType());
-        if (!this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty()) {
-        	this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).write(compoundnbt1);
-        }
-        compoundnbt.put("PikeHeldItem", compoundnbt1);
-        compoundnbt.putBoolean("ShouldDropItem", this.shouldDropItem());
+		if (this.hasCustomName()) {
+			bucket.setDisplayName(this.getCustomName());
+		}
+		CompoundNBT compoundnbt = bucket.getOrCreateTag();
+		CompoundNBT compoundnbt1 = new CompoundNBT();
+		compoundnbt.putInt("BucketVariantTag", this.getPikeType());
+		if (!this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty()) {
+			this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).write(compoundnbt1);
+		}
+		compoundnbt.put("PikeHeldItem", compoundnbt1);
+		compoundnbt.putBoolean("ShouldDropItem", this.shouldDropItem());
     }
 	
 	@Nullable
@@ -167,9 +169,9 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 3;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 3;
+	}
 	
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
@@ -299,15 +301,6 @@ public class EntityPike extends EntityBucketableWaterMob {
 		}
 		
 		return spawnDataIn;
-	}
-	
-	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if(source.getTrueSource() != null && source.getTrueSource() instanceof LivingEntity) {
-			this.setAttackTarget((LivingEntity)source.getTrueSource());
-			return super.attackEntityFrom(source, amount);
-		} else {
-			return super.attackEntityFrom(source, amount);
-		}
 	}
 	
 	private void spitOutItem(ItemStack stackIn) {
