@@ -20,7 +20,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome.Category;
@@ -76,21 +75,11 @@ public class UAEntities {
     }
     
     private static boolean pickerelCondition(EntityType<? extends EntityPike> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		AxisAlignedBB bb = new AxisAlignedBB(pos).grow(16.0D);
-		List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
-		int amountNearby = 0;
-		for(int i = 0; i < entities.size(); i++) {
-			Entity entity = entities.get(i);
-			
-			if(entity instanceof EntityPike) {
-				amountNearby++;
-			}
-		}
     	for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
 					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeedDouble) {
-						if(random.nextFloat() <= 0.25F && amountNearby <= 3)
+						if(random.nextFloat() <= 0.25F)
 							if(world.getBiome(pos).getCategory() == Category.SWAMP) {
 								return random.nextFloat() <= 0.02 ? true : false;
 							}

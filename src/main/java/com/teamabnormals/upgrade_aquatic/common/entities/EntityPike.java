@@ -64,6 +64,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.storage.loot.*;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityPike extends EntityBucketableWaterMob {
 	private static final DataParameter<Integer> PIKE_TYPE = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
@@ -298,6 +299,15 @@ public class EntityPike extends EntityBucketableWaterMob {
 		}
 		
 		return spawnDataIn;
+	}
+	
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		if(source.getTrueSource() != null && source.getTrueSource() instanceof LivingEntity) {
+			this.setAttackTarget((LivingEntity)source.getTrueSource());
+			return super.attackEntityFrom(source, amount);
+		} else {
+			return super.attackEntityFrom(source, amount);
+		}
 	}
 	
 	private void spitOutItem(ItemStack stackIn) {
@@ -568,13 +578,15 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 
 	public static void addSpawn() {
-        for (Biome biome : Biome.BIOMES) {
-        	if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER) {
-        		if(biome.getCategory() == Category.SWAMP) {
-        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 1, 1, 2));
-        		} else {
-        			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 10, 1, 2));
-        		}
+		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityPike::processSpawning);
+	}
+	
+	private static void processSpawning(Biome biome) {
+		if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER) {
+        	if(biome.getCategory() == Category.SWAMP) {
+        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE, 5, 1, 2));
+        	} else {
+        		biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 11, 1, 2));
         	}
         }
 	}
@@ -685,7 +697,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 			boolean isCloseToEntity = difference.length() <= 2;
 			if (isCloseToEntity && distToEnemySqr <= d && this.attackTick <= 0) {
 				this.attackTick = 20;
-				if(attacker.getAttackTarget() != null && !attacker.getAttackTarget().isRidingOrBeingRiddenBy(attacker)) {
+				if(attacker.getAttackTarget() != null) {
 					((EntityPike)this.attacker).setAttackCooldown(attacker.getRNG().nextInt(551) + 50);
 					AxisAlignedBB bb = new AxisAlignedBB(attacker.getPosition()).grow(16.0D);
 					List<Entity> entities = attacker.world.getEntitiesWithinAABB(Entity.class, bb);

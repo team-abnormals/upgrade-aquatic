@@ -9,6 +9,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.CountRangeConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * @author - SmellyModder(Luke Tonon)
@@ -16,12 +17,13 @@ import net.minecraft.world.gen.placement.Placement;
 public class FeatureAmmonite {
 	
 	public static void setupGeneration() {
-		for(Biome biome : Biome.BIOMES) {
-			if(biome.getCategory() == Category.BEACH || biome.getCategory() == Category.OCEAN) {
-			// Vein/Chunk Count, MinHeight, MaxHeightBase, MaxHeight
+		ForgeRegistries.BIOMES.getValues().stream().forEach(FeatureAmmonite::process);
+	}
+	
+	private static void process(Biome biome) {
+		if(biome.getCategory() == Category.BEACH || biome.getCategory() == Category.OCEAN) {
 			CountRangeConfig placement = new CountRangeConfig(24, 20, 0, 73);
 			biome.addFeature(Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.ORE, new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, UABlocks.EMBEDDED_AMMONITE.getDefaultState(), 3), Placement.COUNT_BIASED_RANGE, placement));
-			}
 		}
 	}
 	

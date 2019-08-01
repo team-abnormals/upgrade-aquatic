@@ -28,6 +28,7 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * @author - SmellyModder(Luke Tonon)
@@ -163,11 +164,11 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 	}
 	
 	public static void addPickerelweed() {
-		for(Biome biome : Biome.BIOMES) {
-			if(biome.getCategory() != Category.DESERT && biome.getCategory() != Category.ICY) {
-				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
-			}
-		}
+		ForgeRegistries.BIOMES.getValues().stream().forEach(FeaturePickerelweed::process);
+	}
+	
+	private static void process(Biome biome) {
+		biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
 	}
 	
 }

@@ -1,10 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
 
-import com.google.common.collect.Lists;
 import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
@@ -13,7 +11,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.GenerationStage;
@@ -22,6 +19,7 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.CaveEdgeConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * @author - SmellyModder(Luke Tonon)
@@ -58,20 +56,11 @@ public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
 	}
 	
 	public static void addFeature() {
-		List<Biome> spawnableBiomes = Lists.newArrayList();
-        spawnableBiomes.add(Biomes.DEEP_OCEAN);
-        spawnableBiomes.add(Biomes.OCEAN);
-        spawnableBiomes.add(Biomes.DEEP_LUKEWARM_OCEAN);
-        spawnableBiomes.add(Biomes.LUKEWARM_OCEAN);
-        spawnableBiomes.add(Biomes.DEEP_WARM_OCEAN);
-        spawnableBiomes.add(Biomes.WARM_OCEAN);
-        spawnableBiomes.add(Biomes.COLD_OCEAN);
-        spawnableBiomes.add(Biomes.DEEP_COLD_OCEAN);
-        spawnableBiomes.add(Biomes.FROZEN_OCEAN);
-        spawnableBiomes.add(Biomes.DEEP_FROZEN_OCEAN);
-		for(Biome biome : spawnableBiomes) {
-			biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, Biome.createDecoratedFeature(UAFeatures.PRISMARINE_CORAL, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F)));
-		}
+		ForgeRegistries.BIOMES.getValues().stream().forEach(FeaturePrismarineCoral::process);
+	}
+	
+	private static void process(Biome biome) {
+		biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, Biome.createDecoratedFeature(UAFeatures.PRISMARINE_CORAL, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F)));
 	}
 	
 }
