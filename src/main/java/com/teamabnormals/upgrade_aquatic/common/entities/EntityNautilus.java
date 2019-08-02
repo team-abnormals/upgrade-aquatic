@@ -198,7 +198,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
 	
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.OCEAN && biome.getTempCategory() != TempCategory.COLD) {
-			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 78, 1, 4));
+			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 51, 1, 4));
         }
 	}
     
