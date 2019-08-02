@@ -578,8 +578,10 @@ public class EntityPike extends EntityBucketableWaterMob {
 		if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER) {
         	if(biome.getCategory() == Category.SWAMP) {
         		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE, 5, 1, 2));
+        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(EntityType.SQUID, 5, 1, 2));
+        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(EntityType.SALMON, 5, 1, 2));
         	} else {
-        		biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.PIKE, 11, 1, 2));
+        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE, 11, 1, 2));
         	}
         }
 	}

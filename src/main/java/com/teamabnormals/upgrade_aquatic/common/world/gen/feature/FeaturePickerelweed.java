@@ -16,6 +16,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.TempCategory;
 import net.minecraft.world.biome.FlowerForestBiome;
@@ -168,7 +169,11 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 	}
 	
 	private static void process(Biome biome) {
-		biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
+		if(biome == Biomes.FLOWER_FOREST) {
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
+		} else {
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
+		}
 	}
 	
 }

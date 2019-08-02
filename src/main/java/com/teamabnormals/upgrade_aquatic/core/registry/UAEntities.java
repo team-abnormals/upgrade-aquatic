@@ -60,7 +60,7 @@ public class UAEntities {
             event.getRegistry().register(entity);
         }
         EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
-        EntitySpawnPlacementRegistry.register(PIKE, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::pickerelCondition);
+        EntitySpawnPlacementRegistry.register(PIKE, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
     }
 
     @SubscribeEvent
@@ -81,7 +81,7 @@ public class UAEntities {
 					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeedDouble) {
 						if(random.nextFloat() <= 0.25F)
 							if(world.getBiome(pos).getCategory() == Category.SWAMP) {
-								return random.nextFloat() <= 0.02 ? true : false;
+								return random.nextFloat() <= 0.25 ? true : false;
 							}
 							return true;
 					}
