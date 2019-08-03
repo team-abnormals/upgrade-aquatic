@@ -126,19 +126,54 @@
   "block.upgrade_aquatic.bedroll_orange": "Sac de couchage orange",
   "block.upgrade_aquatic.bedroll_yellow": "Sac de couchage jaune",
   "block.upgrade_aquatic.bedroll_brown": "Sac de couchage marron",
-  
+
+  "block.upgrade_aquatic.pickerel_weed_blue": "Pontédérie bleue",
+  "block.upgrade_aquatic.pickerel_weed_purple": "Pontédérie violette",
+  "block.upgrade_aquatic.pickerel_weed_tall_blue": "Grande pontédérie bleue",
+  "block.upgrade_aquatic.pickerel_weed_tall_purple": "Grande pontédérie violette",
+
+  "block.upgrade_aquatic.searocket_white": "Roquette de mer blanche",
+  "block.upgrade_aquatic.searocket_pink": "Roquette de mer rose",
+
+ "block.upgrade_aquatic.potted_pickerelweed_blue": "Pontédérie bleue en pot",
+  "block.upgrade_aquatic.potted_pickerelweed_purple": "Pontédérie violette en pot",
+  "block.upgrade_aquatic.potted_searocket_white": "Roquette de mer blanche en pot",
+  "block.upgrade_aquatic.potted_searocket_pink": "Roquette de mer rose en pot",
+    
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Bâton de prismarine",
   
   "item.upgrade_aquatic.nautilus_bucket": "Nautile dans un seau",
+"item.upgrade_aquatic.pike_bucket": "Brochet dans un seau",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Œuf d'apparition de villageois noyé",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Œuf d'apparition de nautile",
+  "item.upgrade_aquatic.pike_spawn_egg": "Œuf d'apparition de brochet",
   
+  "item.upgrade_aquatic.boiled_pickerelweed_purple": "Pontédérie bleue bouillie",
+  "item.upgrade_aquatic.boiled_pickerelweed_blue": "Pontédérie violette bouillie",
+  "item.upgrade_aquatic.pike": "Brochet cru",
+  "item.upgrade_aquatic.pike_cooked": "Brochet cuit",
+
+"_comment": "Tooltips",
+  
+  "tooltip.upgrade_aquatic.amur_pike": "Brochet amour",  
+  "tooltip.upgrade_aquatic.redfin_pickerel": "Brochet aileron-rouge",  
+  "tooltip.upgrade_aquatic.brown_northern_pike": "Brochet nordique marron",  
+  "tooltip.upgrade_aquatic.mahogany_northern_pike": "Brochet nordique acajou",  
+  "tooltip.upgrade_aquatic.jade_northern_pike": "Brochet nordique jade",  
+  "tooltip.upgrade_aquatic.olive_northern_pike": "Brochet nordique olive",  
+  "tooltip.upgrade_aquatic.spectral_pike": "Brochet spectral",  
+  "tooltip.upgrade_aquatic.spotted_brown_northern_pike": "Brochet nordique marron à pois",  
+  "tooltip.upgrade_aquatic.spotted_mahogany_northern_pike": "Brochet nordique acajou à pois",  
+  "tooltip.upgrade_aquatic.spotted_jade_northern_pike": "Brochet nordique jade à pois",  
+  "tooltip.upgrade_aquatic.spotted_olive_northern_pike": "Brochet nordique olive à pois",
+
   "_comment": "Entities",
   
   "entity.upgrade_aquatic.nautilus": "Nautile",
+  "entity.upgrade_aquatic.pike": "Brochet",
   
   "_comment": "Potions and Effects",
   
