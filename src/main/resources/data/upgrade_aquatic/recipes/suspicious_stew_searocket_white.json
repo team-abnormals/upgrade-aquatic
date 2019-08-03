@@ -1,0 +1,27 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#B",
+        "PC"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:red_mushroom"
+        },
+        "B": {
+            "item": "minecraft:brown_mushroom"
+        },
+        "P": {
+            "item": "minecraft:bowl"
+        },
+        "C": {
+            "item": "upgrade_aquatic:searocket_white"
+        }
+    },
+    "result": {
+    	"nbt": "{Effects:[{EffectId:13s,EffectDuration:15s}]}",
+        "item": "minecraft:suspicious_stew",
+        "type": "minecraft:item_nbt",
+        "count": 1
+    }
+}

@@ -12,7 +12,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.IFluidState;
-import net.minecraft.network.play.client.CTabCompletePacket;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -173,7 +172,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 		if(biome == Biomes.FLOWER_FOREST) {
 			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
 		} else {
-			if(biome.getCategory() != Category.OCEAN && biome.getCategory() != Category.BEACH) {
+			if(biome.getCategory() != Category.OCEAN && biome.getCategory() != Category.BEACH && biome.getTempCategory() != TempCategory.COLD) {
 				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
 			}
 		}
