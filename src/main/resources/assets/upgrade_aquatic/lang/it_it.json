@@ -135,6 +135,13 @@
   "block.upgrade_aquatic.potted_pickerelweed_blue": "Pontederia Viola in un Vaso",
   "block.upgrade_aquatic.potted_pickerelweed_purple": "Pontederia Blu in un Vaso",
   
+  "block.upgrade_aquatic.searocket_white": "Ravastrello Bianco",
+  "block.upgrade_aquatic.searocket_pink": "Ravastrello Rosa",
+  
+  "block.upgrade_aquatic.potted_searocket_white": "Ravastrello Bianco in un Vaso",
+  "block.upgrade_aquatic.potted_searocket_pink": "Ravastrello Rosa in un Vaso",
+  
+  
   "_comment": "Oggetti",
   
   "item.upgrade_aquatic.prismarine_rod": "Bastone di Prismarino",
