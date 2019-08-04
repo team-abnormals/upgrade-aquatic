@@ -22,6 +22,7 @@ import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -34,6 +35,8 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.passive.fish.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -122,6 +125,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 			}
 			
 		});
+		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<TurtleEntity>(this, TurtleEntity.class, 10, true, false, UAEntityPredicates.IS_CHILD::test) {
+			
+			@Override
+			public boolean shouldExecute() {
+				return ((EntityPike)this.goalOwner).getAttackCooldown() <= 0 && super.shouldExecute();
+			}
+			
+		});
 	}
 	
 	@Override
@@ -161,8 +172,8 @@ public class EntityPike extends EntityBucketableWaterMob {
 			Entity entity = this.world.getEntityByID(this.dataManager.get(CAUGHT_ENTITY));
 			if (entity == null) {
 				return null;
-			} else if (entity != null && entity instanceof AbstractFishEntity) {
-				return (AbstractFishEntity)entity;
+			} else if (entity != null && entity instanceof AbstractFishEntity || entity != null && entity instanceof AnimalEntity) {
+				return (LivingEntity)entity;
 			}
 		}
 		return null;
@@ -361,9 +372,19 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	@Override
+	public boolean func_213365_e(ItemStack p_213365_1_) {
+		EquipmentSlotType equipmentslottype = MobEntity.getSlotForItemStack(p_213365_1_);
+		if (!this.getItemStackFromSlot(equipmentslottype).isEmpty()) {
+			return false;
+		} else {
+			return equipmentslottype == EquipmentSlotType.MAINHAND && super.func_213365_e(p_213365_1_);
+		}
+	}
+	
+	@Override
 	protected void updateEquipmentIfNeeded(ItemEntity itemEntity) {
 		ItemStack itemstack = itemEntity.getItem();
-		if (!this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && this.canEquipItem(itemstack)) {
+		if (canEquipItem(itemstack) && !this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES)) {
 			int i = itemstack.getCount();
 		    if (i > 1) {
 		    	this.spawnItem(itemstack.split(i - 1));
@@ -390,7 +411,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
 	public void updatePassenger(Entity passenger) {
-		if(!this.getPassengers().isEmpty() && passenger instanceof AbstractFishEntity) {
+		if(!this.getPassengers().isEmpty() && passenger instanceof AbstractFishEntity || !this.getPassengers().isEmpty() && passenger instanceof AnimalEntity) {
 			float distance = 0.7F;
 			
 			double dx = Math.cos((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
@@ -703,7 +724,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 			if (isCloseToEntity && distToEnemySqr <= d && this.attackTick <= 0) {
 				this.attackTick = 20;
 				if(attacker.getAttackTarget() != null) {
-					if(enemy instanceof AbstractFishEntity) {
+					if(enemy instanceof AbstractFishEntity || enemy instanceof AnimalEntity) {
 						((EntityPike)this.attacker).setAttackCooldown(attacker.getRNG().nextInt(551) + 50);
 					}
 					AxisAlignedBB bb = new AxisAlignedBB(attacker.getPosition()).grow(16.0D);
@@ -717,11 +738,16 @@ public class EntityPike extends EntityBucketableWaterMob {
 						}
 					}
 					((EntityPike)this.attacker).setCaughtEntity(enemy.getEntityId());
-					if(!(enemy instanceof AbstractFishEntity)) {
-						enemy.attackEntityFrom(DamageSource.causeMobDamage(attacker), 1.5F);
+					if(!(enemy instanceof AbstractFishEntity) && !(enemy instanceof AnimalEntity)) {
+						if(enemy instanceof TurtleEntity) {
+							//Beefy turtle, idk why it has godly defense
+							enemy.setHealth(enemy.getHealth() - 10F);
+						} else {
+							enemy.attackEntityFrom(DamageSource.causeMobDamage(attacker), 1.5F);
+						}
 					}
 				}
-				if(enemy instanceof AbstractFishEntity) this.attacker.setAttackTarget(null);
+				if(enemy instanceof AbstractFishEntity || enemy instanceof AnimalEntity) this.attacker.setAttackTarget(null);
 			}
 		}
 		

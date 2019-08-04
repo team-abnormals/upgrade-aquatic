@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.AnimalEntity;
 
 public class UAEntityPredicates {
 
@@ -16,4 +17,7 @@ public class UAEntityPredicates {
 		return !((EntityPike)p_200818_0_).isHidingInPickerelweed();
 	};
 	
+	public static final Predicate<Entity> IS_CHILD = (entity) -> {
+		return ((AnimalEntity)entity).isChild();
+	};
 }
