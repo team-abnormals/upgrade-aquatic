@@ -6,6 +6,7 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
@@ -36,6 +37,7 @@ public class UAEntities {
 	
 	public static final EntityType<EntityNautilus> NAUTILUS = createEntity(EntityNautilus.class, EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F, 14596231, 16744272);
 	public static final EntityType<EntityPike> PIKE = createEntity(EntityPike.class, EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F, 4806944, 13002040);
+	public static final EntityType<EntityLionfish> LIONFISH = createEntity(EntityLionfish.class, EntityLionfish::new, EntityClassification.CREATURE, "lionfish", 0.5F, 0.4F, 15281931, 16111310);
 	
 	private static <T extends Entity> EntityType<T> createEntity(Class<T> entityClass, EntityType.IFactory<T> factory, EntityClassification entityClassification, String name, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation(Reference.MODID, name);
