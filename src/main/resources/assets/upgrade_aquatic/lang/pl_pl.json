@@ -1,0 +1,206 @@
+{
+  "_comment": "Bloki",
+
+  "block.upgrade_aquatic.guardian_spine": "Kolec strażnika",
+  "block.upgrade_aquatic.elder_guardian_spine": "Kolec prastrażnika",
+
+  "block.upgrade_aquatic.elder_eye": "Oko prastrażnika",
+  
+  "block.upgrade_aquatic.bubble_block": "Blok bąbelkowy",
+  
+  "block.upgrade_aquatic.dead_acan_coral": "Martwy koralowiec acanowy",
+  "block.upgrade_aquatic.dead_acan_coral_block": "Martwy blok koralowca acanowego",
+  "block.upgrade_aquatic.dead_acan_coral_fan": "Martwy wachlarz koralowca acanowego",
+  
+  "block.upgrade_aquatic.acan_coral": "Koralowiec acanowy",
+  "block.upgrade_aquatic.acan_coral_block": "Blok koralowca acanowego",
+  "block.upgrade_aquatic.acan_coral_fan": "Wachlarz koralowca acanowego",
+  
+  "block.upgrade_aquatic.elder_prismarine_coral": "Pryzmarynowy koralowiec prastrażnika",
+  "block.upgrade_aquatic.elder_prismarine_coral_block": "Blok pryzmarynowego koralowca prastrażnika",
+  "block.upgrade_aquatic.elder_prismarine_coral_fan": "Wachlarz pryzmarynowego koralowca prastrażnika",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Natrysk pryzmarynowego koralowca prastrażnika",
+  
+  "block.upgrade_aquatic.prismarine_coral": "Koralowiec Pryzmarynowy",
+  "block.upgrade_aquatic.prismarine_coral_block": "Blok pryzmarynowego koralowca",
+  "block.upgrade_aquatic.prismarine_coral_fan": "Wachlarz pryzmarynowego koralowca",
+  "block.upgrade_aquatic.prismarine_coral_shower": "Natrysk pryzmarynowego koralowca",
+  
+  "block.upgrade_aquatic.dead_silk_coral": "Martwy koralowiec jedwabny",
+  "block.upgrade_aquatic.dead_silk_coral_block": "Blok martwego koralowca jedwabnego",
+  "block.upgrade_aquatic.dead_silk_coral_fan": "Martwy wachlarz koralowca jedwabnego",
+  
+  "block.upgrade_aquatic.silk_coral": "Koralowiec jedwabny",
+  "block.upgrade_aquatic.silk_coral_block": "Blok koralowca jedwabnego",
+  "block.upgrade_aquatic.silk_coral_fan": "Wachlarz koralowca jedwabnego",
+  
+  "block.upgrade_aquatic.dead_pillow_coral": "Martwy koralowiec poduszkowy",
+  "block.upgrade_aquatic.dead_pillow_coral_block": "Blok martwego koralowca poduszkowego",
+  "block.upgrade_aquatic.dead_pillow_coral_fan": "Martwy wachlarz koralowca poduszkowego",
+  
+  "block.upgrade_aquatic.pillow_coral": "Koralowiec poduszkowy",
+  "block.upgrade_aquatic.pillow_coral_block": "Blok koralowca poduszkowego",
+  "block.upgrade_aquatic.pillow_coral_fan": "Wachlarz koralowca poduszkowego",
+  
+  "block.upgrade_aquatic.dead_rock_coral": "Martwy koralowiec skalisty",
+  "block.upgrade_aquatic.dead_rock_coral_block": "Blok martwego koralowca skalistego",
+  "block.upgrade_aquatic.dead_rock_coral_fan": "Martwy wachlarz koralowca skalistego",
+  
+  "block.upgrade_aquatic.rock_coral": "Koralowiec skalisty",
+  "block.upgrade_aquatic.rock_coral_block": "Blok koralowca skalistego",
+  "block.upgrade_aquatic.rock_coral_fan": "Wachlarz koralowca skalistego",
+  
+  "block.upgrade_aquatic.dead_finger_coral": "Martwy koralowiec palcowy",
+  "block.upgrade_aquatic.dead_finger_coral_block": "Martwy blok koralowca palcowego",
+  "block.upgrade_aquatic.dead_finger_coral_fan": "martwy wachlarz koralowca palcowego",
+  
+  "block.upgrade_aquatic.finger_coral": "Koralowiec palcowy",
+  "block.upgrade_aquatic.finger_coral_block": "Blok koralowca palcowego",
+  "block.upgrade_aquatic.finger_coral_fan": "Wachlarz koralowca palcowego",
+  
+  "block.upgrade_aquatic.dead_star_coral": "Martwy koralowiec gwieździsty",
+  "block.upgrade_aquatic.dead_star_coral_block": "Martwy blok koralowca gwieździstego",
+  "block.upgrade_aquatic.dead_star_coral_fan": "Martwy wachlarz koralowca gwieździstego",
+  
+  "block.upgrade_aquatic.star_coral": "Koralowiec gwieździsty",
+  "block.upgrade_aquatic.star_coral_block": "Blok koralowca gwieździstego",
+  "block.upgrade_aquatic.star_coral_fan": "Wachlarz koralowca gwieździstego",
+  
+  "block.upgrade_aquatic.dead_moss_coral": "Martwy koralowiec mchowy",
+  "block.upgrade_aquatic.dead_moss_coral_block": "Martwy blok koralowca mchowego",
+  "block.upgrade_aquatic.dead_moss_coral_fan": "Martwy wachlarz koralowca mchowego",
+  
+  "block.upgrade_aquatic.moss_coral": "Koralowiec mchowy",
+  "block.upgrade_aquatic.moss_coral_block": "Blok koralowca mchowego",
+  "block.upgrade_aquatic.moss_coral_fan": "Wachlarz koralowca mchowego",
+  
+  "block.upgrade_aquatic.dead_petal_coral": "Martwy koralowiec płatkowy",
+  "block.upgrade_aquatic.dead_petal_coral_block": "Martwy blok koralowca płatkowego",
+  "block.upgrade_aquatic.dead_petal_coral_fan": "Martwy wachlarz koralowca płatkowego",
+  
+  "block.upgrade_aquatic.petal_coral": "Koralowiec płatkowy",
+  "block.upgrade_aquatic.petal_coral_block": "Blok koralowca płatkowego",
+  "block.upgrade_aquatic.petal_coral_fan": "Wachlarz koralowca płatkowego",
+  
+  "block.upgrade_aquatic.dead_branch_coral": "Martwy koralowiec gałązkowy",
+  "block.upgrade_aquatic.dead_branch_coral_block": "Martwy blok koralowca gałązkowego",
+  "block.upgrade_aquatic.dead_branch_coral_fan": "martwy wachlarz koralowca gałązkowego",
+  
+  "block.upgrade_aquatic.branch_coral": "Koralowiec gałązkowy",
+  "block.upgrade_aquatic.branch_coral_block": "Blok koralowca gałązkowego",
+  "block.upgrade_aquatic.branch_coral_fan": "Wachlarz koralowca gałązkowego",
+  
+  "block.upgrade_aquatic.jelly_torch_pink": "Różowa galaretkowa pochodnia",
+  "block.upgrade_aquatic.jelly_torch_purple": "Fioletowa galaretkowa pochodnia",
+  "block.upgrade_aquatic.jelly_torch_blue": "Niebieska galaretkowa pochodnia",
+  "block.upgrade_aquatic.jelly_torch_green": "Zielona galaretkowa pochodnia",
+  "block.upgrade_aquatic.jelly_torch_yellow": "Żółta galaretkowa pochodnia",
+  "block.upgrade_aquatic.jelly_torch_orange": "Pomarańczowa galaretkowa pochodnia",
+  "block.upgrade_aquatic.jelly_torch_red": "Czerwona galaretkowa pochodnia",
+  "block.upgrade_aquatic.jelly_torch_white": "Biała galaretkowa pochodnia",
+  "block.upgrade_aquatic.jelly_torch_wall_pink": "Różowa galaretkowa pochodnia ścienna",
+  "block.upgrade_aquatic.jelly_torch_wall_purple": "Fioletowa galaretkowa pochodnia ścienna",
+  "block.upgrade_aquatic.jelly_torch_wall_blue": "Niebieska galaretkowa pochodnia ścienna",
+  "block.upgrade_aquatic.jelly_torch_wall_green": "Zielona galaretkowa pochodnia ścienna",
+  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Żółta galaretkowa pochodnia ścienna",
+  "block.upgrade_aquatic.jelly_torch_wall_orange": "Pomaranczowa galaretkowa pochodnia ścienna",
+  "block.upgrade_aquatic.jelly_torch_wall_red": "Czerwona galaretkowa pochodnia ścienna",
+  "block.upgrade_aquatic.jelly_torch_wall_white": "Biała galaretkowa pochodnia ścienna",
+  
+  "block.upgrade_aquatic.embedded_ammonite": "Odciśnięty amonit",
+  
+  "block.upgrade_aquatic.bedroll_leather": "Śpiwór",
+  "block.upgrade_aquatic.bedroll_white": "Biały śpiwór",
+  "block.upgrade_aquatic.bedroll_black": "Czarny śpiwór",
+  "block.upgrade_aquatic.bedroll_red": "Czerwony śpiwór",
+  "block.upgrade_aquatic.bedroll_blue": "Niebieski śpiwór",
+  "block.upgrade_aquatic.bedroll_green": "Zielony śpiwór",
+  "block.upgrade_aquatic.bedroll_lime": "Jasnozielony śpiwór",
+  "block.upgrade_aquatic.bedroll_light_blue": "Jasnoniebieski śpiwór",
+  "block.upgrade_aquatic.bedroll_gray": "Szary śpiwór",
+  "block.upgrade_aquatic.bedroll_light_gray": "Jasnoszary śpiwór",
+  "block.upgrade_aquatic.bedroll_pink": "Różowy śpiwór",
+  "block.upgrade_aquatic.bedroll_purple": "Fioletowy śpiwór",
+  "block.upgrade_aquatic.bedroll_magenta": "Karmazynowy śpiwór",
+  "block.upgrade_aquatic.bedroll_cyan": "Błękitny śpiwór",
+  "block.upgrade_aquatic.bedroll_orange": "Pomarańczowy śpiwór",
+  "block.upgrade_aquatic.bedroll_yellow": "Żółty śpiwór",
+  "block.upgrade_aquatic.bedroll_brown": "Brązowy śpiwór",
+  
+  "block.upgrade_aquatic.pickerel_weed_blue": "Niebieski rozpław sercowaty",
+  "block.upgrade_aquatic.pickerel_weed_purple": "Fioletowy rozpław sercowaty",
+  "block.upgrade_aquatic.pickerel_weed_tall_blue": "Wysoki niebieski rozpław sercowaty",
+  "block.upgrade_aquatic.pickerel_weed_tall_purple": "Wysoki fioletowy rozpław sercowaty",
+  
+  "block.upgrade_aquatic.searocket_white": "Biała rukwiel nadmorska",
+  "block.upgrade_aquatic.searocket_pink": "Rózowa rukwiel nadmorska",
+  
+  "block.upgrade_aquatic.potted_pickerelweed_blue": "Doniczkowy niebieski rozpław sercowaty",
+  "block.upgrade_aquatic.potted_pickerelweed_purple": "Doniczkowy fioletowy rozpław sercowaty",
+  "block.upgrade_aquatic.potted_searocket_white": "Doniczkowa biała rukwiel nadmorska",
+  "block.upgrade_aquatic.potted_searocket_pink": "Doniczkowa różowa rukwiel nadmorska",
+  
+  "_comment": "Przedmioty",
+  
+  "item.upgrade_aquatic.prismarine_rod": "Pryzmarynowa różdżka",
+  
+  "item.upgrade_aquatic.nautilus_bucket": "Wiaderko z łodzikiem",
+  "item.upgrade_aquatic.pike_bucket": "Wiaderko ze szczupakiem",
+
+  "item.upgrade_aquatic.drowned_villager_spawn_egg": "Jajo przyzywające osadnika utopca",
+  "item.upgrade_aquatic.nautilus_spawn_egg": "Jajo przyzywające łodzika",
+  "item.upgrade_aquatic.pike_spawn_egg": "Jajo przyzywające szczupaka",
+  
+  "item.upgrade_aquatic.boiled_pickerelweed_purple": "Ugotowany fioletowy rozpław sercowaty",
+  "item.upgrade_aquatic.boiled_pickerelweed_blue": "Ugotowany niebieski rozpław sercowaty",
+  "item.upgrade_aquatic.pike": "Surowy szczupak",
+  "item.upgrade_aquatic.pike_cooked": "Pieczony szczupak",
+  
+  "_comment": "Etykiety",
+  
+  "tooltip.upgrade_aquatic.amur_pike": "Szczupak amurski",  
+  "tooltip.upgrade_aquatic.redfin_pickerel": "Szczupak amerykański",  
+  "tooltip.upgrade_aquatic.brown_northern_pike": "Szczupak brązowy północny",  
+  "tooltip.upgrade_aquatic.mahogany_northern_pike": "Szczupak mahoniowy północny",  
+  "tooltip.upgrade_aquatic.jade_northern_pike": "Szczupak jadeitowy północny",  
+  "tooltip.upgrade_aquatic.olive_northern_pike": "Szczupak oliwkowy północny",  
+  "tooltip.upgrade_aquatic.spectral_pike": "Szczupak widmowy",  
+  "tooltip.upgrade_aquatic.spotted_brown_northern_pike": "Cętkowany szczupak brązowy północny",  
+  "tooltip.upgrade_aquatic.spotted_mahogany_northern_pike": "Cętkowany szczupak mahoniowy północny",  
+  "tooltip.upgrade_aquatic.spotted_jade_northern_pike": "Cętkowany szczupak jadeitowy północny",  
+  "tooltip.upgrade_aquatic.spotted_olive_northern_pike": "Cętkowany szczupak oliwkowy północny",
+  
+  "_comment": "Byty",
+  
+  "entity.upgrade_aquatic.nautilus": "Łodzik",
+  "entity.upgrade_aquatic.pike": "Szczupak",
+  
+  "_comment": "Mikstury i Efekty",
+  
+  "effect.upgrade_aquatic.insomnia": "Bezsenność",
+  "item.minecraft.potion.effect.insomnia": "Mikstura bezsenności",
+  "item.minecraft.potion.effect.insomnia_strong": "Mikstura bezsenności",
+  "item.minecraft.splash_potion.effect.insomnia": "Miotana mikstura bezsenności",
+  "item.minecraft.splash_potion.effect.insomnia_strong": "Miotana mikstura bezsenności",
+  "item.minecraft.lingering_potion.effect.insomnia": "Trwała mikstura bezsenności",
+  "item.minecraft.lingering_potion.effect.insomnia_strong": "Trwała mikstura bezsenności",
+  "item.minecraft.tipped_arrow.effect.insomnia": "Strzała bezsenności",
+  "item.minecraft.tipped_arrow.effect.insomnia_strong": "Strzała bezsenności",
+  
+  "effect.upgrade_aquatic.restfulness": "Odpoczynek",
+  "item.minecraft.potion.effect.restfulness": "Mikstura odpoczynku",
+  "item.minecraft.potion.effect.restfulness_strong": "Mikstura odpoczynku",
+  "item.minecraft.splash_potion.effect.restfulness": "Miotana mikstura odpoczynku",
+  "item.minecraft.splash_potion.effect.restfulness_strong": "Miotana mikstura odpoczynku",
+  "item.minecraft.lingering_potion.effect.restfulness": "Trwała mikstura odpoczynku",
+  "item.minecraft.lingering_potion.effect.restfulness_strong": "Trwała mikstura odpoczynku",
+  "item.minecraft.tipped_arrow.effect.restfulness": "Strzała odpoczynku",
+  "item.minecraft.tipped_arrow.effect.restfulness_strong": "Strzała odpoczynku",
+ 	
+  "_comment": "Śmierci",
+  
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s został zakłuty na śmierć przez kolec strażnika",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s został zakłuty na śmierć przez kolec strażnika uciekając przed %2$s",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s został zakłuty na śmierć przez kolec prastrażnika",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s został zakłuty na śmierć przez kolec prastrażnika uciekając przed %2$s"
+}
