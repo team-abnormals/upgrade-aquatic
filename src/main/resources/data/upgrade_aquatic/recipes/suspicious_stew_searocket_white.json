@@ -19,7 +19,7 @@
         }
     },
     "result": {
-    	"nbt": "{Effects:[{EffectId:13s,EffectDuration:15s}]}",
+    	"nbt": "{Effects:[{EffectId:13s,EffectDuration:9s}]}",
         "item": "minecraft:suspicious_stew",
         "type": "minecraft:item_nbt",
         "count": 1
