@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.model;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * ModelLionfish
@@ -58,8 +59,20 @@ public class ModelLionfish<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(T entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         this.body.render(f5);
+    }
+    
+    @Override
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
+    	float f = 1.1F;
+    	float f1 = 1.0F;
+    	if (!entityIn.isInWater()) {
+    		f = 1.35F;
+    		f1 = 1.7F;
+    	}
+    	
+    	this.tail.rotateAngleY = -f * 0.20F * MathHelper.sin(f1 * 0.65F * ageInTicks);
     }
 
     public void setRotateAngle(RendererModel RendererModel, float x, float y, float z) {

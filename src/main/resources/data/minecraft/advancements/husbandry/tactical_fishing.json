@@ -56,6 +56,14 @@
         }
       }
     },
+    "lionfish_bucket": {
+      "trigger": "minecraft:filled_bucket",
+      "conditions": {
+        "item": {
+          "item": "upgrade_aquatic:lionfish_bucket"
+        }
+      }
+    },
     "salmon_bucket": {
       "trigger": "minecraft:filled_bucket",
       "conditions": {

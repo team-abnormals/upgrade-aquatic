@@ -4,6 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.ImmutableMap;
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityBedroll;
@@ -76,6 +77,7 @@ public class UpgradeAquatic {
 		proxy.preInit();
 		EntityNautilus.addSpawn();
 		EntityPike.addSpawn();
+		EntityLionfish.addSpawn();
 		UADispenseBehaviorRegistry.registerAll();
 		UAEffects.registerRecipes();
 		UAWorldGen.registerGenerators();
@@ -129,6 +131,7 @@ public class UpgradeAquatic {
 				new VillagerTrades.ITrade[] {
 					new EntityUtil.ItemsForEmeraldsTrade(Items.TROPICAL_FISH_BUCKET, 5, 1, 4, 1),
 					new EntityUtil.ItemsForEmeraldsTrade(UAItems.PIKE_BUCKET, 5, 1, 4, 1),
+					new EntityUtil.ItemsForEmeraldsTrade(UAItems.LIONFISH_BUCKET, 5, 1, 4, 1),
 					new EntityUtil.ItemsForEmeraldsTrade(Items.PUFFERFISH_BUCKET, 5, 1, 4, 1),
 					new EntityUtil.ItemsForEmeraldsTrade(Items.NAUTILUS_SHELL, 5, 1, 5, 1),
 					new EntityUtil.ItemsForEmeraldsTrade(UAItems.NAUTILUS_BUCKET, 5, 1, 4, 1)

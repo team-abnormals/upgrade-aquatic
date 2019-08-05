@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "upgrade_aquatic:item/nautilus_bucket"
+        "layer0": "upgrade_aquatic:item/bucket/nautilus_bucket"
     }
 }

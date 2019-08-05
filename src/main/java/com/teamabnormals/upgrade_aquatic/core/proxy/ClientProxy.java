@@ -1,8 +1,10 @@
 package com.teamabnormals.upgrade_aquatic.core.proxy;
 
+import com.teamabnormals.upgrade_aquatic.client.render.RenderLionfish;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderNautilus;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderPike;
 import com.teamabnormals.upgrade_aquatic.client.tileentity.TileEntityElderEyeRenderer;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
@@ -19,6 +21,7 @@ public class ClientProxy extends ServerProxy {
 		//Entities
 		RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, manager -> new RenderNautilus(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityPike.class, manager -> new RenderPike(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityLionfish.class, manager -> new RenderLionfish(manager));
 	}
 	
 }

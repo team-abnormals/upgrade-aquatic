@@ -83,6 +83,7 @@ public class UADispenseBehaviorRegistry {
     public static void registerAll() {
     	DispenserBlock.registerDispenseBehavior(UAItems.NAUTILUS_BUCKET, fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(UAItems.PIKE_BUCKET, fishDispenseItemBehavior);
+    	DispenserBlock.registerDispenseBehavior(UAItems.LIONFISH_BUCKET, fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, bucketFishItemBehavior);
     }
 }
