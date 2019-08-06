@@ -6,6 +6,7 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
@@ -19,6 +20,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -36,6 +38,7 @@ public class UAEntities {
 	
 	public static final EntityType<EntityNautilus> NAUTILUS = createEntity(EntityNautilus.class, EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F, 14596231, 16744272);
 	public static final EntityType<EntityPike> PIKE = createEntity(EntityPike.class, EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F, 4806944, 13002040);
+	public static final EntityType<EntityLionfish> LIONFISH = createEntity(EntityLionfish.class, EntityLionfish::new, EntityClassification.CREATURE, "lionfish", 0.6F, 0.5F, 15281931, 16111310);
 	
 	private static <T extends Entity> EntityType<T> createEntity(Class<T> entityClass, EntityType.IFactory<T> factory, EntityClassification entityClassification, String name, float width, float height, int eggPrimary, int eggSecondary) {
         ResourceLocation location = new ResourceLocation(Reference.MODID, name);
@@ -56,11 +59,12 @@ public class UAEntities {
     
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-        for (EntityType entity : entities) {
-            event.getRegistry().register(entity);
-        }
-        EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
-        EntitySpawnPlacementRegistry.register(PIKE, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
+    	for (EntityType entity : entities) {
+    		event.getRegistry().register(entity);
+    	}
+    	EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
+    	EntitySpawnPlacementRegistry.register(PIKE, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
+    	EntitySpawnPlacementRegistry.register(LIONFISH, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::coralCondition);
     }
 
     @SubscribeEvent
@@ -89,5 +93,18 @@ public class UAEntities {
 			}
 		}
 		return random.nextFloat() <= 0.05F ? true : false;
+    }
+    
+    private static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    	for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
+			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
+				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
+					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock().isIn(BlockTags.CORAL_BLOCKS)) {
+						return true;
+					}
+				}
+			}
+		}
+    	return false;
     }
 }

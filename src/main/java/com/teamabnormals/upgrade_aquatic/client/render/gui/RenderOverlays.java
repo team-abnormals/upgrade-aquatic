@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.client.render.overlay;
+package com.teamabnormals.upgrade_aquatic.client.render.gui;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;

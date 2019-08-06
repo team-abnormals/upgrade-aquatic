@@ -753,7 +753,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		
 		@Override
 		public void startExecuting() {
-			if(attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND) != null) {
+			if(attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND) != null && this.attacker.getAttackTarget() instanceof AbstractFishEntity || attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND) != null && this.attacker.getAttackTarget() instanceof TurtleEntity) {
 				((EntityPike)this.attacker).spitOutItem(attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND));
 			}
 			super.startExecuting();

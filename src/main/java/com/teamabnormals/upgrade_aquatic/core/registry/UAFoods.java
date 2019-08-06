@@ -1,6 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import net.minecraft.item.Food;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 
 public class UAFoods {
 
@@ -10,6 +12,10 @@ public class UAFoods {
 	
 	public static final Food PIKE(boolean cooked) {
 		return cooked ? new Food.Builder().hunger(8).saturation(0.8F).build() : new Food.Builder().hunger(3).saturation(0.3F).build();
+	}
+	
+	public static final Food LIONFISH(boolean cooked) {
+		return cooked ? new Food.Builder().hunger(6).saturation(0.7F).build() : new Food.Builder().effect(new EffectInstance(Effects.POISON, 550, 3), 1.0F).effect(new EffectInstance(Effects.NAUSEA, 320, 2), 1.0F).hunger(2).saturation(0.3F).build();
 	}
 	
 }

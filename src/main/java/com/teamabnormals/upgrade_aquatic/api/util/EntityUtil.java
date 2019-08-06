@@ -9,6 +9,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.merchant.villager.VillagerTrades;
+import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -30,6 +31,13 @@ public class EntityUtil {
 	 */
 	public static Int2ObjectMap<VillagerTrades.ITrade[]> newTradeMap(ImmutableMap<Integer, VillagerTrades.ITrade[]> map) {
 		return new Int2ObjectOpenHashMap<>(map);
+	}
+	
+	@Deprecated
+	public static Int2ObjectMap<VillagerTrades.ITrade[]> combineTradeMap(Int2ObjectMap<VillagerTrades.ITrade[]> originalMap, ImmutableMap<Integer, VillagerTrades.ITrade[]> newMap) {
+		Int2ObjectOpenHashMap<VillagerTrades.ITrade[]> map = (Int2ObjectOpenHashMap<ITrade[]>) originalMap;
+		map.putAll(newMap);
+		return map;
 	}
 	
 	/**
