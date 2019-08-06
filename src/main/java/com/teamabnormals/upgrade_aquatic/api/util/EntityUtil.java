@@ -43,29 +43,29 @@ public class EntityUtil {
 	    private final int givenExp;
 	    private final float priceMultiplier;
 	    
-	    public ItemsForEmeraldsTrade(Block block, int stackSize, int p_i50528_3_, int p_i50528_4_, int p_i50528_5_) {
-	    	this(new ItemStack(block), stackSize, p_i50528_3_, p_i50528_4_, p_i50528_5_);
+	    public ItemsForEmeraldsTrade(Block block, int stackSize, int recievedSize, int maxUses, int givenExp) {
+	    	this(new ItemStack(block), stackSize, recievedSize, maxUses, givenExp);
 	    }
 
-	    public ItemsForEmeraldsTrade(Item item, int stackSize, int p_i50529_3_, int p_i50529_4_) {
-	    	this(new ItemStack(item), stackSize, p_i50529_3_, 12, p_i50529_4_);
+	    public ItemsForEmeraldsTrade(Item item, int stackSize, int recievedSize, int givenExp) {
+	    	this(new ItemStack(item), stackSize, recievedSize, 12, givenExp);
 	    }
 
-	    public ItemsForEmeraldsTrade(Item item, int stackSize, int p_i50530_3_, int p_i50530_4_, int priceMultiplier) {
-	    	this(new ItemStack(item), stackSize, p_i50530_3_, p_i50530_4_, priceMultiplier);
+	    public ItemsForEmeraldsTrade(Item item, int stackSize, int recievedSize, int maxUses, int givenExp) {
+	    	this(new ItemStack(item), stackSize, recievedSize, maxUses, givenExp);
 	    }
 
 	    public ItemsForEmeraldsTrade(ItemStack stack, int stackSize, int recievedSize, int maxUses, int givenExp) {
 	    	this(stack, stackSize, recievedSize, maxUses, givenExp, 0.05F);
 	    }
 
-	    public ItemsForEmeraldsTrade(ItemStack stack, int stackSize, int p_i50532_3_, int p_i50532_4_, int p_i50532_5_, float p_i50532_6_) {
+	    public ItemsForEmeraldsTrade(ItemStack stack, int stackSize, int recievedSize, int maxUses, int givenExp, float priceMultiplier) {
 	    	this.itemstack = stack;
 	    	this.stackSize = stackSize;
-	    	this.recievedSize = p_i50532_3_;
-	    	this.maxUses = p_i50532_4_;
-	    	this.givenExp = p_i50532_5_;
-	    	this.priceMultiplier = p_i50532_6_;
+	    	this.recievedSize = recievedSize;
+	    	this.maxUses = maxUses;
+	    	this.givenExp = givenExp;
+	    	this.priceMultiplier = priceMultiplier;
 	    }
 
 	    public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
