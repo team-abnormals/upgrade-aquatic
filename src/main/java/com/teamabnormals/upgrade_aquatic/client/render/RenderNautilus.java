@@ -20,6 +20,7 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_smelly.png"),
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_mca.png"),
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_five.png"),
+		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_cell.png"),
 	};
 
 	public RenderNautilus(EntityRendererManager renderManager) {
@@ -35,6 +36,8 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 			return TEXTURES[2];
 		} else if(name.equals("five") || name.equals("epic")) {
 			return TEXTURES[3];
+		} else if(name.equals("neonmembrane") || name.equals("cellmembrane")) {
+			return TEXTURES[4];
 		}
 		return TEXTURES[0];
 	}

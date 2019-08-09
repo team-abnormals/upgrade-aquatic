@@ -32,7 +32,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.TempCategory;
+import net.minecraft.world.biome.Biome.RainType;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityNautilus extends EntityBucketableWaterMob {
@@ -197,7 +197,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
 	}
 	
 	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && biome.getTempCategory() != TempCategory.COLD) {
+		if(biome.getCategory() == Category.OCEAN && biome.getPrecipitation() != RainType.SNOW) {
 			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.NAUTILUS, 51, 1, 4));
         }
 	}

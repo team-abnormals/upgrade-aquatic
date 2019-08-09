@@ -13,6 +13,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 
 public class EffectRestfulness extends InstantEffect {
+	
     public EffectRestfulness(String name) {
         super(EffectType.BENEFICIAL, 0xb48675);
         this.setRegistryName(new ResourceLocation(Reference.MODID, name));
@@ -28,4 +29,5 @@ public class EffectRestfulness extends InstantEffect {
         	entityLivingBase.attackEntityFrom(DamageSource.MAGIC, Float.MAX_VALUE);
         }
     }
+    
 }

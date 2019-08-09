@@ -510,6 +510,22 @@ public class EntityPike extends EntityBucketableWaterMob {
 	private int getRandomTypeForBiome(IWorld world) {
 		Biome biome = world.getBiome(new BlockPos(this));
 		int probability = rand.nextInt(101);
+		if(this.isFromBucket()) {
+			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : - 1: -1) : rand.nextInt(4) == 0 ? 2 : -1;
+			if(decidedVariant == -1) {
+				float chance = rand.nextFloat();
+				if(chance <= 1 && chance >= 0.5) {
+					decidedVariant = rand.nextInt(6) == 0 ? 9 : 3;
+				} else if(chance < 0.5 && chance >= 0.35) {
+					decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
+				} else if(chance < 0.35 && chance > 0.25) {
+					decidedVariant = rand.nextInt(6) == 0 ? 11 : 6;
+				} else {
+					decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
+				}
+			}
+			return decidedVariant;
+		}
 		if(biome.getCategory() == Category.SWAMP) {
 			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? 7 : -1) : rand.nextInt(3) == 0 ? 2 : 1;
 			if(decidedVariant == -1) {
@@ -541,11 +557,11 @@ public class EntityPike extends EntityBucketableWaterMob {
 			}
 			return decidedVariant;
 		}
-		int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : - 1: -1) : rand.nextInt(4) == 0 ? 5 : -1;
+		int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : - 1: -1) : rand.nextInt(4) == 0 ? 2 : -1;
 		if(decidedVariant == -1) {
 			float chance = rand.nextFloat();
 			if(chance <= 1 && chance >= 0.5) {
-				decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
+				decidedVariant = rand.nextInt(6) == 0 ? 9 : 3;
 			} else if(chance < 0.5 && chance >= 0.35) {
 				decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
 			} else if(chance < 0.35 && chance > 0.25) {

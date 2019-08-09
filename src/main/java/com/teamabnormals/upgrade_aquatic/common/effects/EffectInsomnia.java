@@ -11,6 +11,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.ResourceLocation;
 
 public class EffectInsomnia extends InstantEffect {
+	
     public EffectInsomnia(String name) {
         super(EffectType.HARMFUL, 0xa075b4);
         this.setRegistryName(new ResourceLocation(Reference.MODID, name));
@@ -24,4 +25,5 @@ public class EffectInsomnia extends InstantEffect {
     		statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), (24000 * (amplifier + 1)));
     	}
     }
+    
 }

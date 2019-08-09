@@ -201,7 +201,21 @@
   "item.minecraft.lingering_potion.effect.restfulness_strong": "Lingering Potion of Restfulness",
   "item.minecraft.tipped_arrow.effect.restfulness": "Arrow of Restfulness",
   "item.minecraft.tipped_arrow.effect.restfulness_strong": "Arrow of Restfulness",
- 	
+  
+  "effect.upgrade_aquatic.repellence": "Repellence",
+  "item.minecraft.potion.effect.repellence": "Potion of Repellence",
+  "item.minecraft.potion.effect.repellence_strong": "Potion of Repellence",
+  "item.minecraft.potion.effect.repellence_long": "Potion of Repellence",
+  "item.minecraft.splash_potion.effect.repellence": "Splash Potion of Repellence",
+  "item.minecraft.splash_potion.effect.repellence_strong": "Splash Potion of Repellence",
+  "item.minecraft.splash_potion.effect.repellence_long": "Splash Potion of Repellence",
+  "item.minecraft.lingering_potion.effect.repellence": "Lingering Potion of Repellence",
+  "item.minecraft.lingering_potion.effect.repellence_strong": "Lingering Potion of Repellence",
+  "item.minecraft.lingering_potion.effect.repellence_long": "Lingering Potion of Repellence",
+  "item.minecraft.tipped_arrow.effect.repellence": "Arrow of Repellence",
+  "item.minecraft.tipped_arrow.effect.repellence_strong": "Arrow of Repellence",
+  "item.minecraft.tipped_arrow.effect.repellence_long": "Arrow of Repellence",
+  
   "_comment": "Deaths",
   
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Guardian Spine",
