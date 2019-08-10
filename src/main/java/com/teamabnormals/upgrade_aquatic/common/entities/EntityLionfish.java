@@ -14,6 +14,7 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.controller.MovementController;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
@@ -103,6 +104,7 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 			}
 			
 		});
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	
 	protected void registerData() {
