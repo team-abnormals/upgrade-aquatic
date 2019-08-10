@@ -32,13 +32,13 @@ import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
+import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class EntityEvents {
@@ -76,7 +76,7 @@ public class EntityEvents {
 	
 	@SubscribeEvent
 	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
-		PlayerEntity player = event.getEntityPlayer();
+		PlayerEntity player = event.getPlayer();
 		if(player.getEntityWorld().getBlockState(event.getNewSpawn()).getBlock() instanceof BlockBedroll) {
 			event.setCanceled(true);
 		}

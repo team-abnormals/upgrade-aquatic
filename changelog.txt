@@ -1,3 +1,145 @@
+Build: 1.14.4-28.0.45 - Mon Aug 05 12:56:59 GMT 2019
+	cpw:
+		Grrr. Stupid error. Sorry lex: I fixed it.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Bump modlauncher to 3.2.x. Add a sender modid and document IMC. Closes
+		#5746
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Move fml's PlayerEvent and TickEvent to forge. Update `import
+		net.minecraftforge.fml.common.gameevent.PlayerEvent;` to `import
+		net.minecraftforge.event.entity.player.PlayerEvent;` and `import
+		net.minecraftforge.fml.common.gameevent.TickEvent;` to `import
+		net.minecraftforge.event.TickEvent;`
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+	cpw:
+		Actually reload config when it changes on disk. Closes #5541 and #5959
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.41 - Mon Aug 05 01:19:19 GMT 2019
+	cpw:
+		Turned minecraft into a proper Mod, with a "dummy" language provider.
+		Also fixed the "translations" not being available early if an exception
+		occurs by force loading the forge and MC ones. Closes #5984
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.40 - Sat Aug 03 01:48:54 GMT 2019
+	daemon.umbra:
+		Fix a crash I caused by misunderstanding formatToString (#6007)
+
+=========
+Build: 1.14.4-28.0.39 - Sat Aug 03 01:03:37 GMT 2019
+	lex:
+		Fix userdev setup by moving SAS concept to FG.
+
+=========
+Build: 1.14.4-28.0.38 - Fri Aug 02 21:13:51 GMT 2019
+	mods.itsmeow:
+		Add piston events (#5798)
+
+=========
+Build: 1.14.4-28.0.37 - Fri Aug 02 21:07:42 GMT 2019
+	des.herriott:
+		Make ParticleManager.IParticleMetaFactory public (#5926)
+
+	mods.itsmeow:
+		Fix AT for EntitySpawnPlacementRegistry.register
+
+=========
+Build: 1.14.4-28.0.35 - Fri Aug 02 21:01:02 GMT 2019
+	jojohostert:
+		Add button to open mods folder (#5986)
+
+=========
+Build: 1.14.4-28.0.34 - Fri Aug 02 20:50:19 GMT 2019
+	mh:
+		Fixed PlayerInteractEvents not working (#5976)
+
+	daemon.umbra:
+		Change ModLoadingException to display ModID instead of ModInfo instance
+		identifier. (#5999)
+
+=========
+Build: 1.14.4-28.0.32 - Fri Aug 02 20:44:09 GMT 2019
+	Gamebuster19901:
+		Fix LazyOptional throwing NPE to consumers when owners null. (#5772)
+
+	Gamebuster19901:
+		Fixed Buttons in the error screen are incorrectly rendered if they are
+		extremely long Closes #5687 (#5924)
+
+=========
+Build: 1.14.4-28.0.30 - Fri Aug 02 20:37:17 GMT 2019
+	lex:
+		Make Villager profession unlocalized name use modids when not
+		'minecraft' Closes #5977 Fixed trees able to be generated through water.
+		Closes #6000 Change Block#toString to use getRegistryName instead of
+		getNameForObject Closes #5937 Allow Cooking Recipes to deserialize
+		results with stack sizes. Closes #5960
+
+=========
+Build: 1.14.4-28.0.29 - Thu Aug 01 05:43:58 GMT 2019
+	lex:
+		Fixed DimensionType.getRegistryName() returning null Closes #5992 Fixed
+		RegisterDimensionEvent not firing for new worlds. Closes #5987
+
+=========
+Build: 1.14.4-28.0.28 - Thu Aug 01 04:15:51 GMT 2019
+	lex:
+		Introduce new Side Annotation Stripper system to semi-automate the
+		shipment of Sided methods and cleanup patches. New forge:checkSAS task
+		to validate this config file. Closes #5995
+
+=========
+Build: 1.14.4-28.0.27 - Tue Jul 30 23:42:43 GMT 2019
+	ichttt:
+		Move world unload patch to tick function to prevent duplicate unloading,
+		fix log message in dim manager, fix javadoc for unload method (#5964)
+
+=========
+Build: 1.14.4-28.0.26 - Tue Jul 30 23:36:37 GMT 2019
+	bl4ckscor33:
+		fix melon and pumpkin seeds being peaceable on more than just farmland
+		(#5980)
+
+=========
+Build: 1.14.4-28.0.25 - Tue Jul 30 23:30:21 GMT 2019
+	thecheaterpaul:
+		Fixed possible ClassCastException with dye-able armor. (#5985)
+
+=========
+Build: 1.14.4-28.0.24 - Tue Jul 30 00:20:04 GMT 2019
+	cpw:
+		Fix naming for dev launch providers - they're in MCP..
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.23 - Mon Jul 29 01:10:50 GMT 2019
+	cpw:
+		Register a config command. Currently one subcommand: showfile, which
+		when passed a modid and a type (CLIENT, COMMON or SERVER) will display a
+		link in the caller's chat to open that file in the OS file viewer of
+		choice.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
+Build: 1.14.4-28.0.22 - Sun Jul 28 17:45:41 GMT 2019
+	cpw:
+		Load default configs from the defaultconfig directory by default. (Can
+		be overridden in the fml.toml config file if desired).
+		Will load any type of config tracked file from there - client, common,
+		server or custom tracked file. This means you can ship defaults for your
+		pack in a defaultconfig directory. I am thinking about ways to force a
+		specific config override for an existing config.
+		Signed-off-by: cpw <cpw+github@weeksfamily.ca>
+
+=========
 Build: 1.14.4-28.0.21 - Sat Jul 27 16:48:19 GMT 2019
 	cpw:
 		Fix vanilla bug that hardcore death doesn't clean up properly, leaving a
