@@ -1,5 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
+import java.util.function.Predicate;
+
 import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -18,6 +20,7 @@ import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.passive.fish.TropicalFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -42,6 +45,13 @@ import net.minecraft.world.biome.Biome.RainType;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityLionfish extends EntityBucketableWaterMob {
+	private static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
+		if (entity == null) {
+			return false;
+		} else {
+			return !(entity instanceof EntityLionfish) && !(entity instanceof AbstractFishEntity);
+		}
+	};
 	private static final DataParameter<Boolean> HUNGY = EntityDataManager.createKey(EntityLionfish.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TIME_TILL_HUNGRY = EntityDataManager.createKey(EntityLionfish.class, DataSerializers.VARINT);
 	int lastTimeSinceHungry;
@@ -170,6 +180,13 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 			this.isAirBorne = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
 		}
+		if (this.isAlive()) {
+			for(LivingEntity entity : this.world.getEntitiesWithinAABB(LivingEntity.class, this.getBoundingBox().grow(0.3D), ENEMY_MATCHER)) {
+				if (entity.isAlive()) {
+					this.attack(entity);
+				}
+			}
+		}
 		if(!this.isHungry() && lastTimeSinceHungry < this.getTimeTillHungry()) {
 			lastTimeSinceHungry++;
 		}
@@ -194,7 +211,9 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		Entity entitySource = source.getTrueSource();
 		if(entitySource instanceof LivingEntity && !(entitySource instanceof PlayerEntity && ((PlayerEntity) entitySource).abilities.isCreativeMode)) {
-			this.attack((LivingEntity) entitySource);
+			if(entitySource instanceof PlayerEntity) {
+				this.setAttackTarget((LivingEntity) entitySource);
+			}
 			return super.attackEntityFrom(source, amount);
 		} else {
 			return super.attackEntityFrom(source, amount);
