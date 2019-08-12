@@ -103,16 +103,25 @@ public class ModelThrasher<E extends EntityThrasher> extends UAEntityModel<E> {
     
 	@Override
 	public void setRotationAngles(E thrasher, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
-		super.setRotationAngles(thrasher, limbSwing, limbSwing, ageInTicks, netHeadYaw, headPitch, scaleFactor);
 		this.setDefaultBoxValues();
+		
+		float tailAnimation = thrasher.getTailAnimation(ageInTicks - thrasher.ticksExisted);
+		float finWaveAnimation = thrasher.getFinAnimation(ageInTicks - thrasher.ticksExisted);
+		
+		this.neck.rotateAngleX = headPitch * (float) (Math.PI / 180F);
+		this.neck.rotateAngleY = netHeadYaw * (float) (Math.PI / 180F);
+		
 		RendererModel[] boxes = new RendererModel[] {this.body, this.tail_holder, this.tail_holder_2};
 		for(int i = 1; i < boxes.length + 1; i++) {
-			boxes[i - 1].rotateAngleY = MathHelper.sin(ageInTicks) * (0.1F * i);
+			boxes[i - 1].rotateAngleY = MathHelper.sin(tailAnimation) * (float) Math.PI * (0.045F * i);
 		}
-		this.right_fin.rotateAngleZ = (float) (-MathHelper.cos(ageInTicks) * 0.13);
-		this.right_fin_2.rotateAngleZ = (float) (-MathHelper.cos(ageInTicks) * (0.125 * 0.5 - 0.1F));
-		this.left_fin.rotateAngleZ = (float) (MathHelper.cos(ageInTicks) * 0.13);
-		this.left_fin_2.rotateAngleZ = (float) (MathHelper.cos(ageInTicks) * (0.125 * 0.5 - 0.1F));
+		if(thrasher.isMoving() && thrasher.isInWater()) {
+			this.tail.rotateAngleZ = (float) ((thrasher.ticksExisted + ageInTicks) * 2 * Math.PI * 0.8125);
+		}
+		this.right_fin.rotateAngleZ = (float) (-MathHelper.cos(finWaveAnimation) * (float) Math.PI * 0.13);
+		this.right_fin_2.rotateAngleZ = (float) (-MathHelper.cos(finWaveAnimation - 2) * (float) Math.PI * 0.1);
+		this.left_fin.rotateAngleZ = (float) (MathHelper.cos(finWaveAnimation) * (float) Math.PI * 0.13);
+		this.left_fin_2.rotateAngleZ = (float) (MathHelper.cos(finWaveAnimation - 2) * (float) Math.PI * 0.1);
 	}
 	
 }
