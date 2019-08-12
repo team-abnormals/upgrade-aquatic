@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.api.client.UAEntityModel;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityThrasher;
 
 import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.minecraft.util.math.MathHelper;
 
 /**
  * ModelThrasher - SmellyModder
@@ -103,8 +104,15 @@ public class ModelThrasher<E extends EntityThrasher> extends UAEntityModel<E> {
 	@Override
 	public void setRotationAngles(E thrasher, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
 		super.setRotationAngles(thrasher, limbSwing, limbSwing, ageInTicks, netHeadYaw, headPitch, scaleFactor);
-		this.resetBoxesToDefaultValues();
-		
+		this.setDefaultBoxValues();
+		RendererModel[] boxes = new RendererModel[] {this.body, this.tail_holder, this.tail_holder_2};
+		for(int i = 1; i < boxes.length + 1; i++) {
+			boxes[i - 1].rotateAngleY = MathHelper.sin(ageInTicks) * (0.1F * i);
+		}
+		this.right_fin.rotateAngleZ = (float) (-MathHelper.cos(ageInTicks) * 0.13);
+		this.right_fin_2.rotateAngleZ = (float) (-MathHelper.cos(ageInTicks) * (0.125 * 0.5 - 0.1F));
+		this.left_fin.rotateAngleZ = (float) (MathHelper.cos(ageInTicks) * 0.13);
+		this.left_fin_2.rotateAngleZ = (float) (MathHelper.cos(ageInTicks) * (0.125 * 0.5 - 0.1F));
 	}
 	
 }
