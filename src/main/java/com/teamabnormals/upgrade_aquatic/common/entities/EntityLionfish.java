@@ -190,7 +190,6 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 		if(!this.isHungry() && lastTimeSinceHungry < this.getTimeTillHungry()) {
 			lastTimeSinceHungry++;
 		}
-		
 		if(lastTimeSinceHungry >= this.getTimeTillHungry()) {
 			this.setHungry(true);
 			lastTimeSinceHungry = 0;

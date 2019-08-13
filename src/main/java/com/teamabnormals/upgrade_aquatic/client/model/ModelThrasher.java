@@ -119,9 +119,9 @@ public class ModelThrasher<E extends EntityThrasher> extends UAEntityModel<E> {
 			this.tail.rotateAngleZ = (float) ((thrasher.ticksExisted + ageInTicks) * 2 * Math.PI * 0.8125);
 		}
 		this.right_fin.rotateAngleZ = (float) (-MathHelper.cos(finWaveAnimation) * (float) Math.PI * 0.13);
-		this.right_fin_2.rotateAngleZ = (float) (-MathHelper.cos(finWaveAnimation - 2) * (float) Math.PI * 0.1);
+		this.right_fin_2.rotateAngleZ = (float) (-MathHelper.cos(finWaveAnimation - 1.5F) * (float) Math.PI * 0.1);
 		this.left_fin.rotateAngleZ = (float) (MathHelper.cos(finWaveAnimation) * (float) Math.PI * 0.13);
-		this.left_fin_2.rotateAngleZ = (float) (MathHelper.cos(finWaveAnimation - 2) * (float) Math.PI * 0.1);
+		this.left_fin_2.rotateAngleZ = (float) (MathHelper.cos(finWaveAnimation - 1.5F) * (float) Math.PI * 0.1);
 	}
 	
 }
