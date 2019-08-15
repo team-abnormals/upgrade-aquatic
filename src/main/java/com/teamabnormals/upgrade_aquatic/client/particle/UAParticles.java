@@ -7,7 +7,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public enum UAParticles {
-	PRISMARINE_SHOWER, ELDER_PRISMARINE_SHOWER, JELLY_TORCH, SPECTRAL_CONSUME;
+	PRISMARINE_SHOWER, ELDER_PRISMARINE_SHOWER, JELLY_TORCH, SPECTRAL_CONSUME, SONAR;
 	
 	UAParticles() {}
 
@@ -27,6 +27,8 @@ public enum UAParticles {
     			return new ParticleJellyTorch.Factory();
     		case SPECTRAL_CONSUME:
     			return new ParticleSpectralConsume.Factory();
+    		case SONAR:
+    			return new ParticleSonar.Factory();
     	}
 		return this.getDefaultParticle().getFactory();
     }
