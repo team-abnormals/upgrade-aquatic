@@ -143,17 +143,17 @@
   "_comment": "Itens",
   
   "item.upgrade_aquatic.prismarine_rod": "Vara de prismarinho",
-  "item.upgrade_aquatic.thrasher_tooth": "Dente de alopicador",
+  "item.upgrade_aquatic.thrasher_tooth": "Dente de turbilhão",
   
   "item.upgrade_aquatic.nautilus_bucket": "Balde com náutilo",
   "item.upgrade_aquatic.pike_bucket": "Balde com lúcio",
-  "item.upgrade_aquatic.lionfish_bucket": "Bucket com peixe-leão",
+  "item.upgrade_aquatic.lionfish_bucket": "Balde com peixe-leão",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Ovo gerador de aldeão afogado",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Ovo gerador de náutilo",
   "item.upgrade_aquatic.pike_spawn_egg": "Ovo gerador de lúcio",
   "item.upgrade_aquatic.lionfish_spawn_egg": "Ovo gerador de peixe-leão",
-  "item.upgrade_aquatic.thrasher_spawn_egg": "Ovo gerador de alopicador",
+  "item.upgrade_aquatic.thrasher_spawn_egg": "Ovo gerador de turbilhão",
   
   "item.upgrade_aquatic.boiled_pickerelweed_purple": "Aguapé roxo fervido",
   "item.upgrade_aquatic.boiled_pickerelweed_blue": "Aguapé azul fervido",
@@ -181,7 +181,7 @@
   "entity.upgrade_aquatic.nautilus": "Náutilo",
   "entity.upgrade_aquatic.pike": "Lúcio",
   "entity.upgrade_aquatic.lionfish": "Peixe-leão",
-  "entity.upgrade_aquatic.thrasher": "Alopicador",
+  "entity.upgrade_aquatic.thrasher": "Turbilhão",
   
   "_comment": "Poções e efeitos",
   
