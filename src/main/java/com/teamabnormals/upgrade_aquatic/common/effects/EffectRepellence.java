@@ -24,7 +24,6 @@ public class EffectRepellence extends Effect {
 					
 				} else {
 					livingEntities.addPotionEffect(new EffectInstance(Effects.POISON, 70, 1 * (amplifier + 1)));
-					livingEntities.addPotionEffect(new EffectInstance(Effects.NAUSEA, 180, 1));
 					livingEntities.setRevengeTarget(entity);
 				}
 			}

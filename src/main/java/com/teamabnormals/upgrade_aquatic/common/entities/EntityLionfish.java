@@ -199,7 +199,6 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 	private void attack(LivingEntity entity) {
 		if (entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F) && entity.isInWater()) {
 			entity.addPotionEffect(new EffectInstance(Effects.POISON, 70, 1));
-			entity.addPotionEffect(new EffectInstance(Effects.NAUSEA, 180, 1));
 			this.playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0F, 1.0F);
 			if(entity instanceof PlayerEntity) {
 				this.setAttackTarget(entity);
