@@ -45,8 +45,7 @@ public class TileEntityElderEye extends TileEntity implements ITickableTileEntit
 				for(int i = 0; i < entities.size(); i++) {
 					Entity entity = entities.get(i);
 					
-					if(entity instanceof PaintingEntity || entity instanceof ItemFrameEntity || entity instanceof ArmorStandEntity)
-					{
+					if(entity instanceof PaintingEntity || entity instanceof ItemFrameEntity || entity instanceof ArmorStandEntity) {
 						entityCount--;
 					}
 					
