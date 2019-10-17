@@ -24,7 +24,7 @@
                   }
                 }
               ],
-              "name": "upgrade_aquatic:pillow_coral_block"
+              "name": "upgrade_aquatic:horn_biorock"
             },
             {
               "type": "minecraft:item",
@@ -33,7 +33,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "upgrade_aquatic:dead_pillow_coral_block"
+              "name": "upgrade_aquatic:dead_biorock"
             }
           ]
         }

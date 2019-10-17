@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "upgrade_aquatic:elder_prismarine_coral_block"
+          "name": "upgrade_aquatic:biorock_slab"
         }
       ],
       "conditions": [
