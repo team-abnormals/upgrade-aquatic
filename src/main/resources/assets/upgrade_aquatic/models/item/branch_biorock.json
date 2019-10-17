@@ -1,6 +1,3 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "upgrade_aquatic:block/branch_biorock"
-    }
+    "parent": "upgrade_aquatic:block/branch_biorock"
 }
