@@ -1,4 +1,4 @@
-{{
+{
     "variants": {
         "facing=east,half=bottom,shape=straight":  { "model": "upgrade_aquatic:block/stair/branch_biorock_stairs" },
         "facing=west,half=bottom,shape=straight":  { "model": "upgrade_aquatic:block/stair/branch_biorock_stairs", "y": 180, "uvlock": true },
