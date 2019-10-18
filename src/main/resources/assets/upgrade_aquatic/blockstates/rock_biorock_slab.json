@@ -1,7 +1,7 @@
 {
     "variants": {
-        "type=bottom": { "model": "upgrade_aquatic:block/slab/rock_biorock_slab" },
-        "type=top": { "model": "upgrade_aquatic:block/slab/rock_biorock_slab_top" },
+        "type=bottom": { "model": "upgrade_aquatic:block/rock_biorock_slab" },
+        "type=top": { "model": "upgrade_aquatic:block/rock_biorock_slab_top" },
         "type=double": { "model": "upgrade_aquatic:block/rock_biorock" }
     }
 }
