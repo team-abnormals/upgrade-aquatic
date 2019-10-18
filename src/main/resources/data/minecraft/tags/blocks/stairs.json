@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "upgrade_aquatic:biorock_stairs",
+    "upgrade_aquatic:bubble_biorock_stairs",
+    "upgrade_aquatic:brain_biorock_stairs",
+    "upgrade_aquatic:tube_biorock_stairs",
+    "upgrade_aquatic:horn_biorock_stairs",
+    "upgrade_aquatic:fire_biorock_stairs",
+    "upgrade_aquatic:acan_biorock_stairs",
+    "upgrade_aquatic:finger_biorock_stairs",
+    "upgrade_aquatic:star_biorock_stairs",
+    "upgrade_aquatic:moss_biorock_stairs",
+    "upgrade_aquatic:petal_biorock_stairs",
+    "upgrade_aquatic:branch_biorock_stairs",
+    "upgrade_aquatic:rock_biorock_stairs",
+    "upgrade_aquatic:pillow_biorock_stairs",
+    "upgrade_aquatic:silk_biorock_stairs",
+    "upgrade_aquatic:elder_biorock_stairs",
+    "upgrade_aquatic:prismarine_biorock_stairs",
+    "upgrade_aquatic:dead_biorock_stairs"
+  ]
+}
