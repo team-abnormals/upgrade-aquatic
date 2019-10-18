@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab_top",
+    "textures": {
+        "bottom": "upgrade_aquatic:block/brain_biorock",
+        "top": "upgrade_aquatic:block/brain_biorock",
+        "side": "upgrade_aquatic:block/brain_biorock"
+    }
+}

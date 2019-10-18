@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "upgrade_aquatic/horn_biorock",
+    "top": "upgrade_aquatic/horn_biorock",
+    "side": "upgrade_aquatic/horn_biorock"
+  }
+}
