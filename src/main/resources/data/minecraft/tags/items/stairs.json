@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "upgrade_aquatic:tooth_stairs",
     "upgrade_aquatic:biorock_stairs",
     "upgrade_aquatic:bubble_biorock_stairs",
     "upgrade_aquatic:brain_biorock_stairs",

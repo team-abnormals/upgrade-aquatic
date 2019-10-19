@@ -217,6 +217,9 @@
   "block.upgrade_aquatic.dead_biorock_wall": "Dead Coral Biorock Wall",
   
   "block.upgrade_aquatic.tooth_block": "Tooth Block",
+  "block.upgrade_aquatic.tooth_slab": "Tooth Slab",
+  "block.upgrade_aquatic.tooth_stairs": "Tooth Stairs",
+  "block.upgrade_aquatic.tooth_wall": "Tooth Wall",
   
   "_comment": "Items",
   
