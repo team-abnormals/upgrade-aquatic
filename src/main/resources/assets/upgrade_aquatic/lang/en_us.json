@@ -216,6 +216,8 @@
   "block.upgrade_aquatic.elder_biorock_wall": "Elder Prismarine Coral Biorock Wall",
   "block.upgrade_aquatic.dead_biorock_wall": "Dead Coral Biorock Wall",
   
+  "block.upgrade_aquatic.tooth_block": "Tooth Block",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
