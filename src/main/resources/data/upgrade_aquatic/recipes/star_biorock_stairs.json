@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:star_biorock"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:star_biorock_stairs",
+    "count": 4
+  }
+}

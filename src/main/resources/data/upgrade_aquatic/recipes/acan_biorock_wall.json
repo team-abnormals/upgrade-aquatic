@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:acan_biorock"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:acan_biorock_wall",
+    "count": 6
+  }
+}
