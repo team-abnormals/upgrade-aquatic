@@ -1,15 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "NF",
-    "FF"
+    "FFF",
+    "FNF",
+    "FFF"
   ],
   "key": {
     "N": {
       "item": "minecraft:nautilus_shell"
     },
     "F": {
-      "item": "minecraft:flint"
+      "item": "minecraft:sandstone"
     }
   },
   "result": {
