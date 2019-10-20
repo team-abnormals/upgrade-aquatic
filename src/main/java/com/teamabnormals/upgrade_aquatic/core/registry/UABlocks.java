@@ -206,8 +206,39 @@ public class UABlocks {
 	public static Block PRISMARINE_BIOROCK            = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_biorock");
 	public static Block ELDER_BIOROCK                 = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "elder_biorock");
 	public static Block DEAD_BIOROCK                  = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "dead_biorock");
+	
+	public static Block CHISELED_BIOROCK              = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).tickRandomly()){
+		@Override
+		public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+			if (!worldIn.isAreaLoaded(pos, 3)) return;
+			
+			for(int i = 0; i < 4; i++) {
+				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+				if (UABlocks.CHISELED_BIOROCK_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
+					worldIn.setBlockState(pos, UABlocks.CHISELED_BIOROCK_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState());
+				}
+			}
+		}
+	}.setRegistryName(Reference.MODID, "chiseled_biorock");
+	public static Block BUBBLE_CHISELED_BIOROCK       = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "bubble_chiseled_biorock");
+	public static Block HORN_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "horn_chiseled_biorock");
+	public static Block TUBE_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tube_chiseled_biorock");
+	public static Block BRAIN_CHISELED_BIOROCK        = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "brain_chiseled_biorock");
+	public static Block FIRE_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "fire_chiseled_biorock");	
+	public static Block ACAN_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "acan_chiseled_biorock");
+	public static Block FINGER_CHISELED_BIOROCK       = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "finger_chiseled_biorock");
+	public static Block STAR_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "star_chiseled_biorock");
+	public static Block MOSS_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "moss_chiseled_biorock");
+	public static Block PETAL_CHISELED_BIOROCK        = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "petal_chiseled_biorock");
+	public static Block BRANCH_CHISELED_BIOROCK       = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "branch_chiseled_biorock");
+	public static Block ROCK_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "rock_chiseled_biorock");
+	public static Block PILLOW_CHISELED_BIOROCK       = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "pillow_chiseled_biorock");
+	public static Block SILK_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "silk_chiseled_biorock");
+	public static Block PRISMARINE_CHISELED_BIOROCK   = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_chiseled_biorock");
+	public static Block ELDER_CHISELED_BIOROCK        = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "elder_chiseled_biorock");
+	public static Block DEAD_CHISELED_BIOROCK         = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "dead_chiseled_biorock");
     
-    public static Block BIOROCK_SLAB                  = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "biorock_slab");
+	public static Block BIOROCK_SLAB                  = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "biorock_slab");
 	public static Block BUBBLE_BIOROCK_SLAB           = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "bubble_biorock_slab");
 	public static Block HORN_BIOROCK_SLAB             = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "horn_biorock_slab");
 	public static Block TUBE_BIOROCK_SLAB             = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tube_biorock_slab");
@@ -226,7 +257,7 @@ public class UABlocks {
 	public static Block ELDER_BIOROCK_SLAB            = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "elder_biorock_slab");
 	public static Block DEAD_BIOROCK_SLAB             = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "dead_biorock_slab");	
 	
-    public static Block BIOROCK_STAIRS                = new StairsBlock(BIOROCK.getDefaultState(), Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "biorock_stairs");
+	public static Block BIOROCK_STAIRS                = new StairsBlock(BIOROCK.getDefaultState(), Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "biorock_stairs");
 	public static Block BUBBLE_BIOROCK_STAIRS         = new StairsBlock(BUBBLE_BIOROCK.getDefaultState(), Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "bubble_biorock_stairs");
 	public static Block HORN_BIOROCK_STAIRS           = new StairsBlock(HORN_BIOROCK.getDefaultState(), Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "horn_biorock_stairs");
 	public static Block TUBE_BIOROCK_STAIRS           = new StairsBlock(TUBE_BIOROCK.getDefaultState(), Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tube_biorock_stairs");
@@ -245,7 +276,7 @@ public class UABlocks {
 	public static Block ELDER_BIOROCK_STAIRS          = new StairsBlock(ELDER_BIOROCK.getDefaultState(), Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "elder_biorock_stairs");
 	public static Block DEAD_BIOROCK_STAIRS           = new StairsBlock(DEAD_BIOROCK.getDefaultState(), Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "dead_biorock_stairs");
 	
-    public static Block BIOROCK_WALL                  = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "biorock_wall");
+	public static Block BIOROCK_WALL                  = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "biorock_wall");
 	public static Block BUBBLE_BIOROCK_WALL           = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "bubble_biorock_wall");
 	public static Block HORN_BIOROCK_WALL             = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "horn_biorock_wall");
 	public static Block TUBE_BIOROCK_WALL             = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tube_biorock_wall");
@@ -284,6 +315,26 @@ public class UABlocks {
 		BIOROCK_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_BIOROCK);
 	}
 	
+	public static final Map<Block, Block> CHISELED_BIOROCK_CONVERSION_MAP = Maps.newHashMap();
+	
+	static {
+		CHISELED_BIOROCK_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(Blocks.HORN_CORAL_BLOCK, HORN_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(Blocks.TUBE_CORAL_BLOCK, TUBE_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(Blocks.BRAIN_CORAL_BLOCK, BRAIN_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(Blocks.FIRE_CORAL_BLOCK, FIRE_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(ACAN_CORAL_BLOCK, ACAN_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(FINGER_CORAL_BLOCK, FINGER_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(STAR_CORAL_BLOCK, STAR_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(MOSS_CORAL_BLOCK, MOSS_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(PETAL_CORAL_BLOCK, PETAL_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(BRANCH_CORAL_BLOCK, BRANCH_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(ROCK_CORAL_BLOCK, ROCK_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_CHISELED_BIOROCK);
+		CHISELED_BIOROCK_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CHISELED_BIOROCK);
+	}
+	
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
 		final Block blocks[] = {
@@ -306,7 +357,8 @@ public class UABlocks {
 			BIOROCK_SLAB, BUBBLE_BIOROCK_SLAB, HORN_BIOROCK_SLAB, TUBE_BIOROCK_SLAB, BRAIN_BIOROCK_SLAB, FIRE_BIOROCK_SLAB, ACAN_BIOROCK_SLAB, FINGER_BIOROCK_SLAB, STAR_BIOROCK_SLAB, MOSS_BIOROCK_SLAB, PETAL_BIOROCK_SLAB, BRANCH_BIOROCK_SLAB, ROCK_BIOROCK_SLAB, PILLOW_BIOROCK_SLAB, SILK_BIOROCK_SLAB, PRISMARINE_BIOROCK_SLAB, ELDER_BIOROCK_SLAB, DEAD_BIOROCK_SLAB,
 		    BIOROCK_STAIRS, BUBBLE_BIOROCK_STAIRS, HORN_BIOROCK_STAIRS, TUBE_BIOROCK_STAIRS, BRAIN_BIOROCK_STAIRS, FIRE_BIOROCK_STAIRS, ACAN_BIOROCK_STAIRS, FINGER_BIOROCK_STAIRS, STAR_BIOROCK_STAIRS, MOSS_BIOROCK_STAIRS, PETAL_BIOROCK_STAIRS, BRANCH_BIOROCK_STAIRS, ROCK_BIOROCK_STAIRS, PILLOW_BIOROCK_STAIRS, SILK_BIOROCK_STAIRS, PRISMARINE_BIOROCK_STAIRS, ELDER_BIOROCK_STAIRS, DEAD_BIOROCK_STAIRS,
 		    BIOROCK_WALL, BUBBLE_BIOROCK_WALL, HORN_BIOROCK_WALL, TUBE_BIOROCK_WALL, BRAIN_BIOROCK_WALL, FIRE_BIOROCK_WALL, ACAN_BIOROCK_WALL, FINGER_BIOROCK_WALL, STAR_BIOROCK_WALL, MOSS_BIOROCK_WALL, PETAL_BIOROCK_WALL, BRANCH_BIOROCK_WALL, ROCK_BIOROCK_WALL, PILLOW_BIOROCK_WALL, SILK_BIOROCK_WALL, PRISMARINE_BIOROCK_WALL, ELDER_BIOROCK_WALL, DEAD_BIOROCK_WALL,
-		    BIOROCK, BUBBLE_BIOROCK, HORN_BIOROCK, TUBE_BIOROCK, BRAIN_BIOROCK, FIRE_BIOROCK, ACAN_BIOROCK, FINGER_BIOROCK, STAR_BIOROCK, MOSS_BIOROCK, PETAL_BIOROCK, BRANCH_BIOROCK, ROCK_BIOROCK, PILLOW_BIOROCK, SILK_BIOROCK, PRISMARINE_BIOROCK, ELDER_BIOROCK, DEAD_BIOROCK
+		    BIOROCK, BUBBLE_BIOROCK, HORN_BIOROCK, TUBE_BIOROCK, BRAIN_BIOROCK, FIRE_BIOROCK, ACAN_BIOROCK, FINGER_BIOROCK, STAR_BIOROCK, MOSS_BIOROCK, PETAL_BIOROCK, BRANCH_BIOROCK, ROCK_BIOROCK, PILLOW_BIOROCK, SILK_BIOROCK, PRISMARINE_BIOROCK, ELDER_BIOROCK, DEAD_BIOROCK,
+		    CHISELED_BIOROCK, BUBBLE_CHISELED_BIOROCK, HORN_CHISELED_BIOROCK, TUBE_CHISELED_BIOROCK, BRAIN_CHISELED_BIOROCK, FIRE_CHISELED_BIOROCK, ACAN_CHISELED_BIOROCK, FINGER_CHISELED_BIOROCK, STAR_CHISELED_BIOROCK, MOSS_CHISELED_BIOROCK, PETAL_CHISELED_BIOROCK, BRANCH_CHISELED_BIOROCK, ROCK_CHISELED_BIOROCK, PILLOW_CHISELED_BIOROCK, SILK_CHISELED_BIOROCK, PRISMARINE_CHISELED_BIOROCK, ELDER_CHISELED_BIOROCK, DEAD_CHISELED_BIOROCK
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -443,6 +495,25 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(PRISMARINE_BIOROCK, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_BIOROCK, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(DEAD_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		
+		registry.register(RegistryUtils.createSimpleItemBlock(CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BUBBLE_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(HORN_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(TUBE_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BRAIN_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(FIRE_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));		
+		registry.register(RegistryUtils.createSimpleItemBlock(ACAN_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(FINGER_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(STAR_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(MOSS_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PETAL_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BRANCH_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(ROCK_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PILLOW_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(SILK_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PRISMARINE_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(DEAD_CHISELED_BIOROCK, ItemGroup.BUILDING_BLOCKS));
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(BIOROCK_SLAB, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BUBBLE_BIOROCK_SLAB, ItemGroup.BUILDING_BLOCKS));
