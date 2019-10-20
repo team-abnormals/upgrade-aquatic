@@ -1,19 +1,16 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
-import net.minecraft.block.Block;
+import com.google.common.collect.Maps;
+import net.minecraft.block.*;
 import net.minecraft.block.Block.Properties;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.WallBlock;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,6 +21,9 @@ import com.teamabnormals.upgrade_aquatic.common.UAProperties;
 import com.teamabnormals.upgrade_aquatic.common.blocks.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
+
+import java.util.Map;
+import java.util.Random;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
@@ -176,7 +176,19 @@ public class UABlocks {
     public static Block TOOTH_SLAB                    = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_slab");
     public static Block TOOTH_WALL                    = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_wall");
 	
-	public static Block BIOROCK                       = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "biorock");
+	public static Block BIOROCK                       = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).tickRandomly()){
+		@Override
+		public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+			if (!worldIn.isAreaLoaded(pos, 3)) return;
+			
+			for(int i = 0; i < 4; i++) {
+				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+				if (UABlocks.BIOROCK_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
+					worldIn.setBlockState(pos, UABlocks.BIOROCK_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState());
+				}
+			}
+		}
+	}.setRegistryName(Reference.MODID, "biorock");
 	public static Block BUBBLE_BIOROCK                = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "bubble_biorock");
 	public static Block HORN_BIOROCK             	  = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "horn_biorock");
 	public static Block TUBE_BIOROCK                  = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tube_biorock");
@@ -251,6 +263,26 @@ public class UABlocks {
 	public static Block PRISMARINE_BIOROCK_WALL       = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_biorock_wall");
 	public static Block ELDER_BIOROCK_WALL            = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "elder_biorock_wall");
 	public static Block DEAD_BIOROCK_WALL             = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "dead_biorock_wall");	
+	
+	public static final Map<Block, Block> BIOROCK_CONVERSION_MAP = Maps.newHashMap();
+	
+	static {
+		BIOROCK_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(Blocks.HORN_CORAL_BLOCK, HORN_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(Blocks.TUBE_CORAL_BLOCK, TUBE_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(Blocks.BRAIN_CORAL_BLOCK, BRAIN_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(Blocks.FIRE_CORAL_BLOCK, FIRE_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(ACAN_CORAL_BLOCK, ACAN_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(FINGER_CORAL_BLOCK, FINGER_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(STAR_CORAL_BLOCK, STAR_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(MOSS_CORAL_BLOCK, MOSS_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(PETAL_CORAL_BLOCK, PETAL_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(BRANCH_CORAL_BLOCK, BRANCH_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(ROCK_CORAL_BLOCK, ROCK_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_BIOROCK);
+		BIOROCK_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_BIOROCK);
+	}
 	
 	@SubscribeEvent
 	public static void onRegisterBlocks(RegistryEvent.Register<Block> event) {
