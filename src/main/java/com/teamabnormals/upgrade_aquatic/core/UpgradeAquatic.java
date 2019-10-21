@@ -54,7 +54,6 @@ public class UpgradeAquatic {
 	
 	public UpgradeAquatic() {
 		instance = this;
-		
 		this.setupMessages();
 		
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 public class ItemMobBucket extends BucketItem {
 	private final EntityType<?> entityType;
 
+	@SuppressWarnings("deprecation")
 	public ItemMobBucket(EntityType<? extends EntityBucketableWaterMob> entityType, Fluid p_i49022_2_, Item.Properties builder) {
 		super(p_i49022_2_, builder);
 		this.entityType = entityType;
