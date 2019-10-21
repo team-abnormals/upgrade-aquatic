@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "upgrade_aquatic:block/tooth_block",
+    "top": "upgrade_aquatic:block/tooth_block",
+    "side": "upgrade_aquatic:block/tooth_block"
+  }
+}

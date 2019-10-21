@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FNF",
+    "FFF"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:nautilus_shell"
+    },
+    "F": {
+      "item": "minecraft:sandstone"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:biorock",
+    "count": 16
+  }
+}

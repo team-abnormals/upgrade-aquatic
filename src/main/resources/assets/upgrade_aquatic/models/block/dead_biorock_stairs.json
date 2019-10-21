@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "upgrade_aquatic:block/dead_biorock",
+    "top": "upgrade_aquatic:block/dead_biorock",
+    "side": "upgrade_aquatic:block/dead_biorock"
+  }
+}

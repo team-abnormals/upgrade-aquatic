@@ -1,12 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:coral_plants",
-    "minecraft:tube_coral_fan",
-    "minecraft:brain_coral_fan",
-    "minecraft:bubble_coral_fan",
-    "minecraft:fire_coral_fan",
-    "minecraft:horn_coral_fan",
     "upgrade_aquatic:acan_coral_fan",
     "upgrade_aquatic:finger_coral_fan",
     "upgrade_aquatic:star_coral_fan",

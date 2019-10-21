@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:bedroll_leather"
+      "tag": "upgrade_aquatic:bedrolls"
     },
     {
       "item": "minecraft:light_gray_dye"

@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "upgrade_aquatic:tooth_wall",
+    "upgrade_aquatic:biorock_wall",
+    "upgrade_aquatic:bubble_biorock_wall",
+    "upgrade_aquatic:brain_biorock_wall",
+    "upgrade_aquatic:tube_biorock_wall",
+    "upgrade_aquatic:horn_biorock_wall",
+    "upgrade_aquatic:fire_biorock_wall",
+    "upgrade_aquatic:acan_biorock_wall",
+    "upgrade_aquatic:finger_biorock_wall",
+    "upgrade_aquatic:star_biorock_wall",
+    "upgrade_aquatic:moss_biorock_wall",
+    "upgrade_aquatic:petal_biorock_wall",
+    "upgrade_aquatic:branch_biorock_wall",
+    "upgrade_aquatic:rock_biorock_wall",
+    "upgrade_aquatic:pillow_biorock_wall",
+    "upgrade_aquatic:silk_biorock_wall",
+    "upgrade_aquatic:elder_biorock_wall",
+    "upgrade_aquatic:prismarine_biorock_wall",
+    "upgrade_aquatic:dead_biorock_wall"
+  ]
+}
