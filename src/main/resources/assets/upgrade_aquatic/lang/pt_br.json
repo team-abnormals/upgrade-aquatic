@@ -238,7 +238,7 @@
   "_comment": "Itens",
   
   "item.upgrade_aquatic.prismarine_rod": "Vara de prismarinho",
-  "item.upgrade_aquatic.thrasher_tooth": "Dente de turbilhão",
+  "item.upgrade_aquatic.thrasher_tooth": "Dente de debulhador",
   
   "item.upgrade_aquatic.nautilus_bucket": "Balde com náutilo",
   "item.upgrade_aquatic.pike_bucket": "Balde com lúcio",
@@ -276,7 +276,7 @@
   "entity.upgrade_aquatic.nautilus": "Náutilo",
   "entity.upgrade_aquatic.pike": "Lúcio",
   "entity.upgrade_aquatic.lionfish": "Peixe-leão",
-  "entity.upgrade_aquatic.thrasher": "Turbilhão",
+  "entity.upgrade_aquatic.thrasher": "Debulhador",
   
   "_comment": "Poções e efeitos",
   
