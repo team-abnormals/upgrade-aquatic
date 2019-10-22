@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:silk_biorock"
+  },
+  "result": "upgrade_aquatic:chiseled_silk_biorock",
+  "count": 1
+}

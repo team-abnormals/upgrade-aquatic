@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:finger_biorock"
+  },
+  "result": "upgrade_aquatic:finger_biorock_wall",
+  "count": 1
+}

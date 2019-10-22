@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:tooth_block"
+  },
+  "result": "upgrade_aquatic:tooth_slab",
+  "count": 2
+}

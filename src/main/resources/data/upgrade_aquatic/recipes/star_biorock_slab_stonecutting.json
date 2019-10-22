@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:star_biorock"
+  },
+  "result": "upgrade_aquatic:star_biorock_slab",
+  "count": 2
+}
