@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "upgrade_aquatic:pike"
+    "upgrade_aquatic:pike",
     "upgrade_aquatic:lionfish"
   ]
 }
