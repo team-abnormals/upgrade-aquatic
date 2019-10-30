@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:kelp"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:kelp_block",
+    "count": 1
+  }
+}

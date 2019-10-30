@@ -240,6 +240,23 @@
   "block.upgrade_aquatic.tooth_stairs": "Tooth Stairs",
   "block.upgrade_aquatic.tooth_wall": "Tooth Wall",
   
+  "block.upgrade_aquatic.tongue_kelp": "Tongue Kelp",
+  "block.upgrade_aquatic.thorny_kelp": "Thorny Kelp",
+  "block.upgrade_aquatic.ochre_kelp": "Ochre Kelp",
+  "block.upgrade_aquatic.polar_kelp": "Polar Kelp",
+  
+  "block.upgrade_aquatic.kelp_block": "Kelp Block",
+  "block.upgrade_aquatic.tongue_kelp_block": "Tongue Kelp Block",
+  "block.upgrade_aquatic.thorny_kelp_block": "Thorny Kelp Block",
+  "block.upgrade_aquatic.ochre_kelp_block": "Ochre Kelp Block",
+  "block.upgrade_aquatic.polar_kelp_block": "Polar Kelp Block",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone": "Kelpy Cobblestone",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone": "Tongue Kelpy Cobblestone",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone": "Thorny Kelpy Cobblestone",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone": "Ochre Kelpy Cobblestone",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone": "Polar Kelpy Cobblestone",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
