@@ -303,11 +303,29 @@ public class UABlocks {
 	public static Block OCHRE_KELP_BLOCK              = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK)).setRegistryName(Reference.MODID, "ochre_kelp_block");
 	public static Block POLAR_KELP_BLOCK              = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK)).setRegistryName(Reference.MODID, "polar_kelp_block");
 	
-	public static Block KELPY_COBBLESTONE             = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone");
-	public static Block TONGUE_KELPY_COBBLESTONE      = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone");
-	public static Block THORNY_KELPY_COBBLESTONE      = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "thorny_kelpy_cobblestone");
-	public static Block OCHRE_KELPY_COBBLESTONE       = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "ochre_kelpy_cobblestone");
-	public static Block POLAR_KELPY_COBBLESTONE       = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "polar_kelpy_cobblestone");
+	public static Block KELPY_COBBLESTONE             = new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone");
+	public static Block TONGUE_KELPY_COBBLESTONE      = new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone");
+	public static Block THORNY_KELPY_COBBLESTONE      = new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "thorny_kelpy_cobblestone");
+	public static Block OCHRE_KELPY_COBBLESTONE       = new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "ochre_kelpy_cobblestone");
+	public static Block POLAR_KELPY_COBBLESTONE       = new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "polar_kelpy_cobblestone");
+	
+	public static Block KELPY_COBBLESTONE_STAIRS         = new StairsBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone_stairs");
+	public static Block TONGUE_KELPY_COBBLESTONE_STAIRS  = new StairsBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone_stairs");
+	public static Block THORNY_KELPY_COBBLESTONE_STAIRS  = new StairsBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "thorny_kelpy_cobblestone_stairs");
+	public static Block OCHRE_KELPY_COBBLESTONE_STAIRS   = new StairsBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "ochre_kelpy_cobblestone_stairs");
+	public static Block POLAR_KELPY_COBBLESTONE_STAIRS   = new StairsBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "polar_kelpy_cobblestone_stairs");
+	
+	public static Block KELPY_COBBLESTONE_SLAB         = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone_slab");
+	public static Block TONGUE_KELPY_COBBLESTONE_SLAB  = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone_slab");
+	public static Block THORNY_KELPY_COBBLESTONE_SLAB  = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "thorny_kelpy_cobblestone_slab");
+	public static Block OCHRE_KELPY_COBBLESTONE_SLAB   = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "ochre_kelpy_cobblestone_slab");
+	public static Block POLAR_KELPY_COBBLESTONE_SLAB   = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "polar_kelpy_cobblestone_slab");
+	
+	public static Block KELPY_COBBLESTONE_WALL         = new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone_wall");
+	public static Block TONGUE_KELPY_COBBLESTONE_WALL  = new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone_wall");
+	public static Block THORNY_KELPY_COBBLESTONE_WALL  = new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "thorny_kelpy_cobblestone_wall");
+	public static Block OCHRE_KELPY_COBBLESTONE_WALL   = new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "ochre_kelpy_cobblestone_wall");
+	public static Block POLAR_KELPY_COBBLESTONE_WALL   = new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "polar_kelpy_cobblestone_wall");
 	
 	public static final Map<Block, Block> BIOROCK_CONVERSION_MAP = Maps.newHashMap();
 	
@@ -375,7 +393,10 @@ public class UABlocks {
 		    CHISELED_BIOROCK, BUBBLE_CHISELED_BIOROCK, HORN_CHISELED_BIOROCK, TUBE_CHISELED_BIOROCK, BRAIN_CHISELED_BIOROCK, FIRE_CHISELED_BIOROCK, ACAN_CHISELED_BIOROCK, FINGER_CHISELED_BIOROCK, STAR_CHISELED_BIOROCK, MOSS_CHISELED_BIOROCK, PETAL_CHISELED_BIOROCK, BRANCH_CHISELED_BIOROCK, ROCK_CHISELED_BIOROCK, PILLOW_CHISELED_BIOROCK, SILK_CHISELED_BIOROCK, PRISMARINE_CHISELED_BIOROCK, ELDER_CHISELED_BIOROCK, DEAD_CHISELED_BIOROCK,
 			TONGUE_KELP, OCHRE_KELP, THORNY_KELP, POLAR_KELP,
 		    KELP_BLOCK, TONGUE_KELP_BLOCK, OCHRE_KELP_BLOCK, THORNY_KELP_BLOCK, POLAR_KELP_BLOCK,
-		    KELPY_COBBLESTONE, TONGUE_KELPY_COBBLESTONE, OCHRE_KELPY_COBBLESTONE, THORNY_KELPY_COBBLESTONE, POLAR_KELPY_COBBLESTONE
+		    KELPY_COBBLESTONE, TONGUE_KELPY_COBBLESTONE, OCHRE_KELPY_COBBLESTONE, THORNY_KELPY_COBBLESTONE, POLAR_KELPY_COBBLESTONE,
+		    KELPY_COBBLESTONE_SLAB, TONGUE_KELPY_COBBLESTONE_SLAB, OCHRE_KELPY_COBBLESTONE_SLAB, THORNY_KELPY_COBBLESTONE_SLAB, POLAR_KELPY_COBBLESTONE_SLAB,
+		    KELPY_COBBLESTONE_STAIRS, TONGUE_KELPY_COBBLESTONE_STAIRS, OCHRE_KELPY_COBBLESTONE_STAIRS, THORNY_KELPY_COBBLESTONE_STAIRS, POLAR_KELPY_COBBLESTONE_STAIRS,
+		    KELPY_COBBLESTONE_WALL, TONGUE_KELPY_COBBLESTONE_WALL, OCHRE_KELPY_COBBLESTONE_WALL, THORNY_KELPY_COBBLESTONE_WALL, POLAR_KELPY_COBBLESTONE_WALL
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -605,5 +626,23 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE, ItemGroup.BUILDING_BLOCKS));
+
+		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
+		
+		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_SLAB, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_COBBLESTONE_SLAB, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_SLAB, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_SLAB, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_SLAB, ItemGroup.BUILDING_BLOCKS));
+	
+		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
 	}
 }

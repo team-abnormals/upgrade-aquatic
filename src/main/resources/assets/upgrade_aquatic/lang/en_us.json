@@ -257,6 +257,24 @@
   "block.upgrade_aquatic.ochre_kelpy_cobblestone": "Ochre Kelpy Cobblestone",
   "block.upgrade_aquatic.polar_kelpy_cobblestone": "Polar Kelpy Cobblestone",
   
+  "block.upgrade_aquatic.kelpy_cobblestone_stairs": "Kelpy Cobblestone Stairs",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_stairs": "Tongue Kelpy Cobblestone Stairs",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_stairs": "Thorny Kelpy Cobblestone Stairs",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_stairs": "Ochre Kelpy Cobblestone Stairs",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_stairs": "Polar Kelpy Cobblestone Stairs",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_slab": "Kelpy Cobblestone Slab",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_slab": "Tongue Kelpy Cobblestone Slab",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_slab": "Thorny Kelpy Cobblestone Slab",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_slab": "Ochre Kelpy Cobblestone Slab",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_slab": "Polar Kelpy Cobblestone Slab",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_wall": "Kelpy Cobblestone Wall",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_wall": "Tongue Kelpy Cobblestone Wall",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_wall": "Thorny Kelpy Cobblestone Wall",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_wall": "Ochre Kelpy Cobblestone Wall",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_wall": "Polar Kelpy Cobblestone Wall",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
