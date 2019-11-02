@@ -244,6 +244,10 @@
   "block.upgrade_aquatic.thorny_kelp": "Thorny Kelp",
   "block.upgrade_aquatic.ochre_kelp": "Ochre Kelp",
   "block.upgrade_aquatic.polar_kelp": "Polar Kelp",
+  "block.upgrade_aquatic.tongue_kelp_plant": "Tongue Kelp Plant",
+  "block.upgrade_aquatic.thorny_kelp_plant": "Thorny Kelp Plant",
+  "block.upgrade_aquatic.ochre_kelp_plant": "Ochre Kelp Plant",
+  "block.upgrade_aquatic.polar_kelp_plant": "Polar Kelp Plant",
   
   "block.upgrade_aquatic.kelp_block": "Kelp Block",
   "block.upgrade_aquatic.tongue_kelp_block": "Tongue Kelp Block",
