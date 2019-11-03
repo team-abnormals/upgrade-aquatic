@@ -2,13 +2,8 @@ package com.teamabnormals.upgrade_aquatic.api.util;
 
 import java.util.Random;
 
-import com.google.common.collect.ImmutableMap;
-
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.merchant.villager.VillagerTrades;
 import net.minecraft.entity.merchant.villager.VillagerTrades.ITrade;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,25 +16,6 @@ import net.minecraft.item.MerchantOffer;
  *
  */
 public class EntityUtil {
-
-	/**
-	 * Used to create a new trade map for a villager's trade list
-	 * @param ImmutableMap<Integer, VillagerTrades.ITrade[]> map - A immutable map of an integer and array of trades
-	 * Example: ImmutableMap.of(1, new VillagerTrades.ITrade[] {
-	 *     new EntityUtil.ItemsForEmeraldsTrade(Items.SEA_PICKLE, 2, 1, 5, 1)
-	 * })
-	 */
-	public static Int2ObjectMap<VillagerTrades.ITrade[]> newTradeMap(ImmutableMap<Integer, VillagerTrades.ITrade[]> map) {
-		return new Int2ObjectOpenHashMap<>(map);
-	}
-	
-	@Deprecated
-	public static Int2ObjectMap<VillagerTrades.ITrade[]> combineTradeMap(Int2ObjectMap<VillagerTrades.ITrade[]> originalMap, ImmutableMap<Integer, VillagerTrades.ITrade[]> newMap) {
-		Int2ObjectOpenHashMap<VillagerTrades.ITrade[]> map = (Int2ObjectOpenHashMap<ITrade[]>) originalMap;
-		map.putAll(newMap);
-		return map;
-	}
-	
 	/**
 	 * Builder Class for Basic Emerald Trading
 	 */
