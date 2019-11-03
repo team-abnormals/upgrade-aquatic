@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+  "upgrade_aquatic:potted_pickerelweed_blue",
+  "upgrade_aquatic:potted_pickerelweed_purple",
+  "upgrade_aquatic:potted_searocket_white",
+  "upgrade_aquatic:potted_searocket_pink"
+  ]
+}

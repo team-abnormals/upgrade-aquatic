@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
+    "upgrade_aquatic:kelpy_cobblestone_slab",
+    "upgrade_aquatic:polar_kelpy_cobblestone_slab",
+    "upgrade_aquatic:thorny_kelpy_cobblestone_slab",
+    "upgrade_aquatic:ochre_kelpy_cobblestone_slab",
+    "upgrade_aquatic:tongue_kelpy_cobblestone_slab",
     "upgrade_aquatic:tooth_slab",
     "upgrade_aquatic:biorock_slab",
     "upgrade_aquatic:bubble_biorock_slab",

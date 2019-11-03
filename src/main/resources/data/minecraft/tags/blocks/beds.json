@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "upgrade_aquatic:bedroll",
+    "upgrade_aquatic:red_bedroll",
+    "upgrade_aquatic:black_bedroll",
+    "upgrade_aquatic:blue_bedroll",
+    "upgrade_aquatic:brown_bedroll",
+    "upgrade_aquatic:cyan_bedroll",
+    "upgrade_aquatic:gray_bedroll",
+    "upgrade_aquatic:green_bedroll",
+    "upgrade_aquatic:light_blue_bedroll",
+    "upgrade_aquatic:light_gray_bedroll",
+    "upgrade_aquatic:lime_bedroll",
+    "upgrade_aquatic:magenta_bedroll",
+    "upgrade_aquatic:orange_bedroll",
+    "upgrade_aquatic:pink_bedroll",
+    "upgrade_aquatic:purple_bedroll",
+    "upgrade_aquatic:white_bedroll",
+    "upgrade_aquatic:yellow_bedroll"
+  ]
+}
