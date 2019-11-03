@@ -27,7 +27,7 @@ public class UAParticles {
 	public static class RegisterParticleTypes {
 		
 		@SubscribeEvent
-        public static void registerParticleTypes(RegistryEvent.Register<ParticleType<?>> event) {
+		public static void registerParticleTypes(RegistryEvent.Register<ParticleType<?>> event) {
 			event.getRegistry().registerAll(
 				PRISMARINE_SHOWER, ELDER_PRISMARINE_SHOWER,
 				SPECTRAL_CONSUME,
@@ -41,7 +41,7 @@ public class UAParticles {
 	public static class RegisterParticleFactories {
 		
 		@SubscribeEvent
-        public static void registerParticleTypes(ParticleFactoryRegisterEvent event) {
+		public static void registerParticleTypes(ParticleFactoryRegisterEvent event) {
 			Minecraft.getInstance().particles.registerFactory(PRISMARINE_SHOWER, ParticlePrismarineShower.Factory::new);
 			Minecraft.getInstance().particles.registerFactory(ELDER_PRISMARINE_SHOWER, ParticleElderPrismarineShower.Factory::new);
 			Minecraft.getInstance().particles.registerFactory(SPECTRAL_CONSUME, ParticleSpectralConsume.Factory::new);
