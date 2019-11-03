@@ -43,7 +43,7 @@ public class EntityUtil {
 	/**
 	 * Builder Class for Basic Emerald Trading
 	 */
-	public static class ItemsForEmeraldsTrade implements VillagerTrades.ITrade {
+	public static class ItemsForEmeraldsTrade implements ITrade {
 		private final ItemStack itemstack;
 		private final int stackSize;
 		private final int recievedSize;

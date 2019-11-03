@@ -1,9 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.core.events;
 
+import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -36,6 +39,7 @@ import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
+import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -104,6 +108,30 @@ public class EntityEvents {
 				}
 			}
 		}
+	}
+	
+	@SubscribeEvent
+	public static void onWandererTradesEvent(WandererTradesEvent event) {
+		//Common
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.SEAROCKET_WHITE, 1, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.SEAROCKET_PINK, 1, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.PICKERELWEED_BLUE, 1, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.PICKERELWEED_PURPLE, 1, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.FINGER_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.ACAN_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BRANCH_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.PILLOW_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.SILK_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.PETAL_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.MOSS_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.ROCK_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.STAR_CORAL_BLOCK, 3, 1, 8, 1));
+		
+		//Buckets
+		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.PIKE_BUCKET, 5, 1, 4, 1));
+		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.LIONFISH_BUCKET, 5, 1, 4, 1));
+		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(Items.NAUTILUS_SHELL, 5, 1, 5, 1));
+		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.NAUTILUS_BUCKET, 5, 1, 4, 1));
 	}
 	
 }
