@@ -1,24 +1,29 @@
 package com.teamabnormals.upgrade_aquatic.client.particle;
 
+import net.minecraft.client.particle.IAnimatedSprite;
+import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ParticleSpectralConsume extends UAParticle {
+public class ParticleSpectralConsume extends SpriteTexturedParticle {
+	protected final IAnimatedSprite animatedSprite;
 	private final float scale;
 	private final int MAX_FRAME_ID = 3;
 	protected int currentFrame = 0;
 	private boolean directionRight = true;
 	private int lastTick = 0;
 
-	public ParticleSpectralConsume(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
+	public ParticleSpectralConsume(IAnimatedSprite animatedSprite, World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
 		super(world, posX, posY, posZ, motionX, motionY, motionZ);
 		this.scale = this.particleScale = this.rand.nextFloat() * 0.6F + 0.2F;
 		this.particleRed = 1f;
@@ -28,11 +33,12 @@ public class ParticleSpectralConsume extends UAParticle {
 		this.motionY = motionY * (double)0.2F + (Math.random() * 2.0D - 1.0D) * (double)0.01F;
 		this.motionZ = motionZ * (double)0.2F + (Math.random() * 2.0D - 1.0D) * (double)0.01F;
 		this.maxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
+		this.animatedSprite = animatedSprite;
+		this.selectSpriteWithAge(animatedSprite);
 	}
 	
 	@Override
-    public void onPreRender(BufferBuilder buffer, ActiveRenderInfo activeInfo, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-        super.onPreRender(buffer, activeInfo, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+    public void renderParticle(BufferBuilder buffer, ActiveRenderInfo activeInfo, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
     	Entity entity = activeInfo.getRenderViewEntity();
         if (entity.ticksExisted >= this.lastTick + 5) {
             if (this.currentFrame == MAX_FRAME_ID) {
@@ -45,12 +51,22 @@ public class ParticleSpectralConsume extends UAParticle {
         }
         float f = ((float) this.age + partialTicks) / (float) this.maxAge;
         this.particleScale = this.scale * (1f - f * f * 0.5f);
+        super.renderParticle(buffer, activeInfo, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
     }
 	
 	@Override
     public void tick() {
 		super.tick();
 		this.prevParticleAngle = this.particleAngle;
+		
+		if(this.isAlive()) {
+            this.selectSpriteWithAge(this.animatedSprite);
+        }
+    }
+	
+	@Override
+    public IParticleRenderType getRenderType() {
+    	return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 	
 	@Override
@@ -66,20 +82,18 @@ public class ParticleSpectralConsume extends UAParticle {
 		}
 		return j | k << 16;
     }
-
-	@Override
-	ResourceLocation getTexture() {
-		return UAParticleSprites.SPECTRAL_FRAMES[this.currentFrame];
-	}
 	
-	@OnlyIn(Dist.CLIENT)
-	public static class Factory implements IParticle {
+	public static class Factory implements IParticleFactory<BasicParticleType> {
+		private IAnimatedSprite animatedSprite;
+
+    	public Factory(IAnimatedSprite animatedSprite) {
+    		this.animatedSprite = animatedSprite;
+    	}
     	
-		@Override
-		public Particle makeParticle(World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... params) {
-			return new ParticleSpectralConsume(world, x, y, z, xSpeed, ySpeed, zSpeed);
-		}
-        
+        @Override
+        public Particle makeParticle(BasicParticleType type, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new ParticleSpectralConsume(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);
+        }
 	}
 
 }

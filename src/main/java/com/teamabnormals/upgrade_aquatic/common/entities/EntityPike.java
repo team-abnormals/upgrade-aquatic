@@ -214,7 +214,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 						if(this.getPikeType() == 7) {
 							if (this.world.isRemote) {
 								for(int i = 0; i < 3; ++i) {
-									UAParticles.SPECTRAL_CONSUME.spawn(this.world, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
+									this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
 								}
 							}
 						}
@@ -227,7 +227,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 					if(this.getPikeType() == 7) {
 						if (this.world.isRemote) {
 							for(int i = 0; i < 3; ++i) {
-								UAParticles.SPECTRAL_CONSUME.spawn(this.world, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
+								this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
 							}
 						}
 					}

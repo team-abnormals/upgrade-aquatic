@@ -13,6 +13,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -54,7 +55,7 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
         double d0 = (double) pos.getX() + 0.5d + xOffset;
         double d1 = (double) pos.getY() + 0.5d + yOffset;
         double d2 = (double) pos.getZ() + 0.5d + zOffset;
-        UAParticles.JELLY_TORCH.spawn(world, d0, d1, d2, 0d, 0.0d, 0d, torchType.ordinal());
+        world.addParticle(getTorchParticleType(this.torchType), d0, d1, d2, 0d, 0.0d, 0d);
     }
 
 	@Override
@@ -111,4 +112,26 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
 			return false;
 	    }
 	}
+	
+	public static BasicParticleType getTorchParticleType(JellyTorchType type) {
+		switch(type) {
+			default:
+         	case PINK:
+         		return UAParticles.PINK_JELLY_FLAME;
+         	case PURPLE:
+         		return UAParticles.PURPLE_JELLY_FLAME;
+         	case BLUE:
+                return UAParticles.BLUE_JELLY_FLAME;
+         	case GREEN:
+                return UAParticles.GREEN_JELLY_FLAME;
+         	case YELLOW:
+                return UAParticles.YELLOW_JELLY_FLAME;
+         	case ORANGE:
+                return UAParticles.ORANGE_JELLY_FLAME;
+         	case RED:
+                return UAParticles.RED_JELLY_FLAME;
+         	case WHITE:
+                return UAParticles.WHITE_JELLY_FLAME;
+        }
+    }
 }
