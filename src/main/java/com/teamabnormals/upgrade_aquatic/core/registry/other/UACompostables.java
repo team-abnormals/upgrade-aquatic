@@ -18,6 +18,7 @@ public class UACompostables {
 		ComposterBlock.registerCompostable(0.3F, UABlocks.THORNY_KELP);
 		ComposterBlock.registerCompostable(0.3F, UABlocks.OCHRE_KELP);
 		ComposterBlock.registerCompostable(0.3F, UABlocks.POLAR_KELP);
+		ComposterBlock.registerCompostable(0.5F, UABlocks.KELP_BLOCK);
 		ComposterBlock.registerCompostable(0.5F, UABlocks.TONGUE_KELP_BLOCK);
 		ComposterBlock.registerCompostable(0.5F, UABlocks.THORNY_KELP_BLOCK);
 		ComposterBlock.registerCompostable(0.5F, UABlocks.OCHRE_KELP_BLOCK);
