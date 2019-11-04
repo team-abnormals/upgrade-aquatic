@@ -257,6 +257,25 @@
   "block.upgrade_aquatic.ochre_kelpy_cobblestone": "Pedregulho com algas-ocres",
   "block.upgrade_aquatic.polar_kelpy_cobblestone": "Pedregulho com algas-polares",
   
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_stairs": "Escadas de pedregulho com algas",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_stairs": "Escadas de pedregulho com algas-língua",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_stairs": "Escadas de pedregulho com algas-espinhosas",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_stairs": "Escadas de pedregulho com algas-ocres",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_stairs": "Escadas de pedregulho com algas-polares",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_slab": "Laje de pedregulho com algas",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_slab": "Laje de pedregulho com algas-língua",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_slab": "Laje de pedregulho com algas-espinhosas",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_slab": "Laje de pedregulho com algas-ocre",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_slab": "Laje de pedregulho com algas-polares",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_wall": "Muro de pedregulho com algas",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_wall": "Muro de pedregulho com algas-língua",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_wall": "Muro de pedregulho com algas-espinhosas",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_wall": "Muro de pedregulho com algas-ocres",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_wall": "Muro de pedregulho com algas-polares",
+  
   "_comment": "Itens",
   
   "item.upgrade_aquatic.prismarine_rod": "Vara de prismarinho",
