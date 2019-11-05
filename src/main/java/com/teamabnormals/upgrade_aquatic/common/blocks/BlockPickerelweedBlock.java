@@ -47,7 +47,7 @@ public class BlockPickerelweedBlock extends DirectionalBlock implements IBucketP
 	}
 	
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPES[state.get(FACING).getIndex()];
 	}
 	
