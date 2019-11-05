@@ -10,8 +10,8 @@ import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
@@ -350,7 +350,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		for (int yy = this.getPosition().getY() - 6; yy <= this.getPosition().getY() + 6; yy++) {
 			for (int xx = this.getPosition().getX() - 12; xx <= this.getPosition().getX() + 12; xx++) {
 				for (int zz = this.getPosition().getZ() - 12; zz <= this.getPosition().getZ() + 12; zz++) {
-					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeedDouble) {
+					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweedDouble) {
 						pickerelweeds.add(new BlockPos(xx, yy, zz));
 					}
 				}
@@ -616,7 +616,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	public boolean isHidingInPickerelweed() {
-		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelWeed || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelWeedDouble;
+		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelweed || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelweedDouble;
 	}
 
 	public static void addSpawn() {

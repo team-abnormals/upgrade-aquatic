@@ -279,6 +279,11 @@
   "block.upgrade_aquatic.ochre_kelpy_cobblestone_wall": "Ochre Kelpy Cobblestone Wall",
   "block.upgrade_aquatic.polar_kelpy_cobblestone_wall": "Polar Kelpy Cobblestone Wall",
   
+  "block.upgrade_aquatic.pickerelweed_blue_block": "Blue Pickerelweed Block",
+  "block.upgrade_aquatic.pickerelweed_purple_block": "Purple Pickerelweed Block",
+  "block.upgrade_aquatic.boiled_pickerelweed_blue_block": "Boiled Blue Pickerelweed Block",
+  "block.upgrade_aquatic.boiled_pickerelweed_purple_block": "Boiled Purple Pickerelweed Block",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",

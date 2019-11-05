@@ -39,13 +39,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class BlockPickerelWeedDouble extends Block implements IGrowable, IWaterLoggable {
+public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterLoggable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final BooleanProperty FAKE_WATERLOGGED = BooleanProperty.create("fake_waterlogged");
 
-	public BlockPickerelWeedDouble(Block.Properties properties) {
+	public BlockPickerelweedDouble(Block.Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER).with(FAKE_WATERLOGGED, false));
 	}

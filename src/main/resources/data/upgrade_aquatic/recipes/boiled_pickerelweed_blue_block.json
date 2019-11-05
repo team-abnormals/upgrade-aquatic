@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:boiled_pickerelweed_blue"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:boiled_pickerelweed_blue_block",
+    "count": 1
+  }
+}

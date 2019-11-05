@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.Lists;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
@@ -87,7 +87,7 @@ public class UAEntities {
     	for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
-					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeedDouble) {
+					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweedDouble) {
 						if(random.nextFloat() <= 0.25F)
 							if(world.getBiome(pos).getCategory() == Category.SWAMP) {
 								return random.nextFloat() <= 0.25 ? true : false;

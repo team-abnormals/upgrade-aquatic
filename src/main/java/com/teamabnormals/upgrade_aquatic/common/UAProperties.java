@@ -42,4 +42,7 @@ public class UAProperties {
 	public static final Block.Properties BEDROLL      = Block.Properties.create(Material.WOOL).hardnessAndResistance(0.2F, 0.3F).sound(SoundType.CLOTH);
 	public static final Block.Properties PICKERELWEED = Block.Properties.create(Material.PLANTS, MaterialColor.GRASS).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	
+	public static final Block.Properties PICKERELWEED_BLOCK(boolean isBoiled){
+		return isBoiled ? Block.Properties.create(Material.PLANTS, MaterialColor.FOLIAGE).hardnessAndResistance(0.5F, 5).sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.GRASS).hardnessAndResistance(0.5F, 5).sound(SoundType.WET_GRASS);
+	}
 }

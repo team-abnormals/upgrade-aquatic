@@ -22,6 +22,7 @@ public class UAParticles {
 	public static final BasicParticleType ORANGE_JELLY_FLAME = createBasicParticleType(false, "orange_jelly_flame");
 	public static final BasicParticleType RED_JELLY_FLAME = createBasicParticleType(false, "red_jelly_flame");
 	public static final BasicParticleType WHITE_JELLY_FLAME = createBasicParticleType(false, "white_jelly_flame");
+	public static final BasicParticleType SONAR = createBasicParticleType(true, "sonar");
 	
 	@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegisterParticleTypes {
@@ -31,7 +32,8 @@ public class UAParticles {
 			event.getRegistry().registerAll(
 				PRISMARINE_SHOWER, ELDER_PRISMARINE_SHOWER,
 				SPECTRAL_CONSUME,
-				PINK_JELLY_FLAME, PURPLE_JELLY_FLAME, BLUE_JELLY_FLAME, GREEN_JELLY_FLAME, YELLOW_JELLY_FLAME, ORANGE_JELLY_FLAME, RED_JELLY_FLAME, WHITE_JELLY_FLAME
+				PINK_JELLY_FLAME, PURPLE_JELLY_FLAME, BLUE_JELLY_FLAME, GREEN_JELLY_FLAME, YELLOW_JELLY_FLAME, ORANGE_JELLY_FLAME, RED_JELLY_FLAME, WHITE_JELLY_FLAME,
+				SONAR
 			);
 		}
 		
@@ -53,6 +55,7 @@ public class UAParticles {
 			Minecraft.getInstance().particles.registerFactory(ORANGE_JELLY_FLAME, ParticleJellyTorch.Factory::new);
 			Minecraft.getInstance().particles.registerFactory(RED_JELLY_FLAME, ParticleJellyTorch.Factory::new);
 			Minecraft.getInstance().particles.registerFactory(WHITE_JELLY_FLAME, ParticleJellyTorch.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(SONAR, ParticleSonar.Factory::new);
 		}
 		
 	}

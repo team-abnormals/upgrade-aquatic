@@ -31,11 +31,11 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
-public class BlockPickerelWeed extends Block implements IGrowable, IWaterLoggable {
+public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	
-	public BlockPickerelWeed(Properties properties) {
+	public BlockPickerelweed(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, Boolean.valueOf(false)));
 	}
@@ -64,7 +64,7 @@ public class BlockPickerelWeed extends Block implements IGrowable, IWaterLoggabl
 	
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, BlockState state) {
-		BlockPickerelWeedDouble doubleplantblock = (BlockPickerelWeedDouble) (this == UABlocks.PICKERELWEED_BLUE ? UABlocks.PICKERELWEED_TALL_BLUE : UABlocks.PICKERELWEED_TALL_PURPLE);
+		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (this == UABlocks.PICKERELWEED_BLUE ? UABlocks.PICKERELWEED_TALL_BLUE : UABlocks.PICKERELWEED_TALL_PURPLE);
 		if(doubleplantblock.getDefaultState().isValidPosition(world, pos) && world.isAirBlock(pos.up()) || doubleplantblock.getDefaultState().isValidPosition(world, pos) && world.getFluidState(pos.up()).isTagged(FluidTags.WATER)) {
 			doubleplantblock.placeAt(world, pos, 2);
 		}

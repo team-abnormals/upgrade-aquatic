@@ -11,8 +11,9 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorchWall;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSearocket;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSpine;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoral;
@@ -181,10 +182,10 @@ public class UABlocks {
     public static Block BEDROLL_RED                   = new BlockBedroll(DyeColor.RED, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_red");
     public static Block BEDROLL_BLACK                 = new BlockBedroll(DyeColor.BLACK, UAProperties.BEDROLL).setRegistryName(Reference.MODID, "bedroll_black");
 	
-    public static Block PICKERELWEED_BLUE 	 	      = new BlockPickerelWeed(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_blue");
-    public static Block PICKERELWEED_TALL_BLUE 	 	  = new BlockPickerelWeedDouble(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_tall_blue");
-    public static Block PICKERELWEED_PURPLE 	 	  = new BlockPickerelWeed(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_purple");
-    public static Block PICKERELWEED_TALL_PURPLE      = new BlockPickerelWeedDouble(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_tall_purple");
+    public static Block PICKERELWEED_BLUE 	 	      = new BlockPickerelweed(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_blue");
+    public static Block PICKERELWEED_TALL_BLUE 	 	  = new BlockPickerelweedDouble(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_tall_blue");
+    public static Block PICKERELWEED_PURPLE 	 	  = new BlockPickerelweed(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_purple");
+    public static Block PICKERELWEED_TALL_PURPLE      = new BlockPickerelweedDouble(UAProperties.PICKERELWEED).setRegistryName(Reference.MODID, "pickerel_weed_tall_purple");
     
     public static Block SEAROCKET_WHITE               = new BlockSearocket(UAProperties.SEAROCKET(false)).setRegistryName(Reference.MODID, "searocket_white");
     public static Block SEAROCKET_PINK				  = new BlockSearocket(UAProperties.SEAROCKET(true)).setRegistryName(Reference.MODID, "searocket_pink");
@@ -333,6 +334,11 @@ public class UABlocks {
 	public static Block OCHRE_KELPY_COBBLESTONE_WALL   = new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "ochre_kelpy_cobblestone_wall");
 	public static Block POLAR_KELPY_COBBLESTONE_WALL   = new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "polar_kelpy_cobblestone_wall");
 	
+	public static Block BLUE_PICKERELWEED_BLOCK          = new BlockPickerelweedBlock(UAProperties.PICKERELWEED_BLOCK(false), false).setRegistryName(Reference.MODID, "pickerelweed_blue_block");
+	public static Block PURPLE_PICKERELWEED_BLOCK        = new BlockPickerelweedBlock(UAProperties.PICKERELWEED_BLOCK(false), false).setRegistryName(Reference.MODID, "pickerelweed_purple_block");
+	public static Block BOILED_BLUE_PICKERELWEED_BLOCK   = new BlockPickerelweedBlock(UAProperties.PICKERELWEED_BLOCK(true), true).setRegistryName(Reference.MODID, "boiled_pickerelweed_blue_block");
+	public static Block BOILED_PURPLE_PICKERELWEED_BLOCK = new BlockPickerelweedBlock(UAProperties.PICKERELWEED_BLOCK(true), true).setRegistryName(Reference.MODID, "boiled_pickerelweed_purple_block");
+	
 	public static final Map<Block, Block> BIOROCK_CONVERSION_MAP = Maps.newHashMap();
 	
 	static {
@@ -419,7 +425,8 @@ public class UABlocks {
 		    KELPY_COBBLESTONE, TONGUE_KELPY_COBBLESTONE, OCHRE_KELPY_COBBLESTONE, THORNY_KELPY_COBBLESTONE, POLAR_KELPY_COBBLESTONE,
 		    KELPY_COBBLESTONE_SLAB, TONGUE_KELPY_COBBLESTONE_SLAB, OCHRE_KELPY_COBBLESTONE_SLAB, THORNY_KELPY_COBBLESTONE_SLAB, POLAR_KELPY_COBBLESTONE_SLAB,
 		    KELPY_COBBLESTONE_STAIRS, TONGUE_KELPY_COBBLESTONE_STAIRS, OCHRE_KELPY_COBBLESTONE_STAIRS, THORNY_KELPY_COBBLESTONE_STAIRS, POLAR_KELPY_COBBLESTONE_STAIRS,
-		    KELPY_COBBLESTONE_WALL, TONGUE_KELPY_COBBLESTONE_WALL, OCHRE_KELPY_COBBLESTONE_WALL, THORNY_KELPY_COBBLESTONE_WALL, POLAR_KELPY_COBBLESTONE_WALL
+		    KELPY_COBBLESTONE_WALL, TONGUE_KELPY_COBBLESTONE_WALL, OCHRE_KELPY_COBBLESTONE_WALL, THORNY_KELPY_COBBLESTONE_WALL, POLAR_KELPY_COBBLESTONE_WALL,
+		    BLUE_PICKERELWEED_BLOCK, PURPLE_PICKERELWEED_BLOCK, BOILED_BLUE_PICKERELWEED_BLOCK, BOILED_PURPLE_PICKERELWEED_BLOCK
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -667,5 +674,10 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
+		
+		registry.register(RegistryUtils.createSimpleItemBlock(BLUE_PICKERELWEED_BLOCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PURPLE_PICKERELWEED_BLOCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BOILED_BLUE_PICKERELWEED_BLOCK, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BOILED_PURPLE_PICKERELWEED_BLOCK, ItemGroup.BUILDING_BLOCKS));
 	}
 }

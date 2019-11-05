@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:pickerel_weed_blue"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:pickerelweed_blue_block",
+    "count": 1
+  }
+}

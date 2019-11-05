@@ -5,8 +5,8 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
@@ -114,7 +114,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 				patterns[2] = 6;
 		}
 		BlockPos startPos = pos;
-		BlockPickerelWeedDouble doubleplantblock = (BlockPickerelWeedDouble) (!purple ? UABlocks.PICKERELWEED_TALL_BLUE : UABlocks.PICKERELWEED_TALL_PURPLE);
+		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (!purple ? UABlocks.PICKERELWEED_TALL_BLUE : UABlocks.PICKERELWEED_TALL_PURPLE);
 		MathUtil.Equation r = (theta) -> {
 			return (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
 		};
@@ -131,9 +131,9 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 								IFluidState ifluidstate = world.getFluidState(placingPos);
 								if(PURPLE_PICKERELWEED.isValidPosition(world, placingPos) && world.getBlockState(placingPos.up()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
 									if(purple) {
-										world.setBlockState(placingPos, PURPLE_PICKERELWEED.with(BlockPickerelWeed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
+										world.setBlockState(placingPos, PURPLE_PICKERELWEED.with(BlockPickerelweed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
 									} else {
-										world.setBlockState(placingPos, BLUE_PICKERELWEED.with(BlockPickerelWeed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
+										world.setBlockState(placingPos, BLUE_PICKERELWEED.with(BlockPickerelweed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
 									}
 								} else if(PURPLE_PICKERELWEED.isValidPosition(world, placingPos)) {
 									doubleplantblock.placeAt(world, placingPos, 2);

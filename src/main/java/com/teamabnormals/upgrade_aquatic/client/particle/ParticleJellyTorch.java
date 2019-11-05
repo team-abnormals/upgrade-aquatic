@@ -39,11 +39,6 @@ public class ParticleJellyTorch extends SpriteTexturedParticle {
         this.animatedSprite = animatedSprite;
         this.selectSpriteWithAge(animatedSprite);
     }
-	
-	@Override
-    public void move(double x, double y, double z) {
-    	super.move(x, y, z);
-    }
 
     @Override
     public void renderParticle(BufferBuilder buffer, ActiveRenderInfo activeInfo, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {

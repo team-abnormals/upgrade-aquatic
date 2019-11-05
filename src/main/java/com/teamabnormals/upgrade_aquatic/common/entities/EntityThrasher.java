@@ -7,6 +7,8 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import javax.vecmath.Vector3f;
 
+import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
+
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;
@@ -271,6 +273,10 @@ public class EntityThrasher extends MonsterEntity {
 	
 	protected void pulsateSonar() {
 		this.playSound(SoundEvents.BLOCK_CONDUIT_ACTIVATE, 8.5F, 0.9F);
+		if(this.world.isRemote) {
+			Vec3d look = this.getLook(1.0F).normalize();
+			this.world.addParticle(UAParticles.SONAR, this.posX, this.posY, this.posZ, look.x * 0.6F, look.y * 0.6F, look.z * 0.6F);
+		}
 	}
 	
 	public void travel(Vec3d p_213352_1_) {
@@ -343,13 +349,16 @@ public class EntityThrasher extends MonsterEntity {
 				if(!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
 					knockbackResistance.applyModifier(KNOCKBACK_RESISTANCE_MODIFIER);
 				}
+				
 				if(this.sonarTicks % 80 == 0) {
 					this.pulsateSonar();
 				}
+				
 				if(this.sonarTicks >= 159) {
 					this.setTicksTillSonar((rand.nextInt(100) + 75) * 20);
 					this.setSonarActive(false);
 				}
+				
 				this.getNavigator().clearPath();
 				this.finSpeed = 0.25F;
 				this.sonarTicks++;
@@ -459,8 +468,8 @@ public class EntityThrasher extends MonsterEntity {
 		public void tick() {
 			if (this.isLooking) {
 				this.isLooking = false;
-				this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.func_220678_h() + 20.0F, this.deltaLookYaw);
-				this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, this.func_220677_g() + 10.0F, this.deltaLookPitch);
+				this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.func_220678_h(), this.deltaLookYaw);
+				this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, this.func_220677_g(), this.deltaLookPitch);
 			} else {
 				if (this.mob.getNavigator().noPath()) {
 					this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, 0.0F, 5.0F);
