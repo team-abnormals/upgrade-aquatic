@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=down": { "model": "block/boiled_pickerelweed_block_blue_top", "x": 180 },
+        "facing=up": { "model": "block/boiled_pickerelweed_block_blue_top" },
+        "facing=north": { "model": "block/boiled_pickerelweed_block_blue_top", "x": 90 },
+        "facing=south": { "model": "block/boiled_pickerelweed_block_blue_top", "x": 90, "y": 180 },
+        "facing=west": { "model": "block/boiled_pickerelweed_block_blue_top", "x": 90, "y": 270 },
+        "facing=east": { "model": "block/boiled_pickerelweed_block_blue_top", "x": 90, "y": 90 }
+    }
+}

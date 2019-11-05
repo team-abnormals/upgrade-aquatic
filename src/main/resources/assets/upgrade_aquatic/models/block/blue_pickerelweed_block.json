@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "top": "block/pickerelweed_block_blue_top",
+        "side": "block/pickerelweed_block_blue_side",
+        "bottom": "block/pickerelweed_block_blue_bottom"
+    }
+}
