@@ -198,7 +198,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
 	public void livingTick() {
-		eatTicks++;
+		this.eatTicks++;
 		if (!this.isInWater() && this.onGround && this.collidedVertically) {
 			this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
@@ -327,13 +327,15 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	private void spitOutItem(ItemStack stackIn) {
-		if (!stackIn.isEmpty() && !this.world.isRemote) {
-			ItemEntity itementity = new ItemEntity(this.world, this.posX + this.getLookVec().x, this.posY + 1.0D, this.posZ + this.getLookVec().z, stackIn);
-			itementity.setPickupDelay(40);
-			itementity.setThrowerId(this.getUniqueID());
-			this.playSound(SoundEvents.ENTITY_FOX_SPIT, 1.0F, 1.0F);
-			this.world.addEntity(itementity);
-			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
+		if (!stackIn.isEmpty()) {
+			if(!this.world.isRemote) {
+				ItemEntity itementity = new ItemEntity(this.world, this.posX + this.getLookVec().x, this.posY + 1.0D, this.posZ + this.getLookVec().z, stackIn);
+				itementity.setPickupDelay(40);
+				itementity.setThrowerId(this.getUniqueID());
+				this.playSound(SoundEvents.ENTITY_FOX_SPIT, 1.0F, 1.0F);
+				this.world.addEntity(itementity);
+				this.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
+			}
 		}
 	}
 	
@@ -511,9 +513,9 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	private int getRandomTypeForBiome(IWorld world) {
 		Biome biome = world.getBiome(new BlockPos(this));
-		int probability = rand.nextInt(101);
+		int probability = rand.nextInt(100);
 		if(this.isFromBucket()) {
-			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : - 1: -1) : rand.nextInt(4) == 0 ? 2 : -1;
+			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : -1 : -1) : rand.nextInt(4) == 0 ? 2 : -1;
 			if(decidedVariant == -1) {
 				float chance = rand.nextFloat();
 				if(chance <= 1 && chance >= 0.5) {
