@@ -13,17 +13,16 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderLayerSpectralPike<T extends EntityPike, M extends ModelPike<T>> extends LayerRenderer<T, M> {
-	private static final ResourceLocation RES_PIKE_EYES = new ResourceLocation(Reference.MODID, "textures/entity/pike/pike_7_glow.png");
-
-	public RenderLayerSpectralPike(IEntityRenderer<T, M> renderer) {
+public class RenderLayerGlowingPike<T extends EntityPike, M extends ModelPike<T>> extends LayerRenderer<T, M> {
+	
+	public RenderLayerGlowingPike(IEntityRenderer<T, M> renderer) {
 		super(renderer);
 	}
 
 	@Override
 	public void render(T entity, float p_212842_2_, float p_212842_3_, float p_212842_4_, float p_212842_5_, float p_212842_6_, float p_212842_7_, float p_212842_8_) {
-		if(entity.getPikeType() != 7) return;
-		this.bindTexture(RES_PIKE_EYES);
+		if(entity.getPikeType() != 7 && entity.getPikeType() != 13 && entity.getPikeType() != 12) return;
+		this.bindTexture(this.getPikeOverlayTexture(entity));
 		GlStateManager.depthMask(true);
         GlStateManager.enableBlend();
 
@@ -38,13 +37,18 @@ public class RenderLayerSpectralPike<T extends EntityPike, M extends ModelPike<T
         int j = i % 65536;
         int k = i / 65536;
         GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, (float)j, (float)k);
-        func_215334_a(entity);
+        this.func_215334_a(entity);
 
         GlStateManager.disableBlend();
+	}
+	
+	private ResourceLocation getPikeOverlayTexture(EntityPike pike) {
+		return new ResourceLocation(Reference.MODID, "textures/entity/pike/pike_" + pike.getPikeType() + "_glow.png");
 	}
 
 	@Override
 	public boolean shouldCombineTextures() {
 		return false;
 	}
+	
 }

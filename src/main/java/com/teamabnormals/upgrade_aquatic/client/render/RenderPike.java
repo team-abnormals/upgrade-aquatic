@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.render;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelPike;
 import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerPikeCarriedItem;
-import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerSpectralPike;
+import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerGlowingPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -19,7 +19,7 @@ public class RenderPike extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
 
 	public RenderPike(EntityRendererManager manager) {
 		super(manager, new ModelPike<>(), 0.6F);
-		this.addLayer(new RenderLayerSpectralPike<>(this));
+		this.addLayer(new RenderLayerGlowingPike<>(this));
 		this.addLayer(new RenderLayerPikeCarriedItem(this));
 	}
 
@@ -40,15 +40,27 @@ public class RenderPike extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
 	}
 	
 	@Override
-	protected void preRenderCallback(EntityPike entity, float partialTickTime) {
+	protected void preRenderCallback(EntityPike pike, float partialTickTime) {
 		GlStateManager.scalef(1F, 1F, 1F);
 		float scale;
-		if(entity.getPikeType() == 0) {
-			scale = 1F;
-		} else if(entity.getPikeType() == 1) {
-			scale = 1.2F;
+		if(pike.getPikeType() < 12) {
+			if(pike.getPikeType() < 3) {
+				scale = 1.2F;
+			} else {
+				scale = 1.5F;
+			}
 		} else {
-			scale = 1.5F;
+			if(pike.getPikeType() == 12) {
+				scale = 1.5F;
+			} else if(pike.getPikeType() == 13) {
+				scale = 1.7F;
+			} else if(pike.getPikeType() == 14) {
+				scale = 2.25F;
+			} else if(pike.getPikeType() == 15 || pike.getPikeType() == 16) {
+				scale = 1.2F;
+			} else {
+				scale = 1.35F;
+			}
 		}
 		GlStateManager.scalef(scale, scale, scale);
 	}
