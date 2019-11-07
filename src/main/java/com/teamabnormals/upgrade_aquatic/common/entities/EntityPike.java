@@ -548,7 +548,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 			case 12:
 				return "supercharged_pike";
 			case 13:
-				return "obisidian_pike";
+				return "obsidian_pike";
 			case 14:
 				return "muskellunge";
 			case 15:
