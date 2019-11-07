@@ -11,6 +11,7 @@ import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -203,7 +204,19 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
 	protected PathNavigator createNavigator(World worldIn) {
-		return new SwimmerPathNavigator(this, worldIn);
+		return new SwimmerPathNavigator(this, worldIn) {
+			
+			@Override
+			protected boolean canNavigate() {
+				return super.canNavigate() || this.entity.getBlockState().getBlock() instanceof BlockPickerelweedBlock;
+			}
+			
+			@Override
+			public boolean canEntityStandOnPos(BlockPos pos) {
+				return super.canEntityStandOnPos(pos) || this.entity.getBlockState().getBlock() instanceof BlockPickerelweedBlock;
+			}
+			
+		};
 	}
 	
 	@Override
@@ -363,6 +376,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 			itemstack.damageItem(1, player, (onBroken) -> {
 				onBroken.sendBreakAnimation(hand);
 			});
+			this.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
 			this.setLit(true);
 			return true;
 		} else {
