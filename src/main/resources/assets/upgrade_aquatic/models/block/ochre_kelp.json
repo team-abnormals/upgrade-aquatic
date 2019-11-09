@@ -1,0 +1,7 @@
+{
+    "parent": "block/tinted_cross",
+    "textures": {
+        "particle": "upgrade_aquatic:block/ochre_kelp",
+        "cross": "upgrade_aquatic:block/ochre_kelp"
+    }
+}

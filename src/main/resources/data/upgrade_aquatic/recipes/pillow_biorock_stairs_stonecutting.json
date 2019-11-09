@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:pillow_biorock"
+  },
+  "result": "upgrade_aquatic:pillow_biorock_stairs",
+  "count": 1
+}

@@ -8,13 +8,13 @@
   
   "block.upgrade_aquatic.bubble_block": "Bloco-bolha",
   
-  "block.upgrade_aquatic.dead_acan_coral": "Coral-acan morto",
-  "block.upgrade_aquatic.dead_acan_coral_block": "Bloco de coral-acan morto",
-  "block.upgrade_aquatic.dead_acan_coral_fan": "Gorgônia-acan morta",
+  "block.upgrade_aquatic.dead_acan_coral": "Coral-de-acan morto",
+  "block.upgrade_aquatic.dead_acan_coral_block": "Bloco de coral-de-acan morto",
+  "block.upgrade_aquatic.dead_acan_coral_fan": "Gorgônia-de-acan morta",
   
-  "block.upgrade_aquatic.acan_coral": "Coral-acan ",
-  "block.upgrade_aquatic.acan_coral_block": "Bloco de coral-acan",
-  "block.upgrade_aquatic.acan_coral_fan": "Gorgônia-acan",
+  "block.upgrade_aquatic.acan_coral": "Coral-de-acan ",
+  "block.upgrade_aquatic.acan_coral_block": "Bloco de coral-de-acan",
+  "block.upgrade_aquatic.acan_coral_fan": "Gorgônia-de-acan",
   
   "block.upgrade_aquatic.elder_prismarine_coral": "Coral-de-prismarinho-ancião",
   "block.upgrade_aquatic.elder_prismarine_coral_block": "Bloco de coral-de-prismarinho-ancião",
@@ -146,7 +146,7 @@
   "block.upgrade_aquatic.tube_biorock": "Biorrocha de coral-de-tubo",
   "block.upgrade_aquatic.brain_biorock": "Biorrocha de coral-de-cérebro",
   "block.upgrade_aquatic.fire_biorock": "Biorrocha de coral-de-fogo",		
-  "block.upgrade_aquatic.acan_biorock": "Biorrocha de coral-acan",
+  "block.upgrade_aquatic.acan_biorock": "Biorrocha de coral-de-acan",
   "block.upgrade_aquatic.finger_biorock": "Biorrocha de coral-de-dedo",
   "block.upgrade_aquatic.star_biorock": "Biorrocha de coral-de-estrela",
   "block.upgrade_aquatic.moss_biorock": "Biorrocha de coral-de-musgo",
@@ -165,7 +165,7 @@
   "block.upgrade_aquatic.tube_chiseled_biorock": "Biorrocha de coral-de-tubo talhada",
   "block.upgrade_aquatic.brain_chiseled_biorock": "Biorrocha de coral-de-cérebro talhada",
   "block.upgrade_aquatic.fire_chiseled_biorock": "Biorrocha de coral-de-fogo talhada",		
-  "block.upgrade_aquatic.acan_chiseled_biorock": "Biorrocha de coral-acan talhada",
+  "block.upgrade_aquatic.acan_chiseled_biorock": "Biorrocha de coral-de-acan talhada",
   "block.upgrade_aquatic.finger_chiseled_biorock": "Biorrocha de coral-de-dedo talhada",
   "block.upgrade_aquatic.star_chiseled_biorock": "Biorrocha de coral-de-estrelha talhada",
   "block.upgrade_aquatic.moss_chiseled_biorock": "Biorrocha de coral-de-musgo talhada",
@@ -184,7 +184,7 @@
   "block.upgrade_aquatic.tube_biorock_slab": "Laje de biorrocha de coral-de-tubo",
   "block.upgrade_aquatic.brain_biorock_slab": "Laje de biorrocha de coral-de-cérebro",
   "block.upgrade_aquatic.fire_biorock_slab": "Laje de biorrocha de coral-de-fogo",		
-  "block.upgrade_aquatic.acan_biorock_slab": "Laje de biorrocha de coral-acan",
+  "block.upgrade_aquatic.acan_biorock_slab": "Laje de biorrocha de coral-de-acan",
   "block.upgrade_aquatic.finger_biorock_slab": "Laje de biorrocha de coral-de-dedo",
   "block.upgrade_aquatic.star_biorock_slab": "Laje de biorrocha de coral-de-estrela",
   "block.upgrade_aquatic.moss_biorock_slab": "Laje de biorrocha de coral-de-musgo",
@@ -203,7 +203,7 @@
   "block.upgrade_aquatic.tube_biorock_stairs": "Escadas de biorrocha de coral-de-tubo",
   "block.upgrade_aquatic.brain_biorock_stairs": "Escadas de biorrocha de coral-de-cérebro",
   "block.upgrade_aquatic.fire_biorock_stairs": "Escadas de biorrocha de coral-de-fogo",		
-  "block.upgrade_aquatic.acan_biorock_stairs": "Escadas de biorrocha de coral-acan",
+  "block.upgrade_aquatic.acan_biorock_stairs": "Escadas de biorrocha de coral-de-acan",
   "block.upgrade_aquatic.finger_biorock_stairs": "Escadas de biorrocha de coral-de-dedo",
   "block.upgrade_aquatic.star_biorock_stairs": "Escadas de biorrocha de coral-de-estrela",
   "block.upgrade_aquatic.moss_biorock_stairs": "Escadas de biorrocha de coral-de-musgo",
@@ -222,7 +222,7 @@
   "block.upgrade_aquatic.tube_biorock_wall": "Muro de biorrocha de coral-de-tubo",
   "block.upgrade_aquatic.brain_biorock_wall": "Muro de biorrocha de coral-de-cérebro",
   "block.upgrade_aquatic.fire_biorock_wall": "Muro de biorrocha de coral-de-fogo",		
-  "block.upgrade_aquatic.acan_biorock_wall": "Muro de biorrocha de coral-acan",
+  "block.upgrade_aquatic.acan_biorock_wall": "Muro de biorrocha de coral-de-acan",
   "block.upgrade_aquatic.finger_biorock_wall": "Muro de biorrocha de coral-de-dedo",
   "block.upgrade_aquatic.star_biorock_wall": "Muro de biorrocha de coral-de-estrela",
   "block.upgrade_aquatic.moss_biorock_wall": "Muro de biorrocha de coral-de-musgo",
@@ -235,10 +235,51 @@
   "block.upgrade_aquatic.elder_biorock_wall": "Muro de biorrocha de coral-de-prismarinho-ancião",
   "block.upgrade_aquatic.dead_biorock_wall": "Muro de biorrocha de coral morto",
   
+  "block.upgrade_aquatic.tooth_block": "Bloco de dente",
+  "block.upgrade_aquatic.tooth_slab": "Laje de dente",
+  "block.upgrade_aquatic.tooth_stairs": "Escadas de dente",
+  "block.upgrade_aquatic.tooth_wall": "Muro de dente",
+  
+  "block.upgrade_aquatic.tongue_kelp": "Alga-língua",
+  "block.upgrade_aquatic.thorny_kelp": "Alga-espinhosa",
+  "block.upgrade_aquatic.ochre_kelp": "Alga-ocre",
+  "block.upgrade_aquatic.polar_kelp": "Alga-polar",
+  
+  "block.upgrade_aquatic.kelp_block": "Bloco de algas",
+  "block.upgrade_aquatic.tongue_kelp_block": "Bloco de algas-língua",
+  "block.upgrade_aquatic.thorny_kelp_block": "Bloco de algas-espinhosas",
+  "block.upgrade_aquatic.ochre_kelp_block": "Bloco de algas-ocres",
+  "block.upgrade_aquatic.polar_kelp_block": "Bloco de algas-polares",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone": "Pedregulho com algas",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone": "Pedregulho com algas-língua",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone": "Pedregulho com algas-espinhosas",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone": "Pedregulho com algas-ocres",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone": "Pedregulho com algas-polares",
+  
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_stairs": "Escadas de pedregulho com algas",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_stairs": "Escadas de pedregulho com algas-língua",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_stairs": "Escadas de pedregulho com algas-espinhosas",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_stairs": "Escadas de pedregulho com algas-ocres",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_stairs": "Escadas de pedregulho com algas-polares",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_slab": "Laje de pedregulho com algas",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_slab": "Laje de pedregulho com algas-língua",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_slab": "Laje de pedregulho com algas-espinhosas",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_slab": "Laje de pedregulho com algas-ocre",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_slab": "Laje de pedregulho com algas-polares",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_wall": "Muro de pedregulho com algas",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_wall": "Muro de pedregulho com algas-língua",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_wall": "Muro de pedregulho com algas-espinhosas",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_wall": "Muro de pedregulho com algas-ocres",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_wall": "Muro de pedregulho com algas-polares",
+  
   "_comment": "Itens",
   
   "item.upgrade_aquatic.prismarine_rod": "Vara de prismarinho",
-  "item.upgrade_aquatic.thrasher_tooth": "Dente de turbilhão",
+  "item.upgrade_aquatic.thrasher_tooth": "Dente de debulhador",
   
   "item.upgrade_aquatic.nautilus_bucket": "Balde com náutilo",
   "item.upgrade_aquatic.pike_bucket": "Balde com lúcio",
@@ -276,7 +317,7 @@
   "entity.upgrade_aquatic.nautilus": "Náutilo",
   "entity.upgrade_aquatic.pike": "Lúcio",
   "entity.upgrade_aquatic.lionfish": "Peixe-leão",
-  "entity.upgrade_aquatic.thrasher": "Turbilhão",
+  "entity.upgrade_aquatic.thrasher": "Debulhador",
   
   "_comment": "Poções e efeitos",
   

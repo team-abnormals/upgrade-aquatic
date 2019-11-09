@@ -57,7 +57,7 @@ public class BlockCoralShowerDead extends DeadCoralPlantBlock {
 		double d0 = (double) pos.getX() + 0.5D + xOffset;
 		double d1 = (double) pos.getY() + 0.5D + yOffset;
 		double d2 = (double) pos.getZ() + 0.5D + zOffset;
-		UAParticles.ELDER_PRISMARINE_SHOWER.spawn(worldIn, d0, d1, d2, 0d, 0.004d, 0d);
+		worldIn.addParticle(UAParticles.ELDER_PRISMARINE_SHOWER, d0, d1, d2, 0d, 0.004d, 0d);
 	}
 	
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {

@@ -1,30 +1,31 @@
 package com.teamabnormals.upgrade_aquatic.client.particle;
 
+import net.minecraft.client.particle.IAnimatedSprite;
+import net.minecraft.client.particle.IParticleFactory;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class ParticleElderPrismarineShower extends ParticlePrismarineShower {
-
-	public ParticleElderPrismarineShower(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
-		super(world, posX, posY, posZ, motionX, motionY, motionZ);
-	}
 	
-	@Override
-    ResourceLocation getTexture() {
-        return UAParticleSprites.ELDER_PRISMARINE_FRAMES[currentFrame];
-    }
+	public ParticleElderPrismarineShower(IAnimatedSprite animatedSprite, World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
+		super(animatedSprite, world, posX, posY, posZ, motionX, motionY, motionZ);
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    public static class Factory implements IParticle {
+	public static class Factory implements IParticleFactory<BasicParticleType> {
+		private IAnimatedSprite animatedSprite;
+
+		public Factory(IAnimatedSprite animatedSprite) {
+			this.animatedSprite = animatedSprite;
+		}
     	
-        @Override
-        public Particle makeParticle(World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... params) {
-            return new ParticleElderPrismarineShower(world, x, y, z, xSpeed, ySpeed, zSpeed);
-        }
-        
-    }
+		@Override
+		public Particle makeParticle(BasicParticleType type, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+			return new ParticleElderPrismarineShower(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);
+		}
+	}
 
 }

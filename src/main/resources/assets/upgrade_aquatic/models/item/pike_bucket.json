@@ -69,6 +69,66 @@
                 "variant": 11
             },
             "model": "upgrade_aquatic:item/buckets/pike_bucket_11"
+        },
+        {
+            "predicate": {
+                "variant": 12
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_12"
+        },
+        {
+            "predicate": {
+                "variant": 13
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_13"
+        },
+        {
+            "predicate": {
+                "variant": 14
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_14"
+        },
+        {
+            "predicate": {
+                "variant": 15
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_15"
+        },
+        {
+            "predicate": {
+                "variant": 16
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_16"
+        },
+        {
+            "predicate": {
+                "variant": 17
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_17"
+        },
+        {
+            "predicate": {
+                "variant": 18
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_18"
+        },
+        {
+            "predicate": {
+                "variant": 19
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_19"
+        },
+        {
+            "predicate": {
+                "variant": 20
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_20"
+        },
+        {
+            "predicate": {
+                "variant": 21
+            },
+            "model": "upgrade_aquatic:item/buckets/pike_bucket_21"
         }
     ]
 }

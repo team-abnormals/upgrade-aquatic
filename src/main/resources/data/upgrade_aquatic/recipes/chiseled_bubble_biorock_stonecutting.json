@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:bubble_biorock"
+  },
+  "result": "upgrade_aquatic:chiseled_bubble_biorock",
+  "count": 1
+}

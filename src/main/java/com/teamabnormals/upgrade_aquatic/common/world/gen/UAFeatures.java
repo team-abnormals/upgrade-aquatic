@@ -1,6 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen;
 
+import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureFloweringRush;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePickerelweed;
+
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePrismarineCoral;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePrismarineCoralShelf;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePrismarineStalactite;
@@ -17,6 +19,7 @@ public class UAFeatures {
 	public static final Feature<NoFeatureConfig> PRISMARINE_CORAL            = new FeaturePrismarineCoral(NoFeatureConfig::deserialize);
 	public static final Feature<NoFeatureConfig> PICKERELWEED                = new FeaturePickerelweed(NoFeatureConfig::deserialize);
 	public static final Feature<NoFeatureConfig> SEAROCKET                   = new FeatureSearocket(NoFeatureConfig::deserialize);
+	public static final Feature<NoFeatureConfig> FLOWERING_RUSH              = new FeatureFloweringRush(NoFeatureConfig::deserialize);
 	
 	@SubscribeEvent
     public static void registerFeatures(RegistryEvent.Register<Feature<?>> event) {

@@ -10,6 +10,7 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.TallBlockItem;
 import net.minecraft.item.WallOrFloorItem;
 
 public class RegistryUtils {
@@ -20,6 +21,10 @@ public class RegistryUtils {
 	
 	public static BlockItem createUpsideDownBlockItem(Block block, ItemGroup itemGroup) {
 		return (BlockItem) new ItemBlockUpsideDown(block, new Item.Properties().group(itemGroup)).setRegistryName(block.getRegistryName());
+	}
+	
+	public static BlockItem createTallItemBlock(Block block, ItemGroup itemGroup) {
+		return (BlockItem) new TallBlockItem(block, new Item.Properties().group(itemGroup)).setRegistryName(block.getRegistryName());
 	}
 	
 	public static Item createSimpleItem(String name, ItemGroup itemGroup) {

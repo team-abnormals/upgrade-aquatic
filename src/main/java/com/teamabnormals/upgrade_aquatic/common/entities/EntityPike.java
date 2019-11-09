@@ -10,8 +10,9 @@ import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeed;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelWeedDouble;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
@@ -48,6 +49,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
@@ -63,17 +65,23 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.storage.loot.*;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootParameterSets;
+import net.minecraft.world.storage.loot.LootParameters;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.LootTables;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityPike extends EntityBucketableWaterMob {
 	private static final DataParameter<Integer> PIKE_TYPE = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> CAUGHT_ENTITY = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> DROP_ITEM = EntityDataManager.createKey(EntityPike.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityPike.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Boolean> LIT = EntityDataManager.createKey(EntityPike.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> ATTACK_COOLDOWN = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	public static final Predicate<ItemEntity> ITEM_SELECTOR = (entity) -> {
 		return !entity.cannotPickup() && entity.isAlive() && entity.isInWater() && entity.getItem().getItem().isIn(ItemTags.FISHES);
@@ -143,6 +151,8 @@ public class EntityPike extends EntityBucketableWaterMob {
 		this.dataManager.register(PIKE_TYPE, 0);
 		this.dataManager.register(CAUGHT_ENTITY, 0);
 		this.dataManager.register(DROP_ITEM, true);
+		this.dataManager.register(MOVING, false);
+		this.dataManager.register(LIT, false);
 		this.dataManager.register(ATTACK_COOLDOWN, 0);
 	}
 
@@ -164,6 +174,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		}
 		compoundnbt.put("PikeHeldItem", compoundnbt1);
 		compoundnbt.putBoolean("ShouldDropItem", this.shouldDropItem());
+		compoundnbt.putBoolean("IsLit", this.isLit());
     }
 	
 	@Nullable
@@ -193,12 +204,24 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
 	protected PathNavigator createNavigator(World worldIn) {
-		return new SwimmerPathNavigator(this, worldIn);
+		return new SwimmerPathNavigator(this, worldIn) {
+			
+			@Override
+			protected boolean canNavigate() {
+				return super.canNavigate() || this.entity.getBlockState().getBlock() instanceof BlockPickerelweedBlock;
+			}
+			
+			@Override
+			public boolean canEntityStandOnPos(BlockPos pos) {
+				return super.canEntityStandOnPos(pos) || this.entity.getBlockState().getBlock() instanceof BlockPickerelweedBlock;
+			}
+			
+		};
 	}
 	
 	@Override
 	public void livingTick() {
-		eatTicks++;
+		this.eatTicks++;
 		if (!this.isInWater() && this.onGround && this.collidedVertically) {
 			this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
@@ -214,7 +237,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 						if(this.getPikeType() == 7) {
 							if (this.world.isRemote) {
 								for(int i = 0; i < 3; ++i) {
-									UAParticles.SPECTRAL_CONSUME.spawn(this.world, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
+									this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
 								}
 							}
 						}
@@ -227,7 +250,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 					if(this.getPikeType() == 7) {
 						if (this.world.isRemote) {
 							for(int i = 0; i < 3; ++i) {
-								UAParticles.SPECTRAL_CONSUME.spawn(this.world, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
+								this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
 							}
 						}
 					}
@@ -259,13 +282,30 @@ public class EntityPike extends EntityBucketableWaterMob {
 			}
 		}
 		
+		if(this.isMoving() && this.isInWater() && this.getPikeType() == 12) {
+			Vec3d vec3d1 = this.getLook(0.0F);
+
+			for(int i = 0; i < 2; ++i) {
+				this.world.addParticle(ParticleTypes.BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.posY + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
+			}
+		}
+		
+		if(this.getPikeType() == 13 && this.isLit()) {
+			if(this.world.isRemote) {
+				for(int i = 0; i < 2; i++) {
+					this.world.addParticle(ParticleTypes.PORTAL, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth(), this.posY + this.rand.nextDouble() * (double)this.getHeight() - 0.25D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth(), (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
+				}
+			}
+		}
+		
 		super.livingTick();
 	}
 	
 	@Override
 	public void travel(Vec3d p_213352_1_) {
 		if (this.isServerWorld() && this.isInWater()) {
-			this.moveRelative(0.01F, p_213352_1_);
+			float speed = this.getPikeType() == 12 ? 0.05F : 0.01F;
+			this.moveRelative(speed, p_213352_1_);
 			this.move(MoverType.SELF, this.getMotion());
 			this.setMotion(this.getMotion().scale(0.9D));
 			if (this.getAttackTarget() == null) {
@@ -300,6 +340,9 @@ public class EntityPike extends EntityBucketableWaterMob {
 			if(dataTag.contains("ShouldDropItem")) {
 				this.setToDropItem(dataTag.getBoolean("ShouldDropItem"));
 			}
+			if(dataTag.contains("IsLit")) {
+				this.setLit(dataTag.getBoolean("IsLit"));
+			}
 			return spawnDataIn;
 		}
 		if (spawnDataIn instanceof EntityPike.PikeData) {
@@ -326,14 +369,31 @@ public class EntityPike extends EntityBucketableWaterMob {
 		return spawnDataIn;
 	}
 	
+	@Override
+	protected boolean processInteract(PlayerEntity player, Hand hand) {
+		ItemStack itemstack = player.getHeldItem(hand);
+		if(itemstack.getItem() == Items.FLINT_AND_STEEL) {
+			itemstack.damageItem(1, player, (onBroken) -> {
+				onBroken.sendBreakAnimation(hand);
+			});
+			this.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
+			this.setLit(true);
+			return true;
+		} else {
+			return super.processInteract(player, hand);
+		}
+	}
+	
 	private void spitOutItem(ItemStack stackIn) {
-		if (!stackIn.isEmpty() && !this.world.isRemote) {
-			ItemEntity itementity = new ItemEntity(this.world, this.posX + this.getLookVec().x, this.posY + 1.0D, this.posZ + this.getLookVec().z, stackIn);
-			itementity.setPickupDelay(40);
-			itementity.setThrowerId(this.getUniqueID());
-			this.playSound(SoundEvents.ENTITY_FOX_SPIT, 1.0F, 1.0F);
-			this.world.addEntity(itementity);
-			this.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
+		if (!stackIn.isEmpty()) {
+			if(!this.world.isRemote) {
+				ItemEntity itementity = new ItemEntity(this.world, this.posX + this.getLookVec().x, this.posY + 1.0D, this.posZ + this.getLookVec().z, stackIn);
+				itementity.setPickupDelay(40);
+				itementity.setThrowerId(this.getUniqueID());
+				this.playSound(SoundEvents.ENTITY_FOX_SPIT, 1.0F, 1.0F);
+				this.world.addEntity(itementity);
+				this.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
+			}
 		}
 	}
 	
@@ -350,7 +410,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		for (int yy = this.getPosition().getY() - 6; yy <= this.getPosition().getY() + 6; yy++) {
 			for (int xx = this.getPosition().getX() - 12; xx <= this.getPosition().getX() + 12; xx++) {
 				for (int zz = this.getPosition().getZ() - 12; zz <= this.getPosition().getZ() + 12; zz++) {
-					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelWeedDouble) {
+					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweedDouble) {
 						pickerelweeds.add(new BlockPos(xx, yy, zz));
 					}
 				}
@@ -439,12 +499,24 @@ public class EntityPike extends EntityBucketableWaterMob {
 	@Override
 	public EntitySize getSize(Pose poseIn) {
 		float scale = 0F;
-		if(this.getPikeType() == 0) {
-			scale = 7F;
-		} else if(this.getPikeType() == 1) {
-			scale = 8F;
+		if(this.getPikeType() < 12) {
+			if(this.getPikeType() < 3) {
+				scale = 8F;
+			} else {
+				scale = 10F;
+			}
 		} else {
-			scale = 10F;
+			if(this.getPikeType() == 12) {
+				scale = 10F;
+			} else if(this.getPikeType() == 13) {
+				scale = 11F;
+			} else if(this.getPikeType() == 14) {
+				scale = 15F;
+			} else if(this.getPikeType() == 15 || this.getPikeType() == 16) {
+				scale = 8F;
+			} else {
+				scale = 9F;
+			}
 		}
 		return super.getSize(poseIn).scale(0.225F * scale);
 	}
@@ -473,8 +545,44 @@ public class EntityPike extends EntityBucketableWaterMob {
 				return "spotted_jade_northern_pike";
 			case 11:
 				return "spotted_olive_northern_pike";
+			case 12:
+				return "supercharged_pike";
+			case 13:
+				return "obsidian_pike";
+			case 14:
+				return "muskellunge";
+			case 15:
+				return "chain_pickerel";
+			case 16:
+				return "grass_pickerel";
+			case 17:
+				return "black_southern_pike";
+			case 18:
+				return "ebony_southern_pike";
+			case 19:
+				return "mustard_southern_pike";
+			case 20:
+				return "lemon_southern_pike";
+			case 21:
+				return "golden_southern_pike";
 		}
 		return "";
+	}
+	
+	public boolean isLit() {
+		return this.dataManager.get(LIT);
+	}
+	
+	private void setLit(boolean lit) {
+		this.dataManager.set(LIT, lit);
+	}
+	
+	public boolean isMoving() {
+		return this.dataManager.get(MOVING);
+	}
+	
+	private void setMoving(boolean moving) {
+		this.dataManager.set(MOVING, moving);
 	}
 	
 	private void setCaughtEntity(int entityId) {
@@ -511,68 +619,116 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	private int getRandomTypeForBiome(IWorld world) {
 		Biome biome = world.getBiome(new BlockPos(this));
-		int probability = rand.nextInt(101);
-		if(this.isFromBucket()) {
-			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : - 1: -1) : rand.nextInt(4) == 0 ? 2 : -1;
-			if(decidedVariant == -1) {
-				float chance = rand.nextFloat();
-				if(chance <= 1 && chance >= 0.5) {
-					decidedVariant = rand.nextInt(6) == 0 ? 9 : 3;
-				} else if(chance < 0.5 && chance >= 0.35) {
-					decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
-				} else if(chance < 0.35 && chance > 0.25) {
-					decidedVariant = rand.nextInt(6) == 0 ? 11 : 6;
-				} else {
-					decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
+		float rarity = rand.nextFloat();
+		//Goes common to legendary
+		if(rarity < 1.0F && rand.nextFloat() > 0.60F) {
+			if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER || this.isFromBucket()) {
+				int pickedVariant = rand.nextInt(5);
+				if(pickedVariant == 0) {
+					return 17;
+				} else if(pickedVariant == 1) {
+					if(rand.nextInt(5) == 0) {
+						return 8;
+					} else {
+						return 3;
+					}
+				} else if(pickedVariant == 2) {
+					return 15;
+				} else if(pickedVariant == 3) {
+					return 16;
+				} else if(pickedVariant == 4) {
+					return 2;
 				}
-			}
-			return decidedVariant;
-		}
-		if(biome.getCategory() == Category.SWAMP) {
-			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? 7 : -1) : rand.nextInt(3) == 0 ? 2 : 1;
-			if(decidedVariant == -1) {
-				float chance = rand.nextFloat();
-				if(chance <= 1 && chance >= 0.5) {
-					decidedVariant = rand.nextInt(6) == 0 ? 8 : 3;
-				} else if(chance < 0.5 && chance >= 0.35) {
-					decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
-				} else if(chance < 0.35 && chance > 0.25) {
-					decidedVariant = rand.nextInt(6) == 0 ? 11 : 6;
-				} else {
-					decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
-				}
-			}
-			return decidedVariant;
-		} else if(biome.getCategory() == Category.RIVER) {
-			int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : -1 : -1) : rand.nextInt(4) == 0 ? 2 : -1;
-			if(decidedVariant == -1) {
-				float chance = rand.nextFloat();
-				if(chance <= 1 && chance >= 0.5) {
-					decidedVariant = rand.nextInt(6) == 0 ? 8 : 3;
-				} else if(chance < 0.5 && chance >= 0.35) {
-					decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
-				} else if(chance < 0.35 && chance > 0.25) {
-					decidedVariant = rand.nextInt(6) == 0 ? 11 : 6;
-				} else {
-					decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
-				}
-			}
-			return decidedVariant;
-		}
-		int decidedVariant = probability >= 60 ? (rand.nextInt(20) <= 2 ? rand.nextBoolean() ? 7 : - 1: -1) : rand.nextInt(4) == 0 ? 2 : -1;
-		if(decidedVariant == -1) {
-			float chance = rand.nextFloat();
-			if(chance <= 1 && chance >= 0.5) {
-				decidedVariant = rand.nextInt(6) == 0 ? 9 : 3;
-			} else if(chance < 0.5 && chance >= 0.35) {
-				decidedVariant = rand.nextInt(6) == 0 ? 10 : 5;
-			} else if(chance < 0.35 && chance > 0.25) {
-				decidedVariant = rand.nextInt(6) == 0 ? 11 : 6;
 			} else {
-				decidedVariant = rand.nextInt(6) == 0 ? 9 : 4;
+				int pickedVariant = rand.nextInt(3);
+				if(pickedVariant == 0) {
+					return 17;
+				} else if(pickedVariant == 1) {
+					if(rand.nextInt(5) == 0) {
+						return 8;
+					} else {
+						return 3;
+					}
+				} else if(pickedVariant == 2) {
+					return 2;
+				}
+			}
+		} else if(rarity < 0.60F && rarity > 0.35F) {
+			if(biome.getCategory() == Category.SWAMP || this.isFromBucket()) {
+				int pickedVariant = rand.nextInt(3);
+				if(pickedVariant == 0) {
+					return 18;
+				} else if(pickedVariant == 1) {
+					if(rand.nextInt(5) == 0) {
+						return 4;
+					} else {
+						return 9;
+					}
+				} else if(pickedVariant == 2) {
+					return 1;
+				}
+			} else {
+				int pickedVariant = rand.nextInt(2);
+				if(pickedVariant == 0) {
+					return 18;
+				} else if(pickedVariant == 1) {
+					if(rand.nextInt(5) == 0) {
+						return 4;
+					} else {
+						return 9;
+					}
+				}
+			}
+		} else if(rarity < 0.35F && rarity > 0.15F) {
+			int pickedVariant = rand.nextInt(3);
+			if(pickedVariant == 0) {
+				return 20;
+			} else if(pickedVariant == 1) {
+				return 19;
+			} else if(pickedVariant == 2) {
+				if(rand.nextInt(5) == 0) {
+					return 10;
+				} else {
+					return 5;
+				}
+			}
+		} else if(rarity < 0.15F && rarity > 0.05F) {
+			if(biome.getCategory() == Category.RIVER || this.isFromBucket()) {
+				int pickedVariant = rand.nextInt(3);
+				if(pickedVariant == 0) {
+					return 14;
+				} else if(pickedVariant == 1) {
+					return 21;
+				} else if(pickedVariant == 2) {
+					if(rand.nextInt(5) == 0) {
+						return 11;
+					} else {
+						return 6;
+					}
+				}
+			} else {
+				int pickedVariant = rand.nextInt(2);
+				if(pickedVariant == 0) {
+					return 21;
+				} else if(pickedVariant == 1) {
+					if(rand.nextInt(5) == 0) {
+						return 11;
+					} else {
+						return 6;
+					}
+				}
+			}
+		} else if(rarity < 0.05F) {
+			int pickedVariant = rand.nextInt(3);
+			if(pickedVariant == 0) {
+				return 7;
+			} else if(pickedVariant == 1) {
+				return 13;
+			} else if(pickedVariant == 2) {
+				return 12;
 			}
 		}
-		return decidedVariant;
+		return 1;
 	}
 	
 	@Override
@@ -580,6 +736,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		super.writeAdditional(compound);
 		compound.putInt("PikeType", this.getPikeType());
 		compound.putBoolean("DoesDropItem", this.shouldDropItem());
+		compound.putBoolean("Lit", this.isLit());
 		compound.putInt("AttackCooldown", this.getAttackCooldown());
 	}
 	
@@ -588,6 +745,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		super.readAdditional(compound);
 		this.setPikeType(compound.getInt("PikeType"));
 		this.setToDropItem(compound.getBoolean("DoesDropItem"));
+		this.setLit(compound.getBoolean("Lit"));
 		this.setAttackCooldown(compound.getInt("AttackCooldown"));
 	}
 	
@@ -616,7 +774,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	public boolean isHidingInPickerelweed() {
-		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelWeed || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelWeedDouble;
+		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelweed || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelweedDouble;
 	}
 
 	public static void addSpawn() {
@@ -660,6 +818,13 @@ public class EntityPike extends EntityBucketableWaterMob {
 				float f1 = (float)(this.speed * this.pike.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
 				this.pike.setAIMoveSpeed(MathHelper.lerp(0.125F, this.pike.getAIMoveSpeed(), f1));
 				this.pike.setMotion(this.pike.getMotion().add(0.0D, (double)this.pike.getAIMoveSpeed() * d1 * 0.04D, 0.0D));
+				this.pike.setMoving(true);
+			} else {
+				if(this.pike.getPikeType() == 12) {
+					//Prevents Weirdness...
+					this.pike.setAIMoveSpeed(0.0F);
+				}
+				this.pike.setMoving(false);
 			}
 		}
 		

@@ -1,17 +1,22 @@
 package com.teamabnormals.upgrade_aquatic.client.particle;
 
+import net.minecraft.client.particle.IAnimatedSprite;
+import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ParticlePrismarineShower extends UAParticle {
+public class ParticlePrismarineShower extends SpriteTexturedParticle {
+	protected final IAnimatedSprite animatedSprite;
 	private final float rotSpeed;
 	private float angle;
 	private final float scale;
@@ -20,7 +25,7 @@ public class ParticlePrismarineShower extends UAParticle {
     private boolean directionRight = true;
     private int lastTick = 0;
     
-    public ParticlePrismarineShower(World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
+    public ParticlePrismarineShower(IAnimatedSprite animatedSprite, World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
     	super(world, posX, posY, posZ, motionX, motionY, motionZ);
     	this.motionX = this.motionX * 0.009999999776482582d + motionX;
     	this.motionY = this.motionY * 0.009999999776482582d + motionY;
@@ -34,16 +39,12 @@ public class ParticlePrismarineShower extends UAParticle {
     	this.particleGreen = 1f;
     	this.particleBlue = 1f;
     	this.maxAge = (int) (15d / (Math.random() * 0.8d + 0.2d)) + 4;
+    	this.animatedSprite = animatedSprite;
+    	this.selectSpriteWithAge(animatedSprite);
     }
 
     @Override
-    public void move(double x, double y, double z) {
-    	super.move(x, y, z);
-    }
-
-    @Override
-    public void onPreRender(BufferBuilder buffer, ActiveRenderInfo activeInfo, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
-        super.onPreRender(buffer, activeInfo, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
+    public void renderParticle(BufferBuilder buffer, ActiveRenderInfo activeInfo, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ) {
     	Entity entity = activeInfo.getRenderViewEntity();
         if (entity.ticksExisted >= this.lastTick + 5) {
             if (this.currentFrame == MAX_FRAME_ID) {
@@ -56,6 +57,7 @@ public class ParticlePrismarineShower extends UAParticle {
         }
         float f = ((float) this.age + partialTicks) / (float) this.maxAge;
         this.particleScale = this.scale * (1f - f * f * 0.5f);
+        super.renderParticle(buffer, activeInfo, partialTicks, rotationX, rotationZ, rotationYZ, rotationXY, rotationXZ);
     }
     
     @Override
@@ -63,12 +65,23 @@ public class ParticlePrismarineShower extends UAParticle {
     	super.tick();
     	this.prevParticleAngle = this.particleAngle;
         this.particleAngle += (float)Math.PI * this.rotSpeed * 2.0F;
+        
         if (this.onGround) {
            this.prevParticleAngle = this.particleAngle = 0.0F;
         }
+        
         this.motionX += Math.cos(angle) * 0.0025;
         this.motionY *= 1.06D;
         this.motionZ += Math.sin(angle) * 0.0025;
+        
+        if(this.isAlive()) {
+            this.selectSpriteWithAge(this.animatedSprite);
+        }
+    }
+    
+    @Override
+    public IParticleRenderType getRenderType() {
+    	return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 
     @Override
@@ -84,20 +97,17 @@ public class ParticlePrismarineShower extends UAParticle {
         }
         return j | k << 16;
     }
-    
-    @Override
-    ResourceLocation getTexture() {
-        return UAParticleSprites.PRISMARINE_FRAMES[currentFrame];
-    }
 
-    @OnlyIn(Dist.CLIENT)
-    public static class Factory implements IParticle {
+    public static class Factory implements IParticleFactory<BasicParticleType> {
+    	private IAnimatedSprite animatedSprite;
+
+    	public Factory(IAnimatedSprite animatedSprite) {
+    		this.animatedSprite = animatedSprite;
+    	}
     	
         @Override
-        public Particle makeParticle(World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... params) {
-            return new ParticlePrismarineShower(world, x, y, z, xSpeed, ySpeed, zSpeed);
+        public Particle makeParticle(BasicParticleType type, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            return new ParticlePrismarineShower(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);
         }
-        
     }
-    
 }

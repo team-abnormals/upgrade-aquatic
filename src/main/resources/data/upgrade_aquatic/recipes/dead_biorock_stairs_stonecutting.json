@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:dead_biorock"
+  },
+  "result": "upgrade_aquatic:dead_biorock_stairs",
+  "count": 1
+}

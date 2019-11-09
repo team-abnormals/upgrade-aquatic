@@ -240,6 +240,52 @@
   "block.upgrade_aquatic.tooth_stairs": "Tooth Stairs",
   "block.upgrade_aquatic.tooth_wall": "Tooth Wall",
   
+  "block.upgrade_aquatic.tongue_kelp": "Tongue Kelp",
+  "block.upgrade_aquatic.thorny_kelp": "Thorny Kelp",
+  "block.upgrade_aquatic.ochre_kelp": "Ochre Kelp",
+  "block.upgrade_aquatic.polar_kelp": "Polar Kelp",
+  "block.upgrade_aquatic.tongue_kelp_plant": "Tongue Kelp Plant",
+  "block.upgrade_aquatic.thorny_kelp_plant": "Thorny Kelp Plant",
+  "block.upgrade_aquatic.ochre_kelp_plant": "Ochre Kelp Plant",
+  "block.upgrade_aquatic.polar_kelp_plant": "Polar Kelp Plant",
+  
+  "block.upgrade_aquatic.kelp_block": "Kelp Block",
+  "block.upgrade_aquatic.tongue_kelp_block": "Tongue Kelp Block",
+  "block.upgrade_aquatic.thorny_kelp_block": "Thorny Kelp Block",
+  "block.upgrade_aquatic.ochre_kelp_block": "Ochre Kelp Block",
+  "block.upgrade_aquatic.polar_kelp_block": "Polar Kelp Block",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone": "Kelpy Cobblestone",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone": "Tongue Kelpy Cobblestone",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone": "Thorny Kelpy Cobblestone",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone": "Ochre Kelpy Cobblestone",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone": "Polar Kelpy Cobblestone",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_stairs": "Kelpy Cobblestone Stairs",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_stairs": "Tongue Kelpy Cobblestone Stairs",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_stairs": "Thorny Kelpy Cobblestone Stairs",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_stairs": "Ochre Kelpy Cobblestone Stairs",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_stairs": "Polar Kelpy Cobblestone Stairs",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_slab": "Kelpy Cobblestone Slab",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_slab": "Tongue Kelpy Cobblestone Slab",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_slab": "Thorny Kelpy Cobblestone Slab",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_slab": "Ochre Kelpy Cobblestone Slab",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_slab": "Polar Kelpy Cobblestone Slab",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_wall": "Kelpy Cobblestone Wall",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_wall": "Tongue Kelpy Cobblestone Wall",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_wall": "Thorny Kelpy Cobblestone Wall",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_wall": "Ochre Kelpy Cobblestone Wall",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_wall": "Polar Kelpy Cobblestone Wall",
+  
+  "block.upgrade_aquatic.pickerelweed_blue_block": "Blue Pickerelweed Block",
+  "block.upgrade_aquatic.pickerelweed_purple_block": "Purple Pickerelweed Block",
+  "block.upgrade_aquatic.boiled_pickerelweed_blue_block": "Boiled Blue Pickerelweed Block",
+  "block.upgrade_aquatic.boiled_pickerelweed_purple_block": "Boiled Purple Pickerelweed Block",
+  
+  "block.upgrade_aquatic.flowering_rush": "Flowering Rush",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
@@ -275,6 +321,16 @@
   "tooltip.upgrade_aquatic.spotted_mahogany_northern_pike": "Spotted Mahogany Northern Pike",  
   "tooltip.upgrade_aquatic.spotted_jade_northern_pike": "Spotted Jade Northern Pike",  
   "tooltip.upgrade_aquatic.spotted_olive_northern_pike": "Spotted Olive Northern Pike",
+  "tooltip.upgrade_aquatic.supercharged_pike": "Supercharged Pike",
+  "tooltip.upgrade_aquatic.obsidian_pike": "Obsidian Pike",
+  "tooltip.upgrade_aquatic.muskellunge": "Muskellunge",
+  "tooltip.upgrade_aquatic.chain_pickerel": "Chain Pickerel",
+  "tooltip.upgrade_aquatic.grass_pickerel": "Grass Pickerel",
+  "tooltip.upgrade_aquatic.black_southern_pike": "Black Southern Pike",
+  "tooltip.upgrade_aquatic.ebony_southern_pike": "Ebony Southern Pike",
+  "tooltip.upgrade_aquatic.mustard_southern_pike": "Mustard Southern Pike",
+  "tooltip.upgrade_aquatic.lemon_southern_pike": "Lemon Southern Pike",
+  "tooltip.upgrade_aquatic.golden_southern_pike": "Golden Southern Pike",
   
   "_comment": "Entities",
   

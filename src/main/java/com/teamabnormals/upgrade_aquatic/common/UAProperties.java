@@ -1,9 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.common;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.Block.Properties;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
+import net.minecraftforge.common.ToolType;
 
 public class UAProperties {
 	
@@ -30,10 +33,16 @@ public class UAProperties {
 		return pink ? Block.Properties.create(Material.PLANTS, MaterialColor.PINK).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	}
 	
+	public static final Block.Properties BIOROCK(boolean tickRandomly) {
+		return tickRandomly ? Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).tickRandomly() : Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE);
+	}
+	
 	public static final Block.Properties SPINES       = Block.Properties.create(Material.ORGANIC).doesNotBlockMovement().hardnessAndResistance(1.5F);
 	public static final Block.Properties ELDER_EYE    = Block.Properties.create(Material.ORGANIC, MaterialColor.WHITE_TERRACOTTA).sound(SoundType.WET_GRASS).hardnessAndResistance(1.0F);
 	public static final Block.Properties BEDROLL      = Block.Properties.create(Material.WOOL).hardnessAndResistance(0.2F, 0.3F).sound(SoundType.CLOTH);
 	public static final Block.Properties PICKERELWEED = Block.Properties.create(Material.PLANTS, MaterialColor.GRASS).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	
-	
+	public static final Block.Properties PICKERELWEED_BLOCK(boolean isBoiled){
+		return isBoiled ? Block.Properties.create(Material.PLANTS, MaterialColor.FOLIAGE).hardnessAndResistance(0.5F, 5).sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.GRASS).hardnessAndResistance(0.5F, 5).sound(SoundType.WET_GRASS);
+	}
 }

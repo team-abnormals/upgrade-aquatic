@@ -261,7 +261,7 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 	
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.OCEAN && biome.getPrecipitation() != RainType.SNOW) {
-			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.LIONFISH, 15, 1, 1));
+			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.LIONFISH, 15, 1, 1));
         }
 	}
 	
