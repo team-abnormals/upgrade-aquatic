@@ -22,11 +22,15 @@ import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -35,12 +39,18 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowable {
+	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
 	public BlockFloweringRush(Properties properties) {
 		super(properties);
 		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false));
+	}
+	
+	@Override
+	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+		return SHAPE;
 	}
 	
 	@Override
@@ -58,7 +68,7 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 	
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
-		return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL || block == Blocks.CLAY;
+		return block.isIn(BlockTags.BAMBOO_PLANTABLE_ON);
 	}
 	
 	@Override
@@ -102,6 +112,11 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 	}
 	
 	@Override
+	public BlockRenderLayer getRenderLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
+	
+	@Override
 	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
@@ -130,7 +145,7 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			if(!worldIn.isRemote && !player.isCreative()) {
 				spawnDrops(state, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
-				spawnDrops(blockstate, worldIn, blockpos, (TileEntity)null, player, player.getHeldItemMainhand());
+				spawnDrops(blockstate, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
 			}
 		}
 
