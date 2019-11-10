@@ -5,7 +5,6 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.common.UAProperties;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBiorock;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShower;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
@@ -26,6 +25,10 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFan;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFanDead;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelp;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelpTop;
+import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorock;
+import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockSlab;
+import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockStairs;
+import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockWall;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -239,7 +242,7 @@ public class UABlocks {
 	public static Block ELDER_CHISELED_BIOROCK        = new Block(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "elder_chiseled_biorock");
 	public static Block DEAD_CHISELED_BIOROCK         = new Block(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "dead_chiseled_biorock");
     
-	public static Block BIOROCK_SLAB                  = new SlabBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "biorock_slab");
+	public static Block BIOROCK_SLAB                  = new BlockBiorockSlab(UAProperties.BIOROCK(true)).setRegistryName(Reference.MODID, "biorock_slab");
 	public static Block BUBBLE_BIOROCK_SLAB           = new SlabBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "bubble_biorock_slab");
 	public static Block HORN_BIOROCK_SLAB             = new SlabBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "horn_biorock_slab");
 	public static Block TUBE_BIOROCK_SLAB             = new SlabBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "tube_biorock_slab");
@@ -258,7 +261,7 @@ public class UABlocks {
 	public static Block ELDER_BIOROCK_SLAB            = new SlabBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "elder_biorock_slab");
 	public static Block DEAD_BIOROCK_SLAB             = new SlabBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "dead_biorock_slab");	
 	
-	public static Block BIOROCK_STAIRS                = new StairsBlock(BIOROCK.getDefaultState(), UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "biorock_stairs");
+	public static Block BIOROCK_STAIRS                = new BlockBiorockStairs(() -> BIOROCK.getDefaultState(), UAProperties.BIOROCK(true)).setRegistryName(Reference.MODID, "biorock_stairs");
 	public static Block BUBBLE_BIOROCK_STAIRS         = new StairsBlock(BUBBLE_BIOROCK.getDefaultState(), UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "bubble_biorock_stairs");
 	public static Block HORN_BIOROCK_STAIRS           = new StairsBlock(HORN_BIOROCK.getDefaultState(), UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "horn_biorock_stairs");
 	public static Block TUBE_BIOROCK_STAIRS           = new StairsBlock(TUBE_BIOROCK.getDefaultState(), UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "tube_biorock_stairs");
@@ -277,7 +280,7 @@ public class UABlocks {
 	public static Block ELDER_BIOROCK_STAIRS          = new StairsBlock(ELDER_BIOROCK.getDefaultState(), UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "elder_biorock_stairs");
 	public static Block DEAD_BIOROCK_STAIRS           = new StairsBlock(DEAD_BIOROCK.getDefaultState(), UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "dead_biorock_stairs");
 	
-	public static Block BIOROCK_WALL                  = new WallBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "biorock_wall");
+	public static Block BIOROCK_WALL                  = new BlockBiorockWall(UAProperties.BIOROCK(true)).setRegistryName(Reference.MODID, "biorock_wall");
 	public static Block BUBBLE_BIOROCK_WALL           = new WallBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "bubble_biorock_wall");
 	public static Block HORN_BIOROCK_WALL             = new WallBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "horn_biorock_wall");
 	public static Block TUBE_BIOROCK_WALL             = new WallBlock(UAProperties.BIOROCK(false)).setRegistryName(Reference.MODID, "tube_biorock_wall");
@@ -343,6 +346,10 @@ public class UABlocks {
 	public static Block FLOWERING_RUSH                   = new BlockFloweringRush(Properties.from(Blocks.PEONY)).setRegistryName(Reference.MODID, "flowering_rush");
 	
 	public static final Map<Block, Block> BIOROCK_CONVERSION_MAP = Maps.newHashMap();
+	public static final Map<Block, Block> CHISELED_BIOROCK_CONVERSION_MAP = Maps.newHashMap();
+	public static final Map<Block, Block> BIOROCK_SLAB_CONVERSION_MAP = Maps.newHashMap();
+	public static final Map<Block, Block> BIOROCK_STAIRS_CONVERSION_MAP = Maps.newHashMap();
+	public static final Map<Block, Block> BIOROCK_WALL_CONVERSION_MAP = Maps.newHashMap();
 	
 	static {
 		BIOROCK_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_BIOROCK);
@@ -360,11 +367,6 @@ public class UABlocks {
 		BIOROCK_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_BIOROCK);
 		BIOROCK_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_BIOROCK);
 		BIOROCK_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_BIOROCK);
-	}
-	
-	public static final Map<Block, Block> CHISELED_BIOROCK_CONVERSION_MAP = Maps.newHashMap();
-	
-	static {
 		CHISELED_BIOROCK_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CHISELED_BIOROCK);
 		CHISELED_BIOROCK_CONVERSION_MAP.put(Blocks.HORN_CORAL_BLOCK, HORN_CHISELED_BIOROCK);
 		CHISELED_BIOROCK_CONVERSION_MAP.put(Blocks.TUBE_CORAL_BLOCK, TUBE_CHISELED_BIOROCK);
@@ -380,6 +382,54 @@ public class UABlocks {
 		CHISELED_BIOROCK_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_CHISELED_BIOROCK);
 		CHISELED_BIOROCK_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_CHISELED_BIOROCK);
 		CHISELED_BIOROCK_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CHISELED_BIOROCK);
+		
+		BIOROCK_SLAB_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(Blocks.HORN_CORAL_BLOCK, HORN_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(Blocks.TUBE_CORAL_BLOCK, TUBE_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(Blocks.BRAIN_CORAL_BLOCK, BRAIN_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(Blocks.FIRE_CORAL_BLOCK, FIRE_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(ACAN_CORAL_BLOCK, ACAN_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(FINGER_CORAL_BLOCK, FINGER_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(STAR_CORAL_BLOCK, STAR_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(MOSS_CORAL_BLOCK, MOSS_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(PETAL_CORAL_BLOCK, PETAL_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(BRANCH_CORAL_BLOCK, BRANCH_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(ROCK_CORAL_BLOCK, ROCK_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_BIOROCK_SLAB);
+		BIOROCK_SLAB_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_BIOROCK_SLAB);
+		
+		BIOROCK_STAIRS_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(Blocks.HORN_CORAL_BLOCK, HORN_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(Blocks.TUBE_CORAL_BLOCK, TUBE_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(Blocks.BRAIN_CORAL_BLOCK, BRAIN_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(Blocks.FIRE_CORAL_BLOCK, FIRE_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(ACAN_CORAL_BLOCK, ACAN_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(FINGER_CORAL_BLOCK, FINGER_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(STAR_CORAL_BLOCK, STAR_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(MOSS_CORAL_BLOCK, MOSS_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(PETAL_CORAL_BLOCK, PETAL_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(BRANCH_CORAL_BLOCK, BRANCH_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(ROCK_CORAL_BLOCK, ROCK_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_BIOROCK_STAIRS);
+		BIOROCK_STAIRS_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_BIOROCK_STAIRS);
+		
+		BIOROCK_WALL_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(Blocks.HORN_CORAL_BLOCK, HORN_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(Blocks.TUBE_CORAL_BLOCK, TUBE_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(Blocks.BRAIN_CORAL_BLOCK, BRAIN_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(Blocks.FIRE_CORAL_BLOCK, FIRE_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(ACAN_CORAL_BLOCK, ACAN_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(FINGER_CORAL_BLOCK, FINGER_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(STAR_CORAL_BLOCK, STAR_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(MOSS_CORAL_BLOCK, MOSS_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(PETAL_CORAL_BLOCK, PETAL_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(BRANCH_CORAL_BLOCK, BRANCH_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(ROCK_CORAL_BLOCK, ROCK_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_BIOROCK_WALL);
+		BIOROCK_WALL_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_BIOROCK_WALL);
 	}
 	
 	public static enum KelpType {

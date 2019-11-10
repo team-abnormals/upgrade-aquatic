@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.common.blocks;
+package com.teamabnormals.upgrade_aquatic.common.blocks.biorock;
 
 import java.util.Random;
 
