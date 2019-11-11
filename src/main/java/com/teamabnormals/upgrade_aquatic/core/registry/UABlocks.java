@@ -345,6 +345,8 @@ public class UABlocks {
 	
 	public static Block FLOWERING_RUSH                   = new BlockFloweringRush(Properties.from(Blocks.PEONY)).setRegistryName(Reference.MODID, "flowering_rush");
 	
+	public static Block PRISMARINE_ROD_BUNDLE            = new Block(Properties.from(Blocks.PRISMARINE_BRICKS).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_rod_bundle");	
+	
 	public static final Map<Block, Block> BIOROCK_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CHISELED_BIOROCK_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> BIOROCK_SLAB_CONVERSION_MAP = Maps.newHashMap();
@@ -480,7 +482,8 @@ public class UABlocks {
 		    KELPY_COBBLESTONE_STAIRS, TONGUE_KELPY_COBBLESTONE_STAIRS, OCHRE_KELPY_COBBLESTONE_STAIRS, THORNY_KELPY_COBBLESTONE_STAIRS, POLAR_KELPY_COBBLESTONE_STAIRS,
 		    KELPY_COBBLESTONE_WALL, TONGUE_KELPY_COBBLESTONE_WALL, OCHRE_KELPY_COBBLESTONE_WALL, THORNY_KELPY_COBBLESTONE_WALL, POLAR_KELPY_COBBLESTONE_WALL,
 		    BLUE_PICKERELWEED_BLOCK, PURPLE_PICKERELWEED_BLOCK, BOILED_BLUE_PICKERELWEED_BLOCK, BOILED_PURPLE_PICKERELWEED_BLOCK,
-		    FLOWERING_RUSH
+		    FLOWERING_RUSH,
+			PRISMARINE_ROD_BUNDLE
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -589,8 +592,8 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_CYAN, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BEDROLL_BROWN, ItemGroup.DECORATIONS));
 		
-		registry.register(RegistryUtils.createSimpleItemBlock(PICKERELWEED_BLUE, ItemGroup.DECORATIONS));
-		registry.register(RegistryUtils.createSimpleItemBlock(PICKERELWEED_PURPLE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PICKERELWEED_BLUE, ItemGroup.MISC));
+		registry.register(RegistryUtils.createSimpleItemBlock(PICKERELWEED_PURPLE, ItemGroup.MISC));
 		registry.register(RegistryUtils.createSimpleItemBlock(SEAROCKET_WHITE, ItemGroup.DECORATIONS));
 		registry.register(RegistryUtils.createSimpleItemBlock(SEAROCKET_PINK, ItemGroup.DECORATIONS));
 		
@@ -735,5 +738,7 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(BOILED_PURPLE_PICKERELWEED_BLOCK, ItemGroup.BUILDING_BLOCKS));
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(FLOWERING_RUSH, ItemGroup.DECORATIONS));
+		
+		registry.register(RegistryUtils.createSimpleItemBlock(PRISMARINE_ROD_BUNDLE, ItemGroup.BUILDING_BLOCKS));
 	}
 }
