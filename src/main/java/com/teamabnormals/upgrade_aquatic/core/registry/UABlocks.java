@@ -36,6 +36,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.StairsBlock;
@@ -345,7 +346,7 @@ public class UABlocks {
 	
 	public static Block FLOWERING_RUSH                   = new BlockFloweringRush(Properties.from(Blocks.PEONY)).setRegistryName(Reference.MODID, "flowering_rush");
 	
-	public static Block PRISMARINE_ROD_BUNDLE            = new Block(Properties.from(Blocks.PRISMARINE_BRICKS).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_rod_bundle");	
+	public static Block PRISMARINE_ROD_BUNDLE            = new RotatedPillarBlock(Properties.from(Blocks.PURPUR_PILLAR).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_rod_bundle");	
 	
 	public static final Map<Block, Block> BIOROCK_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CHISELED_BIOROCK_CONVERSION_MAP = Maps.newHashMap();
