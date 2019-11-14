@@ -14,6 +14,7 @@ import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ServerProxy;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
@@ -62,6 +63,8 @@ public class UpgradeAquatic {
 				ConfigHelper.updateClientConfig(config);
 			}
 		});
+		
+		UAItems.ITEMS.register(modEventBus);
 		
 		ModLoadingContext modLoadingContext = ModLoadingContext.get();
 		modLoadingContext.registerConfig(ModConfig.Type.CLIENT, Config.CLIENTSPEC);

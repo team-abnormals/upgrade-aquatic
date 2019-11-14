@@ -146,7 +146,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
     }
 
     public ItemStack getBucket() {
-        return new ItemStack(UAItems.NAUTILUS_BUCKET);
+        return new ItemStack(UAItems.NAUTILUS_BUCKET.get());
     }
 
     @Override

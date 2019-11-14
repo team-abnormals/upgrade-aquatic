@@ -158,7 +158,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 
 	@Override
 	public ItemStack getBucket() {
-		return new ItemStack(UAItems.PIKE_BUCKET);
+		return new ItemStack(UAItems.PIKE_BUCKET.get());
 	}
 	
 	@Override
@@ -728,7 +728,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 				return 12;
 			}
 		}
-		return 1;
+		return 3;
 	}
 	
 	@Override
