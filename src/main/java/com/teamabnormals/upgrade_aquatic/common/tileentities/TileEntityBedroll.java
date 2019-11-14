@@ -13,7 +13,7 @@ public class TileEntityBedroll extends TileEntity {
 	private DyeColor color;
 	
 	public TileEntityBedroll() {
-		super(UATileEntities.BEDROLL);
+		super(UATileEntities.BEDROLL.get());
 	}
 	
 	public TileEntityBedroll(DyeColor colorIn) {
