@@ -12,6 +12,11 @@ public class UACompostables {
 		ComposterBlock.registerCompostable(0.3F, UABlocks.PICKERELWEED_PURPLE);
 		ComposterBlock.registerCompostable(0.3F, UAItems.BOILED_PICKERELWEED_BLUE.get());
 		ComposterBlock.registerCompostable(0.3F, UAItems.BOILED_PICKERELWEED_PURPLE.get());
+		ComposterBlock.registerCompostable(0.5F, UABlocks.BLUE_PICKERELWEED_BLOCK);
+		ComposterBlock.registerCompostable(0.5F, UABlocks.PURPLE_PICKERELWEED_BLOCK);
+		ComposterBlock.registerCompostable(0.5F, UABlocks.BOILED_BLUE_PICKERELWEED_BLOCK);
+		ComposterBlock.registerCompostable(0.5F, UABlocks.BOILED_PURPLE_PICKERELWEED_BLOCK);
+		ComposterBlock.registerCompostable(0.65F, UABlocks.FLOWERING_RUSH);
 		ComposterBlock.registerCompostable(0.65F, UABlocks.SEAROCKET_WHITE);
 		ComposterBlock.registerCompostable(0.65F, UABlocks.SEAROCKET_PINK);
 		ComposterBlock.registerCompostable(0.3F, UABlocks.TONGUE_KELP);
