@@ -62,7 +62,7 @@ public class UAEntities {
     
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-    	for (EntityType entity : entities) {
+    	for(EntityType entity : entities) {
     		event.getRegistry().register(entity);
     	}
     	EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);

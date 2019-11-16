@@ -33,9 +33,7 @@ public class UAProperties {
 		return pink ? Block.Properties.create(Material.PLANTS, MaterialColor.PINK).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	}
 	
-	public static final Block.Properties BIOROCK(boolean tickRandomly) {
-		return tickRandomly ? Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).tickRandomly() : Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE);
-	}
+	public static final Block.Properties BIOROCK = Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).tickRandomly();
 	
 	public static final Block.Properties SPINES       = Block.Properties.create(Material.ORGANIC).doesNotBlockMovement().hardnessAndResistance(1.5F);
 	public static final Block.Properties ELDER_EYE    = Block.Properties.create(Material.ORGANIC, MaterialColor.WHITE_TERRACOTTA).sound(SoundType.WET_GRASS).hardnessAndResistance(1.0F);
