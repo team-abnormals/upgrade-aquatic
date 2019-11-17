@@ -1,0 +1,6 @@
+{
+    "parent": "block/button_inventory",
+    "textures": {
+        "texture": "upgrade_aquatic:block/driftwood_planks"
+    }
+}

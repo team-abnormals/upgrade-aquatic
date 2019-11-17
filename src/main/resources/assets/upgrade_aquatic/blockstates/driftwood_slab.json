@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "upgrade_aquatic:block/driftwood_slab" },
+        "type=top": { "model": "upgrade_aquatic:block/driftwood_slab_top" },
+        "type=double": { "model": "upgrade_aquatic:block/driftwood_planks" }
+    }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "upgrade_aquatic",
+  "ingredients": [
+    {
+      	"tag": "upgrade_aquatic:driftwood_logs"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:driftwood_planks",
+    "count": 4
+  }
+}
