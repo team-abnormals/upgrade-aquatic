@@ -29,6 +29,15 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorock;
 import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockSlab;
 import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockStairs;
 import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockWall;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodLog;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodPlanks;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodDoor;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockButtonBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceGateBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockTrapdoorBase;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -38,6 +47,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SlabBlock;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.WallBlock;
@@ -346,7 +356,19 @@ public class UABlocks {
 	
 	public static Block FLOWERING_RUSH                   = new BlockFloweringRush(Properties.from(Blocks.PEONY)).setRegistryName(Reference.MODID, "flowering_rush");
 	
-	public static Block PRISMARINE_ROD_BUNDLE            = new RotatedPillarBlock(Properties.from(Blocks.PURPUR_PILLAR).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_rod_bundle");	
+	public static Block PRISMARINE_ROD_BUNDLE            = new RotatedPillarBlock(Properties.from(Blocks.PURPUR_PILLAR).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_rod_bundle");
+
+	public static Block DRIFTWOOD_LOG            = new BlockDriftwoodLog(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_log");
+	public static Block DRIFTWOOD                = new BlockDriftwoodLog(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood");
+	public static Block DRIFTWOOD_PLANKS         = new BlockDriftwoodPlanks(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_planks");
+	public static Block DRIFTWOOD_DOOR           = new BlockDriftwoodDoor(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_door");
+	public static Block DRIFTWOOD_SLAB           = new SlabBlock(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_slab");
+	public static Block DRIFTWOOD_STAIRS         = new StairsBlock(DRIFTWOOD_PLANKS.getDefaultState(), UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_stairs");
+	public static Block DRIFTWOOD_FENCE          = new BlockFenceBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_fence");
+	public static Block DRIFTWOOD_FENCE_GATE     = new BlockFenceGateBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_fence_gate");
+	public static Block DRIFTWOOD_PRESSURE_PLATE = new BlockPressurePlateBase(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_pressure_plate");
+	public static Block DRIFTWOOD_BUTTON         = new BlockButtonBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_button");
+	public static Block DRIFTWOOD_TRAPDOOR       = new BlockTrapdoorBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_trapdoor");	
 	
 	public static final Map<Block, Block> BIOROCK_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CHISELED_BIOROCK_CONVERSION_MAP = Maps.newHashMap();
@@ -483,8 +505,8 @@ public class UABlocks {
 		    KELPY_COBBLESTONE_STAIRS, TONGUE_KELPY_COBBLESTONE_STAIRS, OCHRE_KELPY_COBBLESTONE_STAIRS, THORNY_KELPY_COBBLESTONE_STAIRS, POLAR_KELPY_COBBLESTONE_STAIRS,
 		    KELPY_COBBLESTONE_WALL, TONGUE_KELPY_COBBLESTONE_WALL, OCHRE_KELPY_COBBLESTONE_WALL, THORNY_KELPY_COBBLESTONE_WALL, POLAR_KELPY_COBBLESTONE_WALL,
 		    BLUE_PICKERELWEED_BLOCK, PURPLE_PICKERELWEED_BLOCK, BOILED_BLUE_PICKERELWEED_BLOCK, BOILED_PURPLE_PICKERELWEED_BLOCK,
-		    FLOWERING_RUSH,
-			PRISMARINE_ROD_BUNDLE
+		    DRIFTWOOD_LOG, DRIFTWOOD, DRIFTWOOD_PLANKS, DRIFTWOOD_DOOR, DRIFTWOOD_TRAPDOOR, DRIFTWOOD_FENCE, DRIFTWOOD_FENCE_GATE, DRIFTWOOD_SLAB, DRIFTWOOD_STAIRS, DRIFTWOOD_BUTTON, DRIFTWOOD_PRESSURE_PLATE,
+			PRISMARINE_ROD_BUNDLE, FLOWERING_RUSH 
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -739,6 +761,18 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(BOILED_PURPLE_PICKERELWEED_BLOCK, ItemGroup.BUILDING_BLOCKS));
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(FLOWERING_RUSH, ItemGroup.DECORATIONS));
+		
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_LOG, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_PLANKS, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_SLAB, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_STAIRS, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_FENCE, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_FENCE_GATE, ItemGroup.REDSTONE));
+		registry.register(RegistryUtils.createTallItemBlock(DRIFTWOOD_DOOR, ItemGroup.REDSTONE));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_PRESSURE_PLATE, ItemGroup.REDSTONE));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_BUTTON, ItemGroup.REDSTONE));
+		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_TRAPDOOR, ItemGroup.REDSTONE));
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(PRISMARINE_ROD_BUNDLE, ItemGroup.BUILDING_BLOCKS));
 	}
