@@ -1,0 +1,7 @@
+{
+   	"variants": {
+   		"axis=y": { "model": "upgrade_aquatic:block/driftwood_stripped" },
+        "axis=z": { "model": "upgrade_aquatic:block/driftwood_stripped", "x": 90 },
+        "axis=x": { "model": "upgrade_aquatic:block/driftwood_stripped", "x": 90, "y": 90 }
+    }
+}

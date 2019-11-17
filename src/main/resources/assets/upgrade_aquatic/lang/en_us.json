@@ -286,6 +286,8 @@
   
   "block.upgrade_aquatic.driftwood": "Driftwood",
   "block.upgrade_aquatic.driftwood_log": "Driftwood Log",
+  "block.upgrade_aquatic.stripped_driftwood": "Stripped Driftwood",
+  "block.upgrade_aquatic.stripped_driftwood_log": "Stripped Driftwood Log",
   "block.upgrade_aquatic.driftwood_planks": "Driftwood Planks",
   "block.upgrade_aquatic.driftwood_stairs": "Driftwood Stairs",
   "block.upgrade_aquatic.driftwood_slab": "Driftwood Slab",
