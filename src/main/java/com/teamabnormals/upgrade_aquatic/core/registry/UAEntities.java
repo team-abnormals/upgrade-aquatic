@@ -10,6 +10,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityThrasher;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -38,6 +39,7 @@ public class UAEntities {
 	private static List<EntityType> entities = Lists.newArrayList();
 	private static List<Item> spawnEggs = Lists.newArrayList();
 	
+	public static final EntityType<EntityUABoat> BOAT = createEntity(EntityUABoat.class, EntityUABoat::new, EntityClassification.MISC, "boat", 1.375F, 0.5625F);
 	public static final EntityType<EntityNautilus> NAUTILUS = createEntity(EntityNautilus.class, EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F, 14596231, 16744272);
 	public static final EntityType<EntityPike> PIKE = createEntity(EntityPike.class, EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F, 4806944, 13002040);
 	public static final EntityType<EntityLionfish> LIONFISH = createEntity(EntityLionfish.class, EntityLionfish::new, EntityClassification.CREATURE, "lionfish", 0.6F, 0.5F, 15281931, 16111310);
