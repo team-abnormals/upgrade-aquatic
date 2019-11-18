@@ -283,10 +283,28 @@
   "block.upgrade_aquatic.pickerelweed_purple_block": "Блок фиолековой понтедерии",
   "block.upgrade_aquatic.boiled_pickerelweed_blue_block": "Блок вареной синей понтедерии",
   "block.upgrade_aquatic.boiled_pickerelweed_purple_block": "Блок вареной фиолековой понтедерии",
+
+  "block.upgrade_aquatic.driftwood": "Плавник",
+  "block.upgrade_aquatic.driftwood_log": "Плавниковое бревно",
+  "block.upgrade_aquatic.driftwood_stripped": "Обтёсанная плавниковая древесина",
+  "block.upgrade_aquatic.driftwood_log_stripped": "Обтёсанное плавниковое бревно",
+  "block.upgrade_aquatic.driftwood_planks": "Плавниковые доски",
+  "block.upgrade_aquatic.driftwood_stairs": "Плавниковые ступени",
+  "block.upgrade_aquatic.driftwood_slab": "Плавниковая плита",
+  "block.upgrade_aquatic.driftwood_fence": "Плавниковый забор",
+  "block.upgrade_aquatic.driftwood_fence_gate": "Плавниковая калитка",
+  "block.upgrade_aquatic.driftwood_pressure_plate": "Плавниковая нажимная плита",
+  "block.upgrade_aquatic.driftwood_button": "Плавниковая кнопка",
+  "block.upgrade_aquatic.driftwood_door": "Плавниковая дверь",
+  "block.upgrade_aquatic.driftwood_trapdoor": "Плавниковый люк",
   
   "block.upgrade_aquatic.flowering_rush": "Цветущий камыш",
+
+  "block.upgrade_aquatic.prismarine_rod_bundle": "Связка призмариновых стержней",
   
   "_comment": "Предметы",
+
+  "item.upgrade_aquatic.driftwood_boat": "Плавниковая лодка",
 
   "item.upgrade_aquatic.prismarine_rod": "Призмариновый стержень",
   "item.upgrade_aquatic.thrasher_tooth": "Зуб острозуба",
