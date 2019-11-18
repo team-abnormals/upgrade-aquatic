@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "tag": "upgrade_aquatic:deadacan_fans_corals"
+      "tag": "upgrade_aquatic:dead_acan_fans_corals"
     }
   },
   "result": {
-    "item": "upgrade_aquatic:deadacan_coral_block",
+    "item": "upgrade_aquatic:dead_acan_coral_block",
     "count": 1
   }
 }

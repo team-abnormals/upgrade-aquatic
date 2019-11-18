@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "tag": "upgrade_aquatic:deadfinger_fans_corals"
+      "tag": "upgrade_aquatic:dead_finger_fans_corals"
     }
   },
   "result": {
-    "item": "upgrade_aquatic:deadfinger_coral_block",
+    "item": "upgrade_aquatic:dead_finger_coral_block",
     "count": 1
   }
 }

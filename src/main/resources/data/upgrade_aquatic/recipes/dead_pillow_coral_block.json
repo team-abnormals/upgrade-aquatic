@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "tag": "upgrade_aquatic:deadpillow_fans_corals"
+      "tag": "upgrade_aquatic:dead_pillow_fans_corals"
     }
   },
   "result": {
-    "item": "upgrade_aquatic:deadpillow_coral_block",
+    "item": "upgrade_aquatic:dead_pillow_coral_block",
     "count": 1
   }
 }
