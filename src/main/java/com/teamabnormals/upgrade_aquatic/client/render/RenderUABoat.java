@@ -1,10 +1,11 @@
-package com.teamabnormals.upgrade_aquatic.client.render.entity;
+package com.teamabnormals.upgrade_aquatic.client.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 
 import com.teamabnormals.upgrade_aquatic.client.model.ModelUABoat;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.util.Reference;
+
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
@@ -15,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class RenderUABoat extends EntityRenderer<EntityUABoat> {
     private static final ResourceLocation[] BOAT_TEXTURES = new ResourceLocation[] {
-    	new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/boat/driftwood_boat.png"),
+    	new ResourceLocation(Reference.MODID, "textures/entity/boat/driftwood_boat.png"),
     };
     protected final ModelUABoat model = new ModelUABoat();
 

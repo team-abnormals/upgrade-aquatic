@@ -150,9 +150,9 @@ public class EntityUABoat extends BoatEntity {
 	@Override
     public Item getItemBoat() {
 		switch (this.getBoatModel()) {
-			case DRIFTWOOD:
 			default:
-				return UAItems.DRIFTWOOD_BOAT;
+			case DRIFTWOOD:
+				return UAItems.DRIFTWOOD_BOAT.get();
 		}
 	}
 	
@@ -193,9 +193,11 @@ public class EntityUABoat extends BoatEntity {
         if (!this.world.isRemote) {
         	this.setFlag(6, this.isGlowing());
         }
-        baseTick();
+        
+        this.baseTick();
 
         super.tickLerp();
+        
         if (this.canPassengerSteer()) {
             if (this.getPassengers().isEmpty() || !(this.getPassengers().get(0) instanceof PlayerEntity)) {
                 this.setPaddleState(false, false);
