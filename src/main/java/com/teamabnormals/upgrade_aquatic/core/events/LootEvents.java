@@ -10,7 +10,6 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTables;
@@ -60,23 +59,6 @@ public class LootEvents {
 			int spineAmount = event.getLootingLevel() > 0 ? (rand.nextInt(3) + 1) * event.getLootingLevel() : rand.nextInt(2) + 1;
 			ItemEntity drop = new ItemEntity(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, new ItemStack(UABlocks.GUARDIAN_SPINE, spineAmount));
 			event.getDrops().add(drop);
-		} else if(event.getEntity().getType() == EntityType.DROWNED) {
-			if(rand.nextFloat() <= 0.35F) {
-				int coralAmount = event.getLootingLevel() > 0 ? (rand.nextInt(2) + 1) * event.getLootingLevel() : 1;
-				ItemStack corals = new ItemStack(BlockTags.CORAL_PLANTS.getRandomElement(rand), coralAmount);
-				ItemStack wallCorals = new ItemStack(BlockTags.WALL_CORALS.getRandomElement(rand), coralAmount);
-				if(rand.nextBoolean()) {
-					event.getDrops().add(new ItemEntity(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, corals));
-				} else {
-					event.getDrops().add(new ItemEntity(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, wallCorals));
-				}
-			} else {
-				if(rand.nextFloat() >= 0.90) {
-					int coralAmount = event.getLootingLevel() > 0 ? (rand.nextInt(2) + 1) * event.getLootingLevel() : 1;
-					ItemStack corals = new ItemStack(BlockTags.CORAL_BLOCKS.getRandomElement(rand), coralAmount);
-					event.getDrops().add(new ItemEntity(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, corals));
-				}
-			}
 		}
 	}
 }

@@ -49,21 +49,21 @@ public class UAEntities {
 	public static final EntityType<EntityThrasher> THRASHER = createEntity(EntityThrasher.class, EntityThrasher::new, EntityClassification.MONSTER, "thrasher", 1.6F, 1F, 7255507, 11730927);
 	
 	private static <T extends Entity> EntityType<T> createEntity(Class<T> entityClass, EntityType.IFactory<T> factory, EntityClassification entityClassification, String name, float width, float height, int eggPrimary, int eggSecondary) {
-        ResourceLocation location = new ResourceLocation(Reference.MODID, name);
+		ResourceLocation location = new ResourceLocation(Reference.MODID, name);
         
-        EntityType<T> entity = EntityType.Builder.create(factory, entityClassification)
-        	.size(width, height).setTrackingRange(64)
-        	.setShouldReceiveVelocityUpdates(true)
-        	.setUpdateInterval(3)
-        	.build(location.toString());
+		EntityType<T> entity = EntityType.Builder.create(factory, entityClassification)
+			.size(width, height).setTrackingRange(64)
+			.setShouldReceiveVelocityUpdates(true)
+			.setUpdateInterval(3)
+			.build(location.toString());
         
-        entity.setRegistryName(location);
+		entity.setRegistryName(location);
         
-        entities.add(entity);
-        spawnEggs.add(RegistryUtils.createSpawnEggForEntity(entity, eggPrimary, eggSecondary, ItemGroup.MISC));
+		entities.add(entity);
+		spawnEggs.add(RegistryUtils.createSpawnEggForEntity(entity, eggPrimary, eggSecondary, ItemGroup.MISC));
 
-        return entity;
-    }
+		return entity;
+	}
 	
 	private static <T extends Entity> EntityType<T> createBasicEntity(EntityType.IFactory<T> factory, BiFunction<FMLPlayMessages.SpawnEntity, World, T> clientFactory, EntityClassification entityClassification, String name, float width, float height) {
 		ResourceLocation location = new ResourceLocation(Reference.MODID, name);
@@ -83,57 +83,57 @@ public class UAEntities {
 		return entity;
 	}
     
-    @SubscribeEvent
-    public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-    	for(EntityType entity : entities) {
-    		event.getRegistry().register(entity);
-    	}
-    	EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
-    	EntitySpawnPlacementRegistry.register(PIKE, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
-    	EntitySpawnPlacementRegistry.register(LIONFISH, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::coralCondition);
-    }
-
-    @SubscribeEvent
-    public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
-        for (Item spawnEgg : spawnEggs) {
-            event.getRegistry().register(spawnEgg);
-        }
-    }
+	@SubscribeEvent
+	public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
+		for(EntityType entity : entities) {
+			event.getRegistry().register(entity);
+		}
+		EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
+		EntitySpawnPlacementRegistry.register(PIKE, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
+		EntitySpawnPlacementRegistry.register(LIONFISH, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::coralCondition);
+	}
+	
+	@SubscribeEvent
+	public static void registerSpawnEggs(RegistryEvent.Register<Item> event) {
+		for(Item spawnEgg : spawnEggs) {
+			event.getRegistry().register(spawnEgg);
+		}
+	}
     
-    private static boolean ravineMobCondition(EntityType<? extends MobEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    	if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
-    	return pos.getY() <= 30;
-    }
+	private static boolean ravineMobCondition(EntityType<? extends MobEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
+		return pos.getY() <= 30;
+	}
     
-    private static boolean pickerelCondition(EntityType<? extends EntityPike> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    	if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
-    	for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
-			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
-				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
+	private static boolean pickerelCondition(EntityType<? extends EntityPike> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
+		for(int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
+			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
+				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
 					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweedDouble) {
 						if(random.nextFloat() <= 0.25F)
 							if(world.getBiome(pos).getCategory() == Category.SWAMP) {
 								return random.nextFloat() <= 0.25 ? true : false;
 							}
-							return true;
+						return true;
 					}
 				}
 			}
 		}
 		return random.nextFloat() <= 0.05F ? true : false;
-    }
+	}
     
-    private static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    	if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
-    	for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
-			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
-				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
+	private static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
+		for(int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
+			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
+				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
 					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock().isIn(BlockTags.CORAL_BLOCKS)) {
 						return true;
 					}
 				}
 			}
 		}
-    	return false;
+		return false;
     }
 }
