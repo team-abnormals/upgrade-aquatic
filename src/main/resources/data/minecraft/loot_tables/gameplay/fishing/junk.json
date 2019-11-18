@@ -30,6 +30,12 @@
         },
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 5
+            }
+          ],
           "weight": 10,
           "name": "upgrade_aquatic:driftwood_log"
         },
