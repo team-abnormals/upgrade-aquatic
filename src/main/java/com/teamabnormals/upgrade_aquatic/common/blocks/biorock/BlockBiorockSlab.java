@@ -10,14 +10,21 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CoralWallFanBlock;
 import net.minecraft.block.SlabBlock;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
 public class BlockBiorockSlab extends SlabBlock {
@@ -90,6 +97,23 @@ public class BlockBiorockSlab extends SlabBlock {
 			if(flag != worldIn.isBlockPowered(pos)) {
 				worldIn.setBlockState(pos, state.cycle(POWERED), 2);
 			}
+		}
+	}
+	
+	@Override
+	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		if(world.isRemote) {
+			return true;
+		} else {
+			ItemStack stack = player.getHeldItem(hand);
+			BlockState newState = UABlocks.BIOROCK_SLAB.getDefaultState();
+			if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_BIOROCK && state.getBlock() != UABlocks.BIOROCK) {
+				world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
+				stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
+				world.setBlockState(pos, newState.with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED)), 2);
+				return true;
+			}
+			return false;
 		}
 	}
 	

@@ -272,8 +272,8 @@ public class UABlocks {
 	public static Block ELDER_BIOROCK_SLAB            = new BlockBiorockSlab(UAProperties.BIOROCK, null).setRegistryName(Reference.MODID, "elder_biorock_slab");
 	public static Block DEAD_BIOROCK_SLAB             = new BlockBiorockSlab(UAProperties.BIOROCK, null).setRegistryName(Reference.MODID, "dead_biorock_slab");	
 	
-	public static Block BIOROCK_STAIRS                = new BlockBiorockStairs(() -> BIOROCK.getDefaultState(), UAProperties.BIOROCK).setRegistryName(Reference.MODID, "biorock_stairs");
-	public static Block BUBBLE_BIOROCK_STAIRS         = new StairsBlock(BUBBLE_BIOROCK.getDefaultState(), UAProperties.BIOROCK).setRegistryName(Reference.MODID, "bubble_biorock_stairs");
+	public static Block BIOROCK_STAIRS                = new BlockBiorockStairs(() -> BIOROCK.getDefaultState(), UAProperties.BIOROCK, null).setRegistryName(Reference.MODID, "biorock_stairs");
+	public static Block BUBBLE_BIOROCK_STAIRS         = new BlockBiorockStairs(() -> BUBBLE_BIOROCK.getDefaultState(), UAProperties.BIOROCK, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "bubble_biorock_stairs");
 	public static Block HORN_BIOROCK_STAIRS           = new StairsBlock(HORN_BIOROCK.getDefaultState(), UAProperties.BIOROCK).setRegistryName(Reference.MODID, "horn_biorock_stairs");
 	public static Block TUBE_BIOROCK_STAIRS           = new StairsBlock(TUBE_BIOROCK.getDefaultState(), UAProperties.BIOROCK).setRegistryName(Reference.MODID, "tube_biorock_stairs");
 	public static Block BRAIN_BIOROCK_STAIRS          = new StairsBlock(BRAIN_BIOROCK.getDefaultState(), UAProperties.BIOROCK).setRegistryName(Reference.MODID, "brain_biorock_stairs");
