@@ -116,7 +116,7 @@ public class BlockBiorockStairs extends StairsBlock {
 				.with(SHAPE, state.get(SHAPE))
 				.with(WATERLOGGED, state.get(WATERLOGGED)
 			);
-			if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_BIOROCK && state.getBlock() != UABlocks.BIOROCK) {
+			if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.BIOROCK_STAIRS) {
 				world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 				stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 				world.setBlockState(pos, newState, 2);

@@ -107,7 +107,7 @@ public class BlockBiorockSlab extends SlabBlock {
 		} else {
 			ItemStack stack = player.getHeldItem(hand);
 			BlockState newState = UABlocks.BIOROCK_SLAB.getDefaultState();
-			if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_BIOROCK && state.getBlock() != UABlocks.BIOROCK) {
+			if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.BIOROCK_SLAB) {
 				world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 				stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 				world.setBlockState(pos, newState.with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED)), 2);
