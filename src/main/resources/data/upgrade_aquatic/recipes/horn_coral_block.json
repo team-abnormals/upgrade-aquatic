@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "upgrade_aquatic:horn_fans_corals"
+    }
+  },
+  "result": {
+    "item": "minecraft:horn_coral_block",
+    "count": 1
+  }
+}

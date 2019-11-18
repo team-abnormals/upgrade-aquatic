@@ -22,7 +22,7 @@ public class AnvilEvents {
 
 	@SubscribeEvent
 	public static void onAnvilUpdate(AnvilUpdateEvent event) {
-		if(event.getLeft().getItem() == Items.TRIDENT && event.getRight().getItem() == UAItems.THRASHER_TOOTH) {
+		if(event.getLeft().getItem() == Items.TRIDENT && event.getRight().getItem() == UAItems.THRASHER_TOOTH.get()) {
 			ItemStack leftItem = event.getLeft();
 			ItemStack cloneLeftStack = event.getLeft().copy();
 			ItemStack rightItem = event.getRight();

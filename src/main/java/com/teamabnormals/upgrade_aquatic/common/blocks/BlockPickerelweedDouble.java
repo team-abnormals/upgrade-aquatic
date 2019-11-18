@@ -28,6 +28,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -62,7 +63,7 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
 		if (entity instanceof LivingEntity && !(entity instanceof EntityPike)) {
-			entity.setMotion(entity.getMotion().mul(0.6D, 0.6D, 0.6D));
+			entity.setMotionMultiplier(state, new Vec3d(0.75D, 0.75D, 0.75D));
 		}
 	}
 	

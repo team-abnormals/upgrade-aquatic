@@ -163,7 +163,7 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 
 	@Override
 	public ItemStack getBucket() {
-		return new ItemStack(UAItems.LIONFISH_BUCKET);
+		return new ItemStack(UAItems.LIONFISH_BUCKET.get());
 	}
 	
 	@Override

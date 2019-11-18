@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "upgrade_aquatic:bubble_fans_corals"
+    }
+  },
+  "result": {
+    "item": "minecraft:bubble_coral_block",
+    "count": 1
+  }
+}

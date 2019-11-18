@@ -21,7 +21,7 @@ import net.minecraft.util.math.MathHelper;
 public class TileEntityElderEye extends TileEntity implements ITickableTileEntity {
 	
 	public TileEntityElderEye() {
-		super(UATileEntities.ELDER_EYE);
+		super(UATileEntities.ELDER_EYE.get());
 	}
 
 	@Override

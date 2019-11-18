@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen;
 
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureFloweringRush;
+
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePickerelweed;
 
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePrismarineCoral;
@@ -12,6 +13,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
 public class UAFeatures {
 	
 	public static final Feature<NoFeatureConfig> PRISMARINE_CORAL_SHELF      = new FeaturePrismarineCoralShelf(NoFeatureConfig::deserialize);

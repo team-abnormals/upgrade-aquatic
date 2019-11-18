@@ -1,0 +1,6 @@
+{
+    "parent": "block/template_fence_gate",
+    "textures": {
+        "texture": "upgrade_aquatic:block/driftwood_planks"
+    }
+}

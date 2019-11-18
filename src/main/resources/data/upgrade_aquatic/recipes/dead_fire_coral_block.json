@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "upgrade_aquatic:dead_fire_fans_corals"
+    }
+  },
+  "result": {
+    "item": "minecraft:dead_fire_coral_block",
+    "count": 1
+  }
+}

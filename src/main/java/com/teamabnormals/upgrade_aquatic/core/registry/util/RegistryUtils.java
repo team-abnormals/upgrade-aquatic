@@ -1,6 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.core.registry.util;
 
+import java.util.function.Supplier;
+
 import com.teamabnormals.upgrade_aquatic.common.items.itemblocks.ItemBlockUpsideDown;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.Block;
@@ -12,6 +15,7 @@ import net.minecraft.item.Rarity;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.TallBlockItem;
 import net.minecraft.item.WallOrFloorItem;
+import net.minecraftforge.fml.RegistryObject;
 
 public class RegistryUtils {
 	
@@ -41,6 +45,11 @@ public class RegistryUtils {
 
 	public static Item createItemBlockWithRarity(Block blockForInput, ItemGroup itemGroup, Rarity rarity) {
 		return (BlockItem) new BlockItem(blockForInput, new Item.Properties().group(itemGroup).rarity(rarity)).setRegistryName(blockForInput.getRegistryName());
+	}
+	
+	public static <I extends Item> RegistryObject<I> createItem(String name, Supplier<? extends I> supplier) {
+		RegistryObject<I> item = UAItems.ITEMS.register(name, supplier);
+		return item;
 	}
 	
 }

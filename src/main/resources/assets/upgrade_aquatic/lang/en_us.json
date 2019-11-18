@@ -284,9 +284,27 @@
   "block.upgrade_aquatic.boiled_pickerelweed_blue_block": "Boiled Blue Pickerelweed Block",
   "block.upgrade_aquatic.boiled_pickerelweed_purple_block": "Boiled Purple Pickerelweed Block",
   
+  "block.upgrade_aquatic.driftwood": "Driftwood",
+  "block.upgrade_aquatic.driftwood_log": "Driftwood Log",
+  "block.upgrade_aquatic.driftwood_stripped": "Stripped Driftwood",
+  "block.upgrade_aquatic.driftwood_log_stripped": "Stripped Driftwood Log",
+  "block.upgrade_aquatic.driftwood_planks": "Driftwood Planks",
+  "block.upgrade_aquatic.driftwood_stairs": "Driftwood Stairs",
+  "block.upgrade_aquatic.driftwood_slab": "Driftwood Slab",
+  "block.upgrade_aquatic.driftwood_fence": "Driftwood Fence",
+  "block.upgrade_aquatic.driftwood_fence_gate": "Driftwood Fence Gate",
+  "block.upgrade_aquatic.driftwood_pressure_plate": "Driftwood Pressure Plate",
+  "block.upgrade_aquatic.driftwood_button": "Driftwood Button",
+  "block.upgrade_aquatic.driftwood_door": "Driftwood Door",
+  "block.upgrade_aquatic.driftwood_trapdoor": "Driftwood Trapdoor",
+  
   "block.upgrade_aquatic.flowering_rush": "Flowering Rush",
   
+  "block.upgrade_aquatic.prismarine_rod_bundle": "Prismarine Rod Bundle",
+  
   "_comment": "Items",
+  
+  "item.upgrade_aquatic.driftwood_boat": "Driftwood Boat",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
   "item.upgrade_aquatic.thrasher_tooth": "Thrasher Tooth",
