@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "upgrade_aquatic:deadpillow_fans_corals"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:deadpillow_coral_block",
+    "count": 1
+  }
+}

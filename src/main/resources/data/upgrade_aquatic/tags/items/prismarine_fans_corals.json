@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "upgrade_aquatic:prismarine_coral",
+    "upgrade_aquatic:prismarine_coral_fan",
+    "upgrade_aquatic:prismarine_shower"
+  ]
+}
