@@ -34,7 +34,6 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwood;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodPlanks;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodDoor;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockButtonBase;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceGateBase;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceBase;
@@ -232,7 +231,7 @@ public class UABlocks {
 	public static Block PILLOW_BIOROCK                = new BlockBiorock(UAProperties.BIOROCK, false, new Block[] {PILLOW_CORAL, PILLOW_CORAL_FAN, PILLOW_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "pillow_biorock");
 	public static Block SILK_BIOROCK                  = new BlockBiorock(UAProperties.BIOROCK, false, new Block[] {SILK_CORAL, SILK_CORAL_FAN, SILK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "silk_biorock");
 	public static Block PRISMARINE_BIOROCK            = new BlockBiorock(UAProperties.BIOROCK, false, new Block[] {PRISMARINE_CORAL, PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_WALL_FAN, PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "prismarine_biorock");
-	public static Block ELDER_BIOROCK                 = new BlockBiorock(UAProperties.BIOROCK, false, new Block[] {ELDER_PRISMARINE_CORAL, ELDER_PRISMARINE_CORAL_FAN, ELDER_PRISMARINE_CORAL_WALL_FAN, ELDER_PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "elder_biorock");
+	public static Block ELDER_BIOROCK                 = new BlockBiorock(UAProperties.BIOROCK, false).setRegistryName(Reference.MODID, "elder_biorock");
 	public static Block DEAD_BIOROCK                  = new BlockBiorock(UAProperties.BIOROCK, false).setRegistryName(Reference.MODID, "dead_biorock");
 	
 	public static Block CHISELED_BIOROCK              = new BlockBiorock(UAProperties.BIOROCK, true).setRegistryName(Reference.MODID, "chiseled_biorock");
@@ -251,7 +250,7 @@ public class UABlocks {
 	public static Block PILLOW_CHISELED_BIOROCK       = new BlockBiorock(UAProperties.BIOROCK, true, new Block[] {PILLOW_CORAL, PILLOW_CORAL_FAN, PILLOW_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "pillow_chiseled_biorock");
 	public static Block SILK_CHISELED_BIOROCK         = new BlockBiorock(UAProperties.BIOROCK, true, new Block[] {SILK_CORAL, SILK_CORAL_FAN, SILK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "silk_chiseled_biorock");
 	public static Block PRISMARINE_CHISELED_BIOROCK   = new BlockBiorock(UAProperties.BIOROCK, true, new Block[] {PRISMARINE_CORAL, PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_WALL_FAN, PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "prismarine_chiseled_biorock");
-	public static Block ELDER_CHISELED_BIOROCK        = new BlockBiorock(UAProperties.BIOROCK, true, new Block[] {ELDER_PRISMARINE_CORAL, ELDER_PRISMARINE_CORAL_FAN, ELDER_PRISMARINE_CORAL_WALL_FAN, ELDER_PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "elder_chiseled_biorock");
+	public static Block ELDER_CHISELED_BIOROCK        = new BlockBiorock(UAProperties.BIOROCK, true).setRegistryName(Reference.MODID, "elder_chiseled_biorock");
 	public static Block DEAD_CHISELED_BIOROCK         = new BlockBiorock(UAProperties.BIOROCK, true).setRegistryName(Reference.MODID, "dead_chiseled_biorock");
     
 	public static Block BIOROCK_SLAB                  = new BlockBiorockSlab(UAProperties.BIOROCK, null).setRegistryName(Reference.MODID, "biorock_slab");
@@ -270,7 +269,7 @@ public class UABlocks {
 	public static Block PILLOW_BIOROCK_SLAB           = new BlockBiorockSlab(UAProperties.BIOROCK, new Block[] {PILLOW_CORAL, PILLOW_CORAL_FAN, PILLOW_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "pillow_biorock_slab");
 	public static Block SILK_BIOROCK_SLAB             = new BlockBiorockSlab(UAProperties.BIOROCK, new Block[] {SILK_CORAL, SILK_CORAL_FAN, SILK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "silk_biorock_slab");
 	public static Block PRISMARINE_BIOROCK_SLAB       = new BlockBiorockSlab(UAProperties.BIOROCK, new Block[] {PRISMARINE_CORAL, PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_WALL_FAN, PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "prismarine_biorock_slab");
-	public static Block ELDER_BIOROCK_SLAB            = new BlockBiorockSlab(UAProperties.BIOROCK, new Block[] {ELDER_PRISMARINE_CORAL, ELDER_PRISMARINE_CORAL_FAN, ELDER_PRISMARINE_CORAL_WALL_FAN, ELDER_PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "elder_biorock_slab");
+	public static Block ELDER_BIOROCK_SLAB            = new BlockBiorockSlab(UAProperties.BIOROCK, null).setRegistryName(Reference.MODID, "elder_biorock_slab");
 	public static Block DEAD_BIOROCK_SLAB             = new BlockBiorockSlab(UAProperties.BIOROCK, null).setRegistryName(Reference.MODID, "dead_biorock_slab");	
 	
 	public static Block BIOROCK_STAIRS                = new BlockBiorockStairs(() -> BIOROCK.getDefaultState(), UAProperties.BIOROCK).setRegistryName(Reference.MODID, "biorock_stairs");

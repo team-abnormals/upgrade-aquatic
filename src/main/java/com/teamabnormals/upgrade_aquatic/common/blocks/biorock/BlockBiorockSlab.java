@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.upgrade_aquatic.api.util.BlockUtil;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
@@ -39,6 +40,11 @@ public class BlockBiorockSlab extends SlabBlock {
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
 		if(!worldIn.isAreaLoaded(pos, 3)) return;
 		Block block = state.getBlock();
+		
+		if(!BlockUtil.isBlockInWater(worldIn, pos) && random.nextFloat() < 0.45F && this.growableCoralBlocks != null) {
+			BlockState deadState = block == UABlocks.PRISMARINE_BIOROCK_SLAB ? UABlocks.ELDER_BIOROCK_SLAB.getDefaultState() : UABlocks.DEAD_BIOROCK_SLAB.getDefaultState();
+			worldIn.setBlockState(pos, deadState.with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED)).with(POWERED, state.get(POWERED)));
+		}
 		
 		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_BIOROCK_SLAB) {
 			for(int i = 0; i < 4; i++) {
@@ -95,6 +101,9 @@ public class BlockBiorockSlab extends SlabBlock {
 	
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		if(!BlockUtil.isBlockInWater(context.getWorld(), context.getPos())) {
+			context.getWorld().getPendingBlockTicks().scheduleTick(context.getPos(), this, 60 + context.getWorld().getRandom().nextInt(40));
+		}
 		return super.getStateForPlacement(context).with(POWERED, context.getWorld().isBlockPowered(context.getPos()));
 	}
 	
