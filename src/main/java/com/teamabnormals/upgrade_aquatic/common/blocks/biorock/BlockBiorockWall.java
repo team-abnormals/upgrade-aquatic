@@ -2,9 +2,11 @@ package com.teamabnormals.upgrade_aquatic.common.blocks.biorock;
 
 import java.util.Random;
 
+import com.teamabnormals.upgrade_aquatic.api.util.BlockUtil;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.WallBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -62,8 +64,16 @@ public class BlockBiorockWall extends WallBlock {
 				stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 				world.setBlockState(pos, newState, 2);
 				return true;
+			} else {
+				BlockPos offsetPos = pos.offset(hit.getFace());
+				if((BlockUtil.canPlace(world, player, offsetPos, state) || world.getBlockState(offsetPos).getMaterial().isReplaceable()) && state.isValidPosition(world, offsetPos)) {
+					SoundType soundtype = state.getSoundType(world, pos, player);
+					world.playSound(null, pos, BlockUtil.getPlaceSound(state, world, pos, player), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+					return false;
+				} else {
+					return true;
+				}
 			}
-			return false;
 		}
 	}
 
