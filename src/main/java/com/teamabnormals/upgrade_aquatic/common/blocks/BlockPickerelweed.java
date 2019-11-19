@@ -58,7 +58,7 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 	
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
-		if (entity instanceof LivingEntity && !(entity instanceof EntityPike)) {
+		if (!(entity instanceof EntityPike)) {
 			entity.setMotionMultiplier(state, new Vec3d(0.75D, 0.75D, 0.75D));
 		}
 	}

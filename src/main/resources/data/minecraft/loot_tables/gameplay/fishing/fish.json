@@ -26,12 +26,12 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 11,
           "name": "upgrade_aquatic:pike"
         },
         {
           "type": "minecraft:item",
-          "weight": 2,
+          "weight": 5,
           "name": "upgrade_aquatic:lionfish"
         }
       ]
