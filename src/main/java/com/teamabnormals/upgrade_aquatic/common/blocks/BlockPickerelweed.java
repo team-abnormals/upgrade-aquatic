@@ -13,7 +13,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;

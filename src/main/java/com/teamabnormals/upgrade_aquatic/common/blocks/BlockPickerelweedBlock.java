@@ -20,6 +20,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -115,7 +116,7 @@ public class BlockPickerelweedBlock extends DirectionalBlock implements IBucketP
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
 		if(!(entity instanceof EntityPike) && !this.isBoiled) {
-			entity.setMotion(entity.getMotion().mul(0.6D, 1.0D, 0.6D));
+			entity.setMotionMultiplier(state, new Vec3d(0.6D, 1.0, 0.6D));
 		}
 	}
 	
