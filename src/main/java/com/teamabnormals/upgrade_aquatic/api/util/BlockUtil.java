@@ -1,5 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.api.util;
 
+import java.util.Arrays;
+import java.util.List;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tags.FluidTags;
@@ -8,6 +12,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class BlockUtil {
@@ -32,6 +37,18 @@ public class BlockUtil {
 	
 	public static SoundEvent getPlaceSound(BlockState state, World world, BlockPos pos, PlayerEntity entity) {
 		return state.getSoundType(world, pos, entity).getPlaceSound();
+	}
+	
+	public static boolean isPosNotTouchingBlock(IWorld world, BlockPos pos, Block blockToCheck, Direction... blacklistedDirections) {
+		for(Direction directions : Direction.values()) {
+			List<Direction> blacklistedDirectionsList = Arrays.asList(blacklistedDirections);
+			if(!blacklistedDirectionsList.contains(directions)) {
+				if(world.getBlockState(pos.offset(directions)).getBlock() == blockToCheck) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 }
