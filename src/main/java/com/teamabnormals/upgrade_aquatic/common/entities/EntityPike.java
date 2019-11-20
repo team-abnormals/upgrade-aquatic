@@ -623,7 +623,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		//Goes common to legendary
 		if(rarity < 1.0F && rand.nextFloat() > 0.60F) {
 			if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER || this.isFromBucket()) {
-				int pickedVariant = rand.nextInt(5);
+				int pickedVariant = rand.nextInt(4);
 				if(pickedVariant == 0) {
 					return 17;
 				} else if(pickedVariant == 1) {
@@ -633,10 +633,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 						return 3;
 					}
 				} else if(pickedVariant == 2) {
-					return 15;
+					if(biome.getCategory() == Category.RIVER) {
+						return 15;
+					} else if(biome.getCategory() == Category.SWAMP) {
+						return 16;
+					} else {
+						return 3;
+					}
 				} else if(pickedVariant == 3) {
-					return 16;
-				} else if(pickedVariant == 4) {
 					return 2;
 				}
 			} else {

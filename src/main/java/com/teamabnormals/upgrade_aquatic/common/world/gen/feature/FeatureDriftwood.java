@@ -51,33 +51,30 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 						}
 					}
 				}
+				return true;
 			} else {
 				return false;
 			}
 		} else {
 			Direction direction = Direction.byIndex(rand.nextInt(4) + 2);
 			int length = rand.nextInt(3) + 3;
-			if((world.getBiome(pos).getCategory() == Category.OCEAN && world.getBlockState(pos.down()).getBlock() == Blocks.WATER && world.isAirBlock(pos) && rand.nextFloat() < 0.25F) || (this.isNearWater(world, pos) && downBlock.isIn(BlockTags.DIRT_LIKE) || downBlock.isIn(BlockTags.SAND))) {
-				if(this.isDirectionOpen(world, pos, direction, length, false) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length)) {
-					for(int i = 0; i < length; i++) {
-						this.placeDriftwoodLog(world, pos.offset(direction, i), direction);
-						if(rand.nextBoolean()) {
-							this.placeBranch(world, pos.offset(direction, i), direction, rand, length >= 5);
-						}
-						if(rand.nextBoolean()) {
-							Direction upOrDown = rand.nextBoolean() ? Direction.UP : Direction.DOWN;
-							if(world.isAirBlock(pos.offset(direction, i).offset(upOrDown)) && BlockUtil.isPosNotTouchingBlock(world, pos.offset(direction, i).offset(upOrDown), UABlocks.DRIFTWOOD_LOG, Direction.UP, Direction.DOWN)) {
-								this.placeDriftwoodLog(world, pos.offset(direction, i).offset(upOrDown), upOrDown);
-							}
+			if((world.getBiome(pos).getCategory() == Category.OCEAN && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.down()).getBlock() == Blocks.WATER && world.isAirBlock(pos.up()) && rand.nextFloat() < 0.25F) || (world.getBiome(pos).getCategory() != Category.OCEAN && this.isNearWater(world, pos) && downBlock.isIn(BlockTags.DIRT_LIKE) || downBlock.isIn(BlockTags.SAND) && this.isDirectionOpen(world, pos, direction, length, false) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
+				for(int i = 0; i < length; i++) {
+					this.placeDriftwoodLog(world, pos.offset(direction, i), direction);
+					if(rand.nextBoolean()) {
+						this.placeBranch(world, pos.offset(direction, i), direction, rand, length >= 5);
+					}
+					if(rand.nextBoolean()) {
+						Direction upOrDown = rand.nextBoolean() ? Direction.UP : Direction.DOWN;
+						if(this.isBlockPlaceableAtPos(world, pos.offset(direction, i).offset(upOrDown), world.getBiome(pos.offset(direction, i).offset(upOrDown)).getCategory() == Category.OCEAN) && BlockUtil.isPosNotTouchingBlock(world, pos.offset(direction, i).offset(upOrDown), UABlocks.DRIFTWOOD_LOG, Direction.UP, Direction.DOWN)) {
+							this.placeDriftwoodLog(world, pos.offset(direction, i).offset(upOrDown), upOrDown);
 						}
 					}
-					return true;
-				} else {
-					return false;
 				}
+				return true;
 			}
+			return false;
 		}
-		return false;
 	}
 	
 	protected boolean isDirectionOpen(IWorld world, BlockPos pos, Direction direction, int length, boolean inWater) {
@@ -92,6 +89,15 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 				if(!world.isAirBlock(pos.offset(direction, i))) {
 					return false;
 				}
+			}
+		}
+		return true;
+	}
+	
+	protected boolean canFitInOcean(IWorld world, BlockPos pos, Direction direction, int length) {
+		for(int i = 0; i < length; i++) {
+			if(world.getBlockState(pos.offset(direction, i)).getBlock() != Blocks.WATER) {
+				return false;
 			}
 		}
 		return true;
@@ -153,12 +159,17 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 		
 		for(int i = 1; i < size + 1; i++) {
 			Block[] sideBlocks = new Block[] { world.getBlockState(startPos.offset(branchDirection, i).offset(branchDirection.rotateY())).getBlock(), world.getBlockState(startPos.offset(branchDirection, i).offset(branchDirection.rotateYCCW())).getBlock() };
-			if(world.isAirBlock(startPos.offset(branchDirection, i)) && sideBlocks[0] != DRIFTWOOD_LOG.getBlock() && sideBlocks[1] != DRIFTWOOD_LOG.getBlock()) {
+			if(this.isBlockPlaceableAtPos(world, startPos.offset(branchDirection, i), world.getBiome(startPos.offset(branchDirection, i)).getCategory() == Category.OCEAN) && sideBlocks[0] != DRIFTWOOD_LOG.getBlock() && sideBlocks[1] != DRIFTWOOD_LOG.getBlock()) {
 				this.placeDriftwoodLog(world, startPos.offset(branchDirection, i), branchDirection);
 			} else {
 				break;
 			}
 		}
+	}
+	
+	protected boolean isBlockPlaceableAtPos(IWorld world, BlockPos pos, boolean inOcean) {
+		Block block = world.getBlockState(pos).getBlock();
+		return inOcean ? world.isAirBlock(pos) || block == Blocks.WATER : world.isAirBlock(pos);
 	}
 	
 	public static void addDriftwood() {
@@ -167,13 +178,13 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 	
 	private static void process(Biome biome) {
 		if(biome.getCategory() == Category.BEACH) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DRIFTWOOD, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(20)));
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DRIFTWOOD.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(20)));
 		} else if(biome.getCategory() == Category.RIVER) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DRIFTWOOD, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(250)));
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DRIFTWOOD.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(210)));
 		} else if(biome.getCategory() == Category.SWAMP) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DRIFTWOOD, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(30)));
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DRIFTWOOD.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(30)));
 		} else if(biome.getCategory() == Category.OCEAN) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DRIFTWOOD, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(1)));
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DRIFTWOOD.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(1)));
 		}
 	}
 }

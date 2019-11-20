@@ -60,7 +60,7 @@ public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
 	}
 	
 	private static void process(Biome biome) {
-		biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, Biome.createDecoratedFeature(UAFeatures.PRISMARINE_CORAL, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F)));
+		biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, Biome.createDecoratedFeature(UAFeatures.PRISMARINE_CORAL.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.CARVING_MASK, new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F)));
 	}
 	
 }

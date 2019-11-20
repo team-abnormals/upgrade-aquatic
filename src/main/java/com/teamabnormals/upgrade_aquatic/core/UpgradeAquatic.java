@@ -6,6 +6,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
+import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;
 import com.teamabnormals.upgrade_aquatic.core.config.ConfigHelper;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
@@ -60,6 +61,7 @@ public class UpgradeAquatic {
 		
 		UAItems.ITEMS.register(modEventBus);
 		UATileEntities.TILE_ENTITY_TYPES.register(modEventBus);
+		UAFeatures.FEATURES.register(modEventBus);
 		
 		ModLoadingContext modLoadingContext = ModLoadingContext.get();
 		modLoadingContext.registerConfig(ModConfig.Type.CLIENT, Config.CLIENTSPEC);
