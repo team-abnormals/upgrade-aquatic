@@ -319,11 +319,11 @@ public class UABlocks {
 	public static Block OCHRE_KELP_PLANT              = new BlockUAKelp(KelpType.OCHRE, OCHRE_KELP, Properties.from(Blocks.KELP_PLANT)).setRegistryName(Reference.MODID, "ochre_kelp_plant");
 	public static Block POLAR_KELP_PLANT              = new BlockUAKelp(KelpType.POLAR, POLAR_KELP, Properties.from(Blocks.KELP_PLANT)).setRegistryName(Reference.MODID, "polar_kelp_plant");
 	
-	public static Block KELP_BLOCK                    = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK)).setRegistryName(Reference.MODID, "kelp_block");
-	public static Block TONGUE_KELP_BLOCK             = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK)).setRegistryName(Reference.MODID, "tongue_kelp_block");
-	public static Block THORNY_KELP_BLOCK             = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK)).setRegistryName(Reference.MODID, "thorny_kelp_block");
-	public static Block OCHRE_KELP_BLOCK              = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK)).setRegistryName(Reference.MODID, "ochre_kelp_block");
-	public static Block POLAR_KELP_BLOCK              = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK)).setRegistryName(Reference.MODID, "polar_kelp_block");
+	public static Block KELP_BLOCK                    = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)).setRegistryName(Reference.MODID, "kelp_block");
+	public static Block TONGUE_KELP_BLOCK             = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)).setRegistryName(Reference.MODID, "tongue_kelp_block");
+	public static Block THORNY_KELP_BLOCK             = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)).setRegistryName(Reference.MODID, "thorny_kelp_block");
+	public static Block OCHRE_KELP_BLOCK              = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)).setRegistryName(Reference.MODID, "ochre_kelp_block");
+	public static Block POLAR_KELP_BLOCK              = new Block(Properties.from(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)).setRegistryName(Reference.MODID, "polar_kelp_block");
 	
 	public static Block KELPY_COBBLESTONE             = new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone");
 	public static Block TONGUE_KELPY_COBBLESTONE      = new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone");
@@ -356,7 +356,7 @@ public class UABlocks {
 	
 	public static Block FLOWERING_RUSH                   = new BlockFloweringRush(Properties.from(Blocks.PEONY)).setRegistryName(Reference.MODID, "flowering_rush");
 	
-	public static Block PRISMARINE_ROD_BUNDLE            = new RotatedPillarBlock(Properties.from(Blocks.PURPUR_PILLAR).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_rod_bundle");
+	public static Block PRISMARINE_ROD_BUNDLE            = new RotatedPillarBlock(Properties.from(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "prismarine_rod_bundle");
 
 	public static Block DRIFTWOOD_LOG            = new BlockDriftwoodLog(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_log");
 	public static Block DRIFTWOOD                = new BlockDriftwood(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood");
