@@ -111,7 +111,7 @@ public class UAEntities {
 			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
 					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweedDouble) {
-						if(random.nextFloat() <= 0.25F)
+						if(random.nextFloat() <= 0.125F)
 							if(world.getBiome(pos).getCategory() == Category.SWAMP) {
 								return random.nextFloat() <= 0.25 ? true : false;
 							}

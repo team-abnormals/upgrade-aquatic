@@ -20,9 +20,9 @@ public class Config {
             .push("client");
 			
 			daysTillRenderInsomniaOverlay = builder
-				.comment("The amount of days till the insomnia overlay is rendered. Put Zero for no rendering at all")
+				.comment("The amount of days till the insomnia overlay is rendered. Default: Zero(No Insomnia at all)")
 				.translation("upgrade_aquatic.configgui.daysTillRenderInsomniaOverlay")
-				.define("daysTillRenderInsomniaOverlay", 3);
+				.define("daysTillRenderInsomniaOverlay", 0);
 			
 			builder.pop();
 		}

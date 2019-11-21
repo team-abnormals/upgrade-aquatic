@@ -9,14 +9,18 @@ import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.pathfinding.PathType;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -115,8 +119,15 @@ public class BlockPickerelweedBlock extends DirectionalBlock implements IBucketP
 	
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
-		if(!(entity instanceof EntityPike) && !this.isBoiled) {
-			entity.setMotionMultiplier(state, new Vec3d(0.6D, 1.0, 0.6D));
+		if(!(entity instanceof EntityPike)) {
+			if(!this.isBoiled) {
+				entity.setMotionMultiplier(state, new Vec3d(0.6D, 1.0, 0.6D));
+			}
+			if((entity instanceof LivingEntity) && !((LivingEntity)entity).canBreatheUnderwater()) {
+				if(entity.areEyesInFluid(FluidTags.WATER)) {
+					((LivingEntity)entity).addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 40, 0));
+				}
+			}
 		}
 	}
 	
