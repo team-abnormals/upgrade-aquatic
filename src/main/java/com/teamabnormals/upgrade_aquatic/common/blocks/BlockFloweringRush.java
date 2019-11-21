@@ -141,11 +141,13 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 		BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
 		if(blockstate.getBlock() == this && blockstate.get(HALF) != doubleblockhalf) {
-			worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
 			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			if(!worldIn.isRemote && !player.isCreative()) {
 				spawnDrops(state, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
 				spawnDrops(blockstate, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
+			}
+			if(blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+				worldIn.destroyBlock(blockpos, false);
 			}
 		}
 

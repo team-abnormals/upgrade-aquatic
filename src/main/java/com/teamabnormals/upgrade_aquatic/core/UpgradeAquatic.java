@@ -50,7 +50,11 @@ public class UpgradeAquatic {
 		
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setupCommon);
+		modEventBus.addListener(this::setupCommon);
+
+		UAItems.ITEMS.register(modEventBus);
+		UATileEntities.TILE_ENTITY_TYPES.register(modEventBus);
+		UAFeatures.FEATURES.register(modEventBus);
 		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
 			final ModConfig config = event.getConfig();
@@ -58,10 +62,6 @@ public class UpgradeAquatic {
 				ConfigHelper.updateClientConfig(config);
 			}
 		});
-		
-		UAItems.ITEMS.register(modEventBus);
-		UATileEntities.TILE_ENTITY_TYPES.register(modEventBus);
-		UAFeatures.FEATURES.register(modEventBus);
 		
 		ModLoadingContext modLoadingContext = ModLoadingContext.get();
 		modLoadingContext.registerConfig(ModConfig.Type.CLIENT, Config.CLIENTSPEC);

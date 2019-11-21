@@ -32,7 +32,8 @@ public class BlockUtil {
 	public static boolean canPlace(World world, PlayerEntity player, BlockPos pos, BlockState state) {
 		ISelectionContext selectionContext = player == null ? ISelectionContext.dummy() : ISelectionContext.forEntity(player);
 		VoxelShape voxelshape = state.getCollisionShape(world, pos, selectionContext);
-		return voxelshape.isEmpty() && world.checkNoEntityCollision(null, voxelshape.withOffset(pos.getX(), pos.getY(), pos.getZ()));
+		VoxelShape offsetShape = world.getBlockState(pos).getCollisionShape(world, pos);
+		return (offsetShape.isEmpty() || world.getBlockState(pos).getMaterial().isReplaceable()) && state.isValidPosition(world, pos) && world.checkNoEntityCollision(null, voxelshape.withOffset(pos.getX(), pos.getY(), pos.getZ()));
 	}
 	
 	public static SoundEvent getPlaceSound(BlockState state, World world, BlockPos pos, PlayerEntity entity) {

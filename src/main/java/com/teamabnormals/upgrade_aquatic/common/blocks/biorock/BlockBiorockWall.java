@@ -66,7 +66,7 @@ public class BlockBiorockWall extends WallBlock {
 				return true;
 			} else {
 				BlockPos offsetPos = pos.offset(hit.getFace());
-				if((BlockUtil.canPlace(world, player, offsetPos, state) || world.getBlockState(offsetPos).getMaterial().isReplaceable()) && state.isValidPosition(world, offsetPos)) {
+				if(BlockUtil.canPlace(world, player, offsetPos, state)) {
 					SoundType soundtype = state.getSoundType(world, pos, player);
 					world.playSound(null, pos, BlockUtil.getPlaceSound(state, world, pos, player), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
 					return false;
