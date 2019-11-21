@@ -9,7 +9,7 @@
             "item": "minecraft:leather"
         },
         "W": {
-            "item": "minecraft:white_wool"
+            "tag": "minecraft:wool"
         }
     },
     "result": {
