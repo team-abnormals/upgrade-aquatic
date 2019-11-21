@@ -1,7 +1,7 @@
 {   
 	"parent": "upgrade_aquatic:block/bedroll/bedroll_head",
     "textures": {
-        "particle": "upgrade_aquatic:block/bedroll_brown",
+        "particle": "upgrade_aquatic:block/bedroll_particles_brown",
         "bedroll": "upgrade_aquatic:block/bedroll_brown"
     }
 }
