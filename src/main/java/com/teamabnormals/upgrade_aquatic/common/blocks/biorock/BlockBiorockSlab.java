@@ -4,14 +4,12 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.api.util.BlockUtil;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CoralWallFanBlock;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.SoundType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
@@ -102,29 +100,18 @@ public class BlockBiorockSlab extends SlabBlock {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		if(world.isRemote) {
-			return true;
-		} else {
-			ItemStack stack = player.getHeldItem(hand);
+		ItemStack stack = player.getHeldItem(hand);
+		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.BIOROCK_SLAB) {
 			BlockState newState = UABlocks.BIOROCK_SLAB.getDefaultState();
-			if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.BIOROCK_SLAB) {
-				world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
-				stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
-				world.setBlockState(pos, newState.with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED)), 2);
-				return true;
-			} else {
-				BlockPos offsetPos = pos.offset(hit.getFace());
-				if(BlockUtil.canPlace(world, player, offsetPos, state)) {
-					SoundType soundtype = state.getSoundType(world, pos, player);
-					world.playSound(null, pos, BlockUtil.getPlaceSound(state, world, pos, player), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
-					return false;
-				} else {
-					return true;
-				}
-			}
+			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
+			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
+			world.setBlockState(pos, newState.with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED)), 2);
+			return true;
 		}
+		return super.onBlockActivated(state, world, pos, player, hand, hit);
 	}
 	
 	@Override
