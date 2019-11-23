@@ -18,23 +18,6 @@
     "minecraft:prismarine_stairs",
     "minecraft:prismarine_wall",
     "minecraft:dark_prismarine_slab",
-    "minecraft:dark_prismarine_stairs",	
-	"quark:prismarine_vertical_slab",
-	"quark:dark_prismarine_vertical_slab",
-	"quark:prismarine_brick_vertical_slab",
-	"quark:elder_prismarine",
-	"quark:dark_elder_prismarine",
-	"quark:elder_prismarine_bricks",
-	"quark:elder_sea_lantern",
-    "quark:elder_prismarine_brick_slab",
-    "quark:elder_prismarine_brick_stairs",
-    "quark:elder_prismarine_slab",
-    "quark:elder_prismarine_stairs",
-    "quark:elder_prismarine_wall",
-    "quark:dark_elder_prismarine_slab",
-    "quark:dark_elder_prismarine_stairs",	
-	"quark:elder_prismarine_vertical_slab",
-	"quark:dark_elder_prismarine_vertical_slab",
-	"quark:elder_prismarine_brick_vertical_slab"
+    "minecraft:dark_prismarine_stairs"
   ]
 }

@@ -1,7 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
@@ -11,7 +9,6 @@ import com.teamabnormals.upgrade_aquatic.core.config.Config;
 import com.teamabnormals.upgrade_aquatic.core.config.ConfigHelper;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ServerProxy;
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
@@ -19,8 +16,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.tileentity.ConduitTileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -82,14 +77,9 @@ public class UpgradeAquatic {
 	@SuppressWarnings("unused")
 	private void Init(final FMLCommonSetupEvent event) {}
 	
+	//Unused for now
 	void setupMessages() {}
 	
-	void changeVanillaFields() {
-		ConduitTileEntity.field_205042_e = ArrayUtils.addAll(ConduitTileEntity.field_205042_e,
-			UABlocks.PRISMARINE_CORAL, UABlocks.PRISMARINE_CORAL_BLOCK, UABlocks.PRISMARINE_CORAL_FAN, UABlocks.PRISMARINE_CORAL_SHOWER, UABlocks.PRISMARINE_CORAL_WALL_FAN, UABlocks.PRISMARINE_ROD_BUNDLE,
-			UABlocks.ELDER_PRISMARINE_CORAL, UABlocks.ELDER_PRISMARINE_CORAL_BLOCK, UABlocks.ELDER_PRISMARINE_CORAL_FAN, UABlocks.ELDER_PRISMARINE_CORAL_SHOWER, UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN,
-			Blocks.PRISMARINE_SLAB, Blocks.PRISMARINE_STAIRS, Blocks.PRISMARINE_WALL, Blocks.DARK_PRISMARINE_SLAB, Blocks.DARK_PRISMARINE_SLAB, Blocks.DARK_PRISMARINE_STAIRS,
-			Blocks.PRISMARINE_BRICK_SLAB, Blocks.PRISMARINE_BRICK_STAIRS
-		);
-	}
+	//Unused for now
+	void changeVanillaFields() {}
 }
