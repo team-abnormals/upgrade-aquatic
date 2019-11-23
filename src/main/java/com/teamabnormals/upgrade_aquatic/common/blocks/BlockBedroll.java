@@ -29,7 +29,6 @@ import net.minecraft.state.properties.BedPart;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -68,10 +67,6 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 			}
 		}
 		return null;
-	}
-	
-	public boolean isFullCube(BlockState state) {
-		return false;
 	}
 	
 	@Override
@@ -198,7 +193,7 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 	public boolean hasCustomBreakingProgress(BlockState state) {
 		return true;
 	}
-	
+
 	@Nullable
 	public static BlockPos getSafeExitLocation(IBlockReader worldIn, BlockPos pos, int tries) {
 		Direction enumfacing = worldIn.getBlockState(pos).get(HORIZONTAL_FACING);
@@ -235,10 +230,6 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 		return PushReaction.DESTROY;
 	}
 	
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
-	
 	public BlockRenderType getRenderType(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
@@ -272,5 +263,4 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 		BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING), state.get(PART) == BedPart.HEAD ? 0 : 1);
 		return MathHelper.getCoordinateRandom(blockpos.getX(), pos.getY(), blockpos.getZ());
 	}
-	
 }
