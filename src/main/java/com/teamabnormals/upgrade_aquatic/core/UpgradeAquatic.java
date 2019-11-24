@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;
@@ -77,8 +78,14 @@ public class UpgradeAquatic {
 	@SuppressWarnings("unused")
 	private void Init(final FMLCommonSetupEvent event) {}
 	
-	//Unused for now
-	void setupMessages() {}
+	void setupMessages() {
+		int id = -1;
+		
+		CHANNEL.messageBuilder(MessageCAnimation.class, id++)
+		.encoder(MessageCAnimation::serialize).decoder(MessageCAnimation::deserialize)
+		.consumer(MessageCAnimation::handle)
+		.add();
+	}
 	
 	//Unused for now
 	void changeVanillaFields() {}
