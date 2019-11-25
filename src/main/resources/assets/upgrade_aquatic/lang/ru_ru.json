@@ -298,7 +298,7 @@
   "block.upgrade_aquatic.driftwood_door": "Плавниковая дверь",
   "block.upgrade_aquatic.driftwood_trapdoor": "Плавниковый люк",
   
-  "block.upgrade_aquatic.flowering_rush": "Зонтичный сусак ",
+  "block.upgrade_aquatic.flowering_rush": "Зонтичный сусак",
 
   "block.upgrade_aquatic.prismarine_rod_bundle": "Связка призмариновых стержней",
   
@@ -379,19 +379,19 @@
   "item.minecraft.tipped_arrow.effect.restfulness": "Стрела спокойствия",
   "item.minecraft.tipped_arrow.effect.restfulness_strong": "Стрела спокойствия",
   
-  "effect.upgrade_aquatic.repellence": "Гидрофобность",
-  "item.minecraft.potion.effect.repellence": "Зелье гидрофобности",
-  "item.minecraft.potion.effect.repellence_strong": "Зелье гидрофобности",
-  "item.minecraft.potion.effect.repellence_long": "Зелье гидрофобности",
-  "item.minecraft.splash_potion.effect.repellence": "Взрывное зелье гидрофобности",
-  "item.minecraft.splash_potion.effect.repellence_strong": "Взрывное зелье гидрофобности",
-  "item.minecraft.splash_potion.effect.repellence_long": "Взрывное зелье гидрофобности",
-  "item.minecraft.lingering_potion.effect.repellence": "Туманное зелье гидрофобности",
-  "item.minecraft.lingering_potion.effect.repellence_strong": "Туманное зелье гидрофобности",
-  "item.minecraft.lingering_potion.effect.repellence_long": "Туманное зелье гидрофобности",
-  "item.minecraft.tipped_arrow.effect.repellence": "Стрела гидрофобности",
-  "item.minecraft.tipped_arrow.effect.repellence_strong": "Стрела гидрофобности",
-  "item.minecraft.tipped_arrow.effect.repellence_long": "Стрела гидрофобности",
+  "effect.upgrade_aquatic.repellence": "Коррозионосность",
+  "item.minecraft.potion.effect.repellence": "Зелье коррозионосности",
+  "item.minecraft.potion.effect.repellence_strong": "Зелье коррозионосности",
+  "item.minecraft.potion.effect.repellence_long": "Зелье коррозионосности",
+  "item.minecraft.splash_potion.effect.repellence": "Взрывное зелье коррозионосности",
+  "item.minecraft.splash_potion.effect.repellence_strong": "Взрывное зелье коррозионосности",
+  "item.minecraft.splash_potion.effect.repellence_long": "Взрывное зелье коррозионосности",
+  "item.minecraft.lingering_potion.effect.repellence": "Туманное зелье коррозионосности",
+  "item.minecraft.lingering_potion.effect.repellence_strong": "Туманное зелье коррозионосности",
+  "item.minecraft.lingering_potion.effect.repellence_long": "Туманное зелье коррозионосности",
+  "item.minecraft.tipped_arrow.effect.repellence": "Стрела коррозионосности",
+  "item.minecraft.tipped_arrow.effect.repellence_strong": "Стрела коррозионосности",
+  "item.minecraft.tipped_arrow.effect.repellence_long": "Стрела коррозионосности",
   
   "_comment": "Смерти",
   
