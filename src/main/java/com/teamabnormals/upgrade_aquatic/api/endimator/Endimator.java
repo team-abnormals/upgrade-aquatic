@@ -39,6 +39,9 @@ public class Endimator {
 	public boolean setAnimationToPlay(Endimation animationToPlay) {
 		this.tempTick = this.prevTempTick = 0;
 		this.correctAnimation = this.endimatedEntity.getPlayingAnimation() == animationToPlay;
+		this.prevBoxValues.clear();
+	    this.prevBoxValues.putAll(this.boxValues);
+	    this.boxValues.clear();
 		return this.correctAnimation;
 	}
     

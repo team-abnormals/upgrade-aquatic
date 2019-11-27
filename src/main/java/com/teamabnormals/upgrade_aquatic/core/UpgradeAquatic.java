@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
+import com.teamabnormals.upgrade_aquatic.common.network.MessageCUpdateAttackTarget;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;
@@ -84,6 +85,11 @@ public class UpgradeAquatic {
 		CHANNEL.messageBuilder(MessageCAnimation.class, id++)
 		.encoder(MessageCAnimation::serialize).decoder(MessageCAnimation::deserialize)
 		.consumer(MessageCAnimation::handle)
+		.add();
+		
+		CHANNEL.messageBuilder(MessageCUpdateAttackTarget.class, id++)
+		.encoder(MessageCUpdateAttackTarget::serialize).decoder(MessageCUpdateAttackTarget::deserialize)
+		.consumer(MessageCUpdateAttackTarget::handle)
 		.add();
 	}
 	

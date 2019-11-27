@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.common.entities;
+package com.teamabnormals.upgrade_aquatic.common.entities.thrasher;
 
 import java.util.EnumSet;
 import java.util.UUID;
@@ -7,7 +7,11 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import javax.vecmath.Vector3f;
 
+import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
+import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
 
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
@@ -19,14 +23,12 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -34,7 +36,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.pathfinding.PathType;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
@@ -50,7 +51,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class EntityThrasher extends MonsterEntity {
+public class EntityThrasher extends EndimatedMonsterEntity {
 	private static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
 		if (entity == null) {
 			return false;
@@ -70,6 +71,9 @@ public class EntityThrasher extends MonsterEntity {
 	private static final DataParameter<Boolean> SONAR_ACTIVE = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TICKS_TILL_SONAR = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> WATER_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> CAUGHT_ENTITY = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
+	public static final	Endimation SNAP_AT_PRAY_ANIMATION = new Endimation(10);
+	public static final	Endimation DAMAGE_ANIMATION = new Endimation(10);
 	protected int ticksSinceLastSonar;
 	protected int sonarTicks;
 	protected float prevTailAnimation;
@@ -83,37 +87,17 @@ public class EntityThrasher extends MonsterEntity {
 		super(type, world);
 		this.experienceValue = 30;
 		this.moveController = new EntityThrasher.ThrasherMoveController(this);
-		this.lookController = new ThrasherLookController(this, 10);
+		this.lookController = new ThrasherLookController(this);
 		this.tailAnimation = this.rand.nextFloat();
 		this.prevTailAnimation = this.tailAnimation;
 	}
 	
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(2, new EntityThrasher.SonarDetectionGoal(this));
-		this.goalSelector.addGoal(7, new RandomSwimmingGoal(this, 1.1D, 15) {
-			
-			@Override
-			public boolean shouldExecute() {
-				return !((EntityThrasher)this.creature).isSonarActive() && super.shouldExecute();
-			}
-			
-			@Override
-			public boolean shouldContinueExecuting() {
-				return !((EntityThrasher)this.creature).isSonarActive() && super.shouldContinueExecuting();
-			}
-			
-			@Nullable
-			@Override
-			protected Vec3d getPosition() {
-				Vec3d vec3d = RandomPositionGenerator.findRandomTarget(this.creature, 15, 8);
-				for(int i = 0; vec3d != null && !this.creature.world.getBlockState(new BlockPos(vec3d)).allowsMovement(this.creature.world, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = RandomPositionGenerator.findRandomTarget(this.creature, 10, 7)) {
-					;
-				}
-				return vec3d;
-			}
-			
-		});
+		//this.goalSelector.addGoal(2, new EntityThrasher.SonarDetectionGoal(this));
+		this.goalSelector.addGoal(7, new ThrasherRandomSwimGoal(this, 1.1D, 15));
+		this.goalSelector.addGoal(3, new ThrasherGrabGoal(this, 2.5F, true));
+		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 	}
 	
 	@Override
@@ -133,11 +117,20 @@ public class EntityThrasher extends MonsterEntity {
 		this.dataManager.register(SONAR_ACTIVE, false);
 		this.dataManager.register(WATER_TIME, 2500);
 		this.dataManager.register(TICKS_TILL_SONAR, (rand.nextInt(130) + 45) * 20);
+		this.dataManager.register(CAUGHT_ENTITY, 0);
 	}
 	
 	@Override
 	public CreatureAttribute getCreatureAttribute() {
 		return CreatureAttribute.WATER;
+	}
+	
+	@Override
+	public Endimation[] getAnimations() {
+		return new Endimation[] {
+			SNAP_AT_PRAY_ANIMATION,
+			DAMAGE_ANIMATION
+		};
 	}
 	
 	@Nullable
@@ -146,6 +139,71 @@ public class EntityThrasher extends MonsterEntity {
 		this.setAir(this.getMaxAir());
 		this.setTicksTillSonar((rand.nextInt(10) + 10) * 20);
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+	}
+	
+	@Override
+	public void updatePassenger(Entity passenger) {
+		if(!this.getPassengers().isEmpty() && (passenger instanceof AbstractFishEntity || passenger instanceof PlayerEntity)) {
+			float distance = 1.2F;
+			
+			double dx = Math.cos((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
+			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
+			
+			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.posZ + dz);
+			
+			passenger.setPosition(riderPos.x, riderPos.y, riderPos.z);
+		} else {
+			super.updatePassenger(passenger);
+		}
+	}
+	
+	@Override
+	public double getMountedYOffset() {
+		return 0.5F;
+	}
+	
+	@Override
+	public boolean shouldRiderFaceForward(PlayerEntity player) {
+		return true;
+	}
+	
+	@Override
+	public boolean canRiderInteract() {
+		return true;
+	}
+	
+	@Override
+	public boolean shouldRiderSit() {
+		return false;
+	}
+	
+	@Nullable
+	public LivingEntity getCaughtEntity() {
+		if (!this.hasCaughtEntity()) {
+			return null;
+		} else {
+			Entity entity = this.world.getEntityByID(this.dataManager.get(CAUGHT_ENTITY));
+			if(entity == null) {
+				return null;
+			} else if(entity != null && (entity instanceof AbstractFishEntity || entity instanceof PlayerEntity)) {
+				return (LivingEntity)entity;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	protected void onDeathUpdate() {
+		this.setAttackTarget(null);
+		super.onDeathUpdate();
+	}
+	
+	public void setCaughtEntity(int entityId) {
+		this.dataManager.set(CAUGHT_ENTITY, entityId);
+	}
+
+	public boolean hasCaughtEntity() {
+		return this.dataManager.get(CAUGHT_ENTITY) != 0;
 	}
 	
 	public boolean isMoving() {
@@ -186,6 +244,7 @@ public class EntityThrasher extends MonsterEntity {
 		compound.putBoolean("SonarActive", this.isSonarActive());
 		compound.putInt("WaterTicks", this.getWaterTime());
 		compound.putInt("TicksTillSonar", this.getTicksTillSonar());
+		//compound.putInt("CaughtEntityId", this.getCaughtEntity().getEntityId());
     }
 
 	public void readAdditional(CompoundNBT compound) {
@@ -194,6 +253,7 @@ public class EntityThrasher extends MonsterEntity {
 		this.setSonarActive(compound.getBoolean("SonarActive"));
 		this.setWaterTime(compound.getInt("WaterTicks"));
 		this.setTicksTillSonar(compound.getInt("TicksTillSonar"));
+		//this.setCaughtEntity(compound.getInt("CaughtEntityId"));
     }
     
     @Override
@@ -203,6 +263,7 @@ public class EntityThrasher extends MonsterEntity {
     		this.setSonarActive(false);
     		this.setTicksTillSonar((rand.nextInt(60) + 45) * 20);
     	}
+    	this.setPlayingAnimation(DAMAGE_ANIMATION);
     	if(entitySource instanceof LivingEntity) {
     		Vector3f difference = new Vector3f(
     			entitySource.getPosition().getX() - this.getPosition().getX(),
@@ -367,8 +428,8 @@ public class EntityThrasher extends MonsterEntity {
 				this.sonarTicks = 0;
 				if(this.ticksSinceLastSonar < this.getTicksTillSonar()) {
 					this.ticksSinceLastSonar++;
-				} else if (this.ticksSinceLastSonar >= this.getTicksTillSonar()) {
-					this.setSonarActive(true);
+				} else if(this.ticksSinceLastSonar >= this.getTicksTillSonar()) {
+					//this.setSonarActive(true);
 				}
 			}
 		}
@@ -458,15 +519,15 @@ public class EntityThrasher extends MonsterEntity {
 	}
 	
 	class ThrasherLookController extends LookController {
-		private final int angleLimit;
+		private int angleLimit;
 
-		public ThrasherLookController(EntityThrasher thrasher, int angleLimit) {
+		public ThrasherLookController(EntityThrasher thrasher) {
 			super(thrasher);
-			this.angleLimit = angleLimit;
 		}
 
 		public void tick() {
-			if (this.isLooking) {
+			this.angleLimit = this.mob.getPassengers().isEmpty() ? 10 : 5;
+			if(this.isLooking) {
 				this.isLooking = false;
 				this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.func_220678_h(), this.deltaLookYaw);
 				this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, this.func_220677_g(), this.deltaLookPitch);
@@ -478,9 +539,9 @@ public class EntityThrasher extends MonsterEntity {
 			}
 
 			float wrappedDegrees = MathHelper.wrapDegrees(this.mob.rotationYawHead - this.mob.renderYawOffset);
-			if (wrappedDegrees < (float)(-this.angleLimit)) {
+			if(wrappedDegrees < (float)(-this.angleLimit)) {
 				this.mob.renderYawOffset -= 4.0F;
-			} else if (wrappedDegrees > (float)this.angleLimit) {
+			} else if(wrappedDegrees > (float)this.angleLimit) {
 				this.mob.renderYawOffset += 4.0F;
 			}
 		}

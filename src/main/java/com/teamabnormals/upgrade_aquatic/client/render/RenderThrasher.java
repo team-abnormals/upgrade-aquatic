@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.client.render;
 
 import com.teamabnormals.upgrade_aquatic.client.model.ModelThrasher;
 import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerThrasher;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityThrasher;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;

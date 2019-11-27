@@ -9,8 +9,8 @@ import com.teamabnormals.upgrade_aquatic.client.tileentity.TileEntityElderEyeRen
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;

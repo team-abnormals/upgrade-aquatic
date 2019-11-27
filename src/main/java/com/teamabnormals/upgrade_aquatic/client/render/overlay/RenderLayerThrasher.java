@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.render.overlay;
 import com.mojang.blaze3d.platform.GLX;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelThrasher;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityThrasher;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.client.renderer.entity.IEntityRenderer;
