@@ -1,5 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.items;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nullable;
 
 import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
@@ -21,9 +23,8 @@ import net.minecraft.world.World;
 public class ItemMobBucket extends BucketItem {
 	private final EntityType<?> entityType;
 
-	@SuppressWarnings("deprecation")
-	public ItemMobBucket(EntityType<? extends EntityBucketableWaterMob> entityType, Fluid p_i49022_2_, Item.Properties builder) {
-		super(p_i49022_2_, builder);
+	public ItemMobBucket(EntityType<? extends EntityBucketableWaterMob> entityType, Supplier<? extends Fluid> supplier, Item.Properties builder) {
+		super(supplier, builder);
 		this.entityType = entityType;
 	}
 
