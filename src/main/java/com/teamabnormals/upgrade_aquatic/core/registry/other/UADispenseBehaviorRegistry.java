@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.registry.other;
 
-import com.teamabnormals.upgrade_aquatic.api.entities.IBucketableEntity;
+import com.teamabnormals.upgrade_aquatic.api.entity.IBucketableEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.block.DispenserBlock;

@@ -35,7 +35,6 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 		}
 		
 		if(distToEnemySqr <= attackReachSqr && this.attackTick <= 0) {
-			this.thrasher.setCaughtEntity(enemy.getEntityId());
 			enemy.startRiding(this.thrasher, true);
 			this.thrasher.setAttackTarget(null);
 		}

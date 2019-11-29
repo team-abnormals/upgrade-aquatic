@@ -2,9 +2,9 @@ package com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.upgrade_aquatic.api.entity.util.AdvancedRandomPositionGenerator;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 
-import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.util.math.BlockPos;
@@ -49,10 +49,13 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 	@Nullable
 	@Override
 	protected Vec3d getPosition() {
-		Vec3d vec3d = RandomPositionGenerator.findRandomTarget(this.creature, 15, 8);
-		for(int i = 0; vec3d != null && !this.creature.world.getBlockState(new BlockPos(vec3d)).allowsMovement(this.creature.world, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = RandomPositionGenerator.findRandomTarget(this.creature, 10, 7)) {
+		//Tries to go deep when it has an entity in its mouth
+		Vec3d vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.creature, 15, 8, !this.thrasher.getPassengers().isEmpty());
+		
+		for(int i = 0; vec3d != null && !this.creature.world.getBlockState(new BlockPos(vec3d)).allowsMovement(this.creature.world, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.creature, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
 			;
 		}
+		
 		return vec3d;
 	}
 }

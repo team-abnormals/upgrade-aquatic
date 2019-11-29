@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
-import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
+import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 

@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.api.entities;
+package com.teamabnormals.upgrade_aquatic.api.entity;
 
 import net.minecraft.item.ItemStack;
 

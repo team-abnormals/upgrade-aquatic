@@ -21,13 +21,14 @@ import net.minecraftforge.fml.network.PacketDistributor;
 public class NetworkUtil {
 	
 	/**
-	 * Sends an animation message to the clients to update an entity's animations
+	 * Sends an animation message to clients to update an entity's animations and sets the server playing animation
 	 * @param entity - The Entity to send the packet for
 	 * @param animationToPlay - The animation to play
 	 */
 	public static void setPlayingAnimationMessage(EndimatedEntity entity, Endimation animationToPlay) {
 		if(!entity.isWorldRemote()) {
 			UpgradeAquatic.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), new MessageCAnimation(entity.getEntityId(), ArrayUtils.indexOf(entity.getAnimations(), animationToPlay)));
+			entity.setPlayingAnimation(animationToPlay);
 		}
 	}
 	

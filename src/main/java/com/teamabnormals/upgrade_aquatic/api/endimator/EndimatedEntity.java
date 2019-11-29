@@ -53,6 +53,13 @@ public class EndimatedEntity extends CreatureEntity {
 	}
 	
 	/**
+	 * @return - Is no animation playing
+	 */
+	public boolean isNoAnimationPlaying() {
+		return this.getPlayingAnimation() == BLANK_ANIMATION;
+	}
+	
+	/**
 	 * @return - Is the world remote; if true: client
 	 */
 	public boolean isWorldRemote() {

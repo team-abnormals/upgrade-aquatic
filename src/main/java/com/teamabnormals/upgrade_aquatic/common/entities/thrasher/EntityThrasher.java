@@ -1,6 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.thrasher;
 
-import java.util.EnumSet;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -12,6 +11,7 @@ import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
 
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
@@ -27,7 +27,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -35,12 +34,12 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -52,7 +51,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EntityThrasher extends EndimatedMonsterEntity {
-	private static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
+	public static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
 		if (entity == null) {
 			return false;
 		} else {
@@ -71,11 +70,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	private static final DataParameter<Boolean> SONAR_ACTIVE = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TICKS_TILL_SONAR = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> WATER_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> CAUGHT_ENTITY = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	public static final	Endimation SNAP_AT_PRAY_ANIMATION = new Endimation(10);
-	public static final	Endimation DAMAGE_ANIMATION = new Endimation(10);
+	public static final	Endimation HURT_ANIMATION = new Endimation(10);
+	public static final Endimation THRASH_ANIMATION = new Endimation(55);
 	protected int ticksSinceLastSonar;
-	protected int sonarTicks;
+	public int sonarTicks;
 	protected float prevTailAnimation;
 	protected float tailAnimation;
 	protected float tailSpeed;
@@ -95,8 +94,9 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	protected void registerGoals() {
 		//this.goalSelector.addGoal(2, new EntityThrasher.SonarDetectionGoal(this));
-		this.goalSelector.addGoal(7, new ThrasherRandomSwimGoal(this, 1.1D, 15));
+		this.goalSelector.addGoal(2, new ThrasherThrashGoal(this));
 		this.goalSelector.addGoal(3, new ThrasherGrabGoal(this, 2.5F, true));
+		this.goalSelector.addGoal(7, new ThrasherRandomSwimGoal(this, 1.1D, 15));
 		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 	}
 	
@@ -105,8 +105,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
-		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
 		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
 	}
 	
@@ -117,7 +117,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.dataManager.register(SONAR_ACTIVE, false);
 		this.dataManager.register(WATER_TIME, 2500);
 		this.dataManager.register(TICKS_TILL_SONAR, (rand.nextInt(130) + 45) * 20);
-		this.dataManager.register(CAUGHT_ENTITY, 0);
 	}
 	
 	@Override
@@ -129,7 +128,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	public Endimation[] getAnimations() {
 		return new Endimation[] {
 			SNAP_AT_PRAY_ANIMATION,
-			DAMAGE_ANIMATION
+			HURT_ANIMATION,
+			THRASH_ANIMATION
 		};
 	}
 	
@@ -143,15 +143,16 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	
 	@Override
 	public void updatePassenger(Entity passenger) {
-		if(!this.getPassengers().isEmpty() && (passenger instanceof AbstractFishEntity || passenger instanceof PlayerEntity)) {
+		if((passenger instanceof AbstractFishEntity || passenger instanceof PlayerEntity)) {
 			float distance = 1.2F;
 			
 			double dx = Math.cos((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
+			double dy = -Math.sin(this.rotationPitch * (Math.PI / 180.0D));
 			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			
 			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.posZ + dz);
 			
-			passenger.setPosition(riderPos.x, riderPos.y, riderPos.z);
+			passenger.setPosition(riderPos.x, this.posY + dy + 0.3D, riderPos.z);
 		} else {
 			super.updatePassenger(passenger);
 		}
@@ -177,34 +178,17 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		return false;
 	}
 	
-	@Nullable
-	public LivingEntity getCaughtEntity() {
-		if (!this.hasCaughtEntity()) {
-			return null;
-		} else {
-			Entity entity = this.world.getEntityByID(this.dataManager.get(CAUGHT_ENTITY));
-			if(entity == null) {
-				return null;
-			} else if(entity != null && (entity instanceof AbstractFishEntity || entity instanceof PlayerEntity)) {
-				return (LivingEntity)entity;
-			}
-		}
-		return null;
-	}
-	
 	@Override
 	protected void onDeathUpdate() {
 		this.setAttackTarget(null);
 		super.onDeathUpdate();
 	}
 	
-	public void setCaughtEntity(int entityId) {
-		this.dataManager.set(CAUGHT_ENTITY, entityId);
-	}
+	@Override
+	public void onEnterBubbleColumn(boolean downwards) {}
 
-	public boolean hasCaughtEntity() {
-		return this.dataManager.get(CAUGHT_ENTITY) != 0;
-	}
+	@Override
+	public void onEnterBubbleColumnWithAirAbove(boolean downwards) {}
 	
 	public boolean isMoving() {
 		return this.dataManager.get(MOVING);
@@ -218,7 +202,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		return this.dataManager.get(SONAR_ACTIVE);
 	}
 
-	private void setSonarActive(boolean active) {
+	public void setSonarActive(boolean active) {
 		this.dataManager.set(SONAR_ACTIVE, active);
 	}
 	
@@ -244,7 +228,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		compound.putBoolean("SonarActive", this.isSonarActive());
 		compound.putInt("WaterTicks", this.getWaterTime());
 		compound.putInt("TicksTillSonar", this.getTicksTillSonar());
-		//compound.putInt("CaughtEntityId", this.getCaughtEntity().getEntityId());
+		//compound.putInt("CaughtEntityId", passenger.getEntityId());
     }
 
 	public void readAdditional(CompoundNBT compound) {
@@ -263,7 +247,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
     		this.setSonarActive(false);
     		this.setTicksTillSonar((rand.nextInt(60) + 45) * 20);
     	}
-    	this.setPlayingAnimation(DAMAGE_ANIMATION);
+    	this.setPlayingAnimation(HURT_ANIMATION);
     	if(entitySource instanceof LivingEntity) {
     		Vector3f difference = new Vector3f(
     			entitySource.getPosition().getX() - this.getPosition().getX(),
@@ -357,21 +341,29 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.isAIDisabled()) {
-			if (this.isInWaterRainOrBubbleColumn()) {
+		if(!this.isAIDisabled()) {
+			if(this.isInWaterRainOrBubbleColumn()) {
 				this.setWaterTime(2400);
 			} else {
 				this.setWaterTime(this.getWaterTime() - 1);
-				if (this.getWaterTime() <= 0) {
+				if(this.getWaterTime() <= 0) {
 					this.attackEntityFrom(DamageSource.DRYOUT, 1.0F);
 				}
 
-				if (this.onGround) {
+				if(this.onGround) {
 					this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F), 0.5D, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F)));
 					this.rotationYaw = this.rand.nextFloat() * 360.0F;
 					this.rotationPitch = this.rand.nextFloat() * -50.0F;
 					this.onGround = false;
 					this.isAirBorne = true;
+				}
+			}
+			if(world.isRemote) {
+				if(!this.getPassengers().isEmpty() && this.isAnimationPlaying(THRASH_ANIMATION) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
+					Entity passenger = this.getPassengers().get(0);
+					for(int i = 0; i < 3; ++i) {
+						this.world.addParticle(ParticleTypes.BUBBLE, passenger.posX + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), passenger.posY, passenger.posZ + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), (this.getRNG().nextDouble() - 0.5D) * 2.0D, -this.getRNG().nextDouble(), (this.getRNG().nextDouble() - 0.5D) * 2.0D);
+					}
 				}
 			}
 		}
@@ -383,7 +375,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			if (this.world.isRemote) {
 				this.prevTailAnimation = this.tailAnimation;
 				this.prevFinAnimation = this.finAnimation;
-				if(!this.isInWater()) {
+				if(!this.isInWater() || this.isAnimationPlaying(THRASH_ANIMATION)) {
 					this.tailSpeed = 1.1F;
 					this.finSpeed = 0.875F;
 				} else if(this.isMoving()) {
@@ -434,40 +426,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			}
 		}
 		super.livingTick();
-	}
-	
-	static class SonarDetectionGoal extends Goal {
-		private final EntityThrasher thrasher;
-		
-		public SonarDetectionGoal(EntityThrasher thrasher) {
-			this.thrasher = thrasher;
-			this.setMutexFlags(EnumSet.of(Goal.Flag.TARGET));
-		}
-
-		@Override
-		public boolean shouldExecute() {
-			return this.thrasher.isSonarActive();
-		}
-		
-		@Override
-		public boolean shouldContinueExecuting() {
-			return this.thrasher.isSonarActive();
-		}
-		
-		@Override
-		public void tick() {
-			AxisAlignedBB detectionBox = new AxisAlignedBB(this.thrasher.getPosition());
-			if (this.thrasher.isAlive()) {
-				double expansionAmount = this.thrasher.sonarTicks <= 80 ? (this.thrasher.sonarTicks / 20) * 4 : (this.thrasher.sonarTicks / 20) / 2 * 4;
-				for(LivingEntity livingEntity : this.thrasher.world.getEntitiesWithinAABB(LivingEntity.class, detectionBox.grow(expansionAmount), ENEMY_MATCHER)) {
-					if(livingEntity != null && livingEntity.isAlive()) {
-						this.thrasher.setAttackTarget(livingEntity);
-						this.thrasher.setSonarActive(false);
-						this.thrasher.setTicksTillSonar((this.thrasher.getRNG().nextInt(140) + 80) * 20);
-					}
-				}
-			}
-		}
 	}
 	
 	static class ThrasherMoveController extends MovementController {

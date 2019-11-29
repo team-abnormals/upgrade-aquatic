@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import javax.vecmath.Vector3f;
 
 import com.google.common.collect.Lists;
-import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
+import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;

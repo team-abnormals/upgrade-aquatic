@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.api.entities.EntityBucketableWaterMob;
+import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

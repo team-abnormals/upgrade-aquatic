@@ -147,8 +147,8 @@ public class ModelThrasher<E extends EntityThrasher> extends EndimatorEntityMode
 			this.endimator.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.rotate(this.bottom_jaw, -0.0F, 0.0F, 0.0F);
 			this.endimator.endKeyframe();
-		} else if(thrasher.isAnimationPlaying(EntityThrasher.DAMAGE_ANIMATION)) {
-			this.endimator.setAnimationToPlay(EntityThrasher.DAMAGE_ANIMATION);
+		} else if(thrasher.isAnimationPlaying(EntityThrasher.HURT_ANIMATION)) {
+			this.endimator.setAnimationToPlay(EntityThrasher.HURT_ANIMATION);
 			
 			this.endimator.startKeyframe(5);
 			this.endimator.rotate(this.top_jaw, -0.35F, 0.0F, 0.0F);
@@ -158,6 +158,67 @@ public class ModelThrasher<E extends EntityThrasher> extends EndimatorEntityMode
 			this.endimator.startKeyframe(5);
 			this.endimator.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.rotate(this.bottom_jaw, -0.0F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+		} else if(thrasher.isAnimationPlaying(EntityThrasher.THRASH_ANIMATION)) {
+			this.endimator.setAnimationToPlay(EntityThrasher.THRASH_ANIMATION);
+			
+			this.endimator.startKeyframe(5);
+			
+			this.endimator.rotate(this.top_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.neck, 0.0F, 0.75F, 0.0F);
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.neck, 0.0F, 0.75F, 0.0F);
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, 0.15F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, -0.15F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.endKeyframe();
 		}
 	}
