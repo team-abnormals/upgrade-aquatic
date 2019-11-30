@@ -35,11 +35,15 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.FMLPlayMessages;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-@SuppressWarnings("rawtypes")
 public class UAEntities {
-	private static List<EntityType> entities = Lists.newArrayList();
+	//TODO: Make Entity registry use Defferred Register. Will be done once constructor for SpawnEggItem is changed
+	public static final DeferredRegister<EntityType<?>> ENTITIES = new DeferredRegister<>(ForgeRegistries.ENTITIES, Reference.MODID);
+	
+	private static List<EntityType<?>> entities = Lists.newArrayList();
 	private static List<Item> spawnEggs = Lists.newArrayList();
 	
 	public static final EntityType<EntityUABoat> BOAT = createBasicEntity(EntityUABoat::new, EntityUABoat::new, EntityClassification.MISC, "boat", 1.375F, 0.5625F);
@@ -85,7 +89,7 @@ public class UAEntities {
     
 	@SubscribeEvent
 	public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-		for(EntityType entity : entities) {
+		for(EntityType<?> entity : entities) {
 			event.getRegistry().register(entity);
 		}
 		EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);

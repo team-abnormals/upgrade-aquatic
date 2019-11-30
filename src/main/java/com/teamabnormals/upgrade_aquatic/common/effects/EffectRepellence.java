@@ -1,7 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.common.effects;
 
-import com.teamabnormals.upgrade_aquatic.core.util.Reference;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
@@ -11,9 +9,8 @@ import net.minecraft.potion.Effects;
 
 public class EffectRepellence extends Effect {
 
-	public EffectRepellence(String name) {
+	public EffectRepellence() {
 		super(EffectType.NEUTRAL, 11663081);
-		this.setRegistryName(Reference.MODID, name);
 	}
 	
 	@Override

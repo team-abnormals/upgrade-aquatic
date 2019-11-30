@@ -1,7 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.common.effects;
 
-import com.teamabnormals.upgrade_aquatic.core.util.Reference;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -10,13 +8,11 @@ import net.minecraft.potion.InstantEffect;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 
 public class EffectRestfulness extends InstantEffect {
 	
-    public EffectRestfulness(String name) {
+    public EffectRestfulness() {
         super(EffectType.BENEFICIAL, 0xb48675);
-        this.setRegistryName(new ResourceLocation(Reference.MODID, name));
     }
     
     @Override

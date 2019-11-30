@@ -50,6 +50,8 @@ public class UpgradeAquatic {
 		modEventBus.addListener(this::setupCommon);
 
 		UAItems.ITEMS.register(modEventBus);
+		UAEffects.EFFECTS.register(modEventBus);
+		UAEffects.POTIONS.register(modEventBus);
 		UATileEntities.TILE_ENTITY_TYPES.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
 		
@@ -70,7 +72,7 @@ public class UpgradeAquatic {
 		EntityPike.addSpawn();
 		EntityLionfish.addSpawn();
 		UADispenseBehaviorRegistry.registerAll();
-		UAEffects.registerRecipes();
+		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();
 		UACompostables.registerCompostables();
 		this.changeVanillaFields();

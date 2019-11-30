@@ -19,6 +19,10 @@ import net.minecraftforge.fml.RegistryObject;
 
 public class RegistryUtils {
 	
+	public static String nameWithModIdPrefix(String name) {
+		return Reference.MODID + ":" + name;
+	}
+	
 	public static BlockItem createWallOrFloorItem(Block floorBlock, Block wallBlock, ItemGroup itemGroup) {
 		return (BlockItem) new WallOrFloorItem(floorBlock, wallBlock, new Item.Properties().group(itemGroup)).setRegistryName(floorBlock.getRegistryName());
 	}
