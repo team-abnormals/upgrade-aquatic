@@ -357,7 +357,7 @@
   "entity.upgrade_aquatic.pike": "Pike",
   "entity.upgrade_aquatic.lionfish": "Lionfish",
   "entity.upgrade_aquatic.thrasher": "Thrasher",
-   "entity.upgrade_aquatic.flare": "Flare",
+  "entity.upgrade_aquatic.flare": "Flare",
   
   "_comment": "Potions and Effects",
   
