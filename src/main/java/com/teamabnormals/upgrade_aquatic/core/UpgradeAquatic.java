@@ -57,7 +57,7 @@ public class UpgradeAquatic {
 		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
 			final ModConfig config = event.getConfig();
-			if (config.getSpec() == Config.CLIENTSPEC) {
+			if(config.getSpec() == Config.CLIENTSPEC) {
 				ConfigHelper.updateClientConfig(config);
 			}
 		});

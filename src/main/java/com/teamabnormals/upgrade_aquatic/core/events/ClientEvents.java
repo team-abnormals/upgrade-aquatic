@@ -8,7 +8,6 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,7 +17,6 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 @Mod.EventBusSubscriber(modid = Reference.MODID, value = Dist.CLIENT)
 public class ClientEvents {
 	
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onEntityRenderPre(RenderLivingEvent.Pre<?, ?> event) {
 		if(event.getEntity() instanceof ClientPlayerEntity) {
@@ -34,7 +32,6 @@ public class ClientEvents {
 		}
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
 		GlStateManager.pushMatrix();
@@ -48,7 +45,6 @@ public class ClientEvents {
 		}
 	}
 	
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public static void onPlayerRenderPost(RenderPlayerEvent.Post event) {
 		GlStateManager.popMatrix();
