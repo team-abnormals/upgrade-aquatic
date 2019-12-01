@@ -111,7 +111,7 @@ public class EntityFlare extends FlyingEntity {
 
 	@Override
 	public CreatureAttribute getCreatureAttribute() {
-		return CreatureAttribute.UNDEFINED;
+		return CreatureAttribute.UNDEAD;
 	}
 	
 	@Override
