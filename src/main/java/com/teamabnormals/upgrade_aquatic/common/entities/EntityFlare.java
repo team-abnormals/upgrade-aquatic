@@ -73,7 +73,7 @@ public class EntityFlare extends FlyingEntity {
 
 	protected void registerAttributes() {
 		super.registerAttributes();
-		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12 + this.getPhantomSize());;
+		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8 + this.getPhantomSize());;
 	}
 
 	protected void registerData() {
