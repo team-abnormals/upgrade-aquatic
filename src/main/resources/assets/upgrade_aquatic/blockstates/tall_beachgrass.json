@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=lower": { "model": "upgrade_aquatic:block/tall_beachgrass_bottom" },
+        "half=upper":    { "model": "upgrade_aquatic:block/tall_beachgrass_top" }
+    }
+}
