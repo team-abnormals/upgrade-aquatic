@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityFlare;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectType;
@@ -27,8 +28,16 @@ public class EffectInsomnia extends InstantEffect {
     	} else if(entity instanceof PhantomEntity) {
     		EntityFlare flare = UAEntities.FLARE.create(entity.world);
     		flare.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
-    		entity.world.addEntity(flare);
-    		entity.remove(true);
+    		flare.setNoAI(((MobEntity) entity).isAIDisabled());
+    		if(entity.hasCustomName()) {
+    			flare.setCustomName(entity.getCustomName());
+    			flare.setCustomNameVisible(entity.isCustomNameVisible());
+    		}
+    		flare.setHealth(entity.getHealth());
+    		if(flare.getHealth() > 0) {
+    			entity.world.addEntity(flare);
+    			entity.remove(true);
+    		}
     	} else if(entity instanceof EntityFlare) {
     		entity.attackEntityFrom(DamageSource.MAGIC, Float.MAX_VALUE);
     	}

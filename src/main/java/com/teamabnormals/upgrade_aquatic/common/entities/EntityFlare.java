@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -29,8 +28,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.DamageSource;
@@ -71,12 +68,12 @@ public class EntityFlare extends FlyingEntity {
 		this.goalSelector.addGoal(1, new EntityFlare.PickAttackGoal());
 		this.goalSelector.addGoal(2, new EntityFlare.SweepAttackGoal());
 		this.goalSelector.addGoal(3, new EntityFlare.OrbitPointGoal());
-		this.targetSelector.addGoal(1, new EntityFlare.AttackPlayerGoal());
+		this.targetSelector.addGoal(1, new EntityFlare.AttackLivingEntityGoal());
 	}
 
 	protected void registerAttributes() {
 		super.registerAttributes();
-		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12 + this.getPhantomSize());;
 	}
 
 	protected void registerData() {
@@ -90,7 +87,7 @@ public class EntityFlare extends FlyingEntity {
 
 	private void updatePhantomSize() {
 	    this.recalculateSize();
-	    this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue((double)(6 + this.getPhantomSize()));
+	    this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue((12 + this.getPhantomSize()));
 	}
 
 	public int getPhantomSize() {
@@ -111,15 +108,7 @@ public class EntityFlare extends FlyingEntity {
 
 	@Override
 	public CreatureAttribute getCreatureAttribute() {
-		return CreatureAttribute.UNDEAD;
-	}
-	
-	@Override
-	public boolean attackEntityAsMob(Entity entity) {
-		if(entity instanceof LivingEntity) {
-			((LivingEntity) entity).addPotionEffect(new EffectInstance(Effects.POISON, 60, 1));
-		}
-		return super.attackEntityAsMob(entity);
+		return CreatureAttribute.UNDEFINED;
 	}
 	
 	public void tick() {
@@ -211,11 +200,11 @@ public class EntityFlare extends FlyingEntity {
 	    SWOOP;
 	}
 	
-	public class AttackPlayerGoal extends Goal {
+	public class AttackLivingEntityGoal extends Goal {
 	    private final EntityPredicate field_220842_b = (new EntityPredicate()).setDistance(64.0D);
 	    private int tickDelay = 20;
 
-	    private AttackPlayerGoal() {}
+	    private AttackLivingEntityGoal() {}
 
 	    public boolean shouldExecute() {
 	        if(this.tickDelay > 0) {
@@ -223,18 +212,19 @@ public class EntityFlare extends FlyingEntity {
 	            return false;
 	        } else {
 	            this.tickDelay = 60;
-	            List<PlayerEntity> list = EntityFlare.this.world.getTargettablePlayersWithinAABB(this.field_220842_b, EntityFlare.this, EntityFlare.this.getBoundingBox().grow(16.0D, 64.0D, 16.0D));
+	            List<LivingEntity> list = EntityFlare.this.world.getTargettableEntitiesWithinAABB(LivingEntity.class, this.field_220842_b, EntityFlare.this, EntityFlare.this.getBoundingBox().grow(16.0D, 64.0D, 16.0D));
 	            if (!list.isEmpty()) {
-	                list.sort((p_203140_0_, p_203140_1_) -> {
-	                    return p_203140_0_.posY > p_203140_1_.posY ? -1 : 1;
-	                });
-
-	                for(PlayerEntity playerentity : list) {
-	                    if(EntityFlare.this.func_213344_a(playerentity, EntityPredicate.DEFAULT)) {
-	                    	if(playerentity instanceof ServerPlayerEntity) {
-	                    		StatisticsManager statisticsManager = ((ServerPlayerEntity) playerentity).getStats();
+	                for(LivingEntity mob : list) {
+	                    if(EntityFlare.this.func_213344_a(mob, EntityPredicate.DEFAULT)) {
+	                    	if(mob instanceof ServerPlayerEntity) {
+	                    		StatisticsManager statisticsManager = ((ServerPlayerEntity) mob).getStats();
 	                    		if(statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) < 72000) {
-	                    			EntityFlare.this.setAttackTarget(playerentity);
+	                    			EntityFlare.this.setAttackTarget(mob);
+	                    			return true;
+	                    		}
+	                    	} else {
+	                    		if(!(mob instanceof EntityFlare)) {
+	                    			EntityFlare.this.setAttackTarget(mob);
 	                    			return true;
 	                    		}
 	                    	}
@@ -254,7 +244,7 @@ public class EntityFlare extends FlyingEntity {
         			return EntityFlare.this.func_213344_a(livingentity, EntityPredicate.DEFAULT);
         		}
 	        }
-	        return livingentity != null ? EntityFlare.this.func_213344_a(livingentity, EntityPredicate.DEFAULT) : false;
+	        return livingentity != null ? true : false;
 	    }
 	}
 	
@@ -514,7 +504,9 @@ public class EntityFlare extends FlyingEntity {
 	     * Reset the task's internal state. Called when this task is interrupted by another one
 	     */
 	    public void resetTask() {
-	        EntityFlare.this.setAttackTarget((LivingEntity) null);
+	    	if(EntityFlare.this.getAttackTarget() instanceof PlayerEntity) {
+	    		EntityFlare.this.setAttackTarget((LivingEntity) null);
+	    	}
 	        EntityFlare.this.attackPhase = EntityFlare.AttackPhase.CIRCLE;
 	    }
 
