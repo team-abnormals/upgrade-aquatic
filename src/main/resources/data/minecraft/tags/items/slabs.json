@@ -24,6 +24,8 @@
     "upgrade_aquatic:silk_biorock_slab",
     "upgrade_aquatic:elder_biorock_slab",
     "upgrade_aquatic:prismarine_biorock_slab",
-    "upgrade_aquatic:dead_biorock_slab"
+    "upgrade_aquatic:dead_biorock_slab",
+    "upgrade_aquatic:driftwood_slab",
+    "upgrade_aquatic:beachgrass_thatch_slab"
   ]
 }

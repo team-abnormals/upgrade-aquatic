@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "upgrade_aquatic:block/beachgrass_thatch",
+    "top": "upgrade_aquatic:block/beachgrass_thatch",
+    "side": "upgrade_aquatic:block/beachgrass_thatch"
+  }
+}

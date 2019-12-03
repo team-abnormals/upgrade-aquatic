@@ -4,6 +4,8 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.common.UAProperties;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrass;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrassTall;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShower;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
@@ -370,7 +372,13 @@ public class UABlocks {
 	public static Block DRIFTWOOD_FENCE_GATE     = new BlockFenceGateBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_fence_gate");
 	public static Block DRIFTWOOD_PRESSURE_PLATE = new BlockPressurePlateBase(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_pressure_plate");
 	public static Block DRIFTWOOD_BUTTON         = new BlockButtonBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_button");
-	public static Block DRIFTWOOD_TRAPDOOR       = new BlockTrapdoorBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_trapdoor");	
+	public static Block DRIFTWOOD_TRAPDOOR       = new BlockTrapdoorBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_trapdoor");
+
+	public static Block BEACHGRASS_THATCH              = new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch");
+	public static Block BEACHGRASS_THATCH_SLAB         = new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch_slab");
+	public static Block BEACHGRASS_THATCH_STAIRS       = new StairsBlock(BEACHGRASS_THATCH.getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch_stairs");	
+	public static Block BEACHGRASS                     = new BlockBeachgrass(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "beachgrass");
+	public static Block TALL_BEACHGRASS                = new BlockBeachgrassTall(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "tall_beachgrass");
 	
 	public static final Map<Block, Block> BIOROCK_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CHISELED_BIOROCK_CONVERSION_MAP = Maps.newHashMap();
@@ -508,7 +516,8 @@ public class UABlocks {
 		    KELPY_COBBLESTONE_WALL, TONGUE_KELPY_COBBLESTONE_WALL, OCHRE_KELPY_COBBLESTONE_WALL, THORNY_KELPY_COBBLESTONE_WALL, POLAR_KELPY_COBBLESTONE_WALL,
 		    BLUE_PICKERELWEED_BLOCK, PURPLE_PICKERELWEED_BLOCK, BOILED_BLUE_PICKERELWEED_BLOCK, BOILED_PURPLE_PICKERELWEED_BLOCK,
 		    DRIFTWOOD_LOG, DRIFTWOOD, DRIFTWOOD_LOG_STRIPPED, DRIFTWOOD_STRIPPED, DRIFTWOOD_PLANKS, DRIFTWOOD_DOOR, DRIFTWOOD_TRAPDOOR, DRIFTWOOD_FENCE, DRIFTWOOD_FENCE_GATE, DRIFTWOOD_SLAB, DRIFTWOOD_STAIRS, DRIFTWOOD_BUTTON, DRIFTWOOD_PRESSURE_PLATE,
-			PRISMARINE_ROD_BUNDLE, FLOWERING_RUSH 
+			PRISMARINE_ROD_BUNDLE, FLOWERING_RUSH,
+			BEACHGRASS, TALL_BEACHGRASS, BEACHGRASS_THATCH, BEACHGRASS_THATCH_SLAB, BEACHGRASS_THATCH_STAIRS
 		};
 		event.getRegistry().registerAll(blocks);
 	}
@@ -721,7 +730,7 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(PRISMARINE_BIOROCK_WALL, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_BIOROCK_WALL, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(DEAD_BIOROCK_WALL, ItemGroup.BUILDING_BLOCKS));
-/*		
+	
 		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELP, ItemGroup.MISC));
 		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELP, ItemGroup.MISC));
 		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELP, ItemGroup.MISC));
@@ -751,7 +760,7 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-*/			
+	
 		registry.register(RegistryUtils.createSimpleItemBlock(KELP_BLOCK, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
@@ -780,5 +789,11 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(DRIFTWOOD_TRAPDOOR, ItemGroup.REDSTONE));
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(PRISMARINE_ROD_BUNDLE, ItemGroup.BUILDING_BLOCKS));
+		
+		registry.register(RegistryUtils.createSimpleItemBlock(BEACHGRASS, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(TALL_BEACHGRASS, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH_SLAB, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH_STAIRS, ItemGroup.BUILDING_BLOCKS));
 	}
 }

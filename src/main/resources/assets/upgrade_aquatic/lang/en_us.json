@@ -302,6 +302,12 @@
   
   "block.upgrade_aquatic.prismarine_rod_bundle": "Prismarine Rod Bundle",
   
+  "block.upgrade_aquatic.beachgrass": "Beachgrass",
+  "block.upgrade_aquatic.tall_beachgrass": "Tall Beachgrass",
+  "block.upgrade_aquatic.beachgrass_thatch": "Beachgrass Thatch",
+  "block.upgrade_aquatic.beachgrass_thatch_slab": "Beachgrass Thatch Slab",
+  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Beachgrass Thatch Stairs",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.driftwood_boat": "Driftwood Boat",
@@ -357,7 +363,7 @@
   "entity.upgrade_aquatic.pike": "Pike",
   "entity.upgrade_aquatic.lionfish": "Lionfish",
   "entity.upgrade_aquatic.thrasher": "Thrasher",
-   "entity.upgrade_aquatic.flare": "Flare",
+  "entity.upgrade_aquatic.flare": "Flare",
   
   "_comment": "Potions and Effects",
   

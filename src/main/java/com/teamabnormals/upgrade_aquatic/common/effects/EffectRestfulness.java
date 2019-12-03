@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityFlare;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectType;
@@ -29,7 +30,16 @@ public class EffectRestfulness extends InstantEffect {
         } else if(entity instanceof EntityFlare) {
         	PhantomEntity phantom = EntityType.PHANTOM.create(entity.world);
     		phantom.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
-    		entity.world.addEntity(phantom);
+    		phantom.setNoAI(((MobEntity) entity).isAIDisabled());
+    		if(entity.hasCustomName()) {
+    			phantom.setCustomName(entity.getCustomName());
+    			phantom.setCustomNameVisible(entity.isCustomNameVisible());
+    		}
+    		phantom.setHealth(entity.getHealth());
+    		if(phantom.getHealth() > 0) {
+    			entity.world.addEntity(phantom);
+    			entity.remove(true);
+    		}
     		entity.remove(true);
         }
     }
