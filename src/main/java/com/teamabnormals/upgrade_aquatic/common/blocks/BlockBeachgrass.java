@@ -70,7 +70,7 @@ public class BlockBeachgrass extends Block implements IGrowable {
 	
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
-		return block.isIn(BlockTags.BAMBOO_PLANTABLE_ON);
+		return block.isIn(BlockTags.SAND);
 	}
 	
 	@SuppressWarnings("deprecation")
