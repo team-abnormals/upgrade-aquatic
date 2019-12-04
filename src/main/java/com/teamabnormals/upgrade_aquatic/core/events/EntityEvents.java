@@ -5,6 +5,7 @@ import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
@@ -37,6 +38,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
@@ -107,6 +109,13 @@ public class EntityEvents {
 					});
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerRiding(EntityMountEvent event) {
+		if(event.getEntityMounting() instanceof PlayerEntity && event.isDismounting() && event.getEntityBeingMounted() instanceof EntityThrasher) {
+			event.setCanceled(true);
 		}
 	}
 	

@@ -4,42 +4,11 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.common.UAProperties;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrass;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrassTall;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShower;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFloweringRush;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorchWall;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSearocket;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSpine;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoral;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralBlock;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralFan;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralFanDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFan;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFanDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelp;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelpTop;
+import com.teamabnormals.upgrade_aquatic.common.blocks.*;
 import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorock;
 import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockSlab;
 import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockStairs;
 import com.teamabnormals.upgrade_aquatic.common.blocks.biorock.BlockBiorockWall;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodLog;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwood;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodPlanks;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodDoor;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockButtonBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceGateBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockTrapdoorBase;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -47,9 +16,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.StairsBlock;
 import net.minecraft.block.WallBlock;
@@ -517,7 +486,8 @@ public class UABlocks {
 		    BLUE_PICKERELWEED_BLOCK, PURPLE_PICKERELWEED_BLOCK, BOILED_BLUE_PICKERELWEED_BLOCK, BOILED_PURPLE_PICKERELWEED_BLOCK,
 		    DRIFTWOOD_LOG, DRIFTWOOD, DRIFTWOOD_LOG_STRIPPED, DRIFTWOOD_STRIPPED, DRIFTWOOD_PLANKS, DRIFTWOOD_DOOR, DRIFTWOOD_TRAPDOOR, DRIFTWOOD_FENCE, DRIFTWOOD_FENCE_GATE, DRIFTWOOD_SLAB, DRIFTWOOD_STAIRS, DRIFTWOOD_BUTTON, DRIFTWOOD_PRESSURE_PLATE,
 			PRISMARINE_ROD_BUNDLE, FLOWERING_RUSH,
-			BEACHGRASS, TALL_BEACHGRASS, BEACHGRASS_THATCH, BEACHGRASS_THATCH_SLAB, BEACHGRASS_THATCH_STAIRS
+			BEACHGRASS, TALL_BEACHGRASS,
+			BEACHGRASS_THATCH, BEACHGRASS_THATCH_SLAB, BEACHGRASS_THATCH_STAIRS
 		};
 		event.getRegistry().registerAll(blocks);
 	}
