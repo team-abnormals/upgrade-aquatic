@@ -65,7 +65,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		}
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
-	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Sonar Knockback resistance", (double)0.75F, AttributeModifier.Operation.ADDITION)).setSaved(false);
+	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE)).setSaved(false);
 	private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Boolean> SONAR_ACTIVE = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TICKS_TILL_SONAR = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
@@ -107,7 +107,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
-		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.25D);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.35D);
 	}
 	
 	@Override
@@ -185,6 +185,26 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
+	protected void onAnimationStart(Endimation animationStarted) {
+		if(animationStarted == THRASH_ANIMATION) {
+			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
+			if(!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
+				knockbackResistance.applyModifier(KNOCKBACK_RESISTANCE_MODIFIER);
+			}
+		}
+	}
+	
+	@Override
+	protected void onAnimationEnd(Endimation animationEnded) {
+		if(animationEnded == THRASH_ANIMATION) {
+			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
+			if(knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
+				knockbackResistance.removeModifier(KNOCKBACK_RESISTANCE_MODIFIER);
+			}
+		}
+	}
+	
+	@Override
 	public void onEnterBubbleColumn(boolean downwards) {}
 
 	@Override
@@ -255,7 +275,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
     			entitySource.getPosition().getZ() - this.getPosition().getZ()
     		);
     		if(difference.length() <= 8 && entitySource.isInWater()) {
-    			this.setAttackTarget((LivingEntity)entitySource);
+    			if(entitySource instanceof PlayerEntity && !((PlayerEntity)entitySource).isCreative() && !((PlayerEntity)entitySource).isSpectator()) {
+    				this.setAttackTarget((LivingEntity)entitySource);
+    			} else if(!(entitySource instanceof PlayerEntity)) {
+    				this.setAttackTarget((LivingEntity)entitySource);
+    			}
     		}
     	}
     	return super.attackEntityFrom(source, amount);

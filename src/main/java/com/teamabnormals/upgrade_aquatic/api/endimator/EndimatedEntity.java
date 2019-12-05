@@ -102,6 +102,7 @@ public class EndimatedEntity extends CreatureEntity {
 	 */
 	public void setPlayingAnimation(Endimation animationToPlay) {
 		this.animation = animationToPlay;
+		this.onAnimationStart(animationToPlay);
 		this.setAnimationTick(0);
 	}
 	
@@ -109,8 +110,13 @@ public class EndimatedEntity extends CreatureEntity {
 	 * Resets the current animation to a blank one
 	 */
 	public void resetPlayingAnimationToDefault() {
+		this.onAnimationEnd(this.animation);
 		this.animation = BLANK_ANIMATION;
 	}
+	
+	protected void onAnimationStart(Endimation animationStarted) {}
+	
+	protected void onAnimationEnd(Endimation animationEnded) {}
 		
 	/**
 	 * Used in movement controllers to get the distance between the entity's desired path location and its current position
