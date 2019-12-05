@@ -229,14 +229,14 @@ public class EntityNautilus extends EntityBucketableWaterMob {
                 this.nautilus.setMotion(this.nautilus.getMotion().add(0.0D, (double)this.nautilus.getAIMoveSpeed() * d1 * 0.03D, 0.0D));
                 nautilus.setMoving(true);
             } else {
+            	this.nautilus.setAIMoveSpeed(0.0F);
             	nautilus.setMoving(false);
             }
         }
     }
 
     static class SwimGoal extends RandomSwimmingGoal {
-        @SuppressWarnings("unused")
-        private final EntityNautilus nautilus;
+        public final EntityNautilus nautilus;
 
         public SwimGoal(EntityNautilus nautilus) {
             super(nautilus, 1.0D, 30);
