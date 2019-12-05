@@ -1,10 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.blocks;
 
-import java.util.Random;
-
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -31,7 +28,6 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.ForgeEventFactory;
 
 public class BlockBeachgrassTall extends Block {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);

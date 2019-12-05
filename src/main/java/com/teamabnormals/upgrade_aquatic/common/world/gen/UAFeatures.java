@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen;
 
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureDriftwood;
+import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureDunes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureFloweringRush;
 
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePickerelweed;
@@ -27,4 +28,5 @@ public class UAFeatures {
 	public static final RegistryObject<Feature<NoFeatureConfig>> SEAROCKET                   = FEATURES.register("searocket", () -> new FeatureSearocket(NoFeatureConfig::deserialize));
 	public static final RegistryObject<Feature<NoFeatureConfig>> FLOWERING_RUSH              = FEATURES.register("flowering_rush", () -> new FeatureFloweringRush(NoFeatureConfig::deserialize));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DRIFTWOOD                   = FEATURES.register("driftwood", () -> new FeatureDriftwood(NoFeatureConfig::deserialize));
+	public static final RegistryObject<Feature<NoFeatureConfig>> DUNES                       = FEATURES.register("dunes", () -> new FeatureDunes(NoFeatureConfig::deserialize));
 }

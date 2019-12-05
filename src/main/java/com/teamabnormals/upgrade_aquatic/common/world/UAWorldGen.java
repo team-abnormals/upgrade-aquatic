@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.world;
 
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureAmmonite;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureDriftwood;
+import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureDunes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeatureFloweringRush;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.feature.FeaturePrismarineCoral;
@@ -16,6 +17,7 @@ public class UAWorldGen {
 		FeatureSearocket.addSearocket();
 		FeatureFloweringRush.addFloweringRush();
 		FeatureDriftwood.addDriftwood();
+		FeatureDunes.addDunes();
 	}
 	
 }
