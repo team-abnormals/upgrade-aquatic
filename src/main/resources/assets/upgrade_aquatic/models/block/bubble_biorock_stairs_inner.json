@@ -1,8 +1,0 @@
-{
-  "parent": "block/inner_stairs",
-  "textures": {
-    "bottom": "upgrade_aquatic:block/bubble_biorock",
-    "top": "upgrade_aquatic:block/bubble_biorock",
-    "side": "upgrade_aquatic:block/bubble_biorock"
-  }
-}

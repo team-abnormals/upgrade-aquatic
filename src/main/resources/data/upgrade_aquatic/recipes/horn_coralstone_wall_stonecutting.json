@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:horn_coralstone"
+  },
+  "result": "upgrade_aquatic:horn_coralstone_wall",
+  "count": 1
+}

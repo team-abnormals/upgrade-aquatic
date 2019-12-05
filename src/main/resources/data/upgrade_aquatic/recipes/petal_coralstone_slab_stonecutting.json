@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:petal_coralstone"
+  },
+  "result": "upgrade_aquatic:petal_coralstone_slab",
+  "count": 2
+}
