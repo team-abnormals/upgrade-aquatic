@@ -13,6 +13,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
@@ -24,11 +25,13 @@ import net.minecraft.world.biome.SwampBiome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
@@ -174,6 +177,11 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 		} else {
 			if(biome.getCategory() != Category.OCEAN && biome.getCategory() != Category.BEACH && biome.getCategory() != Category.DESERT && biome.getCategory() != Category.ICY) {
 				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
+			} else {
+				if(ModList.get().isLoaded("bloomful")) {
+					ForgeRegistries.BIOMES.getValue(new ResourceLocation("bloomful:wisteria_forest")).getFeatures(Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
+					ForgeRegistries.BIOMES.getValue(new ResourceLocation("bloomful:wisteria_forest_hills")).getFeatures(Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
+				}
 			}
 		}
 	}
