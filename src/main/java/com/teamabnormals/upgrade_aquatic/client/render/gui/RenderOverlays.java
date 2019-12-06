@@ -9,6 +9,7 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.stats.StatisticsManager;
@@ -143,6 +144,12 @@ public class RenderOverlays {
 			if(MC.player.isPassenger()) {
 				if(MC.player.getRidingEntity() instanceof EntityThrasher) {
 					event.setCanceled(true);
+				}
+			}
+		} else if(event.getType() == ElementType.TEXT) {
+			if(MC.player.isPassenger()) {
+				if(MC.ingameGUI.overlayMessage == I18n.format("mount.onboard", MC.gameSettings.keyBindSneak.getLocalizedName()) && MC.player.getRidingEntity() instanceof EntityThrasher) {
+					MC.ingameGUI.setOverlayMessage("", false);
 				}
 			}
 		}
