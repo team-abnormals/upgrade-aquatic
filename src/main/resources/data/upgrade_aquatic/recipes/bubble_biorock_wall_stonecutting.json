@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "upgrade_aquatic:bubble_biorock"
-  },
-  "result": "upgrade_aquatic:bubble_biorock_wall",
-  "count": 1
-}

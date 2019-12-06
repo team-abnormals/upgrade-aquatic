@@ -301,6 +301,12 @@
   "block.upgrade_aquatic.flowering_rush": "Зонтичный сусак",
 
   "block.upgrade_aquatic.prismarine_rod_bundle": "Связка призмариновых стержней",
+
+  "block.upgrade_aquatic.beachgrass": "Песколюбка",
+  "block.upgrade_aquatic.tall_beachgrass": "Высокая песколюбка",
+  "block.upgrade_aquatic.beachgrass_thatch": "Солома песколюбки",
+  "block.upgrade_aquatic.beachgrass_thatch_slab": "Плита из соломы песколюбки",
+  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Ступени из соломы песколюбки",
   
   "_comment": "Предметы",
 
@@ -371,15 +377,15 @@
   "item.minecraft.tipped_arrow.effect.insomnia": "Стрела бессонницы",
   "item.minecraft.tipped_arrow.effect.insomnia_strong": "Стрела бессонницы",
   
-  "effect.upgrade_aquatic.restfulness": "Спокойствие",
-  "item.minecraft.potion.effect.restfulness": "Зелье спокойствия",
-  "item.minecraft.potion.effect.restfulness_strong": "Зелье спокойствия",
-  "item.minecraft.splash_potion.effect.restfulness": "Взрывное зелье спокойствия",
-  "item.minecraft.splash_potion.effect.restfulness_strong": "Взрывное зелье спокойствия",
-  "item.minecraft.lingering_potion.effect.restfulness": "Туманное зелье спокойствия",
-  "item.minecraft.lingering_potion.effect.restfulness_strong": "Туманное зелье спокойствия",
-  "item.minecraft.tipped_arrow.effect.restfulness": "Стрела спокойствия",
-  "item.minecraft.tipped_arrow.effect.restfulness_strong": "Стрела спокойствия",
+  "effect.upgrade_aquatic.restfulness": "Бодрость",
+  "item.minecraft.potion.effect.restfulness": "Зелье бодрости",
+  "item.minecraft.potion.effect.restfulness_strong": "Зелье бодрости",
+  "item.minecraft.splash_potion.effect.restfulness": "Взрывное зелье бодрости",
+  "item.minecraft.splash_potion.effect.restfulness_strong": "Взрывное зелье бодрости",
+  "item.minecraft.lingering_potion.effect.restfulness": "Туманное зелье бодрости",
+  "item.minecraft.lingering_potion.effect.restfulness_strong": "Туманное зелье бодрости",
+  "item.minecraft.tipped_arrow.effect.restfulness": "Стрела бодрости",
+  "item.minecraft.tipped_arrow.effect.restfulness_strong": "Стрела бодрости",
   
   "effect.upgrade_aquatic.repellence": "Коррозионосность",
   "item.minecraft.potion.effect.repellence": "Зелье коррозионосности",

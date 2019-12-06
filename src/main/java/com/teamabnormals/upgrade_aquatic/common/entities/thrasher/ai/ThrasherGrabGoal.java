@@ -17,11 +17,23 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 	
 	@Override
 	public boolean shouldExecute() {
+		LivingEntity attackTarget = this.thrasher.getAttackTarget();
+		if(attackTarget != null && attackTarget.isPassenger()) {
+			if(attackTarget.getRidingEntity() instanceof EntityThrasher) {
+				return false;
+			}
+		}
 		return super.shouldExecute() && thrasher.getPassengers().isEmpty();
 	}
 	
 	@Override
 	public boolean shouldContinueExecuting() {
+		LivingEntity attackTarget = this.thrasher.getAttackTarget();
+		if(attackTarget != null && attackTarget.isPassenger()) {
+			if(attackTarget.getRidingEntity() instanceof EntityThrasher) {
+				return false;
+			}
+		}
 		return super.shouldContinueExecuting() && thrasher.getPassengers().isEmpty();
 	}
 	

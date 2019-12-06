@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "upgrade_aquatic:tube_biorock"
-  },
-  "result": "upgrade_aquatic:chiseled_tube_biorock",
-  "count": 1
-}

@@ -1,8 +1,0 @@
-{
-    "parent": "block/slab",
-    "textures": {
-        "bottom": "upgrade_aquatic:block/biorock",
-        "top": "upgrade_aquatic:block/biorock",
-        "side": "upgrade_aquatic:block/biorock"
-    }
-}

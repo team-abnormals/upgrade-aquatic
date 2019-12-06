@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:beachgrass_thatch"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:beachgrass_thatch_stairs",
+    "count": 4
+  }
+}

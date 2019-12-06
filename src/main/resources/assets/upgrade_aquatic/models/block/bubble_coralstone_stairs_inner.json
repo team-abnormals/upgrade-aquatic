@@ -1,0 +1,8 @@
+{
+  "parent": "block/inner_stairs",
+  "textures": {
+    "bottom": "upgrade_aquatic:block/bubble_coralstone",
+    "top": "upgrade_aquatic:block/bubble_coralstone",
+    "side": "upgrade_aquatic:block/bubble_coralstone"
+  }
+}

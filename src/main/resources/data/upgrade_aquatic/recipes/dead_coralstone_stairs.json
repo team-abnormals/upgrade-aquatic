@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:dead_coralstone"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:dead_coralstone_stairs",
+    "count": 4
+  }
+}

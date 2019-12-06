@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:fire_coralstone"
+  },
+  "result": "upgrade_aquatic:fire_coralstone_stairs",
+  "count": 1
+}
