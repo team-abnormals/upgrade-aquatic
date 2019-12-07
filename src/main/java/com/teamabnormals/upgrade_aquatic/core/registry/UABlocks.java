@@ -31,6 +31,7 @@ import net.minecraft.item.Rarity;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -349,6 +350,14 @@ public class UABlocks {
 	public static Block BEACHGRASS                     = new BlockBeachgrass(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "beachgrass");
 	public static Block TALL_BEACHGRASS                = new BlockBeachgrassTall(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "tall_beachgrass");
 	
+	/*
+	 * Quark Compat
+	 */
+	public static Block DRIFTWOOD_VERTICAL_SLAB        = new BlockVerticalSlab(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_vertical_slab");
+	public static Block DRIFTWOOD_BOOKSHELF            = new BlockUABookshelf(Properties.from(Blocks.BOOKSHELF)).setRegistryName(Reference.MODID, "driftwood_bookshelf");
+	public static Block DRIFTWOOD_LADDER               = new BlockUALadder(Properties.from(Blocks.LADDER)).setRegistryName(Reference.MODID, "driftwood_ladder");
+	public static Block BEACHGRASS_THATCH_VERTICAL_SLAB = new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH)).setRegistryName(Reference.MODID, "beachgrass_thatch_vertical_slab");
+	
 	public static final Map<Block, Block> CORALSTONE_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CHISELED_CORALSTONE_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CORALSTONE_SLAB_CONVERSION_MAP = Maps.newHashMap();
@@ -490,6 +499,16 @@ public class UABlocks {
 			BEACHGRASS_THATCH, BEACHGRASS_THATCH_SLAB, BEACHGRASS_THATCH_STAIRS
 		};
 		event.getRegistry().registerAll(blocks);
+		
+		/*
+		 * Compat
+		 */
+		//if(ModList.get().isLoaded("Quark")) {
+			event.getRegistry().registerAll(
+				DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_BOOKSHELF, DRIFTWOOD_LADDER,
+				BEACHGRASS_THATCH_VERTICAL_SLAB
+			);
+		//}
 	}
 	
 	@SubscribeEvent
@@ -765,5 +784,15 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH_SLAB, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH_STAIRS, ItemGroup.BUILDING_BLOCKS));
+		
+		/*
+		 * Compat
+		 */
+		//if(ModList.get().isLoaded("Quark")) {
+			event.getRegistry().registerAll(
+				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), RegistryUtils.createSimpleItemBlock(DRIFTWOOD_BOOKSHELF, ItemGroup.BUILDING_BLOCKS), RegistryUtils.createSimpleItemBlock(DRIFTWOOD_LADDER, ItemGroup.DECORATIONS),
+				RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS)
+			);
+		//}
 	}
 }

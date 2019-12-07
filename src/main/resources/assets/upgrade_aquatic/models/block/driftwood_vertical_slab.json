@@ -1,0 +1,8 @@
+{
+    "parent": "upgrade_aquatic:block/vertical_slab",
+    "textures": {
+        "side": "upgrade_aquatic:block/driftwood_planks",
+        "top": "upgrade_aquatic:block/driftwood_planks",
+        "bottom": "upgrade_aquatic:block/driftwood_planks"
+    }
+}
