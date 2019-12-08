@@ -3,7 +3,7 @@
 	"credit": "Five",
 	"textures": {
 		"0": "upgrade_aquatic:block/tall_beachgrass_top",
-		"particle": "upgrade_aquatic:item/tall_beachgrass_top"
+		"particle": "upgrade_aquatic:item/tall_beachgrass"
 	},
 	"elements": [
 		{
