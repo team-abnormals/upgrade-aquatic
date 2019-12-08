@@ -1,21 +1,26 @@
 package com.teamabnormals.upgrade_aquatic.common.blocks;
 
+import java.util.Random;
+
 import javax.annotation.Nullable;
+
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -100,9 +105,14 @@ public class BlockBeachgrassTall extends Block {
 		if (blockstate.getBlock() == this && blockstate.get(HALF) != doubleblockhalf) {
 			worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
 			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
-			if (!worldIn.isRemote && !player.isCreative() && player.getHeldItemMainhand().getItem() instanceof ShearsItem) {
-				spawnAsEntity(worldIn, pos, new ItemStack(this));
-				spawnAsEntity(worldIn, pos.up(), new ItemStack(this));
+			if(!worldIn.isRemote && !player.isCreative() && player.getHeldItemMainhand().getItem() instanceof ShearsItem) {
+				spawnAsEntity(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS));
+				spawnAsEntity(worldIn, pos.up(), new ItemStack(UABlocks.BEACHGRASS));
+			} else if(!worldIn.isRemote && !player.isCreative() && !(player.getHeldItemMainhand().getItem() instanceof ShearsItem)) {
+				Random rand = new Random();
+				if(rand.nextFloat() < 0.125F) {
+					spawnAsEntity(worldIn, pos, new ItemStack(Items.BEETROOT_SEEDS));
+				}
 			}
 		}
 
