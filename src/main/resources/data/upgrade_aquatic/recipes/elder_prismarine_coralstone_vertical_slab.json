@@ -7,11 +7,11 @@
   ],
   "key": {
     "#": {
-      "item": "upgrade_aquatic:elder_coralstone_slab"
+      "item": "upgrade_aquatic:elder_prismarine_coralstone_slab"
     }
   },
   "result": {
-    "item": "upgrade_aquatic:elder_coralstone_vertical_slab",
+    "item": "upgrade_aquatic:elder_prismarine_coralstone_vertical_slab",
     "count": 3
   }
 }

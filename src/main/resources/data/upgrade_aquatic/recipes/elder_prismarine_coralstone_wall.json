@@ -6,11 +6,11 @@
   ],
   "key": {
     "#": {
-      "item": "upgrade_aquatic:elder_coralstone"
+      "item": "upgrade_aquatic:elder_prismarine_coralstone"
     }
   },
   "result": {
-    "item": "upgrade_aquatic:elder_coralstone_wall",
+    "item": "upgrade_aquatic:elder_prismarine_coralstone_wall",
     "count": 6
   }
 }
