@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "# #",
+    "#P#",
+    "# #"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "P": {
+      "item": "upgrade_aquatic:driftwood_planks"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:driftwood_ladder",
+    "count": 4
+  },
+}

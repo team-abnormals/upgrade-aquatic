@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:horn_coralstone_slab"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:horn_coralstone_vertical_slab",
+    "count": 3
+  }
+}
