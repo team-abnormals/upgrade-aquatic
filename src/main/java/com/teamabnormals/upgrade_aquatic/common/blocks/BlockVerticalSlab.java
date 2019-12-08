@@ -96,7 +96,7 @@ public class BlockVerticalSlab extends Block implements IWaterLoggable {
         return type == PathType.WATER && worldIn.getFluidState(pos).isTagged(FluidTags.WATER);
     }
 
-	static enum VerticalSlabType implements IStringSerializable {
+	public static enum VerticalSlabType implements IStringSerializable {
 		NORTH(Direction.NORTH),
 		SOUTH(Direction.SOUTH),
 		WEST(Direction.WEST),

@@ -4,9 +4,43 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.common.UAProperties;
-import com.teamabnormals.upgrade_aquatic.common.blocks.*;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrass;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrassTall;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockButtonBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShower;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwood;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodDoor;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodLog;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodPlanks;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceGateBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFloweringRush;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorchWall;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSearocket;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSpine;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockTrapdoorBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUABookshelf;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoral;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralBlock;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralDead;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralFan;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralFanDead;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFan;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFanDead;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelp;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelpTop;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUALadder;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockVerticalSlab;
 import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstone;
-import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneSlab;
+import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneVerticalSlab;
 import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneStairs;
 import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneWall;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
@@ -31,7 +65,6 @@ import net.minecraft.item.Rarity;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -225,24 +258,24 @@ public class UABlocks {
 	public static Block ELDER_CHISELED_CORALSTONE        = new BlockCoralstone(UAProperties.CORALSTONE, true).setRegistryName(Reference.MODID, "elder_chiseled_coralstone");
 	public static Block DEAD_CHISELED_CORALSTONE         = new BlockCoralstone(UAProperties.CORALSTONE, true).setRegistryName(Reference.MODID, "dead_chiseled_coralstone");
     
-	public static Block CORALSTONE_SLAB                  = new BlockCoralstoneSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "coralstone_slab");
-	public static Block BUBBLE_CORALSTONE_SLAB           = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "bubble_coralstone_slab");
-	public static Block HORN_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "horn_coralstone_slab");
-	public static Block TUBE_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {Blocks.TUBE_CORAL, Blocks.TUBE_CORAL_FAN, Blocks.TUBE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "tube_coralstone_slab");
-	public static Block BRAIN_CORALSTONE_SLAB            = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {Blocks.BRAIN_CORAL, Blocks.BRAIN_CORAL_FAN, Blocks.BRAIN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "brain_coralstone_slab");
-	public static Block FIRE_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {Blocks.FIRE_CORAL, Blocks.FIRE_CORAL_FAN, Blocks.FIRE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "fire_coralstone_slab");	
-	public static Block ACAN_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {ACAN_CORAL, ACAN_CORAL_FAN, ACAN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "acan_coralstone_slab");
-	public static Block FINGER_CORALSTONE_SLAB           = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {FINGER_CORAL, FINGER_CORAL_FAN, FINGER_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "finger_coralstone_slab");
-	public static Block STAR_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {STAR_CORAL, STAR_CORAL_FAN, STAR_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "star_coralstone_slab");
-	public static Block MOSS_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {MOSS_CORAL, MOSS_CORAL_FAN, MOSS_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "moss_coralstone_slab");
-	public static Block PETAL_CORALSTONE_SLAB            = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {PETAL_CORAL, PETAL_CORAL_FAN, PETAL_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "petal_coralstone_slab");
-	public static Block BRANCH_CORALSTONE_SLAB           = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {BRANCH_CORAL, BRANCH_CORAL_FAN, BRANCH_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "branch_coralstone_slab");
-	public static Block ROCK_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {ROCK_CORAL, ROCK_CORAL_FAN, ROCK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "rock_coralstone_slab");
-	public static Block PILLOW_CORALSTONE_SLAB           = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {PILLOW_CORAL, PILLOW_CORAL_FAN, PILLOW_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "pillow_coralstone_slab");
-	public static Block SILK_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {SILK_CORAL, SILK_CORAL_FAN, SILK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "silk_coralstone_slab");
-	public static Block PRISMARINE_CORALSTONE_SLAB       = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {PRISMARINE_CORAL, PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_WALL_FAN, PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "prismarine_coralstone_slab");
-	public static Block ELDER_CORALSTONE_SLAB            = new BlockCoralstoneSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "elder_coralstone_slab");
-	public static Block DEAD_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "dead_coralstone_slab");	
+	public static Block CORALSTONE_SLAB                  = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "coralstone_slab");
+	public static Block BUBBLE_CORALSTONE_SLAB           = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "bubble_coralstone_slab");
+	public static Block HORN_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "horn_coralstone_slab");
+	public static Block TUBE_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.TUBE_CORAL, Blocks.TUBE_CORAL_FAN, Blocks.TUBE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "tube_coralstone_slab");
+	public static Block BRAIN_CORALSTONE_SLAB            = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.BRAIN_CORAL, Blocks.BRAIN_CORAL_FAN, Blocks.BRAIN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "brain_coralstone_slab");
+	public static Block FIRE_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.FIRE_CORAL, Blocks.FIRE_CORAL_FAN, Blocks.FIRE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "fire_coralstone_slab");	
+	public static Block ACAN_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {ACAN_CORAL, ACAN_CORAL_FAN, ACAN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "acan_coralstone_slab");
+	public static Block FINGER_CORALSTONE_SLAB           = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {FINGER_CORAL, FINGER_CORAL_FAN, FINGER_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "finger_coralstone_slab");
+	public static Block STAR_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {STAR_CORAL, STAR_CORAL_FAN, STAR_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "star_coralstone_slab");
+	public static Block MOSS_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {MOSS_CORAL, MOSS_CORAL_FAN, MOSS_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "moss_coralstone_slab");
+	public static Block PETAL_CORALSTONE_SLAB            = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {PETAL_CORAL, PETAL_CORAL_FAN, PETAL_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "petal_coralstone_slab");
+	public static Block BRANCH_CORALSTONE_SLAB           = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {BRANCH_CORAL, BRANCH_CORAL_FAN, BRANCH_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "branch_coralstone_slab");
+	public static Block ROCK_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {ROCK_CORAL, ROCK_CORAL_FAN, ROCK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "rock_coralstone_slab");
+	public static Block PILLOW_CORALSTONE_SLAB           = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {PILLOW_CORAL, PILLOW_CORAL_FAN, PILLOW_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "pillow_coralstone_slab");
+	public static Block SILK_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {SILK_CORAL, SILK_CORAL_FAN, SILK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "silk_coralstone_slab");
+	public static Block PRISMARINE_CORALSTONE_SLAB       = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {PRISMARINE_CORAL, PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_WALL_FAN, PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "prismarine_coralstone_slab");
+	public static Block ELDER_CORALSTONE_SLAB            = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "elder_coralstone_slab");
+	public static Block DEAD_CORALSTONE_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "dead_coralstone_slab");	
 	
 	public static Block CORALSTONE_STAIRS                = new BlockCoralstoneStairs(() -> CORALSTONE.getDefaultState(), UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "coralstone_stairs");
 	public static Block BUBBLE_CORALSTONE_STAIRS         = new BlockCoralstoneStairs(() -> BUBBLE_CORALSTONE.getDefaultState(), UAProperties.CORALSTONE, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "bubble_coralstone_stairs");
@@ -364,12 +397,31 @@ public class UABlocks {
 	public static Block THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB  = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "thorny_kelpy_cobblestone_vertical_slab");
 	public static Block OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB   = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "ochre_kelpy_cobblestone_vertical_slab");
 	public static Block POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB   = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "polar_kelpy_cobblestone_vertical_slab");
+	public static Block CORALSTONE_VERTICAL_SLAB                  = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "coralstone_vertical_slab");
+	public static Block BUBBLE_CORALSTONE_VERTICAL_SLAB           = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "bubble_coralstone_vertical_slab");
+	public static Block HORN_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "horn_coralstone_vertical_slab");
+	public static Block TUBE_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.TUBE_CORAL, Blocks.TUBE_CORAL_FAN, Blocks.TUBE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "tube_coralstone_vertical_slab");
+	public static Block BRAIN_CORALSTONE_VERTICAL_SLAB            = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.BRAIN_CORAL, Blocks.BRAIN_CORAL_FAN, Blocks.BRAIN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "brain_coralstone_vertical_slab");
+	public static Block FIRE_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {Blocks.FIRE_CORAL, Blocks.FIRE_CORAL_FAN, Blocks.FIRE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "fire_coralstone_vertical_slab");	
+	public static Block ACAN_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {ACAN_CORAL, ACAN_CORAL_FAN, ACAN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "acan_coralstone_vertical_slab");
+	public static Block FINGER_CORALSTONE_VERTICAL_SLAB           = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {FINGER_CORAL, FINGER_CORAL_FAN, FINGER_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "finger_coralstone_vertical_slab");
+	public static Block STAR_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {STAR_CORAL, STAR_CORAL_FAN, STAR_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "star_coralstone_vertical_slab");
+	public static Block MOSS_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {MOSS_CORAL, MOSS_CORAL_FAN, MOSS_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "moss_coralstone_vertical_slab");
+	public static Block PETAL_CORALSTONE_VERTICAL_SLAB            = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {PETAL_CORAL, PETAL_CORAL_FAN, PETAL_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "petal_coralstone_vertical_slab");
+	public static Block BRANCH_CORALSTONE_VERTICAL_SLAB           = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {BRANCH_CORAL, BRANCH_CORAL_FAN, BRANCH_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "branch_coralstone_vertical_slab");
+	public static Block ROCK_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {ROCK_CORAL, ROCK_CORAL_FAN, ROCK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "rock_coralstone_vertical_slab");
+	public static Block PILLOW_CORALSTONE_VERTICAL_SLAB           = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {PILLOW_CORAL, PILLOW_CORAL_FAN, PILLOW_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "pillow_coralstone_vertical_slab");
+	public static Block SILK_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {SILK_CORAL, SILK_CORAL_FAN, SILK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "silk_coralstone_vertical_slab");
+	public static Block PRISMARINE_CORALSTONE_VERTICAL_SLAB       = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, new Block[] {PRISMARINE_CORAL, PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_WALL_FAN, PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "prismarine_coralstone_vertical_slab");
+	public static Block ELDER_CORALSTONE_VERTICAL_SLAB            = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "elder_coralstone_vertical_slab");
+	public static Block DEAD_CORALSTONE_VERTICAL_SLAB             = new BlockCoralstoneVerticalSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "dead_coralstone_vertical_slab");	
 	
 	public static final Map<Block, Block> CORALSTONE_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CHISELED_CORALSTONE_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CORALSTONE_SLAB_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CORALSTONE_STAIRS_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CORALSTONE_WALL_CONVERSION_MAP = Maps.newHashMap();
+	public static final Map<Block, Block> CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP = Maps.newHashMap();
 	
 	static {
 		CORALSTONE_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CORALSTONE);
@@ -450,6 +502,22 @@ public class UABlocks {
 		CORALSTONE_WALL_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_CORALSTONE_WALL);
 		CORALSTONE_WALL_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_CORALSTONE_WALL);
 		CORALSTONE_WALL_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CORALSTONE_WALL);
+		
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(Blocks.HORN_CORAL_BLOCK, HORN_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(Blocks.TUBE_CORAL_BLOCK, TUBE_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(Blocks.BRAIN_CORAL_BLOCK, BRAIN_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(Blocks.FIRE_CORAL_BLOCK, FIRE_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(ACAN_CORAL_BLOCK, ACAN_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(FINGER_CORAL_BLOCK, FINGER_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(STAR_CORAL_BLOCK, STAR_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(MOSS_CORAL_BLOCK, MOSS_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(PETAL_CORAL_BLOCK, PETAL_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(BRANCH_CORAL_BLOCK, BRANCH_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(ROCK_CORAL_BLOCK, ROCK_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_CORALSTONE_VERTICAL_SLAB);
+		CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CORALSTONE_VERTICAL_SLAB);
 	}
 	
 	public static enum KelpType {
@@ -515,7 +583,8 @@ public class UABlocks {
 				DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_BOOKSHELF, DRIFTWOOD_LADDER, DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_VERTICAL_PLANKS,
 				BEACHGRASS_THATCH_VERTICAL_SLAB,
 				TOOTH_VERTICAL_SLAB,
-				KELPY_COBBLESTONE_VERTICAL_SLAB, TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB, OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB, THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB, POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB
+				KELPY_COBBLESTONE_VERTICAL_SLAB, TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB, OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB, THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB, POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB,
+				CORALSTONE_VERTICAL_SLAB, BUBBLE_CORALSTONE_VERTICAL_SLAB, HORN_CORALSTONE_VERTICAL_SLAB, TUBE_CORALSTONE_VERTICAL_SLAB, BRAIN_CORALSTONE_VERTICAL_SLAB, FIRE_CORALSTONE_VERTICAL_SLAB, ACAN_CORALSTONE_VERTICAL_SLAB, FINGER_CORALSTONE_VERTICAL_SLAB, STAR_CORALSTONE_VERTICAL_SLAB, MOSS_CORALSTONE_VERTICAL_SLAB, PETAL_CORALSTONE_VERTICAL_SLAB, BRANCH_CORALSTONE_VERTICAL_SLAB, ROCK_CORALSTONE_VERTICAL_SLAB, PILLOW_CORALSTONE_VERTICAL_SLAB, SILK_CORALSTONE_VERTICAL_SLAB, PRISMARINE_CORALSTONE_VERTICAL_SLAB, ELDER_CORALSTONE_VERTICAL_SLAB, DEAD_CORALSTONE_VERTICAL_SLAB
 			);
 		//}
 	}
@@ -809,7 +878,25 @@ public class UABlocks {
 				RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 	
 				RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 
 				RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 	
-				RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS)				
+				RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 	
+				RegistryUtils.createSimpleItemBlock(BUBBLE_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(HORN_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(TUBE_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(BRAIN_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(FIRE_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),	
+				RegistryUtils.createSimpleItemBlock(ACAN_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(FINGER_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(STAR_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(MOSS_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(PETAL_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(BRANCH_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(ROCK_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(PILLOW_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(SILK_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(PRISMARINE_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(ELDER_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(DEAD_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS)
 			);
 		//}
 	}
