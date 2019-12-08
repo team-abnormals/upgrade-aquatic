@@ -27,7 +27,7 @@
                 },
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "upgrade_aquatic:beachgrass",
+                  "block": "upgrade_aquatic:tall_beachgrass",
                   "properties": {
                     "half": "lower"
                   }
