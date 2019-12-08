@@ -1,4 +1,4 @@
-﻿{
+{
   "_comment": "Блоки",
 
   "block.upgrade_aquatic.guardian_spine": "Шип стража",
@@ -156,7 +156,7 @@
   "block.upgrade_aquatic.pillow_coralstone": "Подушечный коралло-камень",
   "block.upgrade_aquatic.silk_coralstone": "Шелковистый коралло-камень",
   "block.upgrade_aquatic.prismarine_coralstone": "Призмариновый коралло-камень",
-  "block.upgrade_aquatic.elder_coralstone": "Древний призмариновый коралло-камень",
+  "block.upgrade_aquatic.elder_prismarine_coralstone": "Древний призмариновый коралло-камень",
   "block.upgrade_aquatic.dead_coralstone": "Мертвый коралло-камень",
   
   "block.upgrade_aquatic.chiseled_coralstone": "Резной коралло-камень",
@@ -194,7 +194,7 @@
   "block.upgrade_aquatic.pillow_coralstone_slab": "Плита из подушечного коралло-камня",
   "block.upgrade_aquatic.silk_coralstone_slab": "Плита из шелковистого коралло-камня",
   "block.upgrade_aquatic.prismarine_coralstone_slab": "Плита из призмаринового коралло-камня",
-  "block.upgrade_aquatic.elder_coralstone_slab": "Плита из древнего призмаринового коралло-камня",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_slab": "Плита из древнего призмаринового коралло-камня",
   "block.upgrade_aquatic.dead_coralstone_slab": "Плита из мертвого коралло-камня",
   
   "block.upgrade_aquatic.coralstone_stairs": "Ступеньки из коралло-камня",
@@ -232,7 +232,7 @@
   "block.upgrade_aquatic.pillow_coralstone_wall": "Ограда из подушечного коралло-камня",
   "block.upgrade_aquatic.silk_coralstone_wall": "Ограда из шелковистого коралло-камня",
   "block.upgrade_aquatic.prismarine_coralstone_wall": "Ограда из призмаринового коралло-камня",
-  "block.upgrade_aquatic.elder_coralstone_wall": "Ограда из древнего призмаринового коралло-камня",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_wall": "Ограда из древнего призмаринового коралло-камня",
   "block.upgrade_aquatic.dead_coralstone_wall": "Ограда из мертвого коралло-камня",
   
   "block.upgrade_aquatic.tooth_block": "Зубной блок",

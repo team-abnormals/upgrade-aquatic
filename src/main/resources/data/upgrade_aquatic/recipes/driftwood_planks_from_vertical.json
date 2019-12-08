@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "upgrade_aquatic",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:driftwood_vertical_planks"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:driftwood_planks"
+  }
+}

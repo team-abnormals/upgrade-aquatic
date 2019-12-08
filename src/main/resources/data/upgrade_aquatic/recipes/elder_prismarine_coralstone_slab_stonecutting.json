@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:elder_prismarine_coralstone"
+  },
+  "result": "upgrade_aquatic:elder_prismarine_coralstone_slab",
+  "count": 2
+}

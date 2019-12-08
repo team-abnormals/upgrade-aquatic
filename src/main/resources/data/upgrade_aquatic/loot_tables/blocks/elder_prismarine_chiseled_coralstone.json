@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "upgrade_aquatic:elder_chiseled_coralstone"
+          "name": "upgrade_aquatic:elder_prismarine_chiseled_coralstone"
         }
       ],
       "conditions": [
