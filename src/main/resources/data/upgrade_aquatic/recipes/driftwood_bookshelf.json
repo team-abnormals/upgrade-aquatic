@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": {
-      "tag": "upgrade_aquatic:driftwood_planks"
+      "item": "upgrade_aquatic:driftwood_planks"
     },
     "X": {
       "item": "minecraft:book"
