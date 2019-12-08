@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.render.gui;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 import net.minecraft.client.Minecraft;
@@ -8,6 +9,7 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.stats.StatisticsManager;
@@ -19,6 +21,7 @@ import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.ForgeIngameGui;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -135,6 +138,18 @@ public class RenderOverlays {
 					
 					GlStateManager.disableBlend();
 					GlStateManager.popMatrix();
+				}
+			}
+		} else if(event.getType() == ElementType.HEALTHMOUNT) {
+			if(MC.player.isPassenger()) {
+				if(MC.player.getRidingEntity() instanceof EntityThrasher) {
+					event.setCanceled(true);
+				}
+			}
+		} else if(event.getType() == ElementType.TEXT) {
+			if(MC.player.isPassenger()) {
+				if(MC.ingameGUI.overlayMessage == I18n.format("mount.onboard", MC.gameSettings.keyBindSneak.getLocalizedName()) && MC.player.getRidingEntity() instanceof EntityThrasher) {
+					MC.ingameGUI.setOverlayMessage("", false);
 				}
 			}
 		}

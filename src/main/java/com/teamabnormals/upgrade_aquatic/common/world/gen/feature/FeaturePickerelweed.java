@@ -179,7 +179,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
 				if(ModList.get().isLoaded("bloomful")) {
 					ForgeRegistries.BIOMES.getValue(new ResourceLocation("bloomful:wisteria_forest")).getFeatures(Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
-					ForgeRegistries.BIOMES.getValue(new ResourceLocation("bloomful:wisteria_forest_hills")).getFeatures(Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
+					//ForgeRegistries.BIOMES.getValue(new ResourceLocation("bloomful:wisteria_forest_hills")).getFeatures(Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
 				}
 			}
 		}

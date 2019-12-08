@@ -1,0 +1,7 @@
+{
+    "parent": "block/ladder",
+    "textures": {
+        "particle": "upgrade_aquatic:block/driftwood_ladder",
+        "texture": "upgrade_aquatic:block/driftwood_ladder"
+    }
+}
