@@ -1,6 +1,6 @@
 {
     "parent": "block/template_wall_post",
     "textures": {
-        "wall": "upgrade_aquatic:block/elder_coralstone"
+        "wall": "upgrade_aquatic:block/elder_prismarine_coralstone"
     }
 }

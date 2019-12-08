@@ -156,7 +156,7 @@
   "block.upgrade_aquatic.pillow_coralstone": "Pillow Coralstone",
   "block.upgrade_aquatic.silk_coralstone": "Silk Coralstone",
   "block.upgrade_aquatic.prismarine_coralstone": "Prismarine Coralstone",
-  "block.upgrade_aquatic.elder_coralstone": "Elder Prismarine Coralstone",
+  "block.upgrade_aquatic.elder_prismarine_coralstone": "Elder Prismarine Coralstone",
   "block.upgrade_aquatic.dead_coralstone": "Dead Coralstone",
   
   "block.upgrade_aquatic.chiseled_coralstone": "Chiseled Coralstone",
@@ -194,7 +194,7 @@
   "block.upgrade_aquatic.pillow_coralstone_slab": "Pillow Coralstone Slab",
   "block.upgrade_aquatic.silk_coralstone_slab": "Silk Coralstone Slab",
   "block.upgrade_aquatic.prismarine_coralstone_slab": "Prismarine Coralstone Slab",
-  "block.upgrade_aquatic.elder_coralstone_slab": "Elder Prismarine Coralstone Slab",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_slab": "Elder Prismarine Coralstone Slab",
   "block.upgrade_aquatic.dead_coralstone_slab": "Dead Coralstone Slab",
   
   "block.upgrade_aquatic.coralstone_stairs": "Coralstone Stairs",
@@ -213,7 +213,7 @@
   "block.upgrade_aquatic.pillow_coralstone_stairs": "Pillow Coralstone Stairs",
   "block.upgrade_aquatic.silk_coralstone_stairs": "Silk Coralstone Stairs",
   "block.upgrade_aquatic.prismarine_coralstone_stairs": "Prismarine Coralstone Stairs",
-  "block.upgrade_aquatic.elder_coralstone_stairs": "Elder Prismarine Coralstone Stairs",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_stairs": "Elder Prismarine Coralstone Stairs",
   "block.upgrade_aquatic.dead_coralstone_stairs": "Dead Coralstone Stairs",
   
   "block.upgrade_aquatic.coralstone_wall": "Coralstone Wall",
@@ -232,7 +232,7 @@
   "block.upgrade_aquatic.pillow_coralstone_wall": "Pillow Coralstone Wall",
   "block.upgrade_aquatic.silk_coralstone_wall": "Silk Coralstone Wall",
   "block.upgrade_aquatic.prismarine_coralstone_wall": "Prismarine Coralstone Wall",
-  "block.upgrade_aquatic.elder_coralstone_wall": "Elder Prismarine Coralstone Wall",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_wall": "Elder Prismarine Coralstone Wall",
   "block.upgrade_aquatic.dead_coralstone_wall": "Dead Coralstone Wall",
   
   "block.upgrade_aquatic.tooth_block": "Tooth Block",
