@@ -1,0 +1,8 @@
+{
+    "parent": "upgrade_aquatic:block/vertical_slab",
+    "textures": {
+        "side": "upgrade_aquatic:block/ochre_kelpy_cobblestone",
+        "top": "upgrade_aquatic:block/ochre_kelpy_cobblestone",
+        "bottom": "upgrade_aquatic:block/ochre_kelpy_cobblestone"
+    }
+}
