@@ -33,7 +33,7 @@
                   "condition": "minecraft:survives_explosion"
                 }
               ],
-              "name": "upgrade_aquatic:elder_coralstone"
+              "name": "upgrade_aquatic:elder_prismarine_coralstone"
             }
           ]
         }

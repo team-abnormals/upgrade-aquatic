@@ -256,7 +256,7 @@ public class UABlocks {
 	public static Block PILLOW_CHISELED_CORALSTONE       = new BlockCoralstone(UAProperties.CORALSTONE, true, new Block[] {PILLOW_CORAL, PILLOW_CORAL_FAN, PILLOW_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "pillow_chiseled_coralstone");
 	public static Block SILK_CHISELED_CORALSTONE         = new BlockCoralstone(UAProperties.CORALSTONE, true, new Block[] {SILK_CORAL, SILK_CORAL_FAN, SILK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "silk_chiseled_coralstone");
 	public static Block PRISMARINE_CHISELED_CORALSTONE   = new BlockCoralstone(UAProperties.CORALSTONE, true, new Block[] {PRISMARINE_CORAL, PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_WALL_FAN, PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "prismarine_chiseled_coralstone");
-	public static Block ELDER_PRISMARINE_CHISELED_CORALSTONE = new BlockCoralstone(UAProperties.CORALSTONE, true).setRegistryName(Reference.MODID, "elder_chiseled_coralstone");
+	public static Block ELDER_PRISMARINE_CHISELED_CORALSTONE = new BlockCoralstone(UAProperties.CORALSTONE, true).setRegistryName(Reference.MODID, "elder_prismarine_chiseled_coralstone");
 	public static Block DEAD_CHISELED_CORALSTONE         = new BlockCoralstone(UAProperties.CORALSTONE, true).setRegistryName(Reference.MODID, "dead_chiseled_coralstone");
     
 	public static Block CORALSTONE_SLAB                  = new BlockCoralstoneSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "coralstone_slab");
