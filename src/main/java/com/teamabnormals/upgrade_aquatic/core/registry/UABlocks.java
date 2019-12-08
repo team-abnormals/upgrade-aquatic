@@ -353,10 +353,17 @@ public class UABlocks {
 	/*
 	 * Quark Compat
 	 */
+	public static Block DRIFTWOOD_VERTICAL_PLANKS         = new BlockDriftwoodPlanks(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_vertical_planks");
 	public static Block DRIFTWOOD_VERTICAL_SLAB        = new BlockVerticalSlab(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_vertical_slab");
 	public static Block DRIFTWOOD_BOOKSHELF            = new BlockUABookshelf(Properties.from(Blocks.BOOKSHELF)).setRegistryName(Reference.MODID, "driftwood_bookshelf");
 	public static Block DRIFTWOOD_LADDER               = new BlockUALadder(Properties.from(Blocks.LADDER)).setRegistryName(Reference.MODID, "driftwood_ladder");
 	public static Block BEACHGRASS_THATCH_VERTICAL_SLAB = new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH)).setRegistryName(Reference.MODID, "beachgrass_thatch_vertical_slab");
+	public static Block TOOTH_VERTICAL_SLAB            = new BlockVerticalSlab(Properties.from(TOOTH_BLOCK)).setRegistryName(Reference.MODID, "tooth_vertical_slab");
+	public static Block KELPY_COBBLESTONE_VERTICAL_SLAB         = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone_vertical_slab");
+	public static Block TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB  = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone_vertical_slab");
+	public static Block THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB  = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "thorny_kelpy_cobblestone_vertical_slab");
+	public static Block OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB   = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "ochre_kelpy_cobblestone_vertical_slab");
+	public static Block POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB   = new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "polar_kelpy_cobblestone_vertical_slab");
 	
 	public static final Map<Block, Block> CORALSTONE_CONVERSION_MAP = Maps.newHashMap();
 	public static final Map<Block, Block> CHISELED_CORALSTONE_CONVERSION_MAP = Maps.newHashMap();
@@ -506,7 +513,9 @@ public class UABlocks {
 		//if(ModList.get().isLoaded("Quark")) {
 			event.getRegistry().registerAll(
 				DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_BOOKSHELF, DRIFTWOOD_LADDER,
-				BEACHGRASS_THATCH_VERTICAL_SLAB
+				BEACHGRASS_THATCH_VERTICAL_SLAB,
+				TOOTH_VERTICAL_SLAB,
+				KELPY_COBBLESTONE_VERTICAL_SLAB, TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB, OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB, THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB, POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB, 
 			);
 		//}
 	}
@@ -790,8 +799,17 @@ public class UABlocks {
 		 */
 		//if(ModList.get().isLoaded("Quark")) {
 			event.getRegistry().registerAll(
-				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), RegistryUtils.createSimpleItemBlock(DRIFTWOOD_BOOKSHELF, ItemGroup.BUILDING_BLOCKS), RegistryUtils.createSimpleItemBlock(DRIFTWOOD_LADDER, ItemGroup.DECORATIONS),
-				RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS)
+				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 
+				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_BOOKSHELF, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_VERTICAL_PLANKS, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_LADDER, ItemGroup.DECORATIONS),
+				RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
+				RegistryUtils.createSimpleItemBlock(TOOTH_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),		
+				RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 
+				RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 	
+				RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 
+				RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 	
+				RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS)				
 			);
 		//}
 	}
