@@ -580,7 +580,7 @@ public class UABlocks {
 		/*
 		 * Compat
 		 */
-		if(ModList.get().isLoaded("Quark")) {
+		if(ModList.get().isLoaded("quark")) {
 			event.getRegistry().registerAll(
 				DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_BOOKSHELF, DRIFTWOOD_LADDER, DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_VERTICAL_PLANKS,
 				BEACHGRASS_THATCH_VERTICAL_SLAB,
@@ -868,7 +868,7 @@ public class UABlocks {
 		/*
 		 * Compat
 		 */
-		if(ModList.get().isLoaded("Quark")) {
+		if(ModList.get().isLoaded("quark")) {
 			event.getRegistry().registerAll(
 				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 
 				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_BOOKSHELF, ItemGroup.BUILDING_BLOCKS),
