@@ -148,7 +148,8 @@ public class RenderOverlays {
 			}
 		} else if(event.getType() == ElementType.TEXT) {
 			if(MC.player.isPassenger()) {
-				if(MC.ingameGUI.overlayMessage == I18n.format("mount.onboard", MC.gameSettings.keyBindSneak.getLocalizedName()) && MC.player.getRidingEntity() instanceof EntityThrasher) {
+				String formattedMessage = I18n.format("mount.onboard", MC.gameSettings.keyBindSneak.getLocalizedName());
+				if(MC.ingameGUI.overlayMessage.equals(formattedMessage) && MC.player.getRidingEntity() instanceof EntityThrasher) {
 					MC.ingameGUI.setOverlayMessage("", false);
 				}
 			}
