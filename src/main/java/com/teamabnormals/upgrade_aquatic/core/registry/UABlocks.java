@@ -66,6 +66,7 @@ import net.minecraft.item.Rarity;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -579,7 +580,7 @@ public class UABlocks {
 		/*
 		 * Compat
 		 */
-		//if(ModList.get().isLoaded("Quark")) {
+		if(ModList.get().isLoaded("Quark")) {
 			event.getRegistry().registerAll(
 				DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_BOOKSHELF, DRIFTWOOD_LADDER, DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_VERTICAL_PLANKS,
 				BEACHGRASS_THATCH_VERTICAL_SLAB,
@@ -587,7 +588,7 @@ public class UABlocks {
 				KELPY_COBBLESTONE_VERTICAL_SLAB, TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB, OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB, THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB, POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB,
 				CORALSTONE_VERTICAL_SLAB, BUBBLE_CORALSTONE_VERTICAL_SLAB, HORN_CORALSTONE_VERTICAL_SLAB, TUBE_CORALSTONE_VERTICAL_SLAB, BRAIN_CORALSTONE_VERTICAL_SLAB, FIRE_CORALSTONE_VERTICAL_SLAB, ACAN_CORALSTONE_VERTICAL_SLAB, FINGER_CORALSTONE_VERTICAL_SLAB, STAR_CORALSTONE_VERTICAL_SLAB, MOSS_CORALSTONE_VERTICAL_SLAB, PETAL_CORALSTONE_VERTICAL_SLAB, BRANCH_CORALSTONE_VERTICAL_SLAB, ROCK_CORALSTONE_VERTICAL_SLAB, PILLOW_CORALSTONE_VERTICAL_SLAB, SILK_CORALSTONE_VERTICAL_SLAB, PRISMARINE_CORALSTONE_VERTICAL_SLAB, ELDER_PRISMARINE_CORALSTONE_VERTICAL_SLAB, DEAD_CORALSTONE_VERTICAL_SLAB
 			);
-		//}
+		}
 	}
 	
 	@SubscribeEvent
@@ -867,7 +868,7 @@ public class UABlocks {
 		/*
 		 * Compat
 		 */
-		//if(ModList.get().isLoaded("Quark")) {
+		if(ModList.get().isLoaded("Quark")) {
 			event.getRegistry().registerAll(
 				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 
 				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_BOOKSHELF, ItemGroup.BUILDING_BLOCKS),
@@ -899,6 +900,6 @@ public class UABlocks {
 				RegistryUtils.createSimpleItemBlock(ELDER_PRISMARINE_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
 				RegistryUtils.createSimpleItemBlock(DEAD_CORALSTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS)
 			);
-		//}
+		}
 	}
 }
