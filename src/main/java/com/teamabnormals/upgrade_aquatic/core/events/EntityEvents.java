@@ -115,7 +115,8 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onPlayerRiding(EntityMountEvent event) {
 		Entity mountingEntity = event.getEntityMounting();
-		if(mountingEntity instanceof PlayerEntity && event.isDismounting() && event.getEntityBeingMounted() instanceof EntityThrasher) {
+		Entity entityBeingMounted = event.getEntityBeingMounted();
+		if(mountingEntity instanceof PlayerEntity && event.isDismounting() && entityBeingMounted instanceof EntityThrasher && ((EntityThrasher)entityBeingMounted).isAlive()) {
 			if(!((PlayerEntity)mountingEntity).isCreative() && !((PlayerEntity)mountingEntity).isSpectator() && ((PlayerEntity)mountingEntity).getHealth() > 0.0F) {
 				event.setCanceled(true);
 			}
