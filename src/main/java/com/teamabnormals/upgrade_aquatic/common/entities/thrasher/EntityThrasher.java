@@ -6,12 +6,11 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import javax.vecmath.Vector3f;
 
+import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
 import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
@@ -72,6 +71,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	public static final	Endimation SNAP_AT_PRAY_ANIMATION = new Endimation(10);
 	public static final	Endimation HURT_ANIMATION = new Endimation(10);
 	public static final Endimation THRASH_ANIMATION = new Endimation(55);
+	public final ControlledEndimation STUNNED_ANIMATION = new ControlledEndimation(10, 10);
 	protected int ticksSinceLastSonar;
 	public int sonarTicks;
 	protected float prevTailAnimation;
@@ -253,6 +253,9 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 							difficultyDividend = 16;
 							break;
     				}
+    				if((int) amount == 0) {
+    					amount = 1;
+    				}
     				int chance = amount >= 6 ? 1 : difficultyDividend / (int) amount;
     				if(this.getRNG().nextInt(chance) == 0) {
     					this.setHitsTillStun(this.getHitsLeftTillStun() - 1);
@@ -382,9 +385,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void livingTick() {
 		if(this.isAlive()) {
-			if (this.world.isRemote) {
+			if(this.world.isRemote) {
 				this.prevTailAnimation = this.tailAnimation;
 				this.prevFinAnimation = this.finAnimation;
+				this.STUNNED_ANIMATION.update();
+				
 				if(!this.isInWater() || this.isAnimationPlaying(THRASH_ANIMATION)) {
 					this.tailSpeed = 1.1F;
 					this.finSpeed = 0.875F;
@@ -404,6 +409,25 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 					this.tailSpeed += (0.125F - this.tailSpeed) * 0.1F;
 					this.finSpeed += (0.01125F - this.finSpeed) * 0.05F;
 				}
+				
+				if(this.isStunned()) {
+					if(this.STUNNED_ANIMATION.getCurrentValue() >= 10) {
+						this.STUNNED_ANIMATION.manipulateTimer(true);
+					} else {
+						if(this.STUNNED_ANIMATION.shouldDecrement && this.STUNNED_ANIMATION.getCurrentValue() <= 0) {
+							this.STUNNED_ANIMATION.manipulateTimer(false);
+						}
+					}
+				} else {
+					if(this.STUNNED_ANIMATION.getCurrentValue() == 10) {
+						this.STUNNED_ANIMATION.setTimerToStop(true);
+					}
+					
+					this.STUNNED_ANIMATION.manipulateTimer(false);
+				}
+				
+				this.STUNNED_ANIMATION.updateTimerValues();
+				
 				this.tailAnimation += this.tailSpeed;
 				this.finAnimation += this.finSpeed;
 			}

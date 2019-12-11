@@ -140,13 +140,8 @@ public class RenderOverlays {
 					GlStateManager.popMatrix();
 				}
 			}
-		} else if(event.getType() == ElementType.HEALTHMOUNT) {
-			if(MC.player.isPassenger()) {
-				if(MC.player.getRidingEntity() instanceof EntityThrasher) {
-					event.setCanceled(true);
-				}
-			}
-		} else if(event.getType() == ElementType.TEXT) {
+		}
+		if(event.getType() == ElementType.TEXT) {
 			if(MC.player.isPassenger()) {
 				String formattedMessage = I18n.format("mount.onboard", MC.gameSettings.keyBindSneak.getLocalizedName());
 				if(MC.ingameGUI.overlayMessage.equals(formattedMessage) && MC.player.getRidingEntity() instanceof EntityThrasher) {
