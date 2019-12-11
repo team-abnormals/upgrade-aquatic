@@ -23,7 +23,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 				return false;
 			}
 		}
-		return super.shouldExecute() && thrasher.getPassengers().isEmpty();
+		return !this.thrasher.isStunned() && super.shouldExecute() && thrasher.getPassengers().isEmpty();
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 				return false;
 			}
 		}
-		return super.shouldContinueExecuting() && thrasher.getPassengers().isEmpty();
+		return !this.thrasher.isStunned() && super.shouldContinueExecuting() && thrasher.getPassengers().isEmpty();
 	}
 	
 	@Override
