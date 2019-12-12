@@ -355,7 +355,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 					this.attackEntityFrom(DamageSource.DRYOUT, 1.0F);
 				}
 
-				if(this.onGround) {
+				if(this.onGround && !this.isStunned()) {
 					this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F), 0.5D, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F)));
 					this.rotationYaw = this.rand.nextFloat() * 360.0F;
 					this.rotationPitch = this.rand.nextFloat() * -50.0F;
