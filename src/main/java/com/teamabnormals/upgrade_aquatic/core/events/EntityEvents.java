@@ -153,12 +153,11 @@ public class EntityEvents {
 		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.NAUTILUS_BUCKET.get(), 5, 1, 4, 1));
 	}
 	
-/*	@SubscribeEvent
+	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-    if(event.getType() == VillagerProfession.FISHERMAN) {
-        event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.PIKE, 8, 1, 5, 15));			
+    		if(event.getType() == VillagerProfession.FISHERMAN) {
+        		event.getTrades().get(3).add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.PIKE, 8, 1, 5, 15));			
+        		event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.LIONFISH, 1, 1, 5, 0));		
+		}
 	}
-    if(event.getType() == VillagerProfession.FISHERMAN) {
-        event.getTrades().get(8).add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.LIONFISH, 1, 1, 5, 0));		
-	} */ 
 }
