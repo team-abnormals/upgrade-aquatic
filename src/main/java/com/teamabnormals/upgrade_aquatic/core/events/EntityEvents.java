@@ -156,8 +156,16 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
     		if(event.getType() == VillagerProfession.FISHERMAN) {
-        		event.getTrades().get(3).add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.PIKE.get(), 8, 1, 5, 15));			
-        		event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.LIONFISH.get(), 1, 1, 5, 0));		
+        		event.getTrades().get(3).add(new EntityUtil.ItemsForEmeraldsAndItemsTrade(UAItems.PIKE.get(), 6, UAItems.PIKE_COOKED.get(), 6, 16, 15));
+			event.getTrades().get(4).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.PIKE.get(), 9, 1, 12, 25));	
+        		event.getTrades().get(4).add(new EntityUtil.ItemsForEmeraldsAndItemsTrade(UAItems.LIONFISH.get(), 6, UAItems.LIONIFISH_COOKED.get(), 6, 16, 30));
+			event.getTrades().get(5).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.LIONFISH.get(), 5, 1, 12, 30));	
+		}
+		if(event.getType() == VillagerProfession.MASON) {
+        		event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.EMBEDDED_AMMONITE, 5, 1, 5, 30));	
+		}
+		if(event.getType() == VillagerProfession.CLERIC) {
+        		event.getTrades().get(4).add(new EntityUtil.EmeraldsForItemsTradeTrade(UAItems.THRASHER_TOOTH.get(), 2, 1, 12, 15));	
 		}
 	}
 }
