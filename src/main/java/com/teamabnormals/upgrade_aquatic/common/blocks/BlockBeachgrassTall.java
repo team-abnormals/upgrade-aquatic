@@ -9,6 +9,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.IGrowable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -16,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShearsItem;
 import net.minecraft.state.EnumProperty;
-import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
@@ -34,14 +34,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BlockBeachgrassTall extends Block {
+public class BlockBeachgrassTall extends Block implements IGrowable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-	public static final IntegerProperty STAGE = BlockStateProperties.STAGE_0_1;
-
+	
 	public BlockBeachgrassTall(Block.Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(STAGE, 0).with(HALF, DoubleBlockHalf.LOWER));
+		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER));
 	}
 	
 	@Override
@@ -55,7 +54,7 @@ public class BlockBeachgrassTall extends Block {
 	
 	@Override
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-		return state.get(STAGE) > 0 ? false : true;
+		return false;
 	}
 	
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
@@ -120,7 +119,7 @@ public class BlockBeachgrassTall extends Block {
 	}
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HALF, STAGE);
+		builder.add(HALF);
 	}
 	
 	public BlockRenderLayer getRenderLayer() {
@@ -138,5 +137,37 @@ public class BlockBeachgrassTall extends Block {
 	@OnlyIn(Dist.CLIENT)
 	public long getPositionRandom(BlockState state, BlockPos pos) {
 		return MathHelper.getCoordinateRandom(pos.getX(), pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+	}
+	
+	@Override
+	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+		return true;
+	}
+
+	@Override
+	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+		return true;
+	}
+	
+	@Override
+	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
+		if(!worldIn.isRemote) {
+			BlockState blockstate = UABlocks.BEACHGRASS.getDefaultState();
+			cont:
+			for(int i = 0; i < 128; ++i) {
+				BlockPos blockpos = pos;
+				
+				for(int j = 0; j < i / 16; j++) {
+					blockpos = blockpos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
+					if(Block.isOpaque(worldIn.getBlockState(blockpos).getCollisionShape(worldIn, blockpos))) {
+						continue cont;
+					}
+				}
+				
+				if(blockstate.isValidPosition(worldIn, blockpos) && worldIn.isAirBlock(blockpos) && rand.nextFloat() <= 0.10F) {
+					worldIn.setBlockState(blockpos, blockstate);
+				}
+			}
+		}
 	}
 }
