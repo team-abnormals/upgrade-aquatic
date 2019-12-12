@@ -30,7 +30,7 @@ public class RenderOverlays {
 	private static final Minecraft MC = Minecraft.getInstance();
 	
 	@SubscribeEvent
-	public static void renderInsomniaOverlay(RenderGameOverlayEvent event) {
+	public static void renderOverlays(RenderGameOverlayEvent event) {
 		if (event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE) {
 			int scaledWidth = MC.mainWindow.getScaledWidth();
 			int scaledHeight = MC.mainWindow.getScaledHeight();
