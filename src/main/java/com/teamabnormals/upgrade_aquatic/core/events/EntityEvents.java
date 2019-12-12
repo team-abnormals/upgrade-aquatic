@@ -170,5 +170,24 @@ public class EntityEvents {
 		if(event.getType() == VillagerProfession.CLERIC) {
 			event.getTrades().get(4).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.THRASHER_TOOTH.get(), 2, 1, 12, 15));	
 		}
+		if(event.getType() == VillagerProfession.LEATHERWORKER) {
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_LEATHER, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_WHITE, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_ORANGE, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_MAGENTA, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_LIGHT_BLUE, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_YELLOW, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_LIME, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_PINK, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_GRAY, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_LIGHT_GRAY, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_CYAN, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_PURPLE, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_BLUE, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_BROWN, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_GREEN, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_RED, 1, 1, 8, 10));
+			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_BLACK, 1, 1, 8, 10));
+		}
     }
 }
