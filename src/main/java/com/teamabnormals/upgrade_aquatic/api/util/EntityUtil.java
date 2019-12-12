@@ -20,10 +20,10 @@ public class EntityUtil {
 	 * Builder Class for Basic Emerald Trading
 	 */
 	public static class ItemsForEmeraldsTrade implements ITrade {
-		private final ItemStack itemstack;
-		private final int stackSize;
-		private final int recievedSize;
-		private final int maxUses;
+	    private final ItemStack itemstack;
+	    private final int stackSize;
+	    private final int recievedSize;
+    	    private final int maxUses;
 	    private final int givenExp;
 	    private final float priceMultiplier;
 	    
@@ -58,12 +58,12 @@ public class EntityUtil {
 	}
 	
 	static class EmeraldsForItemsTrade implements ITrade {
-		private final ItemStack itemstack;
-		private final int stackSize;
-		private final int recievedSize;
-		private final int maxUses;
-		private final int givenExp;
-		private final float priceMultiplier;
+	    private final ItemStack itemstack;
+	    private final int stackSize;
+	    private final int recievedSize;
+	    private final int maxUses;
+	    private final int givenExp;
+	    private final float priceMultiplier;
 		
 	    public EmeraldsForItemsTrade(Block block, int stackSize, int recievedSize, int maxUses, int givenExp) {
 	    	this(new ItemStack(block), stackSize, recievedSize, maxUses, givenExp);
@@ -81,18 +81,18 @@ public class EntityUtil {
 	    	this(stack, stackSize, recievedSize, maxUses, givenExp, 0.05F);
 	    }
 	    
-		public EmeraldsForItemsTrade(ItemStack stack, int stackSize, int recievedSize, int maxUses, int givenExp, float priceMultiplier) {
-		   	this.itemstack = stack;
-		   	this.stackSize = stackSize;
-		   	this.recievedSize = recievedSize;
-		   	this.maxUses = maxUses;
-		   	this.givenExp = givenExp;
-		   	this.priceMultiplier = priceMultiplier;
-		}
+	    public EmeraldsForItemsTrade(ItemStack stack, int stackSize, int recievedSize, int maxUses, int givenExp, float priceMultiplier) {
+		this.itemstack = stack;
+	        this.stackSize = stackSize;
+		this.recievedSize = recievedSize;
+     	        this.maxUses = maxUses;
+	   	this.givenExp = givenExp;
+		this.priceMultiplier = priceMultiplier;
+	    }
 
-		public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
-		  	return new MerchantOffer(new ItemStack(this.itemstack.getItem(), this.stackSize), new ItemStack(Items.EMERALD, this.recievedSize), this.maxUses, this.givenExp, this.priceMultiplier);
-		}
+	    public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
+	  	return new MerchantOffer(new ItemStack(this.itemstack.getItem(), this.stackSize), new ItemStack(Items.EMERALD, this.recievedSize), this.maxUses, this.givenExp, this.priceMultiplier);
+	    }
 	}
 	
 	static class ItemsForEmeraldsAndItemsTrade implements ITrade {
@@ -101,9 +101,9 @@ public class EntityUtil {
 	    private final int emeraldCount;
 	    private final ItemStack sellingItem;
 	    private final int sellingItemCount;
-		private final int maxUses;
-		private final int givenExp;
-		private final float priceMultiplier;
+	    private final int maxUses;
+	    private final int givenExp;
+	    private final float priceMultiplier;
 	    
 	    public ItemsForEmeraldsAndItemsTrade(Item item, int stackSize, Item item2, int recievedSize, int maxUses, int givenExp) {
 	       this(new ItemStack(item), stackSize, 1, new ItemStack(item2), recievedSize, maxUses, givenExp, 0.05F);
@@ -123,6 +123,6 @@ public class EntityUtil {
 	    public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
 	    	return new MerchantOffer(new ItemStack(Items.EMERALD, this.emeraldCount), new ItemStack(this.buyingItem.getItem(), this.buyingItemCount), new ItemStack(this.sellingItem.getItem(), this.sellingItemCount), this.maxUses, this.givenExp, this.priceMultiplier);
 	    }
-	}
+      }
 }
 
