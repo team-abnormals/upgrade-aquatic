@@ -23,7 +23,7 @@ public class EntityUtil {
 	    private final ItemStack itemstack;
 	    private final int stackSize;
 	    private final int recievedSize;
-    	private final int maxUses;
+	    private final int maxUses;
 	    private final int givenExp;
 	    private final float priceMultiplier;
 	    
@@ -85,9 +85,9 @@ public class EntityUtil {
 	    	this.itemstack = stack;
 	        this.stackSize = stackSize;
 	        this.recievedSize = recievedSize;
-     	    this.maxUses = maxUses;
-     	    this.givenExp = givenExp;
-     	    this.priceMultiplier = priceMultiplier;
+	        this.maxUses = maxUses;
+	        this.givenExp = givenExp;
+	        this.priceMultiplier = priceMultiplier;
 	    }
 
 	    public MerchantOffer getOffer(Entity p_221182_1_, Random p_221182_2_) {
