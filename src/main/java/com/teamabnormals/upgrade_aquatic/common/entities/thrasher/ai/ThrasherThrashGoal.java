@@ -9,6 +9,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 
@@ -69,8 +70,20 @@ public class ThrasherThrashGoal extends Goal {
 		this.thrasher.renderYawOffset = (float) ((this.originalYaw) + 75 * MathHelper.cos(this.thrasher.ticksExisted * 0.5F) * 1F);
 		this.thrasher.rotationYaw = (float) ((this.originalYaw) + 75 * MathHelper.cos(this.thrasher.ticksExisted * 0.5F) * 1F);
 		
-		if(this.thrashedTicks % 5 == 0) {
-			this.thrasher.getPassengers().get(0).attackEntityFrom(DamageSource.causeMobDamage(this.thrasher), 4.0F);
+		Entity entity = this.thrasher.getPassengers().get(0);
+		
+		if(entity instanceof PlayerEntity) {
+			this.disablePlayersShield((PlayerEntity) entity);
 		}
+		
+		entity.setSneaking(false);
+		
+		if(this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this.thrasher), 4.0F);
+		}
+	}
+	
+	private void disablePlayersShield(PlayerEntity player) {
+		player.getCooldownTracker().setCooldown(Items.SHIELD, 30);
 	}
 }

@@ -253,10 +253,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 							difficultyDividend = 16;
 							break;
     				}
-    				if((int) amount == 0) {
-    					amount = 1;
-    				}
-    				int chance = amount >= 6 ? 1 : difficultyDividend / (int) amount;
+    				int chance = amount >= 6 ? 1 : difficultyDividend / (int) Math.max(1, amount);
     				if(this.getRNG().nextInt(chance) == 0) {
     					this.setHitsTillStun(this.getHitsLeftTillStun() - 1);
     				}
