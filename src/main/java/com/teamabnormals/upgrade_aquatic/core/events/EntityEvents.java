@@ -18,6 +18,7 @@ import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.TurtleEntity;
@@ -36,11 +37,13 @@ import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
+import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -52,7 +55,7 @@ public class EntityEvents {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onEntitySpawned(EntityJoinWorldEvent event) {
 		if (event.getWorld().isRemote) {
-            return;
+			return;
         }
 		Entity entity = event.getEntity();
 		if(entity instanceof DrownedEntity) {
@@ -153,12 +156,19 @@ public class EntityEvents {
 		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.NAUTILUS_BUCKET.get(), 5, 1, 4, 1));
 	}
 	
-/*	@SubscribeEvent
+	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-    if(event.getType() == VillagerProfession.FISHERMAN) {
-        event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.PIKE, 8, 1, 5, 15));			
-	}
-    if(event.getType() == VillagerProfession.FISHERMAN) {
-        event.getTrades().get(8).add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.LIONFISH, 1, 1, 5, 0));		
-	} */ 
+		if(event.getType() == VillagerProfession.FISHERMAN) {
+			event.getTrades().get(3).add(new EntityUtil.ItemsForEmeraldsAndItemsTrade(UAItems.PIKE.get(), 6, UAItems.PIKE_COOKED.get(), 6, 16, 15));
+			event.getTrades().get(4).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.PIKE.get(), 5, 1, 12, 25));	
+			event.getTrades().get(4).add(new EntityUtil.ItemsForEmeraldsAndItemsTrade(UAItems.LIONFISH.get(), 6, UAItems.LIONFISH_COOKED.get(), 6, 16, 30));
+			event.getTrades().get(5).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.LIONFISH.get(), 3, 1, 12, 30));
+		}
+		if(event.getType() == VillagerProfession.MASON) {
+			event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.EMBEDDED_AMMONITE, 5, 1, 5, 30));	
+		}
+		if(event.getType() == VillagerProfession.CLERIC) {
+			event.getTrades().get(4).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.THRASHER_TOOTH.get(), 2, 1, 12, 15));	
+		}
+    }
 }
