@@ -9,6 +9,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 
@@ -30,7 +31,7 @@ public class ThrasherThrashGoal extends Goal {
 				return false;
 			}
 		}
-		return passenger != null && this.thrasher.isNoAnimationPlaying() && this.thrasher.getRNG().nextFloat() < 0.05F;
+		return !this.thrasher.isStunned() && passenger != null && this.thrasher.isNoAnimationPlaying() && this.thrasher.getRNG().nextFloat() < 0.1F;
 	}
 	
 	@Override
@@ -41,12 +42,13 @@ public class ThrasherThrashGoal extends Goal {
 				return false;
 			}
 		}
-		return this.thrashedTicks <= 55 && passenger != null;
+		return !this.thrasher.isStunned() && this.thrashedTicks <= 55 && passenger != null;
 	}
 	
 	@Override
 	public void startExecuting() {
 		this.originalYaw = this.thrasher.rotationYaw;
+		this.thrasher.setHitsTillStun(this.thrasher.getRNG().nextInt(2) + 2);
 		NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.THRASH_ANIMATION);
 	}
 	
@@ -68,8 +70,20 @@ public class ThrasherThrashGoal extends Goal {
 		this.thrasher.renderYawOffset = (float) ((this.originalYaw) + 75 * MathHelper.cos(this.thrasher.ticksExisted * 0.5F) * 1F);
 		this.thrasher.rotationYaw = (float) ((this.originalYaw) + 75 * MathHelper.cos(this.thrasher.ticksExisted * 0.5F) * 1F);
 		
-		if(this.thrasher.isAnimationPlaying(EntityThrasher.THRASH_ANIMATION) && this.thrasher.getAnimationTick() % 5 == 0 && this.thrasher.getAnimationTick() != 0) {
-			this.thrasher.getPassengers().get(0).attackEntityFrom(DamageSource.causeMobDamage(this.thrasher), 4.0F);
+		Entity entity = this.thrasher.getPassengers().get(0);
+		
+		if(entity instanceof PlayerEntity) {
+			this.disablePlayersShield((PlayerEntity) entity);
 		}
+		
+		entity.setSneaking(false);
+		
+		if(this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this.thrasher), 4.0F);
+		}
+	}
+	
+	private void disablePlayersShield(PlayerEntity player) {
+		player.getCooldownTracker().setCooldown(Items.SHIELD, 30);
 	}
 }

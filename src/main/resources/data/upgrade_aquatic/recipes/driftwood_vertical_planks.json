@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "upgrade_aquatic",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:driftwood_planks"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:driftwood_vertical_planks",
+    "count": 3
+  }
+}

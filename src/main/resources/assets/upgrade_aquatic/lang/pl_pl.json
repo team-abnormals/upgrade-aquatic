@@ -156,7 +156,7 @@
   "block.upgrade_aquatic.pillow_coralstone": "Poduszkowy Kamień Koralowy",
   "block.upgrade_aquatic.silk_coralstone": "Jedwabny Kamień Koralowy",
   "block.upgrade_aquatic.prismarine_coralstone": "Pryzmarynowy Kamień Koralowy",
-  "block.upgrade_aquatic.elder_coralstone": "Pryzmarynowy Kamień Koralowy prastrażnika",
+  "block.upgrade_aquatic.elder_prismarine_coralstone": "Pryzmarynowy Kamień Koralowy prastrażnika",
   "block.upgrade_aquatic.dead_coralstone": "Martwy Camień Koralowy",
   
   "block.upgrade_aquatic.chiseled_coralstone": "Rzeźbiony Kamień Koralowy",
@@ -194,7 +194,7 @@
   "block.upgrade_aquatic.pillow_coralstone_slab": "Poduszkowa Płyta z Kamienia Koralowego",
   "block.upgrade_aquatic.silk_coralstone_slab": "Jedwabna Płyta z Kamienia Koralowego",
   "block.upgrade_aquatic.prismarine_coralstone_slab": "Pryzmarynowa Płyta z Kamienia Koralowego",
-  "block.upgrade_aquatic.elder_coralstone_slab": "Pryzmarynowa Płyta z Kamienia Koralowego prastrażnika",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_slab": "Pryzmarynowa Płyta z Kamienia Koralowego prastrażnika",
   "block.upgrade_aquatic.dead_coralstone_slab": "Martwa Płyta z Kamienia Koralowego",
   
   "block.upgrade_aquatic.coralstone_stairs": "Schody z Kamienia koralowego",
@@ -213,7 +213,7 @@
   "block.upgrade_aquatic.pillow_coralstone_stairs": "Poduszkowe Schody z Kamienia koralowego",
   "block.upgrade_aquatic.silk_coralstone_stairs": "Jedwabne Schody z Kamienia koralowego",
   "block.upgrade_aquatic.prismarine_coralstone_stairs": "Pryzmarynowe Schody z Kamienia koralowego",
-  "block.upgrade_aquatic.elder_coralstone_stairs": "Pryzmarynowe Schody z Kamienia koralowego prastrażnika",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_stairs": "Pryzmarynowe Schody z Kamienia koralowego prastrażnika",
   "block.upgrade_aquatic.dead_coralstone_stairs": "Martwe Schody z Kamienia koralowego",
   
   "block.upgrade_aquatic.coralstone_wall": "Murek z Kamienia koralowego",
@@ -232,7 +232,7 @@
   "block.upgrade_aquatic.pillow_coralstone_wall": "Poduszkowy Murek z Kamienia koralowego",
   "block.upgrade_aquatic.silk_coralstone_wall": "Jedwabny Murek z Kamienia koralowego",
   "block.upgrade_aquatic.prismarine_coralstone_wall": "Pryzmarynowy Murek z Kamienia koralowego",
-  "block.upgrade_aquatic.elder_coralstone_wall": "Pryzmarynowy Murek z Kamienia koralowego prastrażnika",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_wall": "Pryzmarynowy Murek z Kamienia koralowego prastrażnika",
   "block.upgrade_aquatic.dead_coralstone_wall": "Martwy Murek z Kamienia koralowego",
   
   "block.upgrade_aquatic.tooth_block": "Blok zębów",

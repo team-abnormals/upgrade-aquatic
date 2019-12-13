@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "upgrade_aquatic:elder_coralstone_wall"
+          "name": "upgrade_aquatic:elder_prismarine_coralstone_wall"
         }
       ],
       "conditions": [

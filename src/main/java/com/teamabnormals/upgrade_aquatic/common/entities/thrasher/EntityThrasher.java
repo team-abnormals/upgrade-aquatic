@@ -6,12 +6,10 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 import javax.vecmath.Vector3f;
 
+import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
 import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
-import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
@@ -55,10 +53,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		if (entity == null) {
 			return false;
 		} else {
-			if(entity instanceof PlayerEntity) {
-				if(((PlayerEntity)entity).isCreative()) {
-					return false;
-				}
+			if(entity instanceof PlayerEntity && !(((PlayerEntity)entity).isCreative() || ((PlayerEntity)entity).isSpectator())) {
 				return entity.isInWater();
 			}
 			return entity instanceof AbstractFishEntity && entity.isInWater();
@@ -70,9 +65,12 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	private static final DataParameter<Boolean> SONAR_ACTIVE = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> TICKS_TILL_SONAR = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> WATER_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> STUN_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> HITS_TILL_STUN = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	public static final	Endimation SNAP_AT_PRAY_ANIMATION = new Endimation(10);
 	public static final	Endimation HURT_ANIMATION = new Endimation(10);
 	public static final Endimation THRASH_ANIMATION = new Endimation(55);
+	public final ControlledEndimation STUNNED_ANIMATION = new ControlledEndimation(10, 10);
 	protected int ticksSinceLastSonar;
 	public int sonarTicks;
 	protected float prevTailAnimation;
@@ -107,7 +105,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
-		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.35D);
+		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.25D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0D);
 	}
 	
 	@Override
@@ -116,6 +115,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.dataManager.register(MOVING, false);
 		this.dataManager.register(SONAR_ACTIVE, false);
 		this.dataManager.register(WATER_TIME, 2500);
+		this.dataManager.register(STUN_TIME, 0);
+		this.dataManager.register(HITS_TILL_STUN, 0);
 		this.dataManager.register(TICKS_TILL_SONAR, (rand.nextInt(130) + 45) * 20);
 	}
 	
@@ -139,6 +140,16 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.setAir(this.getMaxAir());
 		this.setTicksTillSonar((rand.nextInt(10) + 10) * 20);
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+	}
+	
+	@Override
+	public void notifyDataManagerChange(DataParameter<?> key) {
+		if(HITS_TILL_STUN.equals(key)) {
+			if(this.getHitsLeftTillStun() == 0) {
+				this.setStunned(((this.getRNG().nextInt(2) + 2) * 20) + this.getRNG().nextInt(10));
+			}
+		}
+		super.notifyDataManagerChange(key);
 	}
 	
 	@Override
@@ -179,12 +190,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
-	protected void onDeathUpdate() {
-		this.setAttackTarget(null);
-		super.onDeathUpdate();
-	}
-	
-	@Override
 	protected void onAnimationStart(Endimation animationStarted) {
 		if(animationStarted == THRASH_ANIMATION) {
 			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
@@ -209,56 +214,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 
 	@Override
 	public void onEnterBubbleColumnWithAirAbove(boolean downwards) {}
-	
-	public boolean isMoving() {
-		return this.dataManager.get(MOVING);
-	}
-
-	private void setMoving(boolean moving) {
-		this.dataManager.set(MOVING, moving);
-	}
-	
-	public boolean isSonarActive() {
-		return this.dataManager.get(SONAR_ACTIVE);
-	}
-
-	public void setSonarActive(boolean active) {
-		this.dataManager.set(SONAR_ACTIVE, active);
-	}
-	
-	public int getTicksTillSonar() {
-		return this.dataManager.get(TICKS_TILL_SONAR);
-	}
-
-	public void setTicksTillSonar(int ticks) {
-		this.dataManager.set(TICKS_TILL_SONAR, ticks);
-	}
-	
-	public int getWaterTime() {
-		return this.dataManager.get(WATER_TIME);
-	}
-
-	public void setWaterTime(int ticks) {
-		this.dataManager.set(WATER_TIME, ticks);
-	}
-	
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
-		compound.putBoolean("IsMoving", this.isMoving());
-		compound.putBoolean("SonarActive", this.isSonarActive());
-		compound.putInt("WaterTicks", this.getWaterTime());
-		compound.putInt("TicksTillSonar", this.getTicksTillSonar());
-		//compound.putInt("CaughtEntityId", passenger.getEntityId());
-    }
-
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
-		this.setMoving(compound.getBoolean("IsMoving"));
-		this.setSonarActive(compound.getBoolean("SonarActive"));
-		this.setWaterTime(compound.getInt("WaterTicks"));
-		this.setTicksTillSonar(compound.getInt("TicksTillSonar"));
-		//this.setCaughtEntity(compound.getInt("CaughtEntityId"));
-    }
     
     @Override
     public boolean attackEntityFrom(DamageSource source, float amount) {
@@ -274,11 +229,33 @@ public class EntityThrasher extends EndimatedMonsterEntity {
     			entitySource.getPosition().getY() - this.getPosition().getY(),
     			entitySource.getPosition().getZ() - this.getPosition().getZ()
     		);
-    		if(difference.length() <= 8 && entitySource.isInWater()) {
-    			if(entitySource instanceof PlayerEntity && !((PlayerEntity)entitySource).isCreative() && !((PlayerEntity)entitySource).isSpectator()) {
-    				this.setAttackTarget((LivingEntity)entitySource);
-    			} else if(!(entitySource instanceof PlayerEntity)) {
-    				this.setAttackTarget((LivingEntity)entitySource);
+    		if(difference.length() <= 8) {
+    			if(entitySource.isInWater()) {
+    				if(entitySource instanceof PlayerEntity && !((PlayerEntity)entitySource).isCreative() && !((PlayerEntity)entitySource).isSpectator()) {
+    					this.setAttackTarget((LivingEntity)entitySource);
+    				} else if(!(entitySource instanceof PlayerEntity)) {
+    					this.setAttackTarget((LivingEntity)entitySource);
+    				}
+    			}
+    			if(this.getHitsLeftTillStun() > 0) {
+    				int difficultyDividend = 0;
+    				switch(this.world.getDifficulty()) {
+						default:
+						case EASY:
+						case PEACEFUL:
+							difficultyDividend = 10;
+							break;
+						case NORMAL:
+							difficultyDividend = 12;
+							break;
+						case HARD:
+							difficultyDividend = 16;
+							break;
+    				}
+    				int chance = amount >= 6 ? 1 : difficultyDividend / (int) Math.max(1, amount);
+    				if(this.getRNG().nextInt(chance) == 0) {
+    					this.setHitsTillStun(this.getHitsLeftTillStun() - 1);
+    				}
     			}
     		}
     	}
@@ -343,8 +320,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	protected void pulsateSonar() {
 		this.playSound(SoundEvents.BLOCK_CONDUIT_ACTIVATE, 8.5F, 0.9F);
 		if(this.world.isRemote) {
-			Vec3d look = this.getLook(1.0F).normalize();
-			this.world.addParticle(UAParticles.SONAR, this.posX, this.posY, this.posZ, look.x * 0.6F, look.y * 0.6F, look.z * 0.6F);
+			//TODO Sonar Entity
 		}
 	}
 	
@@ -374,7 +350,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 					this.attackEntityFrom(DamageSource.DRYOUT, 1.0F);
 				}
 
-				if(this.onGround) {
+				if(this.onGround && !this.isStunned()) {
 					this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F), 0.5D, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F)));
 					this.rotationYaw = this.rand.nextFloat() * 360.0F;
 					this.rotationPitch = this.rand.nextFloat() * -50.0F;
@@ -382,13 +358,21 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 					this.isAirBorne = true;
 				}
 			}
-			if(world.isRemote) {
+			if(this.isWorldRemote()) {
 				if(!this.getPassengers().isEmpty() && this.isAnimationPlaying(THRASH_ANIMATION) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
 					Entity passenger = this.getPassengers().get(0);
 					for(int i = 0; i < 3; ++i) {
-						this.world.addParticle(ParticleTypes.BUBBLE, passenger.posX + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), passenger.posY, passenger.posZ + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), (this.getRNG().nextDouble() - 0.5D) * 2.0D, -this.getRNG().nextDouble(), (this.getRNG().nextDouble() - 0.5D) * 2.0D);
+						if(passenger.areEyesInFluid(FluidTags.WATER)) {
+							this.world.addParticle(ParticleTypes.BUBBLE, passenger.posX + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), passenger.posY, passenger.posZ + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), (this.getRNG().nextDouble() - 0.5D) * 2.0D, -this.getRNG().nextDouble(), (this.getRNG().nextDouble() - 0.5D) * 2.0D);
+						}
 					}
 				}
+			}
+			if(this.isStunned()) {
+				if(!this.getPassengers().isEmpty() && !this.isWorldRemote()) {
+					this.removePassengers();
+				}
+				this.setStunned(this.getStunTime() - 1);
 			}
 		}
 	}
@@ -396,9 +380,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void livingTick() {
 		if(this.isAlive()) {
-			if (this.world.isRemote) {
+			if(this.world.isRemote) {
 				this.prevTailAnimation = this.tailAnimation;
 				this.prevFinAnimation = this.finAnimation;
+				this.STUNNED_ANIMATION.update();
+				
 				if(!this.isInWater() || this.isAnimationPlaying(THRASH_ANIMATION)) {
 					this.tailSpeed = 1.1F;
 					this.finSpeed = 0.875F;
@@ -418,6 +404,25 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 					this.tailSpeed += (0.125F - this.tailSpeed) * 0.1F;
 					this.finSpeed += (0.01125F - this.finSpeed) * 0.05F;
 				}
+				
+				if(this.isStunned()) {
+					if(this.STUNNED_ANIMATION.getCurrentValue() >= 10) {
+						this.STUNNED_ANIMATION.manipulateTimer(true);
+					} else {
+						if(this.STUNNED_ANIMATION.shouldDecrement && this.STUNNED_ANIMATION.getCurrentValue() <= 0) {
+							this.STUNNED_ANIMATION.manipulateTimer(false);
+						}
+					}
+				} else {
+					if(this.STUNNED_ANIMATION.getCurrentValue() == 10) {
+						this.STUNNED_ANIMATION.setTimerToStop(true);
+					}
+					
+					this.STUNNED_ANIMATION.manipulateTimer(false);
+				}
+				
+				this.STUNNED_ANIMATION.updateTimerValues();
+				
 				this.tailAnimation += this.tailSpeed;
 				this.finAnimation += this.finSpeed;
 			}
@@ -452,6 +457,78 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		super.livingTick();
 	}
 	
+	public boolean isMoving() {
+		return this.dataManager.get(MOVING);
+	}
+
+	private void setMoving(boolean moving) {
+		this.dataManager.set(MOVING, moving);
+	}
+	
+	public boolean isSonarActive() {
+		return this.dataManager.get(SONAR_ACTIVE);
+	}
+
+	public void setSonarActive(boolean active) {
+		this.dataManager.set(SONAR_ACTIVE, active);
+	}
+	
+	public int getTicksTillSonar() {
+		return this.dataManager.get(TICKS_TILL_SONAR);
+	}
+
+	public void setTicksTillSonar(int ticks) {
+		this.dataManager.set(TICKS_TILL_SONAR, ticks);
+	}
+	
+	public int getWaterTime() {
+		return this.dataManager.get(WATER_TIME);
+	}
+
+	public void setWaterTime(int ticks) {
+		this.dataManager.set(WATER_TIME, ticks);
+	}
+	
+	public int getStunTime() {
+		return this.dataManager.get(STUN_TIME);
+	}
+
+	public void setStunned(int ticks) {
+		this.dataManager.set(STUN_TIME, ticks);
+	}
+	
+	public int getHitsLeftTillStun() {
+		return this.dataManager.get(HITS_TILL_STUN);
+	}
+
+	public void setHitsTillStun(int hits) {
+		this.dataManager.set(HITS_TILL_STUN, hits);
+	}
+	
+	public boolean isStunned() {
+		return this.getStunTime() > 0;
+	}
+	
+	public void writeAdditional(CompoundNBT compound) {
+		super.writeAdditional(compound);
+		compound.putBoolean("IsMoving", this.isMoving());
+		compound.putBoolean("SonarActive", this.isSonarActive());
+		compound.putInt("WaterTicks", this.getWaterTime());
+		compound.putInt("TicksTillSonar", this.getTicksTillSonar());
+		compound.putInt("StunnedTicks", this.getStunTime());
+		compound.putInt("HitsTillStun", this.getHitsLeftTillStun());
+    }
+
+	public void readAdditional(CompoundNBT compound) {
+		super.readAdditional(compound);
+		this.setMoving(compound.getBoolean("IsMoving"));
+		this.setSonarActive(compound.getBoolean("SonarActive"));
+		this.setWaterTime(compound.getInt("WaterTicks"));
+		this.setTicksTillSonar(compound.getInt("TicksTillSonar"));
+		this.setStunned(compound.getInt("StunnedTicks"));
+		this.setHitsTillStun(compound.getInt("HitsTillStun"));
+    }
+	
 	static class ThrasherMoveController extends MovementController {
 		private final EntityThrasher thrasher;
 
@@ -461,7 +538,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		}
 
 		public void tick() {
-			if (this.action == MovementController.Action.MOVE_TO && !this.thrasher.getNavigator().noPath()) {
+			if (this.action == MovementController.Action.MOVE_TO && !this.thrasher.getNavigator().noPath() && this.thrasher.getStunTime() <= 0) {
 				Vec3d vec3d = new Vec3d(this.posX - this.thrasher.posX, this.posY - this.thrasher.posY, this.posZ - this.thrasher.posZ);
 				double d0 = vec3d.length();
 				double d1 = vec3d.y / d0;

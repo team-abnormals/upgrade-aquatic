@@ -1,8 +1,0 @@
-{
-    "parent": "upgrade_aquatic:block/vertical_slab",
-    "textures": {
-        "bottom": "upgrade_aquatic:block/elder_coralstone",
-        "top": "upgrade_aquatic:block/elder_coralstone",
-        "side": "upgrade_aquatic:block/elder_coralstone"
-    }
-}

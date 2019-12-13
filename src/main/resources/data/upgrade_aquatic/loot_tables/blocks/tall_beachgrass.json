@@ -11,23 +11,11 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "item": "minecraft:shears"
-                  }
-                }
-              ],
-              "name": "upgrade_aquatic:beachgrass"
-            },
-            {
-              "type": "minecraft:item",
-              "conditions": [
-                {
                   "condition": "minecraft:survives_explosion"
                 },
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "upgrade_aquatic:beachgrass",
+                  "block": "upgrade_aquatic:tall_beachgrass",
                   "properties": {
                     "half": "lower"
                   }

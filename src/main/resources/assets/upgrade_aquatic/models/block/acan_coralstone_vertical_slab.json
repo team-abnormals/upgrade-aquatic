@@ -1,5 +1,5 @@
 {
-    "parent": "block/slab_top",
+    "parent": "upgrade_aquatic:block/vertical_slab",
     "textures": {
         "bottom": "upgrade_aquatic:block/acan_coralstone",
         "top": "upgrade_aquatic:block/acan_coralstone",

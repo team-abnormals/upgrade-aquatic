@@ -51,7 +51,7 @@ public class UAEntities {
 	public static final EntityType<EntityNautilus> NAUTILUS = createEntity(EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F, 14596231, 16744272);
 	public static final EntityType<EntityPike> PIKE = createEntity(EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F, 4806944, 13002040);
 	public static final EntityType<EntityLionfish> LIONFISH = createEntity(EntityLionfish::new, EntityClassification.CREATURE, "lionfish", 0.6F, 0.5F, 15281931, 16111310);
-	public static final EntityType<EntityThrasher> THRASHER = createEntity(EntityThrasher::new, EntityClassification.MONSTER, "thrasher", 1.6F, 1F, 7255507, 11730927);
+	public static final EntityType<EntityThrasher> THRASHER = createEntity(EntityThrasher::new, EntityClassification.MONSTER, "thrasher", 1.6F, 0.9F, 7255507, 11730927);
 	public static final EntityType<EntityFlare> FLARE = createEntity(EntityFlare::new, EntityClassification.MONSTER, "flare", 0.9F, 0.5F, 4532619, 14494960);
 	
 	private static <T extends Entity> EntityType<T> createEntity(EntityType.IFactory<T> factory, EntityClassification entityClassification, String name, float width, float height, int eggPrimary, int eggSecondary) {

@@ -24,7 +24,9 @@ public class RenderLayerThrasher<T extends EntityThrasher, M extends ModelThrash
 	public void render(T entity, float p_212842_2_, float p_212842_3_, float p_212842_4_, float p_212842_5_, float p_212842_6_, float p_212842_7_, float p_212842_8_) {
 		this.bindTexture(RES_THRASHER_FROST);
 
-        GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240.0F, 240.0F);
+		float stunnedAnimation = entity.STUNNED_ANIMATION.getAnimationProgress() * 240.0F;
+		
+        GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, stunnedAnimation, stunnedAnimation);
         GlStateManager.color4f(1F, 1F, 1F, 1F);
         GlStateManager.disableLighting();
 

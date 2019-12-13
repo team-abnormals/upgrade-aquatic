@@ -1,4 +1,4 @@
-{{
+{
     "variants": {
  		"type=north": { "model": "upgrade_aquatic:block/polar_kelpy_cobblestone_vertical_slab", "y": 0, "uvlock": true },
  		"type=south": { "model": "upgrade_aquatic:block/polar_kelpy_cobblestone_vertical_slab", "y": 180, "uvlock": true },
