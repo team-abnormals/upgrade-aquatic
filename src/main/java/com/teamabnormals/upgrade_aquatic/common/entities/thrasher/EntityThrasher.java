@@ -9,7 +9,6 @@ import javax.vecmath.Vector3f;
 import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
 import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
-import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 
 import net.minecraft.entity.CreatureAttribute;
@@ -321,8 +320,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	protected void pulsateSonar() {
 		this.playSound(SoundEvents.BLOCK_CONDUIT_ACTIVATE, 8.5F, 0.9F);
 		if(this.world.isRemote) {
-			Vec3d look = this.getLook(1.0F).normalize();
-			this.world.addParticle(UAParticles.SONAR, this.posX, this.posY, this.posZ, look.x * 0.6F, look.y * 0.6F, look.z * 0.6F);
+			//TODO Sonar Entity
 		}
 	}
 	
