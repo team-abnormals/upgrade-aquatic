@@ -9,6 +9,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.MerchantOffer;
+import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.RayTraceResult;
 
 /**
  * 
@@ -16,6 +18,17 @@ import net.minecraft.item.MerchantOffer;
  *
  */
 public class EntityUtil {
+	
+	public static RayTraceResult rayTrace(Entity entity, double distance, float delta) {
+		return entity.world.rayTraceBlocks(new RayTraceContext(
+			entity.getEyePosition(delta),
+			entity.getEyePosition(delta).add(entity.getLook(delta).scale(distance)),
+			RayTraceContext.BlockMode.OUTLINE,
+			RayTraceContext.FluidMode.NONE,
+			entity
+		));
+	}
+	
 	/**
 	 * Builder Class for Basic Emerald Trading
 	 */

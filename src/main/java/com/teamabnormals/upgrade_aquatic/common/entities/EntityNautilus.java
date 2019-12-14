@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
 import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
@@ -14,7 +15,6 @@ import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -88,7 +88,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
             }
 
         });
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<DrownedEntity>(this, DrownedEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<EntityThrasher>(this, EntityThrasher.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
 
             @Override
             public void startExecuting() {

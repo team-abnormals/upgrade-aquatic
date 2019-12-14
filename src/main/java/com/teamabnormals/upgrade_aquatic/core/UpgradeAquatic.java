@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
@@ -70,6 +71,7 @@ public class UpgradeAquatic {
 		EntityNautilus.addSpawn();
 		EntityPike.addSpawn();
 		EntityLionfish.addSpawn();
+		EntityThrasher.addSpawn();
 		UADispenseBehaviorRegistry.registerAll();
 		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();
