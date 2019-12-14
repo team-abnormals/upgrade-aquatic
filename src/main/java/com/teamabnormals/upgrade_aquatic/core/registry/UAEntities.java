@@ -17,11 +17,11 @@ import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -109,7 +109,7 @@ public class UAEntities {
 		}
 	}
     
-	private static boolean ravineMobCondition(EntityType<? extends MobEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+	private static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
 		return pos.getY() <= 30;
 	}

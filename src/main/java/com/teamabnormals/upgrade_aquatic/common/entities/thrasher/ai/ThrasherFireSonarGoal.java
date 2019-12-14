@@ -45,6 +45,10 @@ public class ThrasherFireSonarGoal extends Goal {
 	
 	@Override
 	public void resetTask() {
+		//Shuts thrasher's mouth
+		if(this.sonarTicks < this.sonarFireDuration - 5 || this.sonarTicks < 10) {
+			NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.HURT_ANIMATION);
+		}
 		this.sonarFireDuration = 0;
 		this.sonarTicks = 0;
 	}

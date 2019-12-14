@@ -38,7 +38,6 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
@@ -46,9 +45,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.DeepFrozenOceanBiome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.RainType;
+import net.minecraft.world.biome.DeepFrozenOceanBiome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -194,6 +193,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
+	public boolean isNotColliding(IWorldReader worldIn) {
+		return worldIn.checkNoEntityCollision(this);
+	}
+	
+	@Override
 	protected void onAnimationStart(Endimation animationStarted) {
 		if(animationStarted == THRASH_ANIMATION) {
 			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
@@ -265,11 +269,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	protected PathNavigator createNavigator(World worldIn) {
 		return new SwimmerPathNavigator(this, worldIn);
-	}
-	
-	@Override
-	public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
-		return worldIn.getFluidState(pos).isTagged(FluidTags.WATER) ? 10.0F + worldIn.getBrightness(pos) - 0.5F : super.getBlockPathWeight(pos, worldIn);
 	}
 	
 	@Override
@@ -433,8 +432,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && biome.getPrecipitation() == RainType.SNOW || biome instanceof DeepFrozenOceanBiome) {
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.THRASHER, 25, 1, 2));
+		if((biome.getCategory() == Category.OCEAN && biome.getPrecipitation() == RainType.SNOW) || biome instanceof DeepFrozenOceanBiome) {
+			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER, 35, 1, 2));
         }
 	}
 	
