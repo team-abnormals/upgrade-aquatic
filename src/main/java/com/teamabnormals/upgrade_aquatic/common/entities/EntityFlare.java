@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -138,39 +137,6 @@ public class EntityFlare extends FlyingEntity {
 	    this.orbitPosition = (new BlockPos(this)).up(5);
 	    this.setPhantomSize(0);
 	    return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-	}
-	
-	@Override
-	protected void updateLeashedState() {
-		super.updateLeashedState();
-		Entity entity = this.getLeashHolder();
-		if(entity != null && entity.world == this.world) {
-			this.setHomePosAndDistance(new BlockPos(entity), 5);
-			float f = this.getDistance(entity);
-
-			if(f > 60.0F) {
-				this.clearLeashed(true, true);
-				return;
-			}
-			
-			if(f > 60.0F) {
-				this.clearLeashed(true, true);
-				this.goalSelector.disableFlag(Goal.Flag.MOVE);
-			} else if(f > 30.0F && entity instanceof PlayerEntity) {
-				double d0 = (entity.posX - this.posX) / (double)f;
-				double d1 = (entity.posY - this.posY) / (double)f;
-				double d2 = (entity.posZ - this.posZ) / (double)f;
-				this.setMotion(this.getMotion().add(Math.copySign(d0 * d0 * 0.4D, d0), Math.copySign(d1 * d1 * 0.4D, d1), Math.copySign(d2 * d2 * 0.4D, d2)));
-			} else {
-				this.goalSelector.enableFlag(Goal.Flag.MOVE);
-				Vec3d vec3d = (new Vec3d(entity.posX - this.posX, entity.posY - this.posY, entity.posZ - this.posZ)).normalize().scale((double)Math.max(f - 2.0F, 0.0F));
-				this.getNavigator().tryMoveToXYZ(this.posX + vec3d.x, this.posY + vec3d.y, this.posZ + vec3d.z, this.followLeashSpeed());
-			}
-		}
-	}
-	
-	protected double followLeashSpeed() {
-		return 1.0D;
 	}
 
 	/**
