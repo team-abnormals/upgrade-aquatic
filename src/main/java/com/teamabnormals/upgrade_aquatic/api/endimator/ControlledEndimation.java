@@ -3,13 +3,10 @@ package com.teamabnormals.upgrade_aquatic.api.endimator;
 import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
 
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 /**
  * @author - SmellyModder(Luke Tonon)
  */
-@OnlyIn(Dist.CLIENT)
 public class ControlledEndimation {
 	private int currentValue, prevValue;
 	public int tickDuration;
