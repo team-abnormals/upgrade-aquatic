@@ -51,4 +51,9 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 			this.thrasher.setAttackTarget(null);
 		}
 	}
+	
+	@Override
+	protected double getAttackReachSqr(LivingEntity attackTarget) {
+		return super.getAttackReachSqr(attackTarget) * 0.55F;
+	}
 }
