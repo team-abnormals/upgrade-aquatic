@@ -11,6 +11,7 @@ import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
 import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFindDetectionPointGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFireSonarGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
@@ -70,7 +71,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			if(entity instanceof PlayerEntity && !(((PlayerEntity)entity).isCreative() || ((PlayerEntity)entity).isSpectator())) {
 				return entity.isInWater();
 			}
-			return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof EntityLionfish)) && entity.isInWater();
+			return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof EntityThrasher) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof EntityLionfish)) && entity.isInWater();
 		}
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
@@ -85,6 +86,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	public static final Endimation THRASH_ANIMATION = new Endimation(55);
 	public static final Endimation SONAR_FIRE_ANIMATION = new Endimation(30);
 	public final ControlledEndimation STUNNED_ANIMATION = new ControlledEndimation(10, 10);
+	protected int ticksSinceLastSonarFire;
 	protected float prevTailAnimation;
 	protected float tailAnimation;
 	protected float tailSpeed;
@@ -103,9 +105,10 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new ThrasherFireSonarGoal(this));
-		this.goalSelector.addGoal(2, new ThrasherThrashGoal(this));
-		this.goalSelector.addGoal(3, new ThrasherGrabGoal(this, 2.5F, true));
+		this.goalSelector.addGoal(1, new ThrasherThrashGoal(this));
+		this.goalSelector.addGoal(2, new ThrasherFireSonarGoal(this));
+		this.goalSelector.addGoal(3, new ThrasherFindDetectionPointGoal(this));
+		this.goalSelector.addGoal(4, new ThrasherGrabGoal(this, 2.5F, true));
 		this.goalSelector.addGoal(5, new ThrasherRandomSwimGoal(this, 1.1D, 15));
 	}
 	
@@ -343,6 +346,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	public void tick() {
 		super.tick();
 		if(!this.isAIDisabled()) {
+			if(this.isAnimationPlaying(SONAR_FIRE_ANIMATION)) {
+				this.ticksSinceLastSonarFire = 0;
+			} else {
+				this.ticksSinceLastSonarFire++;
+			}
 			if(this.isInWaterRainOrBubbleColumn()) {
 				this.setWaterTime(2400);
 			} else {
@@ -492,7 +500,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	
 	@Nullable
 	public BlockPos getPossibleDetectionPoint() {
-		return this.getDataManager().get(POSSIBLE_DETECTION_POINT).orElse((BlockPos)null);
+		return this.getDataManager().get(POSSIBLE_DETECTION_POINT).orElse(null);
+	}
+	
+	public int getTicksSinceLastSonarFire() {
+		return this.ticksSinceLastSonarFire;
 	}
 	
 	public boolean isStunned() {
@@ -505,6 +517,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		compound.putInt("WaterTicks", this.getWaterTime());
 		compound.putInt("StunnedTicks", this.getStunTime());
 		compound.putInt("HitsTillStun", this.getHitsLeftTillStun());
+		compound.putInt("TicksSinceLastSonarFire", this.getTicksSinceLastSonarFire());
 		compound.put("DetectionPoint", NBTUtil.writeBlockPos(this.getPossibleDetectionPoint()));
     }
 
@@ -514,6 +527,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.setWaterTime(compound.getInt("WaterTicks"));
 		this.setStunned(compound.getInt("StunnedTicks"));
 		this.setHitsTillStun(compound.getInt("HitsTillStun"));
+		this.ticksSinceLastSonarFire = compound.getInt("TicksSinceLastSonarFire");
 		this.setPossibleDetectionPoint(NBTUtil.readBlockPos(compound.getCompound("DetectionPoint")));
     }
 	
@@ -562,8 +576,9 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		}
 	}
 	
-	class ThrasherLookController extends LookController {
+	public class ThrasherLookController extends LookController {
 		private int angleLimit;
+		private boolean isTurningForSonar;
 
 		public ThrasherLookController(EntityThrasher thrasher) {
 			super(thrasher);
@@ -573,13 +588,21 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			this.angleLimit = this.mob.getPassengers().isEmpty() ? 10 : 5;
 			if(this.isLooking) {
 				this.isLooking = false;
-				this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.func_220678_h(), this.deltaLookYaw);
+				if(this.isTurningForSonar) {
+					this.mob.rotationYaw = this.func_220675_a(this.mob.rotationYaw, this.func_220678_h(), this.deltaLookYaw);
+				} else {
+					this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.func_220678_h(), this.deltaLookYaw);
+				}
 				this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, this.func_220677_g(), this.deltaLookPitch);
 			} else {
-				if (this.mob.getNavigator().noPath()) {
+				if(this.mob.getNavigator().noPath()) {
 					this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, 0.0F, 5.0F);
 				}
-				this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.mob.renderYawOffset, this.deltaLookYaw);
+				if(this.isTurningForSonar) {
+					this.mob.rotationYaw = this.func_220675_a(this.mob.rotationYaw, this.mob.renderYawOffset, this.deltaLookYaw);
+				} else {
+					this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.mob.renderYawOffset, this.deltaLookYaw);
+				}
 			}
 
 			float wrappedDegrees = MathHelper.wrapDegrees(this.mob.rotationYawHead - this.mob.renderYawOffset);
@@ -588,6 +611,10 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			} else if(wrappedDegrees > (float)this.angleLimit) {
 				this.mob.renderYawOffset += 4.0F;
 			}
+		}
+		
+		public void setTurningForSonar(boolean isTurning) {
+			this.isTurningForSonar = isTurning;
 		}
 	}
 	
