@@ -448,18 +448,18 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
-    public int getMaxSpawnedInChunk() {
-        return 1;
-    }
+	public int getMaxSpawnedInChunk() {
+		return 1;
+	}
 
-    public static void addSpawn() {
+	public static void addSpawn() {
 		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityThrasher::processSpawning);
 	}
 	
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.COLD)) {
 			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER, 80, 1, 2));
-        }
+		}
 	}
 	
 	public boolean isMoving() {
@@ -519,7 +519,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		compound.putInt("HitsTillStun", this.getHitsLeftTillStun());
 		compound.putInt("TicksSinceLastSonarFire", this.getTicksSinceLastSonarFire());
 		compound.put("DetectionPoint", NBTUtil.writeBlockPos(this.getPossibleDetectionPoint()));
-    }
+	}
 
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
@@ -529,7 +529,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.setHitsTillStun(compound.getInt("HitsTillStun"));
 		this.ticksSinceLastSonarFire = compound.getInt("TicksSinceLastSonarFire");
 		this.setPossibleDetectionPoint(NBTUtil.readBlockPos(compound.getCompound("DetectionPoint")));
-    }
+	}
 	
 	static class ThrasherMoveController extends MovementController {
 		private final EntityThrasher thrasher;
