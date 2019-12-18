@@ -17,11 +17,14 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.DrownedEntity;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.TurtleEntity;
+import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.passive.fish.TropicalFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -53,9 +56,8 @@ public class EntityEvents {
 	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onEntitySpawned(EntityJoinWorldEvent event) {
-		if (event.getWorld().isRemote) {
-			return;
-        }
+		if(event.getWorld().isRemote) return;
+		
 		Entity entity = event.getEntity();
 		if(entity instanceof DrownedEntity) {
 			((CreatureEntity) entity).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreatureEntity)entity, TurtleEntity.class, 6.0F, 1.0D, 1.2D));
@@ -65,6 +67,9 @@ public class EntityEvents {
 			if(entity instanceof TropicalFishEntity) {
 				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, EntityLionfish.class, 8.0F, 1.6D, 1.4D, EntityPredicates.IS_ALIVE::test));
 			}
+		}
+		if(entity instanceof WaterMobEntity && !(entity instanceof IMob)) {
+			((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity)entity, EntityThrasher.class, 20.0F, 1.4D, 1.6D, EntityPredicates.IS_ALIVE::test));
 		}
 	}
 	
