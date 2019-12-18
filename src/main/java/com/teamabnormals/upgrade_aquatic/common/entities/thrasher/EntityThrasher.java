@@ -234,28 +234,28 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 
 	@Override
 	public void onEnterBubbleColumnWithAirAbove(boolean downwards) {}
-    
-    @Override
-    public boolean attackEntityFrom(DamageSource source, float amount) {
-    	Entity entitySource = source.getTrueSource();
-    	this.setPlayingAnimation(HURT_ANIMATION);
-    	if(entitySource instanceof LivingEntity) {
-    		Vector3f difference = new Vector3f(
-    			entitySource.getPosition().getX() - this.getPosition().getX(),
-    			entitySource.getPosition().getY() - this.getPosition().getY(),
-    			entitySource.getPosition().getZ() - this.getPosition().getZ()
-    		);
-    		if(difference.length() <= 8) {
-    			if(entitySource.isInWater()) {
-    				if(entitySource instanceof PlayerEntity && !((PlayerEntity)entitySource).isCreative() && !((PlayerEntity)entitySource).isSpectator()) {
-    					this.setAttackTarget((LivingEntity)entitySource);
-    				} else if(!(entitySource instanceof PlayerEntity)) {
-    					this.setAttackTarget((LivingEntity)entitySource);
-    				}
-    			}
-    			if(this.getHitsLeftTillStun() > 0) {
-    				int difficultyDividend = 0;
-    				switch(this.world.getDifficulty()) {
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		Entity entitySource = source.getTrueSource();
+		this.setPlayingAnimation(HURT_ANIMATION);
+		if(entitySource instanceof LivingEntity) {
+			Vector3f difference = new Vector3f(
+				entitySource.getPosition().getX() - this.getPosition().getX(),
+				entitySource.getPosition().getY() - this.getPosition().getY(),
+				entitySource.getPosition().getZ() - this.getPosition().getZ()
+			);
+			if(difference.length() <= 8) {
+				if(entitySource.isInWater()) {
+					if(entitySource instanceof PlayerEntity && !((PlayerEntity)entitySource).isCreative() && !((PlayerEntity)entitySource).isSpectator()) {
+						this.setAttackTarget((LivingEntity)entitySource);
+					} else if(!(entitySource instanceof PlayerEntity)) {
+						this.setAttackTarget((LivingEntity)entitySource);
+					}
+				}
+				if(this.getHitsLeftTillStun() > 0) {
+					int difficultyDividend = 0;
+					switch(this.world.getDifficulty()) {
 						default:
 						case EASY:
 						case PEACEFUL:
@@ -267,16 +267,16 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 						case HARD:
 							difficultyDividend = 16;
 							break;
-    				}
-    				int chance = amount >= 6 ? 1 : difficultyDividend / (int) Math.max(1, amount);
-    				if(this.getRNG().nextInt(chance) == 0) {
-    					this.setHitsTillStun(this.getHitsLeftTillStun() - 1);
-    				}
-    			}
-    		}
-    	}
-    	return super.attackEntityFrom(source, amount);
-    }
+					}
+					int chance = amount >= 6 ? 1 : difficultyDividend / (int) Math.max(1, amount);
+					if(this.getRNG().nextInt(chance) == 0) {
+						this.setHitsTillStun(this.getHitsLeftTillStun() - 1);
+					}
+				}
+			}
+		}
+		return super.attackEntityFrom(source, amount);
+	}
 	
 	@Override
 	protected PathNavigator createNavigator(World worldIn) {
