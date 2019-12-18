@@ -46,10 +46,10 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.RainType;
-import net.minecraft.world.biome.DeepFrozenOceanBiome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityThrasher extends EndimatedMonsterEntity {
@@ -432,8 +432,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	private static void processSpawning(Biome biome) {
-		if((biome.getCategory() == Category.OCEAN && biome.getPrecipitation() == RainType.SNOW) || biome instanceof DeepFrozenOceanBiome) {
-			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER, 35, 1, 2));
+		if(biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.COLD)) {
+			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER, 80, 1, 2));
         }
 	}
 	
