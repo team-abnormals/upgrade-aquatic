@@ -119,11 +119,13 @@ public class EntitySonarWave extends Entity {
 	@Override
 	protected void readAdditional(CompoundNBT compound) {
 		this.setOwnerId(compound.getInt("OwnerId"));
+		this.growProgress = compound.getFloat("GrowProgress");
 	}
 
 	@Override
 	protected void writeAdditional(CompoundNBT compound) {
 		compound.putInt("OwnerId", this.getOwnerId());
+		compound.putFloat("GrowProgress", this.growProgress);
 	}
 	
 	public void setOwnerId(int id) {

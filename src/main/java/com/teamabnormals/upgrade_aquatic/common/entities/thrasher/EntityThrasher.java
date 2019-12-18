@@ -80,8 +80,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	private static final DataParameter<Integer> STUN_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> HITS_TILL_STUN = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Optional<BlockPos>> POSSIBLE_DETECTION_POINT = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.OPTIONAL_BLOCK_POS);
-	public static final	Endimation SNAP_AT_PRAY_ANIMATION = new Endimation(10);
-	public static final	Endimation HURT_ANIMATION = new Endimation(10);
+	public static final Endimation SNAP_AT_PRAY_ANIMATION = new Endimation(10);
+	public static final Endimation HURT_ANIMATION = new Endimation(10);
 	public static final Endimation THRASH_ANIMATION = new Endimation(55);
 	public static final Endimation SONAR_FIRE_ANIMATION = new Endimation(30);
 	public final ControlledEndimation STUNNED_ANIMATION = new ControlledEndimation(10, 10);
