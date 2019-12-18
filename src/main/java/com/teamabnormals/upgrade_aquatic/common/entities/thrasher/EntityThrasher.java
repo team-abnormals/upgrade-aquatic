@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.thrasher;
 
+import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -37,6 +38,7 @@ import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -45,6 +47,7 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
@@ -76,13 +79,12 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	private static final DataParameter<Integer> WATER_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> STUN_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> HITS_TILL_STUN = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
+	private static final DataParameter<Optional<BlockPos>> POSSIBLE_DETECTION_POINT = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.OPTIONAL_BLOCK_POS);
 	public static final	Endimation SNAP_AT_PRAY_ANIMATION = new Endimation(10);
 	public static final	Endimation HURT_ANIMATION = new Endimation(10);
 	public static final Endimation THRASH_ANIMATION = new Endimation(55);
 	public static final Endimation SONAR_FIRE_ANIMATION = new Endimation(30);
 	public final ControlledEndimation STUNNED_ANIMATION = new ControlledEndimation(10, 10);
-	protected int ticksSinceLastSonar;
-	public int sonarTicks;
 	protected float prevTailAnimation;
 	protected float tailAnimation;
 	protected float tailSpeed;
@@ -125,6 +127,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.dataManager.register(WATER_TIME, 2500);
 		this.dataManager.register(STUN_TIME, 0);
 		this.dataManager.register(HITS_TILL_STUN, 0);
+		this.dataManager.register(POSSIBLE_DETECTION_POINT, Optional.empty());
 	}
 	
 	@Override
@@ -483,6 +486,15 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.dataManager.set(HITS_TILL_STUN, hits);
 	}
 	
+	public void setPossibleDetectionPoint(@Nullable BlockPos detectionPoint) {
+		this.getDataManager().set(POSSIBLE_DETECTION_POINT, Optional.ofNullable(detectionPoint));
+	}
+	
+	@Nullable
+	public BlockPos getPossibleDetectionPoint() {
+		return this.getDataManager().get(POSSIBLE_DETECTION_POINT).orElse((BlockPos)null);
+	}
+	
 	public boolean isStunned() {
 		return this.getStunTime() > 0;
 	}
@@ -493,6 +505,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		compound.putInt("WaterTicks", this.getWaterTime());
 		compound.putInt("StunnedTicks", this.getStunTime());
 		compound.putInt("HitsTillStun", this.getHitsLeftTillStun());
+		compound.put("DetectionPoint", NBTUtil.writeBlockPos(this.getPossibleDetectionPoint()));
     }
 
 	public void readAdditional(CompoundNBT compound) {
@@ -501,6 +514,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.setWaterTime(compound.getInt("WaterTicks"));
 		this.setStunned(compound.getInt("StunnedTicks"));
 		this.setHitsTillStun(compound.getInt("HitsTillStun"));
+		this.setPossibleDetectionPoint(NBTUtil.readBlockPos(compound.getCompound("DetectionPoint")));
     }
 	
 	static class ThrasherMoveController extends MovementController {
