@@ -11,16 +11,19 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class UASounds {
 	public static final DeferredRegister<SoundEvent> SOUNDS = new DeferredRegister<>(ForgeRegistries.SOUND_EVENTS, Reference.MODID);
 	
-	public static final RegistryObject<SoundEvent> THRASHER_THRASH       = SOUNDS.register("entity.thrasher.thrash", () -> new SoundEvent(createSoundLocation("entity.thrasher.thrash")));
-	public static final RegistryObject<SoundEvent> THRASHER_SONAR_FIRE   = SOUNDS.register("entity.thrasher.sonar_fire", () -> new SoundEvent(createSoundLocation("entity.thrasher.sonar_fire")));
-	public static final RegistryObject<SoundEvent> THRASHER_AMBIENT      = SOUNDS.register("entity.thrasher.ambient", () -> new SoundEvent(createSoundLocation("entity.thrasher.ambient")));
-	public static final RegistryObject<SoundEvent> THRASHER_AMBIENT_LAND = SOUNDS.register("entity.thrasher.ambient_land", () -> new SoundEvent(createSoundLocation("entity.thrasher.ambient_land")));
-	public static final RegistryObject<SoundEvent> THRASHER_HURT         = SOUNDS.register("entity.thrasher.hurt", () -> new SoundEvent(createSoundLocation("entity.thrasher.hurt")));
-	public static final RegistryObject<SoundEvent> THRASHER_HURT_LAND    = SOUNDS.register("entity.thrasher.hurt_land", () -> new SoundEvent(createSoundLocation("entity.thrasher.hurt_land")));
-	public static final RegistryObject<SoundEvent> THRASHER_DEATH        = SOUNDS.register("entity.thrasher.death", () -> new SoundEvent(createSoundLocation("entity.thrasher.death")));
-	public static final RegistryObject<SoundEvent> THRASHER_DEATH_LAND   = SOUNDS.register("entity.thrasher.death_land", () -> new SoundEvent(createSoundLocation("entity.thrasher.death_land")));
+	public static final RegistryObject<SoundEvent> THRASHER_THRASH       = createSoundEvent("entity.thrasher.thrash");
+	public static final RegistryObject<SoundEvent> THRASHER_SONAR_FIRE   = createSoundEvent("entity.thrasher.sonar_fire");
+	public static final RegistryObject<SoundEvent> THRASHER_FLOP         = createSoundEvent("entity.thrasher.flop");
+	public static final RegistryObject<SoundEvent> THRASHER_STUN         = createSoundEvent("entity.thrasher.stun");
+	public static final RegistryObject<SoundEvent> THRASHER_SWIM         = createSoundEvent("entity.thrasher.swim");
+	public static final RegistryObject<SoundEvent> THRASHER_AMBIENT      = createSoundEvent("entity.thrasher.ambient");
+	public static final RegistryObject<SoundEvent> THRASHER_AMBIENT_LAND = createSoundEvent("entity.thrasher.ambient_land");
+	public static final RegistryObject<SoundEvent> THRASHER_HURT         = createSoundEvent("entity.thrasher.hurt");
+	public static final RegistryObject<SoundEvent> THRASHER_HURT_LAND    = createSoundEvent("entity.thrasher.hurt_land");
+	public static final RegistryObject<SoundEvent> THRASHER_DEATH        = createSoundEvent("entity.thrasher.death");
+	public static final RegistryObject<SoundEvent> THRASHER_DEATH_LAND   = createSoundEvent("entity.thrasher.death_land");
 	
-	private static ResourceLocation createSoundLocation(String name) {
-		return new ResourceLocation(Reference.MODID, name);
+	private static RegistryObject<SoundEvent> createSoundEvent(String name) {
+		return SOUNDS.register(name, () -> new SoundEvent(new ResourceLocation(Reference.MODID, name)));
 	}
 }

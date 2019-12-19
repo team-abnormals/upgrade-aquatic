@@ -1,58 +1,10 @@
 {
-    "entity.thrasher.hurt":
+    "entity.thrasher.thrash":
     {
         "category": "entity",
-        "subtitle": "Thrasher Hurt",
+        "subtitle": "Thrasher Thrashes",
         "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_0", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_1", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_2", "stream": true}
-        ]
-    },
-    "entity.thrasher.hurt_land":
-    {
-        "category": "entity",
-        "subtitle": "Thrasher Hurt Land",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_land_0", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_land_1", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_land_2", "stream": true}
-        ]
-    },
-    "entity.thrasher.death":
-    {
-        "category": "entity",
-        "subtitle": "Thrasher Death",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_death", "stream": true}
-        ]
-    },
-    "entity.thrasher.death_land":
-    {
-        "category": "entity",
-        "subtitle": "Thrasher Death Land",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_death_land", "stream": true}
-        ]
-    },
-    "entity.thrasher.ambient":
-    {
-        "category": "entity",
-        "subtitle": "Thrasher Growls",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_0", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_1", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_2", "stream": true}
-        ]
-    },
-    "entity.thrasher.ambient_land":
-    {
-        "category": "entity",
-        "subtitle": "Thrasher Growls Land",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_land_0", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_land_1", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_land_2", "stream": true}
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_thrash", "stream": true }
         ]
     },
     "entity.thrasher.sonar_fire":
@@ -60,16 +12,93 @@
         "category": "entity",
         "subtitle": "Thrasher Fires Sonar",
         "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_sonar_0", "stream": true},
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_sonar_1", "stream": true}
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_sonar_0", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_sonar_1", "stream": true }
         ]
     },
-    "entity.thrasher.thrash":
+    "entity.thrasher.flop":
     {
         "category": "entity",
-        "subtitle": "Thrasher Thrashes",
+        "subtitle": "Thrasher Flops",
         "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_thrash", "stream": true}
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_flop_0", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_flop_1", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_flop_2", "stream": true }
+        ]
+    },
+    "entity.thrasher.stun":
+    {
+        "category": "entity",
+        "subtitle": "Thrasher Stunned",
+        "sounds": [
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_stun_0", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_stun_1", "stream": true }
+        ]
+    },
+    "entity.thrasher.swim":
+    {
+        "category": "entity",
+        "subtitle": "Thrasher Swims",
+        "sounds": [
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_swim_0", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_swim_1", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_swim_2", "stream": true }
+        ]
+    },
+	"entity.thrasher.ambient":
+    {
+        "category": "entity",
+        "subtitle": "Thrasher Growls",
+        "sounds": [
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_0", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_1", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_2", "stream": true }
+        ]
+    },
+    "entity.thrasher.ambient_land":
+    {
+        "category": "entity",
+        "subtitle": "Thrasher Growls Land",
+        "sounds": [
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_land_0", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_land_1", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_land_2", "stream": true }
+        ]
+    },
+    "entity.thrasher.hurt":
+    {
+        "category": "entity",
+        "subtitle": "Thrasher Hurt",
+        "sounds": [
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_0", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_1", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_2", "stream": true }
+        ]
+    },
+    "entity.thrasher.hurt_land":
+    {
+        "category": "entity",
+        "subtitle": "Thrasher Hurt Land",
+        "sounds": [
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_land_0", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_land_1", "stream": true },
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_land_2", "stream": true }
+        ]
+    },
+    "entity.thrasher.death":
+    {
+        "category": "entity",
+        "subtitle": "Thrasher Dies",
+        "sounds": [
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_death", "stream": true }
+        ]
+    },
+    "entity.thrasher.death_land":
+    {
+        "category": "entity",
+        "subtitle": "Thrasher Dies Land",
+        "sounds": [
+        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_death_land", "stream": true }
         ]
     }
 }

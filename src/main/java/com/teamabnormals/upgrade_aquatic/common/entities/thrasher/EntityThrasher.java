@@ -12,14 +12,11 @@ import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
 import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFindDetectionPointGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFireSonarGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -70,12 +67,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	public static final Predicate<Entity> ENEMY_MATCHER = (entity) -> {
 		if (entity == null) {
 			return false;
-		} else {
-			if(entity instanceof PlayerEntity && !(((PlayerEntity)entity).isCreative() || ((PlayerEntity)entity).isSpectator())) {
-				return entity.isInWater();
-			}
-			return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof EntityThrasher) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof EntityLionfish)) && entity.isInWater();
 		}
+		if(entity instanceof PlayerEntity && !(((PlayerEntity)entity).isCreative() || ((PlayerEntity)entity).isSpectator())) {
+			return entity.isInWater();
+		}
+		return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof EntityThrasher) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof EntityLionfish)) && entity.isInWater();
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
 	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE)).setSaved(false);
@@ -368,12 +364,13 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 					this.attackEntityFrom(DamageSource.DRYOUT, 1.0F);
 				}
 
-				if(this.onGround && !this.isStunned()) {
+				if(!this.isInWater() && !this.isStunned() && this.onGround) {
 					this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F), 0.5D, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F)));
 					this.rotationYaw = this.rand.nextFloat() * 360.0F;
 					this.rotationPitch = this.rand.nextFloat() * -50.0F;
 					this.onGround = false;
 					this.isAirBorne = true;
+					this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
 				}
 			}
 			if(this.isWorldRemote()) {
@@ -467,14 +464,15 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return UASounds.THRASHER_HURT.get();
+		return this.isInWater() ? UASounds.THRASHER_HURT.get() : UASounds.THRASHER_HURT_LAND.get();
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return UASounds.THRASHER_DEATH.get();
+		return this.isInWater() ? UASounds.THRASHER_DEATH.get() : UASounds.THRASHER_DEATH_LAND.get();
 	}
 	
+	@Nullable
 	@Override
 	protected SoundEvent getAmbientSound() {
 		if(this.isAnimationPlaying(THRASH_ANIMATION)) {
@@ -482,6 +480,30 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		}
 		return this.isInWater() ? UASounds.THRASHER_AMBIENT.get() : UASounds.THRASHER_AMBIENT_LAND.get();
 	}
+	
+	protected SoundEvent getFlopSound() {
+		return UASounds.THRASHER_FLOP.get();
+	}
+	
+	public SoundEvent getSonarFireSound() {
+		return UASounds.THRASHER_SONAR_FIRE.get();
+	}
+	
+	public SoundEvent getThrashingSound() {
+		return UASounds.THRASHER_THRASH.get();
+	}
+	
+	protected SoundEvent getStunSound() {
+		return UASounds.THRASHER_STUN.get();
+	}
+	
+	@Override
+	protected SoundEvent getSwimSound() {
+		return UASounds.THRASHER_SWIM.get();
+	}
+	
+	@Override
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {}
 	
 	@Override
 	public int getTalkInterval() {
