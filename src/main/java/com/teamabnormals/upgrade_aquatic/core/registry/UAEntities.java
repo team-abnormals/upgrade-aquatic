@@ -12,15 +12,16 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -48,6 +49,7 @@ public class UAEntities {
 	private static List<Item> spawnEggs = Lists.newArrayList();
 	
 	public static final EntityType<EntityUABoat> BOAT = createBasicEntity(EntityUABoat::new, EntityUABoat::new, EntityClassification.MISC, "boat", 1.375F, 0.5625F);
+	public static final EntityType<EntitySonarWave> SONAR_WAVE = createBasicEntity(EntitySonarWave::new, EntitySonarWave::new, EntityClassification.AMBIENT, "sonar_wave", 1.0F, 1.0F);
 	public static final EntityType<EntityNautilus> NAUTILUS = createEntity(EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F, 14596231, 16744272);
 	public static final EntityType<EntityPike> PIKE = createEntity(EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F, 4806944, 13002040);
 	public static final EntityType<EntityLionfish> LIONFISH = createEntity(EntityLionfish::new, EntityClassification.CREATURE, "lionfish", 0.6F, 0.5F, 15281931, 16111310);
@@ -97,6 +99,7 @@ public class UAEntities {
 		EntitySpawnPlacementRegistry.register(NAUTILUS, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
 		EntitySpawnPlacementRegistry.register(PIKE, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
 		EntitySpawnPlacementRegistry.register(LIONFISH, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::coralCondition);
+		EntitySpawnPlacementRegistry.register(THRASHER, EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::ravineMobCondition);
 	}
 	
 	@SubscribeEvent
@@ -106,7 +109,7 @@ public class UAEntities {
 		}
 	}
     
-	private static boolean ravineMobCondition(EntityType<? extends MobEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+	private static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
 		return pos.getY() <= 30;
 	}

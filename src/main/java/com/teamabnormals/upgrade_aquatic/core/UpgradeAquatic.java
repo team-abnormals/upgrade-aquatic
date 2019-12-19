@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
@@ -12,6 +13,7 @@ import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ServerProxy;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
@@ -52,6 +54,7 @@ public class UpgradeAquatic {
 		UAEffects.EFFECTS.register(modEventBus);
 		UAEffects.POTIONS.register(modEventBus);
 		UATileEntities.TILE_ENTITY_TYPES.register(modEventBus);
+		UASounds.SOUNDS.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
 		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
@@ -70,6 +73,7 @@ public class UpgradeAquatic {
 		EntityNautilus.addSpawn();
 		EntityPike.addSpawn();
 		EntityLionfish.addSpawn();
+		EntityThrasher.addSpawn();
 		UADispenseBehaviorRegistry.registerAll();
 		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();

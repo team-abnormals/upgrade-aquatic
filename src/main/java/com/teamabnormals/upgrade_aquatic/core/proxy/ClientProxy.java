@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.client.render.RenderFlare;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderLionfish;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderNautilus;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderPike;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderSonarWave;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderThrasher;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderUABoat;
 import com.teamabnormals.upgrade_aquatic.client.tileentity.TileEntityElderEyeRenderer;
@@ -12,6 +13,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -31,6 +33,7 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrasher.class, manager -> new RenderThrasher(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityUABoat.class, RenderUABoat::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlare.class, RenderFlare::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySonarWave.class, RenderSonarWave::new);
 	}
 	
 }

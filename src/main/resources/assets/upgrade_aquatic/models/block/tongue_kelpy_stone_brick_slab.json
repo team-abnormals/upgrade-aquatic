@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab",
+    "textures": {
+        "bottom": "upgrade_aquatic:block/tongue_kelpy_stone_brick",
+        "top": "upgrade_aquatic:block/tongue_kelpy_stone_brick",
+        "side": "upgrade_aquatic:block/tongue_kelpy_stone_brick"
+    }
+}

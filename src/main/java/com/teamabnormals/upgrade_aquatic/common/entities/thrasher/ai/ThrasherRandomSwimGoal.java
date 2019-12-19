@@ -37,13 +37,13 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 			this.y = vec3d.y;
 			this.z = vec3d.z;
 			this.mustUpdate = false;
-			return !this.thrasher.isSonarActive();
+			return true;
 	    }
 	}
 	
 	@Override
 	public boolean shouldContinueExecuting() {
-		return !this.thrasher.isSonarActive() && super.shouldContinueExecuting();
+		return super.shouldContinueExecuting();
 	}
 	
 	@Nullable

@@ -279,6 +279,30 @@
   "block.upgrade_aquatic.ochre_kelpy_cobblestone_wall": "Ochre Kelpy Cobblestone Wall",
   "block.upgrade_aquatic.polar_kelpy_cobblestone_wall": "Polar Kelpy Cobblestone Wall",
   
+  "block.upgrade_aquatic.kelpy_stone_brick": "Kelpy Stone Bricks",
+  "block.upgrade_aquatic.tongue_kelpy_stone_brick": "Tongue Kelpy Stone Bricks",
+  "block.upgrade_aquatic.thorny_kelpy_stone_brick": "Thorny Kelpy Stone Bricks",
+  "block.upgrade_aquatic.ochre_kelpy_stone_brick": "Ochre Kelpy Stone Bricks",
+  "block.upgrade_aquatic.polar_kelpy_stone_brick": "Polar Kelpy Stone Bricks",
+  
+  "block.upgrade_aquatic.kelpy_stone_brick_stairs": "Kelpy Stone Brick Stairs",
+  "block.upgrade_aquatic.tongue_kelpy_stone_brick_stairs": "Tongue Kelpy Stone Brick Stairs",
+  "block.upgrade_aquatic.thorny_kelpy_stone_brick_stairs": "Thorny Kelpy Stone Brick Stairs",
+  "block.upgrade_aquatic.ochre_kelpy_stone_brick_stairs": "Ochre Kelpy Stone Brick Stairs",
+  "block.upgrade_aquatic.polar_kelpy_stone_brick_stairs": "Polar Kelpy Stone Brick Stairs",
+  
+  "block.upgrade_aquatic.kelpy_stone_brick_slab": "Kelpy Stone Brick Slab",
+  "block.upgrade_aquatic.tongue_kelpy_stone_brick_slab": "Tongue Kelpy Stone Brick Slab",
+  "block.upgrade_aquatic.thorny_kelpy_stone_brick_slab": "Thorny Kelpy Stone Brick Slab",
+  "block.upgrade_aquatic.ochre_kelpy_stone_brick_slab": "Ochre Kelpy Stone Brick Slab",
+  "block.upgrade_aquatic.polar_kelpy_stone_brick_slab": "Polar Kelpy Stone Brick Slab",
+  
+  "block.upgrade_aquatic.kelpy_stone_brick_wall": "Kelpy Stone Brick Wall",
+  "block.upgrade_aquatic.tongue_kelpy_stone_brick_wall": "Tongue Kelpy Stone Brick Wall",
+  "block.upgrade_aquatic.thorny_kelpy_stone_brick_wall": "Thorny Kelpy Stone Brick Wall",
+  "block.upgrade_aquatic.ochre_kelpy_stone_brick_wall": "Ochre Kelpy Stone Brick Wall",
+  "block.upgrade_aquatic.polar_kelpy_stone_brick_wall": "Polar Kelpy Stone Brick Wall",
+  
   "block.upgrade_aquatic.pickerelweed_blue_block": "Blue Pickerelweed Block",
   "block.upgrade_aquatic.pickerelweed_purple_block": "Purple Pickerelweed Block",
   "block.upgrade_aquatic.boiled_pickerelweed_blue_block": "Boiled Blue Pickerelweed Block",

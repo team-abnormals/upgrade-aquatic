@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
 import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
@@ -14,7 +15,6 @@ import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -32,7 +32,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.RainType;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityNautilus extends EntityBucketableWaterMob {
@@ -88,7 +89,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
             }
 
         });
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<DrownedEntity>(this, DrownedEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<EntityThrasher>(this, EntityThrasher.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
 
             @Override
             public void startExecuting() {
@@ -197,7 +198,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
 	}
 	
 	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && biome.getPrecipitation() != RainType.SNOW) {
+		if(biome.getCategory() == Category.OCEAN && !BiomeDictionary.hasType(biome, Type.COLD)) {
 			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.NAUTILUS, 51, 1, 4));
         }
 	}

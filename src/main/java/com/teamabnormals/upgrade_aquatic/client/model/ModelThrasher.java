@@ -220,6 +220,20 @@ public class ModelThrasher<E extends EntityThrasher> extends EndimatorEntityMode
 			this.endimator.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.rotate(this.bottom_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.endKeyframe();
+		} else if(thrasher.isAnimationPlaying(EntityThrasher.SONAR_FIRE_ANIMATION)) {
+			this.endimator.setAnimationToPlay(EntityThrasher.SONAR_FIRE_ANIMATION);
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, -0.35F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, 0.35F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
+			
+			this.endimator.setStaticKeyframe(20);
+			
+			this.endimator.startKeyframe(5);
+			this.endimator.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
+			this.endimator.rotate(this.bottom_jaw, 0.0F, 0.0F, 0.0F);
+			this.endimator.endKeyframe();
 		}
 	}
 }
