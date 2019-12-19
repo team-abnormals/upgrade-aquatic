@@ -1,0 +1,8 @@
+{
+    "parent": "upgrade_aquatic:block/vertical_slab",
+    "textures": {
+        "side": "upgrade_aquatic:block/polar_kelpy_stone_brick",
+        "top": "upgrade_aquatic:block/polar_kelpy_stone_brick",
+        "bottom": "upgrade_aquatic:block/polar_kelpy_stone_brick"
+    }
+}

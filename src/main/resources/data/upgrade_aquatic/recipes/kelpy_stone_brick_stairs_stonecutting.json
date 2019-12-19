@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:kelpy_stone_brick"
+  },
+  "result": "upgrade_aquatic:kelpy_stone_brick_stairs",
+  "count": 1
+}

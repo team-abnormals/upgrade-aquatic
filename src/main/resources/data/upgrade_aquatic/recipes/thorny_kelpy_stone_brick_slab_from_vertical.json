@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:thorny_kelpy_stone_brick_vertical_slab"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:thorny_kelpy_stone_brick_slab",
+    "count": 1
+  }
+}
