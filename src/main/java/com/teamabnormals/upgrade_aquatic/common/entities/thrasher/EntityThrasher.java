@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.thrasher;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
@@ -273,6 +274,12 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 						this.setHitsTillStun(this.getHitsLeftTillStun() - 1);
 					}
 				}
+			} else {
+				if(entitySource instanceof PlayerEntity && !((PlayerEntity)entitySource).isCreative() && !((PlayerEntity)entitySource).isSpectator()) {
+					this.setPossibleDetectionPoint(entitySource.getPosition().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
+				} else if(!(entitySource instanceof PlayerEntity)) {
+					this.setPossibleDetectionPoint(entitySource.getPosition().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
+				}
 			}
 		}
 		return super.attackEntityFrom(source, amount);
@@ -434,6 +441,15 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				
 				this.tailAnimation += this.tailSpeed;
 				this.finAnimation += this.finSpeed;
+			}
+			
+			if(!this.isStunned()) {
+				List<LivingEntity> nearbyEntities = this.world.getEntitiesWithinAABB(LivingEntity.class, this.getBoundingBox().grow(0.5F), EntityThrasher.ENEMY_MATCHER);
+				for(LivingEntity entities : nearbyEntities) {
+					if(this.getAttackTarget() == null) {
+						this.setAttackTarget((LivingEntity) entities);
+					}
+				}
 			}
 			
 			if(this.isMoving() && this.isInWater()) {
