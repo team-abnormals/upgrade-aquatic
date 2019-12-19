@@ -10,6 +10,7 @@ import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
@@ -37,7 +38,7 @@ public class ThrasherFireSonarGoal extends Goal {
 	@Override
 	public boolean shouldContinueExecuting() {
 		boolean shouldContinue = SonarPhase.shouldContinueExecutingPhase(this.sonarPhase, this.thrasher);
-		return shouldContinue && (this.sonarPhase == SonarPhase.TURN ? (this.thrasher.getAttackTarget() == null && (this.sonarTicks == 0 || this.sonarTicks == this.sonarFireDuration) || this.sonarTicks < this.sonarFireDuration) : true);
+		return shouldContinue && (this.sonarPhase == SonarPhase.FIRE ? (this.thrasher.getAttackTarget() == null && (this.sonarTicks == 0 || this.sonarTicks == this.sonarFireDuration) || this.sonarTicks < this.sonarFireDuration) : true);
 	}
 	
 	@Override
@@ -74,6 +75,7 @@ public class ThrasherFireSonarGoal extends Goal {
 				this.originalYaw = this.thrasher.rotationYaw;
 				this.originalPitch = this.thrasher.rotationPitch;
 				NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.SONAR_FIRE_ANIMATION);
+				this.thrasher.playSound(UASounds.THRASHER_SONAR_FIRE.get(), 8.0F, 1.0F);
 			}
 			
 			this.sonarTicks++;

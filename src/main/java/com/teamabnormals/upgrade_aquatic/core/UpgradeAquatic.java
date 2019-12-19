@@ -13,6 +13,7 @@ import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ServerProxy;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
@@ -53,6 +54,7 @@ public class UpgradeAquatic {
 		UAEffects.EFFECTS.register(modEventBus);
 		UAEffects.POTIONS.register(modEventBus);
 		UATileEntities.TILE_ENTITY_TYPES.register(modEventBus);
+		UASounds.SOUNDS.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
 		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {

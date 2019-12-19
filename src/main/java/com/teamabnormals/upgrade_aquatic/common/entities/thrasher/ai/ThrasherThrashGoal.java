@@ -5,6 +5,7 @@ import java.util.EnumSet;
 import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedEntity;
 import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -79,6 +80,7 @@ public class ThrasherThrashGoal extends Goal {
 		entity.setSneaking(false);
 		
 		if(this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
+			this.thrasher.playSound(UASounds.THRASHER_THRASH.get(), 1.0F, Math.max(0.75F, this.thrasher.getRNG().nextFloat()));
 			entity.attackEntityFrom(DamageSource.causeMobDamage(this.thrasher), 4.0F);
 		}
 	}

@@ -18,6 +18,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGra
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
@@ -49,6 +50,7 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -464,6 +466,29 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return UASounds.THRASHER_HURT.get();
+	}
+	
+	@Override
+	protected SoundEvent getDeathSound() {
+		return UASounds.THRASHER_DEATH.get();
+	}
+	
+	@Override
+	protected SoundEvent getAmbientSound() {
+		if(this.isAnimationPlaying(THRASH_ANIMATION)) {
+			return null;
+		}
+		return this.isInWater() ? UASounds.THRASHER_AMBIENT.get() : UASounds.THRASHER_AMBIENT_LAND.get();
+	}
+	
+	@Override
+	public int getTalkInterval() {
+		return 100;
+	}
+	
+	@Override
 	public int getMaxSpawnedInChunk() {
 		return 1;
 	}
@@ -516,7 +541,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	
 	@Nullable
 	public BlockPos getPossibleDetectionPoint() {
-		return this.getDataManager().get(POSSIBLE_DETECTION_POINT).orElse(null);
+		return this.getDataManager().get(POSSIBLE_DETECTION_POINT).orElse((BlockPos)null);
 	}
 	
 	public int getTicksSinceLastSonarFire() {
@@ -534,7 +559,10 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		compound.putInt("StunnedTicks", this.getStunTime());
 		compound.putInt("HitsTillStun", this.getHitsLeftTillStun());
 		compound.putInt("TicksSinceLastSonarFire", this.getTicksSinceLastSonarFire());
-		compound.put("DetectionPoint", NBTUtil.writeBlockPos(this.getPossibleDetectionPoint()));
+		
+		if(this.getPossibleDetectionPoint() != null) {
+			compound.put("DetectionPoint", NBTUtil.writeBlockPos(this.getPossibleDetectionPoint()));
+		}
 	}
 
 	public void readAdditional(CompoundNBT compound) {
@@ -544,7 +572,10 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.setStunned(compound.getInt("StunnedTicks"));
 		this.setHitsTillStun(compound.getInt("HitsTillStun"));
 		this.ticksSinceLastSonarFire = compound.getInt("TicksSinceLastSonarFire");
-		this.setPossibleDetectionPoint(NBTUtil.readBlockPos(compound.getCompound("DetectionPoint")));
+		
+		if(this.getPossibleDetectionPoint() != null) {
+			this.setPossibleDetectionPoint(NBTUtil.readBlockPos(compound.getCompound("DetectionPoint")));
+		}
 	}
 	
 	static class ThrasherMoveController extends MovementController {

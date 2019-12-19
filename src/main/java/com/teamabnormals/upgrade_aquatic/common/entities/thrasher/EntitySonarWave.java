@@ -89,7 +89,7 @@ public class EntitySonarWave extends Entity {
 		
 		this.setMotion(motion);
 		this.setOwnerId(thrasher.getEntityId());
-		this.setPosition(thrasher.posX + xMotion, thrasher.posY - 0.1F, thrasher.posZ + zMotion);
+		this.setPosition(thrasher.posX + xMotion, thrasher.posY, thrasher.posZ + zMotion);
 		
 		float motionSqrt = MathHelper.sqrt(func_213296_b(motion));
 		this.rotationYaw = (float) (MathHelper.atan2(motion.x, motion.z) * (180F / Math.PI));
