@@ -82,7 +82,7 @@ public class ThrasherFireSonarGoal extends Goal {
 			this.stablilizeDirection();
 			
 			if(this.sonarTicks % 5 == 0 && this.sonarTicks < this.sonarFireDuration) {
-				EntitySonarWave sonarWave = UAEntities.SONAR_WAVE.create(this.thrasher.world);
+				EntitySonarWave sonarWave = UAEntities.SONAR_WAVE.get().create(this.thrasher.world);
 				sonarWave.fireSonarWave(this.thrasher);
 				this.thrasher.world.addEntity(sonarWave);
 			}

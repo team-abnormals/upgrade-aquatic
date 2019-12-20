@@ -27,10 +27,10 @@ public class ClientProxy extends ServerProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityElderEye.class, new TileEntityElderEyeRenderer());
 		
 		//Entities
-		RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, manager -> new RenderNautilus(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPike.class, manager -> new RenderPike(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityLionfish.class, manager -> new RenderLionfish(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityThrasher.class, manager -> new RenderThrasher(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityNautilus.class, RenderNautilus::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityPike.class, RenderPike::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityLionfish.class, RenderLionfish::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityThrasher.class, RenderThrasher::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityUABoat.class, RenderUABoat::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlare.class, RenderFlare::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySonarWave.class, RenderSonarWave::new);

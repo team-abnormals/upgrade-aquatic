@@ -1,29 +1,38 @@
 package com.teamabnormals.upgrade_aquatic.core.registry.other;
 
+import java.util.List;
+
 import com.teamabnormals.upgrade_aquatic.api.entity.IBucketableEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BucketItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.SpawnEggItem;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.List;
+import net.minecraftforge.fml.RegistryObject;
 
 public class UADispenseBehaviorRegistry {
-    static IDispenseItemBehavior fishDispenseItemBehavior = new DefaultDispenseItemBehavior() {
+	static IDispenseItemBehavior fishDispenseItemBehavior = new DefaultDispenseItemBehavior() {
         private final DefaultDispenseItemBehavior field_218405_b = new DefaultDispenseItemBehavior();
 
         @Override
@@ -79,11 +88,29 @@ public class UADispenseBehaviorRegistry {
             return fishDispenseItemBehavior.dispense(source, stack);
         }
     };
+    static DefaultDispenseItemBehavior spawnEggItemBehavior = new DefaultDispenseItemBehavior() {
+    	
+        public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+           Direction direction = source.getBlockState().get(DispenserBlock.FACING);
+           EntityType<?> entitytype = ((SpawnEggItem)stack.getItem()).getType(stack.getTag());
+           entitytype.spawn(source.getWorld(), stack, (PlayerEntity)null, source.getBlockPos().offset(direction), SpawnReason.DISPENSER, direction != Direction.UP, false);
+           stack.shrink(1);
+           return stack;
+        }
+        
+    };
 
-    public static void registerAll() {
+    public static void registerDispenseBehaviors() {
     	DispenserBlock.registerDispenseBehavior(UAItems.NAUTILUS_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(UAItems.PIKE_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(UAItems.LIONFISH_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, bucketFishItemBehavior);
+    	
+    	for(RegistryObject<Item> items : UAItems.SPAWN_EGGS) {
+    		Item item = items.get();
+    		if(item instanceof UASpawnEggItem) {
+    			DispenserBlock.registerDispenseBehavior(item, spawnEggItemBehavior);
+    		}
+    	}
     }
 }

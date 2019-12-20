@@ -57,7 +57,7 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 	int lastTimeSinceHungry;
 
 	public EntityLionfish(EntityType<? extends EntityLionfish> type, World world) {
-		super(UAEntities.LIONFISH, world);
+		super(UAEntities.LIONFISH.get(), world);
 		this.moveController = new EntityLionfish.MoveHelperController(this);
 	}
 	
@@ -261,7 +261,7 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 	
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.OCEAN && biome.getPrecipitation() != RainType.SNOW) {
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.LIONFISH, 15, 1, 1));
+			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.LIONFISH.get(), 15, 1, 1));
         }
 	}
 	

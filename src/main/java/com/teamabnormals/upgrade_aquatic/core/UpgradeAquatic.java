@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
@@ -12,6 +13,7 @@ import com.teamabnormals.upgrade_aquatic.core.config.ConfigHelper;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ServerProxy;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
@@ -19,10 +21,16 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -54,6 +62,7 @@ public class UpgradeAquatic {
 		UAEffects.EFFECTS.register(modEventBus);
 		UAEffects.POTIONS.register(modEventBus);
 		UATileEntities.TILE_ENTITY_TYPES.register(modEventBus);
+		UAEntities.ENTITY_TYPES.register(modEventBus);
 		UASounds.SOUNDS.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
 		
@@ -62,6 +71,10 @@ public class UpgradeAquatic {
 			if(config.getSpec() == Config.CLIENTSPEC) {
 				ConfigHelper.updateClientConfig(config);
 			}
+		});
+		
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+			modEventBus.addListener(EventPriority.LOWEST, this::registerItemColors);
 		});
 		
 		ModLoadingContext modLoadingContext = ModLoadingContext.get();
@@ -74,15 +87,24 @@ public class UpgradeAquatic {
 		EntityPike.addSpawn();
 		EntityLionfish.addSpawn();
 		EntityThrasher.addSpawn();
-		UADispenseBehaviorRegistry.registerAll();
+		UADispenseBehaviorRegistry.registerDispenseBehaviors();
 		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();
 		UACompostables.registerCompostables();
 		this.changeVanillaFields();
 	}
-
-	@SuppressWarnings("unused")
-	private void Init(final FMLCommonSetupEvent event) {}
+	
+	@OnlyIn(Dist.CLIENT)
+	private void registerItemColors(ColorHandlerEvent.Item event) {
+		for(RegistryObject<Item> items : UAItems.SPAWN_EGGS) {
+			Item item = items.get();
+			if(item instanceof UASpawnEggItem) {
+				event.getItemColors().register((itemColor, itemsIn) -> {
+					return ((UASpawnEggItem) item).getColor(itemsIn);
+				}, item);
+			}
+		}
+	}
 	
 	void setupMessages() {
 		int id = -1;

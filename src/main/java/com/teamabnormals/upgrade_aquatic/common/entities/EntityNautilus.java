@@ -46,7 +46,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
     }
 
     public EntityNautilus(World world, double posX, double posY, double posZ) {
-        this(UAEntities.NAUTILUS, world);
+        this(UAEntities.NAUTILUS.get(), world);
         this.setPosition(posX, posY, posZ);
     }
 
@@ -199,7 +199,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
 	
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.OCEAN && !BiomeDictionary.hasType(biome, Type.COLD)) {
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.NAUTILUS, 51, 1, 4));
+			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.NAUTILUS.get(), 51, 1, 4));
         }
 	}
     
