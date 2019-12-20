@@ -80,6 +80,9 @@ public class EntitySonarWave extends Entity {
 		}
 	}
 	
+	@Override
+	protected void pushOutOfBlocks(double x, double y, double z) {}
+	
 	public void fireSonarWave(EntityThrasher thrasher) {
 		float xMotion = -MathHelper.sin(thrasher.rotationYaw * ((float) Math.PI / 180F)) * MathHelper.cos(thrasher.rotationPitch * ((float) Math.PI / 180F));
 		float yMotion = -MathHelper.sin(thrasher.rotationPitch * ((float) Math.PI / 180F));

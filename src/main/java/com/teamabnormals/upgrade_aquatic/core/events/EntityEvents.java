@@ -19,10 +19,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.monster.PhantomEntity;
+import net.minecraft.entity.passive.DolphinEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
@@ -69,7 +72,13 @@ public class EntityEvents {
 			}
 		}
 		if(entity instanceof WaterMobEntity && !(entity instanceof IMob)) {
-			((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity)entity, EntityThrasher.class, 20.0F, 1.4D, 1.6D, EntityPredicates.IS_ALIVE::test));
+			if(!(entity instanceof DolphinEntity)) {
+				((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity)entity, EntityThrasher.class, 20.0F, 1.4D, 1.6D, EntityPredicates.IS_ALIVE::test));
+			}
+			if(entity instanceof DolphinEntity) {
+				((MobEntity) entity).targetSelector.addGoal(0, (new HurtByTargetGoal((DolphinEntity) entity, EntityThrasher.class)).setCallsForHelp());
+				((MobEntity) entity).goalSelector.addGoal(1, new MeleeAttackGoal((DolphinEntity) entity, 1.2D, true));
+			}
 		}
 	}
 	

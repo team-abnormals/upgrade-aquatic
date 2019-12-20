@@ -353,6 +353,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void tick() {
 		super.tick();
+		
+		if(this.getAttackTarget() != null && !this.getAttackTarget().isAlive() && this.ticksSinceLastSonarFire >= 55 && this.getRNG().nextFloat() < 0.05F) {
+			this.setAttackTarget(null);
+		}
+		
 		if(!this.isAIDisabled()) {
 			if(this.isAnimationPlaying(SONAR_FIRE_ANIMATION)) {
 				this.ticksSinceLastSonarFire = 0;
