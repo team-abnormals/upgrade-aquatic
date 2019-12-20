@@ -37,6 +37,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -160,6 +161,11 @@ public class EntityLionfish extends EntityBucketableWaterMob {
     public int getMaxSpawnedInChunk() {
         return 3;
     }
+    
+    @Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(UAItems.LIONFISH_SPAWN_EGG.get());
+	}
 
 	@Override
 	public ItemStack getBucket() {

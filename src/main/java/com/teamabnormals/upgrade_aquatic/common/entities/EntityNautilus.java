@@ -28,6 +28,7 @@ import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -176,17 +177,20 @@ public class EntityNautilus extends EntityBucketableWaterMob {
     }
 
     @Override
-    public void onEnterBubbleColumn(boolean downwards) {
-    }
+    public void onEnterBubbleColumn(boolean downwards) {}
 
     @Override
-    public void onEnterBubbleColumnWithAirAbove(boolean downwards) {
-    }
+    public void onEnterBubbleColumnWithAirAbove(boolean downwards) {}
 
     @Override
     protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
         return sizeIn.height * 0.65F;
     }
+    
+    @Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(UAItems.NAUTILUS_SPAWN_EGG.get());
+	}
 
     @Override
     public int getMaxSpawnedInChunk() {

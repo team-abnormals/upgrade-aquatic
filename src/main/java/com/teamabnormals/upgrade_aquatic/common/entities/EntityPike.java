@@ -62,6 +62,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
@@ -494,6 +495,11 @@ public class EntityPike extends EntityBucketableWaterMob {
 	@Override
 	public boolean canBeRiddenInWater() {
 		return true;
+	}
+	
+	@Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(UAItems.PIKE_SPAWN_EGG.get());
 	}
 	
 	@Override

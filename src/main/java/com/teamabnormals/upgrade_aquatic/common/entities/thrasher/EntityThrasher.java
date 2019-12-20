@@ -14,6 +14,7 @@ import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 
 import net.minecraft.block.BlockState;
@@ -37,6 +38,7 @@ import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
@@ -50,6 +52,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
@@ -460,6 +463,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			}
 		}
 		super.livingTick();
+	}
+	
+	@Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(UAItems.THRASHER_SPAWN_EGG.get());
 	}
 	
 	@Override
