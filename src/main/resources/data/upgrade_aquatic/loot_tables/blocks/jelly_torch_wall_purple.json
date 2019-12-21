@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "upgrade_aquatic:jelly_torch_yellow"
+          "name": "upgrade_aquatic:jelly_torch_purple"
         }
       ],
       "conditions": [
