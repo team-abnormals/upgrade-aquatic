@@ -1,16 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import java.util.EnumSet;
-import java.util.function.Predicate;
+import java.util.function.BiPredicate;
 
 import javax.annotation.Nullable;
 
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
 import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
@@ -23,6 +21,7 @@ public class ThrasherFireSonarGoal extends Goal {
 	private int sonarTicks;
 	private int sonarFireDuration;
 	private float originalYaw, originalPitch;
+	@Nullable
 	private SonarPhase sonarPhase;
 	
 	public ThrasherFireSonarGoal(EntityThrasher thrasher) {
@@ -32,12 +31,12 @@ public class ThrasherFireSonarGoal extends Goal {
 
 	@Override
 	public boolean shouldExecute() {
-		return SonarPhase.shouldContinueExecutingPhase(null, this.thrasher) && this.thrasher.getTicksSinceLastSonarFire() > 55 && this.thrasher.isAnimationPlaying(EntityThrasher.BLANK_ANIMATION);
+		return SonarPhase.shouldContinueExecutingPhase(null, this.thrasher, this.sonarTicks) && this.thrasher.getTicksSinceLastSonarFire() > 55 && this.thrasher.isAnimationPlaying(EntityThrasher.BLANK_ANIMATION);
 	}
 	
 	@Override
 	public boolean shouldContinueExecuting() {
-		boolean shouldContinue = SonarPhase.shouldContinueExecutingPhase(this.sonarPhase, this.thrasher);
+		boolean shouldContinue = SonarPhase.shouldContinueExecutingPhase(this.sonarPhase, this.thrasher, this.sonarTicks);
 		return shouldContinue && (this.sonarPhase == SonarPhase.FIRE ? (this.thrasher.getAttackTarget() == null && (this.sonarTicks == 0 || this.sonarTicks == this.sonarFireDuration) || this.sonarTicks < this.sonarFireDuration) : true);
 	}
 	
@@ -71,19 +70,19 @@ public class ThrasherFireSonarGoal extends Goal {
 				this.sonarPhase = SonarPhase.FIRE;
 			}
 		} else {
-			if(this.sonarTicks == 0) {
+			if(this.sonarTicks == 0 && SonarPhase.shouldContinueExecutingPhase(SonarPhase.FIRE, this.thrasher, this.sonarTicks)) {
 				this.originalYaw = this.thrasher.rotationYaw;
 				this.originalPitch = this.thrasher.rotationPitch;
 				NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.SONAR_FIRE_ANIMATION);
-				this.thrasher.playSound(UASounds.THRASHER_SONAR_FIRE.get(), 8.0F, 1.0F);
+				this.thrasher.playSound(this.thrasher.getSonarFireSound(), 8.0F, 1.0F);
 			}
 			
 			this.sonarTicks++;
 			
 			this.stablilizeDirection();
 			
-			if(this.sonarTicks % 5 == 0 && this.sonarTicks != 0 && this.sonarTicks < this.sonarFireDuration) {
-				EntitySonarWave sonarWave = UAEntities.SONAR_WAVE.create(this.thrasher.world);
+			if(this.sonarTicks % 5 == 0 && this.sonarTicks < this.sonarFireDuration) {
+				EntitySonarWave sonarWave = UAEntities.SONAR_WAVE.get().create(this.thrasher.world);
 				sonarWave.fireSonarWave(this.thrasher);
 				this.thrasher.world.addEntity(sonarWave);
 			}
@@ -99,21 +98,21 @@ public class ThrasherFireSonarGoal extends Goal {
 	
 	static enum SonarPhase {
 		TURN(null),
-		FIRE((thrasher) -> EntityUtil.rayTrace(thrasher, 32.0D, 1.0F).getType() == RayTraceResult.Type.MISS);
+		FIRE((thrasher, sonarTicks) -> sonarTicks > 15 ? EntityUtil.rayTrace(thrasher, 32.0D, 1.0F).getType() == RayTraceResult.Type.MISS : true);
 		
 		@Nullable
-		private Predicate<EntityThrasher> phaseCondition;
+		private BiPredicate<EntityThrasher, Integer> phaseCondition;
 		
-		SonarPhase(@Nullable Predicate<EntityThrasher> phaseCondition) {
+		SonarPhase(@Nullable BiPredicate<EntityThrasher, Integer> phaseCondition) {
 			this.phaseCondition = phaseCondition;
 		}
 		
-		public static boolean shouldContinueExecutingPhase(@Nullable SonarPhase phase, EntityThrasher thrasher) {
+		public static boolean shouldContinueExecutingPhase(@Nullable SonarPhase phase, EntityThrasher thrasher, int sonarTicks) {
 			boolean defaultCondition = !thrasher.isStunned() && thrasher.isInWater() && thrasher.getPassengers().isEmpty() && thrasher.getAttackTarget() == null && thrasher.getPossibleDetectionPoint() != null && thrasher.world.getBlockState(thrasher.getPosition().down()).getBlock() == Blocks.WATER;
 			if(phase == null) {
 				return defaultCondition;
 			}
-			return defaultCondition && (phase.phaseCondition != null && phase.phaseCondition.test(thrasher) || phase.phaseCondition == null);
+			return defaultCondition && (phase.phaseCondition != null && phase.phaseCondition.test(thrasher, sonarTicks) || phase.phaseCondition == null);
 		}
 	}
 }

@@ -82,7 +82,7 @@ public class EntityUABoat extends BoatEntity {
 	}
 		
 	public EntityUABoat(World worldIn, double x, double y, double z) {
-		this(UAEntities.BOAT, worldIn);
+		this(UAEntities.BOAT.get(), worldIn);
 		this.setPosition(x, y, z);
 		this.setMotion(Vec3d.ZERO);
 		this.prevPosX = x;
@@ -91,7 +91,7 @@ public class EntityUABoat extends BoatEntity {
 	}
 
 	public EntityUABoat(FMLPlayMessages.SpawnEntity spawnEntity, World world) {
-		this(UAEntities.BOAT, world);
+		this(UAEntities.BOAT.get(), world);
 	}
 	
 	@Override

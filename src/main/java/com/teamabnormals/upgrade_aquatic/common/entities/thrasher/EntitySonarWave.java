@@ -35,7 +35,7 @@ public class EntitySonarWave extends Entity {
 	}
 	
 	public EntitySonarWave(World worldIn, double x, double y, double z) {
-		this(UAEntities.SONAR_WAVE, worldIn);
+		this(UAEntities.SONAR_WAVE.get(), worldIn);
 		this.setPosition(x, y, z);
 		this.prevPosX = x;
 		this.prevPosY = y;
@@ -43,7 +43,7 @@ public class EntitySonarWave extends Entity {
 	}
 	
 	public EntitySonarWave(FMLPlayMessages.SpawnEntity spawnEntity, World world) {
-		this(UAEntities.SONAR_WAVE, world);
+		this(UAEntities.SONAR_WAVE.get(), world);
 	}
 
 	@Override
@@ -79,6 +79,9 @@ public class EntitySonarWave extends Entity {
 			this.remove();
 		}
 	}
+	
+	@Override
+	protected void pushOutOfBlocks(double x, double y, double z) {}
 	
 	public void fireSonarWave(EntityThrasher thrasher) {
 		float xMotion = -MathHelper.sin(thrasher.rotationYaw * ((float) Math.PI / 180F)) * MathHelper.cos(thrasher.rotationPitch * ((float) Math.PI / 180F));

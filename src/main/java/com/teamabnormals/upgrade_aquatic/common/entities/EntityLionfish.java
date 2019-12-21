@@ -37,6 +37,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
@@ -57,7 +58,7 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 	int lastTimeSinceHungry;
 
 	public EntityLionfish(EntityType<? extends EntityLionfish> type, World world) {
-		super(UAEntities.LIONFISH, world);
+		super(UAEntities.LIONFISH.get(), world);
 		this.moveController = new EntityLionfish.MoveHelperController(this);
 	}
 	
@@ -160,6 +161,11 @@ public class EntityLionfish extends EntityBucketableWaterMob {
     public int getMaxSpawnedInChunk() {
         return 3;
     }
+    
+    @Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(UAItems.LIONFISH_SPAWN_EGG.get());
+	}
 
 	@Override
 	public ItemStack getBucket() {
@@ -261,7 +267,7 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 	
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.OCEAN && biome.getPrecipitation() != RainType.SNOW) {
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.LIONFISH, 15, 1, 1));
+			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.LIONFISH.get(), 15, 1, 1));
         }
 	}
 	

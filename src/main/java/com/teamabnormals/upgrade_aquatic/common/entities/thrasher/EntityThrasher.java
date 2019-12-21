@@ -12,14 +12,12 @@ import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
 import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFindDetectionPointGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFireSonarGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
@@ -40,6 +38,7 @@ import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.datasync.DataParameter;
@@ -53,6 +52,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
@@ -70,12 +70,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	public static final Predicate<Entity> ENEMY_MATCHER = (entity) -> {
 		if (entity == null) {
 			return false;
-		} else {
-			if(entity instanceof PlayerEntity && !(((PlayerEntity)entity).isCreative() || ((PlayerEntity)entity).isSpectator())) {
-				return entity.isInWater();
-			}
-			return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof EntityThrasher) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof EntityLionfish)) && entity.isInWater();
 		}
+		if(entity instanceof PlayerEntity && !(((PlayerEntity)entity).isCreative() || ((PlayerEntity)entity).isSpectator())) {
+			return entity.isInWater();
+		}
+		return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof EntityThrasher) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof EntityLionfish)) && entity.isInWater();
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
 	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE)).setSaved(false);
@@ -118,7 +117,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
@@ -171,20 +170,24 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void updatePassenger(Entity passenger) {
 		if(passenger instanceof LivingEntity) {
-			float distance = 1.2F;
+			float distance = this.getMountDistance();
 			
 			double dx = Math.cos((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			double dy = -Math.sin(this.rotationPitch * (Math.PI / 180.0D));
 			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			
-			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.posZ + dz);
+			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY, this.posZ + dz);
 			
-			double offset = passenger instanceof PlayerEntity ? 0.3D : 0.0D;
+			double offset = passenger instanceof PlayerEntity ? this.getMountedYOffset() - 0.2D : this.getMountedYOffset() - 0.5F;
 			
 			passenger.setPosition(riderPos.x, this.posY + dy + offset, riderPos.z);
 		} else {
 			super.updatePassenger(passenger);
 		}
+	}
+	
+	public float getMountDistance() {
+		return 1.2F;
 	}
 	
 	@Override
@@ -354,6 +357,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void tick() {
 		super.tick();
+		
+		if(this.getAttackTarget() != null && !this.getAttackTarget().isAlive() && this.ticksSinceLastSonarFire >= 55 && this.getRNG().nextFloat() < 0.05F) {
+			this.setAttackTarget(null);
+		}
+		
 		if(!this.isAIDisabled()) {
 			if(this.isAnimationPlaying(SONAR_FIRE_ANIMATION)) {
 				this.ticksSinceLastSonarFire = 0;
@@ -368,12 +376,13 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 					this.attackEntityFrom(DamageSource.DRYOUT, 1.0F);
 				}
 
-				if(this.onGround && !this.isStunned()) {
+				if(!this.isInWater() && !this.isStunned() && this.onGround) {
 					this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F), 0.5D, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.2F)));
 					this.rotationYaw = this.rand.nextFloat() * 360.0F;
 					this.rotationPitch = this.rand.nextFloat() * -50.0F;
 					this.onGround = false;
 					this.isAirBorne = true;
+					this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
 				}
 			}
 			if(this.isWorldRemote()) {
@@ -466,15 +475,21 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(UAItems.THRASHER_SPAWN_EGG.get());
+	}
+	
+	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return UASounds.THRASHER_HURT.get();
+		return this.isInWater() ? UASounds.THRASHER_HURT.get() : UASounds.THRASHER_HURT_LAND.get();
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return UASounds.THRASHER_DEATH.get();
+		return this.isInWater() ? UASounds.THRASHER_DEATH.get() : UASounds.THRASHER_DEATH_LAND.get();
 	}
 	
+	@Nullable
 	@Override
 	protected SoundEvent getAmbientSound() {
 		if(this.isAnimationPlaying(THRASH_ANIMATION)) {
@@ -482,6 +497,30 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		}
 		return this.isInWater() ? UASounds.THRASHER_AMBIENT.get() : UASounds.THRASHER_AMBIENT_LAND.get();
 	}
+	
+	protected SoundEvent getFlopSound() {
+		return UASounds.THRASHER_FLOP.get();
+	}
+	
+	public SoundEvent getSonarFireSound() {
+		return UASounds.THRASHER_SONAR_FIRE.get();
+	}
+	
+	public SoundEvent getThrashingSound() {
+		return UASounds.THRASHER_THRASH.get();
+	}
+	
+	protected SoundEvent getStunSound() {
+		return UASounds.THRASHER_STUN.get();
+	}
+	
+	@Override
+	protected SoundEvent getSwimSound() {
+		return UASounds.THRASHER_SWIM.get();
+	}
+	
+	@Override
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {}
 	
 	@Override
 	public int getTalkInterval() {
@@ -499,7 +538,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.COLD)) {
-			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER, 80, 1, 2));
+			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER.get(), 80, 1, 2));
 		}
 	}
 	

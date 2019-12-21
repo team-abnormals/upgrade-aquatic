@@ -62,6 +62,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
@@ -497,6 +498,11 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	@Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(UAItems.PIKE_SPAWN_EGG.get());
+	}
+	
+	@Override
 	public EntitySize getSize(Pose poseIn) {
 		float scale = 0F;
 		if(this.getPikeType() < 12) {
@@ -788,11 +794,11 @@ public class EntityPike extends EntityBucketableWaterMob {
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER) {
         	if(biome.getCategory() == Category.SWAMP) {
-        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE, 5, 1, 2));
+        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE.get(), 5, 1, 2));
         		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(EntityType.SQUID, 5, 1, 2));
         		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(EntityType.SALMON, 5, 1, 5));
         	} else {
-        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE, 11, 1, 2));
+        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE.get(), 11, 1, 2));
         	}
         }
 	}

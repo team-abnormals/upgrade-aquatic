@@ -21,9 +21,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class ItemMobBucket extends BucketItem {
-	private final EntityType<?> entityType;
+	private final Supplier<EntityType<? extends EntityBucketableWaterMob>> entityType;
 
-	public ItemMobBucket(EntityType<? extends EntityBucketableWaterMob> entityType, Supplier<? extends Fluid> supplier, Item.Properties builder) {
+	public ItemMobBucket(Supplier<EntityType<? extends EntityBucketableWaterMob>> entityType, Supplier<? extends Fluid> supplier, Item.Properties builder) {
 		super(supplier, builder);
 		this.entityType = entityType;
 	}
@@ -39,7 +39,7 @@ public class ItemMobBucket extends BucketItem {
 	}
 
 	private void placeEntity(World worldIn, ItemStack p_205357_2_, BlockPos pos) {
-		Entity entity = this.entityType.spawn(worldIn, p_205357_2_, (PlayerEntity)null, pos, SpawnReason.BUCKET, true, false);
+		Entity entity = this.entityType.get().spawn(worldIn, p_205357_2_, (PlayerEntity)null, pos, SpawnReason.BUCKET, true, false);
 		if (entity != null) {
 			((EntityBucketableWaterMob)entity).setFromBucket(true);
 		}

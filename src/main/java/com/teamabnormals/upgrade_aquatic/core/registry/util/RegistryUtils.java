@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.core.registry.util;
 
 import java.util.function.Supplier;
 
+import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.common.items.itemblocks.ItemBlockUpsideDown;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
@@ -54,6 +55,12 @@ public class RegistryUtils {
 	public static <I extends Item> RegistryObject<I> createItem(String name, Supplier<? extends I> supplier) {
 		RegistryObject<I> item = UAItems.ITEMS.register(name, supplier);
 		return item;
+	}
+	
+	public static RegistryObject<Item> createSpawnEggItem(String entityName, Supplier<EntityType<?>> supplier, int primaryColor, int secondaryColor) {
+		RegistryObject<Item> spawnEgg = UAItems.ITEMS.register(entityName + "_spawn_egg", () -> new UASpawnEggItem(supplier, primaryColor, secondaryColor, new Item.Properties().group(ItemGroup.MISC)));
+		UAItems.SPAWN_EGGS.add(spawnEgg);
+		return spawnEgg;
 	}
 	
 }

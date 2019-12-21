@@ -26,7 +26,7 @@ public class EffectInsomnia extends InstantEffect {
     		StatisticsManager statisticsManager = playerMP.getStats();
     		statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), (24000 * (amplifier + 1)));
     	} else if(entity instanceof PhantomEntity) {
-    		EntityFlare flare = UAEntities.FLARE.create(entity.world);
+    		EntityFlare flare = UAEntities.FLARE.get().create(entity.world);
     		flare.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
     		flare.setNoAI(((MobEntity) entity).isAIDisabled());
     		if(entity.hasCustomName()) {

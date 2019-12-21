@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.common.items;
 import java.util.List;
 import java.util.function.Supplier;
 
+import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -20,7 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class ItemPikeBucket extends ItemMobBucket {
 
-	public ItemPikeBucket(EntityType<? extends EntityPike> entityType, Supplier<? extends Fluid> supplier, Properties builder) {
+	public ItemPikeBucket(Supplier<EntityType<? extends EntityBucketableWaterMob>> entityType, Supplier<? extends Fluid> supplier, Properties builder) {
 		super(entityType, supplier, builder);
 		this.addPropertyOverride(new ResourceLocation("variant"), (stack, world, entity) -> {
 			CompoundNBT compoundnbt = stack.getTag();
