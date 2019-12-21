@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.proxy;
 
 import com.teamabnormals.upgrade_aquatic.client.render.RenderFlare;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderGreatThrasher;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderLionfish;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderNautilus;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderPike;
@@ -13,6 +14,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
@@ -31,6 +33,7 @@ public class ClientProxy extends ServerProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityPike.class, RenderPike::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityLionfish.class, RenderLionfish::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrasher.class, RenderThrasher::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityGreatThrasher.class, RenderGreatThrasher::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityUABoat.class, RenderUABoat::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityFlare.class, RenderFlare::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySonarWave.class, RenderSonarWave::new);

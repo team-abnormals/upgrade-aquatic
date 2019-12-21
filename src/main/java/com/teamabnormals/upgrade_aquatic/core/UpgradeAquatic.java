@@ -1,9 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
@@ -19,6 +15,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.item.Item;
@@ -83,15 +80,11 @@ public class UpgradeAquatic {
 	
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		proxy.preInit();
-		EntityNautilus.addSpawn();
-		EntityPike.addSpawn();
-		EntityLionfish.addSpawn();
-		EntityThrasher.addSpawn();
+		UAEntitySpawns.addSpawnsToBiomes();
 		UADispenseBehaviorRegistry.registerDispenseBehaviors();
 		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();
 		UACompostables.registerCompostables();
-		this.changeVanillaFields();
 	}
 	
 	@OnlyIn(Dist.CLIENT)
@@ -114,7 +107,4 @@ public class UpgradeAquatic {
 		.consumer(MessageCAnimation::handle)
 		.add();
 	}
-	
-	//Unused for now
-	void changeVanillaFields() {}
 }

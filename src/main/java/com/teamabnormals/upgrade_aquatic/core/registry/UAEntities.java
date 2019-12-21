@@ -37,13 +37,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class UAEntities {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, Reference.MODID);
 	
-	public static final RegistryObject<EntityType<EntityUABoat>> BOAT          = ENTITY_TYPES.register("boat", () -> createEntity(EntityUABoat::new, EntityUABoat::new, EntityClassification.MISC, "boat", 1.375F, 0.5625F));
-	public static final RegistryObject<EntityType<EntitySonarWave>> SONAR_WAVE = ENTITY_TYPES.register("sonar_wave", () -> createEntity(EntitySonarWave::new, EntitySonarWave::new, EntityClassification.AMBIENT, "sonar_wave", 1.0F, 1.0F));
-	public static final RegistryObject<EntityType<EntityNautilus>> NAUTILUS    = ENTITY_TYPES.register("nautilus", () -> createLivingEntity(EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F));
-	public static final RegistryObject<EntityType<EntityPike>> PIKE            = ENTITY_TYPES.register("pike", () -> createLivingEntity(EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F));
-	public static final RegistryObject<EntityType<EntityLionfish>> LIONFISH    = ENTITY_TYPES.register("lionfish", () -> createLivingEntity(EntityLionfish::new, EntityClassification.CREATURE, "lionfish", 0.6F, 0.5F));
-	public static final RegistryObject<EntityType<EntityThrasher>> THRASHER    = ENTITY_TYPES.register("thrasher", () -> createLivingEntity(EntityThrasher::new, EntityClassification.MONSTER, "thrasher", 1.6F, 0.9F));
-	public static final RegistryObject<EntityType<EntityFlare>> FLARE          = ENTITY_TYPES.register("flare", () -> createLivingEntity(EntityFlare::new, EntityClassification.MONSTER, "flare", 0.9F, 0.5F));
+	public static final RegistryObject<EntityType<EntityUABoat>> BOAT                     = ENTITY_TYPES.register("boat", () -> createEntity(EntityUABoat::new, EntityUABoat::new, EntityClassification.MISC, "boat", 1.375F, 0.5625F));
+	public static final RegistryObject<EntityType<EntitySonarWave>> SONAR_WAVE            = ENTITY_TYPES.register("sonar_wave", () -> createEntity(EntitySonarWave::new, EntitySonarWave::new, EntityClassification.AMBIENT, "sonar_wave", 1.0F, 1.0F));
+	public static final RegistryObject<EntityType<EntityNautilus>> NAUTILUS               = ENTITY_TYPES.register("nautilus", () -> createLivingEntity(EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F));
+	public static final RegistryObject<EntityType<EntityPike>> PIKE                       = ENTITY_TYPES.register("pike", () -> createLivingEntity(EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F));
+	public static final RegistryObject<EntityType<EntityLionfish>> LIONFISH               = ENTITY_TYPES.register("lionfish", () -> createLivingEntity(EntityLionfish::new, EntityClassification.CREATURE, "lionfish", 0.6F, 0.5F));
+	public static final RegistryObject<EntityType<EntityThrasher>> THRASHER               = ENTITY_TYPES.register("thrasher", () -> createLivingEntity(EntityThrasher::new, EntityClassification.MONSTER, "thrasher", 1.6F, 0.9F));
+	public static final RegistryObject<EntityType<EntityGreatThrasher>> GREAT_THRASHER    = ENTITY_TYPES.register("great_thrasher", () -> createLivingEntity(EntityGreatThrasher::new, EntityClassification.MONSTER, "great_thrasher", 2.8F, 1.575F));
+	public static final RegistryObject<EntityType<EntityFlare>> FLARE                     = ENTITY_TYPES.register("flare", () -> createLivingEntity(EntityFlare::new, EntityClassification.MONSTER, "flare", 0.9F, 0.5F));
 	
 	private static <T extends LivingEntity> EntityType<T> createLivingEntity(EntityType.IFactory<T> factory, EntityClassification entityClassification, String name, float width, float height){
 		ResourceLocation location = new ResourceLocation(Reference.MODID, name);

@@ -117,7 +117,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
 		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
@@ -170,20 +170,24 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void updatePassenger(Entity passenger) {
 		if(passenger instanceof LivingEntity) {
-			float distance = 1.2F;
+			float distance = this.getMountDistance();
 			
 			double dx = Math.cos((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			double dy = -Math.sin(this.rotationPitch * (Math.PI / 180.0D));
 			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			
-			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.posZ + dz);
+			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY, this.posZ + dz);
 			
-			double offset = passenger instanceof PlayerEntity ? 0.3D : 0.0D;
+			double offset = passenger instanceof PlayerEntity ? this.getMountedYOffset() - 0.2D : this.getMountedYOffset() - 0.5F;
 			
 			passenger.setPosition(riderPos.x, this.posY + dy + offset, riderPos.z);
 		} else {
 			super.updatePassenger(passenger);
 		}
+	}
+	
+	public float getMountDistance() {
+		return 1.2F;
 	}
 	
 	@Override
