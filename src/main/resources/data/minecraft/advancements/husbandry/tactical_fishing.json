@@ -71,6 +71,14 @@
           "item": "minecraft:salmon_bucket"
         }
       }
+    },
+    "squid_bucket": {
+      "trigger": "minecraft:filled_bucket",
+      "conditions": {
+        "item": {
+          "item": "minecraft:squid_bucket"
+        }
+      }
     }
   },
   "requirements": [

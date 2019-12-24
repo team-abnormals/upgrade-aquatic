@@ -30,7 +30,9 @@ import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.monster.IMob;
@@ -78,6 +80,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
 	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE)).setSaved(false);
+	public static final IAttribute STUN_DAMAGE_THRESHOLD = new RangedAttribute(null, "thrasher.stun_threshold", 6.0D, 6.0D, 12.0D).setShouldWatch(true);
 	private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> WATER_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> STUN_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
@@ -117,6 +120,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
+		this.getAttributes().registerAttribute(STUN_DAMAGE_THRESHOLD);
+		
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
 		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
@@ -274,7 +279,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 							difficultyDividend = 16;
 							break;
 					}
-					int chance = amount >= 6 ? 1 : difficultyDividend / (int) Math.max(1, amount);
+					int chance = amount >= this.getStunDamageThreshold() ? 1 : difficultyDividend / (int) Math.max(1, amount);
 					if(this.getRNG().nextInt(chance) == 0) {
 						this.setHitsTillStun(this.getHitsLeftTillStun() - 1);
 					}
@@ -525,6 +530,10 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public int getTalkInterval() {
 		return 100;
+	}
+	
+	public double getStunDamageThreshold() {
+		return this.getAttribute(STUN_DAMAGE_THRESHOLD).getValue();
 	}
 	
 	@Override

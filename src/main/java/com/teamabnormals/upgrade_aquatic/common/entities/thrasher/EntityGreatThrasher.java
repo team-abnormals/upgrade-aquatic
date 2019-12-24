@@ -22,9 +22,10 @@ public class EntityGreatThrasher extends EntityThrasher {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
+		this.getAttribute(STUN_DAMAGE_THRESHOLD).setBaseValue(8.0D);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(125.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16.0D);
 	}
 	
 	@Override
@@ -43,7 +44,7 @@ public class EntityGreatThrasher extends EntityThrasher {
 	}
 	
 	public static void addSpawn() {
-		Biomes.DEEP_FROZEN_OCEAN.getSpawns(EntityClassification.WATER_CREATURE).add(new SpawnListEntry(UAEntities.GREAT_THRASHER.get(), 30, 1, 1));
+		Biomes.DEEP_FROZEN_OCEAN.getSpawns(EntityClassification.WATER_CREATURE).add(new SpawnListEntry(UAEntities.GREAT_THRASHER.get(), 10, 1, 1));
 	}
 
 }

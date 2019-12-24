@@ -12,6 +12,7 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureEntity;
@@ -26,6 +27,7 @@ import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.DolphinEntity;
+import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
@@ -43,10 +45,12 @@ import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
@@ -93,6 +97,34 @@ public class EntityEvents {
 					((PhantomEntity) entity).setAttackTarget(null);
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onInteractEntity(EntityInteract event) {
+		Entity entity = event.getTarget();
+		PlayerEntity player = event.getPlayer();
+		ItemStack stack = event.getItemStack();
+		if(stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof SquidEntity) {
+			entity.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
+			stack.shrink(1);
+			ItemStack bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
+			
+			if(entity.hasCustomName()) {
+				bucket.setDisplayName(entity.getCustomName());
+			}
+			
+			if(!event.getWorld().isRemote) {
+				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity)player, bucket);
+			}
+            
+			if(stack.isEmpty()) {
+				player.setHeldItem(event.getHand(), bucket);
+			} else if(!player.inventory.addItemStackToInventory(bucket)) {
+				player.dropItem(bucket, false);
+			}
+			
+			entity.remove();
 		}
 	}
 	
