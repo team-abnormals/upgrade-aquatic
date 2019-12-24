@@ -378,6 +378,7 @@
   "item.upgrade_aquatic.pike_spawn_egg": "Яйцо призыва щуки",
   "item.upgrade_aquatic.lionfish_spawn_egg": "Яйцо призыва крылатки-зебры",
   "item.upgrade_aquatic.thrasher_spawn_egg": "Яйцо призыва острозуба",
+  "item.upgrade_aquatic.great_thrasher_spawn_egg": "Яйцо призыва великого острозуба",
   "item.upgrade_aquatic.flare_spawn_egg": "Яйцо призыва засвета",
 
   "item.upgrade_aquatic.boiled_pickerelweed_purple": "Вареная фиолетовая понтедерия",
@@ -417,6 +418,7 @@
   "entity.upgrade_aquatic.pike": "Щука",
   "entity.upgrade_aquatic.lionfish": "Крылатка-зебра",
   "entity.upgrade_aquatic.thrasher": "Острозуб",
+  "entity.upgrade_aquatic.great_thrasher": "Великий острозуб",
   "entity.upgrade_aquatic.flare": "Засвет",
 
   "_comment": "Зелья и эффекты",
