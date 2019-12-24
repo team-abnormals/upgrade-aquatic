@@ -44,7 +44,7 @@ public class EntityGreatThrasher extends EntityThrasher {
 	}
 	
 	public static void addSpawn() {
-		Biomes.DEEP_FROZEN_OCEAN.getSpawns(EntityClassification.WATER_CREATURE).add(new SpawnListEntry(UAEntities.GREAT_THRASHER.get(), 30, 1, 1));
+		Biomes.DEEP_FROZEN_OCEAN.getSpawns(EntityClassification.WATER_CREATURE).add(new SpawnListEntry(UAEntities.GREAT_THRASHER.get(), 10, 1, 1));
 	}
 
 }
