@@ -22,9 +22,10 @@ public class EntityGreatThrasher extends EntityThrasher {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
+		this.getAttribute(STUN_DAMAGE_THRESHOLD).setBaseValue(8.0D);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(125.0D);
+		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16.0D);
 	}
 	
 	@Override
