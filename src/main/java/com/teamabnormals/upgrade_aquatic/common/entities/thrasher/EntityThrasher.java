@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entities.thrasher;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 import java.util.function.Predicate;
 
@@ -62,6 +63,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
+import net.minecraft.world.biome.DeepFrozenOceanBiome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.BiomeDictionary;
@@ -159,6 +161,15 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		this.setAir(this.getMaxAir());
+		if(reason == SpawnReason.NATURAL && worldIn.getBiome(this.getPosition()) instanceof DeepFrozenOceanBiome) {
+			Random rand = new Random();
+			if(rand.nextFloat() < 0.25F) {
+				EntityGreatThrasher greatThrasher = UAEntities.GREAT_THRASHER.get().create(this.world);
+				greatThrasher.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+				this.world.addEntity(greatThrasher);
+				this.remove();
+			}
+		}
 		return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 	
@@ -599,7 +610,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	public boolean isStunned() {
 		return this.getStunTime() > 0;
 	}
-	
+
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		compound.putBoolean("IsMoving", this.isMoving());

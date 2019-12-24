@@ -77,6 +77,7 @@ public class UAEntities {
 		EntitySpawnPlacementRegistry.register(PIKE.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
 		EntitySpawnPlacementRegistry.register(LIONFISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::coralCondition);
 		EntitySpawnPlacementRegistry.register(THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::ravineMobCondition);
+		EntitySpawnPlacementRegistry.register(GREAT_THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::ravineMobCondition);
 	}
     
 	private static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
