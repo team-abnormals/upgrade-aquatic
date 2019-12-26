@@ -1,4 +1,5 @@
 {
+	"parent": "block/block",
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "upgrade_aquatic:block/beachgrass_thatch",

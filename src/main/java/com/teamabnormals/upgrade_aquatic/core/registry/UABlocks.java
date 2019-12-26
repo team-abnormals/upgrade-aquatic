@@ -405,7 +405,11 @@ public class UABlocks {
 	public static Block DRIFTWOOD_BUTTON         = new BlockButtonBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_button");
 	public static Block DRIFTWOOD_TRAPDOOR       = new BlockTrapdoorBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_trapdoor");
 
-	public static Block BEACHGRASS_THATCH              = new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch");
+	public static Block BEACHGRASS_THATCH              = new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+		public BlockRenderLayer getRenderLayer() {
+			return BlockRenderLayer.CUTOUT;
+		};
+	}.setRegistryName(Reference.MODID, "beachgrass_thatch");
 	public static Block BEACHGRASS_THATCH_SLAB         = new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
 		public BlockRenderLayer getRenderLayer() {
 			return BlockRenderLayer.CUTOUT;
