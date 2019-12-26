@@ -63,6 +63,7 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -70,6 +71,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 
+//TODO: RenderLayer is gone in 1.15.x
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
@@ -404,8 +406,16 @@ public class UABlocks {
 	public static Block DRIFTWOOD_TRAPDOOR       = new BlockTrapdoorBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_trapdoor");
 
 	public static Block BEACHGRASS_THATCH              = new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch");
-	public static Block BEACHGRASS_THATCH_SLAB         = new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch_slab");
-	public static Block BEACHGRASS_THATCH_STAIRS       = new StairsBlock(BEACHGRASS_THATCH.getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch_stairs");	
+	public static Block BEACHGRASS_THATCH_SLAB         = new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+		public BlockRenderLayer getRenderLayer() {
+			return BlockRenderLayer.CUTOUT;
+		};
+	}.setRegistryName(Reference.MODID, "beachgrass_thatch_slab");
+	public static Block BEACHGRASS_THATCH_STAIRS       = new StairsBlock(BEACHGRASS_THATCH.getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+		public BlockRenderLayer getRenderLayer() {
+			return BlockRenderLayer.CUTOUT;
+		};
+	}.setRegistryName(Reference.MODID, "beachgrass_thatch_stairs");
 	public static Block BEACHGRASS                     = new BlockBeachgrass(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "beachgrass");
 	public static Block TALL_BEACHGRASS                = new BlockBeachgrassTall(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "tall_beachgrass");
 	
@@ -416,7 +426,11 @@ public class UABlocks {
 	public static Block DRIFTWOOD_VERTICAL_SLAB                 = new BlockVerticalSlab(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_vertical_slab");
 	public static Block DRIFTWOOD_BOOKSHELF                     = new BlockUABookshelf(Properties.from(Blocks.BOOKSHELF)).setRegistryName(Reference.MODID, "driftwood_bookshelf");
 	public static Block DRIFTWOOD_LADDER                        = new BlockUALadder(Properties.from(Blocks.LADDER)).setRegistryName(Reference.MODID, "driftwood_ladder");
-	public static Block BEACHGRASS_THATCH_VERTICAL_SLAB         = new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH)).setRegistryName(Reference.MODID, "beachgrass_thatch_vertical_slab");
+	public static Block BEACHGRASS_THATCH_VERTICAL_SLAB         = new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH)) {
+		public BlockRenderLayer getRenderLayer() {
+			return BlockRenderLayer.CUTOUT;
+		};
+	}.setRegistryName(Reference.MODID, "beachgrass_thatch_vertical_slab");
 	public static Block TOOTH_VERTICAL_SLAB                     = new BlockVerticalSlab(Properties.from(TOOTH_BLOCK)).setRegistryName(Reference.MODID, "tooth_vertical_slab");
 	public static Block KELPY_COBBLESTONE_VERTICAL_SLAB         = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone_vertical_slab");
 	public static Block TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB  = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone_vertical_slab");
