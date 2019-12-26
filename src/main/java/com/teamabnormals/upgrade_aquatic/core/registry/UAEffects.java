@@ -27,8 +27,8 @@ public class UAEffects {
 	public static final RegistryObject<Potion> INSOMNIA_STRONG    = POTIONS.register("insomnia_strong", () -> new Potion(new EffectInstance(INSOMNIA.get(), 0, 1)));
 	public static final RegistryObject<Potion> RESTFULNESS_NORMAL = POTIONS.register("restfulness", () -> new Potion(new EffectInstance(RESTFULNESS.get())));
 	public static final RegistryObject<Potion> RESTFULNESS_STRONG = POTIONS.register("restfulness_strong", () -> new Potion(new EffectInstance(RESTFULNESS.get(), 0, 1)));
-	public static final RegistryObject<Potion> REPELLENCE_NORMAL  = POTIONS.register("repellence", () -> new Potion(new EffectInstance(REPELLENCE.get())));
-	public static final RegistryObject<Potion> REPELLENCE_STRONG  = POTIONS.register("repellence_strong", () -> new Potion(new EffectInstance(REPELLENCE.get(), 0, 1)));
+	public static final RegistryObject<Potion> REPELLENCE_NORMAL  = POTIONS.register("repellence", () -> new Potion(new EffectInstance(REPELLENCE.get(), 3600)));
+	public static final RegistryObject<Potion> REPELLENCE_STRONG  = POTIONS.register("repellence_strong", () -> new Potion(new EffectInstance(REPELLENCE.get(), 1800, 1)));
 	public static final RegistryObject<Potion> REPELLENCE_LONG    = POTIONS.register("repellence_long", () -> new Potion(new EffectInstance(REPELLENCE.get(), 9600)));
 	
 	public static void registerBrewingRecipes() {
