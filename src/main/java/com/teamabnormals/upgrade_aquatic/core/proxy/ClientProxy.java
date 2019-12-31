@@ -18,6 +18,8 @@ import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThr
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
+
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
@@ -25,6 +27,8 @@ public class ClientProxy extends ServerProxy {
 
 	@Override
 	public void preInit() {
+		UARenderLayers.setBlockRenderLayers();
+		
 		//Tile Entities
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityElderEye.class, new TileEntityElderEyeRenderer());
 		

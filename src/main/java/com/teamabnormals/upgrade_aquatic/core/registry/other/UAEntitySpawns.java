@@ -13,7 +13,6 @@ public class UAEntitySpawns {
 		EntityPike.addSpawn();
 		EntityLionfish.addSpawn();
 		EntityThrasher.addSpawn();
-		EntityGreatThrasher.addSpawn();
 	}
 	
 }

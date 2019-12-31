@@ -74,7 +74,7 @@ public class ThrasherFireSonarGoal extends Goal {
 				this.originalYaw = this.thrasher.rotationYaw;
 				this.originalPitch = this.thrasher.rotationPitch;
 				NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.SONAR_FIRE_ANIMATION);
-				this.thrasher.playSound(this.thrasher.getSonarFireSound(), 8.0F, 1.0F);
+				this.thrasher.playSound(this.thrasher.getSonarFireSound(), 3.5F, 1.0F);
 			}
 			
 			this.sonarTicks++;

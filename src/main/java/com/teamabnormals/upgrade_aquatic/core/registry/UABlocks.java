@@ -63,6 +63,7 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -70,6 +71,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 
+//TODO: RenderLayer is gone in 1.15.x
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
@@ -224,12 +226,12 @@ public class UABlocks {
 	
 	public static Block CORALSTONE                       = new BlockCoralstone(UAProperties.CORALSTONE, false).setRegistryName(Reference.MODID, "coralstone");
 	public static Block BUBBLE_CORALSTONE                = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "bubble_coralstone");
-	public static Block HORN_CORALSTONE             	  = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "horn_coralstone");
+	public static Block HORN_CORALSTONE             	 = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "horn_coralstone");
 	public static Block TUBE_CORALSTONE                  = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.TUBE_CORAL, Blocks.TUBE_CORAL_FAN, Blocks.TUBE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "tube_coralstone");
 	public static Block BRAIN_CORALSTONE                 = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.BRAIN_CORAL, Blocks.BRAIN_CORAL_FAN, Blocks.BRAIN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "brain_coralstone");
 	public static Block FIRE_CORALSTONE                  = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.FIRE_CORAL, Blocks.FIRE_CORAL_FAN, Blocks.FIRE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "fire_coralstone");	
-	public static Block ACAN_CORALSTONE               	  = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {ACAN_CORAL, ACAN_CORAL_FAN, ACAN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "acan_coralstone");
-	public static Block FINGER_CORALSTONE           	  = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {FINGER_CORAL, FINGER_CORAL_FAN, FINGER_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "finger_coralstone");
+	public static Block ACAN_CORALSTONE               	 = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {ACAN_CORAL, ACAN_CORAL_FAN, ACAN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "acan_coralstone");
+	public static Block FINGER_CORALSTONE           	 = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {FINGER_CORAL, FINGER_CORAL_FAN, FINGER_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "finger_coralstone");
 	public static Block STAR_CORALSTONE                  = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {STAR_CORAL, STAR_CORAL_FAN, STAR_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "star_coralstone");
 	public static Block MOSS_CORALSTONE                  = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {MOSS_CORAL, MOSS_CORAL_FAN, MOSS_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "moss_coralstone");
 	public static Block PETAL_CORALSTONE                 = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {PETAL_CORAL, PETAL_CORAL_FAN, PETAL_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "petal_coralstone");
@@ -403,9 +405,21 @@ public class UABlocks {
 	public static Block DRIFTWOOD_BUTTON         = new BlockButtonBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_button");
 	public static Block DRIFTWOOD_TRAPDOOR       = new BlockTrapdoorBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_trapdoor");
 
-	public static Block BEACHGRASS_THATCH              = new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch");
-	public static Block BEACHGRASS_THATCH_SLAB         = new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch_slab");
-	public static Block BEACHGRASS_THATCH_STAIRS       = new StairsBlock(BEACHGRASS_THATCH.getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "beachgrass_thatch_stairs");	
+	public static Block BEACHGRASS_THATCH              = new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+		public BlockRenderLayer getRenderLayer() {
+			return BlockRenderLayer.CUTOUT;
+		};
+	}.setRegistryName(Reference.MODID, "beachgrass_thatch");
+	public static Block BEACHGRASS_THATCH_SLAB         = new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+		public BlockRenderLayer getRenderLayer() {
+			return BlockRenderLayer.CUTOUT;
+		};
+	}.setRegistryName(Reference.MODID, "beachgrass_thatch_slab");
+	public static Block BEACHGRASS_THATCH_STAIRS       = new StairsBlock(BEACHGRASS_THATCH.getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+		public BlockRenderLayer getRenderLayer() {
+			return BlockRenderLayer.CUTOUT;
+		};
+	}.setRegistryName(Reference.MODID, "beachgrass_thatch_stairs");
 	public static Block BEACHGRASS                     = new BlockBeachgrass(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "beachgrass");
 	public static Block TALL_BEACHGRASS                = new BlockBeachgrassTall(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "tall_beachgrass");
 	
@@ -416,7 +430,11 @@ public class UABlocks {
 	public static Block DRIFTWOOD_VERTICAL_SLAB                 = new BlockVerticalSlab(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_vertical_slab");
 	public static Block DRIFTWOOD_BOOKSHELF                     = new BlockUABookshelf(Properties.from(Blocks.BOOKSHELF)).setRegistryName(Reference.MODID, "driftwood_bookshelf");
 	public static Block DRIFTWOOD_LADDER                        = new BlockUALadder(Properties.from(Blocks.LADDER)).setRegistryName(Reference.MODID, "driftwood_ladder");
-	public static Block BEACHGRASS_THATCH_VERTICAL_SLAB         = new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH)).setRegistryName(Reference.MODID, "beachgrass_thatch_vertical_slab");
+	public static Block BEACHGRASS_THATCH_VERTICAL_SLAB         = new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH)) {
+		public BlockRenderLayer getRenderLayer() {
+			return BlockRenderLayer.CUTOUT;
+		};
+	}.setRegistryName(Reference.MODID, "beachgrass_thatch_vertical_slab");
 	public static Block TOOTH_VERTICAL_SLAB                     = new BlockVerticalSlab(Properties.from(TOOTH_BLOCK)).setRegistryName(Reference.MODID, "tooth_vertical_slab");
 	public static Block KELPY_COBBLESTONE_VERTICAL_SLAB         = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone_vertical_slab");
 	public static Block TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB  = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone_vertical_slab");

@@ -107,6 +107,12 @@ public class EntitySonarWave extends Entity {
 	}
 	
 	@Override
+	public void onEnterBubbleColumn(boolean downwards) {}
+
+	@Override
+	public void onEnterBubbleColumnWithAirAbove(boolean downwards) {}
+	
+	@Override
 	protected void doWaterSplashEffect() {}
 	
 	@Override
