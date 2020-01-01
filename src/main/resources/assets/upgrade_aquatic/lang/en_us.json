@@ -458,6 +458,20 @@
   "item.minecraft.tipped_arrow.effect.repellence_strong": "Arrow of Repellence",
   "item.minecraft.tipped_arrow.effect.repellence_long": "Arrow of Repellence",
   
+  "effect.upgrade_aquatic.vibing": "Vibing",
+  "item.minecraft.potion.effect.vibing": "Potion of Vibing",
+  "item.minecraft.potion.effect.vibing_strong": "Potion of Vibing",
+  "item.minecraft.potion.effect.vibing_long": "Potion of Vibing",
+  "item.minecraft.splash_potion.effect.vibing": "Splash Potion of Vibing",
+  "item.minecraft.splash_potion.effect.vibing_strong": "Splash Potion of Vibing",
+  "item.minecraft.splash_potion.effect.vibing_long": "Splash Potion of Vibing",
+  "item.minecraft.lingering_potion.effect.vibing": "Lingering Potion of Vibing",
+  "item.minecraft.lingering_potion.effect.vibing_strong": "Lingering Potion of Vibing",
+  "item.minecraft.lingering_potion.effect.vibing_long": "Lingering Potion of Vibing",
+  "item.minecraft.tipped_arrow.effect.vibing": "Arrow of Vibing",
+  "item.minecraft.tipped_arrow.effect.vibing_strong": "Arrow of Vibing",
+  "item.minecraft.tipped_arrow.effect.vibing_long": "Arrow of Vibing",
+  
   "_comment": "Deaths",
   
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Guardian Spine",
