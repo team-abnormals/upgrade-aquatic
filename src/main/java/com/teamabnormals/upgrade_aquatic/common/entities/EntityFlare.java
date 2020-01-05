@@ -115,6 +115,11 @@ public class EntityFlare extends FlyingEntity {
 		return CreatureAttribute.UNDEFINED;
 	}
 	
+	@Override
+	public boolean canDespawn(double distanceToClosestPlayer) {
+	      return false;
+	}
+	
 	public void tick() {
 	    super.tick();
 	    if(this.world.isRemote) {
