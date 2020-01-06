@@ -1,7 +1,7 @@
 {
   "type": "minecraft:stonecutting",
   "ingredient": {
-    "item": "upgrade_aquatic:tongue_kelpy_stone_brick"
+    "item": "upgrade_aquatic:tongue_kelpy_stone_bricks"
   },
   "result": "upgrade_aquatic:tongue_kelpy_stone_brick_vertical_slab",
   "count": 2
