@@ -10,5 +10,9 @@ public class BlockUACoralFanDead extends CoralFanBlock {
 	public BlockUACoralFanDead() {
 		super(Block.Properties.create(Material.ROCK, MaterialColor.GRAY).doesNotBlockMovement().hardnessAndResistance(0F));
 	}
+	
+	public BlockUACoralFanDead(Block.Properties properties) {
+		super(properties);
+	}
 
 }

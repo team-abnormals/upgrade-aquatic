@@ -29,6 +29,10 @@ public class BlockCoralShowerDead extends DeadCoralPlantBlock {
 		super(Block.Properties.create(Material.ROCK, MaterialColor.WOOD).doesNotBlockMovement().hardnessAndResistance(0F));
 	}
 	
+	public BlockCoralShowerDead(Block.Properties properties) {
+		super(properties);
+	}
+	
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;

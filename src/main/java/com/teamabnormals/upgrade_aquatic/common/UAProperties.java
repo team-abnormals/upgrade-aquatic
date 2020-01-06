@@ -30,11 +30,11 @@ public class UAProperties {
 	}
 	
 	public static Block.Properties PRISMARINE_CORAL_BLOCK_BASE(boolean elder) {
-		MaterialColor color = elder ? MaterialColor.CYAN : MaterialColor.WOOD;
+		MaterialColor color = elder ? MaterialColor.DIAMOND : MaterialColor.WHITE_TERRACOTTA;
 		return Block.Properties.create(Material.CORAL, color).lightValue(3).sound(SoundType.GLASS);
 	}
 	
-	public static Block.Properties ELDER_PRISMARINE_CORAL = Block.Properties.create(Material.CORAL, MaterialColor.WOOD).lightValue(3).sound(SoundType.GLASS);
+	public static Block.Properties ELDER_PRISMARINE_CORAL = Block.Properties.create(Material.CORAL, MaterialColor.WHITE_TERRACOTTA).lightValue(3).sound(SoundType.GLASS);
 	
 	public static final Block.Properties SEAROCKET(boolean pink) {
 		MaterialColor color = pink ? MaterialColor.PINK : MaterialColor.WHITE_TERRACOTTA;
