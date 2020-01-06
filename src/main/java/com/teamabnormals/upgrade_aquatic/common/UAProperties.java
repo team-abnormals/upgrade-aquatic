@@ -25,14 +25,20 @@ public class UAProperties {
 		return Block.Properties.create(Material.OCEAN_PLANT, color).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.WET_GRASS);
 	}
 	
-	public static Block.Properties PRISMARINE_CORAL_BASE() {
+	public static Block.Properties PRISMARINE_CORAL_BASE(boolean elder) {
 		return Block.Properties.create(Material.CORAL, MaterialColor.DIAMOND).doesNotBlockMovement().lightValue(3).sound(SoundType.GLASS);
 	}
 	
-	public static Block.Properties ELDER_PRISMARINE = Block.Properties.create(Material.CORAL, MaterialColor.WHITE).doesNotBlockMovement().lightValue(3).sound(SoundType.GLASS);
+	public static Block.Properties PRISMARINE_CORAL_BLOCK_BASE(boolean elder) {
+		MaterialColor color = elder ? MaterialColor.CYAN : MaterialColor.WOOD;
+		return Block.Properties.create(Material.CORAL, color).lightValue(3).sound(SoundType.GLASS);
+	}
+	
+	public static Block.Properties ELDER_PRISMARINE_CORAL = Block.Properties.create(Material.CORAL, MaterialColor.WOOD).lightValue(3).sound(SoundType.GLASS);
 	
 	public static final Block.Properties SEAROCKET(boolean pink) {
-		return pink ? Block.Properties.create(Material.PLANTS, MaterialColor.PINK).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
+		MaterialColor color = pink ? MaterialColor.PINK : MaterialColor.WHITE_TERRACOTTA;
+		return Block.Properties.create(Material.PLANTS, color).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	}
 	
 	public static final Block.Properties CORALSTONE = Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE).tickRandomly();

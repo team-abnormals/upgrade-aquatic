@@ -26,7 +26,7 @@ public class BlockCoralShowerDead extends DeadCoralPlantBlock {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 1.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
 	public BlockCoralShowerDead() {
-		super(Block.Properties.create(Material.ROCK, MaterialColor.GRAY).doesNotBlockMovement().hardnessAndResistance(0F));
+		super(Block.Properties.create(Material.ROCK, MaterialColor.WOOD).doesNotBlockMovement().hardnessAndResistance(0F));
 	}
 	
 	@Override
