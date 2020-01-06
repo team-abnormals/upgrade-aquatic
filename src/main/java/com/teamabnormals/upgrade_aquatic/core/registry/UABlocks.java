@@ -85,7 +85,7 @@ public class UABlocks {
 	public static Block DEAD_ROCK_CORAL_BLOCK         = new Block(UAProperties.DEAD_CORAL_BLOCK).setRegistryName(Reference.MODID, "dead_rock_coral_block");
 	public static Block DEAD_PILLOW_CORAL_BLOCK       = new Block(UAProperties.DEAD_CORAL_BLOCK).setRegistryName(Reference.MODID, "dead_pillow_coral_block");
 	public static Block DEAD_SILK_CORAL_BLOCK         = new Block(UAProperties.DEAD_CORAL_BLOCK).setRegistryName(Reference.MODID, "dead_silk_coral_block");
-	public static Block ELDER_PRISMARINE_CORAL_BLOCK  = new Block(UAProperties.PRISMARINE_CORAL_BLOCK_BASE(true).setRegistryName(Reference.MODID, "elder_prismarine_coral_block");
+	public static Block ELDER_PRISMARINE_CORAL_BLOCK  = new Block(UAProperties.PRISMARINE_CORAL_BLOCK_BASE(true)).setRegistryName(Reference.MODID, "elder_prismarine_coral_block");
 
 	public static Block ACAN_CORAL_BLOCK              = new BlockUACoralBlock(DEAD_ACAN_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.CYAN)).setRegistryName(Reference.MODID, "acan_coral_block");
 	public static Block FINGER_CORAL_BLOCK            = new BlockUACoralBlock(DEAD_FINGER_CORAL_BLOCK, UAProperties.CORAL_BLOCK_BASE(MaterialColor.ORANGE_TERRACOTTA)).setRegistryName(Reference.MODID, "finger_coral_block");
@@ -151,7 +151,7 @@ public class UABlocks {
 	public static Block DEAD_ROCK_CORAL_FAN           = new BlockUACoralFanDead().setRegistryName(Reference.MODID, "dead_rock_coral_fan");
 	public static Block DEAD_PILLOW_CORAL_FAN         = new BlockUACoralFanDead().setRegistryName(Reference.MODID, "dead_pillow_coral_fan");
 	public static Block DEAD_SILK_CORAL_FAN           = new BlockUACoralFanDead().setRegistryName(Reference.MODID, "dead_silk_coral_fan");
-	public static Block ELDER_PRISMARINE_CORAL_FAN    = new BlockUACoralFanDead().setRegistryName(Reference.MODID, "elder_prismarine_coral_fan");
+	public static Block ELDER_PRISMARINE_CORAL_FAN    = new BlockUACoralFanDead(UAProperties.PRISMARINE_CORAL_BASE(true)).setRegistryName("elder_prismarine_coral_fan");
 	
 	public static Block ACAN_CORAL_FAN           	  = new BlockUACoralFan(DEAD_ACAN_CORAL_FAN, UAProperties.CORAL_FAN_BASE(MaterialColor.CYAN)).setRegistryName(Reference.MODID, "acan_coral_fan");
 	public static Block FINGER_CORAL_FAN              = new BlockUACoralFan(DEAD_FINGER_CORAL_FAN, UAProperties.CORAL_FAN_BASE(MaterialColor.ORANGE_TERRACOTTA)).setRegistryName(Reference.MODID, "finger_coral_fan");
@@ -164,7 +164,7 @@ public class UABlocks {
 	public static Block SILK_CORAL_FAN                = new BlockUACoralFan(DEAD_SILK_CORAL_FAN, UAProperties.CORAL_FAN_BASE(MaterialColor.PURPLE_TERRACOTTA)).setRegistryName(Reference.MODID, "silk_coral_fan");
 	public static Block PRISMARINE_CORAL_FAN          = new BlockUACoralFan(ELDER_PRISMARINE_CORAL_FAN, UAProperties.PRISMARINE_CORAL_BASE(false)).setRegistryName(Reference.MODID, "prismarine_coral_fan");
 	
-	public static Block ELDER_PRISMARINE_CORAL_SHOWER = new BlockCoralShowerDead().setRegistryName(Reference.MODID, "elder_prismarine_coral_shower");
+	public static Block ELDER_PRISMARINE_CORAL_SHOWER = new BlockCoralShowerDead(UAProperties.PRISMARINE_CORAL_BASE(true)).setRegistryName("elder_prismarine_coral_shower");
 	public static Block PRISMARINE_CORAL_SHOWER       = new BlockCoralShower(ELDER_PRISMARINE_CORAL_SHOWER, UAProperties.PRISMARINE_CORAL_BASE(false)).setRegistryName(Reference.MODID, "prismarine_coral_shower");
 	
 	public static Block ELDER_GUARDIAN_SPINE          = new BlockSpine(UAProperties.SPINES, true).setRegistryName(Reference.MODID, "elder_guardian_spine");
