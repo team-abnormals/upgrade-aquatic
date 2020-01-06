@@ -29,6 +29,8 @@ public class UAProperties {
 		return Block.Properties.create(Material.CORAL, MaterialColor.DIAMOND).doesNotBlockMovement().lightValue(3).sound(SoundType.GLASS);
 	}
 	
+	public static Block.Properties ELDER_PRISMARINE = Block.Properties.create(Material.CORAL, MaterialColor.WHITE).doesNotBlockMovement().lightValue(3).sound(SoundType.GLASS);
+	
 	public static final Block.Properties SEAROCKET(boolean pink) {
 		return pink ? Block.Properties.create(Material.PLANTS, MaterialColor.PINK).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.WHITE_TERRACOTTA).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	}
