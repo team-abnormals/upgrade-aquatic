@@ -5,11 +5,11 @@
       "item": "upgrade_aquatic:thorny_kelp"
     },
     {
-      "item": "minecraft:stone_brick"
+      "item": "minecraft:stone_bricks"
     }
   ],
   "result": {
-    "item": "upgrade_aquatic:thorny_kelpy_stone_brick",
+    "item": "upgrade_aquatic:thorny_kelpy_stone_bricks",
     "count": 1
   }
 }

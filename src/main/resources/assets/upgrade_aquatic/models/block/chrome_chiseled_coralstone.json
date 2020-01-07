@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "upgrade_aquatic:block/chrome_chiseled_coralstone"
+    }
+}
