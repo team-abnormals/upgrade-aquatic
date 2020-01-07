@@ -405,23 +405,23 @@ public class UABlocks {
 	public static Block DRIFTWOOD_BUTTON         = new BlockButtonBase(Properties.from(UABlocks.DRIFTWOOD).doesNotBlockMovement()).setRegistryName(Reference.MODID, "driftwood_button");
 	public static Block DRIFTWOOD_TRAPDOOR       = new BlockTrapdoorBase(UAProperties.DRIFTWOOD).setRegistryName(Reference.MODID, "driftwood_trapdoor");
 
-	public static Block BEACHGRASS_THATCH              = new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+	public static Block BEACHGRASS_THATCH              = new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)) {
 		public BlockRenderLayer getRenderLayer() {
 			return BlockRenderLayer.CUTOUT;
 		};
 	}.setRegistryName(Reference.MODID, "beachgrass_thatch");
-	public static Block BEACHGRASS_THATCH_SLAB         = new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+	public static Block BEACHGRASS_THATCH_SLAB         = new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)) {
 		public BlockRenderLayer getRenderLayer() {
 			return BlockRenderLayer.CUTOUT;
 		};
 	}.setRegistryName(Reference.MODID, "beachgrass_thatch_slab");
-	public static Block BEACHGRASS_THATCH_STAIRS       = new StairsBlock(BEACHGRASS_THATCH.getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.PICKAXE)) {
+	public static Block BEACHGRASS_THATCH_STAIRS       = new StairsBlock(BEACHGRASS_THATCH.getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)) {
 		public BlockRenderLayer getRenderLayer() {
 			return BlockRenderLayer.CUTOUT;
 		};
 	}.setRegistryName(Reference.MODID, "beachgrass_thatch_stairs");
-	public static Block BEACHGRASS                     = new BlockBeachgrass(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "beachgrass");
-	public static Block TALL_BEACHGRASS                = new BlockBeachgrassTall(Properties.from(Blocks.GRASS)).setRegistryName(Reference.MODID, "tall_beachgrass");
+	public static Block BEACHGRASS                     = new BlockBeachgrass(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)).setRegistryName(Reference.MODID, "beachgrass");
+	public static Block TALL_BEACHGRASS                = new BlockBeachgrassTall(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)).setRegistryName(Reference.MODID, "tall_beachgrass");
 	
 	/*
 	 * Quark Compat
