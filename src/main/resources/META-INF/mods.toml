@@ -6,7 +6,7 @@ issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
 [[mods]]
     modId="upgrade_aquatic"
     namespace="upgrade_aquatic"
-    version="1.4.5"
+    version="1.4.6"
     displayName="Upgrade Aquatic"
     authors="SmellyModder, Cameron, Five"
     description='''A mod that improves upon the content of 1.13 Update Aquatic.'''
