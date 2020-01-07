@@ -189,6 +189,7 @@ public class EntityEvents {
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.MOSS_CORAL_BLOCK, 3, 1, 8, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.ROCK_CORAL_BLOCK, 3, 1, 8, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.STAR_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.CHROME_CORAL_BLOCK, 3, 1, 8, 1));
 /*		
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.POLAR_KELP, 3, 1, 12, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.TONGUE_KELP, 3, 1, 12, 1));
