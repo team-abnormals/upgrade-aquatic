@@ -112,8 +112,9 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 		return state.get(WATERLOGGED) ? 0 : 60;
 	}
 
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
-		return true;
+	@SuppressWarnings("deprecation")
+	public boolean canGrow(IBlockReader world, BlockPos pos, BlockState state, boolean isClient) {
+		return world.getBlockState(pos.up()).isAir();
 	}
 
 	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
