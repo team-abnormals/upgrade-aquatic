@@ -287,7 +287,7 @@ public class UABlocks {
 	public static Block ROCK_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {ROCK_CORAL, ROCK_CORAL_FAN, ROCK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "rock_coralstone_slab");
 	public static Block PILLOW_CORALSTONE_SLAB           = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {PILLOW_CORAL, PILLOW_CORAL_FAN, PILLOW_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "pillow_coralstone_slab");
 	public static Block SILK_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {SILK_CORAL, SILK_CORAL_FAN, SILK_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "silk_coralstone_slab");
-	public static Block CHROME_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {CHROME_CORAL, CHROME_CORAL_FAN, CHROME_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "chrome_coralstone_slab");
+	public static Block CHROME_CORALSTONE_SLAB           = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {CHROME_CORAL, CHROME_CORAL_FAN, CHROME_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "chrome_coralstone_slab");
 	public static Block PRISMARINE_CORALSTONE_SLAB       = new BlockCoralstoneSlab(UAProperties.CORALSTONE, new Block[] {PRISMARINE_CORAL, PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_WALL_FAN, PRISMARINE_CORAL_SHOWER}).setRegistryName(Reference.MODID, "prismarine_coralstone_slab");
 	public static Block ELDER_PRISMARINE_CORALSTONE_SLAB = new BlockCoralstoneSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "elder_prismarine_coralstone_slab");
 	public static Block DEAD_CORALSTONE_SLAB             = new BlockCoralstoneSlab(UAProperties.CORALSTONE, null).setRegistryName(Reference.MODID, "dead_coralstone_slab");	
@@ -501,7 +501,7 @@ public class UABlocks {
 		CORALSTONE_CONVERSION_MAP.put(ROCK_CORAL_BLOCK, ROCK_CORALSTONE);
 		CORALSTONE_CONVERSION_MAP.put(PILLOW_CORAL_BLOCK, PILLOW_CORALSTONE);
 		CORALSTONE_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_CORALSTONE);
-		CORALSTONE_CONVERSION_MAP.put(SILK_CORAL_BLOCK, SILK_CORALSTONE);
+		CORALSTONE_CONVERSION_MAP.put(CHROME_CORAL_BLOCK, CHROME_CORALSTONE);
 		CORALSTONE_CONVERSION_MAP.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CORALSTONE);
 		CHISELED_CORALSTONE_CONVERSION_MAP.put(Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CHISELED_CORALSTONE);
 		CHISELED_CORALSTONE_CONVERSION_MAP.put(Blocks.HORN_CORAL_BLOCK, HORN_CHISELED_CORALSTONE);
