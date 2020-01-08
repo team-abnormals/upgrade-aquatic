@@ -1,5 +1,5 @@
 {
-    "parent": "tiles/template_wall_post",
+    "parent": "block/template_wall_post",
     "textures": {
         "wall": "upgrade_aquatic:block/tooth_tiles"
     }
