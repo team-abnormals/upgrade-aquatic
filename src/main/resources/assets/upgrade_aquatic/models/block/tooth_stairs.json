@@ -1,8 +1,8 @@
 {
   "parent": "tiles/stairs",
   "textures": {
-    "bottom": "upgrade_aquatic:tiles/tooth_tiles",
-    "top": "upgrade_aquatic:tiles/tooth_tiles",
-    "side": "upgrade_aquatic:tiles/tooth_tiles"
+    "bottom": "upgrade_aquatic:block/tooth_tiles",
+    "top": "upgrade_aquatic:block/tooth_tiles",
+    "side": "upgrade_aquatic:block/tooth_tiles"
   }
 }
