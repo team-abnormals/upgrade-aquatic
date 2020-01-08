@@ -2,6 +2,6 @@
     "variants": {
         "type=bottom": { "model": "upgrade_aquatic:block/tooth_slab" },
         "type=top": { "model": "upgrade_aquatic:block/tooth_slab_top" },
-        "type=double": { "model": "upgrade_aquatic:block/tooth" }
+        "type=double": { "model": "upgrade_aquatic:block/tooth_tiles" }
     }
 }

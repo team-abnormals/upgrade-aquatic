@@ -1,8 +1,8 @@
 {
-    "parent": "upgrade_aquatic:block/vertical_slab",
+    "parent": "upgrade_aquatic:tiles/vertical_slab",
     "textures": {
-        "side": "upgrade_aquatic:block/tooth_block",
-        "top": "upgrade_aquatic:block/tooth_block",
-        "bottom": "upgrade_aquatic:block/tooth_block"
+        "side": "upgrade_aquatic:tiles/tooth_tiles",
+        "top": "upgrade_aquatic:tiles/tooth_tiles",
+        "bottom": "upgrade_aquatic:tiles/tooth_tiles"
     }
 }

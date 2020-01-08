@@ -1,6 +1,6 @@
 {
-    "parent": "block/wall_inventory",
+    "parent": "tiles/wall_inventory",
     "textures": {
-        "wall": "upgrade_aquatic:block/tooth_block"
+        "wall": "upgrade_aquatic:tiles/tooth_tiles"
     }
 }

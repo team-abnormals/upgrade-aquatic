@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:tooth_block"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:thrasher_tooth",
+    "count": 9
+  }
+}
