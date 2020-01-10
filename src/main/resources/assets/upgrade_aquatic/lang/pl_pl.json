@@ -90,6 +90,14 @@
   "block.upgrade_aquatic.branch_coral_block": "Blok koralowca gałązkowego",
   "block.upgrade_aquatic.branch_coral_fan": "Wachlarz koralowca gałązkowego",
   
+  "block.upgrade_aquatic.dead_chrome_coral": "Martwy koralowiec chromowy",
+  "block.upgrade_aquatic.dead_chrome_coral_block": "Blok martwego koralowca chromowego",
+  "block.upgrade_aquatic.dead_chrome_coral_fan": "Martwy wachlarz koralowca chromowego",
+  
+  "block.upgrade_aquatic.chrome_coral": "Koralowiec chromowy",
+  "block.upgrade_aquatic.chrome_coral_block": "Blok koralowca chromowego",
+  "block.upgrade_aquatic.chrome_coral_fan": "Wachlarz koralowca chromowego",
+  
   "block.upgrade_aquatic.jelly_torch_pink": "Różowa galaretkowa pochodnia",
   "block.upgrade_aquatic.jelly_torch_purple": "Fioletowa galaretkowa pochodnia",
   "block.upgrade_aquatic.jelly_torch_blue": "Niebieska galaretkowa pochodnia",
@@ -155,9 +163,10 @@
   "block.upgrade_aquatic.rock_coralstone": "Skalny Kamień Koralowy",
   "block.upgrade_aquatic.pillow_coralstone": "Poduszkowy Kamień Koralowy",
   "block.upgrade_aquatic.silk_coralstone": "Jedwabny Kamień Koralowy",
+  "block.upgrade_aquatic.chrome_coralstone": "Chromowy koralowiec",
   "block.upgrade_aquatic.prismarine_coralstone": "Pryzmarynowy Kamień Koralowy",
   "block.upgrade_aquatic.elder_prismarine_coralstone": "Pryzmarynowy Kamień Koralowy prastrażnika",
-  "block.upgrade_aquatic.dead_coralstone": "Martwy Camień Koralowy",
+  "block.upgrade_aquatic.dead_coralstone": "Martwy Kamień Koralowy",
   
   "block.upgrade_aquatic.chiseled_coralstone": "Rzeźbiony Kamień Koralowy",
   "block.upgrade_aquatic.bubble_chiseled_coralstone": "Rzeźbiony Bąbelkowaty Kamień Koralowy",
@@ -174,6 +183,7 @@
   "block.upgrade_aquatic.rock_chiseled_coralstone": "Rzeźbiony Skalisty Kamień Koralowy",
   "block.upgrade_aquatic.pillow_chiseled_coralstone": "Rzeźbiony Poduszkowy Kamień Koralowy",
   "block.upgrade_aquatic.silk_chiseled_coralstone": "Rzeźbiony Jedwabny Kamień Koralowy",
+  "block.upgrade_aquatic.chrome_chiseled_coralstone": "Rzeźbiony Chromowy kamień Koralowy",
   "block.upgrade_aquatic.prismarine_chiseled_coralstone": "Rzeźbiony Pryzmarynowy Kamień Koralowy",
   "block.upgrade_aquatic.elder_chiseled_coralstone": "Rzeźbiony Pryzmarynowy Kamień Koralowy prastrażnika",
   "block.upgrade_aquatic.dead_chiseled_coralstone": "Rzeźbiony Martwy Kamień Koralowy",
@@ -192,6 +202,7 @@
   "block.upgrade_aquatic.branch_coralstone_slab": "Gałązkowa Płyta z Kamienia Koralowego",
   "block.upgrade_aquatic.rock_coralstone_slab": "Skalna Płyta z Kamienia Koralowego",
   "block.upgrade_aquatic.pillow_coralstone_slab": "Poduszkowa Płyta z Kamienia Koralowego",
+  "block.upgrade_aquatic.chrome_coralstone_slab": "Chromowa Płyta z Kamienia Koralowegob",
   "block.upgrade_aquatic.silk_coralstone_slab": "Jedwabna Płyta z Kamienia Koralowego",
   "block.upgrade_aquatic.prismarine_coralstone_slab": "Pryzmarynowa Płyta z Kamienia Koralowego",
   "block.upgrade_aquatic.elder_prismarine_coralstone_slab": "Pryzmarynowa Płyta z Kamienia Koralowego prastrażnika",
@@ -211,6 +222,7 @@
   "block.upgrade_aquatic.branch_coralstone_stairs": "Gałązkowe Schody z Kamienia koralowego",
   "block.upgrade_aquatic.rock_coralstone_stairs": "Skaliste Schody z Kamienia koralowego",
   "block.upgrade_aquatic.pillow_coralstone_stairs": "Poduszkowe Schody z Kamienia koralowego",
+  "block.upgrade_aquatic.chrome_coralstone_stairs": "Chromowe Schody z Kamienia koralowego",
   "block.upgrade_aquatic.silk_coralstone_stairs": "Jedwabne Schody z Kamienia koralowego",
   "block.upgrade_aquatic.prismarine_coralstone_stairs": "Pryzmarynowe Schody z Kamienia koralowego",
   "block.upgrade_aquatic.elder_prismarine_coralstone_stairs": "Pryzmarynowe Schody z Kamienia koralowego prastrażnika",
@@ -231,11 +243,13 @@
   "block.upgrade_aquatic.rock_coralstone_wall": "Skalisty Murek z Kamienia koralowego",
   "block.upgrade_aquatic.pillow_coralstone_wall": "Poduszkowy Murek z Kamienia koralowego",
   "block.upgrade_aquatic.silk_coralstone_wall": "Jedwabny Murek z Kamienia koralowego",
+  "block.upgrade_aquatic.chrome_coralstone_wall": "Chromowy Murek z Kamienia koralowego",
   "block.upgrade_aquatic.prismarine_coralstone_wall": "Pryzmarynowy Murek z Kamienia koralowego",
   "block.upgrade_aquatic.elder_prismarine_coralstone_wall": "Pryzmarynowy Murek z Kamienia koralowego prastrażnika",
   "block.upgrade_aquatic.dead_coralstone_wall": "Martwy Murek z Kamienia koralowego",
   
   "block.upgrade_aquatic.tooth_block": "Blok zębów",
+  "block.upgrade_aquatic.tooth_tiles": "Zębowe płytki",
   "block.upgrade_aquatic.tooth_slab": "Zębowa płyta",
   "block.upgrade_aquatic.tooth_stairs": "Zębowe schody",
   "block.upgrade_aquatic.tooth_wall": "Zębowy murek",
@@ -372,6 +386,7 @@
   "item.upgrade_aquatic.nautilus_bucket": "Wiaderko z łodzikiem",
   "item.upgrade_aquatic.pike_bucket": "Wiaderko ze szczupakiem",
   "item.upgrade_aquatic.lionfish_bucket": "Wiaderko ze skrzydlicą",
+  "item.upgrade_aquatic.squid_bucket": "Wiaderko z kałamarnicą",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Jajo przyzywające osadnika utopca",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Jajo przyzywające łodzika",
@@ -418,6 +433,7 @@
   "entity.upgrade_aquatic.pike": "Szczupak",
   "entity.upgrade_aquatic.lionfish": "Skrzydlica",
   "entity.upgrade_aquatic.thrasher": "Młocarz
+  "entity.upgrade_aquatic.great_thrasher": "Wielki młocarz",
   "entity.upgrade_aquatic.flare": "Migotka
   
   "_comment": "Mikstury i Efekty",
@@ -455,6 +471,20 @@
   "item.minecraft.tipped_arrow.effect.repellence": "Strzała rzetelności",
   "item.minecraft.tipped_arrow.effect.repellence_strong": "Strzała rzetelności",
   "item.minecraft.tipped_arrow.effect.repellence_long": "Strzała rzetelności", 
+  
+  "effect.upgrade_aquatic.vibing": "Wibrowanie",
+  "item.minecraft.potion.effect.vibing": "Mikstura wibrowania",
+  "item.minecraft.potion.effect.vibing_strong": "Mikstura wibrowania",
+  "item.minecraft.potion.effect.vibing_long": "Mikstura wibrowania",
+  "item.minecraft.splash_potion.effect.vibing": "Miotana mikstura wibrowania",
+  "item.minecraft.splash_potion.effect.vibing_strong": "Miotana mikstura wibrowania",
+  "item.minecraft.splash_potion.effect.vibing_long": "Miotana mikstura wibrowania",
+  "item.minecraft.lingering_potion.effect.vibing": "Trwała mikstura wibrowania",
+  "item.minecraft.lingering_potion.effect.vibing_strong": "Trwała mikstura wibrowania",
+  "item.minecraft.lingering_potion.effect.vibing_long": "Trwała mikstura wibrowania",
+  "item.minecraft.tipped_arrow.effect.vibing": "Strzała wibrowania",
+  "item.minecraft.tipped_arrow.effect.vibing_strong": "Strzała wibrowania",
+  "item.minecraft.tipped_arrow.effect.vibing_long": "Strzała wibrowania",
   
   "_comment": "Śmierci",
   
