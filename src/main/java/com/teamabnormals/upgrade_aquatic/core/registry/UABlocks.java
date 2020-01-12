@@ -783,7 +783,7 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_TILES, ItemGroup.BUILDING_BLOCKS));				
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_SLAB, ItemGroup.BUILDING_BLOCKS));	
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_STAIRS, ItemGroup.BUILDING_BLOCKS));	
-		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_WALL, ItemGroup.BUILDING_BLOCKS));	
+		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_WALL, ItemGroup.DECORATIONS));	
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(CORALSTONE, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BUBBLE_CORALSTONE, ItemGroup.BUILDING_BLOCKS));
@@ -865,25 +865,25 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_PRISMARINE_CORALSTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(DEAD_CORALSTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
 		
-		registry.register(RegistryUtils.createSimpleItemBlock(CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(BUBBLE_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(HORN_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(TUBE_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(BRAIN_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(FIRE_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));		
-		registry.register(RegistryUtils.createSimpleItemBlock(ACAN_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(FINGER_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(STAR_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(MOSS_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(PETAL_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(BRANCH_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(ROCK_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(PILLOW_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(SILK_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(CHROME_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(PRISMARINE_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_PRISMARINE_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(DEAD_CORALSTONE_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BUBBLE_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(HORN_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(TUBE_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BRAIN_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(FIRE_CORALSTONE_WALL, ItemGroup.DECORATIONS));		
+		registry.register(RegistryUtils.createSimpleItemBlock(ACAN_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(FINGER_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(STAR_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(MOSS_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PETAL_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(BRANCH_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(ROCK_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PILLOW_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(SILK_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(CHROME_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(PRISMARINE_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(ELDER_PRISMARINE_CORALSTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(DEAD_CORALSTONE_WALL, ItemGroup.DECORATIONS));
 	
 		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELP, ItemGroup.MISC));
 		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELP, ItemGroup.MISC));
@@ -910,16 +910,16 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_SLAB, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_SLAB, ItemGroup.BUILDING_BLOCKS));
 	
-		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_COBBLESTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_COBBLESTONE_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_WALL, ItemGroup.DECORATIONS));
 	
 		registry.register(RegistryUtils.createSimpleItemBlock(KELP_BLOCK, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_STAIRS, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_SLAB, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_WALL, ItemGroup.DECORATIONS));
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_STONE_BRICK, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_STONE_BRICK, ItemGroup.BUILDING_BLOCKS));
@@ -936,15 +936,15 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_STONE_BRICK_SLAB, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_STONE_BRICK_SLAB, ItemGroup.BUILDING_BLOCKS));
 	
-		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_STONE_BRICK_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_STONE_BRICK_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_STONE_BRICK_WALL, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_STONE_BRICK_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(TONGUE_KELPY_STONE_BRICK_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_STONE_BRICK_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(THORNY_KELPY_STONE_BRICK_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createSimpleItemBlock(POLAR_KELPY_STONE_BRICK_WALL, ItemGroup.DECORATIONS));
 
 		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_STONE_BRICK, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_STONE_BRICK_STAIRS, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_STONE_BRICK_SLAB, ItemGroup.BUILDING_BLOCKS));
-		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_STONE_BRICK_WALL, ItemGroup.BUILDING_BLOCKS));
+		registry.register(RegistryUtils.createSimpleItemBlock(KELPY_STONE_BRICK_WALL, ItemGroup.DECORATIONS));
 
 		registry.register(RegistryUtils.createSimpleItemBlock(BLUE_PICKERELWEED_BLOCK, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(PURPLE_PICKERELWEED_BLOCK, ItemGroup.BUILDING_BLOCKS));
