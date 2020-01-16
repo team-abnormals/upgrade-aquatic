@@ -253,6 +253,10 @@
   "block.upgrade_aquatic.tooth_slab": "Tooth Slab",
   "block.upgrade_aquatic.tooth_stairs": "Tooth Stairs",
   "block.upgrade_aquatic.tooth_wall": "Tooth Wall",
+  "block.upgrade_aquatic.tooth_bricks": "Tooth Bricks",
+  "block.upgrade_aquatic.chiseled_tooth_bricks": "Chiseled Tooth Bricks",
+  "block.upgrade_aquatic.tooth_door": "Tooth Door",
+  "block.upgrade_aquatic.tooth_trapdoor": "Tooth Trapdoor",
   
   "block.upgrade_aquatic.tongue_kelp": "Tongue Kelp",
   "block.upgrade_aquatic.thorny_kelp": "Thorny Kelp",
