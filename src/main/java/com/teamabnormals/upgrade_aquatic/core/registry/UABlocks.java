@@ -26,8 +26,8 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSearocket;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSpine;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothDoor;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockTrapdoorBase;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothDoor;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUABookshelf;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoral;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralBlock;
@@ -228,13 +228,19 @@ public class UABlocks {
     public static Block POTTED_SEAROCKET_WHITE 	      = new FlowerPotBlock(SEAROCKET_WHITE, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)).setRegistryName(Reference.MODID, "potted_searocket_white");
     public static Block POTTED_SEAROCKET_PINK 	      = new FlowerPotBlock(SEAROCKET_PINK, Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)).setRegistryName(Reference.MODID, "potted_searocket_pink");
 	
-	public static Block TOOTH_BLOCK                   = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_block");	
-	public static Block TOOTH_TILES                   = new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_tiles");	
-	public static Block TOOTH_STAIRS                  = new StairsBlock(TOOTH_BLOCK.getDefaultState(), UAProperties.CORALSTONE).setRegistryName(Reference.MODID, "tooth_stairs");
-    public static Block TOOTH_SLAB                    = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_slab");
-    public static Block TOOTH_WALL                    = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_wall");
-	public static Block TOOTH_DOOR                    = new BlockToothDoor(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_door");
-    
+	public static Block TOOTH_BLOCK                   = new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_block");	
+	public static Block TOOTH_TILES                   = new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_tiles");	
+	public static Block TOOTH_STAIRS                  = new StairsBlock(TOOTH_BLOCK.getDefaultState(), Properties.from(Blocks.END_STONE)).setRegistryName(Reference.MODID, "tooth_stairs");
+    public static Block TOOTH_SLAB                    = new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_slab");
+    public static Block TOOTH_WALL                    = new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_wall");
+	public static Block TOOTH_BRICKS                  = new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_bricks");	
+	public static Block CHISELED_TOOTH_BRICKS         = new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "chiseled_tooth_bricks");	
+	public static Block TOOTH_BRICK_STAIRS            = new StairsBlock(TOOTH_BLOCK.getDefaultState(), Properties.from(Blocks.END_STONE)).setRegistryName(Reference.MODID, "tooth_brick_stairs");
+    public static Block TOOTH_BRICK_SLAB              = new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_brick_slab");
+    public static Block TOOTH_BRICK_WALL              = new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_brick_wall");
+	public static Block TOOTH_TRAPDOOR                = new BlockTrapdoorBase(Properties.from(Blocks.END_STONE)).setRegistryName(Reference.MODID, "tooth_trapdoor");
+	public static Block TOOTH_DOOR                    = new BlockToothDoor(Properties.from(Blocks.END_STONE)).setRegistryName(Reference.MODID, "tooth_door");
+	
 	public static Block CORALSTONE                       = new BlockCoralstone(UAProperties.CORALSTONE, false).setRegistryName(Reference.MODID, "coralstone");
 	public static Block BUBBLE_CORALSTONE                = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "bubble_coralstone");
 	public static Block HORN_CORALSTONE             	 = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "horn_coralstone");
@@ -451,7 +457,8 @@ public class UABlocks {
 			return BlockRenderLayer.CUTOUT;
 		};
 	}.setRegistryName(Reference.MODID, "beachgrass_thatch_vertical_slab");
-	public static Block TOOTH_VERTICAL_SLAB                     = new BlockVerticalSlab(Properties.from(TOOTH_BLOCK)).setRegistryName(Reference.MODID, "tooth_vertical_slab");
+	public static Block TOOTH_VERTICAL_SLAB                     = new BlockVerticalSlab(Properties.from(TOOTH_TILES)).setRegistryName(Reference.MODID, "tooth_vertical_slab");
+	public static Block TOOTH_BRICK_VERTICAL_SLAB               = new BlockVerticalSlab(Properties.from(TOOTH_BRICKS)).setRegistryName(Reference.MODID, "tooth_brick_vertical_slab");
 	public static Block KELPY_COBBLESTONE_VERTICAL_SLAB         = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "kelpy_cobblestone_vertical_slab");
 	public static Block TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB  = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tongue_kelpy_cobblestone_vertical_slab");
 	public static Block THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB  = new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "thorny_kelpy_cobblestone_vertical_slab");
@@ -627,7 +634,7 @@ public class UABlocks {
 			PICKERELWEED_BLUE, PICKERELWEED_TALL_BLUE, PICKERELWEED_PURPLE, PICKERELWEED_TALL_PURPLE,
 			SEAROCKET_WHITE, SEAROCKET_PINK,
 			POTTED_PICKERELWEED_BLUE, POTTED_PICKERELWEED_PURPLE, POTTED_SEAROCKET_WHITE, POTTED_SEAROCKET_PINK,
-			TOOTH_BLOCK, TOOTH_TILES, TOOTH_SLAB, TOOTH_STAIRS, TOOTH_WALL, TOOTH_DOOR,
+			TOOTH_BLOCK, TOOTH_TILES, TOOTH_SLAB, TOOTH_STAIRS, TOOTH_WALL, TOOTH_BRICKS, CHISELED_TOOTH_BRICKS, TOOTH_BRICK_SLAB, TOOTH_BRICK_STAIRS, TOOTH_BRICK_WALL, TOOTH_TRAPDOOR, TOOTH_DOOR,
 			CORALSTONE_SLAB, BUBBLE_CORALSTONE_SLAB, HORN_CORALSTONE_SLAB, TUBE_CORALSTONE_SLAB, BRAIN_CORALSTONE_SLAB, FIRE_CORALSTONE_SLAB, ACAN_CORALSTONE_SLAB, FINGER_CORALSTONE_SLAB, STAR_CORALSTONE_SLAB, MOSS_CORALSTONE_SLAB, PETAL_CORALSTONE_SLAB, BRANCH_CORALSTONE_SLAB, ROCK_CORALSTONE_SLAB, PILLOW_CORALSTONE_SLAB, SILK_CORALSTONE_SLAB, CHROME_CORALSTONE_SLAB, PRISMARINE_CORALSTONE_SLAB, ELDER_PRISMARINE_CORALSTONE_SLAB, DEAD_CORALSTONE_SLAB,
 		    CORALSTONE_STAIRS, BUBBLE_CORALSTONE_STAIRS, HORN_CORALSTONE_STAIRS, TUBE_CORALSTONE_STAIRS, BRAIN_CORALSTONE_STAIRS, FIRE_CORALSTONE_STAIRS, ACAN_CORALSTONE_STAIRS, FINGER_CORALSTONE_STAIRS, STAR_CORALSTONE_STAIRS, MOSS_CORALSTONE_STAIRS, PETAL_CORALSTONE_STAIRS, BRANCH_CORALSTONE_STAIRS, ROCK_CORALSTONE_STAIRS, PILLOW_CORALSTONE_STAIRS, SILK_CORALSTONE_STAIRS, CHROME_CORALSTONE_STAIRS, PRISMARINE_CORALSTONE_STAIRS, ELDER_PRISMARINE_CORALSTONE_STAIRS, DEAD_CORALSTONE_STAIRS,
 		    CORALSTONE_WALL, BUBBLE_CORALSTONE_WALL, HORN_CORALSTONE_WALL, TUBE_CORALSTONE_WALL, BRAIN_CORALSTONE_WALL, FIRE_CORALSTONE_WALL, ACAN_CORALSTONE_WALL, FINGER_CORALSTONE_WALL, STAR_CORALSTONE_WALL, MOSS_CORALSTONE_WALL, PETAL_CORALSTONE_WALL, BRANCH_CORALSTONE_WALL, ROCK_CORALSTONE_WALL, PILLOW_CORALSTONE_WALL, SILK_CORALSTONE_WALL, CHROME_CORALSTONE_WALL, PRISMARINE_CORALSTONE_WALL, ELDER_PRISMARINE_CORALSTONE_WALL, DEAD_CORALSTONE_WALL,
@@ -658,7 +665,7 @@ public class UABlocks {
 			event.getRegistry().registerAll(
 				DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_BOOKSHELF, DRIFTWOOD_LADDER, DRIFTWOOD_VERTICAL_SLAB, DRIFTWOOD_VERTICAL_PLANKS,
 				BEACHGRASS_THATCH_VERTICAL_SLAB,
-				TOOTH_VERTICAL_SLAB,
+				TOOTH_VERTICAL_SLAB, TOOTH_BRICK_VERTICAL_SLAB,
 				KELPY_COBBLESTONE_VERTICAL_SLAB, TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB, OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB, THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB, POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB,
 				KELPY_STONE_BRICK_VERTICAL_SLAB, TONGUE_KELPY_STONE_BRICK_VERTICAL_SLAB, OCHRE_KELPY_STONE_BRICK_VERTICAL_SLAB, THORNY_KELPY_STONE_BRICK_VERTICAL_SLAB, POLAR_KELPY_STONE_BRICK_VERTICAL_SLAB,
 				CORALSTONE_VERTICAL_SLAB, BUBBLE_CORALSTONE_VERTICAL_SLAB, HORN_CORALSTONE_VERTICAL_SLAB, TUBE_CORALSTONE_VERTICAL_SLAB, BRAIN_CORALSTONE_VERTICAL_SLAB, FIRE_CORALSTONE_VERTICAL_SLAB, ACAN_CORALSTONE_VERTICAL_SLAB, FINGER_CORALSTONE_VERTICAL_SLAB, STAR_CORALSTONE_VERTICAL_SLAB, MOSS_CORALSTONE_VERTICAL_SLAB, PETAL_CORALSTONE_VERTICAL_SLAB, BRANCH_CORALSTONE_VERTICAL_SLAB, ROCK_CORALSTONE_VERTICAL_SLAB, PILLOW_CORALSTONE_VERTICAL_SLAB, SILK_CORALSTONE_VERTICAL_SLAB, CHROME_CORALSTONE_VERTICAL_SLAB, PRISMARINE_CORALSTONE_VERTICAL_SLAB, ELDER_PRISMARINE_CORALSTONE_VERTICAL_SLAB, DEAD_CORALSTONE_VERTICAL_SLAB
@@ -786,7 +793,13 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_SLAB, ItemGroup.BUILDING_BLOCKS));	
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_STAIRS, ItemGroup.BUILDING_BLOCKS));	
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_WALL, ItemGroup.DECORATIONS));	
-		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_DOOR, ItemGroup.REDSTONE));	
+		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_BRICKS, ItemGroup.BUILDING_BLOCKS));	
+		registry.register(RegistryUtils.createSimpleItemBlock(CHISELED_TOOTH_BRICKS, ItemGroup.BUILDING_BLOCKS));			
+		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_BRICK_SLAB, ItemGroup.BUILDING_BLOCKS));	
+		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_BRICK_STAIRS, ItemGroup.BUILDING_BLOCKS));	
+		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_BRICK_WALL, ItemGroup.DECORATIONS));
+		registry.register(RegistryUtils.createTallItemBlock(TOOTH_DOOR, ItemGroup.REDSTONE));
+		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_TRAPDOOR, ItemGroup.REDSTONE));		
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(CORALSTONE, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BUBBLE_CORALSTONE, ItemGroup.BUILDING_BLOCKS));
@@ -989,6 +1002,7 @@ public class UABlocks {
 				RegistryUtils.createSimpleItemBlock(DRIFTWOOD_LADDER, ItemGroup.DECORATIONS),
 				RegistryUtils.createSimpleItemBlock(BEACHGRASS_THATCH_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),
 				RegistryUtils.createSimpleItemBlock(TOOTH_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),		
+				RegistryUtils.createSimpleItemBlock(TOOTH_BRICK_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS),		
 				RegistryUtils.createSimpleItemBlock(KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 
 				RegistryUtils.createSimpleItemBlock(OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 	
 				RegistryUtils.createSimpleItemBlock(POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB, ItemGroup.BUILDING_BLOCKS), 
