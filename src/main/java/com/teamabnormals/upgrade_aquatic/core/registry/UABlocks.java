@@ -26,6 +26,7 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSearocket;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSpine;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothDoor;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockTrapdoorBase;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUABookshelf;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoral;
@@ -232,7 +233,8 @@ public class UABlocks {
 	public static Block TOOTH_STAIRS                  = new StairsBlock(TOOTH_BLOCK.getDefaultState(), UAProperties.CORALSTONE).setRegistryName(Reference.MODID, "tooth_stairs");
     public static Block TOOTH_SLAB                    = new SlabBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_slab");
     public static Block TOOTH_WALL                    = new WallBlock(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_wall");
-	
+	public static Block TOOTH_DOOR                    = new BlockToothDoor(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_door");
+    
 	public static Block CORALSTONE                       = new BlockCoralstone(UAProperties.CORALSTONE, false).setRegistryName(Reference.MODID, "coralstone");
 	public static Block BUBBLE_CORALSTONE                = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "bubble_coralstone");
 	public static Block HORN_CORALSTONE             	 = new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN}).setRegistryName(Reference.MODID, "horn_coralstone");
@@ -625,7 +627,7 @@ public class UABlocks {
 			PICKERELWEED_BLUE, PICKERELWEED_TALL_BLUE, PICKERELWEED_PURPLE, PICKERELWEED_TALL_PURPLE,
 			SEAROCKET_WHITE, SEAROCKET_PINK,
 			POTTED_PICKERELWEED_BLUE, POTTED_PICKERELWEED_PURPLE, POTTED_SEAROCKET_WHITE, POTTED_SEAROCKET_PINK,
-			TOOTH_BLOCK, TOOTH_TILES, TOOTH_SLAB, TOOTH_STAIRS, TOOTH_WALL, 
+			TOOTH_BLOCK, TOOTH_TILES, TOOTH_SLAB, TOOTH_STAIRS, TOOTH_WALL, TOOTH_DOOR,
 			CORALSTONE_SLAB, BUBBLE_CORALSTONE_SLAB, HORN_CORALSTONE_SLAB, TUBE_CORALSTONE_SLAB, BRAIN_CORALSTONE_SLAB, FIRE_CORALSTONE_SLAB, ACAN_CORALSTONE_SLAB, FINGER_CORALSTONE_SLAB, STAR_CORALSTONE_SLAB, MOSS_CORALSTONE_SLAB, PETAL_CORALSTONE_SLAB, BRANCH_CORALSTONE_SLAB, ROCK_CORALSTONE_SLAB, PILLOW_CORALSTONE_SLAB, SILK_CORALSTONE_SLAB, CHROME_CORALSTONE_SLAB, PRISMARINE_CORALSTONE_SLAB, ELDER_PRISMARINE_CORALSTONE_SLAB, DEAD_CORALSTONE_SLAB,
 		    CORALSTONE_STAIRS, BUBBLE_CORALSTONE_STAIRS, HORN_CORALSTONE_STAIRS, TUBE_CORALSTONE_STAIRS, BRAIN_CORALSTONE_STAIRS, FIRE_CORALSTONE_STAIRS, ACAN_CORALSTONE_STAIRS, FINGER_CORALSTONE_STAIRS, STAR_CORALSTONE_STAIRS, MOSS_CORALSTONE_STAIRS, PETAL_CORALSTONE_STAIRS, BRANCH_CORALSTONE_STAIRS, ROCK_CORALSTONE_STAIRS, PILLOW_CORALSTONE_STAIRS, SILK_CORALSTONE_STAIRS, CHROME_CORALSTONE_STAIRS, PRISMARINE_CORALSTONE_STAIRS, ELDER_PRISMARINE_CORALSTONE_STAIRS, DEAD_CORALSTONE_STAIRS,
 		    CORALSTONE_WALL, BUBBLE_CORALSTONE_WALL, HORN_CORALSTONE_WALL, TUBE_CORALSTONE_WALL, BRAIN_CORALSTONE_WALL, FIRE_CORALSTONE_WALL, ACAN_CORALSTONE_WALL, FINGER_CORALSTONE_WALL, STAR_CORALSTONE_WALL, MOSS_CORALSTONE_WALL, PETAL_CORALSTONE_WALL, BRANCH_CORALSTONE_WALL, ROCK_CORALSTONE_WALL, PILLOW_CORALSTONE_WALL, SILK_CORALSTONE_WALL, CHROME_CORALSTONE_WALL, PRISMARINE_CORALSTONE_WALL, ELDER_PRISMARINE_CORALSTONE_WALL, DEAD_CORALSTONE_WALL,
@@ -784,6 +786,7 @@ public class UABlocks {
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_SLAB, ItemGroup.BUILDING_BLOCKS));	
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_STAIRS, ItemGroup.BUILDING_BLOCKS));	
 		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_WALL, ItemGroup.DECORATIONS));	
+		registry.register(RegistryUtils.createSimpleItemBlock(TOOTH_DOOR, ItemGroup.REDSTONE));	
 		
 		registry.register(RegistryUtils.createSimpleItemBlock(CORALSTONE, ItemGroup.BUILDING_BLOCKS));
 		registry.register(RegistryUtils.createSimpleItemBlock(BUBBLE_CORALSTONE, ItemGroup.BUILDING_BLOCKS));
