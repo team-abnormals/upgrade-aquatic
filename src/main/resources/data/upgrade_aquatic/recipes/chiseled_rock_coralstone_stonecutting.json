@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "upgrade_aquatic:rock_coralstone"
-  },
-  "result": "upgrade_aquatic:chiseled_rock_coralstone",
-  "count": 1
-}

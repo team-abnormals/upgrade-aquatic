@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:tooth_bricks"
+  },
+  "result": "upgrade_aquatic:tooth_brick_stairs",
+  "count": 1
+}
