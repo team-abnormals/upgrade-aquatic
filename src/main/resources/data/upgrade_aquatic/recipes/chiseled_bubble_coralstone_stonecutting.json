@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "upgrade_aquatic:bubble_coralstone"
-  },
-  "result": "upgrade_aquatic:chiseled_bubble_coralstone",
-  "count": 1
-}

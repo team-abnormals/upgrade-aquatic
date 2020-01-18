@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "upgrade_aquatic:moss_coralstone"
-  },
-  "result": "upgrade_aquatic:chiseled_moss_coralstone",
-  "count": 1
-}

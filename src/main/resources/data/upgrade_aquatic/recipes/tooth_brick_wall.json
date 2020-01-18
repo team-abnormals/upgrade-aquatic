@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:tooth_bricks"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:tooth_brick_wall",
+    "count": 6
+  }
+}

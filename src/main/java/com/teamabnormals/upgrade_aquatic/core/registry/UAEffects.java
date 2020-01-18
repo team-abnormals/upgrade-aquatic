@@ -1,9 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
-import com.teamabnormals.upgrade_aquatic.common.effects.EffectInsomnia;
-import com.teamabnormals.upgrade_aquatic.common.effects.EffectRepellence;
-import com.teamabnormals.upgrade_aquatic.common.effects.EffectRestfulness;
-import com.teamabnormals.upgrade_aquatic.common.effects.EffectVibing;
+import com.teamabnormals.upgrade_aquatic.common.effects.*;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.item.Items;

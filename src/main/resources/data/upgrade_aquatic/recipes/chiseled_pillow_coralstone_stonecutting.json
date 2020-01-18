@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "upgrade_aquatic:pillow_coralstone"
-  },
-  "result": "upgrade_aquatic:chiseled_pillow_coralstone",
-  "count": 1
-}

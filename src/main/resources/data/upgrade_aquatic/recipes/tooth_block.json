@@ -1,20 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "FFF",
-    "FNF",
-    "FFF"
+    "###",
+    "###",
+    "###"
   ],
   "key": {
-    "N": {
+    "#": {
       "item": "upgrade_aquatic:thrasher_tooth"
-    },
-    "F": {
-      "item": "minecraft:quartz_block"
     }
   },
   "result": {
     "item": "upgrade_aquatic:tooth_block",
-    "count": 8
+    "count": 1
   }
 }

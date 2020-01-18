@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FNF",
+    "FFF"
+  ],
+  "key": {
+    "N": {
+      "item": "upgrade_aquatic:thrasher_tooth"
+    },
+    "F": {
+      "item": "minecraft:smooth_stone"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:tooth_tiles",
+    "count": 8
+  }
+}
