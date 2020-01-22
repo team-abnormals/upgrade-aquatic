@@ -33,7 +33,7 @@ public class BlockToothDoor extends DoorBlock {
 	}
 	
 	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
-	      if (!worldIn.isRemote && state.get(POWERED)) {
+	      if (!worldIn.isRemote) {
 	            state = state.cycle(OPEN);
 	            worldIn.setBlockState(pos, state, 10);
 				worldIn.playEvent((PlayerEntity)null, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
