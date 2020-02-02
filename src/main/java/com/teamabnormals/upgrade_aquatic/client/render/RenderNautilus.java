@@ -24,6 +24,7 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_tb.png"),
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_bagel.png"),
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_sadcat.png"),
+		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_cameron.png"),
 	};
 
 	public RenderNautilus(EntityRendererManager renderManager) {
