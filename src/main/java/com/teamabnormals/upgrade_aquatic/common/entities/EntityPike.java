@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -19,6 +20,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -88,6 +90,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		return !entity.cannotPickup() && entity.isAlive() && entity.isInWater() && entity.getItem().getItem().isIn(ItemTags.FISHES);
 	};
 	private int eatTicks;
+	private int dropEatingLootCooldown;
 	
 	public EntityPike(EntityType<? extends EntityPike> type, World world) {
 		super(type, world);
@@ -116,6 +119,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 				
 			});
 		}
+		this.goalSelector.addGoal(3, new EntityPike.PlayerTemptGoal(this));
 		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.1D, 40) {
 			
 			@Override
@@ -169,10 +173,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 		}
 		CompoundNBT compoundnbt = bucket.getOrCreateTag();
 		CompoundNBT compoundnbt1 = new CompoundNBT();
+		
 		compoundnbt.putInt("BucketVariantTag", this.getPikeType());
+		compoundnbt.putInt("EatingLootDropCooldown", this.dropEatingLootCooldown);
+		
 		if (!this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty()) {
 			this.getItemStackFromSlot(EquipmentSlotType.MAINHAND).write(compoundnbt1);
 		}
+		
 		compoundnbt.put("PikeHeldItem", compoundnbt1);
 		compoundnbt.putBoolean("ShouldDropItem", this.shouldDropItem());
 		compoundnbt.putBoolean("IsLit", this.isLit());
@@ -223,6 +231,9 @@ public class EntityPike extends EntityBucketableWaterMob {
 	@Override
 	public void livingTick() {
 		this.eatTicks++;
+		
+		if(this.dropEatingLootCooldown > 0) this.dropEatingLootCooldown--;
+		
 		if (!this.isInWater() && this.onGround && this.collidedVertically) {
 			this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F), (double)0.4F, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.05F)));
 			this.onGround = false;
@@ -275,6 +286,21 @@ public class EntityPike extends EntityBucketableWaterMob {
 				if (!itemstack.isEmpty()) {
 					this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstackFood);
 				}
+				
+				if(this.dropEatingLootCooldown <= 0) {
+					if(this.getRNG().nextFloat() < 0.2F) {
+						for(ItemStack stacks : this.generateFishingLoot((ServerWorld) this.world)) {
+							if(stacks.getCount() > 0) {
+								stacks.shrink(stacks.getCount() - 1);
+							}
+							this.spitOutItem(stacks);
+						}
+					} else {
+						this.spitOutItem(new ItemStack(Items.BONE_MEAL));
+					}
+					this.dropEatingLootCooldown = 3600 + this.getRNG().nextInt(400);
+				}
+				
 				this.heal(6);
 				this.eatTicks = 0;
 			} else if (this.eatTicks > 560 && this.rand.nextFloat() < 0.1F) {
@@ -334,6 +360,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		int type = this.getRandomTypeForBiome(worldIn);
 		if(dataTag != null && dataTag.contains("BucketVariantTag", 3)) {
 			this.setPikeType(dataTag.getInt("BucketVariantTag"));
+			this.dropEatingLootCooldown = dataTag.getInt("EatingLootDropCooldown");
 			if(dataTag.contains("PikeHeldItem")) {
 				this.setActiveHand(Hand.MAIN_HAND);
 				this.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.read(dataTag.getCompound("PikeHeldItem")));
@@ -356,12 +383,8 @@ public class EntityPike extends EntityBucketableWaterMob {
 		
 		this.setPikeType(type);
 		
-		if(this.getRNG().nextFloat() <= 0.10F && !world.isRemote && this.isServerWorld()) {
-			LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
-			lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, this).withParameter(LootParameters.THIS_ENTITY, this);
-			LootTable loottable = this.getRNG().nextFloat() >= 0.1F ? this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_JUNK) : this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_TREASURE);
-			List<ItemStack> list = loottable.generate(lootcontext$builder.build(LootParameterSets.FISHING));
-			for(ItemStack itemstack : list) {
+		if(this.getRNG().nextFloat() <= 0.10F && this.isServerWorld()) {
+			for(ItemStack itemstack : this.generateFishingLoot((ServerWorld) this.world)) {
 				this.setItemStackToSlot(EquipmentSlotType.MAINHAND, itemstack);
 			}
 			this.setToDropItem(false);
@@ -418,6 +441,13 @@ public class EntityPike extends EntityBucketableWaterMob {
 			}
 		}
 		return pickerelweeds;
+	}
+	
+	private List<ItemStack> generateFishingLoot(ServerWorld world) {
+		LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
+		lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, this).withParameter(LootParameters.THIS_ENTITY, this);
+		LootTable loottable = this.getRNG().nextFloat() >= 0.1F ? this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_JUNK) : this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_TREASURE);
+		return loottable.generate(lootcontext$builder.build(LootParameterSets.FISHING));
 	}
 	
 	@Override
@@ -745,19 +775,31 @@ public class EntityPike extends EntityBucketableWaterMob {
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		compound.putInt("PikeType", this.getPikeType());
+		compound.putInt("AttackCooldown", this.getAttackCooldown());
+		compound.putInt("EatingLootDropCooldown", this.dropEatingLootCooldown);
 		compound.putBoolean("DoesDropItem", this.shouldDropItem());
 		compound.putBoolean("Lit", this.isLit());
-		compound.putInt("AttackCooldown", this.getAttackCooldown());
 	}
 	
 	@Override
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
 		this.setPikeType(compound.getInt("PikeType"));
+		this.dropEatingLootCooldown = compound.getInt("EatingLootDropCooldown");
+		this.setAttackCooldown(compound.getInt("AttackCooldown"));
 		this.setToDropItem(compound.getBoolean("DoesDropItem"));
 		this.setLit(compound.getBoolean("Lit"));
-		this.setAttackCooldown(compound.getInt("AttackCooldown"));
 	}
+	
+	@Override
+	public boolean canDespawn(double distanceToClosestPlayer) {
+		return !this.shouldDropItem() && super.canDespawn(distanceToClosestPlayer);
+	}
+
+    @Override
+    public boolean preventDespawn() {
+    	return this.shouldDropItem() && super.preventDespawn();
+    }
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
@@ -982,6 +1024,51 @@ public class EntityPike extends EntityBucketableWaterMob {
 			if (!list.isEmpty() && itemstack.isEmpty()) {
 				EntityPike.this.getNavigator().tryMoveToEntityLiving(list.get(0), (double)1.2F);
 			}
+		}
+	}
+	
+	static class PlayerTemptGoal extends Goal {
+		private static final EntityPredicate CAN_FOLLOW = (new EntityPredicate()).setDistance(10.0D).allowFriendlyFire().allowInvulnerable();
+		private final EntityPike pike;
+		private PlayerEntity tempter;
+		private int cooldown;
+
+		PlayerTemptGoal(EntityPike pike) {
+			this.pike = pike;
+			this.setMutexFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+		}
+
+		public boolean shouldExecute() {
+			if(this.cooldown > 0) {
+				this.cooldown--;
+	            return false;
+			} else {
+				this.tempter = this.pike.world.getClosestPlayer(CAN_FOLLOW, this.pike);
+				if(this.tempter == null) {
+					return false;
+				} else {
+					return this.isTemptedBy(this.tempter.getHeldItemMainhand()) || this.isTemptedBy(this.tempter.getHeldItemOffhand());
+				}
+			}
+		}
+
+		public void resetTask() {
+			this.tempter = null;
+			this.pike.getNavigator().clearPath();
+			this.cooldown = 100;
+		}
+
+		public void tick() {
+			this.pike.getLookController().setLookPositionWithEntity(this.tempter, this.pike.getHorizontalFaceSpeed() + 20.0F, this.pike.getVerticalFaceSpeed());
+			if(this.pike.getDistanceSq(this.tempter) < 6.25D) {
+				this.pike.getNavigator().clearPath();
+			} else {
+				this.pike.getNavigator().tryMoveToEntityLiving(this.tempter, 1.0F);
+			}
+		}
+	      
+		private boolean isTemptedBy(ItemStack stack) {
+			return stack.getItem().isIn(ItemTags.FISHES);
 		}
 	}
 	
