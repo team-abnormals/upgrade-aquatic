@@ -23,6 +23,7 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_cell.png"),
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_tb.png"),
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_bagel.png"),
+		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_sadcat.png"),
 	};
 
 	public RenderNautilus(EntityRendererManager renderManager) {
@@ -34,7 +35,7 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 		String name = entity.getName().getString().toLowerCase().trim();
 		if (name.equals("smelly") || name.equals("thefaceofgaming")) {
 			return TEXTURES[1];
-		} else if (name.equals("abnormal") || name.equals("cameron")) {
+		} else if (name.equals("abnormal") || name.equals("abnautilus") || name.equals("abnortilus")) {
 			return TEXTURES[2];
 		} else if(name.equals("five") || name.equals("epic")) {
 			return TEXTURES[3];
@@ -44,6 +45,10 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 			return TEXTURES[5];
 		} else if(name.equals("bagel") || name.equals("shyguy")) {
 			return TEXTURES[6];
+		} else if(name.equals("sadcat")) {
+			return TEXTURES[7];
+		} else if (name.equals("cameron") || name.equals("cam") || name.equals("cringe")) {
+			return TEXTURES[8];
 		}
 		return TEXTURES[0];
 	}
