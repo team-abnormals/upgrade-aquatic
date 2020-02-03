@@ -457,11 +457,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	@Override
 	protected float getDropChance(EquipmentSlotType p_205712_1_) {
-		if(this.shouldDropItem()) {
-			return 100;
-		} else {
-			return 0;
-		}
+		return this.shouldDropItem() ? 100 : 0;
 	}
 	
 	@Override
@@ -657,7 +653,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		Biome biome = world.getBiome(new BlockPos(this));
 		float rarity = rand.nextFloat();
 		//Goes common to legendary
-		if(rarity < 1.0F && rand.nextFloat() > 0.60F) {
+		if(rarity < 1.0F && rand.nextFloat() > 0.35F) {
 			if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER || this.isFromBucket()) {
 				int pickedVariant = rand.nextInt(4);
 				if(pickedVariant == 0) {
@@ -693,7 +689,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 					return 2;
 				}
 			}
-		} else if(rarity < 0.60F && rarity > 0.35F) {
+		} else if(rarity < 0.35F && rarity > 0.15F) {
 			if(biome.getCategory() == Category.SWAMP || this.isFromBucket()) {
 				int pickedVariant = rand.nextInt(3);
 				if(pickedVariant == 0) {
@@ -719,7 +715,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 					}
 				}
 			}
-		} else if(rarity < 0.35F && rarity > 0.15F) {
+		} else if(rarity < 0.15F && rarity > 0.05F) {
 			int pickedVariant = rand.nextInt(3);
 			if(pickedVariant == 0) {
 				return 20;
@@ -732,7 +728,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 					return 5;
 				}
 			}
-		} else if(rarity < 0.15F && rarity > 0.05F) {
+		} else if(rarity < 0.05F && rarity > 0.005F) {
 			if(biome.getCategory() == Category.RIVER || this.isFromBucket()) {
 				int pickedVariant = rand.nextInt(3);
 				if(pickedVariant == 0) {
@@ -758,7 +754,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 					}
 				}
 			}
-		} else if(rarity < 0.05F) {
+		} else if(rarity < 0.005F) {
 			int pickedVariant = rand.nextInt(3);
 			if(pickedVariant == 0) {
 				return 7;
