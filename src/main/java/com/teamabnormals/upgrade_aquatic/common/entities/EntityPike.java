@@ -792,16 +792,6 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	@Override
-	public boolean canDespawn(double distanceToClosestPlayer) {
-		return !this.shouldDropItem() && super.canDespawn(distanceToClosestPlayer);
-	}
-
-    @Override
-    public boolean preventDespawn() {
-    	return this.shouldDropItem() && super.preventDespawn();
-    }
-	
-	@Override
 	protected SoundEvent getAmbientSound() {
 		return SoundEvents.ENTITY_SALMON_AMBIENT;
 	}
