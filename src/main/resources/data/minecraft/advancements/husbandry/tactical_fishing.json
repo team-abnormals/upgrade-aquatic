@@ -76,7 +76,7 @@
       "trigger": "minecraft:filled_bucket",
       "conditions": {
         "item": {
-          "item": "minecraft:squid_bucket"
+          "item": "upgrade_aquatic:squid_bucket"
         }
       }
     }
@@ -89,7 +89,8 @@
       "nautilus_bucket",
       "pike_bucket",
       "lionfish_bucket",
-      "salmon_bucket"
+      "salmon_bucket",
+	  "squid_bucket"
     ]
   ]
 }

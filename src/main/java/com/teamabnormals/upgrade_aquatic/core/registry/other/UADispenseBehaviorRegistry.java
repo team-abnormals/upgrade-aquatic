@@ -13,6 +13,7 @@ import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -83,6 +84,15 @@ public class UADispenseBehaviorRegistry {
                         world.playSound(null, blockPos, SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 0.5F, 1.0F);
                         return bucket;
                     }
+                    if(mob instanceof SquidEntity) {
+                    	ItemStack bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
+                    	if(mob.hasCustomName()) {
+                    		bucket.setDisplayName(mob.getCustomName());
+                    	}
+                    	mob.remove();
+                    	world.playSound(null, blockPos, SoundEvents.ITEM_BUCKET_FILL_FISH, SoundCategory.BLOCKS, 0.5F, 1.0F);
+                    	return bucket;
+                    }
                 }
             }
             return fishDispenseItemBehavior.dispense(source, stack);
@@ -104,6 +114,7 @@ public class UADispenseBehaviorRegistry {
     	DispenserBlock.registerDispenseBehavior(UAItems.NAUTILUS_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(UAItems.PIKE_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(UAItems.LIONFISH_BUCKET.get(), fishDispenseItemBehavior);
+    	DispenserBlock.registerDispenseBehavior(UAItems.SQUID_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, bucketFishItemBehavior);
     	
     	for(RegistryObject<Item> items : UAItems.SPAWN_EGGS) {

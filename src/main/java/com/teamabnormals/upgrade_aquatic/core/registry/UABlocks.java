@@ -4,47 +4,8 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.common.UAProperties;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrass;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrassTall;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockButtonBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShower;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwood;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodDoor;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodLog;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodPlanks;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFenceGateBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFloweringRush;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorchWall;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPressurePlateBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSearocket;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSpine;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockTrapdoorBase;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothDoor;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUABookshelf;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoral;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralBlock;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralFan;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralFanDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFan;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFanDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelp;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelpTop;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUALadder;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockVerticalSlab;
-import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstone;
-import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneSlab;
-import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneVerticalSlab;
-import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneStairs;
-import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneWall;
+import com.teamabnormals.upgrade_aquatic.common.blocks.*;
+import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -72,7 +33,6 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.IForgeRegistry;
 
-//TODO: RenderLayer is gone in 1.15.x
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
@@ -238,7 +198,7 @@ public class UABlocks {
 	public static Block TOOTH_BRICK_STAIRS            = new StairsBlock(TOOTH_BLOCK.getDefaultState(), Properties.from(Blocks.END_STONE)).setRegistryName(Reference.MODID, "tooth_brick_stairs");
     public static Block TOOTH_BRICK_SLAB              = new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_brick_slab");
     public static Block TOOTH_BRICK_WALL              = new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "tooth_brick_wall");
-	public static Block TOOTH_TRAPDOOR                = new BlockTrapdoorBase(Properties.from(Blocks.END_STONE)).setRegistryName(Reference.MODID, "tooth_trapdoor");
+	public static Block TOOTH_TRAPDOOR                = new BlockToothTrapdoor(Properties.from(Blocks.END_STONE)).setRegistryName(Reference.MODID, "tooth_trapdoor");
 	public static Block TOOTH_DOOR                    = new BlockToothDoor(Properties.from(Blocks.END_STONE)).setRegistryName(Reference.MODID, "tooth_door");
 	
 	public static Block CORALSTONE                       = new BlockCoralstone(UAProperties.CORALSTONE, false).setRegistryName(Reference.MODID, "coralstone");

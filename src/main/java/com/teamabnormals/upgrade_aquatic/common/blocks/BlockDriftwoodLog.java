@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.blocks;
 
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
