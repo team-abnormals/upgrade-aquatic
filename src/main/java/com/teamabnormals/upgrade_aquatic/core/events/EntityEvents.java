@@ -176,10 +176,12 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
 		//Common
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEACHGRASS, 1, 1, 12, 1));				
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.SEAROCKET_WHITE, 1, 1, 8, 1));
-		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.SEAROCKET_PINK, 1, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.SEAROCKET_PINK, 1, 1, 8, 1));		
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.PICKERELWEED_BLUE, 1, 1, 8, 1));
-		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.PICKERELWEED_PURPLE, 1, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.PICKERELWEED_PURPLE, 1, 1, 8, 1));	
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.FLOWERING_RUSH, 1, 1, 9, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.FINGER_CORAL_BLOCK, 3, 1, 8, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.ACAN_CORAL_BLOCK, 3, 1, 8, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BRANCH_CORAL_BLOCK, 3, 1, 8, 1));
@@ -190,6 +192,7 @@ public class EntityEvents {
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.ROCK_CORAL_BLOCK, 3, 1, 8, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.STAR_CORAL_BLOCK, 3, 1, 8, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.CHROME_CORAL_BLOCK, 3, 1, 8, 1));
+		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.EMBEDDED_AMMONITE, 5, 1, 6, 1));
 /*		
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.POLAR_KELP, 3, 1, 12, 1));
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.TONGUE_KELP, 3, 1, 12, 1));
@@ -197,6 +200,8 @@ public class EntityEvents {
 		event.getGenericTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.THORNY_KELP, 3, 1, 12, 1));
 */		
 		//Buckets
+		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.DRIFTWOOD_LOG.get(), 2, 1, 16, 1));
+		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.PRISMARINE_CORAL_BLOCK.get(), 6, 1, 4, 1));
 		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.PIKE_BUCKET.get(), 5, 1, 4, 1));
 		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.LIONFISH_BUCKET.get(), 5, 1, 4, 1));
 		event.getRareTrades().add(new EntityUtil.ItemsForEmeraldsTrade(UAItems.NAUTILUS_BUCKET.get(), 5, 1, 4, 1));
@@ -211,10 +216,11 @@ public class EntityEvents {
 			event.getTrades().get(5).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.LIONFISH.get(), 3, 1, 12, 30));
 		}
 		if(event.getType() == VillagerProfession.MASON) {
-			event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.EMBEDDED_AMMONITE, 5, 1, 5, 30));	
+			event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.TOOTH_TILES, 5, 1, 12, 30));	
+			event.getTrades().get(5).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.TOOTH_BRICKS, 5, 1, 12, 30));	
 		}
 		if(event.getType() == VillagerProfession.CLERIC) {
-			event.getTrades().get(4).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.THRASHER_TOOTH.get(), 2, 1, 12, 15));	
+			event.getTrades().get(4).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.THRASHER_TOOTH.get(), 1, 1, 12, 15));	
 		}
 		if(event.getType() == VillagerProfession.LEATHERWORKER) {
 			event.getTrades().get(2).add(new EntityUtil.ItemsForEmeraldsTrade(UABlocks.BEDROLL_LEATHER, 1, 1, 8, 10));
