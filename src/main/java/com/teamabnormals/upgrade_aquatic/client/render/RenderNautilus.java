@@ -25,6 +25,7 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_bagel.png"),
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_sadcat.png"),
 		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_cameron.png"),
+		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_snake_block.png"),
 	};
 
 	public RenderNautilus(EntityRendererManager renderManager) {
@@ -44,12 +45,14 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 			return TEXTURES[4];
 		} else if(name.equals("tb")) {
 			return TEXTURES[5];
-		} else if(name.equals("bagel") || name.equals("shyguy")) {
+		} else if(name.equals("bagel") || name.equals("shyguy") || name.equals("legobagel")) {
 			return TEXTURES[6];
 		} else if(name.equals("sadcat")) {
 			return TEXTURES[7];
 		} else if (name.equals("cameron") || name.equals("cam") || name.equals("cringe")) {
 			return TEXTURES[8];
+		} else if (name.equals("snake") || name.equals("snautilus") || name.equals("snakeblock")) {
+			return TEXTURES[9];
 		}
 		return TEXTURES[0];
 	}

@@ -38,6 +38,7 @@ public class FeaturePrismarineStalactite extends FeaturePrismarineCoral {
 					int a = rand.nextInt(3) + 3;
 					int b = 4;
 					int c = rand.nextInt(5) + 4;
+					@SuppressWarnings("unused")
 					MathUtil.Equation r = (theta) -> {
 						return (Math.cos(b * theta) / c + 1) * a;
 					};
