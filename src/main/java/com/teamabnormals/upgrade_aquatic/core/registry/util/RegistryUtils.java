@@ -2,20 +2,24 @@ package com.teamabnormals.upgrade_aquatic.core.registry.util;
 
 import java.util.function.Supplier;
 
+import javax.annotation.Nullable;
+
 import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.common.items.itemblocks.ItemBlockUpsideDown;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.TallBlockItem;
 import net.minecraft.item.WallOrFloorItem;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.RegistryObject;
 
 public class RegistryUtils {
@@ -61,6 +65,24 @@ public class RegistryUtils {
 		RegistryObject<Item> spawnEgg = UAItems.ITEMS.register(entityName + "_spawn_egg", () -> new UASpawnEggItem(supplier, primaryColor, secondaryColor, new Item.Properties().group(ItemGroup.MISC)));
 		UAItems.SPAWN_EGGS.add(spawnEgg);
 		return spawnEgg;
+	}
+	
+	public static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, @Nullable ItemGroup group) {
+		RegistryObject<B> block = UABlocks.BLOCKS.register(name, supplier);
+		UAItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(group)));
+		return block;
+	}
+	
+	public static <B extends Block> RegistryObject<B> createBlockNoItem(String name, Supplier<? extends B> supplier) {
+		RegistryObject<B> block = UABlocks.BLOCKS.register(name, supplier);
+		return block;
+	}
+	
+	public static <B extends Block> RegistryObject<B> createCompatBlock(String name, String modName, Supplier<? extends B> supplier, @Nullable ItemGroup group) {
+		ItemGroup determinedGroup = ModList.get().isLoaded(modName) || modName == "indev" ? group : null;
+		RegistryObject<B> block = UABlocks.BLOCKS.register(name, supplier);
+		UAItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().group(determinedGroup)));
+		return block;
 	}
 	
 }

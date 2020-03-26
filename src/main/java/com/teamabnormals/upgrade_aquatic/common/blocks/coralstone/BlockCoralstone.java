@@ -47,8 +47,8 @@ public class BlockCoralstone extends Block {
 	@Override
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_CORALSTONE && state.getBlock() != UABlocks.CORALSTONE) {
-			BlockState newState = this.chiseled ? UABlocks.CHISELED_CORALSTONE.getDefaultState() : UABlocks.CORALSTONE.getDefaultState();
+		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_CORALSTONE.get() && state.getBlock() != UABlocks.CORALSTONE.get()) {
+			BlockState newState = this.chiseled ? UABlocks.CHISELED_CORALSTONE.get().getDefaultState() : UABlocks.CORALSTONE.get().getDefaultState();
 			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 			world.setBlockState(pos, newState, 2);
@@ -62,7 +62,7 @@ public class BlockCoralstone extends Block {
 		if(!worldIn.isAreaLoaded(pos, 3)) return;
 		Block block = state.getBlock();
 		
-		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE && block != UABlocks.DEAD_CHISELED_CORALSTONE) {
+		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE.get() && block != UABlocks.DEAD_CHISELED_CORALSTONE.get()) {
 			for(int i = 0; i < 4; i++) {
 				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 				if(chiseled) {

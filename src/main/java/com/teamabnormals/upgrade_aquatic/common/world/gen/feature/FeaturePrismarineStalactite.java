@@ -66,7 +66,7 @@ public class FeaturePrismarineStalactite extends FeaturePrismarineCoral {
 			for (int j = -(a / c + a); j < a / c + a; j++) {
 				double radius = r.compute(Math.atan2(j, i));
 				BlockPos placingPos = pos.add(i, 0, j);
-				if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN && (i * i + j * j) < radius * radius) {
+				if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN.get() && (i * i + j * j) < radius * radius) {
 					world.setBlockState(placingPos, CORAL_BLOCK_BLOCK(true), 2);
 				}
 			}

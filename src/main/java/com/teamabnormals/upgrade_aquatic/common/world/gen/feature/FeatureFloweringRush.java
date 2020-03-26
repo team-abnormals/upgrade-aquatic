@@ -27,7 +27,7 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class FeatureFloweringRush extends Feature<NoFeatureConfig> {
-	private static final BlockState FLOWERING_RUSH = UABlocks.FLOWERING_RUSH.getDefaultState();
+	private static final BlockState FLOWERING_RUSH = UABlocks.FLOWERING_RUSH.get().getDefaultState();
 
 	public FeatureFloweringRush(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);

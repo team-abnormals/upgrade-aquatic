@@ -733,7 +733,7 @@ public class EntityUABoat extends BoatEntity {
 	}
 	
 	public enum Type {
-		DRIFTWOOD(UABlocks.DRIFTWOOD_PLANKS, "driftwood");
+		DRIFTWOOD(UABlocks.DRIFTWOOD_PLANKS.get(), "driftwood");
 
 		private final String name;
 		private final Block block;

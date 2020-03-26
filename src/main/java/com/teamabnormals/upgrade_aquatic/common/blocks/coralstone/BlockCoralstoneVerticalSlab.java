@@ -47,7 +47,7 @@ public class BlockCoralstoneVerticalSlab extends BlockVerticalSlab {
 		Block block = state.getBlock();
 		VerticalSlabType type = state.get(TYPE);
 		
-		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE_SLAB) {
+		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE_SLAB.get()) {
 			for(int i = 0; i < 4; i++) {
 				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 				if(UABlocks.CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
@@ -103,8 +103,8 @@ public class BlockCoralstoneVerticalSlab extends BlockVerticalSlab {
 	@Override
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_VERTICAL_SLAB) {
-			BlockState newState = UABlocks.CORALSTONE_VERTICAL_SLAB.getDefaultState();
+		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_VERTICAL_SLAB.get()) {
+			BlockState newState = UABlocks.CORALSTONE_VERTICAL_SLAB.get().getDefaultState();
 			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 			world.setBlockState(pos, newState.with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED)), 2);

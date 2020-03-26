@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
@@ -26,8 +27,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class FeatureSearocket extends Feature<NoFeatureConfig> {
 	
-	private static final BlockState SEAROCKET(boolean pink) {
-		return pink ? UABlocks.SEAROCKET_PINK.getDefaultState() : UABlocks.SEAROCKET_WHITE.getDefaultState();
+	private static final Supplier<BlockState> SEAROCKET(boolean pink) {
+		return pink ? () -> UABlocks.SEAROCKET_PINK.get().getDefaultState() : () -> UABlocks.SEAROCKET_WHITE.get().getDefaultState();
 	}
 	
 	public FeatureSearocket(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
@@ -39,13 +40,13 @@ public class FeatureSearocket extends Feature<NoFeatureConfig> {
 		boolean colorType;
 		if(worldIn.getBiome(pos).getTempCategory() == TempCategory.COLD) {
 			colorType = rand.nextFloat() <= 0.25F;
-			if(SEAROCKET(colorType).isValidPosition(worldIn, pos)) {
+			if(SEAROCKET(colorType).get().isValidPosition(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));
 				return true;
 			}
 		} else {
 			colorType = rand.nextFloat() <= 0.75F;
-			if(SEAROCKET(colorType).isValidPosition(worldIn, pos)) {
+			if(SEAROCKET(colorType).get().isValidPosition(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));
 				return true;
 			}
@@ -104,8 +105,8 @@ public class FeatureSearocket extends Feature<NoFeatureConfig> {
 						double radius = r.compute(Math.atan2(j, i));
 						BlockPos placingPos = pos.add(i, 0, j);
 						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
-							if(SEAROCKET(pink).isValidPosition(world, placingPos) && world.getFluidState(placingPos).isEmpty()) {
-								world.setBlockState(placingPos, SEAROCKET(pink), 2);
+							if(SEAROCKET(pink).get().isValidPosition(world, placingPos) && world.getFluidState(placingPos).isEmpty()) {
+								world.setBlockState(placingPos, SEAROCKET(pink).get(), 2);
 							}
 						}
 					}

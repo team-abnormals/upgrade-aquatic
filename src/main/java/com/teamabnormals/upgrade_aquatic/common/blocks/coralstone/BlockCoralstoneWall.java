@@ -47,8 +47,8 @@ public class BlockCoralstoneWall extends WallBlock {
 	@Override
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_WALL) {
-			BlockState newState = UABlocks.CORALSTONE_WALL.getDefaultState()
+		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_WALL.get()) {
+			BlockState newState = UABlocks.CORALSTONE_WALL.get().getDefaultState()
 				.with(UP, state.get(UP))
 				.with(NORTH, state.get(NORTH))
 				.with(EAST, state.get(EAST))

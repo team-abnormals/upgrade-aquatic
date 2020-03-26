@@ -46,7 +46,7 @@ public class BlockBeachgrass extends Block implements IGrowable {
 	
 	@Override
 	public void grow(World world, Random rand, BlockPos pos, BlockState state) {
-		BlockBeachgrassTall plant = (BlockBeachgrassTall) UABlocks.TALL_BEACHGRASS;
+		BlockBeachgrassTall plant = (BlockBeachgrassTall) UABlocks.TALL_BEACHGRASS.get();
 		if(plant.getDefaultState().isValidPosition(world, pos) && world.isAirBlock(pos.up())) {
 			plant.placeAt(world, pos, 2);
 		}

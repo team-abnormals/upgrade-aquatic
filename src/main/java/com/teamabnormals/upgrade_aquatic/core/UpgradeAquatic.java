@@ -8,6 +8,7 @@ import com.teamabnormals.upgrade_aquatic.core.config.Config;
 import com.teamabnormals.upgrade_aquatic.core.config.ConfigHelper;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
 import com.teamabnormals.upgrade_aquatic.core.proxy.ServerProxy;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -55,6 +56,7 @@ public class UpgradeAquatic {
 		
 		modEventBus.addListener(this::setupCommon);
 
+		UABlocks.BLOCKS.register(modEventBus);
 		UAItems.ITEMS.register(modEventBus);
 		UAEffects.EFFECTS.register(modEventBus);
 		UAEffects.POTIONS.register(modEventBus);

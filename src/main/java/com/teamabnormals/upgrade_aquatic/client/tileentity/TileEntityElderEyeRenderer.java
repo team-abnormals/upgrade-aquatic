@@ -30,7 +30,7 @@ public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityEld
         GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
         
-        BlockState eyeState = te.hasWorld() ? te.getBlockState() : (BlockState) UABlocks.ELDER_EYE.getDefaultState();
+        BlockState eyeState = te.hasWorld() ? te.getBlockState() : (BlockState) UABlocks.ELDER_EYE.get().getDefaultState();
         
         if (destroyStage >= 0) {
             this.bindTexture(DESTROY_STAGES[destroyStage]);

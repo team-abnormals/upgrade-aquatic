@@ -40,9 +40,9 @@ public class BlockDriftwood extends RotatedPillarBlock {
 	@Override
 	@SuppressWarnings("deprecation")
 	public boolean onBlockActivated(BlockState state, World world, BlockPos p_220051_3_, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
-		if(state.getBlock() == UABlocks.DRIFTWOOD && player.getHeldItemMainhand().getItem() instanceof AxeItem) {
+		if(state.getBlock() == UABlocks.DRIFTWOOD.get() && player.getHeldItemMainhand().getItem() instanceof AxeItem) {
 			world.playSound(player, p_220051_3_, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 2.0F, 1.0F);
-			world.setBlockState(p_220051_3_, UABlocks.DRIFTWOOD_STRIPPED.getDefaultState());
+			world.setBlockState(p_220051_3_, UABlocks.DRIFTWOOD_STRIPPED.get().getDefaultState());
 			return true;
 		}
 		return super.onBlockActivated(state, world, p_220051_3_, player, p_220051_5_, p_220051_6_);

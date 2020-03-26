@@ -57,7 +57,7 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 	
 	@Override
 	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
-		return this == UABlocks.PICKERELWEED_TALL_BLUE ? new ItemStack(UABlocks.PICKERELWEED_BLUE) : new ItemStack(UABlocks.PICKERELWEED_PURPLE);
+		return this == UABlocks.PICKERELWEED_TALL_BLUE.get() ? new ItemStack(UABlocks.PICKERELWEED_BLUE.get()) : new ItemStack(UABlocks.PICKERELWEED_PURPLE.get());
 	}
 	
 	@Override
@@ -167,7 +167,7 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 			cont:
 			for(int i = 0; i < 128; ++i) {
 				BlockPos blockpos = pos;
-				BlockState blockstate = this == UABlocks.PICKERELWEED_TALL_BLUE ? UABlocks.PICKERELWEED_BLUE.getDefaultState() : UABlocks.PICKERELWEED_PURPLE.getDefaultState();
+				BlockState blockstate = this == UABlocks.PICKERELWEED_TALL_BLUE.get() ? UABlocks.PICKERELWEED_BLUE.get().getDefaultState() : UABlocks.PICKERELWEED_PURPLE.get().getDefaultState();
 
 				for(int j = 0; j < i / 16; ++j) {
 					blockpos = blockpos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);

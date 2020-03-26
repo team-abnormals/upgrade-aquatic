@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
@@ -38,8 +39,8 @@ import net.minecraftforge.registries.ForgeRegistries;
  * @author - SmellyModder(Luke Tonon)
  */
 public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
-	private static final BlockState BLUE_PICKERELWEED = UABlocks.PICKERELWEED_BLUE.getDefaultState();
-	private static final BlockState PURPLE_PICKERELWEED = UABlocks.PICKERELWEED_PURPLE.getDefaultState();
+	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.PICKERELWEED_BLUE.get().getDefaultState();
+	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PICKERELWEED_PURPLE.get().getDefaultState();
 	
 	public FeaturePickerelweed(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
 		super(configFactory);
@@ -48,7 +49,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 	@Override
 	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		Biome biome = worldIn.getBiome(pos);
-		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.isValidPosition(worldIn, pos.down())) {
+		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().isValidPosition(worldIn, pos.down())) {
 			if(biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP || biome instanceof FlowerForestBiome) {
 				boolean purpleGen;
 				if(biome instanceof SwampBiome) {
@@ -117,7 +118,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 				patterns[2] = 6;
 		}
 		BlockPos startPos = pos;
-		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (!purple ? UABlocks.PICKERELWEED_TALL_BLUE : UABlocks.PICKERELWEED_TALL_PURPLE);
+		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (!purple ? UABlocks.PICKERELWEED_TALL_BLUE.get() : UABlocks.PICKERELWEED_TALL_PURPLE.get());
 		MathUtil.Equation r = (theta) -> {
 			return (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
 		};
@@ -132,13 +133,13 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
 							if(i * i + j * j > (radius - 1) * (radius - 1)) {
 								IFluidState ifluidstate = world.getFluidState(placingPos);
-								if(PURPLE_PICKERELWEED.isValidPosition(world, placingPos) && world.getBlockState(placingPos.up()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
+								if(PURPLE_PICKERELWEED.get().isValidPosition(world, placingPos) && world.getBlockState(placingPos.up()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
 									if(purple) {
-										world.setBlockState(placingPos, PURPLE_PICKERELWEED.with(BlockPickerelweed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
+										world.setBlockState(placingPos, PURPLE_PICKERELWEED.get().with(BlockPickerelweed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
 									} else {
-										world.setBlockState(placingPos, BLUE_PICKERELWEED.with(BlockPickerelweed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
+										world.setBlockState(placingPos, BLUE_PICKERELWEED.get().with(BlockPickerelweed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
 									}
-								} else if(PURPLE_PICKERELWEED.isValidPosition(world, placingPos)) {
+								} else if(PURPLE_PICKERELWEED.get().isValidPosition(world, placingPos)) {
 									doubleplantblock.placeAt(world, placingPos, 2);
 								}
 							} else {

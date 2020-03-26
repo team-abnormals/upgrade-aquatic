@@ -107,8 +107,8 @@ public class BlockCoralstoneStairs extends StairsBlock {
 	@Override
 	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_STAIRS) {
-			BlockState newState = UABlocks.CORALSTONE_STAIRS.getDefaultState()
+		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_STAIRS.get()) {
+			BlockState newState = UABlocks.CORALSTONE_STAIRS.get().getDefaultState()
 				.with(FACING, state.get(FACING))
 				.with(HALF, state.get(HALF))
 				.with(SHAPE, state.get(SHAPE))

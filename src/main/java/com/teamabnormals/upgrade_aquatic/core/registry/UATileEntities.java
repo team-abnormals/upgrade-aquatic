@@ -13,8 +13,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class UATileEntities {
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, Reference.MODID);
 	
-	public static final RegistryObject<TileEntityType<TileEntityElderEye>> ELDER_EYE = TILE_ENTITY_TYPES.register("elder_eye", () -> new TileEntityType<>(TileEntityElderEye::new, Sets.newHashSet(UABlocks.ELDER_EYE), null));
+	public static final RegistryObject<TileEntityType<TileEntityElderEye>> ELDER_EYE = TILE_ENTITY_TYPES.register("elder_eye", () -> new TileEntityType<>(TileEntityElderEye::new, Sets.newHashSet(UABlocks.ELDER_EYE.get()), null));
 	public static final RegistryObject<TileEntityType<TileEntityBedroll>> BEDROLL = TILE_ENTITY_TYPES.register("bedroll",
-		() -> new TileEntityType<>(TileEntityBedroll::new, Sets.newHashSet(UABlocks.BEDROLL_LEATHER, UABlocks.BEDROLL_GRAY, UABlocks.BEDROLL_LIGHT_GRAY, UABlocks.BEDROLL_BROWN, UABlocks.BEDROLL_WHITE, UABlocks.BEDROLL_BLACK, UABlocks.BEDROLL_PINK, UABlocks.BEDROLL_RED, UABlocks.BEDROLL_ORANGE, UABlocks.BEDROLL_YELLOW, UABlocks.BEDROLL_LIME, UABlocks.BEDROLL_GREEN, UABlocks.BEDROLL_LIGHT_BLUE, UABlocks.BEDROLL_BLUE, UABlocks.BEDROLL_CYAN, UABlocks.BEDROLL_MAGENTA, UABlocks.BEDROLL_PURPLE), null));
+		() -> new TileEntityType<>(TileEntityBedroll::new, Sets.newHashSet(UABlocks.BEDROLL_LEATHER.get(), UABlocks.BEDROLL_GRAY.get(), UABlocks.BEDROLL_LIGHT_GRAY.get(), UABlocks.BEDROLL_BROWN.get(), UABlocks.BEDROLL_WHITE.get(), UABlocks.BEDROLL_BLACK.get(), UABlocks.BEDROLL_PINK.get(), UABlocks.BEDROLL_RED.get(), UABlocks.BEDROLL_ORANGE.get(), UABlocks.BEDROLL_YELLOW.get(), UABlocks.BEDROLL_LIME.get(), UABlocks.BEDROLL_GREEN.get(), UABlocks.BEDROLL_LIGHT_BLUE.get(), UABlocks.BEDROLL_BLUE.get(), UABlocks.BEDROLL_CYAN.get(), UABlocks.BEDROLL_MAGENTA.get(), UABlocks.BEDROLL_PURPLE.get()), null));
 
 }

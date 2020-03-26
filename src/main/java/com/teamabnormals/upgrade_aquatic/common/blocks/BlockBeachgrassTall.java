@@ -105,8 +105,8 @@ public class BlockBeachgrassTall extends Block implements IGrowable {
 			worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
 			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			if(!worldIn.isRemote && !player.isCreative() && player.getHeldItemMainhand().getItem() instanceof ShearsItem) {
-				spawnAsEntity(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS));
-				spawnAsEntity(worldIn, pos.up(), new ItemStack(UABlocks.BEACHGRASS));
+				spawnAsEntity(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS.get()));
+				spawnAsEntity(worldIn, pos.up(), new ItemStack(UABlocks.BEACHGRASS.get()));
 			} else if(!worldIn.isRemote && !player.isCreative() && !(player.getHeldItemMainhand().getItem() instanceof ShearsItem)) {
 				Random rand = new Random();
 				if(rand.nextFloat() < 0.125F) {
@@ -152,7 +152,7 @@ public class BlockBeachgrassTall extends Block implements IGrowable {
 	@Override
 	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		if(!worldIn.isRemote) {
-			BlockState blockstate = UABlocks.BEACHGRASS.getDefaultState();
+			BlockState blockstate = UABlocks.BEACHGRASS.get().getDefaultState();
 			cont:
 			for(int i = 0; i < 128; ++i) {
 				BlockPos blockpos = pos;

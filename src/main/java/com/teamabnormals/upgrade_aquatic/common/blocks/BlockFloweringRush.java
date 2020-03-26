@@ -80,9 +80,9 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
 		if(state.get(HALF) == DoubleBlockHalf.LOWER) {
-			return fluidState.getLevel() >= 8 && this.isValidGround(groundState, worldIn, currentPos.down()) && worldIn.getBlockState(currentPos.up()).getBlock() == UABlocks.FLOWERING_RUSH && worldIn.getBlockState(currentPos.up()).get(HALF) == DoubleBlockHalf.UPPER ? state : Blocks.AIR.getDefaultState();
+			return fluidState.getLevel() >= 8 && this.isValidGround(groundState, worldIn, currentPos.down()) && worldIn.getBlockState(currentPos.up()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.up()).get(HALF) == DoubleBlockHalf.UPPER ? state : Blocks.AIR.getDefaultState();
 		} else {
-			return upperFluidState.isEmpty() && worldIn.getBlockState(currentPos.down()).getBlock() == UABlocks.FLOWERING_RUSH && worldIn.getBlockState(currentPos.down()).get(HALF) == DoubleBlockHalf.LOWER ? state : Blocks.AIR.getDefaultState();
+			return upperFluidState.isEmpty() && worldIn.getBlockState(currentPos.down()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.down()).get(HALF) == DoubleBlockHalf.LOWER ? state : Blocks.AIR.getDefaultState();
 		}
 	}
 	

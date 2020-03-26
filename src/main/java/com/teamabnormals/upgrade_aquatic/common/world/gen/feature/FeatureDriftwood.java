@@ -29,7 +29,7 @@ import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class FeatureDriftwood extends Feature<NoFeatureConfig> {
-	protected static final BlockState DRIFTWOOD_LOG = UABlocks.DRIFTWOOD_LOG.getDefaultState();
+	protected static final BlockState DRIFTWOOD_LOG = UABlocks.DRIFTWOOD_LOG.get().getDefaultState();
 
 	public FeatureDriftwood(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
@@ -46,7 +46,7 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 					this.placeDriftwoodLog(world, pos.offset(upDirection, i), upDirection);
 					if(rand.nextBoolean()) {
 						Direction horizontalDirection = Direction.byHorizontalIndex(rand.nextInt(4));
-						if(world.isAirBlock(pos.offset(upDirection, i).offset(horizontalDirection)) && BlockUtil.isPosNotTouchingBlock(world, pos.offset(upDirection, i).offset(horizontalDirection), UABlocks.DRIFTWOOD_LOG, horizontalDirection.getOpposite())) {
+						if(world.isAirBlock(pos.offset(upDirection, i).offset(horizontalDirection)) && BlockUtil.isPosNotTouchingBlock(world, pos.offset(upDirection, i).offset(horizontalDirection), UABlocks.DRIFTWOOD_LOG.get(), horizontalDirection.getOpposite())) {
 							this.placeDriftwoodLog(world, pos.offset(upDirection, i).offset(horizontalDirection), horizontalDirection);
 						}
 					}
@@ -66,7 +66,7 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 					}
 					if(rand.nextBoolean()) {
 						Direction upOrDown = rand.nextBoolean() ? Direction.UP : Direction.DOWN;
-						if(this.isBlockPlaceableAtPos(world, pos.offset(direction, i).offset(upOrDown), world.getBiome(pos.offset(direction, i).offset(upOrDown)).getCategory() == Category.OCEAN) && BlockUtil.isPosNotTouchingBlock(world, pos.offset(direction, i).offset(upOrDown), UABlocks.DRIFTWOOD_LOG, Direction.UP, Direction.DOWN)) {
+						if(this.isBlockPlaceableAtPos(world, pos.offset(direction, i).offset(upOrDown), world.getBiome(pos.offset(direction, i).offset(upOrDown)).getCategory() == Category.OCEAN) && BlockUtil.isPosNotTouchingBlock(world, pos.offset(direction, i).offset(upOrDown), UABlocks.DRIFTWOOD_LOG.get(), Direction.UP, Direction.DOWN)) {
 							this.placeDriftwoodLog(world, pos.offset(direction, i).offset(upOrDown), upOrDown);
 						}
 					}

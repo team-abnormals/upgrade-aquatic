@@ -69,13 +69,13 @@ public class BlockUAKelpTop extends KelpTopBlock {
 		switch(this.kelpType) {
 			default:
 			case TONGUE:
-				return UABlocks.TONGUE_KELP_PLANT;
+				return UABlocks.TONGUE_KELP_PLANT.get();
 			case THORNY:
-				return UABlocks.THORNY_KELP_PLANT;
+				return UABlocks.THORNY_KELP_PLANT.get();
 			case OCHRE:
-				return UABlocks.OCHRE_KELP_PLANT;
+				return UABlocks.OCHRE_KELP_PLANT.get();
 			case POLAR:
-				return UABlocks.POLAR_KELP_PLANT;
+				return UABlocks.POLAR_KELP_PLANT.get();
 		}
 	}
 
