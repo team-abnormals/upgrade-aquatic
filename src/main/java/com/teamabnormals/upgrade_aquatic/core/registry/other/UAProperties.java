@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.common;
+package com.teamabnormals.upgrade_aquatic.core.registry.other;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

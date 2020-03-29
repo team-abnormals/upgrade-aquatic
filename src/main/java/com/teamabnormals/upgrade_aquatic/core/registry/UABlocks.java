@@ -4,9 +4,9 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import com.google.common.collect.Maps;
-import com.teamabnormals.upgrade_aquatic.common.UAProperties;
 import com.teamabnormals.upgrade_aquatic.common.blocks.*;
 import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAProperties;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
