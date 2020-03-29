@@ -14,6 +14,7 @@ public class UAFoods {
 		return cooked ? new Food.Builder().hunger(8).saturation(0.8F).build() : new Food.Builder().hunger(3).saturation(0.3F).build();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static final Food LIONFISH(boolean cooked) {
 		return cooked ? new Food.Builder().hunger(6).saturation(0.7F).build() : new Food.Builder().effect(new EffectInstance(Effects.POISON, 550, 3), 1.0F).effect(new EffectInstance(Effects.NAUSEA, 320, 2), 1.0F).hunger(2).saturation(0.3F).build();
 	}

@@ -10,7 +10,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.IGrowable;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -19,6 +18,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BlockBeachgrass extends Block implements IGrowable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -45,7 +45,7 @@ public class BlockBeachgrass extends Block implements IGrowable {
 	}
 	
 	@Override
-	public void grow(World world, Random rand, BlockPos pos, BlockState state) {
+	public void grow(ServerWorld world, Random rand, BlockPos pos, BlockState state) {
 		BlockBeachgrassTall plant = (BlockBeachgrassTall) UABlocks.TALL_BEACHGRASS.get();
 		if(plant.getDefaultState().isValidPosition(world, pos) && world.isAirBlock(pos.up())) {
 			plant.placeAt(world, pos, 2);
@@ -54,10 +54,6 @@ public class BlockBeachgrass extends Block implements IGrowable {
 	
 	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XYZ;
-	}
-	
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override

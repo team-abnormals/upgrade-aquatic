@@ -32,6 +32,7 @@ public class ClientEvents {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
 		GlStateManager.pushMatrix();
@@ -45,6 +46,7 @@ public class ClientEvents {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onPlayerRenderPost(RenderPlayerEvent.Post event) {
 		GlStateManager.popMatrix();

@@ -165,7 +165,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			Random rand = new Random();
 			if(rand.nextFloat() < 0.25F) {
 				EntityGreatThrasher greatThrasher = UAEntities.GREAT_THRASHER.get().create(this.world);
-				greatThrasher.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+				greatThrasher.setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, this.rotationPitch);
 				this.world.addEntity(greatThrasher);
 				this.remove();
 			}
@@ -192,11 +192,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			double dy = -Math.sin(this.rotationPitch * (Math.PI / 180.0D));
 			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			
-			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY, this.posZ + dz);
+			Vec3d riderPos = new Vec3d(this.getPosX() + dx, this.getPosY(), this.getPosZ() + dz);
 			
 			double offset = passenger instanceof PlayerEntity ? this.getMountedYOffset() - 0.2D : this.getMountedYOffset() - 0.5F;
 			
-			passenger.setPosition(riderPos.x, this.posY + dy + offset, riderPos.z);
+			passenger.setPosition(riderPos.x, this.getPosY() + dy + offset, riderPos.z);
 		} else {
 			super.updatePassenger(passenger);
 		}
@@ -406,7 +406,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 					Entity passenger = this.getPassengers().get(0);
 					for(int i = 0; i < 3; ++i) {
 						if(passenger.areEyesInFluid(FluidTags.WATER)) {
-							this.world.addParticle(ParticleTypes.BUBBLE, passenger.posX + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), passenger.posY, passenger.posZ + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), (this.getRNG().nextDouble() - 0.5D) * 2.0D, -this.getRNG().nextDouble(), (this.getRNG().nextDouble() - 0.5D) * 2.0D);
+							this.world.addParticle(ParticleTypes.BUBBLE, passenger.getPosX() + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), passenger.getPosY(), passenger.getPosZ() + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), (this.getRNG().nextDouble() - 0.5D) * 2.0D, -this.getRNG().nextDouble(), (this.getRNG().nextDouble() - 0.5D) * 2.0D);
 						}
 					}
 				}
@@ -483,7 +483,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				Vec3d vec3d1 = this.getLook(0.0F);
 
 				for(int i = 0; i < 2; ++i) {
-					this.world.addParticle(ParticleTypes.BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.posY + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
+					this.world.addParticle(ParticleTypes.BUBBLE, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.getPosY() + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
@@ -648,7 +648,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 
 		public void tick() {
 			if (this.action == MovementController.Action.MOVE_TO && !this.thrasher.getNavigator().noPath() && this.thrasher.getStunTime() <= 0) {
-				Vec3d vec3d = new Vec3d(this.posX - this.thrasher.posX, this.posY - this.thrasher.posY, this.posZ - this.thrasher.posZ);
+				Vec3d vec3d = new Vec3d(this.posX - this.thrasher.getPosX(), this.posY - this.thrasher.getPosY(), this.posZ - this.thrasher.getPosZ());
 				double d0 = vec3d.length();
 				double d1 = vec3d.y / d0;
 				float f = (float) (MathHelper.atan2(vec3d.z, vec3d.x) * (double) (180F / (float) Math.PI)) - 90F;
@@ -696,19 +696,19 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			if(this.isLooking) {
 				this.isLooking = false;
 				if(this.isTurningForSonar) {
-					this.mob.rotationYaw = this.func_220675_a(this.mob.rotationYaw, this.func_220678_h(), this.deltaLookYaw);
+					this.mob.rotationYaw = this.clampedRotate(this.mob.rotationYaw, this.getTargetYaw(), this.deltaLookYaw);
 				} else {
-					this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.func_220678_h(), this.deltaLookYaw);
+					this.mob.rotationYawHead = this.clampedRotate(this.mob.rotationYawHead, this.getTargetYaw(), this.deltaLookYaw);
 				}
-				this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, this.func_220677_g(), this.deltaLookPitch);
+				this.mob.rotationPitch = this.clampedRotate(this.mob.rotationPitch, this.getTargetPitch(), this.deltaLookPitch);
 			} else {
 				if(this.mob.getNavigator().noPath()) {
-					this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, 0.0F, 5.0F);
+					this.mob.rotationPitch = this.clampedRotate(this.mob.rotationPitch, 0.0F, 5.0F);
 				}
 				if(this.isTurningForSonar) {
-					this.mob.rotationYaw = this.func_220675_a(this.mob.rotationYaw, this.mob.renderYawOffset, this.deltaLookYaw);
+					this.mob.rotationYaw = this.clampedRotate(this.mob.rotationYaw, this.mob.renderYawOffset, this.deltaLookYaw);
 				} else {
-					this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.mob.renderYawOffset, this.deltaLookYaw);
+					this.mob.rotationYawHead = this.clampedRotate(this.mob.rotationYawHead, this.mob.renderYawOffset, this.deltaLookYaw);
 				}
 			}
 

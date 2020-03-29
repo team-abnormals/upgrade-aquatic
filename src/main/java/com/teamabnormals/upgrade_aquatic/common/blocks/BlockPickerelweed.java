@@ -20,7 +20,6 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -30,6 +29,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -49,7 +49,7 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 	}
 	
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if(random.nextFloat() <= 0.03F && state.get(WATERLOGGED)) {
 			this.grow(worldIn, random, pos, state);
 		}
@@ -63,7 +63,7 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 	}
 	
 	@Override
-	public void grow(World world, Random rand, BlockPos pos, BlockState state) {
+	public void grow(ServerWorld world, Random rand, BlockPos pos, BlockState state) {
 		IFluidState ifluidstate = world.getFluidState(pos.up());
 		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (this == UABlocks.PICKERELWEED_BLUE.get() ? UABlocks.PICKERELWEED_TALL_BLUE.get() : UABlocks.PICKERELWEED_TALL_PURPLE.get());
 		if(doubleplantblock.getDefaultState().isValidPosition(world, pos) && (world.isAirBlock(pos.up()) || ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() >= 6)) {
@@ -102,10 +102,6 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 	
 	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XYZ;
-	}
-	
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override

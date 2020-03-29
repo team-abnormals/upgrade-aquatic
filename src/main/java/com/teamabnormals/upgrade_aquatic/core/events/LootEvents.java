@@ -51,13 +51,13 @@ public class LootEvents {
 		Random rand = event.getEntityLiving().getRNG();
 		if(event.getEntity().getType() == EntityType.ELDER_GUARDIAN) {
 			int spineAmount = event.getLootingLevel() > 0 ? (rand.nextInt(3) + 1) * event.getLootingLevel() : rand.nextInt(2) + 1;
-			ItemEntity eyeDrop = new ItemEntity(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, new ItemStack(UABlocks.ELDER_EYE.get()));
-			ItemEntity spineDrop = new ItemEntity(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, new ItemStack(UABlocks.ELDER_GUARDIAN_SPINE.get(), spineAmount));
+			ItemEntity eyeDrop = new ItemEntity(event.getEntity().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), new ItemStack(UABlocks.ELDER_EYE.get()));
+			ItemEntity spineDrop = new ItemEntity(event.getEntity().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), new ItemStack(UABlocks.ELDER_GUARDIAN_SPINE.get(), spineAmount));
 			event.getDrops().add(eyeDrop);
 			event.getDrops().add(spineDrop);
 		} else if(event.getEntity().getType() == EntityType.GUARDIAN) {
 			int spineAmount = event.getLootingLevel() > 0 ? (rand.nextInt(3) + 1) * event.getLootingLevel() : rand.nextInt(2) + 1;
-			ItemEntity drop = new ItemEntity(event.getEntity().world, event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, new ItemStack(UABlocks.GUARDIAN_SPINE.get(), spineAmount));
+			ItemEntity drop = new ItemEntity(event.getEntity().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), new ItemStack(UABlocks.GUARDIAN_SPINE.get(), spineAmount));
 			event.getDrops().add(drop);
 		}
 	}

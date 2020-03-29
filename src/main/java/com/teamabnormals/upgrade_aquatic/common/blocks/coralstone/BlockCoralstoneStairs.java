@@ -21,6 +21,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.Half;
 import net.minecraft.state.properties.StairsShape;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -28,6 +29,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BlockCoralstoneStairs extends StairsBlock {
 	@Nullable
@@ -52,7 +54,7 @@ public class BlockCoralstoneStairs extends StairsBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if(!worldIn.isAreaLoaded(pos, 3)) return;
 		
 		for(int i = 0; i < 4; i++) {
@@ -105,7 +107,7 @@ public class BlockCoralstoneStairs extends StairsBlock {
 	}
 	
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
 		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_STAIRS.get()) {
 			BlockState newState = UABlocks.CORALSTONE_STAIRS.get().getDefaultState()
@@ -117,9 +119,9 @@ public class BlockCoralstoneStairs extends StairsBlock {
 			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 			world.setBlockState(pos, newState, 2);
-			return true;
+			return ActionResultType.SUCCESS;
 		}
-		return false;
+		return ActionResultType.FAIL;
 	}
 	
 	@Override

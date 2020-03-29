@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -19,16 +20,16 @@ public class BlockToothDoor extends DoorBlock {
 	}
 
 
-	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
 			BlockRayTraceResult hit) {
 		if (state.get(POWERED)) {
-			return true;
+			return ActionResultType.SUCCESS;
 		} else {
 			state = state.cycle(OPEN);
 			worldIn.setBlockState(pos, state, 10);
 			worldIn.playEvent(player, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
 			worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 	}
 	

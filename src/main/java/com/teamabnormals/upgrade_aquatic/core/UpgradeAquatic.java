@@ -1,13 +1,29 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
+import com.teamabnormals.upgrade_aquatic.client.render.RenderFlare;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderGreatThrasher;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderLionfish;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderNautilus;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderPike;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderSonarWave;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderThrasher;
+import com.teamabnormals.upgrade_aquatic.client.render.RenderUABoat;
+import com.teamabnormals.upgrade_aquatic.client.tileentity.TileEntityElderEyeRenderer;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityFlare;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
+import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;
 import com.teamabnormals.upgrade_aquatic.core.config.ConfigHelper;
-import com.teamabnormals.upgrade_aquatic.core.proxy.ClientProxy;
-import com.teamabnormals.upgrade_aquatic.core.proxy.ServerProxy;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
@@ -17,6 +33,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.item.Item;
@@ -29,8 +46,11 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -39,7 +59,6 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 @Mod(value = Reference.MODID)
 public class UpgradeAquatic {
 	public static UpgradeAquatic instance;
-	public static ServerProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 	public static final String NETWORK_PROTOCOL = "1";
 	
 	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(Reference.MODID, "net"))
@@ -65,6 +84,11 @@ public class UpgradeAquatic {
 		UASounds.SOUNDS.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
 		
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
+			modEventBus.addListener(EventPriority.LOWEST, this::registerItemColors);
+			modEventBus.addListener(EventPriority.LOWEST, this::setupClient);
+		});
+		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
 			final ModConfig config = event.getConfig();
 			if(config.getSpec() == Config.CLIENTSPEC) {
@@ -81,12 +105,29 @@ public class UpgradeAquatic {
 	}
 	
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		proxy.preInit();
 		UAEntitySpawns.addSpawnsToBiomes();
 		UADispenseBehaviorRegistry.registerDispenseBehaviors();
 		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();
 		UACompostables.registerCompostables();
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	private void setupClient(final FMLClientSetupEvent event) {
+		UARenderLayers.setBlockRenderLayers();
+		
+		//Tile Entities
+		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), TileEntityElderEyeRenderer::new);
+		
+		//Entities
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.NAUTILUS.get(), RenderNautilus::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.PIKE.get(), RenderPike::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.LIONFISH.get(), RenderLionfish::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.THRASHER.get(), RenderThrasher::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GREAT_THRASHER.get(), RenderGreatThrasher::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOAT.get(), RenderUABoat::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.FLARE.get(), RenderFlare::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.SONAR_WAVE.get(), RenderSonarWave::new);
 	}
 	
 	@OnlyIn(Dist.CLIENT)

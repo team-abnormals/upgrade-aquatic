@@ -1,13 +1,17 @@
 package com.teamabnormals.upgrade_aquatic.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
-
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelUABoat;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
-import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.Quaternion;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,78 +19,51 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderUABoat extends EntityRenderer<EntityUABoat> {
-    private static final ResourceLocation[] BOAT_TEXTURES = new ResourceLocation[] {
-    	new ResourceLocation(Reference.MODID, "textures/entity/boat/driftwood_boat.png"),
-    };
-    protected final ModelUABoat model = new ModelUABoat();
+   private static final ResourceLocation[] BOAT_TEXTURES = new ResourceLocation[]{
+		   new ResourceLocation("buzzierbees:textures/entity/boat/hive.png")};
+   protected final ModelUABoat modelBoat = new ModelUABoat();
 
-    public RenderUABoat(EntityRendererManager renderManagerIn) {
-        super(renderManagerIn);
-        this.shadowSize = 0.8F;
-    }
+   public RenderUABoat(EntityRendererManager renderManagerIn) {
+      super(renderManagerIn);
+      this.shadowSize = 0.8F;
+   }
 
-    @Override
-    public void doRender(EntityUABoat entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        GlStateManager.pushMatrix();
-        this.setupTranslation(x, y, z);
-        this.setupRotation(entity, entityYaw, partialTicks);
-        this.bindEntityTexture(entity);
-        if (this.renderOutlines) {
-            GlStateManager.enableColorMaterial();
-            GlStateManager.setupSolidRenderingTextureCombine(this.getTeamColor(entity));
-        }
+   @Override
+   public void render(EntityUABoat entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+      matrixStackIn.push();
+      matrixStackIn.translate(0.0D, 0.375D, 0.0D);
+      matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - entityYaw));
+      float f = (float)entityIn.getTimeSinceHit() - partialTicks;
+      float f1 = entityIn.getDamageTaken() - partialTicks;
+      if (f1 < 0.0F) {
+         f1 = 0.0F;
+      }
 
-        this.model.render(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        if (this.renderOutlines) {
-            GlStateManager.tearDownSolidRenderingTextureCombine();
-            GlStateManager.disableColorMaterial();
-        }
+      if (f > 0.0F) {
+         matrixStackIn.rotate(Vector3f.XP.rotationDegrees(MathHelper.sin(f) * f * f1 / 10.0F * (float)entityIn.getForwardDirection()));
+      }
 
-        GlStateManager.popMatrix();
-        super.doRender(entity, x, y, z, entityYaw, partialTicks);
-    }
+      float f2 = entityIn.getRockingAngle(partialTicks);
+      if (!MathHelper.epsilonEquals(f2, 0.0F)) {
+         matrixStackIn.rotate(new Quaternion(new Vector3f(1.0F, 0.0F, 1.0F), entityIn.getRockingAngle(partialTicks), true));
+      }
 
-    public void setupRotation(EntityUABoat entityIn, float entityYaw, float partialTicks) {
-        GlStateManager.rotatef(180.0F - entityYaw, 0.0F, 1.0F, 0.0F);
-        float f = (float)entityIn.getTimeSinceHit() - partialTicks;
-        float f1 = entityIn.getDamageTaken() - partialTicks;
-        if (f1 < 0.0F) {
-            f1 = 0.0F;
-        }
+      matrixStackIn.scale(-1.0F, -1.0F, 1.0F);
+      matrixStackIn.rotate(Vector3f.YP.rotationDegrees(90.0F));
+      this.modelBoat.setRotationAngles(entityIn, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F);
+      IVertexBuilder ivertexbuilder = bufferIn.getBuffer(this.modelBoat.getRenderType(this.getEntityTexture(entityIn)));
+      this.modelBoat.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+      IVertexBuilder ivertexbuilder1 = bufferIn.getBuffer(RenderType.getWaterMask());
+      this.modelBoat.func_228245_c_().render(matrixStackIn, ivertexbuilder1, packedLightIn, OverlayTexture.NO_OVERLAY);
+      matrixStackIn.pop();
+      super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+   }
 
-        if (f > 0.0F) {
-            GlStateManager.rotatef(MathHelper.sin(f) * f * f1 / 10.0F * (float)entityIn.getForwardDirection(), 1.0F, 0.0F, 0.0F);
-        }
-
-        float f2 = entityIn.getRockingAngle(partialTicks);
-        if (!MathHelper.epsilonEquals(f2, 0.0F)) {
-            GlStateManager.rotatef(entityIn.getRockingAngle(partialTicks), 1.0F, 0.0F, 1.0F);
-        }
-
-        GlStateManager.scalef(-1.0F, -1.0F, 1.0F);
-    }
-
-    public void setupTranslation(double x, double y, double z) {
-        GlStateManager.translatef((float)x, (float)y + 0.375F, (float)z);
-    }
-
-    @Override
-    protected ResourceLocation getEntityTexture(EntityUABoat entity) {
-        return BOAT_TEXTURES[entity.getBoatModel().ordinal()];
-    }
-
-    @Override
-    public boolean isMultipass() {
-        return true;
-    }
-
-    @Override
-    public void renderMultipass(EntityUABoat entityIn, double x, double y, double z, float entityYaw, float partialTicks) {
-        GlStateManager.pushMatrix();
-        this.setupTranslation(x, y, z);
-        this.setupRotation(entityIn, entityYaw, partialTicks);
-        this.bindEntityTexture(entityIn);
-        this.model.renderMultipass(entityIn, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-        GlStateManager.popMatrix();
-    }
+   /**
+    * Returns the location of an entity's texture.
+    */
+   @Override
+   public ResourceLocation getEntityTexture(EntityUABoat entity) {
+      return BOAT_TEXTURES[entity.getBoatModel().ordinal()];
+   }
 }

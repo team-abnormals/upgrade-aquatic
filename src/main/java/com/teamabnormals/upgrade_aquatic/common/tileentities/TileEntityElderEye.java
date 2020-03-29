@@ -53,9 +53,9 @@ public class TileEntityElderEye extends TileEntity implements ITickableTileEntit
 					}
 
 					int[] posCheck = {
-						facing.getXOffset() * (MathHelper.floor(entity.posX) - this.pos.getX()),
-						facing.getYOffset() * (MathHelper.floor(entity.posY) - this.pos.getY()),
-						facing.getZOffset() * (MathHelper.floor(entity.posZ) - this.pos.getZ())
+						facing.getXOffset() * (MathHelper.floor(entity.getPosX()) - this.pos.getX()),
+						facing.getYOffset() * (MathHelper.floor(entity.getPosY()) - this.pos.getY()),
+						facing.getZOffset() * (MathHelper.floor(entity.getPosZ()) - this.pos.getZ())
 					};
 					
 					for(int b = 1; b < Math.abs(IntStream.of(posCheck).sum()); b++) {

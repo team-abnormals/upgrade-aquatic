@@ -174,13 +174,12 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 	
 	private static void process(Biome biome) {
 		if(biome == Biomes.FLOWER_FOREST) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(90))));
 		} else {
 			if(biome.getCategory() != Category.OCEAN && biome.getCategory() != Category.BEACH && biome.getCategory() != Category.DESERT && biome.getCategory() != Category.ICY) {
-				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(28)));
+				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(28))));
 				if(ModList.get().isLoaded("bloomful")) {
-					ForgeRegistries.BIOMES.getValue(new ResourceLocation("bloomful:wisteria_forest")).getFeatures(Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
-					//ForgeRegistries.BIOMES.getValue(new ResourceLocation("bloomful:wisteria_forest_hills")).getFeatures(Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.PICKERELWEED.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(90)));
+					ForgeRegistries.BIOMES.getValue(new ResourceLocation("bloomful:wisteria_forest")).getFeatures(Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(90))));
 				}
 			}
 		}

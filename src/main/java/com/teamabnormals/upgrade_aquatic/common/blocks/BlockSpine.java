@@ -159,10 +159,10 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 			if(!entityIn.isInvulnerable()) {
 				if(state.get(ELDER)) ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 40));
 			}
-			if (!worldIn.isRemote && (entityIn.lastTickPosX != entityIn.posX || entityIn.lastTickPosZ != entityIn.posZ || entityIn.lastTickPosY != entityIn.posY)) {
-				double d0 = Math.abs(entityIn.posX - entityIn.lastTickPosX);
-				double d1 = Math.abs(entityIn.posZ - entityIn.lastTickPosZ);
-				double d2 = Math.abs(entityIn.posY - entityIn.lastTickPosY);
+			if (!worldIn.isRemote && (entityIn.lastTickPosX != entityIn.getPosX() || entityIn.lastTickPosZ != entityIn.getPosZ() || entityIn.lastTickPosY != entityIn.getPosY())) {
+				double d0 = Math.abs(entityIn.getPosX() - entityIn.lastTickPosX);
+				double d1 = Math.abs(entityIn.getPosZ() - entityIn.lastTickPosZ);
+				double d2 = Math.abs(entityIn.getPosY() - entityIn.lastTickPosY);
 				if (d0 >= 0.003D || d1 >= 0.003D || d2 >= 0.003D) {
 					if(state.get(ELDER)) {
 						entityIn.attackEntityFrom(UADamageSources.ELDER_GUARDIAN_SPINE, 3.0F);

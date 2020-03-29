@@ -61,7 +61,7 @@ public class FeatureFloweringRush extends Feature<NoFeatureConfig> {
 	
 	private static void process(Biome biome) {
 		if(biome.getCategory() == Category.RIVER) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.FLOWERING_RUSH.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(15)));
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.FLOWERING_RUSH.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(15))));
 		}
 	}
 }

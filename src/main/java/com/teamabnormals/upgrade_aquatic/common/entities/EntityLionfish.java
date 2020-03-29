@@ -285,9 +285,9 @@ public class EntityLionfish extends EntityBucketableWaterMob {
             }
 
             if (this.action == MovementController.Action.MOVE_TO && !this.lionfish.getNavigator().noPath()) {
-            	double d0 = this.posX - this.lionfish.posX;
-            	double d1 = this.posY - this.lionfish.posY;
-            	double d2 = this.posZ - this.lionfish.posZ;
+            	double d0 = this.posX - this.lionfish.getPosX();
+            	double d1 = this.posY - this.lionfish.getPosY();
+            	double d2 = this.posZ - this.lionfish.getPosZ();
             	double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
             	d1 = d1 / d3;
             	float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;

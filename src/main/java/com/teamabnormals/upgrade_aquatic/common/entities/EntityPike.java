@@ -249,7 +249,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 						if(this.getPikeType() == 7) {
 							if (this.world.isRemote) {
 								for(int i = 0; i < 3; ++i) {
-									this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
+									this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().getPosX() + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().getPosY() + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().getPosZ() + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
 								}
 							}
 						}
@@ -262,7 +262,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 					if(this.getPikeType() == 7) {
 						if (this.world.isRemote) {
 							for(int i = 0; i < 3; ++i) {
-								this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().posX + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().posY + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().posZ + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
+								this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().getPosX() + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().getPosY() + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().getPosZ() + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
 							}
 						}
 					}
@@ -313,14 +313,14 @@ public class EntityPike extends EntityBucketableWaterMob {
 			Vec3d vec3d1 = this.getLook(0.0F);
 
 			for(int i = 0; i < 2; ++i) {
-				this.world.addParticle(ParticleTypes.BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.posY + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
+				this.world.addParticle(ParticleTypes.BUBBLE, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.getPosY() + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
 			}
 		}
 		
 		if(this.getPikeType() == 13 && this.isLit()) {
 			if(this.world.isRemote) {
 				for(int i = 0; i < 2; i++) {
-					this.world.addParticle(ParticleTypes.PORTAL, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth(), this.posY + this.rand.nextDouble() * (double)this.getHeight() - 0.25D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth(), (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
+					this.world.addParticle(ParticleTypes.PORTAL, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth(), this.getPosY() + this.rand.nextDouble() * (double)this.getHeight() - 0.25D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth(), (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
 				}
 			}
 		}
@@ -411,7 +411,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	private void spitOutItem(ItemStack stackIn) {
 		if (!stackIn.isEmpty()) {
 			if(!this.world.isRemote) {
-				ItemEntity itementity = new ItemEntity(this.world, this.posX + this.getLookVec().x, this.posY + 1.0D, this.posZ + this.getLookVec().z, stackIn);
+				ItemEntity itementity = new ItemEntity(this.world, this.getPosX() + this.getLookVec().x, this.getPosY() + 1.0D, this.getPosZ() + this.getLookVec().z, stackIn);
 				itementity.setPickupDelay(40);
 				itementity.setThrowerId(this.getUniqueID());
 				this.playSound(SoundEvents.ENTITY_FOX_SPIT, 1.0F, 1.0F);
@@ -461,12 +461,12 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	@Override
-	public boolean func_213365_e(ItemStack p_213365_1_) {
+	public boolean canPickUpItem(ItemStack p_213365_1_) {
 		EquipmentSlotType equipmentslottype = MobEntity.getSlotForItemStack(p_213365_1_);
 		if (!this.getItemStackFromSlot(equipmentslottype).isEmpty()) {
 			return false;
 		} else {
-			return equipmentslottype == EquipmentSlotType.MAINHAND && super.func_213365_e(p_213365_1_);
+			return equipmentslottype == EquipmentSlotType.MAINHAND && super.canPickUpItem(p_213365_1_);
 		}
 	}
 	
@@ -488,7 +488,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	}
 	
 	private void spawnItem(ItemStack stackIn) {
-		ItemEntity itementity = new ItemEntity(this.world, this.posX, this.posY, this.posZ, stackIn);
+		ItemEntity itementity = new ItemEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ(), stackIn);
 		this.world.addEntity(itementity);
 	}
 	
@@ -506,7 +506,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 			double dx = Math.cos((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			
-			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.posZ + dz);
+			Vec3d riderPos = new Vec3d(this.getPosX() + dx, this.getPosY() + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.getPosZ() + dz);
 			this.getPassengers().get(0).setPosition(riderPos.x, riderPos.y, riderPos.z);
 		} else {
 			super.updatePassenger(passenger);
@@ -845,9 +845,9 @@ public class EntityPike extends EntityBucketableWaterMob {
 			}
 
 			if (this.action == MovementController.Action.MOVE_TO && !this.pike.getNavigator().noPath()) {
-				double d0 = this.posX - this.pike.posX;
-				double d1 = this.posY - this.pike.posY;
-				double d2 = this.posZ - this.pike.posZ;
+				double d0 = this.posX - this.pike.getPosX();
+				double d1 = this.posY - this.pike.getPosY();
+				double d2 = this.posZ - this.pike.getPosZ();
 				double d3 = (double)MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
 				d1 = d1 / d3;
 				float f = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;

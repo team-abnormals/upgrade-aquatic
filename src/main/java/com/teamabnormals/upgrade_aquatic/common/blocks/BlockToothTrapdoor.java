@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -18,10 +19,10 @@ public class BlockToothTrapdoor extends TrapDoorBlock {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
 			BlockRayTraceResult hit) {
 		if (state.get(POWERED)) {
-			return true;
+			return ActionResultType.SUCCESS;
 		} else {
 			state = state.cycle(OPEN);
 			worldIn.setBlockState(pos, state, 2);
@@ -31,7 +32,7 @@ public class BlockToothTrapdoor extends TrapDoorBlock {
 
 	         this.playSound(player, worldIn, pos, state.get(OPEN));
 			worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 	}
 	

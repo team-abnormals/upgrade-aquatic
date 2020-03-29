@@ -72,7 +72,7 @@ public class FeatureDunes extends Feature<NoFeatureConfig> {
 	
 	private static void process(Biome biome) {
 		if(biome.getCategory() == Category.BEACH) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.DUNES.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(18)));
+			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DUNES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(18))));
 		}
 	}
 

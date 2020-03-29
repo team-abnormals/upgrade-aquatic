@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -39,11 +40,11 @@ public class BlockDriftwoodLog extends RotatedPillarBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public boolean onBlockActivated(BlockState state, World world, BlockPos p_220051_3_, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos p_220051_3_, PlayerEntity player, Hand p_220051_5_, BlockRayTraceResult p_220051_6_) {
 		if(state.getBlock() == UABlocks.DRIFTWOOD_LOG.get() && player.getHeldItemMainhand().getItem() instanceof AxeItem) {
 			world.playSound(player, p_220051_3_, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 2.0F, 1.0F);
 			world.setBlockState(p_220051_3_, UABlocks.DRIFTWOOD_LOG_STRIPPED.get().getDefaultState().with(AXIS, state.get(AXIS)));
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 		return super.onBlockActivated(state, world, p_220051_3_, player, p_220051_5_, p_220051_6_);
 	}

@@ -157,7 +157,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
             Vec3d vec3d1 = this.getLook(0.0F);
 
             if (this.getEntityWorld().getGameTime() % 2 == 0) {
-                this.world.addParticle(ParticleTypes.BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.x * 0.75D, this.posY + this.rand.nextDouble() * (double) this.getHeight() - vec3d1.y * 1D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.z * 0.75D, 0.0D, 0.0D, 0.0D);
+                this.world.addParticle(ParticleTypes.BUBBLE, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.x * 0.75D, this.getPosY() + this.rand.nextDouble() * (double) this.getHeight() - vec3d1.y * 1D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.z * 0.75D, 0.0D, 0.0D, 0.0D);
             }
         }
         super.livingTick();
@@ -221,9 +221,9 @@ public class EntityNautilus extends EntityBucketableWaterMob {
             }
 
             if (this.action == MovementController.Action.MOVE_TO && !this.nautilus.getNavigator().noPath()) {
-                double d0 = this.posX - this.nautilus.posX;
-                double d1 = this.posY - this.nautilus.posY;
-                double d2 = this.posZ - this.nautilus.posZ;
+                double d0 = this.posX - this.nautilus.getPosX();
+                double d1 = this.posY - this.nautilus.getPosY();
+                double d2 = this.posZ - this.nautilus.getPosZ();
                 double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
                 d1 = d1 / d3;
                 float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;

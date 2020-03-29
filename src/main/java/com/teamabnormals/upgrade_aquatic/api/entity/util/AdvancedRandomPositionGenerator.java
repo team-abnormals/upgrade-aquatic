@@ -44,20 +44,20 @@ public class AdvancedRandomPositionGenerator {
 				int l = blockpos1.getZ();
 				if(creature.detachHome() && xz > 1) {
 					BlockPos blockpos2 = creature.getHomePosition();
-					if(creature.posX > (double)blockpos2.getX()) {
+					if(creature.getPosX() > (double)blockpos2.getX()) {
 						j -= random.nextInt(xz / 2);
 					} else {
 						j += random.nextInt(xz / 2);
 					}
 
-					if(creature.posZ > (double)blockpos2.getZ()) {
+					if(creature.getPosZ() > (double)blockpos2.getZ()) {
 						l -= random.nextInt(xz / 2);
 					} else {
 						l += random.nextInt(xz / 2);
 					}
 				}
 
-				BlockPos blockpos3 = new BlockPos((double)j + creature.posX, (double)k + creature.posY, (double)l + creature.posZ);
+				BlockPos blockpos3 = new BlockPos((double)j + creature.getPosX(), (double)k + creature.getPosY(), (double)l + creature.getPosZ());
 				if((!flag || creature.isWithinHomeDistanceFromPosition(blockpos3)) && pathnavigator.canEntityStandOnPos(blockpos3)) {
 					if(!p_191379_4_) {
 						blockpos3 = moveAboveSolid(blockpos3, creature);

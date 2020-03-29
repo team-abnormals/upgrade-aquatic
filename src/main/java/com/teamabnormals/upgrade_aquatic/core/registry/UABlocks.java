@@ -25,7 +25,6 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Util;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
@@ -392,21 +391,9 @@ public class UABlocks {
 	public static RegistryObject<Block> DRIFTWOOD_BUTTON         = RegistryUtils.createBlock("driftwood_button", () -> new BlockButtonBase(Properties.from(UABlocks.DRIFTWOOD.get()).doesNotBlockMovement()), ItemGroup.REDSTONE);
 	public static RegistryObject<Block> DRIFTWOOD_TRAPDOOR       = RegistryUtils.createBlock("driftwood_trapdoor", () -> new BlockTrapdoorBase(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
 
-	public static RegistryObject<Block> BEACHGRASS_THATCH              = RegistryUtils.createBlock("beachgrass_thatch", () -> new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)) {
-		public BlockRenderLayer getRenderLayer() {
-			return BlockRenderLayer.CUTOUT;
-		};
-	}, ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BEACHGRASS_THATCH_SLAB         = RegistryUtils.createBlock("beachgrass_thatch_slab", () -> new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)) {
-		public BlockRenderLayer getRenderLayer() {
-			return BlockRenderLayer.CUTOUT;
-		};
-	}, ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BEACHGRASS_THATCH_STAIRS       = RegistryUtils.createBlock("beachgrass_thatch_stairs", () -> new StairsBlock(BEACHGRASS_THATCH.get().getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)) {
-		public BlockRenderLayer getRenderLayer() {
-			return BlockRenderLayer.CUTOUT;
-		};
-	}, ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH              = RegistryUtils.createBlock("beachgrass_thatch", () -> new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH_SLAB         = RegistryUtils.createBlock("beachgrass_thatch_slab", () -> new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH_STAIRS       = RegistryUtils.createBlock("beachgrass_thatch_stairs", () -> new StairsBlock(BEACHGRASS_THATCH.get().getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> BEACHGRASS                     = RegistryUtils.createBlock("beachgrass", () -> new BlockBeachgrass(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> TALL_BEACHGRASS                = RegistryUtils.createBlock("tall_beachgrass", () -> new BlockBeachgrassTall(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
 	
@@ -417,11 +404,7 @@ public class UABlocks {
 	public static RegistryObject<Block> DRIFTWOOD_VERTICAL_SLAB                 = RegistryUtils.createCompatBlock("driftwood_vertical_slab", "quark", () -> new BlockVerticalSlab(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_BOOKSHELF                     = RegistryUtils.createCompatBlock("driftwood_bookshelf", "quark", () -> new BlockUABookshelf(Properties.from(Blocks.BOOKSHELF)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_LADDER                        = RegistryUtils.createCompatBlock("driftwood_ladder", "quark", () -> new BlockUALadder(Properties.from(Blocks.LADDER)), ItemGroup.DECORATIONS);
-	public static RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB         = RegistryUtils.createCompatBlock("beachgrass_thatch_vertical_slab", "quark", () -> new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH.get())) {
-		public BlockRenderLayer getRenderLayer() {
-			return BlockRenderLayer.CUTOUT;
-		};
-	}, ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB         = RegistryUtils.createCompatBlock("beachgrass_thatch_vertical_slab", "quark", () -> new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH.get())), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> TOOTH_VERTICAL_SLAB                     = RegistryUtils.createCompatBlock("tooth_vertical_slab", "quark", () -> new BlockVerticalSlab(Properties.from(TOOTH_TILES.get())), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> TOOTH_BRICK_VERTICAL_SLAB               = RegistryUtils.createCompatBlock("tooth_brick_vertical_slab", "quark", () -> new BlockVerticalSlab(Properties.from(TOOTH_BRICKS.get())), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> KELPY_COBBLESTONE_VERTICAL_SLAB         = RegistryUtils.createCompatBlock("kelpy_cobblestone_vertical_slab", "quark", () -> new BlockVerticalSlab(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
