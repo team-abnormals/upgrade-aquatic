@@ -9,17 +9,8 @@ import com.teamabnormals.upgrade_aquatic.client.render.RenderSonarWave;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderThrasher;
 import com.teamabnormals.upgrade_aquatic.client.render.RenderUABoat;
 import com.teamabnormals.upgrade_aquatic.client.tileentity.TileEntityElderEyeRenderer;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityFlare;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
-import com.teamabnormals.upgrade_aquatic.common.entities.EntityUABoat;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
-import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;
@@ -34,6 +25,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
+import com.teamabnormals.upgrade_aquatic.core.registry.util.DataUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.item.Item;
@@ -110,6 +102,8 @@ public class UpgradeAquatic {
 		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();
 		UACompostables.registerCompostables();
+		DataUtils.registerStrippable(UABlocks.DRIFTWOOD_LOG.get(), UABlocks.DRIFTWOOD_LOG.get());
+		DataUtils.registerStrippable(UABlocks.DRIFTWOOD.get(), UABlocks.DRIFTWOOD_STRIPPED.get());
 	}
 	
 	@OnlyIn(Dist.CLIENT)

@@ -7,6 +7,7 @@ import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.api.util.BlockUtil;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UABlockTags;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -41,7 +42,7 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 	public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		boolean standing = rand.nextFloat() < 0.25F;
 		Block downBlock = world.getBlockState(pos.down()).getBlock();
-		if(standing && world.getBlockState(pos).getBlock() == Blocks.WATER && (downBlock.isIn(BlockTags.DIRT_LIKE) || downBlock.isIn(BlockTags.SAND))) {
+		if(standing && world.getBlockState(pos).getBlock() == Blocks.WATER && (downBlock.isIn(UABlockTags.DIRT_LIKE) || downBlock.isIn(BlockTags.SAND))) {
 			Direction upDirection = Direction.UP;
 			if(this.isDirectionOpen(world, pos, upDirection, 3, true)) {
 				for(int i = 0; i < 3; i++) {
@@ -60,7 +61,7 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 		} else {
 			Direction direction = Direction.byIndex(rand.nextInt(4) + 2);
 			int length = rand.nextInt(3) + 3;
-			if((world.getBiome(pos).getCategory() == Category.OCEAN && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.down()).getBlock() == Blocks.WATER && world.isAirBlock(pos.up()) && rand.nextFloat() < 0.25F) || (world.getBiome(pos).getCategory() != Category.OCEAN && this.isNearWater(world, pos) && downBlock.isIn(BlockTags.DIRT_LIKE) || downBlock.isIn(BlockTags.SAND) && this.isDirectionOpen(world, pos, direction, length, false) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
+			if((world.getBiome(pos).getCategory() == Category.OCEAN && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.down()).getBlock() == Blocks.WATER && world.isAirBlock(pos.up()) && rand.nextFloat() < 0.25F) || (world.getBiome(pos).getCategory() != Category.OCEAN && this.isNearWater(world, pos) && downBlock.isIn(UABlockTags.DIRT_LIKE) || downBlock.isIn(BlockTags.SAND) && this.isDirectionOpen(world, pos, direction, length, false) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
 				for(int i = 0; i < length; i++) {
 					this.placeDriftwoodLog(world, pos.offset(direction, i), direction);
 					if(rand.nextBoolean()) {
@@ -108,7 +109,7 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 	protected boolean isGroundForDirectionMostlySuitable(IWorld world, BlockPos pos, Direction direction, int length) {
 		int foundGaps = 0;
 		for(int i = 0; i < length; i++) {
-			if(!world.getBlockState(pos.down().offset(direction, i)).getBlock().isIn(BlockTags.DIRT_LIKE) && !world.getBlockState(pos.down().offset(direction, i)).getBlock().isIn(BlockTags.SAND)) {
+			if(!world.getBlockState(pos.down().offset(direction, i)).getBlock().isIn(UABlockTags.DIRT_LIKE) && !world.getBlockState(pos.down().offset(direction, i)).getBlock().isIn(BlockTags.SAND)) {
 				if(world.getBiome(pos.down().offset(direction, i)).getCategory() != Category.OCEAN) {
 					foundGaps++;
 				} else {

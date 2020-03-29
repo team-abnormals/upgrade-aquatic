@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
-import javax.vecmath.Vector3f;
+import net.minecraft.client.renderer.Vector3f;
 
 import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
