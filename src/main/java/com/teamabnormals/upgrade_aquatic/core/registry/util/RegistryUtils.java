@@ -73,6 +73,18 @@ public class RegistryUtils {
 		return block;
 	}
 	
+	public static <B extends Block> RegistryObject<B> createRareBlock(String name, Supplier<? extends B> supplier, Rarity rarity, @Nullable ItemGroup group) {
+		RegistryObject<B> block = UABlocks.BLOCKS.register(name, supplier);
+		UAItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().rarity(rarity).group(group)));
+		return block;
+	}
+	
+	public static <B extends Block> RegistryObject<B> createWallOrFloorBlock(String name, Supplier<? extends B> supplier, Supplier<? extends B> wallSupplier, @Nullable ItemGroup group) {
+		RegistryObject<B> block = UABlocks.BLOCKS.register(name, supplier);
+		UAItems.ITEMS.register(name, () -> new WallOrFloorItem(block.get(), wallSupplier.get(), new Item.Properties().group(group)));
+		return block;
+	}
+	
 	public static <B extends Block> RegistryObject<B> createBlockNoItem(String name, Supplier<? extends B> supplier) {
 		RegistryObject<B> block = UABlocks.BLOCKS.register(name, supplier);
 		return block;

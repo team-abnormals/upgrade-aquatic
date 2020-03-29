@@ -24,6 +24,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Util;
 import net.minecraftforge.common.ToolType;
@@ -61,29 +62,29 @@ public class UABlocks {
 	public static RegistryObject<Block> CHROME_CORAL_BLOCK            = RegistryUtils.createBlock("chrome_coral_block", () -> new BlockUACoralBlock(DEAD_CHROME_CORAL_BLOCK.get(), UAProperties.CORAL_BLOCK_BASE(MaterialColor.GRAY_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> PRISMARINE_CORAL_BLOCK        = RegistryUtils.createBlock("prismarine_coral_block", () -> new BlockUACoralBlock(ELDER_PRISMARINE_CORAL_BLOCK.get(), UAProperties.PRISMARINE_CORAL_BLOCK_BASE(false).lightValue(3)), ItemGroup.BUILDING_BLOCKS);
 	
-	public static RegistryObject<Block> DEAD_ACAN_CORAL               = RegistryUtils.createBlock("dead_acan_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_FINGER_CORAL             = RegistryUtils.createBlock("dead_finger_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_STAR_CORAL               = RegistryUtils.createBlock("dead_star_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_MOSS_CORAL               = RegistryUtils.createBlock("dead_moss_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_PETAL_CORAL              = RegistryUtils.createBlock("dead_petal_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_BRANCH_CORAL             = RegistryUtils.createBlock("dead_branch_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_ROCK_CORAL               = RegistryUtils.createBlock("dead_rock_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_PILLOW_CORAL             = RegistryUtils.createBlock("dead_pillow_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_SILK_CORAL               = RegistryUtils.createBlock("dead_silk_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_CHROME_CORAL             = RegistryUtils.createBlock("dead_chrome_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> ELDER_PRISMARINE_CORAL        = RegistryUtils.createBlock("elder_prismarine_coral", () -> new BlockUACoralDead(UAProperties.PRISMARINE_CORAL_BASE(true)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DEAD_ACAN_CORAL               = RegistryUtils.createBlock("dead_acan_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_FINGER_CORAL             = RegistryUtils.createBlock("dead_finger_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_STAR_CORAL               = RegistryUtils.createBlock("dead_star_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_MOSS_CORAL               = RegistryUtils.createBlock("dead_moss_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_PETAL_CORAL              = RegistryUtils.createBlock("dead_petal_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_BRANCH_CORAL             = RegistryUtils.createBlock("dead_branch_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_ROCK_CORAL               = RegistryUtils.createBlock("dead_rock_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_PILLOW_CORAL             = RegistryUtils.createBlock("dead_pillow_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_SILK_CORAL               = RegistryUtils.createBlock("dead_silk_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_CHROME_CORAL             = RegistryUtils.createBlock("dead_chrome_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> ELDER_PRISMARINE_CORAL        = RegistryUtils.createBlock("elder_prismarine_coral", () -> new BlockUACoralDead(UAProperties.PRISMARINE_CORAL_BASE(true)), ItemGroup.DECORATIONS);
 	
-	public static RegistryObject<Block> ACAN_CORAL               	  = RegistryUtils.createBlock("acan_coral", () -> new BlockUACoral(DEAD_ACAN_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.CYAN)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> FINGER_CORAL             	  = RegistryUtils.createBlock("finger_coral", () -> new BlockUACoral(DEAD_FINGER_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.ORANGE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> STAR_CORAL                    = RegistryUtils.createBlock("star_coral", () -> new BlockUACoral(DEAD_STAR_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.LIME)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> MOSS_CORAL                    = RegistryUtils.createBlock("moss_coral", () -> new BlockUACoral(DEAD_MOSS_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.GREEN)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PETAL_CORAL                   = RegistryUtils.createBlock("petal_coral", () -> new BlockUACoral(DEAD_PETAL_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.LIGHT_BLUE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BRANCH_CORAL                  = RegistryUtils.createBlock("branch_coral", () -> new BlockUACoral(DEAD_BRANCH_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.GRAY_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> ROCK_CORAL                    = RegistryUtils.createBlock("rock_coral", () -> new BlockUACoral(DEAD_ROCK_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.BROWN_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PILLOW_CORAL                  = RegistryUtils.createBlock("pillow_coral", () -> new BlockUACoral(DEAD_PILLOW_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.WHITE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> SILK_CORAL                    = RegistryUtils.createBlock("silk_coral", () -> new BlockUACoral(DEAD_SILK_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.PURPLE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> CHROME_CORAL                  = RegistryUtils.createBlock("chrome_coral", () -> new BlockUACoral(DEAD_CHROME_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.GRAY_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PRISMARINE_CORAL              = RegistryUtils.createBlock("prismarine_coral", () -> new BlockUACoral(ELDER_PRISMARINE_CORAL.get(), UAProperties.PRISMARINE_CORAL_BASE(false)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> ACAN_CORAL               	  = RegistryUtils.createBlock("acan_coral", () -> new BlockUACoral(DEAD_ACAN_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.CYAN)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> FINGER_CORAL             	  = RegistryUtils.createBlock("finger_coral", () -> new BlockUACoral(DEAD_FINGER_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.ORANGE_TERRACOTTA)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> STAR_CORAL                    = RegistryUtils.createBlock("star_coral", () -> new BlockUACoral(DEAD_STAR_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.LIME)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> MOSS_CORAL                    = RegistryUtils.createBlock("moss_coral", () -> new BlockUACoral(DEAD_MOSS_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.GREEN)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PETAL_CORAL                   = RegistryUtils.createBlock("petal_coral", () -> new BlockUACoral(DEAD_PETAL_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.LIGHT_BLUE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> BRANCH_CORAL                  = RegistryUtils.createBlock("branch_coral", () -> new BlockUACoral(DEAD_BRANCH_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.GRAY_TERRACOTTA)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> ROCK_CORAL                    = RegistryUtils.createBlock("rock_coral", () -> new BlockUACoral(DEAD_ROCK_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.BROWN_TERRACOTTA)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PILLOW_CORAL                  = RegistryUtils.createBlock("pillow_coral", () -> new BlockUACoral(DEAD_PILLOW_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.WHITE_TERRACOTTA)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> SILK_CORAL                    = RegistryUtils.createBlock("silk_coral", () -> new BlockUACoral(DEAD_SILK_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.PURPLE_TERRACOTTA)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> CHROME_CORAL                  = RegistryUtils.createBlock("chrome_coral", () -> new BlockUACoral(DEAD_CHROME_CORAL.get(), UAProperties.CORAL_BASE(MaterialColor.GRAY_TERRACOTTA)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PRISMARINE_CORAL              = RegistryUtils.createBlock("prismarine_coral", () -> new BlockUACoral(ELDER_PRISMARINE_CORAL.get(), UAProperties.PRISMARINE_CORAL_BASE(false)), ItemGroup.DECORATIONS);
 	
 	public static RegistryObject<Block> DEAD_ACAN_CORAL_WALL_FAN      = RegistryUtils.createBlockNoItem("dead_acan_coral_wall_fan", () -> new BlockUACoralWallFanDead(UAProperties.DEAD_CORAL));
 	public static RegistryObject<Block> DEAD_FINGER_CORAL_WALL_FAN    = RegistryUtils.createBlockNoItem("dead_finger_coral_wall_fan", () -> new BlockUACoralWallFanDead(UAProperties.DEAD_CORAL));
@@ -109,79 +110,83 @@ public class UABlocks {
 	public static RegistryObject<Block> CHROME_CORAL_WALL_FAN         = RegistryUtils.createBlockNoItem("chrome_coral_wall_fan", () -> new BlockUACoralWallFan(DEAD_CHROME_CORAL_WALL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.GRAY_TERRACOTTA)));
 	public static RegistryObject<Block> PRISMARINE_CORAL_WALL_FAN     = RegistryUtils.createBlockNoItem("prismarine_coral_wall_fan", () -> new BlockUACoralWallFan(ELDER_PRISMARINE_CORAL_WALL_FAN.get(), UAProperties.PRISMARINE_CORAL_BASE(false)));
 	
-	public static RegistryObject<Block> DEAD_ACAN_CORAL_FAN           = RegistryUtils.createBlock("dead_acan_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_FINGER_CORAL_FAN         = RegistryUtils.createBlock("dead_finger_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_STAR_CORAL_FAN           = RegistryUtils.createBlock("dead_star_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_MOSS_CORAL_FAN           = RegistryUtils.createBlock("dead_moss_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_PETAL_CORAL_FAN          = RegistryUtils.createBlock("dead_petal_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_BRANCH_CORAL_FAN         = RegistryUtils.createBlock("dead_branch_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_ROCK_CORAL_FAN           = RegistryUtils.createBlock("dead_rock_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_PILLOW_CORAL_FAN         = RegistryUtils.createBlock("dead_pillow_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_SILK_CORAL_FAN           = RegistryUtils.createBlock("dead_silk_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_CHROME_CORAL_FAN         = RegistryUtils.createBlock("dead_chrome_coral_fan", () -> new BlockUACoralFanDead(), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> ELDER_PRISMARINE_CORAL_FAN    = RegistryUtils.createBlock("elder_prismarine_coral_fan", () -> new BlockUACoralFanDead(UAProperties.PRISMARINE_CORAL_BASE(true)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DEAD_ACAN_CORAL_FAN           = RegistryUtils.createWallOrFloorBlock("dead_acan_coral_fan", () -> new BlockUACoralFanDead(), DEAD_ACAN_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_FINGER_CORAL_FAN         = RegistryUtils.createWallOrFloorBlock("dead_finger_coral_fan", () -> new BlockUACoralFanDead(), DEAD_FINGER_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_STAR_CORAL_FAN           = RegistryUtils.createWallOrFloorBlock("dead_star_coral_fan", () -> new BlockUACoralFanDead(), DEAD_STAR_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_MOSS_CORAL_FAN           = RegistryUtils.createWallOrFloorBlock("dead_moss_coral_fan", () -> new BlockUACoralFanDead(), DEAD_MOSS_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_PETAL_CORAL_FAN          = RegistryUtils.createWallOrFloorBlock("dead_petal_coral_fan", () -> new BlockUACoralFanDead(), DEAD_PETAL_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_BRANCH_CORAL_FAN         = RegistryUtils.createWallOrFloorBlock("dead_branch_coral_fan", () -> new BlockUACoralFanDead(), DEAD_BRANCH_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_ROCK_CORAL_FAN           = RegistryUtils.createWallOrFloorBlock("dead_rock_coral_fan", () -> new BlockUACoralFanDead(), DEAD_ROCK_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_PILLOW_CORAL_FAN         = RegistryUtils.createWallOrFloorBlock("dead_pillow_coral_fan", () -> new BlockUACoralFanDead(), DEAD_PILLOW_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_SILK_CORAL_FAN           = RegistryUtils.createWallOrFloorBlock("dead_silk_coral_fan", () -> new BlockUACoralFanDead(), DEAD_SILK_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_CHROME_CORAL_FAN         = RegistryUtils.createWallOrFloorBlock("dead_chrome_coral_fan", () -> new BlockUACoralFanDead(), DEAD_CHROME_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> ELDER_PRISMARINE_CORAL_FAN    = RegistryUtils.createWallOrFloorBlock("elder_prismarine_coral_fan", () -> new BlockUACoralFanDead(UAProperties.PRISMARINE_CORAL_BASE(true)), ELDER_PRISMARINE_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
 	
-	public static RegistryObject<Block> ACAN_CORAL_FAN           	  = RegistryUtils.createBlock("acan_coral_fan", () -> new BlockUACoralFan(DEAD_ACAN_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.CYAN)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> FINGER_CORAL_FAN              = RegistryUtils.createBlock("finger_coral_fan", () -> new BlockUACoralFan(DEAD_FINGER_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.ORANGE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> STAR_CORAL_FAN                = RegistryUtils.createBlock("star_coral_fan", () -> new BlockUACoralFan(DEAD_STAR_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.LIME)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> MOSS_CORAL_FAN                = RegistryUtils.createBlock("moss_coral_fan", () -> new BlockUACoralFan(DEAD_MOSS_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.GREEN)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PETAL_CORAL_FAN               = RegistryUtils.createBlock("petal_coral_fan", () -> new BlockUACoralFan(DEAD_PETAL_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.LIGHT_BLUE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BRANCH_CORAL_FAN              = RegistryUtils.createBlock("branch_coral_fan", () -> new BlockUACoralFan(DEAD_BRANCH_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.GRAY_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> ROCK_CORAL_FAN                = RegistryUtils.createBlock("rock_coral_fan", () -> new BlockUACoralFan(DEAD_ROCK_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.BROWN_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PILLOW_CORAL_FAN              = RegistryUtils.createBlock("pillow_coral_fan", () -> new BlockUACoralFan(DEAD_PILLOW_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.WHITE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> SILK_CORAL_FAN                = RegistryUtils.createBlock("silk_coral_fan", () -> new BlockUACoralFan(DEAD_SILK_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.PURPLE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> CHROME_CORAL_FAN              = RegistryUtils.createBlock("chrome_coral_fan", () -> new BlockUACoralFan(DEAD_CHROME_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.GRAY_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PRISMARINE_CORAL_FAN          = RegistryUtils.createBlock("prismarine_coral_fan", () -> new BlockUACoralFan(ELDER_PRISMARINE_CORAL_FAN.get(), UAProperties.PRISMARINE_CORAL_BASE(false)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> ACAN_CORAL_FAN           	  = RegistryUtils.createWallOrFloorBlock("acan_coral_fan", () -> new BlockUACoralFan(DEAD_ACAN_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.CYAN)), ACAN_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> FINGER_CORAL_FAN              = RegistryUtils.createWallOrFloorBlock("finger_coral_fan", () -> new BlockUACoralFan(DEAD_FINGER_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.ORANGE_TERRACOTTA)), FINGER_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> STAR_CORAL_FAN                = RegistryUtils.createWallOrFloorBlock("star_coral_fan", () -> new BlockUACoralFan(DEAD_STAR_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.LIME)), STAR_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> MOSS_CORAL_FAN                = RegistryUtils.createWallOrFloorBlock("moss_coral_fan", () -> new BlockUACoralFan(DEAD_MOSS_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.GREEN)), MOSS_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PETAL_CORAL_FAN               = RegistryUtils.createWallOrFloorBlock("petal_coral_fan", () -> new BlockUACoralFan(DEAD_PETAL_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.LIGHT_BLUE)), PETAL_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> BRANCH_CORAL_FAN              = RegistryUtils.createWallOrFloorBlock("branch_coral_fan", () -> new BlockUACoralFan(DEAD_BRANCH_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.GRAY_TERRACOTTA)), BRANCH_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> ROCK_CORAL_FAN                = RegistryUtils.createWallOrFloorBlock("rock_coral_fan", () -> new BlockUACoralFan(DEAD_ROCK_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.BROWN_TERRACOTTA)), ROCK_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PILLOW_CORAL_FAN              = RegistryUtils.createWallOrFloorBlock("pillow_coral_fan", () -> new BlockUACoralFan(DEAD_PILLOW_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.WHITE_TERRACOTTA)), PILLOW_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> SILK_CORAL_FAN                = RegistryUtils.createWallOrFloorBlock("silk_coral_fan", () -> new BlockUACoralFan(DEAD_SILK_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.PURPLE_TERRACOTTA)), SILK_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> CHROME_CORAL_FAN              = RegistryUtils.createWallOrFloorBlock("chrome_coral_fan", () -> new BlockUACoralFan(DEAD_CHROME_CORAL_FAN.get(), UAProperties.CORAL_FAN_BASE(MaterialColor.GRAY_TERRACOTTA)), CHROME_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PRISMARINE_CORAL_FAN          = RegistryUtils.createWallOrFloorBlock("prismarine_coral_fan", () -> new BlockUACoralFan(ELDER_PRISMARINE_CORAL_FAN.get(), UAProperties.PRISMARINE_CORAL_BASE(false)), PRISMARINE_CORAL_WALL_FAN, ItemGroup.DECORATIONS);
 	
-	public static RegistryObject<Block> ELDER_PRISMARINE_CORAL_SHOWER = RegistryUtils.createBlock("elder_prismarine_coral_shower", () -> new BlockCoralShowerDead(UAProperties.PRISMARINE_CORAL_BASE(true)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PRISMARINE_CORAL_SHOWER       = RegistryUtils.createBlock("prismarine_coral_shower", () -> new BlockCoralShower(ELDER_PRISMARINE_CORAL_SHOWER.get(), UAProperties.PRISMARINE_CORAL_BASE(false)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> ELDER_PRISMARINE_CORAL_SHOWER = RegistryUtils.createBlock("elder_prismarine_coral_shower", () -> new BlockCoralShowerDead(UAProperties.PRISMARINE_CORAL_BASE(true)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PRISMARINE_CORAL_SHOWER       = RegistryUtils.createBlock("prismarine_coral_shower", () -> new BlockCoralShower(ELDER_PRISMARINE_CORAL_SHOWER.get(), UAProperties.PRISMARINE_CORAL_BASE(false)), ItemGroup.DECORATIONS);
 	
-	public static RegistryObject<Block> ELDER_GUARDIAN_SPINE          = RegistryUtils.createBlock("elder_guardian_spine", () -> new BlockSpine(UAProperties.SPINES, true), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> GUARDIAN_SPINE                = RegistryUtils.createBlock("guardian_spine", () -> new BlockSpine(UAProperties.SPINES, false), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> ELDER_EYE                     = RegistryUtils.createBlock("elder_eye", () -> new BlockElderEye(UAProperties.ELDER_EYE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> JELLY_TORCH_PINK              = RegistryUtils.createBlock("jelly_torch_pink", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.PINK), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> ELDER_GUARDIAN_SPINE          = RegistryUtils.createBlock("elder_guardian_spine", () -> new BlockSpine(UAProperties.SPINES, true), ItemGroup.REDSTONE);
+	public static RegistryObject<Block> GUARDIAN_SPINE                = RegistryUtils.createBlock("guardian_spine", () -> new BlockSpine(UAProperties.SPINES, false), ItemGroup.REDSTONE);
+	public static RegistryObject<Block> ELDER_EYE                     = RegistryUtils.createRareBlock("elder_eye", () -> new BlockElderEye(UAProperties.ELDER_EYE), Rarity.RARE, ItemGroup.REDSTONE);
+	
 	public static RegistryObject<Block> JELLY_TORCH_WALL_PINK         = RegistryUtils.createBlockNoItem("jelly_torch_wall_pink", () -> new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.PINK));
-	public static RegistryObject<Block> JELLY_TORCH_PURPLE            = RegistryUtils.createBlock("jelly_torch_purple", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.PURPLE), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> JELLY_TORCH_WALL_PURPLE       = RegistryUtils.createBlockNoItem("jelly_torch_wall_purple", () -> new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.PURPLE));
-	public static RegistryObject<Block> JELLY_TORCH_BLUE              = RegistryUtils.createBlock("jelly_torch_blue", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.BLUE), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> JELLY_TORCH_WALL_BLUE         = RegistryUtils.createBlockNoItem("jelly_torch_wall_blue", () -> new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.BLUE));
-	public static RegistryObject<Block> JELLY_TORCH_GREEN             = RegistryUtils.createBlock("jelly_torch_green", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.GREEN), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> JELLY_TORCH_WALL_GREEN        = RegistryUtils.createBlockNoItem("jelly_torch_wall_green", () -> new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.GREEN));
-	public static RegistryObject<Block> JELLY_TORCH_YELLOW            = RegistryUtils.createBlock("jelly_torch_yellow", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.YELLOW), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> JELLY_TORCH_WALL_YELLOW       = RegistryUtils.createBlockNoItem("jelly_torch_wall_yellow", () -> new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.YELLOW));
-	public static RegistryObject<Block> JELLY_TORCH_ORANGE            = RegistryUtils.createBlock("jelly_torch_orange", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.ORANGE), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> JELLY_TORCH_WALL_ORANGE       = RegistryUtils.createBlockNoItem("jelly_torch_wall_orange", () -> new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.ORANGE));
-	public static RegistryObject<Block> JELLY_TORCH_RED            	  = RegistryUtils.createBlock("jelly_torch_red", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.RED), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> JELLY_TORCH_WALL_RED          = RegistryUtils.createBlockNoItem("jelly_torch_wall_red", () -> new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.RED));
-    public static RegistryObject<Block> JELLY_TORCH_WHITE             = RegistryUtils.createBlock("jelly_torch_white", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.WHITE), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> JELLY_TORCH_WALL_WHITE        = RegistryUtils.createBlockNoItem("jelly_torch_wall_white", () -> new BlockJellyTorchWall(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.WHITE));
+	
+	public static RegistryObject<Block> JELLY_TORCH_PINK              = RegistryUtils.createWallOrFloorBlock("jelly_torch_pink", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.PINK), JELLY_TORCH_WALL_PINK, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> JELLY_TORCH_PURPLE            = RegistryUtils.createWallOrFloorBlock("jelly_torch_purple", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.PURPLE), JELLY_TORCH_WALL_PURPLE, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> JELLY_TORCH_BLUE              = RegistryUtils.createWallOrFloorBlock("jelly_torch_blue", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.BLUE), JELLY_TORCH_WALL_BLUE, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> JELLY_TORCH_GREEN             = RegistryUtils.createWallOrFloorBlock("jelly_torch_green", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.GREEN), JELLY_TORCH_WALL_GREEN, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> JELLY_TORCH_YELLOW            = RegistryUtils.createWallOrFloorBlock("jelly_torch_yellow", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.YELLOW), JELLY_TORCH_WALL_YELLOW, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> JELLY_TORCH_ORANGE            = RegistryUtils.createWallOrFloorBlock("jelly_torch_orange", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.ORANGE), JELLY_TORCH_WALL_ORANGE, ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> JELLY_TORCH_RED            	  = RegistryUtils.createWallOrFloorBlock("jelly_torch_red", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.RED), JELLY_TORCH_WALL_RED, ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> JELLY_TORCH_WHITE             = RegistryUtils.createWallOrFloorBlock("jelly_torch_white", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.WHITE), JELLY_TORCH_WALL_WHITE, ItemGroup.DECORATIONS);
+
+
 	public static RegistryObject<Block> EMBEDDED_AMMONITE             = RegistryUtils.createBlock("embedded_ammonite", () -> new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	
-	public static RegistryObject<Block> BEDROLL_LEATHER               = RegistryUtils.createBlock("bedroll_leather", () -> new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BEDROLL_WHITE                 = RegistryUtils.createBlock("bedroll_white", () -> new BlockBedroll(DyeColor.WHITE, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BEDROLL_ORANGE 				  = RegistryUtils.createBlock("bedroll_orange", () -> new BlockBedroll(DyeColor.ORANGE, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_MAGENTA               = RegistryUtils.createBlock("bedroll_magenta", () -> new BlockBedroll(DyeColor.MAGENTA, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_LIGHT_BLUE            = RegistryUtils.createBlock("bedroll_light_blue", () -> new BlockBedroll(DyeColor.LIGHT_BLUE, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_YELLOW                = RegistryUtils.createBlock("bedroll_yellow", () -> new BlockBedroll(DyeColor.YELLOW, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_LIME                  = RegistryUtils.createBlock("bedroll_lime", () -> new BlockBedroll(DyeColor.LIME, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_PINK                  = RegistryUtils.createBlock("bedroll_pink", () -> new BlockBedroll(DyeColor.PINK, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_GRAY                  = RegistryUtils.createBlock("bedroll_gray", () -> new BlockBedroll(DyeColor.GRAY, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_LIGHT_GRAY            = RegistryUtils.createBlock("bedroll_light_gray", () -> new BlockBedroll(DyeColor.LIGHT_GRAY, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_CYAN                  = RegistryUtils.createBlock("bedroll_cyan", () -> new BlockBedroll(DyeColor.CYAN, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_PURPLE                = RegistryUtils.createBlock("bedroll_purple", () -> new BlockBedroll(DyeColor.PURPLE, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_BLUE                  = RegistryUtils.createBlock("bedroll_blue", () -> new BlockBedroll(DyeColor.BLUE, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_BROWN                 = RegistryUtils.createBlock("bedroll_brown", () -> new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_GREEN                 = RegistryUtils.createBlock("bedroll_green", () -> new BlockBedroll(DyeColor.GREEN, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_RED                   = RegistryUtils.createBlock("bedroll_red", () -> new BlockBedroll(DyeColor.RED, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> BEDROLL_BLACK                 = RegistryUtils.createBlock("bedroll_black", () -> new BlockBedroll(DyeColor.BLACK, UAProperties.BEDROLL), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEDROLL_LEATHER               = RegistryUtils.createBlock("bedroll_leather", () -> new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> BEDROLL_WHITE                 = RegistryUtils.createBlock("bedroll_white", () -> new BlockBedroll(DyeColor.WHITE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> BEDROLL_ORANGE 				  = RegistryUtils.createBlock("bedroll_orange", () -> new BlockBedroll(DyeColor.ORANGE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_MAGENTA               = RegistryUtils.createBlock("bedroll_magenta", () -> new BlockBedroll(DyeColor.MAGENTA, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_LIGHT_BLUE            = RegistryUtils.createBlock("bedroll_light_blue", () -> new BlockBedroll(DyeColor.LIGHT_BLUE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_YELLOW                = RegistryUtils.createBlock("bedroll_yellow", () -> new BlockBedroll(DyeColor.YELLOW, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_LIME                  = RegistryUtils.createBlock("bedroll_lime", () -> new BlockBedroll(DyeColor.LIME, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_PINK                  = RegistryUtils.createBlock("bedroll_pink", () -> new BlockBedroll(DyeColor.PINK, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_GRAY                  = RegistryUtils.createBlock("bedroll_gray", () -> new BlockBedroll(DyeColor.GRAY, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_LIGHT_GRAY            = RegistryUtils.createBlock("bedroll_light_gray", () -> new BlockBedroll(DyeColor.LIGHT_GRAY, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_CYAN                  = RegistryUtils.createBlock("bedroll_cyan", () -> new BlockBedroll(DyeColor.CYAN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_PURPLE                = RegistryUtils.createBlock("bedroll_purple", () -> new BlockBedroll(DyeColor.PURPLE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_BLUE                  = RegistryUtils.createBlock("bedroll_blue", () -> new BlockBedroll(DyeColor.BLUE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_BROWN                 = RegistryUtils.createBlock("bedroll_brown", () -> new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_GREEN                 = RegistryUtils.createBlock("bedroll_green", () -> new BlockBedroll(DyeColor.GREEN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_RED                   = RegistryUtils.createBlock("bedroll_red", () -> new BlockBedroll(DyeColor.RED, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> BEDROLL_BLACK                 = RegistryUtils.createBlock("bedroll_black", () -> new BlockBedroll(DyeColor.BLACK, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
 	
-    public static RegistryObject<Block> PICKERELWEED_BLUE 	 	      = RegistryUtils.createBlock("pickerel_weed_blue", () -> new BlockPickerelweed(UAProperties.PICKERELWEED), ItemGroup.BUILDING_BLOCKS);
+    public static RegistryObject<Block> PICKERELWEED_BLUE 	 	      = RegistryUtils.createBlock("pickerel_weed_blue", () -> new BlockPickerelweed(UAProperties.PICKERELWEED), ItemGroup.MISC);
     public static RegistryObject<Block> PICKERELWEED_TALL_BLUE 	 	  = RegistryUtils.createBlockNoItem("pickerel_weed_tall_blue", () -> new BlockPickerelweedDouble(UAProperties.PICKERELWEED));
-    public static RegistryObject<Block> PICKERELWEED_PURPLE 	 	  = RegistryUtils.createBlock("pickerel_weed_purple", () -> new BlockPickerelweed(UAProperties.PICKERELWEED), ItemGroup.BUILDING_BLOCKS);
+    public static RegistryObject<Block> PICKERELWEED_PURPLE 	 	  = RegistryUtils.createBlock("pickerel_weed_purple", () -> new BlockPickerelweed(UAProperties.PICKERELWEED), ItemGroup.MISC);
     public static RegistryObject<Block> PICKERELWEED_TALL_PURPLE      = RegistryUtils.createBlockNoItem("pickerel_weed_tall_purple", () -> new BlockPickerelweedDouble(UAProperties.PICKERELWEED));
     
-    public static RegistryObject<Block> SEAROCKET_WHITE               = RegistryUtils.createBlock("searocket_white", () -> new BlockSearocket(UAProperties.SEAROCKET(false)), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> SEAROCKET_PINK				  = RegistryUtils.createBlock("searocket_pink", () -> new BlockSearocket(UAProperties.SEAROCKET(true)), ItemGroup.BUILDING_BLOCKS);
+    public static RegistryObject<Block> SEAROCKET_WHITE               = RegistryUtils.createBlock("searocket_white", () -> new BlockSearocket(UAProperties.SEAROCKET(false)), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> SEAROCKET_PINK				  = RegistryUtils.createBlock("searocket_pink", () -> new BlockSearocket(UAProperties.SEAROCKET(true)), ItemGroup.DECORATIONS);
     
     public static RegistryObject<Block> POTTED_PICKERELWEED_BLUE 	  = RegistryUtils.createBlockNoItem("potted_pickerelweed_blue", () -> new FlowerPotBlock(PICKERELWEED_BLUE.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));
 	public static RegistryObject<Block> POTTED_PICKERELWEED_PURPLE 	  = RegistryUtils.createBlockNoItem("potted_pickerelweed_purple", () -> new FlowerPotBlock(PICKERELWEED_PURPLE.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));
@@ -192,14 +197,14 @@ public class UABlocks {
 	public static RegistryObject<Block> TOOTH_TILES                   = RegistryUtils.createBlock("tooth_tiles", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);	
 	public static RegistryObject<Block> TOOTH_STAIRS                  = RegistryUtils.createBlock("tooth_stairs", () -> new StairsBlock(TOOTH_BLOCK.get().getDefaultState(), Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
     public static RegistryObject<Block> TOOTH_SLAB                    = RegistryUtils.createBlock("tooth_slab", () -> new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> TOOTH_WALL                    = RegistryUtils.createBlock("tooth_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+    public static RegistryObject<Block> TOOTH_WALL                    = RegistryUtils.createBlock("tooth_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> TOOTH_BRICKS                  = RegistryUtils.createBlock("tooth_bricks", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);	
 	public static RegistryObject<Block> CHISELED_TOOTH_BRICKS         = RegistryUtils.createBlock("chiseled_tooth_bricks", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);	
 	public static RegistryObject<Block> TOOTH_BRICK_STAIRS            = RegistryUtils.createBlock("tooth_brick_stairs", () -> new StairsBlock(TOOTH_BLOCK.get().getDefaultState(), Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
     public static RegistryObject<Block> TOOTH_BRICK_SLAB              = RegistryUtils.createBlock("tooth_brick_slab", () -> new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-    public static RegistryObject<Block> TOOTH_BRICK_WALL              = RegistryUtils.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> TOOTH_TRAPDOOR                = RegistryUtils.createBlock("tooth_trapdoor", () -> new BlockToothTrapdoor(Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> TOOTH_DOOR                    = RegistryUtils.createBlock("tooth_door", () -> new BlockToothDoor(Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
+    public static RegistryObject<Block> TOOTH_BRICK_WALL              = RegistryUtils.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> TOOTH_TRAPDOOR                = RegistryUtils.createBlock("tooth_trapdoor", () -> new BlockToothTrapdoor(Properties.from(Blocks.END_STONE)), ItemGroup.REDSTONE);
+	public static RegistryObject<Block> TOOTH_DOOR                    = RegistryUtils.createBlock("tooth_door", () -> new BlockToothDoor(Properties.from(Blocks.END_STONE)), ItemGroup.REDSTONE);
 	
 	public static RegistryObject<Block> CORALSTONE                       = RegistryUtils.createBlock("coralstone", () -> new BlockCoralstone(UAProperties.CORALSTONE, false), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> BUBBLE_CORALSTONE                = RegistryUtils.createBlock("bubble_coralstone", () -> new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}), ItemGroup.BUILDING_BLOCKS);
@@ -281,30 +286,30 @@ public class UABlocks {
 	public static RegistryObject<Block> ELDER_PRISMARINE_CORALSTONE_STAIRS = RegistryUtils.createBlock("elder_prismarine_coralstone_stairs", () -> new BlockCoralstoneStairs(() -> ELDER_PRISMARINE_CORALSTONE.get().getDefaultState(), UAProperties.CORALSTONE, null), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DEAD_CORALSTONE_STAIRS           = RegistryUtils.createBlock("dead_coralstone_stairs", () -> new BlockCoralstoneStairs(() -> DEAD_CORALSTONE.get().getDefaultState(), UAProperties.CORALSTONE, null), ItemGroup.BUILDING_BLOCKS);
 	
-	public static RegistryObject<Block> CORALSTONE_WALL                  = RegistryUtils.createBlock("coralstone_wall", () -> new BlockCoralstoneWall(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BUBBLE_CORALSTONE_WALL           = RegistryUtils.createBlock("bubble_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> HORN_CORALSTONE_WALL             = RegistryUtils.createBlock("horn_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> TUBE_CORALSTONE_WALL             = RegistryUtils.createBlock("tube_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BRAIN_CORALSTONE_WALL            = RegistryUtils.createBlock("brain_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> FIRE_CORALSTONE_WALL             = RegistryUtils.createBlock("fire_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);	
-	public static RegistryObject<Block> ACAN_CORALSTONE_WALL             = RegistryUtils.createBlock("acan_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> FINGER_CORALSTONE_WALL           = RegistryUtils.createBlock("finger_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> STAR_CORALSTONE_WALL             = RegistryUtils.createBlock("star_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> MOSS_CORALSTONE_WALL             = RegistryUtils.createBlock("moss_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PETAL_CORALSTONE_WALL            = RegistryUtils.createBlock("petal_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BRANCH_CORALSTONE_WALL           = RegistryUtils.createBlock("branch_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> ROCK_CORALSTONE_WALL             = RegistryUtils.createBlock("rock_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PILLOW_CORALSTONE_WALL           = RegistryUtils.createBlock("pillow_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> SILK_CORALSTONE_WALL             = RegistryUtils.createBlock("silk_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> CHROME_CORALSTONE_WALL           = RegistryUtils.createBlock("chrome_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PRISMARINE_CORALSTONE_WALL       = RegistryUtils.createBlock("prismarine_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> ELDER_PRISMARINE_CORALSTONE_WALL = RegistryUtils.createBlock("elder_prismarine_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DEAD_CORALSTONE_WALL             = RegistryUtils.createBlock("dead_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.BUILDING_BLOCKS);	
+	public static RegistryObject<Block> CORALSTONE_WALL                  = RegistryUtils.createBlock("coralstone_wall", () -> new BlockCoralstoneWall(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> BUBBLE_CORALSTONE_WALL           = RegistryUtils.createBlock("bubble_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> HORN_CORALSTONE_WALL             = RegistryUtils.createBlock("horn_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> TUBE_CORALSTONE_WALL             = RegistryUtils.createBlock("tube_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> BRAIN_CORALSTONE_WALL            = RegistryUtils.createBlock("brain_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> FIRE_CORALSTONE_WALL             = RegistryUtils.createBlock("fire_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);	
+	public static RegistryObject<Block> ACAN_CORALSTONE_WALL             = RegistryUtils.createBlock("acan_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> FINGER_CORALSTONE_WALL           = RegistryUtils.createBlock("finger_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> STAR_CORALSTONE_WALL             = RegistryUtils.createBlock("star_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> MOSS_CORALSTONE_WALL             = RegistryUtils.createBlock("moss_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PETAL_CORALSTONE_WALL            = RegistryUtils.createBlock("petal_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> BRANCH_CORALSTONE_WALL           = RegistryUtils.createBlock("branch_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> ROCK_CORALSTONE_WALL             = RegistryUtils.createBlock("rock_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PILLOW_CORALSTONE_WALL           = RegistryUtils.createBlock("pillow_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> SILK_CORALSTONE_WALL             = RegistryUtils.createBlock("silk_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> CHROME_CORALSTONE_WALL           = RegistryUtils.createBlock("chrome_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> PRISMARINE_CORALSTONE_WALL       = RegistryUtils.createBlock("prismarine_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> ELDER_PRISMARINE_CORALSTONE_WALL = RegistryUtils.createBlock("elder_prismarine_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DEAD_CORALSTONE_WALL             = RegistryUtils.createBlock("dead_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE), ItemGroup.DECORATIONS);	
 
-	public static RegistryObject<Block> TONGUE_KELP                   = RegistryUtils.createBlock("tongue_kelp", () -> new BlockUAKelpTop(KelpType.TONGUE, Properties.from(Blocks.KELP)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> THORNY_KELP                   = RegistryUtils.createBlock("thorny_kelp", () -> new BlockUAKelpTop(KelpType.THORNY, Properties.from(Blocks.KELP)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> OCHRE_KELP                    = RegistryUtils.createBlock("ochre_kelp", () -> new BlockUAKelpTop(KelpType.OCHRE, Properties.from(Blocks.KELP)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> POLAR_KELP                    = RegistryUtils.createBlock("polar_kelp", () -> new BlockUAKelpTop(KelpType.POLAR, Properties.from(Blocks.KELP)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> TONGUE_KELP                   = RegistryUtils.createBlock("tongue_kelp", () -> new BlockUAKelpTop(KelpType.TONGUE, Properties.from(Blocks.KELP)), ItemGroup.MISC);
+	public static RegistryObject<Block> THORNY_KELP                   = RegistryUtils.createBlock("thorny_kelp", () -> new BlockUAKelpTop(KelpType.THORNY, Properties.from(Blocks.KELP)), ItemGroup.MISC);
+	public static RegistryObject<Block> OCHRE_KELP                    = RegistryUtils.createBlock("ochre_kelp", () -> new BlockUAKelpTop(KelpType.OCHRE, Properties.from(Blocks.KELP)), ItemGroup.MISC);
+	public static RegistryObject<Block> POLAR_KELP                    = RegistryUtils.createBlock("polar_kelp", () -> new BlockUAKelpTop(KelpType.POLAR, Properties.from(Blocks.KELP)), ItemGroup.MISC);
 	public static RegistryObject<Block> TONGUE_KELP_PLANT             = RegistryUtils.createBlockNoItem("tongue_kelp_plant", () -> new BlockUAKelp(KelpType.TONGUE, TONGUE_KELP.get(), Properties.from(Blocks.KELP_PLANT)));
 	public static RegistryObject<Block> THORNY_KELP_PLANT             = RegistryUtils.createBlockNoItem("thorny_kelp_plant", () -> new BlockUAKelp(KelpType.THORNY, THORNY_KELP.get(), Properties.from(Blocks.KELP_PLANT)));
 	public static RegistryObject<Block> OCHRE_KELP_PLANT              = RegistryUtils.createBlockNoItem("ochre_kelp_plant", () -> new BlockUAKelp(KelpType.OCHRE, OCHRE_KELP.get(), Properties.from(Blocks.KELP_PLANT)));
@@ -334,11 +339,11 @@ public class UABlocks {
 	public static RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_SLAB   = RegistryUtils.createBlock("ochre_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> POLAR_KELPY_COBBLESTONE_SLAB   = RegistryUtils.createBlock("polar_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	
-	public static RegistryObject<Block> KELPY_COBBLESTONE_WALL         = RegistryUtils.createBlock("kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_WALL  = RegistryUtils.createBlock("tongue_kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> THORNY_KELPY_COBBLESTONE_WALL  = RegistryUtils.createBlock("thorny_kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_WALL   = RegistryUtils.createBlock("ochre_kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> POLAR_KELPY_COBBLESTONE_WALL   = RegistryUtils.createBlock("polar_kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> KELPY_COBBLESTONE_WALL         = RegistryUtils.createBlock("kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_WALL  = RegistryUtils.createBlock("tongue_kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> THORNY_KELPY_COBBLESTONE_WALL  = RegistryUtils.createBlock("thorny_kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_WALL   = RegistryUtils.createBlock("ochre_kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> POLAR_KELPY_COBBLESTONE_WALL   = RegistryUtils.createBlock("polar_kelpy_cobblestone_wall", () -> new WallBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
 	
 	public static RegistryObject<Block> KELPY_STONE_BRICK             = RegistryUtils.createBlock("kelpy_stone_brick", () -> new Block(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> TONGUE_KELPY_STONE_BRICK      = RegistryUtils.createBlock("tongue_kelpy_stone_brick", () -> new Block(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
@@ -358,18 +363,18 @@ public class UABlocks {
 	public static RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_SLAB   = RegistryUtils.createBlock("ochre_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> POLAR_KELPY_STONE_BRICK_SLAB   = RegistryUtils.createBlock("polar_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	
-	public static RegistryObject<Block> KELPY_STONE_BRICK_WALL         = RegistryUtils.createBlock("kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_WALL  = RegistryUtils.createBlock("tongue_kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> THORNY_KELPY_STONE_BRICK_WALL  = RegistryUtils.createBlock("thorny_kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_WALL   = RegistryUtils.createBlock("ochre_kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> POLAR_KELPY_STONE_BRICK_WALL   = RegistryUtils.createBlock("polar_kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> KELPY_STONE_BRICK_WALL         = RegistryUtils.createBlock("kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_WALL  = RegistryUtils.createBlock("tongue_kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> THORNY_KELPY_STONE_BRICK_WALL  = RegistryUtils.createBlock("thorny_kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_WALL   = RegistryUtils.createBlock("ochre_kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> POLAR_KELPY_STONE_BRICK_WALL   = RegistryUtils.createBlock("polar_kelpy_stone_brick_wall", () -> new WallBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
 	
 	public static RegistryObject<Block> BLUE_PICKERELWEED_BLOCK          = RegistryUtils.createBlock("pickerelweed_blue_block", () -> new BlockPickerelweedBlock(UAProperties.PICKERELWEED_BLOCK(false), false), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> PURPLE_PICKERELWEED_BLOCK        = RegistryUtils.createBlock("pickerelweed_purple_block", () -> new BlockPickerelweedBlock(UAProperties.PICKERELWEED_BLOCK(false), false), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> BOILED_BLUE_PICKERELWEED_BLOCK   = RegistryUtils.createBlock("boiled_pickerelweed_blue_block", () -> new BlockPickerelweedBlock(UAProperties.PICKERELWEED_BLOCK(true), true), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> BOILED_PURPLE_PICKERELWEED_BLOCK = RegistryUtils.createBlock("boiled_pickerelweed_purple_block", () -> new BlockPickerelweedBlock(UAProperties.PICKERELWEED_BLOCK(true), true), ItemGroup.BUILDING_BLOCKS);
 	
-	public static RegistryObject<Block> FLOWERING_RUSH                   = RegistryUtils.createBlock("flowering_rush", () -> new BlockFloweringRush(Properties.from(Blocks.PEONY).sound(SoundType.WET_GRASS)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> FLOWERING_RUSH                   = RegistryUtils.createBlock("flowering_rush", () -> new BlockFloweringRush(Properties.from(Blocks.PEONY).sound(SoundType.WET_GRASS)), ItemGroup.DECORATIONS);
 	
 	public static RegistryObject<Block> PRISMARINE_ROD_BUNDLE            = RegistryUtils.createBlock("prismarine_rod_bundle", () -> new RotatedPillarBlock(Properties.from(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 
@@ -378,14 +383,14 @@ public class UABlocks {
 	public static RegistryObject<Block> DRIFTWOOD_LOG_STRIPPED   = RegistryUtils.createBlock("driftwood_log_stripped", () -> new BlockDriftwoodLog(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_STRIPPED       = RegistryUtils.createBlock("driftwood_stripped", () -> new BlockDriftwood(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_PLANKS         = RegistryUtils.createBlock("driftwood_planks", () -> new BlockDriftwoodPlanks(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_DOOR           = RegistryUtils.createBlock("driftwood_door", () -> new BlockDriftwoodDoor(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DRIFTWOOD_DOOR           = RegistryUtils.createBlock("driftwood_door", () -> new BlockDriftwoodDoor(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
 	public static RegistryObject<Block> DRIFTWOOD_SLAB           = RegistryUtils.createBlock("driftwood_slab", () -> new SlabBlock(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_STAIRS         = RegistryUtils.createBlock("driftwood_stairs", () -> new StairsBlock(DRIFTWOOD_PLANKS.get().getDefaultState(), UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_FENCE          = RegistryUtils.createBlock("driftwood_fence", () -> new BlockFenceBase(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_FENCE_GATE     = RegistryUtils.createBlock("driftwood_fence_gate", () -> new BlockFenceGateBase(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_PRESSURE_PLATE = RegistryUtils.createBlock("driftwood_pressure_plate", () -> new BlockPressurePlateBase(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_BUTTON         = RegistryUtils.createBlock("driftwood_button", () -> new BlockButtonBase(Properties.from(UABlocks.DRIFTWOOD.get()).doesNotBlockMovement()), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_TRAPDOOR       = RegistryUtils.createBlock("driftwood_trapdoor", () -> new BlockTrapdoorBase(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DRIFTWOOD_FENCE          = RegistryUtils.createBlock("driftwood_fence", () -> new BlockFenceBase(UAProperties.DRIFTWOOD), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> DRIFTWOOD_FENCE_GATE     = RegistryUtils.createBlock("driftwood_fence_gate", () -> new BlockFenceGateBase(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
+	public static RegistryObject<Block> DRIFTWOOD_PRESSURE_PLATE = RegistryUtils.createBlock("driftwood_pressure_plate", () -> new BlockPressurePlateBase(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
+	public static RegistryObject<Block> DRIFTWOOD_BUTTON         = RegistryUtils.createBlock("driftwood_button", () -> new BlockButtonBase(Properties.from(UABlocks.DRIFTWOOD.get()).doesNotBlockMovement()), ItemGroup.REDSTONE);
+	public static RegistryObject<Block> DRIFTWOOD_TRAPDOOR       = RegistryUtils.createBlock("driftwood_trapdoor", () -> new BlockTrapdoorBase(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
 
 	public static RegistryObject<Block> BEACHGRASS_THATCH              = RegistryUtils.createBlock("beachgrass_thatch", () -> new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)) {
 		public BlockRenderLayer getRenderLayer() {
@@ -402,8 +407,8 @@ public class UABlocks {
 			return BlockRenderLayer.CUTOUT;
 		};
 	}, ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BEACHGRASS                     = RegistryUtils.createBlock("beachgrass", () -> new BlockBeachgrass(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> TALL_BEACHGRASS                = RegistryUtils.createBlock("tall_beachgrass", () -> new BlockBeachgrassTall(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS                     = RegistryUtils.createBlock("beachgrass", () -> new BlockBeachgrass(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> TALL_BEACHGRASS                = RegistryUtils.createBlock("tall_beachgrass", () -> new BlockBeachgrassTall(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
 	
 	/*
 	 * Quark Compat
@@ -411,7 +416,7 @@ public class UABlocks {
 	public static RegistryObject<Block> DRIFTWOOD_VERTICAL_PLANKS               = RegistryUtils.createCompatBlock("driftwood_vertical_planks", "quark", () -> new BlockDriftwoodPlanks(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_VERTICAL_SLAB                 = RegistryUtils.createCompatBlock("driftwood_vertical_slab", "quark", () -> new BlockVerticalSlab(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_BOOKSHELF                     = RegistryUtils.createCompatBlock("driftwood_bookshelf", "quark", () -> new BlockUABookshelf(Properties.from(Blocks.BOOKSHELF)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_LADDER                        = RegistryUtils.createCompatBlock("driftwood_ladder", "quark", () -> new BlockUALadder(Properties.from(Blocks.LADDER)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DRIFTWOOD_LADDER                        = RegistryUtils.createCompatBlock("driftwood_ladder", "quark", () -> new BlockUALadder(Properties.from(Blocks.LADDER)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB         = RegistryUtils.createCompatBlock("beachgrass_thatch_vertical_slab", "quark", () -> new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH.get())) {
 		public BlockRenderLayer getRenderLayer() {
 			return BlockRenderLayer.CUTOUT;
