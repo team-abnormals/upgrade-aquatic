@@ -57,16 +57,16 @@ public class BlockCoralstoneStairs extends StairsBlock {
 		
 		for(int i = 0; i < 4; i++) {
 			BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-			if(UABlocks.CORALSTONE_STAIRS_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
-				BlockState newState = UABlocks.CORALSTONE_STAIRS_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState()
-					.with(FACING, state.get(FACING))
-					.with(HALF, state.get(HALF))
-					.with(SHAPE, state.get(SHAPE))
-					.with(WATERLOGGED, state.get(WATERLOGGED)
-				);
-				
-				worldIn.setBlockState(pos, newState);
-			}
+			UABlocks.CORALSTONE_STAIRS_CONVERSION_MAP.forEach((input, output) -> {
+			    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+			    	BlockState newState = output.get().getDefaultState()
+							.with(FACING, state.get(FACING))
+							.with(HALF, state.get(HALF))
+							.with(SHAPE, state.get(SHAPE))
+							.with(WATERLOGGED, state.get(WATERLOGGED));
+			    	worldIn.setBlockState(pos, newState);
+			    }
+			});
 		}
 		
 		if(this.growableCoralBlocks != null && random.nextFloat() < 0.24F && state.get(POWERED)) {

@@ -66,13 +66,17 @@ public class BlockCoralstone extends Block {
 			for(int i = 0; i < 4; i++) {
 				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 				if(chiseled) {
-					if(UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
-						worldIn.setBlockState(pos, UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState());
-					}
+					UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP.forEach((input, output) -> {
+					    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+					    	worldIn.setBlockState(pos, output.get().getDefaultState(), 2);
+					    }
+					});
 				} else {
-					if(UABlocks.CORALSTONE_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
-						worldIn.setBlockState(pos, UABlocks.CORALSTONE_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState());
-					}
+					UABlocks.CORALSTONE_CONVERSION_MAP.forEach((input, output) -> {
+					    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+					    	worldIn.setBlockState(pos, output.get().getDefaultState(), 2);
+					    }
+					});
 				}
 			}
 		}

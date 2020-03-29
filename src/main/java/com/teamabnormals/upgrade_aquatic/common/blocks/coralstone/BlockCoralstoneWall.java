@@ -28,18 +28,19 @@ public class BlockCoralstoneWall extends WallBlock {
 		
 		for(int i = 0; i < 4; i++) {
 			BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-			if(UABlocks.CORALSTONE_WALL_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
-				BlockState newState = UABlocks.CORALSTONE_WALL_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState()
-					.with(UP, state.get(UP))
-					.with(NORTH, state.get(NORTH))
-					.with(EAST, state.get(EAST))
-					.with(SOUTH, state.get(SOUTH))
-					.with(WEST, state.get(WEST))
-					.with(WATERLOGGED, state.get(WATERLOGGED)
-				);
-				
-				worldIn.setBlockState(pos, newState);
-			}
+			UABlocks.CORALSTONE_WALL_CONVERSION_MAP.forEach((input, output) -> {
+			    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+					BlockState newState = output.get().getDefaultState()
+							.with(UP, state.get(UP))
+							.with(NORTH, state.get(NORTH))
+							.with(EAST, state.get(EAST))
+							.with(SOUTH, state.get(SOUTH))
+							.with(WEST, state.get(WEST))
+							.with(WATERLOGGED, state.get(WATERLOGGED)
+						);
+					worldIn.setBlockState(pos, newState, 2);
+			    }
+			});
 		}
 	}
 	

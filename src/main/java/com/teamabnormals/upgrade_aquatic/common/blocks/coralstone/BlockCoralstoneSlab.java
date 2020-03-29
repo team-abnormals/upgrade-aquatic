@@ -50,11 +50,14 @@ public class BlockCoralstoneSlab extends SlabBlock {
 		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE_SLAB.get()) {
 			for(int i = 0; i < 4; i++) {
 				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-				if(UABlocks.CORALSTONE_SLAB_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
-					BlockState newState = UABlocks.CORALSTONE_SLAB_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState().with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED));
-					worldIn.setBlockState(pos, newState);
-				}
+				UABlocks.CORALSTONE_SLAB_CONVERSION_MAP.forEach((input, output) -> {
+				    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+						BlockState newState = output.get().getDefaultState().with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED));
+				    	worldIn.setBlockState(pos, newState, 2);
+				    }
+				});
 			}
+			
 		}
 		
 		if(this.growableCoralBlocks != null && random.nextFloat() < 0.12F && state.get(POWERED)) {
