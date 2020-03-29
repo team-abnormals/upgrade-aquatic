@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:polar_kelp"
+      "item": "minecraft:kelp"
     },
     {
       "item": "minecraft:stone_bricks"
     }
   ],
   "result": {
-    "item": "upgrade_aquatic:polar_kelpy_stone_brick",
+    "item": "upgrade_aquatic:kelpy_stone_bricks",
     "count": 1
   }
 }

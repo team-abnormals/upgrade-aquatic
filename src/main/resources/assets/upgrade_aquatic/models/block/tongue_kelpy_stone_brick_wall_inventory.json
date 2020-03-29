@@ -1,6 +1,6 @@
 {
     "parent": "block/wall_inventory",
     "textures": {
-        "wall": "upgrade_aquatic:block/tongue_kelpy_stone_brick"
+        "wall": "upgrade_aquatic:block/tongue_kelpy_stone_bricks"
     }
 }

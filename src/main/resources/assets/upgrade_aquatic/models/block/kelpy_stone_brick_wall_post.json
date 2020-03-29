@@ -1,6 +1,6 @@
 {
     "parent": "block/template_wall_post",
     "textures": {
-        "wall": "upgrade_aquatic:block/kelpy_stone_brick"
+        "wall": "upgrade_aquatic:block/kelpy_stone_bricks"
     }
 }

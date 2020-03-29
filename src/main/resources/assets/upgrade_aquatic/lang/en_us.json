@@ -300,11 +300,11 @@
   "block.upgrade_aquatic.ochre_kelpy_cobblestone_wall": "Ochre Kelpy Cobblestone Wall",
   "block.upgrade_aquatic.polar_kelpy_cobblestone_wall": "Polar Kelpy Cobblestone Wall",
   
-  "block.upgrade_aquatic.kelpy_stone_brick": "Kelpy Stone Bricks",
-  "block.upgrade_aquatic.tongue_kelpy_stone_brick": "Tongue Kelpy Stone Bricks",
-  "block.upgrade_aquatic.thorny_kelpy_stone_brick": "Thorny Kelpy Stone Bricks",
-  "block.upgrade_aquatic.ochre_kelpy_stone_brick": "Ochre Kelpy Stone Bricks",
-  "block.upgrade_aquatic.polar_kelpy_stone_brick": "Polar Kelpy Stone Bricks",
+  "block.upgrade_aquatic.kelpy_stone_bricks": "Kelpy Stone Bricks",
+  "block.upgrade_aquatic.tongue_kelpy_stone_bricks": "Tongue Kelpy Stone Bricks",
+  "block.upgrade_aquatic.thorny_kelpy_stone_bricks": "Thorny Kelpy Stone Bricks",
+  "block.upgrade_aquatic.ochre_kelpy_stone_bricks": "Ochre Kelpy Stone Bricks",
+  "block.upgrade_aquatic.polar_kelpy_stone_bricks": "Polar Kelpy Stone Bricks",
   
   "block.upgrade_aquatic.kelpy_stone_brick_stairs": "Kelpy Stone Brick Stairs",
   "block.upgrade_aquatic.tongue_kelpy_stone_brick_stairs": "Tongue Kelpy Stone Brick Stairs",
