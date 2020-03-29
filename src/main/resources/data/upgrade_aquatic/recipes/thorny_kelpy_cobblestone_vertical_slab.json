@@ -13,5 +13,11 @@
   "result": {
     "item": "upgrade_aquatic:thorny_kelpy_cobblestone_vertical_slab",
     "count": 3
-  }
+  },
+  "conditions": [
+  	{
+       "type": "forge:mod_loaded",
+       "modid": "quark"
+    }
+  ]
 }

@@ -15,5 +15,11 @@
   },
   "result": {
     "item": "upgrade_aquatic:driftwood_bookshelf"
-  }
+  },
+  "conditions": [
+  	{
+       "type": "forge:mod_loaded",
+       "modid": "quark"
+    }
+  ]
 }

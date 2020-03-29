@@ -4,5 +4,11 @@
     "item": "upgrade_aquatic:kelpy_cobblestone"
   },
   "result": "upgrade_aquatic:kelpy_cobblestone_vertical_slab",
-  "count": 2
+  "count": 2,
+  "conditions": [
+  	{
+       "type": "forge:mod_loaded",
+       "modid": "quark"
+    }
+  ]
 }

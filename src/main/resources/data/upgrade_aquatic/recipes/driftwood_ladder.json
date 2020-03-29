@@ -17,5 +17,11 @@
   "result": {
     "item": "upgrade_aquatic:driftwood_ladder",
     "count": 4
-  }
+  },
+  "conditions": [
+  	{
+       "type": "forge:mod_loaded",
+       "modid": "quark"
+    }
+  ]
 }
