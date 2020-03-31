@@ -1,12 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelPike;
 import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerPikeCarriedItem;
 import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerGlowingPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -24,24 +25,23 @@ public class RenderPike extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityPike entity) {
+	public ResourceLocation getEntityTexture(EntityPike entity) {
 		return new ResourceLocation(Reference.MODID, "textures/entity/pike/pike_" + entity.getPikeType() + ".png");
 	}
 	
 	@Override
-	protected void applyRotations(EntityPike entityLiving, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(entityLiving, ageInTicks, rotationYaw, partialTicks);
+	protected void applyRotations(EntityPike pike, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.applyRotations(pike, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * MathHelper.sin(0.6F * ageInTicks);
-		GlStateManager.rotatef(f, 0.0F, 1.0F, 0.0F);
-		if (!entityLiving.isInWater()) {
-			GlStateManager.translatef(0.1F, 0.1F, -0.1F);
-			GlStateManager.rotatef(90.0F, 0.0F, 0.0F, 1.0F);
+		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));
+		if(!pike.isInWater()) {
+			matrixStack.translate(0.1F, 0.1F, -0.1F);
+			matrixStack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
 	
 	@Override
-	protected void preRenderCallback(EntityPike pike, float partialTickTime) {
-		GlStateManager.scalef(1F, 1F, 1F);
+	protected void preRenderCallback(EntityPike pike, MatrixStack matrixStack, float partialTickTime) {
 		float scale;
 		if(pike.getPikeType() < 12) {
 			if(pike.getPikeType() < 3) {
@@ -62,7 +62,7 @@ public class RenderPike extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
 				scale = 1.35F;
 			}
 		}
-		GlStateManager.scalef(scale, scale, scale);
+		matrixStack.scale(scale, scale, scale);
 	}
 	
 }

@@ -10,6 +10,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+//TODO: Port particles to Deferred and cleanup
 public class UAParticles {
 	public static final BasicParticleType PRISMARINE_SHOWER = createBasicParticleType(false, "prismarine_shower");
 	public static final BasicParticleType ELDER_PRISMARINE_SHOWER = createBasicParticleType(false, "elder_prismarine_shower");

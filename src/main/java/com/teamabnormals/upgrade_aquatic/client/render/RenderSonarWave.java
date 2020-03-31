@@ -1,13 +1,17 @@
 package com.teamabnormals.upgrade_aquatic.client.render;
 
-import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.teamabnormals.upgrade_aquatic.client.UARenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelSonar;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderSonarWave extends EntityRenderer<EntitySonarWave> {
@@ -19,34 +23,20 @@ public class RenderSonarWave extends EntityRenderer<EntitySonarWave> {
 	}
 	
 	@Override
-	public void doRender(EntitySonarWave entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		GlStateManager.pushMatrix();
-		GlStateManager.translated(x, y - 0.7F, z);
-		GlStateManager.rotatef(180.0F + entityYaw, 0.0F, 1.0F, 0.0F);
-		this.bindEntityTexture(entity);
-		
-		if(this.renderOutlines) {
-			GlStateManager.enableColorMaterial();
-			GlStateManager.setupSolidRenderingTextureCombine(this.getTeamColor(entity));
-		}
-		
-		GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240.0F, 240.0F);
-		GlStateManager.disableLighting();
-		
-		this.SONAR_MODEL.render(entity, partialTicks, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-		
-		GlStateManager.enableLighting();
-		if(this.renderOutlines) {
-			GlStateManager.tearDownSolidRenderingTextureCombine();
-			GlStateManager.disableColorMaterial();
-		}
-		
-		GlStateManager.popMatrix();
-		super.doRender(entity, x, y, z, entityYaw, partialTicks);
+	public void render(EntitySonarWave sonarWave, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int packedLightIn) {
+		matrixStack.push();
+		matrixStack.translate(0.0F, -0.7F, 0.0F);
+		matrixStack.rotate(Vector3f.YP.rotationDegrees(sonarWave.rotationYaw));
+	
+		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(UARenderTypes.getEmmisiveTransluscentEntity(this.getEntityTexture(sonarWave), true));
+    	this.SONAR_MODEL.setRotationAngles(sonarWave, 0.0F, 0.0F, partialTicks, sonarWave.rotationYaw, sonarWave.rotationPitch);
+		this.SONAR_MODEL.render(matrixStack, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		matrixStack.pop();
+		super.render(sonarWave, entityYaw, partialTicks, matrixStack, bufferIn, 240);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntitySonarWave entity) {
+	public ResourceLocation getEntityTexture(EntitySonarWave entity) {
 		return new ResourceLocation(Reference.MODID, "textures/entity/thrasher/sonar.png");
 	}
 }

@@ -1,10 +1,11 @@
 package com.teamabnormals.upgrade_aquatic.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -20,18 +21,18 @@ public class RenderLionfish extends MobRenderer<EntityLionfish, ModelLionfish<En
 	}
 	
 	@Override
-	protected ResourceLocation getEntityTexture(EntityLionfish entity) {
+	public ResourceLocation getEntityTexture(EntityLionfish entity) {
 		return new ResourceLocation(Reference.MODID, "textures/entity/lionfish.png");
 	}
 	
 	@Override
-	protected void applyRotations(EntityLionfish entityLiving, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(entityLiving, ageInTicks, rotationYaw, partialTicks);
+	protected void applyRotations(EntityLionfish entityLiving, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.applyRotations(entityLiving, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.0F * MathHelper.sin(0.6F * ageInTicks);
-		GlStateManager.rotatef(f, 0.0F, 1.0F, 0.0F);
+		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));
 		if (!entityLiving.isInWater()) {
-			GlStateManager.translatef(0.1F, 0.1F, -0.1F);
-			GlStateManager.rotatef(90.0F, 0.0F, 0.0F, 1.0F);
+			matrixStack.translate(0.1F, 0.1F, -0.1F);
+			matrixStack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
 

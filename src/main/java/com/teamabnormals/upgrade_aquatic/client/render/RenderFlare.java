@@ -1,11 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelFlare;
 import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerFlareEyes;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityFlare;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -21,21 +22,21 @@ public class RenderFlare extends MobRenderer<EntityFlare, ModelFlare<EntityFlare
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityFlare entity) {
+	public ResourceLocation getEntityTexture(EntityFlare entity) {
 		return new ResourceLocation(Reference.MODID, "textures/entity/flare/flare.png");
 	}
 	
 	@Override
-	protected void preRenderCallback(EntityFlare flare, float partialTickTime) {
+	protected void preRenderCallback(EntityFlare flare, MatrixStack matrixStack, float partialTickTime) {
 		int i = flare.getPhantomSize();
 		float f = 1.0F + 0.15F * (float)i;
-		GlStateManager.scalef(f, f, f);
+		matrixStack.scale(f, f, f);
 	}
-
+	
 	@Override
-	protected void applyRotations(EntityFlare flare, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(flare, ageInTicks, rotationYaw, partialTicks);
-		GlStateManager.rotatef(flare.rotationPitch, 1.0F, 0.0F, 0.0F);
+	protected void applyRotations(EntityFlare flare, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.applyRotations(flare, matrixStack, ageInTicks, rotationYaw, partialTicks);
+		matrixStack.rotate(Vector3f.XP.rotationDegrees(flare.rotationPitch));
 	}
 
 }

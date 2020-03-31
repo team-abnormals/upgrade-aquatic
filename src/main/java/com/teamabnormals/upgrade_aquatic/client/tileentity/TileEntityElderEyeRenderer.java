@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.tileentity;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelElderEye;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
 import com.teamabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
@@ -8,7 +9,11 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -20,74 +25,41 @@ public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityEld
 	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/block/guardian_eye_dim.png");
 	private ModelElderEye model;
 	
-	public TileEntityElderEyeRenderer() {
+	public TileEntityElderEyeRenderer(TileEntityRendererDispatcher renderDispatcher) {
+		super(renderDispatcher);
 		this.model = new ModelElderEye();
 	}
 	
 	@Override
-    public void render(TileEntityElderEye te, double x, double y, double z, float partialTicks, int destroyStage) {
-		GlStateManager.enableDepthTest();
-        GlStateManager.depthFunc(515);
-        GlStateManager.depthMask(true);
-        
-        BlockState eyeState = te.hasWorld() ? te.getBlockState() : (BlockState) UABlocks.ELDER_EYE.get().getDefaultState();
-        
-        if (destroyStage >= 0) {
-            this.bindTexture(DESTROY_STAGES[destroyStage]);
-            GlStateManager.matrixMode(5890);
-            GlStateManager.pushMatrix();
-            GlStateManager.scalef(2F, 2F, 1F);
-            GlStateManager.translatef(0.0625F, 0.0625F, 0.0625F);
-            GlStateManager.matrixMode(5888);
-        } else {
-        	if(eyeState.get(BlockElderEye.ACTIVE)) {
-        		this.bindTexture(ELDER_EYE_TEXTURE);
-        	} else {
-        		this.bindTexture(ELDER_EYE_DIM_TEXTURE);
-        	}
-        }
-        
-        GlStateManager.pushMatrix();
-        
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        if(eyeState.get(BlockElderEye.FACING) == Direction.SOUTH) {
-        	GlStateManager.translatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        } else if(eyeState.get(BlockElderEye.FACING) == Direction.EAST) {
-        	GlStateManager.translatef((float) x - 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-        } else if(eyeState.get(BlockElderEye.FACING) == Direction.NORTH) {
-        	GlStateManager.translatef((float) x - 0.5F, (float) y + 1.5F, (float) z + 1.5F);
-        } else if(eyeState.get(BlockElderEye.FACING) == Direction.WEST) {
-        	GlStateManager.translatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 1.5F);
-        } else if (eyeState.get(BlockElderEye.FACING) == Direction.UP) {
-        	GlStateManager.translatef((float) x + 0.5F, (float) y + 0.25F, (float) z + 0.25F);
-        } else {
-        	GlStateManager.translatef((float) x + 0.5F, (float) y + 1.75F, (float) z + 1.75F);
-        }
-        GlStateManager.scalef(1.0F, -1.0F, -1.0F);
-
-        float angle = eyeState.get(BlockElderEye.FACING).getHorizontalAngle();
-        
-        if (Math.abs(angle) > 1.0E-5D) {
-        	GlStateManager.translatef(0.5F, 0.5F, 0.5F);
-        	if(eyeState.get(BlockElderEye.FACING) == Direction.UP) {
-        		GlStateManager.rotatef(-90F, 1.0F, 0.0F, 0.0F);
-        	} else if(eyeState.get(BlockElderEye.FACING) == Direction.DOWN) {
-        		GlStateManager.rotatef(90F, 1.0F, 0.0F, 0.0F);
-        	} else {
-        		GlStateManager.rotatef(angle, 0.0F, 1.0F, 0.0F);
-        	}
-        	GlStateManager.translatef(-0.5F, -0.5F, -0.5F);
-        }
-        
-        model.renderAll();
-        
-        GlStateManager.popMatrix();
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-        if (destroyStage >= 0) {
-            GlStateManager.matrixMode(5890);
-            GlStateManager.popMatrix();
-            GlStateManager.matrixMode(5888);
-        }
-    }
+	public void render(TileEntityElderEye te, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+		matrixStack.push();
+		matrixStack.translate(0.5D, 1.5D, 1.5D);
+		
+		BlockState eyeState = te.hasWorld() ? te.getBlockState() : UABlocks.ELDER_EYE.get().getDefaultState();
+		Direction facing = eyeState.get(BlockElderEye.FACING);
+		
+		if(facing == Direction.DOWN) {
+			matrixStack.rotate(Vector3f.XP.rotationDegrees(90.0F));
+			matrixStack.translate(0.0F, 1.125F, 1.0F);
+		} else if(facing == Direction.UP){
+			matrixStack.rotate(Vector3f.XP.rotationDegrees(-90.0F));
+			matrixStack.translate(0.0F, 1.125F, -1.0F);
+		} else if(facing == Direction.NORTH) {
+			matrixStack.rotate(Vector3f.YP.rotationDegrees(180.0F));
+		} else if(facing == Direction.EAST) {
+			matrixStack.rotate(Vector3f.YP.rotationDegrees(90.0F));
+		} else if(facing == Direction.WEST) {
+			matrixStack.rotate(Vector3f.YP.rotationDegrees(-90.0F));
+		}
+		
+		matrixStack.scale(1.0F, -1.0F, -1.0F);
+		
+		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(this.getEyeTexture(eyeState.get(BlockElderEye.ACTIVE))));
+		this.model.render(matrixStack, ivertexbuilder, combinedLightIn, combinedOverlayIn);
+		matrixStack.pop();
+	}
+	
+	private ResourceLocation getEyeTexture(boolean active) {
+		return active ? ELDER_EYE_TEXTURE : ELDER_EYE_DIM_TEXTURE;
+	}
 }

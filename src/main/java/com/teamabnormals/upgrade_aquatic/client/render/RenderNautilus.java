@@ -1,70 +1,66 @@
 package com.teamabnormals.upgrade_aquatic.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<EntityNautilus>> {
-	private static final ResourceLocation[] TEXTURES = new ResourceLocation[] { 
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_smelly.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_mca.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_five.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_cell.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_tb.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_bagel.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_sadcat.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_cameron.png"),
-		new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus_snake_block.png"),
-	};
+	private static final Map<List<String>, String> SKINS = Util.make(Maps.newHashMap(), (skins) -> {
+		skins.put(Arrays.asList("smelly", "thefaceofgaming"), "smelly");
+		skins.put(Arrays.asList("abnormal", "abnautilus", "abnortilus"), "mca");
+		skins.put(Arrays.asList("five", "epic"), "five");
+		skins.put(Arrays.asList("neonmembrane", "cellmembrane"), "cell");
+		skins.put(Arrays.asList("tb"), "tb");
+		skins.put(Arrays.asList("bagel", "shyguy", "legobagel"), "bagel");
+		skins.put(Arrays.asList("sadcat"), "sadcat");
+		skins.put(Arrays.asList("cameron", "cam", "cringe"), "cameron");
+		skins.put(Arrays.asList("snake", "snautilus", "snakeblock"), "snake_block");
+	});
 
 	public RenderNautilus(EntityRendererManager renderManager) {
-        super(renderManager, new ModelNautilus<>(), 0.5F);
-    }
+		super(renderManager, new ModelNautilus<>(), 0.5F);
+	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityNautilus entity) {
-		String name = entity.getName().getString().toLowerCase().trim();
-		if (name.equals("smelly") || name.equals("thefaceofgaming")) {
-			return TEXTURES[1];
-		} else if (name.equals("abnormal") || name.equals("abnautilus") || name.equals("abnortilus")) {
-			return TEXTURES[2];
-		} else if(name.equals("five") || name.equals("epic")) {
-			return TEXTURES[3];
-		} else if(name.equals("neonmembrane") || name.equals("cellmembrane")) {
-			return TEXTURES[4];
-		} else if(name.equals("tb")) {
-			return TEXTURES[5];
-		} else if(name.equals("bagel") || name.equals("shyguy") || name.equals("legobagel")) {
-			return TEXTURES[6];
-		} else if(name.equals("sadcat")) {
-			return TEXTURES[7];
-		} else if (name.equals("cameron") || name.equals("cam") || name.equals("cringe")) {
-			return TEXTURES[8];
-		} else if (name.equals("snake") || name.equals("snautilus") || name.equals("snakeblock")) {
-			return TEXTURES[9];
+	public ResourceLocation getEntityTexture(EntityNautilus nautilus) {
+		String textureSuffix = "";
+		
+		if(nautilus.hasCustomName()) {
+			String name = nautilus.getName().getString().toLowerCase().trim();
+			for(Map.Entry<List<String>, String> entries : SKINS.entrySet()) {
+				if(entries.getKey().contains(name)) {
+					textureSuffix = "_" + entries.getValue();
+				}
+			}
 		}
-		return TEXTURES[0];
+		return new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
 	}
 	
 	@Override
-	protected void applyRotations(EntityNautilus entityLiving, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(entityLiving, ageInTicks, rotationYaw, partialTicks);
+	protected void applyRotations(EntityNautilus nautilus, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.applyRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 0.3F * MathHelper.sin(0.6F * ageInTicks);
-		GlStateManager.rotatef(f, 0.0F, 1.0F, 0.0F);
-		if (!entityLiving.isInWater() && !entityLiving.areEyesInFluid(FluidTags.WATER)) {
-			GlStateManager.translatef(0.2F, 0.14F, 0.0F);
-			GlStateManager.rotatef(90.0F, 0.0F, 0.0F, 1.0F);
+		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));
+		if(!nautilus.isInWater() && !nautilus.areEyesInFluid(FluidTags.WATER)) {
+			matrixStack.translate(0.2F, 0.14F, 0.0F);
+			matrixStack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
 }

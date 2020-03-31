@@ -10,7 +10,7 @@ public class UASpawnEggItem extends SpawnEggItem {
 	private Supplier<EntityType<?>> entityType;
 
 	public UASpawnEggItem(Supplier<EntityType<?>> entityType, int primaryColor, int secondaryColor, Properties properties){
-		super(entityType.get(), primaryColor, secondaryColor, properties);
+		super(null, primaryColor, secondaryColor, properties);
 		this.entityType = entityType;
 	}
 

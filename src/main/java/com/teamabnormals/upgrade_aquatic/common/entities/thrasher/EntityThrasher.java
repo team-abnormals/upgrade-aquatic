@@ -7,7 +7,6 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
-import net.minecraft.client.renderer.Vector3f;
 
 import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
 import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
@@ -262,7 +261,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		Entity entitySource = source.getTrueSource();
 		this.setPlayingAnimation(HURT_ANIMATION);
 		if(entitySource instanceof LivingEntity) {
-			Vector3f difference = new Vector3f(
+			Vec3d difference = new Vec3d(
 				entitySource.getPosition().getX() - this.getPosition().getX(),
 				entitySource.getPosition().getY() - this.getPosition().getY(),
 				entitySource.getPosition().getZ() - this.getPosition().getZ()
@@ -558,8 +557,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	
 	private static void processSpawning(Biome biome) {
 		if(biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.COLD)) {
-			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER.get(), 80, 1, 2));
-			biome.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(UAEntities.THRASHER.get(), 30, 1, 2));
+			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER.get(), 90, 1, 2));
 		}
 	}
 	

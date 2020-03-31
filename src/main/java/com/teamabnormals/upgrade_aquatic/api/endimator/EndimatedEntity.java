@@ -126,7 +126,7 @@ public class EndimatedEntity extends CreatureEntity {
 	 * @return - A vector containing the mid-position of the entity's path end location and its current location
 	 */
 	public Vec3d getMoveControllerPathDistance(double pathX, double pathY, double pathZ) {
-		return new Vec3d(pathX - this.posX, pathY - this.posY, pathY - this.posY);
+		return new Vec3d(pathX - this.getPosX(), pathY - this.getPosY(), pathY - this.getPosZ());
 	}
 	
 	/**

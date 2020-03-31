@@ -88,10 +88,6 @@ public class UpgradeAquatic {
 			}
 		});
 		
-		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
-			modEventBus.addListener(EventPriority.LOWEST, this::registerItemColors);
-		});
-		
 		ModLoadingContext modLoadingContext = ModLoadingContext.get();
 		modLoadingContext.registerConfig(ModConfig.Type.CLIENT, Config.CLIENTSPEC);
 	}

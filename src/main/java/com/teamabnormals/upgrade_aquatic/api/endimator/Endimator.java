@@ -20,8 +20,8 @@ public class Endimator {
 	private int prevTempTick;
 	private boolean correctAnimation;
 	public EndimatedEntity endimatedEntity;
-	private Map<EndimatorRendererModel, float[]> boxValues;
-	private Map<EndimatorRendererModel, float[]> prevBoxValues;
+	private Map<EndimatorModelRenderer, float[]> boxValues;
+	private Map<EndimatorModelRenderer, float[]> prevBoxValues;
     
 	public Endimator() {
 		this.tempTick = 0;
@@ -93,7 +93,7 @@ public class Endimator {
 	 * @param model - The EndimatorRendererModel to look up in the box values map
 	 * @return - The EndimatorRendererModel's float array of box values from the box values map
 	 */
-	public float[] getBoxValues(EndimatorRendererModel model) {
+	public float[] getBoxValues(EndimatorModelRenderer model) {
 		float[] empty = {0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F};
 		return this.boxValues.computeIfAbsent(model, a -> empty);
 	}
@@ -105,7 +105,7 @@ public class Endimator {
 	 * @param y - The y point
 	 * @param z - The z point
 	 */
-	public void move(EndimatorRendererModel model, float x, float y, float z) {
+	public void move(EndimatorModelRenderer model, float x, float y, float z) {
 		if(!this.correctAnimation) return;
 		this.getBoxValues(model)[0] = x;
 		this.getBoxValues(model)[1] = y;
@@ -119,7 +119,7 @@ public class Endimator {
 	 * @param y - The y rotation
 	 * @param z - The z rotation
 	 */
-	public void rotate(EndimatorRendererModel model, float x, float y, float z) {
+	public void rotate(EndimatorModelRenderer model, float x, float y, float z) {
 		if(!this.correctAnimation) return;
 		this.getBoxValues(model)[3] = x;
 		this.getBoxValues(model)[4] = y;
@@ -133,7 +133,7 @@ public class Endimator {
 		
 		if(animationTick >= this.prevTempTick && animationTick < this.tempTick) {
 			if(stationary) {
-				for(EndimatorRendererModel box : this.prevBoxValues.keySet()) {
+				for(EndimatorModelRenderer box : this.prevBoxValues.keySet()) {
 					float[] transform = this.prevBoxValues.get(box);
 					box.rotationPointX += transform[0];
 					box.rotationPointY += transform[1];
@@ -146,7 +146,7 @@ public class Endimator {
 				float tick = (animationTick - this.prevTempTick + ClientInfo.getPartialTicks()) / (this.tempTick - this.prevTempTick);
 				float increment = MathHelper.sin((float) (tick * Math.PI / 2.0F));
 				float decrement = 1.0F - increment;	
-				for(EndimatorRendererModel box : this.prevBoxValues.keySet()) {
+				for(EndimatorModelRenderer box : this.prevBoxValues.keySet()) {
 					float[] transform = this.prevBoxValues.get(box);
 					box.rotationPointX += decrement * transform[0];
 					box.rotationPointY += decrement * transform[1];
@@ -155,7 +155,7 @@ public class Endimator {
 					box.rotateAngleY += decrement * transform[4];
 					box.rotateAngleZ += decrement * transform[5];
 				}
-				for(EndimatorRendererModel box : this.boxValues.keySet()) {
+				for(EndimatorModelRenderer box : this.boxValues.keySet()) {
 					float[] transform = this.boxValues.get(box);       
 					box.rotationPointX += increment * transform[0];
 					box.rotationPointY += increment * transform[1];

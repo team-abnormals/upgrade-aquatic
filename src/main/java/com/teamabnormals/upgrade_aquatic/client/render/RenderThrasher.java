@@ -20,7 +20,7 @@ public class RenderThrasher extends MobRenderer<EntityThrasher, ModelThrasher<En
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityThrasher entity) {
+	public ResourceLocation getEntityTexture(EntityThrasher entity) {
 		return new ResourceLocation(Reference.MODID, "textures/entity/thrasher/thrasher.png");
 	}
 

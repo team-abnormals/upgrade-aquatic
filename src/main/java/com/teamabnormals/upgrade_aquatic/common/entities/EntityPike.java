@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
-import net.minecraft.client.renderer.Vector3f;
 
 import com.google.common.collect.Lists;
 import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
@@ -936,7 +935,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 		@Override
 		protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
 			double d = this.getAttackReachSqr(enemy);
-			Vector3f difference = new Vector3f(
+			Vec3d difference = new Vec3d(
 				enemy.getPosition().getX() - attacker.getPosition().getX(),
 				enemy.getPosition().getY() - attacker.getPosition().getY(),
 				enemy.getPosition().getZ() - attacker.getPosition().getZ()

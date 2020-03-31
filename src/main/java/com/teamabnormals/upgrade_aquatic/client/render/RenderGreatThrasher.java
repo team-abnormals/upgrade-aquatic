@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.render;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelThrasher;
 import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerThrasher;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
@@ -21,13 +21,14 @@ public class RenderGreatThrasher extends MobRenderer<EntityGreatThrasher, ModelT
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityGreatThrasher entity) {
+	public ResourceLocation getEntityTexture(EntityGreatThrasher entity) {
 		return new ResourceLocation(Reference.MODID, "textures/entity/thrasher/great_thrasher.png");
 	}
 	
 	@Override
-	protected void preRenderCallback(EntityGreatThrasher thrasher, float partialTickTime) {
-		GlStateManager.scalef(1.75F, 1.75F, 1.75F);
+	protected void preRenderCallback(EntityGreatThrasher thrasher, MatrixStack matrixStack, float partialTickTime) {
+		float scale = 1.75F;
+		matrixStack.scale(scale, scale, scale);
 	}
 	
 }

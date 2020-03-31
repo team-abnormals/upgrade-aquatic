@@ -1,6 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.api.endimator;
 
-import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
+import java.util.List;
+
+import com.google.common.collect.Lists;
 
 import net.minecraft.client.renderer.entity.model.EntityModel;
 
@@ -9,36 +11,46 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
  * @author - SmellyModder(Luke Tonon)
  * @param <E> - The Entity for the Model; Vanilla needs this by default so it will be used here as well
  */
-public class EndimatorEntityModel<E extends EndimatedEntity> extends EntityModel<E> {
-	private EndimatorRendererModel scaleController;
+public abstract class EndimatorEntityModel<E extends EndimatedEntity> extends EntityModel<E> {
+	protected List<EndimatorModelRenderer> cuboids = Lists.newArrayList();
+	private EndimatorModelRenderer scaleController;
+	protected Endimator endimator = new Endimator();
+	protected E entity;
+	
+	public void animateModel(E endimatedEntity) {}
+	
+	@Override
+	public void setRotationAngles(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		this.entity = entity;
+	}
+	
+	public void addCuboid(EndimatorModelRenderer cuboid) {
+		this.cuboids.add(cuboid);
+	}
 	
 	public void setDefaultBoxValues() {
-		for(int i = 0; i < this.boxList.size(); i++) {
-			((EndimatorRendererModel)this.boxList.get(i)).setDefaultBoxValues();
-		}
+		this.cuboids.forEach((rendererModel) -> {
+			if(rendererModel instanceof EndimatorModelRenderer) {
+				rendererModel.setDefaultBoxValues();
+			}
+		});
 	}
 	
 	public void revertBoxesToDefaultValues() {
-		for(int i = 0; i < this.boxList.size(); i++) {
-			((EndimatorRendererModel)this.boxList.get(i)).revertToDefaultBoxValues();
-		}
+		this.cuboids.forEach((rendererModel) -> {
+			if(rendererModel instanceof EndimatorModelRenderer) {
+				rendererModel.revertToDefaultBoxValues();
+			}
+		});
 	}
 	
 	public void createScaleController() {
-		this.scaleController = new EndimatorRendererModel(this, 0, 0);
+		this.scaleController = new EndimatorModelRenderer(this, 0, 0);
 		this.scaleController.showModel = false;
 		this.scaleController.setRotationPoint(1, 1, 1);
 	}
 	
-	public EndimatorRendererModel getScaleController() {
+	public EndimatorModelRenderer getScaleController() {
 		return this.scaleController;
-	}
-	
-	public void animateModel(E endimatedEntity, float f, float f1, float f2, float f3, float f4, float f5) {
-		this.setRotationAngles(endimatedEntity, f, f1, f2, f3, f4, f5);
-	}
-	
-	public float getAnimationFrame(E endimatedEntity) {
-		return endimatedEntity.frame + ClientInfo.getPartialTicks();
 	}
 }

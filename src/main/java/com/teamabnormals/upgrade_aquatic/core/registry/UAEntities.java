@@ -76,13 +76,18 @@ public class UAEntities {
 		EntitySpawnPlacementRegistry.register(NAUTILUS.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
 		EntitySpawnPlacementRegistry.register(PIKE.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
 		EntitySpawnPlacementRegistry.register(LIONFISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::coralCondition);
-		EntitySpawnPlacementRegistry.register(THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::ravineMobCondition);
-		EntitySpawnPlacementRegistry.register(GREAT_THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::ravineMobCondition);
+		EntitySpawnPlacementRegistry.register(THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::thrasherCondition);
+		EntitySpawnPlacementRegistry.register(GREAT_THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::thrasherCondition);
 	}
     
 	private static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
 		return pos.getY() <= 30;
+	}
+	
+	private static boolean thrasherCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
+		return pos.getY() <= 30 ? world.getWorld().isNightTime() ? true : random.nextFloat() < 0.75F : false;
 	}
     
 	private static boolean pickerelCondition(EntityType<? extends EntityPike> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
