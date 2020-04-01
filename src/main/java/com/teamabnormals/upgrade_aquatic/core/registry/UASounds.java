@@ -14,7 +14,6 @@ public class UASounds {
 	public static final RegistryObject<SoundEvent> THRASHER_THRASH       = createSoundEvent("entity.thrasher.thrash");
 	public static final RegistryObject<SoundEvent> THRASHER_SONAR_FIRE   = createSoundEvent("entity.thrasher.sonar_fire");
 	public static final RegistryObject<SoundEvent> THRASHER_FLOP         = createSoundEvent("entity.thrasher.flop");
-	public static final RegistryObject<SoundEvent> THRASHER_STUN         = createSoundEvent("entity.thrasher.stun");
 	public static final RegistryObject<SoundEvent> THRASHER_SWIM         = createSoundEvent("entity.thrasher.swim");
 	public static final RegistryObject<SoundEvent> THRASHER_AMBIENT      = createSoundEvent("entity.thrasher.ambient");
 	public static final RegistryObject<SoundEvent> THRASHER_AMBIENT_LAND = createSoundEvent("entity.thrasher.ambient_land");
