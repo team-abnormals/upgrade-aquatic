@@ -62,6 +62,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.Util;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
@@ -221,8 +222,8 @@ public class UABlocks {
     public static RegistryObject<Block> PICKERELWEED_PURPLE 	 	  = RegistryUtils.createBlock("pickerel_weed_purple", () -> new BlockPickerelweed(UAProperties.PICKERELWEED), ItemGroup.MISC);
     public static RegistryObject<Block> PICKERELWEED_TALL_PURPLE      = RegistryUtils.createBlockNoItem("pickerel_weed_tall_purple", () -> new BlockPickerelweedDouble(UAProperties.PICKERELWEED));
     
-    public static RegistryObject<Block> SEAROCKET_WHITE               = RegistryUtils.createBlock("searocket_white", () -> new BlockSearocket(UAProperties.SEAROCKET(false)), ItemGroup.DECORATIONS);
-    public static RegistryObject<Block> SEAROCKET_PINK				  = RegistryUtils.createBlock("searocket_pink", () -> new BlockSearocket(UAProperties.SEAROCKET(true)), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> SEAROCKET_WHITE               = RegistryUtils.createBlock("searocket_white", () -> new BlockSearocket(Effects.WATER_BREATHING, 9, UAProperties.SEAROCKET(false)), ItemGroup.DECORATIONS);
+    public static RegistryObject<Block> SEAROCKET_PINK				  = RegistryUtils.createBlock("searocket_pink", () -> new BlockSearocket(Effects.WATER_BREATHING, 9, UAProperties.SEAROCKET(true)), ItemGroup.DECORATIONS);
     
     public static RegistryObject<Block> POTTED_PICKERELWEED_BLUE 	  = RegistryUtils.createBlockNoItem("potted_pickerelweed_blue", () -> new FlowerPotBlock(PICKERELWEED_BLUE.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));
 	public static RegistryObject<Block> POTTED_PICKERELWEED_PURPLE 	  = RegistryUtils.createBlockNoItem("potted_pickerelweed_purple", () -> new FlowerPotBlock(PICKERELWEED_PURPLE.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));
