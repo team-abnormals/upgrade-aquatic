@@ -42,6 +42,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -123,14 +124,20 @@ public class UpgradeAquatic {
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.SONAR_WAVE.get(), RenderSonarWave::new);
 	}
 	
+	/*
+	 * Temporary fix for forge bug
+	 */
 	@OnlyIn(Dist.CLIENT)
 	private void registerItemColors(ColorHandlerEvent.Item event) {
 		for(RegistryObject<Item> items : UAItems.SPAWN_EGGS) {
-			Item item = items.get();
-			if(item instanceof UASpawnEggItem) {
-				event.getItemColors().register((itemColor, itemsIn) -> {
-					return ((UASpawnEggItem) item).getColor(itemsIn);
-				}, item);
+			//RegistryObject#isPresent causes a null pointer when it's false :crying: thanks forge
+			if(ObfuscationReflectionHelper.getPrivateValue(RegistryObject.class, items, "value") != null) {
+				Item item = items.get();
+				if(item instanceof UASpawnEggItem) {
+					event.getItemColors().register((itemColor, itemsIn) -> {
+						return ((UASpawnEggItem) item).getColor(itemsIn);
+					}, item);
+				}
 			}
 		}
 	}
