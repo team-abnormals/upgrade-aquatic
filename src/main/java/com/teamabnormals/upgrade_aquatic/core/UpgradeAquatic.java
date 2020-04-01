@@ -24,6 +24,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAFlammables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.DataUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
@@ -98,6 +99,7 @@ public class UpgradeAquatic {
 		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();
 		UACompostables.registerCompostables();
+		UAFlammables.registerFlammables();
 		DataUtils.registerStrippable(UABlocks.DRIFTWOOD_LOG.get(), UABlocks.DRIFTWOOD_LOG.get());
 		DataUtils.registerStrippable(UABlocks.DRIFTWOOD.get(), UABlocks.DRIFTWOOD_STRIPPED.get());
 		UAHooks.makeBubbleColumnTickRandomly();

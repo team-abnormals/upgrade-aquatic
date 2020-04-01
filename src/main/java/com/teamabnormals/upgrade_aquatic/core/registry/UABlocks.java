@@ -9,8 +9,6 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrassTall;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShower;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwood;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockDriftwoodLog;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFloweringRush;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch;
@@ -50,6 +48,7 @@ import net.minecraft.block.FenceBlock;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.LadderBlock;
+import net.minecraft.block.LogBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SlabBlock;
@@ -415,10 +414,10 @@ public class UABlocks {
 	
 	public static RegistryObject<Block> PRISMARINE_ROD_BUNDLE            = RegistryUtils.createBlock("prismarine_rod_bundle", () -> new RotatedPillarBlock(Properties.from(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 
-	public static RegistryObject<Block> DRIFTWOOD_LOG            = RegistryUtils.createBlock("driftwood_log", () -> new BlockDriftwoodLog(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD                = RegistryUtils.createBlock("driftwood", () -> new BlockDriftwood(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_LOG_STRIPPED   = RegistryUtils.createBlock("driftwood_log_stripped", () -> new BlockDriftwoodLog(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> DRIFTWOOD_STRIPPED       = RegistryUtils.createBlock("driftwood_stripped", () -> new BlockDriftwood(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DRIFTWOOD_LOG            = RegistryUtils.createBlock("driftwood_log", () -> new LogBlock(MaterialColor.GRAY, UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DRIFTWOOD                = RegistryUtils.createBlock("driftwood", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DRIFTWOOD_LOG_STRIPPED   = RegistryUtils.createBlock("driftwood_log_stripped", () -> new LogBlock(MaterialColor.GRAY, UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> DRIFTWOOD_STRIPPED       = RegistryUtils.createBlock("driftwood_stripped", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_PLANKS         = RegistryUtils.createBlock("driftwood_planks", () -> new Block(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD_DOOR           = RegistryUtils.createBlock("driftwood_door", () -> new DoorBlock(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
 	public static RegistryObject<Block> DRIFTWOOD_SLAB           = RegistryUtils.createBlock("driftwood_slab", () -> new SlabBlock(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);

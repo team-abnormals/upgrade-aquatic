@@ -11,6 +11,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BlockToothDoor extends DoorBlock {
 
@@ -19,7 +20,7 @@ public class BlockToothDoor extends DoorBlock {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	@Override
 	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
 			BlockRayTraceResult hit) {
 		if (state.get(POWERED)) {
@@ -33,7 +34,8 @@ public class BlockToothDoor extends DoorBlock {
 		}
 	}
 	
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	@Override
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 	      if (!worldIn.isRemote) {
 	            state = state.cycle(OPEN);
 	            worldIn.setBlockState(pos, state, 10);

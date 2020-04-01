@@ -38,6 +38,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 
 public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler, ILiquidContainer {
@@ -201,7 +202,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 		}
 	}
 
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isRemote) {
 			if (state.get(DRAWN) && !worldIn.isBlockPowered(pos)) {
 				float pitch = state.get(ELDER) ? 0.85F : 1.0F;
