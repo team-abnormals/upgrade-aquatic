@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.events;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -32,24 +32,22 @@ public class ClientEvents {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
-		GlStateManager.pushMatrix();
+		MatrixStack stack = event.getMatrixStack();
+		stack.push();
 		if(event.getEntityLiving().getRidingEntity() instanceof EntityThrasher) {
 			EntityThrasher thrasher = (EntityThrasher) event.getEntityLiving().getRidingEntity();
 			double dx = Math.cos((MathHelper.lerp(event.getPartialRenderTick(), thrasher.prevRotationYaw, thrasher.rotationYaw)) * Math.PI / 180.0D);
 			double dz = Math.sin((MathHelper.lerp(event.getPartialRenderTick(), thrasher.prevRotationYaw, thrasher.rotationYaw)) * Math.PI / 180.0D);
 		
-			
-			GlStateManager.translatef((float) dx, 0.0F, (float) dz);
+			stack.translate((float) dx, 0.0F, (float) dz);
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void onPlayerRenderPost(RenderPlayerEvent.Post event) {
-		GlStateManager.popMatrix();
+		event.getMatrixStack().pop();
 	}
 	
 }
