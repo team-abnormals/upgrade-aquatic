@@ -26,16 +26,6 @@
         	{ "name": "mob/guardian/flop3", "stream": false }
         ]
     },
-    "entity.thrasher.swim":
-    {
-        "category": "entity",
-        "subtitle": "Thrasher Swims",
-        "sounds": [
-        	{ "name": "mob/fish/swim1", "stream": false },
-        	{ "name": "mob/fish/swim2", "stream": false },
-        	{ "name": "mob/fish/swim3", "stream": false }
-        ]
-    },
 	"entity.thrasher.ambient":
     {
         "category": "entity",

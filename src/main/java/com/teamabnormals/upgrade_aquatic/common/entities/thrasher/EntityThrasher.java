@@ -52,6 +52,7 @@ import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -527,7 +528,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	
 	@Override
 	protected SoundEvent getSwimSound() {
-		return UASounds.THRASHER_SWIM.get();
+		return SoundEvents.ENTITY_DOLPHIN_SWIM;
 	}
 	
 	@Override
