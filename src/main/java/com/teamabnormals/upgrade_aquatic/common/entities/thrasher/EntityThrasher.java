@@ -525,10 +525,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		return UASounds.THRASHER_THRASH.get();
 	}
 	
-	protected SoundEvent getStunSound() {
-		return UASounds.THRASHER_STUN.get();
-	}
-	
 	@Override
 	protected SoundEvent getSwimSound() {
 		return UASounds.THRASHER_SWIM.get();

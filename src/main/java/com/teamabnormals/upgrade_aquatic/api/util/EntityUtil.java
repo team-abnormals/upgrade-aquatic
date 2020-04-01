@@ -23,7 +23,7 @@ public class EntityUtil {
 		return entity.world.rayTraceBlocks(new RayTraceContext(
 			entity.getEyePosition(delta),
 			entity.getEyePosition(delta).add(entity.getLook(delta).scale(distance)),
-			RayTraceContext.BlockMode.OUTLINE,
+			RayTraceContext.BlockMode.COLLIDER,
 			RayTraceContext.FluidMode.NONE,
 			entity
 		));
