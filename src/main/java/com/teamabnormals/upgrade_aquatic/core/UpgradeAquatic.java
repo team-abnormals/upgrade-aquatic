@@ -100,6 +100,7 @@ public class UpgradeAquatic {
 		UACompostables.registerCompostables();
 		DataUtils.registerStrippable(UABlocks.DRIFTWOOD_LOG.get(), UABlocks.DRIFTWOOD_LOG.get());
 		DataUtils.registerStrippable(UABlocks.DRIFTWOOD.get(), UABlocks.DRIFTWOOD_STRIPPED.get());
+		UAHooks.makeBubbleColumnTickRandomly();
 	}
 	
 	@OnlyIn(Dist.CLIENT)
