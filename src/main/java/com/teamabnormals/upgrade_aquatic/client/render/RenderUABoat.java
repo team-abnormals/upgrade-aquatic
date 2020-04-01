@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class RenderUABoat extends EntityRenderer<EntityUABoat> {
    private static final ResourceLocation[] BOAT_TEXTURES = new ResourceLocation[]{
-		   new ResourceLocation("buzzierbees:textures/entity/boat/hive.png")};
+		   new ResourceLocation("upgrade_aquatic:textures/entity/boat/driftwood.png")};
    protected final ModelUABoat modelBoat = new ModelUABoat();
 
    public RenderUABoat(EntityRendererManager renderManagerIn) {
