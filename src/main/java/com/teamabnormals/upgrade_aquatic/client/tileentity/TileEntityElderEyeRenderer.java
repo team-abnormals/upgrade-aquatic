@@ -33,17 +33,17 @@ public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityEld
 	@Override
 	public void render(TileEntityElderEye te, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		matrixStack.push();
-		matrixStack.translate(0.5D, 1.5D, 1.5D);
+		matrixStack.translate(0.5D, 1.5D, 0.5D);
 		
 		BlockState eyeState = te.hasWorld() ? te.getBlockState() : UABlocks.ELDER_EYE.get().getDefaultState();
 		Direction facing = eyeState.get(BlockElderEye.FACING);
 		
 		if(facing == Direction.DOWN) {
 			matrixStack.rotate(Vector3f.XP.rotationDegrees(90.0F));
-			matrixStack.translate(0.0F, 1.125F, 1.0F);
+			matrixStack.translate(0.0F, 1.25F, 0.75F);
 		} else if(facing == Direction.UP){
 			matrixStack.rotate(Vector3f.XP.rotationDegrees(-90.0F));
-			matrixStack.translate(0.0F, 1.125F, -1.0F);
+			matrixStack.translate(0.0F, 1.25F, -1.25F);
 		} else if(facing == Direction.NORTH) {
 			matrixStack.rotate(Vector3f.YP.rotationDegrees(180.0F));
 		} else if(facing == Direction.EAST) {

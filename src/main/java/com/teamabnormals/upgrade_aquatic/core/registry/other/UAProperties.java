@@ -50,6 +50,6 @@ public class UAProperties {
 	public static final Block.Properties PICKERELWEED = Block.Properties.create(Material.PLANTS, MaterialColor.GRASS).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.WET_GRASS);
 	
 	public static final Block.Properties PICKERELWEED_BLOCK(boolean isBoiled){
-		return isBoiled ? Block.Properties.create(Material.PLANTS, MaterialColor.FOLIAGE).hardnessAndResistance(0.5F, 5).sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.GRASS).hardnessAndResistance(0.5F, 5).sound(SoundType.WET_GRASS);
+		return isBoiled ? Block.Properties.create(Material.PLANTS, MaterialColor.FOLIAGE).hardnessAndResistance(0.5F, 5).notSolid().sound(SoundType.PLANT) : Block.Properties.create(Material.PLANTS, MaterialColor.GRASS).notSolid().hardnessAndResistance(0.5F, 5).sound(SoundType.WET_GRASS);
 	}
 }
