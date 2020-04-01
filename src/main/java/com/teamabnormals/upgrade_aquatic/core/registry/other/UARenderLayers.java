@@ -120,6 +120,15 @@ public class UARenderLayers {
 		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_PURPLE.get(), TRANSLUSCENT);
 		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_WHITE.get(), TRANSLUSCENT);
 				
+		RenderTypeLookup.setRenderLayer(UABlocks.OCHRE_KELP.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.THORNY_KELP.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.POLAR_KELP.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.TONGUE_KELP.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.OCHRE_KELP_PLANT.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.THORNY_KELP_PLANT.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.POLAR_KELP_PLANT.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.TONGUE_KELP_PLANT.get(), CUTOUT);
+		
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PICKERELWEED_BLUE.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PICKERELWEED_PURPLE.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_SEAROCKET_PINK.get(), CUTOUT);
