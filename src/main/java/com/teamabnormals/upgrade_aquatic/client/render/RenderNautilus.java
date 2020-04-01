@@ -24,14 +24,14 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<EntityNautilus>> {
 	private static final Map<List<String>, String> SKINS = Util.make(Maps.newHashMap(), (skins) -> {
 		skins.put(Arrays.asList("smelly", "thefaceofgaming"), "smelly");
-		skins.put(Arrays.asList("abnormal", "abnautilus", "abnortilus"), "mca");
+		skins.put(Arrays.asList("abnormal", "abnautilus", "abnortilus", "mca"), "mca");
 		skins.put(Arrays.asList("five", "epic"), "five");
-		skins.put(Arrays.asList("neonmembrane", "cellmembrane"), "cell");
+		skins.put(Arrays.asList("neon membrane", "cell membrane", "cell"), "cell");
 		skins.put(Arrays.asList("tb"), "tb");
-		skins.put(Arrays.asList("bagel", "shyguy", "legobagel"), "bagel");
+		skins.put(Arrays.asList("bagel", "shy guy", "legobagel"), "bagel");
 		skins.put(Arrays.asList("sadcat"), "sadcat");
 		skins.put(Arrays.asList("cameron", "cam", "cringe"), "cameron");
-		skins.put(Arrays.asList("snake", "snautilus", "snakeblock"), "snake_block");
+		skins.put(Arrays.asList("snake", "snautilus", "snakeblock", "snake block"), "snake_block");
 	});
 
 	public RenderNautilus(EntityRendererManager renderManager) {
