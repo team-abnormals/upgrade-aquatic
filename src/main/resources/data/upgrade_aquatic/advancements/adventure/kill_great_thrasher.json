@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancements.adventure.kill_great_thrasher.description"
     },
-    "frame": "task",
+    "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
