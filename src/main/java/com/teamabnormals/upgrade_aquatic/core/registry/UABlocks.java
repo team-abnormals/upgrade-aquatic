@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrass;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrassTall;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockThatch;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShower;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
@@ -429,7 +430,7 @@ public class UABlocks {
 	public static RegistryObject<Block> DRIFTWOOD_BUTTON         = RegistryUtils.createBlock("driftwood_button", () -> new WoodButtonBlock(Properties.from(UABlocks.DRIFTWOOD.get()).doesNotBlockMovement()), ItemGroup.REDSTONE);
 	public static RegistryObject<Block> DRIFTWOOD_TRAPDOOR       = RegistryUtils.createBlock("driftwood_trapdoor", () -> new TrapDoorBlock(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
 
-	public static RegistryObject<Block> BEACHGRASS_THATCH              = RegistryUtils.createBlock("beachgrass_thatch", () -> new Block(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH              = RegistryUtils.createBlock("beachgrass_thatch", () -> new BlockThatch(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> BEACHGRASS_THATCH_SLAB         = RegistryUtils.createBlock("beachgrass_thatch_slab", () -> new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> BEACHGRASS_THATCH_STAIRS       = RegistryUtils.createBlock("beachgrass_thatch_stairs", () -> new StairsBlock(BEACHGRASS_THATCH.get().getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> BEACHGRASS                     = RegistryUtils.createBlock("beachgrass", () -> new BlockBeachgrass(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
