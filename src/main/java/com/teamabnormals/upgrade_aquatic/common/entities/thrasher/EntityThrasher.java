@@ -362,7 +362,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			this.move(MoverType.SELF, this.getMotion());
 			this.setMotion(this.getMotion().scale(0.9D));
 			if (!this.isMoving() && this.getAttackTarget() == null) {
-				double ySpeed = -0.005D;
+				double ySpeed = !((ThrasherLookController) this.getLookController()).isTurningForSonar() ? -0.005D : -0.0025D;
 				this.setMotion(this.getMotion().add(0.0D, ySpeed, 0.0D));
 			}
 		} else {
@@ -717,6 +717,10 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		
 		public void setTurningForSonar(boolean isTurning) {
 			this.isTurningForSonar = isTurning;
+		}
+		
+		public boolean isTurningForSonar() {
+			return this.isTurningForSonar;
 		}
 	}
 	
