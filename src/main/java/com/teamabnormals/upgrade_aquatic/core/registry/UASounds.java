@@ -2,8 +2,10 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.block.SoundType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,6 +22,8 @@ public class UASounds {
 	public static final RegistryObject<SoundEvent> THRASHER_HURT_LAND    = createSoundEvent("entity.thrasher.hurt_land");
 	public static final RegistryObject<SoundEvent> THRASHER_DEATH        = createSoundEvent("entity.thrasher.death");
 	public static final RegistryObject<SoundEvent> THRASHER_DEATH_LAND   = createSoundEvent("entity.thrasher.death_land");
+	
+	public static final SoundType TOOTH_LANTERN = new SoundType(1.0F, 1.0F, SoundEvents.BLOCK_GLASS_BREAK, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL);
 	
 	private static RegistryObject<SoundEvent> createSoundEvent(String name) {
 		return SOUNDS.register(name, () -> new SoundEvent(new ResourceLocation(Reference.MODID, name)));

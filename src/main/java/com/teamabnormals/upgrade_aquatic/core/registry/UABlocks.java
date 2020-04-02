@@ -244,7 +244,7 @@ public class UABlocks {
     public static RegistryObject<Block> TOOTH_BRICK_WALL              = RegistryUtils.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> TOOTH_TRAPDOOR                = RegistryUtils.createBlock("tooth_trapdoor", () -> new BlockToothTrapdoor(Properties.from(Blocks.END_STONE)), ItemGroup.REDSTONE);
 	public static RegistryObject<Block> TOOTH_DOOR                    = RegistryUtils.createBlock("tooth_door", () -> new BlockToothDoor(Properties.from(Blocks.END_STONE)), ItemGroup.REDSTONE);
-	public static RegistryObject<Block> TOOTH_LANTERN                 = RegistryUtils.createBlock("tooth_lantern", () -> new BlockToothLantern(Properties.from(Blocks.END_STONE).notSolid().lightValue(15)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> TOOTH_LANTERN                 = RegistryUtils.createBlock("tooth_lantern", () -> new BlockToothLantern(Properties.from(Blocks.END_STONE).sound(UASounds.TOOTH_LANTERN).notSolid().lightValue(15)), ItemGroup.DECORATIONS);
 	
 	public static RegistryObject<Block> CORALSTONE                       = RegistryUtils.createBlock("coralstone", () -> new BlockCoralstone(UAProperties.CORALSTONE, false), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> BUBBLE_CORALSTONE                = RegistryUtils.createBlock("bubble_coralstone", () -> new BlockCoralstone(UAProperties.CORALSTONE, false, new Block[] {Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}), ItemGroup.BUILDING_BLOCKS);

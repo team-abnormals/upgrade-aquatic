@@ -30,7 +30,40 @@ public class BlockToothLantern extends Block implements IWaterLoggable {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final VoxelShape[] SHAPES = new VoxelShape[] {
-		VoxelShapes.or(makeCuboidShape(7.0F, 0.0F, 7.0D, 9.0D, 4.0D, 9.0D), makeCuboidShape(4.0F, 4.0F, 4.0F, 12.0F, 5.0F, 12.0F), makeCuboidShape(5.0F, 5.0F, 5.0F, 11.0F, 13.0F, 11.0F), makeCuboidShape(4.0F, 13.0F, 4.0F, 12.0F, 14.0F, 12.0F))
+		VoxelShapes.or( // UP
+				makeCuboidShape(7.0F, 0.0F, 7.0D, 9.0D, 4.0D, 9.0D), 
+				makeCuboidShape(4.0F, 4.0F, 4.0F, 12.0F, 5.0F, 12.0F), 
+				makeCuboidShape(5.0F, 5.0F, 5.0F, 11.0F, 13.0F, 11.0F), 
+				makeCuboidShape(4.0F, 13.0F, 4.0F, 12.0F, 14.0F, 12.0F)), 
+		VoxelShapes.or( // DOWN
+				makeCuboidShape(7.0F, 12.0F, 7.0D, 9.0D, 16.0D, 9.0D), 
+				makeCuboidShape(4.0F, 2.0F, 4.0F, 12.0F, 3.0F, 12.0F), 
+				makeCuboidShape(5.0F, 3.0F, 5.0F, 11.0F, 11.0F, 11.0F), 
+				makeCuboidShape(4.0F, 11.0F, 4.0F, 12.0F, 12.0F, 12.0F)), 
+		VoxelShapes.or( // NORTH
+				makeCuboidShape(7.0F, 12.0F, 10.0D, 9.0D, 16.0D, 12.0D),
+				makeCuboidShape(7.0F, 14.0F, 10.0D, 9.0D, 16.0D, 16.0D), 
+				makeCuboidShape(4.0F, 2.0F, 7.0F, 12.0F, 3.0F, 15.0F), 
+				makeCuboidShape(5.0F, 3.0F, 8.0F, 11.0F, 11.0F, 14.0F), 
+				makeCuboidShape(4.0F, 11.0F, 7.0F, 12.0F, 12.0F, 15.0F)), 
+		VoxelShapes.or( // EAST
+				makeCuboidShape(4.0F, 12.0F, 7.0D, 6.0D, 16.0D, 9.0D),
+				makeCuboidShape(0.0F, 14.0F, 7.0D, 6.0D, 16.0D, 9.0D), 
+				makeCuboidShape(1.0F, 2.0F, 4.0F, 9.0F, 3.0F, 12.0F), 
+				makeCuboidShape(2.0F, 3.0F, 5.0F, 8.0F, 11.0F, 11.0F), 
+				makeCuboidShape(1.0F, 11.0F, 4.0F, 9.0F, 12.0F, 12.0F)), 
+		VoxelShapes.or( // SOUTH
+				makeCuboidShape(7.0F, 12.0F, 4.0D, 9.0D, 16.0D, 6.0D),
+				makeCuboidShape(7.0F, 14.0F, 0.0D, 9.0D, 16.0D, 6.0D), 
+				makeCuboidShape(4.0F, 2.0F, 1.0F, 12.0F, 3.0F, 9.0F), 
+				makeCuboidShape(5.0F, 3.0F, 2.0F, 11.0F, 11.0F, 8.0F), 
+				makeCuboidShape(4.0F, 11.0F, 1.0F, 12.0F, 12.0F, 9.0F)), 
+		VoxelShapes.or( // WEST
+				makeCuboidShape(10.0F, 12.0F, 7.0D, 12.0D, 16.0D, 9.0D),
+				makeCuboidShape(10.0F, 14.0F, 7.0D, 16.0D, 16.0D, 9.0D), 
+				makeCuboidShape(7.0F, 2.0F, 4.0F, 15.0F, 3.0F, 12.0F), 
+				makeCuboidShape(8.0F, 3.0F, 5.0F, 14.0F, 11.0F, 11.0F), 
+				makeCuboidShape(7.0F, 11.0F, 4.0F, 15.0F, 12.0F, 12.0F)), 
 	};
 
 	public BlockToothLantern(Properties properties) {
@@ -40,7 +73,21 @@ public class BlockToothLantern extends Block implements IWaterLoggable {
 	
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return SHAPES[0];
+		switch(state.get(FACING)) {
+		case UP:
+			return SHAPES[0];
+		case DOWN:
+			default:
+			return SHAPES[1];
+		case NORTH:
+			return SHAPES[2];	
+		case EAST:
+		    return SHAPES[3]; 
+		case SOUTH:
+	        return SHAPES[4];
+	    case WEST:
+	        return SHAPES[5];
+		}
 	}
 	
 	@Override
@@ -54,7 +101,7 @@ public class BlockToothLantern extends Block implements IWaterLoggable {
 	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
 		Direction direction = state.get(FACING);
 		BlockPos blockpos = pos.offset(direction.getOpposite());
-		return world.getBlockState(blockpos).isSolidSide(world, blockpos, direction);
+		return Block.hasEnoughSolidSide(world, blockpos, direction);
 	}
 	
 	@Override
