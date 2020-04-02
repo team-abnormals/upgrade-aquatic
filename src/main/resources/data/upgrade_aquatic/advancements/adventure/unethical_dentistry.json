@@ -71,6 +71,10 @@
     "tooth_trapdoor": {
       "trigger": "minecraft:placed_block",
       "conditions": { "block": "upgrade_aquatic:tooth_trapdoor" }
+    },
+    "tooth_lantern": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_lantern" }
     }
   },
   "requirements": [
@@ -88,7 +92,8 @@
       "tooth_brick_vertical_slab",
       "tooth_vertical_slab",
       "tooth_door",
-      "tooth_trapdoor"
+      "tooth_trapdoor",
+      "tooth_lantern"
     ]
   ]
 }
