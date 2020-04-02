@@ -779,7 +779,7 @@ public class EntityPike extends EntityBucketableWaterMob {
 	@Override
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
-		this.setPikeType(compound.getInt("PikeType"));
+		this.setPikeType(MathHelper.clamp(compound.getInt("PikeType"), 1, 21));
 		this.dropEatingLootCooldown = compound.getInt("EatingLootDropCooldown");
 		this.setAttackCooldown(compound.getInt("AttackCooldown"));
 		this.setToDropItem(compound.getBoolean("DoesDropItem"));
