@@ -35,6 +35,11 @@ public class EntityGreatThrasher extends EntityThrasher {
 	}
 	
 	@Override
+	protected float getSoundPitch() {
+		return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.75F;
+	}
+	
+	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
 		return new ItemStack(UAItems.GREAT_THRASHER_SPAWN_EGG.get());
 	}
