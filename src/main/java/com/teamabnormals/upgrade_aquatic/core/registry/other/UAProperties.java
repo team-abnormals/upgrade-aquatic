@@ -26,12 +26,13 @@ public class UAProperties {
 	}
 	
 	public static Block.Properties PRISMARINE_CORAL_BASE(boolean elder) {
-		return Block.Properties.create(Material.CORAL, MaterialColor.DIAMOND).doesNotBlockMovement().lightValue(3).sound(SoundType.GLASS);
+		MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.WHITE_TERRACOTTA;
+		return Block.Properties.create(Material.CORAL, color).doesNotBlockMovement().lightValue(5).sound(SoundType.GLASS);
 	}
 	
 	public static Block.Properties PRISMARINE_CORAL_BLOCK_BASE(boolean elder) {
-		MaterialColor color = elder ? MaterialColor.DIAMOND : MaterialColor.WHITE_TERRACOTTA;
-		return Block.Properties.create(Material.ROCK, color).hardnessAndResistance(1.5F, 6.0F).lightValue(3).sound(SoundType.GLASS);
+		MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.WHITE_TERRACOTTA;
+		return Block.Properties.create(Material.ROCK, color).hardnessAndResistance(1.5F, 6.0F).lightValue(6).sound(SoundType.GLASS);
 	}
 	
 	public static Block.Properties ELDER_PRISMARINE_CORAL = Block.Properties.create(Material.CORAL, MaterialColor.WHITE_TERRACOTTA).lightValue(3).sound(SoundType.GLASS);
