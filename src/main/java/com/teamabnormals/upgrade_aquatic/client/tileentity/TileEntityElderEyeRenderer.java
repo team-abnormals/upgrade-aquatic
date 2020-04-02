@@ -21,8 +21,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityElderEye> {
-	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/block/guardian_eye.png");
-	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/block/guardian_eye_dim.png");
+	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/tile/guardian_eye.png");
+	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/tile/guardian_eye_dim.png");
 	private ModelElderEye model;
 	
 	public TileEntityElderEyeRenderer(TileEntityRendererDispatcher renderDispatcher) {
