@@ -1,7 +1,7 @@
 {
 	"textures": {
-		"0": "upgrade_aquatic:block/guardian_eye",
-		"particle": "upgrade_aquatic:block/guardian_eye"
+		"0": "upgrade_aquatic:tile/guardian_eye",
+		"particle": "upgrade_aquatic:tile/guardian_eye"
 	},
 	"elements": [
 		{
