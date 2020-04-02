@@ -56,6 +56,14 @@
       "trigger": "minecraft:placed_block",
       "conditions": { "block": "upgrade_aquatic:tooth_brick_wall" }
     },
+    "tooth_brick_vertical_slab": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_brick_vertical_slab" }
+    },
+    "tooth_vertical_slab": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_vertical_slab" }
+    },
     "tooth_door": {
       "trigger": "minecraft:placed_block",
       "conditions": { "block": "upgrade_aquatic:tooth_door" }
@@ -77,6 +85,8 @@
       "tooth_brick_stairs",
       "tooth_brick_slab",
       "tooth_brick_wall",
+      "tooth_brick_vertical_slab",
+      "tooth_vertical_slab",
       "tooth_door",
       "tooth_trapdoor"
     ]
