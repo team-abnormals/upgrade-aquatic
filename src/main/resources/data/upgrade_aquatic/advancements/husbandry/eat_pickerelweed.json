@@ -1,0 +1,42 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "display": {
+    "icon": {
+      "item": "upgrade_aquatic:boiled_pickerelweed_blue"
+    },
+    "title": {
+      "translate": "advancements.husbandry.eat_pickerelweed.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.eat_pickerelweed.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "blue_pickerelweed": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "upgrade_aquatic:boiled_pickerelweed_blue"
+        }
+      }
+    },
+    "purple_pickerelweed": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "item": "upgrade_aquatic:boiled_pickerelweed_purple"
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "blue_pickerelweed",
+      "purple_pickerelweed"
+    ]
+  ]
+}

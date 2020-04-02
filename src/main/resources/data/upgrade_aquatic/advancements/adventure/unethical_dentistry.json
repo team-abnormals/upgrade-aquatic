@@ -1,0 +1,84 @@
+{
+  "parent": "upgrade_aquatic:adventure/tooth_fairy",
+  "display": {
+    "icon": {
+      "item": "upgrade_aquatic:tooth_block"
+    },
+    "title": {
+      "translate": "advancements.adventure.unethical_dentistry.title"
+    },
+    "description": {
+      "translate": "advancements.adventure.unethical_dentistry.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tooth_block": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_block" }
+    },
+    "tooth_tiles": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_tiles" }
+    },
+    "tooth_stairs": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_stairs" }
+    },
+    "tooth_slab": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_slab" }
+    },
+    "tooth_wall": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_wall" }
+    },
+    "tooth_bricks": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_bricks" }
+    },
+    "chiseled_tooth_bricks": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:chiseled_tooth_bricks" }
+    },
+    "tooth_brick_stairs": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_brick_stairs" }
+    },
+    "tooth_brick_slab": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_brick_slab" }
+    },
+    "tooth_brick_wall": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_brick_wall" }
+    },
+    "tooth_door": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_door" }
+    },
+    "tooth_trapdoor": {
+      "trigger": "minecraft:placed_block",
+      "conditions": { "block": "upgrade_aquatic:tooth_trapdoor" }
+    }
+  },
+  "requirements": [
+    [
+      "tooth_block",
+      "tooth_tiles",
+      "tooth_stairs",
+      "tooth_slab",
+      "tooth_wall",
+      "tooth_bricks",
+      "chiseled_tooth_bricks",
+      "tooth_brick_stairs",
+      "tooth_brick_slab",
+      "tooth_brick_wall",
+      "tooth_door",
+      "tooth_trapdoor"
+    ]
+  ]
+}
