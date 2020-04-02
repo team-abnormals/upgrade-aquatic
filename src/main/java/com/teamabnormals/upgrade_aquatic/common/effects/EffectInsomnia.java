@@ -1,11 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.common.effects;
 
+import com.teamabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityFlare;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.PhantomEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectType;
 import net.minecraft.potion.InstantEffect;
@@ -37,6 +39,13 @@ public class EffectInsomnia extends InstantEffect {
     		if(flare.getHealth() > 0) {
     			entity.world.addEntity(flare);
     			entity.remove(true);
+    		}
+    		PlayerEntity player = entity.getEntityWorld().getClosestPlayer(entity, 11);
+    		if (player instanceof ServerPlayerEntity && player.isAlive()) {
+    			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
+    			if(!entity.world.isRemote()) {
+    				UACriteriaTriggers.CONVERT_PHANTOM.trigger(serverPlayer); 
+    			}
     		}
     	} else if(entity instanceof EntityFlare) {
     		entity.attackEntityFrom(DamageSource.MAGIC, Float.MAX_VALUE);

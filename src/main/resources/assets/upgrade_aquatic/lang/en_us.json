@@ -391,7 +391,7 @@
   "block.upgrade_aquatic.elder_prismarine_coralstone_vertical_slab": "Elder Coralstone Vertical Slab",
   "block.upgrade_aquatic.dead_coralstone_vertical_slab": "Dead Coralstone Vertical Slab",
   
-  "_comment": "Items",
+  "_comment2": "Items",
   
   "item.upgrade_aquatic.driftwood_boat": "Driftwood Boat",
   
@@ -418,7 +418,7 @@
   "item.upgrade_aquatic.lionfish": "Raw Lionfish",
   "item.upgrade_aquatic.lionfish_cooked": "Cooked Lionfish",
   
-  "_comment": "Tooltips",
+  "_comment3": "Tooltips",
   
   "tooltip.upgrade_aquatic.amur_pike": "Amur Pike",  
   "tooltip.upgrade_aquatic.redfin_pickerel": "Redfin Pickerel",  
@@ -442,7 +442,7 @@
   "tooltip.upgrade_aquatic.lemon_southern_pike": "Lemon Southern Pike",
   "tooltip.upgrade_aquatic.golden_southern_pike": "Golden Southern Pike",
   
-  "_comment": "Entities",
+  "_comment4": "Entities",
   
   "entity.upgrade_aquatic.nautilus": "Nautilus",
   "entity.upgrade_aquatic.pike": "Pike",
@@ -451,7 +451,7 @@
   "entity.upgrade_aquatic.great_thrasher": "Great Thrasher",
   "entity.upgrade_aquatic.flare": "Flare",
   
-  "_comment": "Potions and Effects",
+  "_comment5": "Potions and Effects",
   
   "effect.upgrade_aquatic.insomnia": "Insomnia",
   "item.minecraft.potion.effect.insomnia": "Potion of Insomnia",
@@ -501,10 +501,33 @@
   "item.minecraft.tipped_arrow.effect.vibing_strong": "Arrow of Vibing",
   "item.minecraft.tipped_arrow.effect.vibing_long": "Arrow of Vibing",
   
-  "_comment": "Deaths",
+  "_comment6": "Deaths",
   
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Guardian Spine",
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Guardian Spine whilst trying to escape %2$s",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by an Elder Guardian Spine",
-  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s was spiked to death by an Elder Guardian Spine whilst trying to escape %2$s"
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s was spiked to death by an Elder Guardian Spine whilst trying to escape %2$s",
+  
+  "_comment7": "Advancements",
+  
+  "advancements.adventure.tooth_fairy.title": "Tooth Fairy",
+  "advancements.adventure.tooth_fairy.description": "Collect the teeth of the Thrasher, an ancient horror that lurks deep in cold waters",
+  
+  "advancements.adventure.unethical_dentistry.title": "Unethical Dentistry",
+  "advancements.adventure.unethical_dentistry.description": "Place any block made of Thrasher teeth",
+  
+  "advancements.adventure.kill_great_thrasher.title": "Gonna Need a Bigger Boat",
+  "advancements.adventure.kill_great_thrasher.description": "Kill the Great Thrasher",
+  
+  "advancements.nether.sleepless_slave.title": "Sleepless Slave",
+  "advancements.nether.sleepless_slave.description": "Create a Flare by afflicting a Phantom with insomnia",
+  
+  "advancements.nether.vibe_check.title": "Vibe Check",
+  "advancements.nether.vibe_check.description": "Brew a Lionfish into a Potion of Repellence and invert it with a Spider Eye for a Potion of Vibing",
+  
+  "advancements.husbandry.eat_pickerelweed.title": "Legal in Most States",
+  "advancements.husbandry.eat_pickerelweed.description": "Smoke and eat Boiled Pickerelweed to regain water bubbles",
+  
+  "advancements.husbandry.collect_all_pike.title": "Pike World Tour",
+  "advancements.husbandry.collect_all_pike.description": "Collect every variant of Pike in a bucket"
 }
