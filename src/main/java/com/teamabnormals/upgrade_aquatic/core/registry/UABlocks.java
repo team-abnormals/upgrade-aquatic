@@ -4,8 +4,40 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import com.google.common.collect.Maps;
-import com.teamabnormals.upgrade_aquatic.common.blocks.*;
-import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.*;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrass;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrassTall;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShower;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockCoralShowerDead;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockEmbeddedAmmonite;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFloweringRush;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorchWall;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSearocket;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSpine;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockThatch;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothDoor;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothLantern;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothTrapdoor;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUABookshelf;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoral;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralDead;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralFan;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralFanDead;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFan;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUACoralWallFanDead;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelp;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockUAKelpTop;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockVerticalSlab;
+import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstone;
+import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneSlab;
+import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneStairs;
+import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneVerticalSlab;
+import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneWall;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UAProperties;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.RegistryUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
@@ -167,8 +199,7 @@ public class UABlocks {
 	public static RegistryObject<Block> JELLY_TORCH_RED            	  = RegistryUtils.createWallOrFloorBlock("jelly_torch_red", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.RED), JELLY_TORCH_WALL_RED, ItemGroup.DECORATIONS);
     public static RegistryObject<Block> JELLY_TORCH_WHITE             = RegistryUtils.createWallOrFloorBlock("jelly_torch_white", () -> new BlockJellyTorch(Properties.from(Blocks.TORCH).sound(SoundType.METAL), BlockJellyTorch.JellyTorchType.WHITE), JELLY_TORCH_WALL_WHITE, ItemGroup.DECORATIONS);
 
-
-	public static RegistryObject<Block> EMBEDDED_AMMONITE             = RegistryUtils.createBlock("embedded_ammonite", () -> new Block(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> EMBEDDED_AMMONITE             = RegistryUtils.createBlock("embedded_ammonite", () -> new BlockEmbeddedAmmonite(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	
 	public static RegistryObject<Block> BEDROLL_LEATHER               = RegistryUtils.createBlock("bedroll_leather", () -> new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> BEDROLL_WHITE                 = RegistryUtils.createBlock("bedroll_white", () -> new BlockBedroll(DyeColor.WHITE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
