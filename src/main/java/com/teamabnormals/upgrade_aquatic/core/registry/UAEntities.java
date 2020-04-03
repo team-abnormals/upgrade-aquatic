@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 import java.util.Random;
 import java.util.function.BiFunction;
 
+import com.bagel.buzzierbees.common.entities.HiveBoatEntity;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.entities.*;
@@ -37,7 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class UAEntities {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, Reference.MODID);
 	
-	public static final RegistryObject<EntityType<EntityUABoat>> BOAT                     = ENTITY_TYPES.register("boat", () -> EntityType.Builder.<EntityUABoat>create(EntityUABoat::new, EntityClassification.CREATURE).size(1.02F, 1.02F).build("boat"));
+	public static final RegistryObject<EntityType<EntityUABoat>> BOAT 					  = ENTITY_TYPES.register("boat", () -> EntityType.Builder.<EntityUABoat>create(EntityUABoat::new, EntityClassification.MISC).setTrackingRange(80).setUpdateInterval(3).setShouldReceiveVelocityUpdates(true).size(1.375f, 0.5625f).build("buzzierbees:boat"));
 	public static final RegistryObject<EntityType<EntitySonarWave>> SONAR_WAVE            = ENTITY_TYPES.register("sonar_wave", () -> createEntity(EntitySonarWave::new, EntitySonarWave::new, EntityClassification.AMBIENT, "sonar_wave", 1.0F, 1.0F));
 	public static final RegistryObject<EntityType<EntityNautilus>> NAUTILUS               = ENTITY_TYPES.register("nautilus", () -> createLivingEntity(EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F));
 	public static final RegistryObject<EntityType<EntityPike>> PIKE                       = ENTITY_TYPES.register("pike", () -> createLivingEntity(EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F));
