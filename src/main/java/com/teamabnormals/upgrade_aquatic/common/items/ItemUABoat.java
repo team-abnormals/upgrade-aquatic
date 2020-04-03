@@ -50,7 +50,7 @@ public class ItemUABoat extends Item {
 
 	         if (raytraceresult.getType() == RayTraceResult.Type.BLOCK) {
 	        	 EntityUABoat boatentity = new EntityUABoat(worldIn, raytraceresult.getHitVec().x, raytraceresult.getHitVec().y, raytraceresult.getHitVec().z);
-	            boatentity.setBoatType(this.type);
+	            boatentity.setBoatModel(this.type);
 	            boatentity.rotationYaw = playerIn.rotationYaw;
 	            if (!worldIn.hasNoCollisions(boatentity, boatentity.getBoundingBox().grow(-0.1D))) {
 	               return ActionResult.resultFail(itemstack);
