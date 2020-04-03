@@ -3,7 +3,6 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 import java.util.Random;
 import java.util.function.BiFunction;
 
-import com.bagel.buzzierbees.common.entities.HiveBoatEntity;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.entities.*;
