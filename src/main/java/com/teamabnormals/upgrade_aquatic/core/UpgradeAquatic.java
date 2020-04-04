@@ -101,7 +101,7 @@ public class UpgradeAquatic {
 		UAWorldGen.registerGenerators();
 		UACompostables.registerCompostables();
 		UAFlammables.registerFlammables();
-		DataUtils.registerStrippable(UABlocks.DRIFTWOOD_LOG.get(), UABlocks.DRIFTWOOD_LOG.get());
+		DataUtils.registerStrippable(UABlocks.DRIFTWOOD_LOG.get(), UABlocks.DRIFTWOOD_LOG_STRIPPED.get());
 		DataUtils.registerStrippable(UABlocks.DRIFTWOOD.get(), UABlocks.DRIFTWOOD_STRIPPED.get());
 		UAHooks.makeBubbleColumnTickRandomly();
 	}
