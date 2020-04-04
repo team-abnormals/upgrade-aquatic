@@ -37,7 +37,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class UAEntities {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = new DeferredRegister<>(ForgeRegistries.ENTITIES, Reference.MODID);
 	
-	public static final RegistryObject<EntityType<EntityUABoat>> BOAT 					  = ENTITY_TYPES.register("boat", () -> createEntity(EntityUABoat::new, EntityUABoat::new, EntityClassification.MISC, "boat", 1.375F, 0.5625F));
+	public static final RegistryObject<EntityType<EntityUABoat>> BOAT 		      = ENTITY_TYPES.register("boat", () -> createEntity(EntityUABoat::new, EntityUABoat::new, EntityClassification.MISC, "boat", 1.375F, 0.5625F));
 	public static final RegistryObject<EntityType<EntitySonarWave>> SONAR_WAVE            = ENTITY_TYPES.register("sonar_wave", () -> createEntity(EntitySonarWave::new, EntitySonarWave::new, EntityClassification.AMBIENT, "sonar_wave", 1.0F, 1.0F));
 	public static final RegistryObject<EntityType<EntityNautilus>> NAUTILUS               = ENTITY_TYPES.register("nautilus", () -> createLivingEntity(EntityNautilus::new, EntityClassification.CREATURE, "nautilus", 0.5F, 0.5F));
 	public static final RegistryObject<EntityType<EntityPike>> PIKE                       = ENTITY_TYPES.register("pike", () -> createLivingEntity(EntityPike::new, EntityClassification.CREATURE, "pike", 0.7F, 0.4F));
