@@ -46,6 +46,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
@@ -131,8 +132,11 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
 		PlayerEntity player = event.getPlayer();
-		if(player.getEntityWorld().getBlockState(event.getNewSpawn()).getBlock() instanceof BlockBedroll) {
-			event.setCanceled(true);
+		BlockPos pos = event.getNewSpawn();
+		if(player != null && pos != null) {
+			if(player.getEntityWorld().getBlockState(pos).getBlock() instanceof BlockBedroll) {
+				event.setCanceled(true);
+			}
 		}
 	}
 	
