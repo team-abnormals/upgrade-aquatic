@@ -45,7 +45,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
 	public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Reference.MODID);
-
+	
 	public static RegistryObject<Block> DEAD_ACAN_CORAL_BLOCK         = RegistryUtils.createBlock("dead_acan_coral_block", () -> new Block(UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DEAD_FINGER_CORAL_BLOCK       = RegistryUtils.createBlock("dead_finger_coral_block", () -> new Block(UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DEAD_STAR_CORAL_BLOCK         = RegistryUtils.createBlock("dead_star_coral_block", () -> new Block(UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
