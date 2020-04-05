@@ -1,11 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
+import com.teamabnormals.upgrade_aquatic.common.world.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
@@ -23,9 +25,8 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
-public class FeatureSearocket extends Feature<NoFeatureConfig> {
+public class FeatureSearocket extends Feature<NoFeatureConfig> implements IAddToBiomes {
 	
 	private static final Supplier<BlockState> SEAROCKET(boolean pink) {
 		return pink ? () -> UABlocks.SEAROCKET_PINK.get().getDefaultState() : () -> UABlocks.SEAROCKET_WHITE.get().getDefaultState();
@@ -114,13 +115,12 @@ public class FeatureSearocket extends Feature<NoFeatureConfig> {
 			}
 		}
 	}
-	
-	public static void addSearocket() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(FeatureSearocket::process);
-	}
-	
-	private static void process(Biome biome) {
-		if(biome.getCategory() == Category.BEACH) biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.SEAROCKET.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(15))));
+
+	@Override
+	public Consumer<Biome> processBiomeAddition() {
+		return biome -> {
+			if(biome.getCategory() == Category.BEACH) biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.SEAROCKET.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(15))));
+		};
 	}
 	
 }

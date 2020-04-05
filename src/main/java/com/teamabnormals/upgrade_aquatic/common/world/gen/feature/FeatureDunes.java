@@ -1,10 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBeachgrassTall;
+import com.teamabnormals.upgrade_aquatic.common.world.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
@@ -22,9 +24,8 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
-public class FeatureDunes extends Feature<NoFeatureConfig> {
+public class FeatureDunes extends Feature<NoFeatureConfig> implements IAddToBiomes {
 
 	public FeatureDunes(Function<Dynamic<?>, ? extends NoFeatureConfig> config) {
 		super(config);
@@ -65,15 +66,14 @@ public class FeatureDunes extends Feature<NoFeatureConfig> {
 			}
 		}
 	}
-	
-	public static void addDunes() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(FeatureDunes::process);
-	}
-	
-	private static void process(Biome biome) {
-		if(biome.getCategory() == Category.BEACH) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DUNES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(18))));
-		}
+
+	@Override
+	public Consumer<Biome> processBiomeAddition() {
+		return biome -> {
+			if(biome.getCategory() == Category.BEACH) {
+				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DUNES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(18))));
+			}
+		};
 	}
 
 }

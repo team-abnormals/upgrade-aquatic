@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -8,6 +9,7 @@ import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
+import com.teamabnormals.upgrade_aquatic.common.world.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
@@ -30,12 +32,11 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * @author - SmellyModder(Luke Tonon)
  */
-public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
+public class FeaturePickerelweed extends Feature<NoFeatureConfig> implements IAddToBiomes {
 	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.PICKERELWEED_BLUE.get().getDefaultState();
 	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PICKERELWEED_PURPLE.get().getDefaultState();
 	
@@ -164,19 +165,18 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> {
 		}
 		return false;
 	}
-	
-	public static void addPickerelweed() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(FeaturePickerelweed::process);
-	}
-	
-	private static void process(Biome biome) {
-		if(biome == Biomes.FLOWER_FOREST) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(90))));
-		} else {
-			if(biome.getCategory() != Category.OCEAN && biome.getCategory() != Category.BEACH && biome.getCategory() != Category.DESERT && biome.getCategory() != Category.ICY) {
-				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(28))));
+
+	@Override
+	public Consumer<Biome> processBiomeAddition() {
+		return biome -> {
+			if(biome == Biomes.FLOWER_FOREST) {
+				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(90))));
+			} else {
+				if(biome.getCategory() != Category.OCEAN && biome.getCategory() != Category.BEACH && biome.getCategory() != Category.DESERT && biome.getCategory() != Category.ICY) {
+					biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(28))));
+				}
 			}
-		}
+		};
 	}
 	
 }

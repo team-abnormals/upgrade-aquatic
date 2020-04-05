@@ -1,10 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.upgrade_aquatic.api.util.BlockUtil;
+import com.teamabnormals.upgrade_aquatic.common.world.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UABlockTags;
@@ -27,11 +29,8 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
-//BRING BACK #DIRT_LIKE!!!!!!!!!!!!!!!!!!!
-
-public class FeatureDriftwood extends Feature<NoFeatureConfig> {
+public class FeatureDriftwood extends Feature<NoFeatureConfig> implements IAddToBiomes {
 	protected static final BlockState DRIFTWOOD_LOG = UABlocks.DRIFTWOOD_LOG.get().getDefaultState();
 
 	public FeatureDriftwood(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
@@ -174,20 +173,19 @@ public class FeatureDriftwood extends Feature<NoFeatureConfig> {
 		Block block = world.getBlockState(pos).getBlock();
 		return inOcean ? world.isAirBlock(pos) || block == Blocks.WATER : world.isAirBlock(pos);
 	}
-	
-	public static void addDriftwood() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(FeatureDriftwood::process);
-	}
-	
-	private static void process(Biome biome) {
-		if(biome.getCategory() == Category.BEACH) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(14))));
-		} else if(biome.getCategory() == Category.RIVER) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(125))));
-		} else if(biome.getCategory() == Category.SWAMP) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(21))));
-		} else if(biome.getCategory() == Category.OCEAN) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))));
-		}
+
+	@Override
+	public Consumer<Biome> processBiomeAddition() {
+		return biome -> {
+			if(biome.getCategory() == Category.BEACH) {
+				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(14))));
+			} else if(biome.getCategory() == Category.RIVER) {
+				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(125))));
+			} else if(biome.getCategory() == Category.SWAMP) {
+				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(21))));
+			} else if(biome.getCategory() == Category.OCEAN) {
+				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))));
+			}
+		};
 	}
 }

@@ -1,9 +1,11 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
+import com.teamabnormals.upgrade_aquatic.common.world.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
@@ -19,12 +21,11 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.CaveEdgeConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * @author - SmellyModder(Luke Tonon)
  */
-public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
+public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> implements IAddToBiomes {
 	protected static final BlockState CORAL_BLOCK_BLOCK(boolean elder) {
 		return !elder ? UABlocks.PRISMARINE_CORAL_BLOCK.get().getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_BLOCK.get().getDefaultState();
 	}
@@ -55,12 +56,11 @@ public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> {
 		return false;
 	}
 	
-	public static void addFeature() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(FeaturePrismarineCoral::process);
-	}
-	
-	private static void process(Biome biome) {
-		biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, UAFeatures.PRISMARINE_CORAL.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.CARVING_MASK.configure(new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F))));
+	@Override
+	public Consumer<Biome> processBiomeAddition() {
+		return biome -> {
+			biome.addFeature(GenerationStage.Decoration.RAW_GENERATION, UAFeatures.PRISMARINE_CORAL.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.CARVING_MASK.configure(new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F))));
+		};
 	}
 	
 }
