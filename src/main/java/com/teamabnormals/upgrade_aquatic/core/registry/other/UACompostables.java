@@ -13,8 +13,8 @@ public class UACompostables {
 		ComposterBlock.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH.get());
 		ComposterBlock.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH_STAIRS.get());
 		ComposterBlock.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH_SLAB.get());
-		ComposterBlock.registerCompostable(0.3F, UABlocks.PICKERELWEED_BLUE.get());
-		ComposterBlock.registerCompostable(0.3F, UABlocks.PICKERELWEED_PURPLE.get());
+		ComposterBlock.registerCompostable(0.3F, UABlocks.BLUE_PICKERELWEED.get());
+		ComposterBlock.registerCompostable(0.3F, UABlocks.PURPLE_PICKERELWEED.get());
 		ComposterBlock.registerCompostable(0.3F, UAItems.BOILED_PICKERELWEED_BLUE.get());
 		ComposterBlock.registerCompostable(0.3F, UAItems.BOILED_PICKERELWEED_PURPLE.get());
 		ComposterBlock.registerCompostable(0.5F, UABlocks.BLUE_PICKERELWEED_BLOCK.get());
@@ -22,8 +22,8 @@ public class UACompostables {
 		ComposterBlock.registerCompostable(0.5F, UABlocks.BOILED_BLUE_PICKERELWEED_BLOCK.get());
 		ComposterBlock.registerCompostable(0.5F, UABlocks.BOILED_PURPLE_PICKERELWEED_BLOCK.get());
 		ComposterBlock.registerCompostable(0.65F, UABlocks.FLOWERING_RUSH.get());
-		ComposterBlock.registerCompostable(0.65F, UABlocks.SEAROCKET_WHITE.get());
-		ComposterBlock.registerCompostable(0.65F, UABlocks.SEAROCKET_PINK.get());
+		ComposterBlock.registerCompostable(0.65F, UABlocks.WHITE_SEAROCKET.get());
+		ComposterBlock.registerCompostable(0.65F, UABlocks.PINK_SEAROCKET.get());
 		ComposterBlock.registerCompostable(0.3F, UABlocks.TONGUE_KELP.get());
 		ComposterBlock.registerCompostable(0.3F, UABlocks.THORNY_KELP.get());
 		ComposterBlock.registerCompostable(0.3F, UABlocks.OCHRE_KELP.get());

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:river_planks"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:river_boat"
+  }
+}

@@ -65,7 +65,7 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 	@Override
 	public void grow(ServerWorld world, Random rand, BlockPos pos, BlockState state) {
 		IFluidState ifluidstate = world.getFluidState(pos.up());
-		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (this == UABlocks.PICKERELWEED_BLUE.get() ? UABlocks.PICKERELWEED_TALL_BLUE.get() : UABlocks.PICKERELWEED_TALL_PURPLE.get());
+		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (this == UABlocks.BLUE_PICKERELWEED.get() ? UABlocks.TALL_BLUE_PICKERELWEED.get() : UABlocks.TALL_PURPLE_PICKERELWEED.get());
 		if(doubleplantblock.getDefaultState().isValidPosition(world, pos) && (world.isAirBlock(pos.up()) || ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() >= 6)) {
 			doubleplantblock.placeAt(world, pos, 2);
 		}

@@ -21,6 +21,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAColors;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
@@ -101,13 +102,16 @@ public class UpgradeAquatic {
 		UAWorldGen.registerGenerators();
 		UACompostables.registerCompostables();
 		UAFlammables.registerFlammables();
-		DataUtils.registerStrippable(UABlocks.DRIFTWOOD_LOG.get(), UABlocks.DRIFTWOOD_LOG_STRIPPED.get());
-		DataUtils.registerStrippable(UABlocks.DRIFTWOOD.get(), UABlocks.DRIFTWOOD_STRIPPED.get());
+		DataUtils.registerStrippable(UABlocks.DRIFTWOOD_LOG.get(), UABlocks.STRIPPED_DRIFTWOOD_LOG.get());
+		DataUtils.registerStrippable(UABlocks.DRIFTWOOD.get(), UABlocks.STRIPPED_DRIFTWOOD.get());
+		DataUtils.registerStrippable(UABlocks.RIVER_LOG.get(), UABlocks.STRIPPED_RIVER_LOG.get());
+		DataUtils.registerStrippable(UABlocks.RIVER_WOOD.get(), UABlocks.STRIPPED_RIVER_WOOD.get());
 		UAHooks.makeBubbleColumnTickRandomly();
 	}
 	
 	@OnlyIn(Dist.CLIENT)
 	private void setupClient(final FMLClientSetupEvent event) {
+		UAColors.registerBlockColors();
 		UARenderLayers.setBlockRenderLayers();
 		
 		//Tile Entities

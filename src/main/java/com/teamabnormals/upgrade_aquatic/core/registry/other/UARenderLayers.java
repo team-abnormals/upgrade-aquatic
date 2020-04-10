@@ -7,19 +7,25 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 
 public class UARenderLayers {
 	private static final RenderType CUTOUT = RenderType.getCutout();
+	private static final RenderType CUTOUT_MIPPED = RenderType.getCutoutMipped();
 	private static final RenderType TRANSLUSCENT = RenderType.getTranslucent();
 	
 	public static void setBlockRenderLayers() {
 		RenderTypeLookup.setRenderLayer(UABlocks.BEACHGRASS.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.TALL_BEACHGRASS.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.DRIFTWOOD_LADDER.get(), CUTOUT);
 		
-		RenderTypeLookup.setRenderLayer(UABlocks.PICKERELWEED_BLUE.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.PICKERELWEED_PURPLE.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.PICKERELWEED_TALL_BLUE.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.PICKERELWEED_TALL_PURPLE.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.SEAROCKET_PINK.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.SEAROCKET_WHITE.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.DRIFTWOOD_LADDER.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.RIVER_LADDER.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.RIVER_SAPLING.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.RIVER_LEAVES.get(), CUTOUT_MIPPED);
+		RenderTypeLookup.setRenderLayer(UABlocks.RIVER_LEAF_CARPET.get(), CUTOUT_MIPPED);
+
+		RenderTypeLookup.setRenderLayer(UABlocks.BLUE_PICKERELWEED.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.PURPLE_PICKERELWEED.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.TALL_BLUE_PICKERELWEED.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.TALL_PURPLE_PICKERELWEED.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.PINK_SEAROCKET.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.WHITE_SEAROCKET.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.FLOWERING_RUSH.get(), CUTOUT);
 		
 		RenderTypeLookup.setRenderLayer(UABlocks.BEACHGRASS_THATCH.get(), CUTOUT);
@@ -103,22 +109,22 @@ public class UARenderLayers {
 		RenderTypeLookup.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.get(), TRANSLUSCENT);
 
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_BLUE.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_GREEN.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_RED.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_ORANGE.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_YELLOW.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_PINK.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_PURPLE.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WHITE.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_BLUE.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_GREEN.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_RED.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_ORANGE.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_YELLOW.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_PINK.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_PURPLE.get(), TRANSLUSCENT);
-		RenderTypeLookup.setRenderLayer(UABlocks.JELLY_TORCH_WALL_WHITE.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.BLUE_JELLY_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.GREEN_JELLY_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.RED_JELLY_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.ORANGE_JELLY_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.YELLOW_JELLY_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.PINK_JELLY_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.PURPLE_JELLY_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.WHITE_JELLY_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.BLUE_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.GREEN_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.RED_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.ORANGE_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.YELLOW_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.PINK_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.PURPLE_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.WHITE_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
 				
 		RenderTypeLookup.setRenderLayer(UABlocks.OCHRE_KELP.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.THORNY_KELP.get(), CUTOUT);
@@ -129,9 +135,9 @@ public class UARenderLayers {
 		RenderTypeLookup.setRenderLayer(UABlocks.POLAR_KELP_PLANT.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.TONGUE_KELP_PLANT.get(), CUTOUT);
 		
-		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PICKERELWEED_BLUE.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PICKERELWEED_PURPLE.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_SEAROCKET_PINK.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_SEAROCKET_WHITE.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PURPLE_PICKERELWEED.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PURPLE_PICKERELWEED.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PINK_SEAROCKET.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_WHITE_SEAROCKET.get(), CUTOUT);
 	}
 }

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "upgrade_aquatic:driftwood_fence"
+    "upgrade_aquatic:driftwood_fence",
+    "upgrade_aquatic:river_fence"
   ]
 }

@@ -37,8 +37,8 @@ import net.minecraft.world.gen.placement.Placement;
  * @author - SmellyModder(Luke Tonon)
  */
 public class FeaturePickerelweed extends Feature<NoFeatureConfig> implements IAddToBiomes {
-	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.PICKERELWEED_BLUE.get().getDefaultState();
-	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PICKERELWEED_PURPLE.get().getDefaultState();
+	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.BLUE_PICKERELWEED.get().getDefaultState();
+	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PURPLE_PICKERELWEED.get().getDefaultState();
 	
 	public FeaturePickerelweed(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
 		super(configFactory);
@@ -116,7 +116,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> implements IAd
 				patterns[2] = 6;
 		}
 		BlockPos startPos = pos;
-		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (!purple ? UABlocks.PICKERELWEED_TALL_BLUE.get() : UABlocks.PICKERELWEED_TALL_PURPLE.get());
+		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (!purple ? UABlocks.TALL_BLUE_PICKERELWEED.get() : UABlocks.TALL_PURPLE_PICKERELWEED.get());
 		MathUtil.Equation r = (theta) -> {
 			return (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
 		};

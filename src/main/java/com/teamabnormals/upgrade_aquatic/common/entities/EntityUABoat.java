@@ -155,6 +155,8 @@ public class EntityUABoat extends BoatEntity {
 			case DRIFTWOOD:
 			default:
 				return UAItems.DRIFTWOOD_BOAT.get();
+			case RIVER:
+				return UAItems.RIVER_BOAT.get();
 		}
 	}
 	
@@ -733,7 +735,8 @@ public class EntityUABoat extends BoatEntity {
 	}
 	
 	public enum Type {
-		DRIFTWOOD(UABlocks.DRIFTWOOD_PLANKS.get(), "driftwood");
+		DRIFTWOOD(UABlocks.DRIFTWOOD_PLANKS.get(), "driftwood"),
+		RIVER(UABlocks.RIVER_PLANKS.get(), "river");
 
 		private final String name;
 		private final Block block;

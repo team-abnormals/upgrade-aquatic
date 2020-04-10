@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:stripped_river_log"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:stripped_river_wood",
+    "count": 3
+  }
+}

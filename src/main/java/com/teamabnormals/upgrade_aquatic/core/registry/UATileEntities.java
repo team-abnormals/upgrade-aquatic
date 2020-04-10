@@ -15,6 +15,6 @@ public class UATileEntities {
 	
 	public static final RegistryObject<TileEntityType<TileEntityElderEye>> ELDER_EYE = TILE_ENTITY_TYPES.register("elder_eye", () -> new TileEntityType<>(TileEntityElderEye::new, Sets.newHashSet(UABlocks.ELDER_EYE.get()), null));
 	public static final RegistryObject<TileEntityType<TileEntityBedroll>> BEDROLL = TILE_ENTITY_TYPES.register("bedroll",
-		() -> new TileEntityType<>(TileEntityBedroll::new, Sets.newHashSet(UABlocks.BEDROLL_LEATHER.get(), UABlocks.BEDROLL_GRAY.get(), UABlocks.BEDROLL_LIGHT_GRAY.get(), UABlocks.BEDROLL_BROWN.get(), UABlocks.BEDROLL_WHITE.get(), UABlocks.BEDROLL_BLACK.get(), UABlocks.BEDROLL_PINK.get(), UABlocks.BEDROLL_RED.get(), UABlocks.BEDROLL_ORANGE.get(), UABlocks.BEDROLL_YELLOW.get(), UABlocks.BEDROLL_LIME.get(), UABlocks.BEDROLL_GREEN.get(), UABlocks.BEDROLL_LIGHT_BLUE.get(), UABlocks.BEDROLL_BLUE.get(), UABlocks.BEDROLL_CYAN.get(), UABlocks.BEDROLL_MAGENTA.get(), UABlocks.BEDROLL_PURPLE.get()), null));
+		() -> new TileEntityType<>(TileEntityBedroll::new, Sets.newHashSet(UABlocks.BEDROLL.get(), UABlocks.GRAY_BEDROLL.get(), UABlocks.LIGHT_GRAY_BEDROLL.get(), UABlocks.BROWN_BEDROLL.get(), UABlocks.WHITE_BEDROLL.get(), UABlocks.BLACK_BEDROLL.get(), UABlocks.PINK_BEDROLL.get(), UABlocks.RED_BEDROLL.get(), UABlocks.ORANGE_BEDROLL.get(), UABlocks.YELLOW_BEDROLL.get(), UABlocks.LIME_BEDROLL.get(), UABlocks.GREEN_BEDROLL.get(), UABlocks.LIGHT_BLUE_BEDROLL.get(), UABlocks.BLUE_BEDROLL.get(), UABlocks.CYAN_BEDROLL.get(), UABlocks.MAGENTA_BEDROLL.get(), UABlocks.PURPLE_BEDROLL.get()), null));
 
 }

@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom_rh",
+    "textures": {
+        "bottom": "upgrade_aquatic:block/river_door_bottom",
+        "top": "upgrade_aquatic:block/river_door_top"
+    }
+}

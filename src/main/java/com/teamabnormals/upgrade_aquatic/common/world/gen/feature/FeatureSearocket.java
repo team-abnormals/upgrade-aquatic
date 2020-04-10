@@ -29,7 +29,7 @@ import net.minecraft.world.gen.placement.Placement;
 public class FeatureSearocket extends Feature<NoFeatureConfig> implements IAddToBiomes {
 	
 	private static final Supplier<BlockState> SEAROCKET(boolean pink) {
-		return pink ? () -> UABlocks.SEAROCKET_PINK.get().getDefaultState() : () -> UABlocks.SEAROCKET_WHITE.get().getDefaultState();
+		return pink ? () -> UABlocks.PINK_SEAROCKET.get().getDefaultState() : () -> UABlocks.WHITE_SEAROCKET.get().getDefaultState();
 	}
 	
 	public FeatureSearocket(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
