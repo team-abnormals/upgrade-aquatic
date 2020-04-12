@@ -13,6 +13,7 @@ public class UARenderLayers {
 	public static void setBlockRenderLayers() {
 		RenderTypeLookup.setRenderLayer(UABlocks.BEACHGRASS.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.TALL_BEACHGRASS.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.MULBERRY_VINE.get(), CUTOUT);
 		
 		RenderTypeLookup.setRenderLayer(UABlocks.DRIFTWOOD_LADDER.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.RIVER_LADDER.get(), CUTOUT);

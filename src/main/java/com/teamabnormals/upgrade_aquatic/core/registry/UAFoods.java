@@ -19,4 +19,7 @@ public class UAFoods {
 		return cooked ? new Food.Builder().hunger(6).saturation(0.7F).build() : new Food.Builder().effect(new EffectInstance(Effects.POISON, 550, 3), 1.0F).effect(new EffectInstance(Effects.NAUSEA, 320, 2), 1.0F).hunger(2).saturation(0.3F).build();
 	}
 	
+	public static final Food MULBERRY = new Food.Builder().hunger(8).saturation(0.8F).build();
+	public static final Food MULBERRY_JAM = new Food.Builder().hunger(8).saturation(0.8F).build();
+	public static final Food MULBERRY_BREAD = new Food.Builder().hunger(8).saturation(0.8F).build();
 }

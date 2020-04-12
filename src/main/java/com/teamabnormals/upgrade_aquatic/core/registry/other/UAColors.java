@@ -13,11 +13,11 @@ public class UAColors
 	public static void registerBlockColors() {
         BlockColors blockColors = Minecraft.getInstance().getBlockColors();
         blockColors.register((x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get());
+        blockColors.register((x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), UABlocks.RIVER_LEAF_CARPET.get());
+        blockColors.register((x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), UABlocks.MULBERRY_VINE.get());
         
         ItemColors itemColors = Minecraft.getInstance().getItemColors();
         itemColors.register((color, items) -> FoliageColors.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get());
-        
-        blockColors.register((x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), UABlocks.RIVER_LEAF_CARPET.get());
         itemColors.register((color, items) -> FoliageColors.get(0.5D, 1.0D), UABlocks.RIVER_LEAF_CARPET.get());
     }
 }

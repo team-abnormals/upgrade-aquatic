@@ -214,9 +214,9 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
 		if(event.getType() == VillagerProfession.FISHERMAN) {
-			event.getTrades().get(3).add(new EntityUtil.ItemsForEmeraldsAndItemsTrade(UAItems.PIKE.get(), 6, UAItems.PIKE_COOKED.get(), 6, 16, 15));
+			event.getTrades().get(3).add(new EntityUtil.ItemsForEmeraldsAndItemsTrade(UAItems.PIKE.get(), 6, UAItems.COOKED_PIKE.get(), 6, 16, 15));
 			event.getTrades().get(4).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.PIKE.get(), 5, 1, 12, 25));	
-			event.getTrades().get(4).add(new EntityUtil.ItemsForEmeraldsAndItemsTrade(UAItems.LIONFISH.get(), 6, UAItems.LIONFISH_COOKED.get(), 6, 16, 30));
+			event.getTrades().get(4).add(new EntityUtil.ItemsForEmeraldsAndItemsTrade(UAItems.LIONFISH.get(), 6, UAItems.COOKED_LIONFISH.get(), 6, 16, 30));
 			event.getTrades().get(5).add(new EntityUtil.EmeraldsForItemsTrade(UAItems.LIONFISH.get(), 3, 1, 12, 30));
 		}
 		if(event.getType() == VillagerProfession.MASON) {

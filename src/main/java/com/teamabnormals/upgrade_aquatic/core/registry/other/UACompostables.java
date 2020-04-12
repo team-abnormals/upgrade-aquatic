@@ -13,10 +13,11 @@ public class UACompostables {
 		ComposterBlock.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH.get());
 		ComposterBlock.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH_STAIRS.get());
 		ComposterBlock.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH_SLAB.get());
+		ComposterBlock.registerCompostable(0.3F, UAItems.MULBERRY.get());
 		ComposterBlock.registerCompostable(0.3F, UABlocks.BLUE_PICKERELWEED.get());
 		ComposterBlock.registerCompostable(0.3F, UABlocks.PURPLE_PICKERELWEED.get());
-		ComposterBlock.registerCompostable(0.3F, UAItems.BOILED_PICKERELWEED_BLUE.get());
-		ComposterBlock.registerCompostable(0.3F, UAItems.BOILED_PICKERELWEED_PURPLE.get());
+		ComposterBlock.registerCompostable(0.3F, UAItems.BOILED_BLUE_PICKERELWEED.get());
+		ComposterBlock.registerCompostable(0.3F, UAItems.BOILED_PURPLE_PICKERELWEED.get());
 		ComposterBlock.registerCompostable(0.5F, UABlocks.BLUE_PICKERELWEED_BLOCK.get());
 		ComposterBlock.registerCompostable(0.5F, UABlocks.PURPLE_PICKERELWEED_BLOCK.get());
 		ComposterBlock.registerCompostable(0.5F, UABlocks.BOILED_BLUE_PICKERELWEED_BLOCK.get());

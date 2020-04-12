@@ -15,6 +15,7 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFloweringRush;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorchWall;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockLeafCarpet;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockMulberryVine;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
@@ -230,6 +231,8 @@ public class UABlocks {
     
     public static RegistryObject<Block> WHITE_SEAROCKET	= RegistryUtils.createBlock("searocket_white", () -> new BlockSearocket(Effects.WATER_BREATHING, 9, UAProperties.SEAROCKET(false)), ItemGroup.DECORATIONS);
     public static RegistryObject<Block> PINK_SEAROCKET	= RegistryUtils.createBlock("searocket_pink", () -> new BlockSearocket(Effects.WATER_BREATHING, 9, UAProperties.SEAROCKET(true)), ItemGroup.DECORATIONS);
+    
+    public static RegistryObject<Block> MULBERRY_VINE	= RegistryUtils.createBlockNoItem("mulberry_vine", () -> new BlockMulberryVine(Block.Properties.from(Blocks.SWEET_BERRY_BUSH).notSolid()));
     
     public static RegistryObject<Block> POTTED_BLUE_PICKERELWEED 	= RegistryUtils.createBlockNoItem("potted_pickerelweed_blue", () -> new FlowerPotBlock(BLUE_PICKERELWEED.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));
 	public static RegistryObject<Block> POTTED_PURPLE_PICKERELWEED 	= RegistryUtils.createBlockNoItem("potted_pickerelweed_purple", () -> new FlowerPotBlock(PURPLE_PICKERELWEED.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));

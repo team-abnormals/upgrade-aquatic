@@ -1,0 +1,64 @@
+{
+    "variants": {
+        "age=0,double=false": [
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage0" },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage0", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage0", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage0", "y": 270 }
+        ], 
+        "age=1,double=false": [
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage1" },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage1", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage1", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage1", "y": 270 }
+        ],
+        "age=2,double=false": [
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage2" },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage2", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage2", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage2", "y": 270 }
+        ],
+        "age=3,double=false": [
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage3" },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage3", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage3", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage3", "y": 270 }
+        ], 
+        "age=4,double=false": [
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage4" },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage4", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage4", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/mulberry_vine_stage4", "y": 270 }
+        ],
+        "age=0,double=true": [
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage0" },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage0", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage0", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage0", "y": 270 }
+        ],
+        "age=1,double=true": [
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage1" },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage1", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage1", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage1", "y": 270 }
+        ],
+        "age=2,double=true": [
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage2" },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage2", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage2", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage2", "y": 270 }
+        ],
+        "age=3,double=true": [
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage3" },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage3", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage3", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage3", "y": 270 }
+        ],
+        "age=4,double=true": [
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage4" },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage4", "y": 180 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage4", "y": 90 },
+        	{ "model": "upgrade_aquatic:block/mulberry/double_mulberry_vine_stage4", "y": 270 }
+        ]
+    }
+}
