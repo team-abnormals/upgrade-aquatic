@@ -103,12 +103,12 @@ public class UARenderLayers {
 		RenderTypeLookup.setRenderLayer(UABlocks.PRISMARINE_CORAL.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.PRISMARINE_CORAL_FAN.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.PRISMARINE_CORAL_WALL_FAN.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.PRISMARINE_CORAL_SHOWER.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.PRISMARINE_CORAL_SHOWER.get(), CUTOUT);
 
 		RenderTypeLookup.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL_FAN.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.get(), CUTOUT);
-		RenderTypeLookup.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.get(), TRANSLUSCENT);
+		RenderTypeLookup.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.get(), CUTOUT);
 
 		RenderTypeLookup.setRenderLayer(UABlocks.BLUE_JELLY_TORCH.get(), TRANSLUSCENT);
 		RenderTypeLookup.setRenderLayer(UABlocks.GREEN_JELLY_TORCH.get(), TRANSLUSCENT);
