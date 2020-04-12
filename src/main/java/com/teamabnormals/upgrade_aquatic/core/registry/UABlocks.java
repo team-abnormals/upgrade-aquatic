@@ -523,7 +523,6 @@ public class UABlocks {
 		conversions.put(() -> SILK_CORAL_BLOCK.get(), () -> SILK_CORALSTONE.get());
 		conversions.put(() -> CHROME_CORAL_BLOCK.get(), () -> CHROME_CORALSTONE.get());
 		conversions.put(() -> PRISMARINE_CORAL_BLOCK.get(), () -> PRISMARINE_CORALSTONE.get());
-		conversions.put(() -> ELDER_PRISMARINE_CORAL_BLOCK.get(), () -> ELDER_PRISMARINE_CORALSTONE.get());
 	});
 	
 	public static final Map<Supplier<Block>, Supplier<Block>> CHISELED_CORALSTONE_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
@@ -543,7 +542,6 @@ public class UABlocks {
 		conversions.put(() -> SILK_CORAL_BLOCK.get(), () -> SILK_CHISELED_CORALSTONE.get());
 		conversions.put(() -> CHROME_CORAL_BLOCK.get(), () -> CHROME_CHISELED_CORALSTONE.get());
 		conversions.put(() -> PRISMARINE_CORAL_BLOCK.get(), () -> PRISMARINE_CHISELED_CORALSTONE.get());
-		conversions.put(() -> ELDER_PRISMARINE_CORAL_BLOCK.get(), () -> ELDER_PRISMARINE_CHISELED_CORALSTONE.get());
 	});
 	
 	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_SLAB_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
@@ -563,7 +561,6 @@ public class UABlocks {
 		conversions.put(() -> SILK_CORAL_BLOCK.get(), () -> SILK_CORALSTONE_SLAB.get());
 		conversions.put(() -> CHROME_CORAL_BLOCK.get(), () -> CHROME_CORALSTONE_SLAB.get());
 		conversions.put(() -> PRISMARINE_CORAL_BLOCK.get(), () -> PRISMARINE_CORALSTONE_SLAB.get());
-		conversions.put(() -> ELDER_PRISMARINE_CORAL_BLOCK.get(), () -> ELDER_PRISMARINE_CHISELED_CORALSTONE.get());
 	});
 	
 	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_STAIRS_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
@@ -583,7 +580,6 @@ public class UABlocks {
 		conversions.put(() -> SILK_CORAL_BLOCK.get(), () -> SILK_CORALSTONE_STAIRS.get());
 		conversions.put(() -> CHROME_CORAL_BLOCK.get(), () -> CHROME_CORALSTONE_STAIRS.get());
 		conversions.put(() -> PRISMARINE_CORAL_BLOCK.get(), () -> PRISMARINE_CORALSTONE_STAIRS.get());
-		conversions.put(() -> ELDER_PRISMARINE_CORAL_BLOCK.get(), () -> ELDER_PRISMARINE_CHISELED_CORALSTONE.get());
 	});
 	
 	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_WALL_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
@@ -603,7 +599,6 @@ public class UABlocks {
 		conversions.put(() -> SILK_CORAL_BLOCK.get(), () -> SILK_CORALSTONE_WALL.get());
 		conversions.put(() -> CHROME_CORAL_BLOCK.get(), () -> CHROME_CORALSTONE_WALL.get());
 		conversions.put(() -> PRISMARINE_CORAL_BLOCK.get(), () -> PRISMARINE_CORALSTONE_WALL.get());
-		conversions.put(() -> ELDER_PRISMARINE_CORAL_BLOCK.get(), () -> ELDER_PRISMARINE_CHISELED_CORALSTONE.get());
 	});
 	
 	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_VERTICAL_SLAB_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
@@ -623,7 +618,6 @@ public class UABlocks {
 		conversions.put(() -> SILK_CORAL_BLOCK.get(), () -> SILK_CORALSTONE_VERTICAL_SLAB.get());
 		conversions.put(() -> CHROME_CORAL_BLOCK.get(), () -> CHROME_CORALSTONE_VERTICAL_SLAB.get());
 		conversions.put(() -> PRISMARINE_CORAL_BLOCK.get(), () -> PRISMARINE_CORALSTONE_VERTICAL_SLAB.get());
-		conversions.put(() -> ELDER_PRISMARINE_CORAL_BLOCK.get(), () -> ELDER_PRISMARINE_CHISELED_CORALSTONE.get());
 	});
 	
 	public static enum KelpType {
