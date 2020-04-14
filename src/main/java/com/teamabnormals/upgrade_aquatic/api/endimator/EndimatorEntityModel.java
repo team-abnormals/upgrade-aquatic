@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.api.endimator;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import com.teamabnormals.upgrade_aquatic.api.endimator.entity.EndimatedEntity;
 
 import net.minecraft.client.renderer.entity.model.EntityModel;
 

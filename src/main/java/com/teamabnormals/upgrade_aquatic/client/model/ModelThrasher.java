@@ -138,7 +138,7 @@ public class ModelThrasher<E extends EntityThrasher> extends EndimatorEntityMode
 		super.animateModel(thrasher);
 		this.endimator.updateAnimations(thrasher);
 		
-		if(thrasher.isAnimationPlaying(EntityThrasher.SNAP_AT_PRAY_ANIMATION)) {
+		if(thrasher.isEndimationPlaying(EntityThrasher.SNAP_AT_PRAY_ANIMATION)) {
 			this.endimator.setAnimationToPlay(EntityThrasher.SNAP_AT_PRAY_ANIMATION);
 			
 			this.endimator.startKeyframe(5);
@@ -150,7 +150,7 @@ public class ModelThrasher<E extends EntityThrasher> extends EndimatorEntityMode
 			this.endimator.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.rotate(this.bottom_jaw, -0.0F, 0.0F, 0.0F);
 			this.endimator.endKeyframe();
-		} else if(thrasher.isAnimationPlaying(EntityThrasher.HURT_ANIMATION)) {
+		} else if(thrasher.isEndimationPlaying(EntityThrasher.HURT_ANIMATION)) {
 			this.endimator.setAnimationToPlay(EntityThrasher.HURT_ANIMATION);
 			
 			this.endimator.startKeyframe(5);
@@ -162,7 +162,7 @@ public class ModelThrasher<E extends EntityThrasher> extends EndimatorEntityMode
 			this.endimator.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.rotate(this.bottom_jaw, -0.0F, 0.0F, 0.0F);
 			this.endimator.endKeyframe();
-		} else if(thrasher.isAnimationPlaying(EntityThrasher.THRASH_ANIMATION)) {
+		} else if(thrasher.isEndimationPlaying(EntityThrasher.THRASH_ANIMATION)) {
 			this.endimator.setAnimationToPlay(EntityThrasher.THRASH_ANIMATION);
 			
 			this.endimator.startKeyframe(5);
@@ -223,7 +223,7 @@ public class ModelThrasher<E extends EntityThrasher> extends EndimatorEntityMode
 			this.endimator.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.rotate(this.bottom_jaw, 0.0F, 0.0F, 0.0F);
 			this.endimator.endKeyframe();
-		} else if(thrasher.isAnimationPlaying(EntityThrasher.SONAR_FIRE_ANIMATION)) {
+		} else if(thrasher.isEndimationPlaying(EntityThrasher.SONAR_FIRE_ANIMATION)) {
 			this.endimator.setAnimationToPlay(EntityThrasher.SONAR_FIRE_ANIMATION);
 			
 			this.endimator.startKeyframe(5);

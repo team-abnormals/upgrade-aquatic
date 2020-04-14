@@ -31,7 +31,7 @@ public class ThrasherFireSonarGoal extends Goal {
 
 	@Override
 	public boolean shouldExecute() {
-		return SonarPhase.shouldContinueExecutingPhase(null, this.thrasher, this.sonarTicks) && this.thrasher.getTicksSinceLastSonarFire() > 55 && this.thrasher.isAnimationPlaying(EntityThrasher.BLANK_ANIMATION);
+		return SonarPhase.shouldContinueExecutingPhase(null, this.thrasher, this.sonarTicks) && this.thrasher.getTicksSinceLastSonarFire() > 55 && this.thrasher.isEndimationPlaying(EntityThrasher.BLANK_ANIMATION);
 	}
 	
 	@Override

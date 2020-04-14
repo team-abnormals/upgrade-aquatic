@@ -1,6 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedEntity;
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
 import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
@@ -25,7 +24,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 				return false;
 			}
 		}
-		return !this.thrasher.isStunned() && super.shouldExecute() && thrasher.getPassengers().isEmpty();
+		return !this.thrasher.isStunned() && super.shouldExecute() && this.thrasher.getPassengers().isEmpty();
 	}
 	
 	@Override
@@ -36,14 +35,14 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 				return false;
 			}
 		}
-		return !this.thrasher.isStunned() && super.shouldContinueExecuting() && thrasher.getPassengers().isEmpty();
+		return !this.thrasher.isStunned() && super.shouldContinueExecuting() && this.thrasher.getPassengers().isEmpty();
 	}
 	
 	@Override
 	protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
 		double attackReachSqr = this.getAttackReachSqr(enemy);
 		if(distToEnemySqr <= attackReachSqr + 0.75F && this.attackTick <= 0) {
-			if(this.thrasher.getPlayingAnimation() == EndimatedEntity.BLANK_ANIMATION) {
+			if(this.thrasher.isNoEndimationPlaying()) {
 				NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.SNAP_AT_PRAY_ANIMATION);
 			}
 		}

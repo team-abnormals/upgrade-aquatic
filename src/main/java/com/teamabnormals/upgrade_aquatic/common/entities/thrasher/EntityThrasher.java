@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
+import com.teamabnormals.upgrade_aquatic.api.endimator.entity.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
@@ -148,13 +148,18 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
-	public Endimation[] getAnimations() {
+	public Endimation[] getEndimations() {
 		return new Endimation[] {
 			SNAP_AT_PRAY_ANIMATION,
 			HURT_ANIMATION,
 			THRASH_ANIMATION,
 			SONAR_FIRE_ANIMATION
 		};
+	}
+	
+	@Override
+	public Endimation getHurtAnimation() {
+		return HURT_ANIMATION;
 	}
 	
 	@Nullable
@@ -232,7 +237,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
-	protected void onAnimationStart(Endimation animationStarted) {
+	public void onEndimationStart(Endimation animationStarted) {
 		if(animationStarted == THRASH_ANIMATION) {
 			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
 			if(!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
@@ -242,7 +247,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
-	protected void onAnimationEnd(Endimation animationEnded) {
+	public void onEndimationEnd(Endimation animationEnded) {
 		if(animationEnded == THRASH_ANIMATION) {
 			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
 			if(knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
@@ -260,7 +265,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		Entity entitySource = source.getTrueSource();
-		this.setPlayingAnimation(HURT_ANIMATION);
 		if(entitySource instanceof LivingEntity) {
 			Vec3d difference = new Vec3d(
 				entitySource.getPosition().getX() - this.getPosition().getX(),
@@ -379,7 +383,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		}
 		
 		if(!this.isAIDisabled()) {
-			if(this.isAnimationPlaying(SONAR_FIRE_ANIMATION)) {
+			if(this.isEndimationPlaying(SONAR_FIRE_ANIMATION)) {
 				this.ticksSinceLastSonarFire = 0;
 			} else {
 				this.ticksSinceLastSonarFire++;
@@ -402,7 +406,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				}
 			}
 			if(this.isWorldRemote()) {
-				if(!this.getPassengers().isEmpty() && this.isAnimationPlaying(THRASH_ANIMATION) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
+				if(!this.getPassengers().isEmpty() && this.isEndimationPlaying(THRASH_ANIMATION) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
 					Entity passenger = this.getPassengers().get(0);
 					for(int i = 0; i < 3; ++i) {
 						if(passenger.areEyesInFluid(FluidTags.WATER)) {
@@ -428,7 +432,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				this.prevFinAnimation = this.finAnimation;
 				this.STUNNED_ANIMATION.update();
 				
-				if(!this.isInWater() || (this.isAnimationPlaying(THRASH_ANIMATION) || this.isAnimationPlaying(SONAR_FIRE_ANIMATION))) {
+				if(!this.isInWater() || (this.isEndimationPlaying(THRASH_ANIMATION) || this.isEndimationPlaying(SONAR_FIRE_ANIMATION))) {
 					this.tailSpeed = 1.1F;
 					this.finSpeed = 0.875F;
 				} else if(this.isMoving()) {
@@ -508,7 +512,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Nullable
 	@Override
 	protected SoundEvent getAmbientSound() {
-		if(this.isAnimationPlaying(THRASH_ANIMATION)) {
+		if(this.isEndimationPlaying(THRASH_ANIMATION)) {
 			return null;
 		}
 		return this.isInWater() ? UASounds.THRASHER_AMBIENT.get() : UASounds.THRASHER_AMBIENT_LAND.get();

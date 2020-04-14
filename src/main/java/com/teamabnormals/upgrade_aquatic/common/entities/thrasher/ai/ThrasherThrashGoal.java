@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import java.util.EnumSet;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedEntity;
+import com.teamabnormals.upgrade_aquatic.api.endimator.entity.EndimatedEntity;
 import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 
@@ -32,7 +32,7 @@ public class ThrasherThrashGoal extends Goal {
 				return false;
 			}
 		}
-		return !this.thrasher.isStunned() && passenger != null && this.thrasher.isNoAnimationPlaying() && this.thrasher.getRNG().nextFloat() < 0.1F;
+		return !this.thrasher.isStunned() && passenger != null && this.thrasher.isNoEndimationPlaying() && this.thrasher.getRNG().nextFloat() < 0.1F;
 	}
 	
 	@Override

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
+import com.teamabnormals.upgrade_aquatic.api.endimator.entity.IEndimatedEntity;
 
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,7 +20,7 @@ public class Endimator {
 	private int tempTick;
 	private int prevTempTick;
 	private boolean correctAnimation;
-	public EndimatedEntity endimatedEntity;
+	public IEndimatedEntity endimatedEntity;
 	private Map<EndimatorModelRenderer, float[]> boxValues;
 	private Map<EndimatorModelRenderer, float[]> prevBoxValues;
     
@@ -38,7 +39,7 @@ public class Endimator {
 	 */
 	public boolean setAnimationToPlay(Endimation animationToPlay) {
 		this.tempTick = this.prevTempTick = 0;
-		this.correctAnimation = this.endimatedEntity.getPlayingAnimation() == animationToPlay;
+		this.correctAnimation = this.endimatedEntity.getPlayingEndimation() == animationToPlay;
 		this.prevBoxValues.clear();
 	    this.prevBoxValues.putAll(this.boxValues);
 	    this.boxValues.clear();
@@ -49,7 +50,7 @@ public class Endimator {
 	 * Updates the entity for this endimator instance
 	 * @param endimatedEntity - The entity to update
 	 */
-	public void updateAnimations(EndimatedEntity endimatedEntity) {
+	public void updateAnimations(IEndimatedEntity endimatedEntity) {
 		this.endimatedEntity = endimatedEntity;
 	}
 	

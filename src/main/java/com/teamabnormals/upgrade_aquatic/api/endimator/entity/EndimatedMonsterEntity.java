@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.api.endimator;
+package com.teamabnormals.upgrade_aquatic.api.endimator.entity;
 
 import java.util.Random;
 import java.util.function.Predicate;
@@ -21,7 +21,8 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 
-public class EndimatedMonsterEntity extends EndimatedEntity implements IMob {
+public abstract class EndimatedMonsterEntity extends EndimatedEntity implements IMob {
+	
 	protected EndimatedMonsterEntity(EntityType<? extends EndimatedMonsterEntity> type, World p_i48553_2_) {
 		super(type, p_i48553_2_);
 		this.experienceValue = 5;
@@ -111,4 +112,5 @@ public class EndimatedMonsterEntity extends EndimatedEntity implements IMob {
 			return ItemStack.EMPTY;
 		}
 	}
+	
 }
