@@ -1,0 +1,26 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "upgrade_aquatic:item/bucket/jellyfish_bucket_box"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "variant": 1.2
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_box"
+        },
+        {
+            "predicate": {
+                "variant": 1.6
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_red_box"
+        },
+        {
+            "predicate": {
+                "variant": 1.7
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_white_box"
+        }
+    ]
+}

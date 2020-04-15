@@ -14,10 +14,10 @@ import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderSonarWave extends EntityRenderer<EntitySonarWave> {
+public class SonarWaveRenderer extends EntityRenderer<EntitySonarWave> {
 	private final ModelSonar SONAR_MODEL = new ModelSonar();
 	
-	public RenderSonarWave(EntityRendererManager renderManager) {
+	public SonarWaveRenderer(EntityRendererManager renderManager) {
 		super(renderManager);
 		this.shadowSize = 0.0F;
 	}

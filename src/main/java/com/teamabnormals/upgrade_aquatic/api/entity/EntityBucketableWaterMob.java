@@ -61,7 +61,7 @@ public abstract class EntityBucketableWaterMob extends WaterMobEntity implements
             ItemStack itemstack1 = this.getBucket();
             this.setBucketData(itemstack1);
             if (!this.world.isRemote) {
-                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity)player, itemstack1);
+                CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, itemstack1);
             }
 
             if (itemstack.isEmpty()) {

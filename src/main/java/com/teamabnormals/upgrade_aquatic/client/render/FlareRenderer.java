@@ -14,9 +14,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderFlare extends MobRenderer<EntityFlare, ModelFlare<EntityFlare>> {
+public class FlareRenderer extends MobRenderer<EntityFlare, ModelFlare<EntityFlare>> {
 
-	public RenderFlare(EntityRendererManager manager) {
+	public FlareRenderer(EntityRendererManager manager) {
 		super(manager, new ModelFlare<>(), 0.9F);
 		this.addLayer(new RenderLayerFlareEyes<>(this));
 	}

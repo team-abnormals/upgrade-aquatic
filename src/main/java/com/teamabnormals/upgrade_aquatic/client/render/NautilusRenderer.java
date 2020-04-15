@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<EntityNautilus>> {
+public class NautilusRenderer extends MobRenderer<EntityNautilus, ModelNautilus<EntityNautilus>> {
 	private static final Map<List<String>, String> SKINS = Util.make(Maps.newHashMap(), (skins) -> {
 		skins.put(Arrays.asList("smelly", "thefaceofgaming"), "smelly");
 		skins.put(Arrays.asList("abnormal", "abnautilus", "abnortilus", "mca"), "mca");
@@ -34,7 +34,7 @@ public class RenderNautilus extends MobRenderer<EntityNautilus, ModelNautilus<En
 		skins.put(Arrays.asList("snake", "snautilus", "snakeblock", "snake block"), "snake_block");
 	});
 
-	public RenderNautilus(EntityRendererManager renderManager) {
+	public NautilusRenderer(EntityRendererManager renderManager) {
 		super(renderManager, new ModelNautilus<>(), 0.5F);
 	}
 

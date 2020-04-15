@@ -12,9 +12,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderThrasher extends MobRenderer<EntityThrasher, ModelThrasher<EntityThrasher>> {
+public class ThrasherRenderer extends MobRenderer<EntityThrasher, ModelThrasher<EntityThrasher>> {
 
-	public RenderThrasher(EntityRendererManager renderer) {
+	public ThrasherRenderer(EntityRendererManager renderer) {
 		super(renderer, new ModelThrasher<>(), 0.9F);
 		this.addLayer(new RenderLayerThrasher<>(this));
 	}

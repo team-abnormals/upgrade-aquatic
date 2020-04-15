@@ -3,16 +3,17 @@ package com.teamabnormals.upgrade_aquatic.api.endimator;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.teamabnormals.upgrade_aquatic.api.endimator.entity.EndimatedEntity;
+import com.teamabnormals.upgrade_aquatic.api.endimator.entity.IEndimatedEntity;
 
 import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.entity.Entity;
 
 /**
  * PROPERTY OF ENDERGETIC AND MINECRAFT ABNORMALS MODDING
  * @author - SmellyModder(Luke Tonon)
  * @param <E> - The Entity for the Model; Vanilla needs this by default so it will be used here as well
  */
-public abstract class EndimatorEntityModel<E extends EndimatedEntity> extends EntityModel<E> {
+public abstract class EndimatorEntityModel<E extends Entity & IEndimatedEntity> extends EntityModel<E> {
 	protected List<EndimatorModelRenderer> cuboids = Lists.newArrayList();
 	private EndimatorModelRenderer scaleController;
 	protected Endimator endimator = new Endimator();

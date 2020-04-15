@@ -16,9 +16,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderPike extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
+public class PikeRenderer extends MobRenderer<EntityPike, ModelPike<EntityPike>> {
 
-	public RenderPike(EntityRendererManager manager) {
+	public PikeRenderer(EntityRendererManager manager) {
 		super(manager, new ModelPike<>(), 0.6F);
 		this.addLayer(new RenderLayerGlowingPike<>(this));
 		this.addLayer(new RenderLayerPikeCarriedItem(this));

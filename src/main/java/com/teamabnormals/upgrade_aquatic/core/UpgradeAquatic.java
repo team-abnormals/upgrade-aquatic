@@ -1,32 +1,17 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
-import com.teamabnormals.upgrade_aquatic.client.render.RenderFlare;
-import com.teamabnormals.upgrade_aquatic.client.render.RenderGreatThrasher;
-import com.teamabnormals.upgrade_aquatic.client.render.RenderLionfish;
-import com.teamabnormals.upgrade_aquatic.client.render.RenderNautilus;
-import com.teamabnormals.upgrade_aquatic.client.render.RenderPike;
-import com.teamabnormals.upgrade_aquatic.client.render.RenderSonarWave;
-import com.teamabnormals.upgrade_aquatic.client.render.RenderThrasher;
-import com.teamabnormals.upgrade_aquatic.client.render.RenderUABoat;
-import com.teamabnormals.upgrade_aquatic.client.tileentity.TileEntityElderEyeRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.*;
+import com.teamabnormals.upgrade_aquatic.client.render.jellyfish.*;
+import com.teamabnormals.upgrade_aquatic.client.tileentity.*;
 import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageCAnimation;
+import com.teamabnormals.upgrade_aquatic.common.network.MessageRotateJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;
 import com.teamabnormals.upgrade_aquatic.core.config.ConfigHelper;
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
-import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
-import com.teamabnormals.upgrade_aquatic.core.registry.other.UAColors;
-import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
-import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
-import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
-import com.teamabnormals.upgrade_aquatic.core.registry.other.UAFlammables;
-import com.teamabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
+import com.teamabnormals.upgrade_aquatic.core.registry.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.DataUtils;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -118,14 +103,16 @@ public class UpgradeAquatic {
 		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), TileEntityElderEyeRenderer::new);
 		
 		//Entities
-		RenderingRegistry.registerEntityRenderingHandler(UAEntities.NAUTILUS.get(), RenderNautilus::new);
-		RenderingRegistry.registerEntityRenderingHandler(UAEntities.PIKE.get(), RenderPike::new);
-		RenderingRegistry.registerEntityRenderingHandler(UAEntities.LIONFISH.get(), RenderLionfish::new);
-		RenderingRegistry.registerEntityRenderingHandler(UAEntities.THRASHER.get(), RenderThrasher::new);
-		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GREAT_THRASHER.get(), RenderGreatThrasher::new);
-		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOAT.get(), RenderUABoat::new);
-		RenderingRegistry.registerEntityRenderingHandler(UAEntities.FLARE.get(), RenderFlare::new);
-		RenderingRegistry.registerEntityRenderingHandler(UAEntities.SONAR_WAVE.get(), RenderSonarWave::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.NAUTILUS.get(), NautilusRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.PIKE.get(), PikeRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.LIONFISH.get(), LionfishRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.THRASHER.get(), ThrasherRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GREAT_THRASHER.get(), GreatThrasherRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOAT.get(), UABoatRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.FLARE.get(), FlareRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.SONAR_WAVE.get(), SonarWaveRenderer::new);
+		
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
 	}
 	
 	/*
@@ -152,6 +139,11 @@ public class UpgradeAquatic {
 		CHANNEL.messageBuilder(MessageCAnimation.class, id++)
 		.encoder(MessageCAnimation::serialize).decoder(MessageCAnimation::deserialize)
 		.consumer(MessageCAnimation::handle)
+		.add();
+		
+		CHANNEL.messageBuilder(MessageRotateJellyfish.class, id++)
+		.encoder(MessageRotateJellyfish::serialize).decoder(MessageRotateJellyfish::deserialize)
+		.consumer(MessageRotateJellyfish::handle)
 		.add();
 	}
 }

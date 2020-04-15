@@ -14,9 +14,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderLionfish extends MobRenderer<EntityLionfish, ModelLionfish<EntityLionfish>> {
+public class LionfishRenderer extends MobRenderer<EntityLionfish, ModelLionfish<EntityLionfish>> {
 
-	public RenderLionfish(EntityRendererManager manager) {
+	public LionfishRenderer(EntityRendererManager manager) {
 		super(manager, new ModelLionfish<>(), 0.45F);
 	}
 	

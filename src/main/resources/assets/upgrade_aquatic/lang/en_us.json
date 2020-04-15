@@ -425,6 +425,7 @@
   "item.upgrade_aquatic.pike_bucket": "Bucket of Pike",
   "item.upgrade_aquatic.lionfish_bucket": "Bucket of Lionfish",
   "item.upgrade_aquatic.squid_bucket": "Bucket of Squid",
+  "item.upgrade_aquatic.jellyfish_bucket": "Bucket of Jellyfish",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drowned Villager Spawn Egg",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Nautilus Spawn Egg",
@@ -469,6 +470,20 @@
   "tooltip.upgrade_aquatic.lemon_southern_pike": "Lemon Southern Pike",
   "tooltip.upgrade_aquatic.golden_southern_pike": "Golden Southern Pike",
   
+  "tooltip.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
+  "tooltip.upgrade_aquatic.red_box_jellyfish": "Red Box Jellyfish",
+  "tooltip.upgrade_aquatic.white_box_jellyfish": "White Box Jellyfish",
+  
+  "tooltip.upgrade_aquatic.yielding_jellytorch": "Yielding Torch: ",
+  "tooltip.upgrade_aquatic.jellytorch_blue": "Blue",
+  "tooltip.upgrade_aquatic.jellytorch_green": "Green",
+  "tooltip.upgrade_aquatic.jellytorch_yellow": "Yellow",
+  "tooltip.upgrade_aquatic.jellytorch_orange": "Orange",
+  "tooltip.upgrade_aquatic.jellytorch_red": "Red",
+  "tooltip.upgrade_aquatic.jellytorch_pink": "Pink",
+  "tooltip.upgrade_aquatic.jellytorch_purple": "Purple",
+  "tooltip.upgrade_aquatic.jellytorch_white": "White",
+  
   "_comment4": "Entities",
   
   "entity.upgrade_aquatic.nautilus": "Nautilus",
@@ -477,6 +492,7 @@
   "entity.upgrade_aquatic.thrasher": "Thrasher",
   "entity.upgrade_aquatic.great_thrasher": "Great Thrasher",
   "entity.upgrade_aquatic.flare": "Flare",
+  "entity.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
   
   "_comment5": "Potions and Effects",
   
@@ -534,6 +550,7 @@
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Guardian Spine whilst trying to escape %2$s",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by an Elder Guardian Spine",
   "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s was spiked to death by an Elder Guardian Spine whilst trying to escape %2$s",
+  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s was stung to death by a %2$s",
   
   "_comment7": "Advancements",
   
