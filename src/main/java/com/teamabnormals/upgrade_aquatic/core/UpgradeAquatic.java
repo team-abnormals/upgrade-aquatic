@@ -81,7 +81,7 @@ public class UpgradeAquatic {
 	}
 	
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		UAEntitySpawns.addSpawnsToBiomes();
+		UAEntitySpawns.processSpawnAdditions();
 		UADispenseBehaviorRegistry.registerDispenseBehaviors();
 		UAEffects.registerBrewingRecipes();
 		UAWorldGen.registerGenerators();

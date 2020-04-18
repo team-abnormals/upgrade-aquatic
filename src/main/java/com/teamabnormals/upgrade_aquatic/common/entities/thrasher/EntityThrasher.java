@@ -20,7 +20,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -61,14 +60,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.DeepFrozenOceanBiome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityThrasher extends EndimatedMonsterEntity {
 	public static final Predicate<Entity> ENEMY_MATCHER = (entity) -> {
@@ -550,16 +544,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 1;
-	}
-
-	public static void addSpawn() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityThrasher::processSpawning);
-	}
-	
-	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.COLD)) {
-			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER.get(), 90, 1, 2));
-		}
 	}
 	
 	public boolean isMoving() {

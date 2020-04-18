@@ -21,4 +21,9 @@ public class UARenderTypes extends RenderState {
 		return RenderType.makeType("entity_emmisive_translucent", DefaultVertexFormats.ENTITY, 7, 256, true, true, state);
 	}
 	
+	public static RenderType getEmmisiveTransluscentEntityWithDiffusedLight(ResourceLocation texture, boolean outline) {
+		RenderType.State state = RenderType.State.getBuilder().texture(new RenderState.TextureState(texture, false, false)).transparency(TRANSLUCENT_TRANSPARENCY).diffuseLighting(DIFFUSE_LIGHTING_ENABLED).alpha(DEFAULT_ALPHA).cull(CULL_DISABLED).lightmap(LIGHTMAP_ENABLED).overlay(OVERLAY_ENABLED).build(outline);
+		return RenderType.makeType("entity_emmisive_translucent", DefaultVertexFormats.ENTITY, 7, 256, true, true, state);
+	}
+	
 }

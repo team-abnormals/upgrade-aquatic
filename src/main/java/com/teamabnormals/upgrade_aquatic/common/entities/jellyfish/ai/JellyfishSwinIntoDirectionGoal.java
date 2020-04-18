@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
+import java.util.EnumSet;
 import java.util.Random;
 
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
@@ -20,6 +21,7 @@ public class JellyfishSwinIntoDirectionGoal extends Goal {
 	
 	public JellyfishSwinIntoDirectionGoal(AbstractEntityJellyfish jellyfish) {
 		this.jellyfish = jellyfish;
+		this.setMutexFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));
 	}
 
 	@Override

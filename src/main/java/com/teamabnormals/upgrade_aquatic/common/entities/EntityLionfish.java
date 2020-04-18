@@ -8,7 +8,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -40,10 +39,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.RainType;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityLionfish extends EntityBucketableWaterMob {
 	private static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
@@ -259,16 +254,6 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 	@Override
 	protected SoundEvent getSwimSound() {
 		return SoundEvents.ENTITY_FISH_SWIM;
-	}
-	
-	public static void addSpawn() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityLionfish::processSpawning);
-	}
-	
-	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && biome.getPrecipitation() != RainType.SNOW) {
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.LIONFISH.get(), 15, 1, 1));
-        }
 	}
 	
 	static class MoveHelperController extends MovementController {

@@ -1,30 +1,19 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
-import java.util.Random;
 import java.util.function.BiFunction;
 
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.entities.*;
-import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityBoxJellyfish;
+import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.*;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -75,53 +64,7 @@ public class UAEntities {
 	}
     
 	@SubscribeEvent(priority = EventPriority.LOW)
-	public static void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-		EntitySpawnPlacementRegistry.register(NAUTILUS.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntities::ravineMobCondition);
-		EntitySpawnPlacementRegistry.register(PIKE.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::pickerelCondition);
-		EntitySpawnPlacementRegistry.register(LIONFISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::coralCondition);
-		EntitySpawnPlacementRegistry.register(THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::thrasherCondition);
-		EntitySpawnPlacementRegistry.register(GREAT_THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntities::thrasherCondition);
+	public static void registerEntitySpawns(RegistryEvent.Register<EntityType<?>> event) {
+		UAEntitySpawns.registerSpawnPlacements();
 	}
-    
-	private static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
-		return pos.getY() <= 30;
-	}
-	
-	private static boolean thrasherCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
-		return pos.getY() <= 30 ? world.getWorld().isNightTime() ? true : random.nextFloat() < 0.75F : false;
-	}
-    
-	private static boolean pickerelCondition(EntityType<? extends EntityPike> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
-		for(int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
-			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
-				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
-					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweedDouble) {
-						if(random.nextFloat() <= 0.125F)
-							if(world.getBiome(pos).getCategory() == Category.SWAMP) {
-								return random.nextFloat() <= 0.25 ? true : false;
-							}
-						return true;
-					}
-				}
-			}
-		}
-		return random.nextFloat() <= 0.05F ? true : false;
-	}
-    
-	private static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
-		for(int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
-			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
-				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
-					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock().isIn(BlockTags.CORAL_BLOCKS)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-    }
 }

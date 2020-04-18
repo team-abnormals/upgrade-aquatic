@@ -19,4 +19,10 @@ public class MathUtil {
 		return rand.nextFloat() < negativeChance ? -value : value;
 	}
 	
+	public static int getBrightLightForLight(int light) {
+    	int maxLight = 240;
+    	int newLight = light >= 175 ? light : Math.abs(light - maxLight);
+    	return newLight;
+    }
+	
 }

@@ -5,7 +5,6 @@ import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
@@ -31,11 +30,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityNautilus extends EntityBucketableWaterMob {
     private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
@@ -196,16 +190,6 @@ public class EntityNautilus extends EntityBucketableWaterMob {
     public int getMaxSpawnedInChunk() {
         return 8;
     }
-
-    public static void addSpawn() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityNautilus::processSpawning);
-	}
-	
-	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && !BiomeDictionary.hasType(biome, Type.COLD)) {
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.NAUTILUS.get(), 51, 1, 4));
-        }
-	}
     
     static class MoveHelperController extends MovementController {
         private final EntityNautilus nautilus;

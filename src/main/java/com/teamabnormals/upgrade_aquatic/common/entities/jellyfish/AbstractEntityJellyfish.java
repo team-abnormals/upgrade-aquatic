@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish;
 
 import java.util.Map;
+import java.util.Random;
 import java.util.function.Predicate;
 
 import com.google.common.collect.Maps;
@@ -18,6 +19,8 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UADamageSources;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -25,11 +28,13 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Hand;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.PooledMutable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
 
@@ -54,6 +59,13 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 	}
 	
 	@Override
+	protected void registerAttributes() {
+		super.registerAttributes();
+		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+	}
+	
+	@Override
 	protected void registerData() {
 		super.registerData();
 		this.dataManager.register(COOLDOWN, 0);
@@ -64,6 +76,15 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 		super.tick();
 		this.endimateTick();
 		this.getRotationController().tick();
+		
+		if(this.isServerWorld()) {
+			if(!this.isPassenger()) {
+				this.getRotationController().rotate(this.lockedRotations[0], this.lockedRotations[1], 25);
+			} else {
+				this.getRotationController().rotate(0.0F, 0.0F, 1);
+				this.setAir(this.getMaxAir());
+			}
+		}
 		
 		if(this.hasCooldown()) {
 			if(this.isServerWorld()) this.setCooldown(this.getCooldown() - 1);
@@ -140,15 +161,28 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 	}
 	
 	@Override
+	protected boolean processInteract(PlayerEntity player, Hand hand) {
+		if(player.getHeldItem(hand).isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
+			this.startRiding(player);
+			return true;
+		}
+		return super.processInteract(player, hand);
+	}
+	
+	@Override
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
 		this.setCooldown(compound.getInt("CooldownTicks"));
+		this.lockedRotations[0] = compound.getFloat("LockedYaw");
+		this.lockedRotations[1] = compound.getFloat("LockedPitch");
 	}
 	
 	@Override
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		compound.putInt("CooldownTicks", this.getCooldown());
+		compound.putFloat("LockedYaw", this.lockedRotations[0]);
+		compound.putFloat("LockedPitch", this.lockedRotations[1]);
 	}
 	
 	public int getCooldown() {
@@ -193,8 +227,8 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 	
 	public abstract JellyTorchType getJellyTorchType();
 	
-	public void stingEntity(LivingEntity livingEntity) {
-		livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), 2.0F);
+	public boolean stingEntity(LivingEntity livingEntity) {
+		return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue());
 	}
 	
 	public static ItemStack getTorchByType(JellyTorchType type) {
@@ -217,6 +251,10 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 			case WHITE:
 				return new ItemStack(UABlocks.WHITE_JELLY_TORCH.get());
 		}
+	}
+	
+	public static <J extends AbstractEntityJellyfish> boolean defaultSpawnCondition(EntityType<J> entity, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+		return pos.getY() > 45 && pos.getY() < world.getSeaLevel();
 	}
 	
 	public static final Map<Class<? extends AbstractEntityJellyfish>, Float> IDS = Util.make(Maps.newHashMap(), (entries) -> {

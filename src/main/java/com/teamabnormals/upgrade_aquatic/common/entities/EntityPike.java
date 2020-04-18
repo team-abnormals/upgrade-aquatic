@@ -13,12 +13,10 @@ import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
@@ -76,7 +74,6 @@ import net.minecraft.world.storage.loot.LootParameterSets;
 import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTables;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityPike extends EntityBucketableWaterMob {
 	private static final DataParameter<Integer> PIKE_TYPE = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
@@ -812,22 +809,6 @@ public class EntityPike extends EntityBucketableWaterMob {
 	
 	public boolean isHidingInPickerelweed() {
 		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelweed || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelweedDouble;
-	}
-
-	public static void addSpawn() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityPike::processSpawning);
-	}
-	
-	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.SWAMP || biome.getCategory() == Category.RIVER) {
-        	if(biome.getCategory() == Category.SWAMP) {
-        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE.get(), 5, 1, 2));
-        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(EntityType.SQUID, 5, 1, 2));
-        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(EntityType.SALMON, 5, 1, 5));
-        	} else {
-        		biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.PIKE.get(), 11, 1, 2));
-        	}
-        }
 	}
 	
 	static class MoveHelperController extends MovementController {
