@@ -1,10 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish;
 
-import java.util.Map;
 import java.util.Random;
 import java.util.function.Predicate;
 
-import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.api.endimator.entity.IEndimatedEntity;
 import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
@@ -29,7 +27,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.PooledMutable;
 import net.minecraft.util.math.MathHelper;
@@ -256,10 +253,6 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 	public static <J extends AbstractEntityJellyfish> boolean defaultSpawnCondition(EntityType<J> entity, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
 		return pos.getY() > 45 && pos.getY() < world.getSeaLevel();
 	}
-	
-	public static final Map<Class<? extends AbstractEntityJellyfish>, Float> IDS = Util.make(Maps.newHashMap(), (entries) -> {
-		entries.put(EntityBoxJellyfish.class, 1.0F);
-	});
 	
 	public static class RotationController {
 		private AbstractEntityJellyfish jellyfish;

@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.items;
 
 import java.util.List;
+import java.util.Random;
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
@@ -9,7 +10,7 @@ import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish.BucketData;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -19,6 +20,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BucketItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -41,7 +43,7 @@ public class ItemJellyfishBucket extends BucketItem {
 			CompoundNBT compoundnbt = stack.getTag();
 			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 				AbstractEntityJellyfish jellyfish = this.getEntityInStack(stack, world, null);
-				return AbstractEntityJellyfish.IDS.get(jellyfish.getClass()) + (0.1F * jellyfish.getJellyTorchType().ordinal());
+				return JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * jellyfish.getJellyTorchType().ordinal());
 			}
 			return 0.0F;
 		});
@@ -80,14 +82,16 @@ public class ItemJellyfishBucket extends BucketItem {
 			jellyfish.readBucketData(compoundnbt.getCompound("JellyfishTag"));
 			return jellyfish;
 		} else if(pos != null) {
-			return this.getRandomJellyfish(stack, world, pos);
+			AbstractEntityJellyfish jellyfish = this.getRandomJellyfish(stack, world, pos);
+			return jellyfish != null ? jellyfish : null;
 		}
 		return null;
 	}
 	
-	//TODO: Make actually random when more jellies get added
 	private AbstractEntityJellyfish getRandomJellyfish(ItemStack stack, World world, @Nullable BlockPos pos) {
-		return (AbstractEntityJellyfish) UAEntities.BOX_JELLYFISH.get().spawn(world, stack, null, pos, SpawnReason.BUCKET, true, false);
+		Random rand = new Random();
+		List<JellyfishRegistry.JellyfishEntry<?>> commonJellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);
+		return (AbstractEntityJellyfish) commonJellies.get(rand.nextInt(commonJellies.size())).jellyfish.get().spawn(world, stack, null, pos, SpawnReason.BUCKET, true, false);
 	}
 
 	@Override
