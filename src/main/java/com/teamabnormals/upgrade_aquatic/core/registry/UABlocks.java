@@ -19,9 +19,12 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockMulberryVine;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedBlock;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPrismarineCoralBlock;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPrismarineRod;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSapling;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSearocket;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSpine;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockSupportsConduit;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockThatch;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothDoor;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockToothLantern;
@@ -93,7 +96,7 @@ public class UABlocks {
 	public static RegistryObject<Block> DEAD_PILLOW_CORAL_BLOCK       = RegistryUtils.createBlock("dead_pillow_coral_block", () -> new Block(UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DEAD_SILK_CORAL_BLOCK         = RegistryUtils.createBlock("dead_silk_coral_block", () -> new Block(UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DEAD_CHROME_CORAL_BLOCK       = RegistryUtils.createBlock("dead_chrome_coral_block", () -> new Block(UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> ELDER_PRISMARINE_CORAL_BLOCK  = RegistryUtils.createBlock("elder_prismarine_coral_block", () -> new Block(UAProperties.PRISMARINE_CORAL_BLOCK_BASE(true)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> ELDER_PRISMARINE_CORAL_BLOCK  = RegistryUtils.createBlock("elder_prismarine_coral_block", () -> new BlockSupportsConduit(UAProperties.PRISMARINE_CORAL_BLOCK_BASE(true)), ItemGroup.BUILDING_BLOCKS);
 
 	public static RegistryObject<Block> ACAN_CORAL_BLOCK              = RegistryUtils.createBlock("acan_coral_block", () -> new CoralBlock(DEAD_ACAN_CORAL_BLOCK.get(), UAProperties.CORAL_BLOCK_BASE(MaterialColor.CYAN)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> FINGER_CORAL_BLOCK            = RegistryUtils.createBlock("finger_coral_block", () -> new CoralBlock(DEAD_FINGER_CORAL_BLOCK.get(), UAProperties.CORAL_BLOCK_BASE(MaterialColor.ORANGE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
@@ -105,7 +108,7 @@ public class UABlocks {
 	public static RegistryObject<Block> PILLOW_CORAL_BLOCK            = RegistryUtils.createBlock("pillow_coral_block", () -> new CoralBlock(DEAD_PILLOW_CORAL_BLOCK.get(), UAProperties.CORAL_BLOCK_BASE(MaterialColor.WHITE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> SILK_CORAL_BLOCK              = RegistryUtils.createBlock("silk_coral_block", () -> new CoralBlock(DEAD_SILK_CORAL_BLOCK.get(), UAProperties.CORAL_BLOCK_BASE(MaterialColor.PURPLE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> CHROME_CORAL_BLOCK            = RegistryUtils.createBlock("chrome_coral_block", () -> new CoralBlock(DEAD_CHROME_CORAL_BLOCK.get(), UAProperties.CORAL_BLOCK_BASE(MaterialColor.GRAY_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> PRISMARINE_CORAL_BLOCK        = RegistryUtils.createBlock("prismarine_coral_block", () -> new CoralBlock(ELDER_PRISMARINE_CORAL_BLOCK.get(), UAProperties.PRISMARINE_CORAL_BLOCK_BASE(false)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> PRISMARINE_CORAL_BLOCK        = RegistryUtils.createBlock("prismarine_coral_block", () -> new BlockPrismarineCoralBlock(ELDER_PRISMARINE_CORAL_BLOCK.get(), UAProperties.PRISMARINE_CORAL_BLOCK_BASE(false)), ItemGroup.BUILDING_BLOCKS);
 	
 	public static RegistryObject<Block> DEAD_ACAN_CORAL               = RegistryUtils.createBlock("dead_acan_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> DEAD_FINGER_CORAL             = RegistryUtils.createBlock("dead_finger_coral", () -> new BlockUACoralDead(UAProperties.DEAD_CORAL), ItemGroup.DECORATIONS);
@@ -457,7 +460,7 @@ public class UABlocks {
 	
 	public static RegistryObject<Block> FLOWERING_RUSH           = RegistryUtils.createBlock("flowering_rush", () -> new BlockFloweringRush(Properties.from(Blocks.PEONY).sound(SoundType.WET_GRASS)), ItemGroup.DECORATIONS);
 	
-	public static RegistryObject<Block> PRISMARINE_ROD_BUNDLE    = RegistryUtils.createBlock("prismarine_rod_bundle", () -> new RotatedPillarBlock(Properties.from(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> PRISMARINE_ROD_BUNDLE    = RegistryUtils.createBlock("prismarine_rod_bundle", () -> new BlockPrismarineRod(Properties.from(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 
 	public static RegistryObject<Block> DRIFTWOOD_LOG            = RegistryUtils.createBlock("driftwood_log", () -> new LogBlock(MaterialColor.GRAY, UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DRIFTWOOD                = RegistryUtils.createBlock("driftwood", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
