@@ -504,10 +504,10 @@ public class UABlocks {
 	
 	public static RegistryObject<Block> BEACHGRASS                     	= RegistryUtils.createBlock("beachgrass", () -> new BlockBeachgrass(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> TALL_BEACHGRASS                	= RegistryUtils.createBlock("tall_beachgrass", () -> new BlockBeachgrassTall(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
-	public static RegistryObject<Block> BEACHGRASS_THATCH              	= RegistryUtils.createBlock("beachgrass_thatch", () -> new BlockThatch(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BEACHGRASS_THATCH_SLAB         	= RegistryUtils.createBlock("beachgrass_thatch_slab", () -> new SlabBlock(Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BEACHGRASS_THATCH_STAIRS       	= RegistryUtils.createBlock("beachgrass_thatch_stairs", () -> new StairsBlock(BEACHGRASS_THATCH.get().getDefaultState(), Properties.from(Blocks.HAY_BLOCK).harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB	= RegistryUtils.createCompatBlock("beachgrass_thatch_vertical_slab", "quark", () -> new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH.get())), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH              	= RegistryUtils.createBlock("beachgrass_thatch", () -> new BlockThatch(Properties.from(Blocks.HAY_BLOCK).notSolid().harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH_SLAB         	= RegistryUtils.createBlock("beachgrass_thatch_slab", () -> new SlabBlock(Properties.from(Blocks.HAY_BLOCK).notSolid().harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH_STAIRS       	= RegistryUtils.createBlock("beachgrass_thatch_stairs", () -> new StairsBlock(BEACHGRASS_THATCH.get().getDefaultState(), Properties.from(Blocks.HAY_BLOCK).notSolid().harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB	= RegistryUtils.createCompatBlock("beachgrass_thatch_vertical_slab", "quark", () -> new BlockVerticalSlab(Properties.from(BEACHGRASS_THATCH.get()).notSolid()), ItemGroup.BUILDING_BLOCKS);
 
 	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
 		conversions.put(() -> Blocks.BUBBLE_CORAL_BLOCK, () -> BUBBLE_CORALSTONE.get());
