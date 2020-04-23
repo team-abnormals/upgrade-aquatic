@@ -573,5 +573,15 @@
   "advancements.husbandry.eat_pickerelweed.description": "Smoke and eat Boiled Pickerelweed to regain water bubbles",
   
   "advancements.husbandry.collect_all_pike.title": "Pike World Tour",
-  "advancements.husbandry.collect_all_pike.description": "Collect every variant of Pike in a bucket"
+  "advancements.husbandry.collect_all_pike.description": "Collect every variant of Pike in a bucket",
+  
+  "_comment8": "Subtitles",
+  
+  "subtitles.upgrade_aquatic.thrasher.hurt": "Thrasher hurts",
+  "subtitles.upgrade_aquatic.thrasher.ambient": "Thrasher growls",
+  "subtitles.upgrade_aquatic.thrasher.death": "Thrasher dies",
+  "subtitles.upgrade_aquatic.thrasher.thrash": "Thrasher thrashes",
+  "subtitles.upgrade_aquatic.thrasher.flop": "Thrasher flops",
+  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Thrasher fires sonar"
+  
 }
