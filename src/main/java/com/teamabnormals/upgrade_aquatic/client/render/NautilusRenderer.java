@@ -32,6 +32,7 @@ public class NautilusRenderer extends MobRenderer<EntityNautilus, ModelNautilus<
 		skins.put(Arrays.asList("sadcat"), "sadcat");
 		skins.put(Arrays.asList("cameron", "cam", "cringe"), "cameron");
 		skins.put(Arrays.asList("snake", "snautilus", "snakeblock", "snake block"), "snake_block");
+		skins.put(Arrays.asList("snail", "snail nautilus"), "snail");
 	});
 
 	public NautilusRenderer(EntityRendererManager renderManager) {
