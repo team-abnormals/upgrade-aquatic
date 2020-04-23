@@ -573,5 +573,15 @@
   "advancements.husbandry.eat_pickerelweed.description": "Come una espiga de agua cocida para recuperar burbujas de agua",
   
   "advancements.husbandry.collect_all_pike.title": "Gira mundial de lucios",
-  "advancements.husbandry.collect_all_pike.description": "Consigue todas las variedades de lucio en cubos"
+  "advancements.husbandry.collect_all_pike.description": "Consigue todas las variedades de lucios en cubos",
+  
+  "_comment8": "Subtítulos",
+
+  "subtitles.upgrade_aquatic.thrasher.hurt": "Devorador herido",
+  "subtitles.upgrade_aquatic.thrasher.ambient": "Devorador gruñe",
+  "subtitles.upgrade_aquatic.thrasher.death": "Devorador muere",
+  "subtitles.upgrade_aquatic.thrasher.thrash": "Devorador devora",
+  "subtitles.upgrade_aquatic.thrasher.flop": "Devorador chapotea",
+  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Sonar de devorador"
+  
 }
