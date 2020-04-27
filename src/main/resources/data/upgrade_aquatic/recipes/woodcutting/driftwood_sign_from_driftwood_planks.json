@@ -1,0 +1,1 @@
+{"type":"minecraft:impossible","ingredient":{"item":"upgrade_aquatic:driftwood_planks"},"result":"upgrade_aquatic:driftwood_sign","count":1,"conditions":[{"type":"forge:mod_loaded","modid":"corail_woodcutter"}]}

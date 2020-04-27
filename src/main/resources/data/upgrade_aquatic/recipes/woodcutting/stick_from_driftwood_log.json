@@ -1,0 +1,1 @@
+{"type":"corail_woodcutter:woodcutting","ingredient":{"tag":"upgrade_aquatic:driftwood_logs"},"result":"minecraft:stick","count":8,"conditions":[{"type":"forge:mod_loaded","modid":"corail_woodcutter"}]}

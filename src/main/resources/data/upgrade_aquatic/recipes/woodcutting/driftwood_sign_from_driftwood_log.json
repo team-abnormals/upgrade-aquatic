@@ -1,0 +1,1 @@
+{"type":"minecraft:impossible","ingredient":{"tag":"upgrade_aquatic:driftwood_logs"},"result":"upgrade_aquatic:driftwood_sign","count":4,"conditions":[{"type":"forge:mod_loaded","modid":"corail_woodcutter"}]}

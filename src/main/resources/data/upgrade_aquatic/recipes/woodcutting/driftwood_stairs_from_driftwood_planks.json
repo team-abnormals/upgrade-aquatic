@@ -1,0 +1,1 @@
+{"type":"corail_woodcutter:woodcutting","ingredient":{"item":"upgrade_aquatic:driftwood_planks"},"result":"upgrade_aquatic:driftwood_stairs","count":1,"conditions":[{"type":"forge:mod_loaded","modid":"corail_woodcutter"}]}
