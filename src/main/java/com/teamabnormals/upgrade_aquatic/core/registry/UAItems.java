@@ -53,4 +53,5 @@ public class UAItems {
 	public static final RegistryObject<Item> THRASHER_SPAWN_EGG         = RegistryUtils.createSpawnEggItem("thrasher", () -> UAEntities.THRASHER.get(), 7255507, 11730927);
 	public static final RegistryObject<Item> GREAT_THRASHER_SPAWN_EGG   = RegistryUtils.createSpawnEggItem("great_thrasher", () -> UAEntities.GREAT_THRASHER.get(), 10078409, 13294289);
 	public static final RegistryObject<Item> FLARE_SPAWN_EGG            = RegistryUtils.createSpawnEggItem("flare", () -> UAEntities.FLARE.get(), 4532619, 14494960);
+	public static final RegistryObject<Item> JELLYFISH_SPAWN_EGG        = RegistryUtils.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);
 }

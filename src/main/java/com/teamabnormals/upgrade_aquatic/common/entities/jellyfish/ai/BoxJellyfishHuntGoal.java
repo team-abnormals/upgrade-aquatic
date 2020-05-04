@@ -33,7 +33,7 @@ public class BoxJellyfishHuntGoal extends Goal {
 	
 	@Override
 	public boolean shouldContinueExecuting() {
-		return super.shouldContinueExecuting() && this.noSightTicks < 10;
+		return super.shouldContinueExecuting() && this.noSightTicks < 20;
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class BoxJellyfishHuntGoal extends Goal {
 		float pitch = -((float) (MathHelper.atan2(distance.getY(), (double) MathHelper.sqrt(distance.getX() * distance.getX() + distance.getZ() * distance.getZ())) * (double) (180F / (float) Math.PI)));
 		float yaw = (float) (MathHelper.atan2(distance.getZ(), distance.getX()) * (double) (180F / (float) Math.PI)) - 90.0F;
 		
-		this.hunter.lockedRotations[0] = yaw;
+		this.hunter.lockedRotations[0] = MathHelper.wrapDegrees(yaw);
 		this.hunter.lockedRotations[1] = MathHelper.wrapDegrees(pitch + 90.0F);
 		
 		float[] rotations = this.hunter.getRotationController().getRotations(1.0F);

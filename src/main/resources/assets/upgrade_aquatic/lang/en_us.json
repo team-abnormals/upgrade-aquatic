@@ -434,6 +434,7 @@
   "item.upgrade_aquatic.thrasher_spawn_egg": "Thrasher Spawn Egg",
   "item.upgrade_aquatic.great_thrasher_spawn_egg": "Great Thrasher Spawn Egg",
   "item.upgrade_aquatic.flare_spawn_egg": "Flare Spawn Egg",
+  "item.upgrade_aquatic.jellyfish_spawn_egg": "Jellyfish Spawn Egg",
   
   "item.upgrade_aquatic.boiled_pickerelweed_purple": "Boiled Purple Pickerelweed",
   "item.upgrade_aquatic.boiled_pickerelweed_blue": "Boiled Blue Pickerelweed",
@@ -474,6 +475,10 @@
   "tooltip.upgrade_aquatic.red_box_jellyfish": "Red Box Jellyfish",
   "tooltip.upgrade_aquatic.white_box_jellyfish": "White Box Jellyfish",
   
+  "tooltip.upgrade_aquatic.cassiopea_jellyfish": "Cassiopea Jellyfish",
+  "tooltip.upgrade_aquatic.blue_cassiopea_jellyfish": "Blue Cassiopea Jellyfish",
+  "tooltip.upgrade_aquatic.white_cassiopea_jellyfish": "White Cassiopea Jellyfish",
+  
   "tooltip.upgrade_aquatic.yielding_jellytorch": "Yields: ",
   "tooltip.upgrade_aquatic.jellytorch_blue": "Blue Jelly Torch",
   "tooltip.upgrade_aquatic.jellytorch_green": "Green Jelly Torch",
@@ -493,6 +498,7 @@
   "entity.upgrade_aquatic.great_thrasher": "Great Thrasher",
   "entity.upgrade_aquatic.flare": "Flare",
   "entity.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
+  "entity.upgrade_aquatic.cassiopea_jellyfish": "Cassiopea Jellyfish",
   
   "_comment5": "Potions and Effects",
   

@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.upgrade_aquatic.common.items.ItemJellyfishSpawnEgg;
 import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -25,6 +26,12 @@ public class RegistryUtils {
 	
 	public static RegistryObject<Item> createSpawnEggItem(String entityName, Supplier<EntityType<?>> supplier, int primaryColor, int secondaryColor) {
 		RegistryObject<Item> spawnEgg = UAItems.ITEMS.register(entityName + "_spawn_egg", () -> new UASpawnEggItem(supplier, primaryColor, secondaryColor, new Item.Properties().group(ItemGroup.MISC)));
+		UAItems.SPAWN_EGGS.add(spawnEgg);
+		return spawnEgg;
+	}
+	
+	public static RegistryObject<Item> createJellyfishSpawnEggItem(String entityName, int primaryColor, int secondaryColor) {
+		RegistryObject<Item> spawnEgg = UAItems.ITEMS.register(entityName + "_spawn_egg", () -> new ItemJellyfishSpawnEgg(primaryColor, secondaryColor, new Item.Properties().group(ItemGroup.MISC)));
 		UAItems.SPAWN_EGGS.add(spawnEgg);
 		return spawnEgg;
 	}
