@@ -43,7 +43,7 @@ public class ItemJellyfishBucket extends BucketItem {
 			CompoundNBT compoundnbt = stack.getTag();
 			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 				AbstractEntityJellyfish jellyfish = this.getEntityInStack(stack, world, null);
-				return JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * jellyfish.getJellyTorchType().ordinal());
+				return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * jellyfish.getJellyTorchType().ordinal());
 			}
 			return 0.0F;
 		});

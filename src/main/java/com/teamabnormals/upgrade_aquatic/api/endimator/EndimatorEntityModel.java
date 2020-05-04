@@ -24,6 +24,7 @@ public abstract class EndimatorEntityModel<E extends Entity & IEndimatedEntity> 
 	@Override
 	public void setRotationAngles(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.entity = entity;
+		this.revertBoxesToDefaultValues();
 	}
 	
 	public void addCuboid(EndimatorModelRenderer cuboid) {

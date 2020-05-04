@@ -12,6 +12,7 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch.JellyTorc
 import com.teamabnormals.upgrade_aquatic.common.network.MessageRotateJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UADamageSources;
 
 import net.minecraft.entity.EntityType;
@@ -19,7 +20,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
@@ -43,11 +46,10 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 		if(entity instanceof PlayerEntity) {
 			return !entity.isSpectator() && !((PlayerEntity) entity).isCreative();
 		}
-		return !entity.isSpectator() && !(entity instanceof AbstractEntityJellyfish);
+		return !entity.isSpectator() && !(entity instanceof AbstractEntityJellyfish || entity instanceof TurtleEntity);
 	};
 	protected static final DataParameter<Integer> COOLDOWN = EntityDataManager.createKey(AbstractEntityJellyfish.class, DataSerializers.VARINT);
 	private Endimation playingEndimation = BLANK_ANIMATION;
-	public BucketData tempBucketData;
 	private int animationTick;
 	public float[] lockedRotations = new float[2];
 	
@@ -159,8 +161,18 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 	
 	@Override
 	protected boolean processInteract(PlayerEntity player, Hand hand) {
-		if(player.getHeldItem(hand).isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
+		ItemStack itemstack = player.getHeldItem(hand);
+		Item item = itemstack.getItem();
+		if(itemstack.isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
 			this.startRiding(player);
+			return true;
+		} else if(item == UAItems.PRISMARINE_ROD.get() && !this.hasCooldown()) {
+			Random rand = new Random();
+			if(this.isServerWorld() && rand.nextFloat() < this.getCooldownChance()) {
+				this.setCooldown(20 * (rand.nextInt(16) + 15));
+			}
+			itemstack.shrink(1);
+			player.addItemStackToInventory(getTorchByType(this.getJellyTorchType()));
 			return true;
 		}
 		return super.processInteract(player, hand);
@@ -216,6 +228,11 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 		this.setAnimationTick(0);
 	}
 	
+	@Override
+	public ItemStack getBucket() {
+		return new ItemStack(UAItems.JELLYFISH_BUCKET.get());
+	}
+	
 	public abstract RotationController getRotationController();
 	
 	public abstract void readBucketData(CompoundNBT compound);
@@ -223,6 +240,8 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 	public abstract String getBucketName();
 	
 	public abstract JellyTorchType getJellyTorchType();
+	
+	public abstract float getCooldownChance();
 	
 	public boolean stingEntity(LivingEntity livingEntity) {
 		return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue());
@@ -329,6 +348,20 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 		
 		public float[] getRotations(float ptc) {
 			return new float[] {MathHelper.lerp(ptc, this.prevYaw, this.yaw), MathHelper.lerp(ptc, this.prevPitch, this.pitch)}; 
+		}
+		
+		public void addVelocityForLookDirection(float force, float sizeScale) {
+			float[] rotations = this.getRotations(1.0F);
+			float yaw = (float) rotations[0] + this.jellyfish.rotationYaw;
+			float pitch = (float) rotations[1] - 90.0F;
+			
+			float x = -MathHelper.sin(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
+			float y = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
+			float z = MathHelper.cos(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
+			
+			Vec3d motion = new Vec3d(x, y, z).normalize().scale(force).scale(sizeScale);
+			
+			this.jellyfish.addVelocity(motion.x, motion.y, motion.z);
 		}
 	}
 	

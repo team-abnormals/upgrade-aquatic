@@ -2,19 +2,21 @@ package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
 import java.util.EnumSet;
 
+import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
 import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
-import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityBoxJellyfish;
 
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.RayTraceResult.Type;
 
 public class JellyfishBoostGoal extends Goal {
 	private final AbstractEntityJellyfish jellyfish;
+	private final Endimation boostAnimation;
 	
-	public JellyfishBoostGoal(AbstractEntityJellyfish jellyfish) {
+	public JellyfishBoostGoal(AbstractEntityJellyfish jellyfish, Endimation boostAnimation) {
 		this.jellyfish = jellyfish;
+		this.boostAnimation = boostAnimation;
 		this.setMutexFlags(EnumSet.of(Flag.MOVE));
 	}
 
@@ -35,6 +37,6 @@ public class JellyfishBoostGoal extends Goal {
 	
 	@Override
 	public void startExecuting() {
-		NetworkUtil.setPlayingAnimationMessage(this.jellyfish, EntityBoxJellyfish.BOOST_ANIMATION);
+		NetworkUtil.setPlayingAnimationMessage(this.jellyfish, this.boostAnimation);
 	}
 }
