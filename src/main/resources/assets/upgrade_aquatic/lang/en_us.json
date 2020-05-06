@@ -479,7 +479,10 @@
   "tooltip.upgrade_aquatic.blue_cassiopea_jellyfish": "Blue Cassiopea Jellyfish",
   "tooltip.upgrade_aquatic.white_cassiopea_jellyfish": "White Cassiopea Jellyfish",
   
+  "tooltip.upgrade_aquatic.immortal_jellyfish": "Immortal Jellyfish",
+  
   "tooltip.upgrade_aquatic.yielding_jellytorch": "Yields: ",
+  "tooltip.upgrade_aquatic.yielding_jellytorch.or": " or ",
   "tooltip.upgrade_aquatic.jellytorch_blue": "Blue Jelly Torch",
   "tooltip.upgrade_aquatic.jellytorch_green": "Green Jelly Torch",
   "tooltip.upgrade_aquatic.jellytorch_yellow": "Yellow Jelly Torch",
@@ -497,8 +500,10 @@
   "entity.upgrade_aquatic.thrasher": "Thrasher",
   "entity.upgrade_aquatic.great_thrasher": "Great Thrasher",
   "entity.upgrade_aquatic.flare": "Flare",
+  
   "entity.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Cassiopea Jellyfish",
+  "entity.upgrade_aquatic.immortal_jellyfish": "Immortal Jellyfish",
   
   "_comment5": "Potions and Effects",
   

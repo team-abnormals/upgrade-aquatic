@@ -27,6 +27,7 @@ public class JellyfishRegistry {
 	static {
 		registerJellyfish(() -> UAEntities.BOX_JELLYFISH.get(), EntityBoxJellyfish.class, UAEntitySpawns.warmishOceanCondition(), Rarity.COMMON);
 		registerJellyfish(() -> UAEntities.CASSIOPEA_JELLYFISH.get(), EntityCassiopeaJellyfish.class, biome -> biome == Biomes.LUKEWARM_OCEAN, Rarity.COMMON);
+		registerJellyfish(() -> UAEntities.IMMORTAL_JELLYFISH.get(), EntityImmortalJellyfish.class, UAEntitySpawns.warmishOceanCondition(), Rarity.COMMON);
 	}
 
 	public static <J extends AbstractEntityJellyfish> void registerJellyfish(Supplier<EntityType<J>> jellyfish, Class<J> jellyfishClass, Predicate<Biome> biomePredicate, Rarity rarity) {

@@ -26,6 +26,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+/**
+ * @author SmellyModder(Luke Tonon)
+ */
 public class EntityCassiopeaJellyfish extends AbstractEntityJellyfish {
 	public static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityCassiopeaJellyfish.class, DataSerializers.VARINT);
 	public static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityCassiopeaJellyfish.class, DataSerializers.FLOAT);
@@ -74,7 +77,6 @@ public class EntityCassiopeaJellyfish extends AbstractEntityJellyfish {
 	@Override
 	public void tick() {
 		super.tick();
-		this.rotationYaw = this.rotationYawHead = this.renderYawOffset = 0;
 		
 		if(this.hasUpsideDownCooldown()) {
 			this.upsideDownCooldown--;

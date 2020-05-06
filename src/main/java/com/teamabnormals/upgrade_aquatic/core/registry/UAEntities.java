@@ -36,8 +36,9 @@ public class UAEntities {
 	public static final RegistryObject<EntityType<EntityGreatThrasher>> GREAT_THRASHER    = ENTITY_TYPES.register("great_thrasher", () -> createLivingEntity(EntityGreatThrasher::new, EntityClassification.MONSTER, "great_thrasher", 2.8F, 1.575F));
 	public static final RegistryObject<EntityType<EntityFlare>> FLARE                     = ENTITY_TYPES.register("flare", () -> createLivingEntity(EntityFlare::new, EntityClassification.MONSTER, "flare", 0.9F, 0.5F));
 	
-	public static final RegistryObject<EntityType<EntityBoxJellyfish>> BOX_JELLYFISH      = ENTITY_TYPES.register("box_jellyfish", () -> createLivingEntity(EntityBoxJellyfish::new, EntityClassification.WATER_CREATURE, "box_jellyfish", 0.75F, 0.625F));
+	public static final RegistryObject<EntityType<EntityBoxJellyfish>> BOX_JELLYFISH             = ENTITY_TYPES.register("box_jellyfish", () -> createLivingEntity(EntityBoxJellyfish::new, EntityClassification.WATER_CREATURE, "box_jellyfish", 0.75F, 0.625F));
 	public static final RegistryObject<EntityType<EntityCassiopeaJellyfish>> CASSIOPEA_JELLYFISH = ENTITY_TYPES.register("cassiopea_jellyfish", () -> createLivingEntity(EntityCassiopeaJellyfish::new, EntityClassification.WATER_CREATURE, "cassiopea_jellyfish", 0.6875F, 0.25F));
+	public static final RegistryObject<EntityType<EntityImmortalJellyfish>> IMMORTAL_JELLYFISH   = ENTITY_TYPES.register("immortal_jellyfish", () -> createLivingEntity(EntityImmortalJellyfish::new, EntityClassification.WATER_CREATURE, "immortal_jellyfish", 0.625F, 0.5F));
 	
 	private static <T extends LivingEntity> EntityType<T> createLivingEntity(EntityType.IFactory<T> factory, EntityClassification entityClassification, String name, float width, float height){
 		ResourceLocation location = new ResourceLocation(Reference.MODID, name);

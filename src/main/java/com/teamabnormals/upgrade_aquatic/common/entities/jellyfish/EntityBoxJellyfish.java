@@ -30,6 +30,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
+/**
+ * @author SmellyModder(Luke Tonon)
+ */
 public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 	public static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityBoxJellyfish.class, DataSerializers.VARINT);
 	public static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityBoxJellyfish.class, DataSerializers.FLOAT);
@@ -78,8 +81,6 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 		super.tick();
 		
 		if(this.hasHuntingCooldown()) this.huntingCooldown--;
-		
-		this.rotationYaw = this.rotationYawHead = this.renderYawOffset = 0;
 		
 		if(this.isEndimationPlaying(BOOST_ANIMATION) && this.isInWater()) {
 			this.setMotion(this.getMotion().scale(1.15F));

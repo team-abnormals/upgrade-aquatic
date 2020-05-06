@@ -32,6 +32,9 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.PooledMutable;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
@@ -75,6 +78,8 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 		super.tick();
 		this.endimateTick();
 		this.getRotationController().tick();
+		
+		this.rotationYaw = this.rotationYawHead = this.renderYawOffset = 0;
 		
 		if(this.isServerWorld()) {
 			if(!this.isPassenger()) {
@@ -242,9 +247,18 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 	public abstract JellyTorchType getJellyTorchType();
 	
 	public abstract float getCooldownChance();
+		
+	public int getIdSuffix() {
+		return this.getJellyTorchType().ordinal();
+	}
 	
 	public boolean stingEntity(LivingEntity livingEntity) {
 		return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue());
+	}
+	
+	public ITextComponent getYieldingTorchMessage() {
+		JellyTorchType torchType = this.getJellyTorchType();
+		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").applyTextStyle(TextFormatting.GRAY)).appendSibling((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + torchType.toString().toLowerCase())).applyTextStyle(torchType.color));
 	}
 	
 	public static ItemStack getTorchByType(JellyTorchType type) {

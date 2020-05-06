@@ -44,6 +44,7 @@ public class UAEntitySpawns {
 	
 		spawns.add(new EntitySpawn<>(() -> UAEntities.BOX_JELLYFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 6, 1, 2), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractEntityJellyfish::defaultSpawnCondition, warmishOceanCondition()));
 		spawns.add(new EntitySpawn<>(() -> UAEntities.CASSIOPEA_JELLYFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractEntityJellyfish::defaultSpawnCondition, (biome) -> biome == Biomes.LUKEWARM_OCEAN));
+		spawns.add(new EntitySpawn<>(() -> UAEntities.IMMORTAL_JELLYFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractEntityJellyfish::defaultSpawnCondition, warmishOceanCondition()));
 	});
 	
 	public static void registerSpawnPlacements() {
