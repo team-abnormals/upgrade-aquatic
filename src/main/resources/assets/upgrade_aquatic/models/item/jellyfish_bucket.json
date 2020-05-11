@@ -21,6 +21,30 @@
                 "variant": 1.7
             },
             "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_white_box"
+        },
+        {
+            "predicate": {
+                "variant": 2.2
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_blue_cassiopea"
+        },
+        {
+            "predicate": {
+                "variant": 2.3
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_cassiopea"
+        },
+        {
+            "predicate": {
+                "variant": 2.7
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_white_cassiopea"
+        },
+        {
+            "predicate": {
+                "variant": 1.7
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_immortal"
         }
     ]
 }

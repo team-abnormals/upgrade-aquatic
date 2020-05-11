@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish.BucketData;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.JellyfishRegistry;
@@ -43,7 +42,7 @@ public class ItemJellyfishBucket extends BucketItem {
 			CompoundNBT compoundnbt = stack.getTag();
 			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 				AbstractEntityJellyfish jellyfish = this.getEntityInStack(stack, world, null);
-				return JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * jellyfish.getJellyTorchType().ordinal());
+				return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * (float) jellyfish.getIdSuffix());
 			}
 			return 0.0F;
 		});
@@ -105,8 +104,7 @@ public class ItemJellyfishBucket extends BucketItem {
 				TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
 				tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + jellyfish.getBucketName() + "_jellyfish").applyTextStyles(atextformatting)));
 				
-				JellyTorchType torchType = jellyfish.getJellyTorchType();
-				tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").applyTextStyle(TextFormatting.GRAY)).appendSibling((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + torchType.toString().toLowerCase())).applyTextStyle(torchType.color)));
+				tooltip.add(jellyfish.getYieldingTorchMessage());
 			}
 		}
 	}

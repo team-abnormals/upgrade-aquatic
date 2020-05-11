@@ -1,13 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish;
 
 import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
-import com.teamabnormals.upgrade_aquatic.api.entity.ai.PredicateAttackGoal;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch.JellyTorchType;
-import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.BoxJellyfishHuntGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.CassiopeaHideInSeagrassGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.CassiopeaJellyfishFlipGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwinIntoDirectionGoal;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UADamageSources;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -15,16 +15,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
@@ -33,15 +29,16 @@ import net.minecraft.world.World;
 /**
  * @author SmellyModder(Luke Tonon)
  */
-public class EntityBoxJellyfish extends AbstractEntityJellyfish {
-	public static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityBoxJellyfish.class, DataSerializers.VARINT);
-	public static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityBoxJellyfish.class, DataSerializers.FLOAT);
+public class EntityCassiopeaJellyfish extends AbstractEntityJellyfish {
+	public static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityCassiopeaJellyfish.class, DataSerializers.VARINT);
+	public static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityCassiopeaJellyfish.class, DataSerializers.FLOAT);
 	public static final Endimation SWIM_ANIMATION = new Endimation(20);
 	public static final Endimation BOOST_ANIMATION = new Endimation(20);
 	private RotationController rotationController;
-	private int huntingCooldown;
-
-	public EntityBoxJellyfish(EntityType<? extends EntityBoxJellyfish> type, World world) {
+	public int upsideDownCooldown;
+	public int hideCooldown;
+	
+	public EntityCassiopeaJellyfish(EntityType<? extends AbstractEntityJellyfish> type, World world) {
 		super(type, world);
 		this.rotationController = new RotationController(this);
 	}
@@ -49,23 +46,24 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 	@Override
 	protected void registerAttributes() {
 		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
 	}
 	
 	@Override
 	protected void registerData() {
 		super.registerData();
 		this.dataManager.register(COLOR, 0);
-		this.dataManager.register(SIZE, 1.0F);
+		this.dataManager.register(SIZE, 0.85F);
 	}
 	
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new BoxJellyfishHuntGoal(this));
+		this.goalSelector.addGoal(1, new CassiopeaHideInSeagrassGoal(this));
+		this.goalSelector.addGoal(2, new CassiopeaJellyfishFlipGoal(this));
 		this.goalSelector.addGoal(2, new JellyfishSwinIntoDirectionGoal(this, SWIM_ANIMATION));
 		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, BOOST_ANIMATION));
 		
-		this.targetSelector.addGoal(1, new PredicateAttackGoal<>(this, AbstractFishEntity.class, 150, true, true, null, owner -> !((EntityBoxJellyfish) owner).hasCooldown() && !((EntityBoxJellyfish) owner).hasHuntingCooldown()));
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	
 	@Override
@@ -80,7 +78,13 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 	public void tick() {
 		super.tick();
 		
-		if(this.hasHuntingCooldown()) this.huntingCooldown--;
+		if(this.hasUpsideDownCooldown()) {
+			this.upsideDownCooldown--;
+		}
+		
+		if(this.hasHideCooldown()) {
+			this.hideCooldown--;
+		}
 		
 		if(this.isEndimationPlaying(BOOST_ANIMATION) && this.isInWater()) {
 			this.setMotion(this.getMotion().scale(1.15F));
@@ -88,35 +92,10 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 	}
 	
 	@Override
-	public void onEndimationStart(Endimation endimation) {
-		if(endimation == SWIM_ANIMATION) {
-			this.getRotationController().addVelocityForLookDirection(0.6F, this.getSize());
-		} else if(endimation == BOOST_ANIMATION) {
-			this.getRotationController().addVelocityForLookDirection(0.25F, this.getSize());
-		}
-	}
-	
-	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
-		this.setColor(MathHelper.clamp(compound.getInt("JellyColor"), 0, 2));
-		this.huntingCooldown = compound.getInt("HuntingCooldown");
-		this.setSize(compound.getFloat("Size"), false);
-	}
-	
-	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
-		compound.putInt("JellyColor", this.getColor());
-		compound.putInt("HuntingCooldown", this.huntingCooldown);
-		compound.putFloat("Size", this.getSize());
-	}
-	
-	@Override
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		boolean updateSize = false;
-		float size = this.getRNG().nextFloat() < 0.85F ? 1.0F : this.getRNG().nextBoolean() ? 0.5F : 0.65F;
+		float size = this.getRNG().nextFloat() < 0.9F ? 1.0F : 0.425F;
 		int color = this.getRNG().nextInt(3);
 		if(dataTag != null && this.isFromBucket()) {
 			
@@ -138,6 +117,24 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 	}
 	
 	@Override
+	public void readAdditional(CompoundNBT compound) {
+		super.readAdditional(compound);
+		this.setColor(MathHelper.clamp(compound.getInt("JellyColor"), 0, 2));
+		this.setSize(compound.getFloat("Size"), false);
+		this.upsideDownCooldown = compound.getInt("UpsideDownCooldown");
+		this.hideCooldown = compound.getInt("HideCooldown");
+	}
+	
+	@Override
+	public void writeAdditional(CompoundNBT compound) {
+		super.writeAdditional(compound);
+		compound.putInt("JellyColor", this.getColor());
+		compound.putFloat("Size", this.getSize());
+		compound.putInt("UpsideDownCooldown", this.upsideDownCooldown);
+		compound.putInt("HideCooldown", this.hideCooldown);
+	}
+	
+	@Override
 	public EntitySize getSize(Pose pose) {
 		return super.getSize(pose).scale(this.getSize());
 	}
@@ -150,29 +147,52 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 		this.dataManager.set(COLOR, color);
 	}
 	
-	public void setHuntingCooldown() {
-		this.huntingCooldown = this.getRNG().nextInt(1600) + 1200;
-	}
-	
-	public boolean hasHuntingCooldown() {
-		return this.huntingCooldown > 0;
-	}
-	
 	public float getSize() {
 		return this.dataManager.get(SIZE);
 	}
 	
 	public void setSize(float size, boolean updateHealth) {
 		this.dataManager.set(SIZE, size);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D * size);
+		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D * size);
 		if(updateHealth) {
 			this.setHealth(this.getMaxHealth());
 		}
 	}
 	
+	public boolean hasUpsideDownCooldown() {
+		return this.upsideDownCooldown > 0;
+	}
+	
+	public boolean hasHideCooldown() {
+		return this.hideCooldown > 0;
+	}
+	
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize size) {
 		return size.height * 0.5F;
+	}
+
+	@Override
+	public Endimation[] getEndimations() {
+		return new Endimation[] {
+			BOOST_ANIMATION,
+			SWIM_ANIMATION
+		};
+	}
+	
+	@Override
+	public void onEndimationStart(Endimation endimation) {
+		float sizeForce = this.getSize() < 0.6F ? 0.85F : this.getSize();
+		if(endimation == SWIM_ANIMATION) {
+			this.getRotationController().addVelocityForLookDirection(0.3F, sizeForce);
+		} else if(endimation == BOOST_ANIMATION) {
+			this.getRotationController().addVelocityForLookDirection(0.2F, sizeForce);
+		}
+	}
+
+	@Override
+	public RotationController getRotationController() {
+		return this.rotationController;
 	}
 	
 	@Override
@@ -180,8 +200,15 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 		if(this.hasCustomName()) {
 			bucket.setDisplayName(this.getCustomName());
 		}
-		BoxJellyfishBucketData data = new BoxJellyfishBucketData(this.getColor(), this.getSize());
-		bucket.getOrCreateTag().put("JellyfishTag", BoxJellyfishBucketData.write(data));
+		CassiopeaJellyfishData data = new CassiopeaJellyfishData(this.getColor(), this.getSize());
+		bucket.getOrCreateTag().put("JellyfishTag", CassiopeaJellyfishData.write(data));
+	}
+
+	@Override
+	public void readBucketData(CompoundNBT compound) {
+		CassiopeaJellyfishData jellyData = CassiopeaJellyfishData.read(compound);
+		this.setColor(jellyData.color);
+		this.setSize(jellyData.size, true);
 	}
 
 	@Override
@@ -189,11 +216,11 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 		switch(this.getColor()) {
 			default:
 			case 0: 
-				return "box";
+				return "cassiopea";
 			case 1:
-				return "red_box";
+				return "blue_cassiopea";
 			case 2:
-				return "white_box";
+				return "white_cassiopea";
 		}
 	}
 
@@ -202,9 +229,9 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 		switch(this.getColor()) {
 			default:
 			case 0: 
-				return JellyTorchType.BLUE;
+				return JellyTorchType.GREEN;
 			case 1:
-				return JellyTorchType.RED;
+				return JellyTorchType.BLUE;
 			case 2:
 				return JellyTorchType.WHITE;
 		}
@@ -212,53 +239,15 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 	
 	@Override
 	public float getCooldownChance() {
-		return this.getSize() >= 1.0F ? 0.05F : this.getSize() < 0.5F ? 0.1F : 0.15F;
+		return this.getSize() < 1.0F ? 0.9F : 0.8F;
 	}
 	
 	@Override
 	public boolean stingEntity(LivingEntity livingEntity) {
-		if(super.stingEntity(livingEntity)) {
-			livingEntity.addPotionEffect(new EffectInstance(Effects.POISON, 600, 1));
-			if(this.getAttackTarget() == null) {
-				this.setAttackTarget(livingEntity);
-			}
-			return true;
+		if((this.getAttackTarget() == livingEntity || this.getRevengeTarget() == livingEntity) && this.getRNG().nextFloat() < 0.5F) {
+			return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue());
 		}
 		return false;
-	}
-	
-	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if(super.attackEntityFrom(source, amount)) {
-			Entity entity = source.getTrueSource();
-			if(entity instanceof LivingEntity && this.getAttackTarget() == null && !((LivingEntity) entity).isSpectator()) {
-				if(!(entity instanceof PlayerEntity && ((PlayerEntity) entity).isCreative())) {
-					this.setAttackTarget((LivingEntity) entity);
-				}
-			}
-			return true;
-		}
-		return false;
-	}
-	
-	@Override
-	public void readBucketData(CompoundNBT compound) {
-		BoxJellyfishBucketData jellyData = BoxJellyfishBucketData.read(compound);
-		this.setColor(jellyData.color);
-		this.setSize(jellyData.size, true);
-	}
-	
-	@Override
-	public Endimation[] getEndimations() {
-		return new Endimation[] {
-			SWIM_ANIMATION,
-			BOOST_ANIMATION
-		};
-	}
-
-	@Override
-	public RotationController getRotationController() {
-		return this.rotationController;
 	}
 	
 	@Override
@@ -276,21 +265,21 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 		}
 	}
 	
-	public static class BoxJellyfishBucketData extends BucketData {
+	public static class CassiopeaJellyfishData extends BucketData {
 		private final int color;
 		private final float size;
 		
-		public BoxJellyfishBucketData(int color, float size) {
-			super("box_jellyfish");
+		public CassiopeaJellyfishData(int color, float size) {
+			super("cassiopea_jellyfish");
 			this.color = color;
 			this.size = size;
 		}
 		
-		public static BoxJellyfishBucketData read(CompoundNBT compound) {
-			return new BoxJellyfishBucketData(compound.getInt("Color"), compound.getFloat("Size"));
+		public static CassiopeaJellyfishData read(CompoundNBT compound) {
+			return new CassiopeaJellyfishData(compound.getInt("Color"), compound.getFloat("Size"));
 		}
 		
-		public static CompoundNBT write(BoxJellyfishBucketData data) {
+		public static CompoundNBT write(CassiopeaJellyfishData data) {
 			CompoundNBT compound = new CompoundNBT();
 			compound.putString("EntityId", data.entityId);
 			compound.putInt("Color", data.color);

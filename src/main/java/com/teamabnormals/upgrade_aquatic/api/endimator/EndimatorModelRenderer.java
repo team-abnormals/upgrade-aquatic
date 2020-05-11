@@ -26,7 +26,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class EndimatorModelRenderer extends ModelRenderer {
 	public float defaultRotationPointX, defaultRotationPointY, defaultRotationPointZ;
 	public float defaultRotateAngleX, defaultRotateAngleY, defaultRotateAngleZ;
-	//Gone it seems? Will try later public float defaultOffsetX, defaultOffsetY, defaultOffsetZ;
+	private float offsetX, offsetY, offsetZ;
 	public int textureOffsetX, textureOffsetY;
 	public float textureWidth, textureHeight;
 	public boolean scaleChildren = true;
@@ -182,6 +182,12 @@ public class EndimatorModelRenderer extends ModelRenderer {
 		this.scaleChildren = scaleChildren;
 	}
 	
+	public void setOffset(float x, float y, float z) {
+		this.offsetX = x;
+		this.offsetY = y;
+		this.offsetZ = z;
+	}
+	
 	@Override
 	public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		if(this.showModel) {
@@ -190,6 +196,7 @@ public class EndimatorModelRenderer extends ModelRenderer {
 				this.translateRotate(matrixStackIn);
 				
 				if(this.scaleChildren) {
+					matrixStackIn.translate(this.offsetX, this.offsetY, this.offsetZ);
 					matrixStackIn.scale(this.scales[0], this.scales[1], this.scales[2]);
 					this.doRender(matrixStackIn.getLast(), bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 					
@@ -198,6 +205,7 @@ public class EndimatorModelRenderer extends ModelRenderer {
 					}
 				} else {
 					matrixStackIn.push();
+					matrixStackIn.translate(this.offsetX, this.offsetY, this.offsetZ);
 					matrixStackIn.scale(this.scales[0], this.scales[1], this.scales[2]);
 					this.doRender(matrixStackIn.getLast(), bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 					matrixStackIn.pop();

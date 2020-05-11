@@ -434,6 +434,7 @@
   "item.upgrade_aquatic.thrasher_spawn_egg": "Generar triturador",
   "item.upgrade_aquatic.great_thrasher_spawn_egg": "Generar gran triturador",
   "item.upgrade_aquatic.flare_spawn_egg": "Generar llamarada",
+  "item.upgrade_aquatic.jellyfish_spawn_egg": "Generar medusa",
   
   "item.upgrade_aquatic.boiled_pickerelweed_purple": "Espiga de agua violeta hervida",
   "item.upgrade_aquatic.boiled_pickerelweed_blue": "Espiga de agua azul hervida",
@@ -473,8 +474,15 @@
   "tooltip.upgrade_aquatic.box_jellyfish": "Medusa de caja",
   "tooltip.upgrade_aquatic.red_box_jellyfish": "Medusa de caja roja",
   "tooltip.upgrade_aquatic.white_box_jellyfish": "Medusa de caja blanca",
+
+  "tooltip.upgrade_aquatic.cassiopea_jellyfish": "Medusa invertida",
+  "tooltip.upgrade_aquatic.blue_cassiopea_jellyfish": "Medusa invertida azul",
+  "tooltip.upgrade_aquatic.white_cassiopea_jellyfish": "Medusa invertida blanca",
+
+  "tooltip.upgrade_aquatic.immortal_jellyfish": "Medusa inmortal",
   
   "tooltip.upgrade_aquatic.yielding_jellytorch": "Produce: ",
+  "tooltip.upgrade_aquatic.yielding_jellytorch.or": " o ",
   "tooltip.upgrade_aquatic.jellytorch_blue": "Antorcha gelatinosa azul",
   "tooltip.upgrade_aquatic.jellytorch_green": "Antorcha gelatinosa verde",
   "tooltip.upgrade_aquatic.jellytorch_yellow": "Antorcha gelatinosa amarilla",
@@ -492,7 +500,10 @@
   "entity.upgrade_aquatic.thrasher": "Triturador",
   "entity.upgrade_aquatic.great_thrasher": "Gran triturador",
   "entity.upgrade_aquatic.flare": "Llamarada",
+
   "entity.upgrade_aquatic.box_jellyfish": "Medusa de caja",
+  "entity.upgrade_aquatic.cassiopea_jellyfish": "Medusa invertida",
+  "entity.upgrade_aquatic.immortal_jellyfish": "Medusa inmortal",
   
   "_comment5": "Pociones y efectos",
   
@@ -561,7 +572,7 @@
   "advancements.adventure.unethical_dentistry.description": "Colocá cualquier bloque que esté fabricado con dientes de triturador",
   
   "advancements.adventure.kill_great_thrasher.title": "Vamos a necesitar un barco más grande",
-  "advancements.adventure.kill_great_thrasher.description": "Matá al gran devorador",
+  "advancements.adventure.kill_great_thrasher.description": "Matá al gran triturador",
   
   "advancements.nether.sleepless_slave.title": "Esclavo insomne",
   "advancements.nether.sleepless_slave.description": "Aplicá insomnio en un fantasma para convertirlo en una llamarada",
@@ -577,11 +588,11 @@
   
   "_comment8": "Subtítulos",
 
-  "subtitles.upgrade_aquatic.thrasher.hurt": "Devorador herido",
-  "subtitles.upgrade_aquatic.thrasher.ambient": "Gruñido de devorador",
-  "subtitles.upgrade_aquatic.thrasher.death": "Devorador muere",
-  "subtitles.upgrade_aquatic.thrasher.thrash": "Devorador devora",
-  "subtitles.upgrade_aquatic.thrasher.flop": "Devorador aletea",
-  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Sonar de devorador"
+  "subtitles.upgrade_aquatic.thrasher.hurt": "Triturador herido",
+  "subtitles.upgrade_aquatic.thrasher.ambient": "Gruñido de triturador",
+  "subtitles.upgrade_aquatic.thrasher.death": "Triturador muere",
+  "subtitles.upgrade_aquatic.thrasher.thrash": "Triturador devora",
+  "subtitles.upgrade_aquatic.thrasher.flop": "Triturador aletea",
+  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Sonar de triturador"
 
 }

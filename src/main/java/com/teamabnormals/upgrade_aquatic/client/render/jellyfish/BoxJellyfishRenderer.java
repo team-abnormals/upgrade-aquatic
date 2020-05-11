@@ -6,6 +6,7 @@ import com.teamabnormals.upgrade_aquatic.client.render.jellyfish.layer.Jellyfish
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityBoxJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;
@@ -18,6 +19,12 @@ public class BoxJellyfishRenderer extends AbstractJellyfishRenderer<EntityBoxJel
 	public BoxJellyfishRenderer(EntityRendererManager renderManager) {
 		super(renderManager, new ModelBoxJellyfish<>(), 0.5F);
 		this.addLayer(new JellyfishEmissiveLayer<>(this, this));
+	}
+	
+	@Override
+	public void render(EntityBoxJellyfish jellyfish, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+		this.shadowSize *= jellyfish.getSize();
+		super.render(jellyfish, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}
 
 	@Override

@@ -37,11 +37,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class UAEntitySpawns {
 	private static final List<EntitySpawn<? extends MobEntity>> SPAWNS = Util.make(Lists.newArrayList(), spawns -> {
-		spawns.add(new EntitySpawn<EntityNautilus>(() -> UAEntities.NAUTILUS.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 51, 1, 4), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::ravineMobCondition, notColdOceanCondition()));
-		spawns.add(new PikeEntitySpawn<EntityPike>(() -> UAEntities.PIKE.get(), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING));
-		spawns.add(new EntitySpawn<EntityLionfish>(() -> UAEntities.LIONFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 15, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::coralCondition, hotOceanCondition()));
-		spawns.add(new EntitySpawn<EntityBoxJellyfish>(() -> UAEntities.BOX_JELLYFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 2), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractEntityJellyfish::defaultSpawnCondition, warmishOceanCondition()));
-		spawns.add(new ThrasherEntitySpawn<EntityThrasher>(() -> UAEntities.THRASHER.get(), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns.coldOceanCondition()));
+		spawns.add(new EntitySpawn<>(() -> UAEntities.NAUTILUS.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 51, 1, 4), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::ravineMobCondition, notColdOceanCondition()));
+		spawns.add(new PikeEntitySpawn<>(() -> UAEntities.PIKE.get(), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING));
+		spawns.add(new EntitySpawn<>(() -> UAEntities.LIONFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 15, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::coralCondition, hotOceanCondition()));
+		spawns.add(new ThrasherEntitySpawn<>(() -> UAEntities.THRASHER.get(), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns.coldOceanCondition()));
+	
+		spawns.add(new EntitySpawn<>(() -> UAEntities.BOX_JELLYFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 6, 1, 2), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractEntityJellyfish::defaultSpawnCondition, warmishOceanCondition()));
+		spawns.add(new EntitySpawn<>(() -> UAEntities.CASSIOPEA_JELLYFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractEntityJellyfish::defaultSpawnCondition, (biome) -> biome == Biomes.LUKEWARM_OCEAN));
+		spawns.add(new EntitySpawn<>(() -> UAEntities.IMMORTAL_JELLYFISH.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractEntityJellyfish::defaultSpawnCondition, warmishOceanCondition()));
 	});
 	
 	public static void registerSpawnPlacements() {
@@ -110,7 +113,7 @@ public class UAEntitySpawns {
 		return biome -> biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.HOT);
 	}
 	
-	private static Predicate<Biome> warmishOceanCondition() {
+	public static Predicate<Biome> warmishOceanCondition() {
 		return biome -> biome == Biomes.WARM_OCEAN || biome == Biomes.LUKEWARM_OCEAN;
 	}
 	
