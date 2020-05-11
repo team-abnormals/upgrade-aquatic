@@ -35,6 +35,8 @@ public class UAEntities {
 	public static final RegistryObject<EntityType<EntityThrasher>> THRASHER               = ENTITY_TYPES.register("thrasher", () -> createLivingEntity(EntityThrasher::new, EntityClassification.MONSTER, "thrasher", 1.6F, 0.9F));
 	public static final RegistryObject<EntityType<EntityGreatThrasher>> GREAT_THRASHER    = ENTITY_TYPES.register("great_thrasher", () -> createLivingEntity(EntityGreatThrasher::new, EntityClassification.MONSTER, "great_thrasher", 2.8F, 1.575F));
 	public static final RegistryObject<EntityType<EntityFlare>> FLARE                     = ENTITY_TYPES.register("flare", () -> createLivingEntity(EntityFlare::new, EntityClassification.MONSTER, "flare", 0.9F, 0.5F));
+	public static final RegistryObject<EntityType<EntityUlulu>> ULULU					  = ENTITY_TYPES.register("ululu", () -> createLivingEntity(EntityUlulu::new, EntityClassification.MONSTER, "ululu", 2.04F, 2.04F));
+	
 	
 	public static final RegistryObject<EntityType<EntityBoxJellyfish>> BOX_JELLYFISH      = ENTITY_TYPES.register("box_jellyfish", () -> createLivingEntity(EntityBoxJellyfish::new, EntityClassification.WATER_CREATURE, "box_jellyfish", 0.75F, 0.625F));
 	
