@@ -15,7 +15,7 @@ issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
 [[dependencies.upgrade_aquatic]]
     modId="forge"
     mandatory=true
-    versionRange="[31.1.0,)"
+    versionRange="[31.1.49,)"
     ordering="NONE"
     side="BOTH"
 
