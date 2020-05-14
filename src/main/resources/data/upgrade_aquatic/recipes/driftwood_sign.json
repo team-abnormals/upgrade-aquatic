@@ -7,14 +7,14 @@
   ],
   "key": {
     "#": {
-      "item": "upgrade_aquatic:river_planks"
+      "item": "upgrade_aquatic:driftwood_planks"
     },
     "X": {
-      "item": "minecraft:stick"
+      "tag": "forge:rods/wooden"
     }
   },
   "result": {
-    "item": "upgrade_aquatic:river_sign",
+    "item": "upgrade_aquatic:driftwood_sign",
     "count": 3
   }
 }
