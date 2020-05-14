@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
-import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.BlockState;
@@ -75,7 +75,7 @@ public class FeaturePrismarineCoralShelf extends FeaturePrismarineCoral {
 	}
 	
 	private static void addShelf(IWorld world, BlockPos pos, Random rand, int a, int b, int c, boolean isElder) {
-		MathUtil.Equation r = (theta) -> {
+		MathUtils.Equation r = (theta) -> {
 			return (Math.cos(b * theta) / c + 1) * a;
 		};
 		for (int i = -(a / c + a); i < a / c + a; i++) {

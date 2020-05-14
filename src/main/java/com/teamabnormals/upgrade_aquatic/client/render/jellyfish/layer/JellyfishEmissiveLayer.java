@@ -2,9 +2,9 @@ package com.teamabnormals.upgrade_aquatic.client.render.jellyfish.layer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatorEntityModel;
-import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.client.UARenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.render.jellyfish.AbstractJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
@@ -30,6 +30,6 @@ public class JellyfishEmissiveLayer<T extends AbstractEntityJellyfish, M extends
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(UARenderTypes.getEmmisiveTransluscentEntityWithDiffusedLight(this.jellyfishRenderer.getOverlayTexture(jellyfish), true));
 		
 		this.getEntityModel().setRotationAngles(jellyfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getEntityModel().render(matrixStackIn, ivertexbuilder, MathHelper.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingRenderer.getPackedOverlay(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
+		this.getEntityModel().render(matrixStackIn, ivertexbuilder, MathHelper.clamp((packedLightIn + MathUtils.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingRenderer.getPackedOverlay(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
 	}
 }

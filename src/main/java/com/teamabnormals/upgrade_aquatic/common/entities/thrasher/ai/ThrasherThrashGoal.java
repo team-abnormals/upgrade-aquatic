@@ -2,8 +2,8 @@ package com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import java.util.EnumSet;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.entity.EndimatedEntity;
-import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
+import com.teamabnormals.abnormals_core.core.library.endimator.entity.EndimatedEntity;
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 
 import net.minecraft.entity.Entity;

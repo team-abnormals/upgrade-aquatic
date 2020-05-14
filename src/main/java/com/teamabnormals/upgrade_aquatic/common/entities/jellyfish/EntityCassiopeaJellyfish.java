@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.CassiopeaHideInSeagrassGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.CassiopeaJellyfishFlipGoal;

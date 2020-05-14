@@ -1,13 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
+
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.util.math.MathHelper;
-
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 
 /**
  * ModelSonar - SmellyModder

@@ -2,9 +2,10 @@ package com.teamabnormals.upgrade_aquatic.core.registry.other;
 
 import java.util.List;
 
-import com.teamabnormals.upgrade_aquatic.api.entity.IBucketableEntity;
+import com.teamabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
+import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
-import com.teamabnormals.upgrade_aquatic.common.items.UASpawnEggItem;
+import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 import net.minecraft.block.DispenserBlock;
@@ -30,7 +31,6 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.RegistryObject;
 
 public class UADispenseBehaviorRegistry {
 	static IDispenseItemBehavior fishDispenseItemBehavior = new DefaultDispenseItemBehavior() {
@@ -117,11 +117,9 @@ public class UADispenseBehaviorRegistry {
     	DispenserBlock.registerDispenseBehavior(UAItems.SQUID_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, bucketFishItemBehavior);
     	
-    	for(RegistryObject<Item> items : UAItems.SPAWN_EGGS) {
-    		Item item = items.get();
-    		if(item instanceof UASpawnEggItem) {
-    			DispenserBlock.registerDispenseBehavior(item, spawnEggItemBehavior);
-    		}
-    	}
+    	UpgradeAquatic.REGISTRY_HELPER.getDeferredItemRegister().getEntries().stream().filter((entry) -> entry.get() instanceof AbnormalsSpawnEggItem).forEach((item) -> {
+    		Item items = item.get();
+    		DispenserBlock.registerDispenseBehavior(items, spawnEggItemBehavior);
+    	});
     }
 }

@@ -8,9 +8,9 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
-import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
-import com.teamabnormals.upgrade_aquatic.api.endimator.entity.EndimatedMonsterEntity;
+import com.teamabnormals.abnormals_core.core.library.endimator.ControlledEndimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.upgrade_aquatic.api.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
@@ -447,22 +447,18 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				}
 				
 				if(this.isStunned()) {
-					if(this.STUNNED_ANIMATION.getCurrentValue() >= 10) {
-						this.STUNNED_ANIMATION.manipulateTimer(true);
+					if(this.STUNNED_ANIMATION.getTick() >= 10) {
+						this.STUNNED_ANIMATION.setDecrementing(true);
 					} else {
-						if(this.STUNNED_ANIMATION.shouldDecrement && this.STUNNED_ANIMATION.getCurrentValue() <= 0) {
-							this.STUNNED_ANIMATION.manipulateTimer(false);
+						if(this.STUNNED_ANIMATION.isDecrementing() && this.STUNNED_ANIMATION.getTick() <= 0) {
+							this.STUNNED_ANIMATION.setDecrementing(false);
 						}
 					}
 				} else {
-					if(this.STUNNED_ANIMATION.getCurrentValue() == 10) {
-						this.STUNNED_ANIMATION.setTimerToStop(true);
-					}
-					
-					this.STUNNED_ANIMATION.manipulateTimer(false);
+					this.STUNNED_ANIMATION.setDecrementing(false);
 				}
 				
-				this.STUNNED_ANIMATION.updateTimerValues();
+				this.STUNNED_ANIMATION.update();
 				
 				this.tailAnimation += this.tailSpeed;
 				this.finAnimation += this.finSpeed;

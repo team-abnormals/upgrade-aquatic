@@ -3,10 +3,10 @@ package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish;
 import java.util.Random;
 import java.util.function.Predicate;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
-import com.teamabnormals.upgrade_aquatic.api.endimator.entity.IEndimatedEntity;
-import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
-import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageRotateJellyfish;
@@ -28,15 +28,17 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigator;
+import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.PooledMutable;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -44,7 +46,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
 /**
  * @author SmellyModder(Luke Tonon)
  */
-public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob implements IEndimatedEntity {
+public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity implements IEndimatedEntity {
 	private static final Predicate<LivingEntity> CAN_STING = (entity) -> {
 		if(entity instanceof PlayerEntity) {
 			return !entity.isSpectator() && !((PlayerEntity) entity).isCreative();
@@ -95,7 +97,7 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 			
 			if(this.world.isRemote && this.world.getGameTime() % 4 == 0) {
 				for(int i = 0; i < 2; i++) {
-					this.world.addParticle(BlockJellyTorch.getBlobParticleType(this.getJellyTorchType()), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtil.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtil.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
+					this.world.addParticle(BlockJellyTorch.getBlobParticleType(this.getJellyTorchType()), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
 				}
 			}
 		}
@@ -162,6 +164,11 @@ public abstract class AbstractEntityJellyfish extends EntityBucketableWaterMob i
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public PathNavigator getNavigator() {
+		return new SwimmerPathNavigator(this, this.world);
 	}
 	
 	@Override

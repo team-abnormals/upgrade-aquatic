@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
-import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
@@ -75,7 +75,7 @@ import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraft.world.storage.loot.LootTables;
 
-public class EntityPike extends EntityBucketableWaterMob {
+public class EntityPike extends BucketableWaterMobEntity {
 	private static final DataParameter<Integer> PIKE_TYPE = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> CAUGHT_ENTITY = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
 	private static final DataParameter<Boolean> DROP_ITEM = EntityDataManager.createKey(EntityPike.class, DataSerializers.BOOLEAN);

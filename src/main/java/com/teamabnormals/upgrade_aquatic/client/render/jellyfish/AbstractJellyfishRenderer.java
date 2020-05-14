@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.render.jellyfish;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatorEntityModel;
+import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;

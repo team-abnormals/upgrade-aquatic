@@ -2,9 +2,9 @@ package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatorEntityModel;
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatorModelRenderer;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
+import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorModelRenderer;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityCassiopeaJellyfish;
 
 /**
@@ -60,7 +60,6 @@ public class ModelCassiopeaJellyfish<E extends EntityCassiopeaJellyfish> extends
         this.thing.addChild(this.tentacleE);
         this.thing.addChild(this.tentacleT);
         
-        this.createScaleController();
         this.setDefaultBoxValues();
     }
     
@@ -81,40 +80,39 @@ public class ModelCassiopeaJellyfish<E extends EntityCassiopeaJellyfish> extends
     
     @Override
     public void animateModel(E jellyfish) {
-    	this.endimator.updateAnimations(jellyfish);
+    	super.animateModel(jellyfish);
     	
     	if(jellyfish.isEndimationPlaying(EntityCassiopeaJellyfish.SWIM_ANIMATION)) {
-    		this.endimator.setAnimationToPlay(EntityCassiopeaJellyfish.SWIM_ANIMATION);
+    		this.setEndimationToPlay(EntityCassiopeaJellyfish.SWIM_ANIMATION);
     		
-    		this.endimator.startKeyframe(10);
-    		this.endimator.rotate(this.tentacleN, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleE, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleT, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleW, 0.3F, 0.0F, 0.0F);
+    		this.startKeyframe(10);
+    		this.rotate(this.tentacleN, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleE, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleT, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleW, 0.3F, 0.0F, 0.0F);
     		
-    		this.endimator.move(this.getScaleController(), 0.3F, -0.1F, 0.3F);
-    		this.endimator.move(this.cap, 0.0F, -0.1F, 0.0F);
-    		this.endimator.endKeyframe();
+    		this.scale(this.cap, 0.3F, -0.1F, 0.3F);
+    		this.move(this.cap, 0.0F, -0.1F, 0.0F);
+    		this.endKeyframe();
     		
-    		this.endimator.resetKeyframe(10);
+    		this.resetKeyframe(10);
     	} else if(jellyfish.isEndimationPlaying(EntityCassiopeaJellyfish.BOOST_ANIMATION)) {
-    		this.endimator.setAnimationToPlay(EntityCassiopeaJellyfish.BOOST_ANIMATION);
+    		this.setEndimationToPlay(EntityCassiopeaJellyfish.BOOST_ANIMATION);
     		
-    		this.endimator.startKeyframe(10);
-    		this.endimator.rotate(this.tentacleN, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleE, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleT, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleW, 0.3F, 0.0F, 0.0F);
+    		this.startKeyframe(10);
+    		this.rotate(this.tentacleN, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleE, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleT, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleW, 0.3F, 0.0F, 0.0F);
     		
-    		this.endimator.move(this.getScaleController(), 0.3F, -0.1F, 0.3F);
-    		this.endimator.move(this.cap, 0.0F, -0.1F, 0.0F);
-    		this.endimator.endKeyframe();
+    		this.scale(this.cap, 0.3F, -0.1F, 0.3F);
+    		this.move(this.cap, 0.0F, -0.1F, 0.0F);
+    		this.endKeyframe();
     		
-    		this.endimator.resetKeyframe(10);
+    		this.resetKeyframe(10);
     	}
     	
     	this.cap.setShouldScaleChildren(false);
-    	this.cap.setScale(this.getScaleController().rotationPointX, this.getScaleController().rotationPointY, this.getScaleController().rotationPointZ);
     }
 
     /**

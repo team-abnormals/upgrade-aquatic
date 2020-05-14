@@ -1,8 +1,9 @@
+
 package com.teamabnormals.upgrade_aquatic.client.render.overlay;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
 import com.teamabnormals.upgrade_aquatic.client.UARenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelThrasher;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;

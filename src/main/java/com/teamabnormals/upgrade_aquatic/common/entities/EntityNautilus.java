@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
-import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -31,7 +31,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityNautilus extends EntityBucketableWaterMob {
+public class EntityNautilus extends BucketableWaterMobEntity {
     private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
 

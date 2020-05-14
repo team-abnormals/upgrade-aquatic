@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
-import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 
 import net.minecraft.entity.LivingEntity;

@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
-import com.teamabnormals.upgrade_aquatic.api.entity.ai.PredicateAttackGoal;
+import com.teamabnormals.abnormals_core.common.entity.ai.PredicateAttackGoal;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockJellyTorch.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.BoxJellyfishHuntGoal;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;

@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.network;
 
 import java.util.function.Supplier;
 
-import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 
 import net.minecraft.entity.Entity;

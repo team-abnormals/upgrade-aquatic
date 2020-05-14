@@ -71,9 +71,6 @@ public class EntityUtil {
 		return new Vec3d((double) (f3 * f4), (double) (-f5), (double) (f2 * f4));
 	}
 	
-	/**
-	 * Builder Class for Basic Emerald Trading
-	 */
 	public static class ItemsForEmeraldsTrade implements ITrade {
 	    private final ItemStack itemstack;
 	    private final int stackSize;
@@ -180,4 +177,3 @@ public class EntityUtil {
 	    }
 	}
 }
-

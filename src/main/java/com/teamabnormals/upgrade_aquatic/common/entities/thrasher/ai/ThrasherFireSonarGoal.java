@@ -5,9 +5,10 @@ import java.util.function.BiPredicate;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
-import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.*;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 
 import net.minecraft.block.Blocks;

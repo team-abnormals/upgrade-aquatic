@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import com.google.common.collect.Lists;
+import com.teamabnormals.abnormals_core.core.library.EntitySpawnHandler;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
 import com.teamabnormals.upgrade_aquatic.common.entities.*;
@@ -27,15 +28,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class UAEntitySpawns {
+public class UAEntitySpawns extends EntitySpawnHandler {
 	private static final List<EntitySpawn<? extends MobEntity>> SPAWNS = Util.make(Lists.newArrayList(), spawns -> {
 		spawns.add(new EntitySpawn<>(() -> UAEntities.NAUTILUS.get(), new SpawnEntry(EntityClassification.WATER_CREATURE, 51, 1, 4), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::ravineMobCondition, notColdOceanCondition()));
 		spawns.add(new PikeEntitySpawn<>(() -> UAEntities.PIKE.get(), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING));
@@ -101,48 +99,8 @@ public class UAEntitySpawns {
 		return pos.getY() <= 30 ? world.getWorld().isNightTime() ? true : random.nextFloat() < 0.75F : false;
 	}
 	
-	private static Predicate<Biome> coldOceanCondition() {
-		return biome -> biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.COLD);
-	}
-	
-	private static Predicate<Biome> notColdOceanCondition() {
-		return biome -> biome.getCategory() == Category.OCEAN && !BiomeDictionary.hasType(biome, Type.COLD);
-	}
-	
-	private static Predicate<Biome> hotOceanCondition() {
-		return biome -> biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.HOT);
-	}
-	
 	public static Predicate<Biome> warmishOceanCondition() {
 		return biome -> biome == Biomes.WARM_OCEAN || biome == Biomes.LUKEWARM_OCEAN;
-	}
-	
-	static class EntitySpawn<T extends MobEntity> {
-		public final Supplier<EntityType<T>> entity;
-		public final SpawnEntry spawnEntry;
-		public final PlacementType placementType;
-		public final Heightmap.Type heightmapType;
-		public final EntitySpawnPlacementRegistry.IPlacementPredicate<T> placementPredicate;
-		public final Predicate<Biome> biomePredicate;
-		
-		public EntitySpawn(Supplier<EntityType<T>> entity, SpawnEntry spawnEntry, PlacementType placementType, Heightmap.Type heightmapType, EntitySpawnPlacementRegistry.IPlacementPredicate<T> placementPredicate, Predicate<Biome> biomePredicate) {
-			this.entity = entity;
-			this.spawnEntry = spawnEntry;
-			this.placementType = placementType;
-			this.heightmapType = heightmapType;
-			this.placementPredicate = placementPredicate;
-			this.biomePredicate = biomePredicate;
-		}
-		
-		public void registerSpawnPlacement() {
-			EntitySpawnPlacementRegistry.register(this.entity.get(), this.placementType, this.heightmapType, this.placementPredicate);
-		}
-		
-		public void processSpawnAddition() {
-			ForgeRegistries.BIOMES.getEntries().stream().filter(biome -> this.biomePredicate.test(biome.getValue())).forEach((biome) -> {
-				biome.getValue().addSpawn(this.spawnEntry.classification, new SpawnListEntry(this.entity.get(), this.spawnEntry.weight, this.spawnEntry.minGroup, this.spawnEntry.maxGroup));
-			});
-		}
 	}
 	
 	static class PikeEntitySpawn<T extends EntityPike> extends EntitySpawn<T> {
@@ -194,17 +152,4 @@ public class UAEntitySpawns {
 		}
 		
 	}
-	
-	static class SpawnEntry {
-		public final EntityClassification classification;
-		public final int weight, minGroup, maxGroup;
-		
-		public SpawnEntry(EntityClassification classification, int weight, int minGroup, int maxGroup) {
-			this.classification = classification;
-			this.weight = weight;
-			this.minGroup = minGroup;
-			this.maxGroup = maxGroup;
-		}
-	}
-	
 }

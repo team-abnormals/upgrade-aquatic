@@ -6,7 +6,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish.BucketData;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.JellyfishRegistry;
@@ -62,7 +62,7 @@ public class ItemJellyfishBucket extends BucketItem {
 	private void placeEntity(World world, ItemStack stack, BlockPos pos) {
 		AbstractEntityJellyfish jellyfish = this.getEntityInStack(stack, world, pos);
 		if(jellyfish != null) {
-			((EntityBucketableWaterMob) jellyfish).setFromBucket(true);
+			((BucketableWaterMobEntity) jellyfish).setFromBucket(true);
 		}
 	}
 	

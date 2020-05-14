@@ -3,10 +3,10 @@ package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 import java.util.EnumSet;
 import java.util.Random;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
-import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
-import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 
 import net.minecraft.entity.ai.goal.Goal;
@@ -75,13 +75,13 @@ public class JellyfishSwinIntoDirectionGoal extends Goal {
 		float upperChance = this.jellyfish.getPosition().getY() < this.jellyfish.world.getSeaLevel() - 6 ? 0.5F : 0.2F;
 		if(this.jellyfish.onGround || rotations[0] == 0.0F && rotations[1] == 0.0F || EntityUtil.rayTraceUpWithCustomDirection(this.jellyfish, rotations[1], rotations[0], 1.0F, 1.0F).getType() == Type.BLOCK) {
 			return new float[] {
-				(float) MathHelper.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand)),
-				(float) MathHelper.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand))
+				(float) MathHelper.wrapDegrees(MathUtils.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand)),
+				(float) MathHelper.wrapDegrees(MathUtils.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand))
 			};
 		}
 		return new float[] {
-			rotations[0] + (float) MathHelper.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand)), 
-			rand.nextFloat() < upperChance ? (float) MathUtil.makeNegativeRandomly(rand.nextFloat() * 50.0F, rand) : rotations[1] + (float) MathHelper.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand))
+			rotations[0] + (float) MathHelper.wrapDegrees(MathUtils.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand)), 
+			rand.nextFloat() < upperChance ? (float) MathUtils.makeNegativeRandomly(rand.nextFloat() * 50.0F, rand) : rotations[1] + (float) MathHelper.wrapDegrees(MathUtils.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand))
 		};
 	}
 }

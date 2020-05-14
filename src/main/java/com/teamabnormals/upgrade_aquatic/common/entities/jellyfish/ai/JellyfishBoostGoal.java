@@ -2,9 +2,9 @@ package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
 import java.util.EnumSet;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
-import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 
 import net.minecraft.entity.ai.goal.Goal;

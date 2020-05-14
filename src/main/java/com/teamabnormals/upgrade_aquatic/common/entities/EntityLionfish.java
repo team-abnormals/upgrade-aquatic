@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entities;
 
 import java.util.function.Predicate;
 
-import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
@@ -40,7 +40,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityLionfish extends EntityBucketableWaterMob {
+public class EntityLionfish extends BucketableWaterMobEntity {
 	private static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
 		if (entity == null) {
 			return false;

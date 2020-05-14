@@ -2,9 +2,9 @@ package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatorEntityModel;
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatorModelRenderer;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
+import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorModelRenderer;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityBoxJellyfish;
 
 /**
@@ -68,7 +68,6 @@ public class ModelBoxJellyfish<E extends EntityBoxJellyfish> extends EndimatorEn
         this.body.addChild(this.tentacleSE);
         this.body.addChild(this.tentacleSW);
         
-        this.createScaleController();
         this.setDefaultBoxValues();
     }
     
@@ -91,46 +90,45 @@ public class ModelBoxJellyfish<E extends EntityBoxJellyfish> extends EndimatorEn
     
     @Override
     public void animateModel(E jellyfish) {
-    	this.endimator.updateAnimations(jellyfish);
+    	super.animateModel(jellyfish);
     	
     	if(jellyfish.isEndimationPlaying(EntityBoxJellyfish.SWIM_ANIMATION)) {
-    		this.endimator.setAnimationToPlay(EntityBoxJellyfish.SWIM_ANIMATION);
+    		this.setEndimationToPlay(EntityBoxJellyfish.SWIM_ANIMATION);
     		
-    		this.endimator.startKeyframe(10);
-    		this.endimator.rotate(this.tentacleN, 0.52F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleNW, 0.52F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleNE, 0.52F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleE, -0.52F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleSE, 0.52F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleS, 0.52F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleSW, 0.52F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleW, 0.52F, 0.0F, 0.0F);
+    		this.startKeyframe(10);
+    		this.rotate(this.tentacleN, 0.52F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleNW, 0.52F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleNE, 0.52F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleE, -0.52F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleSE, 0.52F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleS, 0.52F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleSW, 0.52F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleW, 0.52F, 0.0F, 0.0F);
     		
-    		this.endimator.move(this.getScaleController(), 0.5F, -0.15F, 0.5F);
-    		this.endimator.endKeyframe();
+    		this.scale(this.body, 0.5F, -0.15F, 0.5F);
+    		this.endKeyframe();
     		
-    		this.endimator.resetKeyframe(10);
+    		this.resetKeyframe(10);
     	} else if(jellyfish.isEndimationPlaying(EntityBoxJellyfish.BOOST_ANIMATION)) {
-    		this.endimator.setAnimationToPlay(EntityBoxJellyfish.BOOST_ANIMATION);
+    		this.setEndimationToPlay(EntityBoxJellyfish.BOOST_ANIMATION);
     		
-    		this.endimator.startKeyframe(10);
-    		this.endimator.rotate(this.tentacleN, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleNW, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleNE, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleE, -0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleSE, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleS, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleSW, 0.3F, 0.0F, 0.0F);
-    		this.endimator.rotate(this.tentacleW, 0.3F, 0.0F, 0.0F);
+    		this.startKeyframe(10);
+    		this.rotate(this.tentacleN, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleNW, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleNE, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleE, -0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleSE, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleS, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleSW, 0.3F, 0.0F, 0.0F);
+    		this.rotate(this.tentacleW, 0.3F, 0.0F, 0.0F);
     		
-    		this.endimator.move(this.getScaleController(), 0.25F, -0.1F, 0.25F);
-    		this.endimator.endKeyframe();
+    		this.scale(this.body, 0.25F, -0.1F, 0.25F);
+    		this.endKeyframe();
     		
-    		this.endimator.resetKeyframe(10);
+    		this.resetKeyframe(10);
     	}
     	
     	this.body.setShouldScaleChildren(false);
-    	this.body.setScale(this.getScaleController().rotationPointX, this.getScaleController().rotationPointY, this.getScaleController().rotationPointZ);
     }
 
     /**

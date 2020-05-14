@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
 import java.util.EnumSet;
 
-import com.teamabnormals.upgrade_aquatic.api.util.NetworkUtil;
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityBoxJellyfish;
 
 import net.minecraft.entity.LivingEntity;

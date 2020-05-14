@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
-import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Blocks;
@@ -39,7 +39,7 @@ public class FeaturePrismarineStalactite extends FeaturePrismarineCoral {
 					int b = 4;
 					int c = rand.nextInt(5) + 4;
 					@SuppressWarnings("unused")
-					MathUtil.Equation r = (theta) -> {
+					MathUtils.Equation r = (theta) -> {
 						return (Math.cos(b * theta) / c + 1) * a;
 					};
 					for (int i = -(a / c + a); i < a / c + a; i++) {
@@ -59,7 +59,7 @@ public class FeaturePrismarineStalactite extends FeaturePrismarineCoral {
 	}
 	
 	public static void createStalactiteLayer(IWorld world, BlockPos pos, Random rand, int a, int b, int c) {
-		MathUtil.Equation r = (theta) -> {
+		MathUtils.Equation r = (theta) -> {
 			return (Math.cos(b * theta) / c + 1) * a;
 		};
 		for (int i = -(a / c + a); i < a / c + a; i++) {
