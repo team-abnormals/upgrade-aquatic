@@ -2,15 +2,20 @@ package com.teamabnormals.upgrade_aquatic.common.blocks;
 
 import java.util.Random;
 
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.IGrowable;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.potion.Effect;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -62,5 +67,17 @@ public class BlockSearocket extends FlowerBlock implements IGrowable {
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		spawnAsEntity(world, pos, new ItemStack(this));
+	}
+	
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		if(ItemStackUtils.isInGroup(this.asItem(), group)) {
+			int targetIndex = ItemStackUtils.findIndexOfItem(Items.WITHER_ROSE, items);
+			if(targetIndex != -1) {
+				items.add(targetIndex + 1, new ItemStack(this));
+			} else {
+				this.getBlock().fillItemGroup(group, items);
+			}
+		}
 	}
 }

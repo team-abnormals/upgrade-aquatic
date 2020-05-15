@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "upgrade_aquatic:driftwood_sign",
+    "upgrade_aquatic:river_sign"
+  ]
+}

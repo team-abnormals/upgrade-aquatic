@@ -84,7 +84,7 @@ minecraft {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.15.2-31.1.49'
 
-    compile fg.deobf("curse.maven:abnormals-core:2956344")
+    compile fg.deobf("curse.maven:abnormals-core:2957733")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
