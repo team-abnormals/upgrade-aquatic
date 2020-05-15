@@ -42,7 +42,7 @@
         },
         {
             "predicate": {
-                "variant": 1.7
+                "variant": 3.7
             },
             "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_immortal"
         }

@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish.BucketData;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.JellyfishRegistry;
@@ -18,9 +19,12 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.BucketItem;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -105,6 +109,18 @@ public class ItemJellyfishBucket extends BucketItem {
 				tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + jellyfish.getBucketName() + "_jellyfish").applyTextStyles(atextformatting)));
 				
 				tooltip.add(jellyfish.getYieldingTorchMessage());
+			}
+		}
+	}
+	
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		if(this.isInGroup(group)) {
+			int targetIndex = ItemStackUtils.findIndexOfItem(Items.TROPICAL_FISH_BUCKET, items);
+			if(targetIndex != -1) {
+				items.add(targetIndex + 1, new ItemStack(this));
+			} else {
+				super.fillItemGroup(group, items);
 			}
 		}
 	}
