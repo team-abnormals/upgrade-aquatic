@@ -22,6 +22,6 @@ issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
 [[dependencies.upgrade_aquatic]]
     modId="abnormals_core"
     mandatory=true
-    versionRange="[1.0.3,)"
+    versionRange="[1.0.4,)"
     ordering="AFTER"
     side="BOTH"
