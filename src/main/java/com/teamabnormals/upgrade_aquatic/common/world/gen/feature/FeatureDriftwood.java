@@ -5,8 +5,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
+import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.api.util.BlockUtil;
-import com.teamabnormals.upgrade_aquatic.common.world.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UABlockTags;

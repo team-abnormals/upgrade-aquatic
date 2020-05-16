@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.common.blocks.BlockVerticalSlab;
+import com.teamabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
@@ -28,7 +28,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
-public class BlockCoralstoneVerticalSlab extends BlockVerticalSlab {
+public class BlockCoralstoneVerticalSlab extends VerticalSlabBlock {
 	@Nullable
 	private Block[] growableCoralBlocks;
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");

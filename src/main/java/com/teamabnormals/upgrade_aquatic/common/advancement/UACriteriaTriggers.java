@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.advancement;
 
+import com.teamabnormals.abnormals_core.common.advancement.EmptyTrigger;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.advancements.CriteriaTriggers;
