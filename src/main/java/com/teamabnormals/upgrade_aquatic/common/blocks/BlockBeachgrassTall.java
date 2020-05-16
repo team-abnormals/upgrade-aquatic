@@ -177,7 +177,7 @@ public class BlockBeachgrassTall extends Block implements IGrowable {
 			if(targetIndex != -1) {
 				items.add(targetIndex + 1, new ItemStack(this));
 			} else {
-				this.getBlock().fillItemGroup(group, items);
+				super.fillItemGroup(group, items);
 			}
 		}
 	}

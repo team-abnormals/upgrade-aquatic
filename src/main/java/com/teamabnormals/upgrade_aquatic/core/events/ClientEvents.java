@@ -10,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -32,7 +33,7 @@ public class ClientEvents {
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
 		MatrixStack stack = event.getMatrixStack();
 		stack.push();
@@ -45,7 +46,7 @@ public class ClientEvents {
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onPlayerRenderPost(RenderPlayerEvent.Post event) {
 		event.getMatrixStack().pop();
 	}

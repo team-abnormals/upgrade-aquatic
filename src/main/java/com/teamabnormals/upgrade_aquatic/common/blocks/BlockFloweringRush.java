@@ -169,7 +169,7 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 			if(targetIndex != -1) {
 				items.add(targetIndex + 1, new ItemStack(this));
 			} else {
-				this.getBlock().fillItemGroup(group, items);
+				super.fillItemGroup(group, items);
 			}
 		}
 	}
