@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.abnormals_core.common.blocks.AbnormalsLadderBlock;
+import com.teamabnormals.abnormals_core.common.blocks.AbnormalsStairsBlock;
 import com.teamabnormals.abnormals_core.common.blocks.BookshelfBlock;
 import com.teamabnormals.abnormals_core.common.blocks.InjectedBlock;
 import com.teamabnormals.abnormals_core.common.blocks.LeafCarpetBlock;
@@ -79,11 +80,11 @@ import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.StairsBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.trees.OakTree;
+import net.minecraft.entity.item.PaintingType;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
@@ -92,11 +93,16 @@ import net.minecraft.util.Util;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
 	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
+	
+	public static final DeferredRegister<PaintingType> PAINTINGS = new DeferredRegister<>(ForgeRegistries.PAINTING_TYPES, Reference.MODID);
+	public static final RegistryObject<PaintingType> BARNACLE = PAINTINGS.register("barnacle", () -> new PaintingType(16, 32));
 	
 	public static RegistryObject<Block> DEAD_ACAN_CORAL_BLOCK         = HELPER.createBlock("dead_acan_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> DEAD_FINGER_CORAL_BLOCK       = HELPER.createBlock("dead_finger_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
@@ -256,13 +262,13 @@ public class UABlocks {
 	
 	public static RegistryObject<Block> TOOTH_BLOCK					= HELPER.createBlock("tooth_block", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);	
 	public static RegistryObject<Block> TOOTH_TILES					= HELPER.createBlock("tooth_tiles", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);	
-	public static RegistryObject<Block> TOOTH_STAIRS				= HELPER.createBlock("tooth_stairs", () -> new StairsBlock(TOOTH_BLOCK.get().getDefaultState(), Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> TOOTH_STAIRS				= HELPER.createBlock("tooth_stairs", () -> new AbnormalsStairsBlock(TOOTH_BLOCK.get().getDefaultState(), Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
     public static RegistryObject<Block> TOOTH_SLAB					= HELPER.createBlock("tooth_slab", () -> new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
     public static RegistryObject<Block> TOOTH_WALL					= HELPER.createBlock("tooth_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> TOOTH_VERTICAL_SLAB			= HELPER.createCompatBlock("quark", "tooth_vertical_slab", () -> new VerticalSlabBlock(Properties.from(TOOTH_TILES.get())), ItemGroup.BUILDING_BLOCKS);
     public static RegistryObject<Block> TOOTH_BRICKS				= HELPER.createBlock("tooth_bricks", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);	
 	public static RegistryObject<Block> CHISELED_TOOTH_BRICKS		= HELPER.createBlock("chiseled_tooth_bricks", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);	
-	public static RegistryObject<Block> TOOTH_BRICK_STAIRS			= HELPER.createBlock("tooth_brick_stairs", () -> new StairsBlock(TOOTH_BLOCK.get().getDefaultState(), Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> TOOTH_BRICK_STAIRS			= HELPER.createBlock("tooth_brick_stairs", () -> new AbnormalsStairsBlock(TOOTH_BLOCK.get().getDefaultState(), Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
     public static RegistryObject<Block> TOOTH_BRICK_SLAB			= HELPER.createBlock("tooth_brick_slab", () -> new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
     public static RegistryObject<Block> TOOTH_BRICK_WALL			= HELPER.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> TOOTH_BRICK_VERTICAL_SLAB	= HELPER.createCompatBlock("quark", "tooth_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.from(TOOTH_BRICKS.get())), ItemGroup.BUILDING_BLOCKS);
@@ -411,11 +417,11 @@ public class UABlocks {
 	public static RegistryObject<Block> OCHRE_KELPY_COBBLESTONE       = HELPER.createBlock("ochre_kelpy_cobblestone", () -> new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> POLAR_KELPY_COBBLESTONE       = HELPER.createBlock("polar_kelpy_cobblestone", () -> new Block(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	
-	public static RegistryObject<Block> KELPY_COBBLESTONE_STAIRS         = HELPER.createBlock("kelpy_cobblestone_stairs", () -> new StairsBlock(KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_STAIRS  = HELPER.createBlock("tongue_kelpy_cobblestone_stairs", () -> new StairsBlock(TONGUE_KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> THORNY_KELPY_COBBLESTONE_STAIRS  = HELPER.createBlock("thorny_kelpy_cobblestone_stairs", () -> new StairsBlock(THORNY_KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_STAIRS   = HELPER.createBlock("ochre_kelpy_cobblestone_stairs", () -> new StairsBlock(OCHRE_KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> POLAR_KELPY_COBBLESTONE_STAIRS   = HELPER.createBlock("polar_kelpy_cobblestone_stairs", () -> new StairsBlock(POLAR_KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> KELPY_COBBLESTONE_STAIRS         = HELPER.createBlock("kelpy_cobblestone_stairs", () -> new AbnormalsStairsBlock(KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_STAIRS  = HELPER.createBlock("tongue_kelpy_cobblestone_stairs", () -> new AbnormalsStairsBlock(TONGUE_KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> THORNY_KELPY_COBBLESTONE_STAIRS  = HELPER.createBlock("thorny_kelpy_cobblestone_stairs", () -> new AbnormalsStairsBlock(THORNY_KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_STAIRS   = HELPER.createBlock("ochre_kelpy_cobblestone_stairs", () -> new AbnormalsStairsBlock(OCHRE_KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> POLAR_KELPY_COBBLESTONE_STAIRS   = HELPER.createBlock("polar_kelpy_cobblestone_stairs", () -> new AbnormalsStairsBlock(POLAR_KELPY_COBBLESTONE.get().getDefaultState(), Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	
 	public static RegistryObject<Block> KELPY_COBBLESTONE_SLAB         = HELPER.createBlock("kelpy_cobblestone_slab", () -> new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_SLAB  = HELPER.createBlock("tongue_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.from(Blocks.COBBLESTONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
@@ -435,11 +441,11 @@ public class UABlocks {
 	public static RegistryObject<Block> OCHRE_KELPY_STONE_BRICKS       = HELPER.createBlock("ochre_kelpy_stone_bricks", () -> new Block(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> POLAR_KELPY_STONE_BRICKS       = HELPER.createBlock("polar_kelpy_stone_bricks", () -> new Block(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	
-	public static RegistryObject<Block> KELPY_STONE_BRICK_STAIRS         = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new StairsBlock(KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_STAIRS  = HELPER.createBlock("tongue_kelpy_stone_brick_stairs", () -> new StairsBlock(TONGUE_KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> THORNY_KELPY_STONE_BRICK_STAIRS  = HELPER.createBlock("thorny_kelpy_stone_brick_stairs", () -> new StairsBlock(THORNY_KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_STAIRS   = HELPER.createBlock("ochre_kelpy_stone_brick_stairs", () -> new StairsBlock(OCHRE_KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
-	public static RegistryObject<Block> POLAR_KELPY_STONE_BRICK_STAIRS   = HELPER.createBlock("polar_kelpy_stone_brick_stairs", () -> new StairsBlock(POLAR_KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> KELPY_STONE_BRICK_STAIRS         = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new AbnormalsStairsBlock(KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_STAIRS  = HELPER.createBlock("tongue_kelpy_stone_brick_stairs", () -> new AbnormalsStairsBlock(TONGUE_KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> THORNY_KELPY_STONE_BRICK_STAIRS  = HELPER.createBlock("thorny_kelpy_stone_brick_stairs", () -> new AbnormalsStairsBlock(THORNY_KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_STAIRS   = HELPER.createBlock("ochre_kelpy_stone_brick_stairs", () -> new AbnormalsStairsBlock(OCHRE_KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static RegistryObject<Block> POLAR_KELPY_STONE_BRICK_STAIRS   = HELPER.createBlock("polar_kelpy_stone_brick_stairs", () -> new AbnormalsStairsBlock(POLAR_KELPY_STONE_BRICKS.get().getDefaultState(), Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	
 	public static RegistryObject<Block> KELPY_STONE_BRICK_SLAB         = HELPER.createBlock("kelpy_stone_brick_slab", () -> new SlabBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_SLAB  = HELPER.createBlock("tongue_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.from(Blocks.STONE_BRICKS).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);

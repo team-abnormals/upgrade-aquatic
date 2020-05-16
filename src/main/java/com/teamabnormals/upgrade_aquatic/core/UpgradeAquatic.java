@@ -52,6 +52,7 @@ public class UpgradeAquatic {
 		modEventBus.addListener(this::setupCommon);
 
 		REGISTRY_HELPER.getDeferredBlockRegister().register(modEventBus);
+		UABlocks.PAINTINGS.register(modEventBus);
 		REGISTRY_HELPER.getDeferredItemRegister().register(modEventBus);
 		UAEffects.EFFECTS.register(modEventBus);
 		UAEffects.POTIONS.register(modEventBus);
