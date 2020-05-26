@@ -4,16 +4,16 @@
   "block.upgrade_aquatic.guardian_spine": "Épine de gardien",
   "block.upgrade_aquatic.elder_guardian_spine": "Épine d'ancien gardien",
 
-  "block.upgrade_aquatic.elder_eye": "Œil ancien",
+  "block.upgrade_aquatic.elder_eye": "Oeil ancien",
   
   "block.upgrade_aquatic.bubble_block": "Bloc de bulles",
   
   "block.upgrade_aquatic.dead_acan_coral": "Corail Acanthastrea mort",
-  "block.upgrade_aquatic.dead_acan_coral_block": "Block de corail Acanthastrea mort",
+  "block.upgrade_aquatic.dead_acan_coral_block": "Bloc de corail Acanthastrea mort",
   "block.upgrade_aquatic.dead_acan_coral_fan": "Gorgogne Acanthastrea morte",
   
   "block.upgrade_aquatic.acan_coral": "Corail Acanthastrea",
-  "block.upgrade_aquatic.acan_coral_block": "Block de corail Acanthastrea",
+  "block.upgrade_aquatic.acan_coral_block": "Bloc de corail Acanthastrea",
   "block.upgrade_aquatic.acan_coral_fan": "Gorgogne Acanthastrea",
   
   "block.upgrade_aquatic.elder_prismarine_coral": "Corail de prismarine ancien",
@@ -106,14 +106,14 @@
   "block.upgrade_aquatic.jelly_torch_orange": "Torche gélifiée orange",
   "block.upgrade_aquatic.jelly_torch_red": "Torche gélifiée rouge",
   "block.upgrade_aquatic.jelly_torch_white": "Torche gélifiée blanche",
-  "block.upgrade_aquatic.jelly_torch_wall_pink": "Torche gélifiée rose au mur",
-  "block.upgrade_aquatic.jelly_torch_wall_purple": "Torche gélifiée violette au mur",
-  "block.upgrade_aquatic.jelly_torch_wall_blue": "Torche gélifiée bleue au mur",
-  "block.upgrade_aquatic.jelly_torch_wall_green": "Torche gélifiée verte au mur",
-  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Torche gélifiée jaune au mur",
-  "block.upgrade_aquatic.jelly_torch_wall_orange": "Torche gélifiée orange au mur",
-  "block.upgrade_aquatic.jelly_torch_wall_red": "Torche gélifiée rouge au mur",
-  "block.upgrade_aquatic.jelly_torch_wall_white": "Torche gélifiée blanche au mur",
+  "block.upgrade_aquatic.jelly_torch_wall_pink": "Torche gélifiée rose murale",
+  "block.upgrade_aquatic.jelly_torch_wall_purple": "Torche gélifiée violette murale",
+  "block.upgrade_aquatic.jelly_torch_wall_blue": "Torche gélifiée bleue murale",
+  "block.upgrade_aquatic.jelly_torch_wall_green": "Torche gélifiée verte murale",
+  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Torche gélifiée jaune murale",
+  "block.upgrade_aquatic.jelly_torch_wall_orange": "Torche gélifiée orange murale",
+  "block.upgrade_aquatic.jelly_torch_wall_red": "Torche gélifiée rouge murale",
+  "block.upgrade_aquatic.jelly_torch_wall_white": "Torche gélifiée blanche murale",
   
   "block.upgrade_aquatic.embedded_ammonite": "Ammonite fossilisée",
   
