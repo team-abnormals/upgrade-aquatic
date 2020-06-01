@@ -330,9 +330,9 @@
   "block.upgrade_aquatic.boiled_pickerelweed_blue_block": "Bloque de espigas de agua azules hervidas",
   "block.upgrade_aquatic.boiled_pickerelweed_purple_block": "Bloque de espigas de agua moradas hervidas",
   
-  "block.upgrade_aquatic.driftwood": "Tronco de deriva",
+  "block.upgrade_aquatic.driftwood": "Leño de deriva",
   "block.upgrade_aquatic.driftwood_log": "Tronco de deriva",
-  "block.upgrade_aquatic.driftwood_stripped": "Madera de deriva sin corteza",
+  "block.upgrade_aquatic.driftwood_stripped": "Leño de deriva sin corteza",
   "block.upgrade_aquatic.driftwood_log_stripped": "Tronco de deriva sin corteza",
   "block.upgrade_aquatic.driftwood_planks": "Madera de deriva",
   "block.upgrade_aquatic.driftwood_stairs": "Escaleras de deriva",
@@ -354,9 +354,9 @@
   "block.upgrade_aquatic.river_sapling": "Retoño fluvial",
   "block.upgrade_aquatic.river_leaf_carpet": "Alfombra de hojas fluviales",
   "block.upgrade_aquatic.river_log": "Tronco fluvial",
-  "block.upgrade_aquatic.river_wood": "Tronco fluvial",
+  "block.upgrade_aquatic.river_wood": "Leño fluvial",
   "block.upgrade_aquatic.stripped_river_log": "Tronco fluvial sin corteza",
-  "block.upgrade_aquatic.stripped_river_wood": "Madera fluvial sin corteza",
+  "block.upgrade_aquatic.stripped_river_wood": "Leño fluvial sin corteza",
   "block.upgrade_aquatic.river_planks": "Madera fluvial",
   "block.upgrade_aquatic.river_stairs": "Escaleras fluviales",
   "block.upgrade_aquatic.river_slab": "Losa fluvial",
@@ -376,15 +376,15 @@
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
   "block.upgrade_aquatic.mulberry_vine": "Morera",
   
-  "block.upgrade_aquatic.prismarine_rod_bundle": "Montón de varas de prismarina",
+  "block.upgrade_aquatic.prismarine_rod_bundle": "Paquete de varas de prismarina",
   
-  "block.upgrade_aquatic.beachgrass": "Pasto de playa",
-  "block.upgrade_aquatic.tall_beachgrass": "Pasto de playa alta",
-  "block.upgrade_aquatic.beachgrass_thatch": "Paja de pasto de playa",
-  "block.upgrade_aquatic.beachgrass_thatch_slab": "Losa de paja de pasto de playa",
-  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escaleras de paja de pasto de playa",
+  "block.upgrade_aquatic.beachgrass": "Hierba de playa",
+  "block.upgrade_aquatic.tall_beachgrass": "Hierba de playa alta",
+  "block.upgrade_aquatic.beachgrass_thatch": "Cubierta de hierba de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_slab": "Losa de hierba de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escaleras de hierba de playa",
   
-  "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Losa vertical de paja de pasto de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Losa vertical de hierba de playa",
   "block.upgrade_aquatic.tooth_vertical_slab": "Losa vertical de diente",
   "block.upgrade_aquatic.tooth_brick_vertical_slab": "Losa vertical de ladrillos de diente",
   "block.upgrade_aquatic.kelpy_cobblestone_vertical_slab": "Losa vertical de piedra labrada con algas",
@@ -561,11 +561,11 @@
   
   "_comment6": "Muertes",
   
-  "death.attack.upgrade_aquatic.guardianSpine": "%1$s fue empalado/a con Espina de guardián",
-  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s fue empalado/a con Espina de guardián mientras escapaba de %2$s",
-  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s fue empalado/a con Espina de guardián anciano",
-  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s fue empalado/a con Espina de guardián anciano mientras escapaba de %2$s",
-  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s fue picado/a hasta la muerte por %2$s",
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s fue atravesado/a por una espina de guardián",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s fue atravesado/a por una espina de guardián mientras intentaba huir de %2$s",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s fue atravesado/a por una espina de guardián anciano",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s fue atravesado/a por una espina de guardián anciano mientras intentaba huir de %2$s",
+  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s fue picado/a hasta la muerte por una %2$s",
 
   "_comment7": "Progresos",
   
@@ -573,7 +573,7 @@
   "advancements.adventure.tooth_fairy.description": "Consigue el diente de un triturador, una criatura ancestral que acecha en lo profundo de las aguas más frías",
   
   "advancements.adventure.unethical_dentistry.title": "Dentista sin ética",
-  "advancements.adventure.unethical_dentistry.description": "Coloca cualquier bloque que esté fabricado con dientes de triturador",
+  "advancements.adventure.unethical_dentistry.description": "Coloca cualquier bloque fabricado con dientes de triturador",
   
   "advancements.adventure.kill_great_thrasher.title": "Vamos a necesitar un barco más grande",
   "advancements.adventure.kill_great_thrasher.description": "Mata al gran triturador",
@@ -582,7 +582,7 @@
   "advancements.nether.sleepless_slave.description": "Inflige insomnio en un fantasma para convertirlo en una llamarada",
   
   "advancements.nether.vibe_check.title": "Control de sintonía",
-  "advancements.nether.vibe_check.description": "Fermenta un pez león para elaborar una poción de repelencia e invierte su efecto con un ojo de araña para crear una poción de sintonía.",
+  "advancements.nether.vibe_check.description": "Fermenta un pez león para elaborar una poción de repelencia e invierte su efecto con un ojo de araña para crear una poción de sintonía",
   
   "advancements.husbandry.eat_pickerelweed.title": "Casi legal",
   "advancements.husbandry.eat_pickerelweed.description": "Come una espiga de agua hervida para recuperar burbujas de agua",
