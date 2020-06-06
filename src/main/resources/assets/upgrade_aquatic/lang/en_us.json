@@ -106,14 +106,14 @@
   "block.upgrade_aquatic.jelly_torch_orange": "Orange Jelly Torch",
   "block.upgrade_aquatic.jelly_torch_red": "Red Jelly Torch",
   "block.upgrade_aquatic.jelly_torch_white": "White Jelly Torch",
-  "block.upgrade_aquatic.jelly_torch_wall_pink": "Pink Jelly Torch Wall",
-  "block.upgrade_aquatic.jelly_torch_wall_purple": "Purple Jelly Torch Wall",
-  "block.upgrade_aquatic.jelly_torch_wall_blue": "Blue Jelly Torch Wall",
-  "block.upgrade_aquatic.jelly_torch_wall_green": "Green Jelly Torch Wall",
-  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Yellow Jelly Torch Wall",
-  "block.upgrade_aquatic.jelly_torch_wall_orange": "Orange Jelly Torch Wall",
-  "block.upgrade_aquatic.jelly_torch_wall_red": "Red Jelly Torch Wall",
-  "block.upgrade_aquatic.jelly_torch_wall_white": "White Jelly Torch Wall",
+  "block.upgrade_aquatic.jelly_torch_wall_pink": "Pink Jelly Wall Torch",
+  "block.upgrade_aquatic.jelly_torch_wall_purple": "Purple Jelly Wall Torch",
+  "block.upgrade_aquatic.jelly_torch_wall_blue": "Blue Jelly Wall Torch",
+  "block.upgrade_aquatic.jelly_torch_wall_green": "Green Jelly Wall Torch",
+  "block.upgrade_aquatic.jelly_torch_wall_yellow": "Yellow Jelly Wall Torch",
+  "block.upgrade_aquatic.jelly_torch_wall_orange": "Orange Jelly Wall Torch",
+  "block.upgrade_aquatic.jelly_torch_wall_red": "Red Jelly Wall Torch",
+  "block.upgrade_aquatic.jelly_torch_wall_white": "White Jelly Wall Torch",
   
   "block.upgrade_aquatic.embedded_ammonite": "Embedded Ammonite",
   
@@ -137,8 +137,8 @@
   
   "block.upgrade_aquatic.pickerel_weed_blue": "Blue Pickerelweed",
   "block.upgrade_aquatic.pickerel_weed_purple": "Purple Pickerelweed",
-  "block.upgrade_aquatic.pickerel_weed_tall_blue": "Double Blue Pickerelweed",
-  "block.upgrade_aquatic.pickerel_weed_tall_purple": "Double Purple Pickerelweed",
+  "block.upgrade_aquatic.pickerel_weed_tall_blue": "Tall Blue Pickerelweed",
+  "block.upgrade_aquatic.pickerel_weed_tall_purple": "Tall Purple Pickerelweed",
   
   "block.upgrade_aquatic.searocket_white": "White Searocket",
   "block.upgrade_aquatic.searocket_pink": "Pink Searocket",
@@ -348,7 +348,7 @@
   "block.upgrade_aquatic.driftwood_bookshelf": "Driftwood Bookshelf",
   "block.upgrade_aquatic.driftwood_ladder": "Driftwood Ladder",
   "block.upgrade_aquatic.driftwood_sign": "Driftwood Sign",
-  "block.upgrade_aquatic.driftwood_wall_sign": "Driftwood Sign",
+  "block.upgrade_aquatic.driftwood_wall_sign": "Driftwood Wall Sign",
   
   "block.upgrade_aquatic.river_leaves": "River Leaves",
   "block.upgrade_aquatic.river_sapling": "River Sapling",
@@ -371,7 +371,7 @@
   "block.upgrade_aquatic.river_bookshelf": "River Bookshelf",
   "block.upgrade_aquatic.river_ladder": "River Ladder",
   "block.upgrade_aquatic.river_sign": "River Sign",
-  "block.upgrade_aquatic.river_wall_sign": "River Sign",
+  "block.upgrade_aquatic.river_wall_sign": "River Wall Sign",
   
   "block.upgrade_aquatic.flowering_rush": "Flowering Rush",
   "block.upgrade_aquatic.mulberry_vine": "Mulberry Vine",
@@ -504,6 +504,8 @@
   "entity.upgrade_aquatic.thrasher": "Thrasher",
   "entity.upgrade_aquatic.great_thrasher": "Great Thrasher",
   "entity.upgrade_aquatic.flare": "Flare",
+  "entity.upgrade_aquatic.ululu": "Ululu",
+  "entity.upgrade_aquatic.sonar_wave": "Sonar Wave",
   
   "entity.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Cassiopea Jellyfish",
@@ -565,7 +567,7 @@
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Guardian Spine whilst trying to escape %2$s",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by an Elder Guardian Spine",
   "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s was spiked to death by an Elder Guardian Spine whilst trying to escape %2$s",
-  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s was stung to death by a %2$s",
+  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s was stung to death by %2$s",
   
   "_comment7": "Advancements",
   
