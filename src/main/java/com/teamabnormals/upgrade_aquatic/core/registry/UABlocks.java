@@ -67,6 +67,7 @@ import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralston
 import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneStairs;
 import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneVerticalSlab;
 import com.teamabnormals.upgrade_aquatic.common.blocks.coralstone.BlockCoralstoneWall;
+import com.teamabnormals.upgrade_aquatic.common.blocks.trees.RiverTree;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UAProperties;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
@@ -83,7 +84,6 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.WallBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.block.trees.OakTree;
 import net.minecraft.entity.item.PaintingType;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemGroup;
@@ -504,7 +504,7 @@ public class UABlocks {
 	public static RegistryObject<Block> RIVER_LOG				= HELPER.createBlock("river_log", () -> new AbnormalsLogBlock(() -> STRIPPED_RIVER_LOG.get(), MaterialColor.GRAY, UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> RIVER_WOOD				= HELPER.createBlock("river_wood", () -> new WoodBlock(() -> STRIPPED_RIVER_WOOD.get(), UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> RIVER_LEAVES			= HELPER.createBlock("river_leaves", () -> new AbnormalsLeavesBlock(Block.Properties.from(Blocks.OAK_LEAVES).notSolid()), ItemGroup.DECORATIONS);
-	public static RegistryObject<Block> RIVER_SAPLING			= HELPER.createBlock("river_sapling", () -> new AbnormalsSaplingBlock(new OakTree(), Block.Properties.from(Blocks.OAK_SAPLING)), ItemGroup.DECORATIONS);
+	public static RegistryObject<Block> RIVER_SAPLING			= HELPER.createBlock("river_sapling", () -> new AbnormalsSaplingBlock(new RiverTree(), Block.Properties.from(Blocks.OAK_SAPLING)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> POTTED_RIVER_SAPLING	= HELPER.createBlockNoItem("potted_river_sapling", () -> new FlowerPotBlock(RIVER_SAPLING.get(), Block.Properties.from(Blocks.POTTED_ALLIUM)));
 	public static RegistryObject<Block> RIVER_PLANKS			= HELPER.createBlock("river_planks", () -> new PlanksBlock(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> RIVER_DOOR				= HELPER.createBlock("river_door", () -> new WoodDoorBlock(UAProperties.RIVER_WOOD), ItemGroup.REDSTONE);
