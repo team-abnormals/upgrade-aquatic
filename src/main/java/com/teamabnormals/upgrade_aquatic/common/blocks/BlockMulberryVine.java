@@ -4,19 +4,29 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.IGrowable;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -38,7 +48,7 @@ public class BlockMulberryVine extends Block implements net.minecraftforge.commo
 	
 	public BlockMulberryVine(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 1).with(DOUBLE, false));
+        this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0).with(DOUBLE, false));
 	}
 	
 	@Override
@@ -55,6 +65,10 @@ public class BlockMulberryVine extends Block implements net.minecraftforge.commo
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
 	    return VoxelShapes.empty();
 	}
+	
+	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+		return useContext.getItem().getItem() == this.asItem() && !state.get(DOUBLE) ? true : super.isReplaceable(state, useContext);
+	}
 
 	@Override
 	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean moving) {
@@ -68,13 +82,54 @@ public class BlockMulberryVine extends Block implements net.minecraftforge.commo
 	}
 	
 	@Override
-	public boolean canGrow(IBlockReader arg0, BlockPos arg1, BlockState arg2, boolean arg3) {
-		return true;
+	public boolean canGrow(IBlockReader arg0, BlockPos arg1, BlockState state, boolean arg3) {
+		return state.get(AGE) < 4;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World arg0, Random arg1, BlockPos arg2, BlockState arg3) {
-		return true;
+	public boolean canUseBonemeal(World arg0, Random arg1, BlockPos arg2, BlockState state) {
+		return state.get(AGE) < 4;
+	}
+	
+	@Override
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		int i = state.get(AGE);
+		boolean flag = i == 4;
+		if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
+			return ActionResultType.PASS;
+		} else if (player.getHeldItem(handIn).getItem() == Items.SHEARS && state.get(DOUBLE)) {
+			player.getHeldItem(handIn).damageItem(1, player, (onBroken) -> { onBroken.sendBreakAnimation(handIn); });
+			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			if (state.get(AGE) == 4) spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
+			worldIn.setBlockState(pos, state.with(DOUBLE, false), 2);
+			return ActionResultType.SUCCESS;
+		} else if (flag) {
+			spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), state.get(DOUBLE) ? 2 : 1));
+			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
+			return ActionResultType.SUCCESS;
+		} else {
+			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+		}
+	}
+	
+	@Override
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		int i = state.get(AGE);
+		if (i < 4 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)));
+			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);	
+		}
+	}
+	
+	@Override
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
+		super.tick(state, worldIn, pos, rand);
+		int i = state.get(AGE);
+		if (i < 4 && worldIn.getLightSubtracted(pos.up(), 0) >= 7 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(4) == 0)) {
+			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)), 2);
+			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -122,6 +177,10 @@ public class BlockMulberryVine extends Block implements net.minecraftforge.commo
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 	    World world = context.getWorld();
 	    BlockPos pos = context.getPos();
+	    BlockState blockstate = context.getWorld().getBlockState(context.getPos());
+		if (blockstate.getBlock() == this && !blockstate.get(DOUBLE)) {
+			return blockstate.with(DOUBLE, true);
+		}
 	    if (isStateValid(world, pos)) {
 	        return getDefaultState();
 	    }
@@ -136,12 +195,6 @@ public class BlockMulberryVine extends Block implements net.minecraftforge.commo
 	@Override
 	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return false;
-	}
-
-	@Override
-	public void grow(ServerWorld p_225535_1_, Random p_225535_2_, BlockPos p_225535_3_, BlockState p_225535_4_) {
-		// TODO Auto-generated method stub
-		
 	}
 }
 

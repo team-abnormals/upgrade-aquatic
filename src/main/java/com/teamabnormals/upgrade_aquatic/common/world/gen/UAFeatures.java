@@ -21,5 +21,6 @@ public class UAFeatures {
 	public static final RegistryObject<Feature<NoFeatureConfig>> FLOWERING_RUSH              = FEATURES.register("flowering_rush", () -> new FeatureFloweringRush(NoFeatureConfig::deserialize));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DRIFTWOOD                   = FEATURES.register("driftwood", () -> new FeatureDriftwood(NoFeatureConfig::deserialize));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DUNES                       = FEATURES.register("dunes", () -> new FeatureDunes(NoFeatureConfig::deserialize));
-	public static final RegistryObject<Feature<TreeFeatureConfig>> RIVER_TREE 				 = FEATURES.register("river_tree", () -> new FeatureRiverTree(TreeFeatureConfig::func_227338_a_));
+	public static final RegistryObject<Feature<TreeFeatureConfig>> RIVER_TREE 				 = FEATURES.register("river_tree", () -> new FeatureRiverTree(TreeFeatureConfig::func_227338_a_, false));
+	public static final RegistryObject<Feature<TreeFeatureConfig>> MULBERRY_RIVER_TREE 		 = FEATURES.register("mulberry_river_tree", () -> new FeatureRiverTree(TreeFeatureConfig::func_227338_a_, true));
 }

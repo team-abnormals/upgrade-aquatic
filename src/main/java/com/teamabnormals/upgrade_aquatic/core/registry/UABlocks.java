@@ -254,7 +254,7 @@ public class UABlocks {
     public static RegistryObject<Block> WHITE_SEAROCKET	= HELPER.createBlock("searocket_white", () -> new BlockSearocket(Effects.WATER_BREATHING, 9, UAProperties.SEAROCKET(false)), ItemGroup.DECORATIONS);
     public static RegistryObject<Block> PINK_SEAROCKET	= HELPER.createBlock("searocket_pink", () -> new BlockSearocket(Effects.WATER_BREATHING, 9, UAProperties.SEAROCKET(true)), ItemGroup.DECORATIONS);
     
-    public static RegistryObject<Block> MULBERRY_VINE	= HELPER.createBlockNoItem("mulberry_vine", () -> new BlockMulberryVine(Block.Properties.from(Blocks.SWEET_BERRY_BUSH).notSolid()));
+    public static RegistryObject<Block> MULBERRY_VINE	= HELPER.createBlockNoItem("mulberry_vine", () -> new BlockMulberryVine(Block.Properties.from(Blocks.SWEET_BERRY_BUSH).tickRandomly().notSolid()));
     public static RegistryObject<Block> MULBERRY_JAM_BLOCK	= HELPER.createBlock("mulberry_jam_block", () -> new BlockMulberryJam(Block.Properties.from(Blocks.SLIME_BLOCK)), ItemGroup.DECORATIONS);
     
     public static RegistryObject<Block> POTTED_BLUE_PICKERELWEED 	= HELPER.createBlockNoItem("potted_pickerelweed_blue", () -> new FlowerPotBlock(BLUE_PICKERELWEED.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));

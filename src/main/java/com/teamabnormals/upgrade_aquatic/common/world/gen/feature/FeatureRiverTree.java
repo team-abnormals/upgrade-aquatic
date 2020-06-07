@@ -7,6 +7,7 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
+import com.teamabnormals.upgrade_aquatic.common.blocks.BlockMulberryVine;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
@@ -15,6 +16,7 @@ import net.minecraft.block.LeavesBlock;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.IWorldWriter;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
@@ -29,9 +31,11 @@ import net.minecraft.world.gen.placement.Placement;
 
 public class FeatureRiverTree extends TreeFeature implements IAddToBiomes {
 	public static final TreeFeatureConfig RIVER_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(UABlocks.RIVER_LOG.get().getDefaultState()), new SimpleBlockStateProvider(UABlocks.RIVER_LEAVES.get().getDefaultState()), new BlobFoliagePlacer(0, 0))).setSapling((net.minecraftforge.common.IPlantable)UABlocks.RIVER_SAPLING.get()).build();
+	private boolean mulberry;
 	
-	public FeatureRiverTree(Function<Dynamic<?>, ? extends TreeFeatureConfig> config) {
+	public FeatureRiverTree(Function<Dynamic<?>, ? extends TreeFeatureConfig> config, boolean mulberry) {
 		super(config);
+		this.mulberry = mulberry;
 	}
 
 	public boolean func_225557_a_(IWorldGenerationReader worldIn, Random rand, BlockPos position, Set<BlockPos> logsPlaced, Set<BlockPos> leavesPlaced, MutableBoundingBox boundsIn, TreeFeatureConfig config) {
@@ -75,12 +79,12 @@ public class FeatureRiverTree extends TreeFeature implements IAddToBiomes {
 				
 				position = new BlockPos(logX, logY, logZ);
 
-				this.placeLeafAt(leavesPlaced, worldIn, position.up().up(), boundsIn, rand);
-				this.placeLeafAt(leavesPlaced, worldIn, position.up(), boundsIn, rand);
-				this.createLeaves(leavesPlaced, worldIn, position.up(), boundsIn, rand, true);
+				this.placeLeafAt(leavesPlaced, worldIn, position.up(2), boundsIn, rand, false);
+				this.placeLeafAt(leavesPlaced, worldIn, position.up(), boundsIn, rand, false);
+				this.createLeaves(leavesPlaced, worldIn, position.up(), boundsIn, rand, true, false);
 				
-				this.createLeaves(leavesPlaced, worldIn, position, boundsIn, rand, false);
-				this.createLeaves(leavesPlaced, worldIn, position.down(), boundsIn, rand, false);
+				this.createLeaves(leavesPlaced, worldIn, position, boundsIn, rand, false, false);
+				this.createLeaves(leavesPlaced, worldIn, position.down(), boundsIn, rand, false, mulberry);
 				
 				return true;
 			} else {
@@ -91,19 +95,19 @@ public class FeatureRiverTree extends TreeFeature implements IAddToBiomes {
 		}
 	}
 	
-	private void createLeaves(Set<BlockPos> leavesPlaced, IWorldGenerationReader worldIn, BlockPos newPos, MutableBoundingBox boundsIn, Random rand, boolean small) {
+	private void createLeaves(Set<BlockPos> leavesPlaced, IWorldGenerationReader worldIn, BlockPos newPos, MutableBoundingBox boundsIn, Random rand, boolean small, boolean mulberry) {
 		int leafSize = 1;
 		for(int k3 = -leafSize; k3 <= leafSize; ++k3) {
 			for(int j4 = -leafSize; j4 <= leafSize; ++j4) {
 				if (small) {
 					if ((Math.abs(k3) != leafSize || Math.abs(j4) != leafSize)) {
-						if (rand.nextInt(3) != 0) this.placeLeafAt(leavesPlaced, worldIn, newPos.add(k3, 0, j4), boundsIn, rand);
+						if (rand.nextInt(3) != 0) this.placeLeafAt(leavesPlaced, worldIn, newPos.add(k3, 0, j4), boundsIn, rand, mulberry);
 					}
 				} else {
 					if ((Math.abs(k3) != leafSize || Math.abs(j4) != leafSize)) {
-						this.placeLeafAt(leavesPlaced, worldIn, newPos.add(k3, 0, j4), boundsIn, rand);
+						this.placeLeafAt(leavesPlaced, worldIn, newPos.add(k3, 0, j4), boundsIn, rand, mulberry);
 					} else if (rand.nextInt(4) == 0) { 
-						this.placeLeafAt(leavesPlaced, worldIn, newPos.add(k3, 0, j4), boundsIn, rand); 
+						this.placeLeafAt(leavesPlaced, worldIn, newPos.add(k3, 0, j4), boundsIn, rand, mulberry); 
 					}
 				}
 			}
@@ -114,9 +118,13 @@ public class FeatureRiverTree extends TreeFeature implements IAddToBiomes {
 		this.setLogState(changedBlocks, worldIn, pos, UABlocks.RIVER_LOG.get().getDefaultState(), boundsIn);
 	}
 
-	private void placeLeafAt(Set<BlockPos> changedBlocks, IWorldGenerationReader world, BlockPos pos, MutableBoundingBox boundsIn, Random rand) {
+	private void placeLeafAt(Set<BlockPos> changedBlocks, IWorldGenerationReader world, BlockPos pos, MutableBoundingBox boundsIn, Random rand, boolean mulberry) {
 		if (isAirOrLeaves(world, pos)) { 
 			this.setLogState(changedBlocks, world, pos, UABlocks.RIVER_LEAVES.get().getDefaultState().with(LeavesBlock.DISTANCE, 1), boundsIn);
+		}
+		if (mulberry && isAir(world, pos.down()) && rand.nextInt(3) == 0) {
+			BlockState state = UABlocks.MULBERRY_VINE.get().getDefaultState().with(BlockMulberryVine.AGE, rand.nextInt(5)).with(BlockMulberryVine.DOUBLE, rand.nextBoolean());
+			if (state.isValidPosition((IWorldReader) world, pos.down())) this.setLogState(changedBlocks, world, pos.down(), state, boundsIn);
 		}
 	}
 
@@ -132,7 +140,8 @@ public class FeatureRiverTree extends TreeFeature implements IAddToBiomes {
 	public Consumer<Biome> processBiomeAddition() {
 		return biome -> {
 			if(biome.getCategory() == Category.RIVER) {
-				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.RIVER_TREE.get().withConfiguration(RIVER_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.5F, 3))));
+				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.MULBERRY_RIVER_TREE.get().withConfiguration(RIVER_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.5F, 3))));
+
 			}
 		};
 	}
