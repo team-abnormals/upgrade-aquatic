@@ -1,6 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.client.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelGoose;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityGoose;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
@@ -29,10 +28,5 @@ public class GooseRenderer extends MobRenderer<EntityGoose, ModelGoose<EntityGoo
 		float f = MathHelper.lerp(partialTicks, livingBase.oFlap, livingBase.wingRotation);
 		float f1 = MathHelper.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.destPos);
 		return (MathHelper.sin(f) + 1.0F) * f1;
-	}
-	
-	@Override
-	protected void preRenderCallback(EntityGoose entity, MatrixStack matrixStack, float partialTickTime) {
-	    if(entity.isChild()) matrixStack.scale(0.5F, 0.5F, 0.5F);
 	}
 }
