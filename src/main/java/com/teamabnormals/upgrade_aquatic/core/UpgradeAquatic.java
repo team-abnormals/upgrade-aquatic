@@ -1,15 +1,32 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
-import com.teamabnormals.upgrade_aquatic.client.render.*;
-import com.teamabnormals.upgrade_aquatic.client.render.jellyfish.*;
-import com.teamabnormals.upgrade_aquatic.client.tileentity.*;
+import com.teamabnormals.upgrade_aquatic.client.render.FlareRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.GooseRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.GreatThrasherRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.LionfishRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.NautilusRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.PikeRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.SonarWaveRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.ThrasherRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.UluluRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.jellyfish.BoxJellyfishRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.jellyfish.CassiopeaJellyfishRenderer;
+import com.teamabnormals.upgrade_aquatic.client.render.jellyfish.ImmortalJellyfishRenderer;
+import com.teamabnormals.upgrade_aquatic.client.tileentity.TileEntityElderEyeRenderer;
 import com.teamabnormals.upgrade_aquatic.common.network.MessageRotateJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.config.Config;
 import com.teamabnormals.upgrade_aquatic.core.config.ConfigHelper;
-import com.teamabnormals.upgrade_aquatic.core.registry.*;
-import com.teamabnormals.upgrade_aquatic.core.registry.other.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAColors;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UACompostables;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAFlammables;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -103,6 +120,7 @@ public class UpgradeAquatic {
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.FLARE.get(), FlareRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.SONAR_WAVE.get(), SonarWaveRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.ULULU.get(), UluluRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GOOSE.get(), GooseRenderer::new);
 		
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);

@@ -1,7 +1,16 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
-import com.teamabnormals.upgrade_aquatic.common.entities.*;
-import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.*;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.*;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityFlare;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityGoose;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityUlulu;
+import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityBoxJellyfish;
+import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityCassiopeaJellyfish;
+import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityImmortalJellyfish;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
@@ -27,6 +36,7 @@ public class UAEntities {
 	public static final RegistryObject<EntityType<EntityGreatThrasher>> GREAT_THRASHER    = HELPER.createLivingEntity("great_thrasher", EntityGreatThrasher::new, EntityClassification.MONSTER, 2.8F, 1.575F);
 	public static final RegistryObject<EntityType<EntityFlare>> FLARE                     = HELPER.createLivingEntity("flare", EntityFlare::new, EntityClassification.MONSTER, 0.9F, 0.5F);
 	public static final RegistryObject<EntityType<EntityUlulu>> ULULU					  = HELPER.createLivingEntity("ululu", EntityUlulu::new, EntityClassification.MONSTER, 2.04F, 2.04F);
+	public static final RegistryObject<EntityType<EntityGoose>> GOOSE 				  = HELPER.createLivingEntity("goose", EntityGoose::new, EntityClassification.CREATURE, 0.5F, 0.9F);
 	
 	public static final RegistryObject<EntityType<EntityBoxJellyfish>> BOX_JELLYFISH             = HELPER.createLivingEntity("box_jellyfish", EntityBoxJellyfish::new, EntityClassification.WATER_CREATURE, 0.75F, 0.625F);
 	public static final RegistryObject<EntityType<EntityCassiopeaJellyfish>> CASSIOPEA_JELLYFISH = HELPER.createLivingEntity("cassiopea_jellyfish", EntityCassiopeaJellyfish::new, EntityClassification.WATER_CREATURE, 0.6875F, 0.25F);

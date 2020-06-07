@@ -440,6 +440,7 @@
   "item.upgrade_aquatic.thrasher_spawn_egg": "Thrasher Spawn Egg",
   "item.upgrade_aquatic.great_thrasher_spawn_egg": "Great Thrasher Spawn Egg",
   "item.upgrade_aquatic.flare_spawn_egg": "Flare Spawn Egg",
+  "item.upgrade_aquatic.goose_spawn_egg": "Goose Spawn Egg",
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Jellyfish Spawn Egg",
   
   "item.upgrade_aquatic.boiled_pickerelweed_purple": "Boiled Purple Pickerelweed",
@@ -508,6 +509,7 @@
   "entity.upgrade_aquatic.flare": "Flare",
   "entity.upgrade_aquatic.ululu": "Ululu",
   "entity.upgrade_aquatic.sonar_wave": "Sonar Wave",
+  "entity.upgrade_aquatic.goose": "Goose",
   
   "entity.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Cassiopea Jellyfish",
