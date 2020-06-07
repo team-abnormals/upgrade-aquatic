@@ -594,6 +594,9 @@
   "advancements.husbandry.collect_all_pike.title": "Pike World Tour",
   "advancements.husbandry.collect_all_pike.description": "Collect every variant of Pike in a bucket",
   
+  "advancements.husbandry.pick_mulberries.title": "Low Hanging Fruit",
+  "advancements.husbandry.pick_mulberries.description": "Pick Mulberries from a River Tree",
+  
   "_comment8": "Subtitles",
   
   "subtitles.upgrade_aquatic.thrasher.hurt": "Thrasher hurts",

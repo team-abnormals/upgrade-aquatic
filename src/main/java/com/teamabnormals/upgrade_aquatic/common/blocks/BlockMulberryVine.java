@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 import net.minecraft.block.Block;
@@ -12,6 +13,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.IGrowable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -107,6 +109,14 @@ public class BlockMulberryVine extends Block implements net.minecraftforge.commo
 			spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), state.get(DOUBLE) ? 2 : 1));
 			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
 			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
+			
+			if (player instanceof ServerPlayerEntity && player.isAlive()) {
+    			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
+    			if(!player.world.isRemote()) {
+    				UACriteriaTriggers.PICK_MULBERRIES.trigger(serverPlayer); 
+    			}
+    		}
+			
 			return ActionResultType.SUCCESS;
 		} else {
 			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);

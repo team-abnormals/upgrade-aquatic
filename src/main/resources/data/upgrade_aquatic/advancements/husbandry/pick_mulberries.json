@@ -1,0 +1,23 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "display": {
+    "icon": {
+      "item": "upgrade_aquatic:mulberry"
+    },
+    "title": {
+      "translate": "advancements.husbandry.pick_mulberries.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.pick_mulberries.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "tamed": {
+      "trigger": "upgrade_aquatic:pick_mulberries"
+    }
+  }
+}
