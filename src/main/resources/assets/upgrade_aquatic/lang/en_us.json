@@ -376,6 +376,8 @@
   "block.upgrade_aquatic.flowering_rush": "Flowering Rush",
   "block.upgrade_aquatic.mulberry_vine": "Mulberry Vine",
   
+  "block.upgrade_aquatic.mulberry_jam_block": "Mulberry Jam Block",
+  
   "block.upgrade_aquatic.prismarine_rod_bundle": "Prismarine Rod Bundle",
   
   "block.upgrade_aquatic.beachgrass": "Beachgrass",
@@ -448,7 +450,7 @@
   "item.upgrade_aquatic.lionfish_cooked": "Cooked Lionfish",
   
   "item.upgrade_aquatic.mulberry": "Mulberry",
-  "item.upgrade_aquatic.mulberry_jam": "Mulberry Jam",
+  "item.upgrade_aquatic.mulberry_jam": "Mulberry Jam Bottle",
   "item.upgrade_aquatic.mulberry_bread": "Mulberry Bread",
   
   "_comment3": "Tooltips",

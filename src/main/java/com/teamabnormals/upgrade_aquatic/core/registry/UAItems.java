@@ -15,6 +15,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
@@ -39,7 +40,7 @@ public class UAItems {
 	public static final RegistryObject<Item> COOKED_LIONFISH            = HELPER.createItem("lionfish_cooked", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.LIONFISH(true))));
 
 	public static final RegistryObject<Item> MULBERRY            		= HELPER.createItem("mulberry", () -> new BlockNamedItem(UABlocks.MULBERRY_VINE.get(), new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.MULBERRY)));
-	public static final RegistryObject<Item> MULBERRY_JAM            	= HELPER.createItem("mulberry_jam", () -> new ItemMulberryJam(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.MULBERRY_JAM)));
+	public static final RegistryObject<Item> MULBERRY_JAM            	= HELPER.createItem("mulberry_jam", () -> new ItemMulberryJam(new Item.Properties().group(ItemGroup.FOOD).containerItem(Items.GLASS_BOTTLE).food(UAFoods.MULBERRY_JAM)));
 	public static final RegistryObject<Item> MULBERRY_BREAD            	= HELPER.createItem("mulberry_bread", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.MULBERRY_BREAD)));
 
 	public static final RegistryObject<Item> NAUTILUS_SPAWN_EGG         = HELPER.createSpawnEggItem("nautilus", () -> UAEntities.NAUTILUS.get(), 14596231, 16744272);

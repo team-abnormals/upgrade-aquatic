@@ -11,6 +11,8 @@ public class UARenderLayers {
 	private static final RenderType TRANSLUSCENT = RenderType.getTranslucent();
 	
 	public static void setBlockRenderLayers() {
+		RenderTypeLookup.setRenderLayer(UABlocks.MULBERRY_JAM_BLOCK.get(), TRANSLUSCENT);
+		
 		RenderTypeLookup.setRenderLayer(UABlocks.BEACHGRASS.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.TALL_BEACHGRASS.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.MULBERRY_VINE.get(), CUTOUT);

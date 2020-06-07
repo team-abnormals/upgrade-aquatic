@@ -5,8 +5,8 @@ import java.util.function.BiPredicate;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
 import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
-import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
@@ -99,7 +99,7 @@ public class ThrasherFireSonarGoal extends Goal {
 	
 	static enum SonarPhase {
 		TURN(null),
-		FIRE((thrasher, sonarTicks) -> sonarTicks > 15 ? EntityUtil.rayTrace(thrasher, 32.0D, 1.0F).getType() == RayTraceResult.Type.MISS : true);
+		FIRE((thrasher, sonarTicks) -> sonarTicks > 15 ? EntityUtils.rayTrace(thrasher, 32.0D, 1.0F).getType() == RayTraceResult.Type.MISS : true);
 		
 		@Nullable
 		private BiPredicate<EntityThrasher, Integer> phaseCondition;

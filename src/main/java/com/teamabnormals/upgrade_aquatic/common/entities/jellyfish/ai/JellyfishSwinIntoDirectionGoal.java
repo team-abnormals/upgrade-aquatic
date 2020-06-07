@@ -4,9 +4,9 @@ import java.util.EnumSet;
 import java.util.Random;
 
 import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
 import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
-import com.teamabnormals.upgrade_aquatic.api.util.EntityUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 
 import net.minecraft.entity.ai.goal.Goal;
@@ -29,13 +29,13 @@ public class JellyfishSwinIntoDirectionGoal extends Goal {
 	@Override
 	public boolean shouldExecute() {
 		Random rand = this.jellyfish.getRNG();
-		float chance = EntityUtil.rayTraceUpWithCustomDirection(this.jellyfish, this.jellyfish.lockedRotations[1], this.jellyfish.lockedRotations[0], 2.0F, 1.0F).getType() != Type.BLOCK ? 0.1F : 0.025F;
+		float chance = EntityUtils.rayTraceUpWithCustomDirection(this.jellyfish, this.jellyfish.lockedRotations[1], this.jellyfish.lockedRotations[0], 2.0F, 1.0F).getType() != Type.BLOCK ? 0.1F : 0.025F;
 		if(this.jellyfish.isNoEndimationPlaying() && rand.nextFloat() < chance && this.jellyfish.areEyesInFluid(FluidTags.WATER)) {
 			float[] generatedRotations = this.generateDirection(rand);
 			this.yaw = generatedRotations[0];
 			this.pitch = generatedRotations[1];
 			
-			if(EntityUtil.rayTraceUpWithCustomDirection(this.jellyfish, this.pitch, this.yaw, 1.0F, 1.0F).getType() != Type.BLOCK) {
+			if(EntityUtils.rayTraceUpWithCustomDirection(this.jellyfish, this.pitch, this.yaw, 1.0F, 1.0F).getType() != Type.BLOCK) {
 				return !this.jellyfish.willBeBoostedOutOfWater(this.yaw, this.pitch);
 			}
 		}
@@ -73,7 +73,7 @@ public class JellyfishSwinIntoDirectionGoal extends Goal {
 	private float[] generateDirection(Random rand) {
 		float[] rotations = this.jellyfish.getRotationController().getRotations(1.0F);
 		float upperChance = this.jellyfish.getPosition().getY() < this.jellyfish.world.getSeaLevel() - 6 ? 0.5F : 0.2F;
-		if(this.jellyfish.onGround || rotations[0] == 0.0F && rotations[1] == 0.0F || EntityUtil.rayTraceUpWithCustomDirection(this.jellyfish, rotations[1], rotations[0], 1.0F, 1.0F).getType() == Type.BLOCK) {
+		if(this.jellyfish.onGround || rotations[0] == 0.0F && rotations[1] == 0.0F || EntityUtils.rayTraceUpWithCustomDirection(this.jellyfish, rotations[1], rotations[0], 1.0F, 1.0F).getType() == Type.BLOCK) {
 			return new float[] {
 				(float) MathHelper.wrapDegrees(MathUtils.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand)),
 				(float) MathHelper.wrapDegrees(MathUtils.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand))
