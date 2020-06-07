@@ -375,6 +375,8 @@
   
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
   "block.upgrade_aquatic.mulberry_vine": "Morera",
+
+  "block.upgrade_aquatic.mulberry_jam_block": "Bloque de mermelada de moras",
   
   "block.upgrade_aquatic.prismarine_rod_bundle": "Paquete de varas de prismarina",
   
@@ -438,6 +440,7 @@
   "item.upgrade_aquatic.thrasher_spawn_egg": "Generar triturador",
   "item.upgrade_aquatic.great_thrasher_spawn_egg": "Generar gran triturador",
   "item.upgrade_aquatic.flare_spawn_egg": "Generar llamarada",
+  "item.upgrade_aquatic.goose_spawn_egg": "Generar ganso",
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Generar medusa",
   
   "item.upgrade_aquatic.boiled_pickerelweed_purple": "Espiga de agua morada cocida",
@@ -448,7 +451,7 @@
   "item.upgrade_aquatic.lionfish_cooked": "Pez león cocinado",
   
   "item.upgrade_aquatic.mulberry": "Mora",
-  "item.upgrade_aquatic.mulberry_jam": "Mermelada de moras",
+  "item.upgrade_aquatic.mulberry_jam": "Frasco con mermelada de moras",
   "item.upgrade_aquatic.mulberry_bread": "Pan de moras",
   
   "_comment3": "Descripciones",
@@ -504,6 +507,9 @@
   "entity.upgrade_aquatic.thrasher": "Triturador",
   "entity.upgrade_aquatic.great_thrasher": "Gran triturador",
   "entity.upgrade_aquatic.flare": "Llamarada",
+  "entity.upgrade_aquatic.ululu": "Ululu",
+  "entity.upgrade_aquatic.sonar_wave": "Onda sonar",
+  "entity.upgrade_aquatic.goose": "Ganso",
 
   "entity.upgrade_aquatic.box_jellyfish": "Medusa de caja",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Medusa invertida",
@@ -589,6 +595,9 @@
   
   "advancements.husbandry.collect_all_pike.title": "Gira mundial de lucios",
   "advancements.husbandry.collect_all_pike.description": "Consigue todas las variedades de lucios en cubos",
+
+  "advancements.husbandry.pick_mulberries.title": "Frutas maduras",
+  "advancements.husbandry.pick_mulberries.description": "Recoge moras de un árbol fluvial",
   
   "_comment8": "Subtítulos",
 
