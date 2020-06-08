@@ -2,13 +2,12 @@ package com.teamabnormals.upgrade_aquatic.common.entities;
 
 import java.util.function.Predicate;
 
-import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -40,12 +39,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.RainType;
-import net.minecraftforge.registries.ForgeRegistries;
 
-public class EntityLionfish extends EntityBucketableWaterMob {
+public class EntityLionfish extends BucketableWaterMobEntity {
 	private static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
 		if (entity == null) {
 			return false;
@@ -261,16 +256,6 @@ public class EntityLionfish extends EntityBucketableWaterMob {
 		return SoundEvents.ENTITY_FISH_SWIM;
 	}
 	
-	public static void addSpawn() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityLionfish::processSpawning);
-	}
-	
-	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && biome.getPrecipitation() != RainType.SNOW) {
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.LIONFISH.get(), 15, 1, 1));
-        }
-	}
-	
 	static class MoveHelperController extends MovementController {
         private final EntityLionfish lionfish;
 
@@ -285,9 +270,9 @@ public class EntityLionfish extends EntityBucketableWaterMob {
             }
 
             if (this.action == MovementController.Action.MOVE_TO && !this.lionfish.getNavigator().noPath()) {
-            	double d0 = this.posX - this.lionfish.posX;
-            	double d1 = this.posY - this.lionfish.posY;
-            	double d2 = this.posZ - this.lionfish.posZ;
+            	double d0 = this.posX - this.lionfish.getPosX();
+            	double d1 = this.posY - this.lionfish.getPosY();
+            	double d2 = this.posZ - this.lionfish.getPosZ();
             	double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
             	d1 = d1 / d3;
             	float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;

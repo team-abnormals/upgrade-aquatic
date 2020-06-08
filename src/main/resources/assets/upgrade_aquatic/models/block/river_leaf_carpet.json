@@ -1,0 +1,6 @@
+{   
+    "parent": "upgrade_aquatic:block/leaf_carpet",
+    "textures": {
+        "all": "upgrade_aquatic:block/river_leaves"
+    }
+}

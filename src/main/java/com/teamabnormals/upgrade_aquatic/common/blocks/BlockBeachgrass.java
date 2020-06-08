@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.blocks;
 
 import java.util.Random;
 
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
@@ -9,9 +10,12 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.IGrowable;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -19,6 +23,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BlockBeachgrass extends Block implements IGrowable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
@@ -45,8 +50,8 @@ public class BlockBeachgrass extends Block implements IGrowable {
 	}
 	
 	@Override
-	public void grow(World world, Random rand, BlockPos pos, BlockState state) {
-		BlockBeachgrassTall plant = (BlockBeachgrassTall) UABlocks.TALL_BEACHGRASS;
+	public void grow(ServerWorld world, Random rand, BlockPos pos, BlockState state) {
+		BlockBeachgrassTall plant = (BlockBeachgrassTall) UABlocks.TALL_BEACHGRASS.get();
 		if(plant.getDefaultState().isValidPosition(world, pos) && world.isAirBlock(pos.up())) {
 			plant.placeAt(world, pos, 2);
 		}
@@ -54,10 +59,6 @@ public class BlockBeachgrass extends Block implements IGrowable {
 	
 	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XYZ;
-	}
-	
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override
@@ -81,5 +82,17 @@ public class BlockBeachgrass extends Block implements IGrowable {
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.down();
 		return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
+	}
+	
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		if(ItemStackUtils.isInGroup(this.asItem(), group)) {
+			int targetIndex = ItemStackUtils.findIndexOfItem(Items.SEA_PICKLE, items);
+			if(targetIndex != -1) {
+				items.add(targetIndex + 1, new ItemStack(this));
+			} else {
+				super.fillItemGroup(group, items);
+			}
+		}
 	}
 }

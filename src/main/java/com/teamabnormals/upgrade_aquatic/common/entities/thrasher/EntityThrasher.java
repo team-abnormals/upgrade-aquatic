@@ -7,11 +7,10 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
-import javax.vecmath.Vector3f;
 
-import com.teamabnormals.upgrade_aquatic.api.endimator.ControlledEndimation;
-import com.teamabnormals.upgrade_aquatic.api.endimator.EndimatedMonsterEntity;
-import com.teamabnormals.upgrade_aquatic.api.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.ControlledEndimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.upgrade_aquatic.api.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
@@ -21,7 +20,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -53,6 +51,7 @@ import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -61,14 +60,9 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.DeepFrozenOceanBiome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class EntityThrasher extends EndimatedMonsterEntity {
 	public static final Predicate<Entity> ENEMY_MATCHER = (entity) -> {
@@ -148,13 +142,18 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
-	public Endimation[] getAnimations() {
+	public Endimation[] getEndimations() {
 		return new Endimation[] {
 			SNAP_AT_PRAY_ANIMATION,
 			HURT_ANIMATION,
 			THRASH_ANIMATION,
 			SONAR_FIRE_ANIMATION
 		};
+	}
+	
+	@Override
+	public Endimation getHurtAnimation() {
+		return HURT_ANIMATION;
 	}
 	
 	@Nullable
@@ -165,7 +164,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			Random rand = new Random();
 			if(rand.nextFloat() < 0.25F) {
 				EntityGreatThrasher greatThrasher = UAEntities.GREAT_THRASHER.get().create(this.world);
-				greatThrasher.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+				greatThrasher.setLocationAndAngles(this.getPosX(), this.getPosY(), this.getPosZ(), this.rotationYaw, this.rotationPitch);
 				this.world.addEntity(greatThrasher);
 				this.remove();
 			}
@@ -192,11 +191,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			double dy = -Math.sin(this.rotationPitch * (Math.PI / 180.0D));
 			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			
-			Vec3d riderPos = new Vec3d(this.posX + dx, this.posY, this.posZ + dz);
+			Vec3d riderPos = new Vec3d(this.getPosX() + dx, this.getPosY(), this.getPosZ() + dz);
 			
 			double offset = passenger instanceof PlayerEntity ? this.getMountedYOffset() - 0.2D : this.getMountedYOffset() - 0.5F;
 			
-			passenger.setPosition(riderPos.x, this.posY + dy + offset, riderPos.z);
+			passenger.setPosition(riderPos.x, this.getPosY() + dy + offset, riderPos.z);
 		} else {
 			super.updatePassenger(passenger);
 		}
@@ -232,7 +231,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
-	protected void onAnimationStart(Endimation animationStarted) {
+	public void onEndimationStart(Endimation animationStarted) {
 		if(animationStarted == THRASH_ANIMATION) {
 			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
 			if(!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
@@ -242,7 +241,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	}
 	
 	@Override
-	protected void onAnimationEnd(Endimation animationEnded) {
+	public void onEndimationEnd(Endimation animationEnded) {
 		if(animationEnded == THRASH_ANIMATION) {
 			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
 			if(knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
@@ -260,9 +259,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		Entity entitySource = source.getTrueSource();
-		this.setPlayingAnimation(HURT_ANIMATION);
 		if(entitySource instanceof LivingEntity) {
-			Vector3f difference = new Vector3f(
+			Vec3d difference = new Vec3d(
 				entitySource.getPosition().getX() - this.getPosition().getX(),
 				entitySource.getPosition().getY() - this.getPosition().getY(),
 				entitySource.getPosition().getZ() - this.getPosition().getZ()
@@ -362,7 +360,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			this.move(MoverType.SELF, this.getMotion());
 			this.setMotion(this.getMotion().scale(0.9D));
 			if (!this.isMoving() && this.getAttackTarget() == null) {
-				double ySpeed = -0.005D;
+				double ySpeed = !((ThrasherLookController) this.getLookController()).isTurningForSonar() ? -0.005D : -0.0025D;
 				this.setMotion(this.getMotion().add(0.0D, ySpeed, 0.0D));
 			}
 		} else {
@@ -379,7 +377,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		}
 		
 		if(!this.isAIDisabled()) {
-			if(this.isAnimationPlaying(SONAR_FIRE_ANIMATION)) {
+			if(this.isEndimationPlaying(SONAR_FIRE_ANIMATION)) {
 				this.ticksSinceLastSonarFire = 0;
 			} else {
 				this.ticksSinceLastSonarFire++;
@@ -402,11 +400,11 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				}
 			}
 			if(this.isWorldRemote()) {
-				if(!this.getPassengers().isEmpty() && this.isAnimationPlaying(THRASH_ANIMATION) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
+				if(!this.getPassengers().isEmpty() && this.isEndimationPlaying(THRASH_ANIMATION) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
 					Entity passenger = this.getPassengers().get(0);
 					for(int i = 0; i < 3; ++i) {
 						if(passenger.areEyesInFluid(FluidTags.WATER)) {
-							this.world.addParticle(ParticleTypes.BUBBLE, passenger.posX + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), passenger.posY, passenger.posZ + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), (this.getRNG().nextDouble() - 0.5D) * 2.0D, -this.getRNG().nextDouble(), (this.getRNG().nextDouble() - 0.5D) * 2.0D);
+							this.world.addParticle(ParticleTypes.BUBBLE, passenger.getPosX() + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), passenger.getPosY(), passenger.getPosZ() + (this.getRNG().nextDouble() - 0.5D) * (double)passenger.getWidth(), (this.getRNG().nextDouble() - 0.5D) * 2.0D, -this.getRNG().nextDouble(), (this.getRNG().nextDouble() - 0.5D) * 2.0D);
 						}
 					}
 				}
@@ -428,7 +426,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				this.prevFinAnimation = this.finAnimation;
 				this.STUNNED_ANIMATION.update();
 				
-				if(!this.isInWater() || (this.isAnimationPlaying(THRASH_ANIMATION) || this.isAnimationPlaying(SONAR_FIRE_ANIMATION))) {
+				if(!this.isInWater() || (this.isEndimationPlaying(THRASH_ANIMATION) || this.isEndimationPlaying(SONAR_FIRE_ANIMATION))) {
 					this.tailSpeed = 1.1F;
 					this.finSpeed = 0.875F;
 				} else if(this.isMoving()) {
@@ -449,22 +447,18 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				}
 				
 				if(this.isStunned()) {
-					if(this.STUNNED_ANIMATION.getCurrentValue() >= 10) {
-						this.STUNNED_ANIMATION.manipulateTimer(true);
+					if(this.STUNNED_ANIMATION.getTick() >= 10) {
+						this.STUNNED_ANIMATION.setDecrementing(true);
 					} else {
-						if(this.STUNNED_ANIMATION.shouldDecrement && this.STUNNED_ANIMATION.getCurrentValue() <= 0) {
-							this.STUNNED_ANIMATION.manipulateTimer(false);
+						if(this.STUNNED_ANIMATION.isDecrementing() && this.STUNNED_ANIMATION.getTick() <= 0) {
+							this.STUNNED_ANIMATION.setDecrementing(false);
 						}
 					}
 				} else {
-					if(this.STUNNED_ANIMATION.getCurrentValue() == 10) {
-						this.STUNNED_ANIMATION.setTimerToStop(true);
-					}
-					
-					this.STUNNED_ANIMATION.manipulateTimer(false);
+					this.STUNNED_ANIMATION.setDecrementing(false);
 				}
 				
-				this.STUNNED_ANIMATION.updateTimerValues();
+				this.STUNNED_ANIMATION.update();
 				
 				this.tailAnimation += this.tailSpeed;
 				this.finAnimation += this.finSpeed;
@@ -483,7 +477,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				Vec3d vec3d1 = this.getLook(0.0F);
 
 				for(int i = 0; i < 2; ++i) {
-					this.world.addParticle(ParticleTypes.BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.posY + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
+					this.world.addParticle(ParticleTypes.BUBBLE, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.getPosY() + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
@@ -508,7 +502,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Nullable
 	@Override
 	protected SoundEvent getAmbientSound() {
-		if(this.isAnimationPlaying(THRASH_ANIMATION)) {
+		if(this.isEndimationPlaying(THRASH_ANIMATION)) {
 			return null;
 		}
 		return this.isInWater() ? UASounds.THRASHER_AMBIENT.get() : UASounds.THRASHER_AMBIENT_LAND.get();
@@ -526,13 +520,9 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		return UASounds.THRASHER_THRASH.get();
 	}
 	
-	protected SoundEvent getStunSound() {
-		return UASounds.THRASHER_STUN.get();
-	}
-	
 	@Override
 	protected SoundEvent getSwimSound() {
-		return UASounds.THRASHER_SWIM.get();
+		return SoundEvents.ENTITY_DOLPHIN_SWIM;
 	}
 	
 	@Override
@@ -550,17 +540,6 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 1;
-	}
-
-	public static void addSpawn() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityThrasher::processSpawning);
-	}
-	
-	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && BiomeDictionary.hasType(biome, Type.COLD)) {
-			biome.addSpawn(EntityClassification.WATER_CREATURE, new Biome.SpawnListEntry(UAEntities.THRASHER.get(), 80, 1, 2));
-			biome.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(UAEntities.THRASHER.get(), 30, 1, 2));
-		}
 	}
 	
 	public boolean isMoving() {
@@ -648,7 +627,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 
 		public void tick() {
 			if (this.action == MovementController.Action.MOVE_TO && !this.thrasher.getNavigator().noPath() && this.thrasher.getStunTime() <= 0) {
-				Vec3d vec3d = new Vec3d(this.posX - this.thrasher.posX, this.posY - this.thrasher.posY, this.posZ - this.thrasher.posZ);
+				Vec3d vec3d = new Vec3d(this.posX - this.thrasher.getPosX(), this.posY - this.thrasher.getPosY(), this.posZ - this.thrasher.getPosZ());
 				double d0 = vec3d.length();
 				double d1 = vec3d.y / d0;
 				float f = (float) (MathHelper.atan2(vec3d.z, vec3d.x) * (double) (180F / (float) Math.PI)) - 90F;
@@ -696,19 +675,19 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			if(this.isLooking) {
 				this.isLooking = false;
 				if(this.isTurningForSonar) {
-					this.mob.rotationYaw = this.func_220675_a(this.mob.rotationYaw, this.func_220678_h(), this.deltaLookYaw);
+					this.mob.rotationYaw = this.clampedRotate(this.mob.rotationYaw, this.getTargetYaw(), this.deltaLookYaw);
 				} else {
-					this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.func_220678_h(), this.deltaLookYaw);
+					this.mob.rotationYawHead = this.clampedRotate(this.mob.rotationYawHead, this.getTargetYaw(), this.deltaLookYaw);
 				}
-				this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, this.func_220677_g(), this.deltaLookPitch);
+				this.mob.rotationPitch = this.clampedRotate(this.mob.rotationPitch, this.getTargetPitch(), this.deltaLookPitch);
 			} else {
 				if(this.mob.getNavigator().noPath()) {
-					this.mob.rotationPitch = this.func_220675_a(this.mob.rotationPitch, 0.0F, 5.0F);
+					this.mob.rotationPitch = this.clampedRotate(this.mob.rotationPitch, 0.0F, 5.0F);
 				}
 				if(this.isTurningForSonar) {
-					this.mob.rotationYaw = this.func_220675_a(this.mob.rotationYaw, this.mob.renderYawOffset, this.deltaLookYaw);
+					this.mob.rotationYaw = this.clampedRotate(this.mob.rotationYaw, this.mob.renderYawOffset, this.deltaLookYaw);
 				} else {
-					this.mob.rotationYawHead = this.func_220675_a(this.mob.rotationYawHead, this.mob.renderYawOffset, this.deltaLookYaw);
+					this.mob.rotationYawHead = this.clampedRotate(this.mob.rotationYawHead, this.mob.renderYawOffset, this.deltaLookYaw);
 				}
 			}
 
@@ -722,6 +701,10 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		
 		public void setTurningForSonar(boolean isTurning) {
 			this.isTurningForSonar = isTurning;
+		}
+		
+		public boolean isTurningForSonar() {
+			return this.isTurningForSonar;
 		}
 	}
 	

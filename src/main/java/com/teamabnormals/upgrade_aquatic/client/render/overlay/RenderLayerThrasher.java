@@ -1,14 +1,19 @@
+
 package com.teamabnormals.upgrade_aquatic.client.render.overlay;
 
-import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.upgrade_aquatic.client.UARenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelThrasher;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -21,33 +26,19 @@ public class RenderLayerThrasher<T extends EntityThrasher, M extends ModelThrash
 	public RenderLayerThrasher(IEntityRenderer<T, M> renderer) {
 		super(renderer);
 	}
-
+	
 	@Override
-	public void render(T entity, float p_212842_2_, float p_212842_3_, float p_212842_4_, float p_212842_5_, float p_212842_6_, float p_212842_7_, float p_212842_8_) {
-		this.bindTexture(this.getThrasherFrostLayer(entity));
+	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T thrasher, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+		ClientInfo.MINECRAFT.getTextureManager().bindTexture(this.getThrasherFrostLayer(thrasher));
 
-		float stunnedAnimation = entity.STUNNED_ANIMATION.getAnimationProgress() * 240.0F;
+		int stunnedAnimation = (int) (thrasher.STUNNED_ANIMATION.getAnimationProgress() * 240);
+		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(UARenderTypes.getEmissiveEntity(this.getThrasherFrostLayer(thrasher)));
 		
-        GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, stunnedAnimation, stunnedAnimation);
-        GlStateManager.color4f(1F, 1F, 1F, 1F);
-        GlStateManager.disableLighting();
-
-        this.getEntityModel().render(entity, p_212842_2_, p_212842_3_, p_212842_5_, p_212842_6_, p_212842_7_, p_212842_8_);
-
-        GlStateManager.enableLighting();
-        int i = entity.getBrightnessForRender();
-        int j = i % 65536;
-        int k = i / 65536;
-        GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, j, k);
-        func_215334_a(entity);
+		this.getEntityModel().setRotationAngles(thrasher, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		this.getEntityModel().render(matrixStackIn, ivertexbuilder, stunnedAnimation, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 	
 	public ResourceLocation getThrasherFrostLayer(EntityThrasher thrasher) {
 		return thrasher instanceof EntityGreatThrasher ? GREAT_THRASHER_FROST: THRASHER_FROST;
-	}
-
-	@Override
-	public boolean shouldCombineTextures() {
-		return false;
 	}
 }

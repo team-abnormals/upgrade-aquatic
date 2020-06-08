@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
-import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Blocks;
@@ -38,7 +38,8 @@ public class FeaturePrismarineStalactite extends FeaturePrismarineCoral {
 					int a = rand.nextInt(3) + 3;
 					int b = 4;
 					int c = rand.nextInt(5) + 4;
-					MathUtil.Equation r = (theta) -> {
+					@SuppressWarnings("unused")
+					MathUtils.Equation r = (theta) -> {
 						return (Math.cos(b * theta) / c + 1) * a;
 					};
 					for (int i = -(a / c + a); i < a / c + a; i++) {
@@ -58,14 +59,14 @@ public class FeaturePrismarineStalactite extends FeaturePrismarineCoral {
 	}
 	
 	public static void createStalactiteLayer(IWorld world, BlockPos pos, Random rand, int a, int b, int c) {
-		MathUtil.Equation r = (theta) -> {
+		MathUtils.Equation r = (theta) -> {
 			return (Math.cos(b * theta) / c + 1) * a;
 		};
 		for (int i = -(a / c + a); i < a / c + a; i++) {
 			for (int j = -(a / c + a); j < a / c + a; j++) {
 				double radius = r.compute(Math.atan2(j, i));
 				BlockPos placingPos = pos.add(i, 0, j);
-				if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN && (i * i + j * j) < radius * radius) {
+				if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN.get() && (i * i + j * j) < radius * radius) {
 					world.setBlockState(placingPos, CORAL_BLOCK_BLOCK(true), 2);
 				}
 			}

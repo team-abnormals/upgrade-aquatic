@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=false": { "model": "upgrade_aquatic:block/river_pressure_plate" },
+        "powered=true": { "model": "upgrade_aquatic:block/river_pressure_plate_down" }
+    }
+}

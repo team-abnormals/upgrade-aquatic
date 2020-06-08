@@ -14,5 +14,11 @@
   "result": {
     "item": "upgrade_aquatic:driftwood_vertical_planks",
     "count": 3
-  }
+  },
+  "conditions": [
+  	{
+       "type": "forge:mod_loaded",
+       "modid": "quark"
+    }
+  ]
 }

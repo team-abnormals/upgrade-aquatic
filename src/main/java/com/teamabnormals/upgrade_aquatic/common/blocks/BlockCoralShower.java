@@ -76,4 +76,9 @@ public class BlockCoralShower extends CoralPlantBlock {
 		return Block.hasSolidSide(worldIn.getBlockState(blockpos), worldIn, blockpos, Direction.DOWN);
 	}
 	
+	@Override
+	public boolean isConduitFrame(BlockState state, IWorldReader world, BlockPos pos, BlockPos conduit) {
+		return true;
+	}
+	
 }

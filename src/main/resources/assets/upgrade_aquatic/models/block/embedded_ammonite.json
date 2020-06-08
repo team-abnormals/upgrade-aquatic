@@ -1,6 +1,12 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "upgrade_aquatic:block/embedded_ammonite"
-    }
+  "parent": "block/cube",
+  "textures": {
+    "particle": "upgrade_aquatic:block/embedded_ammonite",
+    "north": "upgrade_aquatic:block/embedded_ammonite_side",
+    "south": "upgrade_aquatic:block/embedded_ammonite_side",
+    "east": "upgrade_aquatic:block/embedded_ammonite_side",
+    "west": "upgrade_aquatic:block/embedded_ammonite_side",
+    "up": "upgrade_aquatic:block/embedded_ammonite",
+    "down": "upgrade_aquatic:block/embedded_ammonite_side"
+  }
 }

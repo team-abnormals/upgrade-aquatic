@@ -14,7 +14,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BlockUAKelpTop extends KelpTopBlock {
 	private KelpType kelpType;
@@ -25,7 +25,7 @@ public class BlockUAKelpTop extends KelpTopBlock {
 	}
 	
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if(!state.isValidPosition(worldIn, pos)) {
 			worldIn.destroyBlock(pos, true);
 		} else {
@@ -44,7 +44,7 @@ public class BlockUAKelpTop extends KelpTopBlock {
 		if(block == Blocks.MAGMA_BLOCK) {
 			return false;
 		} else {
-			return block == this || block == this.getBlockForKelpType() || blockstate.func_224755_d(worldIn, blockpos, Direction.UP);
+			return block == this || block == this.getBlockForKelpType() || blockstate.isSolidSide(worldIn, blockpos, Direction.UP);
 		}
 	}
 	
@@ -69,13 +69,13 @@ public class BlockUAKelpTop extends KelpTopBlock {
 		switch(this.kelpType) {
 			default:
 			case TONGUE:
-				return UABlocks.TONGUE_KELP_PLANT;
+				return UABlocks.TONGUE_KELP_PLANT.get();
 			case THORNY:
-				return UABlocks.THORNY_KELP_PLANT;
+				return UABlocks.THORNY_KELP_PLANT.get();
 			case OCHRE:
-				return UABlocks.OCHRE_KELP_PLANT;
+				return UABlocks.OCHRE_KELP_PLANT.get();
 			case POLAR:
-				return UABlocks.POLAR_KELP_PLANT;
+				return UABlocks.POLAR_KELP_PLANT.get();
 		}
 	}
 

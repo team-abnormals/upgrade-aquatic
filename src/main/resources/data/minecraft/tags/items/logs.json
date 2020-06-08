@@ -1,9 +1,7 @@
 {
   "replace": false,
   "values": [
-    "upgrade_aquatic:driftwood_log",
-    "upgrade_aquatic:driftwood",
-    "upgrade_aquatic:driftwood_log_stripped",
-    "upgrade_aquatic:driftwood_stripped"
+    "#upgrade_aquatic:driftwood_logs",
+    "#upgrade_aquatic:river_logs"
   ]
 }

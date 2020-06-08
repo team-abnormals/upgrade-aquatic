@@ -19,6 +19,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.SlabType;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -26,6 +27,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BlockCoralstoneSlab extends SlabBlock {
 	@Nullable
@@ -43,18 +45,21 @@ public class BlockCoralstoneSlab extends SlabBlock {
 	}
 	
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if(!worldIn.isAreaLoaded(pos, 3)) return;
 		Block block = state.getBlock();
 		
-		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE_SLAB) {
+		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE_SLAB.get()) {
 			for(int i = 0; i < 4; i++) {
 				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-				if(UABlocks.CORALSTONE_SLAB_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
-					BlockState newState = UABlocks.CORALSTONE_SLAB_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState().with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED));
-					worldIn.setBlockState(pos, newState);
-				}
+				UABlocks.CORALSTONE_SLAB_CONVERSION_MAP.forEach((input, output) -> {
+				    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+						BlockState newState = output.get().getDefaultState().with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED));
+				    	worldIn.setBlockState(pos, newState, 2);
+				    }
+				});
 			}
+			
 		}
 		
 		if(this.growableCoralBlocks != null && random.nextFloat() < 0.12F && state.get(POWERED)) {
@@ -102,14 +107,14 @@ public class BlockCoralstoneSlab extends SlabBlock {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_SLAB) {
-			BlockState newState = UABlocks.CORALSTONE_SLAB.getDefaultState();
+		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_SLAB.get()) {
+			BlockState newState = UABlocks.CORALSTONE_SLAB.get().getDefaultState();
 			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 			world.setBlockState(pos, newState.with(TYPE, state.get(TYPE)).with(WATERLOGGED, state.get(WATERLOGGED)), 2);
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 		return super.onBlockActivated(state, world, pos, player, hand, hit);
 	}

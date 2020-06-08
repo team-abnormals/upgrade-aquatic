@@ -53,7 +53,7 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	}
 	
 	private void findNearestTarget() {
-		this.foundTarget = this.thrasher.world.getClosestEntity(this.thrasher.world.getEntitiesWithinAABB(LivingEntity.class, this.getTargetableArea(32), EntityThrasher.ENEMY_MATCHER), new EntityPredicate().setDistance(this.getTargetDistance()).setCustomPredicate(null), this.thrasher, this.thrasher.posX, this.thrasher.posY + this.thrasher.getEyeHeight(), this.thrasher.posZ);
+		this.foundTarget = this.thrasher.world.getClosestEntity(this.thrasher.world.getEntitiesWithinAABB(LivingEntity.class, this.getTargetableArea(32), EntityThrasher.ENEMY_MATCHER), new EntityPredicate().setDistance(this.getTargetDistance()).setCustomPredicate(null), this.thrasher, this.thrasher.getPosX(), this.thrasher.getPosY() + this.thrasher.getEyeHeight(), this.thrasher.getPosZ());
 	}
 	
 	private double getTargetDistance() {

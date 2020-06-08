@@ -4,6 +4,6 @@
  		"type=south": { "model": "upgrade_aquatic:block/kelpy_stone_brick_vertical_slab", "y": 180, "uvlock": true },
   		"type=east": { "model": "upgrade_aquatic:block/kelpy_stone_brick_vertical_slab", "y": 90, "uvlock": true },
  		"type=west": { "model": "upgrade_aquatic:block/kelpy_stone_brick_vertical_slab", "y": 270, "uvlock": true },
-        "type=double": { "model": "upgrade_aquatic:block/kelpy_stone_brick" }
+        "type=double": { "model": "upgrade_aquatic:block/kelpy_stone_bricks" }
     }
 }

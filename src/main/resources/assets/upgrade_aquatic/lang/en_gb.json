@@ -1,0 +1,28 @@
+{
+  "_comment": "Blocks",
+  
+  "block.upgrade_aquatic.bedroll_gray": "Grey Bedroll",
+  "block.upgrade_aquatic.bedroll_light_gray": "Light Grey Bedroll",
+
+  "block.upgrade_aquatic.chiseled_tooth_bricks": "Chiselled Tooth Bricks",
+
+  "block.upgrade_aquatic.chiseled_coralstone": "Chiselled Coralstone",
+  "block.upgrade_aquatic.bubble_chiseled_coralstone": "Chiselled Bubble Coralstone",
+  "block.upgrade_aquatic.horn_chiseled_coralstone": "Chiselled Horn Coralstone",
+  "block.upgrade_aquatic.tube_chiseled_coralstone": "Chiselled Tube Coralstone",
+  "block.upgrade_aquatic.brain_chiseled_coralstone": "Chiselled Brain Coralstone",
+  "block.upgrade_aquatic.fire_chiseled_coralstone": "Chiselled Fire Coralstone",		
+  "block.upgrade_aquatic.acan_chiseled_coralstone": "Chiselled Acan Coralstone",
+  "block.upgrade_aquatic.finger_chiseled_coralstone": "Chiselled Finger Coralstone",
+  "block.upgrade_aquatic.star_chiseled_coralstone": "Chiselled Star Coralstone",
+  "block.upgrade_aquatic.moss_chiseled_coralstone": "Chiselled Moss Coralstone",
+  "block.upgrade_aquatic.petal_chiseled_coralstone": "Chiselled Petal Coralstone",
+  "block.upgrade_aquatic.branch_chiseled_coralstone": "Chiselled Branch Coralstone",
+  "block.upgrade_aquatic.rock_chiseled_coralstone": "Chiselled Rock Coralstone",
+  "block.upgrade_aquatic.pillow_chiseled_coralstone": "Chiselled Pillow Coralstone",
+  "block.upgrade_aquatic.silk_chiseled_coralstone": "Chiselled Silk Coralstone",
+  "block.upgrade_aquatic.chrome_chiseled_coralstone": "Chiselled Chrome Coralstone",
+  "block.upgrade_aquatic.prismarine_chiseled_coralstone": "Chiselled Prismarine Coralstone",
+  "block.upgrade_aquatic.elder_prismarine_chiseled_coralstone": "Chiselled Elder Coralstone",
+  "block.upgrade_aquatic.dead_chiseled_coralstone": "Chiselled Dead Coralstone"
+}

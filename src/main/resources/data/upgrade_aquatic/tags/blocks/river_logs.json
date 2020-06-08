@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "upgrade_aquatic:river_log",
+    "upgrade_aquatic:river_wood",
+    "upgrade_aquatic:stripped_river_log",
+    "upgrade_aquatic:stripped_river_wood"
+  ]
+}

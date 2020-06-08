@@ -1,0 +1,59 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "upgrade_aquatic:block/tooth_lantern",
+		"particle": "upgrade_aquatic:block/tooth_lantern"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [7, 0, 7],
+			"to": [9, 4, 9],
+			"faces": {
+				"north": {"uv": [1, 2, 2, 4], "texture": "#0"},
+				"east": {"uv": [1, 2, 2, 4], "texture": "#0"},
+				"south": {"uv": [1, 2, 2, 4], "texture": "#0"},
+				"west": {"uv": [1, 2, 2, 4], "texture": "#0"},
+				"down": {"uv": [1, 0.5, 2, 1.5], "texture": "#0", "cullface": "down"}
+			}
+		},
+		{
+			"name": "skirt",
+			"from": [4, 4, 4],
+			"to": [12, 5, 12],
+			"faces": {
+				"north": {"uv": [7, 5, 11, 5.5], "texture": "#0"},
+				"east": {"uv": [7, 5, 11, 5.5], "texture": "#0"},
+				"south": {"uv": [7, 5, 11, 5.5], "texture": "#0"},
+				"west": {"uv": [7, 5, 11, 5.5], "texture": "#0"},
+				"up": {"uv": [7, 0.5, 11, 4.5], "texture": "#0"},
+				"down": {"uv": [7, 0.5, 11, 4.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "lantern",
+			"from": [5, 5, 5],
+			"to": [11, 13, 11],
+			"faces": {
+				"north": {"uv": [3, 3.5, 6, 7.5], "texture": "#0"},
+				"east": {"uv": [3, 3.5, 6, 7.5], "texture": "#0"},
+				"south": {"uv": [3, 3.5, 6, 7.5], "texture": "#0"},
+				"west": {"uv": [3, 3.5, 6, 7.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "hat",
+			"from": [4, 13, 4],
+			"to": [12, 14, 12],
+			"faces": {
+				"north": {"uv": [7, 5, 11, 5.5], "texture": "#0"},
+				"east": {"uv": [7, 5, 11, 5.5], "texture": "#0"},
+				"south": {"uv": [7, 5, 11, 5.5], "texture": "#0"},
+				"west": {"uv": [7, 5, 11, 5.5], "texture": "#0"},
+				"up": {"uv": [7, 0.5, 11, 4.5], "texture": "#0"},
+				"down": {"uv": [7, 0.5, 11, 4.5], "texture": "#0"}
+			}
+		}
+	]
+}

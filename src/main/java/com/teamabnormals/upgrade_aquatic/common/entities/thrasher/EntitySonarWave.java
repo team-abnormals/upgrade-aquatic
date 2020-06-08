@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.api.UpgradeAquaticAPI.ClientInfo;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 
 import net.minecraft.entity.Entity;
@@ -67,6 +67,40 @@ public class EntitySonarWave extends Entity {
 			}
 		}
 		
+		Vec3d motion = this.getMotion();
+		float horizontalMotionMagnitude = MathHelper.sqrt(horizontalMag(motion));
+		double motionX = motion.getX();
+		double motionY = motion.getY();
+		double motionZ = motion.getZ();
+        
+		if(this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
+			this.rotationYaw = (float) (MathHelper.atan2(motionX, motionZ) * (double)(180F / (float)Math.PI));
+			this.rotationPitch = (float) (MathHelper.atan2(motionY, horizontalMotionMagnitude) * (double)(180F / (float)Math.PI));
+			this.prevRotationYaw = this.rotationYaw;
+			this.prevRotationPitch = this.rotationPitch;
+		}
+		
+		this.rotationYaw = (float)(MathHelper.atan2(motionX, motionZ) * (double)(180F / (float)Math.PI));
+		
+		for(this.rotationPitch = (float)(MathHelper.atan2(motionY, horizontalMotionMagnitude) * (double)(180F / (float)Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+			;
+		}
+
+		while(this.rotationPitch - this.prevRotationPitch >= 180.0F) {
+			this.prevRotationPitch += 360.0F;
+		}
+
+		while(this.rotationYaw - this.prevRotationYaw < -180.0F) {
+			this.prevRotationYaw -= 360.0F;
+		}
+
+		while(this.rotationYaw - this.prevRotationYaw >= 180.0F) {
+			this.prevRotationYaw += 360.0F;
+		}
+
+		this.rotationPitch = MathHelper.lerp(0.2F, this.prevRotationPitch, this.rotationPitch);
+		this.rotationYaw = MathHelper.lerp(0.2F, this.prevRotationYaw, this.rotationYaw);
+		
 		this.prevGrowProgress = this.growProgress;
 		
 		if(this.growProgress < 0.1F) {
@@ -92,9 +126,9 @@ public class EntitySonarWave extends Entity {
 		
 		this.setMotion(motion);
 		this.setOwnerId(thrasher.getEntityId());
-		this.setPosition(thrasher.posX + xMotion, thrasher.posY, thrasher.posZ + zMotion);
+		this.setPosition(thrasher.getPosX() + xMotion, thrasher.getPosY(), thrasher.getPosZ() + zMotion);
 		
-		float motionSqrt = MathHelper.sqrt(func_213296_b(motion));
+		float motionSqrt = MathHelper.sqrt(horizontalMag(motion));
 		this.rotationYaw = (float) (MathHelper.atan2(motion.x, motion.z) * (180F / Math.PI));
 		this.rotationPitch = (float) (MathHelper.atan2(motion.y, motionSqrt) * (180F / Math.PI));
 		this.prevRotationYaw = this.rotationYaw;

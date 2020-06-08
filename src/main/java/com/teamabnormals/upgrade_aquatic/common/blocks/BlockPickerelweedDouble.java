@@ -25,7 +25,6 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -37,6 +36,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -57,7 +57,7 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 	
 	@Override
 	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
-		return this == UABlocks.PICKERELWEED_TALL_BLUE ? new ItemStack(UABlocks.PICKERELWEED_BLUE) : new ItemStack(UABlocks.PICKERELWEED_PURPLE);
+		return this == UABlocks.TALL_BLUE_PICKERELWEED.get() ? new ItemStack(UABlocks.BLUE_PICKERELWEED.get()) : new ItemStack(UABlocks.PURPLE_PICKERELWEED.get());
 	}
 	
 	@Override
@@ -133,10 +133,6 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 	public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
 		return state.get(WATERLOGGED) ? 0 : 60;
 	}
-	
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
 
 	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
 		return true;
@@ -162,12 +158,12 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		if (!worldIn.isRemote) {
 			cont:
 			for(int i = 0; i < 128; ++i) {
 				BlockPos blockpos = pos;
-				BlockState blockstate = this == UABlocks.PICKERELWEED_TALL_BLUE ? UABlocks.PICKERELWEED_BLUE.getDefaultState() : UABlocks.PICKERELWEED_PURPLE.getDefaultState();
+				BlockState blockstate = this == UABlocks.TALL_BLUE_PICKERELWEED.get() ? UABlocks.BLUE_PICKERELWEED.get().getDefaultState() : UABlocks.PURPLE_PICKERELWEED.get().getDefaultState();
 
 				for(int j = 0; j < i / 16; ++j) {
 					blockpos = blockpos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);

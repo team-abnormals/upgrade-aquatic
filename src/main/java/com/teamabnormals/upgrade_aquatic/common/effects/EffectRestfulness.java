@@ -29,7 +29,7 @@ public class EffectRestfulness extends InstantEffect {
         	entity.attackEntityFrom(DamageSource.MAGIC, Float.MAX_VALUE);
         } else if(entity instanceof EntityFlare) {
         	PhantomEntity phantom = EntityType.PHANTOM.create(entity.world);
-    		phantom.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
+    		phantom.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
     		phantom.setNoAI(((MobEntity) entity).isAIDisabled());
     		if(entity.hasCustomName()) {
     			phantom.setCustomName(entity.getCustomName());

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "axis=y":    { "model": "upgrade_aquatic:block/stripped_river_wood" },
+        "axis=z":     { "model": "upgrade_aquatic:block/stripped_river_wood", "x": 90 },
+        "axis=x":     { "model": "upgrade_aquatic:block/stripped_river_wood", "x": 90, "y": 90 }
+    }
+}

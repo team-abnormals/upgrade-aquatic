@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
@@ -16,7 +17,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
@@ -25,8 +28,8 @@ import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -35,6 +38,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -80,9 +84,9 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
 		if(state.get(HALF) == DoubleBlockHalf.LOWER) {
-			return fluidState.getLevel() >= 8 && this.isValidGround(groundState, worldIn, currentPos.down()) && worldIn.getBlockState(currentPos.up()).getBlock() == UABlocks.FLOWERING_RUSH && worldIn.getBlockState(currentPos.up()).get(HALF) == DoubleBlockHalf.UPPER ? state : Blocks.AIR.getDefaultState();
+			return fluidState.getLevel() >= 8 && this.isValidGround(groundState, worldIn, currentPos.down()) && worldIn.getBlockState(currentPos.up()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.up()).get(HALF) == DoubleBlockHalf.UPPER ? state : Blocks.AIR.getDefaultState();
 		} else {
-			return upperFluidState.isEmpty() && worldIn.getBlockState(currentPos.down()).getBlock() == UABlocks.FLOWERING_RUSH && worldIn.getBlockState(currentPos.down()).get(HALF) == DoubleBlockHalf.LOWER ? state : Blocks.AIR.getDefaultState();
+			return upperFluidState.isEmpty() && worldIn.getBlockState(currentPos.down()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.down()).get(HALF) == DoubleBlockHalf.LOWER ? state : Blocks.AIR.getDefaultState();
 		}
 	}
 	
@@ -112,11 +116,6 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 	}
 	
 	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
-	}
-	
-	@Override
 	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
@@ -127,7 +126,7 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		spawnAsEntity(worldIn, pos, new ItemStack(this));
 	}
 	
@@ -161,5 +160,17 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 	@OnlyIn(Dist.CLIENT)
 	public long getPositionRandom(BlockState state, BlockPos pos) {
 		return MathHelper.getCoordinateRandom(pos.getX(), pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+	}
+	
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		if(ItemStackUtils.isInGroup(this.asItem(), group)) {
+			int targetIndex = ItemStackUtils.findIndexOfItem(Items.PEONY, items);
+			if(targetIndex != -1) {
+				items.add(targetIndex + 1, new ItemStack(this));
+			} else {
+				super.fillItemGroup(group, items);
+			}
+		}
 	}
 }

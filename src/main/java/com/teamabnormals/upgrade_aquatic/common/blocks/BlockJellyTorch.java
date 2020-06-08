@@ -17,9 +17,9 @@ import net.minecraft.particles.BasicParticleType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -28,14 +28,20 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler, ILiquidContainer {
 	public enum JellyTorchType {
-		PINK, 
-		PURPLE, 
-		BLUE, 
-		GREEN, 
-		YELLOW, 
-		ORANGE,
-		RED,
-		WHITE;
+		PINK(TextFormatting.LIGHT_PURPLE), 
+		PURPLE(TextFormatting.DARK_PURPLE), 
+		BLUE(TextFormatting.BLUE), 
+		GREEN(TextFormatting.GREEN), 
+		YELLOW(TextFormatting.YELLOW), 
+		ORANGE(TextFormatting.GOLD),
+		RED(TextFormatting.RED),
+		WHITE(TextFormatting.WHITE);
+		
+		public final TextFormatting color;
+		
+		private JellyTorchType(TextFormatting color) {
+			this.color = color;
+		}
 	}
 	private final JellyTorchType torchType;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -61,11 +67,6 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
 	@Override
 	public void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
-	}
-	
-	@Override
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.TRANSLUCENT;
 	}
 	
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
@@ -132,6 +133,28 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
                 return UAParticles.RED_JELLY_FLAME;
          	case WHITE:
                 return UAParticles.WHITE_JELLY_FLAME;
+        }
+    }
+	
+	public static BasicParticleType getBlobParticleType(JellyTorchType type) {
+		switch(type) {
+			default:
+         	case PINK:
+         		return UAParticles.PINK_JELLY_BLOB;
+         	case PURPLE:
+         		return UAParticles.PURPLE_JELLY_BLOB;
+         	case BLUE:
+                return UAParticles.BLUE_JELLY_BLOB;
+         	case GREEN:
+                return UAParticles.GREEN_JELLY_BLOB;
+         	case YELLOW:
+                return UAParticles.YELLOW_JELLY_BLOB;
+         	case ORANGE:
+                return UAParticles.ORANGE_JELLY_BLOB;
+         	case RED:
+                return UAParticles.RED_JELLY_BLOB;
+         	case WHITE:
+                return UAParticles.WHITE_JELLY_BLOB;
         }
     }
 }

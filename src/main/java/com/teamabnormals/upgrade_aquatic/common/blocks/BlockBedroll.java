@@ -107,7 +107,7 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 	
 	public void onLanded(IBlockReader worldIn, Entity entityIn) {
-		if (entityIn.isSneaking()) {
+		if (entityIn.isCrouching()) {
 			super.onLanded(worldIn, entityIn);
 		} else if (entityIn.getMotion().y < 0.0D) {
 			entityIn.setMotion(entityIn.getMotion().x, -entityIn.getMotion().y * (double)0.66F, entityIn.getMotion().z);

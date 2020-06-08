@@ -1,0 +1,50 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "upgrade_aquatic:item/bucket/jellyfish_bucket_box"
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "variant": 1.2
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_box"
+        },
+        {
+            "predicate": {
+                "variant": 1.6
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_red_box"
+        },
+        {
+            "predicate": {
+                "variant": 1.7
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_white_box"
+        },
+        {
+            "predicate": {
+                "variant": 2.2
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_blue_cassiopea"
+        },
+        {
+            "predicate": {
+                "variant": 2.3
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_cassiopea"
+        },
+        {
+            "predicate": {
+                "variant": 2.7
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_white_cassiopea"
+        },
+        {
+            "predicate": {
+                "variant": 3.7
+            },
+            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_immortal"
+        }
+    ]
+}

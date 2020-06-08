@@ -1,0 +1,8 @@
+{
+	"parent": "upgrade_aquatic:block/mulberry/double_mulberry_vine_base",
+	"textures": {
+		"particle": "upgrade_aquatic:block/double_mulberry_vine_stage1",
+		"vine": "upgrade_aquatic:block/double_mulberry_vine_stage1",
+		"overlay": "upgrade_aquatic:block/double_mulberry_vine_overlay_stage1"
+	}
+}

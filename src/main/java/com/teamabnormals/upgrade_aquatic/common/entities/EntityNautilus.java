@@ -1,11 +1,10 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
-import com.teamabnormals.upgrade_aquatic.api.entity.EntityBucketableWaterMob;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
-import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
@@ -31,13 +30,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.registries.ForgeRegistries;
 
-public class EntityNautilus extends EntityBucketableWaterMob {
+public class EntityNautilus extends BucketableWaterMobEntity {
     private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.createKey(EntityNautilus.class, DataSerializers.BOOLEAN);
 
@@ -157,7 +151,7 @@ public class EntityNautilus extends EntityBucketableWaterMob {
             Vec3d vec3d1 = this.getLook(0.0F);
 
             if (this.getEntityWorld().getGameTime() % 2 == 0) {
-                this.world.addParticle(ParticleTypes.BUBBLE, this.posX + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.x * 0.75D, this.posY + this.rand.nextDouble() * (double) this.getHeight() - vec3d1.y * 1D, this.posZ + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.z * 0.75D, 0.0D, 0.0D, 0.0D);
+                this.world.addParticle(ParticleTypes.BUBBLE, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.x * 0.75D, this.getPosY() + this.rand.nextDouble() * (double) this.getHeight() - vec3d1.y * 1D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.z * 0.75D, 0.0D, 0.0D, 0.0D);
             }
         }
         super.livingTick();
@@ -196,16 +190,6 @@ public class EntityNautilus extends EntityBucketableWaterMob {
     public int getMaxSpawnedInChunk() {
         return 8;
     }
-
-    public static void addSpawn() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(EntityNautilus::processSpawning);
-	}
-	
-	private static void processSpawning(Biome biome) {
-		if(biome.getCategory() == Category.OCEAN && !BiomeDictionary.hasType(biome, Type.COLD)) {
-			biome.getSpawns(EntityClassification.WATER_CREATURE).add(new Biome.SpawnListEntry(UAEntities.NAUTILUS.get(), 51, 1, 4));
-        }
-	}
     
     static class MoveHelperController extends MovementController {
         private final EntityNautilus nautilus;
@@ -221,9 +205,9 @@ public class EntityNautilus extends EntityBucketableWaterMob {
             }
 
             if (this.action == MovementController.Action.MOVE_TO && !this.nautilus.getNavigator().noPath()) {
-                double d0 = this.posX - this.nautilus.posX;
-                double d1 = this.posY - this.nautilus.posY;
-                double d2 = this.posZ - this.nautilus.posZ;
+                double d0 = this.posX - this.nautilus.getPosX();
+                double d1 = this.posY - this.nautilus.getPosY();
+                double d2 = this.posZ - this.nautilus.getPosZ();
                 double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
                 d1 = d1 / d3;
                 float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;

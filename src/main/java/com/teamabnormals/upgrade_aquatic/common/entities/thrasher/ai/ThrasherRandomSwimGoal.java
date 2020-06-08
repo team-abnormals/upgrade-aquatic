@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import javax.annotation.Nullable;
 
-import com.teamabnormals.upgrade_aquatic.api.entity.util.AdvancedRandomPositionGenerator;
+import com.teamabnormals.abnormals_core.core.library.api.AdvancedRandomPositionGenerator;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;

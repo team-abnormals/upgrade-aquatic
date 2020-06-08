@@ -1,13 +1,17 @@
 package com.teamabnormals.upgrade_aquatic.client.render.overlay;
 
-import com.mojang.blaze3d.platform.GLX;
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.upgrade_aquatic.client.UARenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.model.ModelPike;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -18,37 +22,21 @@ public class RenderLayerGlowingPike<T extends EntityPike, M extends ModelPike<T>
 	public RenderLayerGlowingPike(IEntityRenderer<T, M> renderer) {
 		super(renderer);
 	}
-
+	
 	@Override
-	public void render(T entity, float p_212842_2_, float p_212842_3_, float p_212842_4_, float p_212842_5_, float p_212842_6_, float p_212842_7_, float p_212842_8_) {
-		if(entity.getPikeType() != 7 && entity.getPikeType() != 13 && entity.getPikeType() != 12) return;
-		this.bindTexture(this.getPikeOverlayTexture(entity));
-		GlStateManager.depthMask(true);
-        GlStateManager.enableBlend();
+	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T pike, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+		if(pike.getPikeType() != 7 && pike.getPikeType() != 13 && pike.getPikeType() != 12) return;
+		
+		ClientInfo.MINECRAFT.getTextureManager().bindTexture(this.getPikeOverlayTexture(pike));
 
-        GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, 240.0F, 240.0F);
-        GlStateManager.color4f(1F, 1F, 1F, 1F);
-        GlStateManager.disableLighting();
-
-        this.getEntityModel().render(entity, p_212842_2_, p_212842_3_, p_212842_5_, p_212842_6_, p_212842_7_, p_212842_8_);
-
-        GlStateManager.enableLighting();
-        int i = entity.getBrightnessForRender();
-        int j = i % 65536;
-        int k = i / 65536;
-        GLX.glMultiTexCoord2f(GLX.GL_TEXTURE1, (float)j, (float)k);
-        this.func_215334_a(entity);
-
-        GlStateManager.disableBlend();
+		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(UARenderTypes.getEmissiveEntity(this.getPikeOverlayTexture(pike)));
+		
+		this.getEntityModel().setRotationAngles(pike, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		this.getEntityModel().render(matrixStackIn, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 	
 	private ResourceLocation getPikeOverlayTexture(EntityPike pike) {
 		return new ResourceLocation(Reference.MODID, "textures/entity/pike/pike_" + pike.getPikeType() + "_glow.png");
-	}
-
-	@Override
-	public boolean shouldCombineTextures() {
-		return false;
 	}
 	
 }

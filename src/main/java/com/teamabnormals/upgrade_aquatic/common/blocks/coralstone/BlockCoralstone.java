@@ -17,6 +17,7 @@ import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -24,6 +25,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class BlockCoralstone extends Block {
 	@Nullable
@@ -45,34 +47,38 @@ public class BlockCoralstone extends Block {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_CORALSTONE && state.getBlock() != UABlocks.CORALSTONE) {
-			BlockState newState = this.chiseled ? UABlocks.CHISELED_CORALSTONE.getDefaultState() : UABlocks.CORALSTONE.getDefaultState();
+		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_CORALSTONE.get() && state.getBlock() != UABlocks.CORALSTONE.get()) {
+			BlockState newState = this.chiseled ? UABlocks.CHISELED_CORALSTONE.get().getDefaultState() : UABlocks.CORALSTONE.get().getDefaultState();
 			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 			world.setBlockState(pos, newState, 2);
-			return true;
+			return ActionResultType.SUCCESS;
 		}
 		return super.onBlockActivated(state, world, pos, player, hand, hit);
 	}
 	
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if(!worldIn.isAreaLoaded(pos, 3)) return;
 		Block block = state.getBlock();
 		
-		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE && block != UABlocks.DEAD_CHISELED_CORALSTONE) {
+		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE.get() && block != UABlocks.DEAD_CHISELED_CORALSTONE.get()) {
 			for(int i = 0; i < 4; i++) {
 				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 				if(chiseled) {
-					if(UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
-						worldIn.setBlockState(pos, UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState());
-					}
+					UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP.forEach((input, output) -> {
+					    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+					    	worldIn.setBlockState(pos, output.get().getDefaultState(), 2);
+					    }
+					});
 				} else {
-					if(UABlocks.CORALSTONE_CONVERSION_MAP.containsKey(worldIn.getBlockState(blockpos).getBlock())) {
-						worldIn.setBlockState(pos, UABlocks.CORALSTONE_CONVERSION_MAP.get(worldIn.getBlockState(blockpos).getBlock()).getDefaultState());
-					}
+					UABlocks.CORALSTONE_CONVERSION_MAP.forEach((input, output) -> {
+					    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+					    	worldIn.setBlockState(pos, output.get().getDefaultState(), 2);
+					    }
+					});
 				}
 			}
 		}

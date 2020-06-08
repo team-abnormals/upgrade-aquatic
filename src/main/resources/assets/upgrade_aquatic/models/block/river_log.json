@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_column",
+    "textures": {
+        "end": "upgrade_aquatic:block/river_log_top",
+        "side": "upgrade_aquatic:block/river_log"
+    }
+}

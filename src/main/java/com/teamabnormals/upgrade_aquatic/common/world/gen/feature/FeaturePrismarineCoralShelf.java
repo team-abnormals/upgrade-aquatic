@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
-import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.BlockState;
@@ -75,14 +75,14 @@ public class FeaturePrismarineCoralShelf extends FeaturePrismarineCoral {
 	}
 	
 	private static void addShelf(IWorld world, BlockPos pos, Random rand, int a, int b, int c, boolean isElder) {
-		MathUtil.Equation r = (theta) -> {
+		MathUtils.Equation r = (theta) -> {
 			return (Math.cos(b * theta) / c + 1) * a;
 		};
 		for (int i = -(a / c + a); i < a / c + a; i++) {
 			for (int j = -(a / c + a); j < a / c + a; j++) {
 				double radius = r.compute(Math.atan2(j, i));
 				BlockPos placingPos = pos.add(i, 0, j);
-				if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN && (i * i + j * j) < radius * radius) {
+				if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN.get() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.get() && (i * i + j * j) < radius * radius) {
 					world.setBlockState(placingPos, CORAL_BLOCK_BLOCK(isElder), 2);
 					if(rand.nextBoolean()) {
 						boolean gen = rand.nextBoolean();

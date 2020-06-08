@@ -19,6 +19,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -71,10 +72,10 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 		return new TileEntityElderEye();
 	}
 	
-	@Override
-	public boolean hasCustomBreakingProgress(BlockState state) {
-		return true;
-	}
+//	@Override
+//	public boolean hasCustomBreakingProgress(BlockState state) {
+//		return true;
+//	}
 	
 	@Override
 	public boolean hasTileEntity(BlockState state) {
@@ -104,7 +105,7 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	 }
 	
 	@Override
-	public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
 		boolean flag = state.get(ACTIVE);
 		if(flag) {
 			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_CONDUIT_DEACTIVATE, SoundCategory.BLOCKS, 0.3F, 1.0F);
@@ -114,7 +115,7 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 			worldIn.setBlockState(pos, state.with(ACTIVE, true).with(POWERED, false));
 		}
 		this.updateRedstoneNeighbors(state, worldIn, pos);
-		return true;
+		return ActionResultType.SUCCESS;
 	}
 	
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {

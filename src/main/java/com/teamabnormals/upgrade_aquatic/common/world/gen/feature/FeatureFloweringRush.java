@@ -1,9 +1,11 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
+import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFloweringRush;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
@@ -24,10 +26,9 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
-public class FeatureFloweringRush extends Feature<NoFeatureConfig> {
-	private static final BlockState FLOWERING_RUSH = UABlocks.FLOWERING_RUSH.getDefaultState();
+public class FeatureFloweringRush extends Feature<NoFeatureConfig> implements IAddToBiomes {
+	private static final BlockState FLOWERING_RUSH = UABlocks.FLOWERING_RUSH.get().getDefaultState();
 
 	public FeatureFloweringRush(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
@@ -54,14 +55,13 @@ public class FeatureFloweringRush extends Feature<NoFeatureConfig> {
 		world.setBlockState(pos, FLOWERING_RUSH.with(BlockFloweringRush.WATERLOGGED, true), 2);
 		world.setBlockState(pos.up(), FLOWERING_RUSH.with(BlockFloweringRush.HALF, DoubleBlockHalf.UPPER), 2);
 	}
-	
-	public static void addFloweringRush() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(FeatureFloweringRush::process);
-	}
-	
-	private static void process(Biome biome) {
-		if(biome.getCategory() == Category.RIVER) {
-			biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.FLOWERING_RUSH.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(15)));
-		}
+
+	@Override
+	public Consumer<Biome> processBiomeAddition() {
+		return biome -> {
+			if(biome.getCategory() == Category.RIVER) {
+				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.FLOWERING_RUSH.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(15))));
+			}
+		};
 	}
 }

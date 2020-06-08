@@ -1,10 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
+import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import com.mojang.datafixers.Dynamic;
-import com.teamabnormals.upgrade_aquatic.api.util.MathUtil;
+import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
@@ -22,12 +25,11 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
-public class FeatureSearocket extends Feature<NoFeatureConfig> {
+public class FeatureSearocket extends Feature<NoFeatureConfig> implements IAddToBiomes {
 	
-	private static final BlockState SEAROCKET(boolean pink) {
-		return pink ? UABlocks.SEAROCKET_PINK.getDefaultState() : UABlocks.SEAROCKET_WHITE.getDefaultState();
+	private static final Supplier<BlockState> SEAROCKET(boolean pink) {
+		return pink ? () -> UABlocks.PINK_SEAROCKET.get().getDefaultState() : () -> UABlocks.WHITE_SEAROCKET.get().getDefaultState();
 	}
 	
 	public FeatureSearocket(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
@@ -39,13 +41,13 @@ public class FeatureSearocket extends Feature<NoFeatureConfig> {
 		boolean colorType;
 		if(worldIn.getBiome(pos).getTempCategory() == TempCategory.COLD) {
 			colorType = rand.nextFloat() <= 0.25F;
-			if(SEAROCKET(colorType).isValidPosition(worldIn, pos)) {
+			if(SEAROCKET(colorType).get().isValidPosition(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));
 				return true;
 			}
 		} else {
 			colorType = rand.nextFloat() <= 0.75F;
-			if(SEAROCKET(colorType).isValidPosition(worldIn, pos)) {
+			if(SEAROCKET(colorType).get().isValidPosition(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));
 				return true;
 			}
@@ -92,7 +94,7 @@ public class FeatureSearocket extends Feature<NoFeatureConfig> {
 				patterns[2] = 6;
 		}
 		BlockPos startPos = pos;
-		MathUtil.Equation r = (theta) -> {
+		MathUtils.Equation r = (theta) -> {
 			return (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
 		};
 		if(!world.isAirBlock(startPos.down()) && !world.isAirBlock(startPos.down(2)) && !world.isAirBlock(startPos.down(3))) {
@@ -104,8 +106,8 @@ public class FeatureSearocket extends Feature<NoFeatureConfig> {
 						double radius = r.compute(Math.atan2(j, i));
 						BlockPos placingPos = pos.add(i, 0, j);
 						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
-							if(SEAROCKET(pink).isValidPosition(world, placingPos) && world.getFluidState(placingPos).isEmpty()) {
-								world.setBlockState(placingPos, SEAROCKET(pink), 2);
+							if(SEAROCKET(pink).get().isValidPosition(world, placingPos) && world.getFluidState(placingPos).isEmpty()) {
+								world.setBlockState(placingPos, SEAROCKET(pink).get(), 2);
 							}
 						}
 					}
@@ -113,13 +115,12 @@ public class FeatureSearocket extends Feature<NoFeatureConfig> {
 			}
 		}
 	}
-	
-	public static void addSearocket() {
-		ForgeRegistries.BIOMES.getValues().stream().forEach(FeatureSearocket::process);
-	}
-	
-	private static void process(Biome biome) {
-		if(biome.getCategory() == Category.BEACH) biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(Biome.createDecoratedFeature(UAFeatures.SEAROCKET.get(), IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(15)));
+
+	@Override
+	public Consumer<Biome> processBiomeAddition() {
+		return biome -> {
+			if(biome.getCategory() == Category.BEACH) biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.SEAROCKET.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(15))));
+		};
 	}
 	
 }

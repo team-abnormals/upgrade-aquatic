@@ -4,6 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
@@ -13,6 +14,7 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.ShearsItem;
@@ -21,8 +23,8 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -31,6 +33,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -105,8 +108,8 @@ public class BlockBeachgrassTall extends Block implements IGrowable {
 			worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
 			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			if(!worldIn.isRemote && !player.isCreative() && player.getHeldItemMainhand().getItem() instanceof ShearsItem) {
-				spawnAsEntity(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS));
-				spawnAsEntity(worldIn, pos.up(), new ItemStack(UABlocks.BEACHGRASS));
+				spawnAsEntity(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS.get()));
+				spawnAsEntity(worldIn, pos.up(), new ItemStack(UABlocks.BEACHGRASS.get()));
 			} else if(!worldIn.isRemote && !player.isCreative() && !(player.getHeldItemMainhand().getItem() instanceof ShearsItem)) {
 				Random rand = new Random();
 				if(rand.nextFloat() < 0.125F) {
@@ -120,10 +123,6 @@ public class BlockBeachgrassTall extends Block implements IGrowable {
 
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HALF);
-	}
-	
-	public BlockRenderLayer getRenderLayer() {
-		return BlockRenderLayer.CUTOUT;
 	}
 
 	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
@@ -150,9 +149,9 @@ public class BlockBeachgrassTall extends Block implements IGrowable {
 	}
 	
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		if(!worldIn.isRemote) {
-			BlockState blockstate = UABlocks.BEACHGRASS.getDefaultState();
+			BlockState blockstate = UABlocks.BEACHGRASS.get().getDefaultState();
 			cont:
 			for(int i = 0; i < 128; ++i) {
 				BlockPos blockpos = pos;
@@ -167,6 +166,18 @@ public class BlockBeachgrassTall extends Block implements IGrowable {
 				if(blockstate.isValidPosition(worldIn, blockpos) && worldIn.isAirBlock(blockpos) && rand.nextFloat() <= 0.10F) {
 					worldIn.setBlockState(blockpos, blockstate);
 				}
+			}
+		}
+	}
+	
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		if(ItemStackUtils.isInGroup(this.asItem(), group)) {
+			int targetIndex = ItemStackUtils.findIndexOfItem(Items.LARGE_FERN, items);
+			if(targetIndex != -1) {
+				items.add(targetIndex + 1, new ItemStack(this));
+			} else {
+				super.fillItemGroup(group, items);
 			}
 		}
 	}
