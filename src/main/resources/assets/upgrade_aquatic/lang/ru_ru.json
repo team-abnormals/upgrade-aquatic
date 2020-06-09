@@ -185,7 +185,7 @@
   "block.upgrade_aquatic.silk_chiseled_coralstone": "Резной шелковистый коралло-камень",
   "block.upgrade_aquatic.chrome_chiseled_coralstone": "Резной хромовый коралло-камень",
   "block.upgrade_aquatic.prismarine_chiseled_coralstone": "Резной призмариновый коралло-камень",
-  "block.upgrade_aquatic.elder_chiseled_coralstone": "Резной древний призмариновый коралло-камень",
+  "block.upgrade_aquatic.elder_prismarine_chiseled_coralstone": "Резной древний призмариновый коралло-камень",
   "block.upgrade_aquatic.dead_chiseled_coralstone": "Резной мертвый коралло-камень",
   
   "block.upgrade_aquatic.coralstone_slab": "Плита из коралло-камня",
@@ -225,7 +225,7 @@
   "block.upgrade_aquatic.silk_coralstone_stairs": "Ступеньки из шелковистого коралло-камня",
   "block.upgrade_aquatic.chrome_coralstone_stairs": "Ступеньки из хромового коралло-камня",
   "block.upgrade_aquatic.prismarine_coralstone_stairs": "Ступеньки из призмаринового коралло-камня",
-  "block.upgrade_aquatic.elder_coralstone_stairs": "Ступеньки из древнего призмаринового коралло-камня",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_stairs": "Ступеньки из древнего призмаринового коралло-камня",
   "block.upgrade_aquatic.dead_coralstone_stairs": "Ступеньки из мертвого коралло-камня",
   
   "block.upgrade_aquatic.coralstone_wall": "Ограда из коралло-камня",
@@ -260,6 +260,7 @@
   "block.upgrade_aquatic.chiseled_tooth_bricks": "Резные зубные кирпичи",
   "block.upgrade_aquatic.tooth_door": "Зубная дверь",
   "block.upgrade_aquatic.tooth_trapdoor": "Зубной люк",
+  "block.upgrade_aquatic.tooth_lantern": "Зубной фонарь",
 
   "block.upgrade_aquatic.tongue_kelp": "Языковая ламинария",
   "block.upgrade_aquatic.thorny_kelp": "Колючая ламинария",
@@ -342,8 +343,40 @@
   "block.upgrade_aquatic.driftwood_button": "Плавниковая кнопка",
   "block.upgrade_aquatic.driftwood_door": "Плавниковая дверь",
   "block.upgrade_aquatic.driftwood_trapdoor": "Плавниковый люк",
+  "block.upgrade_aquatic.driftwood_vertical_planks": "Плавниковые вертикальные доски",
+  "block.upgrade_aquatic.driftwood_vertical_slab": "Плавниковая вертикальная плита",
+  "block.upgrade_aquatic.driftwood_bookshelf": "Плавниковая книжная полка",
+  "block.upgrade_aquatic.driftwood_ladder": "Плавниковая лестница",
+  "block.upgrade_aquatic.driftwood_sign": "Плавниковая табличка",
+  "block.upgrade_aquatic.driftwood_wall_sign": "Плавниковая табличка на стене",
+  
+  "block.upgrade_aquatic.river_leaves": "Листья речного дерева",
+  "block.upgrade_aquatic.river_sapling": "Саженец речного дерева",
+  "block.upgrade_aquatic.river_leaf_carpet": "Ковёр из листьев речного дерева",
+  "block.upgrade_aquatic.river_log": "Бревно речного дерева",
+  "block.upgrade_aquatic.river_wood": "Речное дерево",
+  "block.upgrade_aquatic.stripped_river_log": "Обтёсанное речное дерево",
+  "block.upgrade_aquatic.stripped_river_wood": "Обтёсанная речная древесина",
+  "block.upgrade_aquatic.river_planks": "Доски из речного дерева",
+  "block.upgrade_aquatic.river_stairs": "Ступеньки из речного дерева",
+  "block.upgrade_aquatic.river_slab": "Плита из речного дерева",
+  "block.upgrade_aquatic.river_fence": "Забор из речного дерева",
+  "block.upgrade_aquatic.river_fence_gate": "Калитка из речного дерева",
+  "block.upgrade_aquatic.river_pressure_plate": "Нажимная плита из речного дерева",
+  "block.upgrade_aquatic.river_button": "Кнопка из речного дерева",
+  "block.upgrade_aquatic.river_door": "Дверь из речного дерева",
+  "block.upgrade_aquatic.river_trapdoor": "Люк из речного дерева",
+  "block.upgrade_aquatic.vertical_river_planks": "Вертикальные доски из речного дерева",
+  "block.upgrade_aquatic.river_vertical_slab": "Вертикальная плита из речного дерева",
+  "block.upgrade_aquatic.river_bookshelf": "Книжная полка из речного дерева",
+  "block.upgrade_aquatic.river_ladder": "Лестница из речного дерева",
+  "block.upgrade_aquatic.river_sign": "Табличка из речного дерева",
+  "block.upgrade_aquatic.river_wall_sign": "Табличка из речного дерева на стене",
   
   "block.upgrade_aquatic.flowering_rush": "Зонтичный сусак",
+  "block.upgrade_aquatic.mulberry_vine": "Шелковичная лоза",
+
+  "block.upgrade_aquatic.mulberry_jam_block": "Блок шелковичного джема",
 
   "block.upgrade_aquatic.prismarine_rod_bundle": "Связка призмариновых стержней",
 
@@ -353,12 +386,9 @@
   "block.upgrade_aquatic.beachgrass_thatch_slab": "Плита из соломы песколюбки",
   "block.upgrade_aquatic.beachgrass_thatch_stairs": "Ступеньки из соломы песколюбки",
 
-  "block.upgrade_aquatic.driftwood_vertical_planks": "Плавниковые вертикальные доски",
-  "block.upgrade_aquatic.driftwood_vertical_slab": "Плавниковая вертикальная плита",
-  "block.upgrade_aquatic.driftwood_bookshelf": "Плавниковая книжная полка",
-  "block.upgrade_aquatic.driftwood_ladder": "Плавниковая лестница",
   "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Вертикальная плита из соломы песколюбки",
   "block.upgrade_aquatic.tooth_vertical_slab": "Зубная вертикальная плита",
+  "block.upgrade_aquatic.tooth_brick_vertical_slab": "Вертикальная плита из зубных кирпичей",
   "block.upgrade_aquatic.kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в ламинарии",
   "block.upgrade_aquatic.tongue_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в языковой ламинарии",
   "block.upgrade_aquatic.thorny_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в колючей ламинарии",
@@ -386,12 +416,13 @@
   "block.upgrade_aquatic.silk_coralstone_vertical_slab": "Вертикальная плита из шелковистого коралло-камня",
   "block.upgrade_aquatic.chrome_coralstone_vertical_slab": "Вертикальная плита из хромового коралло-камня",
   "block.upgrade_aquatic.prismarine_coralstone_vertical_slab": "Вертикальная плита из призмаринового коралло-камня",
-  "block.upgrade_aquatic.elder_coralstone_vertical_slab": "Вертикальная плита из древнего призмаринового коралло-камня",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_vertical_slab": "Вертикальная плита из древнего призмаринового коралло-камня",
   "block.upgrade_aquatic.dead_coralstone_vertical_slab": "Вертикальная плита из мертвого коралло-камня",
   
   "_comment": "Предметы",
 
   "item.upgrade_aquatic.driftwood_boat": "Плавниковая лодка",
+  "item.upgrade_aquatic.river_boat": "Лодка из речного дерева",
 
   "item.upgrade_aquatic.prismarine_rod": "Призмариновый стержень",
   "item.upgrade_aquatic.thrasher_tooth": "Зуб острозуба",
@@ -400,6 +431,7 @@
   "item.upgrade_aquatic.pike_bucket": "Щука в ведре",
   "item.upgrade_aquatic.lionfish_bucket": "Крылатка-зебра в ведре",
   "item.upgrade_aquatic.squid_bucket": "Спрут в ведре",
+  "item.upgrade_aquatic.jellyfish_bucket": "Медуза в ведре",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Яйцо призыва крестьянина-утопленника",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Яйцо призыва наутилуса",
@@ -408,6 +440,8 @@
   "item.upgrade_aquatic.thrasher_spawn_egg": "Яйцо призыва острозуба",
   "item.upgrade_aquatic.great_thrasher_spawn_egg": "Яйцо призыва великого острозуба",
   "item.upgrade_aquatic.flare_spawn_egg": "Яйцо призыва засвета",
+  "item.upgrade_aquatic.goose_spawn_egg": "Яйцо призыва гуся",
+  "item.upgrade_aquatic.jellyfish_spawn_egg": "Яйцо призыва медузы",
 
   "item.upgrade_aquatic.boiled_pickerelweed_purple": "Вареная фиолетовая понтедерия",
   "item.upgrade_aquatic.boiled_pickerelweed_blue": "Вареная синяя понтедерия",
@@ -415,6 +449,10 @@
   "item.upgrade_aquatic.pike_cooked": "Жареная щука",
   "item.upgrade_aquatic.lionfish": "Сырая крылатка-зебра",
   "item.upgrade_aquatic.lionfish_cooked": "Жареная крылатка-зебра",
+
+  "item.upgrade_aquatic.mulberry": "Шелковица",
+  "item.upgrade_aquatic.mulberry_jam": "Шелковичный джем",
+  "item.upgrade_aquatic.mulberry_bread": "Шелковичный хлеб",
 
   "_comment": "Подсказки",
   
@@ -440,6 +478,27 @@
   "tooltip.upgrade_aquatic.lemon_southern_pike": "Лимоновая южная щука",
   "tooltip.upgrade_aquatic.golden_southern_pike": "Золотая южная щука",
   
+  "tooltip.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
+  "tooltip.upgrade_aquatic.red_box_jellyfish": "Red Box Jellyfish",
+  "tooltip.upgrade_aquatic.white_box_jellyfish": "White Box Jellyfish",
+  
+  "tooltip.upgrade_aquatic.cassiopea_jellyfish": "Cassiopea Jellyfish",
+  "tooltip.upgrade_aquatic.blue_cassiopea_jellyfish": "Blue Cassiopea Jellyfish",
+  "tooltip.upgrade_aquatic.white_cassiopea_jellyfish": "White Cassiopea Jellyfish",
+  
+  "tooltip.upgrade_aquatic.immortal_jellyfish": "Бессмертная медуза",
+  
+  "tooltip.upgrade_aquatic.yielding_jellytorch": "Yields: ",
+  "tooltip.upgrade_aquatic.yielding_jellytorch.or": " or ",
+  "tooltip.upgrade_aquatic.jellytorch_blue": "Blue Jelly Torch",
+  "tooltip.upgrade_aquatic.jellytorch_green": "Green Jelly Torch",
+  "tooltip.upgrade_aquatic.jellytorch_yellow": "Yellow Jelly Torch",
+  "tooltip.upgrade_aquatic.jellytorch_orange": "Orange Jelly Torch",
+  "tooltip.upgrade_aquatic.jellytorch_red": "Red Jelly Torch",
+  "tooltip.upgrade_aquatic.jellytorch_pink": "Pink Jelly Torch",
+  "tooltip.upgrade_aquatic.jellytorch_purple": "Purple Jelly Torch",
+  "tooltip.upgrade_aquatic.jellytorch_white": "White Jelly Torch",
+  
   "_comment": "Сущности",
   
   "entity.upgrade_aquatic.nautilus": "Наутилус",
@@ -448,6 +507,13 @@
   "entity.upgrade_aquatic.thrasher": "Острозуб",
   "entity.upgrade_aquatic.great_thrasher": "Великий острозуб",
   "entity.upgrade_aquatic.flare": "Засвет",
+  "entity.upgrade_aquatic.ululu": "Улулу",
+  "entity.upgrade_aquatic.sonar_wave": "Гидроволна",
+  "entity.upgrade_aquatic.goose": "Гусь",
+
+  "entity.upgrade_aquatic.box_jellyfish": "Медуза",
+  "entity.upgrade_aquatic.cassiopea_jellyfish": "Медуза кассиопея",
+  "entity.upgrade_aquatic.immortal_jellyfish": "Бессмертная медуза",
 
   "_comment": "Зелья и эффекты",
   
@@ -504,5 +570,42 @@
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s был заколот шипом стража",
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s был заколот шипом стража, пока боролся с %2$s",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s был заколот шипом древнего стража",
-  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s был заколот шипом древнего стража, пока боролся с %2$s"
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s был заколот шипом древнего стража, пока боролся с %2$s",
+  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s был ужален до смерти от %2$s",
+
+  "_comment7": "Достижения",
+  
+  "advancements.adventure.tooth_fairy.title": "Зубная фея",
+  "advancements.adventure.tooth_fairy.description": "Добудьте зубы острозуба, древнего ужаса, что скрывается в холодных водах",
+  
+  "advancements.adventure.unethical_dentistry.title": "Неэтичная стоматология",
+  "advancements.adventure.unethical_dentistry.description": "Поставьте любой блок, сделанный из зубов острозуба",
+  
+  "advancements.adventure.kill_great_thrasher.title": "Тут нужна лодка побольше",
+  "advancements.adventure.kill_great_thrasher.description": "Убить великого острозуба",
+  
+  "advancements.nether.sleepless_slave.title": "Бессонный раб",
+  "advancements.nether.sleepless_slave.description": "Создайте засвета, поразив фантома бессонницей",
+  
+  "advancements.nether.vibe_check.title": "Vibe Check",
+  "advancements.nether.vibe_check.description": "Сварите зелье коррозионосности из крылатки-зебры and инвертируйте его с помощью паучьего глаза для получения зелья аураносности",
+  
+  "advancements.husbandry.eat_pickerelweed.title": "Законно в большинстве штатов",
+  "advancements.husbandry.eat_pickerelweed.description": "Приготовьте и съешьте вареную понтедерию чтобы восстановить количество воздуха",
+  
+  "advancements.husbandry.collect_all_pike.title": "Мировое щучье турне",
+  "advancements.husbandry.collect_all_pike.description": "Добудьте все варианты щук в ведрах",
+  
+  "advancements.husbandry.pick_mulberries.title": "Низко-висящий фрукт",
+  "advancements.husbandry.pick_mulberries.description": "Соберите шелковицу с речного дерева",
+  
+  "_comment8": "Субтитры",
+  
+  "subtitles.upgrade_aquatic.thrasher.hurt": "Острозуб ранен",
+  "subtitles.upgrade_aquatic.thrasher.ambient": "Острозуб рычит",
+  "subtitles.upgrade_aquatic.thrasher.death": "Острозуб погибает",
+  "subtitles.upgrade_aquatic.thrasher.thrash": "Острозуб вгрызается",
+  "subtitles.upgrade_aquatic.thrasher.flop": "Острозуб плещется",
+  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Острозуб запускает гидроволну"
+
 }
