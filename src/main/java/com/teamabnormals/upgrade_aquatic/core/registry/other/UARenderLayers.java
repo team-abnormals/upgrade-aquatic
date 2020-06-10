@@ -142,5 +142,6 @@ public class UARenderLayers {
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_BLUE_PICKERELWEED.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PINK_SEAROCKET.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_WHITE_SEAROCKET.get(), CUTOUT);
+		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_RIVER_SAPLING.get(), CUTOUT);
 	}
 }
