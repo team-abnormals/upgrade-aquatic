@@ -22,31 +22,29 @@ public class UAColors {
 		registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES));
 		registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAF_CARPET));
 		registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.MULBERRY_VINE));
-        
+
 		ItemColors itemColors = Minecraft.getInstance().getItemColors();
 		registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES));
 		registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAF_CARPET));
 	}
 	
 	private static void registerBlockColor(BlockColors blockColors, IBlockColor color, List<RegistryObject<Block>> blocksIn) {
-		List<RegistryObject<Block>> registryObjects = blocksIn;
-		registryObjects.removeIf(block -> !block.isPresent());
-		if(registryObjects.size() > 0) {
-			Block[] blocks = new Block[registryObjects.size()];
-			for(int i = 0; i < registryObjects.size(); i++) {
-				blocks[i] = registryObjects.get(i).get();
+		blocksIn.removeIf(block -> !block.isPresent());
+		if(blocksIn.size() > 0) {
+			Block[] blocks = new Block[blocksIn.size()];
+			for(int i = 0; i < blocksIn.size(); i++) {
+				blocks[i] = blocksIn.get(i).get();
 			}
 			blockColors.register(color, blocks);
 		}
 	}
 	
 	private static void registerBlockItemColor(ItemColors blockColors, IItemColor color, List<RegistryObject<Block>> blocksIn) {
-		List<RegistryObject<Block>> registryObjects = blocksIn;
-		registryObjects.removeIf(block -> !block.isPresent());
-		if(registryObjects.size() > 0) {
-			Block[] blocks = new Block[registryObjects.size()];
-			for(int i = 0; i < registryObjects.size(); i++) {
-				blocks[i] = registryObjects.get(i).get();
+		blocksIn.removeIf(block -> !block.isPresent());
+		if(blocksIn.size() > 0) {
+			Block[] blocks = new Block[blocksIn.size()];
+			for(int i = 0; i < blocksIn.size(); i++) {
+				blocks[i] = blocksIn.get(i).get();
 			}
 			blockColors.register(color, blocks);
 		}

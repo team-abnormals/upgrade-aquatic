@@ -60,8 +60,4 @@ public class UAHooks {
 		fallingblockentity.fallTime = 1;
 		world.addEntity(fallingblockentity);
 	}
-	
-	public static void makeBubbleColumnTickRandomly() {
-		ObfuscationReflectionHelper.setPrivateValue(Block.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
-	}
 }
