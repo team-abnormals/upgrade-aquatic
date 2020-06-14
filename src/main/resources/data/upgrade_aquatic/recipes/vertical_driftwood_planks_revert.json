@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "upgrade_aquatic",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:driftwood_vertical_planks"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:driftwood_planks"
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "vertical_planks"
+        }
+      ]
+    }
+  ]
+}

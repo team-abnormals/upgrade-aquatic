@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:branch_coralstone_vertical_slab"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:branch_coralstone_slab",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "vertical_slabs"
+        }
+      ]
+    }
+  ]
+}
