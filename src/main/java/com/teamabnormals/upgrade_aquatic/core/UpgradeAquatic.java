@@ -36,6 +36,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -48,6 +49,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
+@SuppressWarnings("deprecation")
 @Mod(value = Reference.MODID)
 public class UpgradeAquatic {
 	public static UpgradeAquatic instance;
@@ -70,11 +72,12 @@ public class UpgradeAquatic {
 
 		REGISTRY_HELPER.getDeferredBlockRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredItemRegister().register(modEventBus);
-		UAEffects.EFFECTS.register(modEventBus);
-		UAEffects.POTIONS.register(modEventBus);
 		REGISTRY_HELPER.getDeferredTileEntityRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredEntityRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredSoundRegister().register(modEventBus);
+		
+		UAEffects.EFFECTS.register(modEventBus);
+		UAEffects.POTIONS.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
 		
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
@@ -94,13 +97,16 @@ public class UpgradeAquatic {
 	}
 	
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		UAEntitySpawns.processSpawnAdditions();
-		UADispenseBehaviorRegistry.registerDispenseBehaviors();
-		UAEffects.registerBrewingRecipes();
-		UAWorldGen.registerGenerators();
-		UACompostables.registerCompostables();
-		UAFlammables.registerFlammables();
 		UAHooks.makeBubbleColumnTickRandomly();
+		DeferredWorkQueue.runLater(() -> {
+			REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
+			UAEntitySpawns.processSpawnAdditions();
+			UADispenseBehaviorRegistry.registerDispenseBehaviors();
+			UAEffects.registerBrewingRecipes();
+			UAWorldGen.registerGenerators();
+			UACompostables.registerCompostables();
+			UAFlammables.registerFlammables();
+		});
 	}
 	
 	@OnlyIn(Dist.CLIENT)

@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:river_chest"
+    },
+    {
+      "item": "minecraft:tripwire_hook"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:river_trapped_chest"
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "variant_chests"
+        }
+      ]
+    }
+  ]
+}

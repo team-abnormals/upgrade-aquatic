@@ -11,6 +11,8 @@ import com.teamabnormals.abnormals_core.common.blocks.BookshelfBlock;
 import com.teamabnormals.abnormals_core.common.blocks.InjectedBlock;
 import com.teamabnormals.abnormals_core.common.blocks.LeafCarpetBlock;
 import com.teamabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
+import com.teamabnormals.abnormals_core.common.blocks.chest.AbnormalsChestBlock;
+import com.teamabnormals.abnormals_core.common.blocks.chest.AbnormalsTrappedChestBlock;
 import com.teamabnormals.abnormals_core.common.blocks.sign.AbnormalsStandingSignBlock;
 import com.teamabnormals.abnormals_core.common.blocks.sign.AbnormalsWallSignBlock;
 import com.teamabnormals.abnormals_core.common.blocks.thatch.ThatchBlock;
@@ -523,7 +525,8 @@ public class UABlocks {
 	public static RegistryObject<Block> RIVER_BOOKSHELF			= HELPER.createCompatBlock("quark", "river_bookshelf", () -> new BookshelfBlock(Properties.from(Blocks.BOOKSHELF)), ItemGroup.BUILDING_BLOCKS);
 	public static RegistryObject<Block> RIVER_LADDER			= HELPER.createCompatBlock("quark", "river_ladder", () -> new AbnormalsLadderBlock(Properties.from(Blocks.LADDER).notSolid()), ItemGroup.DECORATIONS);
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> RIVER_SIGN = HELPER.createSignBlock("river", MaterialColor.GRAY);
-	
+	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> RIVER_CHEST = HELPER.createCompatChestBlocks("river", MaterialColor.GRAY);
+
 	public static RegistryObject<Block> BEACHGRASS                     	= HELPER.createBlock("beachgrass", () -> new BlockBeachgrass(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> TALL_BEACHGRASS                	= HELPER.createBlock("tall_beachgrass", () -> new BlockBeachgrassTall(Properties.from(Blocks.GRASS).harvestTool(ToolType.AXE)), ItemGroup.DECORATIONS);
 	public static RegistryObject<Block> BEACHGRASS_THATCH              	= HELPER.createBlock("beachgrass_thatch", () -> new ThatchBlock(Properties.from(Blocks.HAY_BLOCK).notSolid().harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);

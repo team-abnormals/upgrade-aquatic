@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "": { "model": "upgrade_aquatic:block/river_chest" }
+    }
+}

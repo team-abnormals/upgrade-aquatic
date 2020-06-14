@@ -6,7 +6,7 @@ issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
 [[mods]]
     modId="upgrade_aquatic"
     namespace="upgrade_aquatic"
-    version="1.6.1"
+    version="${file.jarVersion}"
     displayName="Upgrade Aquatic"
     authors="SmellyModder, Cameron, Five"
     description='''A mod that improves upon the content of 1.13 Update Aquatic.'''
@@ -15,13 +15,20 @@ issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
 [[dependencies.upgrade_aquatic]]
     modId="forge"
     mandatory=true
-    versionRange="[31.1.49,)"
+    versionRange="[31.1.46,)"
+    ordering="NONE"
+    side="BOTH"
+    
+[[dependencies.upgrade_aquatic]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.upgrade_aquatic]]
     modId="abnormals_core"
     mandatory=true
-    versionRange="[1.0.4,)"
+    versionRange="[1.0.6,)"
     ordering="AFTER"
     side="BOTH"
