@@ -1,0 +1,33 @@
+  
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "light_blue_dye",
+  "ingredients": [
+    [
+      {
+        "item": "upgrade_aquatic:petal_coral"
+      },
+      {
+        "item": "upgrade_aquatic:petal_coral_fan"
+      }
+    ]
+  ],
+  "result": {
+    "item": "minecraft:light_blue_dye"
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "coral_to_dye"
+        }
+      ]
+    }
+  ]
+}
