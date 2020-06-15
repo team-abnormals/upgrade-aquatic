@@ -117,8 +117,6 @@ public class UpgradeAquatic {
 			UARenderLayers.setBlockRenderLayers();
 		});
 
-		// Note: The below don't need to be inside the deferred work queue as they already use a ConcurrentHashMap.
-
 		//Tile Entities
 		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), TileEntityElderEyeRenderer::new);
 
