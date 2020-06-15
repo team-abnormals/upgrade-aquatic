@@ -8,6 +8,7 @@ import com.teamabnormals.upgrade_aquatic.common.items.ItemPikeBucket;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemPrismarineRod;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemSquidBucket;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAFoods;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 

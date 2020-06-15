@@ -1,13 +1,13 @@
-package com.teamabnormals.upgrade_aquatic.core.registry;
+package com.teamabnormals.upgrade_aquatic.core.registry.other;
 
 import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
 public class UAFoods {
-	public static final Food MULBERRY = new Food.Builder().hunger(8).saturation(0.8F).build();
-	public static final Food MULBERRY_JAM = new Food.Builder().hunger(8).saturation(0.8F).build();
-	public static final Food MULBERRY_BREAD = new Food.Builder().hunger(8).saturation(0.8F).build();
+	public static final Food MULBERRY = new Food.Builder().hunger(3).saturation(0.1F).build();
+	public static final Food MULBERRY_JAM = new Food.Builder().hunger(4).saturation(0.2F).setAlwaysEdible().build();
+	public static final Food MULBERRY_BREAD = new Food.Builder().hunger(8).saturation(0.6F).build();
 	
 	public static final Food PICKERELWEED(boolean purple) {
 		return purple ? new Food.Builder().hunger(3).saturation(0.0F).setAlwaysEdible().build() : new Food.Builder().hunger(2).saturation(0.0F).setAlwaysEdible().build();
