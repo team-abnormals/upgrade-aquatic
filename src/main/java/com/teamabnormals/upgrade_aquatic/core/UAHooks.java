@@ -15,6 +15,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
@@ -58,5 +59,9 @@ public class UAHooks {
 		FallingBlockEntity fallingblockentity = new FallingBlockEntity(world, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, block.getDefaultState());
 		fallingblockentity.fallTime = 1;
 		world.addEntity(fallingblockentity);
+	}
+	
+	public static void makeBubbleColumnTickRandomly() {
+		ObfuscationReflectionHelper.setPrivateValue(Block.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
 	}
 }

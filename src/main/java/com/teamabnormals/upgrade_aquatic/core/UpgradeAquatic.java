@@ -30,7 +30,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -106,7 +105,7 @@ public class UpgradeAquatic {
 			UAWorldGen.registerGenerators();
 			UACompostables.registerCompostables();
 			UAFlammables.registerFlammables();
-			Blocks.BUBBLE_COLUMN.ticksRandomly = true;
+			UAHooks.makeBubbleColumnTickRandomly();
 		});
 	}
 	
