@@ -30,6 +30,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -97,7 +98,6 @@ public class UpgradeAquatic {
 	}
 	
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		UAHooks.makeBubbleColumnTickRandomly();
 		DeferredWorkQueue.runLater(() -> {
 			REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
 			UAEntitySpawns.processSpawnAdditions();
@@ -106,17 +106,22 @@ public class UpgradeAquatic {
 			UAWorldGen.registerGenerators();
 			UACompostables.registerCompostables();
 			UAFlammables.registerFlammables();
+			Blocks.BUBBLE_COLUMN.ticksRandomly = true;
 		});
 	}
 	
 	@OnlyIn(Dist.CLIENT)
 	private void setupClient(final FMLClientSetupEvent event) {
-		UAColors.registerBlockColors();
-		UARenderLayers.setBlockRenderLayers();
-		
+		DeferredWorkQueue.runLater(() -> {
+			UAColors.registerBlockColors();
+			UARenderLayers.setBlockRenderLayers();
+		});
+
+		// Note: The below don't need to be inside the deferred work queue as they already use a ConcurrentHashMap.
+
 		//Tile Entities
 		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), TileEntityElderEyeRenderer::new);
-		
+
 		//Entities
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.NAUTILUS.get(), NautilusRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.PIKE.get(), PikeRenderer::new);
@@ -127,10 +132,11 @@ public class UpgradeAquatic {
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.SONAR_WAVE.get(), SonarWaveRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.ULULU.get(), UluluRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GOOSE.get(), GooseRenderer::new);
-		
+
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);
+
 	}
 	
 	/*
