@@ -1,0 +1,33 @@
+  
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "cyan_dye",
+  "ingredients": [
+    [
+      {
+        "item": "upgrade_aquatic:acan_coral"
+      },
+      {
+        "item": "upgrade_aquatic:acan_coral_fan"
+      }
+    ]
+  ],
+  "result": {
+    "item": "minecraft:cyan_dye"
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "coral_to_dye"
+        }
+      ]
+    }
+  ]
+}

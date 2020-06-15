@@ -6,9 +6,18 @@
   "result": "upgrade_aquatic:tongue_kelpy_stone_brick_vertical_slab",
   "count": 2,
   "conditions": [
-  	{
-       "type": "forge:mod_loaded",
-       "modid": "quark"
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "vertical_slabs"
+        }
+      ]
     }
   ]
 }

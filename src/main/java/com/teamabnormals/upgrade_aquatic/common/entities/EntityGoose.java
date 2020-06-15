@@ -1,12 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -20,7 +20,7 @@ public class EntityGoose extends ChickenEntity {
 
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
-		return new ItemStack(UAItems.GOOSE_SPAWN_EGG.get());
+		return new ItemStack(Items.CHICKEN_SPAWN_EGG);
 	}
 	
 	public EntityGoose createChild(AgeableEntity ageable) {

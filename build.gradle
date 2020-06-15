@@ -16,9 +16,9 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+version = '1.6.2'
 group = 'com.mcabnormals.upgrade_aquatic' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'upgrade_aquatic-1.15.2'
+archivesBaseName = 'Upgrade-Aquatic-1.15.2'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -82,9 +82,8 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.49'
-
-    compile fg.deobf("curse.maven:abnormals-core:2957837")
+    minecraft 'net.minecraftforge:forge:1.15.2-31.1.46'
+    implementation fg.deobf("curse.maven:abnormals-core:2980113")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

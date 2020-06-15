@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "upgrade_aquatic",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:driftwood_planks"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:driftwood_vertical_planks",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "vertical_planks"
+        }
+      ]
+    }
+  ]
+}

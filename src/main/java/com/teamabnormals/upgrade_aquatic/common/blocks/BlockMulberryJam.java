@@ -52,7 +52,7 @@ public class BlockMulberryJam extends BreakableBlock implements IWaterLoggable {
         if (other.getBlock() == Blocks.SLIME_BLOCK) return false;
         if (other.getBlock() == Blocks.HONEY_BLOCK) return false;
         if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("autumnity", "snail_slime_block"))) return false;
-        if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("upgrade_aquatic", "mulberry_jam_block"))) return false;
+        if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "aloe_gel_block"))) return false;
         
         return super.canStickTo(state, other);
     }

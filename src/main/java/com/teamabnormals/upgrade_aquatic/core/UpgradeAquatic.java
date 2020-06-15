@@ -50,6 +50,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
+@SuppressWarnings("deprecation")
 @Mod(value = Reference.MODID)
 public class UpgradeAquatic {
 	public static UpgradeAquatic instance;
@@ -72,11 +73,12 @@ public class UpgradeAquatic {
 
 		REGISTRY_HELPER.getDeferredBlockRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredItemRegister().register(modEventBus);
-		UAEffects.EFFECTS.register(modEventBus);
-		UAEffects.POTIONS.register(modEventBus);
 		REGISTRY_HELPER.getDeferredTileEntityRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredEntityRegister().register(modEventBus);
 		REGISTRY_HELPER.getDeferredSoundRegister().register(modEventBus);
+		
+		UAEffects.EFFECTS.register(modEventBus);
+		UAEffects.POTIONS.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
 		
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
@@ -96,8 +98,8 @@ public class UpgradeAquatic {
 	}
 	
 	private void setupCommon(final FMLCommonSetupEvent event) {
-		//noinspection deprecation
 		DeferredWorkQueue.runLater(() -> {
+			REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
 			UAEntitySpawns.processSpawnAdditions();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
 			UAEffects.registerBrewingRecipes();
@@ -110,7 +112,6 @@ public class UpgradeAquatic {
 	
 	@OnlyIn(Dist.CLIENT)
 	private void setupClient(final FMLClientSetupEvent event) {
-		//noinspection deprecation
 		DeferredWorkQueue.runLater(() -> {
 			UAColors.registerBlockColors();
 			UARenderLayers.setBlockRenderLayers();

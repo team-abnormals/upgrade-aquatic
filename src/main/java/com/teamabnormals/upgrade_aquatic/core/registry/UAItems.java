@@ -8,6 +8,7 @@ import com.teamabnormals.upgrade_aquatic.common.items.ItemPikeBucket;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemPrismarineRod;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemSquidBucket;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.UAFoods;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
@@ -50,5 +51,5 @@ public class UAItems {
 	public static final RegistryObject<Item> GREAT_THRASHER_SPAWN_EGG   = HELPER.createSpawnEggItem("great_thrasher", () -> UAEntities.GREAT_THRASHER.get(), 10078409, 13294289);
 	public static final RegistryObject<Item> FLARE_SPAWN_EGG            = HELPER.createSpawnEggItem("flare", () -> UAEntities.FLARE.get(), 4532619, 14494960);
 	public static final RegistryObject<Item> JELLYFISH_SPAWN_EGG        = HELPER.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);
-	public static final RegistryObject<Item> GOOSE_SPAWN_EGG        	= HELPER.createSpawnEggItem("goose", () -> UAEntities.GOOSE.get(), 16448255, 16751914);
+//	public static final RegistryObject<Item> GOOSE_SPAWN_EGG        	= HELPER.createSpawnEggItem("goose", () -> UAEntities.GOOSE.get(), 16448255, 16751914);
 }

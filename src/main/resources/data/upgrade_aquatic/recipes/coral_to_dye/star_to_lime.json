@@ -1,0 +1,33 @@
+  
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "lime_dye",
+  "ingredients": [
+    [
+      {
+        "item": "upgrade_aquatic:star_coral"
+      },
+      {
+        "item": "upgrade_aquatic:star_coral_fan"
+      }
+    ]
+  ],
+  "result": {
+    "item": "minecraft:lime_dye"
+  },
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "abnormals_core:quark_flag",
+          "flag": "coral_to_dye"
+        }
+      ]
+    }
+  ]
+}
