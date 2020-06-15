@@ -372,6 +372,8 @@
   "block.upgrade_aquatic.river_ladder": "Escalera de mano fluvial",
   "block.upgrade_aquatic.river_sign": "Letrero fluvial",
   "block.upgrade_aquatic.river_wall_sign": "Letrero fluvial en pared",
+  "block.upgrade_aquatic.river_chest": "Cofre fluvial",
+  "block.upgrade_aquatic.river_trapped_chest": "Cofre trampa fluvial",
   
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
   "block.upgrade_aquatic.mulberry_vine": "Morera",
