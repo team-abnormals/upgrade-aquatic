@@ -20,10 +20,6 @@
       "type": "forge:and",
       "values": [
         {
-          "type": "forge:mod_loaded",
-          "modid": "upgrade_aquatic"
-        },
-        {
           "type": "abnormals_core:quark_flag",
           "flag": "wood_to_chest_recipes"
         },
