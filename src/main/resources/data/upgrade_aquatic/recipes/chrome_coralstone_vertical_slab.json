@@ -16,17 +16,8 @@
   },
   "conditions": [
     {
-      "type": "forge:and",
-      "values": [
-        {
-          "type": "forge:mod_loaded",
-          "modid": "quark"
-        },
-        {
-          "type": "abnormals_core:quark_flag",
-          "flag": "vertical_slabs"
-        }
-      ]
+      "type": "abnormals_core:quark_flag",
+      "flag": "vertical_slabs"
     }
   ]
 }
