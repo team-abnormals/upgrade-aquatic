@@ -15,8 +15,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 
-public class ItemMulberryJam extends Item {
-   public ItemMulberryJam(Item.Properties properties) {
+public class ItemMulberryJamBottle extends Item {
+   public ItemMulberryJamBottle(Item.Properties properties) {
       super(properties);
    }
 

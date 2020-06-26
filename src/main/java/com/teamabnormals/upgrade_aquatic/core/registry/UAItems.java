@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 import com.teamabnormals.abnormals_core.common.items.MobBucketItem;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemBoiledPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemJellyfishBucket;
-import com.teamabnormals.upgrade_aquatic.common.items.ItemMulberryJam;
+import com.teamabnormals.upgrade_aquatic.common.items.ItemMulberryJamBottle;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemPikeBucket;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemPrismarineRod;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemSquidBucket;
@@ -41,7 +41,7 @@ public class UAItems {
 	public static final RegistryObject<Item> COOKED_LIONFISH            = HELPER.createItem("lionfish_cooked", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.LIONFISH(true))));
 
 	public static final RegistryObject<Item> MULBERRY            		= HELPER.createItem("mulberry", () -> new BlockNamedItem(UABlocks.MULBERRY_VINE.get(), new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.MULBERRY)));
-	public static final RegistryObject<Item> MULBERRY_JAM            	= HELPER.createItem("mulberry_jam", () -> new ItemMulberryJam(new Item.Properties().group(ItemGroup.FOOD).containerItem(Items.GLASS_BOTTLE).food(UAFoods.MULBERRY_JAM)));
+	public static final RegistryObject<Item> MULBERRY_JAM_BOTTLE        = HELPER.createItem("mulberry_jam_bottle", () -> new ItemMulberryJamBottle(new Item.Properties().group(ItemGroup.FOOD).containerItem(Items.GLASS_BOTTLE).food(UAFoods.MULBERRY_JAM)));
 	public static final RegistryObject<Item> MULBERRY_BREAD            	= HELPER.createItem("mulberry_bread", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.MULBERRY_BREAD)));
 
 	public static final RegistryObject<Item> NAUTILUS_SPAWN_EGG         = HELPER.createSpawnEggItem("nautilus", () -> UAEntities.NAUTILUS.get(), 14596231, 16744272);

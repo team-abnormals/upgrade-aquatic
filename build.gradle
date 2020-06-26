@@ -16,7 +16,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.6.2'
+version = '1.7.0'
 group = 'com.mcabnormals.upgrade_aquatic' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Upgrade-Aquatic-1.15.2'
 
@@ -101,10 +101,6 @@ jar {
     }
 }
 
-// Example configuration to allow publishing using the maven-publish task
-// we define a custom artifact that is sourced from the reobfJar output task
-// and then declare that to be published
-// Note you'll need to add a repository here
 def reobfFile = file("$buildDir/reobfJar/output.jar")
 def reobfArtifact = artifacts.add('default', reobfFile) {
     type 'jar'
