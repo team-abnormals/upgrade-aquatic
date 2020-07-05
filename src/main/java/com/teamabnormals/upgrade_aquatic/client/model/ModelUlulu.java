@@ -7,24 +7,22 @@ import com.teamabnormals.upgrade_aquatic.common.entities.EntityUlulu;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 
-//Made with Blockbench 3.5.1
-//Exported for Minecraft version 1.15
-//Paste this class into your mod and generate all required imports
-
 
 public class ModelUlulu<T extends EntityUlulu> extends EntityModel<T> {
 	
-
+	public ModelRenderer body;
+	
 	public ModelUlulu() {
 		textureWidth = 128;
 		textureHeight = 64;
-
-		
+		this.body = new ModelRenderer(this, 0, 0);
+        this.body.setRotationPoint(-12.4F, -0.2F, -11.3F);
+        this.body.addBox(0.0F, 0.0F, 0.0F, 24, 24, 24, 0.0F);
 	}
 
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
-		
+		this.body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {

@@ -1,14 +1,29 @@
 package com.teamabnormals.upgrade_aquatic.common.entities;
 
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.monster.SlimeEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootTables;
 
 public class EntityUlulu extends SlimeEntity {
 
-	public EntityUlulu(EntityType<? extends SlimeEntity> type, World worldIn) {
+	public EntityUlulu(EntityType<? extends EntityUlulu> type, World worldIn) {
 		super(type, worldIn);
 	}
 
+	@Override
+	protected boolean spawnCustomParticles() { return true; }
+	
+	@Override
+	protected ResourceLocation getLootTable() {
+	      return this.isSmallSlime() ? LootTables.EMPTY : this.getType().getLootTable();
+	   }
+	
+	public EntitySize getSize(Pose poseIn) {
+	      return super.getSize(poseIn).scale(0.255F * (float)this.getSlimeSize());
+	   }
 
 }
