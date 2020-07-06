@@ -14,6 +14,7 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureEntity;
@@ -106,7 +107,8 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onPlayerSleep(PlayerSleepInBedEvent event) {
 		PlayerEntity player = event.getPlayer();
-		if (event.getResultStatus() == null && player.getEntityWorld().getBlockState(event.getPos()).getFluidState().getLevel() == 8) {
+		BlockState state = player.getEntityWorld().getBlockState(event.getPos());
+		if (event.getResultStatus() == null && state.getFluidState().getLevel() == 8 && state.getBlock() instanceof BlockBedroll) {
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
 				if(!player.world.isRemote()) {
