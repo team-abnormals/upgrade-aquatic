@@ -1,7 +1,7 @@
   
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "dark_gray_dye",
+  "group": "minecraft:gray_dye",
   "ingredients": [
     [
       {
@@ -13,7 +13,7 @@
     ]
   ],
   "result": {
-    "item": "minecraft:dark_gray_dye"
+    "item": "minecraft:gray_dye"
   },
   "conditions": [
     {
