@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.core.events;
 
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
+import com.teamabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
@@ -53,6 +54,7 @@ import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
+import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -96,6 +98,19 @@ public class EntityEvents {
 				StatisticsManager statisticsManager = playerMP.getStats();
 				if(statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) < 72000) {
 					((PhantomEntity) entity).setAttackTarget(null);
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onPlayerSleep(PlayerSleepInBedEvent event) {
+		PlayerEntity player = event.getPlayer();
+		if (event.getResultStatus() == null && player.getEntityWorld().getBlockState(event.getPos()).getFluidState().getLevel() == 8) {
+			if (player instanceof ServerPlayerEntity && player.isAlive()) {
+				ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
+				if(!player.world.isRemote()) {
+					UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer); 
 				}
 			}
 		}
