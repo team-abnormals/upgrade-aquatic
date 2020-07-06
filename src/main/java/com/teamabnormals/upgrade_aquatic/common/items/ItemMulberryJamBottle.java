@@ -51,12 +51,12 @@ public class ItemMulberryJamBottle extends Item {
       return UseAction.DRINK;
    }
 
-   public SoundEvent func_225520_U__() {
-      return SoundEvents.field_226141_eV_;
+   public SoundEvent getDrinkSound() {
+      return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
    }
 
-   public SoundEvent func_225519_S__() {
-      return SoundEvents.field_226141_eV_;
+   public SoundEvent getEatSound() {
+      return SoundEvents.ITEM_HONEY_BOTTLE_DRINK;
    }
 
    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {

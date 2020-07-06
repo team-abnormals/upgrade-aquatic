@@ -32,7 +32,6 @@ public class UluluRenderer extends MobRenderer<EntityUlulu, ModelUlulu<EntityUlu
 	}
 	
 	protected void preRenderCallback(EntityUlulu entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
-	      float f = 0.999F;
 	      matrixStackIn.scale(0.999F, 0.999F, 0.999F);
 	      matrixStackIn.translate(0.0D, (double)0.001F, 0.0D);
 	      float f1 = (float)entitylivingbaseIn.getSlimeSize();

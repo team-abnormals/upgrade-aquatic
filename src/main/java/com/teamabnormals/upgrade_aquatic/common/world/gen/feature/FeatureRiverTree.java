@@ -50,7 +50,7 @@ public class FeatureRiverTree extends TreeFeature implements IAddToBiomes {
 				for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
 					for (int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
 						if (j >= 0 && j < worldIn.getMaxHeight()) {
-							if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(l, j, i1))) flag = false;
+							if (!canBeReplacedByLogs(worldIn, blockpos$mutableblockpos.setPos(l, j, i1))) flag = false;
 						} else flag = false;
 					}
 				}
