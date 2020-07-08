@@ -38,7 +38,7 @@ public class BoxJellyfishRenderer extends AbstractJellyfishRenderer<EntityBoxJel
 	}
 	
 	@Override
-	protected RenderType func_230042_a_(EntityBoxJellyfish jellyfish, boolean p_230042_2_, boolean p_230042_3_) {
+	protected RenderType func_230496_a_(EntityBoxJellyfish jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
 		return RenderType.getEntityTranslucent(this.getEntityTexture(jellyfish));
 	}
 	

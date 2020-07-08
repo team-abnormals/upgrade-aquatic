@@ -8,11 +8,11 @@ import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWav
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Vector3f;
 
 public class SonarWaveRenderer extends EntityRenderer<EntitySonarWave> {
 	private final ModelSonar SONAR_MODEL = new ModelSonar();

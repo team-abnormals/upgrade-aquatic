@@ -106,7 +106,7 @@ public class ItemJellyfishBucket extends BucketItem {
 			
 			if(jellyfish != null) {
 				TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
-				tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + jellyfish.getBucketName() + "_jellyfish").applyTextStyles(atextformatting)));
+				tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + jellyfish.getBucketName() + "_jellyfish").func_240701_a_(atextformatting)));
 				
 				tooltip.add(jellyfish.getYieldingTorchMessage());
 			}

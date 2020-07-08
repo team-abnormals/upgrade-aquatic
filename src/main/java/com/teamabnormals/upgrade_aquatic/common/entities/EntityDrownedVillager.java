@@ -267,7 +267,7 @@ public class EntityDrownedVillager {
 //            } else if (this.mob.isInWater()) {
 //                return false;
 //            } else {
-//                Vec3d vec3d_1 = this.getWanderTarget();
+//                Vector3d vec3d_1 = this.getWanderTarget();
 //                if (vec3d_1 == null) {
 //                    return false;
 //                } else {
@@ -280,13 +280,13 @@ public class EntityDrownedVillager {
 //        }
 //        
 //        @Nullable
-//        private Vec3d getWanderTarget() {
+//        private Vector3d getWanderTarget() {
 //            Random random_1 = this.mob.getRNG();
 //            BlockPos blockPos_1 = new BlockPos(this.mob.posX, this.mob.getBoundingBox().minY, this.mob.posZ);
 //            for(int int_1 = 0; int_1 < 10; ++int_1) {
 //                BlockPos blockPos_2 = blockPos_1.add(random_1.nextInt(20) - 10, 2 - random_1.nextInt(8), random_1.nextInt(20) - 10);
 //                if (this.world.getBlockState(blockPos_2).getBlock() == Blocks.WATER) {
-//                    return new Vec3d((double)blockPos_2.getX(), (double)blockPos_2.getY(), (double)blockPos_2.getZ());
+//                    return new Vector3d((double)blockPos_2.getX(), (double)blockPos_2.getY(), (double)blockPos_2.getZ());
 //                }
 //            }
 //            return null;
@@ -341,7 +341,7 @@ public class EntityDrownedVillager {
 //
 //        public void tick() {
 //            if (this.drowned.posY < (double)(this.minY - 1) && (this.drowned.getNavigator().noPath() || this.drowned.method_7016())) {
-//                Vec3d vec3d_1 = new Vec3d(this.drowned.posX, (double)(this.minY - 1), this.drowned.posZ);
+//                Vector3d vec3d_1 = new Vector3d(this.drowned.posX, (double)(this.minY - 1), this.drowned.posZ);
 //                
 //                this.drowned.getNavigator().tryMoveToXYZ(vec3d_1.x, vec3d_1.y, vec3d_1.z, this.speed);
 //            }

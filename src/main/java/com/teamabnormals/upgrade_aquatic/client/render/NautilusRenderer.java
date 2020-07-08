@@ -10,13 +10,13 @@ import com.teamabnormals.upgrade_aquatic.client.model.ModelNautilus;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityNautilus;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

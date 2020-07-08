@@ -4,9 +4,9 @@ import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.monster.SlimeEntity;
+import net.minecraft.loot.LootTables;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTables;
 
 public class EntityUlulu extends SlimeEntity {
 

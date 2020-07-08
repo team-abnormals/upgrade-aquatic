@@ -27,7 +27,7 @@ public class FeatureAmmonite {
 	private static void process(Biome biome) {
 		if(biome.getCategory() == Category.BEACH || biome.getCategory() == Category.OCEAN) {
 			CountRangeConfig placement = new CountRangeConfig(24, 20, 0, 73);
-			biome.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, UABlocks.EMBEDDED_AMMONITE.get().getDefaultState().with(BlockEmbeddedAmmonite.FACING, Direction.random(new Random())), 3)).withPlacement(Placement.COUNT_BIASED_RANGE.configure(placement)));
+			biome.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, UABlocks.EMBEDDED_AMMONITE.get().getDefaultState().with(BlockEmbeddedAmmonite.FACING, Direction.func_239631_a_(new Random())), 3)).withPlacement(Placement.COUNT_BIASED_RANGE.configure(placement)));
 		}
 	}
 	

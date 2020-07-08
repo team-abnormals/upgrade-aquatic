@@ -29,10 +29,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -59,8 +59,8 @@ public class BlockMulberryVine extends Block implements net.minecraftforge.commo
 	}
 	
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		Vec3d vec3d = state.getOffset(worldIn, pos);
-		return SHAPE.withOffset(vec3d.x, vec3d.y, vec3d.z);
+		Vector3d Vector3d = state.getOffset(worldIn, pos);
+		return SHAPE.withOffset(Vector3d.x, Vector3d.y, Vector3d.z);
 	}
 
 	@Override

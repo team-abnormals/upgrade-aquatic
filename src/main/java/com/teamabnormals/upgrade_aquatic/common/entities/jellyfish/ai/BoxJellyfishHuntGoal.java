@@ -8,7 +8,7 @@ import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.EntityBoxJell
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 
 public class BoxJellyfishHuntGoal extends Goal {
 	private final EntityBoxJellyfish hunter;
@@ -45,7 +45,7 @@ public class BoxJellyfishHuntGoal extends Goal {
 	@Override
 	public void tick() {
 		LivingEntity target = this.hunter.getAttackTarget();
-		Vec3d distance = new Vec3d(target.getPosX() - this.hunter.getPosX(), target.getPosY() - this.hunter.getPosY(), target.getPosZ() - this.hunter.getPosZ());
+		Vector3d distance = new Vector3d(target.getPosX() - this.hunter.getPosX(), target.getPosY() - this.hunter.getPosY(), target.getPosZ() - this.hunter.getPosZ());
 		
 		float pitch = -((float) (MathHelper.atan2(distance.getY(), (double) MathHelper.sqrt(distance.getX() * distance.getX() + distance.getZ() * distance.getZ())) * (double) (180F / (float) Math.PI)));
 		float yaw = (float) (MathHelper.atan2(distance.getZ(), distance.getX()) * (double) (180F / (float) Math.PI)) - 90.0F;

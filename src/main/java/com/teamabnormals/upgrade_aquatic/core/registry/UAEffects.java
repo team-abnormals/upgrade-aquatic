@@ -14,8 +14,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class UAEffects {
-	public static final DeferredRegister<Effect> EFFECTS = new DeferredRegister<>(ForgeRegistries.POTIONS, Reference.MODID);
-	public static final DeferredRegister<Potion> POTIONS = new DeferredRegister<>(ForgeRegistries.POTION_TYPES, Reference.MODID);
+	public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, Reference.MODID);
+	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, Reference.MODID);
 	
 	public static final RegistryObject<Effect> INSOMNIA    = EFFECTS.register("insomnia", EffectInsomnia::new);
 	public static final RegistryObject<Effect> RESTFULNESS = EFFECTS.register("restfulness", EffectRestfulness::new);

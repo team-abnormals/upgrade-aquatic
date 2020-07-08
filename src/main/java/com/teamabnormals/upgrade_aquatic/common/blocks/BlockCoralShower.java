@@ -9,7 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CoralPlantBlock;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -53,7 +53,7 @@ public class BlockCoralShower extends CoralPlantBlock {
 	
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
 	}
 

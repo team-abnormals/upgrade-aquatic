@@ -16,8 +16,8 @@ import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.entity.ai.controller.MovementController;
@@ -41,7 +41,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
@@ -53,7 +53,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 //Why not extend the Phantom they said.... :pensive:
 public class EntityFlare extends FlyingEntity {
 	private static final DataParameter<Integer> SIZE = EntityDataManager.createKey(EntityFlare.class, DataSerializers.VARINT);
-	private Vec3d orbitOffset = Vec3d.ZERO;
+	private Vector3d orbitOffset = Vector3d.ZERO;
 	private BlockPos orbitPosition = BlockPos.ZERO;
 	private EntityFlare.AttackPhase attackPhase = EntityFlare.AttackPhase.CIRCLE;
 	
@@ -77,7 +77,7 @@ public class EntityFlare extends FlyingEntity {
 
 	protected void registerAttributes() {
 		super.registerAttributes();
-		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8 + this.getPhantomSize());;
+		this.getAttributes().registerAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(8 + this.getPhantomSize());;
 	}
 
 	protected void registerData() {
@@ -91,7 +91,7 @@ public class EntityFlare extends FlyingEntity {
 
 	private void updatePhantomSize() {
 	    this.recalculateSize();
-	    this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue((12 + this.getPhantomSize()));
+	    this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue((12 + this.getPhantomSize()));
 	}
 
 	public int getPhantomSize() {
@@ -337,8 +337,8 @@ public class EntityFlare extends FlyingEntity {
 	        double d3 = (double)(this.speedFactor * MathHelper.cos(f8 * ((float) Math.PI / 180F))) * Math.abs((double) f / d2);
 	        double d4 = (double)(this.speedFactor * MathHelper.sin(f8 * ((float) Math.PI / 180F))) * Math.abs((double) f2 / d2);
 	        double d5 = (double)(this.speedFactor * MathHelper.sin(f7 * ((float) Math.PI / 180F))) * Math.abs((double) f1 / d2);
-	        Vec3d vec3d = EntityFlare.this.getMotion();
-	        EntityFlare.this.setMotion(vec3d.add((new Vec3d(d3, d5, d4)).subtract(vec3d).scale(0.2D)));
+	        Vector3d vec3d = EntityFlare.this.getMotion();
+	        EntityFlare.this.setMotion(vec3d.add((new Vector3d(d3, d5, d4)).subtract(vec3d).scale(0.2D)));
 	    }
 	}
 	
@@ -410,7 +410,7 @@ public class EntityFlare extends FlyingEntity {
 	        }
 
 	        this.field_203150_c += this.field_203153_f * 15.0F * ((float) Math.PI / 180F);
-	        EntityFlare.this.orbitOffset = (new Vec3d(EntityFlare.this.orbitPosition)).add((double)(this.field_203151_d * MathHelper.cos(this.field_203150_c)), (double)(-4.0F + this.field_203152_e), (double)(this.field_203151_d * MathHelper.sin(this.field_203150_c)));
+	        EntityFlare.this.orbitOffset = (new Vector3d(EntityFlare.this.orbitPosition)).add((double)(this.field_203151_d * MathHelper.cos(this.field_203150_c)), (double)(-4.0F + this.field_203152_e), (double)(this.field_203151_d * MathHelper.sin(this.field_203150_c)));
 	    }
 	}
 	
@@ -529,7 +529,7 @@ public class EntityFlare extends FlyingEntity {
 	     */
 	    public void tick() {
 	        LivingEntity livingentity = EntityFlare.this.getAttackTarget();
-	        EntityFlare.this.orbitOffset = new Vec3d(livingentity.getPosX(), livingentity.getPosY() + (double) livingentity.getHeight() * 0.5D, livingentity.getPosZ());
+	        EntityFlare.this.orbitOffset = new Vector3d(livingentity.getPosX(), livingentity.getPosY() + (double) livingentity.getHeight() * 0.5D, livingentity.getPosZ());
 	        if (EntityFlare.this.getBoundingBox().grow((double) 0.2F).intersects(livingentity.getBoundingBox())) {
 	            EntityFlare.this.attackEntityAsMob(livingentity);
 	            EntityFlare.this.attackPhase = EntityFlare.AttackPhase.CIRCLE;

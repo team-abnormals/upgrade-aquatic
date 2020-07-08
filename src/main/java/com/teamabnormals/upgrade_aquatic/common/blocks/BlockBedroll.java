@@ -18,7 +18,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
@@ -80,7 +80,7 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 	
 	@SuppressWarnings("deprecation")
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 	
@@ -90,7 +90,7 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 	
 	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {
+	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		if (fluidStateIn.getFluid() == Fluids.WATER) {
 			if (!worldIn.isRemote()) {
 				worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);

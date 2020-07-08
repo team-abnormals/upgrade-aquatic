@@ -15,8 +15,8 @@ import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
@@ -29,9 +29,9 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -63,7 +63,7 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
 		if (!(entity instanceof EntityPike)) {
-			entity.setMotionMultiplier(state, new Vec3d(0.75D, 0.75D, 0.75D));
+			entity.setMotionMultiplier(state, new Vector3d(0.75D, 0.75D, 0.75D));
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 	}
 	
 	@SuppressWarnings("deprecation")
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 	
@@ -98,9 +98,9 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		BlockPos blockpos = context.getPos();
-		return blockpos.getY() < context.getWorld().getDimension().getHeight() - 1 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)).with(FAKE_WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)) : null;
+		return blockpos.getY() < context.getWorld().getHeight() - 1 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)).with(FAKE_WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)) : null;
 	}
 
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
@@ -118,8 +118,8 @@ public class BlockPickerelweedDouble extends Block implements IGrowable, IWaterL
 	}
 
 	public void placeAt(IWorld p_196390_1_, BlockPos p_196390_2_, int flags) {
-		IFluidState ifluidstate = p_196390_1_.getFluidState(p_196390_2_);
-		IFluidState ifluidstateUp = p_196390_1_.getFluidState(p_196390_2_.up());
+		FluidState ifluidstate = p_196390_1_.getFluidState(p_196390_2_);
+		FluidState ifluidstateUp = p_196390_1_.getFluidState(p_196390_2_.up());
 		boolean applyFakeWaterLogging = Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8) || Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8) ? true : false;
 		p_196390_1_.setBlockState(p_196390_2_, this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8)).with(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
 		p_196390_1_.setBlockState(p_196390_2_.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER).with(WATERLOGGED, Boolean.valueOf(ifluidstateUp.isTagged(FluidTags.WATER) && ifluidstateUp.getLevel() == 8)).with(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);

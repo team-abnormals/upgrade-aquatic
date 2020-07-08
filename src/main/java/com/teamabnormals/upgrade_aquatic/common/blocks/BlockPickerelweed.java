@@ -14,7 +14,7 @@ import net.minecraft.block.IGrowable;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -22,9 +22,9 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -58,13 +58,13 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
 		if (!(entity instanceof EntityPike)) {
-			entity.setMotionMultiplier(state, new Vec3d(0.75D, 0.75D, 0.75D));
+			entity.setMotionMultiplier(state, new Vector3d(0.75D, 0.75D, 0.75D));
 		}
 	}
 	
 	@Override
 	public void grow(ServerWorld world, Random rand, BlockPos pos, BlockState state) {
-		IFluidState ifluidstate = world.getFluidState(pos.up());
+		FluidState ifluidstate = world.getFluidState(pos.up());
 		BlockPickerelweedDouble doubleplantblock = (BlockPickerelweedDouble) (this == UABlocks.BLUE_PICKERELWEED.get() ? UABlocks.TALL_BLUE_PICKERELWEED.get() : UABlocks.TALL_PURPLE_PICKERELWEED.get());
 		if(doubleplantblock.getDefaultState().isValidPosition(world, pos) && (world.isAirBlock(pos.up()) || ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() >= 6)) {
 			doubleplantblock.placeAt(world, pos, 2);
@@ -72,7 +72,7 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 	}
 	
 	@SuppressWarnings("deprecation")
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 	
@@ -83,7 +83,7 @@ public class BlockPickerelweed extends Block implements IGrowable, IWaterLoggabl
 	
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8));
 	}
 	

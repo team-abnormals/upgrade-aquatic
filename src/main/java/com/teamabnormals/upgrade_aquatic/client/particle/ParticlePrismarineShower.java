@@ -8,10 +8,10 @@ import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -26,7 +26,7 @@ public class ParticlePrismarineShower extends SpriteTexturedParticle {
     private boolean directionRight = true;
     private int lastTick = 0;
     
-    public ParticlePrismarineShower(IAnimatedSprite animatedSprite, World world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
+    public ParticlePrismarineShower(IAnimatedSprite animatedSprite, ClientWorld world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
     	super(world, posX, posY, posZ, motionX, motionY, motionZ);
     	this.motionX = this.motionX * 0.009999999776482582d + motionX;
     	this.motionY = this.motionY * 0.009999999776482582d + motionY;
@@ -107,7 +107,7 @@ public class ParticlePrismarineShower extends SpriteTexturedParticle {
     	}
     	
         @Override
-        public Particle makeParticle(BasicParticleType type, World world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new ParticlePrismarineShower(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);
         }
     }

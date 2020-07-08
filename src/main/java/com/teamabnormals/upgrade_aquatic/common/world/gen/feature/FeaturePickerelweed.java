@@ -14,7 +14,7 @@ import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -130,7 +130,7 @@ public class FeaturePickerelweed extends Feature<NoFeatureConfig> implements IAd
 						BlockPos placingPos = pos.add(i, 0, j);
 						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
 							if(i * i + j * j > (radius - 1) * (radius - 1)) {
-								IFluidState ifluidstate = world.getFluidState(placingPos);
+								FluidState ifluidstate = world.getFluidState(placingPos);
 								if(PURPLE_PICKERELWEED.get().isValidPosition(world, placingPos) && world.getBlockState(placingPos.up()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
 									if(purple) {
 										world.setBlockState(placingPos, PURPLE_PICKERELWEED.get().with(BlockPickerelweed.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);

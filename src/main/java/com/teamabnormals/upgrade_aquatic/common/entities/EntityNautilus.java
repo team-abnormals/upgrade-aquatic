@@ -28,7 +28,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public class EntityNautilus extends BucketableWaterMobEntity {
@@ -148,7 +148,7 @@ public class EntityNautilus extends BucketableWaterMobEntity {
     @Override
     public void livingTick() {
         if (this.isMoving() && this.isInWater() && this.eyesInWater) {
-            Vec3d vec3d1 = this.getLook(0.0F);
+            Vector3d vec3d1 = this.getLook(0.0F);
 
             if (this.getEntityWorld().getGameTime() % 2 == 0) {
                 this.world.addParticle(ParticleTypes.BUBBLE, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.x * 0.75D, this.getPosY() + this.rand.nextDouble() * (double) this.getHeight() - vec3d1.y * 1D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double) this.getWidth() - vec3d1.z * 0.75D, 0.0D, 0.0D, 0.0D);
@@ -157,7 +157,7 @@ public class EntityNautilus extends BucketableWaterMobEntity {
         super.livingTick();
     }
 
-    public void travel(Vec3d p_213352_1_) {
+    public void travel(Vector3d p_213352_1_) {
         if (this.isServerWorld() && this.isInWater()) {
             this.moveRelative(0.01F, p_213352_1_);
             this.move(MoverType.SELF, this.getMotion());

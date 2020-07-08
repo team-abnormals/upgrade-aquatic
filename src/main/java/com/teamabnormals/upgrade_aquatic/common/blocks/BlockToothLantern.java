@@ -5,7 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
@@ -93,7 +93,7 @@ public class BlockToothLantern extends Block implements IWaterLoggable {
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		Direction direction = context.getFace();
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		return this.getDefaultState().with(FACING, direction).with(WATERLOGGED, ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8);
 	}
 	
@@ -125,7 +125,7 @@ public class BlockToothLantern extends Block implements IWaterLoggable {
 	}
 
 	@Override
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
 	}
 }

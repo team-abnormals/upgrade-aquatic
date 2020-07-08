@@ -27,6 +27,7 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.Goal;
@@ -44,6 +45,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.loot.LootContext;
+import net.minecraft.loot.LootParameterSets;
+import net.minecraft.loot.LootParameters;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTables;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -53,6 +59,7 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -62,18 +69,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootParameterSets;
-import net.minecraft.world.storage.loot.LootParameters;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.LootTables;
 
 public class EntityPike extends BucketableWaterMobEntity {
 	private static final DataParameter<Integer> PIKE_TYPE = EntityDataManager.createKey(EntityPike.class, DataSerializers.VARINT);
@@ -240,7 +242,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 		if(this.world.getGameTime() % 20 == 0 && this.getCaughtEntity() != null) {
 			if(this.isPickerelweedNearby()) {
 				if(this.isHidingInPickerelweed()) {
-					this.world.playSound(null, this.getPosition(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
+					this.world.playSound(null, this.func_233580_cy_(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
 					if(this.getCaughtEntity().getHealth() <= 1) {
 						if(this.getPikeType() == 7) {
 							if (this.world.isRemote) {
@@ -253,7 +255,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 					this.getCaughtEntity().attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
 				}
 			} else {
-				this.world.playSound(null, this.getPosition(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
+				this.world.playSound(null, this.func_233580_cy_(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
 				if(this.getCaughtEntity().getHealth() <= 1) {
 					if(this.getPikeType() == 7) {
 						if (this.world.isRemote) {
@@ -306,7 +308,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 		}
 		
 		if(this.isMoving() && this.isInWater() && this.getPikeType() == 12) {
-			Vec3d vec3d1 = this.getLook(0.0F);
+			Vector3d vec3d1 = this.getLook(0.0F);
 
 			for(int i = 0; i < 2; ++i) {
 				this.world.addParticle(ParticleTypes.BUBBLE, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.getPosY() + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
@@ -325,7 +327,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 	}
 	
 	@Override
-	public void travel(Vec3d p_213352_1_) {
+	public void travel(Vector3d p_213352_1_) {
 		if (this.isServerWorld() && this.isInWater()) {
 			float speed = this.getPikeType() == 12 ? 0.05F : 0.01F;
 			this.moveRelative(speed, p_213352_1_);
@@ -390,7 +392,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 	}
 	
 	@Override
-	protected boolean processInteract(PlayerEntity player, Hand hand) {
+	public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 		if(itemstack.getItem() == Items.FLINT_AND_STEEL) {
 			itemstack.damageItem(1, player, (onBroken) -> {
@@ -398,9 +400,9 @@ public class EntityPike extends BucketableWaterMobEntity {
 			});
 			this.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
 			this.setLit(true);
-			return true;
+			return ActionResultType.SUCCESS;
 		} else {
-			return super.processInteract(player, hand);
+			return super.func_230254_b_(player, hand);
 		}
 	}
 	
@@ -427,9 +429,9 @@ public class EntityPike extends BucketableWaterMobEntity {
 	
 	private List<BlockPos> getNearbyPickerelweeds() {
 		List<BlockPos> pickerelweeds = Lists.newArrayList();
-		for (int yy = this.getPosition().getY() - 6; yy <= this.getPosition().getY() + 6; yy++) {
-			for (int xx = this.getPosition().getX() - 12; xx <= this.getPosition().getX() + 12; xx++) {
-				for (int zz = this.getPosition().getZ() - 12; zz <= this.getPosition().getZ() + 12; zz++) {
+		for (int yy = this.func_233580_cy_().getY() - 6; yy <= this.getPosY() + 6; yy++) {
+			for (int xx = this.func_233580_cy_().getX() - 12; xx <= this.getPosX() + 12; xx++) {
+				for (int zz = this.func_233580_cy_().getZ() - 12; zz <= this.getPosZ() + 12; zz++) {
 					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweed || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof BlockPickerelweedDouble) {
 						pickerelweeds.add(new BlockPos(xx, yy, zz));
 					}
@@ -440,7 +442,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 	}
 	
 	private List<ItemStack> generateFishingLoot(ServerWorld world) {
-		LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.POSITION, new BlockPos(this)).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
+		LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.POSITION, new BlockPos(this.getPositionVec())).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
 		lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, this).withParameter(LootParameters.THIS_ENTITY, this);
 		LootTable loottable = this.getRNG().nextFloat() >= 0.1F ? this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_JUNK) : this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_TREASURE);
 		return loottable.generate(lootcontext$builder.build(LootParameterSets.FISHING));
@@ -502,7 +504,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 			double dx = Math.cos((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			
-			Vec3d riderPos = new Vec3d(this.getPosX() + dx, this.getPosY() + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.getPosZ() + dz);
+			Vector3d riderPos = new Vector3d(this.getPosX() + dx, this.getPosY() + this.getMountedYOffset() + this.getPassengers().get(0).getYOffset(), this.getPosZ() + dz);
 			this.getPassengers().get(0).setPosition(riderPos.x, riderPos.y, riderPos.z);
 		} else {
 			super.updatePassenger(passenger);
@@ -646,7 +648,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 	}
 	
 	private int getRandomTypeForBiome(IWorld world) {
-		Biome biome = world.getBiome(new BlockPos(this));
+		Biome biome = world.getBiome(new BlockPos(this.getPositionVec()));
 		float rarity = rand.nextFloat();
 		//Goes common to legendary
 		if(rarity < 1.0F && rand.nextFloat() > 0.35F) {
@@ -808,7 +810,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 	}
 	
 	public boolean isHidingInPickerelweed() {
-		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelweed || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof BlockPickerelweedDouble;
+		return this.getEntityWorld().getBlockState(func_233580_cy_()).getBlock() instanceof BlockPickerelweed || this.getEntityWorld().getBlockState(func_233580_cy_()).getBlock() instanceof BlockPickerelweedDouble;
 	}
 	
 	static class MoveHelperController extends MovementController {
@@ -833,7 +835,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 				float f = (float)(MathHelper.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F;
 				this.pike.rotationYaw = this.limitAngle(this.pike.rotationYaw, f, 90.0F);
 				this.pike.renderYawOffset = this.pike.rotationYaw;
-				float f1 = (float)(this.speed * this.pike.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
+				float f1 = (float)(this.speed * this.pike.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
 				this.pike.setAIMoveSpeed(MathHelper.lerp(0.125F, this.pike.getAIMoveSpeed(), f1));
 				this.pike.setMotion(this.pike.getMotion().add(0.0D, (double)this.pike.getAIMoveSpeed() * d1 * 0.04D, 0.0D));
 				this.pike.setMoving(true);
@@ -866,7 +868,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 				}
 			}
 
-			Vec3d vec3d = this.getPosition();
+			Vector3d vec3d = this.func_233580_cy_();
 			if (vec3d == null) {
 				return false;
 			} else {
@@ -887,10 +889,10 @@ public class EntityPike extends BucketableWaterMobEntity {
 		}
 
 		@Nullable
-		protected Vec3d getPosition() {
+		protected Vector3d func_233580_cy_() {
 			if(((EntityPike)creature).isPickerelweedNearby()) {
 				int pickedWeed = creature.getRNG().nextInt(((EntityPike)creature).getNearbyPickerelweeds().size());
-				return new Vec3d(((EntityPike)creature).getNearbyPickerelweeds().get(pickedWeed));
+				return new Vector3d(((EntityPike)creature).getNearbyPickerelweeds().get(pickedWeed));
 			}
 			return null;
 		}
@@ -916,10 +918,10 @@ public class EntityPike extends BucketableWaterMobEntity {
 		@Override
 		protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
 			double d = this.getAttackReachSqr(enemy);
-			Vec3d difference = new Vec3d(
-				enemy.getPosition().getX() - attacker.getPosition().getX(),
-				enemy.getPosition().getY() - attacker.getPosition().getY(),
-				enemy.getPosition().getZ() - attacker.getPosition().getZ()
+			Vector3d difference = new Vector3d(
+				enemy.getPosX() - attacker.getPosX(),
+				enemy.getPosY() - attacker.getPosY(),
+				enemy.getPosZ() - attacker.getPosZ()
 			);
 			boolean isCloseToEntity = difference.length() <= 2;
 			if (isCloseToEntity && distToEnemySqr <= d && this.attackTick <= 0) {
@@ -928,7 +930,7 @@ public class EntityPike extends BucketableWaterMobEntity {
 					if(enemy instanceof AbstractFishEntity || enemy instanceof AnimalEntity) {
 						((EntityPike)this.attacker).setAttackCooldown(attacker.getRNG().nextInt(551) + 50);
 					}
-					AxisAlignedBB bb = new AxisAlignedBB(attacker.getPosition()).grow(16.0D);
+					AxisAlignedBB bb = new AxisAlignedBB(attacker.func_233580_cy_()).grow(16.0D);
 					List<Entity> entities = attacker.world.getEntitiesWithinAABB(Entity.class, bb);
 					for(int i = 0; i < entities.size(); i++) {
 						Entity entity = entities.get(i);

@@ -27,7 +27,7 @@ public class FeaturePrismarineStalactite extends FeaturePrismarineCoral {
 	}
 	
 	public static boolean placeFeature(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		Direction randDirection = Direction.random(rand);
+		Direction randDirection = Direction.func_239631_a_(rand);
 		if(randDirection == Direction.UP || randDirection == Direction.DOWN) {
 			randDirection = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
 		}

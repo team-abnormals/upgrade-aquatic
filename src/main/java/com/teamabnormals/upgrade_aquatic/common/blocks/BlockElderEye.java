@@ -13,7 +13,7 @@ import net.minecraft.block.ILiquidContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -87,7 +87,7 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	}
 
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		return this.getDefaultState()
 			.with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER))
 			.with(FACING, context.getNearestLookingDirection().getOpposite());
@@ -135,7 +135,7 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	}
 
 	@SuppressWarnings("deprecation")
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 
@@ -154,7 +154,7 @@ public class BlockElderEye extends DirectionalBlock implements IBucketPickupHand
 	}
 	
 	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {
+	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		if (!state.get(WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER) {
 			if (!worldIn.isRemote()) {
 				worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);

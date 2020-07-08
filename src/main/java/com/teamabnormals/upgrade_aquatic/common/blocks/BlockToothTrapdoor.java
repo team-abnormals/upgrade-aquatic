@@ -26,7 +26,7 @@ public class BlockToothTrapdoor extends TrapDoorBlock {
 		if (state.get(POWERED)) {
 			return ActionResultType.SUCCESS;
 		} else {
-			state = state.cycle(OPEN);
+			state = state.func_235896_a_(OPEN);
 			worldIn.setBlockState(pos, state, 2);
 	         if (state.get(WATERLOGGED)) {
 	            worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
@@ -41,7 +41,7 @@ public class BlockToothTrapdoor extends TrapDoorBlock {
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 	      if (!worldIn.isRemote) {
-	            state = state.cycle(OPEN);
+	            state = state.func_235896_a_(OPEN);
 	            worldIn.setBlockState(pos, state, 2);
 	            if (state.get(WATERLOGGED)) {
 	               worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));

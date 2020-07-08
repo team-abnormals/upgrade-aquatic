@@ -132,10 +132,10 @@ public class EntityImmortalJellyfish extends AbstractEntityJellyfish {
 	public ITextComponent getYieldingTorchMessage() {
 		JellyTorchType white = JellyTorchType.WHITE;
 		JellyTorchType red = JellyTorchType.RED;
-		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").applyTextStyle(TextFormatting.GRAY))
-			.appendSibling((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + white.toString().toLowerCase())).applyTextStyle(white.color))
-			.appendSibling(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch.or").applyTextStyle(TextFormatting.GRAY))
-			.appendSibling((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + red.toString().toLowerCase())).applyTextStyle(red.color))
+		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").func_240699_a_(TextFormatting.GRAY))
+			.func_230529_a_((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + white.toString().toLowerCase())).func_240699_a_(white.color))
+			.func_230529_a_(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch.or").func_240699_a_(TextFormatting.GRAY))
+			.func_230529_a_((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + red.toString().toLowerCase())).func_240699_a_(red.color))
 		;
 	}
 

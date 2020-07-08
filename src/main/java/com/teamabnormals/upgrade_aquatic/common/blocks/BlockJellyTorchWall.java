@@ -12,8 +12,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -56,7 +56,7 @@ public class BlockJellyTorchWall extends BlockJellyTorch {
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         BlockState blockstate = this.getDefaultState();
         IWorldReader iworldreader = context.getWorld();
-        IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+        FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
         BlockPos blockpos = context.getPos();
         Direction[] adirection = context.getNearestLookingDirections();
         for (Direction direction : adirection) {
@@ -72,7 +72,7 @@ public class BlockJellyTorchWall extends BlockJellyTorch {
     }
 
     public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-    	IFluidState ifluidstate = worldIn.getFluidState(currentPos);
+    	FluidState ifluidstate = worldIn.getFluidState(currentPos);
     	return facing.getOpposite() == stateIn.get(HORIZONTAL_FACING) && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn.with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
     }
 
@@ -96,7 +96,8 @@ public class BlockJellyTorchWall extends BlockJellyTorch {
         return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
     }
 
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
+    @SuppressWarnings("deprecation")
+	public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)));
     }
 

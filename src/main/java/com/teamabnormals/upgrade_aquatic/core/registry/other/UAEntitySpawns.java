@@ -9,26 +9,26 @@ import com.google.common.collect.Lists;
 import com.teamabnormals.abnormals_core.core.library.EntitySpawnHandler;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockPickerelweedDouble;
-import com.teamabnormals.upgrade_aquatic.common.entities.*;
-import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.*;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.*;
+import com.teamabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntitySpawnPlacementRegistry.PlacementType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.EntitySpawnPlacementRegistry.PlacementType;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -54,12 +54,12 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 	}
 	
 	private static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
+		if(world.getWorld().func_234922_V_() != DimensionType.field_235999_c_) return false;
 		return pos.getY() <= 30;
 	}
 	
 	public static boolean pickerelCondition(EntityType<? extends EntityPike> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
+		if(world.getWorld().func_234922_V_() != DimensionType.field_235999_c_) return false;
 		for(int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
@@ -77,7 +77,7 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 	}
 	
 	private static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
+		if(world.getWorld().func_234922_V_() != DimensionType.field_235999_c_) return false;
 		for(int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
@@ -91,7 +91,7 @@ public class UAEntitySpawns extends EntitySpawnHandler {
     }
 	
 	private static boolean thrasherCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getDimension().getType() != DimensionType.OVERWORLD) return false;
+		if(world.getWorld().func_234922_V_() != DimensionType.field_235999_c_) return false;
 		return pos.getY() <= 30 && (world.getWorld().isNightTime() || random.nextFloat() < 0.75F);
 	}
 	

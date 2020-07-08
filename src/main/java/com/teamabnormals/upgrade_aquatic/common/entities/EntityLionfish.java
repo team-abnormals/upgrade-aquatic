@@ -37,7 +37,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public class EntityLionfish extends BucketableWaterMobEntity {
@@ -87,7 +87,7 @@ public class EntityLionfish extends BucketableWaterMobEntity {
 						}
 					}
 
-					Vec3d vec3d = this.getPosition();
+					Vector3d vec3d = this.getPosition();
 					if (vec3d == null) {
 						return false;
 					} else {
@@ -219,7 +219,7 @@ public class EntityLionfish extends BucketableWaterMobEntity {
 		}
 	}
 	
-	public void travel(Vec3d p_213352_1_) {
+	public void travel(Vector3d p_213352_1_) {
 		if (this.isServerWorld() && this.isInWater()) {
 			this.moveRelative(0.01F, p_213352_1_);
 			this.move(MoverType.SELF, this.getMotion());

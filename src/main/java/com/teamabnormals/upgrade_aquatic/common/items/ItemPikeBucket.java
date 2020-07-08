@@ -41,7 +41,7 @@ public class ItemPikeBucket extends MobBucketItem {
 			int i = compoundnbt.getInt("BucketVariantTag");
 			TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
 			
-			tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + EntityPike.getNameById(i)).applyTextStyles(atextformatting)));
+			tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + EntityPike.getNameById(i)).func_240701_a_(atextformatting)));
 		}
 	}
 	

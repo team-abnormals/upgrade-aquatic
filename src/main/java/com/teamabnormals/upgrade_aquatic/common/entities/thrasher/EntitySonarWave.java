@@ -17,7 +17,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -67,7 +67,7 @@ public class EntitySonarWave extends Entity {
 			}
 		}
 		
-		Vec3d motion = this.getMotion();
+		Vector3d motion = this.getMotion();
 		float horizontalMotionMagnitude = MathHelper.sqrt(horizontalMag(motion));
 		double motionX = motion.getX();
 		double motionY = motion.getY();
@@ -122,7 +122,7 @@ public class EntitySonarWave extends Entity {
 		float yMotion = -MathHelper.sin(thrasher.rotationPitch * ((float) Math.PI / 180F));
 		float zMotion = MathHelper.cos(thrasher.rotationYaw * ((float) Math.PI / 180F)) * MathHelper.cos(thrasher.rotationPitch * ((float) Math.PI / 180F));
 		
-		Vec3d motion = new Vec3d(xMotion, yMotion, zMotion).normalize().scale(0.75D);
+		Vector3d motion = new Vector3d(xMotion, yMotion, zMotion).normalize().scale(0.75D);
 		
 		this.setMotion(motion);
 		this.setOwnerId(thrasher.getEntityId());

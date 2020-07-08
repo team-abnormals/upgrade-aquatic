@@ -78,7 +78,7 @@ public class BlockBeachgrassTall extends Block implements IGrowable {
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		BlockPos blockpos = context.getPos();
-		return blockpos.getY() < context.getWorld().getDimension().getHeight() - 1 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context) : null;
+		return blockpos.getY() < context.getWorld().getHeight() - 1 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context) : null;
 	}
 
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {

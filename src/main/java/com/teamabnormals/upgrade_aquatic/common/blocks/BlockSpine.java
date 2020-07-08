@@ -14,8 +14,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.PathType;
@@ -32,9 +32,9 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -156,7 +156,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 	
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity && state.get(DRAWN)) {
-			entityIn.setMotionMultiplier(state, new Vec3d(0.25D, 0.5D, 0.25D));
+			entityIn.setMotionMultiplier(state, new Vector3d(0.25D, 0.5D, 0.25D));
 			if(!entityIn.isInvulnerable()) {
 				if(state.get(ELDER)) ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 40));
 			}
@@ -179,6 +179,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 		return state.with(FACING, rot.rotate(state.get(FACING)));
 	}
 	
+	@SuppressWarnings("deprecation")
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
 		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
 	}
@@ -196,7 +197,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 				} else {
 					float pitch = state.get(ELDER) ? 0.85F : 1.0F;
 					worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 0.3F, pitch);
-					worldIn.setBlockState(pos, state.cycle(DRAWN), 2);
+					worldIn.setBlockState(pos, state.func_235896_a_(DRAWN), 2);
 				}
 			}
 		}
@@ -207,7 +208,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 			if (state.get(DRAWN) && !worldIn.isBlockPowered(pos)) {
 				float pitch = state.get(ELDER) ? 0.85F : 1.0F;
 				worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.3F, pitch);
-				worldIn.setBlockState(pos, state.cycle(DRAWN), 2);
+				worldIn.setBlockState(pos, state.func_235896_a_(DRAWN), 2);
 			}
 		}
 	}
@@ -223,7 +224,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		Direction direction = context.getFace();
 		BlockState state = context.getWorld().getBlockState(context.getPos().offset(direction.getOpposite()));
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		return state.getBlock() == this && state.get(FACING) == direction ? this.getDefaultState().with(FACING, direction.getOpposite()).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER)).with(DRAWN, Boolean.valueOf(context.getWorld().isBlockPowered(context.getPos()))) : this.getDefaultState().with(FACING, direction).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER)).with(DRAWN, Boolean.valueOf(context.getWorld().isBlockPowered(context.getPos())));
 	}
 	
@@ -238,7 +239,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 	}
 	
 	@SuppressWarnings("deprecation")
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 
@@ -248,7 +249,7 @@ public class BlockSpine extends DirectionalBlock implements IBucketPickupHandler
 	}
 	
 	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn) {
+	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		if (!state.get(WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER) {
 			if (!worldIn.isRemote()) {
 				worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);

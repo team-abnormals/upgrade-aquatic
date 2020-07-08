@@ -49,7 +49,7 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	public void tick() {
 		this.ticksPassed++;
 		Random rand = this.thrasher.getRNG();
-		this.foundPos = this.foundTarget.getPosition().add(rand.nextInt(2), rand.nextInt(2), rand.nextInt(2));
+		this.foundPos = this.foundTarget.func_233580_cy_().add(rand.nextInt(2), rand.nextInt(2), rand.nextInt(2));
 	}
 	
 	private void findNearestTarget() {

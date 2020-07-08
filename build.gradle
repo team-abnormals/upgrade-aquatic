@@ -16,14 +16,14 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.7.1'
+version = '2.0.0'
 group = 'com.mcabnormals.upgrade_aquatic' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'Upgrade-Aquatic-1.15.2'
+archivesBaseName = 'Upgrade-Aquatic-1.16.1'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
 minecraft {
-    mappings channel: 'snapshot', version: '20200706-1.15.1'
+    mappings channel: 'snapshot', version: '20200707-1.16.1'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
@@ -82,8 +82,8 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.46'
-    implementation fg.deobf("curse.maven:abnormals-core:2980113")
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.57'
+    implementation fg.deobf("curse.maven:abnormals-core:2989106")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

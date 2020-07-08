@@ -32,7 +32,7 @@ public class FeaturePrismarineCoralShelf extends FeaturePrismarineCoral {
 	}
 	
 	public static boolean placeFeature(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		Direction direction = Direction.random(rand);
+		Direction direction = Direction.func_239631_a_(rand);
 		if(direction == Direction.UP || direction == Direction.DOWN) {
 			direction = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
 		}

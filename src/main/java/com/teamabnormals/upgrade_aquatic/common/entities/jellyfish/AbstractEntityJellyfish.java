@@ -20,6 +20,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -31,11 +32,12 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.PooledMutable;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -116,13 +118,13 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 	}
 	
 	@Override
-	public void travel(Vec3d vec3d) {
+	public void travel(Vector3d Vector3d) {
 		if(this.isServerWorld() && this.isInWater()) {
-			this.moveRelative(0.01F, vec3d);
+			this.moveRelative(0.01F, Vector3d);
 			this.move(MoverType.SELF, this.getMotion());
 			this.setMotion(this.getMotion().scale(0.75D));
 		} else {
-			super.travel(vec3d);
+			super.travel(Vector3d);
 		}
 	}
 	
@@ -131,13 +133,13 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 		float yMotion = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
 		float zMotion = MathHelper.cos(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
 		
-		Vec3d motion = new Vec3d(xMotion, yMotion, zMotion).normalize().scale(0.55F);
+		Vector3d motion = new Vector3d(xMotion, yMotion, zMotion).normalize().scale(0.55F);
 		if(this.world.isAirBlock(new BlockPos(this.getPositionVec().add(motion)))) {
 			return true;
 		}
 		
 		if(pitch <= 75.0F && pitch >= -75.0F) {
-			BlockPos pos = this.getPosition();
+			BlockPos pos = this.func_233580_cy_();
 			PooledMutable blockpos = PooledMutable.retain();
 			for(int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
 				for(int y = pos.getY(); y < pos.getY() + 2; y++) {
@@ -150,7 +152,7 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 				}
 			}
 		} else if(pitch <= 180.0F && (pitch >= -180.0F && pitch < -75.0F)) {
-			BlockPos pos = this.getPosition();
+			BlockPos pos = this.func_233580_cy_();
 			PooledMutable blockpos = PooledMutable.retain();
 			for(int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
 				for(int y = pos.getY(); y < pos.getY() - 2; y++) {
@@ -172,12 +174,12 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 	}
 	
 	@Override
-	protected boolean processInteract(PlayerEntity player, Hand hand) {
+	public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 		Item item = itemstack.getItem();
 		if(itemstack.isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
 			this.startRiding(player);
-			return true;
+			return ActionResultType.SUCCESS;
 		} else if(item == UAItems.PRISMARINE_ROD.get() && !this.hasCooldown()) {
 			Random rand = new Random();
 			if(this.isServerWorld() && rand.nextFloat() < this.getCooldownChance()) {
@@ -185,9 +187,9 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 			}
 			itemstack.shrink(1);
 			player.addItemStackToInventory(getTorchByType(this.getJellyTorchType()));
-			return true;
+			return ActionResultType.SUCCESS;
 		}
-		return super.processInteract(player, hand);
+		return super.func_230254_b_(player, hand);
 	}
 	
 	@Override
@@ -260,12 +262,12 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 	}
 	
 	public boolean stingEntity(LivingEntity livingEntity) {
-		return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue());
+		return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
 	}
 	
 	public ITextComponent getYieldingTorchMessage() {
 		JellyTorchType torchType = this.getJellyTorchType();
-		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").applyTextStyle(TextFormatting.GRAY)).appendSibling((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + torchType.toString().toLowerCase())).applyTextStyle(torchType.color));
+		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").func_240699_a_(TextFormatting.GRAY)).appendSibling((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + torchType.toString().toLowerCase())).func_240701_a_(torchType.color));
 	}
 	
 	public static ItemStack getTorchByType(JellyTorchType type) {
@@ -380,7 +382,7 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 			float y = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
 			float z = MathHelper.cos(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
 			
-			Vec3d motion = new Vec3d(x, y, z).normalize().scale(force).scale(sizeScale);
+			Vector3d motion = new Vector3d(x, y, z).normalize().scale(force).scale(sizeScale);
 			
 			this.jellyfish.addVelocity(motion.x, motion.y, motion.z);
 		}

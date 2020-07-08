@@ -12,7 +12,11 @@ import com.teamabnormals.abnormals_core.core.library.endimator.ControlledEndimat
 import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 import com.teamabnormals.upgrade_aquatic.api.EndimatedMonsterEntity;
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityLionfish;
-import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFindDetectionPointGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFireSonarGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
+import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
@@ -55,7 +59,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -160,7 +164,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		this.setAir(this.getMaxAir());
-		if(reason == SpawnReason.NATURAL && worldIn.getBiome(this.getPosition()) instanceof DeepFrozenOceanBiome) {
+		if(reason == SpawnReason.NATURAL && worldIn.getBiome(this.func_233580_cy_()) instanceof DeepFrozenOceanBiome) {
 			Random rand = new Random();
 			if(rand.nextFloat() < 0.25F) {
 				EntityGreatThrasher greatThrasher = UAEntities.GREAT_THRASHER.get().create(this.world);
@@ -191,7 +195,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			double dy = -Math.sin(this.rotationPitch * (Math.PI / 180.0D));
 			double dz = Math.sin((this.rotationYaw + 90) * Math.PI / 180.0D) * distance;
 			
-			Vec3d riderPos = new Vec3d(this.getPosX() + dx, this.getPosY(), this.getPosZ() + dz);
+			Vector3d riderPos = new Vector3d(this.getPosX() + dx, this.getPosY(), this.getPosZ() + dz);
 			
 			double offset = passenger instanceof PlayerEntity ? this.getMountedYOffset() - 0.2D : this.getMountedYOffset() - 0.5F;
 			
@@ -260,10 +264,10 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		Entity entitySource = source.getTrueSource();
 		if(entitySource instanceof LivingEntity) {
-			Vec3d difference = new Vec3d(
-				entitySource.getPosition().getX() - this.getPosition().getX(),
-				entitySource.getPosition().getY() - this.getPosition().getY(),
-				entitySource.getPosition().getZ() - this.getPosition().getZ()
+			Vector3d difference = new Vector3d(
+				entitySource.getPosX() - this.getPosX(),
+				entitySource.getPosY() - this.getPosY(),
+				entitySource.getPosZ() - this.getPosZ()
 			);
 			if(difference.length() <= 8) {
 				if(entitySource.isInWater()) {
@@ -295,9 +299,9 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				}
 			} else {
 				if(entitySource instanceof PlayerEntity && !((PlayerEntity)entitySource).isCreative() && !((PlayerEntity)entitySource).isSpectator()) {
-					this.setPossibleDetectionPoint(entitySource.getPosition().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
+					this.setPossibleDetectionPoint(entitySource.func_233580_cy_().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
 				} else if(!(entitySource instanceof PlayerEntity)) {
-					this.setPossibleDetectionPoint(entitySource.getPosition().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
+					this.setPossibleDetectionPoint(entitySource.func_233580_cy_().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
 				}
 			}
 		}
@@ -354,7 +358,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		return MathHelper.lerp(ptc, this.prevFinAnimation, this.finAnimation);
 	}
 	
-	public void travel(Vec3d p_213352_1_) {
+	public void travel(Vector3d p_213352_1_) {
 		if (this.isServerWorld() && this.isInWater()) {
 			this.moveRelative(0.1F, p_213352_1_);
 			this.move(MoverType.SELF, this.getMotion());
@@ -474,7 +478,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 			}
 			
 			if(this.isMoving() && this.isInWater()) {
-				Vec3d vec3d1 = this.getLook(0.0F);
+				Vector3d vec3d1 = this.getLook(0.0F);
 
 				for(int i = 0; i < 2; ++i) {
 					this.world.addParticle(ParticleTypes.BUBBLE, this.getPosX() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.x * 1.5D, this.getPosY() + this.rand.nextDouble() * (double)this.getHeight() - vec3d1.y * 1.5D, this.getPosZ() + (this.rand.nextDouble() - 0.5D) * (double)this.getWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
@@ -627,7 +631,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 
 		public void tick() {
 			if (this.action == MovementController.Action.MOVE_TO && !this.thrasher.getNavigator().noPath() && this.thrasher.getStunTime() <= 0) {
-				Vec3d vec3d = new Vec3d(this.posX - this.thrasher.getPosX(), this.posY - this.thrasher.getPosY(), this.posZ - this.thrasher.getPosZ());
+				Vector3d vec3d = new Vector3d(this.posX - this.thrasher.getPosX(), this.posY - this.thrasher.getPosY(), this.posZ - this.thrasher.getPosZ());
 				double d0 = vec3d.length();
 				double d1 = vec3d.y / d0;
 				float f = (float) (MathHelper.atan2(vec3d.z, vec3d.x) * (double) (180F / (float) Math.PI)) - 90F;

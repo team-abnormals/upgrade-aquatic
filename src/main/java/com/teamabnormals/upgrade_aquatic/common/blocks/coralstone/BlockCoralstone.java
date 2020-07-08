@@ -10,7 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CoralWallFanBlock;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -84,9 +84,9 @@ public class BlockCoralstone extends Block {
 		}
 		
 		if(this.growableCoralBlocks != null && random.nextFloat() < 0.12F) {
-			Direction randDirection = this.growableCoralBlocks.length > 3 ? Direction.random(random) : Direction.byIndex(random.nextInt(5) + 1);
+			Direction randDirection = this.growableCoralBlocks.length > 3 ? Direction.func_239631_a_(random) : Direction.byIndex(random.nextInt(5) + 1);
 			BlockPos growPos = pos.offset(randDirection);
-			IFluidState fluidState = worldIn.getBlockState(growPos).getFluidState();
+			FluidState fluidState = worldIn.getBlockState(growPos).getFluidState();
 			boolean isValidPosToGrow = worldIn.getBlockState(growPos).getMaterial().isReplaceable() && fluidState.getLevel() >= 8 && fluidState.isTagged(FluidTags.WATER);
 			
 			if(isValidPosToGrow && state.get(POWERED)) {
@@ -110,7 +110,7 @@ public class BlockCoralstone extends Block {
 		if(!worldIn.isRemote) {
 			boolean flag = state.get(POWERED);
 			if(flag != worldIn.isBlockPowered(pos)) {
-				worldIn.setBlockState(pos, state.cycle(POWERED), 2);
+				worldIn.setBlockState(pos, state.func_235896_a_(POWERED), 2);
 			}
 		}
 	}

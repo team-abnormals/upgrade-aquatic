@@ -26,7 +26,7 @@ public class BlockToothDoor extends DoorBlock {
 		if (state.get(POWERED)) {
 			return ActionResultType.SUCCESS;
 		} else {
-			state = state.cycle(OPEN);
+			state = state.func_235896_a_(OPEN);
 			worldIn.setBlockState(pos, state, 10);
 			worldIn.playEvent(player, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
 			worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
@@ -37,7 +37,7 @@ public class BlockToothDoor extends DoorBlock {
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 	      if (!worldIn.isRemote) {
-	            state = state.cycle(OPEN);
+	            state = state.func_235896_a_(OPEN);
 	            worldIn.setBlockState(pos, state, 10);
 				worldIn.playEvent((PlayerEntity)null, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
 

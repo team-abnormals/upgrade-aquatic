@@ -6,10 +6,10 @@ import com.teamabnormals.upgrade_aquatic.client.render.overlay.RenderLayerFlareE
 import com.teamabnormals.upgrade_aquatic.common.entities.EntityFlare;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

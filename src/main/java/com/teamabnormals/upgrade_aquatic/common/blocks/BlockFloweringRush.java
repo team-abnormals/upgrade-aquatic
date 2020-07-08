@@ -15,7 +15,7 @@ import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -78,8 +78,8 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 	@Override
 	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState groundState = worldIn.getBlockState(currentPos.down());
-		IFluidState fluidState = state.getFluidState();
-		IFluidState upperFluidState = state.getFluidState();
+		FluidState fluidState = state.getFluidState();
+		FluidState upperFluidState = state.getFluidState();
 		if(state.get(WATERLOGGED)) {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
@@ -95,7 +95,7 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		if(state.get(HALF) == DoubleBlockHalf.LOWER) {
 			BlockPos blockpos = pos.down();
-			IFluidState ifluidstate = worldIn.getFluidState(pos);
+			FluidState ifluidstate = worldIn.getFluidState(pos);
 			return worldIn.getBlockState(pos.up()).isAir() && this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos) && ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() >= 8;
 		} else {
 			BlockState blockstate = worldIn.getBlockState(pos.down());
@@ -105,13 +105,13 @@ public class BlockFloweringRush extends Block implements IWaterLoggable, IGrowab
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
+		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
 		return super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public IFluidState getFluidState(BlockState state) {
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
 	

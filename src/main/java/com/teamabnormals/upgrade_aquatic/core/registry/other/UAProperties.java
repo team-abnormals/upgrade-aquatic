@@ -1,9 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.core.registry.other;
 
+import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.Block.Properties;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraftforge.common.ToolType;
@@ -27,15 +27,15 @@ public class UAProperties {
 	
 	public static Block.Properties PRISMARINE_CORAL_BASE(boolean elder) {
 		MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.WHITE_TERRACOTTA;
-		return Block.Properties.create(Material.CORAL, color).doesNotBlockMovement().lightValue(5).sound(SoundType.GLASS);
+		return Block.Properties.create(Material.CORAL, color).doesNotBlockMovement().setLightLevel((unknown) -> (5)).sound(SoundType.GLASS);
 	}
 	
 	public static Block.Properties PRISMARINE_CORAL_BLOCK_BASE(boolean elder) {
 		MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.WHITE_TERRACOTTA;
-		return Block.Properties.create(Material.ROCK, color).hardnessAndResistance(1.5F, 6.0F).lightValue(6).sound(SoundType.GLASS);
+		return Block.Properties.create(Material.ROCK, color).hardnessAndResistance(1.5F, 6.0F).setLightLevel((unknown) -> (6)).sound(SoundType.GLASS);
 	}
 	
-	public static Block.Properties ELDER_PRISMARINE_CORAL = Block.Properties.create(Material.CORAL, MaterialColor.WHITE_TERRACOTTA).lightValue(3).sound(SoundType.GLASS);
+	public static Block.Properties ELDER_PRISMARINE_CORAL = Block.Properties.create(Material.CORAL, MaterialColor.WHITE_TERRACOTTA).setLightLevel((unknown) -> (3)).sound(SoundType.GLASS);
 	
 	public static final Block.Properties SEAROCKET(boolean pink) {
 		MaterialColor color = pink ? MaterialColor.PINK : MaterialColor.WHITE_TERRACOTTA;

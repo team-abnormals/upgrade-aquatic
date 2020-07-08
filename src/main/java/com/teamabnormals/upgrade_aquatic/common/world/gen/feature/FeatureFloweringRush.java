@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Dynamic;
 import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.blocks.BlockFloweringRush;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
@@ -40,7 +40,7 @@ public class FeatureFloweringRush extends Feature<NoFeatureConfig> implements IA
 
 		for(int i = 0; i < 64; ++i) {
 			BlockPos blockpos = pos.add(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(2) - rand.nextInt(2), rand.nextInt(4) - rand.nextInt(4));
-			if(blockpos.getY() < worldIn.getWorld().getDimension().getHeight() - 2 && worldIn.getBlockState(blockpos.down()).getBlock().isIn(BlockTags.BAMBOO_PLANTABLE_ON)) {
+			if(blockpos.getY() < worldIn.getWorld().getHeight() - 2 && worldIn.getBlockState(blockpos.down()).getBlock().isIn(BlockTags.BAMBOO_PLANTABLE_ON)) {
 	            if(worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER && worldIn.isAirBlock(blockpos.up())) {
 	            	this.placeFloweringRush(worldIn, blockpos);
 	            	flag = true;

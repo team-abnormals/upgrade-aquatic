@@ -4,9 +4,8 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.ITag.INamedTag;
 
 public class UABlockTags {
-	public static final Tag<Block> DIRT_LIKE = new BlockTags.Wrapper(new ResourceLocation(Reference.MODID, "dirt_like"));
+	public static final INamedTag<Block> DIRT_LIKE = BlockTags.makeWrapperTag(Reference.MODID + ":dirt_like");
 }
