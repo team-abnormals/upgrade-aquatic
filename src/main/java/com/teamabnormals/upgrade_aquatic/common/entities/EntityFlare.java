@@ -17,6 +17,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.BodyController;
 import net.minecraft.entity.ai.controller.LookController;
@@ -75,10 +76,9 @@ public class EntityFlare extends FlyingEntity {
 		this.targetSelector.addGoal(1, new EntityFlare.AttackLivingEntityGoal());
 	}
 
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttributes().registerAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(8 + this.getPhantomSize());;
-	}
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().func_233814_a_(Attributes.ATTACK_DAMAGE);
+    }
 
 	protected void registerData() {
 		super.registerData();
@@ -143,7 +143,7 @@ public class EntityFlare extends FlyingEntity {
 	}
 
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
-	    this.orbitPosition = (new BlockPos(this)).up(5);
+	    this.orbitPosition = (new BlockPos(this.getPositionVec())).up(5);
 	    this.setPhantomSize(0);
 	    return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
@@ -392,12 +392,12 @@ public class EntityFlare extends FlyingEntity {
 	            this.func_203148_i();
 	        }
 
-	        if (EntityFlare.this.orbitOffset.y < EntityFlare.this.getPosY() && !EntityFlare.this.world.isAirBlock((new BlockPos(EntityFlare.this)).down(1))) {
+	        if (EntityFlare.this.orbitOffset.y < EntityFlare.this.getPosY() && !EntityFlare.this.world.isAirBlock((new BlockPos(EntityFlare.this.getPositionVec())).down(1))) {
 	            this.field_203152_e = Math.max(1.0F, this.field_203152_e);
 	            this.func_203148_i();
 	        }
 
-	        if (EntityFlare.this.orbitOffset.y > EntityFlare.this.getPosY() && !EntityFlare.this.world.isAirBlock((new BlockPos(EntityFlare.this)).up(1))) {
+	        if (EntityFlare.this.orbitOffset.y > EntityFlare.this.getPosY() && !EntityFlare.this.world.isAirBlock((new BlockPos(EntityFlare.this.getPositionVec())).up(1))) {
 	            this.field_203152_e = Math.min(-1.0F, this.field_203152_e);
 	            this.func_203148_i();
 	        }
@@ -406,11 +406,11 @@ public class EntityFlare extends FlyingEntity {
 
 	    private void func_203148_i() {
 	        if(BlockPos.ZERO.equals(EntityFlare.this.orbitPosition)) {
-	            EntityFlare.this.orbitPosition = new BlockPos(EntityFlare.this);
+	            EntityFlare.this.orbitPosition = new BlockPos(EntityFlare.this.getPositionVec());
 	        }
 
 	        this.field_203150_c += this.field_203153_f * 15.0F * ((float) Math.PI / 180F);
-	        EntityFlare.this.orbitOffset = (new Vector3d(EntityFlare.this.orbitPosition)).add((double)(this.field_203151_d * MathHelper.cos(this.field_203150_c)), (double)(-4.0F + this.field_203152_e), (double)(this.field_203151_d * MathHelper.sin(this.field_203150_c)));
+	        EntityFlare.this.orbitOffset = (new Vector3d(EntityFlare.this.orbitPosition.getX(), EntityFlare.this.orbitPosition.getY(), EntityFlare.this.orbitPosition.getZ())).add((double)(this.field_203151_d * MathHelper.cos(this.field_203150_c)), (double)(-4.0F + this.field_203152_e), (double)(this.field_203151_d * MathHelper.sin(this.field_203150_c)));
 	    }
 	}
 	
@@ -460,7 +460,7 @@ public class EntityFlare extends FlyingEntity {
 	    }
 
 	    private void func_203143_f() {
-	        EntityFlare.this.orbitPosition = (new BlockPos(EntityFlare.this.getAttackTarget())).up(20 + EntityFlare.this.rand.nextInt(20));
+	        EntityFlare.this.orbitPosition = (new BlockPos(EntityFlare.this.getAttackTarget().getPositionVec())).up(20 + EntityFlare.this.rand.nextInt(20));
 	        if(EntityFlare.this.orbitPosition.getY() < EntityFlare.this.world.getSeaLevel()) {
 	            EntityFlare.this.orbitPosition = new BlockPos(EntityFlare.this.orbitPosition.getX(), EntityFlare.this.world.getSeaLevel() + 1, EntityFlare.this.orbitPosition.getZ());
 	        }
@@ -533,7 +533,7 @@ public class EntityFlare extends FlyingEntity {
 	        if (EntityFlare.this.getBoundingBox().grow((double) 0.2F).intersects(livingentity.getBoundingBox())) {
 	            EntityFlare.this.attackEntityAsMob(livingentity);
 	            EntityFlare.this.attackPhase = EntityFlare.AttackPhase.CIRCLE;
-	            EntityFlare.this.world.playEvent(1039, new BlockPos(EntityFlare.this), 0);
+	            EntityFlare.this.world.playEvent(1039, new BlockPos(EntityFlare.this.getPositionVec()), 0);
 	        } else if (EntityFlare.this.collidedHorizontally || EntityFlare.this.hurtTime > 0) {
 	            EntityFlare.this.attackPhase = EntityFlare.AttackPhase.CIRCLE;
 	        }

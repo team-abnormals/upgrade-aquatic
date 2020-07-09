@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 import com.teamabnormals.abnormals_core.core.library.endimator.entity.EndimatedEntity;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -90,11 +89,6 @@ public abstract class EndimatedMonsterEntity extends EndimatedEntity implements 
 			int i = p_223323_0_.getWorld().isThundering() ? p_223323_0_.getNeighborAwareLightSubtracted(p_223323_1_, 10) : p_223323_0_.getLight(p_223323_1_);
 			return i <= p_223323_2_.nextInt(8);
 		}
-	}
-
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
 	}
 
 	protected boolean canDropLoot() {

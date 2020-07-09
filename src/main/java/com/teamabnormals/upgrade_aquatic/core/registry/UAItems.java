@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.teamabnormals.abnormals_core.common.items.MobBucketItem;
+import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemBoiledPickerelweed;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemJellyfishBucket;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemMulberryJamBottle;
@@ -8,6 +9,7 @@ import com.teamabnormals.upgrade_aquatic.common.items.ItemPikeBucket;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemPrismarineRod;
 import com.teamabnormals.upgrade_aquatic.common.items.ItemSquidBucket;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.registry.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.other.UAFoods;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
@@ -16,7 +18,10 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
@@ -52,4 +57,23 @@ public class UAItems {
 	public static final RegistryObject<Item> FLARE_SPAWN_EGG            = HELPER.createSpawnEggItem("flare", () -> UAEntities.FLARE.get(), 4532619, 14494960);
 	public static final RegistryObject<Item> JELLYFISH_SPAWN_EGG        = HELPER.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);
 //	public static final RegistryObject<Item> GOOSE_SPAWN_EGG        	= HELPER.createSpawnEggItem("goose", () -> UAEntities.GOOSE.get(), 16448255, 16751914);
+	
+	public static void setupItemPropertes() {
+		ItemModelsProperties.func_239418_a_(JELLYFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
+			CompoundNBT compoundnbt = stack.getTag();
+			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
+				AbstractEntityJellyfish jellyfish = ((ItemJellyfishBucket) stack.getItem()).getEntityInStack(stack, world, null);
+				return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * (float) jellyfish.getIdSuffix());
+			}
+			return 0.0F;
+		});
+		
+		ItemModelsProperties.func_239418_a_(PIKE_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
+			CompoundNBT compoundnbt = stack.getTag();
+			if (compoundnbt != null && compoundnbt.contains("BucketVariantTag", 3)) {
+				return compoundnbt.getInt("BucketVariantTag");
+			}
+			return 2;
+		});
+	}
 }

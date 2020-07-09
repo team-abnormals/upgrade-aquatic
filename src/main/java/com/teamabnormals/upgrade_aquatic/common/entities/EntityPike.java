@@ -25,8 +25,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
@@ -96,12 +96,11 @@ public class EntityPike extends BucketableWaterMobEntity {
 		this.setActiveHand(Hand.MAIN_HAND);
 		this.setCanPickUpLoot(true);
 	}
-	
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.9D);
+
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().
+    			func_233815_a_(Attributes.MAX_HEALTH, 12.0D).
+    			func_233815_a_(Attributes.MOVEMENT_SPEED, 0.9D);
     }
 	
 	@Override
@@ -892,11 +891,11 @@ public class EntityPike extends BucketableWaterMobEntity {
 		protected Vector3d func_233580_cy_() {
 			if(((EntityPike)creature).isPickerelweedNearby()) {
 				int pickedWeed = creature.getRNG().nextInt(((EntityPike)creature).getNearbyPickerelweeds().size());
-				return new Vector3d(((EntityPike)creature).getNearbyPickerelweeds().get(pickedWeed));
+				BlockPos pos = ((EntityPike)creature).getNearbyPickerelweeds().get(pickedWeed);
+				return new Vector3d(pos.getX(), pos.getY(), pos.getZ());
 			}
 			return null;
-		}
-		
+		}	
 	}
 	
 	static class PikeAttackGoal extends MeleeAttackGoal {

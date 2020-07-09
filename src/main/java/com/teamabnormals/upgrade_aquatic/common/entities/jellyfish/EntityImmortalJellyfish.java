@@ -6,7 +6,9 @@ import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishB
 import com.teamabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwinIntoDirectionGoal;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
@@ -30,12 +32,12 @@ public class EntityImmortalJellyfish extends AbstractEntityJellyfish {
 		this.prevHealth = this.getHealth();
 	}
 	
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(7.0D);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
-	}
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().
+    			func_233815_a_(Attributes.ATTACK_DAMAGE, 1.0D).
+    			func_233815_a_(Attributes.MAX_HEALTH, 7.0D);
+    }
+	
 	
 	@Override
 	protected void registerGoals() {

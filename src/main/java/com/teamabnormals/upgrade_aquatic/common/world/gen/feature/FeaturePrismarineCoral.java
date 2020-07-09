@@ -2,23 +2,22 @@ package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.placement.CaveEdgeConfig;
 import net.minecraft.world.gen.placement.Placement;
 
@@ -42,14 +41,14 @@ public class FeaturePrismarineCoral extends Feature<NoFeatureConfig> implements 
 		return !elder ? UABlocks.PRISMARINE_CORAL_SHOWER.get().getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.get().getDefaultState();
 	}
 
-	public FeaturePrismarineCoral(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+	public FeaturePrismarineCoral(Codec<NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
 	@Override
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 //		if(rand.nextDouble() <= 1) {
-			FeaturePrismarineCoralShelf.placeFeature(worldIn, generator, rand, pos, config);
+			FeaturePrismarineCoralShelf.placeFeature(worldIn, manager, generator, rand, pos, config);
 //		} else {
 //			FeaturePrismarineStalactite.placeFeature(worldIn, generator, rand, pos, config);
 //		}

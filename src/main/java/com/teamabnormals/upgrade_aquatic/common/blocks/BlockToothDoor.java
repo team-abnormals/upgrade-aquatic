@@ -29,7 +29,7 @@ public class BlockToothDoor extends DoorBlock {
 			state = state.func_235896_a_(OPEN);
 			worldIn.setBlockState(pos, state, 10);
 			worldIn.playEvent(player, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
-			worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
+			worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.func_234938_ad_(worldIn));
 			return ActionResultType.SUCCESS;
 		}
 	}

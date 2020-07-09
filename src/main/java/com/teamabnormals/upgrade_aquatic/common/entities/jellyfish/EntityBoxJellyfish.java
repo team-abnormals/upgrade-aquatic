@@ -12,9 +12,11 @@ import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -46,11 +48,11 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 		this.rotationController = new RotationController(this);
 	}
 	
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-	}
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().
+    			func_233815_a_(Attributes.ATTACK_DAMAGE, 5.0D);
+    }
+	
 	
 	@Override
 	protected void registerData() {
@@ -164,7 +166,7 @@ public class EntityBoxJellyfish extends AbstractEntityJellyfish {
 	
 	public void setSize(float size, boolean updateHealth) {
 		this.dataManager.set(SIZE, size);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D * size);
+		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(8.0D * size);
 		if(updateHealth) {
 			this.setHealth(this.getMaxHealth());
 		}

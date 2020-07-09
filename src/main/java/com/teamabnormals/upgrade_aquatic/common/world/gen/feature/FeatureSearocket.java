@@ -2,10 +2,9 @@ package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
 import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.function.Supplier;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
 import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
@@ -13,16 +12,17 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.biome.Biome.TempCategory;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
 
@@ -32,12 +32,12 @@ public class FeatureSearocket extends Feature<NoFeatureConfig> implements IAddTo
 		return pink ? () -> UABlocks.PINK_SEAROCKET.get().getDefaultState() : () -> UABlocks.WHITE_SEAROCKET.get().getDefaultState();
 	}
 	
-	public FeatureSearocket(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+	public FeatureSearocket(Codec<NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
 	@Override
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		boolean colorType;
 		if(worldIn.getBiome(pos).getTempCategory() == TempCategory.COLD) {
 			colorType = rand.nextFloat() <= 0.25F;

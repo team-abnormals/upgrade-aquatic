@@ -12,7 +12,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -24,13 +23,6 @@ public class ItemPikeBucket extends MobBucketItem {
 
 	public ItemPikeBucket(Supplier<EntityType<? extends BucketableWaterMobEntity>> entityType, Supplier<? extends Fluid> supplier, Properties builder) {
 		super(entityType, supplier, builder);
-		this.addPropertyOverride(new ResourceLocation("variant"), (stack, world, entity) -> {
-			CompoundNBT compoundnbt = stack.getTag();
-			if (compoundnbt != null && compoundnbt.contains("BucketVariantTag", 3)) {
-				return compoundnbt.getInt("BucketVariantTag");
-			}
-			return 2;
-		});
 	}
 
 	@Override

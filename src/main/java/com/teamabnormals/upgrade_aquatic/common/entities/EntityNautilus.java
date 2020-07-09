@@ -7,9 +7,11 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.PanicGoal;
@@ -45,10 +47,8 @@ public class EntityNautilus extends BucketableWaterMobEntity {
         this.setPosition(posX, posY, posZ);
     }
 
-    @Override
-    protected void registerAttributes() {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(18.0D);
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().func_233815_a_(Attributes.MAX_HEALTH, 18.0D);
     }
 
     @Override
@@ -213,7 +213,7 @@ public class EntityNautilus extends BucketableWaterMobEntity {
                 float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
                 this.nautilus.rotationYaw = this.limitAngle(this.nautilus.rotationYaw, f, 90.0F);
                 this.nautilus.renderYawOffset = this.nautilus.rotationYaw;
-                float f1 = (float) (this.speed * this.nautilus.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
+                float f1 = (float) (this.speed * this.nautilus.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
                 this.nautilus.setAIMoveSpeed(MathHelper.lerp(0.125F, this.nautilus.getAIMoveSpeed(), f1));
                 this.nautilus.setMotion(this.nautilus.getMotion().add(0.0D, (double)this.nautilus.getAIMoveSpeed() * d1 * 0.03D, 0.0D));
                 nautilus.setMoving(true);

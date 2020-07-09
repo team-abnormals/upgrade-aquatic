@@ -7,8 +7,8 @@ import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher
 
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -57,7 +57,7 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	}
 	
 	private double getTargetDistance() {
-		IAttributeInstance iattributeinstance = this.thrasher.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE);
+		ModifiableAttributeInstance iattributeinstance = this.thrasher.getAttribute(Attributes.FOLLOW_RANGE);
 		return iattributeinstance == null ? 16.0D : iattributeinstance.getValue();
 	}
 	

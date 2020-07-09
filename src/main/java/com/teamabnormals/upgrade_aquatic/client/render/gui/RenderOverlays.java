@@ -56,7 +56,7 @@ public class RenderOverlays {
 			} else if (sleepTime < 24000 * configuredTime) {
 				opacity = 0F;
 			}
-			if (MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.dimension == DimensionType.OVERWORLD) {
+			if (MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getEntityWorld().func_234922_V_() == DimensionType.field_235999_c_) {
 				RenderSystem.pushMatrix();
 				
 				MC.textureManager.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/overlay/insomnia.png"));

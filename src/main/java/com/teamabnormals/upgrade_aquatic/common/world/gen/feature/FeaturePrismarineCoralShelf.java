@@ -1,9 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.world.gen.feature;
 
 import java.util.Random;
-import java.util.function.Function;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
@@ -12,26 +11,27 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.DeadCoralWallFanBlock;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.structure.StructureManager;
 
 /**
  * @author - SmellyModder(Luke Tonon)
  */
 public class FeaturePrismarineCoralShelf extends FeaturePrismarineCoral {
 
-	public FeaturePrismarineCoralShelf(Function<Dynamic<?>, ? extends NoFeatureConfig> config) {
+	public FeaturePrismarineCoralShelf(Codec<NoFeatureConfig> config) {
 		super(config);
 	}
 	
 	@Override
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		return false;
 	}
 	
-	public static boolean placeFeature(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public static boolean placeFeature(ISeedReader world, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		Direction direction = Direction.func_239631_a_(rand);
 		if(direction == Direction.UP || direction == Direction.DOWN) {
 			direction = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;

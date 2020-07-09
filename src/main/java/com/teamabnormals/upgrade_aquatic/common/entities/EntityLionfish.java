@@ -11,9 +11,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
@@ -57,11 +59,9 @@ public class EntityLionfish extends BucketableWaterMobEntity {
 		this.moveController = new EntityLionfish.MoveHelperController(this);
 	}
 	
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(8.0D);
-	}
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().func_233815_a_(Attributes.MAX_HEALTH, 8.0D);
+    }
 	
 	@Override
 	protected void registerGoals() {
@@ -278,7 +278,7 @@ public class EntityLionfish extends BucketableWaterMobEntity {
             	float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
             	this.lionfish.rotationYaw = this.limitAngle(this.lionfish.rotationYaw, f, 90.0F);
             	this.lionfish.renderYawOffset = this.lionfish.rotationYaw;
-            	float f1 = (float) (this.speed * this.lionfish.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
+            	float f1 = (float) (this.speed * this.lionfish.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
             	this.lionfish.setAIMoveSpeed(MathHelper.lerp(0.125F, this.lionfish.getAIMoveSpeed(), f1));
             	this.lionfish.setMotion(this.lionfish.getMotion().add(0.0D, (double)this.lionfish.getAIMoveSpeed() * d1 * 0.03D, 0.0D));
             }

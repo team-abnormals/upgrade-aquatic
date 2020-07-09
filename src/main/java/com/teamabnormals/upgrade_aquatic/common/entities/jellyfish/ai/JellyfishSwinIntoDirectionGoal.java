@@ -72,8 +72,8 @@ public class JellyfishSwinIntoDirectionGoal extends Goal {
 	
 	private float[] generateDirection(Random rand) {
 		float[] rotations = this.jellyfish.getRotationController().getRotations(1.0F);
-		float upperChance = this.jellyfish.getPosition().getY() < this.jellyfish.world.getSeaLevel() - 6 ? 0.5F : 0.2F;
-		if(this.jellyfish.onGround || rotations[0] == 0.0F && rotations[1] == 0.0F || EntityUtils.rayTraceUpWithCustomDirection(this.jellyfish, rotations[1], rotations[0], 1.0F, 1.0F).getType() == Type.BLOCK) {
+		float upperChance = this.jellyfish.getPositionVec().getY() < this.jellyfish.world.getSeaLevel() - 6 ? 0.5F : 0.2F;
+		if(this.jellyfish.func_233570_aj_() || rotations[0] == 0.0F && rotations[1] == 0.0F || EntityUtils.rayTraceUpWithCustomDirection(this.jellyfish, rotations[1], rotations[0], 1.0F, 1.0F).getType() == Type.BLOCK) {
 			return new float[] {
 				(float) MathHelper.wrapDegrees(MathUtils.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand)),
 				(float) MathHelper.wrapDegrees(MathUtils.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand))

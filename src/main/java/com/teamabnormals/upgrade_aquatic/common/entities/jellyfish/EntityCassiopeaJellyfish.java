@@ -12,9 +12,11 @@ import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -43,11 +45,10 @@ public class EntityCassiopeaJellyfish extends AbstractEntityJellyfish {
 		this.rotationController = new RotationController(this);
 	}
 	
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D);
-	}
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().
+    			func_233815_a_(Attributes.ATTACK_DAMAGE, 1.0D);
+    }
 	
 	@Override
 	protected void registerData() {
@@ -153,7 +154,7 @@ public class EntityCassiopeaJellyfish extends AbstractEntityJellyfish {
 	
 	public void setSize(float size, boolean updateHealth) {
 		this.dataManager.set(SIZE, size);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(6.0D * size);
+		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(6.0D * size);
 		if(updateHealth) {
 			this.setHealth(this.getMaxHealth());
 		}
@@ -245,7 +246,7 @@ public class EntityCassiopeaJellyfish extends AbstractEntityJellyfish {
 	@Override
 	public boolean stingEntity(LivingEntity livingEntity) {
 		if((this.getAttackTarget() == livingEntity || this.getRevengeTarget() == livingEntity) && this.getRNG().nextFloat() < 0.5F) {
-			return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue());
+			return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
 		}
 		return false;
 	}

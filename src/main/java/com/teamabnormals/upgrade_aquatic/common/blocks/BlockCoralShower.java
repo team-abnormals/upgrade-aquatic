@@ -30,11 +30,6 @@ public class BlockCoralShower extends CoralPlantBlock {
 	}
 	
 	@Override
-	public int getLightValue(BlockState state) {
-		return 3;
-	}
-	
-	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}

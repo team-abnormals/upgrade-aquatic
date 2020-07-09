@@ -7,7 +7,7 @@ import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
@@ -81,7 +81,7 @@ public class ThrasherThrashGoal extends Goal {
 		
 		if(this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
 			this.thrasher.playSound(this.thrasher.getThrashingSound(), 1.0F, Math.max(0.75F, this.thrasher.getRNG().nextFloat()));
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this.thrasher), (float) this.thrasher.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getValue());
+			entity.attackEntityFrom(DamageSource.causeMobDamage(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
 		}
 	}
 	

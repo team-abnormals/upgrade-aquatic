@@ -42,14 +42,6 @@ public class ItemJellyfishBucket extends BucketItem {
 
 	public ItemJellyfishBucket(Supplier<? extends Fluid> supplier, Properties builder) {
 		super(supplier, builder);
-		this.addPropertyOverride(new ResourceLocation("variant"), (stack, world, entity) -> {
-			CompoundNBT compoundnbt = stack.getTag();
-			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
-				AbstractEntityJellyfish jellyfish = this.getEntityInStack(stack, world, null);
-				return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * (float) jellyfish.getIdSuffix());
-			}
-			return 0.0F;
-		});
 	}
 	
 	public void onLiquidPlaced(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
@@ -71,7 +63,7 @@ public class ItemJellyfishBucket extends BucketItem {
 	}
 	
 	@Nullable
-	private AbstractEntityJellyfish getEntityInStack(ItemStack stack, World world, @Nullable BlockPos pos) {
+	public AbstractEntityJellyfish getEntityInStack(ItemStack stack, World world, @Nullable BlockPos pos) {
 		CompoundNBT compoundnbt = stack.getTag();
 		if(compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 			BucketData bucketData = BucketData.read(compoundnbt.getCompound("JellyfishTag"));

@@ -39,9 +39,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.IForgeShearable;
 
 @SuppressWarnings("deprecation")
-public class BlockMulberryVine extends Block implements net.minecraftforge.common.IShearable, IGrowable {
+public class BlockMulberryVine extends Block implements IForgeShearable, IGrowable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0, 4.0, 5.0, 13.0, 16.0, 13.0);
 
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
@@ -200,11 +201,6 @@ public class BlockMulberryVine extends Block implements net.minecraftforge.commo
 	@Override
 	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
 		return true;
-	}
-
-	@Override
-	public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return false;
 	}
 }
 

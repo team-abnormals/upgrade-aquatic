@@ -248,7 +248,7 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 		if (!worldIn.isRemote) {
 			BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING));
 			worldIn.setBlockState(blockpos, state.with(PART, BedPart.HEAD), 3);
-			worldIn.notifyNeighbors(pos, Blocks.AIR);//https://github.com/Krevik/Kathairis/blob/master/src/main/resources/META-INF/mods.toml
+			worldIn.notifyNeighborsOfStateChange(pos, Blocks.AIR);//https://github.com/Krevik/Kathairis/blob/master/src/main/resources/META-INF/mods.toml
 			state.updateNeighbors(worldIn, pos, 3);
 		}
 	}

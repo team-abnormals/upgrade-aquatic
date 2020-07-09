@@ -3,7 +3,9 @@ package com.teamabnormals.upgrade_aquatic.common.entities.thrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -14,20 +16,19 @@ public class EntityGreatThrasher extends EntityThrasher {
 		super(type, world);
 		this.experienceValue = 55;
 	}
-	
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttribute(STUN_DAMAGE_THRESHOLD).setBaseValue(8.0D);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(8.0D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(125.0D);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(16.0D);
-	}
-	
+
 	@Override
 	public float getMountDistance() {
 		return 2.1F;
 	}
+	
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().
+    			func_233815_a_(EntityThrasher.STUN_DAMAGE_THRESHOLD, 125.0D).
+    			func_233815_a_(Attributes.MAX_HEALTH, 125.0D).
+    			func_233815_a_(Attributes.ATTACK_DAMAGE, 8.0D).
+    			func_233815_a_(Attributes.ARMOR, 16.0D);
+    }
 	
 	@Override
 	public double getMountedYOffset() {

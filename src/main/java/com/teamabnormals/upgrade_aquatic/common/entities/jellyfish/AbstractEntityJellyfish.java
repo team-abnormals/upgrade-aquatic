@@ -17,9 +17,10 @@ import com.teamabnormals.upgrade_aquatic.core.registry.other.UADamageSources;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -64,12 +65,10 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 		super(type, world);
 	}
 	
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttributes().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
-	}
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().
+    			func_233815_a_(Attributes.ATTACK_DAMAGE, 2.0D);
+    }
 	
 	@Override
 	protected void registerData() {
@@ -267,7 +266,7 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 	
 	public ITextComponent getYieldingTorchMessage() {
 		JellyTorchType torchType = this.getJellyTorchType();
-		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").func_240699_a_(TextFormatting.GRAY)).appendSibling((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + torchType.toString().toLowerCase())).func_240701_a_(torchType.color));
+		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").func_240699_a_(TextFormatting.GRAY)).func_230529_a_((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + torchType.toString().toLowerCase())).func_240701_a_(torchType.color));
 	}
 	
 	public static ItemStack getTorchByType(JellyTorchType type) {

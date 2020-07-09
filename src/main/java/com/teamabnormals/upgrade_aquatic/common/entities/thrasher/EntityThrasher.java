@@ -28,13 +28,15 @@ import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.IAttribute;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.ai.controller.LookController;
 import net.minecraft.entity.ai.controller.MovementController;
@@ -79,8 +81,8 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof EntityThrasher) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof EntityLionfish)) && entity.isInWater();
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
-	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE)).setSaved(false);
-	public static final IAttribute STUN_DAMAGE_THRESHOLD = new RangedAttribute(null, "thrasher.stun_threshold", 6.0D, 6.0D, 12.0D).setShouldWatch(true);
+	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE));
+	public static final Attribute STUN_DAMAGE_THRESHOLD = new RangedAttribute("thrasher.stun_threshold", 6.0D, 6.0D, 12.0D).func_233753_a_(true);
 	private static final DataParameter<Boolean> MOVING = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> WATER_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> STUN_TIME = EntityDataManager.createKey(EntityThrasher.class, DataSerializers.VARINT);
@@ -117,18 +119,16 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		this.goalSelector.addGoal(5, new ThrasherRandomSwimGoal(this, 1.1D, 15));
 	}
 	
-	@Override
-	protected void registerAttributes() {
-		super.registerAttributes();
-		this.getAttributes().registerAttribute(STUN_DAMAGE_THRESHOLD);
-		
-		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.55D);
-		this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0D);
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(50.0D);
-		this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.25D);
-		this.getAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0D);
-	}
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().
+    			func_233814_a_(EntityThrasher.STUN_DAMAGE_THRESHOLD).
+    			func_233815_a_(Attributes.ATTACK_DAMAGE, 5.0D).
+    			func_233815_a_(Attributes.MOVEMENT_SPEED, 0.55D).
+    			func_233815_a_(Attributes.FOLLOW_RANGE, 32.0D).
+    			func_233815_a_(Attributes.MAX_HEALTH, 50.0D).
+    			func_233815_a_(Attributes.KNOCKBACK_RESISTANCE, 1.25D).
+    			func_233815_a_(Attributes.ARMOR, 8.0D);
+    }
 	
 	@Override
 	protected void registerData() {
@@ -237,9 +237,9 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void onEndimationStart(Endimation animationStarted) {
 		if(animationStarted == THRASH_ANIMATION) {
-			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
+			ModifiableAttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 			if(!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
-				knockbackResistance.applyModifier(KNOCKBACK_RESISTANCE_MODIFIER);
+				knockbackResistance.func_233767_b_(KNOCKBACK_RESISTANCE_MODIFIER);
 			}
 		}
 	}
@@ -247,7 +247,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 	@Override
 	public void onEndimationEnd(Endimation animationEnded) {
 		if(animationEnded == THRASH_ANIMATION) {
-			IAttributeInstance knockbackResistance = this.getAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
+			ModifiableAttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 			if(knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
 				knockbackResistance.removeModifier(KNOCKBACK_RESISTANCE_MODIFIER);
 			}
@@ -640,7 +640,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 				this.thrasher.renderYawOffset = this.thrasher.rotationYaw;
 				this.thrasher.rotationYawHead = this.thrasher.rotationYaw;
 				
-				float f1 = (float)(this.speed * this.thrasher.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getValue());
+				float f1 = (float)(this.speed * this.thrasher.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
 				float f2 = MathHelper.lerp(0.125F, this.thrasher.getAIMoveSpeed(), f1);
 				
 				this.thrasher.setAIMoveSpeed(f2);
