@@ -100,6 +100,7 @@ public class UpgradeAquatic {
 		DeferredWorkQueue.runLater(() -> {
 			REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
 			UAEntitySpawns.processSpawnAdditions();
+			UAEntities.registerAttributes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
 			UAEffects.registerBrewingRecipes();
 			UAWorldGen.registerGenerators();

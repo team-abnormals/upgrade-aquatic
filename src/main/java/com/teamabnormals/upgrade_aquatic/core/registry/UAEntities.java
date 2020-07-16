@@ -18,6 +18,7 @@ import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -45,5 +46,20 @@ public class UAEntities {
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public static void registerEntitySpawns(RegistryEvent.Register<EntityType<?>> event) {
 		UAEntitySpawns.registerSpawnPlacements();
+	}
+	
+	public static void registerAttributes() {
+		GlobalEntityTypeAttributes.put(NAUTILUS.get(), EntityNautilus.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(PIKE.get(), EntityPike.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(LIONFISH.get(), EntityLionfish.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(THRASHER.get(), EntityThrasher.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(GREAT_THRASHER.get(), EntityGreatThrasher.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(FLARE.get(), EntityFlare.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(ULULU.get(), EntityUlulu.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(GOOSE.get(), EntityGoose.registerAttributes().func_233813_a_());
+		
+		GlobalEntityTypeAttributes.put(BOX_JELLYFISH.get(), EntityBoxJellyfish.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(CASSIOPEA_JELLYFISH.get(), EntityCassiopeaJellyfish.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(IMMORTAL_JELLYFISH.get(), EntityImmortalJellyfish.registerAttributes().func_233813_a_());
 	}
 }
