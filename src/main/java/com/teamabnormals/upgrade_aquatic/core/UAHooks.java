@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 
 import com.google.common.collect.Maps;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -62,6 +63,6 @@ public class UAHooks {
 	}
 	
 	public static void makeBubbleColumnTickRandomly() {
-		ObfuscationReflectionHelper.setPrivateValue(Block.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
+		ObfuscationReflectionHelper.setPrivateValue(AbstractBlock.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
 	}
 }
