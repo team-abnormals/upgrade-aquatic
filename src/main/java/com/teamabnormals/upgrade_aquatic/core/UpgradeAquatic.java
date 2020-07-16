@@ -65,9 +65,7 @@ public class UpgradeAquatic {
 	public UpgradeAquatic() {
 		instance = this;
 		this.setupMessages();
-		
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		
 		modEventBus.addListener(this::setupCommon);
 
 		REGISTRY_HELPER.getDeferredBlockRegister().register(modEventBus);
