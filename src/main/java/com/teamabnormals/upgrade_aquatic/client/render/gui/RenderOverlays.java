@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.render.gui;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.teamabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
@@ -19,6 +20,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -31,6 +33,7 @@ import net.minecraftforge.fml.common.Mod;
 public class RenderOverlays {
 	private static final Minecraft MC = Minecraft.getInstance();
 	
+	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void renderOverlays(RenderGameOverlayEvent event) {
 		if (event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE) {
@@ -57,8 +60,9 @@ public class RenderOverlays {
 				opacity = 0F;
 			}
 			if (MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getEntityWorld().func_234922_V_() == DimensionType.field_235999_c_) {
-				RenderSystem.pushMatrix();
+				MatrixStack stack = event.getMatrixStack();
 				
+				stack.push();
 				MC.textureManager.bindTexture(new ResourceLocation(Reference.MODID, "textures/gui/overlay/insomnia.png"));
 				RenderSystem.enableBlend();
 				RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
@@ -72,8 +76,7 @@ public class RenderOverlays {
 				bufferbuilder.pos((double) scaledWidth, 0.0D, -90.0D).tex(1.0F, 0.0F).endVertex();
 				bufferbuilder.pos(0.0D, 0.0D, -90.0D).tex(0.0F, 0.0F).endVertex();
 				tessellator.draw();
-				
-				RenderSystem.popMatrix();
+				stack.pop();
 			}
 		}
 	}
@@ -96,7 +99,8 @@ public class RenderOverlays {
 				if (!turtleHelmet.isEmpty()) {
 					event.setCanceled(true);
 					
-					RenderSystem.pushMatrix();
+					MatrixStack stack = event.getMatrixStack();
+					stack.push();
 					RenderSystem.enableBlend();
 					int left = scaledWidth / 2 + 91;
 					int top = scaledHeight - ForgeIngameGui.right_height;
@@ -137,15 +141,15 @@ public class RenderOverlays {
 					ForgeIngameGui.right_height += 10;
 					
 					RenderSystem.disableBlend();
-					RenderSystem.popMatrix();
+					stack.pop();
 				}
 			}
 		}
 		if(event.getType() == ElementType.TEXT) {
 			if(MC.player.isPassenger()) {
-				String formattedMessage = I18n.format("mount.onboard", MC.gameSettings.keyBindSneak.getLocalizedName());
-				if(MC.ingameGUI.overlayMessage.equals(formattedMessage) && MC.player.getRidingEntity() instanceof EntityThrasher) {
-					MC.ingameGUI.setOverlayMessage("", false);
+				String formattedMessage = I18n.format("mount.onboard", MC.gameSettings.keyBindSneak.getKeyDescription());
+				if(MC.ingameGUI.overlayMessage.toString().equals(formattedMessage) && MC.player.getRidingEntity() instanceof EntityThrasher) {
+					MC.ingameGUI.setOverlayMessage(new StringTextComponent(""), false);
 				}
 			}
 		}

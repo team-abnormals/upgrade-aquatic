@@ -299,8 +299,8 @@ public class EntityLionfish extends BucketableWaterMobEntity {
 		@Override
 		protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
 			double d0 = this.getAttackReachSqr(enemy);
-			if (distToEnemySqr <= d0 && this.attackTick <= 0) {
-				this.attackTick = 20;
+			if (distToEnemySqr <= d0 && this.func_234041_j_() <= 0) {
+				this.func_234039_g_();
 				((EntityLionfish)this.attacker).attack(enemy);
 				((EntityLionfish)this.attacker).setHungry(false);
 				((EntityLionfish)this.attacker).setTimeTillHungry(attacker.getRNG().nextInt(300) + 300);

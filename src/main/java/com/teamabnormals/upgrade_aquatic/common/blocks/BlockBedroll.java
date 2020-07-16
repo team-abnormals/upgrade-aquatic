@@ -11,7 +11,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
-import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -51,22 +50,6 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 		super(colorIn, builder);
 		this.color = colorIn;
 		this.setDefaultState(this.stateContainer.getBaseState().with(PART, BedPart.FOOT).with(OCCUPIED, Boolean.valueOf(false)).with(WATERLOGGED, Boolean.valueOf(false)));
-	}
-	
-	@Override
-	public MaterialColor getMaterialColor(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return state.get(PART) == BedPart.FOOT ? this.color.getMapColor() : MaterialColor.WOOL;
-	}
-	
-	@SuppressWarnings("deprecation")
-	@Nullable
-	private PlayerEntity getPlayerInBed(World worldIn, BlockPos pos) {
-		for(PlayerEntity entityplayer : worldIn.getPlayers()) {
-			if (entityplayer.isSleeping() && entityplayer.getBedLocation().equals(pos)) {
-				return entityplayer;
-			}
-		}
-		return null;
 	}
 	
 	@Override
@@ -248,8 +231,7 @@ public class BlockBedroll extends BedBlock implements IBucketPickupHandler, ILiq
 		if (!worldIn.isRemote) {
 			BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING));
 			worldIn.setBlockState(blockpos, state.with(PART, BedPart.HEAD), 3);
-			worldIn.notifyNeighborsOfStateChange(pos, Blocks.AIR);//https://github.com/Krevik/Kathairis/blob/master/src/main/resources/META-INF/mods.toml
-			state.updateNeighbors(worldIn, pos, 3);
+			worldIn.notifyNeighborsOfStateChange(pos, Blocks.AIR);
 		}
 	}
 	

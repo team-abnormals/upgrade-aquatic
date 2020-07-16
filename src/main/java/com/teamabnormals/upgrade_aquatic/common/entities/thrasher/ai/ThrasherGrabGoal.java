@@ -41,7 +41,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 	@Override
 	protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
 		double attackReachSqr = this.getAttackReachSqr(enemy);
-		if(distToEnemySqr <= attackReachSqr + 0.75F && this.attackTick <= 0) {
+		if(distToEnemySqr <= attackReachSqr + 0.75F && this.func_234041_j_() <= 0) {
 			if(this.thrasher.isNoEndimationPlaying()) {
 				NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.SNAP_AT_PRAY_ANIMATION);
 			}
@@ -49,7 +49,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 		
 		boolean isGrabBlocked = EntityUtils.rayTrace(this.thrasher, enemy.getPositionVec().distanceTo(this.thrasher.getPositionVec()), 1.0F).getType() == Type.BLOCK;
 		
-		if(distToEnemySqr <= attackReachSqr && !isGrabBlocked && this.attackTick <= 0) {
+		if(distToEnemySqr <= attackReachSqr && !isGrabBlocked && this.func_234041_j_() <= 0) {
 			enemy.startRiding(this.thrasher, true);
 			this.thrasher.setAttackTarget(null);
 		}

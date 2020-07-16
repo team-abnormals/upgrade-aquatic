@@ -77,6 +77,8 @@ import com.teamabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CoralBlock;
@@ -91,6 +93,7 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Rarity;
 import net.minecraft.potion.Effects;
+import net.minecraft.state.properties.BedPart;
 import net.minecraft.util.Util;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
@@ -264,23 +267,23 @@ public class UABlocks {
 
 	public static final RegistryObject<Block> EMBEDDED_AMMONITE = HELPER.createBlock("embedded_ammonite", () -> new BlockEmbeddedAmmonite(Properties.from(Blocks.STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
 
-	public static final RegistryObject<Block> BEDROLL = HELPER.createBlock("bedroll_leather", () -> new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> WHITE_BEDROLL = HELPER.createBlock("bedroll_white", () -> new BlockBedroll(DyeColor.WHITE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> ORANGE_BEDROLL = HELPER.createBlock("bedroll_orange", () -> new BlockBedroll(DyeColor.ORANGE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> MAGENTA_BEDROLL = HELPER.createBlock("bedroll_magenta", () -> new BlockBedroll(DyeColor.MAGENTA, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> LIGHT_BLUE_BEDROLL = HELPER.createBlock("bedroll_light_blue", () -> new BlockBedroll(DyeColor.LIGHT_BLUE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> YELLOW_BEDROLL = HELPER.createBlock("bedroll_yellow", () -> new BlockBedroll(DyeColor.YELLOW, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> LIME_BEDROLL = HELPER.createBlock("bedroll_lime", () -> new BlockBedroll(DyeColor.LIME, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> PINK_BEDROLL = HELPER.createBlock("bedroll_pink", () -> new BlockBedroll(DyeColor.PINK, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> GRAY_BEDROLL = HELPER.createBlock("bedroll_gray", () -> new BlockBedroll(DyeColor.GRAY, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> LIGHT_GRAY_BEDROLL = HELPER.createBlock("bedroll_light_gray", () -> new BlockBedroll(DyeColor.LIGHT_GRAY, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> CYAN_BEDROLL = HELPER.createBlock("bedroll_cyan", () -> new BlockBedroll(DyeColor.CYAN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> PURPLE_BEDROLL = HELPER.createBlock("bedroll_purple", () -> new BlockBedroll(DyeColor.PURPLE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> BLUE_BEDROLL = HELPER.createBlock("bedroll_blue", () -> new BlockBedroll(DyeColor.BLUE, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> BROWN_BEDROLL = HELPER.createBlock("bedroll_brown", () -> new BlockBedroll(DyeColor.BROWN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> GREEN_BEDROLL = HELPER.createBlock("bedroll_green", () -> new BlockBedroll(DyeColor.GREEN, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> RED_BEDROLL = HELPER.createBlock("bedroll_red", () -> new BlockBedroll(DyeColor.RED, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> BLACK_BEDROLL = HELPER.createBlock("bedroll_black", () -> new BlockBedroll(DyeColor.BLACK, UAProperties.BEDROLL), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BEDROLL = HELPER.createBlock("bedroll_leather", createBedroll(DyeColor.BROWN), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> WHITE_BEDROLL = HELPER.createBlock("bedroll_white", createBedroll(DyeColor.WHITE), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> ORANGE_BEDROLL = HELPER.createBlock("bedroll_orange", createBedroll(DyeColor.ORANGE), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> MAGENTA_BEDROLL = HELPER.createBlock("bedroll_magenta", createBedroll(DyeColor.MAGENTA), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> LIGHT_BLUE_BEDROLL = HELPER.createBlock("bedroll_light_blue", createBedroll(DyeColor.LIGHT_BLUE), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> YELLOW_BEDROLL = HELPER.createBlock("bedroll_yellow", createBedroll(DyeColor.YELLOW), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> LIME_BEDROLL = HELPER.createBlock("bedroll_lime", createBedroll(DyeColor.LIME), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PINK_BEDROLL = HELPER.createBlock("bedroll_pink", createBedroll(DyeColor.PINK), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> GRAY_BEDROLL = HELPER.createBlock("bedroll_gray", createBedroll(DyeColor.GRAY), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> LIGHT_GRAY_BEDROLL = HELPER.createBlock("bedroll_light_gray", createBedroll(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> CYAN_BEDROLL = HELPER.createBlock("bedroll_cyan", createBedroll(DyeColor.CYAN), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> PURPLE_BEDROLL = HELPER.createBlock("bedroll_purple", createBedroll(DyeColor.PURPLE), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BLUE_BEDROLL = HELPER.createBlock("bedroll_blue", createBedroll(DyeColor.BLUE), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BROWN_BEDROLL = HELPER.createBlock("bedroll_brown", createBedroll(DyeColor.BROWN), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> GREEN_BEDROLL = HELPER.createBlock("bedroll_green", createBedroll(DyeColor.GREEN), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> RED_BEDROLL = HELPER.createBlock("bedroll_red", createBedroll(DyeColor.RED), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> BLACK_BEDROLL = HELPER.createBlock("bedroll_black", createBedroll(DyeColor.BLACK), ItemGroup.DECORATIONS);
 
 	public static final RegistryObject<Block> BLUE_PICKERELWEED = HELPER.createBlock("pickerel_weed_blue", () -> new BlockPickerelweed(UAProperties.PICKERELWEED), ItemGroup.MISC);
 	public static final RegistryObject<Block> TALL_BLUE_PICKERELWEED = HELPER.createBlockNoItem("pickerel_weed_tall_blue", () -> new BlockPickerelweedDouble(UAProperties.PICKERELWEED));
@@ -676,6 +679,12 @@ public class UABlocks {
 			() -> new ThatchStairsBlock(BEACHGRASS_THATCH.get().getDefaultState(), Properties.from(Blocks.HAY_BLOCK).notSolid().harvestTool(ToolType.AXE)), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "beachgrass_thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(Properties.from(BEACHGRASS_THATCH.get()).notSolid()),
 			ItemGroup.BUILDING_BLOCKS);
+	
+	private static Supplier<BlockBedroll> createBedroll(DyeColor color) {
+		return () -> new BlockBedroll(color, AbstractBlock.Properties.create(Material.WOOL, (state) -> {
+			return state.get(BedBlock.PART) == BedPart.FOOT ? color.getMapColor() : MaterialColor.WOOL;
+		}).sound(SoundType.CLOTH).hardnessAndResistance(0.2F, 0.3F).notSolid());
+	}
 
 	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
 		conversions.put(() -> Blocks.BUBBLE_CORAL_BLOCK, () -> BUBBLE_CORALSTONE.get());

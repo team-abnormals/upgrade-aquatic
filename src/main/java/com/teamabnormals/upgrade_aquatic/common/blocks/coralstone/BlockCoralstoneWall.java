@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.blocks.coralstone;
 
 import java.util.Random;
 
+import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.BlockState;
@@ -32,39 +33,22 @@ public class BlockCoralstoneWall extends WallBlock {
 			BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 			UABlocks.CORALSTONE_WALL_CONVERSION_MAP.forEach((input, output) -> {
 			    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
-					BlockState newState = output.get().getDefaultState()
-							.with(UP, state.get(UP))
-							.with(NORTH, state.get(NORTH))
-							.with(EAST, state.get(EAST))
-							.with(SOUTH, state.get(SOUTH))
-							.with(WEST, state.get(WEST))
-							.with(WATERLOGGED, state.get(WATERLOGGED)
-						);
-					worldIn.setBlockState(pos, newState, 2);
+					worldIn.setBlockState(pos, BlockUtils.transferAllBlockStates(state, output.get().getDefaultState()), 2);
 			    }
 			});
 		}
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
 		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_WALL.get()) {
-			BlockState newState = UABlocks.CORALSTONE_WALL.get().getDefaultState()
-				.with(UP, state.get(UP))
-				.with(NORTH, state.get(NORTH))
-				.with(EAST, state.get(EAST))
-				.with(SOUTH, state.get(SOUTH))
-				.with(WEST, state.get(WEST))
-				.with(WATERLOGGED, state.get(WATERLOGGED)
-			);
 			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
-			world.setBlockState(pos, newState, 2);
+			world.setBlockState(pos, BlockUtils.transferAllBlockStates(state, UABlocks.CORALSTONE_WALL.get().getDefaultState()), 2);
 			return ActionResultType.SUCCESS;
 		}
-		return super.onBlockActivated(state, world, pos, player, hand, hit);
+		return ActionResultType.PASS;
 	}
 
 }

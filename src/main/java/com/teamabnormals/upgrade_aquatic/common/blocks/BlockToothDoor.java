@@ -17,32 +17,29 @@ public class BlockToothDoor extends DoorBlock {
 
 	public BlockToothDoor(Properties builder) {
 		super(builder);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
-			BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (state.get(POWERED)) {
 			return ActionResultType.SUCCESS;
 		} else {
 			state = state.func_235896_a_(OPEN);
 			worldIn.setBlockState(pos, state, 10);
 			worldIn.playEvent(player, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
-			worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.func_234938_ad_(worldIn));
+			worldIn.getPendingBlockTicks().scheduleTick(pos, this, 20);
 			return ActionResultType.SUCCESS;
 		}
 	}
 	
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-	      if (!worldIn.isRemote) {
-	            state = state.func_235896_a_(OPEN);
-	            worldIn.setBlockState(pos, state, 10);
-				worldIn.playEvent((PlayerEntity)null, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
-
-	      }
-	   }
+		if (!worldIn.isRemote) {
+			state = state.func_235896_a_(OPEN);
+			worldIn.setBlockState(pos, state, 10);
+			worldIn.playEvent((PlayerEntity)null, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+		}
+	}
 
 	private int getCloseSound() {
 		return this.material == Material.IRON ? 1011 : 1012;

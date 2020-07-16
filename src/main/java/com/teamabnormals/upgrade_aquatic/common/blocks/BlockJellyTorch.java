@@ -47,7 +47,7 @@ public class BlockJellyTorch extends TorchBlock implements IBucketPickupHandler,
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	
 	public BlockJellyTorch(Properties props, JellyTorchType torchType) {
-		super(props);
+		super(props, null);
 		this.torchType = torchType;
 		this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, false));
 	}

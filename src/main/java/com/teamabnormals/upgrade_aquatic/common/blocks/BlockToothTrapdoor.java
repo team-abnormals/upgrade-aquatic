@@ -17,12 +17,10 @@ public class BlockToothTrapdoor extends TrapDoorBlock {
 
 	public BlockToothTrapdoor(Properties properties) {
 		super(properties);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
-			BlockRayTraceResult hit) {
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (state.get(POWERED)) {
 			return ActionResultType.SUCCESS;
 		} else {
@@ -33,23 +31,21 @@ public class BlockToothTrapdoor extends TrapDoorBlock {
 	         }
 
 	         this.playSound(player, worldIn, pos, state.get(OPEN));
-			worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
+			worldIn.getPendingBlockTicks().scheduleTick(pos, this, 20);
 			return ActionResultType.SUCCESS;
 		}
 	}
 	
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-	      if (!worldIn.isRemote) {
-	            state = state.func_235896_a_(OPEN);
-	            worldIn.setBlockState(pos, state, 2);
-	            if (state.get(WATERLOGGED)) {
-	               worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
-	            }
-
-	            this.playSound((PlayerEntity)null, worldIn, pos, state.get(OPEN));
-
-	      }
-	   }
+		if (!worldIn.isRemote) {
+			state = state.func_235896_a_(OPEN);
+			worldIn.setBlockState(pos, state, 2);
+			if (state.get(WATERLOGGED)) {
+				worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+			}
+			this.playSound((PlayerEntity)null, worldIn, pos, state.get(OPEN));
+		}
+	}
 
 }

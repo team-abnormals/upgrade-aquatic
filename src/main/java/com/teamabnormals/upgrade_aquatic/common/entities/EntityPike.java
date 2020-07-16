@@ -923,8 +923,8 @@ public class EntityPike extends BucketableWaterMobEntity {
 				enemy.getPosZ() - attacker.getPosZ()
 			);
 			boolean isCloseToEntity = difference.length() <= 2;
-			if (isCloseToEntity && distToEnemySqr <= d && this.attackTick <= 0) {
-				this.attackTick = 20;
+			if (isCloseToEntity && distToEnemySqr <= d && this.func_234040_h_()) {
+				this.func_234039_g_();
 				if(attacker.getAttackTarget() != null) {
 					if(enemy instanceof AbstractFishEntity || enemy instanceof AnimalEntity) {
 						((EntityPike)this.attacker).setAttackCooldown(attacker.getRNG().nextInt(551) + 50);

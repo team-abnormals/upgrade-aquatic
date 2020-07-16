@@ -25,7 +25,7 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 		if(this.jellyfish.getRNG().nextFloat() < 0.025F && this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.world.isDaytime()) {
 			BlockPos pos = this.jellyfish.func_233580_cy_();
 			if(pos.getY() >= this.world.getSeaLevel() - 2) {
-				if(this.world.dimension.hasSkyLight() && this.world.canBlockSeeSky(pos)) {
+				if(this.world.func_230315_m_().hasSkyLight() && this.world.canBlockSeeSky(pos)) {
 					return !this.jellyfish.hasUpsideDownCooldown() && !this.jellyfish.func_233570_aj_();
 				}
 			}

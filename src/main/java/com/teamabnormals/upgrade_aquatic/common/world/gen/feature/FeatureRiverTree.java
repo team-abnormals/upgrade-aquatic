@@ -136,7 +136,6 @@ public class FeatureRiverTree extends Feature<BaseTreeFeatureConfig> implements 
 		return biome -> {
 			if(biome.getCategory() == Category.RIVER) {
 				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.RIVER_TREE.get().withConfiguration(RIVER_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(1, 0.75F, 2))));
-
 			}
 		};
 	}

@@ -31,6 +31,7 @@ public class FeatureDunes extends Feature<NoFeatureConfig> implements IAddToBiom
 		super(config);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean func_230362_a_(ISeedReader world, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		for(BlockState blockstate = world.getBlockState(pos); (world.isAirBlock(pos) || blockstate.isIn(BlockTags.LEAVES)) && pos.getY() > 0; blockstate = world.getBlockState(pos)) {

@@ -36,7 +36,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.PooledMutable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
@@ -139,7 +138,7 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 		
 		if(pitch <= 75.0F && pitch >= -75.0F) {
 			BlockPos pos = this.func_233580_cy_();
-			PooledMutable blockpos = PooledMutable.retain();
+			BlockPos.Mutable blockpos = new BlockPos.Mutable();
 			for(int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
 				for(int y = pos.getY(); y < pos.getY() + 2; y++) {
 					for(int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
@@ -152,7 +151,7 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 			}
 		} else if(pitch <= 180.0F && (pitch >= -180.0F && pitch < -75.0F)) {
 			BlockPos pos = this.func_233580_cy_();
-			PooledMutable blockpos = PooledMutable.retain();
+			BlockPos.Mutable blockpos = new BlockPos.Mutable();
 			for(int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
 				for(int y = pos.getY(); y < pos.getY() - 2; y++) {
 					for(int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
@@ -291,6 +290,7 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static <J extends AbstractEntityJellyfish> boolean defaultSpawnCondition(EntityType<J> entity, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
 		return pos.getY() > 45 && pos.getY() < world.getSeaLevel();
 	}
