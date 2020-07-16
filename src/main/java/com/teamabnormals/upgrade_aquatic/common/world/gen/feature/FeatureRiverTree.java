@@ -36,8 +36,7 @@ import net.minecraftforge.common.IPlantable;
 
 @SuppressWarnings("deprecation")
 public class FeatureRiverTree extends Feature<BaseTreeFeatureConfig> implements IAddToBiomes {
-	public static final BaseTreeFeatureConfig RIVER_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(UABlocks.RIVER_LOG.get().getDefaultState()),
-			new SimpleBlockStateProvider(UABlocks.RIVER_LEAVES.get().getDefaultState()), null, null, null)).build();
+	public static final BaseTreeFeatureConfig RIVER_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(UABlocks.RIVER_LOG.get().getDefaultState()), new SimpleBlockStateProvider(UABlocks.RIVER_LEAVES.get().getDefaultState()), null, null, null)).build();
 
 	public FeatureRiverTree(Codec<BaseTreeFeatureConfig> config) {
 		super(config);
@@ -124,12 +123,12 @@ public class FeatureRiverTree extends Feature<BaseTreeFeatureConfig> implements 
 	}
 
 	private void placeLogAt(IWorldWriter worldIn, BlockPos pos, Random rand, BaseTreeFeatureConfig config) {
-		this.setLogState(worldIn, pos, config.trunkProvider.getBlockState(rand, pos));
+		this.setLogState(worldIn, pos, UABlocks.RIVER_LOG.get().getDefaultState());
 	}
 
 	private void placeLeafAt(IWorldGenerationReader world, BlockPos pos, Random rand, BaseTreeFeatureConfig config) {
 		if (isAirOrLeaves(world, pos)) {
-			this.setLogState(world, pos, config.leavesProvider.getBlockState(rand, pos).with(LeavesBlock.DISTANCE, 1));
+			this.setLogState(world, pos, UABlocks.RIVER_LEAVES.get().getDefaultState().with(LeavesBlock.DISTANCE, 1));
 		}
 		if (isAir(world, pos.down()) && rand.nextInt(3) == 0 && rand.nextBoolean()) {
 			BlockState state = UABlocks.MULBERRY_VINE.get().getDefaultState().with(BlockMulberryVine.AGE, 4).with(BlockMulberryVine.DOUBLE, rand.nextBoolean());
