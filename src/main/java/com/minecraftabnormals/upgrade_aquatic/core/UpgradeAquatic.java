@@ -28,7 +28,7 @@ import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns
 import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UAFlammables;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -50,13 +50,14 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 @SuppressWarnings("deprecation")
-@Mod(value = Reference.MODID)
+@Mod(value = UpgradeAquatic.MODID)
 public class UpgradeAquatic {
 	public static UpgradeAquatic instance;
 	public static final String NETWORK_PROTOCOL = "1";
-	public static final UARegistryHelper REGISTRY_HELPER = new UARegistryHelper(Reference.MODID);
+	public static final String MODID = "upgrade_aquatic";
+	public static final UARegistryHelper REGISTRY_HELPER = new UARegistryHelper(MODID);
 	
-	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(Reference.MODID, "net"))
+	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(UpgradeAquatic.MODID, "net"))
 		.networkProtocolVersion(() -> NETWORK_PROTOCOL)
 		.clientAcceptedVersions(NETWORK_PROTOCOL::equals)
 		.serverAcceptedVersions(NETWORK_PROTOCOL::equals)

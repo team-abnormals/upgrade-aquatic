@@ -4,14 +4,13 @@ import com.minecraftabnormals.upgrade_aquatic.common.tileentities.TileEntityBedr
 import com.minecraftabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UATileEntities {
 	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
 	

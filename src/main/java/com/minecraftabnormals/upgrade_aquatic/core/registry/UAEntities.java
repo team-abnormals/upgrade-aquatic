@@ -14,7 +14,6 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThr
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -25,7 +24,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UAEntities {
 	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
 	

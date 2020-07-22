@@ -1,7 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.core.events;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.entity.player.ClientPlayerEntity;
@@ -15,7 +15,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, value = Dist.CLIENT)
 public class ClientEvents {
 	
 	@SubscribeEvent

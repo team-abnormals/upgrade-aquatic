@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 import com.minecraftabnormals.upgrade_aquatic.client.model.ModelFlare;
 import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.RenderLayerFlareEyes;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityFlare;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -23,7 +23,7 @@ public class FlareRenderer extends MobRenderer<EntityFlare, ModelFlare<EntityFla
 
 	@Override
 	public ResourceLocation getEntityTexture(EntityFlare entity) {
-		return new ResourceLocation(Reference.MODID, "textures/entity/flare/flare.png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/flare/flare.png");
 	}
 	
 	@Override

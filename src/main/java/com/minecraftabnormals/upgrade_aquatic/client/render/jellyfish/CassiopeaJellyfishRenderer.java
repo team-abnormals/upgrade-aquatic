@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish;
 import com.minecraftabnormals.upgrade_aquatic.client.model.jellyfish.ModelCassiopeaJellyfish;
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.layer.JellyfishEmissiveLayer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.EntityCassiopeaJellyfish;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -29,12 +29,12 @@ public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<Entity
 
 	@Override
 	public ResourceLocation getEntityTexture(EntityCassiopeaJellyfish jellyfish) {
-		return new ResourceLocation(Reference.MODID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish.png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
 	
 	@Override
 	public ResourceLocation getOverlayTexture(EntityCassiopeaJellyfish jellyfish) {
-		return new ResourceLocation(Reference.MODID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
 	}
 	
 	@Override

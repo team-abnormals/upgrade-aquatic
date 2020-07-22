@@ -6,9 +6,9 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityLionfish;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityPike;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -62,7 +62,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
 public class EntityEvents {
 	
 	@SubscribeEvent(priority = EventPriority.LOWEST)

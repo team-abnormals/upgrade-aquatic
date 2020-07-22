@@ -7,7 +7,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 import com.minecraftabnormals.upgrade_aquatic.client.model.ModelNautilus;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityNautilus;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -51,7 +51,7 @@ public class NautilusRenderer extends MobRenderer<EntityNautilus, ModelNautilus<
 				}
 			}
 		}
-		return new ResourceLocation(Reference.MODID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
 	}
 	
 	@Override

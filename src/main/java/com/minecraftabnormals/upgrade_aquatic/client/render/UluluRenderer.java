@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 
 import com.minecraftabnormals.upgrade_aquatic.client.model.ModelUlulu;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityUlulu;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -28,7 +28,7 @@ public class UluluRenderer extends MobRenderer<EntityUlulu, ModelUlulu<EntityUlu
 
 	@Override
 	public ResourceLocation getEntityTexture(EntityUlulu entity) {
-		return new ResourceLocation(Reference.MODID, "textures/entity/ululu/ululu_dry.png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/ululu/ululu_dry.png");
 	}
 	
 	protected void preRenderCallback(EntityUlulu entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {

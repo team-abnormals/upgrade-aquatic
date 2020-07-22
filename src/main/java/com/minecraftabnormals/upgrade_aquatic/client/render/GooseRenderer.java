@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 
 import com.minecraftabnormals.upgrade_aquatic.client.model.ModelGoose;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityGoose;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -20,7 +20,7 @@ public class GooseRenderer extends MobRenderer<EntityGoose, ModelGoose<EntityGoo
 	
 	@Override
 	public ResourceLocation getEntityTexture(EntityGoose entity) {
-		return new ResourceLocation(Reference.MODID, "textures/entity/goose.png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/goose.png");
 	}
 	
 	@Override

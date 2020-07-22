@@ -44,7 +44,6 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.trees.RiverTree;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UAProperties;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.abnormals_core.common.blocks.AbnormalsLadderBlock;
 import com.teamabnormals.abnormals_core.common.blocks.AbnormalsStairsBlock;
@@ -100,7 +99,7 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
 @SuppressWarnings("deprecation")
-@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
 	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
 

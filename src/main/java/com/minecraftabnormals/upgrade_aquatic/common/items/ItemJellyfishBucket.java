@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish.BucketData;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.other.JellyfishRegistry;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
 import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 
@@ -67,7 +67,7 @@ public class ItemJellyfishBucket extends BucketItem {
 		CompoundNBT compoundnbt = stack.getTag();
 		if(compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 			BucketData bucketData = BucketData.read(compoundnbt.getCompound("JellyfishTag"));
-			Entity entity = pos != null ? ForgeRegistries.ENTITIES.getValue(new ResourceLocation(Reference.MODID + ":" + bucketData.entityId)).spawn(world, stack, null, pos, SpawnReason.BUCKET, true, false) : ForgeRegistries.ENTITIES.getValue(new ResourceLocation(Reference.MODID + ":" + bucketData.entityId)).create(world);
+			Entity entity = pos != null ? ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + bucketData.entityId)).spawn(world, stack, null, pos, SpawnReason.BUCKET, true, false) : ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + bucketData.entityId)).create(world);
 			AbstractEntityJellyfish jellyfish = entity instanceof AbstractEntityJellyfish ? (AbstractEntityJellyfish) entity : null;
 			
 			if(jellyfish == null) {

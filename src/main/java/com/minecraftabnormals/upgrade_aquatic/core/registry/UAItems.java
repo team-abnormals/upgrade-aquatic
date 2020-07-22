@@ -11,7 +11,6 @@ import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UAFoods;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
 import com.teamabnormals.abnormals_core.common.items.MobBucketItem;
 
 import net.minecraft.fluid.Fluids;
@@ -25,7 +24,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UAItems {
 	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
 	

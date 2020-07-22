@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish;
 import com.minecraftabnormals.upgrade_aquatic.client.model.jellyfish.ModelImmortalJellyfish;
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.layer.JellyfishEmissiveLayer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.EntityImmortalJellyfish;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -18,12 +18,12 @@ public class ImmortalJellyfishRenderer<I extends EntityImmortalJellyfish> extend
 	
 	@Override
 	public ResourceLocation getEntityTexture(I jellyfish) {
-		return new ResourceLocation(Reference.MODID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish.png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
 	
 	@Override
 	public ResourceLocation getOverlayTexture(I jellyfish) {
-		return new ResourceLocation(Reference.MODID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
 	}
 	
 	@Override

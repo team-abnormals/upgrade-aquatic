@@ -1,6 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.client.particle;
 
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.particles.BasicParticleType;
@@ -32,7 +33,7 @@ public class UAParticles {
 	public static final BasicParticleType RED_JELLY_BLOB = createBasicParticleType(false, "red_jelly_blob");
 	public static final BasicParticleType WHITE_JELLY_BLOB = createBasicParticleType(false, "white_jelly_blob");
 	
-	@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegisterParticleTypes {
 		
 		@SubscribeEvent
@@ -47,7 +48,7 @@ public class UAParticles {
 		
 	}
 	
-	@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegisterParticleFactories {
 		
 		@SubscribeEvent
@@ -77,7 +78,7 @@ public class UAParticles {
 	
 	private static BasicParticleType createBasicParticleType(boolean alwaysShow, String name) {
 		BasicParticleType particleType = new BasicParticleType(alwaysShow);
-		particleType.setRegistryName(Reference.MODID, name);
+		particleType.setRegistryName(UpgradeAquatic.MODID, name);
 		return particleType;
 	}
 }

@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render.overlay;
 import com.minecraftabnormals.upgrade_aquatic.client.UARenderTypes;
 import com.minecraftabnormals.upgrade_aquatic.client.model.ModelUlulu;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityUlulu;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.teamabnormals.abnormals_core.client.ClientInfo;
@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderLayerUluluEyes<T extends EntityUlulu, M extends ModelUlulu<T>> extends LayerRenderer<T, M> {
 
-	private static final ResourceLocation EYES_LAYER = new ResourceLocation(Reference.MODID, "textures/entity/ululu/ululu_emissive.png");
+	private static final ResourceLocation EYES_LAYER = new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/ululu/ululu_emissive.png");
 
 	
 	public RenderLayerUluluEyes(IEntityRenderer<T, M> renderer) {

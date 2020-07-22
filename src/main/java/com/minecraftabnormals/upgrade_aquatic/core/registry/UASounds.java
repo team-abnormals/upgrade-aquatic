@@ -2,7 +2,6 @@ package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.util.SoundEvent;
@@ -10,7 +9,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = Reference.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UASounds {
 	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
 	

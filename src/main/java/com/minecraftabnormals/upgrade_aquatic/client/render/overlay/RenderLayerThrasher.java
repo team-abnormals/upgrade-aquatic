@@ -5,7 +5,7 @@ import com.minecraftabnormals.upgrade_aquatic.client.UARenderTypes;
 import com.minecraftabnormals.upgrade_aquatic.client.model.ModelThrasher;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.teamabnormals.abnormals_core.client.ClientInfo;
@@ -20,8 +20,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class RenderLayerThrasher<T extends EntityThrasher, M extends ModelThrasher<T>> extends LayerRenderer<T, M> {
-	private static final ResourceLocation THRASHER_FROST = new ResourceLocation(Reference.MODID, "textures/entity/thrasher/thrasher_emissive.png");
-	private static final ResourceLocation GREAT_THRASHER_FROST = new ResourceLocation(Reference.MODID, "textures/entity/thrasher/great_thrasher_emissive.png");
+	private static final ResourceLocation THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/thrasher/thrasher_emissive.png");
+	private static final ResourceLocation GREAT_THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/thrasher/great_thrasher_emissive.png");
 	
 	public RenderLayerThrasher(IEntityRenderer<T, M> renderer) {
 		super(renderer);

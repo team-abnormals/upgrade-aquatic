@@ -3,8 +3,8 @@ package com.minecraftabnormals.upgrade_aquatic.client.tileentity;
 import com.minecraftabnormals.upgrade_aquatic.client.model.ModelElderEye;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.BlockElderEye;
 import com.minecraftabnormals.upgrade_aquatic.common.tileentities.TileEntityElderEye;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
@@ -21,8 +21,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class TileEntityElderEyeRenderer extends TileEntityRenderer<TileEntityElderEye> {
-	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/tile/guardian_eye.png");
-	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(Reference.MODID + ":textures/tile/guardian_eye_dim.png");
+	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(UpgradeAquatic.MODID + ":textures/tile/guardian_eye.png");
+	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(UpgradeAquatic.MODID + ":textures/tile/guardian_eye_dim.png");
 	private ModelElderEye model;
 	
 	public TileEntityElderEyeRenderer(TileEntityRendererDispatcher renderDispatcher) {

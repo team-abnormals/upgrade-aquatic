@@ -4,7 +4,7 @@ import com.minecraftabnormals.upgrade_aquatic.client.model.ModelPike;
 import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.RenderLayerGlowingPike;
 import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.RenderLayerPikeCarriedItem;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityPike;
-import com.minecraftabnormals.upgrade_aquatic.core.util.Reference;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -26,7 +26,7 @@ public class PikeRenderer extends MobRenderer<EntityPike, ModelPike<EntityPike>>
 
 	@Override
 	public ResourceLocation getEntityTexture(EntityPike entity) {
-		return new ResourceLocation(Reference.MODID, "textures/entity/pike/pike_" + entity.getPikeType() + ".png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/pike/pike_" + entity.getPikeType() + ".png");
 	}
 	
 	@Override
