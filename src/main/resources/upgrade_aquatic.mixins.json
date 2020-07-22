@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "com.teamabnormals.upgrade_aquatic.core.mixin",
+  "package": "com.minecraftabnormals.upgrade_aquatic.core.mixin",
   "compatibilityLevel": "JAVA_8",
   "minVersion": "0.8",
   "refmap": "upgrade_aquatic.refmap.json",
