@@ -1,0 +1,10 @@
+{
+    "parent": "block/orientable_with_bottom",
+    "textures": {
+        "particle": "upgrade_aquatic:block/driftwood_beehive_side",
+        "bottom": "upgrade_aquatic:block/driftwood_beehive_end",
+        "top": "upgrade_aquatic:block/driftwood_beehive_end",
+        "front": "upgrade_aquatic:block/driftwood_beehive_front",
+        "side": "upgrade_aquatic:block/driftwood_beehive_side"
+    }
+}

@@ -349,6 +349,9 @@
   "block.upgrade_aquatic.driftwood_ladder": "Driftwood Ladder",
   "block.upgrade_aquatic.driftwood_sign": "Driftwood Sign",
   "block.upgrade_aquatic.driftwood_wall_sign": "Driftwood Wall Sign",
+  "block.upgrade_aquatic.driftwood_chest": "Driftwood Chest",
+  "block.upgrade_aquatic.driftwood_trapped_chest": "Driftwood Trapped Chest",
+  "block.upgrade_aquatic.driftwood_beehive": "Driftwood Beehive",
   
   "block.upgrade_aquatic.river_leaves": "River Leaves",
   "block.upgrade_aquatic.river_sapling": "River Sapling",
@@ -374,6 +377,7 @@
   "block.upgrade_aquatic.river_wall_sign": "River Wall Sign",
   "block.upgrade_aquatic.river_chest": "River Chest",
   "block.upgrade_aquatic.river_trapped_chest": "River Trapped Chest",
+  "block.upgrade_aquatic.river_beehive": "River Beehive",
   
   "block.upgrade_aquatic.flowering_rush": "Flowering Rush",
   "block.upgrade_aquatic.mulberry_vine": "Mulberry Vine",

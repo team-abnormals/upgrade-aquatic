@@ -6,5 +6,8 @@
   "refmap": "upgrade_aquatic.refmap.json",
   "mixins": [
     "BubbleColumnMixin"
-  ]
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
 }
