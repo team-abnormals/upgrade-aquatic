@@ -3,77 +3,64 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
+        maven { url = 'https://dist.creeper.host/Sponge/maven' }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
 plugins {
   id "com.wynprice.cursemaven" version "2.1.1"
 }
 apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
+
+mixin {
+    add sourceSets.main, "upgrade_aquatic.refmap.json"
+}
 
 version = '2.0.0'
-group = 'com.mcabnormals.upgrade_aquatic' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'com.minecraftabnormals.upgrade_aquatic'
 archivesBaseName = 'Upgrade-Aquatic-1.16.1'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
     mappings channel: 'snapshot', version: '20200707-1.16.1'
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
+            arg "-mixin.config=upgrade_aquatic.mixins.json"
             mods {
-                examplemod {
+                upgrade_aquatic {
                     source sourceSets.main
                 }
             }
         }
-
         server {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
+            arg "-mixin.config=nether_extension.mixins.json"
             mods {
-                examplemod {
+                upgrade_aquatic {
                     source sourceSets.main
                 }
             }
         }
-
         data {
             workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/')
-
+            args '--mod', 'upgrade_aquatic', '--all', '--output', file('src/generated/resources/')
             mods {
-                examplemod {
+                upgrade_aquatic {
                     source sourceSets.main
                 }
             }
@@ -81,40 +68,21 @@ minecraft {
     }
 }
 
-dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.1-32.0.57'
-    implementation fg.deobf("curse.maven:abnormals-core:2989106")
-}
-
-// Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
-        attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        attributes(["Specification-Title": "Upgrade Aquatic",
+                    "Specification-Vendor": "Team Abnormals",
+                    "Specification-Version": "1",
+                    "Implementation-Title": project.name,
+                    "Implementation-Version": "${version}",
+                    "Implementation-Vendor": "Team Abnormals",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                    "MixinConfigs": "upgrade_aquatic.mixins.json"
         ])
     }
 }
 
-def reobfFile = file("$buildDir/reobfJar/output.jar")
-def reobfArtifact = artifacts.add('default', reobfFile) {
-    type 'jar'
-    builtBy 'reobfJar'
-}
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact reobfArtifact
-        }
-    }
-    repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.16.1-32.0.75'
+    implementation fg.deobf("curse.maven:abnormals-core:2989106")
 }
