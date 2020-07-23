@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.layer;
 
 import com.minecraftabnormals.upgrade_aquatic.client.UARenderTypes;
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.AbstractJellyfishRenderer;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.teamabnormals.abnormals_core.client.ClientInfo;
@@ -15,7 +15,7 @@ import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.math.MathHelper;
 
-public class JellyfishEmissiveLayer<T extends AbstractEntityJellyfish, M extends EndimatorEntityModel<T>> extends LayerRenderer<T, M> {
+public class JellyfishEmissiveLayer<T extends AbstractJellyfishEntity, M extends EndimatorEntityModel<T>> extends LayerRenderer<T, M> {
 	private final AbstractJellyfishRenderer<T> jellyfishRenderer;
 	
 	public JellyfishEmissiveLayer(IEntityRenderer<T, M> renderer, AbstractJellyfishRenderer<T> jellyfishRenderer) {

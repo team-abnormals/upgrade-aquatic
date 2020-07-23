@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.api.EndimatedMonsterEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityLionfish;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFindDetectionPointGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFireSonarGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
@@ -78,7 +78,7 @@ public class EntityThrasher extends EndimatedMonsterEntity {
 		if(entity instanceof PlayerEntity && !(((PlayerEntity)entity).isCreative() || ((PlayerEntity)entity).isSpectator())) {
 			return entity.isInWater();
 		}
-		return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof EntityThrasher) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof EntityLionfish)) && entity.isInWater();
+		return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof EntityThrasher) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof LionfishEntity)) && entity.isInWater();
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
 	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE));

@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
 import java.util.EnumSet;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
 import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
@@ -11,10 +11,10 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.RayTraceResult.Type;
 
 public class JellyfishBoostGoal extends Goal {
-	private final AbstractEntityJellyfish jellyfish;
+	private final AbstractJellyfishEntity jellyfish;
 	private final Endimation boostAnimation;
 	
-	public JellyfishBoostGoal(AbstractEntityJellyfish jellyfish, Endimation boostAnimation) {
+	public JellyfishBoostGoal(AbstractJellyfishEntity jellyfish, Endimation boostAnimation) {
 		this.jellyfish = jellyfish;
 		this.boostAnimation = boostAnimation;
 		this.setMutexFlags(EnumSet.of(Flag.MOVE));

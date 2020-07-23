@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.common.items.InjectedBlockItem;
-import com.minecraftabnormals.upgrade_aquatic.common.items.ItemJellyfishSpawnEgg;
+import com.minecraftabnormals.upgrade_aquatic.common.items.JellyfishSpawnEggItem;
 import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.block.Block;
@@ -20,7 +20,7 @@ public class UARegistryHelper extends RegistryHelper {
 	}
 	
 	public RegistryObject<Item> createJellyfishSpawnEggItem(String entityName, int primaryColor, int secondaryColor) {
-		RegistryObject<Item> spawnEgg = this.getDeferredItemRegister().register(entityName + "_spawn_egg", () -> new ItemJellyfishSpawnEgg(primaryColor, secondaryColor, new Item.Properties().group(ItemGroup.MISC)));
+		RegistryObject<Item> spawnEgg = this.getDeferredItemRegister().register(entityName + "_spawn_egg", () -> new JellyfishSpawnEggItem(primaryColor, secondaryColor, new Item.Properties().group(ItemGroup.MISC)));
 		this.spawnEggs.add(spawnEgg);
 		return spawnEgg;
 	}

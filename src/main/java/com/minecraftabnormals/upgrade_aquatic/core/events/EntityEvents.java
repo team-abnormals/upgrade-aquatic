@@ -2,9 +2,9 @@ package com.minecraftabnormals.upgrade_aquatic.core.events;
 
 import com.minecraftabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.minecraftabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
-import com.minecraftabnormals.upgrade_aquatic.common.blocks.BlockBedroll;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityLionfish;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityPike;
+import com.minecraftabnormals.upgrade_aquatic.common.blocks.BedrollBlock;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
@@ -74,9 +74,9 @@ public class EntityEvents {
 			((CreatureEntity) entity).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreatureEntity)entity, TurtleEntity.class, 6.0F, 1.0D, 1.2D));
 		}
 		if(entity instanceof AbstractFishEntity) {
-			((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, EntityPike.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_HIDING_IN_PICKERELWEED::test));
+			((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, PikeEntity.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_HIDING_IN_PICKERELWEED::test));
 			if(entity instanceof TropicalFishEntity) {
-				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, EntityLionfish.class, 8.0F, 1.6D, 1.4D, EntityPredicates.IS_ALIVE::test));
+				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, LionfishEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.IS_ALIVE::test));
 			}
 		}
 		if(entity instanceof WaterMobEntity && !(entity instanceof IMob)) {
@@ -108,7 +108,7 @@ public class EntityEvents {
 	public static void onPlayerSleep(PlayerSleepInBedEvent event) {
 		PlayerEntity player = event.getPlayer();
 		BlockState state = player.getEntityWorld().getBlockState(event.getPos());
-		if (event.getResultStatus() == null && state.getFluidState().getLevel() == 8 && state.getBlock() instanceof BlockBedroll) {
+		if (event.getResultStatus() == null && state.getFluidState().getLevel() == 8 && state.getBlock() instanceof BedrollBlock) {
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
 				if(!player.world.isRemote()) {
@@ -151,7 +151,7 @@ public class EntityEvents {
 		PlayerEntity player = event.getPlayer();
 		BlockPos pos = event.getNewSpawn();
 		if(player != null && pos != null) {
-			if(player.getEntityWorld().getBlockState(pos).getBlock() instanceof BlockBedroll) {
+			if(player.getEntityWorld().getBlockState(pos).getBlock() instanceof BedrollBlock) {
 				event.setCanceled(true);
 			}
 		}

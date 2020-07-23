@@ -1,7 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render;
 
-import com.minecraftabnormals.upgrade_aquatic.client.model.ModelLionfish;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityLionfish;
+import com.minecraftabnormals.upgrade_aquatic.client.model.LionfishModel;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
@@ -14,19 +14,19 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class LionfishRenderer extends MobRenderer<EntityLionfish, ModelLionfish<EntityLionfish>> {
+public class LionfishRenderer extends MobRenderer<LionfishEntity, LionfishModel<LionfishEntity>> {
 
 	public LionfishRenderer(EntityRendererManager manager) {
-		super(manager, new ModelLionfish<>(), 0.45F);
+		super(manager, new LionfishModel<>(), 0.45F);
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(EntityLionfish entity) {
+	public ResourceLocation getEntityTexture(LionfishEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/lionfish.png");
 	}
 	
 	@Override
-	protected void applyRotations(EntityLionfish entityLiving, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void applyRotations(LionfishEntity entityLiving, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.applyRotations(entityLiving, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.0F * MathHelper.sin(0.6F * ageInTicks);
 		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));

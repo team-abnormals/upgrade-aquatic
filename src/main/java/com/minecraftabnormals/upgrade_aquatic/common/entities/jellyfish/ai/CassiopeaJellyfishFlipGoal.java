@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
 import java.util.EnumSet;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.EntityCassiopeaJellyfish;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.CassiopeaJellyfishEntity;
 
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.tags.FluidTags;
@@ -10,11 +10,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class CassiopeaJellyfishFlipGoal extends Goal {
-	private final EntityCassiopeaJellyfish jellyfish;
+	private final CassiopeaJellyfishEntity jellyfish;
 	private World world;
 	private int ticksPassed;
 	
-	public CassiopeaJellyfishFlipGoal(EntityCassiopeaJellyfish jellyfish) {
+	public CassiopeaJellyfishFlipGoal(CassiopeaJellyfishEntity jellyfish) {
 		this.jellyfish = jellyfish;
 		this.world = jellyfish.world;
 		this.setMutexFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));

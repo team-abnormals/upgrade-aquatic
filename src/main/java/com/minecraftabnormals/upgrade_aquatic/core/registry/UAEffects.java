@@ -1,9 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
-import com.minecraftabnormals.upgrade_aquatic.common.effects.EffectInsomnia;
-import com.minecraftabnormals.upgrade_aquatic.common.effects.EffectRepellence;
-import com.minecraftabnormals.upgrade_aquatic.common.effects.EffectRestfulness;
-import com.minecraftabnormals.upgrade_aquatic.common.effects.EffectVibing;
+import com.minecraftabnormals.upgrade_aquatic.common.effects.InsomniaEffect;
+import com.minecraftabnormals.upgrade_aquatic.common.effects.RepellenceEffect;
+import com.minecraftabnormals.upgrade_aquatic.common.effects.RestfulnessEffect;
+import com.minecraftabnormals.upgrade_aquatic.common.effects.VibingEffect;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 
 import net.minecraft.item.Items;
@@ -20,10 +20,10 @@ public class UAEffects {
 	public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, UpgradeAquatic.MODID);
 	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, UpgradeAquatic.MODID);
 	
-	public static final RegistryObject<Effect> INSOMNIA    = EFFECTS.register("insomnia", EffectInsomnia::new);
-	public static final RegistryObject<Effect> RESTFULNESS = EFFECTS.register("restfulness", EffectRestfulness::new);
-	public static final RegistryObject<Effect> REPELLENCE  = EFFECTS.register("repellence", EffectRepellence::new);
-    public static final RegistryObject<Effect> VIBING      = EFFECTS.register("vibing", EffectVibing::new);
+	public static final RegistryObject<Effect> INSOMNIA    = EFFECTS.register("insomnia", InsomniaEffect::new);
+	public static final RegistryObject<Effect> RESTFULNESS = EFFECTS.register("restfulness", RestfulnessEffect::new);
+	public static final RegistryObject<Effect> REPELLENCE  = EFFECTS.register("repellence", RepellenceEffect::new);
+    public static final RegistryObject<Effect> VIBING      = EFFECTS.register("vibing", VibingEffect::new);
 	
 	public static final RegistryObject<Potion> INSOMNIA_NORMAL    = POTIONS.register("insomnia", () -> new Potion(new EffectInstance(INSOMNIA.get())));
 	public static final RegistryObject<Potion> INSOMNIA_STRONG    = POTIONS.register("insomnia_strong", () -> new Potion(new EffectInstance(INSOMNIA.get(), 0, 1)));

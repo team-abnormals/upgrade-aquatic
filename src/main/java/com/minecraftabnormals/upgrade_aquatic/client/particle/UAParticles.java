@@ -53,25 +53,25 @@ public class UAParticles {
 		
 		@SubscribeEvent
 		public static void registerParticleTypes(ParticleFactoryRegisterEvent event) {
-			Minecraft.getInstance().particles.registerFactory(PRISMARINE_SHOWER, ParticlePrismarineShower.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(ELDER_PRISMARINE_SHOWER, ParticleElderPrismarineShower.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(SPECTRAL_CONSUME, ParticleSpectralConsume.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(PINK_JELLY_FLAME, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(PURPLE_JELLY_FLAME, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(BLUE_JELLY_FLAME, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(GREEN_JELLY_FLAME, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(YELLOW_JELLY_FLAME, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(ORANGE_JELLY_FLAME, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(RED_JELLY_FLAME, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(WHITE_JELLY_FLAME, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(PINK_JELLY_BLOB, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(PURPLE_JELLY_BLOB, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(BLUE_JELLY_BLOB, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(GREEN_JELLY_BLOB, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(YELLOW_JELLY_BLOB, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(ORANGE_JELLY_BLOB, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(RED_JELLY_BLOB, ParticleJellyTorch.Factory::new);
-			Minecraft.getInstance().particles.registerFactory(WHITE_JELLY_BLOB, ParticleJellyTorch.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(PRISMARINE_SHOWER, PrismarineShowerParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(ELDER_PRISMARINE_SHOWER, ElderPrismarineShowerParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(SPECTRAL_CONSUME, SpectralConsumeParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(PINK_JELLY_FLAME, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(PURPLE_JELLY_FLAME, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(BLUE_JELLY_FLAME, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(GREEN_JELLY_FLAME, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(YELLOW_JELLY_FLAME, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(ORANGE_JELLY_FLAME, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(RED_JELLY_FLAME, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(WHITE_JELLY_FLAME, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(PINK_JELLY_BLOB, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(PURPLE_JELLY_BLOB, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(BLUE_JELLY_BLOB, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(GREEN_JELLY_BLOB, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(YELLOW_JELLY_BLOB, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(ORANGE_JELLY_BLOB, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(RED_JELLY_BLOB, JellyTorchParticle.Factory::new);
+			Minecraft.getInstance().particles.registerFactory(WHITE_JELLY_BLOB, JellyTorchParticle.Factory::new);
 		}
 		
 	}

@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
-import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.FeatureRiverTree;
+import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.RiverTreeFeature;
 
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
@@ -16,7 +16,7 @@ public class RiverTree extends Tree {
 	@Nullable
 	@Override
 	protected ConfiguredFeature<BaseTreeFeatureConfig, ?> getTreeFeature(Random randomIn, boolean p_225546_2_) {
-		return UAFeatures.RIVER_TREE.get().withConfiguration(FeatureRiverTree.RIVER_TREE_CONFIG);
+		return UAFeatures.RIVER_TREE.get().withConfiguration(RiverTreeFeature.RIVER_TREE_CONFIG);
 	}
 	
 }

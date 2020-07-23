@@ -1,7 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render;
 
-import com.minecraftabnormals.upgrade_aquatic.client.model.ModelThrasher;
-import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.RenderLayerThrasher;
+import com.minecraftabnormals.upgrade_aquatic.client.model.ThrasherModel;
+import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.ThrasherRenderLayer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -13,11 +13,11 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GreatThrasherRenderer extends MobRenderer<EntityGreatThrasher, ModelThrasher<EntityGreatThrasher>>{
+public class GreatThrasherRenderer extends MobRenderer<EntityGreatThrasher, ThrasherModel<EntityGreatThrasher>>{
 
 	public GreatThrasherRenderer(EntityRendererManager renderer) {
-		super(renderer, new ModelThrasher<>(), 1.575F);
-		this.addLayer(new RenderLayerThrasher<>(this));
+		super(renderer, new ThrasherModel<>(), 1.575F);
+		this.addLayer(new ThrasherRenderLayer<>(this));
 	}
 
 	@Override

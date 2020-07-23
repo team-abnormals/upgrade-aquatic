@@ -1,7 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render;
 
 import com.minecraftabnormals.upgrade_aquatic.client.UARenderTypes;
-import com.minecraftabnormals.upgrade_aquatic.client.model.ModelSonar;
+import com.minecraftabnormals.upgrade_aquatic.client.model.SonarWaveModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
 public class SonarWaveRenderer extends EntityRenderer<EntitySonarWave> {
-	private final ModelSonar SONAR_MODEL = new ModelSonar();
+	private final SonarWaveModel SONAR_MODEL = new SonarWaveModel();
 	
 	public SonarWaveRenderer(EntityRendererManager renderManager) {
 		super(renderManager);

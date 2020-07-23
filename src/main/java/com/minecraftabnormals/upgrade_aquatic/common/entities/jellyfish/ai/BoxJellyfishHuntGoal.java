@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
 import java.util.EnumSet;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.EntityBoxJellyfish;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.BoxJellyfishEntity;
 import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 
 import net.minecraft.entity.LivingEntity;
@@ -11,10 +11,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 
 public class BoxJellyfishHuntGoal extends Goal {
-	private final EntityBoxJellyfish hunter;
+	private final BoxJellyfishEntity hunter;
 	private int noSightTicks;
 	
-	public BoxJellyfishHuntGoal(EntityBoxJellyfish hunter) {
+	public BoxJellyfishHuntGoal(BoxJellyfishEntity hunter) {
 		this.hunter = hunter;
 		this.setMutexFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
 	}
@@ -60,7 +60,7 @@ public class BoxJellyfishHuntGoal extends Goal {
 		}
 		
 		if(this.hunter.isNoEndimationPlaying() && Math.abs(rotations[0] - this.hunter.lockedRotations[0]) < 7.5F) {
-			NetworkUtil.setPlayingAnimationMessage(this.hunter, EntityBoxJellyfish.SWIM_ANIMATION);
+			NetworkUtil.setPlayingAnimationMessage(this.hunter, BoxJellyfishEntity.SWIM_ANIMATION);
 		}
 	}
 }

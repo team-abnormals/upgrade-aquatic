@@ -12,21 +12,21 @@ import com.minecraftabnormals.upgrade_aquatic.client.render.UluluRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.BoxJellyfishRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.CassiopeaJellyfishRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.ImmortalJellyfishRenderer;
-import com.minecraftabnormals.upgrade_aquatic.client.tileentity.TileEntityElderEyeRenderer;
-import com.minecraftabnormals.upgrade_aquatic.common.network.MessageRotateJellyfish;
+import com.minecraftabnormals.upgrade_aquatic.client.tileentity.ElderEyeTileEntityRenderer;
+import com.minecraftabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.minecraftabnormals.upgrade_aquatic.common.world.UAWorldGen;
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.minecraftabnormals.upgrade_aquatic.core.config.Config;
 import com.minecraftabnormals.upgrade_aquatic.core.config.ConfigHelper;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UAColors;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UACompostables;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UAEntitySpawns;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UAFlammables;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UARenderLayers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UATileEntities;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UAColors;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UACompostables;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UADispenseBehaviorRegistry;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UAEntitySpawns;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UAFlammables;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.other.UARenderLayers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 
 
@@ -117,7 +117,7 @@ public class UpgradeAquatic {
 		});
 
 		//Tile Entities
-		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), TileEntityElderEyeRenderer::new);
+		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), ElderEyeTileEntityRenderer::new);
 
 		//Entities
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.NAUTILUS.get(), NautilusRenderer::new);
@@ -147,9 +147,9 @@ public class UpgradeAquatic {
 	void setupMessages() {
 		int id = -1;
 		
-		CHANNEL.messageBuilder(MessageRotateJellyfish.class, id++)
-		.encoder(MessageRotateJellyfish::serialize).decoder(MessageRotateJellyfish::deserialize)
-		.consumer(MessageRotateJellyfish::handle)
+		CHANNEL.messageBuilder(RotateJellyfishMessage.class, id++)
+		.encoder(RotateJellyfishMessage::serialize).decoder(RotateJellyfishMessage::deserialize)
+		.consumer(RotateJellyfishMessage::handle)
 		.add();
 	}
 }

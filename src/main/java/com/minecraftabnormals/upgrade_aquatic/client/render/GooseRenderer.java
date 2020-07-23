@@ -1,7 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render;
 
-import com.minecraftabnormals.upgrade_aquatic.client.model.ModelGoose;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityGoose;
+import com.minecraftabnormals.upgrade_aquatic.client.model.GooseModel;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.GooseEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -12,19 +12,19 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GooseRenderer extends MobRenderer<EntityGoose, ModelGoose<EntityGoose>> {
+public class GooseRenderer extends MobRenderer<GooseEntity, GooseModel<GooseEntity>> {
 
 	public GooseRenderer(EntityRendererManager manager) {
-		super(manager, new ModelGoose<>(), 0.45F);
+		super(manager, new GooseModel<>(), 0.45F);
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(EntityGoose entity) {
+	public ResourceLocation getEntityTexture(GooseEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/goose.png");
 	}
 	
 	@Override
-	protected float handleRotationFloat(EntityGoose livingBase, float partialTicks) {
+	protected float handleRotationFloat(GooseEntity livingBase, float partialTicks) {
 		float f = MathHelper.lerp(partialTicks, livingBase.oFlap, livingBase.wingRotation);
 		float f1 = MathHelper.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.destPos);
 		return (MathHelper.sin(f) + 1.0F) * f1;

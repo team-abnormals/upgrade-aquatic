@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 import java.util.EnumSet;
 import java.util.Random;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractEntityJellyfish;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
 import com.teamabnormals.abnormals_core.core.utils.MathUtils;
@@ -15,12 +15,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult.Type;
 
 public class JellyfishSwinIntoDirectionGoal extends Goal {
-	private final AbstractEntityJellyfish jellyfish;
+	private final AbstractJellyfishEntity jellyfish;
 	private final Endimation swimAnimation;
 	private float yaw, pitch;
 	private int ticksAtRotation;
 	
-	public JellyfishSwinIntoDirectionGoal(AbstractEntityJellyfish jellyfish, Endimation swimAnimation) {
+	public JellyfishSwinIntoDirectionGoal(AbstractJellyfishEntity jellyfish, Endimation swimAnimation) {
 		this.jellyfish = jellyfish;
 		this.swimAnimation = swimAnimation;
 		this.setMutexFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));

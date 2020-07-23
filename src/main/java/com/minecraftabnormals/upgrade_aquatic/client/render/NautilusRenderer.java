@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.minecraftabnormals.upgrade_aquatic.client.model.ModelNautilus;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.EntityNautilus;
+import com.minecraftabnormals.upgrade_aquatic.client.model.NautilusModel;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.NautilusEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class NautilusRenderer extends MobRenderer<EntityNautilus, ModelNautilus<EntityNautilus>> {
+public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<NautilusEntity>> {
 	private static final Map<List<String>, String> SKINS = Util.make(Maps.newHashMap(), (skins) -> {
 		skins.put(Arrays.asList("smelly", "thefaceofgaming"), "smelly");
 		skins.put(Arrays.asList("abnormal", "abnautilus", "abnortilus", "mca"), "mca");
@@ -36,11 +36,11 @@ public class NautilusRenderer extends MobRenderer<EntityNautilus, ModelNautilus<
 	});
 
 	public NautilusRenderer(EntityRendererManager renderManager) {
-		super(renderManager, new ModelNautilus<>(), 0.5F);
+		super(renderManager, new NautilusModel<>(), 0.5F);
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(EntityNautilus nautilus) {
+	public ResourceLocation getEntityTexture(NautilusEntity nautilus) {
 		String textureSuffix = "";
 		
 		if(nautilus.hasCustomName()) {
@@ -55,7 +55,7 @@ public class NautilusRenderer extends MobRenderer<EntityNautilus, ModelNautilus<
 	}
 	
 	@Override
-	protected void applyRotations(EntityNautilus nautilus, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void applyRotations(NautilusEntity nautilus, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.applyRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 0.3F * MathHelper.sin(0.6F * ageInTicks);
 		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));
