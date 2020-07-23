@@ -349,6 +349,9 @@
   "block.upgrade_aquatic.driftwood_ladder": "Escalera de deriva",
   "block.upgrade_aquatic.driftwood_sign": "Cartel de deriva",
   "block.upgrade_aquatic.driftwood_wall_sign": "Cartel de deriva en pared",
+  "block.upgrade_aquatic.driftwood_chest": "Cofre de deriva",
+  "block.upgrade_aquatic.driftwood_trapped_chest": "Cofre con trampa de deriva",
+  "block.upgrade_aquatic.driftwood_beehive": "Apiario de deriva",
   
   "block.upgrade_aquatic.river_leaves": "Hojas fluviales",
   "block.upgrade_aquatic.river_sapling": "Brote fluvial",
@@ -374,6 +377,7 @@
   "block.upgrade_aquatic.river_wall_sign": "Cartel fluvial en pared",
   "block.upgrade_aquatic.river_chest": "Cofre fluvial",
   "block.upgrade_aquatic.river_trapped_chest": "Cofre con trampa fluvial",
+  "block.upgrade_aquatic.river_beehive": "Apiario fluvial",
   
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
   "block.upgrade_aquatic.mulberry_vine": "Morera",
