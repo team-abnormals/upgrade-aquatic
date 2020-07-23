@@ -26,6 +26,7 @@ import com.minecraftabnormals.upgrade_aquatic.core.other.UAFlammables;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UARenderLayers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 
@@ -113,6 +114,7 @@ public class UpgradeAquatic {
 	private void setupClient(final FMLClientSetupEvent event) {
 		DeferredWorkQueue.runLater(() -> {
 			UAColors.registerBlockColors();
+			UAItems.setupItemPropertes();
 			UARenderLayers.setBlockRenderLayers();
 		});
 
