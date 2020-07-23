@@ -1,14 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.items.BoiledPickerelweedItem;
-import com.minecraftabnormals.upgrade_aquatic.common.items.JellyfishBucketItem;
-import com.minecraftabnormals.upgrade_aquatic.common.items.MulberryJamBottleItem;
-import com.minecraftabnormals.upgrade_aquatic.common.items.PikeBucketItem;
-import com.minecraftabnormals.upgrade_aquatic.common.items.PrismarineRodItem;
-import com.minecraftabnormals.upgrade_aquatic.common.items.SquidBucketItem;
+import com.minecraftabnormals.upgrade_aquatic.common.items.*;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAFoods;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.abnormals_core.common.items.MobBucketItem;

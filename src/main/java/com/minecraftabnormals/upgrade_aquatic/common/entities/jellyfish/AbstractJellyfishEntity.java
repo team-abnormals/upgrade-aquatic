@@ -37,6 +37,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -243,6 +244,11 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	@Override
 	public ItemStack getBucket() {
 		return new ItemStack(UAItems.JELLYFISH_BUCKET.get());
+	}
+	
+	@Override
+	public ItemStack getPickedResult(RayTraceResult target) {
+		return new ItemStack(UAItems.JELLYFISH_SPAWN_EGG.get());
 	}
 	
 	public abstract RotationController getRotationController();
