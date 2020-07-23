@@ -1,6 +1,0 @@
-{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "upgrade_aquatic:item/jelly_torch_orange"
-    }
-}

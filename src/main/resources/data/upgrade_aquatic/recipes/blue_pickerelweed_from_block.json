@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:blue_pickerelweed_block"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:blue_pickerelweed",
+    "count": 9
+  }
+}

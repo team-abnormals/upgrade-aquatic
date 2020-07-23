@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "upgrade_aquatic:lionfish"
-  },
-  "result": "upgrade_aquatic:lionfish_cooked",
-  "experience": 0.35,
-  "cookingtime": 100
-}

@@ -2,8 +2,8 @@
   "replace": false,
   "values": [
     "upgrade_aquatic:pike",
-    "upgrade_aquatic:pike_cooked",
+    "upgrade_aquatic:cooked_pike",
     "upgrade_aquatic:lionfish",
-    "upgrade_aquatic:lionfish_cooked"
+    "upgrade_aquatic:cooked_lionfish"
   ]
 }

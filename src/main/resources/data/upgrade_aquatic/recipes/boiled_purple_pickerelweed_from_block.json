@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:boiled_purple_pickerelweed_block"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:boiled_purple_pickerelweed",
+    "count": 9
+  }
+}

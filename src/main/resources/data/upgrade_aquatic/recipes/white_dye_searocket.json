@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:searocket_white"
+      "item": "upgrade_aquatic:white_searocket"
     }
   ],
   "result": {

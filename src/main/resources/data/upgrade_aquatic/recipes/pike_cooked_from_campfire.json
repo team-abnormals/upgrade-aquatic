@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:campfire_cooking",
-  "ingredient": {
-    "item": "upgrade_aquatic:pike"
-  },
-  "result": "upgrade_aquatic:pike_cooked",
-  "experience": 0.35,
-  "cookingtime": 600
-}

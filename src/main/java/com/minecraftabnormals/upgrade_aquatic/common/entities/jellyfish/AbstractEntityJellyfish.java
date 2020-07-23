@@ -265,7 +265,7 @@ public abstract class AbstractEntityJellyfish extends BucketableWaterMobEntity i
 	
 	public ITextComponent getYieldingTorchMessage() {
 		JellyTorchType torchType = this.getJellyTorchType();
-		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jellytorch").func_240699_a_(TextFormatting.GRAY)).func_230529_a_((new TranslationTextComponent("tooltip.upgrade_aquatic.jellytorch_" + torchType.toString().toLowerCase())).func_240701_a_(torchType.color));
+		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").func_240699_a_(TextFormatting.GRAY)).func_230529_a_((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + torchType.toString().toLowerCase())).func_240701_a_(torchType.color));
 	}
 	
 	public static ItemStack getTorchByType(JellyTorchType type) {

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "ingredient": {
+    "item": "upgrade_aquatic:lionfish"
+  },
+  "result": "upgrade_aquatic:cooked_lionfish",
+  "experience": 0.35,
+  "cookingtime": 600
+}

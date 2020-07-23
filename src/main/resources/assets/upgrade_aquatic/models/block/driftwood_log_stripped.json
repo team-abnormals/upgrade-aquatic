@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures": {
-        "end": "upgrade_aquatic:block/driftwood_log_top_stripped",
-        "side": "upgrade_aquatic:block/driftwood_log_stripped"
-    }
-}

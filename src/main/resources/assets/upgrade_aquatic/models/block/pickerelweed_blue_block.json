@@ -1,8 +1,0 @@
-{
-    "parent": "block/cube_bottom_top",
-    "textures": {
-        "top": "upgrade_aquatic:block/pickerelweed_block_blue_top",
-        "side": "upgrade_aquatic:block/pickerelweed_block_blue_side",
-        "bottom": "upgrade_aquatic:block/pickerelweed_block_blue_bottom"
-    }
-}

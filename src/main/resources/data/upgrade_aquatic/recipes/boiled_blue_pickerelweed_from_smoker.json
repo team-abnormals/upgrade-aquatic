@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "upgrade_aquatic:blue_pickerelweed"
+  },
+  "result": "upgrade_aquatic:boiled_blue_pickerelweed",
+  "experience": 0.1,
+  "cookingtime": 100
+}

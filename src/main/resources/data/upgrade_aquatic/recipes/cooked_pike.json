@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "upgrade_aquatic:pike"
+  },
+  "result": "upgrade_aquatic:cooked_pike",
+  "experience": 0.35,
+  "cookingtime": 200
+}

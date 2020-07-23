@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "upgrade_aquatic:purple_pickerelweed"
+  },
+  "result": "upgrade_aquatic:boiled_purple_pickerelweed",
+  "experience": 0.1,
+  "cookingtime": 200
+}

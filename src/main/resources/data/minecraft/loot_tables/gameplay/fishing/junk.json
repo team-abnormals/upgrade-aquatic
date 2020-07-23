@@ -127,7 +127,7 @@
            }
         ],
       	"weight": 12,
-       	"name": "upgrade_aquatic:pickerel_weed_blue"
+       	"name": "upgrade_aquatic:blue_pickerelweed"
       },
       {
       	  "type": "minecraft:item",
@@ -157,7 +157,7 @@
            }
         ],
       	"weight": 12,
-       	"name": "upgrade_aquatic:pickerel_weed_purple"
+       	"name": "upgrade_aquatic:purple_pickerelweed"
       },
         {
           "type": "minecraft:item",

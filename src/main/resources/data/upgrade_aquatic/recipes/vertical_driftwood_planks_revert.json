@@ -3,7 +3,7 @@
   "group": "upgrade_aquatic",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:driftwood_vertical_planks"
+      "item": "upgrade_aquatic:vertical_driftwood_planks"
     }
   ],
   "result": {

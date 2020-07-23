@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "upgrade_aquatic:pickerelweed_blue_block"
-  },
-  "result": "upgrade_aquatic:boiled_pickerelweed_blue_block",
-  "experience": 0.8,
-  "cookingtime": 200
-}

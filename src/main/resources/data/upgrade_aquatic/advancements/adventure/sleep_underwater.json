@@ -2,7 +2,7 @@
   "parent": "minecraft:adventure/sleep_in_bed",
   "display": {
     "icon": {
-      "item": "upgrade_aquatic:bedroll_red"
+      "item": "upgrade_aquatic:red_bedroll"
     },
     "title": {
       "translate": "advancements.adventure.sleep_underwater.title"

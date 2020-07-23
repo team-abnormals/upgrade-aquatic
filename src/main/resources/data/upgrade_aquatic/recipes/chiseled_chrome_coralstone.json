@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:chrome_coralstone_slab"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:chiseled_chrome_coralstone",
+    "count": 1
+  }
+}
