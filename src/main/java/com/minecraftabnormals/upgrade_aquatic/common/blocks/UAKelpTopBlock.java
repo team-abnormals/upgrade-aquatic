@@ -44,7 +44,7 @@ public class UAKelpTopBlock extends KelpTopBlock {
 		if(block == Blocks.MAGMA_BLOCK) {
 			return false;
 		} else {
-			return block == this || block == this.getBlockForKelpType() || blockstate.isSolidSide(worldIn, blockpos, Direction.UP);
+			return block == this || block == this.func_230330_d_() || blockstate.isSolidSide(worldIn, blockpos, Direction.UP);
 		}
 	}
 	
@@ -58,14 +58,15 @@ public class UAKelpTopBlock extends KelpTopBlock {
 		}
 
 		if(facing == Direction.UP && facingState.getBlock() == this) {
-			return this.getBlockForKelpType().getDefaultState();
+			return this.func_230330_d_().getDefaultState();
 		} else {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 			return stateIn;
 		}
 	}
 	
-	private Block getBlockForKelpType() {
+	@Override
+	public Block func_230330_d_() {
 		switch(this.kelpType) {
 			default:
 			case TONGUE:
