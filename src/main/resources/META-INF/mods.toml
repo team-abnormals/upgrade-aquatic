@@ -2,6 +2,7 @@ modLoader="javafml"
 loaderVersion="[32,)"
 logoFile="logo.png" #optional
 issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
+license="https://github.com/minecraftabnormals/Upgrade-Aquatic/blob/master/LICENSE.txt"
 
 [[mods]]
     modId="upgrade_aquatic"
