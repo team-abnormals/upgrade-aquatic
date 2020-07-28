@@ -10,8 +10,8 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.Abstract
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity.BucketData;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.minecraftabnormals.abnormals_core.core.utils.ItemStackUtils;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;

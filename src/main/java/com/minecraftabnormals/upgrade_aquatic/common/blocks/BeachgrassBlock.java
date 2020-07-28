@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 import java.util.Random;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.minecraftabnormals.abnormals_core.core.utils.ItemStackUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

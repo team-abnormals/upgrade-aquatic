@@ -4,7 +4,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.items.*;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAFoods;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
-import com.teamabnormals.abnormals_core.common.items.MobBucketItem;
+import com.minecraftabnormals.abnormals_core.common.items.MobBucketItem;
 
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockNamedItem;

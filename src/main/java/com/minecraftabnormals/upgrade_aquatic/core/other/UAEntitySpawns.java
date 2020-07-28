@@ -12,7 +12,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.teamabnormals.abnormals_core.core.library.EntitySpawnHandler;
+import com.minecraftabnormals.abnormals_core.core.library.EntitySpawnHandler;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;

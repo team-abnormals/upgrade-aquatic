@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-import com.teamabnormals.abnormals_core.common.items.MobBucketItem;
+import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.minecraftabnormals.abnormals_core.common.items.MobBucketItem;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityType;

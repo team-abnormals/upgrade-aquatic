@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.core.other;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.core.utils.DataUtils;
+import com.minecraftabnormals.abnormals_core.core.utils.DataUtils;
 
 public class UACompostables {
 	

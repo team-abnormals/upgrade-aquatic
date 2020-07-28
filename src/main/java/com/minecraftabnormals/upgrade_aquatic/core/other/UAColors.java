@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.core.other;
 import java.util.Arrays;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.abnormals_core.core.utils.DataUtils;
+import com.minecraftabnormals.abnormals_core.core.utils.DataUtils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;

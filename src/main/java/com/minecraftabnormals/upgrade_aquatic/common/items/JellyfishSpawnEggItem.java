@@ -5,7 +5,7 @@ import java.util.Random;
 
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry.JellyfishEntry;
-import com.teamabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
+import com.minecraftabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Rarity;

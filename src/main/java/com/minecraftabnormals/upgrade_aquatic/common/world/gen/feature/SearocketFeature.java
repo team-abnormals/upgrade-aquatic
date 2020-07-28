@@ -7,8 +7,8 @@ import java.util.function.Supplier;
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
-import com.teamabnormals.abnormals_core.core.utils.MathUtils;
+import com.minecraftabnormals.abnormals_core.core.library.api.IAddToBiomes;
+import com.minecraftabnormals.abnormals_core.core.utils.MathUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;

@@ -9,7 +9,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThr
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.core.utils.TradeUtils;
+import com.minecraftabnormals.abnormals_core.core.utils.TradeUtils;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;

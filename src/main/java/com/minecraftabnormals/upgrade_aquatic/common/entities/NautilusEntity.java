@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;

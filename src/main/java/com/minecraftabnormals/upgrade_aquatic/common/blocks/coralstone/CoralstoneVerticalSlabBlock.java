@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -63,13 +63,13 @@ public class CoralstoneVerticalSlabBlock extends VerticalSlabBlock {
 		
 		if(this.growableCoralBlocks != null && random.nextFloat() < 0.12F && state.get(POWERED)) {
 			Direction randDirection = this.growableCoralBlocks.length > 3 ? Direction.func_239631_a_(random) : Direction.byIndex(random.nextInt(5) + 1);
-			BlockPos growPos = type.slabDirection != null ? pos.offset(type.slabDirection.getOpposite()) : pos.offset(randDirection);
+			BlockPos growPos = type.direction != null ? pos.offset(type.direction.getOpposite()) : pos.offset(randDirection);
 			FluidState fluidState = worldIn.getBlockState(growPos).getFluidState();
 			boolean validGrowPos = this.isValidPosToGrow(worldIn, growPos, fluidState);
 			
 			if(state.get(TYPE) != VerticalSlabType.DOUBLE) {
 				if(validGrowPos) {
-					worldIn.setBlockState(growPos, this.growableCoralBlocks[2].getDefaultState().with(CoralWallFanBlock.FACING, type.slabDirection.getOpposite()), 2);
+					worldIn.setBlockState(growPos, this.growableCoralBlocks[2].getDefaultState().with(CoralWallFanBlock.FACING, type.direction.getOpposite()), 2);
 				}
 			} else {
 				if(validGrowPos) {

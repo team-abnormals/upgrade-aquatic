@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.api;
 import java.util.Random;
 import java.util.function.Predicate;
 
-import com.teamabnormals.abnormals_core.core.library.endimator.entity.EndimatedEntity;
+import com.minecraftabnormals.abnormals_core.core.library.endimator.entity.EndimatedEntity;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.IMob;
