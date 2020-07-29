@@ -6,7 +6,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.Cassi
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwinIntoDirectionGoal;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADamageSources;
-import com.minecraftabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;

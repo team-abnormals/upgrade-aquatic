@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;

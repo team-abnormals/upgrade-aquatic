@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.blocks.coralstone;
 import java.util.Random;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.minecraftabnormals.abnormals_core.core.utils.BlockUtils;
+import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.WallBlock;

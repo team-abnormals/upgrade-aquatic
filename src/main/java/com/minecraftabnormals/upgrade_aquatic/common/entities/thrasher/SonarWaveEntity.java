@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

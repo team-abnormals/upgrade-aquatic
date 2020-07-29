@@ -1,6 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render;
 
-import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
+import com.teamabnormals.abnormals_core.client.ACRenderTypes;
 import com.minecraftabnormals.upgrade_aquatic.client.model.SonarWaveModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.SonarWaveEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;

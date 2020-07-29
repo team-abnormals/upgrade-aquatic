@@ -1,17 +1,15 @@
 modLoader="javafml"
 loaderVersion="[32,)"
-logoFile="logo.png" #optional
 issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
 license="https://github.com/minecraftabnormals/Upgrade-Aquatic/blob/master/LICENSE.txt"
 
 [[mods]]
     modId="upgrade_aquatic"
-    namespace="upgrade_aquatic"
     version="${file.jarVersion}"
+    logoFile="logo.png"
     displayName="Upgrade Aquatic"
     authors="SmellyModder, Bagel, Cameron, Five"
     description='''A mod that improves upon the content of 1.13 Update Aquatic.'''
-    displayURL=""
 
 [[dependencies.upgrade_aquatic]]
     modId="forge"
@@ -30,6 +28,6 @@ license="https://github.com/minecraftabnormals/Upgrade-Aquatic/blob/master/LICEN
 [[dependencies.upgrade_aquatic]]
     modId="abnormals_core"
     mandatory=true
-    versionRange="[2.1.0,)"
+    versionRange="[2.0.1,)"
     ordering="AFTER"
     side="BOTH"

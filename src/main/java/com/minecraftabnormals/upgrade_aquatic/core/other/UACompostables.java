@@ -2,46 +2,46 @@ package com.minecraftabnormals.upgrade_aquatic.core.other;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.minecraftabnormals.abnormals_core.core.utils.DataUtils;
+import com.teamabnormals.abnormals_core.core.utils.DataUtils;
 
 public class UACompostables {
 	
 	public static void registerCompostables() {
-		DataUtils.registerCompostable(0.30F, UABlocks.RIVER_LEAVES.get());
-        DataUtils.registerCompostable(0.30F, UABlocks.RIVER_SAPLING.get());
-        DataUtils.registerCompostable(0.30F, UABlocks.RIVER_LEAF_CARPET.get());
-		DataUtils.registerCompostable(0.30F, UAItems.MULBERRY.get());
+		DataUtils.registerCompostable(UABlocks.RIVER_LEAVES.get(), 0.30F);
+        DataUtils.registerCompostable(UABlocks.RIVER_SAPLING.get(), 0.30F);
+        DataUtils.registerCompostable(UABlocks.RIVER_LEAF_CARPET.get(), 0.30F);
+		DataUtils.registerCompostable(UAItems.MULBERRY.get(), 0.30F);
 
-		DataUtils.registerCompostable(0.30F, UABlocks.BEACHGRASS.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.TALL_BEACHGRASS.get());
-		DataUtils.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH.get());
-		DataUtils.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH_STAIRS.get());
-		DataUtils.registerCompostable(0.65F, UABlocks.BEACHGRASS_THATCH_SLAB.get());
+		DataUtils.registerCompostable(UABlocks.BEACHGRASS.get(), 0.30F);
+		DataUtils.registerCompostable(UABlocks.TALL_BEACHGRASS.get(), 0.65F);
+		DataUtils.registerCompostable(UABlocks.BEACHGRASS_THATCH.get(), 0.65F);
+		DataUtils.registerCompostable(UABlocks.BEACHGRASS_THATCH_STAIRS.get(), 0.65F);
+		DataUtils.registerCompostable(UABlocks.BEACHGRASS_THATCH_SLAB.get(), 0.65F);
 		
-		DataUtils.registerCompostable(0.30F, UABlocks.BLUE_PICKERELWEED.get());
-		DataUtils.registerCompostable(0.30F, UAItems.BOILED_BLUE_PICKERELWEED.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.BLUE_PICKERELWEED_BLOCK.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.BOILED_BLUE_PICKERELWEED_BLOCK.get());
+		DataUtils.registerCompostable(UABlocks.BLUE_PICKERELWEED.get(), 0.30F);
+		DataUtils.registerCompostable(UAItems.BOILED_BLUE_PICKERELWEED.get(), 0.30F);
+		DataUtils.registerCompostable(UABlocks.BLUE_PICKERELWEED_BLOCK.get(), 0.50F);
+		DataUtils.registerCompostable(UABlocks.BOILED_BLUE_PICKERELWEED_BLOCK.get(), 0.50F);
 		
-		DataUtils.registerCompostable(0.30F, UABlocks.PURPLE_PICKERELWEED.get());
-		DataUtils.registerCompostable(0.30F, UAItems.BOILED_PURPLE_PICKERELWEED.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.PURPLE_PICKERELWEED_BLOCK.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.BOILED_PURPLE_PICKERELWEED_BLOCK.get());
+		DataUtils.registerCompostable(UABlocks.PURPLE_PICKERELWEED.get(), 0.30F);
+		DataUtils.registerCompostable(UAItems.BOILED_PURPLE_PICKERELWEED.get(), 0.30F);
+		DataUtils.registerCompostable(UABlocks.PURPLE_PICKERELWEED_BLOCK.get(), 0.50F);
+		DataUtils.registerCompostable(UABlocks.BOILED_PURPLE_PICKERELWEED_BLOCK.get(), 0.50F);
 		
-		DataUtils.registerCompostable(0.65F, UABlocks.FLOWERING_RUSH.get());
-		DataUtils.registerCompostable(0.65F, UABlocks.WHITE_SEAROCKET.get());
-		DataUtils.registerCompostable(0.65F, UABlocks.PINK_SEAROCKET.get());
+		DataUtils.registerCompostable(UABlocks.FLOWERING_RUSH.get(), 0.65F);
+		DataUtils.registerCompostable(UABlocks.WHITE_SEAROCKET.get(), 0.65F);
+		DataUtils.registerCompostable(UABlocks.PINK_SEAROCKET.get(), 0.65F);
 		
-		DataUtils.registerCompostable(0.30F, UABlocks.TONGUE_KELP.get());
-		DataUtils.registerCompostable(0.30F, UABlocks.THORNY_KELP.get());
-		DataUtils.registerCompostable(0.30F, UABlocks.OCHRE_KELP.get());
-		DataUtils.registerCompostable(0.30F, UABlocks.POLAR_KELP.get());
+		DataUtils.registerCompostable(UABlocks.TONGUE_KELP.get(), 0.30F);
+		DataUtils.registerCompostable(UABlocks.THORNY_KELP.get(), 0.30F);
+		DataUtils.registerCompostable(UABlocks.OCHRE_KELP.get(), 0.30F);
+		DataUtils.registerCompostable(UABlocks.POLAR_KELP.get(), 0.30F);
 		
-		DataUtils.registerCompostable(0.50F, UABlocks.KELP_BLOCK.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.TONGUE_KELP_BLOCK.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.THORNY_KELP_BLOCK.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.OCHRE_KELP_BLOCK.get());
-		DataUtils.registerCompostable(0.50F, UABlocks.POLAR_KELP_BLOCK.get());
+		DataUtils.registerCompostable(UABlocks.KELP_BLOCK.get(), 0.50F);
+		DataUtils.registerCompostable(UABlocks.TONGUE_KELP_BLOCK.get(), 0.50F);
+		DataUtils.registerCompostable(UABlocks.THORNY_KELP_BLOCK.get(), 0.50F);
+		DataUtils.registerCompostable(UABlocks.OCHRE_KELP_BLOCK.get(), 0.50F);
+		DataUtils.registerCompostable(UABlocks.POLAR_KELP_BLOCK.get(), 0.50F);
 	}
 	
 }

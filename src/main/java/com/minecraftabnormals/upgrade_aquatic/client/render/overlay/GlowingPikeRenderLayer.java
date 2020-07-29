@@ -1,7 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render.overlay;
 
-import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.abnormals_core.client.ACRenderTypes;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
 import com.minecraftabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;

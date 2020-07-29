@@ -5,8 +5,8 @@ import java.util.List;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.minecraftabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
-import com.minecraftabnormals.abnormals_core.core.library.api.IBucketableEntity;
+import com.teamabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
+import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
 
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.DefaultDispenseItemBehavior;

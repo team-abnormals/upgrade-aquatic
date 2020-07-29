@@ -4,8 +4,8 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.Jell
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.BoxJellyfishHuntGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwinIntoDirectionGoal;
-import com.minecraftabnormals.abnormals_core.common.entity.ai.PredicateAttackGoal;
-import com.minecraftabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.common.entity.ai.PredicateAttackGoal;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;

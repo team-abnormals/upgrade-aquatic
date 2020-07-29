@@ -18,8 +18,8 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.Thrash
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
-import com.minecraftabnormals.abnormals_core.core.library.endimator.ControlledEndimation;
-import com.minecraftabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.ControlledEndimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureAttribute;

@@ -10,10 +10,10 @@ import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADamageSources;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-import com.minecraftabnormals.abnormals_core.core.library.endimator.Endimation;
-import com.minecraftabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
-import com.minecraftabnormals.abnormals_core.core.utils.MathUtils;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

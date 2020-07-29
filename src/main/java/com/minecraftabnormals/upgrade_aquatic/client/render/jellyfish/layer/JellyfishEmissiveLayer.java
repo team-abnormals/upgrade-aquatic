@@ -1,9 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.layer;
 
-import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
-import com.minecraftabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
-import com.minecraftabnormals.abnormals_core.core.utils.MathUtils;
+import com.teamabnormals.abnormals_core.client.ACRenderTypes;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
+import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.AbstractJellyfishRenderer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;

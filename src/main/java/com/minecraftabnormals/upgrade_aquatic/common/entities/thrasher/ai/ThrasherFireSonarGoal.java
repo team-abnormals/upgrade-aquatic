@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.SonarWaveEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.minecraftabnormals.abnormals_core.core.utils.EntityUtils;
-import com.minecraftabnormals.abnormals_core.core.utils.NetworkUtil;
+import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;

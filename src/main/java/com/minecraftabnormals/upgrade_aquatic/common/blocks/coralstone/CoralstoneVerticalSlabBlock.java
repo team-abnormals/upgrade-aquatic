@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.minecraftabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
+import com.teamabnormals.abnormals_core.common.blocks.VerticalSlabBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

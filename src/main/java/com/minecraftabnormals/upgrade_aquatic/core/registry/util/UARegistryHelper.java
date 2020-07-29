@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.common.items.InjectedBlockItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.JellyfishSpawnEggItem;
-import com.minecraftabnormals.abnormals_core.core.utils.RegistryHelper;
+import com.teamabnormals.abnormals_core.core.utils.RegistryHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

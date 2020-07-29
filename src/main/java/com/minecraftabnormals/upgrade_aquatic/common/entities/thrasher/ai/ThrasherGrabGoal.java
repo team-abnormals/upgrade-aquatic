@@ -1,8 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import com.minecraftabnormals.abnormals_core.core.utils.EntityUtils;
-import com.minecraftabnormals.abnormals_core.core.utils.NetworkUtil;
+import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;

@@ -13,7 +13,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedPlantBlo
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedDoublePlantBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;

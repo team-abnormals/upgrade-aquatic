@@ -1,7 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.minecraftabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

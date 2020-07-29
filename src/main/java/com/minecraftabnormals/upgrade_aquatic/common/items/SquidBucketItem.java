@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import com.minecraftabnormals.abnormals_core.core.utils.ItemStackUtils;
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

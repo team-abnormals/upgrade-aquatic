@@ -3,9 +3,9 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 import java.util.EnumSet;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import com.minecraftabnormals.abnormals_core.core.library.endimator.Endimation;
-import com.minecraftabnormals.abnormals_core.core.utils.EntityUtils;
-import com.minecraftabnormals.abnormals_core.core.utils.NetworkUtil;
+import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
+import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.RayTraceResult.Type;
