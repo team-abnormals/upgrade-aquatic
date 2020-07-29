@@ -10,29 +10,33 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class EntityGreatThrasher extends EntityThrasher {
+public class GreatThrasherEntity extends ThrasherEntity {
 
-	public EntityGreatThrasher(EntityType<? extends EntityThrasher> type, World world) {
+	public GreatThrasherEntity(EntityType<? extends ThrasherEntity> type, World world) {
 		super(type, world);
 		this.experienceValue = 55;
 	}
-
+	
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+    	return MobEntity.func_233666_p_().
+    		func_233815_a_(Attributes.MAX_HEALTH, 125.0D).
+    		func_233815_a_(Attributes.ATTACK_DAMAGE, 8.0D).
+    		func_233815_a_(Attributes.ARMOR, 16.0D);
+    }
+	
 	@Override
 	public float getMountDistance() {
 		return 2.1F;
 	}
 	
-	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().
-    			func_233815_a_(EntityThrasher.STUN_DAMAGE_THRESHOLD, 125.0D).
-    			func_233815_a_(Attributes.MAX_HEALTH, 125.0D).
-    			func_233815_a_(Attributes.ATTACK_DAMAGE, 8.0D).
-    			func_233815_a_(Attributes.ARMOR, 16.0D);
-    }
-	
 	@Override
 	public double getMountedYOffset() {
 		return 0.875F;
+	}
+	
+	@Override
+	protected double getStunDamageThreshold() {
+		return 8.0F;
 	}
 	
 	@Override

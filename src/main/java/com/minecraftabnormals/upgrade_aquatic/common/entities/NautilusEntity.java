@@ -1,6 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
@@ -84,7 +84,7 @@ public class NautilusEntity extends BucketableWaterMobEntity {
             }
 
         });
-        this.goalSelector.addGoal(2, new AvoidEntityGoal<EntityThrasher>(this, EntityThrasher.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
+        this.goalSelector.addGoal(2, new AvoidEntityGoal<ThrasherEntity>(this, ThrasherEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NOT_SPECTATING::test) {
 
             @Override
             public void startExecuting() {

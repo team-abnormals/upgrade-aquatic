@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import javax.annotation.Nullable;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.abnormals_core.core.library.api.AdvancedRandomPositionGenerator;
 
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
@@ -11,9 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 
 public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
-	private final EntityThrasher thrasher;
+	private final ThrasherEntity thrasher;
 
-	public ThrasherRandomSwimGoal(EntityThrasher thrasher, double speed, int chance) {
+	public ThrasherRandomSwimGoal(ThrasherEntity thrasher, double speed, int chance) {
 		super(thrasher, speed, chance);
 		this.thrasher = thrasher;
 	}

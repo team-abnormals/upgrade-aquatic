@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 import java.util.EnumSet;
 import java.util.Random;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
@@ -14,12 +14,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 
 public class ThrasherFindDetectionPointGoal extends Goal {
-	public EntityThrasher thrasher;
+	public ThrasherEntity thrasher;
 	private LivingEntity foundTarget;
 	private BlockPos foundPos;
 	private int ticksPassed;
 
-	public ThrasherFindDetectionPointGoal(EntityThrasher thrasher) {
+	public ThrasherFindDetectionPointGoal(ThrasherEntity thrasher) {
 		this.thrasher = thrasher;
 		this.setMutexFlags(EnumSet.of(Goal.Flag.TARGET));
 	}
@@ -29,7 +29,7 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 		boolean flag = !this.thrasher.isStunned() && this.thrasher.getRNG().nextFloat() < 0.05F;
 		if(flag) {
 			this.findNearestTarget();
-			return this.foundTarget != null && this.thrasher.getTicksSinceLastSonarFire() > 55 && EntityThrasher.ENEMY_MATCHER.test(this.foundTarget);
+			return this.foundTarget != null && this.thrasher.getTicksSinceLastSonarFire() > 55 && ThrasherEntity.ENEMY_MATCHER.test(this.foundTarget);
 		}
 		return false;
 	}
@@ -53,7 +53,7 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	}
 	
 	private void findNearestTarget() {
-		this.foundTarget = this.thrasher.world.getClosestEntity(this.thrasher.world.getEntitiesWithinAABB(LivingEntity.class, this.getTargetableArea(32), EntityThrasher.ENEMY_MATCHER), new EntityPredicate().setDistance(this.getTargetDistance()).setCustomPredicate(null), this.thrasher, this.thrasher.getPosX(), this.thrasher.getPosY() + this.thrasher.getEyeHeight(), this.thrasher.getPosZ());
+		this.foundTarget = this.thrasher.world.getClosestEntity(this.thrasher.world.getEntitiesWithinAABB(LivingEntity.class, this.getTargetableArea(32), ThrasherEntity.ENEMY_MATCHER), new EntityPredicate().setDistance(this.getTargetDistance()).setCustomPredicate(null), this.thrasher, this.thrasher.getPosX(), this.thrasher.getPosY() + this.thrasher.getEyeHeight(), this.thrasher.getPosZ());
 	}
 	
 	private double getTargetDistance() {

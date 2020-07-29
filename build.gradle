@@ -47,7 +47,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
-            arg "-mixin.config=nether_extension.mixins.json"
+            arg "-mixin.config=upgrade_aquatic.mixins.json"
             mods {
                 upgrade_aquatic {
                     source sourceSets.main

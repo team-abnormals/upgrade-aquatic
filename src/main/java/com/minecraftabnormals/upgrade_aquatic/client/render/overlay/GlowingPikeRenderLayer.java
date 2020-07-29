@@ -1,12 +1,12 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render.overlay;
 
-import com.minecraftabnormals.upgrade_aquatic.client.UARenderTypes;
+import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
+import com.minecraftabnormals.abnormals_core.client.ClientInfo;
 import com.minecraftabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
 
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
@@ -29,7 +29,7 @@ public class GlowingPikeRenderLayer<T extends PikeEntity, M extends PikeModel<T>
 		
 		ClientInfo.MINECRAFT.getTextureManager().bindTexture(this.getPikeOverlayTexture(pike));
 
-		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(UARenderTypes.getEmissiveEntity(this.getPikeOverlayTexture(pike)));
+		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveEntity(this.getPikeOverlayTexture(pike)));
 		
 		this.getEntityModel().setRotationAngles(pike, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getEntityModel().render(matrixStackIn, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);

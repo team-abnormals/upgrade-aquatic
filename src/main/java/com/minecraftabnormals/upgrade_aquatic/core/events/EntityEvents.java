@@ -5,7 +5,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.advancement.UACriteriaTrigg
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.BedrollBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -81,10 +81,10 @@ public class EntityEvents {
 		}
 		if(entity instanceof WaterMobEntity && !(entity instanceof IMob)) {
 			if(!(entity instanceof DolphinEntity)) {
-				((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity)entity, EntityThrasher.class, 20.0F, 1.4D, 1.6D, EntityPredicates.IS_ALIVE::test));
+				((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity)entity, ThrasherEntity.class, 20.0F, 1.4D, 1.6D, EntityPredicates.IS_ALIVE::test));
 			}
 			if(entity instanceof DolphinEntity) {
-				((MobEntity) entity).targetSelector.addGoal(0, (new HurtByTargetGoal((DolphinEntity) entity, EntityThrasher.class)).setCallsForHelp());
+				((MobEntity) entity).targetSelector.addGoal(0, (new HurtByTargetGoal((DolphinEntity) entity, ThrasherEntity.class)).setCallsForHelp());
 				((MobEntity) entity).goalSelector.addGoal(1, new MeleeAttackGoal((DolphinEntity) entity, 1.2D, true));
 			}
 		}
@@ -182,14 +182,14 @@ public class EntityEvents {
 	}
 	
 	@SubscribeEvent
-	public static void onPlayerRiding(EntityMountEvent event) {
+	public static void onPlayerMount(EntityMountEvent event) {
 		Entity mountingEntity = event.getEntityMounting();
 		Entity entityBeingMounted = event.getEntityBeingMounted();
-		if(mountingEntity instanceof PlayerEntity && event.isDismounting() && entityBeingMounted instanceof EntityThrasher && ((EntityThrasher)entityBeingMounted).isAlive()) {
-			if(!((PlayerEntity)mountingEntity).isCreative() && !((PlayerEntity)mountingEntity).isSpectator() && ((PlayerEntity)mountingEntity).getHealth() > 0.0F) {
-				if(!((EntityThrasher)entityBeingMounted).isStunned()) {
-					event.setCanceled(true);
-				}
+		if (mountingEntity instanceof PlayerEntity && entityBeingMounted instanceof ThrasherEntity) {
+			PlayerEntity player = (PlayerEntity) mountingEntity;
+			ThrasherEntity thrasher = (ThrasherEntity) entityBeingMounted;
+			if (event.isDismounting() && player.isAlive() && !player.isCreative() && !player.isSpectator() && thrasher.isAlive()) {
+				event.setCanceled(true);
 			}
 		}
 	}

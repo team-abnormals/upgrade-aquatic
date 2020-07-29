@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 
 import com.minecraftabnormals.upgrade_aquatic.client.model.ThrasherModel;
 import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.ThrasherRenderLayer;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityGreatThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.GreatThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GreatThrasherRenderer extends MobRenderer<EntityGreatThrasher, ThrasherModel<EntityGreatThrasher>>{
+public class GreatThrasherRenderer extends MobRenderer<GreatThrasherEntity, ThrasherModel<GreatThrasherEntity>>{
 
 	public GreatThrasherRenderer(EntityRendererManager renderer) {
 		super(renderer, new ThrasherModel<>(), 1.575F);
@@ -21,12 +21,12 @@ public class GreatThrasherRenderer extends MobRenderer<EntityGreatThrasher, Thra
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(EntityGreatThrasher entity) {
+	public ResourceLocation getEntityTexture(GreatThrasherEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/thrasher/great_thrasher.png");
 	}
 	
 	@Override
-	protected void preRenderCallback(EntityGreatThrasher thrasher, MatrixStack matrixStack, float partialTickTime) {
+	protected void preRenderCallback(GreatThrasherEntity thrasher, MatrixStack matrixStack, float partialTickTime) {
 		float scale = 1.75F;
 		matrixStack.scale(scale, scale, scale);
 	}

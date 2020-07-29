@@ -10,7 +10,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedPlantBlo
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedDoublePlantBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.abnormals_core.core.library.EntitySpawnHandler;
 
@@ -128,7 +128,7 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 		
 	}
 	
-	static class ThrasherEntitySpawn<T extends EntityThrasher> extends EntitySpawn<T> {
+	static class ThrasherEntitySpawn<T extends ThrasherEntity> extends EntitySpawn<T> {
 
 		public ThrasherEntitySpawn(Supplier<EntityType<T>> thrasher, PlacementType placementType, Heightmap.Type heightmapType, Predicate<Biome> biomePredicate) {
 			super(thrasher, null, placementType, heightmapType, null, biomePredicate);

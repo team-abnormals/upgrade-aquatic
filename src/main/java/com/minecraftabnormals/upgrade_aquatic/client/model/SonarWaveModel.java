@@ -1,6 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntitySonarWave;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.SonarWaveEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.minecraftabnormals.abnormals_core.client.ClientInfo;
@@ -13,9 +13,9 @@ import net.minecraft.util.math.MathHelper;
  * ModelSonar - SmellyModder
  * Created using Tabula 7.0.0
  */
-public class SonarWaveModel extends EntityModel<EntitySonarWave> {
+public class SonarWaveModel extends EntityModel<SonarWaveEntity> {
     public ModelRenderer wave;
-    private EntitySonarWave sonarWave;
+    private SonarWaveEntity sonarWave;
 
     public SonarWaveModel() {
         this.textureWidth = 16;
@@ -36,7 +36,7 @@ public class SonarWaveModel extends EntityModel<EntitySonarWave> {
     }
     
     @Override
-    public void setRotationAngles(EntitySonarWave sonar, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setRotationAngles(SonarWaveEntity sonar, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
     	this.sonarWave = sonar;
     	
     	this.wave.rotateAngleX = (float) -Math.toRadians(MathHelper.lerp(ClientInfo.getPartialTicks(), sonar.prevRotationPitch, sonar.rotationPitch));

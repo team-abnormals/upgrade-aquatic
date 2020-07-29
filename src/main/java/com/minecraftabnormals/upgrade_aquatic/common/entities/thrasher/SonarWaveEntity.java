@@ -24,17 +24,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EntitySonarWave extends Entity {
-	private static final DataParameter<Integer> OWNER_ID = EntityDataManager.createKey(EntitySonarWave.class, DataSerializers.VARINT);
+public class SonarWaveEntity extends Entity {
+	private static final DataParameter<Integer> OWNER_ID = EntityDataManager.createKey(SonarWaveEntity.class, DataSerializers.VARINT);
 	private float growProgress = 0;
 	private float prevGrowProgress = 0;
 	
-	public EntitySonarWave(EntityType<? extends EntitySonarWave> type, World worldIn) {
+	public SonarWaveEntity(EntityType<? extends SonarWaveEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.preventEntitySpawning = true;
 	}
 	
-	public EntitySonarWave(World worldIn, double x, double y, double z) {
+	public SonarWaveEntity(World worldIn, double x, double y, double z) {
 		this(UAEntities.SONAR_WAVE.get(), worldIn);
 		this.setPosition(x, y, z);
 		this.prevPosX = x;
@@ -42,7 +42,7 @@ public class EntitySonarWave extends Entity {
 		this.prevPosZ = z;
 	}
 	
-	public EntitySonarWave(FMLPlayMessages.SpawnEntity spawnEntity, World world) {
+	public SonarWaveEntity(FMLPlayMessages.SpawnEntity spawnEntity, World world) {
 		this(UAEntities.SONAR_WAVE.get(), world);
 	}
 
@@ -58,7 +58,7 @@ public class EntitySonarWave extends Entity {
 		this.move(MoverType.SELF, this.getMotion());
 		
 		if(this.getThrasherOwner() != null) {
-			List<Entity> entities = this.world.getEntitiesInAABBexcluding(this.getThrasherOwner(), this.getBoundingBox().grow(this.growProgress), EntityThrasher.ENEMY_MATCHER);
+			List<Entity> entities = this.world.getEntitiesInAABBexcluding(this.getThrasherOwner(), this.getBoundingBox().grow(this.growProgress), ThrasherEntity.ENEMY_MATCHER);
 			
 			for(Entity entity : entities) {
 				if(entity instanceof LivingEntity && this.getThrasherOwner().getAttackTarget() == null) {
@@ -117,7 +117,7 @@ public class EntitySonarWave extends Entity {
 	@Override
 	protected void pushOutOfBlocks(double x, double y, double z) {}
 	
-	public void fireSonarWave(EntityThrasher thrasher) {
+	public void fireSonarWave(ThrasherEntity thrasher) {
 		float xMotion = -MathHelper.sin(thrasher.rotationYaw * ((float) Math.PI / 180F)) * MathHelper.cos(thrasher.rotationPitch * ((float) Math.PI / 180F));
 		float yMotion = -MathHelper.sin(thrasher.rotationPitch * ((float) Math.PI / 180F));
 		float zMotion = MathHelper.cos(thrasher.rotationYaw * ((float) Math.PI / 180F)) * MathHelper.cos(thrasher.rotationPitch * ((float) Math.PI / 180F));
@@ -180,10 +180,10 @@ public class EntitySonarWave extends Entity {
 	}
 	
 	@Nullable
-	public EntityThrasher getThrasherOwner() {
+	public ThrasherEntity getThrasherOwner() {
 		Entity owner = this.world.getEntityByID(this.getOwnerId());
-		if(owner instanceof EntityThrasher) {
-			return (EntityThrasher) owner;
+		if(owner instanceof ThrasherEntity) {
+			return (ThrasherEntity) owner;
 		}
 		return null;
 	}

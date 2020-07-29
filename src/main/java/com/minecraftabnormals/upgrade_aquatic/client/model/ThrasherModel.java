@@ -1,6 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.minecraftabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
@@ -12,7 +12,7 @@ import net.minecraft.util.math.MathHelper;
  * ModelThrasher - SmellyModder
  * Created using Tabula 7.0.0
  */
-public class ThrasherModel<E extends EntityThrasher> extends EndimatorEntityModel<E> {
+public class ThrasherModel<E extends ThrasherEntity> extends EndimatorEntityModel<E> {
 	public EndimatorModelRenderer neck;
 	public EndimatorModelRenderer body;
 	public EndimatorModelRenderer top_jaw;
@@ -134,8 +134,8 @@ public class ThrasherModel<E extends EntityThrasher> extends EndimatorEntityMode
 	public void animateModel(E thrasher) {
 		super.animateModel(thrasher);
 		
-		if(thrasher.isEndimationPlaying(EntityThrasher.SNAP_AT_PRAY_ANIMATION)) {
-			this.setEndimationToPlay(EntityThrasher.SNAP_AT_PRAY_ANIMATION);
+		if(thrasher.isEndimationPlaying(ThrasherEntity.SNAP_AT_PRAY_ANIMATION)) {
+			this.setEndimationToPlay(ThrasherEntity.SNAP_AT_PRAY_ANIMATION);
 			
 			this.startKeyframe(5);
 			this.rotate(this.top_jaw, -0.55F, 0.0F, 0.0F);
@@ -146,8 +146,8 @@ public class ThrasherModel<E extends EntityThrasher> extends EndimatorEntityMode
 			this.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.rotate(this.bottom_jaw, -0.0F, 0.0F, 0.0F);
 			this.endKeyframe();
-		} else if(thrasher.isEndimationPlaying(EntityThrasher.HURT_ANIMATION)) {
-			this.setEndimationToPlay(EntityThrasher.HURT_ANIMATION);
+		} else if(thrasher.isEndimationPlaying(ThrasherEntity.HURT_ANIMATION)) {
+			this.setEndimationToPlay(ThrasherEntity.HURT_ANIMATION);
 			
 			this.startKeyframe(5);
 			this.rotate(this.top_jaw, -0.35F, 0.0F, 0.0F);
@@ -158,8 +158,8 @@ public class ThrasherModel<E extends EntityThrasher> extends EndimatorEntityMode
 			this.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.rotate(this.bottom_jaw, -0.0F, 0.0F, 0.0F);
 			this.endKeyframe();
-		} else if(thrasher.isEndimationPlaying(EntityThrasher.THRASH_ANIMATION)) {
-			this.setEndimationToPlay(EntityThrasher.THRASH_ANIMATION);
+		} else if(thrasher.isEndimationPlaying(ThrasherEntity.THRASH_ANIMATION)) {
+			this.setEndimationToPlay(ThrasherEntity.THRASH_ANIMATION);
 			
 			this.startKeyframe(5);
 			
@@ -219,8 +219,8 @@ public class ThrasherModel<E extends EntityThrasher> extends EndimatorEntityMode
 			this.rotate(this.top_jaw, 0.0F, 0.0F, 0.0F);
 			this.rotate(this.bottom_jaw, 0.0F, 0.0F, 0.0F);
 			this.endKeyframe();
-		} else if(thrasher.isEndimationPlaying(EntityThrasher.SONAR_FIRE_ANIMATION)) {
-			this.setEndimationToPlay(EntityThrasher.SONAR_FIRE_ANIMATION);
+		} else if(thrasher.isEndimationPlaying(ThrasherEntity.SONAR_FIRE_ANIMATION)) {
+			this.setEndimationToPlay(ThrasherEntity.SONAR_FIRE_ANIMATION);
 			
 			this.startKeyframe(5);
 			this.rotate(this.top_jaw, -0.35F, 0.0F, 0.0F);

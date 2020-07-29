@@ -1,6 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.abnormals_core.core.utils.EntityUtils;
 import com.minecraftabnormals.abnormals_core.core.utils.NetworkUtil;
 
@@ -9,9 +9,9 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.util.math.RayTraceResult.Type;
 
 public class ThrasherGrabGoal extends MeleeAttackGoal {
-	private EntityThrasher thrasher;
+	private ThrasherEntity thrasher;
 
-	public ThrasherGrabGoal(EntityThrasher thrasher, double speedIn, boolean useLongMemory) {
+	public ThrasherGrabGoal(ThrasherEntity thrasher, double speedIn, boolean useLongMemory) {
 		super(thrasher, speedIn, useLongMemory);
 		this.thrasher = thrasher;
 	}
@@ -20,7 +20,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 	public boolean shouldExecute() {
 		LivingEntity attackTarget = this.thrasher.getAttackTarget();
 		if(attackTarget != null && attackTarget.isPassenger()) {
-			if(attackTarget.getRidingEntity() instanceof EntityThrasher) {
+			if(attackTarget.getRidingEntity() instanceof ThrasherEntity) {
 				return false;
 			}
 		}
@@ -31,7 +31,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 	public boolean shouldContinueExecuting() {
 		LivingEntity attackTarget = this.thrasher.getAttackTarget();
 		if(attackTarget != null && attackTarget.isPassenger()) {
-			if(attackTarget.getRidingEntity() instanceof EntityThrasher) {
+			if(attackTarget.getRidingEntity() instanceof ThrasherEntity) {
 				return false;
 			}
 		}
@@ -43,7 +43,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 		double attackReachSqr = this.getAttackReachSqr(enemy);
 		if(distToEnemySqr <= attackReachSqr + 0.75F && this.func_234041_j_() <= 0) {
 			if(this.thrasher.isNoEndimationPlaying()) {
-				NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.SNAP_AT_PRAY_ANIMATION);
+				NetworkUtil.setPlayingAnimationMessage(this.thrasher, ThrasherEntity.SNAP_AT_PRAY_ANIMATION);
 			}
 		}
 		

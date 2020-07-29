@@ -1,6 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render.gui;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.config.Config;
 import com.mojang.blaze3d.matrix.MatrixStack;
@@ -145,13 +145,8 @@ public class RenderOverlays {
 				}
 			}
 		}
-		if(event.getType() == ElementType.TEXT) {
-			if(MC.player.isPassenger()) {
-				String formattedMessage = I18n.format("mount.onboard", MC.gameSettings.keyBindSneak.getKeyDescription());
-				if(MC.ingameGUI.overlayMessage.toString().equals(formattedMessage) && MC.player.getRidingEntity() instanceof EntityThrasher) {
-					MC.ingameGUI.setOverlayMessage(new StringTextComponent(""), false);
-				}
-			}
+		if (event.getType() == ElementType.TEXT && MC.player.isPassenger() && MC.player.getRidingEntity() instanceof ThrasherEntity && MC.ingameGUI.overlayMessage.getString().equals(I18n.format("mount.onboard", I18n.format("key.keyboard.left.shift")))) {
+			MC.ingameGUI.setOverlayMessage(new StringTextComponent(""), false);
 		}
 	}
 }

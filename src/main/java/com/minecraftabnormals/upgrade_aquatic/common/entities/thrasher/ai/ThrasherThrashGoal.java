@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import java.util.EnumSet;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.EntityThrasher;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.abnormals_core.core.library.endimator.entity.EndimatedEntity;
 import com.minecraftabnormals.abnormals_core.core.utils.NetworkUtil;
 
@@ -15,11 +15,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 
 public class ThrasherThrashGoal extends Goal {
-	public EntityThrasher thrasher;
+	public ThrasherEntity thrasher;
 	private float originalYaw;
 	private float thrashedTicks;
 	
-	public ThrasherThrashGoal(EntityThrasher thrasher) {
+	public ThrasherThrashGoal(ThrasherEntity thrasher) {
 		this.thrasher = thrasher;
 		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
@@ -50,7 +50,7 @@ public class ThrasherThrashGoal extends Goal {
 	public void startExecuting() {
 		this.originalYaw = this.thrasher.rotationYaw;
 		this.thrasher.setHitsTillStun(this.thrasher.getRNG().nextInt(2) + 2);
-		NetworkUtil.setPlayingAnimationMessage(this.thrasher, EntityThrasher.THRASH_ANIMATION);
+		NetworkUtil.setPlayingAnimationMessage(this.thrasher, ThrasherEntity.THRASH_ANIMATION);
 	}
 	
 	@Override
