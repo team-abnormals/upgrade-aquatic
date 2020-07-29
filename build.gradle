@@ -23,7 +23,7 @@ mixin {
 }
 
 version = '2.0.0'
-group = 'com.minecraftabnormals.upgrade_aquatic'
+group = 'com.minecraftabnormals'
 archivesBaseName = 'Upgrade-Aquatic-1.16.1'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
