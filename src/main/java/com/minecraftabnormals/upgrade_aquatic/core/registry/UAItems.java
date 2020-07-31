@@ -1,11 +1,14 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.items.*;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAFoods;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.teamabnormals.abnormals_core.common.items.MobBucketItem;
 
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
@@ -51,14 +54,18 @@ public class UAItems {
 //	public static final RegistryObject<Item> GOOSE_SPAWN_EGG        	= HELPER.createSpawnEggItem("goose", () -> UAEntities.GOOSE.get(), 16448255, 16751914);
 	
 	public static void setupItemPropertes() {
-//		ItemModelsProperties.func_239418_a_(JELLYFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
-//			CompoundNBT compoundnbt = stack.getTag();
-//			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
-//				AbstractJellyfishEntity jellyfish = ((JellyfishBucketItem) stack.getItem()).getEntityInStack(stack, world, null);
-//				return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * (float) jellyfish.getIdSuffix());
-//			}
-//			return 0.0F;
-//		});
+		ItemModelsProperties.func_239418_a_(JELLYFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
+			if (world == null && entity.world instanceof ClientWorld) {
+				world = (ClientWorld) entity.world;
+			}
+			
+			CompoundNBT compoundnbt = stack.getTag();
+			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
+				AbstractJellyfishEntity jellyfish = ((JellyfishBucketItem) stack.getItem()).getEntityInStack(stack, world, null);
+				return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * (float) jellyfish.getIdSuffix());
+			}
+			return 0.0F;
+		});
 		
 		ItemModelsProperties.func_239418_a_(PIKE_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
 			CompoundNBT compoundnbt = stack.getTag();
