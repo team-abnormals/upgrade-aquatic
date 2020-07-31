@@ -48,13 +48,11 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
-import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.event.village.WandererTradesEvent;
@@ -111,7 +109,7 @@ public class EntityEvents {
 		if (event.getResultStatus() == null && state.getFluidState().getLevel() == 8 && state.getBlock() instanceof BedrollBlock) {
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
-				if(!player.world.isRemote()) {
+				if (!player.world.isRemote()) {
 					UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer); 
 				}
 			}
@@ -143,17 +141,6 @@ public class EntityEvents {
 			}
 			
 			entity.remove();
-		}
-	}
-	
-	@SubscribeEvent
-	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
-		PlayerEntity player = event.getPlayer();
-		BlockPos pos = event.getNewSpawn();
-		if(player != null && pos != null) {
-			if(player.getEntityWorld().getBlockState(pos).getBlock() instanceof BedrollBlock) {
-				event.setCanceled(true);
-			}
 		}
 	}
 	

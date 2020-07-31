@@ -33,7 +33,6 @@ import net.minecraftforge.fml.common.Mod;
 public class RenderOverlays {
 	private static final Minecraft MC = Minecraft.getInstance();
 	
-	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public static void renderOverlays(RenderGameOverlayEvent event) {
 		if (event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE) {
