@@ -669,19 +669,19 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 
 		public void tick() {
 			this.angleLimit = this.mob.getPassengers().isEmpty() ? 10 : 5;
-			if(this.isLooking) {
+			if (this.isLooking) {
 				this.isLooking = false;
-				if(this.isTurningForSonar) {
+				if (this.isTurningForSonar) {
 					this.mob.rotationYaw = this.clampedRotate(this.mob.rotationYaw, this.getTargetYaw(), this.deltaLookYaw);
 				} else {
 					this.mob.rotationYawHead = this.clampedRotate(this.mob.rotationYawHead, this.getTargetYaw(), this.deltaLookYaw);
 				}
 				this.mob.rotationPitch = this.clampedRotate(this.mob.rotationPitch, this.getTargetPitch(), this.deltaLookPitch);
 			} else {
-				if(this.mob.getNavigator().noPath()) {
+				if (this.mob.getNavigator().noPath()) {
 					this.mob.rotationPitch = this.clampedRotate(this.mob.rotationPitch, 0.0F, 5.0F);
 				}
-				if(this.isTurningForSonar) {
+				if (this.isTurningForSonar) {
 					this.mob.rotationYaw = this.clampedRotate(this.mob.rotationYaw, this.mob.renderYawOffset, this.deltaLookYaw);
 				} else {
 					this.mob.rotationYawHead = this.clampedRotate(this.mob.rotationYawHead, this.mob.renderYawOffset, this.deltaLookYaw);
@@ -689,9 +689,9 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 			}
 
 			float wrappedDegrees = MathHelper.wrapDegrees(this.mob.rotationYawHead - this.mob.renderYawOffset);
-			if(wrappedDegrees < (float)(-this.angleLimit)) {
+			if (wrappedDegrees < (float)(-this.angleLimit)) {
 				this.mob.renderYawOffset -= 4.0F;
-			} else if(wrappedDegrees > (float)this.angleLimit) {
+			} else if (wrappedDegrees > (float)this.angleLimit) {
 				this.mob.renderYawOffset += 4.0F;
 			}
 		}

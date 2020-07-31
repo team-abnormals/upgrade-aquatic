@@ -65,7 +65,7 @@ public class ThrasherFireSonarGoal extends Goal {
 			this.turnTicks++;
 			BlockPos pos = this.thrasher.getPossibleDetectionPoint();
 			((ThrasherEntity.ThrasherLookController) this.thrasher.getLookController()).setTurningForSonar(true);
-			this.thrasher.getLookController().setLookPosition(pos.getX(), pos.getY(), pos.getZ(), 60.0F, 60.0F);
+			this.thrasher.getLookController().setLookPosition(pos.getX(), pos.getY(), pos.getZ(), 90.0F, 90.0F);
 			
 			if(this.turnTicks > 50) {
 				this.sonarPhase = SonarPhase.FIRE;
