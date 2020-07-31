@@ -26,7 +26,6 @@ import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BedPart;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -108,15 +107,11 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 		}
 		
-		if (facing == func_208070_a(stateIn.get(PART), stateIn.get(HORIZONTAL_FACING))) {
+		if (facing == getDirectionToOther(stateIn.get(PART), stateIn.get(HORIZONTAL_FACING))) {
 			return facingState.getBlock() == this && facingState.get(PART) != stateIn.get(PART) ? stateIn.with(OCCUPIED, facingState.get(OCCUPIED)) : Blocks.AIR.getDefaultState();
 		} else {
 			return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		}
-	}
-	
-	private static Direction func_208070_a(BedPart p_208070_0_, Direction p_208070_1_) {
-		return p_208070_0_ == BedPart.FOOT ? p_208070_1_ : p_208070_1_.getOpposite();
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -134,24 +129,22 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 
 	@Override
 	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		BedPart bedpart = state.get(PART);
-		BlockPos blockpos = pos.offset(getDirectionToOther(bedpart, state.get(HORIZONTAL_FACING)));
-		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.getBlock() == this && blockstate.get(PART) != bedpart) {
-			worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
-			if (!worldIn.isRemote && !player.isCreative()) {
-				ItemStack itemstack = player.getHeldItemMainhand();
-				spawnDrops(state, worldIn, pos, (TileEntity)null, player, itemstack);
+		if (!worldIn.isRemote && player.isCreative()) {
+			BedPart bedpart = state.get(PART);
+			if (bedpart == BedPart.FOOT) {
+				BlockPos blockpos = pos.offset(getDirectionToOther(bedpart, state.get(HORIZONTAL_FACING)));
+				BlockState blockstate = worldIn.getBlockState(blockpos);
+				if (blockstate.getBlock() == this && blockstate.get(PART) == BedPart.HEAD) {
+					worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
+					worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+				}
 			}
-
-			player.addStat(Stats.BLOCK_MINED.get(this));
 		}
 		super.onBlockHarvested(worldIn, pos, state, player);
 	}
-	   
-	private static Direction getDirectionToOther(BedPart p_208070_0_, Direction p_208070_1_) {
-		return p_208070_0_ == BedPart.FOOT ? p_208070_1_ : p_208070_1_.getOpposite();
+	
+	private static Direction getDirectionToOther(BedPart part, Direction direction) {
+		return part == BedPart.FOOT ? direction : direction.getOpposite();
 	}
 	
 	@Nullable
