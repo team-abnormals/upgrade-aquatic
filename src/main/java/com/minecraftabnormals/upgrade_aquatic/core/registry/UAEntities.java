@@ -48,17 +48,17 @@ public class UAEntities {
 	}
 	
 	public static void registerAttributes() {
-		GlobalEntityTypeAttributes.put(NAUTILUS.get(), NautilusEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(PIKE.get(), PikeEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(LIONFISH.get(), LionfishEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(THRASHER.get(), ThrasherEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(GREAT_THRASHER.get(), GreatThrasherEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(FLARE.get(), FlareEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(ULULU.get(), UluluEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(GOOSE.get(), GooseEntity.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(NAUTILUS.get(), NautilusEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(PIKE.get(), PikeEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(LIONFISH.get(), LionfishEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(THRASHER.get(), ThrasherEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(GREAT_THRASHER.get(), GreatThrasherEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(FLARE.get(), FlareEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(ULULU.get(), UluluEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(GOOSE.get(), GooseEntity.registerAttributes().create());
 		
-		GlobalEntityTypeAttributes.put(BOX_JELLYFISH.get(), BoxJellyfishEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishEntity.registerAttributes().func_233813_a_());
-		GlobalEntityTypeAttributes.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfishEntity.registerAttributes().func_233813_a_());
+		GlobalEntityTypeAttributes.put(BOX_JELLYFISH.get(), BoxJellyfishEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfishEntity.registerAttributes().create());
 	}
 }

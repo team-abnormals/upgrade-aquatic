@@ -31,8 +31,8 @@ public class UAKelpTopBlock extends KelpTopBlock {
 		} else {
 			BlockPos blockpos = pos.up();
 			BlockState blockstate = worldIn.getBlockState(blockpos);
-			if(blockstate.getBlock() == Blocks.WATER && state.get(field_235502_d_) < 25 && random.nextDouble() < this.kelpType.getGrowChance()) {
-				worldIn.setBlockState(blockpos, state.func_235896_a_(field_235502_d_));
+			if(blockstate.getBlock() == Blocks.WATER && state.get(AGE) < 25 && random.nextDouble() < this.kelpType.getGrowChance()) {
+				worldIn.setBlockState(blockpos, state.func_235896_a_(AGE));
 			}
 		}
 	}

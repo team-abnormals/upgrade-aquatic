@@ -54,12 +54,12 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 	}
 	
 	private static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getWorld().func_234922_V_() != DimensionType.field_235999_c_) return false;
+		if(world.getWorld().func_234922_V_() != DimensionType.OVERWORLD) return false;
 		return pos.getY() <= 30;
 	}
 	
 	public static boolean pickerelCondition(EntityType<? extends PikeEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getWorld().func_234922_V_() != DimensionType.field_235999_c_) return false;
+		if(world.getWorld().func_234922_V_() != DimensionType.OVERWORLD) return false;
 		for(int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
@@ -77,7 +77,7 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 	}
 	
 	private static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getWorld().func_234922_V_() != DimensionType.field_235999_c_) return false;
+		if(world.getWorld().func_234922_V_() != DimensionType.OVERWORLD) return false;
 		for(int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for(int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for(int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
@@ -91,7 +91,7 @@ public class UAEntitySpawns extends EntitySpawnHandler {
     }
 	
 	private static boolean thrasherCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getWorld().func_234922_V_() != DimensionType.field_235999_c_) return false;
+		if(world.getWorld().func_234922_V_() != DimensionType.OVERWORLD) return false;
 		return pos.getY() <= 30 && (world.getWorld().isNightTime() || random.nextFloat() < 0.75F);
 	}
 	

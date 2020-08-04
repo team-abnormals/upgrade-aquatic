@@ -67,7 +67,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
     	return MobEntity.func_233666_p_().
-    			func_233815_a_(Attributes.ATTACK_DAMAGE, 2.0D);
+    			createMutableAttribute(Attributes.ATTACK_DAMAGE, 2.0D);
     }
 	
 	@Override
@@ -138,7 +138,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		}
 		
 		if(pitch <= 75.0F && pitch >= -75.0F) {
-			BlockPos pos = this.func_233580_cy_();
+			BlockPos pos = this.getPosition();
 			BlockPos.Mutable blockpos = new BlockPos.Mutable();
 			for(int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
 				for(int y = pos.getY(); y < pos.getY() + 2; y++) {
@@ -151,7 +151,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 				}
 			}
 		} else if(pitch <= 180.0F && (pitch >= -180.0F && pitch < -75.0F)) {
-			BlockPos pos = this.func_233580_cy_();
+			BlockPos pos = this.getPosition();
 			BlockPos.Mutable blockpos = new BlockPos.Mutable();
 			for(int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
 				for(int y = pos.getY(); y < pos.getY() - 2; y++) {
@@ -271,7 +271,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	
 	public ITextComponent getYieldingTorchMessage() {
 		JellyTorchType torchType = this.getJellyTorchType();
-		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").func_240699_a_(TextFormatting.GRAY)).func_230529_a_((new TranslationTextComponent("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase() + "_jelly_torch")).func_240701_a_(torchType.color));
+		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").mergeStyle(TextFormatting.GRAY)).append((new TranslationTextComponent("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase() + "_jelly_torch")).mergeStyle(torchType.color));
 	}
 	
 	public static ItemStack getTorchByType(JellyTorchType type) {

@@ -98,9 +98,9 @@ public class PikeEntity extends BucketableWaterMobEntity {
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().
-    			func_233815_a_(Attributes.MAX_HEALTH, 12.0D).
-    			func_233815_a_(Attributes.MOVEMENT_SPEED, 0.9D);
+    	return MobEntity.func_233666_p_()
+    			.createMutableAttribute(Attributes.MAX_HEALTH, 12.0D)
+    			.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.9D);
     }
 	
 	@Override
@@ -241,7 +241,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 		if(this.world.getGameTime() % 20 == 0 && this.getCaughtEntity() != null) {
 			if(this.isPickerelweedNearby()) {
 				if(this.isHidingInPickerelweed()) {
-					this.world.playSound(null, this.func_233580_cy_(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
+					this.world.playSound(null, this.getPosition(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
 					if(this.getCaughtEntity().getHealth() <= 1) {
 						if(this.getPikeType() == 7) {
 							if (this.world.isRemote) {
@@ -254,7 +254,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 					this.getCaughtEntity().attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
 				}
 			} else {
-				this.world.playSound(null, this.func_233580_cy_(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
+				this.world.playSound(null, this.getPosition(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
 				if(this.getCaughtEntity().getHealth() <= 1) {
 					if(this.getPikeType() == 7) {
 						if (this.world.isRemote) {
@@ -428,9 +428,9 @@ public class PikeEntity extends BucketableWaterMobEntity {
 	
 	private List<BlockPos> getNearbyPickerelweeds() {
 		List<BlockPos> pickerelweeds = Lists.newArrayList();
-		for (int yy = this.func_233580_cy_().getY() - 6; yy <= this.getPosY() + 6; yy++) {
-			for (int xx = this.func_233580_cy_().getX() - 12; xx <= this.getPosX() + 12; xx++) {
-				for (int zz = this.func_233580_cy_().getZ() - 12; zz <= this.getPosZ() + 12; zz++) {
+		for (int yy = this.getPosition().getY() - 6; yy <= this.getPosY() + 6; yy++) {
+			for (int xx = this.getPosition().getX() - 12; xx <= this.getPosX() + 12; xx++) {
+				for (int zz = this.getPosition().getZ() - 12; zz <= this.getPosZ() + 12; zz++) {
 					if(world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof PickerelweedPlantBlock || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof PickerelweedDoublePlantBlock) {
 						pickerelweeds.add(new BlockPos(xx, yy, zz));
 					}
@@ -809,7 +809,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 	}
 	
 	public boolean isHidingInPickerelweed() {
-		return this.getEntityWorld().getBlockState(func_233580_cy_()).getBlock() instanceof PickerelweedPlantBlock || this.getEntityWorld().getBlockState(func_233580_cy_()).getBlock() instanceof PickerelweedDoublePlantBlock;
+		return this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof PickerelweedPlantBlock || this.getEntityWorld().getBlockState(getPosition()).getBlock() instanceof PickerelweedDoublePlantBlock;
 	}
 	
 	static class MoveHelperController extends MovementController {
@@ -867,7 +867,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 				}
 			}
 
-			Vector3d vec3d = this.func_233580_cy_();
+			Vector3d vec3d = this.getPosition();
 			if (vec3d == null) {
 				return false;
 			} else {
@@ -888,7 +888,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 		}
 
 		@Nullable
-		protected Vector3d func_233580_cy_() {
+		protected Vector3d getPosition() {
 			if(((PikeEntity)creature).isPickerelweedNearby()) {
 				int pickedWeed = creature.getRNG().nextInt(((PikeEntity)creature).getNearbyPickerelweeds().size());
 				BlockPos pos = ((PikeEntity)creature).getNearbyPickerelweeds().get(pickedWeed);
@@ -929,7 +929,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 					if(enemy instanceof AbstractFishEntity || enemy instanceof AnimalEntity) {
 						((PikeEntity)this.attacker).setAttackCooldown(attacker.getRNG().nextInt(551) + 50);
 					}
-					AxisAlignedBB bb = new AxisAlignedBB(attacker.func_233580_cy_()).grow(16.0D);
+					AxisAlignedBB bb = new AxisAlignedBB(attacker.getPosition()).grow(16.0D);
 					List<Entity> entities = attacker.world.getEntitiesWithinAABB(Entity.class, bb);
 					for(int i = 0; i < entities.size(); i++) {
 						Entity entity = entities.get(i);

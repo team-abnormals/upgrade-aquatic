@@ -18,10 +18,10 @@ public class GreatThrasherEntity extends ThrasherEntity {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().
-    		func_233815_a_(Attributes.MAX_HEALTH, 125.0D).
-    		func_233815_a_(Attributes.ATTACK_DAMAGE, 8.0D).
-    		func_233815_a_(Attributes.ARMOR, 16.0D);
+    	return MobEntity.func_233666_p_()
+    		.createMutableAttribute(Attributes.MAX_HEALTH, 125.0D)
+    		.createMutableAttribute(Attributes.ATTACK_DAMAGE, 8.0D)
+    		.createMutableAttribute(Attributes.ARMOR, 16.0D);
     }
 	
 	@Override

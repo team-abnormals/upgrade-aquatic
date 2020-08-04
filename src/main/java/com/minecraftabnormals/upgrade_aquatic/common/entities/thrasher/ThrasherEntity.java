@@ -117,13 +117,13 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.func_233666_p_().
-    		func_233815_a_(Attributes.ATTACK_DAMAGE, 5.0D).
-    		func_233815_a_(Attributes.MOVEMENT_SPEED, 0.55D).
-    		func_233815_a_(Attributes.FOLLOW_RANGE, 32.0D).
-    		func_233815_a_(Attributes.MAX_HEALTH, 50.0D).
-    		func_233815_a_(Attributes.KNOCKBACK_RESISTANCE, 1.25D).
-    		func_233815_a_(Attributes.ARMOR, 8.0D);
+		return MobEntity.func_233666_p_()
+    		.createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D)
+    		.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.55D)
+    		.createMutableAttribute(Attributes.FOLLOW_RANGE, 32.0D)
+    		.createMutableAttribute(Attributes.MAX_HEALTH, 50.0D)
+    		.createMutableAttribute(Attributes.KNOCKBACK_RESISTANCE, 1.25D)
+    		.createMutableAttribute(Attributes.ARMOR, 8.0D);
     }
 	
 	@Override
@@ -160,7 +160,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	@Override
 	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		this.setAir(this.getMaxAir());
-		if(reason == SpawnReason.NATURAL && worldIn.getBiome(this.func_233580_cy_()) instanceof DeepFrozenOceanBiome) {
+		if(reason == SpawnReason.NATURAL && worldIn.getBiome(this.getPosition()) instanceof DeepFrozenOceanBiome) {
 			Random rand = new Random();
 			if(rand.nextFloat() < 0.25F) {
 				GreatThrasherEntity greatThrasher = UAEntities.GREAT_THRASHER.get().create(this.world);
@@ -235,7 +235,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		if(animationStarted == THRASH_ANIMATION) {
 			ModifiableAttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 			if(!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
-				knockbackResistance.func_233767_b_(KNOCKBACK_RESISTANCE_MODIFIER);
+				knockbackResistance.applyNonPersistentModifier(KNOCKBACK_RESISTANCE_MODIFIER);
 			}
 		}
 	}
@@ -295,9 +295,9 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 				}
 			} else {
 				if(entitySource instanceof PlayerEntity && !((PlayerEntity)entitySource).isCreative() && !((PlayerEntity)entitySource).isSpectator()) {
-					this.setPossibleDetectionPoint(entitySource.func_233580_cy_().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
+					this.setPossibleDetectionPoint(entitySource.getPosition().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
 				} else if(!(entitySource instanceof PlayerEntity)) {
-					this.setPossibleDetectionPoint(entitySource.func_233580_cy_().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
+					this.setPossibleDetectionPoint(entitySource.getPosition().add(this.getRNG().nextInt(2), this.getRNG().nextInt(2), this.getRNG().nextInt(2)));
 				}
 			}
 		}

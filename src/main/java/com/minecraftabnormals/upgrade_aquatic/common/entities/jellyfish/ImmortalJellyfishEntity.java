@@ -33,9 +33,9 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().
-    			func_233815_a_(Attributes.ATTACK_DAMAGE, 1.0D).
-    			func_233815_a_(Attributes.MAX_HEALTH, 7.0D);
+    	return MobEntity.func_233666_p_()
+    			.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D)
+    			.createMutableAttribute(Attributes.MAX_HEALTH, 7.0D);
     }
 	
 	
@@ -134,10 +134,10 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	public ITextComponent getYieldingTorchMessage() {
 		JellyTorchType white = JellyTorchType.WHITE;
 		JellyTorchType red = JellyTorchType.RED;
-		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").func_240699_a_(TextFormatting.GRAY))
-			.func_230529_a_((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + white.toString().toLowerCase())).func_240699_a_(white.color))
-			.func_230529_a_(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").func_240699_a_(TextFormatting.GRAY))
-			.func_230529_a_((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + red.toString().toLowerCase())).func_240699_a_(red.color))
+		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").mergeStyle(TextFormatting.GRAY))
+			.append((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + white.toString().toLowerCase())).mergeStyle(white.color))
+			.append(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").mergeStyle(TextFormatting.GRAY))
+			.append((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + red.toString().toLowerCase())).mergeStyle(red.color))
 		;
 	}
 

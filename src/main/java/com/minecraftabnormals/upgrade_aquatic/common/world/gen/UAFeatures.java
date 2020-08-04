@@ -29,5 +29,5 @@ public class UAFeatures {
 	public static final RegistryObject<Feature<NoFeatureConfig>> FLOWERING_RUSH              = FEATURES.register("flowering_rush", () -> new FloweringRushFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DRIFTWOOD                   = FEATURES.register("driftwood", () -> new DriftwoodFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DUNES                       = FEATURES.register("dunes", () -> new BeachgrassDunesFeature(NoFeatureConfig.field_236558_a_));
-	public static final RegistryObject<Feature<BaseTreeFeatureConfig>> RIVER_TREE 			 = FEATURES.register("river_tree", () -> new RiverTreeFeature(BaseTreeFeatureConfig.field_236676_a_));
+	public static final RegistryObject<Feature<BaseTreeFeatureConfig>> RIVER_TREE 			 = FEATURES.register("river_tree", () -> new RiverTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
 }

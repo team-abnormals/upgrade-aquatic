@@ -23,10 +23,10 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 	@Override
 	public boolean shouldExecute() {
 		if(this.jellyfish.getRNG().nextFloat() < 0.025F && this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.world.isDaytime()) {
-			BlockPos pos = this.jellyfish.func_233580_cy_();
+			BlockPos pos = this.jellyfish.getPosition();
 			if(pos.getY() >= this.world.getSeaLevel() - 2) {
 				if(this.world.func_230315_m_().hasSkyLight() && this.world.canBlockSeeSky(pos)) {
-					return !this.jellyfish.hasUpsideDownCooldown() && !this.jellyfish.func_233570_aj_();
+					return !this.jellyfish.hasUpsideDownCooldown() && !this.jellyfish.isOnGround();
 				}
 			}
 		}
@@ -47,6 +47,6 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 	
 	@Override
 	public boolean shouldContinueExecuting() {
-		return this.ticksPassed < 40 && !this.jellyfish.func_233570_aj_() && this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.world.isDaytime() && this.jellyfish.func_233580_cy_().getY() >= this.world.getSeaLevel() - 4;
+		return this.ticksPassed < 40 && !this.jellyfish.isOnGround() && this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.world.isDaytime() && this.jellyfish.getPosition().getY() >= this.world.getSeaLevel() - 4;
 	}
 }

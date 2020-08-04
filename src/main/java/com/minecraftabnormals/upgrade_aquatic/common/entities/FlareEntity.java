@@ -77,7 +77,7 @@ public class FlareEntity extends FlyingEntity {
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().func_233814_a_(Attributes.ATTACK_DAMAGE);
+    	return MobEntity.func_233666_p_().createMutableAttribute(Attributes.ATTACK_DAMAGE);
     }
 
 	protected void registerData() {

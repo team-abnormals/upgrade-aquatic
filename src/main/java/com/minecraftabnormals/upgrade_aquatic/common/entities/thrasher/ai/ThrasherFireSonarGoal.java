@@ -109,7 +109,7 @@ public class ThrasherFireSonarGoal extends Goal {
 		}
 		
 		public static boolean shouldContinueExecutingPhase(@Nullable SonarPhase phase, ThrasherEntity thrasher, int sonarTicks) {
-			boolean defaultCondition = !thrasher.isStunned() && thrasher.isInWater() && thrasher.getPassengers().isEmpty() && thrasher.getAttackTarget() == null && thrasher.getPossibleDetectionPoint() != null && thrasher.world.getBlockState(thrasher.func_233580_cy_().down()).getBlock() == Blocks.WATER;
+			boolean defaultCondition = !thrasher.isStunned() && thrasher.isInWater() && thrasher.getPassengers().isEmpty() && thrasher.getAttackTarget() == null && thrasher.getPossibleDetectionPoint() != null && thrasher.world.getBlockState(thrasher.getPosition().down()).getBlock() == Blocks.WATER;
 			if(phase == null) {
 				return defaultCondition;
 			}

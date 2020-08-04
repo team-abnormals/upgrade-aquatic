@@ -46,8 +46,8 @@ public class CassiopeaJellyfishEntity extends AbstractJellyfishEntity {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().
-    			func_233815_a_(Attributes.ATTACK_DAMAGE, 1.0D);
+    	return MobEntity.func_233666_p_()
+    			.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
     }
 	
 	@Override

@@ -48,7 +48,7 @@ public class NautilusEntity extends BucketableWaterMobEntity {
     }
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().func_233815_a_(Attributes.MAX_HEALTH, 18.0D);
+    	return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 18.0D);
     }
 
     @Override
