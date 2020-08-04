@@ -49,10 +49,8 @@ public class BoxJellyfishEntity extends AbstractJellyfishEntity {
 	}
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_()
-    			.createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
+    	return MobEntity.func_233666_p_().createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
     }
-	
 	
 	@Override
 	protected void registerData() {
