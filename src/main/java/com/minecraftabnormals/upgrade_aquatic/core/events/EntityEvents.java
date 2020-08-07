@@ -19,8 +19,10 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
@@ -49,6 +51,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
@@ -180,6 +183,15 @@ public class EntityEvents {
 			}
 		}
 	}
+	
+    @SubscribeEvent
+    public static void onDrownedPoseChange(EntityEvent.EyeHeight event) {
+        if (event.getEntity() instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
+    			event.setNewHeight(0.2F);
+    			event.getEntity().size = EntitySize.flexible(0.6F, 0.6F);
+    	        if (((DrownedEntity)event.getEntity()).isChild()) event.getEntity().size = EntitySize.flexible(0.7F, 0.6F);
+        }
+    }
 	
 	@SubscribeEvent
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
