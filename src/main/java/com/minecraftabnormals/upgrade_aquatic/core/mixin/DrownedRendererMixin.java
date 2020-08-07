@@ -21,7 +21,7 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
 	}
 	
 	/**
-	 * @reason when i tried to use inject instead of overwrite it made the entity walk backwards.
+	 * @reason when i tried to use inject instead of overwrite it made the entity walk backwards. hence why this is an overwrite
 	 * @author tallest red
 	 */
 	@Overwrite
