@@ -186,10 +186,12 @@ public class EntityEvents {
 	
     @SubscribeEvent
     public static void onDrownedPoseChange(EntityEvent.EyeHeight event) {
-        if (event.getEntity() instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
-    			event.setNewHeight(0.2F);
-    			event.getEntity().size = EntitySize.flexible(0.6F, 0.6F);
-    	        if (((DrownedEntity)event.getEntity()).isChild()) event.getEntity().size = EntitySize.flexible(0.7F, 0.6F);
+    	Entity entity = event.getEntity();
+        if (entity instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
+            DrownedEntity drowned = (DrownedEntity) entity;
+            event.setNewHeight(0.2F);
+            drowned.size = EntitySize.flexible(0.6F, 0.6F);
+    	    if (drowned.isChild()) drowned.size = EntitySize.flexible(0.7F, 0.6F);
         }
     }
 	
