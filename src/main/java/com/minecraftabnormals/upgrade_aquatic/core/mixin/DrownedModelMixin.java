@@ -20,7 +20,7 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 	}
 
 	@Inject(at = @At("TAIL"), method = "setRotationAngles(Lnet/minecraft/entity/monster/ZombieEntity;FFFFF)V")
-    private void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
+	private void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
     	if (entityIn.isInWater() && entityIn.getRidingEntity() == null) {
     		float limbSwingRemainder = limbSwing % 26.0F;
     		entityIn.setPose(Pose.SWIMMING);
