@@ -21,7 +21,7 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 
     @Inject(at = @At("TAIL"), method = "setRotationAngles(Lnet/minecraft/entity/monster/ZombieEntity;FFFFF)V")
     private void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
-	    if (entityIn.isInWater() && entityIn.getRidingEntity() == null) {
+        if (entityIn.isInWater() && entityIn.getRidingEntity() == null) {
              float limbSwingRemainder = limbSwing % 26.0F;
              entityIn.setPose(Pose.SWIMMING);
              HandSide handside = this.getMainHand(entityIn);
@@ -42,7 +42,7 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
                 this.bipedRightArm.rotateAngleY = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleY, (float)Math.PI);
                 this.bipedLeftArm.rotateAngleZ = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleZ, 5.012389F - 1.8707964F * multiplier1);
                 this.bipedRightArm.rotateAngleZ = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleZ, 1.2707963F + 1.8707964F * multiplier1);
-            } else if (limbSwingRemainder >= 22.0F && limbSwingRemainder < 26.0F) {
+             } else if (limbSwingRemainder >= 22.0F && limbSwingRemainder < 26.0F) {
                 float multiplier2 = (limbSwingRemainder - 22.0F) / 4.0F;
                 this.bipedLeftArm.rotateAngleX = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleX, ((float)Math.PI / 2F) - ((float)Math.PI / 2F) * multiplier2);
                 this.bipedRightArm.rotateAngleX = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleX, ((float)Math.PI / 2F) - ((float)Math.PI / 2F) * multiplier2);
@@ -61,8 +61,9 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
                 entityIn.setPose(Pose.STANDING);
              }
     }
-
+    
     private float getArmAngleSq(float limbSwing) {
-        return -65.0F * limbSwing + limbSwing * limbSwing;
-    }
+        return -65.0F * limbSwing + limbSwing * limbSwing; 
+    } 
+    
 }

@@ -23,10 +23,10 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
     protected void applyRotations(DrownedEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
         float swimAnimationTicks = entityLiving.getSwimAnimation(partialTicks);
         if (entityLiving.isInWater()) {
-             super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-             float rotationPitchChange = entityLiving.isInWater() ? -90.0F - entityLiving.rotationPitch : -90.0F;
-             float rotationModifier = MathHelper.lerp(swimAnimationTicks, 0.0F, rotationPitchChange);
-             matrixStackIn.rotate(Vector3f.XP.rotationDegrees(rotationModifier));
+            super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+            float rotationPitchChange = entityLiving.isInWater() ? -90.0F - entityLiving.rotationPitch : -90.0F;
+            float rotationModifier = MathHelper.lerp(swimAnimationTicks, 0.0F, rotationPitchChange);
+            matrixStackIn.rotate(Vector3f.XP.rotationDegrees(rotationModifier));
             if (entityLiving.isActualySwimming()) {
                 matrixStackIn.translate(0.0D, -1.0D, (double)0.3F);
             }
@@ -35,4 +35,3 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
            }
     }
 }
-
