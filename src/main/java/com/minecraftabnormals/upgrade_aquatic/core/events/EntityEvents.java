@@ -185,7 +185,7 @@ public class EntityEvents {
 	}
 	
 	@SubscribeEvent
-    public static void onDrownedPoseChange(EntityEvent.EyeHeight event) {
+	public static void onDrownedPoseChange(EntityEvent.EyeHeight event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
 			DrownedEntity drowned = (DrownedEntity) entity;
