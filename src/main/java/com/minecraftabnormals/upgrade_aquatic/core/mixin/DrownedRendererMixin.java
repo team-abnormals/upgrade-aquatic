@@ -14,10 +14,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 
 @Mixin(DrownedRenderer.class)
-public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, DrownedModel<DrownedEntity>> 
-{
-	private DrownedRendererMixin(EntityRendererManager p_i50974_1_, DrownedModel<DrownedEntity> p_i50974_2_, DrownedModel<DrownedEntity> p_i50974_3_, DrownedModel<DrownedEntity> p_i50974_4_) {
-		super(p_i50974_1_, p_i50974_2_, p_i50974_3_, p_i50974_4_);
+public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, DrownedModel<DrownedEntity>> {
+    private DrownedRendererMixin(EntityRendererManager p_i50974_1_, DrownedModel<DrownedEntity> p_i50974_2_, DrownedModel<DrownedEntity> p_i50974_3_, DrownedModel<DrownedEntity> p_i50974_4_) {
+        super(p_i50974_1_, p_i50974_2_, p_i50974_3_, p_i50974_4_);
 	}
 	
     @Overwrite
@@ -33,7 +32,7 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
          }
         } else {
           super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-       }
+        }
     }
 }
 

@@ -184,15 +184,15 @@ public class EntityEvents {
 		}
 	}
 	
-    @SubscribeEvent
+	@SubscribeEvent
     public static void onDrownedPoseChange(EntityEvent.EyeHeight event) {
-    	Entity entity = event.getEntity();
-        if (entity instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
-            DrownedEntity drowned = (DrownedEntity) entity;
-            event.setNewHeight(0.2F);
-            drowned.size = drowned.isChild() ? EntitySize.flexible(0.7F, 0.6F) : EntitySize.flexible(0.6F, 0.6F);
-        }
-    }
+		Entity entity = event.getEntity();
+		if (entity instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
+			DrownedEntity drowned = (DrownedEntity) entity;
+			event.setNewHeight(0.2F);
+			drowned.size = EntitySize.flexible(drowned.isChild() ? 0.7F : 0.6F, 0.6F);
+		}
+	}
 	
 	@SubscribeEvent
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
