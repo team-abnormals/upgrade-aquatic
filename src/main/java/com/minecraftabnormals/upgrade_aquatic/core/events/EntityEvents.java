@@ -190,8 +190,7 @@ public class EntityEvents {
         if (entity instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
             DrownedEntity drowned = (DrownedEntity) entity;
             event.setNewHeight(0.2F);
-            drowned.size = EntitySize.flexible(0.6F, 0.6F);
-    	    if (drowned.isChild()) drowned.size = EntitySize.flexible(0.7F, 0.6F);
+            drowned.size = drowned.isChild() ? EntitySize.flexible(0.7F, 0.6F) : EntitySize.flexible(0.6F, 0.6F);
         }
     }
 	
