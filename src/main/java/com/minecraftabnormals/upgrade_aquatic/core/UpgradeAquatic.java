@@ -23,6 +23,7 @@ import com.minecraftabnormals.upgrade_aquatic.core.other.UACompostables;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAEntitySpawns;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAFlammables;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UAHooks;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UARenderLayers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;

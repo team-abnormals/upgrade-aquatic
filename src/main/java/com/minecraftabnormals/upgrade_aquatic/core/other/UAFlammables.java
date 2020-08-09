@@ -6,6 +6,8 @@ import com.teamabnormals.abnormals_core.core.utils.DataUtils;
 public class UAFlammables {
 	
 	public static void registerFlammables() {
+	    DataUtils.registerFlammable(UABlocks.MULBERRY_VINE.get(), 60, 100);
+	    
         DataUtils.registerFlammable(UABlocks.DRIFTWOOD_LOG.get(), 5, 5);
         DataUtils.registerFlammable(UABlocks.DRIFTWOOD.get(), 5, 5);
         DataUtils.registerFlammable(UABlocks.STRIPPED_DRIFTWOOD_LOG.get(), 5, 5);
@@ -17,7 +19,7 @@ public class UAFlammables {
         DataUtils.registerFlammable(UABlocks.DRIFTWOOD_FENCE_GATE.get(), 5, 20);
         DataUtils.registerFlammable(UABlocks.VERTICAL_DRIFTWOOD_PLANKS.get(), 5, 20);
         DataUtils.registerFlammable(UABlocks.DRIFTWOOD_VERTICAL_SLAB.get(), 5, 20);
-        DataUtils.registerFlammable(UABlocks.DRIFTWOOD_BOOKSHELF.get(), 5, 20);
+        DataUtils.registerFlammable(UABlocks.DRIFTWOOD_BOOKSHELF.get(), 30, 20);
         
         DataUtils.registerFlammable(UABlocks.RIVER_LEAVES.get(), 30, 60);
         DataUtils.registerFlammable(UABlocks.RIVER_LOG.get(), 5, 5);
@@ -32,7 +34,7 @@ public class UAFlammables {
         DataUtils.registerFlammable(UABlocks.VERTICAL_RIVER_PLANKS.get(), 5, 20);
         DataUtils.registerFlammable(UABlocks.RIVER_LEAF_CARPET.get(), 30, 60);
         DataUtils.registerFlammable(UABlocks.RIVER_VERTICAL_SLAB.get(), 5, 20);
-        DataUtils.registerFlammable(UABlocks.RIVER_BOOKSHELF.get(), 5, 20);
+        DataUtils.registerFlammable(UABlocks.RIVER_BOOKSHELF.get(), 30, 20);
 	}
 	
 }

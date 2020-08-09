@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.minecraftabnormals.upgrade_aquatic.core.UAHooks;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UAHooks;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BubbleColumnBlock;

@@ -1,4 +1,4 @@
-package com.minecraftabnormals.upgrade_aquatic.core;
+package com.minecraftabnormals.upgrade_aquatic.core.other;
 
 import java.util.Map;
 import java.util.function.Supplier;
