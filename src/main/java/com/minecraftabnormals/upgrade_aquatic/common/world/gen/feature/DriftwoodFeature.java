@@ -5,9 +5,9 @@ import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
-import com.minecraftabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UABlockTags;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.abnormals_core.core.library.GenerationPiece;
 import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;

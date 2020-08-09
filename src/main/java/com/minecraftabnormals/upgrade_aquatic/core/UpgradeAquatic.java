@@ -14,8 +14,6 @@ import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.CassiopeaJ
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.ImmortalJellyfishRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.tileentity.ElderEyeTileEntityRenderer;
 import com.minecraftabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
-import com.minecraftabnormals.upgrade_aquatic.common.world.UAWorldGen;
-import com.minecraftabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.minecraftabnormals.upgrade_aquatic.core.config.Config;
 import com.minecraftabnormals.upgrade_aquatic.core.config.ConfigHelper;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAColors;
@@ -27,6 +25,7 @@ import com.minecraftabnormals.upgrade_aquatic.core.other.UAHooks;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UARenderLayers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
@@ -104,9 +103,9 @@ public class UpgradeAquatic {
 			UAEntities.registerAttributes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
 			UAEffects.registerBrewingRecipes();
-			UAWorldGen.registerGenerators();
 			UACompostables.registerCompostables();
 			UAFlammables.registerFlammables();
+			UAFeatures.setupGeneration();
 			UAHooks.makeBubbleColumnTickRandomly();
 		});
 	}

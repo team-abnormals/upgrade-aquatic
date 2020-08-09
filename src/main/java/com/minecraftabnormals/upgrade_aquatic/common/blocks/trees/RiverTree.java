@@ -4,8 +4,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import com.minecraftabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.RiverTreeFeature;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAFeatures;
 
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;

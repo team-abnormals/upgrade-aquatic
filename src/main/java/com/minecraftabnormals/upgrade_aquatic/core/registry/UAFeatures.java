@@ -1,6 +1,7 @@
-package com.minecraftabnormals.upgrade_aquatic.common.world.gen;
+package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.DriftwoodFeature;
+import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.AmmoniteFeature;
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.BeachgrassDunesFeature;
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.FloweringRushFeature;
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.PickerelweedFeature;
@@ -30,4 +31,8 @@ public class UAFeatures {
 	public static final RegistryObject<Feature<NoFeatureConfig>> DRIFTWOOD                   = FEATURES.register("driftwood", () -> new DriftwoodFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> DUNES                       = FEATURES.register("dunes", () -> new BeachgrassDunesFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<BaseTreeFeatureConfig>> RIVER_TREE 			 = FEATURES.register("river_tree", () -> new RiverTreeFeature(BaseTreeFeatureConfig.CODEC_BASE_TREE_FEATURE_CONFIG));
+	
+	public static void setupGeneration() {
+	    AmmoniteFeature.setupGeneration();
+	}
 }

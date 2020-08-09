@@ -6,8 +6,8 @@ import java.util.function.Supplier;
 
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedPlantBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedDoublePlantBlock;
-import com.minecraftabnormals.upgrade_aquatic.common.world.gen.UAFeatures;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.mojang.serialization.Codec;
 import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
 import com.teamabnormals.abnormals_core.core.utils.MathUtils;
