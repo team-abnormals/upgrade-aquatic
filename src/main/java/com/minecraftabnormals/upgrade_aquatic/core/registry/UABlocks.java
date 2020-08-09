@@ -256,6 +256,7 @@ public class UABlocks {
 
 	public static final RegistryObject<Block> MULBERRY_VINE 		= HELPER.createBlockNoItem("mulberry_vine", () -> new MulberryVineBlock(Block.Properties.from(Blocks.SWEET_BERRY_BUSH).tickRandomly().notSolid()));
 	public static final RegistryObject<Block> MULBERRY_JAM_BLOCK 	= HELPER.createBlock("mulberry_jam_block", () -> new MulberryJamBlock(Block.Properties.from(Blocks.SLIME_BLOCK)), ItemGroup.DECORATIONS);
+    public static final RegistryObject<Block> MULBERRY_PUNNET       = HELPER.createCompatBlock("quark", "mulberry_punnet", () -> new Block(Block.Properties.create(Material.WOOD, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(1.5F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS);
 
 	public static final RegistryObject<Block> POTTED_BLUE_PICKERELWEED 		= HELPER.createBlockNoItem("potted_blue_pickerelweed", () -> new FlowerPotBlock(BLUE_PICKERELWEED.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));
 	public static final RegistryObject<Block> POTTED_PURPLE_PICKERELWEED 	= HELPER.createBlockNoItem("potted_purple_pickerelweed", () -> new FlowerPotBlock(PURPLE_PICKERELWEED.get(), Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.0F)));

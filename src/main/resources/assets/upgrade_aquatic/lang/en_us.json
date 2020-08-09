@@ -5,9 +5,7 @@
   "block.upgrade_aquatic.elder_guardian_spine": "Elder Guardian Spine",
 
   "block.upgrade_aquatic.elder_eye": "Elder Eye",
-  
-  "block.upgrade_aquatic.bubble_block": "Bubble Block",
-  
+
   "block.upgrade_aquatic.dead_acan_coral": "Dead Acan Coral",
   "block.upgrade_aquatic.dead_acan_coral_block": "Dead Acan Coral Block",
   "block.upgrade_aquatic.dead_acan_coral_fan": "Dead Acan Coral Fan",
@@ -380,8 +378,9 @@
   "block.upgrade_aquatic.river_beehive": "River Beehive",
   
   "block.upgrade_aquatic.flowering_rush": "Flowering Rush",
-  "block.upgrade_aquatic.mulberry_vine": "Mulberry Vine",
   
+  "block.upgrade_aquatic.mulberry_vine": "Mulberry Vine",
+  "block.upgrade_aquatic.mulberry_punnet": "Mulberry Punnet",
   "block.upgrade_aquatic.mulberry_jam_block": "Mulberry Jam Block",
   
   "block.upgrade_aquatic.prismarine_rod_bundle": "Prismarine Rod Bundle",
@@ -459,6 +458,7 @@
   "item.upgrade_aquatic.mulberry": "Mulberry",
   "item.upgrade_aquatic.mulberry_jam_bottle": "Mulberry Jam Bottle",
   "item.upgrade_aquatic.mulberry_bread": "Mulberry Bread",
+  "item.upgrade_aquatic.mulberry_pie": "Mulberry Pie",
   
   "_comment3": "Tooltips",
   
