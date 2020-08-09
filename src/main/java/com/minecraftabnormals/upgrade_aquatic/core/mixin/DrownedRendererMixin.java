@@ -19,8 +19,8 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
 		super(p_i50974_1_, p_i50974_2_, p_i50974_3_, p_i50974_4_);
 	}
 	
-    @Overwrite
-    protected void applyRotations(DrownedEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+	@Overwrite
+	protected void applyRotations(DrownedEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 		float swimAnimationTicks = entityLiving.getSwimAnimation(partialTicks);
 		if (entityLiving.isInWater()) {
 			super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
