@@ -21,7 +21,7 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 
 	@Inject(at = @At("TAIL"), method = "setRotationAngles(Lnet/minecraft/entity/monster/ZombieEntity;FFFFF)V")
 	private void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
-    	if (entityIn.isInWater() && entityIn.getRidingEntity() == null) {
+		if (entityIn.isInWater() && entityIn.getRidingEntity() == null) {
     		float limbSwingRemainder = limbSwing % 26.0F;
     		entityIn.setPose(Pose.SWIMMING);
     		HandSide handside = this.getMainHand(entityIn);
@@ -57,13 +57,13 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
     		}
     		this.bipedLeftLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedLeftLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F + (float)Math.PI));
     		this.bipedRightLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedRightLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F));
-    	} else {
-    		entityIn.setPose(Pose.STANDING);
+		} else {
+			entityIn.setPose(Pose.STANDING);
     	}
     }
     
     private float getArmAngleSq(float limbSwing) {
-    	return -65.0F * limbSwing + limbSwing * limbSwing; 
+		return -65.0F * limbSwing + limbSwing * limbSwing; 
     } 
     
 }
