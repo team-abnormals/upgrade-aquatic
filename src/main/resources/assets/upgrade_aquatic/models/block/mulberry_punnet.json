@@ -3,6 +3,6 @@
   "textures": {
     "top": "upgrade_aquatic:block/mulberry_punnet_top",
     "bottom": "upgrade_aquatic:block/mulberry_punnet_bottom",
-    "side": "upgrade_aquatic:block/mulberry_punnet_side "
+    "side": "upgrade_aquatic:block/mulberry_punnet_side"
   }
 }
