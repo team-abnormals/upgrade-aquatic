@@ -7,7 +7,9 @@
   "mixins": [
     "BubbleColumnMixin",
     "ClientPlayerEntityMixin",
-    "ServerPlayerEntityMixin"
+    "ServerPlayerEntityMixin",
+    "DrownedModelMixin",
+    "DrownedRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
