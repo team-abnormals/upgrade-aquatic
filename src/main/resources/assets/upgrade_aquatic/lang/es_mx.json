@@ -6,8 +6,6 @@
 
   "block.upgrade_aquatic.elder_eye": "Ojo de guardián anciano",
   
-  "block.upgrade_aquatic.bubble_block": "Bloque de burbujas",
-  
   "block.upgrade_aquatic.dead_acan_coral": "Coral acan muerto",
   "block.upgrade_aquatic.dead_acan_coral_block": "Bloque de coral acan muerto",
   "block.upgrade_aquatic.dead_acan_coral_fan": "Gorgonia acan muerta",
@@ -380,14 +378,15 @@
   "block.upgrade_aquatic.river_beehive": "Apiario de abejas fluvial",
   
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
-  "block.upgrade_aquatic.mulberry_vine": "Morera",
 
+  "block.upgrade_aquatic.mulberry_vine": "Morera",
+  "block.upgrade_aquatic.mulberry_punnet": "Canasta de moras",
   "block.upgrade_aquatic.mulberry_jam_block": "Bloque de mermelada de moras",
   
   "block.upgrade_aquatic.prismarine_rod_bundle": "Paquete de varas de prismarina",
   
-  "block.upgrade_aquatic.beachgrass": "Hierba de playa",
-  "block.upgrade_aquatic.tall_beachgrass": "Hierba de playa alta",
+  "block.upgrade_aquatic.beachgrass": "Pasto de playa",
+  "block.upgrade_aquatic.tall_beachgrass": "Pasto de playa alto",
   "block.upgrade_aquatic.beachgrass_thatch": "Cubierta de pasto de playa",
   "block.upgrade_aquatic.beachgrass_thatch_slab": "Losa de pasto de playa",
   "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escaleras de pasto de playa",
@@ -457,8 +456,9 @@
   "item.upgrade_aquatic.cooked_lionfish": "Pez león asado",
   
   "item.upgrade_aquatic.mulberry": "Moras",
-  "item.upgrade_aquatic.mulberry_jam_bottle": "Frasco de mermelada de moras",
+  "item.upgrade_aquatic.mulberry_jam_bottle": "Botella de mermelada de moras",
   "item.upgrade_aquatic.mulberry_bread": "Pan de moras",
+  "item.upgrade_aquatic.mulberry_pie": "Pastel de moras",
   
   "_comment3": "Descripciones",
   

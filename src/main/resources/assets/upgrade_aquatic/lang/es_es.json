@@ -6,8 +6,6 @@
 
   "block.upgrade_aquatic.elder_eye": "Ojo de guardián anciano",
   
-  "block.upgrade_aquatic.bubble_block": "Bloque de burbujas",
-  
   "block.upgrade_aquatic.dead_acan_coral": "Coral acan muerto",
   "block.upgrade_aquatic.dead_acan_coral_block": "Bloque de coral acan muerto",
   "block.upgrade_aquatic.dead_acan_coral_fan": "Gorgonia acan muerta",
@@ -380,8 +378,9 @@
   "block.upgrade_aquatic.river_beehive": "Apiario fluvial",
   
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
-  "block.upgrade_aquatic.mulberry_vine": "Morera",
 
+  "block.upgrade_aquatic.mulberry_vine": "Morera",
+  "block.upgrade_aquatic.mulberry_punnet": "Canasta de moras",
   "block.upgrade_aquatic.mulberry_jam_block": "Bloque de mermelada de moras",
   
   "block.upgrade_aquatic.prismarine_rod_bundle": "Paquete de varas de prismarina",
@@ -459,6 +458,7 @@
   "item.upgrade_aquatic.mulberry": "Moras",
   "item.upgrade_aquatic.mulberry_jam_bottle": "Frasco con mermelada de moras",
   "item.upgrade_aquatic.mulberry_bread": "Pan de moras",
+  "item.upgrade_aquatic.mulberry_pie": "Tarta de moras",
   
   "_comment3": "Descripciones",
   
