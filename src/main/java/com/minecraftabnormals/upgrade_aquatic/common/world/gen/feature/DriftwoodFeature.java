@@ -189,7 +189,9 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> implements IAddTo
 				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(21))));
 			} else if(biome.getCategory() == Category.OCEAN) {
 				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))));
-			}
+			} else if(biome.getRegistryName().toString().contains("rainforest_basin")) {
+                biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(17))));
+            }
 		};
 	}
 }
