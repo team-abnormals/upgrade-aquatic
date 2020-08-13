@@ -109,7 +109,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 		} else if (flag) {
 			spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), state.get(DOUBLE) ? 2 : 1));
 			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(0)), 2);
 			
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
     			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
