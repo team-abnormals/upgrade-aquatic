@@ -1,7 +1,12 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.items.*;
+import com.minecraftabnormals.upgrade_aquatic.common.items.BoiledPickerelweedItem;
+import com.minecraftabnormals.upgrade_aquatic.common.items.JellyfishBucketItem;
+import com.minecraftabnormals.upgrade_aquatic.common.items.MulberryJamBottleItem;
+import com.minecraftabnormals.upgrade_aquatic.common.items.PikeBucketItem;
+import com.minecraftabnormals.upgrade_aquatic.common.items.PrismarineRodItem;
+import com.minecraftabnormals.upgrade_aquatic.common.items.SquidBucketItem;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAFoods;
@@ -17,6 +22,8 @@ import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 
@@ -54,6 +61,7 @@ public class UAItems {
 	public static final RegistryObject<Item> JELLYFISH_SPAWN_EGG        = HELPER.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);
 //	public static final RegistryObject<Item> GOOSE_SPAWN_EGG        	= HELPER.createSpawnEggItem("goose", () -> UAEntities.GOOSE.get(), 16448255, 16751914);
 	
+	@OnlyIn(Dist.CLIENT)
 	public static void setupItemPropertes() {
 		ItemModelsProperties.func_239418_a_(JELLYFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
 			if (world == null && entity.world instanceof ClientWorld) {
