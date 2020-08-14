@@ -906,7 +906,8 @@ public class PikeEntity extends BucketableWaterMobEntity {
 		
 		@Override
 		public boolean shouldExecute() {
-			return ((PikeEntity)this.attacker).getAttackCooldown() <= 0 && attacker.getAttackTarget() != null && !attacker.getAttackTarget().isRidingOrBeingRiddenBy(attacker) && !attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && attacker.isInWater() && ((PikeEntity)attacker).getCaughtEntity() == null && !(attacker.getAttackTarget() instanceof PufferfishEntity) && super.shouldExecute();
+		    boolean flag = this.attacker.getEntityWorld().isRemote() ? !attacker.getAttackTarget().isRidingOrBeingRiddenBy(attacker) : true;
+			return ((PikeEntity)this.attacker).getAttackCooldown() <= 0 && attacker.getAttackTarget() != null && flag && !attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && attacker.isInWater() && ((PikeEntity)attacker).getCaughtEntity() == null && !(attacker.getAttackTarget() instanceof PufferfishEntity) && super.shouldExecute();
 		}
 		
 		@Override
