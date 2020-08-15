@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.model.DrownedModel;
 import net.minecraft.client.renderer.entity.model.ZombieModel;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 
@@ -21,7 +22,7 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 
 	@Inject(at = @At("TAIL"), method = "setRotationAngles(Lnet/minecraft/entity/monster/ZombieEntity;FFFFF)V")
 	private void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
-		if (entityIn.isInWater() && entityIn.getRidingEntity() == null && (entityIn.getMotion().getX() != 0 || entityIn.getMotion().getZ() != 0)) {
+		if (entityIn.isInWater() && entityIn.getRidingEntity() == null && (entityIn.getMotion().getX() != 0 || entityIn.getMotion().getZ() != 0) && entityIn.getEntityWorld().getFluidState(entityIn.getPosition().down()).isTagged(FluidTags.WATER)) {
 			float limbSwingRemainder = limbSwing % 26.0F;
 			entityIn.setPose(Pose.SWIMMING);
 			HandSide handside = this.getMainHand(entityIn);
