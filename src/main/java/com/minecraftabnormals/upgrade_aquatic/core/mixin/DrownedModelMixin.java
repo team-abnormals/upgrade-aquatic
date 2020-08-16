@@ -12,6 +12,7 @@ import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 
 @Mixin(DrownedModel.class)
 public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
@@ -21,11 +22,11 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 	}
 
 	@Inject(at = @At("TAIL"), method = "setRotationAngles(Lnet/minecraft/entity/monster/ZombieEntity;FFFFF)V")
-	private void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
-		if (entityIn.isInWater() && entityIn.getRidingEntity() == null && (entityIn.getMotion().getX() != 0 || entityIn.getMotion().getZ() != 0) && entityIn.getEntityWorld().getFluidState(entityIn.getPosition().down()).isTagged(FluidTags.WATER)) {
+	private void setRotationAngles(T drowned, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
+		if (drowned.isInWater() && drowned.getRidingEntity() == null && this.getHorizontalMotion(drowned.getMotion()) >= 0.025F && drowned.getEntityWorld().getFluidState(drowned.getPosition().down()).isTagged(FluidTags.WATER)) {
 			float limbSwingRemainder = limbSwing % 26.0F;
-			entityIn.setPose(Pose.SWIMMING);
-			HandSide handside = this.getMainHand(entityIn);
+			drowned.setPose(Pose.SWIMMING);
+			HandSide handside = this.getMainHand(drowned);
 			float rightArmSwimAnimTicks = handside == HandSide.RIGHT && this.swingProgress > 0.0F ? 0.0F : this.swimAnimation;
 			float leftArmSwimAnimTicks = handside == HandSide.LEFT && this.swingProgress > 0.0F ? 0.0F : this.swimAnimation;
 			if (limbSwingRemainder < 14.0F) {
@@ -51,7 +52,7 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 				this.bipedRightArm.rotateAngleY = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleY, (float)Math.PI);
 				this.bipedLeftArm.rotateAngleZ = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleZ, (float)Math.PI);
 				this.bipedRightArm.rotateAngleZ = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleZ, (float)Math.PI);
-			} if (entityIn.isActualySwimming()) {
+			} if (drowned.isActualySwimming()) {
 				this.bipedHead.rotateAngleX = this.rotLerpRad(this.swimAnimation, this.bipedHead.rotateAngleX, (-(float)Math.PI / 4F));
 			} else {
 				this.bipedHead.rotateAngleX = this.rotLerpRad(this.swimAnimation, this.bipedHead.rotateAngleX, headPitch * ((float)Math.PI / 180F));
@@ -59,12 +60,17 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 			this.bipedLeftLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedLeftLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F + (float)Math.PI));
 			this.bipedRightLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedRightLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F));
 		} else {
-			entityIn.setPose(Pose.STANDING);
+			drowned.setPose(Pose.STANDING);
 		}
 	}
     
 	private float getArmAngleSq(float limbSwing) {
 		return -65.0F * limbSwing + limbSwing * limbSwing; 
-	} 
+	}
     
+	private float getHorizontalMotion(Vector3d motion) {
+		double x = motion.getX();
+		double z = motion.getZ();
+		return MathHelper.sqrt(x * x + z * z);
+	}
 }

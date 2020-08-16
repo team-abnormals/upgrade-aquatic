@@ -15,8 +15,8 @@ import net.minecraft.util.math.vector.Vector3f;
 
 @Mixin(DrownedRenderer.class)
 public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, DrownedModel<DrownedEntity>> {
-	private DrownedRendererMixin(EntityRendererManager p_i50974_1_, DrownedModel<DrownedEntity> p_i50974_2_, DrownedModel<DrownedEntity> p_i50974_3_, DrownedModel<DrownedEntity> p_i50974_4_) {
-		super(p_i50974_1_, p_i50974_2_, p_i50974_3_, p_i50974_4_);
+	private DrownedRendererMixin(EntityRendererManager manager, DrownedModel<DrownedEntity> model, DrownedModel<DrownedEntity> model2, DrownedModel<DrownedEntity> model3) {
+		super(manager, model, model2, model3);
 	}
 	
 	@Overwrite
