@@ -183,5 +183,4 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 			}
 		}
 	}
-
 }
