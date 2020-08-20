@@ -48,7 +48,7 @@ public class UAItems {
 	public static final RegistryObject<Item> COOKED_LIONFISH            = HELPER.createItem("cooked_lionfish", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.buildLionfish(true))));
 
 	public static final RegistryObject<Item> MULBERRY            		= HELPER.createItem("mulberry", () -> new BlockNamedItem(UABlocks.MULBERRY_VINE.get(), new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.MULBERRY)));
-	public static final RegistryObject<Item> MULBERRY_JAM_BOTTLE        = HELPER.createItem("mulberry_jam_bottle", () -> new MulberryJamBottleItem(new Item.Properties().group(ItemGroup.FOOD).containerItem(Items.GLASS_BOTTLE).food(UAFoods.MULBERRY_JAM)));
+	public static final RegistryObject<Item> MULBERRY_JAM_BOTTLE        = HELPER.createItem("mulberry_jam_bottle", () -> new MulberryJamBottleItem(new Item.Properties().group(ItemGroup.FOOD).maxStackSize(16).containerItem(Items.GLASS_BOTTLE).food(UAFoods.MULBERRY_JAM)));
 	public static final RegistryObject<Item> MULBERRY_BREAD            	= HELPER.createItem("mulberry_bread", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.MULBERRY_BREAD)));
     public static final RegistryObject<Item> MULBERRY_PIE               = HELPER.createItem("mulberry_pie", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.MULBERRY_PIE)));
 
