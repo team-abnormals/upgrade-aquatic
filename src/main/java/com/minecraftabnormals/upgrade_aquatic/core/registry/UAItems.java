@@ -11,6 +11,7 @@ import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAFoods;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
+import com.teamabnormals.abnormals_core.client.ClientInfo;
 import com.teamabnormals.abnormals_core.common.items.MobBucketItem;
 
 import net.minecraft.client.world.ClientWorld;
@@ -64,8 +65,8 @@ public class UAItems {
 	@OnlyIn(Dist.CLIENT)
 	public static void setupItemPropertes() {
 		ItemModelsProperties.func_239418_a_(JELLYFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity) -> {
-			if (world == null && entity.world instanceof ClientWorld) {
-				world = (ClientWorld) entity.world;
+			if (world == null) {
+				world = (ClientWorld) ClientInfo.getClientPlayerWorld();
 			}
 			
 			CompoundNBT compoundnbt = stack.getTag();
