@@ -89,7 +89,7 @@ public class JellyWallTorchBlock extends JellyTorchBlock {
         double d3 = 0.18d;
         double d4 = 0.3d;
         Direction facing = direction.getOpposite();
-        world.addParticle(getTorchParticleType(this.torchType), d0 + d4 * (double) facing.getXOffset(), d1 + d3, d2 + d4 * (double) facing.getZOffset(), 0d, 0.004d, 0d);
+        world.addParticle(this.torchType.flameParticle.get(), d0 + d4 * (double) facing.getXOffset(), d1 + d3, d2 + d4 * (double) facing.getZOffset(), 0d, 0.004d, 0d);
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {

@@ -3,7 +3,6 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 import java.util.Random;
 import java.util.function.Predicate;
 
-import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.JellyTorchType;
 import com.minecraftabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
@@ -96,7 +95,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			
 			if (this.world.isRemote && this.world.getGameTime() % 4 == 0) {
 				for (int i = 0; i < 2; i++) {
-					this.world.addParticle(JellyTorchBlock.getBlobParticleType(this.getJellyTorchType()), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
+					this.world.addParticle(this.getJellyTorchType().blobParticle.get(), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
 				}
 			}
 		}

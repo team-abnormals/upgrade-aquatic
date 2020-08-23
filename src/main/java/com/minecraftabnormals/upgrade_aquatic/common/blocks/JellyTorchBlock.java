@@ -47,7 +47,7 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
         double d0 = (double) pos.getX() + 0.5d + xOffset;
         double d1 = (double) pos.getY() + 0.5d + yOffset;
         double d2 = (double) pos.getZ() + 0.5d + zOffset;
-        world.addParticle(getTorchParticleType(this.torchType), d0, d1, d2, 0d, 0.0d, 0d);
+        world.addParticle(this.torchType.flameParticle.get(), d0, d1, d2, 0d, 0.0d, 0d);
     }
 
 	@Override
@@ -100,66 +100,66 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
 	    }
 	}
 	
-	public static BasicParticleType getTorchParticleType(JellyTorchType type) {
-		switch(type) {
-			default:
-         	case PINK:
-         		return UAParticles.PINK_JELLY_FLAME;
-         	case PURPLE:
-         		return UAParticles.PURPLE_JELLY_FLAME;
-         	case BLUE:
-                return UAParticles.BLUE_JELLY_FLAME;
-         	case GREEN:
-                return UAParticles.GREEN_JELLY_FLAME;
-         	case YELLOW:
-                return UAParticles.YELLOW_JELLY_FLAME;
-         	case ORANGE:
-                return UAParticles.ORANGE_JELLY_FLAME;
-         	case RED:
-                return UAParticles.RED_JELLY_FLAME;
-         	case WHITE:
-                return UAParticles.WHITE_JELLY_FLAME;
-        }
-    }
-	
-	public static BasicParticleType getBlobParticleType(JellyTorchType type) {
-		switch(type) {
-			default:
-         	case PINK:
-         		return UAParticles.PINK_JELLY_BLOB;
-         	case PURPLE:
-         		return UAParticles.PURPLE_JELLY_BLOB;
-         	case BLUE:
-                return UAParticles.BLUE_JELLY_BLOB;
-         	case GREEN:
-                return UAParticles.GREEN_JELLY_BLOB;
-         	case YELLOW:
-                return UAParticles.YELLOW_JELLY_BLOB;
-         	case ORANGE:
-                return UAParticles.ORANGE_JELLY_BLOB;
-         	case RED:
-                return UAParticles.RED_JELLY_BLOB;
-         	case WHITE:
-                return UAParticles.WHITE_JELLY_BLOB;
-        }
-    }
-	
 	public enum JellyTorchType {
-		PINK(TextFormatting.LIGHT_PURPLE, () -> UABlocks.PINK_JELLY_TORCH.get()), 
-		PURPLE(TextFormatting.DARK_PURPLE, () -> UABlocks.PURPLE_JELLY_TORCH.get()), 
-		BLUE(TextFormatting.BLUE, () -> UABlocks.BLUE_JELLY_TORCH.get()), 
-		GREEN(TextFormatting.GREEN, () -> UABlocks.GREEN_JELLY_TORCH.get()), 
-		YELLOW(TextFormatting.YELLOW, () -> UABlocks.YELLOW_JELLY_TORCH.get()), 
-		ORANGE(TextFormatting.GOLD, () -> UABlocks.ORANGE_JELLY_TORCH.get()),
-		RED(TextFormatting.RED, () -> UABlocks.RED_JELLY_TORCH.get()),
-		WHITE(TextFormatting.WHITE, () -> UABlocks.WHITE_JELLY_TORCH.get());
+		PINK(
+			TextFormatting.LIGHT_PURPLE,
+			() -> UABlocks.PINK_JELLY_TORCH.get(),
+			() -> UAParticles.PINK_JELLY_FLAME,
+			() -> UAParticles.PINK_JELLY_BLOB
+		), 
+		PURPLE(
+			TextFormatting.DARK_PURPLE, 
+			() -> UABlocks.PURPLE_JELLY_TORCH.get(),
+			() -> UAParticles.PURPLE_JELLY_FLAME,
+			() -> UAParticles.PURPLE_JELLY_BLOB
+		), 
+		BLUE(
+			TextFormatting.BLUE, 
+			() -> UABlocks.BLUE_JELLY_TORCH.get(),
+			() -> UAParticles.BLUE_JELLY_FLAME,
+			() -> UAParticles.BLUE_JELLY_BLOB
+		), 
+		GREEN(
+			TextFormatting.GREEN, 
+			() -> UABlocks.GREEN_JELLY_TORCH.get(),
+			() -> UAParticles.GREEN_JELLY_FLAME,
+			() -> UAParticles.GREEN_JELLY_BLOB
+		), 
+		YELLOW(
+			TextFormatting.YELLOW,
+			() -> UABlocks.YELLOW_JELLY_TORCH.get(),
+			() -> UAParticles.YELLOW_JELLY_FLAME,
+			() -> UAParticles.YELLOW_JELLY_BLOB
+		), 
+		ORANGE(
+			TextFormatting.GOLD, 
+			() -> UABlocks.ORANGE_JELLY_TORCH.get(),
+			() -> UAParticles.ORANGE_JELLY_FLAME,
+			() -> UAParticles.ORANGE_JELLY_BLOB
+		),
+		RED(
+			TextFormatting.RED,
+			() -> UABlocks.RED_JELLY_TORCH.get(),
+			() -> UAParticles.RED_JELLY_FLAME,
+			() -> UAParticles.RED_JELLY_BLOB
+		),
+		WHITE(
+			TextFormatting.WHITE,
+			() -> UABlocks.WHITE_JELLY_TORCH.get(),
+			() -> UAParticles.WHITE_JELLY_FLAME,
+			() -> UAParticles.WHITE_JELLY_BLOB
+		);
 		
 		public final TextFormatting color;
 		public final Supplier<Block> torch;
+		public final Supplier<BasicParticleType> flameParticle;
+		public final Supplier<BasicParticleType> blobParticle;
 		
-		private JellyTorchType(TextFormatting color, Supplier<Block> torch) {
+		private JellyTorchType(TextFormatting color, Supplier<Block> torch, Supplier<BasicParticleType> flameParticle, Supplier<BasicParticleType> blobParticle) {
 			this.color = color;
 			this.torch = torch;
+			this.flameParticle = flameParticle;
+			this.blobParticle = blobParticle;
 		}
 	}
 }
