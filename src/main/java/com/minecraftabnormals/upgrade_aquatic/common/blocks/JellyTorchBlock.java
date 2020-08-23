@@ -1,8 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -27,22 +29,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler, ILiquidContainer {
-	public enum JellyTorchType {
-		PINK(TextFormatting.LIGHT_PURPLE), 
-		PURPLE(TextFormatting.DARK_PURPLE), 
-		BLUE(TextFormatting.BLUE), 
-		GREEN(TextFormatting.GREEN), 
-		YELLOW(TextFormatting.YELLOW), 
-		ORANGE(TextFormatting.GOLD),
-		RED(TextFormatting.RED),
-		WHITE(TextFormatting.WHITE);
-		
-		public final TextFormatting color;
-		
-		private JellyTorchType(TextFormatting color) {
-			this.color = color;
-		}
-	}
 	private final JellyTorchType torchType;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	
@@ -157,4 +143,23 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
                 return UAParticles.WHITE_JELLY_BLOB;
         }
     }
+	
+	public enum JellyTorchType {
+		PINK(TextFormatting.LIGHT_PURPLE, () -> UABlocks.PINK_JELLY_TORCH.get()), 
+		PURPLE(TextFormatting.DARK_PURPLE, () -> UABlocks.PURPLE_JELLY_TORCH.get()), 
+		BLUE(TextFormatting.BLUE, () -> UABlocks.BLUE_JELLY_TORCH.get()), 
+		GREEN(TextFormatting.GREEN, () -> UABlocks.GREEN_JELLY_TORCH.get()), 
+		YELLOW(TextFormatting.YELLOW, () -> UABlocks.YELLOW_JELLY_TORCH.get()), 
+		ORANGE(TextFormatting.GOLD, () -> UABlocks.ORANGE_JELLY_TORCH.get()),
+		RED(TextFormatting.RED, () -> UABlocks.RED_JELLY_TORCH.get()),
+		WHITE(TextFormatting.WHITE, () -> UABlocks.WHITE_JELLY_TORCH.get());
+		
+		public final TextFormatting color;
+		public final Supplier<Block> torch;
+		
+		private JellyTorchType(TextFormatting color, Supplier<Block> torch) {
+			this.color = color;
+			this.torch = torch;
+		}
+	}
 }

@@ -9,7 +9,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -20,15 +19,17 @@ import net.minecraft.world.World;
  * @author SmellyModder(Luke Tonon)
  */
 public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
-	private RotationController rotationController;
 	public static final Endimation SWIM_ANIMATION = new Endimation(20);
 	public static final Endimation BOOST_ANIMATION = new Endimation(20);
+	private RotationController rotationController;
+	private final BucketProcessor<ImmortalJellyfishEntity> bucketProcessor;
 	private int healCooldown;
 	private float prevHealth;
 
 	public ImmortalJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, World world) {
 		super(type, world);
 		this.rotationController = new RotationController(this);
+		this.bucketProcessor = new BucketProcessor<>("immortal_jellyfish", this);
 		this.prevHealth = this.getHealth();
 	}
 	
@@ -49,15 +50,15 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	public void tick() {
 		super.tick();
 		
-		if(this.healCooldown > 0) {
+		if (this.healCooldown > 0) {
 			this.healCooldown--;
 		} else {
-			if(this.ticksExisted % 5 == 0) {
+			if (this.ticksExisted % 5 == 0) {
 				this.heal(0.5F);
 			}
 		}
 		
-		if(this.prevHealth > this.getHealth()) {
+		if (this.prevHealth > this.getHealth()) {
 			this.healCooldown = this.getRNG().nextInt(40) + 20;
 		}
 		
@@ -66,9 +67,9 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	
 	@Override
 	public void onEndimationStart(Endimation endimation) {
-		if(endimation == SWIM_ANIMATION) {
+		if (endimation == SWIM_ANIMATION) {
 			this.getRotationController().addVelocityForLookDirection(0.35F, 1.0F);
-		} else if(endimation == BOOST_ANIMATION) {
+		} else if (endimation == BOOST_ANIMATION) {
 			this.getRotationController().addVelocityForLookDirection(0.2F, 1.0F);
 		}
 	}
@@ -97,18 +98,6 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	public RotationController getRotationController() {
 		return this.rotationController;
 	}
-	
-	@Override
-	protected void setBucketData(ItemStack bucket) {
-		if(this.hasCustomName()) {
-			bucket.setDisplayName(this.getCustomName());
-		}
-		BucketData data = new BucketData("immortal_jellyfish");
-		bucket.getOrCreateTag().put("JellyfishTag", BucketData.write(data));
-	}
-
-	@Override
-	public void readBucketData(CompoundNBT compound) {}
 
 	@Override
 	public String getBucketName() {
@@ -144,5 +133,10 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 3;
+	}
+
+	@Override
+	public BucketProcessor<?> getBucketProcessor() {
+		return this.bucketProcessor;
 	}
 }

@@ -8,7 +8,6 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.Jell
 import com.minecraftabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADamageSources;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
@@ -51,7 +50,7 @@ import net.minecraftforge.fml.network.PacketDistributor;
  */
 public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity implements IEndimatedEntity {
 	private static final Predicate<LivingEntity> CAN_STING = (entity) -> {
-		if(entity instanceof PlayerEntity) {
+		if (entity instanceof PlayerEntity) {
 			return !entity.isSpectator() && !((PlayerEntity) entity).isCreative();
 		}
 		return !entity.isSpectator() && !(entity instanceof AbstractJellyfishEntity || entity instanceof TurtleEntity);
@@ -66,8 +65,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	}
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().
-    			createMutableAttribute(Attributes.ATTACK_DAMAGE, 2.0D);
+		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.ATTACK_DAMAGE, 2.0D);
     }
 	
 	@Override
@@ -84,8 +82,8 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		
 		this.rotationYaw = this.rotationYawHead = this.renderYawOffset = 0;
 		
-		if(this.isServerWorld()) {
-			if(!this.isPassenger()) {
+		if (this.isServerWorld()) {
+			if (!this.isPassenger()) {
 				this.getRotationController().rotate(this.lockedRotations[0], this.lockedRotations[1], 25);
 			} else {
 				this.getRotationController().rotate(0.0F, 0.0F, 1);
@@ -93,24 +91,24 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			}
 		}
 		
-		if(this.hasCooldown()) {
-			if(this.isServerWorld()) this.setCooldown(this.getCooldown() - 1);
+		if (this.hasCooldown()) {
+			if (this.isServerWorld()) this.setCooldown(this.getCooldown() - 1);
 			
-			if(this.world.isRemote && this.world.getGameTime() % 4 == 0) {
-				for(int i = 0; i < 2; i++) {
+			if (this.world.isRemote && this.world.getGameTime() % 4 == 0) {
+				for (int i = 0; i < 2; i++) {
 					this.world.addParticle(JellyTorchBlock.getBlobParticleType(this.getJellyTorchType()), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
 				}
 			}
 		}
 		
-		if(this.isAlive()) {
-			for(LivingEntity entities : this.world.getEntitiesWithinAABB(LivingEntity.class, this.getBoundingBox().grow(0.15D), CAN_STING)) {
-				if(entities.isAlive()) {
+		if (this.isAlive()) {
+			for (LivingEntity entities : this.world.getEntitiesWithinAABB(LivingEntity.class, this.getBoundingBox().grow(0.15D), CAN_STING)) {
+				if (entities.isAlive()) {
 					this.stingEntity(entities);
 				}
 			}
 			
-			if(this.isInWater() && this.isNoEndimationPlaying()) {
+			if (this.isInWater() && this.isNoEndimationPlaying()) {
 				this.setMotion(this.getMotion().subtract(0.0F, 0.005F, 0.0F));
 			}
 		}
@@ -118,7 +116,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	
 	@Override
 	public void travel(Vector3d Vector3d) {
-		if(this.isServerWorld() && this.isInWater()) {
+		if (this.isServerWorld() && this.isInWater()) {
 			this.moveRelative(0.01F, Vector3d);
 			this.move(MoverType.SELF, this.getMotion());
 			this.setMotion(this.getMotion().scale(0.75D));
@@ -133,33 +131,20 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		float zMotion = MathHelper.cos(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
 		
 		Vector3d motion = new Vector3d(xMotion, yMotion, zMotion).normalize().scale(0.55F);
-		if(this.world.isAirBlock(new BlockPos(this.getPositionVec().add(motion)))) {
+		if (this.world.isAirBlock(new BlockPos(this.getPositionVec().add(motion)))) {
 			return true;
 		}
 		
-		if(pitch <= 75.0F && pitch >= -75.0F) {
-			BlockPos pos = this.getPosition();
-			BlockPos.Mutable blockpos = new BlockPos.Mutable();
-			for(int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
-				for(int y = pos.getY(); y < pos.getY() + 2; y++) {
-					for(int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
-						blockpos.setPos(x, y, z);
-						if(this.world.isAirBlock(blockpos.up()) && this.world.getFluidState(blockpos).isTagged(FluidTags.WATER)) {
-							return true;
-						}
-					}
-				}
-			}
-		} else if(pitch <= 180.0F && (pitch >= -180.0F && pitch < -75.0F)) {
-			BlockPos pos = this.getPosition();
-			BlockPos.Mutable blockpos = new BlockPos.Mutable();
-			for(int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
-				for(int y = pos.getY(); y < pos.getY() - 2; y++) {
-					for(int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
-						blockpos.setPos(x, y, z);
-						if(this.world.isAirBlock(blockpos.down()) && this.world.getFluidState(blockpos).isTagged(FluidTags.WATER)) {
-							return true;
-						}
+		BlockPos pos = this.getPosition();
+		BlockPos.Mutable blockpos = new BlockPos.Mutable();
+		boolean up = pitch <= 75.0F && pitch >= -75.0F;
+		int yOffset = up ? pos.getY() + 2 : pos.getY() - 2;
+		for (int x = pos.getX() - 1; x < pos.getX() + 2; x++) {
+			for (int y = pos.getY(); (up ? y < yOffset : y > yOffset); y++) {
+				for (int z = pos.getZ() - 1; z < pos.getZ() + 2; z++) {
+					blockpos.setPos(x, y, z);
+					if (this.world.isAirBlock(blockpos.up()) && this.world.getFluidState(blockpos).isTagged(FluidTags.WATER)) {
+						return true;
 					}
 				}
 			}
@@ -176,19 +161,27 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 		Item item = itemstack.getItem();
-		if(itemstack.isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
+		if (itemstack.isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
 			this.startRiding(player);
 			return ActionResultType.SUCCESS;
-		} else if(item == UAItems.PRISMARINE_ROD.get() && !this.hasCooldown()) {
+		} else if (item == UAItems.PRISMARINE_ROD.get() && !this.hasCooldown()) {
 			Random rand = new Random();
-			if(this.isServerWorld() && rand.nextFloat() < this.getCooldownChance()) {
+			if (this.isServerWorld() && rand.nextFloat() < this.getCooldownChance()) {
 				this.setCooldown(20 * (rand.nextInt(16) + 15));
 			}
 			itemstack.shrink(1);
-			player.addItemStackToInventory(getTorchByType(this.getJellyTorchType()));
+			player.addItemStackToInventory(this.getTorchByType(this.getJellyTorchType()));
 			return ActionResultType.SUCCESS;
 		}
 		return super.func_230254_b_(player, hand);
+	}
+	
+	@Override
+	protected void setBucketData(ItemStack bucket) {
+		if (this.hasCustomName()) {
+			bucket.setDisplayName(this.getCustomName());
+		}
+		bucket.getOrCreateTag().put("JellyfishTag", this.getBucketProcessor().write());
 	}
 	
 	@Override
@@ -253,7 +246,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	
 	public abstract RotationController getRotationController();
 	
-	public abstract void readBucketData(CompoundNBT compound);
+	public abstract BucketProcessor<?> getBucketProcessor();
 	
 	public abstract String getBucketName();
 	
@@ -265,7 +258,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		return this.getJellyTorchType().ordinal();
 	}
 	
-	public boolean stingEntity(LivingEntity livingEntity) {
+	protected boolean stingEntity(LivingEntity livingEntity) {
 		return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
 	}
 	
@@ -274,26 +267,8 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").mergeStyle(TextFormatting.GRAY)).append((new TranslationTextComponent("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase() + "_jelly_torch")).mergeStyle(torchType.color));
 	}
 	
-	public static ItemStack getTorchByType(JellyTorchType type) {
-		switch(type) {
-			default:
-			case RED:
-				return new ItemStack(UABlocks.RED_JELLY_TORCH.get());
-			case ORANGE:
-				return new ItemStack(UABlocks.ORANGE_JELLY_TORCH.get());
-			case YELLOW:
-				return new ItemStack(UABlocks.YELLOW_JELLY_TORCH.get());
-			case GREEN:
-				return new ItemStack(UABlocks.GREEN_JELLY_TORCH.get());
-				case BLUE:
-				return new ItemStack(UABlocks.BLUE_JELLY_TORCH.get());
-			case PINK:
-				return new ItemStack(UABlocks.PINK_JELLY_TORCH.get());
-			case PURPLE:
-				return new ItemStack(UABlocks.PURPLE_JELLY_TORCH.get());
-			case WHITE:
-				return new ItemStack(UABlocks.WHITE_JELLY_TORCH.get());
-		}
+	protected ItemStack getTorchByType(JellyTorchType type) {
+		return new ItemStack(type.torch.get());
 	}
 	
 	@SuppressWarnings("deprecation")
@@ -318,17 +293,12 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			this.prevYaw = this.yaw;
 			this.prevPitch = this.pitch;
 			
-			if(!this.rotating) {
+			if (!this.rotating) {
 				this.ticksSinceNotRotating++;
 				
-				if(this.ticksSinceNotRotating > 5) {
-					if(this.setYaw != 0.0F) {
-						this.startingYaw = this.yaw;
-					}
-				
-					if(this.setPitch != 0.0F) {
-						this.startingPitch = this.pitch;
-					}
+				if (this.ticksSinceNotRotating > 5) {
+					if (this.setYaw != 0.0F) this.startingYaw = this.yaw;
+					if (this.setPitch != 0.0F) this.startingPitch = this.pitch;
 					
 					this.setYaw = 0.0F;
 					this.setPitch = 0.0F;
@@ -338,15 +308,14 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			
 			this.yaw = this.clamp((this.setYaw - this.startingYaw) <= 0, this.yaw + ((this.setYaw - this.startingYaw) / this.tickLength), this.startingYaw, this.setYaw);
 			this.pitch = this.clamp((this.setPitch - this.startingPitch) <= 0, this.pitch + ((this.setPitch - this.startingPitch) / this.tickLength), this.startingPitch, this.setPitch);
-			
 			this.rotating = false;
 		}
 		
 		private float clamp(boolean invert, float num, float min, float max) {
-			if(invert) {
+			if (invert) {
 				return num > max ? num : max;
 			} else {
-				if(num < min) {
+				if (num < min) {
 					return min;
 				} else {
 					return num > max ? max : num;
@@ -355,13 +324,8 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		}
 		
 		public void rotate(float yaw, float pitch, int tickLength) {
-			if(this.setYaw != yaw) {
-				this.startingYaw = this.yaw;
-			}
-			
-			if(this.setPitch != pitch) {
-				this.startingPitch = this.pitch;
-			}
+			if (this.setYaw != yaw) this.startingYaw = this.yaw;
+			if (this.setPitch != pitch) this.startingPitch = this.pitch;
 			
 			this.setYaw = yaw;
 			this.setPitch = pitch;
@@ -369,7 +333,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			this.rotating = true;
 			this.ticksSinceNotRotating = 0;
 			
-			if(!this.jellyfish.world.isRemote) {
+			if (!this.jellyfish.world.isRemote) {
 				UpgradeAquatic.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.jellyfish), new RotateJellyfishMessage(this.jellyfish.getEntityId(), tickLength, yaw, pitch));
 			}
 		}
@@ -393,21 +357,21 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		}
 	}
 	
-	public static class BucketData {
-		public final String entityId;
+	public static class BucketProcessor<J extends AbstractJellyfishEntity> {
+		private final String entityId;
+		protected final J jellyfish;
 		
-		public BucketData(String entityId) {
+		public BucketProcessor(String entityId, J jellyfish) {
 			this.entityId = entityId;
+			this.jellyfish = jellyfish;
 		}
 		
-		public static BucketData read(CompoundNBT compound) {
-			return new BucketData(compound.getString("EntityId"));
+		public CompoundNBT write() {
+			CompoundNBT nbt = new CompoundNBT();
+			nbt.putString("EntityId", this.entityId);
+			return nbt;
 		}
 		
-		public static CompoundNBT write(BucketData data) {
-			CompoundNBT compound = new CompoundNBT();
-			compound.putString("EntityId", data.entityId);
-			return compound;
-		}
+		public void read(CompoundNBT nbt) {}
 	}
 }

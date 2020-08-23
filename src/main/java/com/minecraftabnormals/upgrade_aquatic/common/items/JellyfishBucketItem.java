@@ -7,7 +7,6 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity.BucketData;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
@@ -57,7 +56,7 @@ public class JellyfishBucketItem extends BucketItem {
 
 	private void placeEntity(World world, ItemStack stack, BlockPos pos) {
 		AbstractJellyfishEntity jellyfish = this.getEntityInStack(stack, world, pos);
-		if(jellyfish != null) {
+		if (jellyfish != null) {
 			((BucketableWaterMobEntity) jellyfish).setFromBucket(true);
 		}
 	}
@@ -65,18 +64,19 @@ public class JellyfishBucketItem extends BucketItem {
 	@Nullable
 	public AbstractJellyfishEntity getEntityInStack(ItemStack stack, World world, @Nullable BlockPos pos) {
 		CompoundNBT compoundnbt = stack.getTag();
-		if(compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
-			BucketData bucketData = BucketData.read(compoundnbt.getCompound("JellyfishTag"));
-			Entity entity = pos != null ? ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + bucketData.entityId)).spawn(world, stack, null, pos, SpawnReason.BUCKET, true, false) : ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + bucketData.entityId)).create(world);
+		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
+			CompoundNBT jellyfishTag = compoundnbt.getCompound("JellyfishTag");
+			String entityId = jellyfishTag.getString("EntityId");
+			Entity entity = pos != null ? ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + entityId)).spawn(world, stack, null, pos, SpawnReason.BUCKET, true, false) : ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + entityId)).create(world);
 			AbstractJellyfishEntity jellyfish = entity instanceof AbstractJellyfishEntity ? (AbstractJellyfishEntity) entity : null;
 			
-			if(jellyfish == null) {
+			if (jellyfish == null) {
 				return null;
 			}
 			
-			jellyfish.readBucketData(compoundnbt.getCompound("JellyfishTag"));
+			jellyfish.getBucketProcessor().read(jellyfishTag);
 			return jellyfish;
-		} else if(pos != null) {
+		} else if (pos != null) {
 			AbstractJellyfishEntity jellyfish = this.getRandomJellyfish(stack, world, pos);
 			return jellyfish != null ? jellyfish : null;
 		}
