@@ -128,11 +128,11 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 		
 	}
 	
-	class SpawnData implements ILivingEntityData {
-		public final float size;
-		public final int color;
+	static class SpawnData implements ILivingEntityData {
+		private final float size;
+		private final int color;
 
-		public SpawnData(float size, int color) {
+		private SpawnData(float size, int color) {
 			this.size = size;
 			this.color = color;
 		}

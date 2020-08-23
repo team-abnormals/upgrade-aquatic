@@ -60,8 +60,12 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 			this.hideCooldown--;
 		}
 		
-		if (this.isEndimationPlaying(BOOST_ANIMATION) && this.isInWater()) {
-			this.setMotion(this.getMotion().scale(1.15F));
+		if (this.isInWater()) {
+			if (this.isEndimationPlaying(BOOST_ANIMATION)) {
+				this.setMotion(this.getMotion().scale(1.15F));
+			} else if (this.isEndimationPlaying(SWIM_ANIMATION)) {
+				this.setMotion(this.getMotion().scale(1.05F));
+			}
 		}
 	}
 	
