@@ -27,8 +27,6 @@ import net.minecraft.world.World;
  * @author SmellyModder(Luke Tonon)
  */
 public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
-	public static final Endimation SWIM_ANIMATION = new Endimation(20);
-	public static final Endimation BOOST_ANIMATION = new Endimation(20);
 	private RotationController rotationController;
 	private int huntingCooldown;
 
@@ -112,14 +110,6 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 			return true;
 		}
 		return false;
-	}
-	
-	@Override
-	public Endimation[] getEndimations() {
-		return new Endimation[] {
-			SWIM_ANIMATION,
-			BOOST_ANIMATION
-		};
 	}
 	
 	@Override

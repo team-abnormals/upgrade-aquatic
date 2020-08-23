@@ -23,8 +23,6 @@ import net.minecraft.world.World;
  * @author SmellyModder(Luke Tonon)
  */
 public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
-	public static final Endimation SWIM_ANIMATION = new Endimation(20);
-	public static final Endimation BOOST_ANIMATION = new Endimation(20);
 	private RotationController rotationController;
 	public int upsideDownCooldown;
 	public int hideCooldown;
@@ -104,14 +102,6 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 3;
-	}
-
-	@Override
-	public Endimation[] getEndimations() {
-		return new Endimation[] {
-			BOOST_ANIMATION,
-			SWIM_ANIMATION
-		};
 	}
 	
 	@Override

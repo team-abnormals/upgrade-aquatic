@@ -19,8 +19,6 @@ import net.minecraft.world.World;
  * @author SmellyModder(Luke Tonon)
  */
 public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
-	public static final Endimation SWIM_ANIMATION = new Endimation(20);
-	public static final Endimation BOOST_ANIMATION = new Endimation(20);
 	private RotationController rotationController;
 	private final BucketProcessor<ImmortalJellyfishEntity> bucketProcessor;
 	private int healCooldown;
@@ -84,14 +82,6 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		compound.putInt("HealCooldown", this.healCooldown);
-	}
-
-	@Override
-	public Endimation[] getEndimations() {
-		return new Endimation[] {
-			SWIM_ANIMATION,
-			BOOST_ANIMATION
-		};
 	}
 
 	@Override

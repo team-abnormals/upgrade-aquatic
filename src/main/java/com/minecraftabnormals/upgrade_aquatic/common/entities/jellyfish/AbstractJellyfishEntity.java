@@ -54,6 +54,8 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		}
 		return !entity.isSpectator() && !(entity instanceof AbstractJellyfishEntity || entity instanceof TurtleEntity);
 	};
+	public static final Endimation SWIM_ANIMATION = new Endimation(20);
+	public static final Endimation BOOST_ANIMATION = new Endimation(20);
 	protected static final DataParameter<Integer> COOLDOWN = EntityDataManager.createKey(AbstractJellyfishEntity.class, DataSerializers.VARINT);
 	private Endimation playingEndimation = BLANK_ANIMATION;
 	private int animationTick;
@@ -231,6 +233,15 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		this.onEndimationEnd(this.playingEndimation);
 		this.playingEndimation = endimationToPlay;
 		this.setAnimationTick(0);
+	}
+	
+
+	@Override
+	public Endimation[] getEndimations() {
+		return new Endimation[] {
+			SWIM_ANIMATION,
+			BOOST_ANIMATION
+		};
 	}
 	
 	@Override
