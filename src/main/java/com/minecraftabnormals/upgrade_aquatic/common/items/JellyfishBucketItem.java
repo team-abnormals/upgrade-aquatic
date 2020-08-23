@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
 import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 
@@ -26,7 +27,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -44,14 +44,14 @@ public class JellyfishBucketItem extends BucketItem {
 	}
 	
 	public void onLiquidPlaced(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
-		if(!worldIn.isRemote) {
+		if (!worldIn.isRemote) {
 			this.placeEntity(worldIn, p_203792_2_, pos);
 		}
 	}
 	
 	@Override
 	protected void playEmptySound(@Nullable PlayerEntity player, IWorld worldIn, BlockPos pos) {
-		worldIn.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+		worldIn.playSound(player, pos, UASounds.ITEM_BUCKET_EMPTY_JELLYFISH.get(), SoundCategory.NEUTRAL, 1.0F, 1.0F);
 	}
 
 	private void placeEntity(World world, ItemStack stack, BlockPos pos) {

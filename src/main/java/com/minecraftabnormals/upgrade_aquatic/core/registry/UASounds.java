@@ -23,5 +23,17 @@ public class UASounds {
 	public static final RegistryObject<SoundEvent> THRASHER_DEATH        = HELPER.createSoundEvent("entity.thrasher.death");
 	public static final RegistryObject<SoundEvent> THRASHER_DEATH_LAND   = HELPER.createSoundEvent("entity.thrasher.death_land");
 	
+	public static final RegistryObject<SoundEvent> JELLYFISH_AMBIENT        = HELPER.createSoundEvent("entity.jellyfish.ambient");
+	public static final RegistryObject<SoundEvent> JELLYFISH_HURT           = HELPER.createSoundEvent("entity.jellyfish.hurt");
+	public static final RegistryObject<SoundEvent> JELLYFISH_DEATH          = HELPER.createSoundEvent("entity.jellyfish.death");
+	public static final RegistryObject<SoundEvent> JELLYFISH_HARVEST        = HELPER.createSoundEvent("entity.jellyfish.harvest");
+	public static final RegistryObject<SoundEvent> JELLYFISH_COOLDOWN_START = HELPER.createSoundEvent("entity.jellyfish.cooldown_start");
+	public static final RegistryObject<SoundEvent> JELLYFISH_COOLDOWN_END   = HELPER.createSoundEvent("entity.jellyfish.cooldown_end");
+	public static final RegistryObject<SoundEvent> JELLYFISH_STING          = HELPER.createSoundEvent("entity.jellyfish.sting");
+	public static final RegistryObject<SoundEvent> GHOST_JELLYFISH_VANISH   = HELPER.createSoundEvent("entity.jellyfish.ghost_vanish");
+	
+	public static final RegistryObject<SoundEvent> ITEM_BUCKET_EMPTY_JELLYFISH = HELPER.createSoundEvent("item.bucket.empty_jellyfish");
+	public static final RegistryObject<SoundEvent> ITEM_BUCKET_FILL_JELLYFISH  = HELPER.createSoundEvent("item.bucket.fill_jellyfish");
+	
 	public static final SoundType TOOTH_LANTERN = new SoundType(1.0F, 1.0F, SoundEvents.BLOCK_GLASS_BREAK, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL);
 }

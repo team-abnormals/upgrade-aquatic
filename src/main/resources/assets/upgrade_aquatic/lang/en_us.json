@@ -615,6 +615,17 @@
   "subtitles.upgrade_aquatic.thrasher.death": "Thrasher dies",
   "subtitles.upgrade_aquatic.thrasher.thrash": "Thrasher thrashes",
   "subtitles.upgrade_aquatic.thrasher.flop": "Thrasher flops",
-  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Thrasher fires sonar"
+  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Thrasher fires sonar",
   
+  "subtitles.upgrade_aquatic.jellyfish.hurt": "Jellyfish hurts",
+  "subtitles.upgrade_aquatic.jellyfish.ambient": "Jellyfish pulses",
+  "subtitles.upgrade_aquatic.jellyfish.death": "Jellyfish dies",
+  "subtitles.upgrade_aquatic.jellyfish.harvest": "Jellyfish harvested",
+  "subtitles.upgrade_aquatic.jellyfish.cooldown_start": "Jellyfish cooldown starts",
+  "subtitles.upgrade_aquatic.jellyfish.cooldown_end": "Jellyfish cooldown ends",
+  "subtitles.upgrade_aquatic.jellyfish.sting": "Jellyfish stings",
+  "subtitles.upgrade_aquatic.jellyfish.ghost_vanish": "Ghost jellyfish vanishes",
+  
+  "subtitles.upgrade_aquatic.bucket.empty_jellyfish": "Jellyfish released",
+  "subtitles.upgrade_aquatic.bucket.fill_jellyfish": "Jellyfish captured"
 }

@@ -8,11 +8,13 @@ import com.minecraftabnormals.upgrade_aquatic.common.network.RotateJellyfishMess
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADamageSources;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
 import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
 import com.teamabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
 import com.teamabnormals.abnormals_core.core.utils.MathUtils;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -22,8 +24,10 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -32,7 +36,9 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -76,6 +82,22 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	}
 	
 	@Override
+	public void readAdditional(CompoundNBT compound) {
+		super.readAdditional(compound);
+		this.setCooldown(compound.getInt("CooldownTicks"));
+		this.lockedRotations[0] = compound.getFloat("LockedYaw");
+		this.lockedRotations[1] = compound.getFloat("LockedPitch");
+	}
+	
+	@Override
+	public void writeAdditional(CompoundNBT compound) {
+		super.writeAdditional(compound);
+		compound.putInt("CooldownTicks", this.getCooldown());
+		compound.putFloat("LockedYaw", this.lockedRotations[0]);
+		compound.putFloat("LockedPitch", this.lockedRotations[1]);
+	}
+	
+	@Override
 	public void tick() {
 		super.tick();
 		this.endimateTick();
@@ -93,7 +115,12 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 		}
 		
 		if (this.hasCooldown()) {
-			if (this.isServerWorld()) this.setCooldown(this.getCooldown() - 1);
+			if (this.isServerWorld()) {
+				this.setCooldown(this.getCooldown() - 1);
+				if (!this.hasCooldown()) {
+					this.playSound(UASounds.JELLYFISH_COOLDOWN_END.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
+				}
+			}
 			
 			if (this.world.isRemote && this.world.getGameTime() % 4 == 0) {
 				for (int i = 0; i < 2; i++) {
@@ -162,19 +189,66 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
 		Item item = itemstack.getItem();
-		if (itemstack.isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
+		if (item == Items.WATER_BUCKET && this.isAlive()) {
+			this.playSound(UASounds.ITEM_BUCKET_FILL_JELLYFISH.get(), 1.0F, 1.0F);
+			itemstack.shrink(1);
+			ItemStack bucket = this.getBucket();
+			this.setBucketData(bucket);
+			if (!this.world.isRemote) {
+				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, bucket);
+			}
+
+			if (itemstack.isEmpty()) {
+				player.setHeldItem(hand, bucket);
+			} else if (!player.inventory.addItemStackToInventory(bucket)) {
+				player.dropItem(bucket, false);
+			}
+
+			this.remove();
+			return ActionResultType.SUCCESS;
+		} else if (itemstack.isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
 			this.startRiding(player);
 			return ActionResultType.SUCCESS;
 		} else if (item == UAItems.PRISMARINE_ROD.get() && !this.hasCooldown()) {
 			Random rand = new Random();
 			if (this.isServerWorld() && rand.nextFloat() < this.getCooldownChance()) {
 				this.setCooldown(20 * (rand.nextInt(16) + 15));
+				this.playSound(UASounds.JELLYFISH_COOLDOWN_START.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
 			}
 			itemstack.shrink(1);
 			player.addItemStackToInventory(this.getTorchByType(this.getJellyTorchType()));
+			this.playSound(UASounds.JELLYFISH_HARVEST.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
 			return ActionResultType.SUCCESS;
 		}
 		return super.func_230254_b_(player, hand);
+	}
+	
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return this.isInWater() ? UASounds.JELLYFISH_AMBIENT.get() : null;
+	}
+	
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return UASounds.JELLYFISH_HURT.get();
+	}
+	
+	@Override
+	protected SoundEvent getDeathSound() {
+		return UASounds.JELLYFISH_DEATH.get();
+	}
+	
+	@Override
+	public void playAmbientSound() {
+		SoundEvent soundevent = this.getAmbientSound();
+		if (soundevent != null) {
+			this.playSound(soundevent, 0.25F, this.getSoundPitch());
+		}
+	}
+	
+	@Override
+	public int getTalkInterval() {
+		return this.rand.nextInt(200) + 200;
 	}
 	
 	@Override
@@ -183,22 +257,6 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			bucket.setDisplayName(this.getCustomName());
 		}
 		bucket.getOrCreateTag().put("JellyfishTag", this.getBucketProcessor().write());
-	}
-	
-	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
-		this.setCooldown(compound.getInt("CooldownTicks"));
-		this.lockedRotations[0] = compound.getFloat("LockedYaw");
-		this.lockedRotations[1] = compound.getFloat("LockedPitch");
-	}
-	
-	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
-		compound.putInt("CooldownTicks", this.getCooldown());
-		compound.putFloat("LockedYaw", this.lockedRotations[0]);
-		compound.putFloat("LockedPitch", this.lockedRotations[1]);
 	}
 	
 	public int getCooldown() {
@@ -269,7 +327,11 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 	}
 	
 	protected boolean stingEntity(LivingEntity livingEntity) {
-		return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+		if (livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
+			this.playSound(UASounds.JELLYFISH_STING.get(), 0.5F, this.rand.nextFloat() * 0.2F + 1.0F);
+			return true;
+		}
+		return false;
 	}
 	
 	public ITextComponent getYieldingTorchMessage() {

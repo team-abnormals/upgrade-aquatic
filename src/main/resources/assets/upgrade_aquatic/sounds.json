@@ -79,5 +79,94 @@
         "sounds": [
         	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_death", "stream": false }
         ]
+    },
+    "entity.jellyfish.ambient":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.jellyfish.ambient",
+        "sounds": [
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_ambient_0",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_ambient_1",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_ambient_2"
+        ]
+    },
+    "entity.jellyfish.hurt":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.jellyfish.hurt",
+        "sounds": [
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_hurt_0",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_hurt_1",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_hurt_2"
+        ]
+    },
+    "entity.jellyfish.death":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.jellyfish.death",
+        "sounds": [
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_death_0",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_death_1"
+        ]
+    },
+    "entity.jellyfish.harvest":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.jellyfish.harvest",
+        "sounds": [
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_harvest_0",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_harvest_1",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_harvest_2"
+        ]
+    },
+    "entity.jellyfish.cooldown_start":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.jellyfish.cooldown_start",
+        "sounds": [
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_cooldown_start"
+        ]
+    },
+    "entity.jellyfish.cooldown_end":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.jellyfish.cooldown_end",
+        "sounds": [
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_cooldown_end"
+        ]
+    },
+    "entity.jellyfish.sting":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.jellyfish.sting",
+        "sounds": [
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_sting_0",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_sting_1",
+        	"upgrade_aquatic:entity/jellyfish/jellyfish_sting_2"
+        ]
+    },
+    "entity.jellyfish.ghost_vanish":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.jellyfish.ghost_vanish",
+        "sounds": [
+        	"upgrade_aquatic:entity/jellyfish/ghost_jellyfish_vanish"
+        ]
+    },
+    "item.bucket.empty_jellyfish":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.bucket.empty_jellyfish",
+        "sounds": [
+        	"upgrade_aquatic:item/bucket/jellyfish_bucket_empty"
+        ]
+    },
+    "item.bucket.fill_jellyfish":
+    {
+        "category": "entity",
+        "subtitle": "subtitles.upgrade_aquatic.bucket.fill_jellyfish",
+        "sounds": [
+        	"upgrade_aquatic:item/bucket/jellyfish_bucket_fill"
+        ]
     }
 }
