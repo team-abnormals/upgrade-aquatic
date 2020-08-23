@@ -124,7 +124,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			
 			if (this.world.isRemote && this.world.getGameTime() % 4 == 0) {
 				for (int i = 0; i < 2; i++) {
-					this.world.addParticle(this.getJellyTorchType().blobParticle.get(), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
+					this.world.addParticle(JellyTorchType.getBlobParticleType(this.getJellyTorchType()), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
 				}
 			}
 		}

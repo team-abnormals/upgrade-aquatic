@@ -1,5 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.core;
 
+import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.client.render.FlareRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.GooseRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.GreatThrasherRenderer;
@@ -79,6 +80,7 @@ public class UpgradeAquatic {
 		UAEffects.EFFECTS.register(modEventBus);
 		UAEffects.POTIONS.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
+		UAParticles.PARTICLES.register(modEventBus);
 		
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
 			modEventBus.addListener(EventPriority.LOWEST, this::registerItemColors);

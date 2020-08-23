@@ -43,7 +43,7 @@ public class CoralShowerBlock extends CoralPlantBlock {
 		double d0 = (double) pos.getX() + 0.5D + xOffset;
 		double d1 = (double) pos.getY() + 0.5D + yOffset;
 		double d2 = (double) pos.getZ() + 0.5D + zOffset;
-		worldIn.addParticle(UAParticles.PRISMARINE_SHOWER, d0, d1, d2, 0d, 0.004d, 0d);
+		worldIn.addParticle(UAParticles.PRISMARINE_SHOWER.get(), d0, d1, d2, 0d, 0.004d, 0d);
 	}
 	
 	@Override

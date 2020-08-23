@@ -238,33 +238,16 @@ public class PikeEntity extends BucketableWaterMobEntity {
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
 		}
 		
-		if(this.world.getGameTime() % 20 == 0 && this.getCaughtEntity() != null) {
-			if(this.isPickerelweedNearby()) {
-				if(this.isHidingInPickerelweed()) {
-					this.world.playSound(null, this.getPosition(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
-					if(this.getCaughtEntity().getHealth() <= 1) {
-						if(this.getPikeType() == 7) {
-							if (this.world.isRemote) {
-								for(int i = 0; i < 3; ++i) {
-									this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().getPosX() + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().getPosY() + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().getPosZ() + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
-								}
-							}
-						}
-					}
-					this.getCaughtEntity().attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
-				}
-			} else {
+		if (this.world.getGameTime() % 20 == 0) {
+			LivingEntity caughtEntity = this.getCaughtEntity();
+			if (caughtEntity != null && (!this.isPickerelweedNearby() || this.isHidingInPickerelweed())) {
 				this.world.playSound(null, this.getPosition(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
-				if(this.getCaughtEntity().getHealth() <= 1) {
-					if(this.getPikeType() == 7) {
-						if (this.world.isRemote) {
-							for(int i = 0; i < 3; ++i) {
-								this.world.addParticle(UAParticles.SPECTRAL_CONSUME, this.getCaughtEntity().getPosX() + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), this.getCaughtEntity().getPosY() + this.getCaughtEntity().getRNG().nextDouble() * (double)this.getCaughtEntity().getHeight() - 0.25D, this.getCaughtEntity().getPosZ() + (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * (double)this.getCaughtEntity().getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -this.getCaughtEntity().getRNG().nextDouble(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D);
-							}
-						}
+				if (this.world.isRemote && caughtEntity.getHealth() <= 1 && this.getPikeType() == 7) {
+					for (int i = 0; i < 3; ++i) {
+						this.world.addParticle(UAParticles.SPECTRAL_CONSUME.get(), caughtEntity.getPosX() + (caughtEntity.getRNG().nextDouble() - 0.5D) * (double)caughtEntity.getWidth(), caughtEntity.getPosY() + caughtEntity.getRNG().nextDouble() * (double)caughtEntity.getHeight() - 0.25D, caughtEntity.getPosZ() + (caughtEntity.getRNG().nextDouble() - 0.5D) * (double)caughtEntity.getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -caughtEntity.getRNG().nextDouble(), (caughtEntity.getRNG().nextDouble() - 0.5D) * 2.0D);
 					}
 				}
-				this.getCaughtEntity().attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
+				caughtEntity.attackEntityFrom(DamageSource.causeMobDamage(this), 1.0F);
 			}
 		}
 		
