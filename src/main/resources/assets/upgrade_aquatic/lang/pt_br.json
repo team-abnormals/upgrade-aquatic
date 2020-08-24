@@ -401,7 +401,7 @@
   "block.upgrade_aquatic.ochre_kelpy_cobblestone_slab": "Laje vertical de pedregulho com algas-ocre",
   "block.upgrade_aquatic.polar_kelpy_cobblestone_slab": "Laje vertical de pedregulho com algas-polares",
   
-    "block.upgrade_aquatic.kelpy_stone_brick_slab": "Laje vertical de tijolos de pedra com algas",
+  "block.upgrade_aquatic.kelpy_stone_brick_slab": "Laje vertical de tijolos de pedra com algas",
   "block.upgrade_aquatic.tongue_kelpy_stone_brick_slab": "Laje vertical de tijolos de pedra com algas-língua",
   "block.upgrade_aquatic.thorny_kelpy_stone_brick_slab": "Laje vertical de tijolos de pedra com algas-espinhosas",
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_slab": "Laje vertical de tijolos de pedra com algas-ocre",
@@ -429,7 +429,7 @@
   
   "_comment": "Items",
   
-    "item.upgrade_aquatic.driftwood_boat": "Bote de madeira flutuante",
+  "item.upgrade_aquatic.driftwood_boat": "Bote de madeira flutuante",
   "item.upgrade_aquatic.river_boat": "Bote de ribeira",
   
   "item.upgrade_aquatic.prismarine_rod": "Vara de prismarinho",
@@ -478,9 +478,9 @@
   "tooltip.upgrade_aquatic.spotted_olive_northern_pike": "Lúcio-do-norte oliva manchado",
   "tooltip.upgrade_aquatic.supercharged_pike": "Lúcio supercomprimido",
   "tooltip.upgrade_aquatic.obsidian_pike": "Lúcio-de-obsidiana",
-  "tooltip.upgrade_aquatic.muskellunge": "Lúcio-almiscarado",
-  "tooltip.upgrade_aquatic.chain_pickerel": "Esox-corrente",
-  "tooltip.upgrade_aquatic.grass_pickerel": "Esox-da-grama",
+  "tooltip.upgrade_aquatic.muskellunge_pike": "Lúcio-almiscarado",
+  "tooltip.upgrade_aquatic.chain_pickerel_pike": "Esox-corrente",
+  "tooltip.upgrade_aquatic.grass_pickerel_pike": "Esox-da-grama",
   "tooltip.upgrade_aquatic.black_southern_pike": "Lúcio-do-sul negro",
   "tooltip.upgrade_aquatic.ebony_southern_pike": "Lúcio-do-sul ébano",
   "tooltip.upgrade_aquatic.mustard_southern_pike": "Lúcio-do-sul mostarda",
