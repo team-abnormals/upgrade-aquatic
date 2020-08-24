@@ -380,7 +380,7 @@
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
 
   "block.upgrade_aquatic.mulberry_vine": "Morera",
-  "block.upgrade_aquatic.mulberry_punnet": "Canasta de moras",
+  "block.upgrade_aquatic.mulberry_punnet": "Canastilla de moras",
   "block.upgrade_aquatic.mulberry_jam_block": "Bloque de mermelada de moras",
   
   "block.upgrade_aquatic.prismarine_rod_bundle": "Paquete de varas de prismarina",
@@ -475,9 +475,9 @@
   "tooltip.upgrade_aquatic.spotted_olive_northern_pike": "Lucio boreal oliva moteado",
   "tooltip.upgrade_aquatic.supercharged_pike": "Lucio sobrealimentado",
   "tooltip.upgrade_aquatic.obsidian_pike": "Lucio de obsidiana",
-  "tooltip.upgrade_aquatic.muskellunge": "Muskellunge",
-  "tooltip.upgrade_aquatic.chain_pickerel": "Lucio cadena",
-  "tooltip.upgrade_aquatic.grass_pickerel": "Lucio hierba",
+  "tooltip.upgrade_aquatic.muskellunge_pike": "Muskellunge",
+  "tooltip.upgrade_aquatic.chain_pickerel_pike": "Lucio cadena",
+  "tooltip.upgrade_aquatic.grass_pickerel_pike": "Lucio hierba",
   "tooltip.upgrade_aquatic.black_southern_pike": "Lucio austral negro",
   "tooltip.upgrade_aquatic.ebony_southern_pike": "Lucio austral ébano",
   "tooltip.upgrade_aquatic.mustard_southern_pike": "Lucio austral mostaza",
@@ -615,6 +615,17 @@
   "subtitles.upgrade_aquatic.thrasher.death": "Triturador muere",
   "subtitles.upgrade_aquatic.thrasher.thrash": "Triturador devora",
   "subtitles.upgrade_aquatic.thrasher.flop": "Triturador aletea",
-  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Sonar de triturador"
+  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Sonar de triturador",
 
-}
+  "subtitles.upgrade_aquatic.jellyfish.hurt": "Medusa herida",
+  "subtitles.upgrade_aquatic.jellyfish.ambient": "Pulsación de medusa",
+  "subtitles.upgrade_aquatic.jellyfish.death": "Medusa muere",
+  "subtitles.upgrade_aquatic.jellyfish.harvest": "Medusa cosechada",
+  "subtitles.upgrade_aquatic.jellyfish.cooldown_start": "Enfriamiento de medusa comienza",
+  "subtitles.upgrade_aquatic.jellyfish.cooldown_end": "Enfriamiento de medusa termina",
+  "subtitles.upgrade_aquatic.jellyfish.sting": "Medusa pica",
+  "subtitles.upgrade_aquatic.jellyfish.ghost_vanish": "Medusa fantasma desaparece",
+
+  "subtitles.upgrade_aquatic.bucket.empty_jellyfish": "Medusa liberada",
+  "subtitles.upgrade_aquatic.bucket.fill_jellyfish": "Medusa capturada"
+} 
