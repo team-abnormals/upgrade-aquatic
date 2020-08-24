@@ -2,7 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.core.other;
 
 import java.util.List;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
@@ -69,7 +69,7 @@ public class UADispenseBehaviorRegistry {
                     		ItemStack bucket = ((IBucketableEntity) mob).getBucket();
                     		CompoundNBT nbt = bucket.getOrCreateTag();
                     		CompoundNBT compoundnbt1 = new CompoundNBT();
-                    		nbt.putInt("BucketVariantTag", ((PikeEntity) mob).getPikeType());
+                    		nbt.putInt("BucketVariantTag", ((PikeEntity) mob).getPikeType().id);
                     		if (!mob.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty()) {
                     			mob.getItemStackFromSlot(EquipmentSlotType.MAINHAND).write(compoundnbt1);
                     		}

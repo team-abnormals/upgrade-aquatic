@@ -19,6 +19,7 @@ import com.minecraftabnormals.upgrade_aquatic.core.config.Config;
 import com.minecraftabnormals.upgrade_aquatic.core.config.ConfigHelper;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAColors;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UACompostables;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAEntitySpawns;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAFlammables;
@@ -109,6 +110,7 @@ public class UpgradeAquatic {
 			UAFlammables.registerFlammables();
 			UAFeatures.setupGeneration();
 			UAHooks.makeBubbleColumnTickRandomly();
+			UADataSerializers.register();
 		});
 	}
 	

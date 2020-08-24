@@ -1,6 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

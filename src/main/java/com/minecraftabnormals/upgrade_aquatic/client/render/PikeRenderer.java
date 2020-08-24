@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 import com.minecraftabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.GlowingPikeRenderLayer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.PikeCarriedItemRenderLayer;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
@@ -26,7 +26,7 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 
 	@Override
 	public ResourceLocation getEntityTexture(PikeEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/pike/pike_" + entity.getPikeType() + ".png");
+		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/pike/pike_" + entity.getPikeType().id + ".png");
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 		super.applyRotations(pike, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * MathHelper.sin(0.6F * ageInTicks);
 		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));
-		if(!pike.isInWater()) {
+		if (!pike.isInWater()) {
 			matrixStack.translate(0.1F, 0.1F, -0.1F);
 			matrixStack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
 		}
@@ -42,26 +42,7 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 	
 	@Override
 	protected void preRenderCallback(PikeEntity pike, MatrixStack matrixStack, float partialTickTime) {
-		float scale;
-		if(pike.getPikeType() < 12) {
-			if(pike.getPikeType() < 3) {
-				scale = 1.2F;
-			} else {
-				scale = 1.5F;
-			}
-		} else {
-			if(pike.getPikeType() == 12) {
-				scale = 1.5F;
-			} else if(pike.getPikeType() == 13) {
-				scale = 1.7F;
-			} else if(pike.getPikeType() == 14) {
-				scale = 2.25F;
-			} else if(pike.getPikeType() == 15 || pike.getPikeType() == 16) {
-				scale = 1.2F;
-			} else {
-				scale = 1.35F;
-			}
-		}
+		float scale = pike.getPikeType().pikeSize.renderSize;
 		matrixStack.scale(scale, scale, scale);
 	}
 	

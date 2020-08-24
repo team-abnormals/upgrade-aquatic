@@ -6,7 +6,7 @@ import com.minecraftabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.minecraftabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.BedrollBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
