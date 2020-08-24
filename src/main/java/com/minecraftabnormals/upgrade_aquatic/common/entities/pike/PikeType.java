@@ -42,9 +42,9 @@ public enum PikeType {
 	public final PikeSize pikeSize;
 	public final PikeRarity rarity;
 	@Nullable
-	public final Integer spottedVariant;
+	private final Integer spottedVariant;
 	@Nullable
-	public final Biome.Category biomeCategory;
+	private final Biome.Category biomeCategory;
 	
 	private PikeType(int id, PikeSize pikeSize, PikeRarity rarity, @Nullable Integer spottedVariant, @Nullable Biome.Category biomeCategory) {
 		this.id = id;

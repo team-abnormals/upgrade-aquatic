@@ -91,9 +91,9 @@ public class PikeEntity extends BucketableWaterMobEntity {
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
 		return MobEntity.func_233666_p_()
-			.createMutableAttribute(Attributes.MAX_HEALTH, 12.0D)
-			.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.9D);
-    }
+				.createMutableAttribute(Attributes.MAX_HEALTH, 12.0D)
+				.createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.9D);
+	}
 	
 	@Override
 	protected void registerGoals() {

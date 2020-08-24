@@ -25,8 +25,8 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(PikeEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/pike/pike_" + entity.getPikeType().id + ".png");
+	public ResourceLocation getEntityTexture(PikeEntity pike) {
+		return new ResourceLocation(UpgradeAquatic.MODID, String.format("textures/entity/pike/%s.png", pike.getPikeType().name().toLowerCase()));
 	}
 	
 	@Override
