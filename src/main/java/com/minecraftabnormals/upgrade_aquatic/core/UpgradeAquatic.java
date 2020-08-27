@@ -23,7 +23,6 @@ import com.minecraftabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAEntitySpawns;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAFlammables;
-import com.minecraftabnormals.upgrade_aquatic.core.other.UAHooks;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UARenderLayers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEffects;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
@@ -32,7 +31,8 @@ import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 
-
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -45,6 +45,7 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -109,7 +110,7 @@ public class UpgradeAquatic {
 			UACompostables.registerCompostables();
 			UAFlammables.registerFlammables();
 			UAFeatures.setupGeneration();
-			UAHooks.makeBubbleColumnTickRandomly();
+			ObfuscationReflectionHelper.setPrivateValue(AbstractBlock.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
 			UADataSerializers.register();
 		});
 	}
