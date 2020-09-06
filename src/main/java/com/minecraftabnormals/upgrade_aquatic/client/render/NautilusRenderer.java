@@ -36,7 +36,7 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 	});
 
 	public NautilusRenderer(EntityRendererManager renderManager) {
-		super(renderManager, new NautilusModel<>(), 0.5F);
+		super(renderManager, new NautilusModel<>(), 0.25F);
 	}
 
 	@Override
