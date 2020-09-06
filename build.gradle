@@ -22,7 +22,7 @@ mixin {
     add sourceSets.main, "upgrade_aquatic.refmap.json"
 }
 
-version = '2.0.1'
+version = '2.0.2'
 group = 'com.minecraftabnormals'
 archivesBaseName = 'Upgrade-Aquatic-1.16.1'
 
