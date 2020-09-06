@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "upgrade_aquatic:flare",
-    "upgrade_aquatic:thrasher"
+    "upgrade_aquatic:flare"
   ]
 }
