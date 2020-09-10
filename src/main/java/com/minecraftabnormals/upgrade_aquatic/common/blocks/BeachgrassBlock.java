@@ -31,11 +31,6 @@ public class BeachgrassBlock extends Block implements IGrowable {
 	public BeachgrassBlock(Properties properties) {
 		super(properties);
 	}
-	
-	@Override
-	public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-		return 60;
-	}
 
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
 		return SHAPE;

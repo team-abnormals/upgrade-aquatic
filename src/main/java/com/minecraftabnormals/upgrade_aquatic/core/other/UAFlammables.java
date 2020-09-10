@@ -16,6 +16,13 @@ public class UAFlammables {
 		DataUtils.registerFlammable(UABlocks.PURPLE_PICKERELWEED.get(), 60, 100);
 		DataUtils.registerFlammable(UABlocks.TALL_BLUE_PICKERELWEED.get(), 60, 100);
 		DataUtils.registerFlammable(UABlocks.TALL_PURPLE_PICKERELWEED.get(), 60, 100);
+
+		DataUtils.registerFlammable(UABlocks.BEACHGRASS.get(), 60, 20);
+		DataUtils.registerFlammable(UABlocks.TALL_BEACHGRASS.get(), 60, 20);
+		DataUtils.registerFlammable(UABlocks.BEACHGRASS_THATCH.get(), 60, 20);
+		DataUtils.registerFlammable(UABlocks.BEACHGRASS_THATCH_STAIRS.get(), 60, 20);
+		DataUtils.registerFlammable(UABlocks.BEACHGRASS_THATCH_SLAB.get(), 60, 20);
+		DataUtils.registerFlammable(UABlocks.BEACHGRASS_THATCH_VERTICAL_SLAB.get(), 60, 20);
 	    
 		DataUtils.registerFlammable(UABlocks.DRIFTWOOD_LOG.get(), 5, 5);
 		DataUtils.registerFlammable(UABlocks.DRIFTWOOD.get(), 5, 5);
