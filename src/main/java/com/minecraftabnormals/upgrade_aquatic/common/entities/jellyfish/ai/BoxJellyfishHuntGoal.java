@@ -22,11 +22,10 @@ public class BoxJellyfishHuntGoal extends Goal {
 	@Override
 	public boolean shouldExecute() {
 		LivingEntity target = this.hunter.getAttackTarget();
-		if(target != null && target.isAlive() && target.getDistance(this.hunter) <= 10) {
+		if (this.hunter.isInWater() && target != null && target.isInWater() && target.isAlive() && target.getDistance(this.hunter) <= 10) {
 			return true;
-		} else if(target != null) {
+		} else if (target != null) {
 			this.hunter.setAttackTarget(null);
-			return false;
 		}
 		return false;
 	}
@@ -41,7 +40,7 @@ public class BoxJellyfishHuntGoal extends Goal {
 		this.hunter.setHuntingCooldown();
 		this.noSightTicks = 0;
 	}
-	
+
 	@Override
 	public void tick() {
 		LivingEntity target = this.hunter.getAttackTarget();
