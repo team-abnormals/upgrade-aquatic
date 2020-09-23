@@ -387,11 +387,11 @@
   
   "block.upgrade_aquatic.beachgrass": "Pasto de playa",
   "block.upgrade_aquatic.tall_beachgrass": "Pasto de playa alto",
-  "block.upgrade_aquatic.beachgrass_thatch": "Cubierta de pasto de playa",
-  "block.upgrade_aquatic.beachgrass_thatch_slab": "Baldosa de pasto de playa",
-  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escaleras de pasto de playa",
+  "block.upgrade_aquatic.beachgrass_thatch": "Paja de pasto de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_slab": "Baldosa de paja de pasto de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escaleras de paja de pasto de playa",
   
-  "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Baldosa vertical de pasto de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Baldosa vertical de paja de pasto de playa",
   "block.upgrade_aquatic.tooth_vertical_slab": "Baldosa vertical de diente",
   "block.upgrade_aquatic.tooth_brick_vertical_slab": "Baldosa vertical de ladrillos de diente",
   "block.upgrade_aquatic.kelpy_cobblestone_vertical_slab": "Baldosa vertical de adoquín con algas",

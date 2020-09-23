@@ -387,11 +387,11 @@
   
   "block.upgrade_aquatic.beachgrass": "Hierba de playa",
   "block.upgrade_aquatic.tall_beachgrass": "Hierba de playa alta",
-  "block.upgrade_aquatic.beachgrass_thatch": "Cubierta de hierba de playa",
-  "block.upgrade_aquatic.beachgrass_thatch_slab": "Losa de hierba de playa",
-  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escaleras de hierba de playa",
+  "block.upgrade_aquatic.beachgrass_thatch": "Paja de hierba de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_slab": "Losa de paja de hierba de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escaleras de paja de hierba de playa",
   
-  "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Losa vertical de hierba de playa",
+  "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Losa vertical de paja de hierba de playa",
   "block.upgrade_aquatic.tooth_vertical_slab": "Losa vertical de diente",
   "block.upgrade_aquatic.tooth_brick_vertical_slab": "Losa vertical de ladrillos de diente",
   "block.upgrade_aquatic.kelpy_cobblestone_vertical_slab": "Losa vertical de roca con algas",
