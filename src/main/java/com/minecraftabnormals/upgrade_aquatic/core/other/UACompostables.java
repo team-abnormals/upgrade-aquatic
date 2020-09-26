@@ -11,6 +11,7 @@ public class UACompostables {
         DataUtils.registerCompostable(UABlocks.RIVER_SAPLING.get(), 0.30F);
         DataUtils.registerCompostable(UABlocks.RIVER_LEAF_CARPET.get(), 0.30F);
 		DataUtils.registerCompostable(UAItems.MULBERRY.get(), 0.30F);
+		DataUtils.registerCompostable(UAItems.MULBERRY_PIE.get(), 1.0F);
 
 		DataUtils.registerCompostable(UABlocks.BEACHGRASS.get(), 0.30F);
 		DataUtils.registerCompostable(UABlocks.TALL_BEACHGRASS.get(), 0.65F);
