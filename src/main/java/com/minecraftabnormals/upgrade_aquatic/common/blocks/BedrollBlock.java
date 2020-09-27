@@ -61,7 +61,6 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
 	}
@@ -108,23 +107,17 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 		}
 		
 		if (facing == getDirectionToOther(stateIn.get(PART), stateIn.get(HORIZONTAL_FACING))) {
-			return facingState.getBlock() == this && facingState.get(PART) != stateIn.get(PART) ? stateIn.with(OCCUPIED, facingState.get(OCCUPIED)) : Blocks.AIR.getDefaultState();
+			return facingState.isIn(this) && facingState.get(PART) != stateIn.get(PART) ? stateIn.with(OCCUPIED, facingState.get(OCCUPIED)) : Blocks.AIR.getDefaultState();
 		} else {
 			return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			super.onReplaced(state, worldIn, pos, newState, isMoving);
 			worldIn.removeTileEntity(pos);
 		}
-	}
-	
-	@Override
-	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
-		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
 	}
 
 	@Override
@@ -219,12 +212,14 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 		return new BedrollTileEntity(this.color);
 	}
 	
+	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		if (!worldIn.isRemote) {
 			BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING));
 			worldIn.setBlockState(blockpos, state.with(PART, BedPart.HEAD), 3);
-			worldIn.notifyNeighborsOfStateChange(pos, Blocks.AIR);
+			worldIn.func_230547_a_(pos, Blocks.AIR);
+			state.updateNeighbours(worldIn, pos, 3);
 		}
 	}
 	
