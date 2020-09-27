@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "upgrade_aquatic:tooth_trapdoor"
+    "upgrade_aquatic:tooth_trapdoor",
+    "upgrade_aquatic:glass_trapdoor"
   ]
 }

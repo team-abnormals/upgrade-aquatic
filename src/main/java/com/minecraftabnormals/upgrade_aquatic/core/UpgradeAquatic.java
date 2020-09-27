@@ -53,7 +53,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
-@SuppressWarnings("deprecation")
 @Mod(value = UpgradeAquatic.MODID)
 public class UpgradeAquatic {
 	public static UpgradeAquatic instance;

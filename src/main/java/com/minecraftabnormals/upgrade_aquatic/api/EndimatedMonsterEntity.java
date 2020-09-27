@@ -77,7 +77,6 @@ public abstract class EndimatedMonsterEntity extends EndimatedEntity implements 
 		return heightIn > 4 ? SoundEvents.ENTITY_HOSTILE_BIG_FALL : SoundEvents.ENTITY_HOSTILE_SMALL_FALL;
 	}
 
-	@SuppressWarnings("deprecation")
 	public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
 		return 0.5F - worldIn.getBrightness(pos);
 	}
