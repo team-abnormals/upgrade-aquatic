@@ -259,6 +259,9 @@
   "block.upgrade_aquatic.tooth_door": "Puerta de diente",
   "block.upgrade_aquatic.tooth_trapdoor": "Trampilla de diente",
   "block.upgrade_aquatic.tooth_lantern": "Farol de diente",
+
+  "block.upgrade_aquatic.glass_door": "Puerta de vidrio",
+  "block.upgrade_aquatic.glass_trapdoor": "Trampilla de vidrio",
   
   "block.upgrade_aquatic.tongue_kelp": "Alga lengua",
   "block.upgrade_aquatic.thorny_kelp": "Alga espinosa",
