@@ -4,6 +4,8 @@ import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
+import net.minecraft.entity.ai.attributes.AttributeModifierMap;
+import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
 import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.loot.LootTables;
@@ -29,6 +31,11 @@ public class UluluEntity extends MobEntity {
 		return this.dataManager.get(ULULU_SIZE);
 	}
 
+	protected void registerData() {
+		super.registerData();
+		this.dataManager.register(ULULU_SIZE, 1);
+	}
+
 	public boolean isSmallUlulu() {
 		return this.getUluluSize() <= 1;
 	}
@@ -39,8 +46,12 @@ public class UluluEntity extends MobEntity {
 	   }
 	
 	public EntitySize getSize(Pose poseIn) {
-	      return super.getSize(poseIn).scale(0.255F * (float)this.getUluluSize());
+	      return super.getSize(poseIn);
 	   }
+
+	public static AttributeModifierMap.MutableAttribute registerAttributes() {
+		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 18.0D);
+	}
 
 	static class MoveHelperController extends MovementController {
 		private final UluluEntity ululu;
