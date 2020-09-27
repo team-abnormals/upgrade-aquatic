@@ -82,10 +82,12 @@ import net.minecraft.block.BedBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CoralBlock;
+import net.minecraft.block.DoorBlock;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.PressurePlateBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.TrapDoorBlock;
 import net.minecraft.block.WallBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -102,7 +104,6 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@SuppressWarnings("deprecation")
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
 	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
@@ -282,6 +283,9 @@ public class UABlocks {
 	public static final RegistryObject<Block> TOOTH_DOOR 				= HELPER.createBlock("tooth_door", () -> new ToothDoorBlock(Properties.from(Blocks.END_STONE)), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> TOOTH_LANTERN 			= HELPER.createBlock("tooth_lantern", () -> new ToothLanternBlock(Properties.from(Blocks.END_STONE).sound(UASounds.TOOTH_LANTERN).notSolid().setLightLevel((unknown) -> 15)), ItemGroup.DECORATIONS);
 
+	public static final RegistryObject<Block> GLASS_TRAPDOOR 			= HELPER.createBlock("glass_trapdoor", () -> new TrapDoorBlock(Properties.from(Blocks.GLASS)), ItemGroup.REDSTONE);
+	public static final RegistryObject<Block> GLASS_DOOR 				= HELPER.createBlock("glass_door", () -> new DoorBlock(Properties.from(Blocks.GLASS)), ItemGroup.REDSTONE);
+	
 	public static final RegistryObject<Block> CORALSTONE 					= HELPER.createBlock("coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> BUBBLE_CORALSTONE 			= HELPER.createBlock("bubble_coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false, new Block[] { Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN }), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> HORN_CORALSTONE 				= HELPER.createBlock("horn_coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false, new Block[] { Blocks.HORN_CORAL, Blocks.HORN_CORAL_FAN, Blocks.HORN_CORAL_WALL_FAN }), ItemGroup.BUILDING_BLOCKS);

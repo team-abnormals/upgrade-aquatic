@@ -5,7 +5,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.monster.SlimeEntity;
 import net.minecraft.loot.LootTables;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -43,6 +42,7 @@ public class UluluEntity extends MobEntity {
 	   }
 
 	static class MoveHelperController extends MovementController {
+		@SuppressWarnings("unused")
 		private final UluluEntity ululu;
 
 		MoveHelperController(UluluEntity ululu) {
