@@ -11,13 +11,17 @@ public class UACompostables {
         DataUtils.registerCompostable(UABlocks.RIVER_SAPLING.get(), 0.30F);
         DataUtils.registerCompostable(UABlocks.RIVER_LEAF_CARPET.get(), 0.30F);
 		DataUtils.registerCompostable(UAItems.MULBERRY.get(), 0.30F);
+		DataUtils.registerCompostable(UAItems.MULBERRY_BREAD.get(), 0.85F);
 		DataUtils.registerCompostable(UAItems.MULBERRY_PIE.get(), 1.0F);
+		DataUtils.registerCompostable(UAItems.MULBERRY_PUNNET.get(), 1.0F);
+		DataUtils.registerCompostable(UAItems.MULBERRY_JAM_BLOCK.get(), 1.0F);
 
 		DataUtils.registerCompostable(UABlocks.BEACHGRASS.get(), 0.30F);
 		DataUtils.registerCompostable(UABlocks.TALL_BEACHGRASS.get(), 0.65F);
 		DataUtils.registerCompostable(UABlocks.BEACHGRASS_THATCH.get(), 0.65F);
 		DataUtils.registerCompostable(UABlocks.BEACHGRASS_THATCH_STAIRS.get(), 0.65F);
 		DataUtils.registerCompostable(UABlocks.BEACHGRASS_THATCH_SLAB.get(), 0.65F);
+		DataUtils.registerCompostable(UABlocks.BEACHGRASS_THATCH_VERTICAL_SLAB.get(), 0.65F);
 		
 		DataUtils.registerCompostable(UABlocks.BLUE_PICKERELWEED.get(), 0.30F);
 		DataUtils.registerCompostable(UAItems.BOILED_BLUE_PICKERELWEED.get(), 0.30F);
