@@ -6,7 +6,8 @@
   "refmap": "upgrade_aquatic.refmap.json",
   "mixins": [
     "BubbleColumnMixin",
-    "ServerPlayerEntityMixin"
+    "ServerPlayerEntityMixin",
+    "LivingEntityMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",
