@@ -1,7 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.core;
 
+import com.minecraftabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.client.render.FlareRenderer;
+import com.minecraftabnormals.upgrade_aquatic.client.render.GlowSquidRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.GooseRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.GreatThrasherRenderer;
 import com.minecraftabnormals.upgrade_aquatic.client.render.LionfishRenderer;
@@ -86,6 +88,7 @@ public class UpgradeAquatic {
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
 			modEventBus.addListener(EventPriority.LOWEST, this::registerItemColors);
 			modEventBus.addListener(EventPriority.LOWEST, this::setupClient);
+			GlowSquidSpriteUploader.init(modEventBus);
 		});
 		
 		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
@@ -101,7 +104,6 @@ public class UpgradeAquatic {
 	
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		DeferredWorkQueue.runLater(() -> {
-			REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
 			UAEntitySpawns.processSpawnAdditions();
 			UAEntities.registerAttributes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
@@ -135,6 +137,7 @@ public class UpgradeAquatic {
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.SONAR_WAVE.get(), SonarWaveRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.ULULU.get(), UluluRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GOOSE.get(), GooseRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GLOW_SQUID.get(), GlowSquidRenderer::new);
 
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);

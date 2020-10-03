@@ -5,7 +5,6 @@ import java.util.List;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
 import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
 
 import net.minecraft.block.DispenserBlock;
@@ -20,7 +19,6 @@ import net.minecraft.entity.passive.fish.AbstractFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.BucketItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.SpawnEggItem;
@@ -111,15 +109,11 @@ public class UADispenseBehaviorRegistry {
     };
 
     public static void registerDispenseBehaviors() {
+		UpgradeAquatic.REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
     	DispenserBlock.registerDispenseBehavior(UAItems.NAUTILUS_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(UAItems.PIKE_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(UAItems.LIONFISH_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(UAItems.SQUID_BUCKET.get(), fishDispenseItemBehavior);
     	DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, bucketFishItemBehavior);
-    	
-    	UpgradeAquatic.REGISTRY_HELPER.getDeferredItemRegister().getEntries().stream().filter((entry) -> entry.get() instanceof AbnormalsSpawnEggItem).forEach((item) -> {
-    		Item items = item.get();
-    		DispenserBlock.registerDispenseBehavior(items, spawnEggItemBehavior);
-    	});
     }
 }

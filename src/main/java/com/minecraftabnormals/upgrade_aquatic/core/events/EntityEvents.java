@@ -22,6 +22,7 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.Pose;
@@ -34,7 +35,6 @@ import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.DolphinEntity;
-import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
@@ -127,7 +127,7 @@ public class EntityEvents {
 		Entity entity = event.getTarget();
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
-		if(stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof SquidEntity) {
+		if(stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity.getType() == EntityType.SQUID) {
 			entity.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
 			stack.shrink(1);
 			ItemStack bucket = new ItemStack(UAItems.SQUID_BUCKET.get());

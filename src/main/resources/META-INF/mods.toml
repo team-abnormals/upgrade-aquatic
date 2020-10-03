@@ -9,6 +9,7 @@ license="https://github.com/minecraftabnormals/Upgrade-Aquatic/blob/master/LICEN
     logoFile="logo.png"
     displayName="Upgrade Aquatic"
     authors="SmellyModder, Bagel, Cameron, Five"
+    credits="SystemZee, Ocelot, Endergy"
     description='''A mod that improves upon the content of 1.13 Update Aquatic.'''
 
 [[dependencies.upgrade_aquatic]]

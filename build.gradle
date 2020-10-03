@@ -72,13 +72,13 @@ jar {
     manifest {
         attributes([
         	"Specification-Title": "Upgrade Aquatic",
-            "Specification-Vendor": "Team Abnormals",
-            "Specification-Version": "1",
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor": "Team Abnormals",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-            "MixinConfigs": "upgrade_aquatic.mixins.json"
+          "Specification-Vendor": "Team Abnormals",
+          "Specification-Version": "1",
+          "Implementation-Title": project.name,
+          "Implementation-Version": "${version}",
+          "Implementation-Vendor": "Team Abnormals",
+          "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+          "MixinConfigs": "upgrade_aquatic.mixins.json"
         ])
     }
 }

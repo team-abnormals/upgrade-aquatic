@@ -434,12 +434,14 @@
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
   "item.upgrade_aquatic.thrasher_tooth": "Thrasher Tooth",
+  "item.upgrade_aquatic.glowing_ink_sac": "Glowing Ink Sac",
   
   "item.upgrade_aquatic.nautilus_bucket": "Bucket of Nautilus",
   "item.upgrade_aquatic.pike_bucket": "Bucket of Pike",
   "item.upgrade_aquatic.lionfish_bucket": "Bucket of Lionfish",
   "item.upgrade_aquatic.squid_bucket": "Bucket of Squid",
   "item.upgrade_aquatic.jellyfish_bucket": "Bucket of Jellyfish",
+  "item.upgrade_aquatic.glow_squid_bucket": "Bucket of Glow Squid",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Drowned Villager Spawn Egg",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Nautilus Spawn Egg",
@@ -450,6 +452,7 @@
   "item.upgrade_aquatic.flare_spawn_egg": "Flare Spawn Egg",
   "item.upgrade_aquatic.goose_spawn_egg": "Goose Spawn Egg",
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Jellyfish Spawn Egg",
+  "item.upgrade_aquatic.glow_squid_spawn_egg": "Glow Squid Spawn Egg",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Boiled Purple Pickerelweed",
   "item.upgrade_aquatic.boiled_blue_pickerelweed": "Boiled Blue Pickerelweed",
@@ -519,6 +522,7 @@
   "entity.upgrade_aquatic.ululu": "Ululu",
   "entity.upgrade_aquatic.sonar_wave": "Sonar Wave",
   "entity.upgrade_aquatic.goose": "Goose",
+  "entity.upgrade_aquatic.glow_squid": "Glow Squid",
   
   "entity.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Cassiopea Jellyfish",

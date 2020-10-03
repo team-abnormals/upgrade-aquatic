@@ -37,7 +37,8 @@ public class UAParticles {
 	public static final RegistryObject<BasicParticleType> ORANGE_JELLY_BLOB = createBasicParticleType("orange_jelly_blob", false);
 	public static final RegistryObject<BasicParticleType> RED_JELLY_BLOB = createBasicParticleType("red_jelly_blob", false);
 	public static final RegistryObject<BasicParticleType> WHITE_JELLY_BLOB = createBasicParticleType("white_jelly_blob", false);
-	
+	public static final RegistryObject<BasicParticleType> GLOW_SQUID_INK = createBasicParticleType("glow_squid_ink", true);
+
 	private static RegistryObject<BasicParticleType> createBasicParticleType(String name, boolean alwaysShow) {
 		RegistryObject<BasicParticleType> particleType = PARTICLES.register(name, () -> new BasicParticleType(alwaysShow));
 		return particleType;
@@ -105,6 +106,9 @@ public class UAParticles {
 			}
 			if (WHITE_JELLY_BLOB.isPresent()) {
 				manager.registerFactory(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			}
+			if (GLOW_SQUID_INK.isPresent()) {
+				manager.registerFactory(GLOW_SQUID_INK.get(), GlowSquidInkParticle.Factory::new);
 			}
 		}
 	}

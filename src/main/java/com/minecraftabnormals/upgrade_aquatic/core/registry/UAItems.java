@@ -2,6 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.items.BoiledPickerelweedItem;
+import com.minecraftabnormals.upgrade_aquatic.common.items.GlowSquidBucketItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.JellyfishBucketItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.MulberryJamBottleItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.PikeBucketItem;
@@ -34,15 +35,20 @@ public class UAItems {
 	
 	public static final RegistryObject<Item> DRIFTWOOD_BOAT             = HELPER.createBoatItem("driftwood", UABlocks.DRIFTWOOD_PLANKS);
 	public static final RegistryObject<Item> RIVER_BOAT             	= HELPER.createBoatItem("river", UABlocks.RIVER_PLANKS);
+	
 	public static final RegistryObject<Item> NAUTILUS_BUCKET            = HELPER.createItem("nautilus_bucket", () -> new MobBucketItem(() -> UAEntities.NAUTILUS.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 	public static final RegistryObject<Item> PIKE_BUCKET                = HELPER.createItem("pike_bucket", () -> new PikeBucketItem(() -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 	public static final RegistryObject<Item> LIONFISH_BUCKET            = HELPER.createItem("lionfish_bucket", () -> new MobBucketItem(() -> UAEntities.LIONFISH.get(), () -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 	public static final RegistryObject<Item> SQUID_BUCKET               = HELPER.createItem("squid_bucket", () -> new SquidBucketItem(() -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
+	public static final RegistryObject<Item> GLOW_SQUID_BUCKET          = HELPER.createItem("glow_squid_bucket", () -> new GlowSquidBucketItem(() -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 	public static final RegistryObject<Item> JELLYFISH_BUCKET           = HELPER.createItem("jellyfish_bucket", () -> new JellyfishBucketItem(() -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
+	
 	public static final RegistryObject<Item> PRISMARINE_ROD             = HELPER.createItem("prismarine_rod", () -> new PrismarineRodItem(new Item.Properties().group(ItemGroup.MISC)));
 	public static final RegistryObject<Item> THRASHER_TOOTH             = HELPER.createItem("thrasher_tooth", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
+	public static final RegistryObject<Item> GLOWING_INK_SAC            = HELPER.createItem("glowing_ink_sac", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
 	public static final RegistryObject<Item> BOILED_BLUE_PICKERELWEED   = HELPER.createItem("boiled_blue_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.buildPickerelweed(false)), false));
 	public static final RegistryObject<Item> BOILED_PURPLE_PICKERELWEED = HELPER.createItem("boiled_purple_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.buildPickerelweed(true)), true));
+	
 	public static final RegistryObject<Item> PIKE                       = HELPER.createItem("pike", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.buildPike(false))));
 	public static final RegistryObject<Item> COOKED_PIKE                = HELPER.createItem("cooked_pike", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.buildPike(true))));
 	public static final RegistryObject<Item> LIONFISH                   = HELPER.createItem("lionfish", () -> new Item(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.buildLionfish(false))));
@@ -60,6 +66,7 @@ public class UAItems {
 	public static final RegistryObject<Item> GREAT_THRASHER_SPAWN_EGG   = HELPER.createSpawnEggItem("great_thrasher", () -> UAEntities.GREAT_THRASHER.get(), 10078409, 13294289);
 	public static final RegistryObject<Item> FLARE_SPAWN_EGG            = HELPER.createSpawnEggItem("flare", () -> UAEntities.FLARE.get(), 4532619, 14494960);
 	public static final RegistryObject<Item> JELLYFISH_SPAWN_EGG        = HELPER.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);
+	public static final RegistryObject<Item> GLOW_SQUID_SPAWN_EGG 		= HELPER.createSpawnEggItem("glow_squid", () -> UAEntities.GLOW_SQUID.get(), 0x358080, 0x42D7A5);
 //	public static final RegistryObject<Item> GOOSE_SPAWN_EGG        	= HELPER.createSpawnEggItem("goose", () -> UAEntities.GOOSE.get(), 16448255, 16751914);
 	
 	@OnlyIn(Dist.CLIENT)
