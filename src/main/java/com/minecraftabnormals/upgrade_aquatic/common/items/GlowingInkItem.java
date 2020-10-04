@@ -46,7 +46,8 @@ public class GlowingInkItem extends Item {
 		} else {
 			BlockPos offset = world.getBlockState(pos).isSolid() ? pos.offset(context.getFace()) : pos;
 			world.playSound(context.getPlayer(), offset, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, offset);
+			if (world.isRemote())
+				squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, offset);
 		}
 
 		return ActionResultType.SUCCESS;

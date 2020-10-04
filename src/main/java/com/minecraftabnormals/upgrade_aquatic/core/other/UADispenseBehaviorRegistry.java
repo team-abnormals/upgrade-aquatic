@@ -49,7 +49,8 @@ public class UADispenseBehaviorRegistry {
 		
 		@Override
 		protected void spawnDispenseParticles(IBlockSource source, Direction facingIn) {
-			GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, source.getWorld(), source.getBlockPos().offset(facingIn));
+			if (source.getWorld().isRemote())
+				GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, source.getWorld(), source.getBlockPos().offset(facingIn));
 		}
 	};
 	
@@ -76,7 +77,8 @@ public class UADispenseBehaviorRegistry {
 		
 		@Override
 		protected void spawnDispenseParticles(IBlockSource source, Direction facingIn) {
-			GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), source.getWorld(), source.getBlockPos().offset(facingIn));
+			if (source.getWorld().isRemote())
+				GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), source.getWorld(), source.getBlockPos().offset(facingIn));
 		}
 	};
 
