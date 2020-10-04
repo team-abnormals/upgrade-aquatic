@@ -42,6 +42,9 @@ public class UAProperties {
 
 	public static final Block.Properties ELDER_PRISMARINE_CORAL = Block.Properties.create(Material.CORAL, MaterialColor.WHITE_TERRACOTTA).setLightLevel((unknown) -> (3)).sound(SoundType.GLASS);
 
+	public static final Block.Properties LUMINOUS_PRISMARINE = Block.Properties.create(Material.ROCK, MaterialColor.DIAMOND).hardnessAndResistance(1.5F, 6.0F).setLightLevel((unknown) -> (8)).setNeedsPostProcessing(UAProperties::needsPostProcessing).setEmmisiveRendering(UAProperties::needsPostProcessing);
+	public static final Block.Properties LUMINOUS_ELDER_PRISMARINE = Block.Properties.create(Material.ROCK, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(1.5F, 6.0F).setLightLevel((unknown) -> (8)).setNeedsPostProcessing(UAProperties::needsPostProcessing).setEmmisiveRendering(UAProperties::needsPostProcessing);
+
 	public static final Block.Properties createSearocket(boolean pink) {
 		MaterialColor color = pink ? MaterialColor.PINK : MaterialColor.WHITE_TERRACOTTA;
 		return Block.Properties.create(Material.PLANTS, color).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
@@ -54,7 +57,11 @@ public class UAProperties {
 	private static Boolean allowsSpawnOnLeaves(BlockState state, IBlockReader reader, BlockPos pos, EntityType<?> entity) {
 		return entity == EntityType.OCELOT || entity == EntityType.PARROT;
 	}
-	
+
+	private static boolean needsPostProcessing(BlockState state, IBlockReader reader, BlockPos pos) {
+		return true;
+	}
+
 	private static boolean isntSolid(BlockState state, IBlockReader reader, BlockPos pos) {
 		return false;
 	}

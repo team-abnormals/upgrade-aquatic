@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "type=bottom": { "model": "upgrade_aquatic:block/luminous_prismarine_slab" },
+        "type=top": { "model": "upgrade_aquatic:block/luminous_prismarine_slab_top" },
+        "type=double": { "model": "upgrade_aquatic:block/luminous_prismarine" }
+    }
+}

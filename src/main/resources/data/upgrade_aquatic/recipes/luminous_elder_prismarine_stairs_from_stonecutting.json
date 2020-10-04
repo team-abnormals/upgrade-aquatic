@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:luminous_elder_prismarine"
+  },
+  "result": "upgrade_aquatic:luminous_elder_prismarine_stairs",
+  "count": 1,
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "elder_prismarine_underground_biome"
+    }
+  ]
+}

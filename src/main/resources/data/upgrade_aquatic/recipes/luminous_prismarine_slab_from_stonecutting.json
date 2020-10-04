@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:luminous_prismarine"
+  },
+  "result": "upgrade_aquatic:luminous_prismarine_slab",
+  "count": 2
+}

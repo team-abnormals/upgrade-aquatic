@@ -17,9 +17,12 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
@@ -102,6 +105,11 @@ public class GlowSquidEntity extends BucketableWaterMobEntity {
 
 	public void livingTick() {
 		super.livingTick();
+		
+        for (PlayerEntity player : this.world.getEntitiesWithinAABB(ServerPlayerEntity.class, this.getBoundingBox().grow(5.0D, 5.0D, 5.0D))) {
+            player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 240));
+        }
+        
 		this.prevSquidPitch = this.squidPitch;
 		this.prevSquidYaw = this.squidYaw;
 		this.prevSquidRotation = this.squidRotation;

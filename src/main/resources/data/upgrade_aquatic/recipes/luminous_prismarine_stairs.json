@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:luminous_prismarine"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:luminous_prismarine_stairs",
+    "count": 4
+  }
+}

@@ -394,6 +394,16 @@
   "block.upgrade_aquatic.beachgrass_thatch_slab": "Beachgrass Thatch Slab",
   "block.upgrade_aquatic.beachgrass_thatch_stairs": "Beachgrass Thatch Stairs",
   
+  "block.upgrade_aquatic.luminous_prismarine": "Luminous Prismarine",
+  "block.upgrade_aquatic.luminous_prismarine_slab": "Luminous Prismarine Slab",
+  "block.upgrade_aquatic.luminous_prismarine_stairs": "Luminous Prismarine Stairs",
+  "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Luminous Prismarine Vertical Slab",
+  
+  "block.upgrade_aquatic.luminous_elder_prismarine": "Luminous Elder Prismarine",
+  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Luminous Elder Prismarine Slab",
+  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Luminous Elder Prismarine Stairs",
+  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Luminous Elder Prismarine Vertical Slab",
+  
   "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Beachgrass Thatch Vertical Slab",
   "block.upgrade_aquatic.tooth_vertical_slab": "Tooth Vertical Slab",
   "block.upgrade_aquatic.tooth_brick_vertical_slab": "Tooth Brick Vertical Slab",
