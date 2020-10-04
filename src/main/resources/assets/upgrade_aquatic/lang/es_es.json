@@ -3,6 +3,7 @@
 
   "block.upgrade_aquatic.guardian_spine": "Espina de guardián",
   "block.upgrade_aquatic.elder_guardian_spine": "Espina de guardián anciano",
+  "item.upgrade_aquatic.glowing_ink_sac": "Saco de tinta luminosa",
 
   "block.upgrade_aquatic.elder_eye": "Ojo de guardián anciano",
   
@@ -393,6 +394,16 @@
   "block.upgrade_aquatic.beachgrass_thatch": "Paja de hierba de playa",
   "block.upgrade_aquatic.beachgrass_thatch_slab": "Losa de paja de hierba de playa",
   "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escaleras de paja de hierba de playa",
+
+  "block.upgrade_aquatic.luminous_prismarine": "Prismarina luminosa",
+  "block.upgrade_aquatic.luminous_prismarine_slab": "Losa de prismarina luminosa",
+  "block.upgrade_aquatic.luminous_prismarine_stairs": "Escaleras de prismarina luminosa",
+  "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Losa vertical de prismarina luminosa",
+
+  "block.upgrade_aquatic.luminous_elder_prismarine": "Prismarina anciana luminosa",
+  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Losa de prismarina anciana luminosa",
+  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Escaleras de prismarina anciana luminosa",
+  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Losa vertical de prismarina anciana luminosa",
   
   "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Losa vertical de paja de hierba de playa",
   "block.upgrade_aquatic.tooth_vertical_slab": "Losa vertical de diente",
@@ -440,6 +451,7 @@
   "item.upgrade_aquatic.lionfish_bucket": "Cubo con pez león",
   "item.upgrade_aquatic.squid_bucket": "Cubo con calamar",
   "item.upgrade_aquatic.jellyfish_bucket": "Cubo con medusa",
+  "item.upgrade_aquatic.glow_squid_bucket": "Cubo con calamar luminoso",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Generar aldeano ahogado",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Generar nautilo",
@@ -450,6 +462,7 @@
   "item.upgrade_aquatic.flare_spawn_egg": "Generar llamarada",
   "item.upgrade_aquatic.goose_spawn_egg": "Generar ganso",
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Generar medusa",
+  "item.upgrade_aquatic.glow_squid_spawn_egg": "Generar calamar luminoso",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Espiga de agua morada cocida",
   "item.upgrade_aquatic.boiled_blue_pickerelweed": "Espiga de agua azul cocida",
@@ -519,6 +532,7 @@
   "entity.upgrade_aquatic.ululu": "Ululu",
   "entity.upgrade_aquatic.sonar_wave": "Onda sonar",
   "entity.upgrade_aquatic.goose": "Ganso",
+  "entity.upgrade_aquatic.glow_squid": "Calamar luminoso",
 
   "entity.upgrade_aquatic.box_jellyfish": "Medusa de caja",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Medusa invertida",
