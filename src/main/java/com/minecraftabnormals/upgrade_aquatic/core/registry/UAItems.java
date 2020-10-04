@@ -79,7 +79,9 @@ public class UAItems {
 			CompoundNBT compoundnbt = stack.getTag();
 			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 				AbstractJellyfishEntity jellyfish = ((JellyfishBucketItem) stack.getItem()).getEntityInStack(stack, world, null);
-				return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * (float) jellyfish.getIdSuffix());
+				if (jellyfish != null) {
+					return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * (float) jellyfish.getIdSuffix());
+				}
 			}
 			return 0.0F;
 		});
