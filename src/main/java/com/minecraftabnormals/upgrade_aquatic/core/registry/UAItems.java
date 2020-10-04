@@ -3,10 +3,10 @@ package com.minecraftabnormals.upgrade_aquatic.core.registry;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.items.BoiledPickerelweedItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.GlowSquidBucketItem;
+import com.minecraftabnormals.upgrade_aquatic.common.items.GlowingInkItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.JellyfishBucketItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.MulberryJamBottleItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.PikeBucketItem;
-import com.minecraftabnormals.upgrade_aquatic.common.items.PrismarineRodItem;
 import com.minecraftabnormals.upgrade_aquatic.common.items.SquidBucketItem;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
@@ -43,9 +43,9 @@ public class UAItems {
 	public static final RegistryObject<Item> GLOW_SQUID_BUCKET          = HELPER.createItem("glow_squid_bucket", () -> new GlowSquidBucketItem(() -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 	public static final RegistryObject<Item> JELLYFISH_BUCKET           = HELPER.createItem("jellyfish_bucket", () -> new JellyfishBucketItem(() -> Fluids.WATER, new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 	
-	public static final RegistryObject<Item> PRISMARINE_ROD             = HELPER.createItem("prismarine_rod", () -> new PrismarineRodItem(new Item.Properties().group(ItemGroup.MISC)));
+	public static final RegistryObject<Item> PRISMARINE_ROD             = HELPER.createItem("prismarine_rod", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
 	public static final RegistryObject<Item> THRASHER_TOOTH             = HELPER.createItem("thrasher_tooth", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
-	public static final RegistryObject<Item> GLOWING_INK_SAC            = HELPER.createItem("glowing_ink_sac", () -> new Item(new Item.Properties().group(ItemGroup.MISC)));
+	public static final RegistryObject<Item> GLOWING_INK_SAC            = HELPER.createItem("glowing_ink_sac", () -> new GlowingInkItem(new Item.Properties().group(ItemGroup.MISC)));
 	public static final RegistryObject<Item> BOILED_BLUE_PICKERELWEED   = HELPER.createItem("boiled_blue_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.buildPickerelweed(false)), false));
 	public static final RegistryObject<Item> BOILED_PURPLE_PICKERELWEED = HELPER.createItem("boiled_purple_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().group(ItemGroup.FOOD).food(UAFoods.buildPickerelweed(true)), true));
 	

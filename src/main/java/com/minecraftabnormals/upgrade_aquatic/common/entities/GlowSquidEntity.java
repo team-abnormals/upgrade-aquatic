@@ -195,7 +195,6 @@ public class GlowSquidEntity extends BucketableWaterMobEntity {
 			Vector3d vector3d2 = vector3d1.scale(0.3D + (double) (this.rand.nextFloat() * 2.0F));
 			((ServerWorld) this.world).spawnParticle(UAParticles.GLOW_SQUID_INK.get(), vector3d.x, vector3d.y + 0.5D, vector3d.z, 0, vector3d2.x, vector3d2.y, vector3d2.z, (double) 0.1F);
 		}
-
 	}
 
 	public void travel(Vector3d travelVector) {

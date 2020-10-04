@@ -8,6 +8,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.BedrollBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.items.GlowingInkItem;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -45,6 +46,7 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.play.server.SStatisticsPacket;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stat;
@@ -52,12 +54,16 @@ import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
@@ -90,6 +96,23 @@ public class EntityEvents {
 			if(entity instanceof DolphinEntity) {
 				((MobEntity) entity).targetSelector.addGoal(0, (new HurtByTargetGoal((DolphinEntity) entity, ThrasherEntity.class)).setCallsForHelp());
 				((MobEntity) entity).goalSelector.addGoal(1, new MeleeAttackGoal((DolphinEntity) entity, 1.2D, true));
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void rightClickItem(PlayerInteractEvent.RightClickBlock event) {
+		World world = event.getWorld();
+		BlockPos pos = event.getPos();
+		PlayerEntity player = event.getPlayer();
+		if (event.getItemStack().getItem() == Items.INK_SAC) {
+			event.getPlayer().swingArm(event.getHand());
+			if (!world.isRemote()) {
+				if (!player.abilities.isCreativeMode)
+					event.getItemStack().shrink(1);
+			} else {
+				world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
 			}
 		}
 	}
