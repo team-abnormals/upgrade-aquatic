@@ -7,6 +7,7 @@ import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
 
+import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -62,6 +63,18 @@ public class GlowingInkItem extends Item {
 			double d7 = (double) posIn.getY() + random.nextDouble();
 			double d8 = (double) posIn.getZ() + random.nextDouble();
 			worldIn.addParticle(particle, d6, d7, d8, d1, d1, d1);
+		}
+	}
+
+	public static void squirtInkServer(IParticleData particle, BlockPos posIn) {
+		String particleRegistryName = particle.getType().getRegistryName().toString();
+		NetworkUtil.spawnParticle(particleRegistryName, (double) posIn.getX() + 0.5D, (double) posIn.getY() + 0.5D, (double) posIn.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
+		for (int i = 0; i < 15; ++i) {
+			double d1 = random.nextGaussian() * 0.02D;
+			double d6 = (double) posIn.getX() + random.nextDouble();
+			double d7 = (double) posIn.getY() + random.nextDouble();
+			double d8 = (double) posIn.getZ() + random.nextDouble();
+			NetworkUtil.spawnParticle(particleRegistryName, d6, d7, d8, d1, d1, d1);
 		}
 	}
 
