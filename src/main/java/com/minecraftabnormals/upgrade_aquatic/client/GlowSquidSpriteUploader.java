@@ -21,6 +21,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 public class GlowSquidSpriteUploader extends SpriteUploader {
 	public static final ResourceLocation ATLAS_LOCATION = new ResourceLocation(UpgradeAquatic.MODID, "textures/atlas/glow_squid.png");
 	public static final ResourceLocation SQUID_SPRITE = new ResourceLocation(UpgradeAquatic.MODID, "glow_squid");
+	public static final ResourceLocation GLOW_SPRITE = new ResourceLocation(UpgradeAquatic.MODID, "glow_squid_emissive");
 
 	private static GlowSquidSpriteUploader uploader;
 
@@ -30,7 +31,7 @@ public class GlowSquidSpriteUploader extends SpriteUploader {
 
 	@Override
 	protected Stream<ResourceLocation> getResourceLocations() {
-		return Stream.of(SQUID_SPRITE);
+		return Stream.of(SQUID_SPRITE, GLOW_SPRITE);
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class GlowSquidSpriteUploader extends SpriteUploader {
 			Minecraft minecraft = Minecraft.getInstance();
 			IResourceManager resourceManager = minecraft.getResourceManager();
 			if (resourceManager instanceof IReloadableResourceManager) {
-				((IReloadableResourceManager) resourceManager).addReloadListener(uploader = new GlowSquidSpriteUploader(minecraft.textureManager, ATLAS_LOCATION, "entity"));
+				((IReloadableResourceManager) resourceManager).addReloadListener(uploader = new GlowSquidSpriteUploader(minecraft.textureManager, ATLAS_LOCATION, "entity/glow_squid"));
 			}
 		});
 	}
@@ -53,5 +54,12 @@ public class GlowSquidSpriteUploader extends SpriteUploader {
 	 */
 	public static TextureAtlasSprite getSprite() {
 		return uploader.getSprite(SQUID_SPRITE);
+	}
+
+	/**
+	 * @return The sprite for the glow squid outer layer
+	 */
+	public static TextureAtlasSprite getGlowSprite() {
+		return uploader.getSprite(GLOW_SPRITE);
 	}
 }

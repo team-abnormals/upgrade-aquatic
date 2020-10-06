@@ -8,24 +8,30 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.GlowSquidEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
+import com.teamabnormals.abnormals_core.client.ACRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 
 /**
  * @author Ocelot
  */
 public class GlowSquidModel extends SegmentedModel<GlowSquidEntity>
 {
+    private final boolean emissive;
     private final ModelRenderer body;
     private final ModelRenderer[] legs = new ModelRenderer[8];
     private final ImmutableList<ModelRenderer> field_228296_f_;
 
-    public GlowSquidModel()
+    public GlowSquidModel(boolean emissive)
     {
         this.textureWidth = 64;
         this.textureHeight = 64;
+
+        this.emissive = emissive;
+
         this.body = new ModelRenderer(this, 0, 0);
         this.body.addBox(-6.0F, -8.0F, -6.0F, 12.0F, 16.0F, 12.0F);
         this.body.rotationPointY += 8.0F;
@@ -62,7 +68,18 @@ public class GlowSquidModel extends SegmentedModel<GlowSquidEntity>
     @Override
     public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha)
     {
-        super.render(matrixStack, GlowSquidSpriteUploader.getSprite().wrapBuffer(Minecraft.getInstance().getRenderTypeBuffers().getBufferSource().getBuffer(RenderType.getEntitySolid(GlowSquidSpriteUploader.ATLAS_LOCATION))), packedLight, packedOverlay, red, green, blue, alpha);
+        TextureAtlasSprite sprite = this.emissive ? GlowSquidSpriteUploader.getGlowSprite() : GlowSquidSpriteUploader.getSprite();
+        RenderType render = this.emissive ? ACRenderTypes.getEmissiveEntity(GlowSquidSpriteUploader.ATLAS_LOCATION) : RenderType.getEntitySolid(GlowSquidSpriteUploader.ATLAS_LOCATION);
+        super.render(
+                matrixStack,
+                sprite.wrapBuffer(
+                        Minecraft.getInstance().getRenderTypeBuffers().getBufferSource().getBuffer(render)),
+                this.emissive ? 15728880 : packedLight,
+                packedOverlay,
+                red,
+                green,
+                blue,
+                alpha);
     }
 
     @Override
