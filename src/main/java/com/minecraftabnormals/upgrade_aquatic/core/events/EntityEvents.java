@@ -130,12 +130,20 @@ public class EntityEvents {
 			}
 
 			if (event.getItemStack().getItem() == Items.INK_SAC) {
-				if (!world.isRemote()) {
-					if (!player.abilities.isCreativeMode)
-						event.getItemStack().shrink(1);
+				if (world.getTileEntity(pos) instanceof IGlowable) {
+					IGlowable te = (IGlowable) world.getTileEntity(pos);
+
+					if (te != null && te.setGlowing(false)) {
+						if (!player.abilities.isCreativeMode) stack.shrink(1);
+						if (world.isRemote())
+							GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, pos);
+						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					}
 				} else {
+					if (!player.abilities.isCreativeMode) event.getItemStack().shrink(1);
+					if(world.isRemote())
+						GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
 					world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-					GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
 				}
 
 				event.setCanceled(true);
