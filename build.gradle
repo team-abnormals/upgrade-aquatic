@@ -36,6 +36,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.disableRefMap', 'true'
             arg "-mixin.config=upgrade_aquatic.mixins.json"
             mods {
                 upgrade_aquatic {
@@ -47,6 +48,7 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
+            property 'mixin.env.disableRefMap', 'true'
             arg "-mixin.config=upgrade_aquatic.mixins.json"
             mods {
                 upgrade_aquatic {
