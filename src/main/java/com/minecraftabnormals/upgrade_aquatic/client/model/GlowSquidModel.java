@@ -70,16 +70,7 @@ public class GlowSquidModel extends SegmentedModel<GlowSquidEntity>
     {
         TextureAtlasSprite sprite = this.emissive ? GlowSquidSpriteUploader.getGlowSprite() : GlowSquidSpriteUploader.getSprite();
         RenderType render = this.emissive ? ACRenderTypes.getEmissiveEntity(GlowSquidSpriteUploader.ATLAS_LOCATION) : RenderType.getEntitySolid(GlowSquidSpriteUploader.ATLAS_LOCATION);
-        super.render(
-                matrixStack,
-                sprite.wrapBuffer(
-                        Minecraft.getInstance().getRenderTypeBuffers().getBufferSource().getBuffer(render)),
-                this.emissive ? 15728880 : packedLight,
-                packedOverlay,
-                red,
-                green,
-                blue,
-                alpha);
+        super.render(matrixStack, sprite.wrapBuffer(Minecraft.getInstance().getRenderTypeBuffers().getBufferSource().getBuffer(render)), this.emissive ? 15728880 : packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override
