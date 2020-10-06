@@ -29,6 +29,6 @@ license="https://github.com/minecraftabnormals/Upgrade-Aquatic/blob/master/LICEN
 [[dependencies.upgrade_aquatic]]
     modId="abnormals_core"
     mandatory=true
-    versionRange="[2.0.1,)"
+    versionRange="[2.0.5,)"
     ordering="AFTER"
     side="BOTH"

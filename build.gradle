@@ -85,5 +85,5 @@ jar {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.1-32.0.72'
-    implementation fg.deobf("curse.maven:abnormals-core:3017821")
+    implementation fg.deobf("curse.maven:abnormals-core:3072976")
 }
