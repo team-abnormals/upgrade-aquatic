@@ -7,6 +7,7 @@ import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -17,8 +18,6 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
@@ -102,13 +101,17 @@ public class GlowSquidEntity extends BucketableWaterMobEntity {
 	protected boolean canTriggerWalking() {
 		return false;
 	}
+	
+	@Override
+	public void applyEntityCollision(Entity entityIn) {
+		super.applyEntityCollision(entityIn);
+		if (entityIn instanceof LivingEntity) {
+			((LivingEntity) entityIn).addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 600));
+		}
+	}
 
 	public void livingTick() {
 		super.livingTick();
-		
-        for (PlayerEntity player : this.world.getEntitiesWithinAABB(ServerPlayerEntity.class, this.getBoundingBox().grow(5.0D, 5.0D, 5.0D))) {
-            player.addPotionEffect(new EffectInstance(Effects.NIGHT_VISION, 240));
-        }
         
 		this.prevSquidPitch = this.squidPitch;
 		this.prevSquidYaw = this.squidYaw;

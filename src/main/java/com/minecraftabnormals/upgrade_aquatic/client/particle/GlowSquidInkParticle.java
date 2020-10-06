@@ -17,7 +17,7 @@ public class GlowSquidInkParticle extends SimpleAnimatedParticle {
 		super(world, posX, posY, posZ, animatedSprite, 0.0F);
 		this.particleScale = 0.5F;
 		this.setAlphaF(1.0F);
-		this.setColor(0.40F, 0.86F, 0.81F);
+		this.setColor(66F / 256F, 215F / 256F, 165F / 256F);
 		this.maxAge = (int) ((double) (this.particleScale * 12.0F) / (Math.random() * (double) 0.8F + (double) 0.2F));
 		this.selectSpriteWithAge(animatedSprite);
 		this.canCollide = false;

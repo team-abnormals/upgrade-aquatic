@@ -39,7 +39,7 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 		spawns.add(new PikeEntitySpawn<>(UAEntities.PIKE::get, PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING));
 		spawns.add(new EntitySpawn<>(UAEntities.LIONFISH::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 15, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::coralCondition, hotOceanCondition()));
 		spawns.add(new ThrasherEntitySpawn<>(UAEntities.THRASHER::get, PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, coldOceanCondition()));
-		spawns.add(new EntitySpawn<>(UAEntities.GLOW_SQUID::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 5, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntitySpawns::deepMobCondition, oceanCondition()));
+		spawns.add(new EntitySpawn<>(UAEntities.GLOW_SQUID::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 14, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntitySpawns::deepMobCondition, oceanCondition()));
 		
 		spawns.add(new EntitySpawn<>(UAEntities.BOX_JELLYFISH::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 6, 1, 2), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, warmishOceanCondition()));
 		spawns.add(new EntitySpawn<>(UAEntities.CASSIOPEA_JELLYFISH::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, (biome) -> biome == Biomes.LUKEWARM_OCEAN));

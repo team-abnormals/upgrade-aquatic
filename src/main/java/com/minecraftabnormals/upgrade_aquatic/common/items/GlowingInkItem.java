@@ -3,19 +3,17 @@ package com.minecraftabnormals.upgrade_aquatic.common.items;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
-import com.minecraftabnormals.upgrade_aquatic.api.IGlowable;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
-
 import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.particles.IParticleData;
-import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;

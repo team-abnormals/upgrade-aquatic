@@ -482,12 +482,12 @@ public class UABlocks {
 	public static final RegistryObject<Block> BEACHGRASS_THATCH_STAIRS 			= HELPER.createBlock("beachgrass_thatch_stairs", () -> new ThatchStairsBlock(BEACHGRASS_THATCH.get().getDefaultState(), UAProperties.BEACHGRASS_THATCH), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB 	= HELPER.createCompatBlock("quark", "beachgrass_thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(UAProperties.BEACHGRASS_THATCH), ItemGroup.BUILDING_BLOCKS);
 
-	public static final RegistryObject<Block> LUMINOUS_PRISMARINE				= HELPER.createBlock("luminous_prismarine", () -> new Block(UAProperties.LUMINOUS_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LUMINOUS_PRISMARINE				= HELPER.createBlock("luminous_prismarine", () -> new ConduitSupportingBlock(UAProperties.LUMINOUS_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> LUMINOUS_PRISMARINE_STAIRS 		= HELPER.createBlock("luminous_prismarine_stairs", () -> new AbnormalsStairsBlock(LUMINOUS_PRISMARINE.get().getDefaultState(), UAProperties.LUMINOUS_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> LUMINOUS_PRISMARINE_SLAB 			= HELPER.createBlock("luminous_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> LUMINOUS_PRISMARINE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "luminous_prismarine_vertical_slab", () -> new VerticalSlabBlock(UAProperties.LUMINOUS_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
 	
-    public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE					= HELPER.createCompatBlock("quark", "luminous_elder_prismarine", () -> new Block(UAProperties.LUMINOUS_ELDER_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE					= HELPER.createCompatBlock("quark", "luminous_elder_prismarine", () -> new ConduitSupportingBlock(UAProperties.LUMINOUS_ELDER_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE_STAIRS 			= HELPER.createCompatBlock("quark", "luminous_elder_prismarine_stairs", () -> new AbnormalsStairsBlock(LUMINOUS_ELDER_PRISMARINE.get().getDefaultState(), UAProperties.LUMINOUS_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE_SLAB 			= HELPER.createCompatBlock("quark", "luminous_elder_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_ELDER_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE_VERTICAL_SLAB 	= HELPER.createCompatBlock("quark", "luminous_elder_prismarine_vertical_slab", () -> new VerticalSlabBlock(UAProperties.LUMINOUS_ELDER_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
