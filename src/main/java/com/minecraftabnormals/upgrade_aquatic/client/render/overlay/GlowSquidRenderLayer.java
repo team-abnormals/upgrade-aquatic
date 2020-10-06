@@ -2,23 +2,13 @@ package com.minecraftabnormals.upgrade_aquatic.client.render.overlay;
 
 import com.minecraftabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
 import com.minecraftabnormals.upgrade_aquatic.client.model.GlowSquidModel;
-import com.minecraftabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.GlowSquidEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeType.PikeRarity;
-import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.teamabnormals.abnormals_core.client.ACRenderTypes;
-import com.teamabnormals.abnormals_core.client.ClientInfo;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.LivingRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.client.renderer.entity.model.BipedModel;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
