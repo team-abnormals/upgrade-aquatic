@@ -6,13 +6,15 @@
   "refmap": "upgrade_aquatic.refmap.json",
   "mixins": [
     "BubbleColumnMixin",
+    "LivingEntityMixin",
     "ServerPlayerEntityMixin",
-    "LivingEntityMixin"
+    "SignTileEntityMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",
     "DrownedModelMixin",
-    "DrownedRendererMixin"
+    "DrownedRendererMixin",
+    "SignTileEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

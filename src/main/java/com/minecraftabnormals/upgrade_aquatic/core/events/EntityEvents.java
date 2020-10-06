@@ -2,7 +2,9 @@ package com.minecraftabnormals.upgrade_aquatic.core.events;
 
 import java.util.List;
 
+import com.minecraftabnormals.upgrade_aquatic.api.IGlowable;
 import com.minecraftabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
+import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.BedrollBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
@@ -43,6 +45,7 @@ import net.minecraft.entity.passive.fish.TropicalFishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.play.server.SStatisticsPacket;
@@ -53,6 +56,7 @@ import net.minecraft.stats.Stat;
 import net.minecraft.stats.StatisticsManager;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -105,14 +109,37 @@ public class EntityEvents {
 		World world = event.getWorld();
 		BlockPos pos = event.getPos();
 		PlayerEntity player = event.getPlayer();
-		if (event.getItemStack().getItem() == Items.INK_SAC) {
-			event.getPlayer().swingArm(event.getHand());
-			if (!world.isRemote()) {
-				if (!player.abilities.isCreativeMode)
-					event.getItemStack().shrink(1);
-			} else {
-				world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
+		ItemStack stack = event.getItemStack();
+
+		if(!player.isSecondaryUseActive())
+		{
+			if (stack.getItem() == UAItems.GLOWING_INK_SAC.get()) {
+				if (world.getTileEntity(pos) instanceof IGlowable) {
+					IGlowable te = (IGlowable) world.getTileEntity(pos);
+
+					if (te != null && te.setGlowing(true)) {
+						if (!player.abilities.isCreativeMode) stack.shrink(1);
+						if (world.isRemote())
+							GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, pos);
+						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					}
+
+					event.setCanceled(true);
+					event.setCancellationResult(ActionResultType.SUCCESS);
+				}
+			}
+
+			if (event.getItemStack().getItem() == Items.INK_SAC) {
+				if (!world.isRemote()) {
+					if (!player.abilities.isCreativeMode)
+						event.getItemStack().shrink(1);
+				} else {
+					world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
+				}
+
+				event.setCanceled(true);
+				event.setCancellationResult(ActionResultType.SUCCESS);
 			}
 		}
 	}

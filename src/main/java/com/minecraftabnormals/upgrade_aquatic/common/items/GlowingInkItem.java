@@ -3,6 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.items;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
+import com.minecraftabnormals.upgrade_aquatic.api.IGlowable;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
@@ -14,6 +15,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.particles.IParticleData;
+import net.minecraft.tileentity.SignTileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -36,14 +38,18 @@ public class GlowingInkItem extends Item {
 		BlockPos pos = context.getPos();
 		BlockState state = world.getBlockState(pos);
 
+		if(context.getPlayer() != null && context.getPlayer().isSecondaryUseActive())
+			return super.onItemUse(context);
+
 		if (DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
 			Block livingCoral = DEAD_CORAL_CONVERSION_MAP.get(state.getBlock());
 			world.setBlockState(pos, BlockUtils.transferAllBlockStates(state, livingCoral.getDefaultState()));
 			world.getPendingBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
-			if (!context.getPlayer().abilities.isCreativeMode)
+			if (context.getPlayer() != null && !context.getPlayer().abilities.isCreativeMode)
 				context.getItem().shrink(1);
 			world.playSound(context.getPlayer(), pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, pos);
+			if (world.isRemote())
+				squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, pos);
 		} else {
 			BlockPos offset = world.getBlockState(pos).isSolid() ? pos.offset(context.getFace()) : pos;
 			world.playSound(context.getPlayer(), offset, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
