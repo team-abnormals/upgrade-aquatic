@@ -7,13 +7,13 @@
 
   "block.upgrade_aquatic.elder_eye": "Ojo de guardián mayor",
   
-  "block.upgrade_aquatic.dead_acan_coral": "Coral acan muerto",
-  "block.upgrade_aquatic.dead_acan_coral_block": "Bloque de coral acan muerto",
-  "block.upgrade_aquatic.dead_acan_coral_fan": "Gorgonia acan muerta",
+  "block.upgrade_aquatic.dead_acan_coral": "Coral de acan muerto",
+  "block.upgrade_aquatic.dead_acan_coral_block": "Bloque de coral de acan muerto",
+  "block.upgrade_aquatic.dead_acan_coral_fan": "Gorgonia de acan muerta",
   
-  "block.upgrade_aquatic.acan_coral": "Coral acan",
-  "block.upgrade_aquatic.acan_coral_block": "Bloque de coral acan",
-  "block.upgrade_aquatic.acan_coral_fan": "Gorgonia acan",
+  "block.upgrade_aquatic.acan_coral": "Coral de acan",
+  "block.upgrade_aquatic.acan_coral_block": "Bloque de coral de acan",
+  "block.upgrade_aquatic.acan_coral_fan": "Gorgonia de acan",
   
   "block.upgrade_aquatic.elder_prismarine_coral": "Coral de prismarina mayor",
   "block.upgrade_aquatic.elder_prismarine_coral_block": "Bloque de coral de prismarina mayor",
@@ -114,7 +114,7 @@
   "block.upgrade_aquatic.red_jelly_wall_torch": "Antorcha gelatinosa roja en pared",
   "block.upgrade_aquatic.white_jelly_wall_torch": "Antorcha gelatinosa blanca en pared",
   
-  "block.upgrade_aquatic.embedded_ammonite": "Ammonite incrustado",
+  "block.upgrade_aquatic.embedded_ammonite": "Fósil de amonite",
   
   "block.upgrade_aquatic.bedroll": "Bolsa de dormir",
   "block.upgrade_aquatic.white_bedroll": "Bolsa de dormir blanca",
@@ -153,7 +153,7 @@
   "block.upgrade_aquatic.tube_coralstone": "Piedra coral de tubo",
   "block.upgrade_aquatic.brain_coralstone": "Piedra coral de cerebro",
   "block.upgrade_aquatic.fire_coralstone": "Piedra coral de fuego",		
-  "block.upgrade_aquatic.acan_coralstone": "Piedra coral acan",
+  "block.upgrade_aquatic.acan_coralstone": "Piedra coral de acan",
   "block.upgrade_aquatic.finger_coralstone": "Piedra coral de dedo",
   "block.upgrade_aquatic.star_coralstone": "Piedra coral de estrella",
   "block.upgrade_aquatic.moss_coralstone": "Piedra coral de musgo",
@@ -173,7 +173,7 @@
   "block.upgrade_aquatic.chiseled_tube_coralstone": "Piedra coral de tubo cincelada",
   "block.upgrade_aquatic.chiseled_brain_coralstone": "Piedra coral de cerebro cincelada",
   "block.upgrade_aquatic.chiseled_fire_coralstone": "Piedra coral de fuego cincelada",
-  "block.upgrade_aquatic.chiseled_acan_coralstone": "Piedra coral acan cincelada",
+  "block.upgrade_aquatic.chiseled_acan_coralstone": "Piedra coral de acan cincelada",
   "block.upgrade_aquatic.chiseled_finger_coralstone": "Piedra coral de dedo cincelada",
   "block.upgrade_aquatic.chiseled_star_coralstone": "Piedra coral de estrella cincelada",
   "block.upgrade_aquatic.chiseled_moss_coralstone": "Piedra coral de musgo cincelada",
@@ -193,7 +193,7 @@
   "block.upgrade_aquatic.tube_coralstone_slab": "Baldosa de piedra coral de tubo",
   "block.upgrade_aquatic.brain_coralstone_slab": "Baldosa de piedra coral de cerebro",
   "block.upgrade_aquatic.fire_coralstone_slab": "Baldosa de piedra coral de fuego",
-  "block.upgrade_aquatic.acan_coralstone_slab": "Baldosa de piedra coral acan",
+  "block.upgrade_aquatic.acan_coralstone_slab": "Baldosa de piedra coral de acan",
   "block.upgrade_aquatic.finger_coralstone_slab": "Baldosa de piedra coral de dedo",
   "block.upgrade_aquatic.star_coralstone_slab": "Baldosa de piedra coral de estrella",
   "block.upgrade_aquatic.moss_coralstone_slab": "Baldosa de piedra coral de musgo",
@@ -213,7 +213,7 @@
   "block.upgrade_aquatic.tube_coralstone_stairs": "Escaleras de piedra coral de tubo",
   "block.upgrade_aquatic.brain_coralstone_stairs": "Escaleras de piedra coral de cerebro",
   "block.upgrade_aquatic.fire_coralstone_stairs": "Escaleras de piedra coral de fuego",		
-  "block.upgrade_aquatic.acan_coralstone_stairs": "Escaleras de piedra coral acan",
+  "block.upgrade_aquatic.acan_coralstone_stairs": "Escaleras de piedra coral de acan",
   "block.upgrade_aquatic.finger_coralstone_stairs": "Escaleras de piedra coral de dedo",
   "block.upgrade_aquatic.star_coralstone_stairs": "Escaleras de piedra coral de estrella",
   "block.upgrade_aquatic.moss_coralstone_stairs": "Escaleras de piedra coral de musgo",
@@ -233,7 +233,7 @@
   "block.upgrade_aquatic.tube_coralstone_wall": "Pared de piedra coral de tubo",
   "block.upgrade_aquatic.brain_coralstone_wall": "Pared de piedra coral de cerebro",
   "block.upgrade_aquatic.fire_coralstone_wall": "Pared de piedra coral de fuego",		
-  "block.upgrade_aquatic.acan_coralstone_wall": "Pared de piedra coral acan",
+  "block.upgrade_aquatic.acan_coralstone_wall": "Pared de piedra coral de acan",
   "block.upgrade_aquatic.finger_coralstone_wall": "Pared de piedra coral de dedo",
   "block.upgrade_aquatic.star_coralstone_wall": "Pared de piedra coral de estrella",
   "block.upgrade_aquatic.moss_coralstone_wall": "Pared de piedra coral de musgo",
@@ -387,7 +387,7 @@
   "block.upgrade_aquatic.mulberry_punnet": "Canastilla de moras",
   "block.upgrade_aquatic.mulberry_jam_block": "Bloque de mermelada de moras",
   
-  "block.upgrade_aquatic.prismarine_rod_bundle": "Paquete de varas de prismarina",
+  "block.upgrade_aquatic.prismarine_rod_bundle": "Fardo de varas de prismarina",
   
   "block.upgrade_aquatic.beachgrass": "Pasto de playa",
   "block.upgrade_aquatic.tall_beachgrass": "Pasto de playa alto",
@@ -424,7 +424,7 @@
   "block.upgrade_aquatic.tube_coralstone_vertical_slab": "Baldosa vertical de piedra coral de tubo",
   "block.upgrade_aquatic.brain_coralstone_vertical_slab": "Baldosa vertical de piedra coral de cerebro",
   "block.upgrade_aquatic.fire_coralstone_vertical_slab": "Baldosa vertical de piedra coral de fuego",		
-  "block.upgrade_aquatic.acan_coralstone_vertical_slab": "Baldosa vertical de piedra coral acan",
+  "block.upgrade_aquatic.acan_coralstone_vertical_slab": "Baldosa vertical de piedra coral de acan",
   "block.upgrade_aquatic.finger_coralstone_vertical_slab": "Baldosa vertical de piedra coral de dedo",
   "block.upgrade_aquatic.star_coralstone_vertical_slab": "Baldosa vertical de piedra coral de estrella",
   "block.upgrade_aquatic.moss_coralstone_vertical_slab": "Baldosa vertical de piedra coral de musgo",
@@ -574,19 +574,19 @@
   "item.minecraft.tipped_arrow.effect.repellence_strong": "Flecha de repelencia",
   "item.minecraft.tipped_arrow.effect.repellence_long": "Flecha de repelencia",
   
-  "effect.upgrade_aquatic.vibing": "Sintonía",
-  "item.minecraft.potion.effect.vibing": "Poción de sintonía",
-  "item.minecraft.potion.effect.vibing_strong": "Poción de sintonía",
-  "item.minecraft.potion.effect.vibing_long": "Poción de sintonía",
-  "item.minecraft.splash_potion.effect.vibing": "Poción arrojadiza de sintonía",
-  "item.minecraft.splash_potion.effect.vibing_strong": "Poción arrojadiza de sintonía",
-  "item.minecraft.splash_potion.effect.vibing_long": "Poción arrojadiza de sintonía",
-  "item.minecraft.lingering_potion.effect.vibing": "Poción persistente de sintonía",
-  "item.minecraft.lingering_potion.effect.vibing_strong": "Poción persistente de sintonía",
-  "item.minecraft.lingering_potion.effect.vibing_long": "Poción persistente de sintonía",
-  "item.minecraft.tipped_arrow.effect.vibing": "Flecha de sintonía",
-  "item.minecraft.tipped_arrow.effect.vibing_strong": "Flecha de sintonía",
-  "item.minecraft.tipped_arrow.effect.vibing_long": "Flecha de sintonía",
+  "effect.upgrade_aquatic.vibing": "Ánimo",
+  "item.minecraft.potion.effect.vibing": "Poción de ánimo",
+  "item.minecraft.potion.effect.vibing_strong": "Poción de ánimo",
+  "item.minecraft.potion.effect.vibing_long": "Poción de ánimo",
+  "item.minecraft.splash_potion.effect.vibing": "Poción arrojadiza de ánimo",
+  "item.minecraft.splash_potion.effect.vibing_strong": "Poción arrojadiza de ánimo",
+  "item.minecraft.splash_potion.effect.vibing_long": "Poción arrojadiza de ánimo",
+  "item.minecraft.lingering_potion.effect.vibing": "Poción persistente de ánimo",
+  "item.minecraft.lingering_potion.effect.vibing_strong": "Poción persistente de ánimo",
+  "item.minecraft.lingering_potion.effect.vibing_long": "Poción persistente de ánimo",
+  "item.minecraft.tipped_arrow.effect.vibing": "Flecha de ánimo",
+  "item.minecraft.tipped_arrow.effect.vibing_strong": "Flecha de ánimo",
+  "item.minecraft.tipped_arrow.effect.vibing_long": "Flecha de ánimo",
   
   "_comment6": "Muertes",
   
@@ -601,8 +601,8 @@
   "advancements.adventure.tooth_fairy.title": "Ratón Pérez",
   "advancements.adventure.tooth_fairy.description": "Conseguí el diente de un triturador, una criatura ancestral que acecha en lo profundo de las aguas más frías",
   
-  "advancements.adventure.unethical_dentistry.title": "Dentista sin ética",
-  "advancements.adventure.unethical_dentistry.description": "Poné cualquier bloque fabricado con dientes de triturador",
+  "advancements.adventure.unethical_dentistry.title": "Odontología poco ética",
+  "advancements.adventure.unethical_dentistry.description": "Colocá cualquier bloque fabricado con dientes de triturador",
   
   "advancements.adventure.kill_great_thrasher.title": "Vamos a necesitar un barco más grande",
   "advancements.adventure.kill_great_thrasher.description": "Matá al gran triturador",
@@ -613,10 +613,10 @@
   "advancements.nether.sleepless_slave.title": "Esclavo insomne",
   "advancements.nether.sleepless_slave.description": "Aplicá insomnio en un fantasma para convertirlo en una llamarada",
   
-  "advancements.nether.vibe_check.title": "Control de sintonía",
-  "advancements.nether.vibe_check.description": "Fermentá un pez león para elaborar una poción de repelencia e invertí su efecto con un ojo de araña para crear una poción de sintonía",
+  "advancements.nether.vibe_check.title": "Control de ánimo",
+  "advancements.nether.vibe_check.description": "Fermentá un pez león para elaborar una poción de repelencia e invertí su efecto con un ojo de araña para crear una poción de ánimo",
   
-  "advancements.husbandry.eat_pickerelweed.title": "Casi legal",
+  "advancements.husbandry.eat_pickerelweed.title": "Legal en la mayoría de estados",
   "advancements.husbandry.eat_pickerelweed.description": "Comé una espiga de agua hervida para recuperar burbujas de agua",
   
   "advancements.husbandry.collect_all_pike.title": "Gira mundial de lucios",
@@ -645,4 +645,4 @@
 
   "subtitles.upgrade_aquatic.bucket.empty_jellyfish": "Medusa liberada",
   "subtitles.upgrade_aquatic.bucket.fill_jellyfish": "Medusa capturada"
-} 
+}
