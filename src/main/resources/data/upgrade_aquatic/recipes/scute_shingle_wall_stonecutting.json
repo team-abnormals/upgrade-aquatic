@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:scute_shingles"
+  },
+  "result": "upgrade_aquatic:scute_shingle_wall",
+  "count": 1
+}

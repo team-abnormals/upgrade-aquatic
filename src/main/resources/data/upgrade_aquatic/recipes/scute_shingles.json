@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "FFF",
+    "FNF",
+    "FFF"
+  ],
+  "key": {
+    "N": {
+      "item": "minecraft:scute"
+    },
+    "F": {
+      "item": "minecraft:stone_bricks"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:scute_shingles",
+    "count": 8
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:scute_shingle_slab"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:chiseled_scute_shingles",
+    "count": 1
+  }
+}
