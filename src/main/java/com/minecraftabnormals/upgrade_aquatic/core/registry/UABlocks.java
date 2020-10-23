@@ -224,6 +224,19 @@ public class UABlocks {
 	public static final RegistryObject<Block> TOOTH_DOOR 				= HELPER.createBlock("tooth_door", () -> new ToothDoorBlock(Properties.from(Blocks.END_STONE)), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> TOOTH_LANTERN 			= HELPER.createBlock("tooth_lantern", () -> new ToothLanternBlock(Properties.from(Blocks.END_STONE).sound(UASounds.TOOTH_LANTERN).notSolid().setLightLevel((unknown) -> 15)), ItemGroup.DECORATIONS);
 
+	public static final RegistryObject<Block> SCUTE_BLOCK 					= HELPER.createBlock("scute_block", () -> new ScuteBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_SHINGLES 				= HELPER.createBlock("scute_shingles", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_SHINGLE_STAIRS 			= HELPER.createBlock("scute_shingle_stairs", () -> new AbnormalsStairsBlock(SCUTE_BLOCK.get().getDefaultState(), Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_SHINGLE_SLAB 			= HELPER.createBlock("scute_shingle_slab", () -> new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_SHINGLE_WALL 			= HELPER.createBlock("scute_shingle_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> SCUTE_SHINGLE_VERTICAL_SLAB 	= HELPER.createCompatBlock("quark", "scute_shingle_vertical_slab", () -> new VerticalSlabBlock(Properties.from(SCUTE_SHINGLES.get())), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> CHISELED_SCUTE_SHINGLES 		= HELPER.createBlock("chiseled_scute_shingles", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT 				= HELPER.createBlock("scute_pavement", () -> new Block(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT_STAIRS 		= HELPER.createBlock("scute_pavement_stairs", () -> new AbnormalsStairsBlock(SCUTE_BLOCK.get().getDefaultState(), Properties.from(Blocks.END_STONE)), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT_SLAB 			= HELPER.createBlock("scute_pavement_slab", () -> new SlabBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT_WALL 			= HELPER.createBlock("scute_pavement_wall", () -> new WallBlock(Properties.from(Blocks.END_STONE).harvestTool(ToolType.PICKAXE)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT_VERTICAL_SLAB 	= HELPER.createCompatBlock("quark", "scute_pavement_vertical_slab", () -> new VerticalSlabBlock(Properties.from(SCUTE_PAVEMENT.get())), ItemGroup.BUILDING_BLOCKS);
+	
 	public static final RegistryObject<Block> GLASS_TRAPDOOR 			= HELPER.createBlock("glass_trapdoor", () -> new GlassTrapDoorBlock(Properties.from(Blocks.GLASS)), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> GLASS_DOOR 				= HELPER.createBlock("glass_door", () -> new GlassDoorBlock(Properties.from(Blocks.GLASS)), ItemGroup.REDSTONE);
 	

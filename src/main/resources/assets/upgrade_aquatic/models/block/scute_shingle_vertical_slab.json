@@ -1,0 +1,8 @@
+{
+    "parent": "abnormals_core:block/vertical_slab",
+    "textures": {
+        "side": "upgrade_aquatic:block/scute_shingles",
+        "top": "upgrade_aquatic:block/scute_shingles",
+        "bottom": "upgrade_aquatic:block/scute_shingles"
+    }
+}
