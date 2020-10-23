@@ -260,6 +260,17 @@
   "block.upgrade_aquatic.tooth_trapdoor": "Tooth Trapdoor",
   "block.upgrade_aquatic.tooth_lantern": "Tooth Lantern",
   
+  "block.upgrade_aquatic.scute_block": "Scute Block",
+  "block.upgrade_aquatic.scute_shingles": "Scute Shingles",
+  "block.upgrade_aquatic.scute_shingle_slab": "Scute Shingle Slab",
+  "block.upgrade_aquatic.scute_shingle_stairs": "Scute Shingle Stairs",
+  "block.upgrade_aquatic.scute_shingle_wall": "Scute Shingle Wall",
+  "block.upgrade_aquatic.chiseled_scute_shingles": "Chiseled Scute Shingles",
+  "block.upgrade_aquatic.scute_pavement": "Scute Pavement",
+  "block.upgrade_aquatic.scute_pavement_slab": "Scute Pavement Slab",
+  "block.upgrade_aquatic.scute_pavement_stairs": "Scute Pavement Stairs",
+  "block.upgrade_aquatic.scute_pavement_wall": "Scute Pavement Wall",
+  
   "block.upgrade_aquatic.glass_door": "Glass Door",
   "block.upgrade_aquatic.glass_trapdoor": "Glass Trapdoor",
   
@@ -436,6 +447,8 @@
   "block.upgrade_aquatic.prismarine_coralstone_vertical_slab": "Prismarine Coralstone Vertical Slab",
   "block.upgrade_aquatic.elder_prismarine_coralstone_vertical_slab": "Elder Prismarine Coralstone Vertical Slab",
   "block.upgrade_aquatic.dead_coralstone_vertical_slab": "Dead Coralstone Vertical Slab",
+  "block.upgrade_aquatic.scute_shingles_vertical_slab": "Scute Shingles Vertical Slab",
+  "block.upgrade_aquatic.scute_pavement_vertical_slab": "Scute Pavement Vertical Slab",
   
   "_comment2": "Items",
   
