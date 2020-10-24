@@ -25,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -38,6 +39,7 @@ public class UADispenseBehaviorRegistry {
 		
 		@Override
 		public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
+            GlowingInkItem.createEffectCloud(Effects.BLINDNESS, source.getWorld(), source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING)));
 			stack.shrink(1);
 			return stack;
 		}
@@ -61,6 +63,7 @@ public class UADispenseBehaviorRegistry {
 			World world = source.getWorld();
             BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
             BlockState state = source.getWorld().getBlockState(pos);
+            GlowingInkItem.createEffectCloud(Effects.NIGHT_VISION, world, pos);
             if (GlowingInkItem.DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
     			Block livingCoral = GlowingInkItem.DEAD_CORAL_CONVERSION_MAP.get(state.getBlock());
     			world.setBlockState(pos, BlockUtils.transferAllBlockStates(state, livingCoral.getDefaultState()));

@@ -6,18 +6,29 @@ import com.google.common.collect.Maps;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
+import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
 import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.item.Items;
 import net.minecraft.particles.IParticleData;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResultType;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -36,7 +47,7 @@ public class GlowingInkItem extends Item {
 		BlockPos pos = context.getPos();
 		BlockState state = world.getBlockState(pos);
 
-		if(context.getPlayer() != null && context.getPlayer().isSecondaryUseActive())
+		if (context.getPlayer() != null && context.getPlayer().isSecondaryUseActive())
 			return super.onItemUse(context);
 
 		if (DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
@@ -46,11 +57,13 @@ public class GlowingInkItem extends Item {
 			if (context.getPlayer() != null && !context.getPlayer().abilities.isCreativeMode)
 				context.getItem().shrink(1);
 			world.playSound(context.getPlayer(), pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			createEffectCloud(Effects.NIGHT_VISION, world, pos);
 			if (world.isRemote())
 				squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, pos);
 		} else {
 			BlockPos offset = world.getBlockState(pos).isSolid() ? pos.offset(context.getFace()) : pos;
 			world.playSound(context.getPlayer(), offset, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			createEffectCloud(Effects.NIGHT_VISION, world, offset);
 			if (world.isRemote())
 				squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, offset);
 		}
@@ -80,6 +93,24 @@ public class GlowingInkItem extends Item {
 			double d8 = (double) posIn.getZ() + random.nextDouble();
 			NetworkUtil.spawnParticle(particleRegistryName, d6, d7, d8, d1, d1, d1);
 		}
+	}
+
+	public static void createEffectCloud(Effect effect, World world, BlockPos pos) {
+		for(LivingEntity entity : world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(pos))) {
+			entity.addPotionEffect(new EffectInstance(effect, 300));
+		}
+	}
+	
+	public static void createEffectCloud(Effect effect, World world, AxisAlignedBB aabb) {
+		for(LivingEntity entity : world.getEntitiesWithinAABB(LivingEntity.class, aabb)) {
+			if (!(entity instanceof SquidEntity))
+				entity.addPotionEffect(new EffectInstance(effect, 300, 1));
+		}
+	}
+
+	@Override
+	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+		ItemStackUtils.fillAfterItemForGroup(this.getItem(), Items.INK_SAC, group, items);
 	}
 
 	public static final Map<Block, Block> DEAD_CORAL_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {

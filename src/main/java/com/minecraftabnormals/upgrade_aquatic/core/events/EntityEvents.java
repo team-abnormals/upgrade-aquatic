@@ -13,6 +13,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherE
 import com.minecraftabnormals.upgrade_aquatic.common.items.GlowingInkItem;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.abnormals_core.core.utils.TradeUtils;
 
@@ -38,6 +39,7 @@ import net.minecraft.entity.monster.DrownedEntity;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.monster.PhantomEntity;
 import net.minecraft.entity.passive.DolphinEntity;
+import net.minecraft.entity.passive.SquidEntity;
 import net.minecraft.entity.passive.TurtleEntity;
 import net.minecraft.entity.passive.WaterMobEntity;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;
@@ -118,6 +120,7 @@ public class EntityEvents {
 
 					if (te != null && te.setGlowing(true)) {
 						if (!player.abilities.isCreativeMode) stack.shrink(1);
+						GlowingInkItem.createEffectCloud(Effects.NIGHT_VISION, world, pos);
 						if (world.isRemote())
 							GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, pos);
 						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -128,18 +131,20 @@ public class EntityEvents {
 				}
 			}
 
-			if (event.getItemStack().getItem() == Items.INK_SAC) {
+			if (stack.getItem() == Items.INK_SAC) {
 				if (world.getTileEntity(pos) instanceof IGlowable) {
 					IGlowable te = (IGlowable) world.getTileEntity(pos);
 
 					if (te != null && te.setGlowing(false)) {
 						if (!player.abilities.isCreativeMode) stack.shrink(1);
+						GlowingInkItem.createEffectCloud(Effects.NIGHT_VISION, world, pos);
 						if (world.isRemote())
 							GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, pos);
 						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 					}
 				} else {
 					if (!player.abilities.isCreativeMode) event.getItemStack().shrink(1);
+					GlowingInkItem.createEffectCloud(Effects.BLINDNESS, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
 					if(world.isRemote())
 						GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
 					world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -184,10 +189,19 @@ public class EntityEvents {
 		Entity entity = event.getTarget();
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
-		if(stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity.getType() == EntityType.SQUID) {
+		if(stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof SquidEntity) {
+			ItemStack bucket = ItemStack.EMPTY;
+			if (entity.getType() == EntityType.SQUID) {
+				bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
+			} else if (entity.getType() == UAEntities.GLOW_SQUID.get()) {
+				bucket = new ItemStack(UAItems.GLOW_SQUID_BUCKET.get());
+			} else {
+				return;
+			}
+			
+			player.swingArm(event.getHand());
 			entity.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
 			stack.shrink(1);
-			ItemStack bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
 			
 			if(entity.hasCustomName()) {
 				bucket.setDisplayName(entity.getCustomName());
