@@ -267,7 +267,6 @@
   "block.upgrade_aquatic.dead_coralstone_slab": "Laje vertical de pedra-coral morta",
   
   "block.upgrade_aquatic.tooth_block": "Bloco de dente",
-  
   "block.upgrade_aquatic.tooth_bricks": "Tijolos de dente",
   "block.upgrade_aquatic.tooth_brick_slab": "Laje de tijolos de dente",
   "block.upgrade_aquatic.tooth_brick_stairs": "Escadas de tijolos de dente",
@@ -443,6 +442,16 @@
   "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escadas de palha de grama de praia",
   "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Laje vertical de palha de grama de praia",
   
+  "block.upgrade_aquatic.luminous_prismarine": "Prismarinho luminoso",
+  "block.upgrade_aquatic.luminous_prismarine_slab": "Laje de prismarinho luminoso",
+  "block.upgrade_aquatic.luminous_prismarine_stairs": "Escadas de prismarinho luminoso",
+  "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Laje vertical de prismarinho luminoso",
+  
+  "block.upgrade_aquatic.luminous_elder_prismarine": "Prismarinho-ancião luminoso",
+  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Laje de prismarinho-ancião luminoso",
+  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Escadas de prismarinho-ancião luminoso",
+  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Laje vertical de prismarinho-ancião luminoso",
+  
   "_comment": "Items",
   
   "item.upgrade_aquatic.driftwood_boat": "Bote de madeira flutuante",
@@ -450,12 +459,14 @@
   
   "item.upgrade_aquatic.prismarine_rod": "Vara de prismarinho",
   "item.upgrade_aquatic.thrasher_tooth": "Dente de destruidor",
+  "item.upgrade_aquatic.glowing_ink_sac": "Saco de tinta brilhante",
   
   "item.upgrade_aquatic.nautilus_bucket": "Balde com náutilo",
   "item.upgrade_aquatic.pike_bucket": "Balde com lúcio",
   "item.upgrade_aquatic.lionfish_bucket": "Balde com peixe-leão",
   "item.upgrade_aquatic.squid_bucket": "Balde com lula",
   "item.upgrade_aquatic.jellyfish_bucket": "Balde com medusa",
+  "item.upgrade_aquatic.glow_squid_bucket": "Balde com lula brilhante",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Ovo gerador de aldeão afogado",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Ovo gerador de náutilo",
@@ -466,6 +477,7 @@
   "item.upgrade_aquatic.flare_spawn_egg": "Ovo gerador de flare",
   "item.upgrade_aquatic.goose_spawn_egg": "Ovo gerador de ganso",
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Ovo gerador de medusa",
+  "item.upgrade_aquatic.glow_squid_spawn_egg": "Ovo gerador de lula brilhante",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Aguapé roxo fervido",
   "item.upgrade_aquatic.boiled_blue_pickerelweed": "Aguapé azul fervido",
@@ -535,6 +547,7 @@
   "entity.upgrade_aquatic.ululu": "Ululu",
   "entity.upgrade_aquatic.sonar_wave": "Onda sonar",
   "entity.upgrade_aquatic.goose": "Ganso",
+  "entity.upgrade_aquatic.glow_squid": "Lula brilhante",
   
   "entity.upgrade_aquatic.box_jellyfish": "Cubomedusa",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Medusa invertida",
@@ -634,5 +647,17 @@
   "subtitles.upgrade_aquatic.thrasher.death": "Destruidor morre",
   "subtitles.upgrade_aquatic.thrasher.thrash": "Destruidor destruindo",
   "subtitles.upgrade_aquatic.thrasher.flop": "Destruidor saltitando",
-  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Destruidor emite sonar"
+  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Destruidor emite sonar",
+  
+  "subtitles.upgrade_aquatic.jellyfish.hurt": "Medusa ferida",
+  "subtitles.upgrade_aquatic.jellyfish.ambient": "Medusa pulsando",
+  "subtitles.upgrade_aquatic.jellyfish.death": "Medusa morre",
+  "subtitles.upgrade_aquatic.jellyfish.harvest": "Medusa colhida",
+  "subtitles.upgrade_aquatic.jellyfish.cooldown_start": "Resfriamento da medusa começa",
+  "subtitles.upgrade_aquatic.jellyfish.cooldown_end": "Resfriamento da medusa acaba",
+  "subtitles.upgrade_aquatic.jellyfish.sting": "Medusa ferroa",
+  "subtitles.upgrade_aquatic.jellyfish.ghost_vanish": "Medusa fantasma desaparece",
+  
+  "subtitles.upgrade_aquatic.bucket.empty_jellyfish": "Medusa liberada",
+  "subtitles.upgrade_aquatic.bucket.fill_jellyfish": "Medusa capturada"
 }
