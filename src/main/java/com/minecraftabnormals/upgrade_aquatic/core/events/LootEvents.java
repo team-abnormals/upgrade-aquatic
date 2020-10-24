@@ -56,7 +56,7 @@ public class LootEvents {
 			event.getDrops().add(eyeDrop);
 			event.getDrops().add(spineDrop);
 		} else if(event.getEntity().getType() == EntityType.GUARDIAN) {
-			int spineAmount = event.getLootingLevel() > 0 ? (rand.nextInt(3) + 1) * event.getLootingLevel() : rand.nextInt(2) + 1;
+			int spineAmount = (rand.nextInt(2) + 1) + event.getLootingLevel();
 			ItemEntity drop = new ItemEntity(event.getEntity().world, event.getEntity().getPosX(), event.getEntity().getPosY(), event.getEntity().getPosZ(), new ItemStack(UABlocks.GUARDIAN_SPINE.get(), spineAmount));
 			event.getDrops().add(drop);
 		}
