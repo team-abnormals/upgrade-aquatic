@@ -10,11 +10,11 @@
       "item": "quark:elder_prismarine"
     },
     "D": {
-      "tag": "minecraft:ink_sac"
+      "item": "minecraft:ink_sac"
     }
   },
   "result": {
-    "item": "upgrade_aquatic:luminous_elder_prismarine",
+    "item": "quark:dark_elder_prismarine",
     "count": 4
   },
   "conditions": [
