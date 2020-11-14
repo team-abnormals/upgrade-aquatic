@@ -399,7 +399,7 @@
 	"block.upgrade_aquatic.driftwood_wall_sign": "Ajopuu seinäkyltti",
 	"block.upgrade_aquatic.driftwood_chest": "Ajopuuarkku",
 	"block.upgrade_aquatic.driftwood_trapped_chest": "Ansoitettu ajopuuarkku",
-	"block.upgrade_aquatic.driftwood_beehive": "Keinotekoinen ajopuumehiläispesä",
+	"block.upgrade_aquatic.driftwood_beehive": "Ajopuumehiläispesä",
 
 	"block.upgrade_aquatic.river_leaves": "Jokipuunlehdet",
 	"block.upgrade_aquatic.river_sapling": "Jokipuun taimi",
@@ -425,7 +425,7 @@
 	"block.upgrade_aquatic.river_wall_sign": "Jokipuu seinäkyltti",
 	"block.upgrade_aquatic.river_chest": "Jokipuuarkku",
 	"block.upgrade_aquatic.river_trapped_chest": "Ansoitettu jokipuuarkku",
-	"block.upgrade_aquatic.river_beehive": "Keinotekoinen jokipuumehiläispesä",
+	"block.upgrade_aquatic.river_beehive": "Jokipuumehiläispesä",
 
 	"block.upgrade_aquatic.flowering_rush": "Sarjarimpi",
 
