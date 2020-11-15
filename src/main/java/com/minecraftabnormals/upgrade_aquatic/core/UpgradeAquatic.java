@@ -71,6 +71,7 @@ public class UpgradeAquatic {
 	public UpgradeAquatic() {
 		instance = this;
 		this.setupMessages();
+		UADataSerializers.register();
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::setupCommon);
 
@@ -112,7 +113,6 @@ public class UpgradeAquatic {
 			UAFlammables.registerFlammables();
 			UAFeatures.setupGeneration();
 			ObfuscationReflectionHelper.setPrivateValue(AbstractBlock.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
-			UADataSerializers.register();
 		});
 	}
 	
