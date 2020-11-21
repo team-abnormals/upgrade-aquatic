@@ -71,7 +71,6 @@ public class UpgradeAquatic {
 	public UpgradeAquatic() {
 		instance = this;
 		this.setupMessages();
-		UADataSerializers.register();
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 		modEventBus.addListener(this::setupCommon);
 
@@ -85,6 +84,7 @@ public class UpgradeAquatic {
 		UAEffects.POTIONS.register(modEventBus);
 		UAFeatures.FEATURES.register(modEventBus);
 		UAParticles.PARTICLES.register(modEventBus);
+		UADataSerializers.SERIALIZERS.register(modEventBus);
 		
 		DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> {
 			modEventBus.addListener(EventPriority.LOWEST, this::registerItemColors);

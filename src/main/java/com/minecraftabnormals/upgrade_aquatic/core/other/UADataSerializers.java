@@ -1,12 +1,16 @@
 package com.minecraftabnormals.upgrade_aquatic.core.other;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeType;
-
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.IDataSerializer;
+import net.minecraftforge.registries.DataSerializerEntry;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public final class UADataSerializers {
+	public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(ForgeRegistries.DATA_SERIALIZERS, UpgradeAquatic.MODID);
+
 	public static final IDataSerializer<PikeType> PIKE_TYPE = new IDataSerializer<PikeType>() {
 		public void write(PacketBuffer buf, PikeType value) {
 			buf.writeEnumValue(value);
@@ -20,8 +24,8 @@ public final class UADataSerializers {
 			return type;
 		}
 	};
-	
-	public static void register() {
-		DataSerializers.registerSerializer(PIKE_TYPE);
+
+	static {
+		SERIALIZERS.register("pike_type", () -> new DataSerializerEntry(PIKE_TYPE));
 	}
 }
