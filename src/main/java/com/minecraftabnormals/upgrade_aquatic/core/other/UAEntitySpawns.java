@@ -35,15 +35,15 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class UAEntitySpawns extends EntitySpawnHandler {
 	private static final List<EntitySpawn<? extends MobEntity>> SPAWNS = Util.make(Lists.newArrayList(), spawns -> {
-		spawns.add(new EntitySpawn<>(UAEntities.NAUTILUS::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 51, 1, 4), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::ravineMobCondition, notColdOceanCondition()));
-		spawns.add(new PikeEntitySpawn<>(UAEntities.PIKE::get, PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING));
-		spawns.add(new EntitySpawn<>(UAEntities.LIONFISH::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 15, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::coralCondition, hotOceanCondition()));
-		spawns.add(new ThrasherEntitySpawn<>(UAEntities.THRASHER::get, PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, coldOceanCondition()));
-		spawns.add(new EntitySpawn<>(UAEntities.GLOW_SQUID::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 12, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntitySpawns::deepMobCondition, oceanCondition()));
+		spawns.add(new EntitySpawn<>(UAEntities.NAUTILUS, new SpawnEntry(EntityClassification.WATER_CREATURE, 51, 1, 4), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::ravineMobCondition, notColdOceanCondition()));
+		spawns.add(new PikeEntitySpawn<>(UAEntities.PIKE, PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING));
+		spawns.add(new EntitySpawn<>(UAEntities.LIONFISH, new SpawnEntry(EntityClassification.WATER_CREATURE, 15, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::coralCondition, hotOceanCondition()));
+		spawns.add(new ThrasherEntitySpawn<>(UAEntities.THRASHER, PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, coldOceanCondition()));
+		spawns.add(new EntitySpawn<>(UAEntities.GLOW_SQUID, new SpawnEntry(EntityClassification.WATER_CREATURE, 10, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntitySpawns::deepMobCondition, oceanCondition()));
 		
-		spawns.add(new EntitySpawn<>(UAEntities.BOX_JELLYFISH::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 6, 1, 2), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, warmishOceanCondition()));
-		spawns.add(new EntitySpawn<>(UAEntities.CASSIOPEA_JELLYFISH::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, (biome) -> biome == Biomes.LUKEWARM_OCEAN));
-		spawns.add(new EntitySpawn<>(UAEntities.IMMORTAL_JELLYFISH::get, new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, warmishOceanCondition()));
+		spawns.add(new EntitySpawn<>(UAEntities.BOX_JELLYFISH, new SpawnEntry(EntityClassification.WATER_CREATURE, 6, 1, 2), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, warmishOceanCondition()));
+		spawns.add(new EntitySpawn<>(UAEntities.CASSIOPEA_JELLYFISH, new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, (biome) -> biome == Biomes.LUKEWARM_OCEAN));
+		spawns.add(new EntitySpawn<>(UAEntities.IMMORTAL_JELLYFISH, new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, warmishOceanCondition()));
 	});
 	
 	public static void registerSpawnPlacements() {
@@ -57,7 +57,7 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 	protected static Predicate<Biome> oceanCondition() {
 		return biome -> biome.getCategory() == Category.OCEAN;
 	}
-	
+
 	private static boolean deepMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
 		if(world.getWorld().func_234922_V_() != DimensionType.OVERWORLD) return false;
 		return pos.getY() <= 45;
