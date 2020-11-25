@@ -58,7 +58,8 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AGE, DOUBLE);
 	}
-	
+
+	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		Vector3d Vector3d = state.getOffset(worldIn, pos);
 		return SHAPE.withOffset(Vector3d.x, Vector3d.y, Vector3d.z);
@@ -68,9 +69,10 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
 	    return VoxelShapes.empty();
 	}
-	
+
+	@Override
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-		return useContext.getItem().getItem() == this.asItem() && !state.get(DOUBLE) ? true : super.isReplaceable(state, useContext);
+		return useContext.getItem().getItem() == this.asItem() && !state.get(DOUBLE) && state.get(AGE) < 2 || super.isReplaceable(state, useContext);
 	}
 
 	@Override
@@ -102,14 +104,14 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 			return ActionResultType.PASS;
 		} else if (player.getHeldItem(handIn).getItem() == Items.SHEARS && state.get(DOUBLE)) {
 			player.getHeldItem(handIn).damageItem(1, player, (onBroken) -> { onBroken.sendBreakAnimation(handIn); });
-			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
 			if (state.get(AGE) == 4) spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
 			worldIn.setBlockState(pos, state.with(DOUBLE, false), 2);
 			return ActionResultType.SUCCESS;
 		} else if (flag) {
 			spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), state.get(DOUBLE) ? 2 : 1));
-			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(0)), 2);
+			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.setBlockState(pos, state.with(AGE, 1), 2);
 			
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
     			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
@@ -128,7 +130,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		int i = state.get(AGE);
 		if (i < 4 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)));
+			worldIn.setBlockState(pos, state.with(AGE, i + 1));
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);	
 		}
 	}
@@ -138,7 +140,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 		super.tick(state, worldIn, pos, rand);
 		int i = state.get(AGE);
 		if (i < 4 && worldIn.getLightSubtracted(pos.up(), 0) >= 7 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(4) == 0)) {
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)), 2);
+			worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
 			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
@@ -188,9 +190,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 	    World world = context.getWorld();
 	    BlockPos pos = context.getPos();
-	    BlockState blockstate = context.getWorld().getBlockState(context.getPos());
-		if (blockstate.getBlock() == this && !blockstate.get(DOUBLE)) {
-			return blockstate.with(DOUBLE, true);
+	    BlockState state = context.getWorld().getBlockState(context.getPos());
+		if (state.getBlock() == this && !state.get(DOUBLE) && state.get(AGE) < 2) {
+			return state.with(DOUBLE, true);
 		}
 	    if (isStateValid(world, pos)) {
 	        return getDefaultState();

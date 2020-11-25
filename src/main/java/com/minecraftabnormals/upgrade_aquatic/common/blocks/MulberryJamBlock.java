@@ -50,7 +50,7 @@ public class MulberryJamBlock extends BreakableBlock implements IWaterLoggable {
 	
 	public boolean canStickTo(BlockState state, BlockState other) {
         if (other.getBlock() == Blocks.SLIME_BLOCK) return false;
-        if (other.getBlock() == Blocks.HONEY_BLOCK) return false;
+        if (other.getBlock() == Blocks.HONEY_BLOCK) return true;
         if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("autumnity", "snail_slime_block"))) return false;
         if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "aloe_gel_block"))) return false;
         
@@ -65,7 +65,7 @@ public class MulberryJamBlock extends BreakableBlock implements IWaterLoggable {
 		IWorld iworld = context.getWorld();
 		BlockPos blockpos = context.getPos();
 		boolean flag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
-		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(flag));
+		return this.getDefaultState().with(WATERLOGGED, flag);
 	}
 	
 	@SuppressWarnings("deprecation")
