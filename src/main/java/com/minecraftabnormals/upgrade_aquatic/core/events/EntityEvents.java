@@ -306,6 +306,10 @@ public class EntityEvents {
 	
 	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
+		if (event.getType() == VillagerProfession.FARMER) {
+			event.getTrades().get(2).add(new TradeUtils.EmeraldsForItemsTrade(UAItems.MULBERRY.get(), 9, 1, 12, 10));
+			event.getTrades().get(2).add(new TradeUtils.ItemsForEmeraldsTrade(UAItems.MULBERRY_PIE.get(), 1, 5, 12, 5));
+		}
 		if(event.getType() == VillagerProfession.FISHERMAN) {
 			event.getTrades().get(3).add(new TradeUtils.ItemsForEmeraldsAndItemsTrade(UAItems.PIKE.get(), 6, 1, UAItems.COOKED_PIKE.get(), 6, 16, 15));
 			event.getTrades().get(4).add(new TradeUtils.EmeraldsForItemsTrade(UAItems.PIKE.get(), 5, 1, 12, 25));	
