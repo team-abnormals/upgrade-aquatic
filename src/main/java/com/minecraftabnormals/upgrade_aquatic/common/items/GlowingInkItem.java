@@ -104,7 +104,7 @@ public class GlowingInkItem extends Item {
 	public static void createEffectCloud(Effect effect, World world, AxisAlignedBB aabb) {
 		for(LivingEntity entity : world.getEntitiesWithinAABB(LivingEntity.class, aabb)) {
 			if (!(entity instanceof SquidEntity))
-				entity.addPotionEffect(new EffectInstance(effect, 300, 1));
+				entity.addPotionEffect(new EffectInstance(effect, 200, 1));
 		}
 	}
 
