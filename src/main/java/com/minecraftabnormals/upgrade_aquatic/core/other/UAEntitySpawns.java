@@ -39,7 +39,7 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 		spawns.add(new PikeEntitySpawn<>(UAEntities.PIKE, PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING));
 		spawns.add(new EntitySpawn<>(UAEntities.LIONFISH, new SpawnEntry(EntityClassification.WATER_CREATURE, 15, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UAEntitySpawns::coralCondition, hotOceanCondition()));
 		spawns.add(new ThrasherEntitySpawn<>(UAEntities.THRASHER, PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, coldOceanCondition()));
-		spawns.add(new EntitySpawn<>(UAEntities.GLOW_SQUID, new SpawnEntry(EntityClassification.WATER_CREATURE, 10, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntitySpawns::deepMobCondition, oceanCondition()));
+		spawns.add(new EntitySpawn<>(UAEntities.GLOW_SQUID, new SpawnEntry(EntityClassification.WATER_CREATURE, 26, 1, 1), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, UAEntitySpawns::ravineMobCondition, oceanCondition()));
 		
 		spawns.add(new EntitySpawn<>(UAEntities.BOX_JELLYFISH, new SpawnEntry(EntityClassification.WATER_CREATURE, 6, 1, 2), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, warmishOceanCondition()));
 		spawns.add(new EntitySpawn<>(UAEntities.CASSIOPEA_JELLYFISH, new SpawnEntry(EntityClassification.WATER_CREATURE, 7, 1, 3), PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractJellyfishEntity::defaultSpawnCondition, (biome) -> biome == Biomes.LUKEWARM_OCEAN));
@@ -56,11 +56,6 @@ public class UAEntitySpawns extends EntitySpawnHandler {
 	
 	protected static Predicate<Biome> oceanCondition() {
 		return biome -> biome.getCategory() == Category.OCEAN;
-	}
-
-	private static boolean deepMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if(world.getWorld().func_234922_V_() != DimensionType.OVERWORLD) return false;
-		return pos.getY() <= 45;
 	}
 	
 	private static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
