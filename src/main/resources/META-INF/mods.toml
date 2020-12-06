@@ -1,34 +1,36 @@
-modLoader="javafml"
-loaderVersion="[32,)"
-issueTrackerURL="https://github.com/minecraftabnormals/Upgrade-Aquatic/issues"
-license="https://github.com/minecraftabnormals/Upgrade-Aquatic/blob/master/LICENSE.txt"
+modLoader = "javafml"
+loaderVersion = "[32,)"
+issueTrackerURL = "https://github.com/team-abnormals/upgrade-aquatic/issues"
+license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.txt"
 
 [[mods]]
-    modId="upgrade_aquatic"
-    version="${file.jarVersion}"
-    logoFile="logo.png"
-    displayName="Upgrade Aquatic"
-    authors="SmellyModder, Bagel, Cameron, Five"
-    credits="SystemZee, Ocelot, Endergy"
-    description='''A mod that improves upon the content of 1.13 Update Aquatic.'''
+    modId = "upgrade_aquatic"
+    version = "${file.jarVersion}"
+    logoFile = "logo.png"
+    authors = "Team Abnormals"
+    credits = "SmellyModder, bageldotjpg, Cameron, five, SystemZee, Ocelot, Endergized"
+    displayName = "Upgrade Aquatic"
+    description = '''
+    A mod that improves upon the content of 1.13 Update Aquatic.
+    '''
 
 [[dependencies.upgrade_aquatic]]
-    modId="forge"
-    mandatory=true
-    versionRange="[32.0.72,)"
-    ordering="NONE"
-    side="BOTH"
-    
-[[dependencies.upgrade_aquatic]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.16.1]"
-    ordering="NONE"
-    side="BOTH"
+    modId = "forge"
+    mandatory = true
+    versionRange = "[32.0.72,)"
+    ordering = "NONE"
+    side = "BOTH"
 
 [[dependencies.upgrade_aquatic]]
-    modId="abnormals_core"
-    mandatory=true
-    versionRange="[2.0.6,)"
-    ordering="AFTER"
-    side="BOTH"
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[1.16.1]"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.upgrade_aquatic]]
+    modId = "abnormals_core"
+    mandatory = true
+    versionRange = "[2.0.6,)"
+    ordering = "AFTER"
+    side = "BOTH"
