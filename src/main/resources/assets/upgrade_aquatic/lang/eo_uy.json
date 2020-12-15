@@ -1,5 +1,5 @@
 {
-  "_comment": "Blocks",
+  "_comment": "Blokoj",
 
   "block.upgrade_aquatic.guardian_spine": "Gardista dorno",
   "block.upgrade_aquatic.elder_guardian_spine": "Pragardista dorno",
@@ -17,12 +17,12 @@
   "block.upgrade_aquatic.elder_prismarine_coral": "Praprismarinokoralo",
   "block.upgrade_aquatic.elder_prismarine_coral_block": "Bloko praprismarinokorala",
   "block.upgrade_aquatic.elder_prismarine_coral_fan": "Ventumilo praprismarinokorala",
-  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Praprismarinokorala Shower",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Praprismarinokorala duŝilo",
   
   "block.upgrade_aquatic.prismarine_coral": "Prismarinokoralo",
   "block.upgrade_aquatic.prismarine_coral_block": "Bloko prismarinokorala",
   "block.upgrade_aquatic.prismarine_coral_fan": "Ventumilo prismarinokorala",
-  "block.upgrade_aquatic.prismarine_coral_shower": "Prismarinokorala Shower",
+  "block.upgrade_aquatic.prismarine_coral_shower": "Prismarinokorala duŝilo",
   
   "block.upgrade_aquatic.dead_silk_coral": "Mortita silkokoralo",
   "block.upgrade_aquatic.dead_silk_coral_block": "Mortita bloko silkokorala",
@@ -104,14 +104,14 @@
   "block.upgrade_aquatic.orange_jelly_torch": "Oranĝkolora meduza torĉo",
   "block.upgrade_aquatic.red_jelly_torch": "Ruĝa meduza torĉo",
   "block.upgrade_aquatic.white_jelly_torch": "Blanka meduza torĉo",
-  "block.upgrade_aquatic.pink_jelly_wall_torch": "Rozkolora meduza muro torĉo",
-  "block.upgrade_aquatic.purple_jelly_wall_torch": "Violkolora meduza muro torĉo",
-  "block.upgrade_aquatic.blue_jelly_wall_torch": "Blua meduza muro torĉo",
-  "block.upgrade_aquatic.green_jelly_wall_torch": "Verda meduza muro torĉo",
-  "block.upgrade_aquatic.yellow_jelly_wall_torch": "Flava meduza muro torĉo",
-  "block.upgrade_aquatic.orange_jelly_wall_torch": "Oranĝkolora meduza muro torĉo",
-  "block.upgrade_aquatic.red_jelly_wall_torch": "Ruĝa meduza muro torĉo",
-  "block.upgrade_aquatic.white_jelly_wall_torch": "Blanka meduza muro torĉo",
+  "block.upgrade_aquatic.pink_jelly_wall_torch": "Rozkolora meduza mura torĉo",
+  "block.upgrade_aquatic.purple_jelly_wall_torch": "Violkolora meduza mura torĉo",
+  "block.upgrade_aquatic.blue_jelly_wall_torch": "Blua meduza mura torĉo",
+  "block.upgrade_aquatic.green_jelly_wall_torch": "Verda meduza mura torĉo",
+  "block.upgrade_aquatic.yellow_jelly_wall_torch": "Flava meduza mura torĉo",
+  "block.upgrade_aquatic.orange_jelly_wall_torch": "Oranĝkolora meduza mura torĉo",
+  "block.upgrade_aquatic.red_jelly_wall_torch": "Ruĝa meduza mura torĉo",
+  "block.upgrade_aquatic.white_jelly_wall_torch": "Blanka meduza mura torĉo",
   
   "block.upgrade_aquatic.embedded_ammonite": "Enroka amonito",
   
@@ -260,26 +260,26 @@
   "block.upgrade_aquatic.tooth_trapdoor": "Denta klappordo",
   "block.upgrade_aquatic.tooth_lantern": "Denta lanterno",
   
-  "block.upgrade_aquatic.tongue_kelp": "Langofuko",
-  "block.upgrade_aquatic.thorny_kelp": "Dornofuko",
-  "block.upgrade_aquatic.ochre_kelp": "Okra fuko",
-  "block.upgrade_aquatic.polar_kelp": "Polusa fuko",
-  "block.upgrade_aquatic.tongue_kelp_plant": "Langoplanto de fuko",
-  "block.upgrade_aquatic.thorny_kelp_plant": "Dornoplanto de fuko",
-  "block.upgrade_aquatic.ochre_kelp_plant": "Okra planto de fuko",
-  "block.upgrade_aquatic.polar_kelp_plant": "Polusa planto de fuko",
+  "block.upgrade_aquatic.tongue_kelp": "Langoalgo",
+  "block.upgrade_aquatic.thorny_kelp": "Dornoalgo",
+  "block.upgrade_aquatic.ochre_kelp": "Okra algo",
+  "block.upgrade_aquatic.polar_kelp": "Polusa algo",
+  "block.upgrade_aquatic.tongue_kelp_plant": "Planto de Langoalgo",
+  "block.upgrade_aquatic.thorny_kelp_plant": "Planto de Dornoalgo",
+  "block.upgrade_aquatic.ochre_kelp_plant": "Planto de Okra algo",
+  "block.upgrade_aquatic.polar_kelp_plant": "Planto de Polusa algo",
   
   "block.upgrade_aquatic.kelp_block": "Algo bloko",
-  "block.upgrade_aquatic.tongue_kelp_block": "Langofuko bloko",
-  "block.upgrade_aquatic.thorny_kelp_block": "Dornofuko bloko",
-  "block.upgrade_aquatic.ochre_kelp_block": "Okra fuko bloko",
-  "block.upgrade_aquatic.polar_kelp_block": "Polusa fuko bloko",
+  "block.upgrade_aquatic.tongue_kelp_block": "Langoalgo bloko",
+  "block.upgrade_aquatic.thorny_kelp_block": "Dornoalgo bloko",
+  "block.upgrade_aquatic.ochre_kelp_block": "Okra algo bloko",
+  "block.upgrade_aquatic.polar_kelp_block": "Polusa algo bloko",
   
   "block.upgrade_aquatic.kelpy_cobblestone": "Alga pavimŝdtono",
-  "block.upgrade_aquatic.tongue_kelpy_cobblestone": "Langoalga pavimŝdtono",
-  "block.upgrade_aquatic.thorny_kelpy_cobblestone": "Dornoalga pavimŝdtono",
-  "block.upgrade_aquatic.ochre_kelpy_cobblestone": "Okra alga pavimŝdtono",
-  "block.upgrade_aquatic.polar_kelpy_cobblestone": "Polusa alga pavimŝdtono",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone": "Langoalga pavimŝtono",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone": "Dornoalga pavimŝtono",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone": "Okra alga pavimŝtono",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone": "Polusa alga pavimŝtono",
   
   "block.upgrade_aquatic.kelpy_cobblestone_stairs": "Alga pavimŝtona ŝtuparo",
   "block.upgrade_aquatic.tongue_kelpy_cobblestone_stairs": "Langoalga pavimŝtona ŝtuparo",
@@ -381,7 +381,7 @@
   
   "block.upgrade_aquatic.mulberry_vine": "Morusa hedero",
   "block.upgrade_aquatic.mulberry_punnet": "Morusa kradkesto",
-  "block.upgrade_aquatic.mulberry_jam_block": "Morusa Jam bloko",
+  "block.upgrade_aquatic.mulberry_jam_block": "Morusa kontifaĵa bloko",
   
   "block.upgrade_aquatic.prismarine_rod_bundle": "Prismarina verga fasko",
   
@@ -444,9 +444,9 @@
   "item.upgrade_aquatic.lionfish_spawn_egg": "Aperigovo de lepuo",
   "item.upgrade_aquatic.thrasher_spawn_egg": "Aperigovo de skurĝulo",
   "item.upgrade_aquatic.great_thrasher_spawn_egg": "Aperigovo de praskurĝulo",
-  "item.upgrade_aquatic.flare_spawn_egg": "Aperigovo de Flagrulo",
-  "item.upgrade_aquatic.goose_spawn_egg": "Aperigovo de Goose",
-  "item.upgrade_aquatic.jellyfish_spawn_egg": "Aperigovo de Meduzo",
+  "item.upgrade_aquatic.flare_spawn_egg": "Aperigovo de flagrulo",
+  "item.upgrade_aquatic.goose_spawn_egg": "Aperigovo de ansero",
+  "item.upgrade_aquatic.jellyfish_spawn_egg": "Aperigovo de meduzo",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Boligita viola ezokplanto",
   "item.upgrade_aquatic.boiled_blue_pickerelweed": "Boligita blua ezokplanto",
@@ -456,7 +456,7 @@
   "item.upgrade_aquatic.cooked_lionfish": "Kuirita lepuo",
   
   "item.upgrade_aquatic.mulberry": "Moruso",
-  "item.upgrade_aquatic.mulberry_jam_bottle": "Morusa konfitaĵo botelo",
+  "item.upgrade_aquatic.mulberry_jam_bottle": "Morusa konfitaĵa botelo",
   "item.upgrade_aquatic.mulberry_bread": "Morusa pano",
   "item.upgrade_aquatic.mulberry_pie": "Morusa torto",
   
@@ -596,7 +596,7 @@
   "advancements.nether.sleepless_slave.title": "Sendorma Sklavo",
   "advancements.nether.sleepless_slave.description": "Kreu Flagrulon per aflikti Fantomon per maldormemo",
   
-  "advancements.nether.vibe_check.title": "Sento Mezuro",
+  "advancements.nether.vibe_check.title": "Sentomezuro",
   "advancements.nether.vibe_check.description": "Faru Lepuon al Eliksiro de Distoksigo kaj inversigu ĝin per Okulo de Araneo por krei Eliksiron de Bonetosigo",
   
   "advancements.husbandry.eat_pickerelweed.title": "Laŭleĝa Multŝtate",
@@ -606,11 +606,11 @@
   "advancements.husbandry.collect_all_pike.description": "Kolektu ĉiun specon de Ezoko en sitelo",
   
   "advancements.husbandry.pick_mulberries.title": "Senpena Rikolto",
-  "advancements.husbandry.pick_mulberries.description": "Pluku Morusojn el Ĉerivera Arbo",
+  "advancements.husbandry.pick_mulberries.description": "Pluku Morusojn el Rivera Arbo",
   
   "_comment8": "Subtitoloj",
   
-  "subtitles.upgrade_aquatic.thrasher.hurt": "Skurĝulo vundiĝiis",
+  "subtitles.upgrade_aquatic.thrasher.hurt": "Skurĝulo vundiĝis",
   "subtitles.upgrade_aquatic.thrasher.ambient": "Skurĝulo graŭlas",
   "subtitles.upgrade_aquatic.thrasher.death": "Skurĝulo mortiĝis",
   "subtitles.upgrade_aquatic.thrasher.thrash": "Skurĝulo draŝas",
