@@ -1,16 +1,14 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
-
 import net.minecraft.util.Util;
 import net.minecraft.util.WeightedList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.biome.Biome;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 /**
  * @author SmellyModder (Luke Tonon)

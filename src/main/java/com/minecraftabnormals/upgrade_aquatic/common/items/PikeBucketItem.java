@@ -1,12 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
-import java.util.List;
-import java.util.function.Supplier;
-
+import com.minecraftabnormals.abnormals_core.common.items.MobBucketItem;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeType;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.teamabnormals.abnormals_core.common.items.MobBucketItem;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
@@ -17,6 +13,9 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class PikeBucketItem extends MobBucketItem {
 

@@ -2,7 +2,6 @@ package com.minecraftabnormals.upgrade_aquatic.common.tileentities;
 
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.BedrollBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UATileEntities;
-
 import net.minecraft.item.DyeColor;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;

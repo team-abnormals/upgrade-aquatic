@@ -1,8 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
+import com.minecraftabnormals.abnormals_core.core.util.registry.SoundSubRegistryHelper;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
-
 import net.minecraft.block.SoundType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -11,7 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UASounds {
-	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
+	public static final SoundSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getSoundSubHelper();
 	
 	public static final RegistryObject<SoundEvent> THRASHER_THRASH       = HELPER.createSoundEvent("entity.thrasher.thrash");
 	public static final RegistryObject<SoundEvent> THRASHER_SONAR_FIRE   = HELPER.createSoundEvent("entity.thrasher.sonar_fire");

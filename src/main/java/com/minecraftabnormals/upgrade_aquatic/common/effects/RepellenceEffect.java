@@ -12,21 +12,19 @@ public class RepellenceEffect extends Effect {
 	public RepellenceEffect() {
 		super(EffectType.NEUTRAL, 11663081);
 	}
-	
+
 	@Override
 	public void performEffect(LivingEntity entity, int amplifier) {
-		for(LivingEntity livingEntities : entity.world.getEntitiesWithinAABB(LivingEntity.class, entity.getBoundingBox().grow(0.3D))) {
-			if (livingEntities.isAlive() && livingEntities != entity) {
-				if(livingEntities instanceof PlayerEntity && ((PlayerEntity)livingEntities).isCreative()) {
-					
-				} else {
-					livingEntities.addPotionEffect(new EffectInstance(Effects.POISON, 70, 1 * (amplifier + 1)));
-					livingEntities.setRevengeTarget(entity);
+		for (LivingEntity livingEntity : entity.world.getEntitiesWithinAABB(LivingEntity.class, entity.getBoundingBox().grow(0.3D))) {
+			if (livingEntity.isAlive() && livingEntity != entity) {
+				if (!(livingEntity instanceof PlayerEntity && ((PlayerEntity) livingEntity).isCreative())) {
+					livingEntity.addPotionEffect(new EffectInstance(Effects.POISON, 70, amplifier + 1));
+					livingEntity.setRevengeTarget(entity);
 				}
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean isReady(int duration, int amplifier) {
 		return true;

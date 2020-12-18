@@ -1,10 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.client.particle;
 
-import net.minecraft.client.particle.IAnimatedSprite;
-import net.minecraft.client.particle.IParticleFactory;
-import net.minecraft.client.particle.IParticleRenderType;
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.SimpleAnimatedParticle;
+import net.minecraft.client.particle.*;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.particles.BasicParticleType;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +31,7 @@ public class GlowSquidInkParticle extends SimpleAnimatedParticle {
 		if (this.age++ >= this.maxAge) {
 			this.setExpired();
 		} else {
-			this.selectSpriteWithAge(this.field_217584_C);
+			this.selectSpriteWithAge(this.spriteWithAge);
 			if (this.age > this.maxAge / 2) {
 				this.setAlphaF(1.0F - ((float) this.age - (float) (this.maxAge / 2)) / (float) this.maxAge);
 			}

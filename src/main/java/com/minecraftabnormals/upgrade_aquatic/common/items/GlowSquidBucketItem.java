@@ -1,11 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
-import java.util.function.Supplier;
-
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.passive.SquidEntity;
@@ -15,29 +12,33 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
+import java.util.function.Supplier;
 
 public class GlowSquidBucketItem extends SquidBucketItem {
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(UAItems.SQUID_BUCKET);
 
 	public GlowSquidBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
 		super(supplier, builder);
 	}
 
-	@Override
-	public void onLiquidPlaced(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
-		if (!worldIn.isRemote) {
-			this.placeEntity(worldIn, p_203792_2_, pos);
+	public void onLiquidPlaced(World worldIn, ItemStack stack, BlockPos pos) {
+		if (worldIn instanceof ServerWorld) {
+			this.placeEntity((ServerWorld) worldIn, stack, pos);
 		}
 	}
 
-	private void placeEntity(World worldIn, ItemStack stack, BlockPos pos) {
+	private void placeEntity(ServerWorld worldIn, ItemStack stack, BlockPos pos) {
 		Entity entity = UAEntities.GLOW_SQUID.get().spawn(worldIn, stack, null, pos, SpawnReason.BUCKET, true, false);
 		if (entity instanceof SquidEntity) {
 			((SquidEntity) entity).enablePersistence();
 		}
 	}
-	
+
+
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.getItem(), UAItems.SQUID_BUCKET.get(), group, items);
+		FILLER.fillItem(this, group, items);
 	}
 }

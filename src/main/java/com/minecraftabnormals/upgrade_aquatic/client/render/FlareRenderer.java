@@ -5,7 +5,6 @@ import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.FlareEyesRen
 import com.minecraftabnormals.upgrade_aquatic.common.entities.FlareEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;

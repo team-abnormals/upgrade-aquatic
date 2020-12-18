@@ -1,14 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
-import java.util.EnumSet;
-
+import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.BoxJellyfishEntity;
-import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+
+import java.util.EnumSet;
 
 public class BoxJellyfishHuntGoal extends Goal {
 	private final BoxJellyfishEntity hunter;

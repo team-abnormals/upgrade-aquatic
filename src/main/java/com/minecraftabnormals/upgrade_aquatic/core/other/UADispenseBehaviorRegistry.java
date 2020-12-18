@@ -1,16 +1,12 @@
 package com.minecraftabnormals.upgrade_aquatic.core.other;
 
-import java.util.List;
-
+import com.minecraftabnormals.abnormals_core.common.dispenser.FishBucketDispenseBehavior;
+import com.minecraftabnormals.abnormals_core.core.api.IBucketableEntity;
+import com.minecraftabnormals.abnormals_core.core.util.BlockUtil;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.items.GlowingInkItem;
-import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.common.dispenser.FishBucketDispenseBehavior;
-import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
-import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
@@ -32,6 +28,8 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class UADispenseBehaviorRegistry {
 
@@ -66,7 +64,7 @@ public class UADispenseBehaviorRegistry {
             GlowingInkItem.createEffectCloud(Effects.NIGHT_VISION, world, pos);
             if (GlowingInkItem.DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
     			Block livingCoral = GlowingInkItem.DEAD_CORAL_CONVERSION_MAP.get(state.getBlock());
-    			world.setBlockState(pos, BlockUtils.transferAllBlockStates(state, livingCoral.getDefaultState()));
+    			world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, livingCoral.getDefaultState()));
     			world.getPendingBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
             }
 			stack.shrink(1);
@@ -135,7 +133,6 @@ public class UADispenseBehaviorRegistry {
     };
 
 	public static void registerDispenseBehaviors() {
-		UpgradeAquatic.REGISTRY_HELPER.processSpawnEggDispenseBehaviors();
 		DispenserBlock.registerDispenseBehavior(UAItems.NAUTILUS_BUCKET.get(), new FishBucketDispenseBehavior());
 		DispenserBlock.registerDispenseBehavior(UAItems.PIKE_BUCKET.get(), new FishBucketDispenseBehavior());
 		DispenserBlock.registerDispenseBehavior(UAItems.LIONFISH_BUCKET.get(), new FishBucketDispenseBehavior());

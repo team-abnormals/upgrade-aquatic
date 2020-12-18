@@ -1,33 +1,22 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
+import com.minecraftabnormals.abnormals_core.core.util.BlockUtil;
+import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.item.Items;
+import net.minecraft.item.*;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.Util;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -35,7 +24,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Map;
+
 public class GlowingInkItem extends Item {
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.INK_SAC);
 
 	public GlowingInkItem(Properties properties) {
 		super(properties);
@@ -52,7 +44,7 @@ public class GlowingInkItem extends Item {
 
 		if (DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
 			Block livingCoral = DEAD_CORAL_CONVERSION_MAP.get(state.getBlock());
-			world.setBlockState(pos, BlockUtils.transferAllBlockStates(state, livingCoral.getDefaultState()));
+			world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, livingCoral.getDefaultState()));
 			world.getPendingBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
 			if (context.getPlayer() != null && !context.getPlayer().abilities.isCreativeMode)
 				context.getItem().shrink(1);
@@ -96,13 +88,13 @@ public class GlowingInkItem extends Item {
 	}
 
 	public static void createEffectCloud(Effect effect, World world, BlockPos pos) {
-		for(LivingEntity entity : world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(pos))) {
+		for (LivingEntity entity : world.getEntitiesWithinAABB(LivingEntity.class, new AxisAlignedBB(pos))) {
 			entity.addPotionEffect(new EffectInstance(effect, 300));
 		}
 	}
-	
+
 	public static void createEffectCloud(Effect effect, World world, AxisAlignedBB aabb) {
-		for(LivingEntity entity : world.getEntitiesWithinAABB(LivingEntity.class, aabb)) {
+		for (LivingEntity entity : world.getEntitiesWithinAABB(LivingEntity.class, aabb)) {
 			if (!(entity instanceof SquidEntity))
 				entity.addPotionEffect(new EffectInstance(effect, 200, 1));
 		}
@@ -110,7 +102,7 @@ public class GlowingInkItem extends Item {
 
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.getItem(), Items.INK_SAC, group, items);
+		FILLER.fillItem(this, group, items);
 	}
 
 	public static final Map<Block, Block> DEAD_CORAL_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {

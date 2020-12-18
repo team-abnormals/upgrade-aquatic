@@ -5,13 +5,8 @@ import com.minecraftabnormals.upgrade_aquatic.common.effects.RepellenceEffect;
 import com.minecraftabnormals.upgrade_aquatic.common.effects.RestfulnessEffect;
 import com.minecraftabnormals.upgrade_aquatic.common.effects.VibingEffect;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-
 import net.minecraft.item.Items;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionBrewing;
-import net.minecraft.potion.Potions;
+import net.minecraft.potion.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

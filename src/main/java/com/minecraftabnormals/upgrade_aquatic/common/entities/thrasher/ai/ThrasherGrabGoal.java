@@ -1,9 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
+import com.minecraftabnormals.abnormals_core.core.util.EntityUtil;
+import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
-import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -47,7 +46,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 			}
 		}
 		
-		boolean isGrabBlocked = EntityUtils.rayTrace(this.thrasher, enemy.getPositionVec().distanceTo(this.thrasher.getPositionVec()), 1.0F).getType() == Type.BLOCK;
+		boolean isGrabBlocked = EntityUtil.rayTrace(this.thrasher, enemy.getPositionVec().distanceTo(this.thrasher.getPositionVec()), 1.0F).getType() == Type.BLOCK;
 		
 		if(distToEnemySqr <= attackReachSqr && !isGrabBlocked && this.func_234041_j_() <= 0) {
 			enemy.startRiding(this.thrasher, true);

@@ -1,7 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.effects;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.FlareEntity;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;

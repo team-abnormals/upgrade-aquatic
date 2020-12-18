@@ -1,11 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model;
 
+import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorEntityModel;
+import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorModelRenderer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
-import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorModelRenderer;
-
 import net.minecraft.util.math.MathHelper;
 
 /**

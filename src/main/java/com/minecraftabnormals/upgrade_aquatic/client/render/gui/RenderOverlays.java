@@ -6,13 +6,13 @@ import com.minecraftabnormals.upgrade_aquatic.core.config.Config;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.PointOfView;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.stats.StatisticsManager;
@@ -21,7 +21,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.DimensionType;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
@@ -58,7 +58,7 @@ public class RenderOverlays {
 			} else if (sleepTime < 24000 * configuredTime) {
 				opacity = 0F;
 			}
-			if (MC.gameSettings.thirdPersonView == 0 && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getEntityWorld().func_234922_V_() == DimensionType.OVERWORLD) {
+			if (MC.gameSettings.getPointOfView() == PointOfView.FIRST_PERSON && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getEntityWorld().getDimensionKey() == World.OVERWORLD) {
 				MatrixStack stack = event.getMatrixStack();
 				
 				stack.push();

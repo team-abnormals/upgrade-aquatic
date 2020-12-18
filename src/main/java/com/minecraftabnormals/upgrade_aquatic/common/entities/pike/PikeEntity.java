@@ -1,31 +1,20 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike;
 
-import java.util.List;
-import java.util.function.Predicate;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
+import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.minecraftabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
-import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedPlantBlock;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai.*;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedDoublePlantBlock;
+import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedPlantBlock;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai.HideInPickerelweedGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai.PikeAttackGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai.PikeSwimToItemsGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai.PikeTemptGoal;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
@@ -41,11 +30,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.loot.LootContext;
-import net.minecraft.loot.LootParameterSets;
-import net.minecraft.loot.LootParameters;
-import net.minecraft.loot.LootTable;
-import net.minecraft.loot.LootTables;
+import net.minecraft.loot.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -55,20 +40,22 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.server.ServerWorld;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Predicate;
 
 public class PikeEntity extends BucketableWaterMobEntity {
 	private static final DataParameter<PikeType> TYPE = EntityDataManager.createKey(PikeEntity.class, UADataSerializers.PIKE_TYPE);
@@ -282,7 +269,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 	
 	@Nullable
 	@Override
-	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
+	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		int type = PikeType.getRandom(this.rand, world.getBiome(this.getPosition()).getCategory(), reason == SpawnReason.BUCKET).id;
 		if (dataTag != null && dataTag.contains("BucketVariantTag", 3)) {
@@ -321,7 +308,25 @@ public class PikeEntity extends BucketableWaterMobEntity {
 		this.recalculateSize();
 		return spawnDataIn;
 	}
-	
+
+	public static boolean pickerelCondition(EntityType<? extends PikeEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		if (((World) world).getDimensionKey() != World.OVERWORLD) return false;
+		for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
+			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
+				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
+					if (world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof PickerelweedPlantBlock || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof PickerelweedDoublePlantBlock) {
+						if (random.nextFloat() <= 0.125F)
+							if (world.getBiome(pos).getCategory() == Biome.Category.SWAMP) {
+								return random.nextFloat() <= 0.25F;
+							}
+						return true;
+					}
+				}
+			}
+		}
+		return random.nextFloat() <= 0.05F;
+	}
+
 	@Override
 	public ActionResultType func_230254_b_(PlayerEntity player, Hand hand) {
 		ItemStack itemstack = player.getHeldItem(hand);
@@ -436,7 +441,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 	}
 	
 	private List<ItemStack> generateFishingLoot(ServerWorld world) {
-		LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.POSITION, new BlockPos(this.getPositionVec())).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
+		LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerWorld)this.world)).withParameter(LootParameters.field_237457_g_, this.getPositionVec()).withParameter(LootParameters.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.rand).withLuck((float)1 + 1);
 		lootcontext$builder.withParameter(LootParameters.KILLER_ENTITY, this).withParameter(LootParameters.THIS_ENTITY, this);
 		LootTable loottable = this.getRNG().nextFloat() >= 0.1F ? this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_JUNK) : this.world.getServer().getLootTableManager().getLootTableFromLocation(LootTables.GAMEPLAY_FISHING_TREASURE);
 		return loottable.generate(lootcontext$builder.build(LootParameterSets.FISHING));

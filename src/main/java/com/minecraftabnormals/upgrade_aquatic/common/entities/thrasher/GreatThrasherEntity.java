@@ -1,7 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;

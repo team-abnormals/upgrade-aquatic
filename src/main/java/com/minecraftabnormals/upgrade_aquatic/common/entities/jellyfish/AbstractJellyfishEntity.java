@@ -1,25 +1,17 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 
-import java.util.Random;
-import java.util.function.Predicate;
-
+import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
+import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
+import com.minecraftabnormals.abnormals_core.core.endimator.entity.IEndimatedEntity;
+import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.JellyTorchType;
 import com.minecraftabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADamageSources;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
-import com.teamabnormals.abnormals_core.core.library.endimator.entity.IEndimatedEntity;
-import com.teamabnormals.abnormals_core.core.utils.MathUtils;
-
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.TurtleEntity;
@@ -49,6 +41,9 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.PacketDistributor;
+
+import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * @author SmellyModder(Luke Tonon)
@@ -124,7 +119,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			
 			if (this.world.isRemote && this.world.getGameTime() % 4 == 0) {
 				for (int i = 0; i < 2; i++) {
-					this.world.addParticle(JellyTorchType.getBlobParticleType(this.getJellyTorchType()), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtils.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
+					this.world.addParticle(JellyTorchType.getBlobParticleType(this.getJellyTorchType()), this.getPosXRandom(0.5D), this.getPosY() + this.getEyeHeight(), this.getPosZRandom(0.5D), MathUtil.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()), -this.rand.nextDouble() * 0.05F, MathUtil.makeNegativeRandomly(this.rand.nextDouble() * 0.05F, this.getRNG()));
 				}
 			}
 		}

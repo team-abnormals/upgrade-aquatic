@@ -1,12 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.api.util;
 
-import java.util.function.Predicate;
-
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeType;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.AnimalEntity;
+
+import java.util.function.Predicate;
 
 public class UAEntityPredicates {
 

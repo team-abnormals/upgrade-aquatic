@@ -1,28 +1,17 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.item.BucketItem;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.Rarity;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -33,19 +22,26 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+import java.util.function.Supplier;
+
 public class JellyfishBucketItem extends BucketItem {
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TROPICAL_FISH_BUCKET);
 
 	public JellyfishBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
 		super(supplier, builder);
 	}
-	
-	public void onLiquidPlaced(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
-		if (!worldIn.isRemote) {
-			this.placeEntity(worldIn, p_203792_2_, pos);
+
+	public void onLiquidPlaced(World worldIn, ItemStack stack, BlockPos pos) {
+		if (worldIn instanceof ServerWorld) {
+			this.placeEntity((ServerWorld) worldIn, stack, pos);
 		}
 	}
 	
@@ -54,10 +50,10 @@ public class JellyfishBucketItem extends BucketItem {
 		worldIn.playSound(player, pos, UASounds.ITEM_BUCKET_EMPTY_JELLYFISH.get(), SoundCategory.NEUTRAL, 1.0F, 1.0F);
 	}
 
-	private void placeEntity(World world, ItemStack stack, BlockPos pos) {
+	private void placeEntity(ServerWorld world, ItemStack stack, BlockPos pos) {
 		AbstractJellyfishEntity jellyfish = this.getEntityInStack(stack, world, pos);
 		if (jellyfish != null) {
-			((BucketableWaterMobEntity) jellyfish).setFromBucket(true);
+			jellyfish.setFromBucket(true);
 		}
 	}
 	
@@ -67,7 +63,8 @@ public class JellyfishBucketItem extends BucketItem {
 		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 			CompoundNBT jellyfishTag = compoundnbt.getCompound("JellyfishTag");
 			String entityId = jellyfishTag.getString("EntityId");
-			Entity entity = pos != null ? ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + entityId)).spawn(world, stack, null, pos, SpawnReason.BUCKET, true, false) : ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + entityId)).create(world);
+			EntityType<?> jellyfishType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + entityId));
+			Entity entity = pos != null ? jellyfishType.spawn((ServerWorld)world, stack, null, pos, SpawnReason.BUCKET, true, false) : jellyfishType.create(world);
 			AbstractJellyfishEntity jellyfish = entity instanceof AbstractJellyfishEntity ? (AbstractJellyfishEntity) entity : null;
 			
 			if (jellyfish == null) {
@@ -78,7 +75,7 @@ public class JellyfishBucketItem extends BucketItem {
 			return jellyfish;
 		} else if (pos != null) {
 			AbstractJellyfishEntity jellyfish = this.getRandomJellyfish(stack, world, pos);
-			return jellyfish != null ? jellyfish : null;
+			return jellyfish;
 		}
 		return null;
 	}
@@ -86,7 +83,7 @@ public class JellyfishBucketItem extends BucketItem {
 	private AbstractJellyfishEntity getRandomJellyfish(ItemStack stack, World world, @Nullable BlockPos pos) {
 		Random rand = new Random();
 		List<JellyfishRegistry.JellyfishEntry<?>> commonJellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);
-		return (AbstractJellyfishEntity) commonJellies.get(rand.nextInt(commonJellies.size())).jellyfish.get().spawn(world, stack, null, pos, SpawnReason.BUCKET, true, false);
+		return (AbstractJellyfishEntity) commonJellies.get(rand.nextInt(commonJellies.size())).jellyfish.get().spawn((ServerWorld)world, stack, null, pos, SpawnReason.BUCKET, true, false);
 	}
 
 	@Override
@@ -104,9 +101,9 @@ public class JellyfishBucketItem extends BucketItem {
 			}
 		}
 	}
-	
+
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		ItemStackUtils.fillAfterItemForGroup(this.getItem(), Items.TROPICAL_FISH_BUCKET, group, items);
+		FILLER.fillItem(this, group, items);
 	}
 }

@@ -1,7 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.damagesource;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.text.ITextComponent;

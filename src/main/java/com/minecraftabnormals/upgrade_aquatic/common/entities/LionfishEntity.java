@@ -1,19 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities;
 
-import java.util.function.Predicate;
-
+import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.Pose;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
@@ -33,14 +23,20 @@ import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+
+import java.util.Random;
+import java.util.function.Predicate;
 
 public class LionfishEntity extends BucketableWaterMobEntity {
 	private static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
@@ -171,7 +167,21 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 	protected PathNavigator createNavigator(World worldIn) {
 		return new SwimmerPathNavigator(this, worldIn);
 	}
-	
+
+	public static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		if (((World) world).getDimensionKey() != World.OVERWORLD) return false;
+		for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
+			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
+				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
+					if (world.getBlockState(new BlockPos(xx, yy, zz)).getBlock().isIn(BlockTags.CORAL_BLOCKS)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public void tick() {
 		super.tick();

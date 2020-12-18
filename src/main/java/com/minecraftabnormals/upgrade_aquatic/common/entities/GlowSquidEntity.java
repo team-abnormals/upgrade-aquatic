@@ -1,10 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities;
 
+import com.minecraftabnormals.abnormals_core.core.api.IBucketableEntity;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.common.items.GlowingInkItem;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.core.library.api.IBucketableEntity;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

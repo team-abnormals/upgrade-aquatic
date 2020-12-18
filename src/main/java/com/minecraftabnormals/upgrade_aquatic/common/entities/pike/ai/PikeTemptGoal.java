@@ -1,14 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai;
 
-import java.util.EnumSet;
-
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
-
 import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ItemTags;
+
+import java.util.EnumSet;
 
 public final class PikeTemptGoal extends Goal {
 	private static final EntityPredicate CAN_FOLLOW = new EntityPredicate().setDistance(10.0D).allowFriendlyFire().allowInvulnerable();

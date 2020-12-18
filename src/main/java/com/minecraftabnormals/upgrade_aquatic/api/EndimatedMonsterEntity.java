@@ -1,10 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.api;
 
-import java.util.Random;
-import java.util.function.Predicate;
-
-import com.teamabnormals.abnormals_core.core.library.endimator.entity.EndimatedEntity;
-
+import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatedEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,11 +12,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
+
+import java.util.Random;
+import java.util.function.Predicate;
 
 public abstract class EndimatedMonsterEntity extends EndimatedEntity implements IMob {
 	
@@ -81,7 +76,7 @@ public abstract class EndimatedMonsterEntity extends EndimatedEntity implements 
 		return 0.5F - worldIn.getBrightness(pos);
 	}
 
-	public static boolean func_223323_a(IWorld p_223323_0_, BlockPos p_223323_1_, Random p_223323_2_) {
+	public static boolean isValidLightLevel(IServerWorld p_223323_0_, BlockPos p_223323_1_, Random p_223323_2_) {
 		if (p_223323_0_.getLightFor(LightType.SKY, p_223323_1_) > p_223323_2_.nextInt(32)) {
 			return false;
 		} else {
@@ -90,11 +85,19 @@ public abstract class EndimatedMonsterEntity extends EndimatedEntity implements 
 		}
 	}
 
+	protected boolean isDespawnPeaceful() {
+		return true;
+	}
+
 	protected boolean canDropLoot() {
 		return true;
 	}
 
-	public boolean isPreventingPlayerRest(PlayerEntity playerIn) {
+	protected boolean func_230282_cS_() {
+		return true;
+	}
+
+	public boolean func_230292_f_(PlayerEntity playerIn) {
 		return true;
 	}
 

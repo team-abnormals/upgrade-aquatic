@@ -1,10 +1,5 @@
 package com.minecraftabnormals.upgrade_aquatic.core.mixin;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import net.minecraft.client.renderer.entity.model.DrownedModel;
 import net.minecraft.client.renderer.entity.model.ZombieModel;
 import net.minecraft.entity.Pose;
@@ -13,6 +8,10 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.HandSide;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(DrownedModel.class)
 public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {

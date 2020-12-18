@@ -1,19 +1,18 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model;
 
-import java.util.Arrays;
-
 import com.google.common.collect.ImmutableList;
+import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
 import com.minecraftabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.GlowSquidEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
-import com.teamabnormals.abnormals_core.client.ACRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.SegmentedModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+
+import java.util.Arrays;
 
 /**
  * @author Ocelot

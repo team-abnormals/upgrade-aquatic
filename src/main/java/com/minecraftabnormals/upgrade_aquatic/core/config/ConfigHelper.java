@@ -1,8 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.core.config;
 
-import static com.minecraftabnormals.upgrade_aquatic.core.config.ConfigHolder.daysTillRenderInsomniaOverlay;
-
 import net.minecraftforge.fml.config.ModConfig;
+
+import static com.minecraftabnormals.upgrade_aquatic.core.config.ConfigHolder.daysTillRenderInsomniaOverlay;
 
 public class ConfigHelper {
 	

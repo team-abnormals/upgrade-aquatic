@@ -1,7 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
-
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;

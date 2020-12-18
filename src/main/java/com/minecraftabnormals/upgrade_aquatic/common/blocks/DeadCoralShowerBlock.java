@@ -1,9 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import java.util.Random;
-
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,6 +18,8 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.Random;
 
 public class DeadCoralShowerBlock extends DeadCoralPlantBlock {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 1.0D, 2.0D, 14.0D, 16.0D, 14.0D);
@@ -66,7 +65,7 @@ public class DeadCoralShowerBlock extends DeadCoralPlantBlock {
 	
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.up();
-		return Block.hasSolidSide(worldIn.getBlockState(blockpos), worldIn, blockpos, Direction.DOWN);
+		return worldIn.getBlockState(blockpos).isSolidSide(worldIn, blockpos, Direction.DOWN);
 	}
 	
 }

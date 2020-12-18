@@ -1,16 +1,28 @@
 package com.minecraftabnormals.upgrade_aquatic.core.other;
 
+import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.world.FoliageColors;
+import net.minecraft.world.biome.BiomeColors;
 
-public class UARenderLayers {
+import java.util.Arrays;
+
+public class UAClientCompat {
 	private static final RenderType CUTOUT = RenderType.getCutout();
 	private static final RenderType CUTOUT_MIPPED = RenderType.getCutoutMipped();
 	private static final RenderType TRANSLUSCENT = RenderType.getTranslucent();
-	
-	public static void setBlockRenderLayers() {
+
+	public static void registerClientCompat() {
+		registerBlockColors();
+		registerRenderLayers();
+	}
+
+	public static void registerRenderLayers() {
 		RenderTypeLookup.setRenderLayer(UABlocks.GLASS_DOOR.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.GLASS_TRAPDOOR.get(), CUTOUT);
 
@@ -146,5 +158,14 @@ public class UARenderLayers {
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_PINK_SEAROCKET.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_WHITE_SEAROCKET.get(), CUTOUT);
 		RenderTypeLookup.setRenderLayer(UABlocks.POTTED_RIVER_SAPLING.get(), CUTOUT);
+	}
+
+	public static void registerBlockColors() {
+		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
+		ItemColors itemColors = Minecraft.getInstance().getItemColors();
+
+		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), Arrays.asList(
+				UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.MULBERRY_VINE));
+		DataUtil.registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET));
 	}
 }

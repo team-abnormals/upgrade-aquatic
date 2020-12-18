@@ -7,7 +7,6 @@
   "mixins": [
     "BubbleColumnMixin",
     "LivingEntityMixin",
-    "ServerPlayerEntityMixin",
     "SignTileEntityMixin",
     "SquidEntityMixin"
   ],

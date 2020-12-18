@@ -1,12 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.core.events;
 
-import java.util.Map;
-
-import org.apache.commons.lang3.StringUtils;
-
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.item.EnchantedBookItem;
@@ -16,6 +11,9 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
 public class AnvilEvents {

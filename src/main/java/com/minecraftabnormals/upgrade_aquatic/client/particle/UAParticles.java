@@ -2,7 +2,6 @@ package com.minecraftabnormals.upgrade_aquatic.client.particle;
 
 
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.particles.BasicParticleType;

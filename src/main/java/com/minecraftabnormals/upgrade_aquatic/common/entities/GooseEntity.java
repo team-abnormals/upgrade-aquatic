@@ -1,7 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;

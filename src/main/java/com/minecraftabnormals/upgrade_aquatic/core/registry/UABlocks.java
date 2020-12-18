@@ -1,37 +1,25 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
-import java.util.Map;
-import java.util.function.Supplier;
-
 import com.google.common.collect.Maps;
+import com.minecraftabnormals.abnormals_core.common.blocks.*;
+import com.minecraftabnormals.abnormals_core.common.blocks.chest.AbnormalsChestBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.chest.AbnormalsTrappedChestBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.sign.AbnormalsStandingSignBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.sign.AbnormalsWallSignBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.thatch.ThatchBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.thatch.ThatchSlabBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.thatch.ThatchStairsBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.thatch.ThatchVerticalSlabBlock;
+import com.minecraftabnormals.abnormals_core.common.blocks.wood.*;
+import com.minecraftabnormals.abnormals_core.core.util.registry.BlockSubRegistryHelper;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.*;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.coralstone.*;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.trees.RiverTree;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UAProperties;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UARegistryHelper;
 import com.mojang.datafixers.util.Pair;
-import com.teamabnormals.abnormals_core.common.blocks.*;
-import com.teamabnormals.abnormals_core.common.blocks.chest.AbnormalsChestBlock;
-import com.teamabnormals.abnormals_core.common.blocks.chest.AbnormalsTrappedChestBlock;
-import com.teamabnormals.abnormals_core.common.blocks.sign.AbnormalsStandingSignBlock;
-import com.teamabnormals.abnormals_core.common.blocks.sign.AbnormalsWallSignBlock;
-import com.teamabnormals.abnormals_core.common.blocks.thatch.*;
-import com.teamabnormals.abnormals_core.common.blocks.wood.*;
-
+import net.minecraft.block.*;
 import net.minecraft.block.AbstractBlock.Properties;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BedBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CoralBlock;
-import net.minecraft.block.DoorBlock;
-import net.minecraft.block.FlowerPotBlock;
-import net.minecraft.block.PressurePlateBlock;
-import net.minecraft.block.SlabBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.TrapDoorBlock;
-import net.minecraft.block.WallBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
@@ -47,9 +35,12 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Map;
+import java.util.function.Supplier;
+
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UABlocks {
-	public static final UARegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER;
+	public static final BlockSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getBlockSubHelper();
 
 	public static final RegistryObject<Block> DEAD_ACAN_CORAL_BLOCK 		= HELPER.createBlock("dead_acan_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DEAD_FINGER_CORAL_BLOCK 		= HELPER.createBlock("dead_finger_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), ItemGroup.BUILDING_BLOCKS);

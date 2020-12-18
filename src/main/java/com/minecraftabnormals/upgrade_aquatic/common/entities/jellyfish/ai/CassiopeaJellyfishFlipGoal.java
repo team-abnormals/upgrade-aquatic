@@ -1,13 +1,12 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
-import java.util.EnumSet;
-
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.CassiopeaJellyfishEntity;
-
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.EnumSet;
 
 public class CassiopeaJellyfishFlipGoal extends Goal {
 	private final CassiopeaJellyfishEntity jellyfish;
@@ -25,7 +24,7 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 		if(this.jellyfish.getRNG().nextFloat() < 0.025F && this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.world.isDaytime()) {
 			BlockPos pos = this.jellyfish.getPosition();
 			if(pos.getY() >= this.world.getSeaLevel() - 2) {
-				if(this.world.func_230315_m_().hasSkyLight() && this.world.canBlockSeeSky(pos)) {
+				if(this.world.getDimensionType().hasSkyLight() && this.world.canBlockSeeSky(pos)) {
 					return !this.jellyfish.hasUpsideDownCooldown() && !this.jellyfish.isOnGround();
 				}
 			}

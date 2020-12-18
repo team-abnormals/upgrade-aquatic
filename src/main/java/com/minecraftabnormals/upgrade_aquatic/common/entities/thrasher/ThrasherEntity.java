@@ -1,37 +1,15 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
-import java.util.function.Predicate;
-
-import javax.annotation.Nullable;
-
+import com.minecraftabnormals.abnormals_core.core.endimator.ControlledEndimation;
+import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
 import com.minecraftabnormals.upgrade_aquatic.api.EndimatedMonsterEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFindDetectionPointGoal;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFireSonarGoal;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
-import com.teamabnormals.abnormals_core.core.library.endimator.ControlledEndimation;
-import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
-
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.CreatureAttribute;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -60,13 +38,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.DeepFrozenOceanBiome;
+import net.minecraft.world.*;
+import net.minecraft.world.biome.Biomes;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import java.util.UUID;
+import java.util.function.Predicate;
 
 public class ThrasherEntity extends EndimatedMonsterEntity {
 	public static final Predicate<Entity> ENEMY_MATCHER = (entity) -> {
@@ -158,9 +140,9 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	
 	@Nullable
 	@Override
-	public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
 		this.setAir(this.getMaxAir());
-		if(reason == SpawnReason.NATURAL && worldIn.getBiome(this.getPosition()) instanceof DeepFrozenOceanBiome) {
+		if(reason == SpawnReason.NATURAL && worldIn.getBiome(this.getPosition()).getRegistryName().equals(Biomes.DEEP_FROZEN_OCEAN.getLocation()) ) {
 			Random rand = new Random();
 			if(rand.nextFloat() < 0.25F) {
 				GreatThrasherEntity greatThrasher = UAEntities.GREAT_THRASHER.get().create(this.world);
@@ -228,6 +210,11 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	@Override
 	public boolean isNotColliding(IWorldReader worldIn) {
 		return worldIn.checkNoEntityCollision(this);
+	}
+
+	public static boolean thrasherCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
+		if (((World) world).getDimensionKey() != World.OVERWORLD) return false;
+		return pos.getY() <= 30 && (((World) world).isNightTime() || random.nextFloat() < 0.75F);
 	}
 	
 	@Override

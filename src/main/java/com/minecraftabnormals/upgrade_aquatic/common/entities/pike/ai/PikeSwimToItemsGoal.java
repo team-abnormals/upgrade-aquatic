@@ -1,12 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai;
 
-import java.util.List;
-
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
-
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.EquipmentSlotType;
+
+import java.util.List;
 
 public final class PikeSwimToItemsGoal extends Goal {
 	private final PikeEntity pike;

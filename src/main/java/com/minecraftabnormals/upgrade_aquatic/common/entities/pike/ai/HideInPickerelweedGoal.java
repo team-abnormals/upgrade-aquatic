@@ -1,12 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai;
 
-import javax.annotation.Nullable;
-
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
-
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+
+import javax.annotation.Nullable;
 
 public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 	

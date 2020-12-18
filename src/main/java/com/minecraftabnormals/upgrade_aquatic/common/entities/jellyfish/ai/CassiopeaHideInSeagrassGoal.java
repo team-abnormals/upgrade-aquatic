@@ -1,12 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
-import java.util.EnumSet;
-
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.CassiopeaJellyfishEntity;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.tags.FluidTags;
+
+import java.util.EnumSet;
 
 /**
  * @author SmellyModder(Luke Tonon)

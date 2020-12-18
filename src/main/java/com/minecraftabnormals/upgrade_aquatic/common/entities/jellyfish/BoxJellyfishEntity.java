@@ -1,18 +1,12 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 
+import com.minecraftabnormals.abnormals_core.common.entity.ai.PredicateAttackGoal;
+import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.JellyTorchType;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.BoxJellyfishHuntGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwinIntoDirectionGoal;
-import com.teamabnormals.abnormals_core.common.entity.ai.PredicateAttackGoal;
-import com.teamabnormals.abnormals_core.core.library.endimator.Endimation;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.Pose;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.passive.fish.AbstractFishEntity;

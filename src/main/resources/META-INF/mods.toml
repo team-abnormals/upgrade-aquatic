@@ -15,22 +15,22 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
     '''
 
 [[dependencies.upgrade_aquatic]]
-    modId = "forge"
+    modId = "minecraft"
     mandatory = true
-    versionRange = "[32.0.72,)"
-    ordering = "NONE"
+    versionRange = "[1.16.3,1.17)"
+    ordering = "AFTER"
     side = "BOTH"
 
 [[dependencies.upgrade_aquatic]]
-    modId = "minecraft"
+    modId = "forge"
     mandatory = true
-    versionRange = "[1.16.1]"
+    versionRange = "[34.1.42,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.upgrade_aquatic]]
     modId = "abnormals_core"
     mandatory = true
-    versionRange = "[2.0.6,)"
+    versionRange = "[3.0.3,)"
     ordering = "AFTER"
     side = "BOTH"

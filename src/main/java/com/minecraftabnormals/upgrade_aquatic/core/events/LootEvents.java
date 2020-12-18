@@ -1,12 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.core.events;
 
-import java.util.Random;
-import java.util.Set;
-
 import com.google.common.collect.Sets;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -18,6 +14,9 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.Random;
+import java.util.Set;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
 public class LootEvents {

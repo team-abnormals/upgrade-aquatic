@@ -1,17 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import java.util.Random;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedPlantBlock;
+import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedDoublePlantBlock;
+import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedPlantBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
-import com.teamabnormals.abnormals_core.core.utils.MathUtils;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.tags.FluidTags;
@@ -20,54 +13,49 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biome.TempCategory;
 import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.FlowerForestBiome;
-import net.minecraft.world.biome.SwampBiome;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.StructureManager;
-import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.Placement;
+
+import java.util.Random;
+import java.util.function.Supplier;
 
 /**
  * @author - SmellyModder(Luke Tonon)
  */
-public class PickerelweedFeature extends Feature<NoFeatureConfig> implements IAddToBiomes {
+public class PickerelweedFeature extends Feature<NoFeatureConfig> {
 	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.BLUE_PICKERELWEED.get().getDefaultState();
 	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PURPLE_PICKERELWEED.get().getDefaultState();
-	
+
 	public PickerelweedFeature(Codec<NoFeatureConfig> configFactory) {
 		super(configFactory);
 	}
 
 	@Override
-	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		Biome biome = worldIn.getBiome(pos);
 		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().isValidPosition(worldIn, pos.down())) {
-			if(biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP || biome instanceof FlowerForestBiome) {
+			if(biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP || biome.getRegistryName().equals(Biomes.FLOWER_FOREST.getLocation())) {
 				boolean purpleGen;
-				if(biome instanceof SwampBiome) {
-					purpleGen = rand.nextFloat() >= 0.60D ? true : false;
+				if(biome.getCategory() == Category.SWAMP) {
+					purpleGen = rand.nextFloat() >= 0.60D;
 				} else {
-					purpleGen = rand.nextFloat() >= 0.60D ? false : true;
+					purpleGen = !(rand.nextFloat() >= 0.60D);
 				}
 				if(rand.nextInt() <= 0.90D) {
 					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(8));
 				}
 			} else {
 				boolean purpleGen;
-				if(biome.getTempCategory() == TempCategory.COLD) {
-					purpleGen = rand.nextFloat() >= 0.75D ? true : false;
-				} else if(biome.getTempCategory() == TempCategory.MEDIUM) {
+				if(biome.getTemperature() < 0.2D) {
+					purpleGen = rand.nextFloat() >= 0.75D;
+				} else if(biome.getTemperature() < 1.0D) {
 					purpleGen = rand.nextBoolean();
 				} else {
-					purpleGen = rand.nextFloat() >= 0.75D ? false : true;
+					purpleGen = !(rand.nextFloat() >= 0.75D);
 				}
-				
+
 				if(rand.nextInt() <= 0.35D) {
 					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(8));
 				}
@@ -76,7 +64,7 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> implements IAd
 		}
 		return false;
 	}
-	
+
 	public void generatePickerelweedPatch(IWorld world, BlockPos pos, boolean purple, int randomDesign) {
 		// 0 - a, 1 - b, 2 - c
 		int[] patterns = new int[3];
@@ -117,9 +105,7 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> implements IAd
 		}
 		BlockPos startPos = pos;
 		PickerelweedDoublePlantBlock doubleplantblock = (PickerelweedDoublePlantBlock) (!purple ? UABlocks.TALL_BLUE_PICKERELWEED.get() : UABlocks.TALL_PURPLE_PICKERELWEED.get());
-		MathUtils.Equation r = (theta) -> {
-			return (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
-		};
+		MathUtil.Equation r = (theta) -> (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
 		if(!world.isAirBlock(startPos.down()) && !world.isAirBlock(startPos.down(2)) && !world.isAirBlock(startPos.down(3))) {
 			int repeatsDown = world.getRandom().nextInt(2) + 2;
 			for(int repeats = 0; repeats < repeatsDown; repeats++) {
@@ -133,9 +119,9 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> implements IAd
 								FluidState ifluidstate = world.getFluidState(placingPos);
 								if(PURPLE_PICKERELWEED.get().isValidPosition(world, placingPos) && world.getBlockState(placingPos.up()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
 									if(purple) {
-										world.setBlockState(placingPos, PURPLE_PICKERELWEED.get().with(PickerelweedPlantBlock.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
+										world.setBlockState(placingPos, PURPLE_PICKERELWEED.get().with(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.isTagged(FluidTags.WATER)), 2);
 									} else {
-										world.setBlockState(placingPos, BLUE_PICKERELWEED.get().with(PickerelweedPlantBlock.WATERLOGGED, Boolean.valueOf(ifluidstate.isTagged(FluidTags.WATER))), 2);
+										world.setBlockState(placingPos, BLUE_PICKERELWEED.get().with(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.isTagged(FluidTags.WATER)), 2);
 									}
 								} else if(PURPLE_PICKERELWEED.get().isValidPosition(world, placingPos)) {
 									doubleplantblock.placeAt(world, placingPos, 2);
@@ -151,14 +137,14 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> implements IAd
 			}
 		}
 	}
-	
+
 	public boolean isValidBlock(IWorld world, BlockPos pos) {
 		if(world.isAirBlock(pos) || world.getBlockState(pos).getFluidState().isTagged(FluidTags.WATER)) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean shouldPlace(IWorld world, BlockPos pos) {
 		if(world.getFluidState(pos.down().west()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().east()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().north()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().south()).isTagged(FluidTags.WATER)) {
 			return true;
@@ -166,17 +152,17 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> implements IAd
 		return false;
 	}
 
-	@Override
-	public Consumer<Biome> processBiomeAddition() {
-		return biome -> {
-			if(biome == Biomes.FLOWER_FOREST) {
-				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(90))));
-			} else {
-				if(biome.getCategory() != Category.OCEAN && biome.getCategory() != Category.BEACH && biome.getCategory() != Category.DESERT && biome.getCategory() != Category.ICY) {
-					biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(28))));
-				}
-			}
-		};
-	}
-	
+//	@Override
+//	public Consumer<Biome> processBiomeAddition() {
+//		return biome -> {
+//			if(biome == Biomes.FLOWER_FOREST) {
+//				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(90))));
+//			} else {
+//				if(biome.getCategory() != Category.OCEAN && biome.getCategory() != Category.BEACH && biome.getCategory() != Category.DESERT && biome.getCategory() != Category.ICY) {
+//					biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(28))));
+//				}
+//			}
+//		};
+//	}
+
 }

@@ -1,11 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model.jellyfish;
 
+import com.minecraftabnormals.abnormals_core.client.ClientInfo;
+import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorEntityModel;
+import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorModelRenderer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.BoxJellyfishEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.teamabnormals.abnormals_core.client.ClientInfo;
-import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorEntityModel;
-import com.teamabnormals.abnormals_core.core.library.endimator.EndimatorModelRenderer;
 
 /**
  * BoxJelly - SnakeBlock

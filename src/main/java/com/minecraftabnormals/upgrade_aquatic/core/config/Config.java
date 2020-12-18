@@ -1,12 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.core.config;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.config.ModConfig.Reloading;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Config {
 

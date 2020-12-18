@@ -1,11 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -22,40 +17,37 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 public class SquidBucketItem extends BucketItem {
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TROPICAL_FISH_BUCKET);
 
 	public SquidBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
 		super(supplier, builder);
 	}
-	
-	public void onLiquidPlaced(World worldIn, ItemStack p_203792_2_, BlockPos pos) {
-		if(!worldIn.isRemote) {
-			this.placeEntity(worldIn, p_203792_2_, pos);
+
+	public void onLiquidPlaced(World worldIn, ItemStack stack, BlockPos pos) {
+		if (worldIn instanceof ServerWorld) {
+			this.placeEntity((ServerWorld) worldIn, stack, pos);
 		}
 	}
-	
+
 	protected void playEmptySound(@Nullable PlayerEntity player, IWorld world, BlockPos pos) {
 		world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 	}
 
-	private void placeEntity(World worldIn, ItemStack stack, BlockPos pos) {
+	private void placeEntity(ServerWorld worldIn, ItemStack stack, BlockPos pos) {
 		Entity entity = EntityType.SQUID.spawn(worldIn, stack, null, pos, SpawnReason.BUCKET, true, false);
-		if(entity instanceof SquidEntity) {
+		if (entity instanceof SquidEntity) {
 			((SquidEntity) entity).enablePersistence();
 		}
 	}
-	
+
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if(this.isInGroup(group)) {
-			int targetIndex = ItemStackUtils.findIndexOfItem(Items.TROPICAL_FISH_BUCKET, items);
-			if(targetIndex != -1) {
-				items.add(targetIndex + 1, new ItemStack(this));
-			} else {
-				super.fillItemGroup(group, items);
-			}
-		}
+		FILLER.fillItem(this, group, items);
 	}
-
 }

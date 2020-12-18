@@ -4,7 +4,6 @@ import com.minecraftabnormals.upgrade_aquatic.client.model.UluluModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.UluluEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

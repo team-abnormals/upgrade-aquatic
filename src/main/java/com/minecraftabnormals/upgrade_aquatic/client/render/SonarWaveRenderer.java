@@ -1,12 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render;
 
-import com.teamabnormals.abnormals_core.client.ACRenderTypes;
+import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
 import com.minecraftabnormals.upgrade_aquatic.client.model.SonarWaveModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.SonarWaveEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
