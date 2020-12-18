@@ -1,7 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 
+import com.minecraftabnormals.abnormals_core.core.api.IAgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.nbt.CompoundNBT;
@@ -12,7 +14,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
-public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEntity {
+public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEntity implements IAgeableEntity {
 	protected static final DataParameter<Integer> COLOR = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.VARINT);
 	protected static final DataParameter<Float> SIZE = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.FLOAT);
 	private final ColoredSizableBucketProcessor bucketProcessor;
@@ -93,6 +95,39 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 
 	public float getSize() {
 		return this.dataManager.get(SIZE);
+	}
+
+	@Override
+	public boolean hasGrowthProgress() {
+		return false;
+	}
+
+	@Override
+	public void resetGrowthProgress() {
+	}
+
+	@Override
+	public boolean canAge(boolean isGrowing) {
+		return this.getSize() == 0.65F || (this.getSize() == 0.5F ? isGrowing : this.getSize() == 1.0F && !isGrowing);
+	}
+
+	@Override
+	public LivingEntity attemptAging(boolean isGrowing) {
+		float size = this.getSize();
+		float newSize = 0;
+		if (size == 0.65F) {
+			newSize = isGrowing ? 1.0F : 0.5F;
+		}
+		else if (size == 0.5F && isGrowing) {
+			newSize = 0.65F;
+		}
+		else if (size == 1.0F && !isGrowing) {
+			newSize = 0.65F;
+		}
+		if(newSize != 0) {
+			this.setSize(newSize, false);
+		}
+		return this;
 	}
 
 	@Override
