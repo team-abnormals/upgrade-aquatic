@@ -3,7 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.JellyTorchType;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwinIntoDirectionGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwimIntoDirectionGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -18,8 +18,8 @@ import net.minecraft.world.World;
  * @author SmellyModder(Luke Tonon)
  */
 public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
-	private RotationController rotationController;
 	private final BucketProcessor<ImmortalJellyfishEntity> bucketProcessor;
+	private RotationController rotationController;
 	private int healCooldown;
 	private float prevHealth;
 
@@ -29,24 +29,24 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 		this.bucketProcessor = new BucketProcessor<>("immortal_jellyfish", this);
 		this.prevHealth = this.getHealth();
 	}
-	
+
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_()
-    			.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D)
-    			.createMutableAttribute(Attributes.MAX_HEALTH, 7.0D);
-    }
-	
-	
+		return MobEntity.func_233666_p_()
+				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D)
+				.createMutableAttribute(Attributes.MAX_HEALTH, 7.0D);
+	}
+
+
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(2, new JellyfishSwinIntoDirectionGoal(this, SWIM_ANIMATION));
+		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, SWIM_ANIMATION));
 		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, BOOST_ANIMATION));
 	}
-	
+
 	@Override
 	public void tick() {
 		super.tick();
-		
+
 		if (this.healCooldown > 0) {
 			this.healCooldown--;
 		} else {
@@ -54,14 +54,14 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 				this.heal(0.5F);
 			}
 		}
-		
+
 		if (this.prevHealth > this.getHealth()) {
 			this.healCooldown = this.getRNG().nextInt(40) + 20;
 		}
-		
+
 		this.prevHealth = this.getHealth();
 	}
-	
+
 	@Override
 	public void onEndimationStart(Endimation endimation) {
 		if (endimation == SWIM_ANIMATION) {
@@ -70,13 +70,13 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 			this.getRotationController().addVelocityForLookDirection(0.2F, 1.0F);
 		}
 	}
-	
+
 	@Override
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
 		this.healCooldown = compound.getInt("HealCooldown");
 	}
-	
+
 	@Override
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
@@ -102,21 +102,21 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	public float getCooldownChance() {
 		return 0.8F;
 	}
-	
+
 	@Override
 	public int getIdSuffix() {
 		return 7;
 	}
-	
+
 	@Override
 	public ITextComponent getYieldingTorchMessage() {
 		JellyTorchType white = JellyTorchType.WHITE;
 		JellyTorchType red = JellyTorchType.RED;
 		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").mergeStyle(TextFormatting.GRAY))
-			.append((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + white.toString().toLowerCase())).mergeStyle(white.color))
-			.append(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").mergeStyle(TextFormatting.GRAY))
-			.append((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + red.toString().toLowerCase())).mergeStyle(red.color))
-		;
+				.append((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + white.toString().toLowerCase())).mergeStyle(white.color))
+				.append(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").mergeStyle(TextFormatting.GRAY))
+				.append((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + red.toString().toLowerCase())).mergeStyle(red.color))
+				;
 	}
 
 	@Override

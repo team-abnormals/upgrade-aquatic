@@ -5,7 +5,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.Jell
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.CassiopeaHideInSeagrassGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.CassiopeaJellyfishFlipGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwinIntoDirectionGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwimIntoDirectionGoal;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADamageSources;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -18,41 +18,41 @@ import net.minecraft.world.World;
  * @author SmellyModder(Luke Tonon)
  */
 public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
-	private RotationController rotationController;
 	public int upsideDownCooldown;
 	public int hideCooldown;
-	
+	private RotationController rotationController;
+
 	public CassiopeaJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, World world) {
 		super(type, world);
 		this.rotationController = new RotationController(this);
 	}
-	
+
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
 		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
-    }
-	
+	}
+
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new CassiopeaHideInSeagrassGoal(this));
 		this.goalSelector.addGoal(2, new CassiopeaJellyfishFlipGoal(this));
-		this.goalSelector.addGoal(2, new JellyfishSwinIntoDirectionGoal(this, SWIM_ANIMATION));
+		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, SWIM_ANIMATION));
 		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, BOOST_ANIMATION));
-		
+
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
-	
+
 	@Override
 	public void tick() {
 		super.tick();
-		
+
 		if (this.hasUpsideDownCooldown()) {
 			this.upsideDownCooldown--;
 		}
-		
+
 		if (this.hasHideCooldown()) {
 			this.hideCooldown--;
 		}
-		
+
 		if (this.isInWater()) {
 			if (this.isEndimationPlaying(BOOST_ANIMATION)) {
 				this.setMotion(this.getMotion().scale(1.15F));
@@ -61,50 +61,50 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 			}
 		}
 	}
-	
+
 	@Override
 	public void writeAdditional(CompoundNBT compound) {
 		super.writeAdditional(compound);
 		compound.putInt("UpsideDownCooldown", this.upsideDownCooldown);
 		compound.putInt("HideCooldown", this.hideCooldown);
 	}
-	
+
 	@Override
 	public void readAdditional(CompoundNBT compound) {
 		super.readAdditional(compound);
 		this.upsideDownCooldown = compound.getInt("UpsideDownCooldown");
 		this.hideCooldown = compound.getInt("HideCooldown");
 	}
-	
+
 	public boolean hasUpsideDownCooldown() {
 		return this.upsideDownCooldown > 0;
 	}
-	
+
 	public boolean hasHideCooldown() {
 		return this.hideCooldown > 0;
 	}
-	
+
 	@Override
 	public EntitySize getSize(Pose pose) {
 		return super.getSize(pose).scale(this.getSize());
 	}
-	
+
 	@Override
 	protected float getStandingEyeHeight(Pose poseIn, EntitySize size) {
 		return size.height * 0.5F;
 	}
-	
+
 	@Override
 	public int getMaxSpawnedInChunk() {
 		return 3;
 	}
-	
+
 	@Override
 	public void onEndimationStart(Endimation endimation) {
 		float sizeForce = this.getSize() < 0.6F ? 0.85F : this.getSize();
-		if(endimation == SWIM_ANIMATION) {
+		if (endimation == SWIM_ANIMATION) {
 			this.getRotationController().addVelocityForLookDirection(0.3F, sizeForce);
-		} else if(endimation == BOOST_ANIMATION) {
+		} else if (endimation == BOOST_ANIMATION) {
 			this.getRotationController().addVelocityForLookDirection(0.2F, sizeForce);
 		}
 	}
@@ -113,12 +113,12 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 	public RotationController getRotationController() {
 		return this.rotationController;
 	}
-	
+
 	@Override
 	public String getBucketName() {
-		switch(this.getColor()) {
+		switch (this.getColor()) {
 			default:
-			case 0: 
+			case 0:
 				return "cassiopea";
 			case 1:
 				return "blue_cassiopea";
@@ -129,9 +129,9 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 
 	@Override
 	public JellyTorchType getJellyTorchType() {
-		switch(this.getColor()) {
+		switch (this.getColor()) {
 			default:
-			case 0: 
+			case 0:
 				return JellyTorchType.GREEN;
 			case 1:
 				return JellyTorchType.BLUE;
@@ -139,12 +139,12 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 				return JellyTorchType.WHITE;
 		}
 	}
-	
+
 	@Override
 	public float getCooldownChance() {
 		return this.getSize() < 1.0F ? 0.9F : 0.8F;
 	}
-	
+
 	@Override
 	public boolean stingEntity(LivingEntity livingEntity) {
 		if ((this.getAttackTarget() == livingEntity || this.getRevengeTarget() == livingEntity) && this.getRNG().nextFloat() < 0.5F) {
