@@ -124,7 +124,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 		else if (size == 1.0F && !isGrowing) {
 			newSize = 0.65F;
 		}
-		if(newSize != 0) {
+		if (newSize != 0) {
 			this.setSize(newSize, false);
 		}
 		return this;
