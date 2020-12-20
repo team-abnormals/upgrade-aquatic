@@ -1,5 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 
+import com.google.common.collect.ImmutableMap;
 import com.minecraftabnormals.abnormals_core.core.api.IAgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -14,9 +15,12 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
+import java.util.TreeMap;
+
 public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEntity implements IAgeableEntity {
 	protected static final DataParameter<Integer> COLOR = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.VARINT);
 	protected static final DataParameter<Float> SIZE = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.FLOAT);
+	protected TreeMap<Float, Integer> sizes = new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34));
 	private final ColoredSizableBucketProcessor bucketProcessor;
 
 	public ColoredSizableJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, World world) {
@@ -57,7 +61,18 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
 		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		boolean updateSize = false;
-		float size = this.getRNG().nextFloat() < 0.85F ? 1.0F : this.getRNG().nextBoolean() ? 0.5F : 0.65F;
+		float size = 0;
+		int denominator = 0;
+		for (int weight : sizes.values())
+			denominator += weight;
+		for (float currentSize : sizes.keySet()) {
+			int weight = sizes.get(currentSize);
+			if (this.getRNG().nextInt(denominator) < weight) {
+				size = currentSize;
+				break;
+			}
+			denominator = denominator - weight;
+		}
 		int color = this.getRNG().nextInt(3);
 
 		if (!(dataTag != null && this.isFromBucket())) {
@@ -108,24 +123,18 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 
 	@Override
 	public boolean canAge(boolean isGrowing) {
-		return this.getSize() == 0.65F || (this.getSize() == 0.5F ? isGrowing : this.getSize() == 1.0F && !isGrowing);
+		if (sizes.containsKey(this.getSize())) {
+			Float newSize = isGrowing ? sizes.higherKey(this.getSize()) : sizes.lowerKey(this.getSize());
+			return newSize != null;
+		}
+		return false;
 	}
 
 	@Override
 	public LivingEntity attemptAging(boolean isGrowing) {
-		float size = this.getSize();
-		float newSize = 0;
-		if (size == 0.65F) {
-			newSize = isGrowing ? 1.0F : 0.5F;
-		}
-		else if (size == 0.5F && isGrowing) {
-			newSize = 0.65F;
-		}
-		else if (size == 1.0F && !isGrowing) {
-			newSize = 0.65F;
-		}
-		if(newSize != 0) {
-			this.setSize(newSize, false);
+		if (sizes.containsKey(this.getSize())) {
+			Float newSize = isGrowing ? sizes.higherKey(this.getSize()) : sizes.lowerKey(this.getSize());
+			if(newSize != null) this.setSize(newSize, false);
 		}
 		return this;
 	}
