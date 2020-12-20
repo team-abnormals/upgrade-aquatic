@@ -20,7 +20,7 @@ import java.util.TreeMap;
 public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEntity implements IAgeableEntity {
 	protected static final DataParameter<Integer> COLOR = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.VARINT);
 	protected static final DataParameter<Float> SIZE = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.FLOAT);
-	protected TreeMap<Float, Integer> sizes = new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34));
+	protected TreeMap<Float, Integer> naturalSpawningSizes = new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34));
 	private final ColoredSizableBucketProcessor bucketProcessor;
 
 	public ColoredSizableJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, World world) {
@@ -63,10 +63,10 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 		boolean updateSize = false;
 		float size = 0;
 		int denominator = 0;
-		for (int weight : sizes.values())
+		for (int weight : naturalSpawningSizes.values())
 			denominator += weight;
-		for (float currentSize : sizes.keySet()) {
-			int weight = sizes.get(currentSize);
+		for (float currentSize : naturalSpawningSizes.keySet()) {
+			int weight = naturalSpawningSizes.get(currentSize);
 			if (this.getRNG().nextInt(denominator) < weight) {
 				size = currentSize;
 				break;
@@ -123,8 +123,8 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 
 	@Override
 	public boolean canAge(boolean isGrowing) {
-		if (sizes.containsKey(this.getSize())) {
-			Float newSize = isGrowing ? sizes.higherKey(this.getSize()) : sizes.lowerKey(this.getSize());
+		if (naturalSpawningSizes.containsKey(this.getSize())) {
+			Float newSize = isGrowing ? naturalSpawningSizes.higherKey(this.getSize()) : naturalSpawningSizes.lowerKey(this.getSize());
 			return newSize != null;
 		}
 		return false;
@@ -132,8 +132,8 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 
 	@Override
 	public LivingEntity attemptAging(boolean isGrowing) {
-		if (sizes.containsKey(this.getSize())) {
-			Float newSize = isGrowing ? sizes.higherKey(this.getSize()) : sizes.lowerKey(this.getSize());
+		if (naturalSpawningSizes.containsKey(this.getSize())) {
+			Float newSize = isGrowing ? naturalSpawningSizes.higherKey(this.getSize()) : naturalSpawningSizes.lowerKey(this.getSize());
 			if(newSize != null) this.setSize(newSize, false);
 		}
 		return this;
