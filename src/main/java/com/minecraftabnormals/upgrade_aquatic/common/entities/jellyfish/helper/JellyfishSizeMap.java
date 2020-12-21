@@ -20,14 +20,14 @@ public class JellyfishSizeMap {
     }
 
     public int size() {
-        return sizeMap.size();
+        return this.sizeMap.size();
     }
 
     public int totalWeight() {
         return this.weightTotal;
     }
 
-    public Float randomSize(Random rand) throws RuntimeException {
+    public float randomSize(Random rand) throws RuntimeException {
         int denominator = totalWeight();
         for (Map.Entry<Float, Integer> sizeEntry : this.entrySet()) {
             int weight = sizeEntry.getValue();
@@ -40,78 +40,78 @@ public class JellyfishSizeMap {
     }
 
     public boolean containsKey(Float key) {
-        return sizeMap.containsKey(key);
+        return this.sizeMap.containsKey(key);
     }
 
     public boolean containsValue(Integer value) {
-        return sizeMap.containsValue(value);
+        return this.sizeMap.containsValue(value);
     }
 
     public Integer get(Float key) {
-        return sizeMap.get(key);
+        return this.sizeMap.get(key);
     }
 
     public Comparator<? super Float> comparator() {
-        return sizeMap.comparator();
+        return this.sizeMap.comparator();
     }
 
     public Float firstKey() {
-        return sizeMap.firstKey();
+        return this.sizeMap.firstKey();
     }
 
     public Float lastKey() {
-        return sizeMap.lastKey();
+        return this.sizeMap.lastKey();
     }
 
     public Map.Entry<Float, Integer> firstEntry() {
-        return sizeMap.firstEntry();
+        return this.sizeMap.firstEntry();
     }
     
     public Map.Entry<Float, Integer> lastEntry() {
-        return sizeMap.lastEntry();
+        return this.sizeMap.lastEntry();
     }
     
     public Map.Entry<Float, Integer> lowerEntry(Float key) {
-        return sizeMap.lowerEntry(key);
+        return this.sizeMap.lowerEntry(key);
     }
     
     public Float lowerKey(Float key) {
-        return sizeMap.lowerKey(key);
+        return this.sizeMap.lowerKey(key);
     }
     
     public Map.Entry<Float, Integer> floorEntry(Float key) {
-        return sizeMap.floorEntry(key);
+        return this.sizeMap.floorEntry(key);
     }
     
     public Float floorKey(Float key) {
-        return sizeMap.floorKey(key);
+        return this.sizeMap.floorKey(key);
     }
     
     public Map.Entry<Float, Integer> ceilingEntry(Float key) {
-        return sizeMap.ceilingEntry(key);
+        return this.sizeMap.ceilingEntry(key);
     }
     
     public Float ceilingKey(Float key) {
-        return sizeMap.ceilingKey(key);
+        return this.sizeMap.ceilingKey(key);
     }
 
     public Map.Entry<Float, Integer> higherEntry(Float key) {
-        return sizeMap.higherEntry(key);
+        return this.sizeMap.higherEntry(key);
     }
     
     public Float higherKey(Float key) {
-        return sizeMap.higherKey(key);
+        return this.sizeMap.higherKey(key);
     }
 
     public Set<Float> keySet() {
-        return sizeMap.keySet();
+        return this.sizeMap.keySet();
     }
     
     public Collection<Integer> values() {
-        return sizeMap.values();
+        return this.sizeMap.values();
     }
     
     public Set<Map.Entry<Float, Integer>> entrySet() {
-        return sizeMap.entrySet();
+        return this.sizeMap.entrySet();
     }
 }
