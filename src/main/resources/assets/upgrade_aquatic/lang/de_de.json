@@ -605,11 +605,11 @@
   
   "_comment6": "Deaths",
   
-  "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Guardian Spine",
-  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Guardian Spine whilst trying to escape %2$s",
-  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by an Elder Guardian Spine",
-  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s was spiked to death by an Elder Guardian Spine whilst trying to escape %2$s",
-  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s was stung to death by %2$s",
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s wurde durch einen Wächterdorn erstochen",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s wurde beim Versuch, %2$s zu entkommen, durch einen Wächterdorn erstochen",
+  "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s wurde durch einen Großwächterdorn erstochen",
+  "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s wurde beim Versuch, %2$s zu entkommen, durch einen Großwächterdorn erstochen",
+  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s wurde von %2$s zu Tode gestochen",
   
   "_comment7": "Advancements",
   
