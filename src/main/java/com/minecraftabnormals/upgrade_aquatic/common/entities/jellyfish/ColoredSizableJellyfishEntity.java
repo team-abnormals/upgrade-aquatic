@@ -134,7 +134,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	public LivingEntity attemptAging(boolean isGrowing) {
 		if (naturalSpawningSizes.containsKey(this.getSize())) {
 			Float newSize = isGrowing ? naturalSpawningSizes.higherKey(this.getSize()) : naturalSpawningSizes.lowerKey(this.getSize());
-			if(newSize != null) this.setSize(newSize, false);
+			if (newSize != null) this.setSize(newSize, false);
 		}
 		return this;
 	}
