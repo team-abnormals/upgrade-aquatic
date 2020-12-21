@@ -16,6 +16,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 
+import java.util.Random;
 import java.util.TreeMap;
 
 public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEntity implements IAgeableEntity {
@@ -63,8 +64,9 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		boolean updateSize = false;
 
-		int color = this.getRNG().nextInt(3);
-		float size = this.getSizeMap().randomSize(this.getRNG());
+		Random rand = this.getRNG();
+		int color = rand.nextInt(3);
+		float size = this.getSizeMap().randomSize(rand);
 		if (!(dataTag != null && this.isFromBucket())) {
 			if (spawnDataIn instanceof SpawnData) {
 				size = ((SpawnData) spawnDataIn).size;
