@@ -131,7 +131,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 		JellyfishSizeMap map = this.getSizeMap();
 		if (map.containsKey(size)) {
 			Float newSize = isGrowing ? map.higherKey(size) : map.lowerKey(size);
-			if(newSize != null) this.setSize(newSize, false);
+			if (newSize != null) this.setSize(newSize, false);
 		}
 		return this;
 	}
