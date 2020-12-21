@@ -3,11 +3,8 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.helper;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class JellyfishSizeMap {
