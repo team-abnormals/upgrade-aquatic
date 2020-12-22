@@ -20,7 +20,7 @@ public class JellyfishSizeMap {
         for (int weight : this.sizeMap.values())
             totalWeight += weight;
         this.totalWeight = totalWeight;
-        if(this.sizeMap.isEmpty()) AbnormalsCore.LOGGER.throwing(Level.ERROR, new IllegalArgumentException("[Upgrade Aquatic] Inputted size map for JellyfishSizeMap cannot be empty!"));
+        if (this.sizeMap.isEmpty()) AbnormalsCore.LOGGER.error("Inputted size map cannot be empty!");
     }
 
     public int size() {
