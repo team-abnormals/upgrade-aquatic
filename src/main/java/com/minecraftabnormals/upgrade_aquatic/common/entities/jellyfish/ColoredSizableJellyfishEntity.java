@@ -66,7 +66,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 
 		Random rand = this.getRNG();
 		int color = rand.nextInt(3);
-		float size = this.getSizeMap().randomSize(rand);
+		float size = this.getNaturalSizeMap().randomSize(rand);
 		if (!(dataTag != null && this.isFromBucket())) {
 			if (spawnDataIn instanceof SpawnData) {
 				size = ((SpawnData) spawnDataIn).size;
@@ -84,16 +84,16 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 		return spawnDataIn;
 	}
 
-	public JellyfishSizeMap getSizeMap() {
-		return NATURAL_SIZES;
-	}
-
 	public int getColor() {
 		return this.dataManager.get(COLOR);
 	}
 
 	public void setColor(int color) {
 		this.dataManager.set(COLOR, color);
+	}
+
+	public JellyfishSizeMap getNaturalSizeMap() {
+		return NATURAL_SIZES;
 	}
 
 	public void setSize(float size, boolean updateHealth) {
@@ -120,7 +120,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	@Override
 	public boolean canAge(boolean isGrowing) {
 		float size = this.getSize();
-		JellyfishSizeMap map = this.getSizeMap();
+		JellyfishSizeMap map = this.getNaturalSizeMap();
 		if (map.containsKey(size)) {
 			return (isGrowing ? map.higherKey(size) : map.lowerKey(size)) != null;
 		}
@@ -130,7 +130,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	@Override
 	public LivingEntity attemptAging(boolean isGrowing) {
 		float size = this.getSize();
-		JellyfishSizeMap map = this.getSizeMap();
+		JellyfishSizeMap map = this.getNaturalSizeMap();
 		if (map.containsKey(size)) {
 			Float newSize = isGrowing ? map.higherKey(size) : map.lowerKey(size);
 			if (newSize != null) this.setSize(newSize, false);

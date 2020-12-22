@@ -1,5 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.helper;
 
+import com.minecraftabnormals.abnormals_core.core.AbnormalsCore;
+import org.apache.logging.log4j.Level;
+
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Map;
@@ -11,12 +14,13 @@ public class JellyfishSizeMap {
     protected final TreeMap<Float, Integer> sizeMap;
     private final int totalWeight;
 
-    public JellyfishSizeMap(TreeMap<Float, Integer> map) {
-        this.sizeMap = map;
-        int weightTotal = 0;
+    public JellyfishSizeMap(TreeMap<Float, Integer> sizeMap) {
+        this.sizeMap = sizeMap;
+        int totalWeight = 0;
         for (int weight : this.sizeMap.values())
-            weightTotal += weight;
-        this.weightTotal = weightTotal;
+            totalWeight += weight;
+        this.totalWeight = totalWeight;
+        if(this.sizeMap.isEmpty()) AbnormalsCore.LOGGER.throwing(Level.ERROR, new IllegalArgumentException("[Upgrade Aquatic] Inputted size map for JellyfishSizeMap cannot be empty!"));
     }
 
     public int size() {
@@ -24,11 +28,11 @@ public class JellyfishSizeMap {
     }
 
     public int getTotalWeight() {
-        return this.weightTotal;
+        return this.totalWeight;
     }
 
     public float randomSize(Random rand) throws RuntimeException {
-        int denominator = totalWeight();
+        int denominator = this.getTotalWeight();
         for (Map.Entry<Float, Integer> sizeEntry : this.entrySet()) {
             int weight = sizeEntry.getValue();
             if (rand.nextInt(denominator) < weight) {
@@ -36,7 +40,7 @@ public class JellyfishSizeMap {
             }
             denominator = denominator - weight;
         }
-       throw new RuntimeException("JellyfishSizeMap in Upgrade Aquatic has broken. This should not be happening!");
+        return 0;
     }
 
     public boolean containsKey(Float key) {
