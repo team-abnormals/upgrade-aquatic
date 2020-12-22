@@ -1,7 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.helper;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -47,12 +47,9 @@ public class JellyfishSizeMap {
         return this.sizeMap.containsValue(value);
     }
 
+    @Nullable
     public Integer get(Float key) {
         return this.sizeMap.get(key);
-    }
-
-    public Comparator<? super Float> comparator() {
-        return this.sizeMap.comparator();
     }
 
     public Float firstKey() {
@@ -66,39 +63,27 @@ public class JellyfishSizeMap {
     public Map.Entry<Float, Integer> firstEntry() {
         return this.sizeMap.firstEntry();
     }
-    
+
     public Map.Entry<Float, Integer> lastEntry() {
         return this.sizeMap.lastEntry();
     }
-    
+
+    @Nullable
     public Map.Entry<Float, Integer> lowerEntry(Float key) {
         return this.sizeMap.lowerEntry(key);
     }
-    
+
+    @Nullable
     public Float lowerKey(Float key) {
         return this.sizeMap.lowerKey(key);
     }
-    
-    public Map.Entry<Float, Integer> floorEntry(Float key) {
-        return this.sizeMap.floorEntry(key);
-    }
-    
-    public Float floorKey(Float key) {
-        return this.sizeMap.floorKey(key);
-    }
-    
-    public Map.Entry<Float, Integer> ceilingEntry(Float key) {
-        return this.sizeMap.ceilingEntry(key);
-    }
-    
-    public Float ceilingKey(Float key) {
-        return this.sizeMap.ceilingKey(key);
-    }
 
+    @Nullable
     public Map.Entry<Float, Integer> higherEntry(Float key) {
         return this.sizeMap.higherEntry(key);
     }
-    
+
+    @Nullable
     public Float higherKey(Float key) {
         return this.sizeMap.higherKey(key);
     }
