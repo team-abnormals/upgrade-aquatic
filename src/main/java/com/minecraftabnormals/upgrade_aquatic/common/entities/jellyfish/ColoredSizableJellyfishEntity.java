@@ -22,7 +22,7 @@ import java.util.TreeMap;
 public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEntity implements IAgeableEntity {
 	protected static final DataParameter<Integer> COLOR = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.VARINT);
 	protected static final DataParameter<Float> SIZE = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.FLOAT);
-	private static final JellyfishSizeMap naturalSpawningSizes = new JellyfishSizeMap(new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34)));
+	private static final JellyfishSizeMap NATURAL_SIZES = new JellyfishSizeMap(new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34)));
 	private final ColoredSizableBucketProcessor bucketProcessor;
 
 	public ColoredSizableJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, World world) {
@@ -85,7 +85,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	}
 
 	public JellyfishSizeMap getSizeMap() {
-		return naturalSpawningSizes;
+		return NATURAL_SIZES;
 	}
 
 	public int getColor() {

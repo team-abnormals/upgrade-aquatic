@@ -9,7 +9,7 @@ import java.util.TreeMap;
 
 public class JellyfishSizeMap {
     protected final TreeMap<Float, Integer> sizeMap;
-    protected final int weightTotal;
+    private final int totalWeight;
 
     public JellyfishSizeMap(TreeMap<Float, Integer> map) {
         this.sizeMap = map;
@@ -23,7 +23,7 @@ public class JellyfishSizeMap {
         return this.sizeMap.size();
     }
 
-    public int totalWeight() {
+    public int getTotalWeight() {
         return this.weightTotal;
     }
 
