@@ -16,7 +16,6 @@ apply plugin: "eclipse"
 apply plugin: "maven-publish"
 apply plugin: "org.spongepowered.mixin"
 
-
 mixin {
     add sourceSets.main, project.modId + ".refmap.json"
 }
