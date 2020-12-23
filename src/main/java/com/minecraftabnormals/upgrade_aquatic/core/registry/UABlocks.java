@@ -458,9 +458,9 @@ public class UABlocks {
 
 	public static final RegistryObject<Block> STRIPPED_RIVER_LOG 	= HELPER.createBlock("stripped_river_log", () -> new StrippedLogBlock(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> STRIPPED_RIVER_WOOD 	= HELPER.createBlock("stripped_river_wood", () -> new StrippedWoodBlock(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_LOG 			= HELPER.createBlock("river_log", () -> new AbnormalsLogBlock(() -> STRIPPED_RIVER_LOG.get(), UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_WOOD 			= HELPER.createBlock("river_wood", () -> new WoodBlock(() -> STRIPPED_RIVER_WOOD.get(), UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_LEAVES 			= HELPER.createBlock("river_leaves", () -> new AbnormalsLeavesBlock(UAProperties.createLeaves()), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> RIVER_LOG 			= HELPER.createBlock("river_log", () -> new AbnormalsLogBlock(STRIPPED_RIVER_LOG::get, UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_WOOD 			= HELPER.createBlock("river_wood", () -> new WoodBlock(STRIPPED_RIVER_WOOD::get, UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_LEAVES 			= HELPER.createBlock("river_leaves", () -> new AbnormalsLeavesBlock(UAProperties.LEAVES), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> RIVER_SAPLING 		= HELPER.createBlock("river_sapling", () -> new AbnormalsSaplingBlock(new RiverTree(), Block.Properties.from(Blocks.OAK_SAPLING)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> POTTED_RIVER_SAPLING 	= HELPER.createBlockNoItem("potted_river_sapling", () -> new FlowerPotBlock(RIVER_SAPLING.get(), Block.Properties.from(Blocks.POTTED_ALLIUM)));
 	public static final RegistryObject<Block> RIVER_PLANKS 			= HELPER.createBlock("river_planks", () -> new PlanksBlock(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
@@ -472,7 +472,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> RIVER_PRESSURE_PLATE 	= HELPER.createBlock("river_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.RIVER_WOOD), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> RIVER_BUTTON 			= HELPER.createBlock("river_button", () -> new AbnormalsWoodButtonBlock(Properties.from(UABlocks.RIVER_WOOD.get()).doesNotBlockMovement()), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> RIVER_TRAPDOOR 		= HELPER.createBlock("river_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.RIVER_WOOD), ItemGroup.REDSTONE);
-	public static final RegistryObject<Block> RIVER_LEAF_CARPET 	= HELPER.createCompatBlock("quark", "river_leaf_carpet", () -> new LeafCarpetBlock(Block.Properties.from(Blocks.OAK_LEAVES)), ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> RIVER_LEAF_CARPET 	= HELPER.createCompatBlock("quark", "river_leaf_carpet", () -> new LeafCarpetBlock(UAProperties.LEAF_CARPET), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> VERTICAL_RIVER_PLANKS = HELPER.createCompatBlock("quark", "vertical_river_planks", () -> new Block(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_VERTICAL_SLAB 	= HELPER.createCompatFuelBlock("quark", "river_vertical_slab", () -> new VerticalSlabBlock(UAProperties.RIVER_WOOD), 150, ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_BOOKSHELF 		= HELPER.createCompatFuelBlock("quark", "river_bookshelf", () -> new BookshelfBlock(Properties.from(Blocks.BOOKSHELF)), 300, ItemGroup.BUILDING_BLOCKS);
