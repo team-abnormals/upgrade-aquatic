@@ -1,0 +1,9 @@
+{
+  "advancement": "minecraft:adventure/throw_trident",
+  "modifiers": [
+    {
+      "type": "parent",
+      "config": "upgrade_aquatic:adventure/tooth_fairy"
+    }
+  ]
+}

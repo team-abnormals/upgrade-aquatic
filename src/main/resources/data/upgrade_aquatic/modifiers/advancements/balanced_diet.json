@@ -1,0 +1,125 @@
+{
+  "advancement": "minecraft:husbandry/balanced_diet",
+  "modifiers": [
+    {
+      "type": "criteria",
+      "config": {
+        "mode": "modify",
+        "criteria": {
+          "upgrade_aquatic:boiled_blue_pickerelweed": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:boiled_blue_pickerelweed"
+              }
+            }
+          },
+          "upgrade_aquatic:boiled_purple_pickerelweed": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:boiled_purple_pickerelweed"
+              }
+            }
+          },
+          "upgrade_aquatic:pike": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:pike"
+              }
+            }
+          },
+          "upgrade_aquatic:cooked_pike": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:cooked_pike"
+              }
+            }
+          },
+          "upgrade_aquatic:lionfish": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:lionfish"
+              }
+            }
+          },
+          "upgrade_aquatic:cooked_lionfish": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:cooked_lionfish"
+              }
+            }
+          },
+          "upgrade_aquatic:mulberry": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:mulberry"
+              }
+            }
+          },
+          "upgrade_aquatic:mulberry_jam_bottle": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:mulberry_jam_bottle"
+              }
+            }
+          },
+          "upgrade_aquatic:mulberry_bread": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:mulberry_bread"
+              }
+            }
+          },
+          "upgrade_aquatic:mulberry_pie": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:mulberry_pie"
+              }
+            }
+          }
+        },
+        "requirements": [
+          [
+            "upgrade_aquatic:boiled_blue_pickerelweed"
+          ],
+          [
+            "upgrade_aquatic:boiled_purple_pickerelweed"
+          ],
+          [
+            "upgrade_aquatic:pike"
+          ],
+          [
+            "upgrade_aquatic:cooked_pike"
+          ],
+          [
+            "upgrade_aquatic:lionfish"
+          ],
+          [
+            "upgrade_aquatic:cooked_lionfish"
+          ],
+          [
+            "upgrade_aquatic:mulberry"
+          ],
+          [
+            "upgrade_aquatic:mulberry_jam_bottle"
+          ],
+          [
+            "upgrade_aquatic:mulberry_bread"
+          ],
+          [
+            "upgrade_aquatic:mulberry_pie"
+          ]
+        ]
+      }
+    }
+  ]
+}
