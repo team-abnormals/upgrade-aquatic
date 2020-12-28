@@ -1,10 +1,11 @@
 {
-  "advancement": "minecraft:adventure/kill_all_mobs",
+  "advancement": "minecraft:adventure/kill_a_mob",
   "modifiers": [
     {
-      "type": "criteria",
+      "type": "indexed_requirements",
       "config": {
         "mode": "modify",
+        "index": 0,
         "criteria": {
           "upgrade_aquatic:thrasher": {
             "trigger": "minecraft:player_killed_entity",
