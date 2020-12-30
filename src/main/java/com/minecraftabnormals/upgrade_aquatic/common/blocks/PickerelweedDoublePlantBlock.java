@@ -204,14 +204,14 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 			BlockPos blockpos = pos.down();
 			BlockState blockstate = world.getBlockState(blockpos);
 			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
-				world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 51);
+				world.setBlockState(blockpos, world.getFluidState(blockpos).getLevel() == 8 ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 51);
 				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			}
 		} else if (doubleblockhalf == DoubleBlockHalf.LOWER) {
 			BlockPos blockpos = pos.up();
 			BlockState blockstate = world.getBlockState(blockpos);
 			if (blockstate.getBlock() == state.getBlock() && blockstate.get(HALF) == DoubleBlockHalf.UPPER) {
-				world.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 51);
+				world.setBlockState(blockpos, world.getFluidState(blockpos).getLevel() == 8 ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 51);
 				world.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
 			}
 		}
