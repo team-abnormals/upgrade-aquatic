@@ -61,13 +61,13 @@ public class UASpawns {
 				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.LIONFISH.get(), 15, 1, 1));
 			}
 
-			if (isWarmOcean(biome) || isLukewarmOcean(biome)) {
-				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.BOX_JELLYFISH.get(), 6, 1, 2));
-				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.IMMORTAL_JELLYFISH.get(), 7, 1, 3));
-				if (isLukewarmOcean(biome)) {
-					spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.CASSIOPEA_JELLYFISH.get(), 7, 1, 3));
-				}
-			}
+//			if (isWarmOcean(biome) || isLukewarmOcean(biome)) {
+//				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.BOX_JELLYFISH.get(), 6, 1, 2));
+//				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.IMMORTAL_JELLYFISH.get(), 7, 1, 3));
+//				if (isLukewarmOcean(biome)) {
+//					spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.CASSIOPEA_JELLYFISH.get(), 7, 1, 3));
+//				}
+//			}
 		}
 
 		if (event.getCategory() == Biome.Category.RIVER) {
