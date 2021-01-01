@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 public class PikeBucketItem extends MobBucketItem {
 
 	public PikeBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
-		super(() -> UAEntities.PIKE.get(), supplier, builder);
+		super(UAEntities.PIKE::get, supplier, builder);
 	}
 	
 	@Override

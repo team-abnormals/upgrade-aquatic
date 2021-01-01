@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class GooseRenderer extends MobRenderer<GooseEntity, GooseModel<GooseEntity>> {
 
 	public GooseRenderer(EntityRendererManager manager) {
-		super(manager, new GooseModel<>(), 0.45F);
+		super(manager, new GooseModel<>(), 0.25F);
 	}
 	
 	@Override
