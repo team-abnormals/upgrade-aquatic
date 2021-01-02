@@ -178,7 +178,9 @@ public class EntityEvents {
 
 	@SubscribeEvent
 	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
-		if (event.getEntityLiving().getEntityWorld().getBlockState(event.getNewSpawn()).getBlock() instanceof BedrollBlock)
+		Entity entity = event.getEntity();
+		BlockPos spawn = event.getNewSpawn();
+		if (spawn != null && entity.getEntityWorld().getBlockState(spawn).getBlock() instanceof BedrollBlock)
 			event.setCanceled(true);
 	}
 	
