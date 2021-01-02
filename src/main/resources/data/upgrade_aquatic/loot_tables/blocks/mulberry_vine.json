@@ -5,6 +5,7 @@
       "rolls": 1,
       "entries": [
         {
+          "type": "minecraft:item",
           "functions": [
             {
               "function": "minecraft:set_count",
