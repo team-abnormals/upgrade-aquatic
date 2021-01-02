@@ -26,9 +26,9 @@ public class UAEntities {
 	public static final EntitySubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getEntitySubHelper();
 	
 	public static final RegistryObject<EntityType<SonarWaveEntity>> SONAR_WAVE          = HELPER.createEntity("sonar_wave", SonarWaveEntity::new, SonarWaveEntity::new, EntityClassification.MISC, 1.0F, 1.0F);
-	public static final RegistryObject<EntityType<NautilusEntity>> NAUTILUS             = HELPER.createLivingEntity("nautilus", NautilusEntity::new, EntityClassification.CREATURE, 0.5F, 0.5F);
-	public static final RegistryObject<EntityType<PikeEntity>> PIKE                     = HELPER.createLivingEntity("pike", PikeEntity::new, EntityClassification.CREATURE, 0.7F, 0.4F);
-	public static final RegistryObject<EntityType<LionfishEntity>> LIONFISH             = HELPER.createLivingEntity("lionfish", LionfishEntity::new, EntityClassification.CREATURE, 0.6F, 0.5F);
+	public static final RegistryObject<EntityType<NautilusEntity>> NAUTILUS             = HELPER.createLivingEntity("nautilus", NautilusEntity::new, EntityClassification.WATER_AMBIENT, 0.5F, 0.5F);
+	public static final RegistryObject<EntityType<PikeEntity>> PIKE                     = HELPER.createLivingEntity("pike", PikeEntity::new, EntityClassification.WATER_AMBIENT, 0.7F, 0.4F);
+	public static final RegistryObject<EntityType<LionfishEntity>> LIONFISH             = HELPER.createLivingEntity("lionfish", LionfishEntity::new, EntityClassification.WATER_AMBIENT, 0.6F, 0.5F);
 	public static final RegistryObject<EntityType<ThrasherEntity>> THRASHER             = HELPER.createLivingEntity("thrasher", ThrasherEntity::new, EntityClassification.MONSTER, 1.6F, 0.9F);
 	public static final RegistryObject<EntityType<GreatThrasherEntity>> GREAT_THRASHER	= HELPER.createLivingEntity("great_thrasher", GreatThrasherEntity::new, EntityClassification.MONSTER, 2.8F, 1.575F);
 	public static final RegistryObject<EntityType<FlareEntity>> FLARE                   = HELPER.createLivingEntity("flare", FlareEntity::new, EntityClassification.MONSTER, 0.9F, 0.5F);
