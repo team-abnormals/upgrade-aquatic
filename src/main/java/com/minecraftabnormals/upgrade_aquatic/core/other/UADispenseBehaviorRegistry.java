@@ -129,8 +129,8 @@ public class UADispenseBehaviorRegistry {
                     }
                 }
             }
-            return stack; //Should never be reached
-		}
+            return stack;
+	}
     };
 
 	public static void registerDispenseBehaviors() {
