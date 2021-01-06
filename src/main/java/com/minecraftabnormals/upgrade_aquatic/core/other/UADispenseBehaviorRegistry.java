@@ -3,6 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.core.other;
 import com.minecraftabnormals.abnormals_core.common.dispenser.FishBucketDispenseBehavior;
 import com.minecraftabnormals.abnormals_core.core.api.IBucketableEntity;
 import com.minecraftabnormals.abnormals_core.core.util.BlockUtil;
+import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.items.GlowingInkItem;
@@ -128,7 +129,7 @@ public class UADispenseBehaviorRegistry {
                     }
                 }
             }
-            return new FishBucketDispenseBehavior().dispense(source, stack);
+            return stack;
         }
     };
 
@@ -138,7 +139,7 @@ public class UADispenseBehaviorRegistry {
 		DispenserBlock.registerDispenseBehavior(UAItems.LIONFISH_BUCKET.get(), new FishBucketDispenseBehavior());
 		DispenserBlock.registerDispenseBehavior(UAItems.SQUID_BUCKET.get(), new FishBucketDispenseBehavior());
 		DispenserBlock.registerDispenseBehavior(UAItems.GLOW_SQUID_BUCKET.get(), new FishBucketDispenseBehavior());
-		DispenserBlock.registerDispenseBehavior(Items.WATER_BUCKET, bucketFishItemBehavior);
+		DataUtil.registerAlternativeDispenseBehavior(Items.WATER_BUCKET, (source, stack) -> !BlockUtil.getEntitiesAtOffsetPos(source, WaterMobEntity.class, entity -> entity instanceof AbstractFishEntity || entity instanceof IBucketableEntity || entity instanceof SquidEntity).isEmpty(), bucketFishItemBehavior);
 		
 		DispenserBlock.registerDispenseBehavior(Items.INK_SAC, inkDispenseBehavior);
 		DispenserBlock.registerDispenseBehavior(UAItems.GLOWING_INK_SAC.get(), glowingInkDispenseBehavior);
