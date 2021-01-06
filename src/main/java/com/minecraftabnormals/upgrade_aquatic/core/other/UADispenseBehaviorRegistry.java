@@ -130,7 +130,7 @@ public class UADispenseBehaviorRegistry {
                 }
             }
             return stack;
-		}
+	}
     };
 
 	public static void registerDispenseBehaviors() {
