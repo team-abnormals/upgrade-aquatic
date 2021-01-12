@@ -1,0 +1,16 @@
+{
+  "advancement": "minecraft:nether/all_effects",
+  "modifiers": [
+    {
+      "type": "effects_changed",
+      "config": {
+        "criteria": "all_effects",
+        "removes": false,
+        "effects": {
+          "upgrade_aquatic:vibing": {},
+          "upgrade_aquatic:repellence": {}
+        }
+      }
+    }
+  ]
+}
