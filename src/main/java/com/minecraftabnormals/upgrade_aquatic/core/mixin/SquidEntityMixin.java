@@ -4,6 +4,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.items.GlowingInkItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.SquidEntity;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +21,6 @@ public abstract class SquidEntityMixin extends Entity {
 
 	@Inject(at = @At("HEAD"), method = "squirtInk", cancellable = true)
 	private void squirtInk(CallbackInfo info) {
-		GlowingInkItem.createEffectCloud(Effects.BLINDNESS, this.world, this.getBoundingBox().expand(2.5F, 2.5F, 2.5F));
+		GlowingInkItem.createEffectCloud(new EffectInstance(Effects.BLINDNESS, 100), this.world, this.getBoundingBox().expand(2.5F, 2.5F, 2.5F));
 	}
-
 }

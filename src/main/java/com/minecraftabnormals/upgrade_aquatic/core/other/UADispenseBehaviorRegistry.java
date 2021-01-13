@@ -33,27 +33,6 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class UADispenseBehaviorRegistry {
-
-	static IDispenseItemBehavior inkDispenseBehavior = new DefaultDispenseItemBehavior() {
-		
-		@Override
-		public ItemStack dispenseStack(IBlockSource source, ItemStack stack) {
-            GlowingInkItem.createEffectCloud(Effects.BLINDNESS, source.getWorld(), source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING)));
-			stack.shrink(1);
-			return stack;
-		}
-
-		@Override
-		protected void playDispenseSound(IBlockSource source) {
-			source.getWorld().playSound(null, source.getBlockPos(), SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-		}
-		
-		@Override
-		protected void spawnDispenseParticles(IBlockSource source, Direction facingIn) {
-			GlowingInkItem.squirtInkServer(ParticleTypes.SQUID_INK, source.getBlockPos().offset(facingIn));
-		}
-
-	};
 	
 	static IDispenseItemBehavior glowingInkDispenseBehavior = new DefaultDispenseItemBehavior() {
 		
@@ -62,13 +41,12 @@ public class UADispenseBehaviorRegistry {
 			World world = source.getWorld();
             BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
             BlockState state = source.getWorld().getBlockState(pos);
-            GlowingInkItem.createEffectCloud(Effects.NIGHT_VISION, world, pos);
             if (GlowingInkItem.DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
     			Block livingCoral = GlowingInkItem.DEAD_CORAL_CONVERSION_MAP.get(state.getBlock());
     			world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, livingCoral.getDefaultState()));
     			world.getPendingBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
+				stack.shrink(1);
             }
-			stack.shrink(1);
 			return stack;
 		}
 
@@ -79,7 +57,7 @@ public class UADispenseBehaviorRegistry {
 		
 		@Override
 		protected void spawnDispenseParticles(IBlockSource source, Direction facingIn) {
-			GlowingInkItem.squirtInkServer(UAParticles.GLOW_SQUID_INK.get(), source.getBlockPos().offset(facingIn));
+			GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), source.getBlockPos().offset(facingIn));
 		}
 	};
 
@@ -141,7 +119,6 @@ public class UADispenseBehaviorRegistry {
 		DispenserBlock.registerDispenseBehavior(UAItems.GLOW_SQUID_BUCKET.get(), new FishBucketDispenseBehavior());
 		DataUtil.registerAlternativeDispenseBehavior(Items.WATER_BUCKET, (source, stack) -> !BlockUtil.getEntitiesAtOffsetPos(source, WaterMobEntity.class, entity -> entity instanceof AbstractFishEntity || entity instanceof IBucketableEntity || entity instanceof SquidEntity).isEmpty(), bucketFishItemBehavior);
 		
-		DispenserBlock.registerDispenseBehavior(Items.INK_SAC, inkDispenseBehavior);
 		DispenserBlock.registerDispenseBehavior(UAItems.GLOWING_INK_SAC.get(), glowingInkDispenseBehavior);
 	}
 }

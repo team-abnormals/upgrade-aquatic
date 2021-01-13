@@ -71,32 +71,32 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
 public class EntityEvents {
-	
+
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onEntitySpawned(EntityJoinWorldEvent event) {
-		if(event.getWorld().isRemote) return;
-		
+		if (event.getWorld().isRemote) return;
+
 		Entity entity = event.getEntity();
-		if(entity instanceof DrownedEntity) {
-			((CreatureEntity) entity).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreatureEntity)entity, TurtleEntity.class, 6.0F, 1.0D, 1.2D));
+		if (entity instanceof DrownedEntity) {
+			((CreatureEntity) entity).goalSelector.addGoal(3, new AvoidEntityGoal<>((CreatureEntity) entity, TurtleEntity.class, 6.0F, 1.0D, 1.2D));
 		}
-		if(entity instanceof AbstractFishEntity) {
-			((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, PikeEntity.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_HIDING_IN_PICKERELWEED::test));
-			if(entity instanceof TropicalFishEntity) {
-				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity)entity, LionfishEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.IS_ALIVE::test));
+		if (entity instanceof AbstractFishEntity) {
+			((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity) entity, PikeEntity.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_HIDING_IN_PICKERELWEED::test));
+			if (entity instanceof TropicalFishEntity) {
+				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity) entity, LionfishEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.IS_ALIVE::test));
 			}
 		}
-		if(entity instanceof WaterMobEntity && !(entity instanceof IMob)) {
-			if(!(entity instanceof DolphinEntity)) {
-				((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity)entity, ThrasherEntity.class, 20.0F, 1.4D, 1.6D, EntityPredicates.IS_ALIVE::test));
+		if (entity instanceof WaterMobEntity && !(entity instanceof IMob)) {
+			if (!(entity instanceof DolphinEntity)) {
+				((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity) entity, ThrasherEntity.class, 20.0F, 1.4D, 1.6D, EntityPredicates.IS_ALIVE::test));
 			}
-			if(entity instanceof DolphinEntity) {
+			if (entity instanceof DolphinEntity) {
 				((MobEntity) entity).targetSelector.addGoal(0, (new HurtByTargetGoal((DolphinEntity) entity, ThrasherEntity.class)).setCallsForHelp());
 				((MobEntity) entity).goalSelector.addGoal(1, new MeleeAttackGoal((DolphinEntity) entity, 1.2D, true));
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void rightClickItem(PlayerInteractEvent.RightClickBlock event) {
 		World world = event.getWorld();
@@ -104,73 +104,58 @@ public class EntityEvents {
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
 
-		if(!player.isSecondaryUseActive())
-		{
+		if (!player.isSecondaryUseActive()) {
 			if (stack.getItem() == UAItems.GLOWING_INK_SAC.get()) {
 				if (world.getTileEntity(pos) instanceof IGlowable) {
 					IGlowable te = (IGlowable) world.getTileEntity(pos);
-
 					if (te != null && te.setGlowing(true)) {
 						if (!player.abilities.isCreativeMode) stack.shrink(1);
-						GlowingInkItem.createEffectCloud(Effects.NIGHT_VISION, world, pos);
-						if (world.isRemote())
-							GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), world, pos);
+						if (world.isRemote()) GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
 						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						event.setCanceled(true);
+						event.setCancellationResult(ActionResultType.SUCCESS);
 					}
-
-					event.setCanceled(true);
-					event.setCancellationResult(ActionResultType.SUCCESS);
 				}
 			}
 
 			if (stack.getItem() == Items.INK_SAC) {
 				if (world.getTileEntity(pos) instanceof IGlowable) {
 					IGlowable te = (IGlowable) world.getTileEntity(pos);
-
 					if (te != null && te.setGlowing(false)) {
 						if (!player.abilities.isCreativeMode) stack.shrink(1);
-						GlowingInkItem.createEffectCloud(Effects.NIGHT_VISION, world, pos);
-						if (world.isRemote())
-							GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, pos);
+						if (world.isRemote()) GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, pos);
 						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						event.setCanceled(true);
+						event.setCancellationResult(ActionResultType.SUCCESS);
 					}
-				} else {
-					if (!player.abilities.isCreativeMode) event.getItemStack().shrink(1);
-					GlowingInkItem.createEffectCloud(Effects.BLINDNESS, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
-					if(world.isRemote())
-						GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, world, world.getBlockState(pos).isSolid() ? pos.offset(event.getFace()) : pos);
-					world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				}
-
-				event.setCanceled(true);
-				event.setCancellationResult(ActionResultType.SUCCESS);
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onEntityUpdate(LivingUpdateEvent event) {
 		LivingEntity entity = event.getEntityLiving();
-		if(entity instanceof PhantomEntity) {
-			if(((PhantomEntity) entity).getAttackTarget() instanceof ServerPlayerEntity) {
+		if (entity instanceof PhantomEntity) {
+			if (((PhantomEntity) entity).getAttackTarget() instanceof ServerPlayerEntity) {
 				ServerPlayerEntity playerMP = (ServerPlayerEntity) ((PhantomEntity) entity).getAttackTarget();
 				StatisticsManager statisticsManager = playerMP.getStats();
-				if(statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) < 72000) {
+				if (statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) < 72000) {
 					((PhantomEntity) entity).setAttackTarget(null);
 				}
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onPlayerSleep(PlayerSleepInBedEvent event) {
 		PlayerEntity player = event.getPlayer();
 		BlockState state = player.getEntityWorld().getBlockState(event.getPos());
 		if (event.getResultStatus() == null && state.getFluidState().getLevel() == 8 && state.getBlock() instanceof BedrollBlock) {
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
-				ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
+				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 				if (!player.world.isRemote()) {
-					UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer); 
+					UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer);
 				}
 			}
 		}
@@ -183,13 +168,13 @@ public class EntityEvents {
 		if (spawn != null && entity.getEntityWorld().getBlockState(spawn).getBlock() instanceof BedrollBlock)
 			event.setCanceled(true);
 	}
-	
+
 	@SubscribeEvent
 	public static void onInteractEntity(EntityInteract event) {
 		Entity entity = event.getTarget();
 		PlayerEntity player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
-		if(stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof SquidEntity) {
+		if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof SquidEntity) {
 			ItemStack bucket = ItemStack.EMPTY;
 			if (entity.getType() == EntityType.SQUID) {
 				bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
@@ -198,45 +183,45 @@ public class EntityEvents {
 			} else {
 				return;
 			}
-			
+
 			player.swingArm(event.getHand());
 			entity.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
 			stack.shrink(1);
-			
-			if(entity.hasCustomName()) {
+
+			if (entity.hasCustomName()) {
 				bucket.setDisplayName(entity.getCustomName());
 			}
-			
-			if(!event.getWorld().isRemote) {
-				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity)player, bucket);
+
+			if (!event.getWorld().isRemote) {
+				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, bucket);
 			}
-            
-			if(stack.isEmpty()) {
+
+			if (stack.isEmpty()) {
 				player.setHeldItem(event.getHand(), bucket);
-			} else if(!player.inventory.addItemStackToInventory(bucket)) {
+			} else if (!player.inventory.addItemStackToInventory(bucket)) {
 				player.dropItem(bucket, false);
 			}
-			
+
 			entity.remove();
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event) {
 		PlayerEntity player = event.player;
 		ItemStack headSlotStack = player.getItemStackFromSlot(EquipmentSlotType.HEAD);
-		if(!event.player.world.isRemote && event.player.world.getGameTime() % 5 == 0 && event.player instanceof ServerPlayerEntity) {
+		if (!event.player.world.isRemote && event.player.world.getGameTime() % 5 == 0 && event.player instanceof ServerPlayerEntity) {
 			ServerPlayerEntity sPlayer = (ServerPlayerEntity) event.player;
 			StatisticsManager statisticsManager = sPlayer.getStats();
 			Object2IntMap<Stat<?>> object2intmap = new Object2IntOpenHashMap<>();
 			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
 			sPlayer.connection.sendPacket(new SStatisticsPacket(object2intmap));
 		}
-		if(player.isServerWorld() && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
+		if (player.isServerWorld() && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
 			int timeTillDamage = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 40 * (1 + EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 40;
-			if(player.areEyesInFluid(FluidTags.WATER)) {
+			if (player.areEyesInFluid(FluidTags.WATER)) {
 				player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 210));
-				if(player.world.getGameTime() % timeTillDamage == 0) {
+				if (player.world.getGameTime() % timeTillDamage == 0) {
 					headSlotStack.damageItem(1, player, (p_213341_0_) -> {
 						p_213341_0_.sendBreakAnimation(EquipmentSlotType.HEAD);
 					});
@@ -244,7 +229,7 @@ public class EntityEvents {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onPlayerMount(EntityMountEvent event) {
 		Entity mountingEntity = event.getEntityMounting();
@@ -257,7 +242,7 @@ public class EntityEvents {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onDrownedPoseChange(EntityEvent.Size event) {
 		Entity entity = event.getEntity();
@@ -267,7 +252,7 @@ public class EntityEvents {
 			drowned.size = EntitySize.flexible(drowned.isChild() ? 0.7F : 0.6F, 0.6F);
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
 		TradeUtil.addWandererTrades(event,
@@ -347,7 +332,6 @@ public class EntityEvents {
 				new AbnormalsTrade(1, UABlocks.GREEN_BEDROLL.get().asItem(), 1, 8, 10),
 				new AbnormalsTrade(1, UABlocks.RED_BEDROLL.get().asItem(), 1, 8, 10),
 				new AbnormalsTrade(1, UABlocks.BLACK_BEDROLL.get().asItem(), 1, 8, 10)
-
 		);
-    }
+	}
 }
