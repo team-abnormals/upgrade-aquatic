@@ -362,12 +362,12 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 
 		private float clamp(boolean invert, float num, float min, float max) {
 			if (invert) {
-				return num > max ? num : max;
+				return Math.max(num, max);
 			} else {
 				if (num < min) {
 					return min;
 				} else {
-					return num > max ? max : num;
+					return Math.min(num, max);
 				}
 			}
 		}

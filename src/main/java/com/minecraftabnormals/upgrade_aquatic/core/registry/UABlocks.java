@@ -451,7 +451,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> VERTICAL_DRIFTWOOD_PLANKS = HELPER.createCompatBlock("quark", "vertical_driftwood_planks", () -> new Block(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_VERTICAL_SLAB 	= HELPER.createCompatFuelBlock("quark", "driftwood_vertical_slab", () -> new VerticalSlabBlock(UAProperties.DRIFTWOOD), 150, ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_BOOKSHELF 		= HELPER.createCompatFuelBlock("quark", "driftwood_bookshelf", () -> new BookshelfBlock(Properties.from(Blocks.BOOKSHELF)), 300, ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_LADDER 			= HELPER.createCompatFuelBlock("quark", "driftwood_ladder", () -> new AbnormalsLadderBlock(Properties.from(Blocks.LADDER).notSolid()), 300, ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> DRIFTWOOD_LADDER 			= HELPER.createCompatFuelBlock("quark", "driftwood_ladder", () -> new AbnormalsLadderBlock(Properties.from(Blocks.LADDER).harvestTool(ToolType.AXE)), 300, ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> DRIFTWOOD_BEEHIVE			= HELPER.createCompatBlock("buzzier_bees", "driftwood_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> DRIFTWOOD_SIGN = HELPER.createSignBlock("driftwood", MaterialColor.GRAY);
 	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> DRIFTWOOD_CHEST 	= HELPER.createCompatChestBlocks("driftwood", MaterialColor.GRAY);
@@ -476,7 +476,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> VERTICAL_RIVER_PLANKS = HELPER.createCompatBlock("quark", "vertical_river_planks", () -> new Block(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_VERTICAL_SLAB 	= HELPER.createCompatFuelBlock("quark", "river_vertical_slab", () -> new VerticalSlabBlock(UAProperties.RIVER_WOOD), 150, ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_BOOKSHELF 		= HELPER.createCompatFuelBlock("quark", "river_bookshelf", () -> new BookshelfBlock(Properties.from(Blocks.BOOKSHELF)), 300, ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_LADDER 			= HELPER.createCompatFuelBlock("quark", "river_ladder", () -> new AbnormalsLadderBlock(Properties.from(Blocks.LADDER).notSolid()), 300, ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> RIVER_LADDER 			= HELPER.createCompatFuelBlock("quark", "river_ladder", () -> new AbnormalsLadderBlock(Properties.from(Blocks.LADDER).harvestTool(ToolType.AXE)), 300, ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> RIVER_BEEHIVE			= HELPER.createCompatBlock("buzzier_bees", "river_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> RIVER_SIGN = HELPER.createSignBlock("river", MaterialColor.GRAY);
 	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> RIVER_CHEST 	= HELPER.createCompatChestBlocks("river", MaterialColor.GRAY);

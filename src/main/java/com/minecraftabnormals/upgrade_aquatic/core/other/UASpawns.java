@@ -52,32 +52,32 @@ public class UASpawns {
 			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.GLOW_SQUID.get(), 67, 1, 1));
 
 			if (BiomeDictionary.hasType(key, BiomeDictionary.Type.COLD)) {
-				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.THRASHER.get(), 90, 1, 2));
+				spawns.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(UAEntities.THRASHER.get(), 90, 1, 2));
 			} else {
-				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.NAUTILUS.get(), 51, 1, 4));
+				spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.NAUTILUS.get(), 51, 1, 4));
 			}
 
 			if (BiomeDictionary.hasType(key, BiomeDictionary.Type.HOT)) {
-				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.LIONFISH.get(), 15, 1, 1));
+				spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.LIONFISH.get(), 15, 1, 1));
 			}
 
-			if (isWarmOcean(biome) || isLukewarmOcean(biome)) {
-				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.BOX_JELLYFISH.get(), 6, 1, 2));
-				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.IMMORTAL_JELLYFISH.get(), 7, 1, 3));
-				if (isLukewarmOcean(biome)) {
-					spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.CASSIOPEA_JELLYFISH.get(), 7, 1, 3));
-				}
-			}
+//			if (isWarmOcean(biome) || isLukewarmOcean(biome)) {
+//				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.BOX_JELLYFISH.get(), 6, 1, 2));
+//				spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.IMMORTAL_JELLYFISH.get(), 7, 1, 3));
+//				if (isLukewarmOcean(biome)) {
+//					spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.CASSIOPEA_JELLYFISH.get(), 7, 1, 3));
+//				}
+//			}
 		}
 
 		if (event.getCategory() == Biome.Category.RIVER) {
-			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), 11, 1, 2));
+			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), 11, 1, 2));
 		}
 
 		if (event.getCategory() == Biome.Category.SWAMP) {
-			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), 5, 1, 2));
+			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), 5, 1, 2));
 			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SQUID, 5, 1, 2));
-			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SALMON, 5, 1, 5));
+			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(EntityType.SALMON, 5, 1, 5));
 		}
 	}
 

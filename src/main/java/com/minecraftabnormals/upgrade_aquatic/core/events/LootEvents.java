@@ -23,8 +23,7 @@ public class LootEvents {
 	private static final Set<ResourceLocation> TOOTH_RUINS_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_UNDERWATER_RUIN_BIG);
 	private static final Set<ResourceLocation> TOOTH_TREASURE_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_BURIED_TREASURE);
 	private static final Set<ResourceLocation> PICKERELWEED_LOOT_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_SHIPWRECK_SUPPLY);
-	private static final Set<ResourceLocation> PICKERELWEED_FISHINGJUNK_LOOT_INJECTIONS = Sets.newHashSet(LootTables.GAMEPLAY_FISHING_JUNK);
-	
+
 	@SubscribeEvent
 	public static void onInjectLoot(LootTableLoadEvent event) {
 		if (TOOTH_RUINS_INJECTIONS.contains(event.getName())) {
@@ -37,10 +36,6 @@ public class LootEvents {
 		}
 		if (PICKERELWEED_LOOT_INJECTIONS.contains(event.getName())) {
 			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(UpgradeAquatic.MODID, "injections/pickerelweed_structures")).weight(1).quality(0)).name("pickerelweed_structure").build();
-			event.getTable().addPool(pool);
-		}
-		if(PICKERELWEED_FISHINGJUNK_LOOT_INJECTIONS.contains(event.getName())) {
-			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(UpgradeAquatic.MODID, "injections/pickerelweed_fishjunk")).weight(1).quality(0)).name("pickerelweed_fishing").build();
 			event.getTable().addPool(pool);
 		}
 	}

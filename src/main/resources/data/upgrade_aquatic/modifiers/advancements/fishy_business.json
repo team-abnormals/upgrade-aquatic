@@ -1,0 +1,38 @@
+{
+  "advancement": "minecraft:husbandry/fishy_business",
+  "modifiers": [
+    {
+      "type": "indexed_requirements",
+      "config": {
+        "mode": "modify",
+        "index": 0,
+        "criteria": {
+          "upgrade_aquatic:pike": {
+            "trigger": "minecraft:fishing_rod_hooked",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:pike"
+              }
+            }
+          },
+          "upgrade_aquatic:lionfish": {
+            "trigger": "minecraft:fishing_rod_hooked",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:lionfish"
+              }
+            }
+          }
+        },
+        "requirements": [
+          [
+            "upgrade_aquatic:pike"
+          ],
+          [
+            "upgrade_aquatic:lionfish"
+          ]
+        ]
+      }
+    }
+  ]
+}

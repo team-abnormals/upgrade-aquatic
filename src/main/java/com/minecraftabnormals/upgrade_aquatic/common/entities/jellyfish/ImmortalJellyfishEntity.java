@@ -113,9 +113,9 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 		JellyTorchType white = JellyTorchType.WHITE;
 		JellyTorchType red = JellyTorchType.RED;
 		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").mergeStyle(TextFormatting.GRAY))
-				.append((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + white.toString().toLowerCase())).mergeStyle(white.color))
+				.append((new TranslationTextComponent("tooltip.upgrade_aquatic." + white.toString().toLowerCase() + "_jelly_torch")).mergeStyle(white.color))
 				.append(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").mergeStyle(TextFormatting.GRAY))
-				.append((new TranslationTextComponent("tooltip.upgrade_aquatic.jelly_torch_" + red.toString().toLowerCase())).mergeStyle(red.color))
+				.append((new TranslationTextComponent("tooltip.upgrade_aquatic." + red.toString().toLowerCase() + "_jelly_torch")).mergeStyle(red.color))
 				;
 	}
 

@@ -6,8 +6,6 @@
 
   "block.upgrade_aquatic.elder_eye": "Древний глаз",
   
-  "block.upgrade_aquatic.bubble_block": "Пузырьковый блок",
-  
   "block.upgrade_aquatic.dead_acan_coral": "Мёртвый акановый коралл",
   "block.upgrade_aquatic.dead_acan_coral_block": "Блок мёртвого аканового коралла",
   "block.upgrade_aquatic.dead_acan_coral_fan": "Мёртвый веерный акановый коралл",
@@ -248,19 +246,57 @@
   "block.upgrade_aquatic.elder_prismarine_coralstone_wall": "Ограда из древнего призмаринового коралло-камня",
   "block.upgrade_aquatic.dead_coralstone_wall": "Ограда из мертвого коралло-камня",
   
+  "block.upgrade_aquatic.coralstone_vertical_slab": "Вертикальная плита из коралло-камня",
+  "block.upgrade_aquatic.bubble_coralstone_vertical_slab": "Вертикальная плита из пузырчатого коралло-камня",
+  "block.upgrade_aquatic.horn_coralstone_vertical_slab": "Вертикальная плита из рогового коралло-камня",
+  "block.upgrade_aquatic.tube_coralstone_vertical_slab": "Вертикальная плита из трубчатого коралло-камня",
+  "block.upgrade_aquatic.brain_coralstone_vertical_slab": "Вертикальная плита из мозговитого коралло-камня",
+  "block.upgrade_aquatic.fire_coralstone_vertical_slab": "Вертикальная плита из огненного коралло-камня",   
+  "block.upgrade_aquatic.acan_coralstone_vertical_slab": "Вертикальная плита из аканового коралло-камня",
+  "block.upgrade_aquatic.finger_coralstone_vertical_slab": "Вертикальная плита из пальцевидного коралло-камня",
+  "block.upgrade_aquatic.star_coralstone_vertical_slab": "Вертикальная плита из звездовидного коралло-камня",
+  "block.upgrade_aquatic.moss_coralstone_vertical_slab": "Вертикальная плита из моховидного коралло-камня",
+  "block.upgrade_aquatic.petal_coralstone_vertical_slab": "Вертикальная плита из лепесткового коралло-камня",
+  "block.upgrade_aquatic.branch_coralstone_vertical_slab": "Вертикальная плита из ветвистого коралло-камня",
+  "block.upgrade_aquatic.rock_coralstone_vertical_slab": "Вертикальная плита из каменистого коралло-камня",
+  "block.upgrade_aquatic.pillow_coralstone_vertical_slab": "Вертикальная плита из подушечного коралло-камня",
+  "block.upgrade_aquatic.silk_coralstone_vertical_slab": "Вертикальная плита из шелковистого коралло-камня",
+  "block.upgrade_aquatic.chrome_coralstone_vertical_slab": "Вертикальная плита из хромового коралло-камня",
+  "block.upgrade_aquatic.prismarine_coralstone_vertical_slab": "Вертикальная плита из призмаринового коралло-камня",
+  "block.upgrade_aquatic.elder_prismarine_coralstone_vertical_slab": "Вертикальная плита из древнего призмаринового коралло-камня",
+  "block.upgrade_aquatic.dead_coralstone_vertical_slab": "Вертикальная плита из мёртвого коралло-камня",
+  
   "block.upgrade_aquatic.tooth_block": "Зубной блок",
-  "block.upgrade_aquatic.tooth_tiles": "Зубная плитка",
-  "block.upgrade_aquatic.tooth_slab": "Зубная плита",
-  "block.upgrade_aquatic.tooth_stairs": "Зубные ступеньки",
-  "block.upgrade_aquatic.tooth_wall": "Зубная ограда",
   "block.upgrade_aquatic.tooth_bricks": "Зубные кирпичи",
   "block.upgrade_aquatic.tooth_brick_slab": "Плита из зубных кирпичей",
   "block.upgrade_aquatic.tooth_brick_stairs": "Ступеньки из зубных кирпичей",
   "block.upgrade_aquatic.tooth_brick_wall": "Ограда из зубных кирпичей",
+  "block.upgrade_aquatic.tooth_brick_vertical_slab": "Вертикальная плита из зубных кирпичей",
   "block.upgrade_aquatic.chiseled_tooth_bricks": "Резные зубные кирпичи",
+  "block.upgrade_aquatic.tooth_tiles": "Зубная плитка",
+  "block.upgrade_aquatic.tooth_slab": "Зубная плита",
+  "block.upgrade_aquatic.tooth_stairs": "Зубные ступеньки",
+  "block.upgrade_aquatic.tooth_wall": "Зубная ограда",
+  "block.upgrade_aquatic.tooth_vertical_slab": "Вертикальная зубная плита",
   "block.upgrade_aquatic.tooth_door": "Зубная дверь",
   "block.upgrade_aquatic.tooth_trapdoor": "Зубной люк",
   "block.upgrade_aquatic.tooth_lantern": "Зубной фонарь",
+  
+  "block.upgrade_aquatic.scute_block": "Щитковый блок",
+  "block.upgrade_aquatic.scute_shingles": "Щитковая черепица",
+  "block.upgrade_aquatic.scute_shingle_slab": "Плита из щитковой черепицы",
+  "block.upgrade_aquatic.scute_shingle_stairs": "Ступеньки из щитковой черепица",
+  "block.upgrade_aquatic.scute_shingle_wall": "Ограда из щитковой черепица",
+  "block.upgrade_aquatic.scute_shingle_vertical_slab": "Вертикальная плита из щитковой черепицы",
+  "block.upgrade_aquatic.chiseled_scute_shingles": "Резная щитковой черепица",
+  "block.upgrade_aquatic.scute_pavement": "Щитковый тротуар",
+  "block.upgrade_aquatic.scute_pavement_slab": "Плита из щиткового тротуара",
+  "block.upgrade_aquatic.scute_pavement_stairs": "Ступеньки из щиткового тротуара",
+  "block.upgrade_aquatic.scute_pavement_wall": "Ограда из щиткового тротуара",
+  "block.upgrade_aquatic.scute_pavement_vertical_slab": "Вертикальная плита из щиткового тротуара",
+  
+  "block.upgrade_aquatic.glass_door": "Стеклянная дверь",
+  "block.upgrade_aquatic.glass_trapdoor": "Стеклянный люк",
 
   "block.upgrade_aquatic.tongue_kelp": "Языковая ламинария",
   "block.upgrade_aquatic.thorny_kelp": "Колючая ламинария",
@@ -300,6 +336,12 @@
   "block.upgrade_aquatic.thorny_kelpy_cobblestone_wall": "Ограда из булышника в колючей ламинарии",
   "block.upgrade_aquatic.ochre_kelpy_cobblestone_wall": "Ограда из булышника в охристой ламинарии",
   "block.upgrade_aquatic.polar_kelpy_cobblestone_wall": "Ограда из булышника в полярной ламинарии",
+  
+  "block.upgrade_aquatic.kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в ламинарии",
+  "block.upgrade_aquatic.tongue_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в языковой ламинарии",
+  "block.upgrade_aquatic.thorny_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в колючей ламинарии",
+  "block.upgrade_aquatic.ochre_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в охристой ламинарии",
+  "block.upgrade_aquatic.polar_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в полярной ламинарии",
 
   "block.upgrade_aquatic.kelpy_stone_bricks": "Каменные кирпичи в ламинарии",
   "block.upgrade_aquatic.tongue_kelpy_stone_bricks": "Каменные кирпичи в языковой ламинарии",
@@ -325,6 +367,12 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_wall": "Ограда из каменного кирпича в охристой ламинарии",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_wall": "Ограда из каменного кирпича в полярной ламинарии",
   
+  "block.upgrade_aquatic.kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в ламинарии",
+  "block.upgrade_aquatic.tongue_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в языковой ламинарии",
+  "block.upgrade_aquatic.thorny_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в колючей ламинарии",
+  "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в охристой ламинарии",
+  "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в полярной ламинарии",
+  
   "block.upgrade_aquatic.blue_pickerelweed_block": "Блок синей понтедерии",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Блок фиолетовой понтедерии",
   "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Блок вареной синей понтедерии",
@@ -349,6 +397,9 @@
   "block.upgrade_aquatic.driftwood_ladder": "Плавниковая лестница",
   "block.upgrade_aquatic.driftwood_sign": "Плавниковая табличка",
   "block.upgrade_aquatic.driftwood_wall_sign": "Плавниковая табличка на стене",
+  "block.upgrade_aquatic.driftwood_chest": "Плавниковый сундук",
+  "block.upgrade_aquatic.driftwood_trapped_chest": "Плавниковый сундук-ловушка",
+  "block.upgrade_aquatic.driftwood_beehive": "Плавниковый улей",
   
   "block.upgrade_aquatic.river_leaves": "Листья речного дерева",
   "block.upgrade_aquatic.river_sapling": "Саженец речного дерева",
@@ -372,12 +423,16 @@
   "block.upgrade_aquatic.river_ladder": "Лестница из речного дерева",
   "block.upgrade_aquatic.river_sign": "Табличка из речного дерева",
   "block.upgrade_aquatic.river_wall_sign": "Табличка из речного дерева на стене",
+  "block.upgrade_aquatic.river_chest": "Сундук из речного дерева",
+  "block.upgrade_aquatic.river_trapped_chest": "Сундук-ловушка из речного дерева",
+  "block.upgrade_aquatic.river_beehive": "Улей из речного дерева",
   
   "block.upgrade_aquatic.flowering_rush": "Зонтичный сусак",
+  
   "block.upgrade_aquatic.mulberry_vine": "Шелковичная лоза",
-
+  "block.upgrade_aquatic.mulberry_punnet": "Шелковичная корзина",
   "block.upgrade_aquatic.mulberry_jam_block": "Блок шелковичного джема",
-
+  
   "block.upgrade_aquatic.prismarine_rod_bundle": "Связка призмариновых стержней",
 
   "block.upgrade_aquatic.beachgrass": "Песколюбка",
@@ -385,39 +440,17 @@
   "block.upgrade_aquatic.beachgrass_thatch": "Солома песколюбки",
   "block.upgrade_aquatic.beachgrass_thatch_slab": "Плита из соломы песколюбки",
   "block.upgrade_aquatic.beachgrass_thatch_stairs": "Ступеньки из соломы песколюбки",
-
   "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Вертикальная плита из соломы песколюбки",
-  "block.upgrade_aquatic.tooth_vertical_slab": "Зубная вертикальная плита",
-  "block.upgrade_aquatic.tooth_brick_vertical_slab": "Вертикальная плита из зубных кирпичей",
-  "block.upgrade_aquatic.kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в ламинарии",
-  "block.upgrade_aquatic.tongue_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в языковой ламинарии",
-  "block.upgrade_aquatic.thorny_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в колючей ламинарии",
-  "block.upgrade_aquatic.ochre_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в охристой ламинарии",
-  "block.upgrade_aquatic.polar_kelpy_cobblestone_vertical_slab": "Вертикальная плита из булыжника в полярной ламинарии",
-  "block.upgrade_aquatic.kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в ламинарии",
-  "block.upgrade_aquatic.tongue_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в языковой ламинарии",
-  "block.upgrade_aquatic.thorny_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в колючей ламинарии",
-  "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в охристой ламинарии",
-  "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в полярной ламинарии",
-  "block.upgrade_aquatic.coralstone_vertical_slab": "Вертикальная плита из коралло-камня",
-  "block.upgrade_aquatic.bubble_coralstone_vertical_slab": "Вертикальная плита из пузырчатого коралло-камня",
-  "block.upgrade_aquatic.horn_coralstone_vertical_slab": "Вертикальная плита из рогового коралло-камня",
-  "block.upgrade_aquatic.tube_coralstone_vertical_slab": "Вертикальная плита из трубчатого коралло-камня",
-  "block.upgrade_aquatic.brain_coralstone_vertical_slab": "Вертикальная плита из мозговитого коралло-камня",
-  "block.upgrade_aquatic.fire_coralstone_vertical_slab": "Вертикальная плита из огненного коралло-камня",		
-  "block.upgrade_aquatic.acan_coralstone_vertical_slab": "Вертикальная плита из аканового коралло-камня",
-  "block.upgrade_aquatic.finger_coralstone_vertical_slab": "Вертикальная плита из пальцевидного коралло-камня",
-  "block.upgrade_aquatic.star_coralstone_vertical_slab": "Вертикальная плита из звездовидного коралло-камня",
-  "block.upgrade_aquatic.moss_coralstone_vertical_slab": "Вертикальная плита из моховидного коралло-камня",
-  "block.upgrade_aquatic.petal_coralstone_vertical_slab": "Вертикальная плита из лепесткового коралло-камня",
-  "block.upgrade_aquatic.branch_coralstone_vertical_slab": "Вертикальная плита из ветвистого коралло-камня",
-  "block.upgrade_aquatic.rock_coralstone_vertical_slab": "Вертикальная плита из каменистого коралло-камня",
-  "block.upgrade_aquatic.pillow_coralstone_vertical_slab": "Вертикальная плита из подушечного коралло-камня",
-  "block.upgrade_aquatic.silk_coralstone_vertical_slab": "Вертикальная плита из шелковистого коралло-камня",
-  "block.upgrade_aquatic.chrome_coralstone_vertical_slab": "Вертикальная плита из хромового коралло-камня",
-  "block.upgrade_aquatic.prismarine_coralstone_vertical_slab": "Вертикальная плита из призмаринового коралло-камня",
-  "block.upgrade_aquatic.elder_prismarine_coralstone_vertical_slab": "Вертикальная плита из древнего призмаринового коралло-камня",
-  "block.upgrade_aquatic.dead_coralstone_vertical_slab": "Вертикальная плита из мертвого коралло-камня",
+  
+  "block.upgrade_aquatic.luminous_prismarine": "Светящийся призмарин",
+  "block.upgrade_aquatic.luminous_prismarine_slab": "Плита из светящегося призмарина",
+  "block.upgrade_aquatic.luminous_prismarine_stairs": "Ступеньки из светящегося призмарина",
+  "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Вертикальная плита из светящегося призмарина",
+  
+  "block.upgrade_aquatic.luminous_elder_prismarine": "Светящийся древний призмарин",
+  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Плита из светящегося древнего призмарина",
+  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Ступеньки из светящегося древнего призмарина",
+  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Вертикальная плита из светящегося древнего призмарина",
   
   "_comment": "Предметы",
 
@@ -426,12 +459,14 @@
 
   "item.upgrade_aquatic.prismarine_rod": "Призмариновый стержень",
   "item.upgrade_aquatic.thrasher_tooth": "Зуб острозуба",
+  "item.upgrade_aquatic.glowing_ink_sac": "Светящийся чернильный мешок",
   
   "item.upgrade_aquatic.nautilus_bucket": "Наутилус в ведре",
   "item.upgrade_aquatic.pike_bucket": "Щука в ведре",
   "item.upgrade_aquatic.lionfish_bucket": "Крылатка-зебра в ведре",
   "item.upgrade_aquatic.squid_bucket": "Спрут в ведре",
   "item.upgrade_aquatic.jellyfish_bucket": "Медуза в ведре",
+  "item.upgrade_aquatic.glow_squid_bucket": "Светящийся спрут в ведре",
 
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Яйцо призыва крестьянина-утопленника",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Яйцо призыва наутилуса",
@@ -442,6 +477,7 @@
   "item.upgrade_aquatic.flare_spawn_egg": "Яйцо призыва засвета",
   "item.upgrade_aquatic.goose_spawn_egg": "Яйцо призыва гуся",
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Яйцо призыва медузы",
+  "item.upgrade_aquatic.glow_squid_spawn_egg": "Яйцо призыва светящегося спрута",
 
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Вареная фиолетовая понтедерия",
   "item.upgrade_aquatic.boiled_blue_pickerelweed": "Вареная синяя понтедерия",
@@ -453,6 +489,7 @@
   "item.upgrade_aquatic.mulberry": "Шелковица",
   "item.upgrade_aquatic.mulberry_jam_bottle": "Шелковичный джем",
   "item.upgrade_aquatic.mulberry_bread": "Шелковичный хлеб",
+  "item.upgrade_aquatic.mulberry_pie": "Шелковичный пирог",
 
   "_comment": "Подсказки",
   
@@ -510,6 +547,7 @@
   "entity.upgrade_aquatic.ululu": "Улулу",
   "entity.upgrade_aquatic.sonar_wave": "Гидроволна",
   "entity.upgrade_aquatic.goose": "Гусь",
+  "entity.upgrade_aquatic.glow_squid": "Светящийся спрут",
 
   "entity.upgrade_aquatic.box_jellyfish": "Медуза",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Медуза кассиопея",
@@ -584,6 +622,9 @@
   "advancements.adventure.kill_great_thrasher.title": "Тут нужна лодка побольше",
   "advancements.adventure.kill_great_thrasher.description": "Убить великого острозуба",
   
+  "advancements.adventure.sleep_underwater.title": "Поспать с рыбками",
+  "advancements.adventure.sleep_underwater.description": "Воспользуйтесь спальником под водой",
+  
   "advancements.nether.sleepless_slave.title": "Бессонный раб",
   "advancements.nether.sleepless_slave.description": "Создайте засвета, поразив фантома бессонницей",
   
@@ -606,6 +647,17 @@
   "subtitles.upgrade_aquatic.thrasher.death": "Острозуб погибает",
   "subtitles.upgrade_aquatic.thrasher.thrash": "Острозуб вгрызается",
   "subtitles.upgrade_aquatic.thrasher.flop": "Острозуб плещется",
-  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Острозуб запускает гидроволну"
-
+  "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Острозуб запускает гидроволну",
+  
+  "subtitles.upgrade_aquatic.jellyfish.hurt": "Медуза получает урон",
+  "subtitles.upgrade_aquatic.jellyfish.ambient": "Медуза пульсирует",
+  "subtitles.upgrade_aquatic.jellyfish.death": "Медуза умерает",
+  "subtitles.upgrade_aquatic.jellyfish.harvest": "Медуза добывает",
+  "subtitles.upgrade_aquatic.jellyfish.cooldown_start": "Отсчёт медузы начался",
+  "subtitles.upgrade_aquatic.jellyfish.cooldown_end": "Отсчёт медузы закончился",
+  "subtitles.upgrade_aquatic.jellyfish.sting": "Медуза жалит",
+  "subtitles.upgrade_aquatic.jellyfish.ghost_vanish": "Призрак медузы испаряется",
+  
+  "subtitles.upgrade_aquatic.bucket.empty_jellyfish": "Медуза вылазит",
+  "subtitles.upgrade_aquatic.bucket.fill_jellyfish": "Медуза поймана"
 }

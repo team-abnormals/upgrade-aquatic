@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:dead_brain_coral",
-    "minecraft:dead_brain_coral_fan"
+    "minecraft:dead_bubble_coral",
+    "minecraft:dead_bubble_coral_fan"
   ]
 }

@@ -43,7 +43,7 @@ public class GlowSquidEntity extends SquidEntity implements IBucketableEntity {
 
 	@Override
 	protected void squirtInk() {
-		GlowingInkItem.createEffectCloud(Effects.NIGHT_VISION, this.world, this.getBoundingBox().expand(2.5F, 2.5F, 2.5F));
+		GlowingInkItem.createEffectCloud(new EffectInstance(Effects.NIGHT_VISION, 300, 1), this.world, this.getBoundingBox().expand(2.5F, 2.5F, 2.5F));
 		this.playSound(SoundEvents.ENTITY_SQUID_SQUIRT, this.getSoundVolume(), this.getSoundPitch());
 		Vector3d vector3d = this.func_207400_b(new Vector3d(0.0D, -1.0D, 0.0D)).add(this.getPosX(), this.getPosY(), this.getPosZ());
 
