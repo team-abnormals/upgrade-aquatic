@@ -1,9 +1,6 @@
 {
-  "_comment": "Blocks",
-
   "block.upgrade_aquatic.guardian_spine": "Guardian Spine",
   "block.upgrade_aquatic.elder_guardian_spine": "Elder Guardian Spine",
-
   "block.upgrade_aquatic.elder_eye": "Elder Eye",
 
   "block.upgrade_aquatic.dead_acan_coral": "Dead Acan Coral",
@@ -452,8 +449,6 @@
   "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Luminous Elder Prismarine Stairs",
   "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Luminous Elder Prismarine Vertical Slab",
   
-  "_comment2": "Items",
-  
   "item.upgrade_aquatic.driftwood_boat": "Driftwood Boat",
   "item.upgrade_aquatic.river_boat": "River Boat",
   
@@ -490,8 +485,6 @@
   "item.upgrade_aquatic.mulberry_jam_bottle": "Mulberry Jam Bottle",
   "item.upgrade_aquatic.mulberry_bread": "Mulberry Bread",
   "item.upgrade_aquatic.mulberry_pie": "Mulberry Pie",
-  
-  "_comment3": "Tooltips",
   
   "tooltip.upgrade_aquatic.amur_pike": "Amur Pike",  
   "tooltip.upgrade_aquatic.redfin_pike": "Redfin Pike",  
@@ -536,8 +529,6 @@
   "tooltip.upgrade_aquatic.purple_jelly_torch": "Purple Jelly Torch",
   "tooltip.upgrade_aquatic.white_jelly_torch": "White Jelly Torch",
   
-  "_comment4": "Entities",
-  
   "entity.upgrade_aquatic.nautilus": "Nautilus",
   "entity.upgrade_aquatic.pike": "Pike",
   "entity.upgrade_aquatic.lionfish": "Lionfish",
@@ -552,8 +543,6 @@
   "entity.upgrade_aquatic.box_jellyfish": "Box Jellyfish",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Cassiopea Jellyfish",
   "entity.upgrade_aquatic.immortal_jellyfish": "Immortal Jellyfish",
-  
-  "_comment5": "Potions and Effects",
   
   "effect.upgrade_aquatic.insomnia": "Insomnia",
   "item.minecraft.potion.effect.insomnia": "Potion of Insomnia",
@@ -603,16 +592,12 @@
   "item.minecraft.tipped_arrow.effect.vibing_strong": "Arrow of Vibing",
   "item.minecraft.tipped_arrow.effect.vibing_long": "Arrow of Vibing",
   
-  "_comment6": "Deaths",
-  
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Guardian Spine",
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Guardian Spine whilst trying to escape %2$s",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s was spiked to death by an Elder Guardian Spine",
   "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s was spiked to death by an Elder Guardian Spine whilst trying to escape %2$s",
   "death.attack.upgrade_aquatic.jellyfishSting": "%1$s was stung to death by %2$s",
-  
-  "_comment7": "Advancements",
-  
+
   "advancements.adventure.tooth_fairy.title": "Tooth Fairy",
   "advancements.adventure.tooth_fairy.description": "Collect the teeth of the Thrasher, an ancient horror that lurks deep in cold waters",
   
@@ -636,12 +621,7 @@
   
   "advancements.husbandry.collect_all_pike.title": "Pike World Tour",
   "advancements.husbandry.collect_all_pike.description": "Collect every variant of Pike in a bucket",
-  
-  "advancements.husbandry.pick_mulberries.title": "Low Hanging Fruit",
-  "advancements.husbandry.pick_mulberries.description": "Pick Mulberries from a River Tree",
-  
-  "_comment8": "Subtitles",
-  
+
   "subtitles.upgrade_aquatic.thrasher.hurt": "Thrasher hurts",
   "subtitles.upgrade_aquatic.thrasher.ambient": "Thrasher growls",
   "subtitles.upgrade_aquatic.thrasher.death": "Thrasher dies",
