@@ -29,9 +29,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class UAFeatures {
-	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, UpgradeAquatic.MODID);
+	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, UpgradeAquatic.MOD_ID);
 
 	public static final RegistryObject<Feature<NoFeatureConfig>> PRISMARINE_CORAL_SHELF = FEATURES.register("prismarine_coral_shelf", () -> new PrismarineCoralShelfFeature(NoFeatureConfig.field_236558_a_));
 	public static final RegistryObject<Feature<NoFeatureConfig>> PRISMARINE_CORAL_STALACTITE = FEATURES.register("prismarine_coral_stalactite", () -> new PrismarineStalactiteFeature(NoFeatureConfig.field_236558_a_));
@@ -129,7 +129,7 @@ public class UAFeatures {
 		}
 
 		private static <FC extends IFeatureConfig> void register(String name, ConfiguredFeature<FC, ?> configuredFeature) {
-			Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(UpgradeAquatic.MODID, name), configuredFeature);
+			Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, new ResourceLocation(UpgradeAquatic.MOD_ID, name), configuredFeature);
 		}
 	}
 }

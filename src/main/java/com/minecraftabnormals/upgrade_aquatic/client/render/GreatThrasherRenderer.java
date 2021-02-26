@@ -21,7 +21,7 @@ public class GreatThrasherRenderer extends MobRenderer<GreatThrasherEntity, Thra
 
 	@Override
 	public ResourceLocation getEntityTexture(GreatThrasherEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/thrasher/great_thrasher.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher.png");
 	}
 	
 	@Override

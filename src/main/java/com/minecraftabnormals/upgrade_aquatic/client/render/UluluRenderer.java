@@ -27,7 +27,7 @@ public class UluluRenderer extends MobRenderer<UluluEntity, UluluModel<UluluEnti
 
 	@Override
 	public ResourceLocation getEntityTexture(UluluEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/ululu/ululu_dry.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/ululu/ululu_dry.png");
 	}
 	
 	protected void preRenderCallback(UluluEntity entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {

@@ -21,7 +21,7 @@ public class LionfishRenderer extends MobRenderer<LionfishEntity, LionfishModel<
 	
 	@Override
 	public ResourceLocation getEntityTexture(LionfishEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/lionfish.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/lionfish.png");
 	}
 	
 	@Override

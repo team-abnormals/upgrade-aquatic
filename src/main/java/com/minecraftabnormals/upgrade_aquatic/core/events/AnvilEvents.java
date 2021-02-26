@@ -15,7 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class AnvilEvents {
 
 	@SubscribeEvent

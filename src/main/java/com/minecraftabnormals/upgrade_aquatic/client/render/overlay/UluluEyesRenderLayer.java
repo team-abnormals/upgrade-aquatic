@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.ResourceLocation;
 
 public class UluluEyesRenderLayer<T extends UluluEntity, M extends UluluModel<T>> extends LayerRenderer<T, M> {
-	private static final ResourceLocation EYES_LAYER = new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/ululu/ululu_emissive.png");
+	private static final ResourceLocation EYES_LAYER = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/ululu/ululu_emissive.png");
 
 	public UluluEyesRenderLayer(IEntityRenderer<T, M> renderer) {
 		super(renderer);

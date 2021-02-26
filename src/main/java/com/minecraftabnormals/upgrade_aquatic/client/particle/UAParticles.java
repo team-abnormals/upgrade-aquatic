@@ -15,7 +15,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class UAParticles {
-	public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, UpgradeAquatic.MODID);
+	public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, UpgradeAquatic.MOD_ID);
 	
 	public static final RegistryObject<BasicParticleType> PRISMARINE_SHOWER = createBasicParticleType("prismarine_shower", false);
 	public static final RegistryObject<BasicParticleType> ELDER_PRISMARINE_SHOWER = createBasicParticleType("elder_prismarine_shower", false);
@@ -43,7 +43,7 @@ public class UAParticles {
 		return particleType;
 	}
 	
-	@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+	@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 	public static class RegisterParticleFactories {
 		
 		@SubscribeEvent(priority = EventPriority.LOWEST)

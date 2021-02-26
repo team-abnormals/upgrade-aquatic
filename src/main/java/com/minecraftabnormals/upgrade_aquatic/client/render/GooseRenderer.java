@@ -19,7 +19,7 @@ public class GooseRenderer extends MobRenderer<GooseEntity, GooseModel<GooseEnti
 	
 	@Override
 	public ResourceLocation getEntityTexture(GooseEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/goose.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/goose.png");
 	}
 	
 	@Override

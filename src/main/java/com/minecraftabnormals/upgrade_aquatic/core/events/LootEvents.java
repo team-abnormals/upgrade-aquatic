@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.Random;
 import java.util.Set;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class LootEvents {
 	private static final Set<ResourceLocation> TOOTH_RUINS_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_UNDERWATER_RUIN_BIG);
 	private static final Set<ResourceLocation> TOOTH_TREASURE_INJECTIONS = Sets.newHashSet(LootTables.CHESTS_BURIED_TREASURE);
@@ -27,15 +27,15 @@ public class LootEvents {
 	@SubscribeEvent
 	public static void onInjectLoot(LootTableLoadEvent event) {
 		if (TOOTH_RUINS_INJECTIONS.contains(event.getName())) {
-			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(UpgradeAquatic.MODID, "injections/tooth_ruins")).weight(1).quality(0)).name("tooth_ruins").build();
+			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(UpgradeAquatic.MOD_ID, "injections/tooth_ruins")).weight(1).quality(0)).name("tooth_ruins").build();
 			event.getTable().addPool(pool);
 		}
 		if (TOOTH_TREASURE_INJECTIONS.contains(event.getName())) {
-			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(UpgradeAquatic.MODID, "injections/tooth_treasure")).weight(1).quality(0)).name("tooth_treasure").build();
+			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(UpgradeAquatic.MOD_ID, "injections/tooth_treasure")).weight(1).quality(0)).name("tooth_treasure").build();
 			event.getTable().addPool(pool);
 		}
 		if (PICKERELWEED_LOOT_INJECTIONS.contains(event.getName())) {
-			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(UpgradeAquatic.MODID, "injections/pickerelweed_structures")).weight(1).quality(0)).name("pickerelweed_structure").build();
+			LootPool pool = LootPool.builder().addEntry(TableLootEntry.builder(new ResourceLocation(UpgradeAquatic.MOD_ID, "injections/pickerelweed_structures")).weight(1).quality(0)).name("pickerelweed_structure").build();
 			event.getTable().addPool(pool);
 		}
 	}

@@ -36,7 +36,7 @@ public class GlowingPikeRenderLayer<T extends PikeEntity, M extends PikeModel<T>
 	}
 	
 	private ResourceLocation getPikeOverlayTexture(PikeEntity pike) {
-		return new ResourceLocation(UpgradeAquatic.MODID, String.format("textures/entity/pike/%s_glow.png", pike.getPikeType().name().toLowerCase()));
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s_glow.png", pike.getPikeType().name().toLowerCase()));
 	}
 	
 }

@@ -69,7 +69,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class EntityEvents {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)

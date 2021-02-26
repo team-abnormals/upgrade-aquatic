@@ -18,9 +18,9 @@ import java.util.stream.Stream;
  * @author Ocelot
  */
 public class GlowSquidSpriteUploader extends SpriteUploader {
-	public static final ResourceLocation ATLAS_LOCATION = new ResourceLocation(UpgradeAquatic.MODID, "textures/atlas/glow_squid.png");
-	public static final ResourceLocation SQUID_SPRITE = new ResourceLocation(UpgradeAquatic.MODID, "glow_squid");
-	public static final ResourceLocation GLOW_SPRITE = new ResourceLocation(UpgradeAquatic.MODID, "glow_squid_emissive");
+	public static final ResourceLocation ATLAS_LOCATION = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/atlas/glow_squid.png");
+	public static final ResourceLocation SQUID_SPRITE = new ResourceLocation(UpgradeAquatic.MOD_ID, "glow_squid");
+	public static final ResourceLocation GLOW_SPRITE = new ResourceLocation(UpgradeAquatic.MOD_ID, "glow_squid_emissive");
 
 	private static GlowSquidSpriteUploader uploader;
 

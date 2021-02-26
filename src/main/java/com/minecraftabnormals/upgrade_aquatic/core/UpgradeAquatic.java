@@ -27,16 +27,16 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@Mod(value = UpgradeAquatic.MODID)
+@Mod(value = UpgradeAquatic.MOD_ID)
 public class UpgradeAquatic {
 	public static UpgradeAquatic instance;
 	public static final String NETWORK_PROTOCOL = "1";
-	public static final String MODID = "upgrade_aquatic";
-	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MODID, helper -> {
+	public static final String MOD_ID = "upgrade_aquatic";
+	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> {
 		helper.putSubHelper(ForgeRegistries.ITEMS, new UAItemSubRegistryHelper(helper));
 	});
 
-	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(UpgradeAquatic.MODID, "net"))
+	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(UpgradeAquatic.MOD_ID, "net"))
 			.networkProtocolVersion(() -> NETWORK_PROTOCOL)
 			.clientAcceptedVersions(NETWORK_PROTOCOL::equals)
 			.serverAcceptedVersions(NETWORK_PROTOCOL::equals)

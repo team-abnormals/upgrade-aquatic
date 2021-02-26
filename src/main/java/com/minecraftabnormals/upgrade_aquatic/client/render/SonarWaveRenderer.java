@@ -36,6 +36,6 @@ public class SonarWaveRenderer extends EntityRenderer<SonarWaveEntity> {
 
 	@Override
 	public ResourceLocation getEntityTexture(SonarWaveEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/thrasher/sonar.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/sonar.png");
 	}
 }

@@ -28,12 +28,12 @@ public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<Cassio
 
 	@Override
 	public ResourceLocation getEntityTexture(CassiopeaJellyfishEntity jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
 	
 	@Override
 	public ResourceLocation getOverlayTexture(CassiopeaJellyfishEntity jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
 	}
 	
 	@Override

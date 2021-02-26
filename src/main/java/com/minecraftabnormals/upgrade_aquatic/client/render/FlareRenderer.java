@@ -22,7 +22,7 @@ public class FlareRenderer extends MobRenderer<FlareEntity, FlareModel<FlareEnti
 
 	@Override
 	public ResourceLocation getEntityTexture(FlareEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/flare/flare.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/flare/flare.png");
 	}
 	
 	@Override

@@ -63,7 +63,7 @@ public class JellyfishBucketItem extends BucketItem {
 		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 			CompoundNBT jellyfishTag = compoundnbt.getCompound("JellyfishTag");
 			String entityId = jellyfishTag.getString("EntityId");
-			EntityType<?> jellyfishType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MODID + ":" + entityId));
+			EntityType<?> jellyfishType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MOD_ID + ":" + entityId));
 			Entity entity = pos != null ? jellyfishType.spawn((ServerWorld)world, stack, null, pos, SpawnReason.BUCKET, true, false) : jellyfishType.create(world);
 			AbstractJellyfishEntity jellyfish = entity instanceof AbstractJellyfishEntity ? (AbstractJellyfishEntity) entity : null;
 			

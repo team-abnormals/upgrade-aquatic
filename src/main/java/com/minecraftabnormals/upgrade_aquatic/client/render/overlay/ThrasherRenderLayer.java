@@ -19,8 +19,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ThrasherRenderLayer<T extends ThrasherEntity, M extends ThrasherModel<T>> extends LayerRenderer<T, M> {
-	private static final ResourceLocation THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/thrasher/thrasher_emissive.png");
-	private static final ResourceLocation GREAT_THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/thrasher/great_thrasher_emissive.png");
+	private static final ResourceLocation THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/thrasher_emissive.png");
+	private static final ResourceLocation GREAT_THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher_emissive.png");
 	
 	public ThrasherRenderLayer(IEntityRenderer<T, M> renderer) {
 		super(renderer);

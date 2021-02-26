@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class FlareEyesRenderLayer<T extends FlareEntity, M extends FlareModel<T>> extends LayerRenderer<T, M> {	
-	private static final ResourceLocation EYES_LAYER = new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/flare/flare_eyes.png");
+	private static final ResourceLocation EYES_LAYER = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/flare/flare_eyes.png");
 	
 	public FlareEyesRenderLayer(IEntityRenderer<T, M> renderer) {
 		super(renderer);

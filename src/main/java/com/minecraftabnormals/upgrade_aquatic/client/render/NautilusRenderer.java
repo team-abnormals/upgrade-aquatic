@@ -50,7 +50,7 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 				}
 			}
 		}
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
 	}
 	
 	@Override

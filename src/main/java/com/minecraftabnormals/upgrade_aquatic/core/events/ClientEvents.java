@@ -14,7 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT)
 public class ClientEvents {
 	
 	@SubscribeEvent

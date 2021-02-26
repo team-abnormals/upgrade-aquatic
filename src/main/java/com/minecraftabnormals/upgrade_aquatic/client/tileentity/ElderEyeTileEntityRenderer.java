@@ -20,8 +20,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ElderEyeTileEntityRenderer extends TileEntityRenderer<ElderEyeTileEntity> {
-	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(UpgradeAquatic.MODID + ":textures/tile/guardian_eye.png");
-	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(UpgradeAquatic.MODID + ":textures/tile/guardian_eye_dim.png");
+	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(UpgradeAquatic.MOD_ID + ":textures/tile/guardian_eye.png");
+	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(UpgradeAquatic.MOD_ID + ":textures/tile/guardian_eye_dim.png");
 	private ElderEyeModel model;
 	
 	public ElderEyeTileEntityRenderer(TileEntityRendererDispatcher renderDispatcher) {

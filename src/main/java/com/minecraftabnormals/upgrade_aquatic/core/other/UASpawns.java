@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MODID)
+@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class UASpawns {
 
 	public static void registerSpawns() {

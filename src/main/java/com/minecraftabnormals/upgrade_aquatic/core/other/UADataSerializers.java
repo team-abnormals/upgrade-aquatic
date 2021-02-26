@@ -9,7 +9,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public final class UADataSerializers {
-	public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(ForgeRegistries.DATA_SERIALIZERS, UpgradeAquatic.MODID);
+	public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(ForgeRegistries.DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
 
 	public static final IDataSerializer<PikeType> PIKE_TYPE = new IDataSerializer<PikeType>() {
 		public void write(PacketBuffer buf, PikeType value) {
