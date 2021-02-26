@@ -443,8 +443,8 @@ public class UABlocks {
 	public static final RegistryObject<Block> DRIFTWOOD_DOOR 			= HELPER.createBlock("driftwood_door", () -> new WoodDoorBlock(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> DRIFTWOOD_SLAB 			= HELPER.createBlock("driftwood_slab", () -> new WoodSlabBlock(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_STAIRS 			= HELPER.createBlock("driftwood_stairs", () -> new WoodStairsBlock(DRIFTWOOD_PLANKS.get().getDefaultState(), UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_FENCE 			= HELPER.createBlock("driftwood_fence", () -> new WoodFenceBlock(UAProperties.DRIFTWOOD), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> DRIFTWOOD_FENCE_GATE 		= HELPER.createBlock("driftwood_fence_gate", () -> new WoodFenceGateBlock(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
+	public static final RegistryObject<Block> DRIFTWOOD_FENCE 			= HELPER.createFuelBlock("driftwood_fence", () -> new WoodFenceBlock(UAProperties.DRIFTWOOD), 300, ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> DRIFTWOOD_FENCE_GATE 		= HELPER.createFuelBlock("driftwood_fence_gate", () -> new WoodFenceGateBlock(UAProperties.DRIFTWOOD),  300,ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> DRIFTWOOD_PRESSURE_PLATE 	= HELPER.createBlock("driftwood_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> DRIFTWOOD_BUTTON 			= HELPER.createBlock("driftwood_button", () -> new AbnormalsWoodButtonBlock(Properties.from(UABlocks.DRIFTWOOD.get()).doesNotBlockMovement()), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> DRIFTWOOD_TRAPDOOR 		= HELPER.createBlock("driftwood_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.DRIFTWOOD), ItemGroup.REDSTONE);
@@ -452,9 +452,11 @@ public class UABlocks {
 	public static final RegistryObject<Block> DRIFTWOOD_VERTICAL_SLAB 	= HELPER.createCompatFuelBlock("quark", "driftwood_vertical_slab", () -> new VerticalSlabBlock(UAProperties.DRIFTWOOD), 150, ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_BOOKSHELF 		= HELPER.createCompatFuelBlock("quark", "driftwood_bookshelf", () -> new BookshelfBlock(Properties.from(Blocks.BOOKSHELF)), 300, ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_LADDER 			= HELPER.createCompatFuelBlock("quark", "driftwood_ladder", () -> new AbnormalsLadderBlock(Properties.from(Blocks.LADDER).harvestTool(ToolType.AXE)), 300, ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_POST 	= HELPER.createCompatBlock("quark", "stripped_driftwood_post", () -> new WoodPostBlock(UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_POST 			= HELPER.createCompatBlock("quark", "driftwood_post", () -> new WoodPostBlock(STRIPPED_DRIFTWOOD_POST, UAProperties.DRIFTWOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_BEEHIVE			= HELPER.createCompatBlock("buzzier_bees", "driftwood_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> DRIFTWOOD_SIGN = HELPER.createSignBlock("driftwood", MaterialColor.GRAY);
-	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> DRIFTWOOD_CHEST 	= HELPER.createCompatChestBlocks("driftwood", MaterialColor.GRAY);
+	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> DRIFTWOOD_CHEST 	= HELPER.createCompatChestBlocks("quark" ,"driftwood", MaterialColor.GRAY);
 
 	public static final RegistryObject<Block> STRIPPED_RIVER_LOG 	= HELPER.createBlock("stripped_river_log", () -> new StrippedLogBlock(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> STRIPPED_RIVER_WOOD 	= HELPER.createBlock("stripped_river_wood", () -> new StrippedWoodBlock(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
@@ -467,8 +469,8 @@ public class UABlocks {
 	public static final RegistryObject<Block> RIVER_DOOR 			= HELPER.createBlock("river_door", () -> new WoodDoorBlock(UAProperties.RIVER_WOOD), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> RIVER_SLAB 			= HELPER.createBlock("river_slab", () -> new WoodSlabBlock(UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_STAIRS 			= HELPER.createBlock("river_stairs", () -> new WoodStairsBlock(RIVER_PLANKS.get().getDefaultState(), UAProperties.RIVER_WOOD), ItemGroup.BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_FENCE 			= HELPER.createBlock("river_fence", () -> new WoodFenceBlock(UAProperties.RIVER_WOOD), ItemGroup.DECORATIONS);
-	public static final RegistryObject<Block> RIVER_FENCE_GATE 		= HELPER.createBlock("river_fence_gate", () -> new WoodFenceGateBlock(UAProperties.RIVER_WOOD), ItemGroup.REDSTONE);
+	public static final RegistryObject<Block> RIVER_FENCE 			= HELPER.createFuelBlock("river_fence", () -> new WoodFenceBlock(UAProperties.RIVER_WOOD), 300, ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> RIVER_FENCE_GATE 		= HELPER.createFuelBlock("river_fence_gate", () -> new WoodFenceGateBlock(UAProperties.RIVER_WOOD), 300, ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> RIVER_PRESSURE_PLATE 	= HELPER.createBlock("river_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.RIVER_WOOD), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> RIVER_BUTTON 			= HELPER.createBlock("river_button", () -> new AbnormalsWoodButtonBlock(Properties.from(UABlocks.RIVER_WOOD.get()).doesNotBlockMovement()), ItemGroup.REDSTONE);
 	public static final RegistryObject<Block> RIVER_TRAPDOOR 		= HELPER.createBlock("river_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.RIVER_WOOD), ItemGroup.REDSTONE);
@@ -477,9 +479,12 @@ public class UABlocks {
 	public static final RegistryObject<Block> RIVER_VERTICAL_SLAB 	= HELPER.createCompatFuelBlock("quark", "river_vertical_slab", () -> new VerticalSlabBlock(UAProperties.RIVER_WOOD), 150, ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_BOOKSHELF 		= HELPER.createCompatFuelBlock("quark", "river_bookshelf", () -> new BookshelfBlock(Properties.from(Blocks.BOOKSHELF)), 300, ItemGroup.BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_LADDER 			= HELPER.createCompatFuelBlock("quark", "river_ladder", () -> new AbnormalsLadderBlock(Properties.from(Blocks.LADDER).harvestTool(ToolType.AXE)), 300, ItemGroup.DECORATIONS);
+	public static final RegistryObject<Block> STRIPPED_RIVER_POST 	= HELPER.createCompatFuelBlock("quark", "stripped_river_post", () -> new WoodPostBlock(UAProperties.RIVER_WOOD), 300, ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_POST 			= HELPER.createCompatFuelBlock("quark", "river_post", () -> new WoodPostBlock(STRIPPED_RIVER_POST, UAProperties.RIVER_WOOD), 300, ItemGroup.BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_HEDGE 			= HELPER.createCompatFuelBlock("quark", "river_hedge", () -> new HedgeBlock(UAProperties.RIVER_WOOD), 300, ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> RIVER_BEEHIVE			= HELPER.createCompatBlock("buzzier_bees", "river_beehive", () -> new AbnormalsBeehiveBlock(Properties.from(Blocks.BEEHIVE)), ItemGroup.DECORATIONS);
 	public static final Pair<RegistryObject<AbnormalsStandingSignBlock>, RegistryObject<AbnormalsWallSignBlock>> RIVER_SIGN = HELPER.createSignBlock("river", MaterialColor.GRAY);
-	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> RIVER_CHEST 	= HELPER.createCompatChestBlocks("river", MaterialColor.GRAY);
+	public static final Pair<RegistryObject<AbnormalsChestBlock>, RegistryObject<AbnormalsTrappedChestBlock>> RIVER_CHEST 	= HELPER.createCompatChestBlocks("quark" ,"river", MaterialColor.GRAY);
 
 	public static final RegistryObject<Block> BEACHGRASS 						= HELPER.createBlock("beachgrass", () -> new BeachgrassBlock(Properties.from(Blocks.GRASS).harvestTool(ToolType.HOE)), ItemGroup.DECORATIONS);
 	public static final RegistryObject<Block> TALL_BEACHGRASS 					= HELPER.createBlock("tall_beachgrass", () -> new TallBeachgrassBlock(Properties.from(Blocks.GRASS).harvestTool(ToolType.HOE)), ItemGroup.DECORATIONS);

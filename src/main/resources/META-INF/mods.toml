@@ -31,6 +31,6 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
 [[dependencies.upgrade_aquatic]]
     modId = "abnormals_core"
     mandatory = true
-    versionRange = "[3.0.6,)"
+    versionRange = "[3.1.0,)"
     ordering = "AFTER"
     side = "BOTH"
