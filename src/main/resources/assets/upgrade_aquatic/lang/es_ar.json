@@ -1,9 +1,6 @@
 {
-  "_comment": "Bloques",
-
   "block.upgrade_aquatic.guardian_spine": "Espina de guardián",
   "block.upgrade_aquatic.elder_guardian_spine": "Espina de guardián mayor",
-
   "block.upgrade_aquatic.elder_eye": "Ojo de guardián mayor",
   
   "block.upgrade_aquatic.dead_acan_coral": "Coral de acan muerto",
@@ -273,11 +270,11 @@
   "block.upgrade_aquatic.tooth_brick_wall": "Pared de ladrillos de dientes",
   "block.upgrade_aquatic.tooth_brick_vertical_slab": "Baldosa vertical de ladrillos de dientes",
   "block.upgrade_aquatic.chiseled_tooth_bricks": "Ladrillos de dientes cincelados",
-  "block.upgrade_aquatic.tooth_tiles": "Azulejos de dientes",
-  "block.upgrade_aquatic.tooth_slab": "Baldosa de azulejos de dientes",
-  "block.upgrade_aquatic.tooth_stairs": "Escaleras de azulejos de dientes",
-  "block.upgrade_aquatic.tooth_wall": "Pared de azulejos de dientes",
-  "block.upgrade_aquatic.tooth_vertical_slab": "Baldosa vertical de azulejos de dientes",
+  "block.upgrade_aquatic.tooth_tiles": "Losetas de dientes",
+  "block.upgrade_aquatic.tooth_slab": "Baldosa de losetas de dientes",
+  "block.upgrade_aquatic.tooth_stairs": "Escaleras de losetas de dientes",
+  "block.upgrade_aquatic.tooth_wall": "Pared de losetas de dientes",
+  "block.upgrade_aquatic.tooth_vertical_slab": "Baldosa vertical de losetas de dientes",
   "block.upgrade_aquatic.tooth_door": "Puerta de dientes",
   "block.upgrade_aquatic.tooth_trapdoor": "Escotilla de dientes",
   "block.upgrade_aquatic.tooth_lantern": "Farol de dientes",
@@ -399,6 +396,8 @@
   "block.upgrade_aquatic.driftwood_wall_sign": "Cartel de deriva en pared",
   "block.upgrade_aquatic.driftwood_chest": "Cofre de deriva",
   "block.upgrade_aquatic.driftwood_trapped_chest": "Cofre con trampa de deriva",
+  "block.upgrade_aquatic.driftwood_post": "Poste de deriva",
+  "block.upgrade_aquatic.stripped_driftwood_post": "Poste de deriva sin corteza",
   "block.upgrade_aquatic.driftwood_beehive": "Apiario de deriva",
   
   "block.upgrade_aquatic.river_leaves": "Hojas ribereñas",
@@ -425,6 +424,9 @@
   "block.upgrade_aquatic.river_wall_sign": "Cartel ribereño en pared",
   "block.upgrade_aquatic.river_chest": "Cofre ribereño",
   "block.upgrade_aquatic.river_trapped_chest": "Cofre con trampa ribereño",
+  "block.upgrade_aquatic.river_post": "Poste ribereño",
+  "block.upgrade_aquatic.stripped_river_post": "Poste ribereño sin corteza",
+  "block.upgrade_aquatic.river_hedge": "Seto ribereño",
   "block.upgrade_aquatic.river_beehive": "Apiario ribereño",
   
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
@@ -451,9 +453,7 @@
   "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Baldosa de prismarina mayor luminosa",
   "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Escaleras de prismarina mayor luminosa",
   "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Baldosa vertical de prismarina mayor luminosa",
-  
-  "_comment2": "Objetos",
-  
+
   "item.upgrade_aquatic.driftwood_boat": "Bote de deriva",
   "item.upgrade_aquatic.river_boat": "Bote ribereño",
   
@@ -490,9 +490,7 @@
   "item.upgrade_aquatic.mulberry_jam_bottle": "Botella de mermelada de moras",
   "item.upgrade_aquatic.mulberry_bread": "Pan de moras",
   "item.upgrade_aquatic.mulberry_pie": "Tarta de moras",
-  
-  "_comment3": "Descripciones",
-  
+
   "tooltip.upgrade_aquatic.amur_pike": "Lucio del pacífico",  
   "tooltip.upgrade_aquatic.redfin_pike": "Lucio de aletas rojas",  
   "tooltip.upgrade_aquatic.brown_northern_pike": "Lucio boreal marrón",  
@@ -535,9 +533,7 @@
   "tooltip.upgrade_aquatic.pink_jelly_torch": "Antorcha gelatinosa rosa",
   "tooltip.upgrade_aquatic.purple_jelly_torch": "Antorcha gelatinosa violeta",
   "tooltip.upgrade_aquatic.white_jelly_torch": "Antorcha gelatinosa blanca",
-  
-  "_comment4": "Entidades",
-  
+
   "entity.upgrade_aquatic.nautilus": "Nautilo",
   "entity.upgrade_aquatic.pike": "Lucio",
   "entity.upgrade_aquatic.lionfish": "Pez león",
@@ -552,9 +548,7 @@
   "entity.upgrade_aquatic.box_jellyfish": "Medusa de caja",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Medusa invertida",
   "entity.upgrade_aquatic.immortal_jellyfish": "Medusa inmortal",
-  
-  "_comment5": "Pociones y efectos",
-  
+
   "effect.upgrade_aquatic.insomnia": "Insomnio",
   "item.minecraft.potion.effect.insomnia": "Poción de insomnio",
   "item.minecraft.potion.effect.insomnia_strong": "Poción de insomnio",
@@ -602,17 +596,13 @@
   "item.minecraft.tipped_arrow.effect.vibing": "Flecha de ánimo",
   "item.minecraft.tipped_arrow.effect.vibing_strong": "Flecha de ánimo",
   "item.minecraft.tipped_arrow.effect.vibing_long": "Flecha de ánimo",
-  
-  "_comment6": "Muertes",
-  
+
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s fue atravesado/a por una espina de guardián",
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s fue atravesado/a por una espina de guardián tratando de escapar de %2$s",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s fue atravesado/a por una espina de guardián mayor",
   "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s fue atravesado/a por una espina de guardián mayor tratando de escapar de %2$s",
   "death.attack.upgrade_aquatic.jellyfishSting": "%1$s fue picado/a hasta la muerte por %2$s",
 
-  "_comment7": "Progresos",
-  
   "advancements.adventure.tooth_fairy.title": "Ratón Pérez",
   "advancements.adventure.tooth_fairy.description": "Conseguí el diente de un triturador, una criatura ancestral que acecha en lo profundo de las aguas más frías",
   
@@ -635,12 +625,7 @@
   "advancements.husbandry.eat_pickerelweed.description": "Comé una espiga de agua hervida para recuperar burbujas de agua",
   
   "advancements.husbandry.collect_all_pike.title": "Gira mundial de lucios",
-  "advancements.husbandry.collect_all_pike.description": "Conseguí todas las variedades de lucios en baldes",
-
-  "advancements.husbandry.pick_mulberries.title": "Frutas maduras",
-  "advancements.husbandry.pick_mulberries.description": "Recogé moras de un árbol ribereño",
-  
-  "_comment8": "Subtítulos",
+  "advancements.husbandry.collect_all_pike.description": "Capturá en baldes todas las variedades de lucios",
 
   "subtitles.upgrade_aquatic.thrasher.hurt": "Triturador herido",
   "subtitles.upgrade_aquatic.thrasher.ambient": "Gruñido de triturador",
