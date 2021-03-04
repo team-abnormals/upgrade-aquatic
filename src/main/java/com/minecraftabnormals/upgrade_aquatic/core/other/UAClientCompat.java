@@ -172,9 +172,7 @@ public class UAClientCompat {
 		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
 		ItemColors itemColors = Minecraft.getInstance().getItemColors();
 
-		List<RegistryObject<Block>> foliageColors = Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE, UABlocks.MULBERRY_VINE);
-
-		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), foliageColors);
-		DataUtil.registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), foliageColors);
+		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE, UABlocks.MULBERRY_VINE));
+		DataUtil.registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE));
 	}
 }
