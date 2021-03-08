@@ -1,8 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render.gui;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
+import com.minecraftabnormals.upgrade_aquatic.core.UAConfig;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.minecraftabnormals.upgrade_aquatic.core.config.Config;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -41,7 +41,7 @@ public class RenderOverlays {
 			ClientPlayerEntity player = MC.player;
 			StatisticsManager statisticsManager = player.getStats();
 			int sleepTime = statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
-			int configuredTime = Config.CLIENT.daysTillRenderInsomniaOverlay.get();
+			int configuredTime = UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get();
 			float opacity = 0;
 			if (sleepTime == 24000 * configuredTime) {
 				opacity = 0.25F;
@@ -58,7 +58,7 @@ public class RenderOverlays {
 			} else if (sleepTime < 24000 * configuredTime) {
 				opacity = 0F;
 			}
-			if (MC.gameSettings.getPointOfView() == PointOfView.FIRST_PERSON && Config.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getEntityWorld().getDimensionKey() == World.OVERWORLD) {
+			if (MC.gameSettings.getPointOfView() == PointOfView.FIRST_PERSON && UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getEntityWorld().getDimensionKey() == World.OVERWORLD) {
 				MatrixStack stack = event.getMatrixStack();
 				
 				stack.push();
@@ -70,9 +70,9 @@ public class RenderOverlays {
 				Tessellator tessellator = Tessellator.getInstance();
 				BufferBuilder bufferbuilder = tessellator.getBuffer();
 				bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-				bufferbuilder.pos(0.0D, (double) scaledHeight, -90.0D).tex(0.0F, 1.0F).endVertex();
-				bufferbuilder.pos((double) scaledWidth, (double) scaledHeight, -90.0D).tex(1.0F, 1.0F).endVertex();
-				bufferbuilder.pos((double) scaledWidth, 0.0D, -90.0D).tex(1.0F, 0.0F).endVertex();
+				bufferbuilder.pos(0.0D, scaledHeight, -90.0D).tex(0.0F, 1.0F).endVertex();
+				bufferbuilder.pos(scaledWidth, scaledHeight, -90.0D).tex(1.0F, 1.0F).endVertex();
+				bufferbuilder.pos(scaledWidth, 0.0D, -90.0D).tex(1.0F, 0.0F).endVertex();
 				bufferbuilder.pos(0.0D, 0.0D, -90.0D).tex(0.0F, 0.0F).endVertex();
 				tessellator.draw();
 				stack.pop();

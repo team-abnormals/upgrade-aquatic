@@ -53,12 +53,12 @@ public class UAProperties {
 		return AbstractBlock.Properties.create(Material.ROCK, color).hardnessAndResistance(1.5F, 6.0F).setLightLevel((unknown) -> (6)).sound(SoundType.GLASS);
 	}
 
-	public static final AbstractBlock.Properties createSearocket(boolean pink) {
+	public static AbstractBlock.Properties createSearocket(boolean pink) {
 		MaterialColor color = pink ? MaterialColor.PINK : MaterialColor.WHITE_TERRACOTTA;
 		return AbstractBlock.Properties.create(Material.PLANTS, color).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 	}
 
-	public static final AbstractBlock.Properties createPickerelweedBlock(boolean isBoiled) {
+	public static AbstractBlock.Properties createPickerelweedBlock(boolean isBoiled) {
 		return isBoiled ? AbstractBlock.Properties.create(Material.PLANTS, MaterialColor.FOLIAGE).hardnessAndResistance(0.5F, 5).notSolid().sound(SoundType.PLANT).harvestTool(ToolType.HOE) : AbstractBlock.Properties.create(Material.PLANTS, MaterialColor.GRASS).notSolid().hardnessAndResistance(0.5F, 5).sound(SoundType.WET_GRASS).harvestTool(ToolType.HOE);
 	}
 

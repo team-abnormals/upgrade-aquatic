@@ -4,8 +4,6 @@ import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
 import com.minecraftabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
-import com.minecraftabnormals.upgrade_aquatic.core.config.Config;
-import com.minecraftabnormals.upgrade_aquatic.core.config.ConfigHelper;
 import com.minecraftabnormals.upgrade_aquatic.core.other.*;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.*;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
@@ -60,15 +58,8 @@ public class UpgradeAquatic {
 			GlowSquidSpriteUploader.init(modEventBus);
 		});
 
-		modEventBus.addListener((ModConfig.ModConfigEvent event) -> {
-			final ModConfig config = event.getConfig();
-			if (config.getSpec() == Config.CLIENTSPEC) {
-				ConfigHelper.updateClientConfig(config);
-			}
-		});
-
-		ModLoadingContext modLoadingContext = ModLoadingContext.get();
-		modLoadingContext.registerConfig(ModConfig.Type.CLIENT, Config.CLIENTSPEC);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UAConfig.COMMON_SPEC);
+		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, UAConfig.CLIENT_SPEC);
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {
