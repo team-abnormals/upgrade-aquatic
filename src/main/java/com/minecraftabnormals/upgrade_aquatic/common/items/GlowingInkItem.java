@@ -42,7 +42,7 @@ public class GlowingInkItem extends Item {
 			world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, livingCoral.getDefaultState()));
 			world.getPendingBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
 			world.playSound(context.getPlayer(), pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			if (world.isRemote()) squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
+			if (!world.isRemote()) squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
 			if (context.getPlayer() != null && !context.getPlayer().abilities.isCreativeMode)
 				context.getItem().shrink(1);
 			return ActionResultType.SUCCESS;

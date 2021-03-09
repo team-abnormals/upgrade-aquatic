@@ -111,7 +111,7 @@ public class EntityEvents {
 					IGlowable te = (IGlowable) world.getTileEntity(pos);
 					if (te != null && te.setGlowing(true)) {
 						if (!player.abilities.isCreativeMode) stack.shrink(1);
-						if (world.isRemote()) GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
+						if (!world.isRemote()) GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
 						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						event.setCanceled(true);
 						event.setCancellationResult(ActionResultType.SUCCESS);
@@ -124,7 +124,7 @@ public class EntityEvents {
 					IGlowable te = (IGlowable) world.getTileEntity(pos);
 					if (te != null && te.setGlowing(false)) {
 						if (!player.abilities.isCreativeMode) stack.shrink(1);
-						if (world.isRemote()) GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, pos);
+						if (!world.isRemote()) GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, pos);
 						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						event.setCanceled(true);
 						event.setCancellationResult(ActionResultType.SUCCESS);
