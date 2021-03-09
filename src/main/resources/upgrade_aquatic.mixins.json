@@ -5,12 +5,14 @@
   "minVersion": "0.8",
   "refmap": "upgrade_aquatic.refmap.json",
   "mixins": [
+    "AbnormalsSignTileEntityMixin",
     "BubbleColumnMixin",
     "LivingEntityMixin",
     "SignTileEntityMixin",
     "SquidEntityMixin"
   ],
   "client": [
+    "AbnormalsSignTileEntityRendererMixin",
     "ClientPlayerEntityMixin",
     "DrownedModelMixin",
     "DrownedRendererMixin",
