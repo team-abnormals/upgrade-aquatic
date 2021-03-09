@@ -50,16 +50,16 @@ public class UASpawns {
 		RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, biome);
 
 		if (event.getCategory() == Biome.Category.OCEAN) {
-			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.GLOW_SQUID.get(), UAConfig.COMMON.glowSquidSpawnWeight.get(), 1, 1));
+			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.GLOW_SQUID.get(), UAConfig.COMMON.glowSquidWeight.get(), 1, 1));
 
 			if (BiomeDictionary.hasType(key, BiomeDictionary.Type.COLD)) {
-				spawns.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(UAEntities.THRASHER.get(), UAConfig.COMMON.thrasherSpawnWeight.get(), 1, 2));
+				spawns.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(UAEntities.THRASHER.get(), UAConfig.COMMON.thrasherWeight.get(), 1, 2));
 			} else {
-				spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.NAUTILUS.get(), UAConfig.COMMON.nautilusSpawnWeight.get(), 1, 4));
+				spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.NAUTILUS.get(), UAConfig.COMMON.nautilusWeight.get(), 1, 4));
 			}
 
 			if (BiomeDictionary.hasType(key, BiomeDictionary.Type.HOT)) {
-				spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.LIONFISH.get(), UAConfig.COMMON.lionfishSpawnWeight.get(), 1, 1));
+				spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.LIONFISH.get(), UAConfig.COMMON.lionfishWeight.get(), 1, 1));
 			}
 
 //			if (isWarmOcean(biome) || isLukewarmOcean(biome)) {
@@ -72,13 +72,13 @@ public class UASpawns {
 		}
 
 		if (event.getCategory() == Biome.Category.RIVER) {
-			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeSpawnWeight.get(), 1, 2));
+			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeWeight.get(), 1, 2));
 		}
 
 		if (event.getCategory() == Biome.Category.SWAMP) {
-			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeSwampSpawnWeight.get(), 1, 2));
-			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SQUID, UAConfig.COMMON.squidSwampSpawnWeight.get(), 1, 2));
-			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(EntityType.SALMON, UAConfig.COMMON.salmonSwampSpawnWeight.get(), 1, 5));
+			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeSwampWeight.get(), 1, 2));
+			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SQUID, UAConfig.COMMON.squidSwampWeight.get(), 1, 2));
+			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(EntityType.SALMON, UAConfig.COMMON.salmonSwampWeight.get(), 1, 5));
 		}
 	}
 

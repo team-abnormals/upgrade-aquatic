@@ -7,35 +7,51 @@ import org.apache.commons.lang3.tuple.Pair;
 public class UAConfig {
 
 	public static class Common {
-		public final ConfigValue<Integer> glowSquidSpawnWeight;
-		public final ConfigValue<Integer> thrasherSpawnWeight;
-		public final ConfigValue<Integer> nautilusSpawnWeight;
-		public final ConfigValue<Integer> lionfishSpawnWeight;
-		public final ConfigValue<Integer> pikeSpawnWeight;
-
-		public final ConfigValue<Integer> pikeSwampSpawnWeight;
-		public final ConfigValue<Integer> squidSwampSpawnWeight;
-		public final ConfigValue<Integer> salmonSwampSpawnWeight;
-
 		public final ConfigValue<Integer> deepOceanMobMaxHeight;
+
+		public final ConfigValue<Integer> glowSquidWeight;
+		public final ConfigValue<Integer> thrasherWeight;
+		public final ConfigValue<Integer> nautilusWeight;
+		public final ConfigValue<Integer> lionfishWeight;
+		public final ConfigValue<Integer> pikeWeight;
+		public final ConfigValue<Integer> pikeSwampWeight;
+		public final ConfigValue<Integer> squidSwampWeight;
+		public final ConfigValue<Integer> salmonSwampWeight;
+
+		public final ConfigValue<Integer> beachgrassFrequency;
+		public final ConfigValue<Integer> searocketFrequency;
+		public final ConfigValue<Integer> pickerelweedFrequency;
+		public final ConfigValue<Integer> pickerelweedExtraFrequency;
+		public final ConfigValue<Integer> floweringRushFrequency;
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			builder.comment("Upgrade Aquatic common configuration").push("common");
 			builder.push("mobs");
 
-			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("deepOceanMobMaxHeight", 30, 0, 255);
+			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("Deep ocean mob max height", 30, 0, 255);
 
 			builder.push("spawns");
 
-			this.glowSquidSpawnWeight = builder.comment("Glow Squid spawn weight in oceans").define("glowSquidSpawnWeight", 67);
-			this.thrasherSpawnWeight = builder.comment("Thrasher spawn weight in cold oceans").define("thrasherSpawnWeight", 90);
-			this.nautilusSpawnWeight = builder.comment("Nautilus spawn weight in warm oceans").define("nautilusSpawnWeight", 51);
-			this.lionfishSpawnWeight = builder.comment("Lionfish spawn weight in coral reefs").define("lionfishSpawnWeight", 15);
-			this.pikeSpawnWeight = builder.comment("Pike spawn weight in rivers").define("pikeSpawnWeight", 11);
+			this.glowSquidWeight = builder.define("Glow Squid spawn weight (oceans)", 67);
+			this.thrasherWeight = builder.define("Thrasher spawn weight (cold oceans)", 90);
+			this.nautilusWeight = builder.define("Nautilus spawn weight (warm oceans)", 51);
+			this.lionfishWeight = builder.define("Lionfish spawn weight (coral reefs)", 15);
+			this.pikeWeight = builder.define("Pike spawn weight (rivers)", 11);
 
-			this.pikeSwampSpawnWeight = builder.comment("Pike spawn weight in swamps").define("pikeSwampSpawnWeight", 5);
-			this.squidSwampSpawnWeight = builder.comment("Squid spawn weight in swamps").define("squidSwampSpawnWeight", 5);
-			this.salmonSwampSpawnWeight = builder.comment("Salmon spawn weight in swamps").define("salmonSwampSpawnWeight", 5);
+			this.pikeSwampWeight = builder.define("Pike spawn weight (swamps)", 5);
+			this.squidSwampWeight = builder.define("Squid spawn weight (swamps)", 5);
+			this.salmonSwampWeight = builder.define("Salmon spawn weight (swamps)", 5);
+
+			builder.pop();
+			builder.pop();
+			builder.push("world");
+			builder.push("generation");
+
+			this.beachgrassFrequency = builder.define("Beachgrass frequency (beaches)", 18);
+			this.searocketFrequency = builder.define("Searocket frequency (beaches)", 15);
+			this.pickerelweedFrequency = builder.define("Pickerelweed frequency (jungles, swamps, rivers)", 28);
+			this.pickerelweedExtraFrequency = builder.define("Pickerelweed frequency (flower forests)", 90);
+			this.floweringRushFrequency = builder.define("Flowering Rush frequency (rivers)", 15);
 
 			builder.pop();
 			builder.pop();

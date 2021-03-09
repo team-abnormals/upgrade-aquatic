@@ -2,6 +2,7 @@ package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.EmbeddedAmmoniteBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature.*;
+import com.minecraftabnormals.upgrade_aquatic.core.UAConfig;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
@@ -47,28 +48,29 @@ public class UAFeatures {
 	public static void onBiomeLoad(BiomeLoadingEvent event) {
 		if (event.getName() == null) return;
 		ResourceLocation biome = event.getName();
+		Biome.Category category = event.getCategory();
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
 
 		generation.withFeature(GenerationStage.Decoration.RAW_GENERATION, Configured.PRISMARINE_CORAL);
 
-		if (event.getCategory() == Biome.Category.OCEAN) {
+		if (category == Biome.Category.OCEAN) {
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.DRIFTWOOD_OCEAN);
 		}
 
-		if (event.getCategory() == Biome.Category.BEACH) {
+		if (category == Biome.Category.BEACH) {
 			generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Configured.ORE_AMMONITE);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.DRIFTWOOD_BEACH);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.PATCH_SEAROCKET);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.BEACHGRASS_DUNES);
 		}
 
-		if (event.getCategory() == Biome.Category.RIVER) {
+		if (category == Biome.Category.RIVER) {
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.RIVER_TREE);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.DRIFTWOOD_RIVER);
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.PATCH_FLOWERING_RUSH);
 		}
 
-		if (event.getCategory() == Biome.Category.SWAMP) {
+		if (category == Biome.Category.SWAMP) {
 			generation.withFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Configured.DRIFTWOOD_SWAMP);
 		}
 
@@ -76,11 +78,11 @@ public class UAFeatures {
 			generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Configured.PATCH_PICKERELWEED_EXTRA);
 		}
 
-		if (event.getCategory() == Biome.Category.BEACH || event.getCategory() == Biome.Category.OCEAN || biome.equals(Biomes.STONE_SHORE.getLocation())) {
+		if (category == Biome.Category.BEACH || category == Biome.Category.OCEAN || biome.equals(Biomes.STONE_SHORE.getLocation())) {
 			generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Configured.ORE_AMMONITE);
 		}
 
-		if (event.getCategory() != Biome.Category.OCEAN && event.getCategory() != Biome.Category.BEACH && event.getCategory() != Biome.Category.DESERT && event.getCategory() != Biome.Category.ICY) {
+		if ((category == Biome.Category.JUNGLE || category == Biome.Category.SWAMP || category == Biome.Category.RIVER) && !biome.toString().contains("marsh")) {
 			generation.withFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Configured.PATCH_PICKERELWEED);
 		}
 
@@ -95,14 +97,14 @@ public class UAFeatures {
 
 	public static final class Configured {
 		public static final ConfiguredFeature<?, ?> ORE_AMMONITE = Feature.ORE.withConfiguration(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.BASE_STONE_OVERWORLD, UABlocks.EMBEDDED_AMMONITE.get().getDefaultState().with(EmbeddedAmmoniteBlock.FACING, Direction.getRandomDirection(new Random())), 3)).withPlacement(Placement.RANGE.configure(new TopSolidRangeConfig(20, 0, 73))).square().func_242731_b(30);
-		public static final ConfiguredFeature<?, ?> BEACHGRASS_DUNES = UAFeatures.DUNES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.PATCH_PLACEMENT).func_242731_b(18);
+		public static final ConfiguredFeature<?, ?> BEACHGRASS_DUNES = UAFeatures.DUNES.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.PATCH_PLACEMENT).func_242731_b(UAConfig.COMMON.beachgrassFrequency.get());
 		public static final ConfiguredFeature<?, ?> RIVER_TREE = UAFeatures.RIVER_TREE.get().withConfiguration(Configs.RIVER_TREE_CONFIG).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).withPlacement(Placement.COUNT_EXTRA.configure(new AtSurfaceWithExtraConfig(1, 0.80F, 2)));
 		public static final ConfiguredFeature<?, ?> PRISMARINE_CORAL = UAFeatures.PRISMARINE_CORAL.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.CARVING_MASK.configure(new CaveEdgeConfig(GenerationStage.Carving.LIQUID, 0.0125F)));
 
-		public static final ConfiguredFeature<?, ?> PATCH_SEAROCKET = UAFeatures.SEAROCKET.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(15);
-		public static final ConfiguredFeature<?, ?> PATCH_PICKERELWEED = UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(28);
-		public static final ConfiguredFeature<?, ?> PATCH_PICKERELWEED_EXTRA = UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(90);
-		public static final ConfiguredFeature<?, ?> PATCH_FLOWERING_RUSH = UAFeatures.FLOWERING_RUSH.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(15);
+		public static final ConfiguredFeature<?, ?> PATCH_SEAROCKET = UAFeatures.SEAROCKET.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(UAConfig.COMMON.searocketFrequency.get());
+		public static final ConfiguredFeature<?, ?> PATCH_PICKERELWEED = UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(UAConfig.COMMON.pickerelweedFrequency.get());
+		public static final ConfiguredFeature<?, ?> PATCH_PICKERELWEED_EXTRA = UAFeatures.PICKERELWEED.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(UAConfig.COMMON.pickerelweedExtraFrequency.get());
+		public static final ConfiguredFeature<?, ?> PATCH_FLOWERING_RUSH = UAFeatures.FLOWERING_RUSH.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.VEGETATION_PLACEMENT).withPlacement(Features.Placements.HEIGHTMAP_PLACEMENT).func_242731_b(UAConfig.COMMON.floweringRushFrequency.get());
 
 		public static final ConfiguredFeature<?, ?> DRIFTWOOD_OCEAN = UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).func_242731_b(1);
 		public static final ConfiguredFeature<?, ?> DRIFTWOOD_BEACH = UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Features.Placements.PATCH_PLACEMENT).func_242731_b(14);
