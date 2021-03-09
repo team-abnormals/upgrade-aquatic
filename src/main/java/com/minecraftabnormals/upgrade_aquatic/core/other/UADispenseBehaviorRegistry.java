@@ -41,11 +41,11 @@ public class UADispenseBehaviorRegistry {
 			World world = source.getWorld();
             BlockPos pos = source.getBlockPos().offset(source.getBlockState().get(DispenserBlock.FACING));
             BlockState state = source.getWorld().getBlockState(pos);
+			stack.shrink(1);
             if (GlowingInkItem.DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
     			Block livingCoral = GlowingInkItem.DEAD_CORAL_CONVERSION_MAP.get(state.getBlock());
     			world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, livingCoral.getDefaultState()));
     			world.getPendingBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
-				stack.shrink(1);
             }
 			return stack;
 		}
