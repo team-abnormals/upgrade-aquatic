@@ -73,15 +73,22 @@ public class UAConfig {
 	}
 
 	public static class Client {
+		public final ConfigValue<Boolean> drownedSwimmingAnimation;
 		public final ConfigValue<Integer> daysTillRenderInsomniaOverlay;
 
 		public Client(ForgeConfigSpec.Builder builder) {
 			builder.comment("Upgrade Aquatic client configuration").push("client");
+
+			builder.push("mobs");
+
+			this.drownedSwimmingAnimation = builder.define("Drowned swimming animation", true);
+
+			builder.pop();
 			builder.push("misc");
 
 			this.daysTillRenderInsomniaOverlay = builder
 					.comment("The amount of days till the insomnia overlay is rendered", "Setting to 3 will make the overlay indicate phantom spawns", "Setting to 0 will disable the overlay")
-					.define("daysTillRenderInsomniaOverlay", 0);
+					.define("Days until insomnia overlay", 0);
 
 			builder.pop();
 			builder.pop();
