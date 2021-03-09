@@ -7,6 +7,9 @@ import org.apache.commons.lang3.tuple.Pair;
 public class UAConfig {
 
 	public static class Common {
+		public final ConfigValue<Boolean> clericsBuyThrasherTeeth;
+		public final ConfigValue<Boolean> leatherworkersSellBedrolls;
+
 		public final ConfigValue<Integer> deepOceanMobMaxHeight;
 
 		public final ConfigValue<Integer> glowSquidWeight;
@@ -26,6 +29,16 @@ public class UAConfig {
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			builder.comment("Upgrade Aquatic common configuration").push("common");
+
+			builder.push("items");
+			builder.push("trades");
+
+			this.clericsBuyThrasherTeeth = builder.define("Clerics buy thrasher teeth", true);
+			this.leatherworkersSellBedrolls = builder.define("Leatherworkers sell bedrolls", true);
+
+			builder.pop();
+			builder.pop();
+
 			builder.push("mobs");
 
 			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("Deep ocean mob max height", 30, 0, 255);

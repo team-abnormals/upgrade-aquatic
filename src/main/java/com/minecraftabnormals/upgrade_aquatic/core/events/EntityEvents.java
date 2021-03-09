@@ -11,6 +11,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.items.GlowingInkItem;
+import com.minecraftabnormals.upgrade_aquatic.core.UAConfig;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
@@ -285,53 +286,54 @@ public class EntityEvents {
 
 	@SubscribeEvent
 	public static void onVillagerTradesEvent(VillagerTradesEvent event) {
-		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, 2,
-				new AbnormalsTrade(UAItems.MULBERRY.get(), 9, 1, 12, 10),
-				new AbnormalsTrade(1, UAItems.MULBERRY.get(), 5, 12, 5)
+		TradeUtil.addVillagerTrades(event, VillagerProfession.FARMER, TradeUtil.APPRENTICE,
+				new AbnormalsTrade(1, UAItems.MULBERRY.get(), 5, 16, 5)
 		);
 
 		if (event.getType().equals(VillagerProfession.FISHERMAN)) {
-			TradeUtil.addVillagerTrades(event, 3,
+			TradeUtil.addVillagerTrades(event, TradeUtil.JOURNEYMAN,
 					new AbnormalsTrade(new ItemStack(UAItems.PIKE.get(), 6), new ItemStack(Items.EMERALD, 1), new ItemStack(UAItems.COOKED_PIKE.get(), 6), 16, 15, 0.15F)
 			);
 
-			TradeUtil.addVillagerTrades(event, 4,
+			TradeUtil.addVillagerTrades(event, TradeUtil.EXPERT,
 					new AbnormalsTrade(UAItems.PIKE.get(), 5, 1, 12, 25),
 					new AbnormalsTrade(new ItemStack(UAItems.LIONFISH.get(), 6), new ItemStack(Items.EMERALD, 1), new ItemStack(UAItems.COOKED_LIONFISH.get(), 6), 16, 30, 0.15F)
 			);
 
-			TradeUtil.addVillagerTrades(event, 5,
+			TradeUtil.addVillagerTrades(event, TradeUtil.MASTER,
 					new AbnormalsTrade(UAItems.PIKE.get(), 3, 1, 12, 30)
 			);
 		}
 
-		TradeUtil.addVillagerTrades(event, VillagerProfession.MASON, 5,
+		TradeUtil.addVillagerTrades(event, VillagerProfession.MASON, TradeUtil.MASTER,
 				new AbnormalsTrade(5, UABlocks.TOOTH_TILES.get().asItem(), 1, 12, 30),
 				new AbnormalsTrade(5, UABlocks.TOOTH_BRICKS.get().asItem(), 1, 12, 30)
 		);
 
-		TradeUtil.addVillagerTrades(event, VillagerProfession.CLERIC, 4,
-				new AbnormalsTrade(UAItems.THRASHER_TOOTH.get(), 1, 1, 12, 15)
-		);
+		if (UAConfig.COMMON.clericsBuyThrasherTeeth.get())
+			TradeUtil.addVillagerTrades(event, VillagerProfession.CLERIC, TradeUtil.EXPERT,
+					new AbnormalsTrade(UAItems.THRASHER_TOOTH.get(), 1, 1, 12, 15)
+			);
 
-		TradeUtil.addVillagerTrades(event, VillagerProfession.LEATHERWORKER, 2,
-				new AbnormalsTrade(1, UABlocks.BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.WHITE_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.ORANGE_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.MAGENTA_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.LIGHT_BLUE_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.YELLOW_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.LIME_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.PINK_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.GRAY_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.LIGHT_GRAY_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.CYAN_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.PURPLE_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.BLUE_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.BROWN_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.GREEN_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.RED_BEDROLL.get().asItem(), 1, 8, 10),
-				new AbnormalsTrade(1, UABlocks.BLACK_BEDROLL.get().asItem(), 1, 8, 10)
-		);
+		if (UAConfig.COMMON.leatherworkersSellBedrolls.get())
+			TradeUtil.addVillagerTrades(event, VillagerProfession.LEATHERWORKER, TradeUtil.APPRENTICE,
+					new AbnormalsTrade(1, UABlocks.BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.WHITE_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.ORANGE_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.MAGENTA_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.LIGHT_BLUE_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.YELLOW_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.LIME_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.PINK_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.GRAY_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.LIGHT_GRAY_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.CYAN_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.PURPLE_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.BLUE_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.BROWN_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.GREEN_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.RED_BEDROLL.get().asItem(), 1, 8, 10),
+					new AbnormalsTrade(1, UABlocks.BLACK_BEDROLL.get().asItem(), 1, 8, 10)
+			);
 	}
 }
