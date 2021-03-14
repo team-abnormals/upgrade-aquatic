@@ -22,6 +22,14 @@
                 "item": "upgrade_aquatic:lionfish"
               }
             }
+          },
+          "upgrade_aquatic:perch": {
+            "trigger": "minecraft:fishing_rod_hooked",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:perch"
+              }
+            }
           }
         },
         "requirements": [
@@ -30,6 +38,9 @@
           ],
           [
             "upgrade_aquatic:lionfish"
+          ],
+          [
+            "upgrade_aquatic:perch"
           ]
         ]
       }

@@ -54,6 +54,22 @@
               }
             }
           },
+          "upgrade_aquatic:perch": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:perch"
+              }
+            }
+          },
+          "upgrade_aquatic:cooked_perch": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:cooked_perch"
+              }
+            }
+          },
           "upgrade_aquatic:mulberry": {
             "trigger": "minecraft:consume_item",
             "conditions": {
@@ -105,6 +121,12 @@
           ],
           [
             "upgrade_aquatic:cooked_lionfish"
+          ],
+          [
+            "upgrade_aquatic:perch"
+          ],
+          [
+            "upgrade_aquatic:cooked_perch"
           ],
           [
             "upgrade_aquatic:mulberry"

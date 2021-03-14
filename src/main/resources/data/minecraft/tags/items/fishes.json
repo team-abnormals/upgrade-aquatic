@@ -4,6 +4,8 @@
     "upgrade_aquatic:pike",
     "upgrade_aquatic:cooked_pike",
     "upgrade_aquatic:lionfish",
-    "upgrade_aquatic:cooked_lionfish"
+    "upgrade_aquatic:cooked_lionfish",
+    "upgrade_aquatic:perch",
+    "upgrade_aquatic:cooked_perch"
   ]
 }

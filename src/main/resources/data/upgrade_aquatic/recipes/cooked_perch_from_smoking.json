@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "upgrade_aquatic:perch"
+  },
+  "result": "upgrade_aquatic:cooked_perch",
+  "experience": 0.35,
+  "cookingtime": 100
+}

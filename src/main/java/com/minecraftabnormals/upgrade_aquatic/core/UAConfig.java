@@ -17,9 +17,9 @@ public class UAConfig {
 		public final ConfigValue<Integer> nautilusWeight;
 		public final ConfigValue<Integer> lionfishWeight;
 		public final ConfigValue<Integer> pikeWeight;
+		public final ConfigValue<Integer> perchWeight;
 		public final ConfigValue<Integer> pikeSwampWeight;
 		public final ConfigValue<Integer> squidSwampWeight;
-		public final ConfigValue<Integer> salmonSwampWeight;
 
 		public final ConfigValue<Integer> beachgrassFrequency;
 		public final ConfigValue<Integer> searocketFrequency;
@@ -44,9 +44,9 @@ public class UAConfig {
 			this.nautilusWeight = builder.define("Nautilus spawn weight (warm oceans)", 51);
 			this.lionfishWeight = builder.define("Lionfish spawn weight (coral reefs)", 15);
 			this.pikeWeight = builder.define("Pike spawn weight (rivers)", 11);
+			this.perchWeight = builder.define("Perch spawn weight (swamps)", 5);
 			this.pikeSwampWeight = builder.define("Pike spawn weight (swamps)", 5);
 			this.squidSwampWeight = builder.define("Squid spawn weight (swamps)", 5);
-			this.salmonSwampWeight = builder.define("Salmon spawn weight (swamps)", 5);
 			builder.pop();
 
 			builder.pop();

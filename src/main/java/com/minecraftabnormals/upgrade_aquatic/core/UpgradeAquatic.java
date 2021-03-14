@@ -78,7 +78,7 @@ public class UpgradeAquatic {
 		UAEntities.registerRenderers();
 		UATileEntities.registerRenderers();
 		event.enqueueWork(() -> {
-			UAItems.setupItemPropertes();
+			UAItems.registerItemProperties();
 			UAClientCompat.registerClientCompat();
 		});
 	}

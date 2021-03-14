@@ -31,6 +31,14 @@
               }
             }
           },
+          "upgrade_aquatic:perch_bucket": {
+            "trigger": "minecraft:filled_bucket",
+            "conditions": {
+              "item": {
+                "item": "upgrade_aquatic:perch_bucket"
+              }
+            }
+          },
           "upgrade_aquatic:squid_bucket": {
             "trigger": "minecraft:filled_bucket",
             "conditions": {
@@ -65,6 +73,9 @@
           ],
           [
             "upgrade_aquatic:lionfish_bucket"
+          ],
+          [
+            "upgrade_aquatic:perch_bucket"
           ],
           [
             "upgrade_aquatic:squid_bucket"

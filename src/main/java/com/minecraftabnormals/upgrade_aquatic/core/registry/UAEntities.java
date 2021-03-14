@@ -28,6 +28,7 @@ public class UAEntities {
 	public static final RegistryObject<EntityType<SonarWaveEntity>> SONAR_WAVE          = HELPER.createEntity("sonar_wave", SonarWaveEntity::new, SonarWaveEntity::new, EntityClassification.MISC, 1.0F, 1.0F);
 	public static final RegistryObject<EntityType<NautilusEntity>> NAUTILUS             = HELPER.createLivingEntity("nautilus", NautilusEntity::new, EntityClassification.WATER_AMBIENT, 0.5F, 0.5F);
 	public static final RegistryObject<EntityType<PikeEntity>> PIKE                     = HELPER.createLivingEntity("pike", PikeEntity::new, EntityClassification.WATER_AMBIENT, 0.7F, 0.4F);
+	public static final RegistryObject<EntityType<PerchEntity>> PERCH                   = HELPER.createLivingEntity("perch", PerchEntity::new, EntityClassification.WATER_AMBIENT, 0.6F, 0.5F);
 	public static final RegistryObject<EntityType<LionfishEntity>> LIONFISH             = HELPER.createLivingEntity("lionfish", LionfishEntity::new, EntityClassification.WATER_AMBIENT, 0.6F, 0.5F);
 	public static final RegistryObject<EntityType<ThrasherEntity>> THRASHER             = HELPER.createLivingEntity("thrasher", ThrasherEntity::new, EntityClassification.MONSTER, 1.6F, 0.9F);
 	public static final RegistryObject<EntityType<GreatThrasherEntity>> GREAT_THRASHER	= HELPER.createLivingEntity("great_thrasher", GreatThrasherEntity::new, EntityClassification.MONSTER, 2.8F, 1.575F);
@@ -44,6 +45,7 @@ public class UAEntities {
 		GlobalEntityTypeAttributes.put(NAUTILUS.get(), NautilusEntity.registerAttributes().create());
 		GlobalEntityTypeAttributes.put(PIKE.get(), PikeEntity.registerAttributes().create());
 		GlobalEntityTypeAttributes.put(LIONFISH.get(), LionfishEntity.registerAttributes().create());
+		GlobalEntityTypeAttributes.put(PERCH.get(), PerchEntity.func_234176_m_().create());
 		GlobalEntityTypeAttributes.put(THRASHER.get(), ThrasherEntity.registerAttributes().create());
 		GlobalEntityTypeAttributes.put(GREAT_THRASHER.get(), GreatThrasherEntity.registerAttributes().create());
 		GlobalEntityTypeAttributes.put(FLARE.get(), FlareEntity.registerAttributes().create());
@@ -60,6 +62,7 @@ public class UAEntities {
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.NAUTILUS.get(), NautilusRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.PIKE.get(), PikeRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.LIONFISH.get(), LionfishRenderer::new);
+		RenderingRegistry.registerEntityRenderingHandler(UAEntities.PERCH.get(), PerchRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.THRASHER.get(), ThrasherRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GREAT_THRASHER.get(), GreatThrasherRenderer::new);
 		RenderingRegistry.registerEntityRenderingHandler(UAEntities.FLARE.get(), FlareRenderer::new);

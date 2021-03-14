@@ -8,6 +8,8 @@ import com.minecraftabnormals.upgrade_aquatic.core.UAConfig;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import net.minecraft.entity.*;
+import net.minecraft.entity.passive.fish.AbstractFishEntity;
+import net.minecraft.entity.passive.fish.CodEntity;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -33,6 +35,7 @@ public class UASpawns {
 		EntitySpawnPlacementRegistry.register(UAEntities.NAUTILUS.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UASpawns::ravineMobCondition);
 		EntitySpawnPlacementRegistry.register(UAEntities.LIONFISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, LionfishEntity::coralCondition);
 		EntitySpawnPlacementRegistry.register(UAEntities.PIKE.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, PikeEntity::pickerelCondition);
+		EntitySpawnPlacementRegistry.register(UAEntities.PERCH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractFishEntity::func_223363_b);
 		EntitySpawnPlacementRegistry.register(UAEntities.GLOW_SQUID.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UASpawns::ravineMobCondition);
 		EntitySpawnPlacementRegistry.register(UAEntities.THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, ThrasherEntity::thrasherCondition);
 		EntitySpawnPlacementRegistry.register(UAEntities.GREAT_THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, ThrasherEntity::thrasherCondition);
@@ -78,7 +81,7 @@ public class UASpawns {
 		if (event.getCategory() == Biome.Category.SWAMP) {
 			if (UAConfig.COMMON.pikeSwampWeight.get() > 0) spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeSwampWeight.get(), 1, 2));
 			if (UAConfig.COMMON.squidSwampWeight.get() > 0) spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SQUID, UAConfig.COMMON.squidSwampWeight.get(), 1, 2));
-			if (UAConfig.COMMON.salmonSwampWeight.get() > 0) spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(EntityType.SALMON, UAConfig.COMMON.salmonSwampWeight.get(), 1, 5));
+			if (UAConfig.COMMON.perchWeight.get() > 0) spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PERCH.get(), UAConfig.COMMON.perchWeight.get(), 1, 5));
 		}
 	}
 
