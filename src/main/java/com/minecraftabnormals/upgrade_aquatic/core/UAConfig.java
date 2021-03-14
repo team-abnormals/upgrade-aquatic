@@ -28,45 +28,36 @@ public class UAConfig {
 		public final ConfigValue<Integer> floweringRushFrequency;
 
 		public Common(ForgeConfigSpec.Builder builder) {
-			builder.comment("Upgrade Aquatic common configuration").push("common");
-
 			builder.push("items");
 			builder.push("trades");
-
 			this.clericsBuyThrasherTeeth = builder.define("Clerics buy thrasher teeth", true);
 			this.leatherworkersSellBedrolls = builder.define("Leatherworkers sell bedrolls", true);
-
 			builder.pop();
 			builder.pop();
 
 			builder.push("mobs");
-
 			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("Deep ocean mob max height", 30, 0, 255);
 
 			builder.push("spawns");
-
 			this.glowSquidWeight = builder.define("Glow Squid spawn weight (oceans)", 67);
 			this.thrasherWeight = builder.define("Thrasher spawn weight (cold oceans)", 90);
 			this.nautilusWeight = builder.define("Nautilus spawn weight (warm oceans)", 51);
 			this.lionfishWeight = builder.define("Lionfish spawn weight (coral reefs)", 15);
 			this.pikeWeight = builder.define("Pike spawn weight (rivers)", 11);
-
 			this.pikeSwampWeight = builder.define("Pike spawn weight (swamps)", 5);
 			this.squidSwampWeight = builder.define("Squid spawn weight (swamps)", 5);
 			this.salmonSwampWeight = builder.define("Salmon spawn weight (swamps)", 5);
+			builder.pop();
 
 			builder.pop();
-			builder.pop();
+
 			builder.push("world");
 			builder.push("generation");
-
 			this.beachgrassFrequency = builder.define("Beachgrass frequency (beaches)", 18);
 			this.searocketFrequency = builder.define("Searocket frequency (beaches)", 15);
 			this.pickerelweedFrequency = builder.define("Pickerelweed frequency (jungles, swamps, rivers)", 28);
 			this.pickerelweedExtraFrequency = builder.define("Pickerelweed frequency (flower forests)", 90);
 			this.floweringRushFrequency = builder.define("Flowering Rush frequency (rivers)", 15);
-
-			builder.pop();
 			builder.pop();
 			builder.pop();
 		}
@@ -77,20 +68,14 @@ public class UAConfig {
 		public final ConfigValue<Integer> daysTillRenderInsomniaOverlay;
 
 		public Client(ForgeConfigSpec.Builder builder) {
-			builder.comment("Upgrade Aquatic client configuration").push("client");
-
 			builder.push("mobs");
-
 			this.drownedSwimmingAnimation = builder.define("Drowned swimming animation", true);
-
 			builder.pop();
-			builder.push("misc");
 
+			builder.push("misc");
 			this.daysTillRenderInsomniaOverlay = builder
 					.comment("The amount of days till the insomnia overlay is rendered", "Setting to 3 will make the overlay indicate phantom spawns", "Setting to 0 will disable the overlay")
 					.define("Days until insomnia overlay", 0);
-
-			builder.pop();
 			builder.pop();
 		}
 	}
