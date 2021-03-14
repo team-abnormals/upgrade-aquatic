@@ -278,7 +278,6 @@ public class EntityEvents {
 		TradeUtil.addRareWandererTrades(event,
 				new AbnormalsTrade(2, UABlocks.DRIFTWOOD_LOG.get().asItem(), 1, 16, 1),
 				new AbnormalsTrade(5, UAItems.PIKE_BUCKET.get(), 1, 4, 1),
-				new AbnormalsTrade(5, UAItems.PIKE_BUCKET.get(), 1, 4, 1),
 				new AbnormalsTrade(5, UAItems.LIONFISH_BUCKET.get(), 1, 4, 1),
 				new AbnormalsTrade(5, UAItems.NAUTILUS_BUCKET.get(), 1, 4, 1)
 		);
@@ -291,17 +290,22 @@ public class EntityEvents {
 		);
 
 		if (event.getType().equals(VillagerProfession.FISHERMAN)) {
+			TradeUtil.addVillagerTrades(event, TradeUtil.APPRENTICE,
+					new AbnormalsTrade(new ItemStack(UAItems.PERCH.get(), 6), new ItemStack(Items.EMERALD), new ItemStack(UAItems.COOKED_PERCH.get(), 6), 16, 5, 0.05F)
+			);
+
 			TradeUtil.addVillagerTrades(event, TradeUtil.JOURNEYMAN,
-					new AbnormalsTrade(new ItemStack(UAItems.PIKE.get(), 6), new ItemStack(Items.EMERALD, 1), new ItemStack(UAItems.COOKED_PIKE.get(), 6), 16, 15, 0.15F)
+					new AbnormalsTrade(UAItems.PERCH.get(), 14, 1, 16, 20),
+					new AbnormalsTrade(new ItemStack(UAItems.PIKE.get(), 6), new ItemStack(Items.EMERALD), new ItemStack(UAItems.COOKED_PIKE.get(), 6), 16, 10, 0.05F)
 			);
 
 			TradeUtil.addVillagerTrades(event, TradeUtil.EXPERT,
-					new AbnormalsTrade(UAItems.PIKE.get(), 5, 1, 12, 25),
-					new AbnormalsTrade(new ItemStack(UAItems.LIONFISH.get(), 6), new ItemStack(Items.EMERALD, 1), new ItemStack(UAItems.COOKED_LIONFISH.get(), 6), 16, 30, 0.15F)
+					new AbnormalsTrade(UAItems.PIKE.get(), 5, 1, 16, 25),
+					new AbnormalsTrade(new ItemStack(UAItems.LIONFISH.get(), 6), new ItemStack(Items.EMERALD), new ItemStack(UAItems.COOKED_LIONFISH.get(), 6), 16, 15, 0.05F)
 			);
 
 			TradeUtil.addVillagerTrades(event, TradeUtil.MASTER,
-					new AbnormalsTrade(UAItems.PIKE.get(), 3, 1, 12, 30)
+					new AbnormalsTrade(UAItems.LIONFISH.get(), 3, 1, 16, 30)
 			);
 		}
 

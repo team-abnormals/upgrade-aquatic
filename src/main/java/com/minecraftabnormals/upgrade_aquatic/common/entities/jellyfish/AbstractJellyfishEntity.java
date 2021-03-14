@@ -117,7 +117,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			if (this.isServerWorld()) {
 				this.setCooldown(this.getCooldown() - 1);
 				if (!this.hasCooldown()) {
-					this.playSound(UASounds.JELLYFISH_COOLDOWN_END.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
+					this.playSound(UASounds.ENTITY_JELLYFISH_COOLDOWN_END.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
 				}
 			}
 
@@ -196,11 +196,11 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			Random rand = new Random();
 			if (this.isServerWorld() && rand.nextFloat() < this.getCooldownChance()) {
 				this.setCooldown(20 * (rand.nextInt(16) + 15));
-				this.playSound(UASounds.JELLYFISH_COOLDOWN_START.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
+				this.playSound(UASounds.ENTITY_JELLYFISH_COOLDOWN_START.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
 			}
 			itemstack.shrink(1);
 			player.addItemStackToInventory(this.getTorchByType(this.getJellyTorchType()));
-			this.playSound(UASounds.JELLYFISH_HARVEST.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
+			this.playSound(UASounds.ENTITY_JELLYFISH_HARVEST.get(), 1.0F, this.rand.nextFloat() * 0.15F + 1.0F);
 			return ActionResultType.SUCCESS;
 		}
 		return super.func_230254_b_(player, hand);
@@ -208,17 +208,17 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return this.isInWater() ? UASounds.JELLYFISH_AMBIENT.get() : null;
+		return this.isInWater() ? UASounds.ENTITY_JELLYFISH_AMBIENT.get() : null;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return UASounds.JELLYFISH_HURT.get();
+		return UASounds.ENTITY_JELLYFISH_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return UASounds.JELLYFISH_DEATH.get();
+		return UASounds.ENTITY_JELLYFISH_DEATH.get();
 	}
 
 	@Override
@@ -310,7 +310,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 
 	protected boolean stingEntity(LivingEntity livingEntity) {
 		if (livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
-			this.playSound(UASounds.JELLYFISH_STING.get(), 0.5F, this.rand.nextFloat() * 0.2F + 1.0F);
+			this.playSound(UASounds.ENTITY_JELLYFISH_STING.get(), 0.5F, this.rand.nextFloat() * 0.2F + 1.0F);
 			return true;
 		}
 		return false;

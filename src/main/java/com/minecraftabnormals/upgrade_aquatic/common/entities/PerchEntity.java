@@ -3,6 +3,7 @@ package com.minecraftabnormals.upgrade_aquatic.common.entities;
 import com.google.common.collect.Lists;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.goal.PerchHideInSeagrassGoal;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -54,18 +55,18 @@ public class PerchEntity extends AbstractGroupFishEntity {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_COD_AMBIENT;
+		return UASounds.ENTITY_PERCH_AMBIENT.get();
 	}
 
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_COD_DEATH;
+		return UASounds.ENTITY_PERCH_DEATH.get();
 	}
 
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_COD_HURT;
+		return UASounds.ENTITY_PERCH_HURT.get();
 	}
 
 	protected SoundEvent getFlopSound() {
-		return SoundEvents.ENTITY_COD_FLOP;
+		return UASounds.ENTITY_PERCH_FLOP.get();
 	}
 }

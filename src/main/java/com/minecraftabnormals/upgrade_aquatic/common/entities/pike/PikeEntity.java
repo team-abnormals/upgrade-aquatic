@@ -13,6 +13,7 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai.PikeSwimTo
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai.PikeTemptGoal;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -181,7 +182,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 		if (this.world.getGameTime() % 20 == 0) {
 			LivingEntity caughtEntity = this.getCaughtEntity();
 			if (caughtEntity != null && (!this.isPickerelweedNearby() || this.isHidingInPickerelweed())) {
-				this.world.playSound(null, this.getPosition(), SoundEvents.ENTITY_FOX_BITE, SoundCategory.HOSTILE, 0.8F, 0.90F);
+				this.world.playSound(null, this.getPosition(), UASounds.ENTITY_PIKE_BITE.get(), SoundCategory.HOSTILE, 0.8F, 0.90F);
 				if (this.world.isRemote && caughtEntity.getHealth() <= 1 && this.getPikeType() == PikeType.SPECTRAL) {
 					for (int i = 0; i < 3; ++i) {
 						this.world.addParticle(UAParticles.SPECTRAL_CONSUME.get(), caughtEntity.getPosX() + (caughtEntity.getRNG().nextDouble() - 0.5D) * (double)caughtEntity.getWidth(), caughtEntity.getPosY() + caughtEntity.getRNG().nextDouble() * (double)caughtEntity.getHeight() - 0.25D, caughtEntity.getPosZ() + (caughtEntity.getRNG().nextDouble() - 0.5D) * (double)caughtEntity.getWidth(), (this.getCaughtEntity().getRNG().nextDouble() - 0.5D) * 2.0D, -caughtEntity.getRNG().nextDouble(), (caughtEntity.getRNG().nextDouble() - 0.5D) * 2.0D);
@@ -404,7 +405,7 @@ public class PikeEntity extends BucketableWaterMobEntity {
 				ItemEntity itementity = new ItemEntity(this.world, this.getPosX() + this.getLookVec().x, this.getPosY() + 1.0D, this.getPosZ() + this.getLookVec().z, stackIn);
 				itementity.setPickupDelay(40);
 				itementity.setThrowerId(this.getUniqueID());
-				this.playSound(SoundEvents.ENTITY_FOX_SPIT, 1.0F, 1.0F);
+				this.playSound(UASounds.ENTITY_PIKE_SPIT.get(), 1.0F, 1.0F);
 				this.world.addEntity(itementity);
 				this.setItemStackToSlot(EquipmentSlotType.MAINHAND, ItemStack.EMPTY);
 			}
@@ -581,21 +582,21 @@ public class PikeEntity extends BucketableWaterMobEntity {
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_SALMON_AMBIENT;
+		return UASounds.ENTITY_PIKE_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_SALMON_DEATH;
+		return UASounds.ENTITY_PIKE_DEATH.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_SALMON_HURT;
+		return UASounds.ENTITY_PIKE_HURT.get();
 	}
 	
 	protected SoundEvent getFlopSound() {
-		return SoundEvents.ENTITY_SALMON_FLOP;
+		return UASounds.ENTITY_PIKE_FLOP.get();
 	}
 	
 	@Override

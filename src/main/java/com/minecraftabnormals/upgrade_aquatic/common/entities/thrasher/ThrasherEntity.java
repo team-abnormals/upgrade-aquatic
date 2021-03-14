@@ -477,12 +477,12 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return this.isInWater() ? UASounds.THRASHER_HURT.get() : UASounds.THRASHER_HURT_LAND.get();
+		return this.isInWater() ? UASounds.ENTITY_THRASHER_HURT.get() : UASounds.ENTITY_THRASHER_HURT_LAND.get();
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() {
-		return this.isInWater() ? UASounds.THRASHER_DEATH.get() : UASounds.THRASHER_DEATH_LAND.get();
+		return this.isInWater() ? UASounds.ENTITY_THRASHER_DEATH.get() : UASounds.ENTITY_THRASHER_DEATH_LAND.get();
 	}
 	
 	@Nullable
@@ -491,19 +491,19 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		if(this.isEndimationPlaying(THRASH_ANIMATION)) {
 			return null;
 		}
-		return this.isInWater() ? UASounds.THRASHER_AMBIENT.get() : UASounds.THRASHER_AMBIENT_LAND.get();
+		return this.isInWater() ? UASounds.ENTITY_THRASHER_AMBIENT.get() : UASounds.ENTITY_THRASHER_AMBIENT_LAND.get();
 	}
 	
 	protected SoundEvent getFlopSound() {
-		return UASounds.THRASHER_FLOP.get();
+		return UASounds.ENTITY_THRASHER_FLOP.get();
 	}
 	
 	public SoundEvent getSonarFireSound() {
-		return UASounds.THRASHER_SONAR_FIRE.get();
+		return UASounds.ENTITY_THRASHER_SONAR_FIRE.get();
 	}
 	
 	public SoundEvent getThrashingSound() {
-		return UASounds.THRASHER_THRASH.get();
+		return UASounds.ENTITY_THRASHER_THRASH.get();
 	}
 	
 	@Override

@@ -632,6 +632,16 @@
   "advancements.husbandry.collect_all_pike.title": "Pike World Tour",
   "advancements.husbandry.collect_all_pike.description": "Collect every variant of Pike in a bucket",
 
+  "subtitles.upgrade_aquatic.entity.pike.death": "Pike dies",
+  "subtitles.upgrade_aquatic.entity.pike.flop": "Pike flops",
+  "subtitles.upgrade_aquatic.entity.pike.hurt": "Pike hurts",
+  "subtitles.upgrade_aquatic.entity.pike.bite": "Pike bites",
+  "subtitles.upgrade_aquatic.entity.pike.spit": "Pike spits",
+
+  "subtitles.upgrade_aquatic.entity.perch.death": "Perch dies",
+  "subtitles.upgrade_aquatic.entity.perch.flop": "Perch flops",
+  "subtitles.upgrade_aquatic.entity.perch.hurt": "Perch hurts",
+
   "subtitles.upgrade_aquatic.thrasher.hurt": "Thrasher hurts",
   "subtitles.upgrade_aquatic.thrasher.ambient": "Thrasher growls",
   "subtitles.upgrade_aquatic.thrasher.death": "Thrasher dies",
