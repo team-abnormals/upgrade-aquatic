@@ -1,9 +1,6 @@
 {
-	"_comment": "Blocks",
-
 	"block.upgrade_aquatic.guardian_spine": "Vartijan piikki",
 	"block.upgrade_aquatic.elder_guardian_spine": "Vartijavanhimman piikki",
-
 	"block.upgrade_aquatic.elder_eye": "Vanhimman silmä",
 
 	"block.upgrade_aquatic.dead_acan_coral": "Kuollut acan-koralli",
@@ -287,7 +284,7 @@
 	"block.upgrade_aquatic.scute_shingle_slab": "Kilpipaanulaatta",
 	"block.upgrade_aquatic.scute_shingle_stairs": "Kilpipaanuportaat",
 	"block.upgrade_aquatic.scute_shingle_wall": "Kilpipaanumuuri",
-	"block.upgrade_aquatic.scute_shingles_vertical_slab": "Pystysuora kilpipaanulaatta",
+	"block.upgrade_aquatic.scute_shingle_vertical_slab": "Pystysuora kilpipaanulaatta",
 	"block.upgrade_aquatic.chiseled_scute_shingles": "Kaiverretut kilpipaanut",
 	"block.upgrade_aquatic.scute_pavement": "Kilpikiveys",
 	"block.upgrade_aquatic.scute_pavement_slab": "Kilpikiveyslaatta",
@@ -399,6 +396,8 @@
 	"block.upgrade_aquatic.driftwood_wall_sign": "Ajopuu seinäkyltti",
 	"block.upgrade_aquatic.driftwood_chest": "Ajopuuarkku",
 	"block.upgrade_aquatic.driftwood_trapped_chest": "Ansoitettu ajopuuarkku",
+	"block.upgrade_aquatic.driftwood_post": "Ajopuutolppa",
+	"block.upgrade_aquatic.stripped_driftwood_post": "Kuorittu ajopuutolppa",
 	"block.upgrade_aquatic.driftwood_beehive": "Ajopuumehiläispesä",
 
 	"block.upgrade_aquatic.river_leaves": "Jokipuunlehdet",
@@ -425,6 +424,9 @@
 	"block.upgrade_aquatic.river_wall_sign": "Jokipuu seinäkyltti",
 	"block.upgrade_aquatic.river_chest": "Jokipuuarkku",
 	"block.upgrade_aquatic.river_trapped_chest": "Ansoitettu jokipuuarkku",
+	"block.upgrade_aquatic.river_post": "Jokipuutolppa",
+	"block.upgrade_aquatic.stripped_river_post": "Kuorittu jokipuutolppa",
+	"block.upgrade_aquatic.river_hedge": "Jokipuupensasaita",
 	"block.upgrade_aquatic.river_beehive": "Jokipuumehiläispesä",
 
 	"block.upgrade_aquatic.flowering_rush": "Sarjarimpi",
@@ -452,8 +454,6 @@
 	"block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Hohtavat vanhinprismariiniportaat",
 	"block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Pystysuora hohtava vanhinprismariinilaatta",
 
-	"_comment2": "Items",
-
 	"item.upgrade_aquatic.driftwood_boat": "Ajopuuvene",
 	"item.upgrade_aquatic.river_boat": "Jokipuuvene",
 
@@ -464,6 +464,7 @@
 	"item.upgrade_aquatic.nautilus_bucket": "Helmivene ämpärissä",
 	"item.upgrade_aquatic.pike_bucket": "Hauki ämpärissä",
 	"item.upgrade_aquatic.lionfish_bucket": "Siipisimppu ämpärissä",
+	"item.upgrade_aquatic.perch_bucket": "Ahven ämpärissä",
 	"item.upgrade_aquatic.squid_bucket": "Kalmari ämpärissä",
 	"item.upgrade_aquatic.jellyfish_bucket": "Meduusa ämpärissä",
 	"item.upgrade_aquatic.glow_squid_bucket": "Hehkukalmari ämpärissä",
@@ -472,6 +473,7 @@
 	"item.upgrade_aquatic.nautilus_spawn_egg": "Luo helmivene",
 	"item.upgrade_aquatic.pike_spawn_egg": "Luo hauki",
 	"item.upgrade_aquatic.lionfish_spawn_egg": "Luo siipisimppu",
+	"item.upgrade_aquatic.perch_spawn_egg": "Luo ahven",
 	"item.upgrade_aquatic.thrasher_spawn_egg": "Luo syvänrepo",
 	"item.upgrade_aquatic.great_thrasher_spawn_egg": "Luo suursyvänrepo",
 	"item.upgrade_aquatic.flare_spawn_egg": "Luo leimu",
@@ -485,16 +487,16 @@
 	"item.upgrade_aquatic.cooked_pike": "Paistettu hauki",
 	"item.upgrade_aquatic.lionfish": "Raaka siipisimppu",
 	"item.upgrade_aquatic.cooked_lionfish": "Paistettu siipisimppu",
+	"item.upgrade_aquatic.perch": "Raaka ahven",
+	"item.upgrade_aquatic.cooked_perch": "Paistettu ahven",
 
 	"item.upgrade_aquatic.mulberry": "Mulperi-marja",
 	"item.upgrade_aquatic.mulberry_jam_bottle": "Mulperihillopullo",
 	"item.upgrade_aquatic.mulberry_bread": "Mulperileipä",
 	"item.upgrade_aquatic.mulberry_pie": "Mulperipiirakka",
 
-	"_comment3": "Tooltips",
-
 	"tooltip.upgrade_aquatic.amur_pike": "Täplähauki",  
-	"tooltip.upgrade_aquatic.redfin_pickerel": "Punaevähauki",  
+	"tooltip.upgrade_aquatic.redfin_pike": "Punaevähauki",  
 	"tooltip.upgrade_aquatic.brown_northern_pike": "Ruskea hauki",  
 	"tooltip.upgrade_aquatic.mahogany_northern_pike": "Mahonkihauki",  
 	"tooltip.upgrade_aquatic.jade_northern_pike": "Jade-hauki",  
@@ -536,11 +538,10 @@
 	"tooltip.upgrade_aquatic.purple_jelly_torch": "Violetti meduusasoihtu",
 	"tooltip.upgrade_aquatic.white_jelly_torch": "Valkoinen meduusasoihtu",
 
-	"_comment4": "Entities",
-
 	"entity.upgrade_aquatic.nautilus": "Helmivene",
 	"entity.upgrade_aquatic.pike": "Hauki",
 	"entity.upgrade_aquatic.lionfish": "Siipisimppu",
+	"entity.upgrade_aquatic.perch": "Ahven",
 	"entity.upgrade_aquatic.thrasher": "Syvänrepo",
 	"entity.upgrade_aquatic.great_thrasher": "Suursyvänrepo",
 	"entity.upgrade_aquatic.flare": "Leimu",
@@ -552,8 +553,6 @@
 	"entity.upgrade_aquatic.box_jellyfish": "Kuutiomeduusa",
 	"entity.upgrade_aquatic.cassiopea_jellyfish": "Kassiopeiameduusa",
 	"entity.upgrade_aquatic.immortal_jellyfish": "Kuolematon meduusa",
-
-	"_comment5": "Potions and Effects",
 
 	"effect.upgrade_aquatic.insomnia": "Unettomus",
 	"item.minecraft.potion.effect.insomnia": "Unettomuuden taikajuoma",
@@ -603,15 +602,11 @@
 	"item.minecraft.tipped_arrow.effect.vibing_strong": "Laupeuden nuoli",
 	"item.minecraft.tipped_arrow.effect.vibing_long": "Laupeuden nuoli",
 
-	"_comment6": "Deaths",
-
 	"death.attack.upgrade_aquatic.guardianSpine": "Vartijan piikki piikitti pelaajan %1$s kuoliaaksi",
 	"death.attack.upgrade_aquatic.guardianSpine.player": "Vartijan piikki piikitti pelaajan %1$s kuoliaaksi tämän paetessa olentoa %2$s",
 	"death.attack.upgrade_aquatic.elderGuardianSpine": "Vartijavanhimman piikki piikitti pelaajan %1$s kuoliaaksi",
 	"death.attack.upgrade_aquatic.elderGuardianSpine.player": "Vartijavanhimmn piikki piikitti pelaajan %1$s kuoliaaksi tämän paetessa olentoa %2$s",
 	"death.attack.upgrade_aquatic.jellyfishSting": "%2$s poltti pelaajaa %1$s:n",
-
-	"_comment7": "Advancements",
 
 	"advancements.adventure.tooth_fairy.title": "Hammaskeiju",
 	"advancements.adventure.tooth_fairy.description": "Saa muinaisen merihirviön, syvänrevon, hammas",
@@ -628,7 +623,7 @@
 	"advancements.nether.sleepless_slave.title": "Uneton orja",
 	"advancements.nether.sleepless_slave.description": "Luo leimu heittämällä unettomuuden taikajuoma aavetta päin",
 
-	"advancements.nether.vibe_check.title": "Fiilistarkistus",
+	"advancements.nether.vibe_check.title": "Vibe-tsekkaus",
 	"advancements.nether.vibe_check.description": "Valmista siipisimpulla torjunnan taikajuoma ja muuta se laupeuden taikajuomaksi hämähäkinsilmän avulla",
 
 	"advancements.husbandry.eat_pickerelweed.title": "Laillista useimmissa osavaltioissa",
@@ -637,10 +632,15 @@
 	"advancements.husbandry.collect_all_pike.title": "Kalastajan maailmanmatka",
 	"advancements.husbandry.collect_all_pike.description": "Kerää jokainen haukimuunnos ämpärillä",
 
-	"advancements.husbandry.pick_mulberries.title": "Helpoimmat hedelmät",
-	"advancements.husbandry.pick_mulberries.description": "Poimi mulperi-marjoja jokipuusta",
+	"subtitles.upgrade_aquatic.entity.pike.death": "Hauki kuolee",
+	"subtitles.upgrade_aquatic.entity.pike.flop": "Hauki sätkii",
+	"subtitles.upgrade_aquatic.entity.pike.hurt": "Hauki vahingoittuu",
+	"subtitles.upgrade_aquatic.entity.pike.bite": "Hauki puree",
+	"subtitles.upgrade_aquatic.entity.pike.spit": "Hauki sylkee",
 
-	"_comment8": "Subtitles",
+	"subtitles.upgrade_aquatic.entity.perch.death": "Ahven kuolee",
+	"subtitles.upgrade_aquatic.entity.perch.flop": "Ahven sätkii",
+	"subtitles.upgrade_aquatic.entity.perch.hurt": "Ahven vahingoittuu",
 
 	"subtitles.upgrade_aquatic.thrasher.hurt": "Syvänrepo vahingoittuu",
 	"subtitles.upgrade_aquatic.thrasher.ambient": "Syvänrepo murisee",
