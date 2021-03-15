@@ -1,14 +1,25 @@
 package com.minecraftabnormals.upgrade_aquatic.core.other;
 
+import com.minecraftabnormals.abnormals_core.core.registry.LootInjectionRegistry;
 import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
+import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
+import net.minecraft.loot.LootTables;
 
 public class UACompat {
 
 	public static void registerCompat() {
+		registerLootInjectors();
 		registerCompostables();
 		registerFlammables();
+	}
+
+	public static void registerLootInjectors() {
+		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(UpgradeAquatic.MOD_ID);
+		injector.addLootInjection(injector.buildLootPool("tooth_ruins", 1, 0), LootTables.CHESTS_UNDERWATER_RUIN_BIG);
+		injector.addLootInjection(injector.buildLootPool("tooth_treasure", 1, 0), LootTables.CHESTS_BURIED_TREASURE);
+		injector.addLootInjection(injector.buildLootPool("pickerelweed_structures", 1, 0), LootTables.CHESTS_SHIPWRECK_SUPPLY);
 	}
 
 	public static void registerCompostables() {
