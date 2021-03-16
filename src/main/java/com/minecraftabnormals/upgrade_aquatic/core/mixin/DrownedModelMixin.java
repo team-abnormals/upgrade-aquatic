@@ -26,7 +26,6 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 		if (UAConfig.CLIENT.drownedSwimmingAnimation.get()) {
 			if (drowned.isInWater() && drowned.getRidingEntity() == null && this.getHorizontalMotion(drowned.getMotion()) >= 0.025F && drowned.getEntityWorld().getFluidState(drowned.getPosition().down()).isTagged(FluidTags.WATER)) {
 				float limbSwingRemainder = limbSwing % 26.0F;
-				drowned.setPose(Pose.SWIMMING);
 				HandSide handside = this.getMainHand(drowned);
 				float rightArmSwimAnimTicks = handside == HandSide.RIGHT && this.swingProgress > 0.0F ? 0.0F : this.swimAnimation;
 				float leftArmSwimAnimTicks = handside == HandSide.LEFT && this.swingProgress > 0.0F ? 0.0F : this.swimAnimation;
@@ -61,8 +60,6 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 				}
 				this.bipedLeftLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedLeftLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F + (float) Math.PI));
 				this.bipedRightLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedRightLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F));
-			} else {
-				drowned.setPose(Pose.STANDING);
 			}
 		}
 	}

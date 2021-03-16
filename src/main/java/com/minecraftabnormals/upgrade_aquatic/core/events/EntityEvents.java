@@ -54,6 +54,8 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -146,6 +148,17 @@ public class EntityEvents {
 				}
 			}
 		}
+		if (entity instanceof DrownedEntity) {
+			Pose pose = EntityEvents.getHorizontalMotion(((DrownedEntity) entity).getMotion()) >= 0.025F && ((DrownedEntity) entity).getEntityWorld().getFluidState(((DrownedEntity) entity).getPosition().down()).isTagged(FluidTags.WATER) ? Pose.SWIMMING : Pose.STANDING;
+			if (entity.getPose() != pose)
+				((DrownedEntity) entity).setPose(pose);
+		}
+	}
+	
+	private static float getHorizontalMotion(Vector3d motion) {
+		double x = motion.getX();
+		double z = motion.getZ();
+		return MathHelper.sqrt(x * x + z * z);
 	}
 
 	@SubscribeEvent
@@ -248,9 +261,8 @@ public class EntityEvents {
 	public static void onDrownedPoseChange(EntityEvent.Size event) {
 		Entity entity = event.getEntity();
 		if (entity instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
-			DrownedEntity drowned = (DrownedEntity) entity;
 			event.setNewSize(new EntitySize(event.getOldSize().width, 0.40F, false));
-			drowned.size = EntitySize.flexible(drowned.isChild() ? 0.7F : 0.6F, 0.6F);
+			event.setNewEyeHeight(0.40F);
 		}
 	}
 
