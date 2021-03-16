@@ -3,7 +3,6 @@ package com.minecraftabnormals.upgrade_aquatic.core.mixin;
 import com.minecraftabnormals.upgrade_aquatic.core.UAConfig;
 import net.minecraft.client.renderer.entity.model.DrownedModel;
 import net.minecraft.client.renderer.entity.model.ZombieModel;
-import net.minecraft.entity.Pose;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.HandSide;
