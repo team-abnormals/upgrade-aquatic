@@ -1,6 +1,5 @@
 package com.minecraftabnormals.upgrade_aquatic.core.mixin;
 
-import com.minecraftabnormals.upgrade_aquatic.core.UAConfig;
 import net.minecraft.client.renderer.entity.model.DrownedModel;
 import net.minecraft.client.renderer.entity.model.ZombieModel;
 import net.minecraft.entity.monster.ZombieEntity;
@@ -22,7 +21,7 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 
 	@Inject(at = @At("TAIL"), method = "setRotationAngles(Lnet/minecraft/entity/monster/ZombieEntity;FFFFF)V")
 	private void setRotationAngles(T drowned, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
-		if (UAConfig.COMMON.drownedSwimmingAnimation.get()) {
+		if (drowned.isActualySwimming()) {
 			if (drowned.isInWater() && drowned.getRidingEntity() == null && this.getHorizontalMotion(drowned.getMotion()) >= 0.025F && drowned.getEntityWorld().getFluidState(drowned.getPosition().down()).isTagged(FluidTags.WATER)) {
 				float limbSwingRemainder = limbSwing % 26.0F;
 				HandSide handside = this.getMainHand(drowned);
