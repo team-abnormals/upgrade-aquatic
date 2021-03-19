@@ -24,7 +24,7 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
 	 */
 	@Overwrite
 	protected void applyRotations(DrownedEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-		if (UAConfig.CLIENT.drownedSwimmingAnimation.get()) {
+		if (UAConfig.COMMON.drownedSwimmingAnimation.get()) {
 			float swimAnimationTicks = entityLiving.getSwimAnimation(partialTicks);
 			if (entityLiving.isInWater()) {
 				super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);

@@ -8,6 +8,7 @@ public class UAConfig {
 
 	public static class Common {
 		public final ConfigValue<Boolean> clericsBuyThrasherTeeth;
+		public final ConfigValue<Boolean> drownedSwimmingAnimation;
 		public final ConfigValue<Boolean> leatherworkersSellBedrolls;
 
 		public final ConfigValue<Integer> deepOceanMobMaxHeight;
@@ -36,6 +37,7 @@ public class UAConfig {
 			builder.pop();
 
 			builder.push("mobs");
+			this.drownedSwimmingAnimation = builder.comment("Keep in mind the swimming animation affects their hitbox").define("Drowned swimming animation", true);
 			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("Deep ocean mob max height", 30, 0, 255);
 
 			builder.push("spawns");
@@ -64,14 +66,9 @@ public class UAConfig {
 	}
 
 	public static class Client {
-		public final ConfigValue<Boolean> drownedSwimmingAnimation;
 		public final ConfigValue<Integer> daysTillRenderInsomniaOverlay;
 
 		public Client(ForgeConfigSpec.Builder builder) {
-			builder.push("mobs");
-			this.drownedSwimmingAnimation = builder.define("Drowned swimming animation", true);
-			builder.pop();
-
 			builder.push("misc");
 			this.daysTillRenderInsomniaOverlay = builder
 					.comment("The amount of days till the insomnia overlay is rendered", "Setting to 3 will make the overlay indicate phantom spawns", "Setting to 0 will disable the overlay")
