@@ -42,7 +42,7 @@ public class LootEvents {
 		}
 
 		if (name.equals(LootTables.GAMEPLAY_FISHING_JUNK)) {
-			addEntry(pool, ItemLootEntry.builder(UABlocks.DRIFTWOOD.get()).weight(10).acceptFunction(SetCount.builder(ConstantRange.of(5))).build());
+			addEntry(pool, ItemLootEntry.builder(UABlocks.DRIFTWOOD_LOG.get()).weight(10).acceptFunction(SetCount.builder(ConstantRange.of(5))).build());
 			addEntry(pool, ItemLootEntry.builder(UABlocks.BLUE_PICKERELWEED.get()).weight(12).acceptCondition(IN_SWAMP.alternative(IN_SWAMP_HILLS).alternative(IN_RIVER)).build());
 			addEntry(pool, ItemLootEntry.builder(UABlocks.PURPLE_PICKERELWEED.get()).weight(12).acceptCondition(IN_SWAMP.alternative(IN_SWAMP_HILLS).alternative(IN_RIVER)).build());
 		}
