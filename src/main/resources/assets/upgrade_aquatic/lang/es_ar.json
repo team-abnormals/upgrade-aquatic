@@ -464,6 +464,7 @@
   "item.upgrade_aquatic.nautilus_bucket": "Balde con nautilo",
   "item.upgrade_aquatic.pike_bucket": "Balde con lucio",
   "item.upgrade_aquatic.lionfish_bucket": "Balde con pez león",
+  "item.upgrade_aquatic.perch_bucket": "Balde con perca",
   "item.upgrade_aquatic.squid_bucket": "Balde con calamar",
   "item.upgrade_aquatic.jellyfish_bucket": "Balde con medusa",
   "item.upgrade_aquatic.glow_squid_bucket": "Balde con calamar luminoso",
@@ -472,6 +473,7 @@
   "item.upgrade_aquatic.nautilus_spawn_egg": "Generar nautilo",
   "item.upgrade_aquatic.pike_spawn_egg": "Generar lucio",
   "item.upgrade_aquatic.lionfish_spawn_egg": "Generar pez león",
+  "item.upgrade_aquatic.perch_spawn_egg": "Generar perca",
   "item.upgrade_aquatic.thrasher_spawn_egg": "Generar triturador",
   "item.upgrade_aquatic.great_thrasher_spawn_egg": "Generar gran triturador",
   "item.upgrade_aquatic.flare_spawn_egg": "Generar llamarada",
@@ -485,6 +487,8 @@
   "item.upgrade_aquatic.cooked_pike": "Lucio cocinado",
   "item.upgrade_aquatic.lionfish": "Pez león crudo",
   "item.upgrade_aquatic.cooked_lionfish": "Pez león cocinado",
+  "item.upgrade_aquatic.perch": "Perca cruda",
+  "item.upgrade_aquatic.cooked_perch": "Perca cocinada",
   
   "item.upgrade_aquatic.mulberry": "Moras",
   "item.upgrade_aquatic.mulberry_jam_bottle": "Botella de mermelada de moras",
@@ -537,6 +541,7 @@
   "entity.upgrade_aquatic.nautilus": "Nautilo",
   "entity.upgrade_aquatic.pike": "Lucio",
   "entity.upgrade_aquatic.lionfish": "Pez león",
+  "entity.upgrade_aquatic.perch": "Perca",
   "entity.upgrade_aquatic.thrasher": "Triturador",
   "entity.upgrade_aquatic.great_thrasher": "Gran triturador",
   "entity.upgrade_aquatic.flare": "Llamarada",
@@ -625,7 +630,17 @@
   "advancements.husbandry.eat_pickerelweed.description": "Comé una espiga de agua hervida para recuperar burbujas de agua",
   
   "advancements.husbandry.collect_all_pike.title": "Gira mundial de lucios",
-  "advancements.husbandry.collect_all_pike.description": "Capturá en baldes todas las variedades de lucios",
+  "advancements.husbandry.collect_all_pike.description": "Capturá en baldes a todas las variedades de lucios",
+
+  "subtitles.upgrade_aquatic.entity.pike.death": "Lucio muere",
+  "subtitles.upgrade_aquatic.entity.pike.flop": "Lucio aletea",
+  "subtitles.upgrade_aquatic.entity.pike.hurt": "Lucio herido",
+  "subtitles.upgrade_aquatic.entity.pike.bite": "Lucio muerde",
+  "subtitles.upgrade_aquatic.entity.pike.spit": "Lucio escupe",
+
+  "subtitles.upgrade_aquatic.entity.perch.death": "Perca muere",
+  "subtitles.upgrade_aquatic.entity.perch.flop": "Perca aletea",
+  "subtitles.upgrade_aquatic.entity.perch.hurt": "Perca herida",
 
   "subtitles.upgrade_aquatic.thrasher.hurt": "Triturador herido",
   "subtitles.upgrade_aquatic.thrasher.ambient": "Gruñido de triturador",
