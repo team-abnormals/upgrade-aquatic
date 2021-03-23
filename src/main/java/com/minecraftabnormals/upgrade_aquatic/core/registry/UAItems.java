@@ -57,7 +57,7 @@ public class UAItems {
 	public static final RegistryObject<AbnormalsSpawnEggItem> PIKE_SPAWN_EGG            = HELPER.createSpawnEggItem("pike", UAEntities.PIKE::get, 4806944, 13002040);
 	public static final RegistryObject<AbnormalsSpawnEggItem> LIONFISH_SPAWN_EGG        = HELPER.createSpawnEggItem("lionfish", UAEntities.LIONFISH::get, 15281931, 16111310);
 	public static final RegistryObject<AbnormalsSpawnEggItem> PERCH_SPAWN_EGG           = HELPER.createSpawnEggItem("perch", UAEntities.PERCH::get, 7764021, 12555079);
-	public static final RegistryObject<AbnormalsSpawnEggItem> THRASHER_SPAWN_EGG        = HELPER.createSpawnEggItem("thrasher", UAEntities.THRASHER::get, 7764021, 11730927);
+	public static final RegistryObject<AbnormalsSpawnEggItem> THRASHER_SPAWN_EGG        = HELPER.createSpawnEggItem("thrasher", UAEntities.THRASHER::get, 7255507, 11730927);
 	public static final RegistryObject<AbnormalsSpawnEggItem> GREAT_THRASHER_SPAWN_EGG  = HELPER.createSpawnEggItem("great_thrasher", UAEntities.GREAT_THRASHER::get, 10078409, 13294289);
 	public static final RegistryObject<AbnormalsSpawnEggItem> FLARE_SPAWN_EGG           = HELPER.createSpawnEggItem("flare", UAEntities.FLARE::get, 4532619, 14494960);
 	public static final RegistryObject<JellyfishSpawnEggItem> JELLYFISH_SPAWN_EGG       = HELPER.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);

@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
@@ -123,9 +124,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	@Override
 	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		int i = state.get(AGE);
-		if (i < 4 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+		if (i < 4 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
 			worldIn.setBlockState(pos, state.with(AGE, i + 1));
-			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);	
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
 	
@@ -133,9 +134,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		int i = state.get(AGE);
-		if (i < 4 && worldIn.getLightSubtracted(pos.up(), 0) >= 7 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
+		if (i < 4 && worldIn.getLightSubtracted(pos.up(), 0) >= 7 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
 			worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
-			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
 
@@ -146,9 +147,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	            BlockPos blockpos = pos.down();
 	            BlockState blockstate = worldIn.getBlockState(blockpos);
 	            if (!blockstate.isSolid() || !blockstate.isSolidSide(worldIn, blockpos, Direction.UP)) {
-	                double d0 = (double)((float)pos.getX() + rand.nextFloat());
-	                double d1 = (double)pos.getY() - 0.05D;
-	                double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+	                double d0 = ((float)pos.getX() + rand.nextFloat());
+	                double d1 = pos.getY() - 0.05D;
+	                double d2 = ((float)pos.getZ() + rand.nextFloat());
 	                worldIn.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 	            }
 	        }
@@ -158,10 +159,6 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	@Override
 	public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity) {
 	    return true;
-	}
-
-	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
-	    return false;
 	}
 
 	protected boolean isStateValid(World worldIn, BlockPos pos) {
