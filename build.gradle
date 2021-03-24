@@ -78,7 +78,7 @@ dependencies {
 
 repositories {
     maven {
-        url "https://www.cursemaven.com"
+        url "https://maven.jaackson.me"
     }
     maven {
         url "https://dvs1.progwml6.com/files/maven/"
