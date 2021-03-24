@@ -146,6 +146,11 @@ public class EntityEvents {
 				}
 			}
 		}
+		if (entity instanceof DrownedEntity && UAConfig.COMMON.drownedSwimmingAnimation.get() && entity.isServerWorld()) {
+			Pose pose = Entity.horizontalMag(entity.getMotion()) >= 0.000625F && entity.getEntityWorld().getFluidState(entity.getPosition().down()).isTagged(FluidTags.WATER) ? Pose.SWIMMING : Pose.STANDING;
+			if (entity.getPose() != pose)
+				((DrownedEntity) entity).setPose(pose);
+		}
 	}
 
 	@SubscribeEvent
@@ -247,10 +252,9 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onDrownedPoseChange(EntityEvent.Size event) {
 		Entity entity = event.getEntity();
-		if (entity instanceof DrownedEntity && event.getPose() == Pose.SWIMMING) {
-			DrownedEntity drowned = (DrownedEntity) entity;
+		if (entity instanceof DrownedEntity && entity.getPose() == Pose.SWIMMING && UAConfig.COMMON.drownedSwimmingAnimation.get()) {
 			event.setNewSize(new EntitySize(event.getOldSize().width, 0.40F, false));
-			drowned.size = EntitySize.flexible(drowned.isChild() ? 0.7F : 0.6F, 0.6F);
+			event.setNewEyeHeight(0.40F);
 		}
 	}
 
