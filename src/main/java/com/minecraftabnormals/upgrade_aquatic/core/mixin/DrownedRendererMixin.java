@@ -30,7 +30,7 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
 				float rotationPitchChange = entityLiving.isInWater() ? -90.0F - entityLiving.rotationPitch : -90.0F;
 				float rotationModifier = MathHelper.lerp(swimAnimationTicks, 0.0F, rotationPitchChange);
 				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(rotationModifier));
-                matrixStackIn.translate(0.0D, -1.0D, (double) 0.3F);
+				matrixStackIn.translate(0.0D, -1.0D, (double) 0.3F);
 			} else {
 				super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
 			}
