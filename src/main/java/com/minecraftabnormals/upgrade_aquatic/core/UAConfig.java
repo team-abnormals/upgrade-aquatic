@@ -37,7 +37,7 @@ public class UAConfig {
 			builder.pop();
 
 			builder.push("mobs");
-			this.drownedSwimmingAnimation = builder.comment("Keep in mind the swimming animation affects their hitbox").define("Drowned swimming animation", true);
+			this.drownedSwimmingAnimation = builder.comment("Give Drowneds a swimming animation, like in bedrock edition").define("Drowned swimming animation", true);
 			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("Deep ocean mob max height", 30, 0, 255);
 
 			builder.push("spawns");
