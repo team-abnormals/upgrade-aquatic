@@ -37,8 +37,8 @@ public class LootEvents {
 
 		if (name.equals(LootTables.GAMEPLAY_FISHING_FISH)) {
 			addEntry(pool, ItemLootEntry.builder(UAItems.PIKE.get()).weight(11).acceptCondition(IN_SWAMP.alternative(IN_SWAMP_HILLS).alternative(IN_RIVER)).build());
-			addEntry(pool, ItemLootEntry.builder(UAItems.LIONFISH.get()).weight(5).acceptCondition(IN_SWAMP.alternative(IN_SWAMP_HILLS)).build());
-			addEntry(pool, ItemLootEntry.builder(UAItems.PERCH.get()).weight(18).acceptCondition(IN_WARM_OCEAN.alternative(IN_DEEP_WARM_OCEAN)).build());
+			addEntry(pool, ItemLootEntry.builder(UAItems.PERCH.get()).weight(18).acceptCondition(IN_SWAMP.alternative(IN_SWAMP_HILLS)).build());
+			addEntry(pool, ItemLootEntry.builder(UAItems.LIONFISH.get()).weight(5).acceptCondition(IN_WARM_OCEAN.alternative(IN_DEEP_WARM_OCEAN)).build());
 		}
 
 		if (name.equals(LootTables.GAMEPLAY_FISHING_JUNK)) {

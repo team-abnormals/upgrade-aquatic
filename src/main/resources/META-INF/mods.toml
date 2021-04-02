@@ -7,6 +7,7 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
     modId = "upgrade_aquatic"
     version = "${file.jarVersion}"
     logoFile = "logo.png"
+    itemIcon = "upgrade_aquatic:pike"
     authors = "Team Abnormals"
     credits = "SmellyModder, bageldotjpg, Cameron, five, SystemZee, Ocelot, Endergized"
     displayName = "Upgrade Aquatic"
