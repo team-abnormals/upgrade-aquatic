@@ -1,7 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DeadCoralPlantBlock;
 import net.minecraft.util.math.BlockPos;

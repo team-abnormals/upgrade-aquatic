@@ -1,18 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import java.util.Random;
-import java.util.function.Consumer;
-
-import javax.annotation.Nullable;
-
-import com.minecraftabnormals.upgrade_aquatic.core.other.UABlockTags;
+import com.minecraftabnormals.abnormals_core.core.util.BlockUtil;
+import com.minecraftabnormals.abnormals_core.core.util.GenerationPiece;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.abnormals_core.core.library.GenerationPiece;
-import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
-import com.teamabnormals.abnormals_core.core.utils.BlockUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -26,15 +17,14 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.StructureManager;
-import net.minecraft.world.gen.placement.FrequencyConfig;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.common.Tags;
 
-public class DriftwoodFeature extends Feature<NoFeatureConfig> implements IAddToBiomes {
+import javax.annotation.Nullable;
+import java.util.Random;
+
+public class DriftwoodFeature extends Feature<NoFeatureConfig> {
 	protected static final BlockState DRIFTWOOD_LOG = UABlocks.DRIFTWOOD_LOG.get().getDefaultState();
 
 	public DriftwoodFeature(Codec<NoFeatureConfig> configFactoryIn) {
@@ -42,17 +32,17 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> implements IAddTo
 	}
 
 	@Override
-	public boolean func_230362_a_(ISeedReader world, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		boolean standing = rand.nextFloat() < 0.25F;
 		Block downBlock = world.getBlockState(pos.down()).getBlock();
-		if (standing && world.getBlockState(pos).getBlock() == Blocks.WATER && (downBlock.isIn(UABlockTags.DIRT_LIKE) || downBlock.isIn(BlockTags.SAND))) {
+		if (standing && world.getBlockState(pos).getBlock() == Blocks.WATER && (downBlock.isIn(Tags.Blocks.DIRT) || downBlock.isIn(Tags.Blocks.SAND))) {
 			Direction upDirection = Direction.UP;
 			if (this.isDirectionOpen(world, pos, upDirection, 3)) {
 				for (int i = 0; i < 3; i++) {
 					this.placeDriftwoodLog(world, pos.offset(upDirection, i), upDirection, null);
 					if (rand.nextBoolean()) {
 						Direction horizontalDirection = Direction.byHorizontalIndex(rand.nextInt(4));
-						if (world.isAirBlock(pos.offset(upDirection, i).offset(horizontalDirection)) && BlockUtils.isPosNotTouchingBlock(world, pos.offset(upDirection, i).offset(horizontalDirection), UABlocks.DRIFTWOOD_LOG.get(), horizontalDirection.getOpposite())) {
+						if (world.isAirBlock(pos.offset(upDirection, i).offset(horizontalDirection)) && BlockUtil.isPosNotTouchingBlock(world, pos.offset(upDirection, i).offset(horizontalDirection), UABlocks.DRIFTWOOD_LOG.get(), horizontalDirection.getOpposite())) {
 							this.placeDriftwoodLog(world, pos.offset(upDirection, i).offset(horizontalDirection), horizontalDirection, null);
 						}
 					}
@@ -64,7 +54,7 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> implements IAddTo
 		} else {
 			Direction direction = Direction.byHorizontalIndex(rand.nextInt(4));
 			int length = rand.nextInt(3) + 3;
-			if ((rand.nextFloat() < 0.25F && world.getBiome(pos).getCategory() == Category.OCEAN && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.down()).getBlock() == Blocks.WATER && world.isAirBlock(pos.up())) || (world.getBiome(pos).getCategory() != Category.OCEAN && this.isNearWater(world, pos) && downBlock.isIn(UABlockTags.DIRT_LIKE) || downBlock.isIn(BlockTags.SAND) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
+			if ((rand.nextFloat() < 0.25F && world.getBiome(pos).getCategory() == Category.OCEAN && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.down()).getBlock() == Blocks.WATER && world.isAirBlock(pos.up())) || (world.getBiome(pos).getCategory() != Category.OCEAN && this.isNearWater(world, pos) && downBlock.isIn(Tags.Blocks.DIRT) || downBlock.isIn(Tags.Blocks.SAND) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
 				GenerationPiece driftwood = new GenerationPiece((iworld, part) -> {
 					return world.isAirBlock(part.pos) || world.getFluidState(part.pos).getFluid().isIn(FluidTags.WATER);
 				});
@@ -75,7 +65,7 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> implements IAddTo
 					}
 					if (rand.nextBoolean()) {
 						Direction upOrDown = rand.nextBoolean() ? Direction.UP : Direction.DOWN;
-						if (this.isBlockPlaceableAtPos(world, pos.offset(direction, i).offset(upOrDown), world.getBiome(pos.offset(direction, i).offset(upOrDown)).getCategory() == Category.OCEAN) && BlockUtils.isPosNotTouchingBlock(world, pos.offset(direction, i).offset(upOrDown), UABlocks.DRIFTWOOD_LOG.get(), Direction.UP, Direction.DOWN)) {
+						if (this.isBlockPlaceableAtPos(world, pos.offset(direction, i).offset(upOrDown), world.getBiome(pos.offset(direction, i).offset(upOrDown)).getCategory() == Category.OCEAN) && BlockUtil.isPosNotTouchingBlock(world, pos.offset(direction, i).offset(upOrDown), UABlocks.DRIFTWOOD_LOG.get(), Direction.UP, Direction.DOWN)) {
 							this.placeDriftwoodLog(world, pos.offset(direction, i).offset(upOrDown), upOrDown, driftwood);
 						}
 					}
@@ -111,7 +101,7 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> implements IAddTo
 	private boolean isGroundForDirectionMostlySuitable(IWorld world, BlockPos pos, Direction direction, int length) {
 		int foundGaps = 0;
 		for (int i = 0; i < length; i++) {
-			if (!world.getBlockState(pos.down().offset(direction, i)).getBlock().isIn(UABlockTags.DIRT_LIKE) && !world.getBlockState(pos.down().offset(direction, i)).getBlock().isIn(BlockTags.SAND)) {
+			if (!world.getBlockState(pos.down().offset(direction, i)).getBlock().isIn(Tags.Blocks.DIRT) && !world.getBlockState(pos.down().offset(direction, i)).getBlock().isIn(BlockTags.SAND)) {
 				if (world.getBiome(pos.down().offset(direction, i)).getCategory() != Category.OCEAN) {
 					foundGaps++;
 				} else {
@@ -176,20 +166,5 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> implements IAddTo
 	private boolean isBlockPlaceableAtPos(IWorld world, BlockPos pos, boolean inOcean) {
 		Block block = world.getBlockState(pos).getBlock();
 		return inOcean ? world.isAirBlock(pos) || block == Blocks.WATER : world.isAirBlock(pos);
-	}
-
-	@Override
-	public Consumer<Biome> processBiomeAddition() {
-		return biome -> {
-			if(biome.getCategory() == Category.BEACH) {
-				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(14))));
-			} else if(biome.getCategory() == Category.RIVER) {
-				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(125))));
-			} else if(biome.getCategory() == Category.SWAMP) {
-				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(21))));
-			} else if(biome.getCategory() == Category.OCEAN) {
-				biome.getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION).add(UAFeatures.DRIFTWOOD.get().withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.COUNT_HEIGHTMAP_DOUBLE.configure(new FrequencyConfig(1))));
-			}
-		};
 	}
 }

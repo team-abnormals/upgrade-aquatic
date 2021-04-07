@@ -3,7 +3,6 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 import com.minecraftabnormals.upgrade_aquatic.client.model.GooseModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.GooseEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -15,12 +14,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class GooseRenderer extends MobRenderer<GooseEntity, GooseModel<GooseEntity>> {
 
 	public GooseRenderer(EntityRendererManager manager) {
-		super(manager, new GooseModel<>(), 0.45F);
+		super(manager, new GooseModel<>(), 0.25F);
 	}
 	
 	@Override
 	public ResourceLocation getEntityTexture(GooseEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/goose.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/goose.png");
 	}
 	
 	@Override

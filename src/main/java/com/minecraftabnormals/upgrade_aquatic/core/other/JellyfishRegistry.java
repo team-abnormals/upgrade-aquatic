@@ -1,20 +1,19 @@
 package com.minecraftabnormals.upgrade_aquatic.core.other;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.BoxJellyfishEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.CassiopeaJellyfishEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ImmortalJellyfishEntity;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Rarity;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
-
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.*;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Rarity;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
 
 /**
  * Registry class for the jellyfish
@@ -25,13 +24,13 @@ public class JellyfishRegistry {
 	public static final Map<Class<? extends AbstractJellyfishEntity>, Integer> IDS = Maps.newHashMap();
 	
 	static {
-		registerJellyfish(() -> UAEntities.BOX_JELLYFISH.get(), BoxJellyfishEntity.class, UAEntitySpawns.warmishOceanCondition(), Rarity.COMMON);
-		registerJellyfish(() -> UAEntities.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishEntity.class, biome -> biome == Biomes.LUKEWARM_OCEAN, Rarity.COMMON);
-		//registerJellyfish(() -> UAEntities.IMMORTAL_JELLYFISH.get(), EntityImmortalJellyfish.class, UAEntitySpawns.warmishOceanCondition(), Rarity.COMMON);
+		registerJellyfish(UAEntities.BOX_JELLYFISH, BoxJellyfishEntity.class, Rarity.COMMON);
+		registerJellyfish(UAEntities.CASSIOPEA_JELLYFISH, CassiopeaJellyfishEntity.class, Rarity.COMMON);
+		registerJellyfish(UAEntities.IMMORTAL_JELLYFISH, ImmortalJellyfishEntity.class, Rarity.COMMON);
 	}
 
-	public static <J extends AbstractJellyfishEntity> void registerJellyfish(Supplier<EntityType<J>> jellyfish, Class<J> jellyfishClass, Predicate<Biome> biomePredicate, Rarity rarity) {
-		JELLYFISHES.add(new JellyfishEntry<J>(jellyfish, biomePredicate, rarity));
+	public static <J extends AbstractJellyfishEntity> void registerJellyfish(Supplier<EntityType<J>> jellyfish, Class<J> jellyfishClass, Rarity rarity) {
+		JELLYFISHES.add(new JellyfishEntry<J>(jellyfish, rarity));
 		IDS.putIfAbsent(jellyfishClass, getNextId());
 	}
 	
@@ -72,12 +71,10 @@ public class JellyfishRegistry {
 	
 	public static class JellyfishEntry<J extends AbstractJellyfishEntity> {
 		public final Supplier<EntityType<J>> jellyfish;
-		public final Predicate<Biome> biomePredicate;
 		public final Rarity rarity;
 		
-		public JellyfishEntry(Supplier<EntityType<J>> jellyfish, Predicate<Biome> biomePredicate, Rarity rarity) {
+		public JellyfishEntry(Supplier<EntityType<J>> jellyfish, Rarity rarity) {
 			this.jellyfish = jellyfish;
-			this.biomePredicate = biomePredicate;
 			this.rarity = rarity;
 		}
 	}

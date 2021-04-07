@@ -1,14 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import java.util.Random;
-import java.util.function.Consumer;
-
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.MulberryVineBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.abnormals_core.core.library.api.IAddToBiomes;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,30 +14,23 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.IWorldWriter;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.IWorldGenerationBaseReader;
 import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.structure.StructureManager;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.common.IPlantable;
 
-@SuppressWarnings("deprecation")
-public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> implements IAddToBiomes {
-	public static final BaseTreeFeatureConfig RIVER_TREE_CONFIG = (new BaseTreeFeatureConfig.Builder(new SimpleBlockStateProvider(UABlocks.RIVER_LOG.get().getDefaultState()), new SimpleBlockStateProvider(UABlocks.RIVER_LEAVES.get().getDefaultState()), null, null, null)).build();
+import java.util.Random;
 
+@SuppressWarnings("deprecation")
+public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 	public RiverTreeFeature(Codec<BaseTreeFeatureConfig> config) {
 		super(config);
 	}
 
 	@Override
-	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
+	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
 		int height = 3 + rand.nextInt(2) + rand.nextInt(2);
 		boolean flag = true;
 
@@ -167,12 +154,12 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> implements 
 		return world.getBlockState(pos).canSustainPlant(world, pos, Direction.UP, (IPlantable)UABlocks.RIVER_SAPLING.get());
 	}
 
-	@Override
-	public Consumer<Biome> processBiomeAddition() {
-		return biome -> {
-			if (biome.getCategory() == Category.RIVER) {
-				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.RIVER_TREE.get().withConfiguration(RIVER_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(1, 0.75F, 2))));
-			}
-		};
-	}
+//	@Override
+//	public Consumer<Biome> processBiomeAddition() {
+//		return biome -> {
+//			if (biome.getCategory() == Category.RIVER) {
+//				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, UAFeatures.RIVER_TREE.get().withConfiguration(RIVER_TREE_CONFIG).withPlacement(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(1, 0.80F, 2))));
+//			}
+//		};
+//	}
 }

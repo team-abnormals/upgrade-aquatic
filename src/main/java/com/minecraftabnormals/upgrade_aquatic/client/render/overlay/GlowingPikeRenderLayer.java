@@ -1,13 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render.overlay;
 
-import com.teamabnormals.abnormals_core.client.ACRenderTypes;
-import com.teamabnormals.abnormals_core.client.ClientInfo;
+import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
+import com.minecraftabnormals.abnormals_core.client.ClientInfo;
 import com.minecraftabnormals.upgrade_aquatic.client.model.PikeModel;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeType.PikeRarity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -25,7 +25,7 @@ public class GlowingPikeRenderLayer<T extends PikeEntity, M extends PikeModel<T>
 	
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T pike, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		if(pike.getPikeType() != 7 && pike.getPikeType() != 13 && pike.getPikeType() != 12) return;
+		if (pike.getPikeType().rarity != PikeRarity.LEGENDARY) return;
 		
 		ClientInfo.MINECRAFT.getTextureManager().bindTexture(this.getPikeOverlayTexture(pike));
 
@@ -36,7 +36,7 @@ public class GlowingPikeRenderLayer<T extends PikeEntity, M extends PikeModel<T>
 	}
 	
 	private ResourceLocation getPikeOverlayTexture(PikeEntity pike) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/pike/pike_" + pike.getPikeType() + "_glow.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s_glow.png", pike.getPikeType().name().toLowerCase()));
 	}
 	
 }

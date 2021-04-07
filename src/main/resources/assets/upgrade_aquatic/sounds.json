@@ -1,83 +1,356 @@
 {
-    "entity.thrasher.thrash":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.thrash",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_thrash", "stream": false }
-        ]
-    },
-    "entity.thrasher.sonar_fire":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.sonar_fire",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_sonar_0", "stream": false },
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_sonar_1", "stream": false }
-        ]
-    },
-    "entity.thrasher.flop":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.flop",
-        "sounds": [
-        	{ "name": "mob/guardian/flop1", "stream": false },
-        	{ "name": "mob/guardian/flop2", "stream": false },
-        	{ "name": "mob/guardian/flop3", "stream": false }
-        ]
-    },
-	"entity.thrasher.ambient":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.ambient",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_0", "stream": false },
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_1", "stream": false },
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_2", "stream": false }
-        ]
-    },
-    "entity.thrasher.ambient_land":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.ambient",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_land", "stream": false }
-        ]
-    },
-    "entity.thrasher.hurt":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.hurt",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_0", "stream": false },
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_1", "stream": false },
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_2", "stream": false }
-        ]
-    },
-    "entity.thrasher.hurt_land":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.hurt",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_0", "stream": false },
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_1", "stream": false },
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_2", "stream": false }
-        ]
-    },
-    "entity.thrasher.death":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.death",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_death", "stream": false }
-        ]
-    },
-    "entity.thrasher.death_land":
-    {
-        "category": "entity",
-        "subtitle": "subtitles.upgrade_aquatic.thrasher.death",
-        "sounds": [
-        	{ "name": "upgrade_aquatic:entity/thrasher/thrasher_death", "stream": false }
-        ]
-    }
+  "entity.pike.ambient": {
+    "sounds": []
+  },
+  "entity.pike.death": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.upgrade_aquatic.entity.pike.death"
+  },
+  "entity.pike.flop": {
+    "sounds": [
+      {
+        "name": "entity/fish/flop1",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop2",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop3",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop4",
+        "pitch": 0.8,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.upgrade_aquatic.entity.pike.flop"
+  },
+  "entity.pike.hurt": {
+    "sounds": [
+      {
+        "name": "entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.upgrade_aquatic.entity.pike.hurt"
+  },
+  "entity.pike.bite": {
+    "sounds": [
+      {
+        "name": "mob/fox/bite1",
+        "volume": 0.6,
+        "pitch": 1.1
+      },
+      {
+        "name": "mob/fox/bite2",
+        "volume": 0.6,
+        "pitch": 1.1
+      },
+      {
+        "name": "mob/fox/bite3",
+        "volume": 0.6,
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitles.upgrade_aquatic.entity.pike.bite"
+  },
+  "entity.pike.spit": {
+    "sounds": [
+      {
+        "name": "mob/fox/spit1",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/fox/spit2",
+        "volume": 0.7
+      },
+      {
+        "name": "mob/fox/spit3",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.upgrade_aquatic.entity.pike.spit"
+  },
+  "entity.perch.ambient": {
+    "sounds": []
+  },
+  "entity.perch.death": {
+    "sounds": [
+      "entity/fish/hurt1",
+      "entity/fish/hurt2",
+      "entity/fish/hurt3",
+      "entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.upgrade_aquatic.entity.perch.death"
+  },
+  "entity.perch.flop": {
+    "sounds": [
+      {
+        "name": "entity/fish/flop1",
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop2",
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop3",
+        "volume": 0.3
+      },
+      {
+        "name": "entity/fish/flop4",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.upgrade_aquatic.entity.perch.flop"
+  },
+  "entity.perch.hurt": {
+    "sounds": [
+      "entity/fish/hurt1",
+      "entity/fish/hurt2",
+      "entity/fish/hurt3",
+      "entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.upgrade_aquatic.entity.perch.hurt"
+  },
+  "entity.thrasher.thrash": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.thrash",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_thrash",
+        "stream": false
+      }
+    ]
+  },
+  "entity.thrasher.sonar_fire": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.sonar_fire",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_sonar_0",
+        "stream": false
+      },
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_sonar_1",
+        "stream": false
+      }
+    ]
+  },
+  "entity.thrasher.flop": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.flop",
+    "sounds": [
+      {
+        "name": "mob/guardian/flop1",
+        "stream": false
+      },
+      {
+        "name": "mob/guardian/flop2",
+        "stream": false
+      },
+      {
+        "name": "mob/guardian/flop3",
+        "stream": false
+      }
+    ]
+  },
+  "entity.thrasher.ambient": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.ambient",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_0",
+        "stream": false
+      },
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_1",
+        "stream": false
+      },
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.thrasher.ambient_land": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.ambient",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_idle_land",
+        "stream": false
+      }
+    ]
+  },
+  "entity.thrasher.hurt": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.hurt",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_0",
+        "stream": false
+      },
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_1",
+        "stream": false
+      },
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.thrasher.hurt_land": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.hurt",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_0",
+        "stream": false
+      },
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_1",
+        "stream": false
+      },
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_hurt_2",
+        "stream": false
+      }
+    ]
+  },
+  "entity.thrasher.death": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.death",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_death",
+        "stream": false
+      }
+    ]
+  },
+  "entity.thrasher.death_land": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.thrasher.death",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:entity/thrasher/thrasher_death",
+        "stream": false
+      }
+    ]
+  },
+  "entity.jellyfish.ambient": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.jellyfish.ambient",
+    "sounds": [
+      "upgrade_aquatic:entity/jellyfish/jellyfish_ambient_0",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_ambient_1",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_ambient_2"
+    ]
+  },
+  "entity.jellyfish.hurt": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.jellyfish.hurt",
+    "sounds": [
+      "upgrade_aquatic:entity/jellyfish/jellyfish_hurt_0",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_hurt_1",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_hurt_2"
+    ]
+  },
+  "entity.jellyfish.death": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.jellyfish.death",
+    "sounds": [
+      "upgrade_aquatic:entity/jellyfish/jellyfish_death_0",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_death_1"
+    ]
+  },
+  "entity.jellyfish.harvest": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.jellyfish.harvest",
+    "sounds": [
+      "upgrade_aquatic:entity/jellyfish/jellyfish_harvest_0",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_harvest_1",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_harvest_2"
+    ]
+  },
+  "entity.jellyfish.cooldown_start": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.jellyfish.cooldown_start",
+    "sounds": [
+      "upgrade_aquatic:entity/jellyfish/jellyfish_cooldown_start"
+    ]
+  },
+  "entity.jellyfish.cooldown_end": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.jellyfish.cooldown_end",
+    "sounds": [
+      "upgrade_aquatic:entity/jellyfish/jellyfish_cooldown_end"
+    ]
+  },
+  "entity.jellyfish.sting": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.jellyfish.sting",
+    "sounds": [
+      "upgrade_aquatic:entity/jellyfish/jellyfish_sting_0",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_sting_1",
+      "upgrade_aquatic:entity/jellyfish/jellyfish_sting_2"
+    ]
+  },
+  "entity.jellyfish.ghost_vanish": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.jellyfish.ghost_vanish",
+    "sounds": [
+      "upgrade_aquatic:entity/jellyfish/ghost_jellyfish_vanish"
+    ]
+  },
+  "item.bucket.empty_jellyfish": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.bucket.empty_jellyfish",
+    "sounds": [
+      "upgrade_aquatic:item/bucket/jellyfish_bucket_empty"
+    ]
+  },
+  "item.bucket.fill_jellyfish": {
+    "category": "entity",
+    "subtitle": "subtitles.upgrade_aquatic.bucket.fill_jellyfish",
+    "sounds": [
+      "upgrade_aquatic:item/bucket/jellyfish_bucket_fill"
+    ]
+  }
 }

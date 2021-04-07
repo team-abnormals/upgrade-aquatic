@@ -1,11 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import java.util.Random;
-
+import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.abnormals_core.core.utils.MathUtils;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -13,7 +10,8 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.StructureManager;
+
+import java.util.Random;
 
 public class PrismarineStalactiteFeature extends PrismarineCoralFeature {
 
@@ -22,12 +20,12 @@ public class PrismarineStalactiteFeature extends PrismarineCoralFeature {
 	}
 	
 	@Override
-	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		return false;
 	}
 	
-	public static boolean placeFeature(ISeedReader world, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		Direction randDirection = Direction.func_239631_a_(rand);
+	public static boolean placeFeature(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+		Direction randDirection = Direction.getRandomDirection(rand);
 		if(randDirection == Direction.UP || randDirection == Direction.DOWN) {
 			randDirection = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
 		}
@@ -39,7 +37,7 @@ public class PrismarineStalactiteFeature extends PrismarineCoralFeature {
 					int b = 4;
 					int c = rand.nextInt(5) + 4;
 					@SuppressWarnings("unused")
-					MathUtils.Equation r = (theta) -> {
+					MathUtil.Equation r = (theta) -> {
 						return (Math.cos(b * theta) / c + 1) * a;
 					};
 					for (int i = -(a / c + a); i < a / c + a; i++) {
@@ -59,9 +57,7 @@ public class PrismarineStalactiteFeature extends PrismarineCoralFeature {
 	}
 	
 	public static void createStalactiteLayer(IWorld world, BlockPos pos, Random rand, int a, int b, int c) {
-		MathUtils.Equation r = (theta) -> {
-			return (Math.cos(b * theta) / c + 1) * a;
-		};
+		MathUtil.Equation r = (theta) -> (Math.cos(b * theta) / c + 1) * a;
 		for (int i = -(a / c + a); i < a / c + a; i++) {
 			for (int j = -(a / c + a); j < a / c + a; j++) {
 				double radius = r.compute(Math.atan2(j, i));

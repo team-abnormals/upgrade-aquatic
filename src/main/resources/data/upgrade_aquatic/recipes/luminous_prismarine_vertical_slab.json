@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:luminous_prismarine_vertical_slab"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:luminous_prismarine_slab",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "vertical_slabs"
+    }
+  ]
+}

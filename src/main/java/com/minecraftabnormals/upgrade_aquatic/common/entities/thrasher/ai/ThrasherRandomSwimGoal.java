@@ -1,14 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
-import javax.annotation.Nullable;
-
+import com.minecraftabnormals.abnormals_core.core.api.AdvancedRandomPositionGenerator;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import com.teamabnormals.abnormals_core.core.library.api.AdvancedRandomPositionGenerator;
-
 import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+
+import javax.annotation.Nullable;
 
 public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 	private final ThrasherEntity thrasher;

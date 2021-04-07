@@ -1,15 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities;
 
+import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
-
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.Pose;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.controller.MovementController;
@@ -27,7 +22,10 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathNavigator;
 import net.minecraft.pathfinding.SwimmerPathNavigator;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -106,6 +104,26 @@ public class NautilusEntity extends BucketableWaterMobEntity {
     protected PathNavigator createNavigator(World worldIn) {
         return new SwimmerPathNavigator(this, worldIn);
     }
+    
+    @Override
+	protected SoundEvent getAmbientSound() {
+		return SoundEvents.ENTITY_COD_AMBIENT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.ENTITY_TURTLE_DEATH;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+		return SoundEvents.ENTITY_TURTLE_HURT;
+	}
+	
+	@Override
+	protected SoundEvent getSwimSound() {
+		return SoundEvents.ENTITY_FISH_SWIM;
+	}
 
     protected void registerData() {
         super.registerData();

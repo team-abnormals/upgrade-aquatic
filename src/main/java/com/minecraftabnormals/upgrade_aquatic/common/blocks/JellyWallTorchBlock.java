@@ -1,13 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import java.util.Map;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -30,6 +24,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
+import java.util.Map;
+import java.util.Random;
+
 public class JellyWallTorchBlock extends JellyTorchBlock {
 	public static final DirectionProperty HORIZONTAL_FACING = HorizontalBlock.HORIZONTAL_FACING;
     private static final Map<Direction, VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.makeCuboidShape(5.5d, 3d, 11d, 10.5d, 13d, 16d), Direction.SOUTH, Block.makeCuboidShape(5.5d, 3d, 0d, 10.5d, 13d, 5d), Direction.WEST, Block.makeCuboidShape(11d, 3d, 5.5d, 16d, 13d, 10.5d), Direction.EAST, Block.makeCuboidShape(0d, 3d, 5.5d, 5d, 13d, 10.5d)));
@@ -49,7 +47,7 @@ public class JellyWallTorchBlock extends JellyTorchBlock {
         Direction direction = state.get(HORIZONTAL_FACING);
         BlockPos blockpos = pos.offset(direction.getOpposite());
         BlockState blockstate = worldIn.getBlockState(blockpos);
-        return Block.hasSolidSide(blockstate, worldIn, blockpos, direction);
+        return blockstate.isSolidSide(worldIn, blockpos, direction);
     }
 
     @Nullable
@@ -89,7 +87,7 @@ public class JellyWallTorchBlock extends JellyTorchBlock {
         double d3 = 0.18d;
         double d4 = 0.3d;
         Direction facing = direction.getOpposite();
-        world.addParticle(getTorchParticleType(this.torchType), d0 + d4 * (double) facing.getXOffset(), d1 + d3, d2 + d4 * (double) facing.getZOffset(), 0d, 0.004d, 0d);
+        world.addParticle(JellyTorchType.getTorchParticleType(this.torchType), d0 + d4 * (double) facing.getXOffset(), d1 + d3, d2 + d4 * (double) facing.getZOffset(), 0d, 0.004d, 0d);
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {

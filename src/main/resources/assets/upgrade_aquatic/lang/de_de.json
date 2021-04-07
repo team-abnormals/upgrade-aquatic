@@ -1,6 +1,7 @@
 {
   "block.upgrade_aquatic.guardian_spine": "Wächterdorn",
   "block.upgrade_aquatic.elder_guardian_spine": "Großwächterdorn",
+
   "block.upgrade_aquatic.elder_eye": "Großauge",
 
   "block.upgrade_aquatic.dead_acan_coral": "Abgestorbene Acankoralle",
@@ -553,7 +554,7 @@
   "entity.upgrade_aquatic.box_jellyfish": "Würfelqualle",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Kassiopeia-Qualle",
   "entity.upgrade_aquatic.immortal_jellyfish": "Unsterbliche Qualle",
-  
+
   "effect.upgrade_aquatic.insomnia": "Agrypnie",
   "item.minecraft.potion.effect.insomnia": "Trank der Agrypnie",
   "item.minecraft.potion.effect.insomnia_strong": "Trank der Agrypnie",

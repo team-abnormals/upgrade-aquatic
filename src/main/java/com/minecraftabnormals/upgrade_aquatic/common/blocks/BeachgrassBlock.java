@@ -1,10 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import java.util.Random;
-
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -25,16 +22,14 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import java.util.Random;
+
 public class BeachgrassBlock extends Block implements IGrowable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
-	
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.SEA_PICKLE);
+
 	public BeachgrassBlock(Properties properties) {
 		super(properties);
-	}
-	
-	@Override
-	public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
-		return 60;
 	}
 
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
@@ -83,16 +78,9 @@ public class BeachgrassBlock extends Block implements IGrowable {
 		BlockPos blockpos = pos.down();
 		return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
 	}
-	
+
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if(ItemStackUtils.isInGroup(this.asItem(), group)) {
-			int targetIndex = ItemStackUtils.findIndexOfItem(Items.SEA_PICKLE, items);
-			if(targetIndex != -1) {
-				items.add(targetIndex + 1, new ItemStack(this));
-			} else {
-				super.fillItemGroup(group, items);
-			}
-		}
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

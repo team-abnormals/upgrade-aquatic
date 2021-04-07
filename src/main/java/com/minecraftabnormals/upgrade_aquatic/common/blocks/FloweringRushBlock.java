@@ -1,21 +1,12 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.*;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -42,10 +33,14 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
+import java.util.Random;
+
 public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowable {
 	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.PEONY);
 
 	public FloweringRushBlock(Properties properties) {
 		super(properties);
@@ -161,16 +156,9 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 	public long getPositionRandom(BlockState state, BlockPos pos) {
 		return MathHelper.getCoordinateRandom(pos.getX(), pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
-	
+
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if(ItemStackUtils.isInGroup(this.asItem(), group)) {
-			int targetIndex = ItemStackUtils.findIndexOfItem(Items.PEONY, items);
-			if(targetIndex != -1) {
-				items.add(targetIndex + 1, new ItemStack(this));
-			} else {
-				super.fillItemGroup(group, items);
-			}
-		}
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

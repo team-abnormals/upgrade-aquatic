@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:scute"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:scute_block",
+    "count": 1
+  }
+}

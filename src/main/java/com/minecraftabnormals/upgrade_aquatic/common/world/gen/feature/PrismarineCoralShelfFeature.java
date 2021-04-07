@@ -1,11 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import java.util.Random;
-
+import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
-import com.teamabnormals.abnormals_core.core.utils.MathUtils;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.DeadCoralWallFanBlock;
@@ -15,7 +12,8 @@ import net.minecraft.world.ISeedReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.StructureManager;
+
+import java.util.Random;
 
 /**
  * @author - SmellyModder(Luke Tonon)
@@ -27,12 +25,12 @@ public class PrismarineCoralShelfFeature extends PrismarineCoralFeature {
 	}
 	
 	@Override
-	public boolean func_230362_a_(ISeedReader worldIn, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		return false;
 	}
 	
-	public static boolean placeFeature(ISeedReader world, StructureManager manager, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		Direction direction = Direction.func_239631_a_(rand);
+	public static boolean placeFeature(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+		Direction direction = Direction.getRandomDirection(rand);
 		if(direction == Direction.UP || direction == Direction.DOWN) {
 			direction = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
 		}
@@ -41,9 +39,9 @@ public class PrismarineCoralShelfFeature extends PrismarineCoralFeature {
 		    int c = rand.nextInt(5) + 3;
 		    int b = 4;
 		    boolean elders[] = {
-		    	rand.nextDouble() <= 0.35D ? true : false,
-		    	rand.nextDouble() <= 0.35D ? true : false,
-		    	rand.nextDouble() <= 0.35D ? true : false
+					rand.nextDouble() <= 0.35D,
+					rand.nextDouble() <= 0.35D,
+					rand.nextDouble() <= 0.35D
 		    };
 			if(rand.nextInt(6) < 2 && pos.getY() > 11) {
 				pos = pos.offset(direction.getOpposite());
@@ -75,7 +73,7 @@ public class PrismarineCoralShelfFeature extends PrismarineCoralFeature {
 	}
 	
 	private static void addShelf(IWorld world, BlockPos pos, Random rand, int a, int b, int c, boolean isElder) {
-		MathUtils.Equation r = (theta) -> {
+		MathUtil.Equation r = (theta) -> {
 			return (Math.cos(b * theta) / c + 1) * a;
 		};
 		for (int i = -(a / c + a); i < a / c + a; i++) {

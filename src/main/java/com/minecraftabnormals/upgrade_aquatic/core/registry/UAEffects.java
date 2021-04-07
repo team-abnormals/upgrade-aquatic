@@ -5,20 +5,15 @@ import com.minecraftabnormals.upgrade_aquatic.common.effects.RepellenceEffect;
 import com.minecraftabnormals.upgrade_aquatic.common.effects.RestfulnessEffect;
 import com.minecraftabnormals.upgrade_aquatic.common.effects.VibingEffect;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-
 import net.minecraft.item.Items;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionBrewing;
-import net.minecraft.potion.Potions;
+import net.minecraft.potion.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class UAEffects {
-	public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, UpgradeAquatic.MODID);
-	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, UpgradeAquatic.MODID);
+	public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, UpgradeAquatic.MOD_ID);
+	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, UpgradeAquatic.MOD_ID);
 	
 	public static final RegistryObject<Effect> INSOMNIA    = EFFECTS.register("insomnia", InsomniaEffect::new);
 	public static final RegistryObject<Effect> RESTFULNESS = EFFECTS.register("restfulness", RestfulnessEffect::new);

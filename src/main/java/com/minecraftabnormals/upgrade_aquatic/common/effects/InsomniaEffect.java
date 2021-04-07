@@ -3,7 +3,6 @@ package com.minecraftabnormals.upgrade_aquatic.common.effects;
 import com.minecraftabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.FlareEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.monster.PhantomEntity;

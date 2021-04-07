@@ -5,7 +5,6 @@ import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.layer.Jell
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.BoxJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -29,12 +28,12 @@ public class BoxJellyfishRenderer extends AbstractJellyfishRenderer<BoxJellyfish
 
 	@Override
 	public ResourceLocation getEntityTexture(BoxJellyfishEntity jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/jellyfish/box/" + jellyfish.getBucketName() + "_jellyfish.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/box/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
 	
 	@Override
 	public ResourceLocation getOverlayTexture(BoxJellyfishEntity jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/jellyfish/box/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/box/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
 	}
 	
 	@Override

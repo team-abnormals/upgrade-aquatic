@@ -1,12 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.minecraftabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -22,11 +17,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -39,7 +30,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IForgeShearable;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class MulberryVineBlock extends Block implements IForgeShearable, IGrowable {
@@ -58,7 +53,8 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AGE, DOUBLE);
 	}
-	
+
+	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		Vector3d Vector3d = state.getOffset(worldIn, pos);
 		return SHAPE.withOffset(Vector3d.x, Vector3d.y, Vector3d.z);
@@ -68,9 +64,10 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	public VoxelShape getCollisionShape(BlockState state, IBlockReader reader, BlockPos pos, ISelectionContext context) {
 	    return VoxelShapes.empty();
 	}
-	
+
+	@Override
 	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-		return useContext.getItem().getItem() == this.asItem() && !state.get(DOUBLE) ? true : super.isReplaceable(state, useContext);
+		return useContext.getItem().getItem() == this.asItem() && !state.get(DOUBLE) && state.get(AGE) < 2 || super.isReplaceable(state, useContext);
 	}
 
 	@Override
@@ -102,14 +99,14 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 			return ActionResultType.PASS;
 		} else if (player.getHeldItem(handIn).getItem() == Items.SHEARS && state.get(DOUBLE)) {
 			player.getHeldItem(handIn).damageItem(1, player, (onBroken) -> { onBroken.sendBreakAnimation(handIn); });
-			worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
 			if (state.get(AGE) == 4) spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
 			worldIn.setBlockState(pos, state.with(DOUBLE, false), 2);
 			return ActionResultType.SUCCESS;
 		} else if (flag) {
 			spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), state.get(DOUBLE) ? 2 : 1));
-			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(2)), 2);
+			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
+			worldIn.setBlockState(pos, state.with(AGE, 1), 2);
 			
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
     			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
@@ -127,9 +124,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	@Override
 	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		int i = state.get(AGE);
-		if (i < 4 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)));
-			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);	
+		if (i < 4 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
+			worldIn.setBlockState(pos, state.with(AGE, i + 1));
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
 	
@@ -137,9 +134,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
 		int i = state.get(AGE);
-		if (i < 4 && worldIn.getLightSubtracted(pos.up(), 0) >= 7 && net.minecraftforge.common.ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(4) == 0)) {
-			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(i + 1)), 2);
-			net.minecraftforge.common.ForgeHooks.onCropsGrowPost(worldIn, pos, state);
+		if (i < 4 && worldIn.getLightSubtracted(pos.up(), 0) >= 7 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
+			worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
 
@@ -150,9 +147,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	            BlockPos blockpos = pos.down();
 	            BlockState blockstate = worldIn.getBlockState(blockpos);
 	            if (!blockstate.isSolid() || !blockstate.isSolidSide(worldIn, blockpos, Direction.UP)) {
-	                double d0 = (double)((float)pos.getX() + rand.nextFloat());
-	                double d1 = (double)pos.getY() - 0.05D;
-	                double d2 = (double)((float)pos.getZ() + rand.nextFloat());
+	                double d0 = ((float)pos.getX() + rand.nextFloat());
+	                double d1 = pos.getY() - 0.05D;
+	                double d2 = ((float)pos.getZ() + rand.nextFloat());
 	                worldIn.addParticle(ParticleTypes.DRIPPING_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 	            }
 	        }
@@ -162,10 +159,6 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	@Override
 	public boolean isLadder(BlockState state, IWorldReader world, BlockPos pos, LivingEntity entity) {
 	    return true;
-	}
-
-	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
-	    return false;
 	}
 
 	protected boolean isStateValid(World worldIn, BlockPos pos) {
@@ -188,9 +181,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 	    World world = context.getWorld();
 	    BlockPos pos = context.getPos();
-	    BlockState blockstate = context.getWorld().getBlockState(context.getPos());
-		if (blockstate.getBlock() == this && !blockstate.get(DOUBLE)) {
-			return blockstate.with(DOUBLE, true);
+	    BlockState state = context.getWorld().getBlockState(context.getPos());
+		if (state.getBlock() == this && !state.get(DOUBLE) && state.get(AGE) < 2) {
+			return state.with(DOUBLE, true);
 		}
 	    if (isStateValid(world, pos)) {
 	        return getDefaultState();

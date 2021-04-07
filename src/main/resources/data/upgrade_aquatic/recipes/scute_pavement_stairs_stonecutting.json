@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:scute_pavement"
+  },
+  "result": "upgrade_aquatic:scute_pavement_stairs",
+  "count": 1
+}

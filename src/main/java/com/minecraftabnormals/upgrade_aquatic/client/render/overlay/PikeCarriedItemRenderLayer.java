@@ -1,9 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render.overlay;
 
 import com.minecraftabnormals.upgrade_aquatic.client.model.PikeModel;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.PikeEntity;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;

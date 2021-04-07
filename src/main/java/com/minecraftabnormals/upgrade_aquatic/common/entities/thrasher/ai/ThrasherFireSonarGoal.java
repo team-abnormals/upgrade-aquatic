@@ -1,20 +1,18 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
-import java.util.EnumSet;
-import java.util.function.BiPredicate;
-
-import javax.annotation.Nullable;
-
+import com.minecraftabnormals.abnormals_core.core.util.EntityUtil;
+import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.SonarWaveEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.teamabnormals.abnormals_core.core.utils.EntityUtils;
-import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
-
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+
+import javax.annotation.Nullable;
+import java.util.EnumSet;
+import java.util.function.BiPredicate;
 
 public class ThrasherFireSonarGoal extends Goal {
 	public ThrasherEntity thrasher;
@@ -99,7 +97,7 @@ public class ThrasherFireSonarGoal extends Goal {
 	
 	static enum SonarPhase {
 		TURN(null),
-		FIRE((thrasher, sonarTicks) -> sonarTicks > 15 ? EntityUtils.rayTrace(thrasher, 32.0D, 1.0F).getType() == RayTraceResult.Type.MISS : true);
+		FIRE((thrasher, sonarTicks) -> sonarTicks > 15 ? EntityUtil.rayTrace(thrasher, 32.0D, 1.0F).getType() == RayTraceResult.Type.MISS : true);
 		
 		@Nullable
 		private BiPredicate<ThrasherEntity, Integer> phaseCondition;

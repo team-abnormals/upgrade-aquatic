@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "L",
+    "W"
+  ],
+  "key": {
+    "L": {
+      "item": "upgrade_aquatic:river_leaves"
+    },
+    "W": {
+      "tag": "upgrade_aquatic:river_logs"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:river_hedge",
+    "count": 2
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "hedges"
+    }
+  ]
+} 

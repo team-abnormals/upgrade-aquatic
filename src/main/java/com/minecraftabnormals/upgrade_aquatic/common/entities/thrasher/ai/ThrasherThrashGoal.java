@@ -1,11 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
-import java.util.EnumSet;
-
+import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatedEntity;
+import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import com.teamabnormals.abnormals_core.core.library.endimator.entity.EndimatedEntity;
-import com.teamabnormals.abnormals_core.core.utils.NetworkUtil;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.Goal;
@@ -13,6 +10,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
+
+import java.util.EnumSet;
 
 public class ThrasherThrashGoal extends Goal {
 	public ThrasherEntity thrasher;

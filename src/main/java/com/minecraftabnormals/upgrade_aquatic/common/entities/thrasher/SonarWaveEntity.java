@@ -1,12 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import com.minecraftabnormals.abnormals_core.client.ClientInfo;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import com.teamabnormals.abnormals_core.client.ClientInfo;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -23,6 +18,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class SonarWaveEntity extends Entity {
 	private static final DataParameter<Integer> OWNER_ID = EntityDataManager.createKey(SonarWaveEntity.class, DataSerializers.VARINT);

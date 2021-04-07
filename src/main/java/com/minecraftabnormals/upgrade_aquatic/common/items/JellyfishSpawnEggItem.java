@@ -1,15 +1,14 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
-import java.util.List;
-import java.util.Random;
-
+import com.minecraftabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry.JellyfishEntry;
-import com.teamabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
+
+import java.util.List;
+import java.util.Random;
 
 public class JellyfishSpawnEggItem extends AbnormalsSpawnEggItem {
 
@@ -28,7 +27,7 @@ public class JellyfishSpawnEggItem extends AbnormalsSpawnEggItem {
 		}
 		return getRandomJellyfish();
 	}
-	
+
 	private EntityType<?> getRandomJellyfish() {
 		Random rand = new Random();
 		List<JellyfishEntry<?>> jellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);

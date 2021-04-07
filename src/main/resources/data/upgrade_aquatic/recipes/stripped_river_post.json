@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F",
+    "F",
+    "F"
+  ],
+  "key": {
+    "F": {
+      "item": "upgrade_aquatic:stripped_river_wood"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:stripped_river_post",
+    "count": 8
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "wooden_posts"
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-    "parent": "upgrade_aquatic:block/vertical_slab",
+    "parent": "abnormals_core:block/vertical_slab",
     "textures": {
         "bottom": "upgrade_aquatic:block/rock_coralstone",
         "top": "upgrade_aquatic:block/rock_coralstone",

@@ -1,14 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import java.util.Random;
-
-import com.teamabnormals.abnormals_core.core.utils.ItemStackUtils;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowerBlock;
-import net.minecraft.block.IGrowable;
+import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
+import net.minecraft.block.*;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -25,30 +18,33 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import java.util.Random;
+
 public class SearocketBlock extends FlowerBlock implements IGrowable {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
-	
+	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.WITHER_ROSE);
+
 	public SearocketBlock(Effect effect, int effectDuration, Properties properties) {
 		super(effect, effectDuration, properties);
 	}
-	
+
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
 		return SHAPE;
 	}
-	
+
 	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XZ;
 	}
-	
+
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		return !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
 	}
-	
+
 	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.down();
 		return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
 	}
-	
+
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
 		return block.isIn(BlockTags.BAMBOO_PLANTABLE_ON);
@@ -68,16 +64,10 @@ public class SearocketBlock extends FlowerBlock implements IGrowable {
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		spawnAsEntity(world, pos, new ItemStack(this));
 	}
-	
+
+
 	@Override
 	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
-		if(ItemStackUtils.isInGroup(this.asItem(), group)) {
-			int targetIndex = ItemStackUtils.findIndexOfItem(Items.WITHER_ROSE, items);
-			if(targetIndex != -1) {
-				items.add(targetIndex + 1, new ItemStack(this));
-			} else {
-				super.fillItemGroup(group, items);
-			}
-		}
+		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

@@ -1,16 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model;
 
 import com.google.common.collect.ImmutableList;
-
 import net.minecraft.client.renderer.entity.model.AgeableModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
-
-// Made with Blockbench 3.5.4
-// Exported for Minecraft version 1.15
-// Paste this class into your mod and generate all required imports
-
 
 public class GooseModel<T extends Entity> extends AgeableModel<T> {
 	private final ModelRenderer body;
@@ -76,11 +70,5 @@ public class GooseModel<T extends Entity> extends AgeableModel<T> {
 		this.leftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
 		this.rightWing.rotateAngleZ = ageInTicks;
 		this.leftWing.rotateAngleZ = -ageInTicks;
-	}
-
-	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
 	}
 }

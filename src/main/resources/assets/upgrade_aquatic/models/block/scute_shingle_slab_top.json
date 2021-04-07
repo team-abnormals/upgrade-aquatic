@@ -1,0 +1,8 @@
+{
+    "parent": "block/slab_top",
+    "textures": {
+        "bottom": "upgrade_aquatic:block/scute_shingles",
+        "top": "upgrade_aquatic:block/scute_shingles",
+        "side": "upgrade_aquatic:block/scute_shingles"
+    }
+}

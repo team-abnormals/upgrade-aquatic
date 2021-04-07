@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F",
+    "F",
+    "F"
+  ],
+  "key": {
+    "F": {
+      "item": "upgrade_aquatic:driftwood"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:driftwood_post",
+    "count": 8
+  },
+  "conditions": [
+    {
+      "type": "abnormals_core:quark_flag",
+      "flag": "wooden_posts"
+    }
+  ]
+}

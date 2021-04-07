@@ -1,15 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import com.minecraftabnormals.upgrade_aquatic.client.model.NautilusModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.NautilusEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.tags.FluidTags;
@@ -19,6 +14,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
 public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<NautilusEntity>> {
@@ -36,7 +35,7 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 	});
 
 	public NautilusRenderer(EntityRendererManager renderManager) {
-		super(renderManager, new NautilusModel<>(), 0.5F);
+		super(renderManager, new NautilusModel<>(), 0.25F);
 	}
 
 	@Override
@@ -51,7 +50,7 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 				}
 			}
 		}
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
 	}
 	
 	@Override

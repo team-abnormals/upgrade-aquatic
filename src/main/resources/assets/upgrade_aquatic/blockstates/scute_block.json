@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "x": 180,
+      "model": "upgrade_aquatic:block/scute_block"
+    },
+    "facing=east": {
+      "x": 90,
+      "y": 90,
+      "model": "upgrade_aquatic:block/scute_block"
+    },
+    "facing=north": {
+      "x": 90,
+      "model": "upgrade_aquatic:block/scute_block"
+    },
+    "facing=south": {
+      "x": 90,
+      "y": 180,
+      "model": "upgrade_aquatic:block/scute_block"
+    },
+    "facing=up": {
+      "model": "upgrade_aquatic:block/scute_block"
+    },
+    "facing=west": {
+      "x": 90,
+      "y": 270,
+      "model": "upgrade_aquatic:block/scute_block"
+    }
+  }
+}

@@ -16,11 +16,7 @@ public class BoiledPickerelweedItem extends Item {
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 		ItemStack itemstack = super.onItemUseFinish(stack, worldIn, entityLiving);
 		int adder = isPurple ? 75 : 100;
-		if(entityLiving.getAir() + adder <= 300) {
-			entityLiving.setAir(entityLiving.getAir() + adder);
-		} else {
-			entityLiving.setAir(300);
-		}
+		entityLiving.setAir(Math.min(entityLiving.getAir() + adder, 300));
 		return itemstack;
 	}
 	

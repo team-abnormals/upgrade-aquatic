@@ -4,7 +4,6 @@ import com.minecraftabnormals.upgrade_aquatic.client.model.LionfishModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -22,7 +21,7 @@ public class LionfishRenderer extends MobRenderer<LionfishEntity, LionfishModel<
 	
 	@Override
 	public ResourceLocation getEntityTexture(LionfishEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/lionfish.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/lionfish.png");
 	}
 	
 	@Override

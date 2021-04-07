@@ -1,11 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.tileentities;
 
-import java.util.List;
-import java.util.stream.IntStream;
-
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.ElderEyeBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UATileEntities;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -17,6 +13,9 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class ElderEyeTileEntity extends TileEntity implements ITickableTileEntity {
 	

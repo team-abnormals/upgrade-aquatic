@@ -5,7 +5,6 @@ import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.ThrasherRend
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.GreatThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
-
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -22,7 +21,7 @@ public class GreatThrasherRenderer extends MobRenderer<GreatThrasherEntity, Thra
 
 	@Override
 	public ResourceLocation getEntityTexture(GreatThrasherEntity entity) {
-		return new ResourceLocation(UpgradeAquatic.MODID, "textures/entity/thrasher/great_thrasher.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher.png");
 	}
 	
 	@Override

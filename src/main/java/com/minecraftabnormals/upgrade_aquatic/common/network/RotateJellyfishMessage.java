@@ -1,14 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.network;
 
-import java.util.function.Supplier;
-
+import com.minecraftabnormals.abnormals_core.client.ClientInfo;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import com.teamabnormals.abnormals_core.client.ClientInfo;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.network.NetworkEvent;
+
+import java.util.function.Supplier;
 
 /**
  * Message that tells the client to rotate a Jellyfish

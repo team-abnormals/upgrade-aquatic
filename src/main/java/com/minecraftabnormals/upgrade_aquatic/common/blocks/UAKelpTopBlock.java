@@ -1,10 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import java.util.Random;
-
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks.KelpType;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -15,6 +12,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.server.ServerWorld;
+
+import java.util.Random;
 
 public class UAKelpTopBlock extends KelpTopBlock {
 	private KelpType kelpType;
@@ -44,7 +43,7 @@ public class UAKelpTopBlock extends KelpTopBlock {
 		if(block == Blocks.MAGMA_BLOCK) {
 			return false;
 		} else {
-			return block == this || block == this.func_230330_d_() || blockstate.isSolidSide(worldIn, blockpos, Direction.UP);
+			return block == this || block == this.getPlantBlock() || blockstate.isSolidSide(worldIn, blockpos, Direction.UP);
 		}
 	}
 	
@@ -58,15 +57,14 @@ public class UAKelpTopBlock extends KelpTopBlock {
 		}
 
 		if(facing == Direction.UP && facingState.getBlock() == this) {
-			return this.func_230330_d_().getDefaultState();
+			return this.getPlantBlock().getDefaultState();
 		} else {
 			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
 			return stateIn;
 		}
 	}
 	
-	@Override
-	public Block func_230330_d_() {
+	public Block getPlantBlock() {
 		switch(this.kelpType) {
 			default:
 			case TONGUE:

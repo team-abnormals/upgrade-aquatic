@@ -1,11 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks.coralstone;
 
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CoralWallFanBlock;
@@ -17,15 +12,14 @@ import net.minecraft.item.Items;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+
+import javax.annotation.Nullable;
+import java.util.Random;
 
 public class CoralstoneBlock extends Block {
 	@Nullable
@@ -84,7 +78,7 @@ public class CoralstoneBlock extends Block {
 		}
 		
 		if(this.growableCoralBlocks != null && random.nextFloat() < 0.12F) {
-			Direction randDirection = this.growableCoralBlocks.length > 3 ? Direction.func_239631_a_(random) : Direction.byIndex(random.nextInt(5) + 1);
+			Direction randDirection = this.growableCoralBlocks.length > 3 ? Direction.getRandomDirection(random) : Direction.byIndex(random.nextInt(5) + 1);
 			BlockPos growPos = pos.offset(randDirection);
 			FluidState fluidState = worldIn.getBlockState(growPos).getFluidState();
 			boolean isValidPosToGrow = worldIn.getBlockState(growPos).getMaterial().isReplaceable() && fluidState.getLevel() >= 8 && fluidState.isTagged(FluidTags.WATER);

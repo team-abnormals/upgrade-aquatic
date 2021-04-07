@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#forge:raw_fishes/pike",
+    "#forge:raw_fishes/lionfish",
+    "#forge:raw_fishes/perch"
+  ]
+}
