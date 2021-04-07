@@ -1,9 +1,6 @@
 {
-  "_comment": "Blocks",
-
   "block.upgrade_aquatic.guardian_spine": "Wächterdorn",
   "block.upgrade_aquatic.elder_guardian_spine": "Großwächterdorn",
-
   "block.upgrade_aquatic.elder_eye": "Großauge",
 
   "block.upgrade_aquatic.dead_acan_coral": "Abgestorbene Acankoralle",
@@ -399,6 +396,8 @@
   "block.upgrade_aquatic.driftwood_wall_sign": "Treibholzwandschild",
   "block.upgrade_aquatic.driftwood_chest": "Treibholztruhe",
   "block.upgrade_aquatic.driftwood_trapped_chest": "Redstone-Treibholztruhe",
+  "block.upgrade_aquatic.driftwood_post": "Treibholzpfahl",
+  "block.upgrade_aquatic.stripped_driftwood_post": "Entrindeter Treibholzpfahl",
   "block.upgrade_aquatic.driftwood_beehive": "Treibholzbienenstock",
   
   "block.upgrade_aquatic.river_leaves": "Flusslaub",
@@ -425,6 +424,9 @@
   "block.upgrade_aquatic.river_wall_sign": "Flussholzwandschild",
   "block.upgrade_aquatic.river_chest": "Flussholztruhe",
   "block.upgrade_aquatic.river_trapped_chest": "Redstone-Flussholztruhe",
+  "block.upgrade_aquatic.river_post": "Flussholzpfahl",
+  "block.upgrade_aquatic.stripped_river_post": "Entrindeter Flussholzpfahl",
+  "block.upgrade_aquatic.river_hedge": "Flusshecke",
   "block.upgrade_aquatic.river_beehive": "Flussholzbienenstock",
   
   "block.upgrade_aquatic.flowering_rush": "Wasserviole",
@@ -451,9 +453,7 @@
   "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Leuchtgroßprismarinstufe",
   "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Leuchtgroßprismarintreppe",
   "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Vertikale Leuchtgroßprismarinstufe",
-  
-  "_comment2": "Items",
-  
+
   "item.upgrade_aquatic.driftwood_boat": "Treibholzboot",
   "item.upgrade_aquatic.river_boat": "Flussholzboot",
   
@@ -464,6 +464,7 @@
   "item.upgrade_aquatic.nautilus_bucket": "Nautiluseimer",
   "item.upgrade_aquatic.pike_bucket": "Hechteimer",
   "item.upgrade_aquatic.lionfish_bucket": "Rotfeuerfischeimer",
+  "item.upgrade_aquatic.perch_bucket": "Barscheimer",
   "item.upgrade_aquatic.squid_bucket": "Tintenfischeimer",
   "item.upgrade_aquatic.jellyfish_bucket": "Qualleneimer",
   "item.upgrade_aquatic.glow_squid_bucket": "Glühtintenfischeimer",
@@ -472,6 +473,7 @@
   "item.upgrade_aquatic.nautilus_spawn_egg": "Nautilus-Spawn-Ei",
   "item.upgrade_aquatic.pike_spawn_egg": "Hechten-Spawn-Ei",
   "item.upgrade_aquatic.lionfish_spawn_egg": "Rotfeuerfisch-Spawn-Ei",
+  "item.upgrade_aquatic.perch_spawn_egg": "Barsch-Spawn-Ei",
   "item.upgrade_aquatic.thrasher_spawn_egg": "Drescher-Spawn-Ei",
   "item.upgrade_aquatic.great_thrasher_spawn_egg": "Großer-Drescher-Spawn-Ei",
   "item.upgrade_aquatic.flare_spawn_egg": "Flimmer-Spawn-Ei",
@@ -485,16 +487,16 @@
   "item.upgrade_aquatic.cooked_pike": "Gebratener Hecht",
   "item.upgrade_aquatic.lionfish": "Roher Rotfeuerfisch",
   "item.upgrade_aquatic.cooked_lionfish": "Gebratener Rotfeuerfisch",
+  "item.upgrade_aquatic.perch": "Roher Barsch",
+  "item.upgrade_aquatic.cooked_perch": "Gebratener Barsch",
   
   "item.upgrade_aquatic.mulberry": "Maulbeere",
   "item.upgrade_aquatic.mulberry_jam_bottle": "Maulbeermarmeladenflasche",
   "item.upgrade_aquatic.mulberry_bread": "Maulbeerbrot",
   "item.upgrade_aquatic.mulberry_pie": "Maulbeerkuchen",
   
-  "_comment3": "Tooltips",
-  
   "tooltip.upgrade_aquatic.amur_pike": "Amurhecht",  
-  "tooltip.upgrade_aquatic.redfin_pickerel": "Rotflossenhecht",  
+  "tooltip.upgrade_aquatic.redfin_pike": "Rotflossenhecht", 
   "tooltip.upgrade_aquatic.brown_northern_pike": "Braunhecht",  
   "tooltip.upgrade_aquatic.mahogany_northern_pike": "Mahoganihecht",  
   "tooltip.upgrade_aquatic.jade_northern_pike": "Jadegrünhecht",  
@@ -536,11 +538,10 @@
   "tooltip.upgrade_aquatic.purple_jelly_torch": "Violette Quallenfackel",
   "tooltip.upgrade_aquatic.white_jelly_torch": "Weiße Quallenfackel",
   
-  "_comment4": "Entities",
-  
   "entity.upgrade_aquatic.nautilus": "Nautilus",
   "entity.upgrade_aquatic.pike": "Hecht",
   "entity.upgrade_aquatic.lionfish": "Rotfeuerfisch",
+  "entity.upgrade_aquatic.perch": "Barsch",
   "entity.upgrade_aquatic.thrasher": "Drescher",
   "entity.upgrade_aquatic.great_thrasher": "Großer Drescher",
   "entity.upgrade_aquatic.flare": "Flimmer",
@@ -552,8 +553,6 @@
   "entity.upgrade_aquatic.box_jellyfish": "Würfelqualle",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Kassiopeia-Qualle",
   "entity.upgrade_aquatic.immortal_jellyfish": "Unsterbliche Qualle",
-  
-  "_comment5": "Potions and Effects",
   
   "effect.upgrade_aquatic.insomnia": "Agrypnie",
   "item.minecraft.potion.effect.insomnia": "Trank der Agrypnie",
@@ -603,15 +602,11 @@
   "item.minecraft.tipped_arrow.effect.vibing_strong": "Pfeil des Vibings",
   "item.minecraft.tipped_arrow.effect.vibing_long": "Pfeil des Vibings",
   
-  "_comment6": "Deaths",
-  
   "death.attack.upgrade_aquatic.guardianSpine": "%1$s wurde durch einen Wächterdorn erstochen",
   "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s wurde beim Versuch, %2$s zu entkommen, durch einen Wächterdorn erstochen",
   "death.attack.upgrade_aquatic.elderGuardianSpine": "%1$s wurde durch einen Großwächterdorn erstochen",
   "death.attack.upgrade_aquatic.elderGuardianSpine.player": "%1$s wurde beim Versuch, %2$s zu entkommen, durch einen Großwächterdorn erstochen",
   "death.attack.upgrade_aquatic.jellyfishSting": "%1$s wurde von %2$s zu Tode gestochen",
-  
-  "_comment7": "Advancements",
   
   "advancements.adventure.tooth_fairy.title": "Zahnfee",
   "advancements.adventure.tooth_fairy.description": "Sammle die Zähne eines Dreschers",
@@ -637,10 +632,15 @@
   "advancements.husbandry.collect_all_pike.title": "Weltreise der Hechte",
   "advancements.husbandry.collect_all_pike.description": "Sammle jede Variante des Hechts im Eimer",
   
-  "advancements.husbandry.pick_mulberries.title": "Die Beere fällt nicht weit vom Stamm",
-  "advancements.husbandry.pick_mulberries.description": "Pflücke Maulbeeren vom Flussbaum",
-  
-  "_comment8": "Subtitles",
+  "subtitles.upgrade_aquatic.entity.pike.death": "Hecht stirbt",
+  "subtitles.upgrade_aquatic.entity.pike.flop": "Hecht platscht",
+  "subtitles.upgrade_aquatic.entity.pike.hurt": "Hecht nimmt Schaden",
+  "subtitles.upgrade_aquatic.entity.pike.bite": "Hecht beißt",
+  "subtitles.upgrade_aquatic.entity.pike.spit": "Hecht spuckt",
+
+  "subtitles.upgrade_aquatic.entity.perch.death": "Barsch stirbt",
+  "subtitles.upgrade_aquatic.entity.perch.flop": "Barsch platscht",
+  "subtitles.upgrade_aquatic.entity.perch.hurt": "Barsch nimmt Schaden",
   
   "subtitles.upgrade_aquatic.thrasher.hurt": "Drescher nimmt Schaden",
   "subtitles.upgrade_aquatic.thrasher.ambient": "Drescher knurrt",
