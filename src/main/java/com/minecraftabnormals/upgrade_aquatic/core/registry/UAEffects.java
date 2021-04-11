@@ -1,12 +1,16 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
+import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.effects.InsomniaEffect;
 import com.minecraftabnormals.upgrade_aquatic.common.effects.RepellenceEffect;
 import com.minecraftabnormals.upgrade_aquatic.common.effects.RestfulnessEffect;
 import com.minecraftabnormals.upgrade_aquatic.common.effects.VibingEffect;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.item.Items;
-import net.minecraft.potion.*;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.Potions;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -32,15 +36,15 @@ public class UAEffects {
 	public static final RegistryObject<Potion> VIBING_LONG        = POTIONS.register("vibing_long", () -> new Potion(new EffectInstance(VIBING.get(), 9600)));
 	
 	public static void registerBrewingRecipes() {
-		PotionBrewing.addMix(Potions.AWKWARD, Items.COCOA_BEANS, RESTFULNESS_NORMAL.get());
-		PotionBrewing.addMix(RESTFULNESS_NORMAL.get(), Items.GLOWSTONE_DUST, RESTFULNESS_STRONG.get());
-		PotionBrewing.addMix(RESTFULNESS_NORMAL.get(), Items.FERMENTED_SPIDER_EYE, INSOMNIA_NORMAL.get());
-		PotionBrewing.addMix(INSOMNIA_NORMAL.get(), Items.GLOWSTONE_DUST, INSOMNIA_STRONG.get());
-		PotionBrewing.addMix(Potions.AWKWARD, UAItems.LIONFISH.get(), REPELLENCE_NORMAL.get());
-		PotionBrewing.addMix(REPELLENCE_NORMAL.get(), Items.GLOWSTONE_DUST, REPELLENCE_STRONG.get());
-		PotionBrewing.addMix(REPELLENCE_NORMAL.get(), Items.REDSTONE, REPELLENCE_LONG.get());
-		PotionBrewing.addMix(REPELLENCE_NORMAL.get(), Items.FERMENTED_SPIDER_EYE, VIBING_NORMAL.get());
-		PotionBrewing.addMix(VIBING_NORMAL.get(), Items.GLOWSTONE_DUST, VIBING_STRONG.get());
-		PotionBrewing.addMix(VIBING_NORMAL.get(), Items.REDSTONE, VIBING_LONG.get());
+		DataUtil.addMix(Potions.AWKWARD, Items.COCOA_BEANS, RESTFULNESS_NORMAL.get());
+		DataUtil.addMix(RESTFULNESS_NORMAL.get(), Items.GLOWSTONE_DUST, RESTFULNESS_STRONG.get());
+		DataUtil.addMix(RESTFULNESS_NORMAL.get(), Items.FERMENTED_SPIDER_EYE, INSOMNIA_NORMAL.get());
+		DataUtil.addMix(INSOMNIA_NORMAL.get(), Items.GLOWSTONE_DUST, INSOMNIA_STRONG.get());
+		DataUtil.addMix(Potions.AWKWARD, UAItems.LIONFISH.get(), REPELLENCE_NORMAL.get());
+		DataUtil.addMix(REPELLENCE_NORMAL.get(), Items.GLOWSTONE_DUST, REPELLENCE_STRONG.get());
+		DataUtil.addMix(REPELLENCE_NORMAL.get(), Items.REDSTONE, REPELLENCE_LONG.get());
+		DataUtil.addMix(REPELLENCE_NORMAL.get(), Items.FERMENTED_SPIDER_EYE, VIBING_NORMAL.get());
+		DataUtil.addMix(VIBING_NORMAL.get(), Items.GLOWSTONE_DUST, VIBING_STRONG.get());
+		DataUtil.addMix(VIBING_NORMAL.get(), Items.REDSTONE, VIBING_LONG.get());
 	}
 }

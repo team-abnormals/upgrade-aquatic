@@ -2,11 +2,10 @@ buildscript {
     repositories {
         maven { url = "https://files.minecraftforge.net/maven" }
         maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
-        jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "3.+", changing: true
+        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "4.1.+", changing: true
         classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
     }
 }
@@ -17,7 +16,7 @@ apply plugin: "maven-publish"
 apply plugin: "org.spongepowered.mixin"
 
 mixin {
-    add sourceSets.main, project.modId + ".refmap.json"
+    add sourceSets.main, "${project.modId}.refmap.json"
 }
 
 version = "${project.minecraft}-${project.modVersion}"
@@ -35,7 +34,7 @@ minecraft {
             property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
             property "forge.logging.console.level", "debug"
             property "mixin.env.disableRefMap", "true"
-            arg "-mixin.config=upgrade_aquatic.mixins.json"
+            arg "-mixin.config=" + project.modId + ".mixins.json"
             mods {
                 upgrade_aquatic {
                     source sourceSets.main
@@ -47,7 +46,7 @@ minecraft {
             property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
             property "forge.logging.console.level", "debug"
             property "mixin.env.disableRefMap", "true"
-            arg "-mixin.config=upgrade_aquatic.mixins.json"
+            arg "-mixin.config=" + project.modId + ".mixins.json"
             mods {
                 upgrade_aquatic {
                     source sourceSets.main
@@ -58,7 +57,8 @@ minecraft {
             workingDirectory project.file("run")
             property "forge.logging.markers", "SCAN,REGISTRIES,REGISTRYDUMP"
             property "forge.logging.console.level", "debug"
-            args "--mod", "upgrade_aquatic", "--all", "--output", file("src/generated/resources/")
+            property "mixin.env.disableRefMap", "true"
+            args "--mod", project.modId, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources")
             mods {
                 upgrade_aquatic {
                     source sourceSets.main

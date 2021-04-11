@@ -1,14 +1,20 @@
 package com.minecraftabnormals.upgrade_aquatic.core.events;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
+import com.minecraftabnormals.upgrade_aquatic.core.UAConfig;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -49,5 +55,16 @@ public class ClientEvents {
 	public static void onPlayerRenderPost(RenderPlayerEvent.Post event) {
 		event.getMatrixStack().pop();
 	}
-	
+
+	@SubscribeEvent
+	public static void onItemTooltip(ItemTooltipEvent event) {
+		Item item = event.getItemStack().getItem();
+		ResourceLocation name = item.getRegistryName();
+
+		if (name != null && UAConfig.CLIENT.showUnobtainableDescription.get() && name.getNamespace().equals(UpgradeAquatic.MOD_ID)) {
+			String id = name.getPath();
+			if (id.contains("jelly") || id.contains("tongue_kelp") || id.contains("polar_kelp") || id.contains("ochre_kelp") || id.contains("thorny_kelp"))
+				event.getToolTip().add(new TranslationTextComponent("tooltip.upgrade_aquatic.unobtainable").mergeStyle(TextFormatting.GRAY));
+		}
+	}
 }

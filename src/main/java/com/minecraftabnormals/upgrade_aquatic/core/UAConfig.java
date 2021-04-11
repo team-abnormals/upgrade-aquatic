@@ -66,10 +66,12 @@ public class UAConfig {
 	}
 
 	public static class Client {
+		public final ConfigValue<Boolean> showUnobtainableDescription;
 		public final ConfigValue<Integer> daysTillRenderInsomniaOverlay;
 
 		public Client(ForgeConfigSpec.Builder builder) {
 			builder.push("misc");
+			this.showUnobtainableDescription = builder.comment("If unimplemented items should show that they are unobtainable in their item description").define("Show unobtainable description", true);
 			this.daysTillRenderInsomniaOverlay = builder
 					.comment("The amount of days till the insomnia overlay is rendered", "Setting to 3 will make the overlay indicate phantom spawns", "Setting to 0 will disable the overlay")
 					.define("Days until insomnia overlay", 0);
