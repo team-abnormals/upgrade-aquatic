@@ -16,7 +16,8 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherE
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -24,38 +25,39 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UAEntities {
 	public static final EntitySubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getEntitySubHelper();
-	
-	public static final RegistryObject<EntityType<SonarWaveEntity>> SONAR_WAVE          = HELPER.createEntity("sonar_wave", SonarWaveEntity::new, SonarWaveEntity::new, EntityClassification.MISC, 1.0F, 1.0F);
-	public static final RegistryObject<EntityType<NautilusEntity>> NAUTILUS             = HELPER.createLivingEntity("nautilus", NautilusEntity::new, EntityClassification.WATER_AMBIENT, 0.5F, 0.5F);
-	public static final RegistryObject<EntityType<PikeEntity>> PIKE                     = HELPER.createLivingEntity("pike", PikeEntity::new, EntityClassification.WATER_AMBIENT, 0.7F, 0.4F);
-	public static final RegistryObject<EntityType<PerchEntity>> PERCH                   = HELPER.createLivingEntity("perch", PerchEntity::new, EntityClassification.WATER_AMBIENT, 0.6F, 0.5F);
-	public static final RegistryObject<EntityType<LionfishEntity>> LIONFISH             = HELPER.createLivingEntity("lionfish", LionfishEntity::new, EntityClassification.WATER_AMBIENT, 0.6F, 0.5F);
-	public static final RegistryObject<EntityType<ThrasherEntity>> THRASHER             = HELPER.createLivingEntity("thrasher", ThrasherEntity::new, EntityClassification.MONSTER, 1.6F, 0.9F);
-	public static final RegistryObject<EntityType<GreatThrasherEntity>> GREAT_THRASHER	= HELPER.createLivingEntity("great_thrasher", GreatThrasherEntity::new, EntityClassification.MONSTER, 2.8F, 1.575F);
-	public static final RegistryObject<EntityType<FlareEntity>> FLARE                   = HELPER.createLivingEntity("flare", FlareEntity::new, EntityClassification.MONSTER, 0.9F, 0.5F);
-	public static final RegistryObject<EntityType<UluluEntity>> ULULU					= HELPER.createLivingEntity("ululu", UluluEntity::new, EntityClassification.MONSTER, 2.04F, 2.04F);
-	public static final RegistryObject<EntityType<GooseEntity>> GOOSE 				  	= HELPER.createLivingEntity("goose", GooseEntity::new, EntityClassification.CREATURE, 0.5F, 0.9F);
-	public static final RegistryObject<EntityType<GlowSquidEntity>> GLOW_SQUID 			= HELPER.createLivingEntity("glow_squid", GlowSquidEntity::new, EntityClassification.WATER_CREATURE, 0.8F, 0.8F);
 
-	public static final RegistryObject<EntityType<BoxJellyfishEntity>> BOX_JELLYFISH             = HELPER.createLivingEntity("box_jellyfish", BoxJellyfishEntity::new, EntityClassification.WATER_CREATURE, 0.75F, 0.625F);
+	public static final RegistryObject<EntityType<SonarWaveEntity>> SONAR_WAVE = HELPER.createEntity("sonar_wave", SonarWaveEntity::new, SonarWaveEntity::new, EntityClassification.MISC, 1.0F, 1.0F);
+	public static final RegistryObject<EntityType<NautilusEntity>> NAUTILUS = HELPER.createLivingEntity("nautilus", NautilusEntity::new, EntityClassification.WATER_AMBIENT, 0.5F, 0.5F);
+	public static final RegistryObject<EntityType<PikeEntity>> PIKE = HELPER.createLivingEntity("pike", PikeEntity::new, EntityClassification.WATER_AMBIENT, 0.7F, 0.4F);
+	public static final RegistryObject<EntityType<PerchEntity>> PERCH = HELPER.createLivingEntity("perch", PerchEntity::new, EntityClassification.WATER_AMBIENT, 0.6F, 0.5F);
+	public static final RegistryObject<EntityType<LionfishEntity>> LIONFISH = HELPER.createLivingEntity("lionfish", LionfishEntity::new, EntityClassification.WATER_AMBIENT, 0.6F, 0.5F);
+	public static final RegistryObject<EntityType<ThrasherEntity>> THRASHER = HELPER.createLivingEntity("thrasher", ThrasherEntity::new, EntityClassification.MONSTER, 1.6F, 0.9F);
+	public static final RegistryObject<EntityType<GreatThrasherEntity>> GREAT_THRASHER = HELPER.createLivingEntity("great_thrasher", GreatThrasherEntity::new, EntityClassification.MONSTER, 2.8F, 1.575F);
+	public static final RegistryObject<EntityType<FlareEntity>> FLARE = HELPER.createLivingEntity("flare", FlareEntity::new, EntityClassification.MONSTER, 0.9F, 0.5F);
+	public static final RegistryObject<EntityType<UluluEntity>> ULULU = HELPER.createLivingEntity("ululu", UluluEntity::new, EntityClassification.MONSTER, 2.04F, 2.04F);
+	public static final RegistryObject<EntityType<GooseEntity>> GOOSE = HELPER.createLivingEntity("goose", GooseEntity::new, EntityClassification.CREATURE, 0.5F, 0.9F);
+	public static final RegistryObject<EntityType<GlowSquidEntity>> GLOW_SQUID = HELPER.createLivingEntity("glow_squid", GlowSquidEntity::new, EntityClassification.WATER_CREATURE, 0.8F, 0.8F);
+
+	public static final RegistryObject<EntityType<BoxJellyfishEntity>> BOX_JELLYFISH = HELPER.createLivingEntity("box_jellyfish", BoxJellyfishEntity::new, EntityClassification.WATER_CREATURE, 0.75F, 0.625F);
 	public static final RegistryObject<EntityType<CassiopeaJellyfishEntity>> CASSIOPEA_JELLYFISH = HELPER.createLivingEntity("cassiopea_jellyfish", CassiopeaJellyfishEntity::new, EntityClassification.WATER_CREATURE, 0.6875F, 0.25F);
-	public static final RegistryObject<EntityType<ImmortalJellyfishEntity>> IMMORTAL_JELLYFISH   = HELPER.createLivingEntity("immortal_jellyfish", ImmortalJellyfishEntity::new, EntityClassification.WATER_CREATURE, 0.625F, 0.5F);
+	public static final RegistryObject<EntityType<ImmortalJellyfishEntity>> IMMORTAL_JELLYFISH = HELPER.createLivingEntity("immortal_jellyfish", ImmortalJellyfishEntity::new, EntityClassification.WATER_CREATURE, 0.625F, 0.5F);
 
-	public static void registerAttributes() {
-		GlobalEntityTypeAttributes.put(NAUTILUS.get(), NautilusEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(PIKE.get(), PikeEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(LIONFISH.get(), LionfishEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(PERCH.get(), PerchEntity.func_234176_m_().create());
-		GlobalEntityTypeAttributes.put(THRASHER.get(), ThrasherEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(GREAT_THRASHER.get(), GreatThrasherEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(FLARE.get(), FlareEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(ULULU.get(), UluluEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(GOOSE.get(), GooseEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(GLOW_SQUID.get(), GlowSquidEntity.func_234227_m_().create());
-		
-		GlobalEntityTypeAttributes.put(BOX_JELLYFISH.get(), BoxJellyfishEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishEntity.registerAttributes().create());
-		GlobalEntityTypeAttributes.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfishEntity.registerAttributes().create());
+	@SubscribeEvent
+	public static void onEntityAttributes(EntityAttributeCreationEvent event) {
+		event.put(NAUTILUS.get(), NautilusEntity.registerAttributes().create());
+		event.put(PIKE.get(), PikeEntity.registerAttributes().create());
+		event.put(LIONFISH.get(), LionfishEntity.registerAttributes().create());
+		event.put(PERCH.get(), PerchEntity.func_234176_m_().create());
+		event.put(THRASHER.get(), ThrasherEntity.registerAttributes().create());
+		event.put(GREAT_THRASHER.get(), GreatThrasherEntity.registerAttributes().create());
+		event.put(FLARE.get(), FlareEntity.registerAttributes().create());
+		event.put(ULULU.get(), UluluEntity.registerAttributes().create());
+		event.put(GOOSE.get(), GooseEntity.registerAttributes().create());
+		event.put(GLOW_SQUID.get(), GlowSquidEntity.func_234227_m_().create());
+
+		event.put(BOX_JELLYFISH.get(), BoxJellyfishEntity.registerAttributes().create());
+		event.put(CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishEntity.registerAttributes().create());
+		event.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfishEntity.registerAttributes().create());
 	}
 
 	public static void registerRenderers() {

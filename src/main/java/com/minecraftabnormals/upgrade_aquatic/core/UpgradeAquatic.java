@@ -65,7 +65,6 @@ public class UpgradeAquatic {
 	private void setupCommon(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			UACompat.registerCompat();
-			UAEntities.registerAttributes();
 			UASpawns.registerSpawns();
 			UAEffects.registerBrewingRecipes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
