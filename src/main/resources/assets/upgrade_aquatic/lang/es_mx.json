@@ -538,6 +538,8 @@
   "tooltip.upgrade_aquatic.purple_jelly_torch": "Antorcha gelatinosa morada",
   "tooltip.upgrade_aquatic.white_jelly_torch": "Antorcha gelatinosa blanca",
 
+  "tooltip.upgrade_aquatic.unobtainable": "Inobtenible",
+
   "entity.upgrade_aquatic.nautilus": "Nautilo",
   "entity.upgrade_aquatic.pike": "Lucio",
   "entity.upgrade_aquatic.lionfish": "Pez león",
