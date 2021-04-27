@@ -243,7 +243,7 @@ public class EntityEvents {
 		if (mountingEntity instanceof PlayerEntity && entityBeingMounted instanceof ThrasherEntity) {
 			PlayerEntity player = (PlayerEntity) mountingEntity;
 			ThrasherEntity thrasher = (ThrasherEntity) entityBeingMounted;
-			if (event.isDismounting() && player.isAlive() && !player.isCreative() && !player.isSpectator() && thrasher.isAlive()) {
+			if (event.isDismounting() && player.isAlive() && !player.isCreative() && !player.isSpectator() && thrasher.isAlive() && !thrasher.isStunned()) {
 				event.setCanceled(true);
 			}
 		}
