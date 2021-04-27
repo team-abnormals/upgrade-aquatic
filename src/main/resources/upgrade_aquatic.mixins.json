@@ -6,6 +6,7 @@
   "refmap": "upgrade_aquatic.refmap.json",
   "mixins": [
     "BubbleColumnMixin",
+    "EntityMixin",
     "LivingEntityMixin",
     "SignTileEntityMixin",
     "SquidEntityMixin"
