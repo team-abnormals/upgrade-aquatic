@@ -1,6 +1,7 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
+import net.minecraft.entity.EntitySize;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -10,6 +11,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class GreatThrasherEntity extends ThrasherEntity {
+	private static final EntitySize DEFAULT_SIZE = EntitySize.fixed(2.8F, 1.575F);
 
 	public GreatThrasherEntity(EntityType<? extends ThrasherEntity> type, World world) {
 		super(type, world);
@@ -37,7 +39,12 @@ public class GreatThrasherEntity extends ThrasherEntity {
 	protected double getStunDamageThreshold() {
 		return 8.0F;
 	}
-	
+
+	@Override
+	protected EntitySize getDefaultSize() {
+		return DEFAULT_SIZE;
+	}
+
 	@Override
 	protected float getSoundPitch() {
 		return (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 0.75F;
@@ -47,5 +54,4 @@ public class GreatThrasherEntity extends ThrasherEntity {
 	public ItemStack getPickedResult(RayTraceResult target) {
 		return new ItemStack(UAItems.GREAT_THRASHER_SPAWN_EGG.get());
 	}
-
 }
