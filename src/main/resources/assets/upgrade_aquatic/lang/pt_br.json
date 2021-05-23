@@ -442,10 +442,10 @@
   
   "block.upgrade_aquatic.beachgrass": "Grama de praia",
   "block.upgrade_aquatic.tall_beachgrass": "Grama de praia alta",
-  "block.upgrade_aquatic.beachgrass_thatch": "Sapé de grama de praia",
-  "block.upgrade_aquatic.beachgrass_thatch_slab": "Laje de sapé de grama de praia",
-  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escadas de sapé de grama de praia",
-  "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Laje vertical de sapé de grama de praia",
+  "block.upgrade_aquatic.beachgrass_thatch": "Colmo de grama de praia",
+  "block.upgrade_aquatic.beachgrass_thatch_slab": "Laje de colmo de grama de praia",
+  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Escadas de colmo de grama de praia",
+  "block.upgrade_aquatic.beachgrass_thatch_vertical_slab": "Laje vertical de colmo de grama de praia",
   
   "block.upgrade_aquatic.luminous_prismarine": "Prismarinho luminoso",
   "block.upgrade_aquatic.luminous_prismarine_slab": "Laje de prismarinho luminoso",
