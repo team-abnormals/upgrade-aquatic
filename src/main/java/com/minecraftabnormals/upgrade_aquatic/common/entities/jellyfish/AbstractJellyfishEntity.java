@@ -336,6 +336,8 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 
 		RotationController(AbstractJellyfishEntity jellyfish) {
 			this.jellyfish = jellyfish;
+			this.startingPitch = jellyfish.rotationPitch;
+			this.startingYaw = jellyfish.rotationYaw;
 		}
 
 		protected void tick() {
