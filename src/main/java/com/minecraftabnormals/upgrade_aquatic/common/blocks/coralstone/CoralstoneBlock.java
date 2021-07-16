@@ -1,5 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks.coralstone;
 
+import com.minecraftabnormals.abnormals_core.core.util.BlockUtil;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,31 +20,32 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Random;
+import java.util.function.Supplier;
 
+@SuppressWarnings("deprecation")
 public class CoralstoneBlock extends Block {
+	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 	@Nullable
 	private Block[] growableCoralBlocks;
-	
 	private boolean chiseled;
-	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 
 	public CoralstoneBlock(Properties properties, boolean chiseled) {
 		this(properties, chiseled, null);
 	}
-	
+
 	public CoralstoneBlock(Properties properties, boolean chiseled, @Nullable Block[] growableCoralBlocks) {
 		super(properties);
 		this.chiseled = chiseled;
 		this.growableCoralBlocks = growableCoralBlocks;
 		this.setDefaultState(this.stateContainer.getBaseState().with(POWERED, false));
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_CORALSTONE.get() && state.getBlock() != UABlocks.CORALSTONE.get()) {
+		if (stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_CORALSTONE.get() && state.getBlock() != UABlocks.CORALSTONE.get()) {
 			BlockState newState = this.chiseled ? UABlocks.CHISELED_CORALSTONE.get().getDefaultState() : UABlocks.CORALSTONE.get().getDefaultState();
 			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
@@ -52,42 +54,27 @@ public class CoralstoneBlock extends Block {
 		}
 		return super.onBlockActivated(state, world, pos, player, hand, hit);
 	}
-	
+
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if(!worldIn.isAreaLoaded(pos, 3)) return;
+		if (!worldIn.isAreaLoaded(pos, 3)) return;
+
 		Block block = state.getBlock();
-		
-		if(this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE.get() && block != UABlocks.DEAD_CHISELED_CORALSTONE.get()) {
-			for(int i = 0; i < 4; i++) {
-				BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-				if(chiseled) {
-					UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP.forEach((input, output) -> {
-					    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
-					    	worldIn.setBlockState(pos, output.get().getDefaultState(), 2);
-					    }
-					});
-				} else {
-					UABlocks.CORALSTONE_CONVERSION_MAP.forEach((input, output) -> {
-					    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
-					    	worldIn.setBlockState(pos, output.get().getDefaultState(), 2);
-					    }
-					});
-				}
-			}
+		if (this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE.get() && block != UABlocks.DEAD_CHISELED_CORALSTONE.get()) {
+			CoralstoneBlock.tickConversion(this.chiseled ? UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP : UABlocks.CORALSTONE_CONVERSION_MAP, state, worldIn, pos, random);
 		}
-		
-		if(this.growableCoralBlocks != null && random.nextFloat() < 0.12F) {
+
+		if (this.growableCoralBlocks != null && random.nextFloat() < 0.12F) {
 			Direction randDirection = this.growableCoralBlocks.length > 3 ? Direction.getRandomDirection(random) : Direction.byIndex(random.nextInt(5) + 1);
 			BlockPos growPos = pos.offset(randDirection);
 			FluidState fluidState = worldIn.getBlockState(growPos).getFluidState();
 			boolean isValidPosToGrow = worldIn.getBlockState(growPos).getMaterial().isReplaceable() && fluidState.getLevel() >= 8 && fluidState.isTagged(FluidTags.WATER);
-			
-			if(isValidPosToGrow && state.get(POWERED)) {
-				if(randDirection.getIndex() > 1) {
+
+			if (isValidPosToGrow && state.get(POWERED)) {
+				if (randDirection.getIndex() > 1) {
 					worldIn.setBlockState(growPos, growableCoralBlocks[2].getDefaultState().with(CoralWallFanBlock.FACING, randDirection), 2);
-				} else if(randDirection.getIndex() == 1) {
-					if(random.nextBoolean()) {
+				} else if (randDirection.getIndex() == 1) {
+					if (random.nextBoolean()) {
 						worldIn.setBlockState(growPos, growableCoralBlocks[1].getDefaultState(), 2);
 					} else {
 						worldIn.setBlockState(growPos, growableCoralBlocks[0].getDefaultState(), 2);
@@ -98,24 +85,35 @@ public class CoralstoneBlock extends Block {
 			}
 		}
 	}
-	
+
 	@Override
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-		if(!worldIn.isRemote) {
+		if (!worldIn.isRemote) {
 			boolean flag = state.get(POWERED);
-			if(flag != worldIn.isBlockPowered(pos)) {
+			if (flag != worldIn.isBlockPowered(pos)) {
 				worldIn.setBlockState(pos, state.func_235896_a_(POWERED), 2);
 			}
 		}
 	}
-	
+
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		return this.getDefaultState().with(POWERED, context.getWorld().isBlockPowered(context.getPos()));
 	}
-	
+
 	@Override
 	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(POWERED);
+	}
+
+	public static void tickConversion(Map<Supplier<Block>, Supplier<Block>> conversionMap, BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		for (int i = 0; i < 4; i++) {
+			Block randomBlock = world.getBlockState(pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1)).getBlock();
+			conversionMap.forEach((input, output) -> {
+				if (input.get() == randomBlock) {
+					world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, output.get().getDefaultState()), 2);
+				}
+			});
+		}
 	}
 }

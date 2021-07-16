@@ -18,22 +18,27 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class CoralstoneWallBlock extends WallBlock {
 
 	public CoralstoneWallBlock(Properties properties) {
 		super(properties);
 	}
-	
+
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if(!worldIn.isAreaLoaded(pos, 3)) return;
-		
-		for(int i = 0; i < 4; i++) {
+		if (!worldIn.isAreaLoaded(pos, 3)) return;
+
+		if (state.getBlock() != UABlocks.DEAD_CORALSTONE_WALL.get()) {
+			CoralstoneBlock.tickConversion(UABlocks.CORALSTONE_WALL_CONVERSION_MAP, state, worldIn, pos, random);
+		}
+
+		for (int i = 0; i < 4; i++) {
 			BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 			UABlocks.CORALSTONE_WALL_CONVERSION_MAP.forEach((input, output) -> {
-			    if(input.get() == worldIn.getBlockState(blockpos).getBlock()) {
+				if (input.get() == worldIn.getBlockState(blockpos).getBlock()) {
 					worldIn.setBlockState(pos, BlockUtil.transferAllBlockStates(state, output.get().getDefaultState()), 2);
-			    }
+				}
 			});
 		}
 	}
@@ -41,7 +46,7 @@ public class CoralstoneWallBlock extends WallBlock {
 	@Override
 	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
 		ItemStack stack = player.getHeldItem(hand);
-		if(stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_WALL.get()) {
+		if (stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_WALL.get()) {
 			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
 			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
 			world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, UABlocks.CORALSTONE_WALL.get().getDefaultState()), 2);
