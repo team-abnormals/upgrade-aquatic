@@ -338,6 +338,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 			this.jellyfish = jellyfish;
 			this.startingPitch = jellyfish.rotationPitch;
 			this.startingYaw = jellyfish.rotationYaw;
+			this.tickLength = 1;
 		}
 
 		protected void tick() {
