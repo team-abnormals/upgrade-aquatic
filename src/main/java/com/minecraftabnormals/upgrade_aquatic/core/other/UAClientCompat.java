@@ -16,9 +16,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class UAClientCompat {
-	private static final RenderType CUTOUT = RenderType.getCutout();
-	private static final RenderType CUTOUT_MIPPED = RenderType.getCutoutMipped();
-	private static final RenderType TRANSLUSCENT = RenderType.getTranslucent();
+	private static final RenderType CUTOUT = RenderType.cutout();
+	private static final RenderType CUTOUT_MIPPED = RenderType.cutoutMipped();
+	private static final RenderType TRANSLUSCENT = RenderType.translucent();
 
 	public static void registerClientCompat() {
 		registerBlockColors();
@@ -172,7 +172,7 @@ public class UAClientCompat {
 		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
 		ItemColors itemColors = Minecraft.getInstance().getItemColors();
 
-		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE, UABlocks.MULBERRY_VINE));
+		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE, UABlocks.MULBERRY_VINE));
 		DataUtil.registerBlockItemColor(itemColors, (color, items) -> FoliageColors.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE));
 	}
 }

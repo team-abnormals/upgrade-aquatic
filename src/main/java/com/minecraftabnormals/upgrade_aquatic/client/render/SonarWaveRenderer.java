@@ -18,24 +18,24 @@ public class SonarWaveRenderer extends EntityRenderer<SonarWaveEntity> {
 	
 	public SonarWaveRenderer(EntityRendererManager renderManager) {
 		super(renderManager);
-		this.shadowSize = 0.0F;
+		this.shadowRadius = 0.0F;
 	}
 	
 	@Override
 	public void render(SonarWaveEntity sonarWave, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int packedLightIn) {
-		matrixStack.push();
+		matrixStack.pushPose();
 		matrixStack.translate(0.0F, -0.7F, 0.0F);
-		matrixStack.rotate(Vector3f.YP.rotationDegrees(sonarWave.rotationYaw));
+		matrixStack.mulPose(Vector3f.YP.rotationDegrees(sonarWave.yRot));
 	
-		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveTransluscentEntity(this.getEntityTexture(sonarWave), true));
-    	this.SONAR_MODEL.setRotationAngles(sonarWave, 0.0F, 0.0F, partialTicks, sonarWave.rotationYaw, sonarWave.rotationPitch);
-		this.SONAR_MODEL.render(matrixStack, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-		matrixStack.pop();
+		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveTransluscentEntity(this.getTextureLocation(sonarWave), true));
+    	this.SONAR_MODEL.setupAnim(sonarWave, 0.0F, 0.0F, partialTicks, sonarWave.yRot, sonarWave.xRot);
+		this.SONAR_MODEL.renderToBuffer(matrixStack, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		matrixStack.popPose();
 		super.render(sonarWave, entityYaw, partialTicks, matrixStack, bufferIn, 240);
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(SonarWaveEntity entity) {
+	public ResourceLocation getTextureLocation(SonarWaveEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/sonar.png");
 	}
 }

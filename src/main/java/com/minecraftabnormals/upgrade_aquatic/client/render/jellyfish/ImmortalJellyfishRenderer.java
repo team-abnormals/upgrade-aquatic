@@ -16,7 +16,7 @@ public class ImmortalJellyfishRenderer<I extends ImmortalJellyfishEntity> extend
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(I jellyfish) {
+	public ResourceLocation getTextureLocation(I jellyfish) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
 	
@@ -26,8 +26,8 @@ public class ImmortalJellyfishRenderer<I extends ImmortalJellyfishEntity> extend
 	}
 	
 	@Override
-	protected RenderType func_230496_a_(I jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
-		return RenderType.getEntityTranslucent(this.getEntityTexture(jellyfish));
+	protected RenderType getRenderType(I jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
+		return RenderType.entityTranslucent(this.getTextureLocation(jellyfish));
 	}
 
 }

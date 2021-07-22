@@ -6,6 +6,8 @@ import net.minecraft.block.DeadCoralWallFanBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class UACoralWallFanDeadBlock extends DeadCoralWallFanBlock {
 
 	public UACoralWallFanDeadBlock(Properties props) {

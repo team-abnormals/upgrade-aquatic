@@ -13,9 +13,9 @@ public class JellyfishDamageSource extends EntityDamageSource {
 	}
 	
 	@Override
-	public ITextComponent getDeathMessage(LivingEntity entityLivingBase) {
-		String message = "death.attack." + this.damageType;
-		return new TranslationTextComponent(message, entityLivingBase.getDisplayName(), this.damageSourceEntity.getDisplayName());
+	public ITextComponent getLocalizedDeathMessage(LivingEntity entityLivingBase) {
+		String message = "death.attack." + this.msgId;
+		return new TranslationTextComponent(message, entityLivingBase.getDisplayName(), this.entity.getDisplayName());
 	}
 
 }

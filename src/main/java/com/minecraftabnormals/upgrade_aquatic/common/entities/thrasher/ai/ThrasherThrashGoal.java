@@ -20,22 +20,22 @@ public class ThrasherThrashGoal extends Goal {
 	
 	public ThrasherThrashGoal(ThrasherEntity thrasher) {
 		this.thrasher = thrasher;
-		this.setMutexFlags(EnumSet.of(Goal.Flag.LOOK));
+		this.setFlags(EnumSet.of(Goal.Flag.LOOK));
 	}
 
 	@Override
-	public boolean shouldExecute() {
+	public boolean canUse() {
 		Entity passenger = !thrasher.getPassengers().isEmpty() ? this.thrasher.getPassengers().get(0) : null;
 		if(passenger instanceof PlayerEntity) {
 			if(((PlayerEntity) passenger).isCreative() || passenger.isSpectator()) {
 				return false;
 			}
 		}
-		return !this.thrasher.isStunned() && passenger != null && this.thrasher.isNoEndimationPlaying() && this.thrasher.getRNG().nextFloat() < 0.1F;
+		return !this.thrasher.isStunned() && passenger != null && this.thrasher.isNoEndimationPlaying() && this.thrasher.getRandom().nextFloat() < 0.1F;
 	}
 	
 	@Override
-	public boolean shouldContinueExecuting() {
+	public boolean canContinueToUse() {
 		Entity passenger = !thrasher.getPassengers().isEmpty() ? this.thrasher.getPassengers().get(0) : null;
 		if(passenger instanceof PlayerEntity) {
 			if(((PlayerEntity) passenger).isCreative() || passenger.isSpectator()) {
@@ -46,14 +46,14 @@ public class ThrasherThrashGoal extends Goal {
 	}
 	
 	@Override
-	public void startExecuting() {
-		this.originalYaw = this.thrasher.rotationYaw;
-		this.thrasher.setHitsTillStun(this.thrasher.getRNG().nextInt(2) + 2);
+	public void start() {
+		this.originalYaw = this.thrasher.yRot;
+		this.thrasher.setHitsTillStun(this.thrasher.getRandom().nextInt(2) + 2);
 		NetworkUtil.setPlayingAnimationMessage(this.thrasher, ThrasherEntity.THRASH_ANIMATION);
 	}
 	
 	@Override
-	public void resetTask() {
+	public void stop() {
 		this.originalYaw = 0;
 		this.thrashedTicks = 0;
 		NetworkUtil.setPlayingAnimationMessage(this.thrasher, EndimatedEntity.BLANK_ANIMATION);
@@ -63,12 +63,12 @@ public class ThrasherThrashGoal extends Goal {
 	public void tick() {
 		this.thrashedTicks++;
 		
-		this.thrasher.getNavigator().clearPath();
+		this.thrasher.getNavigation().stop();
 		
-		this.thrasher.prevRotationYaw = this.thrasher.rotationYaw;
+		this.thrasher.yRotO = this.thrasher.yRot;
 		
-		this.thrasher.renderYawOffset = (float) ((this.originalYaw) + 75 * MathHelper.cos(this.thrasher.ticksExisted * 0.5F) * 1F);
-		this.thrasher.rotationYaw = (float) ((this.originalYaw) + 75 * MathHelper.cos(this.thrasher.ticksExisted * 0.5F) * 1F);
+		this.thrasher.yBodyRot = (float) ((this.originalYaw) + 75 * MathHelper.cos(this.thrasher.tickCount * 0.5F) * 1F);
+		this.thrasher.yRot = (float) ((this.originalYaw) + 75 * MathHelper.cos(this.thrasher.tickCount * 0.5F) * 1F);
 		
 		Entity entity = this.thrasher.getPassengers().get(0);
 		
@@ -76,15 +76,15 @@ public class ThrasherThrashGoal extends Goal {
 			this.disablePlayersShield((PlayerEntity) entity);
 		}
 		
-		entity.setSneaking(false);
+		entity.setShiftKeyDown(false);
 		
 		if(this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
-			this.thrasher.playSound(this.thrasher.getThrashingSound(), 1.0F, Math.max(0.75F, this.thrasher.getRNG().nextFloat()));
-			entity.attackEntityFrom(DamageSource.causeMobDamage(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+			this.thrasher.playSound(this.thrasher.getThrashingSound(), 1.0F, Math.max(0.75F, this.thrasher.getRandom().nextFloat()));
+			entity.hurt(DamageSource.mobAttack(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
 		}
 	}
 	
 	private void disablePlayersShield(PlayerEntity player) {
-		player.getCooldownTracker().setCooldown(Items.SHIELD, 30);
+		player.getCooldowns().addCooldown(Items.SHIELD, 30);
 	}
 }

@@ -28,56 +28,58 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class JellyWallTorchBlock extends JellyTorchBlock {
-	public static final DirectionProperty HORIZONTAL_FACING = HorizontalBlock.HORIZONTAL_FACING;
-    private static final Map<Direction, VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.makeCuboidShape(5.5d, 3d, 11d, 10.5d, 13d, 16d), Direction.SOUTH, Block.makeCuboidShape(5.5d, 3d, 0d, 10.5d, 13d, 5d), Direction.WEST, Block.makeCuboidShape(11d, 3d, 5.5d, 16d, 13d, 10.5d), Direction.EAST, Block.makeCuboidShape(0d, 3d, 5.5d, 5d, 13d, 10.5d)));
+	public static final DirectionProperty HORIZONTAL_FACING = HorizontalBlock.FACING;
+    private static final Map<Direction, VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(5.5d, 3d, 11d, 10.5d, 13d, 16d), Direction.SOUTH, Block.box(5.5d, 3d, 0d, 10.5d, 13d, 5d), Direction.WEST, Block.box(11d, 3d, 5.5d, 16d, 13d, 10.5d), Direction.EAST, Block.box(0d, 3d, 5.5d, 5d, 13d, 10.5d)));
     private JellyTorchType torchType;
 
     public JellyWallTorchBlock(Properties properties, JellyTorchType torchType) {
         super(properties, torchType);
         this.torchType = torchType;
-        this.setDefaultState(this.stateContainer.getBaseState().with(HORIZONTAL_FACING, Direction.NORTH).with(WATERLOGGED, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HORIZONTAL_FACING, Direction.NORTH).setValue(WATERLOGGED, false));
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return SHAPES.get(state.get(HORIZONTAL_FACING));
+        return SHAPES.get(state.getValue(HORIZONTAL_FACING));
     }
 
-    public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-        Direction direction = state.get(HORIZONTAL_FACING);
-        BlockPos blockpos = pos.offset(direction.getOpposite());
+    public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+        Direction direction = state.getValue(HORIZONTAL_FACING);
+        BlockPos blockpos = pos.relative(direction.getOpposite());
         BlockState blockstate = worldIn.getBlockState(blockpos);
-        return blockstate.isSolidSide(worldIn, blockpos, direction);
+        return blockstate.isFaceSturdy(worldIn, blockpos, direction);
     }
 
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        BlockState blockstate = this.getDefaultState();
-        IWorldReader iworldreader = context.getWorld();
-        FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-        BlockPos blockpos = context.getPos();
+        BlockState blockstate = this.defaultBlockState();
+        IWorldReader iworldreader = context.getLevel();
+        FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
+        BlockPos blockpos = context.getClickedPos();
         Direction[] adirection = context.getNearestLookingDirections();
         for (Direction direction : adirection) {
             if (direction.getAxis().isHorizontal()) {
                 Direction direction1 = direction.getOpposite();
-                blockstate = blockstate.with(HORIZONTAL_FACING, direction1);
-                if (blockstate.isValidPosition(iworldreader, blockpos)) {
-                    return blockstate.with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+                blockstate = blockstate.setValue(HORIZONTAL_FACING, direction1);
+                if (blockstate.canSurvive(iworldreader, blockpos)) {
+                    return blockstate.setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
                 }
             }
         }
         return null;
     }
 
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
     	FluidState ifluidstate = worldIn.getFluidState(currentPos);
-    	return facing.getOpposite() == stateIn.get(HORIZONTAL_FACING) && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn.with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+    	return facing.getOpposite() == stateIn.getValue(HORIZONTAL_FACING) && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn.setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, World world, BlockPos pos, Random random) {
-        Direction direction = state.get(HORIZONTAL_FACING);
+        Direction direction = state.getValue(HORIZONTAL_FACING);
         double xOffset = random.nextBoolean() ? -(Math.random() * 0.075) : (Math.random() * 0.075);
 		double yOffset = random.nextBoolean() ? -(Math.random() * 0.075) : (Math.random() * 0.075);
 		double zOffset = random.nextBoolean() ? -(Math.random() * 0.075) : (Math.random() * 0.075);
@@ -87,20 +89,20 @@ public class JellyWallTorchBlock extends JellyTorchBlock {
         double d3 = 0.18d;
         double d4 = 0.3d;
         Direction facing = direction.getOpposite();
-        world.addParticle(JellyTorchType.getTorchParticleType(this.torchType), d0 + d4 * (double) facing.getXOffset(), d1 + d3, d2 + d4 * (double) facing.getZOffset(), 0d, 0.004d, 0d);
+        world.addParticle(JellyTorchType.getTorchParticleType(this.torchType), d0 + d4 * (double) facing.getStepX(), d1 + d3, d2 + d4 * (double) facing.getStepZ(), 0d, 0.004d, 0d);
     }
 
     public BlockState rotate(BlockState state, Rotation rot) {
-        return state.with(HORIZONTAL_FACING, rot.rotate(state.get(HORIZONTAL_FACING)));
+        return state.setValue(HORIZONTAL_FACING, rot.rotate(state.getValue(HORIZONTAL_FACING)));
     }
 
     @SuppressWarnings("deprecation")
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state.rotate(mirrorIn.toRotation(state.get(HORIZONTAL_FACING)));
+        return state.rotate(mirrorIn.getRotation(state.getValue(HORIZONTAL_FACING)));
     }
 
     @Override
-    public void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    public void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(HORIZONTAL_FACING, WATERLOGGED);
     }
 }

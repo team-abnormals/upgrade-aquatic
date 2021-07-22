@@ -21,17 +21,17 @@ public class BeachgrassDunesFeature extends Feature<NoFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		for(BlockState blockstate = world.getBlockState(pos); (world.isAirBlock(pos) || blockstate.isIn(BlockTags.LEAVES)) && pos.getY() > 0; blockstate = world.getBlockState(pos)) {
-			pos = pos.down();
+	public boolean place(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+		for(BlockState blockstate = world.getBlockState(pos); (world.isEmptyBlock(pos) || blockstate.is(BlockTags.LEAVES)) && pos.getY() > 0; blockstate = world.getBlockState(pos)) {
+			pos = pos.below();
 		}
 		
 		int grassesPlaced = 0;
 		
 		if(pos.getY() >= world.getSeaLevel() + 6) {
 			for(int j = 0; j < 128; ++j) {
-				BlockPos blockpos = pos.add(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(4) - rand.nextInt(4));
-				if(world.isAirBlock(blockpos) && UABlocks.BEACHGRASS.get().getDefaultState().isValidPosition(world, blockpos)) {
+				BlockPos blockpos = pos.offset(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(4) - rand.nextInt(4));
+				if(world.isEmptyBlock(blockpos) && UABlocks.BEACHGRASS.get().defaultBlockState().canSurvive(world, blockpos)) {
 					this.placeBeachgrass(world, blockpos, rand);
 					grassesPlaced++;
 				}
@@ -46,12 +46,12 @@ public class BeachgrassDunesFeature extends Feature<NoFeatureConfig> {
 	private void placeBeachgrass(IWorld world, BlockPos pos, Random rand) {
 		if(rand.nextFloat() < 0.30F) {
 			TallBeachgrassBlock beachGrass = (TallBeachgrassBlock) UABlocks.TALL_BEACHGRASS.get();
-			if(world.isAirBlock(pos) && world.isAirBlock(pos.up())) {
+			if(world.isEmptyBlock(pos) && world.isEmptyBlock(pos.above())) {
 				beachGrass.placeAt(world, pos, 2);
 			}
 		} else {
-			if(world.isAirBlock(pos)) {
-				world.setBlockState(pos, UABlocks.BEACHGRASS.get().getDefaultState(), 2);
+			if(world.isEmptyBlock(pos)) {
+				world.setBlock(pos, UABlocks.BEACHGRASS.get().defaultBlockState(), 2);
 			}
 		}
 	}

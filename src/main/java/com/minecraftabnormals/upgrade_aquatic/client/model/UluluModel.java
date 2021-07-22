@@ -12,26 +12,26 @@ public class UluluModel<T extends UluluEntity> extends EntityModel<T> {
 	public ModelRenderer body;
 	
 	public UluluModel() {
-		textureWidth = 128;
-		textureHeight = 64;
+		texWidth = 128;
+		texHeight = 64;
 		this.body = new ModelRenderer(this, 0, 0);
-        this.body.setRotationPoint(-12.4F, -0.2F, -11.3F);
+        this.body.setPos(-12.4F, -0.2F, -11.3F);
         this.body.addBox(0.0F, 0.0F, 0.0F, 24, 24, 24, 0.0F);
 	}
 
 	@Override
-	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
 		this.body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-		modelRenderer.rotateAngleX = x;
-		modelRenderer.rotateAngleY = y;
-		modelRenderer.rotateAngleZ = z;
+		modelRenderer.xRot = x;
+		modelRenderer.yRot = y;
+		modelRenderer.zRot = z;
 	}
 
 	@Override
-	public void setRotationAngles(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		// TODO Auto-generated method stub
 		
 	}

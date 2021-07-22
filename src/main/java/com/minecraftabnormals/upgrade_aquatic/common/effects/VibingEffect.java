@@ -14,20 +14,20 @@ public class VibingEffect extends Effect {
 	}
 	
 	@Override
-	public void performEffect(LivingEntity entity, int amplifier) {
-		for(LivingEntity livingEntities : entity.world.getEntitiesWithinAABB(LivingEntity.class, entity.getBoundingBox().grow(0.3D))) {
+	public void applyEffectTick(LivingEntity entity, int amplifier) {
+		for(LivingEntity livingEntities : entity.level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(0.3D))) {
 			if (livingEntities.isAlive() && livingEntities != entity) {
 				if(livingEntities instanceof PlayerEntity && ((PlayerEntity)livingEntities).isCreative()) {
 					
 				} else {
-					livingEntities.addPotionEffect(new EffectInstance(Effects.REGENERATION, 70, 1 * (amplifier + 1)));
+					livingEntities.addEffect(new EffectInstance(Effects.REGENERATION, 70, 1 * (amplifier + 1)));
 				}
 			}
 		}
 	}
 	
 	@Override
-	public boolean isReady(int duration, int amplifier) {
+	public boolean isDurationEffectTick(int duration, int amplifier) {
 		return true;
 	}
 

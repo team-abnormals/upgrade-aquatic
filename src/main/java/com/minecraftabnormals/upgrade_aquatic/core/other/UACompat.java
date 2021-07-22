@@ -17,9 +17,9 @@ public class UACompat {
 
 	public static void registerLootInjectors() {
 		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(UpgradeAquatic.MOD_ID);
-		injector.addLootInjection(injector.buildLootPool("tooth_ruins", 1, 0), LootTables.CHESTS_UNDERWATER_RUIN_BIG);
-		injector.addLootInjection(injector.buildLootPool("tooth_treasure", 1, 0), LootTables.CHESTS_BURIED_TREASURE);
-		injector.addLootInjection(injector.buildLootPool("pickerelweed_structures", 1, 0), LootTables.CHESTS_SHIPWRECK_SUPPLY);
+		injector.addLootInjection(injector.buildLootPool("tooth_ruins", 1, 0), LootTables.UNDERWATER_RUIN_BIG);
+		injector.addLootInjection(injector.buildLootPool("tooth_treasure", 1, 0), LootTables.BURIED_TREASURE);
+		injector.addLootInjection(injector.buildLootPool("pickerelweed_structures", 1, 0), LootTables.SHIPWRECK_SUPPLY);
 	}
 
 	public static void registerCompostables() {

@@ -7,13 +7,16 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
     modId = "upgrade_aquatic"
     version = "${file.jarVersion}"
     logoFile = "logo.png"
-    itemIcon = "upgrade_aquatic:pike"
     authors = "Team Abnormals"
     credits = "SmellyModder, bageldotjpg, Cameron, five, SystemZee, Ocelot, Endergized"
     displayName = "Upgrade Aquatic"
     description = '''
-    A mod that improves upon the content of 1.13 Update Aquatic.
+    Expands upon Update Aquatic and aquatic life as a whole with new enemies, sea creatures, and building blocks.
     '''
+
+[modproperties.upgrade_aquatic]
+    catalogueItemIcon = "upgrade_aquatic:pike"
+    configuredBackground = "upgrade_aquatic:textures/block/coralstone.png"
 
 [[dependencies.upgrade_aquatic]]
     modId = "minecraft"
@@ -32,6 +35,6 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
 [[dependencies.upgrade_aquatic]]
     modId = "abnormals_core"
     mandatory = true
-    versionRange = "[3.1.1,)"
+    versionRange = "[3.2.0,)"
     ordering = "AFTER"
     side = "BOTH"

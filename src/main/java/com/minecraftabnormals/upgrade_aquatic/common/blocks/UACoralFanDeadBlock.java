@@ -18,7 +18,7 @@ public class UACoralFanDeadBlock extends CoralFanBlock {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.DEAD_HORN_CORAL_FAN);
 
 	public UACoralFanDeadBlock() {
-		super(Block.Properties.create(Material.ROCK, MaterialColor.GRAY).doesNotBlockMovement().hardnessAndResistance(0F));
+		super(Block.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).noCollission().strength(0F));
 	}
 
 	public UACoralFanDeadBlock(Block.Properties properties) {
@@ -31,7 +31,7 @@ public class UACoralFanDeadBlock extends CoralFanBlock {
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

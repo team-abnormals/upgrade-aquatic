@@ -18,7 +18,7 @@ public class UAEntityPredicates {
 	};
 	
 	public static final Predicate<Entity> IS_CHILD = (entity) -> {
-		return ((AnimalEntity) entity).isChild();
+		return ((AnimalEntity) entity).isBaby();
 	};
 	
 }

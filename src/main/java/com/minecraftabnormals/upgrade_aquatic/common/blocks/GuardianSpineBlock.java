@@ -32,51 +32,53 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class GuardianSpineBlock extends DirectionalBlock implements IBucketPickupHandler, ILiquidContainer {
 	public static final BooleanProperty DRAWN = BooleanProperty.create("drawn");
 	public static final BooleanProperty ELDER = BooleanProperty.create("elder");
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	protected static final VoxelShape[] SHAPES = { 
-		Block.makeCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D), 
-		Block.makeCuboidShape(0.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D),
-		Block.makeCuboidShape(6.0D, 6.0D, 0.0D, 10.0D, 10.0D, 16.0D),
+		Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D), 
+		Block.box(0.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D),
+		Block.box(6.0D, 6.0D, 0.0D, 10.0D, 10.0D, 16.0D),
 		//Elder
-		Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D),
-		Block.makeCuboidShape(0.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D),
-		Block.makeCuboidShape(4.0D, 4.0D, 0.0D, 12.0D, 12.0D, 16.0D),
+		Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D),
+		Block.box(0.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D),
+		Block.box(4.0D, 4.0D, 0.0D, 12.0D, 12.0D, 16.0D),
 	};
 	protected static final VoxelShape[] SHAPES_RETRACTED = { 
-		Block.makeCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 1.0D, 10.0D), 
-		Block.makeCuboidShape(16.0D, 6.0D, 6.0D, 15.0D, 10.0D, 10.0D),
-		Block.makeCuboidShape(6.0D, 6.0D, 16.0D, 10.0D, 10.0D, 15.0D),
-		Block.makeCuboidShape(6.0D, 16.0D, 6.0D, 10.0D, 15.0D, 10.0D),
+		Block.box(6.0D, 0.0D, 6.0D, 10.0D, 1.0D, 10.0D), 
+		Block.box(16.0D, 6.0D, 6.0D, 15.0D, 10.0D, 10.0D),
+		Block.box(6.0D, 6.0D, 16.0D, 10.0D, 10.0D, 15.0D),
+		Block.box(6.0D, 16.0D, 6.0D, 10.0D, 15.0D, 10.0D),
 		//Elder
-		Block.makeCuboidShape(4.0D, 0.0D, 4.0D, 12.0D, 1.0D, 12.0D),
-		Block.makeCuboidShape(16.0D, 4.0D, 4.0D, 15.0D, 12.0D, 12.0D),
-		Block.makeCuboidShape(4.0D, 4.0D, 16.0D, 12.0D, 12.0D, 15.0D),
-		Block.makeCuboidShape(4.0D, 16.0D, 4.0D, 12.0D, 15.0D, 12.0D),
+		Block.box(4.0D, 0.0D, 4.0D, 12.0D, 1.0D, 12.0D),
+		Block.box(16.0D, 4.0D, 4.0D, 15.0D, 12.0D, 12.0D),
+		Block.box(4.0D, 4.0D, 16.0D, 12.0D, 12.0D, 15.0D),
+		Block.box(4.0D, 16.0D, 4.0D, 12.0D, 15.0D, 12.0D),
 		
 		//Fixers Elder
-		Block.makeCuboidShape(0.0D, 4.0D, 4.0D, 1.0D, 12.0D, 12.0D),
-		Block.makeCuboidShape(4.0D, 4.0D, 1.0D, 12.0D, 12.0D, 0.0D),
+		Block.box(0.0D, 4.0D, 4.0D, 1.0D, 12.0D, 12.0D),
+		Block.box(4.0D, 4.0D, 1.0D, 12.0D, 12.0D, 0.0D),
 		//Fixes
-		Block.makeCuboidShape(0.0D, 6.0D, 6.0D, 1.0D, 10.0D, 10.0D),
-		Block.makeCuboidShape(6.0D, 6.0D, 1.0D, 10.0D, 10.0D, 0.0D),
+		Block.box(0.0D, 6.0D, 6.0D, 1.0D, 10.0D, 10.0D),
+		Block.box(6.0D, 6.0D, 1.0D, 10.0D, 10.0D, 0.0D),
 	};
 	
 	public GuardianSpineBlock(Properties props, boolean elder) {
 		super(props);
-		this.setDefaultState(this.stateContainer.getBaseState()
-			.with(WATERLOGGED, false)
-			.with(DRAWN, false)
-			.with(ELDER, elder)
-			.with(FACING, Direction.SOUTH)
+		this.registerDefaultState(this.stateDefinition.any()
+			.setValue(WATERLOGGED, false)
+			.setValue(DRAWN, false)
+			.setValue(ELDER, elder)
+			.setValue(FACING, Direction.SOUTH)
 		);
 	}
 	
 	@Override
-	public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
-		return state.get(DRAWN);
+	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+		return state.getValue(DRAWN);
 	}
 	
 	@Override
@@ -86,56 +88,56 @@ public class GuardianSpineBlock extends DirectionalBlock implements IBucketPicku
 	
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
-		if(!state.get(ELDER)) {
-			if(state.get(DRAWN)) {
-				if(state.get(FACING).getAxis() == Axis.Y) {
+		if(!state.getValue(ELDER)) {
+			if(state.getValue(DRAWN)) {
+				if(state.getValue(FACING).getAxis() == Axis.Y) {
 					return SHAPES[0];
-				} else if(state.get(FACING).getAxis() == Axis.X) {
+				} else if(state.getValue(FACING).getAxis() == Axis.X) {
 					return SHAPES[1];
-				} else if(state.get(FACING).getAxis() == Axis.Z) {
+				} else if(state.getValue(FACING).getAxis() == Axis.Z) {
 					return SHAPES[2];
 				}
 			} else {
-				if(state.get(FACING).getAxis() == Axis.Y) {
-					if(state.get(FACING).getAxisDirection() == AxisDirection.POSITIVE) {
+				if(state.getValue(FACING).getAxis() == Axis.Y) {
+					if(state.getValue(FACING).getAxisDirection() == AxisDirection.POSITIVE) {
 						return SHAPES_RETRACTED[0];
 					}
 					return SHAPES_RETRACTED[3];
-				} else if(state.get(FACING).getAxis() == Axis.X) {
-					if(state.get(FACING).getAxisDirection() == AxisDirection.NEGATIVE) {
+				} else if(state.getValue(FACING).getAxis() == Axis.X) {
+					if(state.getValue(FACING).getAxisDirection() == AxisDirection.NEGATIVE) {
 						return SHAPES_RETRACTED[1];
 					}
 					return SHAPES_RETRACTED[10];
-				} else if(state.get(FACING).getAxis() == Axis.Z) {
-					if(state.get(FACING).getAxisDirection() == AxisDirection.NEGATIVE) {
+				} else if(state.getValue(FACING).getAxis() == Axis.Z) {
+					if(state.getValue(FACING).getAxisDirection() == AxisDirection.NEGATIVE) {
 						return SHAPES_RETRACTED[2];
 					}
 					return SHAPES_RETRACTED[11];
 				}
 			}
 		} else {
-			if(state.get(DRAWN)) {
-				if(state.get(FACING).getAxis() == Axis.Y) {
+			if(state.getValue(DRAWN)) {
+				if(state.getValue(FACING).getAxis() == Axis.Y) {
 					return SHAPES[3];
-				} else if(state.get(FACING).getAxis() == Axis.X) {
+				} else if(state.getValue(FACING).getAxis() == Axis.X) {
 					return SHAPES[4];
-				} else if(state.get(FACING).getAxis() == Axis.Z) {
+				} else if(state.getValue(FACING).getAxis() == Axis.Z) {
 					return SHAPES[5];
 				}
 			} else {
-				if(state.get(FACING).getAxis() == Axis.Y) {
-					if(state.get(FACING).getAxisDirection() == AxisDirection.POSITIVE) {
+				if(state.getValue(FACING).getAxis() == Axis.Y) {
+					if(state.getValue(FACING).getAxisDirection() == AxisDirection.POSITIVE) {
 						return SHAPES_RETRACTED[4];
 					} else {
 						return SHAPES_RETRACTED[7];
 					}
-				} else if(state.get(FACING).getAxis() == Axis.X) {
-					if(state.get(FACING).getAxisDirection() == AxisDirection.NEGATIVE) {
+				} else if(state.getValue(FACING).getAxis() == Axis.X) {
+					if(state.getValue(FACING).getAxisDirection() == AxisDirection.NEGATIVE) {
 						return SHAPES_RETRACTED[5];
 					}
 					return SHAPES_RETRACTED[8];
-				} else if(state.get(FACING).getAxis() == Axis.Z) {
-					if(state.get(FACING).getAxisDirection() == AxisDirection.NEGATIVE) {
+				} else if(state.getValue(FACING).getAxis() == Axis.Z) {
+					if(state.getValue(FACING).getAxisDirection() == AxisDirection.NEGATIVE) {
 						return SHAPES_RETRACTED[6];
 					}
 					return SHAPES_RETRACTED[9];
@@ -145,21 +147,21 @@ public class GuardianSpineBlock extends DirectionalBlock implements IBucketPicku
 		return null;
 	}
 	
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		if (entityIn instanceof LivingEntity && state.get(DRAWN)) {
-			entityIn.setMotionMultiplier(state, new Vector3d(0.25D, 0.5D, 0.25D));
+	public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+		if (entityIn instanceof LivingEntity && state.getValue(DRAWN)) {
+			entityIn.makeStuckInBlock(state, new Vector3d(0.25D, 0.5D, 0.25D));
 			if(!entityIn.isInvulnerable()) {
-				if(state.get(ELDER)) ((LivingEntity)entityIn).addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 40));
+				if(state.getValue(ELDER)) ((LivingEntity)entityIn).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 40));
 			}
-			if (!worldIn.isRemote && (entityIn.lastTickPosX != entityIn.getPosX() || entityIn.lastTickPosZ != entityIn.getPosZ() || entityIn.lastTickPosY != entityIn.getPosY())) {
-				double d0 = Math.abs(entityIn.getPosX() - entityIn.lastTickPosX);
-				double d1 = Math.abs(entityIn.getPosZ() - entityIn.lastTickPosZ);
-				double d2 = Math.abs(entityIn.getPosY() - entityIn.lastTickPosY);
+			if (!worldIn.isClientSide && (entityIn.xOld != entityIn.getX() || entityIn.zOld != entityIn.getZ() || entityIn.yOld != entityIn.getY())) {
+				double d0 = Math.abs(entityIn.getX() - entityIn.xOld);
+				double d1 = Math.abs(entityIn.getZ() - entityIn.zOld);
+				double d2 = Math.abs(entityIn.getY() - entityIn.yOld);
 				if (d0 >= 0.003D || d1 >= 0.003D || d2 >= 0.003D) {
-					if(state.get(ELDER)) {
-						entityIn.attackEntityFrom(UADamageSources.ELDER_GUARDIAN_SPINE, 3.0F);
+					if(state.getValue(ELDER)) {
+						entityIn.hurt(UADamageSources.ELDER_GUARDIAN_SPINE, 3.0F);
 					} else {
-						entityIn.attackEntityFrom(UADamageSources.GUARDIAN_SPINE, 2.0F);
+						entityIn.hurt(UADamageSources.GUARDIAN_SPINE, 2.0F);
 					}
 				}
 			}
@@ -167,62 +169,62 @@ public class GuardianSpineBlock extends DirectionalBlock implements IBucketPicku
 	}
 	
 	public BlockState rotate(BlockState state, Rotation rot) {
-		return state.with(FACING, rot.rotate(state.get(FACING)));
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
 	}
 	
 	@SuppressWarnings("deprecation")
 	public BlockState mirror(BlockState state, Mirror mirrorIn) {
-		return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 	
-	public void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	public void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, WATERLOGGED, DRAWN, ELDER);
 	}
 	
 	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_) {
-		if (!worldIn.isRemote) {
-			boolean flag = state.get(DRAWN);
-			if (flag != worldIn.isBlockPowered(pos)) {
+		if (!worldIn.isClientSide) {
+			boolean flag = state.getValue(DRAWN);
+			if (flag != worldIn.hasNeighborSignal(pos)) {
 				if (flag) {
-					worldIn.getPendingBlockTicks().scheduleTick(pos, this, 1);
+					worldIn.getBlockTicks().scheduleTick(pos, this, 1);
 				} else {
-					float pitch = state.get(ELDER) ? 0.85F : 1.0F;
-					worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 0.3F, pitch);
-					worldIn.setBlockState(pos, state.func_235896_a_(DRAWN), 2);
+					float pitch = state.getValue(ELDER) ? 0.85F : 1.0F;
+					worldIn.playSound((PlayerEntity)null, pos, SoundEvents.PISTON_EXTEND, SoundCategory.BLOCKS, 0.3F, pitch);
+					worldIn.setBlock(pos, state.cycle(DRAWN), 2);
 				}
 			}
 		}
 	}
 
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (!worldIn.isRemote) {
-			if (state.get(DRAWN) && !worldIn.isBlockPowered(pos)) {
-				float pitch = state.get(ELDER) ? 0.85F : 1.0F;
-				worldIn.playSound((PlayerEntity)null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.3F, pitch);
-				worldIn.setBlockState(pos, state.func_235896_a_(DRAWN), 2);
+		if (!worldIn.isClientSide) {
+			if (state.getValue(DRAWN) && !worldIn.hasNeighborSignal(pos)) {
+				float pitch = state.getValue(ELDER) ? 0.85F : 1.0F;
+				worldIn.playSound((PlayerEntity)null, pos, SoundEvents.PISTON_CONTRACT, SoundCategory.BLOCKS, 0.3F, pitch);
+				worldIn.setBlock(pos, state.cycle(DRAWN), 2);
 			}
 		}
 	}
 	
 	@SuppressWarnings("deprecation")
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.getValue(WATERLOGGED)) {
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
-	    return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	    return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		Direction direction = context.getFace();
-		BlockState state = context.getWorld().getBlockState(context.getPos().offset(direction.getOpposite()));
-		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		return state.getBlock() == this && state.get(FACING) == direction ? this.getDefaultState().with(FACING, direction.getOpposite()).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER)).with(DRAWN, Boolean.valueOf(context.getWorld().isBlockPowered(context.getPos()))) : this.getDefaultState().with(FACING, direction).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER)).with(DRAWN, Boolean.valueOf(context.getWorld().isBlockPowered(context.getPos())));
+		Direction direction = context.getClickedFace();
+		BlockState state = context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));
+		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
+		return state.getBlock() == this && state.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER)).setValue(DRAWN, Boolean.valueOf(context.getLevel().hasNeighborSignal(context.getClickedPos()))) : this.defaultBlockState().setValue(FACING, direction).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER)).setValue(DRAWN, Boolean.valueOf(context.getLevel().hasNeighborSignal(context.getClickedPos())));
 	}
 	
 	@Override
-	public Fluid pickupFluid(IWorld worldIn, BlockPos pos, BlockState state) {
-		if (state.get(WATERLOGGED)) {
-			worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(false)), 3);
+	public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
+		if (state.getValue(WATERLOGGED)) {
+			worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(false)), 3);
 			return Fluids.WATER;
 		} else {
 	        return Fluids.EMPTY;
@@ -231,20 +233,20 @@ public class GuardianSpineBlock extends DirectionalBlock implements IBucketPicku
 	
 	@SuppressWarnings("deprecation")
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-		return !state.get(WATERLOGGED) && fluidIn == Fluids.WATER;
+	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+		return !state.getValue(WATERLOGGED) && fluidIn == Fluids.WATER;
 	}
 	
 	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-		if (!state.get(WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER) {
-			if (!worldIn.isRemote()) {
-				worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);
-	            worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+		if (!state.getValue(WATERLOGGED) && fluidStateIn.getType() == Fluids.WATER) {
+			if (!worldIn.isClientSide()) {
+				worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(true)), 3);
+	            worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 	         }
 	         return true;
 		} else {

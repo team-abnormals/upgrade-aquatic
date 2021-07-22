@@ -19,41 +19,41 @@ public final class PikeAttackGoal extends MeleeAttackGoal {
 	}
 	
 	@Override
-	public boolean shouldExecute() {
-		PikeEntity pike = (PikeEntity) this.attacker;
-		return pike.getAttackCooldown() <= 0 && pike.getAttackTarget() != null && !pike.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && pike.isInWater() && pike.getCaughtEntity() == null && !(pike.getAttackTarget() instanceof PufferfishEntity) && super.shouldExecute();
+	public boolean canUse() {
+		PikeEntity pike = (PikeEntity) this.mob;
+		return pike.getAttackCooldown() <= 0 && pike.getTarget() != null && !pike.getItemBySlot(EquipmentSlotType.MAINHAND).getItem().is(ItemTags.FISHES) && pike.isInWater() && pike.getCaughtEntity() == null && !(pike.getTarget() instanceof PufferfishEntity) && super.canUse();
 	}
 	
 	@Override
-	public boolean shouldContinueExecuting() {
-		return !this.attacker.getItemStackFromSlot(EquipmentSlotType.MAINHAND).getItem().isIn(ItemTags.FISHES) && this.attacker.isInWater() && super.shouldContinueExecuting();
+	public boolean canContinueToUse() {
+		return !this.mob.getItemBySlot(EquipmentSlotType.MAINHAND).getItem().is(ItemTags.FISHES) && this.mob.isInWater() && super.canContinueToUse();
 	}
 	
 	@Override
 	protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
-		PikeEntity pike = (PikeEntity) this.attacker;
+		PikeEntity pike = (PikeEntity) this.mob;
 		double attackReach = this.getAttackReachSqr(enemy);
-		if (distToEnemySqr <= attackReach && this.func_234040_h_()) {
-			this.func_234039_g_();
-			if (pike.getAttackTarget() != null) {
+		if (distToEnemySqr <= attackReach && this.isTimeToAttack()) {
+			this.resetAttackCooldown();
+			if (pike.getTarget() != null) {
 				if (enemy instanceof AbstractFishEntity || enemy instanceof AnimalEntity) {
-					pike.setAttackCooldown(pike.getRNG().nextInt(550) + 50);
+					pike.setAttackCooldown(pike.getRandom().nextInt(550) + 50);
 					enemy.startRiding(pike, true);
-					pike.setAttackTarget(null);
+					pike.setTarget(null);
 				} else {
-					enemy.attackEntityFrom(DamageSource.causeMobDamage(pike), 1.5F);
+					enemy.hurt(DamageSource.mobAttack(pike), 1.5F);
 				}
 			}
 		}
 	}
 	
 	@Override
-	public void startExecuting() {
-		PikeEntity pike = (PikeEntity) this.attacker;
-		if (pike.getItemStackFromSlot(EquipmentSlotType.MAINHAND) != null && pike.getAttackTarget() instanceof AbstractFishEntity || pike.getItemStackFromSlot(EquipmentSlotType.MAINHAND) != null && pike.getAttackTarget() instanceof TurtleEntity) {
-			pike.spitOutItem(pike.getItemStackFromSlot(EquipmentSlotType.MAINHAND));
+	public void start() {
+		PikeEntity pike = (PikeEntity) this.mob;
+		if (pike.getItemBySlot(EquipmentSlotType.MAINHAND) != null && pike.getTarget() instanceof AbstractFishEntity || pike.getItemBySlot(EquipmentSlotType.MAINHAND) != null && pike.getTarget() instanceof TurtleEntity) {
+			pike.spitOutItem(pike.getItemBySlot(EquipmentSlotType.MAINHAND));
 		}
-		super.startExecuting();
+		super.start();
 	}
 
 }

@@ -46,5 +46,5 @@ public class UASounds {
 	public static final RegistryObject<SoundEvent> ITEM_BUCKET_EMPTY_JELLYFISH = HELPER.createSoundEvent("item.bucket.empty_jellyfish");
 	public static final RegistryObject<SoundEvent> ITEM_BUCKET_FILL_JELLYFISH = HELPER.createSoundEvent("item.bucket.fill_jellyfish");
 
-	public static final SoundType TOOTH_LANTERN = new SoundType(1.0F, 1.0F, SoundEvents.BLOCK_GLASS_BREAK, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL, SoundEvents.BLOCK_END_PORTAL_FRAME_FILL);
+	public static final SoundType TOOTH_LANTERN = new SoundType(1.0F, 1.0F, SoundEvents.GLASS_BREAK, SoundEvents.END_PORTAL_FRAME_FILL, SoundEvents.END_PORTAL_FRAME_FILL, SoundEvents.END_PORTAL_FRAME_FILL, SoundEvents.END_PORTAL_FRAME_FILL);
 }

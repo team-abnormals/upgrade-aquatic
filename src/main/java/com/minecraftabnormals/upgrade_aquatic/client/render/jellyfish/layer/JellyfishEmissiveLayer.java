@@ -24,11 +24,11 @@ public class JellyfishEmissiveLayer<T extends AbstractJellyfishEntity, M extends
 	
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T jellyfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		ClientInfo.MINECRAFT.getTextureManager().bindTexture(this.jellyfishRenderer.getOverlayTexture(jellyfish));
+		ClientInfo.MINECRAFT.getTextureManager().bind(this.jellyfishRenderer.getOverlayTexture(jellyfish));
 		
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveTransluscentEntityWithDiffusedLight(this.jellyfishRenderer.getOverlayTexture(jellyfish), true));
 		
-		this.getEntityModel().setRotationAngles(jellyfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getEntityModel().render(matrixStackIn, ivertexbuilder, MathHelper.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingRenderer.getPackedOverlay(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
+		this.getParentModel().setupAnim(jellyfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, MathHelper.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingRenderer.getOverlayCoords(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
 	}
 }

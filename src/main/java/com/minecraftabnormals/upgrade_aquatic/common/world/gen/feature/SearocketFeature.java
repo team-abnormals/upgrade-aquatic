@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 public class SearocketFeature extends Feature<NoFeatureConfig> {
 
 	private static final Supplier<BlockState> SEAROCKET(boolean pink) {
-		return pink ? () -> UABlocks.PINK_SEAROCKET.get().getDefaultState() : () -> UABlocks.WHITE_SEAROCKET.get().getDefaultState();
+		return pink ? () -> UABlocks.PINK_SEAROCKET.get().defaultBlockState() : () -> UABlocks.WHITE_SEAROCKET.get().defaultBlockState();
 	}
 
 	public SearocketFeature(Codec<NoFeatureConfig> configFactoryIn) {
@@ -25,17 +25,17 @@ public class SearocketFeature extends Feature<NoFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		boolean colorType;
-		if (worldIn.getBiome(pos).getTemperature() < 0.2D) {
+		if (worldIn.getBiome(pos).getBaseTemperature() < 0.2D) {
 			colorType = rand.nextFloat() <= 0.25F;
-			if (SEAROCKET(colorType).get().isValidPosition(worldIn, pos)) {
+			if (SEAROCKET(colorType).get().canSurvive(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));
 				return true;
 			}
 		} else {
 			colorType = rand.nextFloat() <= 0.75F;
-			if (SEAROCKET(colorType).get().isValidPosition(worldIn, pos)) {
+			if (SEAROCKET(colorType).get().canSurvive(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));
 				return true;
 			}
@@ -85,17 +85,17 @@ public class SearocketFeature extends Feature<NoFeatureConfig> {
 		MathUtil.Equation r = (theta) -> {
 			return (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
 		};
-		if (!world.isAirBlock(startPos.down()) && !world.isAirBlock(startPos.down(2)) && !world.isAirBlock(startPos.down(3))) {
+		if (!world.isEmptyBlock(startPos.below()) && !world.isEmptyBlock(startPos.below(2)) && !world.isEmptyBlock(startPos.below(3))) {
 			int repeatsDown = world.getRandom().nextInt(2) + 2;
 			for (int repeats = 0; repeats < repeatsDown; repeats++) {
-				pos = pos.add(0, -repeats, 0);
+				pos = pos.offset(0, -repeats, 0);
 				for (int i = -(patterns[0] / patterns[2] + patterns[0]); i < patterns[0] / patterns[2] + patterns[0]; i++) {
 					for (int j = -(patterns[0] / patterns[2] + patterns[0]); j < patterns[0] / patterns[2] + patterns[0]; j++) {
 						double radius = r.compute(Math.atan2(j, i));
-						BlockPos placingPos = pos.add(i, 0, j);
+						BlockPos placingPos = pos.offset(i, 0, j);
 						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
-							if (SEAROCKET(pink).get().isValidPosition(world, placingPos) && world.getFluidState(placingPos).isEmpty()) {
-								world.setBlockState(placingPos, SEAROCKET(pink).get(), 2);
+							if (SEAROCKET(pink).get().canSurvive(world, placingPos) && world.getFluidState(placingPos).isEmpty()) {
+								world.setBlock(placingPos, SEAROCKET(pink).get(), 2);
 							}
 						}
 					}

@@ -22,10 +22,10 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 
 public class DeadCoralShowerBlock extends DeadCoralPlantBlock {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 1.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 1.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
 	public DeadCoralShowerBlock() {
-		super(Block.Properties.create(Material.ROCK, MaterialColor.WOOD).doesNotBlockMovement().hardnessAndResistance(0F));
+		super(Block.Properties.of(Material.STONE, MaterialColor.WOOD).noCollission().strength(0F));
 	}
 	
 	public DeadCoralShowerBlock(Block.Properties properties) {
@@ -38,16 +38,16 @@ public class DeadCoralShowerBlock extends DeadCoralPlantBlock {
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (facing == Direction.UP && !stateIn.isValidPosition(worldIn, currentPos)) {
-			return Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (facing == Direction.UP && !stateIn.canSurvive(worldIn, currentPos)) {
+			return Blocks.AIR.defaultBlockState();
 		} else {
-			this.updateIfDry(stateIn, worldIn, currentPos);
-			if (stateIn.get(WATERLOGGED)) {
-				worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+			this.tryScheduleDieTick(stateIn, worldIn, currentPos);
+			if (stateIn.getValue(WATERLOGGED)) {
+				worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			}
 
-			return facing == Direction.UP && !this.isValidPosition(stateIn, worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
+			return facing == Direction.UP && !this.canSurvive(stateIn, worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
 		}
 	}
 	
@@ -63,9 +63,9 @@ public class DeadCoralShowerBlock extends DeadCoralPlantBlock {
 		worldIn.addParticle(UAParticles.ELDER_PRISMARINE_SHOWER.get(), d0, d1, d2, 0d, 0.004d, 0d);
 	}
 	
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockPos blockpos = pos.up();
-		return worldIn.getBlockState(blockpos).isSolidSide(worldIn, blockpos, Direction.DOWN);
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockPos blockpos = pos.above();
+		return worldIn.getBlockState(blockpos).isFaceSturdy(worldIn, blockpos, Direction.DOWN);
 	}
 	
 }

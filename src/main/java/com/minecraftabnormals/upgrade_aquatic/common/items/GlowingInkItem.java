@@ -21,6 +21,8 @@ import net.minecraft.world.World;
 
 import java.util.Map;
 
+import net.minecraft.item.Item.Properties;
+
 public class GlowingInkItem extends Item {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.INK_SAC);
 
@@ -29,26 +31,26 @@ public class GlowingInkItem extends Item {
 	}
 
 	@Override
-	public ActionResultType onItemUse(ItemUseContext context) {
-		World world = context.getWorld();
-		BlockPos pos = context.getPos();
+	public ActionResultType useOn(ItemUseContext context) {
+		World world = context.getLevel();
+		BlockPos pos = context.getClickedPos();
 		BlockState state = world.getBlockState(pos);
 
 		if (context.getPlayer() != null && context.getPlayer().isSecondaryUseActive())
-			return super.onItemUse(context);
+			return super.useOn(context);
 
 		if (DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
 			Block livingCoral = DEAD_CORAL_CONVERSION_MAP.get(state.getBlock());
-			world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, livingCoral.getDefaultState()));
-			world.getPendingBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
-			world.playSound(context.getPlayer(), pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-			if (!world.isRemote()) squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
-			if (context.getPlayer() != null && !context.getPlayer().abilities.isCreativeMode)
-				context.getItem().shrink(1);
+			world.setBlockAndUpdate(pos, BlockUtil.transferAllBlockStates(state, livingCoral.defaultBlockState()));
+			world.getBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
+			world.playSound(context.getPlayer(), pos, SoundEvents.SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			if (!world.isClientSide()) squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
+			if (context.getPlayer() != null && !context.getPlayer().abilities.instabuild)
+				context.getItemInHand().shrink(1);
 			return ActionResultType.SUCCESS;
 		}
 
-		return super.onItemUse(context);
+		return super.useOn(context);
 	}
 
 	public static void squirtInk(IParticleData particle, BlockPos posIn) {
@@ -64,14 +66,14 @@ public class GlowingInkItem extends Item {
 	}
 
 	public static void createEffectCloud(EffectInstance effectInstance, World world, AxisAlignedBB aabb) {
-		for (LivingEntity entity : world.getEntitiesWithinAABB(LivingEntity.class, aabb)) {
+		for (LivingEntity entity : world.getEntitiesOfClass(LivingEntity.class, aabb)) {
 			if (!(entity instanceof SquidEntity))
-				entity.addPotionEffect(effectInstance);
+				entity.addEffect(effectInstance);
 		}
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this, group, items);
 	}
 

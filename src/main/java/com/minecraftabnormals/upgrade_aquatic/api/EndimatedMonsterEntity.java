@@ -21,90 +21,90 @@ public abstract class EndimatedMonsterEntity extends EndimatedEntity implements 
 	
 	protected EndimatedMonsterEntity(EntityType<? extends EndimatedMonsterEntity> type, World p_i48553_2_) {
 		super(type, p_i48553_2_);
-		this.experienceValue = 5;
+		this.xpReward = 5;
 	}
 
-	public SoundCategory getSoundCategory() {
+	public SoundCategory getSoundSource() {
 		return SoundCategory.HOSTILE;
 	}
 
-	public void livingTick() {
-		this.updateArmSwingProgress();
-		this.func_213623_ec();
-		super.livingTick();
+	public void aiStep() {
+		this.updateSwingTime();
+		this.updateNoActionTime();
+		super.aiStep();
 	}
 
-	protected void func_213623_ec() {
+	protected void updateNoActionTime() {
 		float f = this.getBrightness();
 		if (f > 0.5F) {
-			this.idleTime += 2;
+			this.noActionTime += 2;
 		}
 	}
 
 	public void tick() {
 		super.tick();
-		if (!this.world.isRemote && this.world.getDifficulty() == Difficulty.PEACEFUL) {
+		if (!this.level.isClientSide && this.level.getDifficulty() == Difficulty.PEACEFUL) {
 			this.remove();
 		}
 	}
 
 	protected SoundEvent getSwimSound() {
-		return SoundEvents.ENTITY_HOSTILE_SWIM;
+		return SoundEvents.HOSTILE_SWIM;
 	}
 
-	protected SoundEvent getSplashSound() {
-		return SoundEvents.ENTITY_HOSTILE_SPLASH;
+	protected SoundEvent getSwimSplashSound() {
+		return SoundEvents.HOSTILE_SPLASH;
 	}
 
-	public boolean attackEntityFrom(DamageSource source, float amount) {
-		return this.isInvulnerableTo(source) ? false : super.attackEntityFrom(source, amount);
+	public boolean hurt(DamageSource source, float amount) {
+		return this.isInvulnerableTo(source) ? false : super.hurt(source, amount);
 	}
 	
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_HOSTILE_HURT;
+		return SoundEvents.HOSTILE_HURT;
 	}
 
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_HOSTILE_DEATH;
+		return SoundEvents.HOSTILE_DEATH;
 	}
 
-	protected SoundEvent getFallSound(int heightIn) {
-		return heightIn > 4 ? SoundEvents.ENTITY_HOSTILE_BIG_FALL : SoundEvents.ENTITY_HOSTILE_SMALL_FALL;
+	protected SoundEvent getFallDamageSound(int heightIn) {
+		return heightIn > 4 ? SoundEvents.HOSTILE_BIG_FALL : SoundEvents.HOSTILE_SMALL_FALL;
 	}
 
-	public float getBlockPathWeight(BlockPos pos, IWorldReader worldIn) {
+	public float getWalkTargetValue(BlockPos pos, IWorldReader worldIn) {
 		return 0.5F - worldIn.getBrightness(pos);
 	}
 
 	public static boolean isValidLightLevel(IServerWorld p_223323_0_, BlockPos p_223323_1_, Random p_223323_2_) {
-		if (p_223323_0_.getLightFor(LightType.SKY, p_223323_1_) > p_223323_2_.nextInt(32)) {
+		if (p_223323_0_.getBrightness(LightType.SKY, p_223323_1_) > p_223323_2_.nextInt(32)) {
 			return false;
 		} else {
-			int i = p_223323_0_.getWorld().isThundering() ? p_223323_0_.getNeighborAwareLightSubtracted(p_223323_1_, 10) : p_223323_0_.getLight(p_223323_1_);
+			int i = p_223323_0_.getLevel().isThundering() ? p_223323_0_.getMaxLocalRawBrightness(p_223323_1_, 10) : p_223323_0_.getMaxLocalRawBrightness(p_223323_1_);
 			return i <= p_223323_2_.nextInt(8);
 		}
 	}
 
-	protected boolean isDespawnPeaceful() {
+	protected boolean shouldDespawnInPeaceful() {
 		return true;
 	}
 
-	protected boolean canDropLoot() {
+	protected boolean shouldDropExperience() {
 		return true;
 	}
 
-	protected boolean func_230282_cS_() {
+	protected boolean shouldDropLoot() {
 		return true;
 	}
 
-	public boolean func_230292_f_(PlayerEntity playerIn) {
+	public boolean isPreventingPlayerRest(PlayerEntity playerIn) {
 		return true;
 	}
 
-	public ItemStack findAmmo(ItemStack shootable) {
+	public ItemStack getProjectile(ItemStack shootable) {
 		if (shootable.getItem() instanceof ShootableItem) {
-			Predicate<ItemStack> predicate = ((ShootableItem)shootable.getItem()).getAmmoPredicate();
-			ItemStack itemstack = ShootableItem.getHeldAmmo(this, predicate);
+			Predicate<ItemStack> predicate = ((ShootableItem)shootable.getItem()).getSupportedHeldProjectiles();
+			ItemStack itemstack = ShootableItem.getHeldProjectile(this, predicate);
 			return itemstack.isEmpty() ? new ItemStack(Items.ARROW) : itemstack;
 		} else {
 			return ItemStack.EMPTY;

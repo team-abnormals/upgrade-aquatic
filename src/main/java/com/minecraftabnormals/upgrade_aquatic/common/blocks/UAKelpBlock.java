@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class UAKelpBlock extends KelpBlock {
 	private KelpType kelpType;
 	private Block kelpTopBlock;
@@ -21,12 +23,12 @@ public class UAKelpBlock extends KelpBlock {
 	}
 
 	@Override
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+	public ItemStack getCloneItemStack(IBlockReader worldIn, BlockPos pos, BlockState state) {
 		return new ItemStack(this.kelpTopBlock);
 	}
 
 	@Override
-	protected AbstractTopPlantBlock getTopPlantBlock() {
+	protected AbstractTopPlantBlock getHeadBlock() {
 		switch (this.kelpType) {
 		default:
 		case TONGUE:

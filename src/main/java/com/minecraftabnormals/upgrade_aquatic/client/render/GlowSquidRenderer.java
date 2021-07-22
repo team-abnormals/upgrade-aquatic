@@ -21,23 +21,23 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, GlowSquidMod
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(GlowSquidEntity entity) {
+	public ResourceLocation getTextureLocation(GlowSquidEntity entity) {
 		return MissingTextureSprite.getLocation();
 	}
 
 	@Override
-	protected void applyRotations(GlowSquidEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-		float f = MathHelper.lerp(partialTicks, entityLiving.prevSquidPitch, entityLiving.squidPitch);
-		float f1 = MathHelper.lerp(partialTicks, entityLiving.prevSquidYaw, entityLiving.squidYaw);
+	protected void setupRotations(GlowSquidEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+		float f = MathHelper.lerp(partialTicks, entityLiving.xBodyRotO, entityLiving.xBodyRot);
+		float f1 = MathHelper.lerp(partialTicks, entityLiving.zBodyRotO, entityLiving.zBodyRot);
 		matrixStackIn.translate(0.0D, 0.5D, 0.0D);
-		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
-		matrixStackIn.rotate(Vector3f.XP.rotationDegrees(f));
-		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f1));
+		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
+		matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(f));
+		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f1));
 		matrixStackIn.translate(0.0D, -1.2F, 0.0D);
 	}
 
 	@Override
-	protected float handleRotationFloat(GlowSquidEntity livingBase, float partialTicks) {
-		return MathHelper.lerp(partialTicks, livingBase.lastTentacleAngle, livingBase.tentacleAngle);
+	protected float getBob(GlowSquidEntity livingBase, float partialTicks) {
+		return MathHelper.lerp(partialTicks, livingBase.oldTentacleAngle, livingBase.tentacleAngle);
 	}
 }

@@ -19,45 +19,45 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 		super(p_i48914_1_, p_i48914_2_, p_i48914_3_, p_i48914_4_);
 	}
 
-	@Inject(at = @At("TAIL"), method = "setRotationAngles(Lnet/minecraft/entity/monster/ZombieEntity;FFFFF)V")
+	@Inject(at = @At("TAIL"), method = "setupAnim(Lnet/minecraft/entity/monster/ZombieEntity;FFFFF)V")
 	private void setRotationAngles(T drowned, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo info) {
-		if (drowned.isActualySwimming()) {
-			if (drowned.isInWater() && drowned.getRidingEntity() == null && this.getHorizontalMotion(drowned.getMotion()) >= 0.025F && drowned.getEntityWorld().getFluidState(drowned.getPosition().down()).isTagged(FluidTags.WATER)) {
+		if (drowned.isVisuallySwimming()) {
+			if (drowned.isInWater() && drowned.getVehicle() == null && this.getHorizontalMotion(drowned.getDeltaMovement()) >= 0.025F && drowned.getCommandSenderWorld().getFluidState(drowned.blockPosition().below()).is(FluidTags.WATER)) {
 				float limbSwingRemainder = limbSwing % 26.0F;
-				HandSide handside = this.getMainHand(drowned);
-				float rightArmSwimAnimTicks = handside == HandSide.RIGHT && this.swingProgress > 0.0F ? 0.0F : this.swimAnimation;
-				float leftArmSwimAnimTicks = handside == HandSide.LEFT && this.swingProgress > 0.0F ? 0.0F : this.swimAnimation;
+				HandSide handside = this.getAttackArm(drowned);
+				float rightArmSwimAnimTicks = handside == HandSide.RIGHT && this.attackTime > 0.0F ? 0.0F : this.swimAmount;
+				float leftArmSwimAnimTicks = handside == HandSide.LEFT && this.attackTime > 0.0F ? 0.0F : this.swimAmount;
 				if (limbSwingRemainder < 14.0F) {
-					this.bipedLeftArm.rotateAngleX = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleX, 0.0F);
-					this.bipedRightArm.rotateAngleX = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleX, 0.0F);
-					this.bipedLeftArm.rotateAngleY = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleY, (float) Math.PI);
-					this.bipedRightArm.rotateAngleY = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleY, (float) Math.PI);
-					this.bipedLeftArm.rotateAngleZ = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleZ, (float) Math.PI + 1.8707964F * this.getArmAngleSq(limbSwingRemainder) / this.getArmAngleSq(14.0F));
-					this.bipedRightArm.rotateAngleZ = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleZ, (float) Math.PI - 1.8707964F * this.getArmAngleSq(limbSwingRemainder) / this.getArmAngleSq(14.0F));
+					this.leftArm.xRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.xRot, 0.0F);
+					this.rightArm.xRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.xRot, 0.0F);
+					this.leftArm.yRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.yRot, (float) Math.PI);
+					this.rightArm.yRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.yRot, (float) Math.PI);
+					this.leftArm.zRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.zRot, (float) Math.PI + 1.8707964F * this.getArmAngleSq(limbSwingRemainder) / this.getArmAngleSq(14.0F));
+					this.rightArm.zRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.zRot, (float) Math.PI - 1.8707964F * this.getArmAngleSq(limbSwingRemainder) / this.getArmAngleSq(14.0F));
 				} else if (limbSwingRemainder >= 14.0F && limbSwingRemainder < 22.0F) {
 					float multiplier1 = (limbSwingRemainder - 14.0F) / 8.0F;
-					this.bipedLeftArm.rotateAngleX = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleX, ((float) Math.PI / 2F) * multiplier1);
-					this.bipedRightArm.rotateAngleX = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleX, ((float) Math.PI / 2F) * multiplier1);
-					this.bipedLeftArm.rotateAngleY = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleY, (float) Math.PI);
-					this.bipedRightArm.rotateAngleY = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleY, (float) Math.PI);
-					this.bipedLeftArm.rotateAngleZ = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleZ, 5.012389F - 1.8707964F * multiplier1);
-					this.bipedRightArm.rotateAngleZ = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleZ, 1.2707963F + 1.8707964F * multiplier1);
+					this.leftArm.xRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.xRot, ((float) Math.PI / 2F) * multiplier1);
+					this.rightArm.xRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.xRot, ((float) Math.PI / 2F) * multiplier1);
+					this.leftArm.yRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.yRot, (float) Math.PI);
+					this.rightArm.yRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.yRot, (float) Math.PI);
+					this.leftArm.zRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.zRot, 5.012389F - 1.8707964F * multiplier1);
+					this.rightArm.zRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.zRot, 1.2707963F + 1.8707964F * multiplier1);
 				} else if (limbSwingRemainder >= 22.0F && limbSwingRemainder < 26.0F) {
 					float multiplier2 = (limbSwingRemainder - 22.0F) / 4.0F;
-					this.bipedLeftArm.rotateAngleX = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleX, ((float) Math.PI / 2F) - ((float) Math.PI / 2F) * multiplier2);
-					this.bipedRightArm.rotateAngleX = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleX, ((float) Math.PI / 2F) - ((float) Math.PI / 2F) * multiplier2);
-					this.bipedLeftArm.rotateAngleY = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleY, (float) Math.PI);
-					this.bipedRightArm.rotateAngleY = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleY, (float) Math.PI);
-					this.bipedLeftArm.rotateAngleZ = this.rotLerpRad(leftArmSwimAnimTicks, this.bipedLeftArm.rotateAngleZ, (float) Math.PI);
-					this.bipedRightArm.rotateAngleZ = MathHelper.lerp(rightArmSwimAnimTicks, this.bipedRightArm.rotateAngleZ, (float) Math.PI);
+					this.leftArm.xRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.xRot, ((float) Math.PI / 2F) - ((float) Math.PI / 2F) * multiplier2);
+					this.rightArm.xRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.xRot, ((float) Math.PI / 2F) - ((float) Math.PI / 2F) * multiplier2);
+					this.leftArm.yRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.yRot, (float) Math.PI);
+					this.rightArm.yRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.yRot, (float) Math.PI);
+					this.leftArm.zRot = this.rotlerpRad(leftArmSwimAnimTicks, this.leftArm.zRot, (float) Math.PI);
+					this.rightArm.zRot = MathHelper.lerp(rightArmSwimAnimTicks, this.rightArm.zRot, (float) Math.PI);
 				}
-				if (drowned.isActualySwimming()) {
-					this.bipedHead.rotateAngleX = this.rotLerpRad(this.swimAnimation, this.bipedHead.rotateAngleX, (-(float) Math.PI / 4F));
+				if (drowned.isVisuallySwimming()) {
+					this.head.xRot = this.rotlerpRad(this.swimAmount, this.head.xRot, (-(float) Math.PI / 4F));
 				} else {
-					this.bipedHead.rotateAngleX = this.rotLerpRad(this.swimAnimation, this.bipedHead.rotateAngleX, headPitch * ((float) Math.PI / 180F));
+					this.head.xRot = this.rotlerpRad(this.swimAmount, this.head.xRot, headPitch * ((float) Math.PI / 180F));
 				}
-				this.bipedLeftLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedLeftLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F + (float) Math.PI));
-				this.bipedRightLeg.rotateAngleX = MathHelper.lerp(this.swimAnimation, this.bipedRightLeg.rotateAngleX, 0.3F * MathHelper.cos(limbSwing * 0.33333334F));
+				this.leftLeg.xRot = MathHelper.lerp(this.swimAmount, this.leftLeg.xRot, 0.3F * MathHelper.cos(limbSwing * 0.33333334F + (float) Math.PI));
+				this.rightLeg.xRot = MathHelper.lerp(this.swimAmount, this.rightLeg.xRot, 0.3F * MathHelper.cos(limbSwing * 0.33333334F));
 			}
 		}
 	}
@@ -67,8 +67,8 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 	}
     
 	private float getHorizontalMotion(Vector3d motion) {
-		double x = motion.getX();
-		double z = motion.getZ();
+		double x = motion.x();
+		double z = motion.z();
 		return MathHelper.sqrt(x * x + z * z);
 	}
 }

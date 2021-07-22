@@ -23,17 +23,17 @@ public class PikeCarriedItemRenderLayer extends LayerRenderer<PikeEntity, PikeMo
 	
 	@Override
 	public void render(MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int packedLightIn, PikeEntity pike, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		ItemStack itemstack = pike.getItemStackFromSlot(EquipmentSlotType.MAINHAND);
+		ItemStack itemstack = pike.getItemBySlot(EquipmentSlotType.MAINHAND);
 		if(!itemstack.isEmpty()) {
 			if (!itemstack.isEmpty()) {
-				matrixStack.push();
+				matrixStack.pushPose();
 				
-				matrixStack.translate((this.getEntityModel()).nose.rotationPointX / 16.0F, (this.getEntityModel()).nose.rotationPointY / 16.0F + 1.3F, (this.getEntityModel()).nose.rotationPointZ / 16.0F - 0.5F);
+				matrixStack.translate((this.getParentModel()).nose.x / 16.0F, (this.getParentModel()).nose.y / 16.0F + 1.3F, (this.getParentModel()).nose.z / 16.0F - 0.5F);
 				
-				matrixStack.rotate(Vector3f.XP.rotationDegrees(90.0F));
+				matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
 				
-				Minecraft.getInstance().getFirstPersonRenderer().renderItemSide(pike, itemstack, ItemCameraTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
-				matrixStack.pop();
+				Minecraft.getInstance().getItemInHandRenderer().renderItem(pike, itemstack, ItemCameraTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
+				matrixStack.popPose();
 			}
 		}
 	}

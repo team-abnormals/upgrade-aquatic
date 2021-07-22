@@ -30,7 +30,7 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.ATTACK_DAMAGE, 5.0D);
+		return MobEntity.createMobAttributes().add(Attributes.ATTACK_DAMAGE, 5.0D);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 		if (this.hasHuntingCooldown()) this.huntingCooldown--;
 
 		if (this.isEndimationPlaying(BOOST_ANIMATION) && this.isInWater()) {
-			this.setMotion(this.getMotion().scale(1.15F));
+			this.setDeltaMovement(this.getDeltaMovement().scale(1.15F));
 		}
 	}
 
@@ -63,24 +63,24 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
+	public void addAdditionalSaveData(CompoundNBT compound) {
+		super.addAdditionalSaveData(compound);
 		compound.putInt("HuntingCooldown", this.huntingCooldown);
 	}
 
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
+	public void readAdditionalSaveData(CompoundNBT compound) {
+		super.readAdditionalSaveData(compound);
 		this.huntingCooldown = compound.getInt("HuntingCooldown");
 	}
 
 	@Override
-	public EntitySize getSize(Pose pose) {
-		return super.getSize(pose).scale(this.getSize());
+	public EntitySize getDimensions(Pose pose) {
+		return super.getDimensions(pose).scale(this.getSize());
 	}
 
 	public void setHuntingCooldown() {
-		this.huntingCooldown = this.getRNG().nextInt(1600) + 1200;
+		this.huntingCooldown = this.getRandom().nextInt(1600) + 1200;
 	}
 
 	public boolean hasHuntingCooldown() {
@@ -93,12 +93,12 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (super.attackEntityFrom(source, amount)) {
-			Entity entity = source.getTrueSource();
-			if (entity instanceof LivingEntity && this.getAttackTarget() == null && !entity.isSpectator()) {
+	public boolean hurt(DamageSource source, float amount) {
+		if (super.hurt(source, amount)) {
+			Entity entity = source.getEntity();
+			if (entity instanceof LivingEntity && this.getTarget() == null && !entity.isSpectator()) {
 				if (!(entity instanceof PlayerEntity && ((PlayerEntity) entity).isCreative())) {
-					this.setAttackTarget((LivingEntity) entity);
+					this.setTarget((LivingEntity) entity);
 				}
 			}
 			return true;
@@ -140,9 +140,9 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	@Override
 	public boolean stingEntity(LivingEntity livingEntity) {
 		if (super.stingEntity(livingEntity)) {
-			livingEntity.addPotionEffect(new EffectInstance(Effects.POISON, 600, 1));
-			if (this.getAttackTarget() == null) {
-				this.setAttackTarget(livingEntity);
+			livingEntity.addEffect(new EffectInstance(Effects.POISON, 600, 1));
+			if (this.getTarget() == null) {
+				this.setTarget(livingEntity);
 			}
 			return true;
 		}
@@ -170,7 +170,7 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnClusterSize() {
 		return 3;
 	}
 }

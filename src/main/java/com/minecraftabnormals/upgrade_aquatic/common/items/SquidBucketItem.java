@@ -22,6 +22,8 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
+import net.minecraft.item.Item.Properties;
+
 public class SquidBucketItem extends BucketItem {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TROPICAL_FISH_BUCKET);
 
@@ -29,25 +31,25 @@ public class SquidBucketItem extends BucketItem {
 		super(supplier, builder);
 	}
 
-	public void onLiquidPlaced(World worldIn, ItemStack stack, BlockPos pos) {
+	public void checkExtraContent(World worldIn, ItemStack stack, BlockPos pos) {
 		if (worldIn instanceof ServerWorld) {
 			this.placeEntity((ServerWorld) worldIn, stack, pos);
 		}
 	}
 
 	protected void playEmptySound(@Nullable PlayerEntity player, IWorld world, BlockPos pos) {
-		world.playSound(player, pos, SoundEvents.ITEM_BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+		world.playSound(player, pos, SoundEvents.BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 	}
 
 	private void placeEntity(ServerWorld worldIn, ItemStack stack, BlockPos pos) {
 		Entity entity = EntityType.SQUID.spawn(worldIn, stack, null, pos, SpawnReason.BUCKET, true, false);
 		if (entity instanceof SquidEntity) {
-			((SquidEntity) entity).enablePersistence();
+			((SquidEntity) entity).setPersistenceRequired();
 		}
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this, group, items);
 	}
 }

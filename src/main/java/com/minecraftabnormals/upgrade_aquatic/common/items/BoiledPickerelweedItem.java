@@ -5,6 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import net.minecraft.item.Item.Properties;
+
 public class BoiledPickerelweedItem extends Item {
 	final boolean isPurple;
 	
@@ -13,10 +15,10 @@ public class BoiledPickerelweedItem extends Item {
 		this.isPurple = isPurple;
 	}
 	
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-		ItemStack itemstack = super.onItemUseFinish(stack, worldIn, entityLiving);
+	public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+		ItemStack itemstack = super.finishUsingItem(stack, worldIn, entityLiving);
 		int adder = isPurple ? 75 : 100;
-		entityLiving.setAir(Math.min(entityLiving.getAir() + adder, 300));
+		entityLiving.setAirSupply(Math.min(entityLiving.getAirSupply() + adder, 300));
 		return itemstack;
 	}
 	

@@ -48,66 +48,66 @@ public class UAParticles {
 		
 		@SubscribeEvent(priority = EventPriority.LOWEST)
 		public static void registerParticleTypes(ParticleFactoryRegisterEvent event) {
-			ParticleManager manager = Minecraft.getInstance().particles;
+			ParticleManager manager = Minecraft.getInstance().particleEngine;
 			if (PRISMARINE_SHOWER.isPresent()) {
-				manager.registerFactory(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
+				manager.register(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
 			}
 			if (ELDER_PRISMARINE_SHOWER.isPresent()) {
-				manager.registerFactory(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);
+				manager.register(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);
 			}
 			if (SPECTRAL_CONSUME.isPresent()) {
-				manager.registerFactory(SPECTRAL_CONSUME.get(), SpectralConsumeParticle.Factory::new);
+				manager.register(SPECTRAL_CONSUME.get(), SpectralConsumeParticle.Factory::new);
 			}
 			if (PINK_JELLY_FLAME.isPresent()) {
-				manager.registerFactory(PINK_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+				manager.register(PINK_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 			}
 			if (PURPLE_JELLY_FLAME.isPresent()) {
-				manager.registerFactory(PURPLE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+				manager.register(PURPLE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 			}
 			if (BLUE_JELLY_FLAME.isPresent()) {
-				manager.registerFactory(BLUE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+				manager.register(BLUE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 			}
 			if (GREEN_JELLY_FLAME.isPresent()) {
-				manager.registerFactory(GREEN_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+				manager.register(GREEN_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 			}
 			if (YELLOW_JELLY_FLAME.isPresent()) {
-				manager.registerFactory(YELLOW_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+				manager.register(YELLOW_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 			}
 			if (ORANGE_JELLY_FLAME.isPresent()) {
-				manager.registerFactory(ORANGE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+				manager.register(ORANGE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 			}
 			if (RED_JELLY_FLAME.isPresent()) {
-				manager.registerFactory(RED_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+				manager.register(RED_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 			}
 			if (WHITE_JELLY_FLAME.isPresent()) {
-				manager.registerFactory(WHITE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+				manager.register(WHITE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 			}
 			if (PINK_JELLY_BLOB.isPresent()) {
-				manager.registerFactory(PINK_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+				manager.register(PINK_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 			}
 			if (PURPLE_JELLY_BLOB.isPresent()) {
-				manager.registerFactory(PURPLE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+				manager.register(PURPLE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 			}
 			if (BLUE_JELLY_BLOB.isPresent()) {
-				manager.registerFactory(BLUE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+				manager.register(BLUE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 			}
 			if (GREEN_JELLY_BLOB.isPresent()) {
-				manager.registerFactory(GREEN_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+				manager.register(GREEN_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 			}
 			if (YELLOW_JELLY_BLOB.isPresent()) {
-				manager.registerFactory(YELLOW_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+				manager.register(YELLOW_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 			}
 			if (ORANGE_JELLY_BLOB.isPresent()) {
-				manager.registerFactory(ORANGE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+				manager.register(ORANGE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 			}
 			if (RED_JELLY_BLOB.isPresent()) {
-				manager.registerFactory(RED_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+				manager.register(RED_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 			}
 			if (WHITE_JELLY_BLOB.isPresent()) {
-				manager.registerFactory(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+				manager.register(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 			}
 			if (GLOW_SQUID_INK.isPresent()) {
-				manager.registerFactory(GLOW_SQUID_INK.get(), GlowSquidInkParticle.Factory::new);
+				manager.register(GLOW_SQUID_INK.get(), GlowSquidInkParticle.Factory::new);
 			}
 		}
 	}

@@ -20,12 +20,12 @@ public abstract class SignTileEntityMixin extends TileEntity implements IGlowabl
 		super(tileEntityTypeIn);
 	}
 
-	@Inject(method = "write", at = @At("TAIL"))
+	@Inject(method = "save", at = @At("TAIL"))
 	public void writeGlowing(CompoundNBT nbt, CallbackInfoReturnable<CompoundNBT> ci) {
 		nbt.putBoolean("Glowing", this.glowing);
 	}
 
-	@Inject(method = "read", at = @At("TAIL"))
+	@Inject(method = "load", at = @At("TAIL"))
 	public void readGlowing(BlockState state, CompoundNBT nbt, CallbackInfo ci) {
 		this.glowing = nbt.getBoolean("Glowing");
 	}
@@ -34,8 +34,8 @@ public abstract class SignTileEntityMixin extends TileEntity implements IGlowabl
 	public boolean setGlowing(boolean glowing) {
 		if (glowing != this.isGlowing()) {
 			this.glowing = glowing;
-			this.markDirty();
-			this.world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 3);
+			this.setChanged();
+			this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
 			return true;
 		}
 		return false;

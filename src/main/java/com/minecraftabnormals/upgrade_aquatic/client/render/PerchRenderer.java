@@ -17,17 +17,17 @@ public class PerchRenderer extends MobRenderer<PerchEntity, PerchModel<PerchEnti
 		super(renderManagerIn, new PerchModel<>(), 0.3F);
 	}
 
-	public ResourceLocation getEntityTexture(PerchEntity entity) {
+	public ResourceLocation getTextureLocation(PerchEntity entity) {
 		return PERCH_LOCATION;
 	}
 
-	protected void applyRotations(PerchEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(PerchEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * MathHelper.sin(0.6F * ageInTicks);
-		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(f));
+		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
 		if (!entityLiving.isInWater()) {
 			matrixStackIn.translate(0.1F, 0.1F, -0.1F);
-			matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(90.0F));
+			matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
 }

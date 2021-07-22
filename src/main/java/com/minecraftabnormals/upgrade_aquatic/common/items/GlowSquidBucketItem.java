@@ -16,6 +16,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.function.Supplier;
 
+import net.minecraft.item.Item.Properties;
+
 public class GlowSquidBucketItem extends SquidBucketItem {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(UAItems.SQUID_BUCKET);
 
@@ -23,7 +25,7 @@ public class GlowSquidBucketItem extends SquidBucketItem {
 		super(supplier, builder);
 	}
 
-	public void onLiquidPlaced(World worldIn, ItemStack stack, BlockPos pos) {
+	public void checkExtraContent(World worldIn, ItemStack stack, BlockPos pos) {
 		if (worldIn instanceof ServerWorld) {
 			this.placeEntity((ServerWorld) worldIn, stack, pos);
 		}
@@ -32,13 +34,13 @@ public class GlowSquidBucketItem extends SquidBucketItem {
 	private void placeEntity(ServerWorld worldIn, ItemStack stack, BlockPos pos) {
 		Entity entity = UAEntities.GLOW_SQUID.get().spawn(worldIn, stack, null, pos, SpawnReason.BUCKET, true, false);
 		if (entity instanceof SquidEntity) {
-			((SquidEntity) entity).enablePersistence();
+			((SquidEntity) entity).setPersistenceRequired();
 		}
 	}
 
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this, group, items);
 	}
 }

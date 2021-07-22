@@ -14,8 +14,8 @@ public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 	}
 	
 	@Override
-	public boolean shouldExecute() {
-		if (!this.mustUpdate && (this.creature.getIdleTime() >= 100 || this.creature.getRNG().nextInt(this.executionChance) != 0)) {
+	public boolean canUse() {
+		if (!this.forceTrigger && (this.mob.getNoActionTime() >= 100 || this.mob.getRandom().nextInt(this.interval) != 0)) {
 			return false;
 		}
 
@@ -23,11 +23,11 @@ public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 		if (vec3d == null) {
 			return false;
 		} else {
-			if(((PikeEntity) this.creature).isPickerelweedNearby()) {
-				this.x = vec3d.x;
-				this.y = vec3d.y;
-				this.z = vec3d.z;
-				this.mustUpdate = false;
+			if(((PikeEntity) this.mob).isPickerelweedNearby()) {
+				this.wantedX = vec3d.x;
+				this.wantedY = vec3d.y;
+				this.wantedZ = vec3d.z;
+				this.forceTrigger = false;
 				return true;
 			}
 		}
@@ -35,15 +35,15 @@ public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 	}
 	
 	@Override
-	public boolean shouldContinueExecuting() {
-		return ((PikeEntity) this.creature).isPickerelweedNearby() && super.shouldContinueExecuting();
+	public boolean canContinueToUse() {
+		return ((PikeEntity) this.mob).isPickerelweedNearby() && super.canContinueToUse();
 	}
 
 	@Nullable
 	protected Vector3d getPosition() {
-		PikeEntity pike = (PikeEntity) this.creature;
+		PikeEntity pike = (PikeEntity) this.mob;
 		if (pike.isPickerelweedNearby()) {
-			int pickedWeed = pike.getRNG().nextInt(pike.getNearbyPickerelweeds().size());
+			int pickedWeed = pike.getRandom().nextInt(pike.getNearbyPickerelweeds().size());
 			BlockPos pos = pike.getNearbyPickerelweeds().get(pickedWeed);
 			return new Vector3d(pos.getX(), pos.getY(), pos.getZ());
 		}

@@ -21,10 +21,10 @@ public abstract class LivingEntityMixin extends Entity {
 		super(entityTypeIn, worldIn);
 	}
 
-	@Inject(at = @At("HEAD"), method = "setSleepingPosition", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "setPosToBed", cancellable = true)
 	private void setBedrollSleepingPosition(BlockPos pos, CallbackInfo info) {
-		if (this.world.getBlockState(pos).getBlock() instanceof BedrollBlock) {
-			this.setPosition(pos.getX() + 0.5D, pos.getY() + 0.1875D, pos.getZ() + 0.5D);
+		if (this.level.getBlockState(pos).getBlock() instanceof BedrollBlock) {
+			this.setPos(pos.getX() + 0.5D, pos.getY() + 0.1875D, pos.getZ() + 0.5D);
 			info.cancel();
 		}
 	}

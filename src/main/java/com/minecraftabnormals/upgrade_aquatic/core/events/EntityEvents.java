@@ -75,7 +75,7 @@ public class EntityEvents {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onEntitySpawned(EntityJoinWorldEvent event) {
-		if (event.getWorld().isRemote) return;
+		if (event.getWorld().isClientSide) return;
 
 		Entity entity = event.getEntity();
 		if (entity instanceof DrownedEntity) {
@@ -84,15 +84,15 @@ public class EntityEvents {
 		if (entity instanceof AbstractFishEntity) {
 			((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity) entity, PikeEntity.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_HIDING_IN_PICKERELWEED::test));
 			if (entity instanceof TropicalFishEntity) {
-				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity) entity, LionfishEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.IS_ALIVE::test));
+				((AbstractFishEntity) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((CreatureEntity) entity, LionfishEntity.class, 8.0F, 1.6D, 1.4D, EntityPredicates.ENTITY_STILL_ALIVE::test));
 			}
 		}
 		if (entity instanceof WaterMobEntity && !(entity instanceof IMob)) {
 			if (!(entity instanceof DolphinEntity)) {
-				((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity) entity, ThrasherEntity.class, 20.0F, 1.4D, 1.6D, EntityPredicates.IS_ALIVE::test));
+				((MobEntity) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((CreatureEntity) entity, ThrasherEntity.class, 20.0F, 1.4D, 1.6D, EntityPredicates.ENTITY_STILL_ALIVE::test));
 			}
 			if (entity instanceof DolphinEntity) {
-				((MobEntity) entity).targetSelector.addGoal(0, (new HurtByTargetGoal((DolphinEntity) entity, ThrasherEntity.class)).setCallsForHelp());
+				((MobEntity) entity).targetSelector.addGoal(0, (new HurtByTargetGoal((DolphinEntity) entity, ThrasherEntity.class)).setAlertOthers());
 				((MobEntity) entity).goalSelector.addGoal(1, new MeleeAttackGoal((DolphinEntity) entity, 1.2D, true));
 			}
 		}
@@ -107,12 +107,12 @@ public class EntityEvents {
 
 		if (!player.isSecondaryUseActive()) {
 			if (stack.getItem() == UAItems.GLOWING_INK_SAC.get()) {
-				if (world.getTileEntity(pos) instanceof IGlowable) {
-					IGlowable te = (IGlowable) world.getTileEntity(pos);
+				if (world.getBlockEntity(pos) instanceof IGlowable) {
+					IGlowable te = (IGlowable) world.getBlockEntity(pos);
 					if (te != null && te.setGlowing(true)) {
-						if (!player.abilities.isCreativeMode) stack.shrink(1);
-						if (!world.isRemote()) GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
-						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						if (!player.abilities.instabuild) stack.shrink(1);
+						if (!world.isClientSide()) GlowingInkItem.squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
+						world.playSound(player, pos, SoundEvents.SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						event.setCanceled(true);
 						event.setCancellationResult(ActionResultType.SUCCESS);
 					}
@@ -120,12 +120,12 @@ public class EntityEvents {
 			}
 
 			if (stack.getItem() == Items.INK_SAC) {
-				if (world.getTileEntity(pos) instanceof IGlowable) {
-					IGlowable te = (IGlowable) world.getTileEntity(pos);
+				if (world.getBlockEntity(pos) instanceof IGlowable) {
+					IGlowable te = (IGlowable) world.getBlockEntity(pos);
 					if (te != null && te.setGlowing(false)) {
-						if (!player.abilities.isCreativeMode) stack.shrink(1);
-						if (!world.isRemote()) GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, pos);
-						world.playSound(player, pos, SoundEvents.ENTITY_SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+						if (!player.abilities.instabuild) stack.shrink(1);
+						if (!world.isClientSide()) GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, pos);
+						world.playSound(player, pos, SoundEvents.SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						event.setCanceled(true);
 						event.setCancellationResult(ActionResultType.SUCCESS);
 					}
@@ -138,16 +138,16 @@ public class EntityEvents {
 	public static void onEntityUpdate(LivingUpdateEvent event) {
 		LivingEntity entity = event.getEntityLiving();
 		if (entity instanceof PhantomEntity) {
-			if (((PhantomEntity) entity).getAttackTarget() instanceof ServerPlayerEntity) {
-				ServerPlayerEntity playerMP = (ServerPlayerEntity) ((PhantomEntity) entity).getAttackTarget();
+			if (((PhantomEntity) entity).getTarget() instanceof ServerPlayerEntity) {
+				ServerPlayerEntity playerMP = (ServerPlayerEntity) ((PhantomEntity) entity).getTarget();
 				StatisticsManager statisticsManager = playerMP.getStats();
 				if (statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) < 72000) {
-					((PhantomEntity) entity).setAttackTarget(null);
+					((PhantomEntity) entity).setTarget(null);
 				}
 			}
 		}
-		if (entity instanceof DrownedEntity && UAConfig.COMMON.drownedSwimmingAnimation.get() && entity.isServerWorld()) {
-			Pose pose = Entity.horizontalMag(entity.getMotion()) >= 0.000625F && entity.getEntityWorld().getFluidState(entity.getPosition().down()).isTagged(FluidTags.WATER) ? Pose.SWIMMING : Pose.STANDING;
+		if (entity instanceof DrownedEntity && UAConfig.COMMON.drownedSwimmingAnimation.get() && entity.isEffectiveAi()) {
+			Pose pose = Entity.getHorizontalDistanceSqr(entity.getDeltaMovement()) >= 0.000625F && entity.getCommandSenderWorld().getFluidState(entity.blockPosition().below()).is(FluidTags.WATER) ? Pose.SWIMMING : Pose.STANDING;
 			if (entity.getPose() != pose)
 				((DrownedEntity) entity).setPose(pose);
 		}
@@ -156,11 +156,11 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onPlayerSleep(PlayerSleepInBedEvent event) {
 		PlayerEntity player = event.getPlayer();
-		BlockState state = player.getEntityWorld().getBlockState(event.getPos());
-		if (event.getResultStatus() == null && state.getFluidState().getLevel() == 8 && state.getBlock() instanceof BedrollBlock) {
+		BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
+		if (event.getResultStatus() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
 				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-				if (!player.world.isRemote()) {
+				if (!player.level.isClientSide()) {
 					UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer);
 				}
 			}
@@ -171,7 +171,7 @@ public class EntityEvents {
 	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
 		Entity entity = event.getEntity();
 		BlockPos spawn = event.getNewSpawn();
-		if (spawn != null && entity.getEntityWorld().getBlockState(spawn).getBlock() instanceof BedrollBlock)
+		if (spawn != null && entity.getCommandSenderWorld().getBlockState(spawn).getBlock() instanceof BedrollBlock)
 			event.setCanceled(true);
 	}
 
@@ -190,22 +190,22 @@ public class EntityEvents {
 				return;
 			}
 
-			player.swingArm(event.getHand());
-			entity.playSound(SoundEvents.ITEM_BUCKET_FILL_FISH, 1.0F, 1.0F);
+			player.swing(event.getHand());
+			entity.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0F, 1.0F);
 			stack.shrink(1);
 
 			if (entity.hasCustomName()) {
-				bucket.setDisplayName(entity.getCustomName());
+				bucket.setHoverName(entity.getCustomName());
 			}
 
-			if (!event.getWorld().isRemote) {
+			if (!event.getWorld().isClientSide) {
 				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayerEntity) player, bucket);
 			}
 
 			if (stack.isEmpty()) {
-				player.setHeldItem(event.getHand(), bucket);
-			} else if (!player.inventory.addItemStackToInventory(bucket)) {
-				player.dropItem(bucket, false);
+				player.setItemInHand(event.getHand(), bucket);
+			} else if (!player.inventory.add(bucket)) {
+				player.drop(bucket, false);
 			}
 
 			entity.remove();
@@ -215,21 +215,21 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event) {
 		PlayerEntity player = event.player;
-		ItemStack headSlotStack = player.getItemStackFromSlot(EquipmentSlotType.HEAD);
-		if (!event.player.world.isRemote && event.player.world.getGameTime() % 5 == 0 && event.player instanceof ServerPlayerEntity) {
+		ItemStack headSlotStack = player.getItemBySlot(EquipmentSlotType.HEAD);
+		if (!event.player.level.isClientSide && event.player.level.getGameTime() % 5 == 0 && event.player instanceof ServerPlayerEntity) {
 			ServerPlayerEntity sPlayer = (ServerPlayerEntity) event.player;
 			StatisticsManager statisticsManager = sPlayer.getStats();
 			Object2IntMap<Stat<?>> object2intmap = new Object2IntOpenHashMap<>();
 			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
-			sPlayer.connection.sendPacket(new SStatisticsPacket(object2intmap));
+			sPlayer.connection.send(new SStatisticsPacket(object2intmap));
 		}
-		if (player.isServerWorld() && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
-			int timeTillDamage = EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 40 * (1 + EnchantmentHelper.getEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 40;
-			if (player.areEyesInFluid(FluidTags.WATER)) {
-				player.addPotionEffect(new EffectInstance(Effects.WATER_BREATHING, 210));
-				if (player.world.getGameTime() % timeTillDamage == 0) {
-					headSlotStack.damageItem(1, player, (p_213341_0_) -> {
-						p_213341_0_.sendBreakAnimation(EquipmentSlotType.HEAD);
+		if (player.isEffectiveAi() && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
+			int timeTillDamage = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 40 * (1 + EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 40;
+			if (player.isEyeInFluid(FluidTags.WATER)) {
+				player.addEffect(new EffectInstance(Effects.WATER_BREATHING, 210));
+				if (player.level.getGameTime() % timeTillDamage == 0) {
+					headSlotStack.hurtAndBreak(1, player, (p_213341_0_) -> {
+						p_213341_0_.broadcastBreakEvent(EquipmentSlotType.HEAD);
 					});
 				}
 			}

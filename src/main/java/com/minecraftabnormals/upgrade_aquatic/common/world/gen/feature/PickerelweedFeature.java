@@ -25,20 +25,20 @@ import java.util.function.Supplier;
  * @author - SmellyModder(Luke Tonon)
  */
 public class PickerelweedFeature extends Feature<NoFeatureConfig> {
-	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.BLUE_PICKERELWEED.get().getDefaultState();
-	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PURPLE_PICKERELWEED.get().getDefaultState();
+	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.BLUE_PICKERELWEED.get().defaultBlockState();
+	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PURPLE_PICKERELWEED.get().defaultBlockState();
 
 	public PickerelweedFeature(Codec<NoFeatureConfig> configFactory) {
 		super(configFactory);
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		Biome biome = worldIn.getBiome(pos);
-		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().isValidPosition(worldIn, pos.down())) {
-			if (biome.getCategory() == Category.RIVER || biome.getCategory() == Category.SWAMP || biome.getRegistryName().equals(Biomes.FLOWER_FOREST.getLocation())) {
+		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().canSurvive(worldIn, pos.below())) {
+			if (biome.getBiomeCategory() == Category.RIVER || biome.getBiomeCategory() == Category.SWAMP || biome.getRegistryName().equals(Biomes.FLOWER_FOREST.location())) {
 				boolean purpleGen;
-				if (biome.getCategory() == Category.SWAMP) {
+				if (biome.getBiomeCategory() == Category.SWAMP) {
 					purpleGen = rand.nextFloat() >= 0.60D;
 				} else {
 					purpleGen = !(rand.nextFloat() >= 0.60D);
@@ -48,9 +48,9 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> {
 				}
 			} else {
 				boolean purpleGen;
-				if (biome.getTemperature() < 0.2D) {
+				if (biome.getBaseTemperature() < 0.2D) {
 					purpleGen = rand.nextFloat() >= 0.75D;
-				} else if (biome.getTemperature() < 1.0D) {
+				} else if (biome.getBaseTemperature() < 1.0D) {
 					purpleGen = rand.nextBoolean();
 				} else {
 					purpleGen = !(rand.nextFloat() >= 0.75D);
@@ -108,28 +108,28 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> {
 		MathUtil.Equation r = (theta) -> {
 			return (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
 		};
-		if (!world.isAirBlock(startPos.down()) && !world.isAirBlock(startPos.down(2)) && !world.isAirBlock(startPos.down(3))) {
+		if (!world.isEmptyBlock(startPos.below()) && !world.isEmptyBlock(startPos.below(2)) && !world.isEmptyBlock(startPos.below(3))) {
 			int repeatsDown = world.getRandom().nextInt(2) + 2;
 			for (int repeats = 0; repeats < repeatsDown; repeats++) {
-				pos = pos.add(0, -repeats, 0);
+				pos = pos.offset(0, -repeats, 0);
 				for (int i = -(patterns[0] / patterns[2] + patterns[0]); i < patterns[0] / patterns[2] + patterns[0]; i++) {
 					for (int j = -(patterns[0] / patterns[2] + patterns[0]); j < patterns[0] / patterns[2] + patterns[0]; j++) {
 						double radius = r.compute(Math.atan2(j, i));
-						BlockPos placingPos = pos.add(i, 0, j);
+						BlockPos placingPos = pos.offset(i, 0, j);
 						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
 							if (i * i + j * j > (radius - 1) * (radius - 1)) {
 								FluidState ifluidstate = world.getFluidState(placingPos);
-								if (PURPLE_PICKERELWEED.get().isValidPosition(world, placingPos) && world.getBlockState(placingPos.up()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
+								if (PURPLE_PICKERELWEED.get().canSurvive(world, placingPos) && world.getBlockState(placingPos.above()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
 									if (purple) {
-										world.setBlockState(placingPos, PURPLE_PICKERELWEED.get().with(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.isTagged(FluidTags.WATER)), 2);
+										world.setBlock(placingPos, PURPLE_PICKERELWEED.get().setValue(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.is(FluidTags.WATER)), 2);
 									} else {
-										world.setBlockState(placingPos, BLUE_PICKERELWEED.get().with(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.isTagged(FluidTags.WATER)), 2);
+										world.setBlock(placingPos, BLUE_PICKERELWEED.get().setValue(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.is(FluidTags.WATER)), 2);
 									}
-								} else if (PURPLE_PICKERELWEED.get().isValidPosition(world, placingPos)) {
+								} else if (PURPLE_PICKERELWEED.get().canSurvive(world, placingPos)) {
 									doubleplantblock.placeAt(world, placingPos, 2);
 								}
 							} else {
-								if (doubleplantblock.getDefaultState().isValidPosition(world, placingPos)) {
+								if (doubleplantblock.defaultBlockState().canSurvive(world, placingPos)) {
 									doubleplantblock.placeAt(world, placingPos, 2);
 								}
 							}
@@ -141,14 +141,14 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> {
 	}
 
 	public boolean isValidBlock(IWorld world, BlockPos pos) {
-		if (world.isAirBlock(pos) || world.getBlockState(pos).getFluidState().isTagged(FluidTags.WATER)) {
+		if (world.isEmptyBlock(pos) || world.getBlockState(pos).getFluidState().is(FluidTags.WATER)) {
 			return true;
 		}
 		return false;
 	}
 
 	public boolean shouldPlace(IWorld world, BlockPos pos) {
-		if (world.getFluidState(pos.down().west()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().east()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().north()).isTagged(FluidTags.WATER) || world.getFluidState(pos.down().south()).isTagged(FluidTags.WATER)) {
+		if (world.getFluidState(pos.below().west()).is(FluidTags.WATER) || world.getFluidState(pos.below().east()).is(FluidTags.WATER) || world.getFluidState(pos.below().north()).is(FluidTags.WATER) || world.getFluidState(pos.below().south()).is(FluidTags.WATER)) {
 			return true;
 		}
 		return false;

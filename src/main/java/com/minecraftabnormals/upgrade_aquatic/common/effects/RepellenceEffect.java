@@ -14,19 +14,19 @@ public class RepellenceEffect extends Effect {
 	}
 
 	@Override
-	public void performEffect(LivingEntity entity, int amplifier) {
-		for (LivingEntity livingEntity : entity.world.getEntitiesWithinAABB(LivingEntity.class, entity.getBoundingBox().grow(0.3D))) {
+	public void applyEffectTick(LivingEntity entity, int amplifier) {
+		for (LivingEntity livingEntity : entity.level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(0.3D))) {
 			if (livingEntity.isAlive() && livingEntity != entity) {
 				if (!(livingEntity instanceof PlayerEntity && ((PlayerEntity) livingEntity).isCreative())) {
-					livingEntity.addPotionEffect(new EffectInstance(Effects.POISON, 70, amplifier + 1));
-					livingEntity.setRevengeTarget(entity);
+					livingEntity.addEffect(new EffectInstance(Effects.POISON, 70, amplifier + 1));
+					livingEntity.setLastHurtByMob(entity);
 				}
 			}
 		}
 	}
 
 	@Override
-	public boolean isReady(int duration, int amplifier) {
+	public boolean isDurationEffectTick(int duration, int amplifier) {
 		return true;
 	}
 

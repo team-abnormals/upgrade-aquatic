@@ -7,6 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraftforge.common.ToolType;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class UACoralDeadBlock extends DeadCoralPlantBlock {
 
 	public UACoralDeadBlock(Properties props) {

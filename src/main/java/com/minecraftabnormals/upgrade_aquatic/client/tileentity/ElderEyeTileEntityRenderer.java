@@ -31,31 +31,31 @@ public class ElderEyeTileEntityRenderer extends TileEntityRenderer<ElderEyeTileE
 	
 	@Override
 	public void render(ElderEyeTileEntity te, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-		matrixStack.push();
+		matrixStack.pushPose();
 		matrixStack.translate(0.5D, 1.5D, 0.5D);
 		
-		BlockState eyeState = te.hasWorld() ? te.getBlockState() : UABlocks.ELDER_EYE.get().getDefaultState();
-		Direction facing = eyeState.get(ElderEyeBlock.FACING);
+		BlockState eyeState = te.hasLevel() ? te.getBlockState() : UABlocks.ELDER_EYE.get().defaultBlockState();
+		Direction facing = eyeState.getValue(ElderEyeBlock.FACING);
 		
 		if(facing == Direction.DOWN) {
-			matrixStack.rotate(Vector3f.XP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
 			matrixStack.translate(0.0F, 1.25F, 0.75F);
 		} else if(facing == Direction.UP){
-			matrixStack.rotate(Vector3f.XP.rotationDegrees(-90.0F));
+			matrixStack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
 			matrixStack.translate(0.0F, 1.25F, -1.25F);
 		} else if(facing == Direction.NORTH) {
-			matrixStack.rotate(Vector3f.YP.rotationDegrees(180.0F));
+			matrixStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
 		} else if(facing == Direction.EAST) {
-			matrixStack.rotate(Vector3f.YP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Vector3f.YP.rotationDegrees(90.0F));
 		} else if(facing == Direction.WEST) {
-			matrixStack.rotate(Vector3f.YP.rotationDegrees(-90.0F));
+			matrixStack.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
 		}
 		
 		matrixStack.scale(1.0F, -1.0F, -1.0F);
 		
-		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.getEntityCutoutNoCull(this.getEyeTexture(eyeState.get(ElderEyeBlock.ACTIVE))));
+		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(this.getEyeTexture(eyeState.getValue(ElderEyeBlock.ACTIVE))));
 		this.model.render(matrixStack, ivertexbuilder, combinedLightIn, combinedOverlayIn);
-		matrixStack.pop();
+		matrixStack.popPose();
 	}
 	
 	private ResourceLocation getEyeTexture(boolean active) {

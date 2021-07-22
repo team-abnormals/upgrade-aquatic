@@ -21,33 +21,33 @@ public class InsomniaEffect extends InstantEffect {
     }
     
     @Override
-    public void performEffect(LivingEntity entity, int amplifier) {
+    public void applyEffectTick(LivingEntity entity, int amplifier) {
     	if(entity instanceof ServerPlayerEntity) {
     		ServerPlayerEntity playerMP = (ServerPlayerEntity) entity;
     		StatisticsManager statisticsManager = playerMP.getStats();
     		statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), (24000 * (amplifier + 1)));
     	} else if(entity instanceof PhantomEntity) {
-    		FlareEntity flare = UAEntities.FLARE.get().create(entity.world);
-    		flare.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), entity.rotationYaw, entity.rotationPitch);
-    		flare.setNoAI(((MobEntity) entity).isAIDisabled());
+    		FlareEntity flare = UAEntities.FLARE.get().create(entity.level);
+    		flare.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.yRot, entity.xRot);
+    		flare.setNoAi(((MobEntity) entity).isNoAi());
     		if(entity.hasCustomName()) {
     			flare.setCustomName(entity.getCustomName());
     			flare.setCustomNameVisible(entity.isCustomNameVisible());
     		}
     		flare.setHealth(entity.getHealth());
     		if(flare.getHealth() > 0) {
-    			entity.world.addEntity(flare);
+    			entity.level.addFreshEntity(flare);
     			entity.remove(true);
     		}
-    		PlayerEntity player = entity.getEntityWorld().getClosestPlayer(entity, 11);
+    		PlayerEntity player = entity.getCommandSenderWorld().getNearestPlayer(entity, 11);
     		if (player instanceof ServerPlayerEntity && player.isAlive()) {
     			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
-    			if(!entity.world.isRemote()) {
+    			if(!entity.level.isClientSide()) {
     				UACriteriaTriggers.CONVERT_PHANTOM.trigger(serverPlayer); 
     			}
     		}
     	} else if(entity instanceof FlareEntity) {
-    		entity.attackEntityFrom(DamageSource.MAGIC, Float.MAX_VALUE);
+    		entity.hurt(DamageSource.MAGIC, Float.MAX_VALUE);
     	}
     }
     

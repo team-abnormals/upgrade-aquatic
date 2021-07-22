@@ -28,13 +28,13 @@ public class ThrasherRenderLayer<T extends ThrasherEntity, M extends ThrasherMod
 	
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T thrasher, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		ClientInfo.MINECRAFT.getTextureManager().bindTexture(this.getThrasherFrostLayer(thrasher));
+		ClientInfo.MINECRAFT.getTextureManager().bind(this.getThrasherFrostLayer(thrasher));
 
 		int stunnedAnimation = (int) (thrasher.STUNNED_ANIMATION.getAnimationProgress() * 240);
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveEntity(this.getThrasherFrostLayer(thrasher)));
 		
-		this.getEntityModel().setRotationAngles(thrasher, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getEntityModel().render(matrixStackIn, ivertexbuilder, stunnedAnimation, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		this.getParentModel().setupAnim(thrasher, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, stunnedAnimation, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 	
 	public ResourceLocation getThrasherFrostLayer(ThrasherEntity thrasher) {

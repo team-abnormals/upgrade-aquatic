@@ -23,7 +23,7 @@ public class ElderPrismarineShowerParticle extends PrismarineShowerParticle {
 		}
     	
 		@Override
-		public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			return new ElderPrismarineShowerParticle(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);
 		}
 	}

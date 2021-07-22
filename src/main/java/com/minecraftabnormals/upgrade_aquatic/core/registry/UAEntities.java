@@ -44,20 +44,20 @@ public class UAEntities {
 
 	@SubscribeEvent
 	public static void onEntityAttributes(EntityAttributeCreationEvent event) {
-		event.put(NAUTILUS.get(), NautilusEntity.registerAttributes().create());
-		event.put(PIKE.get(), PikeEntity.registerAttributes().create());
-		event.put(LIONFISH.get(), LionfishEntity.registerAttributes().create());
-		event.put(PERCH.get(), PerchEntity.func_234176_m_().create());
-		event.put(THRASHER.get(), ThrasherEntity.registerAttributes().create());
-		event.put(GREAT_THRASHER.get(), GreatThrasherEntity.registerAttributes().create());
-		event.put(FLARE.get(), FlareEntity.registerAttributes().create());
-		event.put(ULULU.get(), UluluEntity.registerAttributes().create());
-		event.put(GOOSE.get(), GooseEntity.registerAttributes().create());
-		event.put(GLOW_SQUID.get(), GlowSquidEntity.func_234227_m_().create());
+		event.put(NAUTILUS.get(), NautilusEntity.registerAttributes().build());
+		event.put(PIKE.get(), PikeEntity.registerAttributes().build());
+		event.put(LIONFISH.get(), LionfishEntity.registerAttributes().build());
+		event.put(PERCH.get(), PerchEntity.createAttributes().build());
+		event.put(THRASHER.get(), ThrasherEntity.registerAttributes().build());
+		event.put(GREAT_THRASHER.get(), GreatThrasherEntity.registerAttributes().build());
+		event.put(FLARE.get(), FlareEntity.registerAttributes().build());
+		event.put(ULULU.get(), UluluEntity.registerAttributes().build());
+		event.put(GOOSE.get(), GooseEntity.registerAttributes().build());
+		event.put(GLOW_SQUID.get(), GlowSquidEntity.createAttributes().build());
 
-		event.put(BOX_JELLYFISH.get(), BoxJellyfishEntity.registerAttributes().create());
-		event.put(CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishEntity.registerAttributes().create());
-		event.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfishEntity.registerAttributes().create());
+		event.put(BOX_JELLYFISH.get(), BoxJellyfishEntity.registerAttributes().build());
+		event.put(CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishEntity.registerAttributes().build());
+		event.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfishEntity.registerAttributes().build());
 	}
 
 	public static void registerRenderers() {

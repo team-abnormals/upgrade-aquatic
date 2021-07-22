@@ -15,23 +15,23 @@ public final class PikeSwimToItemsGoal extends Goal {
 	}
 	
 	@Override
-	public boolean shouldExecute() {
-		List<ItemEntity> list = this.pike.world.getEntitiesWithinAABB(ItemEntity.class, this.pike.getBoundingBox().grow(8.0D, 8.0D, 8.0D), PikeEntity.ITEM_SELECTOR);
-		return !list.isEmpty() || !this.pike.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty();
+	public boolean canUse() {
+		List<ItemEntity> list = this.pike.level.getEntitiesOfClass(ItemEntity.class, this.pike.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), PikeEntity.ITEM_SELECTOR);
+		return !list.isEmpty() || !this.pike.getItemBySlot(EquipmentSlotType.MAINHAND).isEmpty();
 	}
 
 	@Override
-	public void startExecuting() {
+	public void start() {
 		this.moveTowardsNearestItem();
 	}
 
 	@Override
 	public void tick() {
-		if (this.pike.getItemStackFromSlot(EquipmentSlotType.MAINHAND).isEmpty()) this.moveTowardsNearestItem();
+		if (this.pike.getItemBySlot(EquipmentSlotType.MAINHAND).isEmpty()) this.moveTowardsNearestItem();
 	}
 	
 	private void moveTowardsNearestItem() {
-		List<ItemEntity> list = this.pike.world.getEntitiesWithinAABB(ItemEntity.class, this.pike.getBoundingBox().grow(8.0D, 8.0D, 8.0D), PikeEntity.ITEM_SELECTOR);
-		if (!list.isEmpty()) this.pike.getNavigator().tryMoveToEntityLiving(list.get(0), 1.2F);
+		List<ItemEntity> list = this.pike.level.getEntitiesOfClass(ItemEntity.class, this.pike.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), PikeEntity.ITEM_SELECTOR);
+		if (!list.isEmpty()) this.pike.getNavigation().moveTo(list.get(0), 1.2F);
 	}
 }

@@ -30,11 +30,11 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
 		int height = 3 + rand.nextInt(2) + rand.nextInt(2);
 		boolean flag = true;
 
-		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getHeight()) {
+		if (position.getY() >= 1 && position.getY() + height + 1 <= worldIn.getMaxBuildHeight()) {
 			for (int j = position.getY(); j <= position.getY() + 1 + height; ++j) {
 				int k = 1;
 				if (j == position.getY())
@@ -44,8 +44,8 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 				BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
 				for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
 					for (int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
-						if (j >= 0 && j < worldIn.getHeight()) {
-							if (!isAirOrLeaves(worldIn, blockpos$mutableblockpos.setPos(l, j, i1)))
+						if (j >= 0 && j < worldIn.getMaxBuildHeight()) {
+							if (!isAirOrLeaves(worldIn, blockpos$mutableblockpos.set(l, j, i1)))
 								flag = false;
 						} else
 							flag = false;
@@ -55,8 +55,8 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 
 			if (!flag) {
 				return false;
-			} else if (isValidGround(worldIn, position.down()) && position.getY() < worldIn.getHeight() - height - 1) {
-				setDirtAt(worldIn, position.down());
+			} else if (isValidGround(worldIn, position.below()) && position.getY() < worldIn.getMaxBuildHeight() - height - 1) {
+				setDirtAt(worldIn, position.below());
 
 				int logX = position.getX();
 				int logZ = position.getZ();
@@ -74,11 +74,11 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 
 				position = new BlockPos(logX, logY, logZ);
 
-				this.createLeaves(worldIn, position.down(), rand, false, config);
+				this.createLeaves(worldIn, position.below(), rand, false, config);
 				this.createLeaves(worldIn, position, rand, false, config);
-				this.createLeaves(worldIn, position.up(), rand, true, config);
-				this.placeLeafAt(worldIn, position.up(), rand, config);
-				this.placeLeafAt(worldIn, position.up(2), rand, config);
+				this.createLeaves(worldIn, position.above(), rand, true, config);
+				this.placeLeafAt(worldIn, position.above(), rand, config);
+				this.placeLeafAt(worldIn, position.above(2), rand, config);
 
 				return true;
 			} else {
@@ -96,13 +96,13 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 				if (small) {
 					if ((Math.abs(k3) != leafSize || Math.abs(j4) != leafSize)) {
 						if (rand.nextInt(3) != 0)
-							this.placeLeafAt(worldIn, newPos.add(k3, 0, j4), rand, null);
+							this.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, null);
 					}
 				} else {
 					if ((Math.abs(k3) != leafSize || Math.abs(j4) != leafSize)) {
-						this.placeLeafAt(worldIn, newPos.add(k3, 0, j4), rand, config);
+						this.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, config);
 					} else if (rand.nextInt(4) == 0) {
-						this.placeLeafAt(worldIn, newPos.add(k3, 0, j4), rand, config);
+						this.placeLeafAt(worldIn, newPos.offset(k3, 0, j4), rand, config);
 					}
 				}
 			}
@@ -110,43 +110,43 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 	}
 
 	private void placeLogAt(IWorldWriter worldIn, BlockPos pos, Random rand, BaseTreeFeatureConfig config) {
-		this.setLogState(worldIn, pos, UABlocks.RIVER_LOG.get().getDefaultState());
+		this.setLogState(worldIn, pos, UABlocks.RIVER_LOG.get().defaultBlockState());
 	}
 
 	private void placeLeafAt(IWorldGenerationReader world, BlockPos pos, Random rand, BaseTreeFeatureConfig config) {
 		if (isAirOrLeaves(world, pos)) {
-			this.setLogState(world, pos, UABlocks.RIVER_LEAVES.get().getDefaultState().with(LeavesBlock.DISTANCE, 1));
+			this.setLogState(world, pos, UABlocks.RIVER_LEAVES.get().defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
 		}
-		if (isAir(world, pos.down()) && rand.nextInt(3) == 0 && rand.nextBoolean()) {
-			BlockState state = UABlocks.MULBERRY_VINE.get().getDefaultState().with(MulberryVineBlock.AGE, 4).with(MulberryVineBlock.DOUBLE, rand.nextBoolean());
-			if (state.isValidPosition((IWorldReader) world, pos.down()))
-				this.setLogState(world, pos.down(), state);
+		if (isAir(world, pos.below()) && rand.nextInt(3) == 0 && rand.nextBoolean()) {
+			BlockState state = UABlocks.MULBERRY_VINE.get().defaultBlockState().setValue(MulberryVineBlock.AGE, 4).setValue(MulberryVineBlock.DOUBLE, rand.nextBoolean());
+			if (state.canSurvive((IWorldReader) world, pos.below()))
+				this.setLogState(world, pos.below(), state);
 		}
 	}
 
 	protected final void setLogState(IWorldWriter worldIn, BlockPos pos, BlockState state) {
-		worldIn.setBlockState(pos, state, 18);
+		worldIn.setBlock(pos, state, 18);
 	}
 
 	public static boolean isAir(IWorldGenerationBaseReader worldIn, BlockPos pos) {
 		if (!(worldIn instanceof net.minecraft.world.IBlockReader)) // FORGE: Redirect to state method when possible
-			return worldIn.hasBlockState(pos, BlockState::isAir);
+			return worldIn.isStateAtPosition(pos, BlockState::isAir);
 		else
-			return worldIn.hasBlockState(pos, state -> state.isAir((net.minecraft.world.IBlockReader) worldIn, pos));
+			return worldIn.isStateAtPosition(pos, state -> state.isAir((net.minecraft.world.IBlockReader) worldIn, pos));
 	}
 
 	public static boolean isAirOrLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos) {
 		if (worldIn instanceof net.minecraft.world.IWorldReader) // FORGE: Redirect to state method when possible
-			return worldIn.hasBlockState(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.IWorldReader) worldIn, pos));
-		return worldIn.hasBlockState(pos, (state) -> {
-			return state.isAir() || state.isIn(BlockTags.LEAVES);
+			return worldIn.isStateAtPosition(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.IWorldReader) worldIn, pos));
+		return worldIn.isStateAtPosition(pos, (state) -> {
+			return state.isAir() || state.is(BlockTags.LEAVES);
 		});
 	}
 
 	public static void setDirtAt(IWorld worldIn, BlockPos pos) {
 		Block block = worldIn.getBlockState(pos).getBlock();
 		if (block == Blocks.GRASS_BLOCK || block == Blocks.FARMLAND) {
-			worldIn.setBlockState(pos, Blocks.DIRT.getDefaultState(), 18);
+			worldIn.setBlock(pos, Blocks.DIRT.defaultBlockState(), 18);
 		}
 	}
 	

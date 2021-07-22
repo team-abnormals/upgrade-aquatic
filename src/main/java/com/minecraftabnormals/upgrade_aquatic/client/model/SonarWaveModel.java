@@ -17,36 +17,36 @@ public class SonarWaveModel extends EntityModel<SonarWaveEntity> {
     private SonarWaveEntity sonarWave;
 
     public SonarWaveModel() {
-        this.textureWidth = 16;
-        this.textureHeight = 16;
+        this.texWidth = 16;
+        this.texHeight = 16;
         this.wave = new ModelRenderer(this, 0, 0);
-        this.wave.setRotationPoint(0.0F, 19.0F, 0.0F);
+        this.wave.setPos(0.0F, 19.0F, 0.0F);
         this.wave.addBox(-8.0F, -8.0F, 0.0F, 16, 16, 0, 0.0F);
     }
     
     @Override
-    public void render(MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-    	matrixStack.push();
+    public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+    	matrixStack.pushPose();
     	float progress = this.sonarWave.getGrowProgress();
     	float scale = 0.6F + progress;
     	matrixStack.scale(scale, scale, scale);
     	this.wave.render(matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha - (0.25F * progress));
-    	matrixStack.pop();
+    	matrixStack.popPose();
     }
     
     @Override
-    public void setRotationAngles(SonarWaveEntity sonar, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setupAnim(SonarWaveEntity sonar, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
     	this.sonarWave = sonar;
     	
-    	this.wave.rotateAngleX = (float) -Math.toRadians(MathHelper.lerp(ClientInfo.getPartialTicks(), sonar.prevRotationPitch, sonar.rotationPitch));
+    	this.wave.xRot = (float) -Math.toRadians(MathHelper.lerp(ClientInfo.getPartialTicks(), sonar.xRotO, sonar.xRot));
     }
 
     /**
      * This is a helper function from Tabula to set the rotation of model parts
      */
     public void setRotateAngle(ModelRenderer ModelRenderer, float x, float y, float z) {
-        ModelRenderer.rotateAngleX = x;
-        ModelRenderer.rotateAngleY = y;
-        ModelRenderer.rotateAngleZ = z;
+        ModelRenderer.xRot = x;
+        ModelRenderer.yRot = y;
+        ModelRenderer.zRot = z;
     }
 }

@@ -20,12 +20,12 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 
 	public ThrasherFindDetectionPointGoal(ThrasherEntity thrasher) {
 		this.thrasher = thrasher;
-		this.setMutexFlags(EnumSet.of(Goal.Flag.TARGET));
+		this.setFlags(EnumSet.of(Goal.Flag.TARGET));
 	}
 	
 	@Override
-	public boolean shouldExecute() {
-		boolean flag = !this.thrasher.isStunned() && this.thrasher.getRNG().nextFloat() < 0.05F;
+	public boolean canUse() {
+		boolean flag = !this.thrasher.isStunned() && this.thrasher.getRandom().nextFloat() < 0.05F;
 		if(flag) {
 			this.findNearestTarget();
 			return this.foundTarget != null && this.thrasher.getTicksSinceLastSonarFire() > 55 && ThrasherEntity.ENEMY_MATCHER.test(this.foundTarget);
@@ -34,12 +34,12 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	}
 	
 	@Override
-	public boolean shouldContinueExecuting() {
+	public boolean canContinueToUse() {
 		return !this.thrasher.isStunned() && this.thrasher.getPossibleDetectionPoint() == null && this.ticksPassed < 10;
 	}
 	
 	@Override
-	public void resetTask() {
+	public void stop() {
 		if(this.foundPos != null && !this.thrasher.isStunned()) {
 			this.thrasher.setPossibleDetectionPoint(this.foundPos);
 		}
@@ -47,12 +47,12 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	
 	public void tick() {
 		this.ticksPassed++;
-		Random rand = this.thrasher.getRNG();
-		this.foundPos = this.foundTarget.getPosition().add(rand.nextInt(2), rand.nextInt(2), rand.nextInt(2));
+		Random rand = this.thrasher.getRandom();
+		this.foundPos = this.foundTarget.blockPosition().offset(rand.nextInt(2), rand.nextInt(2), rand.nextInt(2));
 	}
 	
 	private void findNearestTarget() {
-		this.foundTarget = this.thrasher.world.getClosestEntity(this.thrasher.world.getEntitiesWithinAABB(LivingEntity.class, this.getTargetableArea(32), ThrasherEntity.ENEMY_MATCHER), new EntityPredicate().setDistance(this.getTargetDistance()).setCustomPredicate(null), this.thrasher, this.thrasher.getPosX(), this.thrasher.getPosY() + this.thrasher.getEyeHeight(), this.thrasher.getPosZ());
+		this.foundTarget = this.thrasher.level.getNearestEntity(this.thrasher.level.getEntitiesOfClass(LivingEntity.class, this.getTargetableArea(32), ThrasherEntity.ENEMY_MATCHER), new EntityPredicate().range(this.getTargetDistance()).selector(null), this.thrasher, this.thrasher.getX(), this.thrasher.getY() + this.thrasher.getEyeHeight(), this.thrasher.getZ());
 	}
 	
 	private double getTargetDistance() {
@@ -61,6 +61,6 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	}
 	
 	private AxisAlignedBB getTargetableArea(double targetDistance) {
-		return this.thrasher.getBoundingBox().grow(targetDistance, 4.0D, targetDistance);
+		return this.thrasher.getBoundingBox().inflate(targetDistance, 4.0D, targetDistance);
 	}
 }

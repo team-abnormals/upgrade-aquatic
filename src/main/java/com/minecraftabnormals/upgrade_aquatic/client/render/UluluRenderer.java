@@ -21,16 +21,16 @@ public class UluluRenderer extends MobRenderer<UluluEntity, UluluModel<UluluEnti
 	}
 	
 	public void render(UluluEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-		this.shadowSize = 0.75F * (float)entityIn.getUluluSize();
+		this.shadowRadius = 0.75F * (float)entityIn.getUluluSize();
 		super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(UluluEntity entity) {
+	public ResourceLocation getTextureLocation(UluluEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/ululu/ululu_dry.png");
 	}
 	
-	protected void preRenderCallback(UluluEntity entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
+	protected void scale(UluluEntity entitylivingbaseIn, MatrixStack matrixStackIn, float partialTickTime) {
 	      matrixStackIn.scale(0.999F, 0.999F, 0.999F);
 	      matrixStackIn.translate(0.0D, (double)0.001F, 0.0D);
 	      float f1 = (float)entitylivingbaseIn.getUluluSize();

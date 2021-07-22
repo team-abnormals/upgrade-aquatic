@@ -26,14 +26,14 @@ public class ElderEyeTileEntity extends TileEntity implements ITickableTileEntit
 	@Override
 	@SuppressWarnings("deprecation")
 	public void tick() {
-		if(world.getGameTime() % 4 == 0 && !world.isRemote) {
-			BlockState state = world.getBlockState(pos);
+		if(level.getGameTime() % 4 == 0 && !level.isClientSide) {
+			BlockState state = level.getBlockState(worldPosition);
 			
 			if(!(state.getBlock() instanceof ElderEyeBlock)) return;
 
-			Direction facing = state.get(ElderEyeBlock.FACING);
-			AxisAlignedBB bb = new AxisAlignedBB(0, 0, 0, 1, 1, 1).offset(pos.offset(facing)).expand(facing.getXOffset() * calcRange(facing), facing.getYOffset() * calcRange(facing), facing.getZOffset() * calcRange(facing));
-			List<Entity> entities = world.getEntitiesWithinAABB(Entity.class, bb);
+			Direction facing = state.getValue(ElderEyeBlock.FACING);
+			AxisAlignedBB bb = new AxisAlignedBB(0, 0, 0, 1, 1, 1).move(worldPosition.relative(facing)).expandTowards(facing.getStepX() * calcRange(facing), facing.getStepY() * calcRange(facing), facing.getStepZ() * calcRange(facing));
+			List<Entity> entities = level.getEntitiesOfClass(Entity.class, bb);
 
 			int entityCount = entities.size();
 			boolean hasEntity = entityCount > 0;
@@ -52,15 +52,15 @@ public class ElderEyeTileEntity extends TileEntity implements ITickableTileEntit
 					}
 
 					int[] posCheck = {
-						facing.getXOffset() * (MathHelper.floor(entity.getPosX()) - this.pos.getX()),
-						facing.getYOffset() * (MathHelper.floor(entity.getPosY()) - this.pos.getY()),
-						facing.getZOffset() * (MathHelper.floor(entity.getPosZ()) - this.pos.getZ())
+						facing.getStepX() * (MathHelper.floor(entity.getX()) - this.worldPosition.getX()),
+						facing.getStepY() * (MathHelper.floor(entity.getY()) - this.worldPosition.getY()),
+						facing.getStepZ() * (MathHelper.floor(entity.getZ()) - this.worldPosition.getZ())
 					};
 					
 					for(int b = 1; b < Math.abs(IntStream.of(posCheck).sum()); b++) {
 						
-						if(!world.getBlockState(this.pos.offset(facing, b)).isAir()) {
-							if(world.getBlockState(this.pos.offset(facing, b)).getMaterial().blocksMovement()) {
+						if(!level.getBlockState(this.worldPosition.relative(facing, b)).isAir()) {
+							if(level.getBlockState(this.worldPosition.relative(facing, b)).getMaterial().blocksMotion()) {
 								entityCount--;
 								if(entityCount <= 0) {
 									hasEntity = false;
@@ -73,9 +73,9 @@ public class ElderEyeTileEntity extends TileEntity implements ITickableTileEntit
 				}
 			}
 
-			if(state.get(ElderEyeBlock.POWERED) != hasEntity && state.get(ElderEyeBlock.ACTIVE)) {
-				world.setBlockState(pos, state.getBlockState().with(ElderEyeBlock.POWERED, hasEntity));
-				((ElderEyeBlock)state.getBlock()).updateRedstoneNeighbors(state, getWorld(), getPos());
+			if(state.getValue(ElderEyeBlock.POWERED) != hasEntity && state.getValue(ElderEyeBlock.ACTIVE)) {
+				level.setBlockAndUpdate(worldPosition, state.getBlockState().setValue(ElderEyeBlock.POWERED, hasEntity));
+				((ElderEyeBlock)state.getBlock()).updateRedstoneNeighbors(state, getLevel(), getBlockPos());
 			}
 		}
 	}
@@ -83,9 +83,9 @@ public class ElderEyeTileEntity extends TileEntity implements ITickableTileEntit
 	public int calcRange(Direction direction) {
 		int i;
 		for(i = 1; i < 13; i++) {
-			if(world.getBlockState(pos.offset(direction, i)).getMaterial() != Material.AIR) {
+			if(level.getBlockState(worldPosition.relative(direction, i)).getMaterial() != Material.AIR) {
 				
-				if(world.getBlockState(pos.offset(direction, i)).getMaterial() != Material.WATER) {
+				if(level.getBlockState(worldPosition.relative(direction, i)).getMaterial() != Material.WATER) {
 					break;
 				}
 				
@@ -95,6 +95,6 @@ public class ElderEyeTileEntity extends TileEntity implements ITickableTileEntit
 	}
 	
 	public BlockPos getBlockPosForRange(Direction direction) {
-		return pos.offset(direction, this.calcRange(direction));
+		return worldPosition.relative(direction, this.calcRange(direction));
 	}
 }

@@ -19,12 +19,14 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class MulberryJamBlock extends BreakableBlock implements IWaterLoggable {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public MulberryJamBlock(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.getDefaultState().with(WATERLOGGED, false));
+		this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
 	}
 	
 	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
@@ -53,25 +55,25 @@ public class MulberryJamBlock extends BreakableBlock implements IWaterLoggable {
         return super.canStickTo(state, other);
     }
 	
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-		entity.setMotionMultiplier(state, new Vector3d(0.2D, 0.2D, 0.2D));
+	public void entityInside(BlockState state, World world, BlockPos pos, Entity entity) {
+		entity.makeStuckInBlock(state, new Vector3d(0.2D, 0.2D, 0.2D));
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IWorld iworld = context.getWorld();
-		BlockPos blockpos = context.getPos();
-		boolean flag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
-		return this.getDefaultState().with(WATERLOGGED, flag);
+		IWorld iworld = context.getLevel();
+		BlockPos blockpos = context.getClickedPos();
+		boolean flag = iworld.getFluidState(blockpos).getType() == Fluids.WATER;
+		return this.defaultBlockState().setValue(WATERLOGGED, flag);
 	}
 	
 	@SuppressWarnings("deprecation")
     @Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);	
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);	
 	}
 	
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
 	}
 }

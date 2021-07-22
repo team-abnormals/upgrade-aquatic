@@ -46,17 +46,17 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 			return !(entity instanceof LionfishEntity) && !(entity instanceof AbstractFishEntity);
 		}
 	};
-	private static final DataParameter<Boolean> HUNGY = EntityDataManager.createKey(LionfishEntity.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> TIME_TILL_HUNGRY = EntityDataManager.createKey(LionfishEntity.class, DataSerializers.VARINT);
+	private static final DataParameter<Boolean> HUNGY = EntityDataManager.defineId(LionfishEntity.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> TIME_TILL_HUNGRY = EntityDataManager.defineId(LionfishEntity.class, DataSerializers.INT);
 	int lastTimeSinceHungry;
 
 	public LionfishEntity(EntityType<? extends LionfishEntity> type, World world) {
 		super(UAEntities.LIONFISH.get(), world);
-		this.moveController = new LionfishEntity.MoveHelperController(this);
+		this.moveControl = new LionfishEntity.MoveHelperController(this);
 	}
 	
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 8.0D);
+    	return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D);
     }
 	
 	@Override
@@ -64,20 +64,20 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 		this.goalSelector.addGoal(4, new RandomSwimmingGoal(this, 1.35D, 30) {
 			
 			@Override
-			public boolean shouldExecute() {
-				if (this.creature.isBeingRidden()) {
+			public boolean canUse() {
+				if (this.mob.isVehicle()) {
 					return false;
 				} else {
-					if (!this.mustUpdate) {
-						if (this.creature.getIdleTime() >= 100) {
+					if (!this.forceTrigger) {
+						if (this.mob.getNoActionTime() >= 100) {
 							return false;
 						}
-						if(((LionfishEntity)this.creature).isHungry()) {
-							if (this.creature.getRNG().nextInt(60) != 0) {
+						if(((LionfishEntity)this.mob).isHungry()) {
+							if (this.mob.getRandom().nextInt(60) != 0) {
 								return false;
 							}
 						} else {
-							if (this.creature.getRNG().nextInt(30) != 0) {
+							if (this.mob.getRandom().nextInt(30) != 0) {
 								return false;
 							}
 						}
@@ -87,10 +87,10 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 					if (vec3d == null) {
 						return false;
 					} else {
-						this.x = vec3d.x;
-						this.y = vec3d.y;
-						this.z = vec3d.z;
-						this.mustUpdate = false;
+						this.wantedX = vec3d.x;
+						this.wantedY = vec3d.y;
+						this.wantedZ = vec3d.z;
+						this.forceTrigger = false;
 						return true;
 					}
 				}
@@ -101,44 +101,44 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<TropicalFishEntity>(this, TropicalFishEntity.class, true) {
 			
 			@Override
-			public boolean shouldExecute() {
-				return ((LionfishEntity)this.goalOwner).isHungry() && super.shouldExecute();
+			public boolean canUse() {
+				return ((LionfishEntity)this.mob).isHungry() && super.canUse();
 			}
 			
 		});
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 	
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(HUNGY, true);
-		this.dataManager.register(TIME_TILL_HUNGRY, 0);
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(HUNGY, true);
+		this.entityData.define(TIME_TILL_HUNGRY, 0);
     }
 
     public boolean isHungry() {
-        return this.dataManager.get(HUNGY);
+        return this.entityData.get(HUNGY);
     }
 
     public void setHungry(boolean hungry) {
-        this.dataManager.set(HUNGY, hungry);
+        this.entityData.set(HUNGY, hungry);
     }
     
     public int getTimeTillHungry() {
-        return this.dataManager.get(TIME_TILL_HUNGRY);
+        return this.entityData.get(TIME_TILL_HUNGRY);
     }
 
     public void setTimeTillHungry(int ticks) {
-        this.dataManager.set(TIME_TILL_HUNGRY, ticks);
+        this.entityData.set(TIME_TILL_HUNGRY, ticks);
     }
     
-    public void writeAdditional(CompoundNBT compound) {
-    	super.writeAdditional(compound);
+    public void addAdditionalSaveData(CompoundNBT compound) {
+    	super.addAdditionalSaveData(compound);
     	compound.putBoolean("IsHungry", this.isHungry());
     	compound.putInt("TimeTillHungry", this.getTimeTillHungry());
     }
 
-    public void readAdditional(CompoundNBT compound) {
-    	super.readAdditional(compound);
+    public void readAdditionalSaveData(CompoundNBT compound) {
+    	super.readAdditionalSaveData(compound);
     	this.setHungry(compound.getBoolean("IsHungry"));
     	this.setTimeTillHungry(compound.getInt("TimeTillHungry"));
     }
@@ -149,7 +149,7 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 	}
 
     @Override
-    public int getMaxSpawnedInChunk() {
+    public int getMaxSpawnClusterSize() {
         return 3;
     }
     
@@ -164,16 +164,16 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 	}
 	
 	@Override
-	protected PathNavigator createNavigator(World worldIn) {
+	protected PathNavigator createNavigation(World worldIn) {
 		return new SwimmerPathNavigator(this, worldIn);
 	}
 
 	public static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if (((World) world).getDimensionKey() != World.OVERWORLD) return false;
+		if (((World) world).dimension() != World.OVERWORLD) return false;
 		for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
-					if (world.getBlockState(new BlockPos(xx, yy, zz)).getBlock().isIn(BlockTags.CORAL_BLOCKS)) {
+					if (world.getBlockState(new BlockPos(xx, yy, zz)).getBlock().is(BlockTags.CORAL_BLOCKS)) {
 						return true;
 					}
 				}
@@ -185,14 +185,14 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.isInWater() && this.onGround && this.collidedVertically) {
-			this.setMotion(this.getMotion().add((double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.035F), (double)0.4F, (double)((this.rand.nextFloat() * 2.0F - 1.0F) * 0.035F)));
+		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+			this.setDeltaMovement(this.getDeltaMovement().add((double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.035F), (double)0.4F, (double)((this.random.nextFloat() * 2.0F - 1.0F) * 0.035F)));
 			this.onGround = false;
-			this.isAirBorne = true;
-			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
+			this.hasImpulse = true;
+			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
 		if (this.isAlive()) {
-			for(LivingEntity entity : this.world.getEntitiesWithinAABB(LivingEntity.class, this.getBoundingBox().grow(0.3D), ENEMY_MATCHER)) {
+			for(LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.3D), ENEMY_MATCHER)) {
 				if (entity.isAlive()) {
 					this.attack(entity);
 				}
@@ -208,34 +208,34 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 	}
 	
 	private void attack(LivingEntity entity) {
-		if(entity.attackEntityFrom(DamageSource.causeMobDamage(this), 2.0F) && entity.isInWater()) {
-			entity.addPotionEffect(new EffectInstance(Effects.POISON, 70, 1));
-			this.playSound(SoundEvents.ENTITY_PUFFER_FISH_STING, 1.0F, 1.0F);
+		if(entity.hurt(DamageSource.mobAttack(this), 2.0F) && entity.isInWater()) {
+			entity.addEffect(new EffectInstance(Effects.POISON, 70, 1));
+			this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0F, 1.0F);
 			if(entity instanceof PlayerEntity) {
-				this.setAttackTarget(entity);
+				this.setTarget(entity);
 			}
 		}
 	}
 	
-	public boolean attackEntityFrom(DamageSource source, float amount) {
-		Entity entitySource = source.getTrueSource();
-		if(entitySource instanceof LivingEntity && !(entitySource instanceof PlayerEntity && ((PlayerEntity) entitySource).abilities.isCreativeMode)) {
+	public boolean hurt(DamageSource source, float amount) {
+		Entity entitySource = source.getEntity();
+		if(entitySource instanceof LivingEntity && !(entitySource instanceof PlayerEntity && ((PlayerEntity) entitySource).abilities.instabuild)) {
 			if(entitySource instanceof PlayerEntity) {
-				this.setAttackTarget((LivingEntity) entitySource);
+				this.setTarget((LivingEntity) entitySource);
 			}
-			return super.attackEntityFrom(source, amount);
+			return super.hurt(source, amount);
 		} else {
-			return super.attackEntityFrom(source, amount);
+			return super.hurt(source, amount);
 		}
 	}
 	
 	public void travel(Vector3d p_213352_1_) {
-		if (this.isServerWorld() && this.isInWater()) {
+		if (this.isEffectiveAi() && this.isInWater()) {
 			this.moveRelative(0.01F, p_213352_1_);
-			this.move(MoverType.SELF, this.getMotion());
-			this.setMotion(this.getMotion().scale(0.9D));
-			if (this.getAttackTarget() == null) {
-				this.setMotion(this.getMotion().add(0.0D, -0.005D, 0.0D));
+			this.move(MoverType.SELF, this.getDeltaMovement());
+			this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
+			if (this.getTarget() == null) {
+				this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.005D, 0.0D));
 			}
 		} else {
 			super.travel(p_213352_1_);
@@ -244,26 +244,26 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 	
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return SoundEvents.ENTITY_PUFFER_FISH_AMBIENT;
+		return SoundEvents.PUFFER_FISH_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return SoundEvents.ENTITY_PUFFER_FISH_DEATH;
+		return SoundEvents.PUFFER_FISH_DEATH;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return SoundEvents.ENTITY_PUFFER_FISH_HURT;
+		return SoundEvents.PUFFER_FISH_HURT;
 	}
 	
 	protected SoundEvent getFlopSound() {
-		return SoundEvents.ENTITY_PUFFER_FISH_FLOP;
+		return SoundEvents.PUFFER_FISH_FLOP;
 	}
 	
 	@Override
 	protected SoundEvent getSwimSound() {
-		return SoundEvents.ENTITY_FISH_SWIM;
+		return SoundEvents.FISH_SWIM;
 	}
 	
 	static class MoveHelperController extends MovementController {
@@ -275,22 +275,22 @@ public class LionfishEntity extends BucketableWaterMobEntity {
         }
 
         public void tick() {
-            if (this.lionfish.areEyesInFluid(FluidTags.WATER)) {
-                this.lionfish.setMotion(this.lionfish.getMotion().add(0.0D, 0.005D, 0.0D));
+            if (this.lionfish.isEyeInFluid(FluidTags.WATER)) {
+                this.lionfish.setDeltaMovement(this.lionfish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
             }
 
-            if (this.action == MovementController.Action.MOVE_TO && !this.lionfish.getNavigator().noPath()) {
-            	double d0 = this.posX - this.lionfish.getPosX();
-            	double d1 = this.posY - this.lionfish.getPosY();
-            	double d2 = this.posZ - this.lionfish.getPosZ();
+            if (this.operation == MovementController.Action.MOVE_TO && !this.lionfish.getNavigation().isDone()) {
+            	double d0 = this.wantedX - this.lionfish.getX();
+            	double d1 = this.wantedY - this.lionfish.getY();
+            	double d2 = this.wantedZ - this.lionfish.getZ();
             	double d3 = (double) MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
             	d1 = d1 / d3;
             	float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-            	this.lionfish.rotationYaw = this.limitAngle(this.lionfish.rotationYaw, f, 90.0F);
-            	this.lionfish.renderYawOffset = this.lionfish.rotationYaw;
-            	float f1 = (float) (this.speed * this.lionfish.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
-            	this.lionfish.setAIMoveSpeed(MathHelper.lerp(0.125F, this.lionfish.getAIMoveSpeed(), f1));
-            	this.lionfish.setMotion(this.lionfish.getMotion().add(0.0D, (double)this.lionfish.getAIMoveSpeed() * d1 * 0.03D, 0.0D));
+            	this.lionfish.yRot = this.rotlerp(this.lionfish.yRot, f, 90.0F);
+            	this.lionfish.yBodyRot = this.lionfish.yRot;
+            	float f1 = (float) (this.speedModifier * this.lionfish.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
+            	this.lionfish.setSpeed(MathHelper.lerp(0.125F, this.lionfish.getSpeed(), f1));
+            	this.lionfish.setDeltaMovement(this.lionfish.getDeltaMovement().add(0.0D, (double)this.lionfish.getSpeed() * d1 * 0.03D, 0.0D));
             }
         }
     }
@@ -302,21 +302,21 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 		}
 		
 		@Override
-		public boolean shouldContinueExecuting() {
-			return super.shouldContinueExecuting() && attacker.isInWater();
+		public boolean canContinueToUse() {
+			return super.canContinueToUse() && mob.isInWater();
 		}
 		
 		@Override
 		protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
 			double d0 = this.getAttackReachSqr(enemy);
-			if (distToEnemySqr <= d0 && this.func_234041_j_() <= 0) {
-				this.func_234039_g_();
-				((LionfishEntity)this.attacker).attack(enemy);
-				((LionfishEntity)this.attacker).setHungry(false);
-				((LionfishEntity)this.attacker).setTimeTillHungry(attacker.getRNG().nextInt(300) + 300);
+			if (distToEnemySqr <= d0 && this.getTicksUntilNextAttack() <= 0) {
+				this.resetAttackCooldown();
+				((LionfishEntity)this.mob).attack(enemy);
+				((LionfishEntity)this.mob).setHungry(false);
+				((LionfishEntity)this.mob).setTimeTillHungry(mob.getRandom().nextInt(300) + 300);
 				if(enemy instanceof PlayerEntity) {
-					attacker.setAttackTarget(null);
-					this.resetTask();
+					mob.setTarget(null);
+					this.stop();
 				}
 			}
 		}

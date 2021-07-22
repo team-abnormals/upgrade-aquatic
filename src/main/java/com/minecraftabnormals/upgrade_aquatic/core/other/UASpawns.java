@@ -35,7 +35,7 @@ public class UASpawns {
 		EntitySpawnPlacementRegistry.register(UAEntities.NAUTILUS.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UASpawns::ravineMobCondition);
 		EntitySpawnPlacementRegistry.register(UAEntities.LIONFISH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, LionfishEntity::coralCondition);
 		EntitySpawnPlacementRegistry.register(UAEntities.PIKE.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, PikeEntity::pickerelCondition);
-		EntitySpawnPlacementRegistry.register(UAEntities.PERCH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractFishEntity::func_223363_b);
+		EntitySpawnPlacementRegistry.register(UAEntities.PERCH.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, AbstractFishEntity::checkFishSpawnRules);
 		EntitySpawnPlacementRegistry.register(UAEntities.GLOW_SQUID.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, UASpawns::ravineMobCondition);
 		EntitySpawnPlacementRegistry.register(UAEntities.THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, ThrasherEntity::thrasherCondition);
 		EntitySpawnPlacementRegistry.register(UAEntities.GREAT_THRASHER.get(), EntitySpawnPlacementRegistry.PlacementType.IN_WATER, Heightmap.Type.MOTION_BLOCKING, ThrasherEntity::thrasherCondition);
@@ -50,19 +50,19 @@ public class UASpawns {
 		if (event.getName() == null) return;
 		ResourceLocation biome = event.getName();
 		MobSpawnInfoBuilder spawns = event.getSpawns();
-		RegistryKey<Biome> key = RegistryKey.getOrCreateKey(Registry.BIOME_KEY, biome);
+		RegistryKey<Biome> key = RegistryKey.create(Registry.BIOME_REGISTRY, biome);
 
 		if (event.getCategory() == Biome.Category.OCEAN && UAConfig.COMMON.glowSquidWeight.get() > 0) {
-			spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.GLOW_SQUID.get(), UAConfig.COMMON.glowSquidWeight.get(), 1, 1));
+			spawns.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(UAEntities.GLOW_SQUID.get(), UAConfig.COMMON.glowSquidWeight.get(), 1, 1));
 
 			if (BiomeDictionary.hasType(key, BiomeDictionary.Type.COLD) && UAConfig.COMMON.thrasherWeight.get() > 0) {
-				spawns.withSpawner(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(UAEntities.THRASHER.get(), UAConfig.COMMON.thrasherWeight.get(), 1, 2));
+				spawns.addSpawn(EntityClassification.MONSTER, new MobSpawnInfo.Spawners(UAEntities.THRASHER.get(), UAConfig.COMMON.thrasherWeight.get(), 1, 2));
 			} else if (UAConfig.COMMON.nautilusWeight.get() > 0) {
-				spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.NAUTILUS.get(), UAConfig.COMMON.nautilusWeight.get(), 1, 4));
+				spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.NAUTILUS.get(), UAConfig.COMMON.nautilusWeight.get(), 1, 4));
 			}
 
 			if (BiomeDictionary.hasType(key, BiomeDictionary.Type.HOT) && UAConfig.COMMON.lionfishWeight.get() > 0) {
-				spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.LIONFISH.get(), UAConfig.COMMON.lionfishWeight.get(), 1, 1));
+				spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.LIONFISH.get(), UAConfig.COMMON.lionfishWeight.get(), 1, 1));
 			}
 
 //			if (isWarmOcean(biome) || isLukewarmOcean(biome)) {
@@ -75,26 +75,26 @@ public class UASpawns {
 		}
 
 		if (event.getCategory() == Biome.Category.RIVER && UAConfig.COMMON.pikeWeight.get() > 0) {
-			spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeWeight.get(), 1, 2));
+			spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeWeight.get(), 1, 2));
 		}
 
 		if (event.getCategory() == Biome.Category.SWAMP) {
-			if (UAConfig.COMMON.pikeSwampWeight.get() > 0) spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeSwampWeight.get(), 1, 2));
-			if (UAConfig.COMMON.squidSwampWeight.get() > 0) spawns.withSpawner(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SQUID, UAConfig.COMMON.squidSwampWeight.get(), 1, 2));
-			if (UAConfig.COMMON.perchWeight.get() > 0) spawns.withSpawner(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PERCH.get(), UAConfig.COMMON.perchWeight.get(), 1, 6));
+			if (UAConfig.COMMON.pikeSwampWeight.get() > 0) spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeSwampWeight.get(), 1, 2));
+			if (UAConfig.COMMON.squidSwampWeight.get() > 0) spawns.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SQUID, UAConfig.COMMON.squidSwampWeight.get(), 1, 2));
+			if (UAConfig.COMMON.perchWeight.get() > 0) spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PERCH.get(), UAConfig.COMMON.perchWeight.get(), 1, 6));
 		}
 	}
 
 	public static boolean ravineMobCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if (((World) world).getDimensionKey() != World.OVERWORLD) return false;
+		if (((World) world).dimension() != World.OVERWORLD) return false;
 		return pos.getY() <= UAConfig.COMMON.deepOceanMobMaxHeight.get();
 	}
 
 	public static boolean isLukewarmOcean(ResourceLocation biome) {
-		return biome.equals(Biomes.LUKEWARM_OCEAN.getLocation()) || biome.equals(Biomes.DEEP_LUKEWARM_OCEAN.getLocation());
+		return biome.equals(Biomes.LUKEWARM_OCEAN.location()) || biome.equals(Biomes.DEEP_LUKEWARM_OCEAN.location());
 	}
 
 	public static boolean isWarmOcean(ResourceLocation biome) {
-		return biome.equals(Biomes.WARM_OCEAN.getLocation()) || biome.equals(Biomes.DEEP_WARM_OCEAN.getLocation());
+		return biome.equals(Biomes.WARM_OCEAN.location()) || biome.equals(Biomes.DEEP_WARM_OCEAN.location());
 	}
 }

@@ -14,8 +14,8 @@ public class PerchHideInSeagrassGoal extends RandomWalkingGoal {
 	}
 
 	@Override
-	public boolean shouldExecute() {
-		if (!this.mustUpdate && (this.creature.getIdleTime() >= 100 || this.creature.getRNG().nextInt(this.executionChance) != 0)) {
+	public boolean canUse() {
+		if (!this.forceTrigger && (this.mob.getNoActionTime() >= 100 || this.mob.getRandom().nextInt(this.interval) != 0)) {
 			return false;
 		}
 
@@ -23,11 +23,11 @@ public class PerchHideInSeagrassGoal extends RandomWalkingGoal {
 		if (vec3d == null) {
 			return false;
 		} else {
-			if (((PerchEntity) this.creature).isSeagrassNearby()) {
-				this.x = vec3d.x;
-				this.y = vec3d.y;
-				this.z = vec3d.z;
-				this.mustUpdate = false;
+			if (((PerchEntity) this.mob).isSeagrassNearby()) {
+				this.wantedX = vec3d.x;
+				this.wantedY = vec3d.y;
+				this.wantedZ = vec3d.z;
+				this.forceTrigger = false;
 				return true;
 			}
 		}
@@ -35,16 +35,16 @@ public class PerchHideInSeagrassGoal extends RandomWalkingGoal {
 	}
 
 	@Override
-	public boolean shouldContinueExecuting() {
-		return ((PerchEntity) this.creature).isSeagrassNearby() && super.shouldContinueExecuting();
+	public boolean canContinueToUse() {
+		return ((PerchEntity) this.mob).isSeagrassNearby() && super.canContinueToUse();
 	}
 
 
 	@Nullable
 	protected Vector3d getPosition() {
-		PerchEntity perch = (PerchEntity) this.creature;
+		PerchEntity perch = (PerchEntity) this.mob;
 		if (perch.isSeagrassNearby()) {
-			int seagrass = perch.getRNG().nextInt(perch.getNearbySeagrass().size());
+			int seagrass = perch.getRandom().nextInt(perch.getNearbySeagrass().size());
 			BlockPos pos = perch.getNearbySeagrass().get(seagrass);
 			return new Vector3d(pos.getX(), pos.getY(), pos.getZ());
 		}

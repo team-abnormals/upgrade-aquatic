@@ -17,6 +17,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.List;
 import java.util.function.Supplier;
 
+import net.minecraft.item.Item.Properties;
+
 public class PikeBucketItem extends MobBucketItem {
 
 	public PikeBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
@@ -25,11 +27,11 @@ public class PikeBucketItem extends MobBucketItem {
 	
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		CompoundNBT compoundnbt = stack.getTag();
 		if (compoundnbt != null && compoundnbt.contains("BucketVariantTag", 3)) {
 			PikeType type = PikeType.getTypeById(compoundnbt.getInt("BucketVariantTag"));
-			tooltip.add((new TranslationTextComponent(String.format("tooltip.upgrade_aquatic.%s_pike", type.toString().toLowerCase())).mergeStyle(TextFormatting.ITALIC, type.rarity.formatting)));
+			tooltip.add((new TranslationTextComponent(String.format("tooltip.upgrade_aquatic.%s_pike", type.toString().toLowerCase())).withStyle(TextFormatting.ITALIC, type.rarity.formatting)));
 		}
 	}
 	

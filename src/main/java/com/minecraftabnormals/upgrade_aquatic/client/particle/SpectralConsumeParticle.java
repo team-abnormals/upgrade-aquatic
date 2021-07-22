@@ -21,42 +21,42 @@ public class SpectralConsumeParticle extends SpriteTexturedParticle {
 
 	public SpectralConsumeParticle(IAnimatedSprite animatedSprite, ClientWorld world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
 		super(world, posX, posY, posZ, motionX, motionY, motionZ);
-		this.scale = this.particleScale = this.rand.nextFloat() * 0.6F + 0.2F;
-		this.particleRed = 1f;
-		this.particleGreen = 1f;
-		this.particleBlue = 1f;
-		this.motionX = motionX * (double)0.2F + (Math.random() * 2.0D - 1.0D) * (double)0.01F;
-		this.motionY = motionY * (double)0.2F + (Math.random() * 2.0D - 1.0D) * (double)0.01F;
-		this.motionZ = motionZ * (double)0.2F + (Math.random() * 2.0D - 1.0D) * (double)0.01F;
-		this.maxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
+		this.scale = this.quadSize = this.random.nextFloat() * 0.6F + 0.2F;
+		this.rCol = 1f;
+		this.gCol = 1f;
+		this.bCol = 1f;
+		this.xd = motionX * (double)0.2F + (Math.random() * 2.0D - 1.0D) * (double)0.01F;
+		this.yd = motionY * (double)0.2F + (Math.random() * 2.0D - 1.0D) * (double)0.01F;
+		this.zd = motionZ * (double)0.2F + (Math.random() * 2.0D - 1.0D) * (double)0.01F;
+		this.lifetime = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
 		this.animatedSprite = animatedSprite;
-		this.selectSpriteWithAge(animatedSprite);
+		this.setSpriteFromAge(animatedSprite);
 	}
 	
 	@Override
-	public void renderParticle(IVertexBuilder p_225606_1_, ActiveRenderInfo activeInfo, float partialTicks) {
-		Entity entity = activeInfo.getRenderViewEntity();
-        if (entity.ticksExisted >= this.lastTick + 5) {
+	public void render(IVertexBuilder p_225606_1_, ActiveRenderInfo activeInfo, float partialTicks) {
+		Entity entity = activeInfo.getEntity();
+        if (entity.tickCount >= this.lastTick + 5) {
             if (this.currentFrame == MAX_FRAME_ID) {
                 this.directionRight = false;
             } else if (currentFrame == 0) {
                 this.directionRight = true;
             }
             this.currentFrame = this.currentFrame + (directionRight ? 1 : -1);
-            this.lastTick = entity.ticksExisted;
+            this.lastTick = entity.tickCount;
         }
-        float f = ((float) this.age + partialTicks) / (float) this.maxAge;
-        this.particleScale = this.scale * (1f - f * f * 0.5f);
-		super.renderParticle(p_225606_1_, activeInfo, partialTicks);
+        float f = ((float) this.age + partialTicks) / (float) this.lifetime;
+        this.quadSize = this.scale * (1f - f * f * 0.5f);
+		super.render(p_225606_1_, activeInfo, partialTicks);
 	}
 	
 	@Override
     public void tick() {
 		super.tick();
-		this.prevParticleAngle = this.particleAngle;
+		this.oRoll = this.roll;
 		
 		if(this.isAlive()) {
-            this.selectSpriteWithAge(this.animatedSprite);
+            this.setSpriteFromAge(this.animatedSprite);
         }
     }
 	
@@ -66,10 +66,10 @@ public class SpectralConsumeParticle extends SpriteTexturedParticle {
     }
 	
 	@Override
-    public int getBrightnessForRender(float partialTick) {
-		float f = ((float) this.age + partialTick) / (float) this.maxAge;
+    public int getLightColor(float partialTick) {
+		float f = ((float) this.age + partialTick) / (float) this.lifetime;
 		f = MathHelper.clamp(f, 0f, 1f);
-		int i = super.getBrightnessForRender(partialTick);
+		int i = super.getLightColor(partialTick);
 		int j = i & 255;
 		int k = i >> 16 & 255;
 		j = j + (int) (f * 15f * 16f);
@@ -87,7 +87,7 @@ public class SpectralConsumeParticle extends SpriteTexturedParticle {
     	}
     	
         @Override
-        public Particle makeParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new SpectralConsumeParticle(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);
         }
 	}

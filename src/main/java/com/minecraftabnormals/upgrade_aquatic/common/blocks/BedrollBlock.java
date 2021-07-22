@@ -35,29 +35,29 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
 	public static final BooleanProperty OCCUPIED = BlockStateProperties.OCCUPIED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-	private static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
+	private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
 	private final DyeColor color;
 
 	public BedrollBlock(DyeColor colorIn, Block.Properties builder) {
 		super(colorIn, builder);
 		this.color = colorIn;
-		this.setDefaultState(this.stateContainer.getBaseState().with(PART, BedPart.FOOT).with(OCCUPIED, false).with(WATERLOGGED, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(PART, BedPart.FOOT).setValue(OCCUPIED, false).setValue(WATERLOGGED, false));
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(IBlockReader worldIn) {
+	public TileEntity newBlockEntity(IBlockReader worldIn) {
 		return new BedrollTileEntity(this.color);
 	}
 
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-		builder.add(HORIZONTAL_FACING, PART, OCCUPIED, WATERLOGGED);
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(FACING, PART, OCCUPIED, WATERLOGGED);
 	}
 	
 	@Override
-	public Fluid pickupFluid(IWorld worldIn, BlockPos pos, BlockState state) {
-		if (state.get(WATERLOGGED)) {
-			worldIn.setBlockState(pos, state.with(WATERLOGGED, false), 3);
+	public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
+		if (state.getValue(WATERLOGGED)) {
+			worldIn.setBlock(pos, state.setValue(WATERLOGGED, false), 3);
 			return Fluids.WATER;
 		} else {
 			return Fluids.EMPTY;
@@ -65,20 +65,20 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 	
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 	
 	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return fluidIn == Fluids.WATER;
 	}
 	
 	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-		if (fluidStateIn.getFluid() == Fluids.WATER) {
-			if (!worldIn.isRemote()) {
-				worldIn.setBlockState(pos, state.with(WATERLOGGED, true), 3);
-	            worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
+	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+		if (fluidStateIn.getType() == Fluids.WATER) {
+			if (!worldIn.isClientSide()) {
+				worldIn.setBlock(pos, state.setValue(WATERLOGGED, true), 3);
+	            worldIn.getLiquidTicks().scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
 			}
 			return true;
 		} else {
@@ -86,54 +86,54 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 		}
 	}
 	
-	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-		super.onFallenUpon(worldIn, pos, entityIn, fallDistance * 0.2F);
+	public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+		super.fallOn(worldIn, pos, entityIn, fallDistance * 0.2F);
 	}
 	
-	public void onLanded(IBlockReader worldIn, Entity entityIn) {
+	public void updateEntityAfterFallOn(IBlockReader worldIn, Entity entityIn) {
 		if (entityIn.isCrouching()) {
-			super.onLanded(worldIn, entityIn);
-		} else if (entityIn.getMotion().y < 0.0D) {
-			entityIn.setMotion(entityIn.getMotion().x, -entityIn.getMotion().y * (double) 0.66F, entityIn.getMotion().z);
+			super.updateEntityAfterFallOn(worldIn, entityIn);
+		} else if (entityIn.getDeltaMovement().y < 0.0D) {
+			entityIn.setDeltaMovement(entityIn.getDeltaMovement().x, -entityIn.getDeltaMovement().y * (double) 0.66F, entityIn.getDeltaMovement().z);
 			if (!(entityIn instanceof LivingEntity)) {
-				entityIn.setMotion(entityIn.getMotion().x, entityIn.getMotion().y * 0.3F, entityIn.getMotion().z);
+				entityIn.setDeltaMovement(entityIn.getDeltaMovement().x, entityIn.getDeltaMovement().y * 0.3F, entityIn.getDeltaMovement().z);
 			}
 		}
 	}
 	
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.getValue(WATERLOGGED)) {
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
-		if (facing == getDirectionToOther(stateIn.get(PART), stateIn.get(HORIZONTAL_FACING))) {
-			return facingState.isIn(this) && facingState.get(PART) != stateIn.get(PART) ? stateIn.with(OCCUPIED, facingState.get(OCCUPIED)) : Blocks.AIR.getDefaultState();
+		if (facing == getDirectionToOther(stateIn.getValue(PART), stateIn.getValue(FACING))) {
+			return facingState.is(this) && facingState.getValue(PART) != stateIn.getValue(PART) ? stateIn.setValue(OCCUPIED, facingState.getValue(OCCUPIED)) : Blocks.AIR.defaultBlockState();
 		} else {
-			return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+			return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		}
 	}
 	
-	public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			super.onReplaced(state, worldIn, pos, newState, isMoving);
-			worldIn.removeTileEntity(pos);
+			super.onRemove(state, worldIn, pos, newState, isMoving);
+			worldIn.removeBlockEntity(pos);
 		}
 	}
 
 	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!worldIn.isRemote && player.isCreative()) {
-			BedPart bedpart = state.get(PART);
+	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		if (!worldIn.isClientSide && player.isCreative()) {
+			BedPart bedpart = state.getValue(PART);
 			if (bedpart == BedPart.FOOT) {
-				BlockPos blockpos = pos.offset(getDirectionToOther(bedpart, state.get(HORIZONTAL_FACING)));
+				BlockPos blockpos = pos.relative(getDirectionToOther(bedpart, state.getValue(FACING)));
 				BlockState blockstate = worldIn.getBlockState(blockpos);
-				if (blockstate.getBlock() == this && blockstate.get(PART) == BedPart.HEAD) {
-					worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-					worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
+				if (blockstate.getBlock() == this && blockstate.getValue(PART) == BedPart.HEAD) {
+					worldIn.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
+					worldIn.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
 				}
 			}
 		}
-		super.onBlockHarvested(worldIn, pos, state, player);
+		super.playerWillDestroy(worldIn, pos, state, player);
 	}
 	
 	private static Direction getDirectionToOther(BedPart part, Direction direction) {
@@ -142,14 +142,14 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		Direction enumfacing = context.getPlacementHorizontalFacing();
-		BlockPos blockpos = context.getPos();
-		BlockPos blockpos1 = blockpos.offset(enumfacing);
+		Direction enumfacing = context.getHorizontalDirection();
+		BlockPos blockpos = context.getClickedPos();
+		BlockPos blockpos1 = blockpos.relative(enumfacing);
 		
-		if (context.getWorld().getBlockState(blockpos).getBlock() == Blocks.WATER) {
-			return context.getWorld().getBlockState(blockpos1).isReplaceable(context) ? this.getDefaultState().with(HORIZONTAL_FACING, enumfacing).with(WATERLOGGED, Boolean.TRUE) : null;
+		if (context.getLevel().getBlockState(blockpos).getBlock() == Blocks.WATER) {
+			return context.getLevel().getBlockState(blockpos1).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, enumfacing).setValue(WATERLOGGED, Boolean.TRUE) : null;
 		} else {
-			return context.getWorld().getBlockState(blockpos1).isReplaceable(context) ? this.getDefaultState().with(HORIZONTAL_FACING, enumfacing).with(WATERLOGGED, Boolean.FALSE) : null;
+			return context.getLevel().getBlockState(blockpos1).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, enumfacing).setValue(WATERLOGGED, Boolean.FALSE) : null;
 		}
 	}
 	
@@ -158,22 +158,22 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 		return SHAPE;
 	}
 	
-	public PushReaction getPushReaction(BlockState state) {
+	public PushReaction getPistonPushReaction(BlockState state) {
 		return PushReaction.DESTROY;
 	}
 	
-	public BlockRenderType getRenderType(BlockState state) {
+	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-		if (!worldIn.isRemote) {
-			BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING));
-			worldIn.setBlockState(blockpos, state.with(PART, BedPart.HEAD), 3);
-			worldIn.func_230547_a_(pos, Blocks.AIR);
-			state.updateNeighbours(worldIn, pos, 3);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(worldIn, pos, state, placer, stack);
+		if (!worldIn.isClientSide) {
+			BlockPos blockpos = pos.relative(state.getValue(FACING));
+			worldIn.setBlock(blockpos, state.setValue(PART, BedPart.HEAD), 3);
+			worldIn.blockUpdated(pos, Blocks.AIR);
+			state.updateNeighbourShapes(worldIn, pos, 3);
 		}
 	}
 	
@@ -183,8 +183,8 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public long getPositionRandom(BlockState state, BlockPos pos) {
-		BlockPos blockpos = pos.offset(state.get(HORIZONTAL_FACING), state.get(PART) == BedPart.HEAD ? 0 : 1);
-		return MathHelper.getCoordinateRandom(blockpos.getX(), pos.getY(), blockpos.getZ());
+	public long getSeed(BlockState state, BlockPos pos) {
+		BlockPos blockpos = pos.relative(state.getValue(FACING), state.getValue(PART) == BedPart.HEAD ? 0 : 1);
+		return MathHelper.getSeed(blockpos.getX(), pos.getY(), blockpos.getZ());
 	}
 }

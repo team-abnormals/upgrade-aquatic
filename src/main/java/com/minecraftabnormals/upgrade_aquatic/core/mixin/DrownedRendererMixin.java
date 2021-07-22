@@ -22,23 +22,23 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
 	 * @reason Replace the Drowned swimming animation
 	 */
 	@Overwrite
-	protected void applyRotations(DrownedEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-		if (entityLiving.isActualySwimming()) {
-			float swimAnimationTicks = entityLiving.getSwimAnimation(partialTicks);
+	protected void setupRotations(DrownedEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+		if (entityLiving.isVisuallySwimming()) {
+			float swimAnimationTicks = entityLiving.getSwimAmount(partialTicks);
 			if (entityLiving.isInWater()) {
-				super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-				float rotationPitchChange = entityLiving.isInWater() ? -90.0F - entityLiving.rotationPitch : -90.0F;
+				super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+				float rotationPitchChange = entityLiving.isInWater() ? -90.0F - entityLiving.xRot : -90.0F;
 				float rotationModifier = MathHelper.lerp(swimAnimationTicks, 0.0F, rotationPitchChange);
-				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(rotationModifier));
-				matrixStackIn.translate(0.0D, -1.0D, (double) 0.3F);
+				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(rotationModifier));
+				matrixStackIn.translate(0.0D, -1.0D, 0.3F);
 			} else {
-				super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+				super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
 			}
 		} else {
-			super.applyRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
-			float f = entityLiving.getSwimAnimation(partialTicks);
+			super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+			float f = entityLiving.getSwimAmount(partialTicks);
 			if (f > 0.0F) {
-				matrixStackIn.rotate(Vector3f.XP.rotationDegrees(MathHelper.lerp(f, entityLiving.rotationPitch, -10.0F - entityLiving.rotationPitch)));
+				matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(MathHelper.lerp(f, entityLiving.xRot, -10.0F - entityLiving.xRot)));
 			}
 		}
 	}

@@ -36,8 +36,8 @@ public class RenderOverlays {
 	@SubscribeEvent
 	public static void renderOverlays(RenderGameOverlayEvent event) {
 		if (event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE) {
-			int scaledWidth = MC.getMainWindow().getScaledWidth();
-			int scaledHeight = MC.getMainWindow().getScaledHeight();
+			int scaledWidth = MC.getWindow().getGuiScaledWidth();
+			int scaledHeight = MC.getWindow().getGuiScaledHeight();
 			ClientPlayerEntity player = MC.player;
 			StatisticsManager statisticsManager = player.getStats();
 			int sleepTime = statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
@@ -58,24 +58,24 @@ public class RenderOverlays {
 			} else if (sleepTime < 24000 * configuredTime) {
 				opacity = 0F;
 			}
-			if (MC.gameSettings.getPointOfView() == PointOfView.FIRST_PERSON && UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getEntityWorld().getDimensionKey() == World.OVERWORLD) {
+			if (MC.options.getCameraType() == PointOfView.FIRST_PERSON && UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getCommandSenderWorld().dimension() == World.OVERWORLD) {
 				MatrixStack stack = event.getMatrixStack();
 				
-				stack.push();
-				MC.textureManager.bindTexture(new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/insomnia.png"));
+				stack.pushPose();
+				MC.textureManager.bind(new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/insomnia.png"));
 				RenderSystem.enableBlend();
 				RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				RenderSystem.color3f(1.0F, 1.0F, 1.0F);
 				RenderSystem.color4f(1.0F, 1.0F, 1.0F, opacity);
 				Tessellator tessellator = Tessellator.getInstance();
-				BufferBuilder bufferbuilder = tessellator.getBuffer();
+				BufferBuilder bufferbuilder = tessellator.getBuilder();
 				bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-				bufferbuilder.pos(0.0D, scaledHeight, -90.0D).tex(0.0F, 1.0F).endVertex();
-				bufferbuilder.pos(scaledWidth, scaledHeight, -90.0D).tex(1.0F, 1.0F).endVertex();
-				bufferbuilder.pos(scaledWidth, 0.0D, -90.0D).tex(1.0F, 0.0F).endVertex();
-				bufferbuilder.pos(0.0D, 0.0D, -90.0D).tex(0.0F, 0.0F).endVertex();
-				tessellator.draw();
-				stack.pop();
+				bufferbuilder.vertex(0.0D, scaledHeight, -90.0D).uv(0.0F, 1.0F).endVertex();
+				bufferbuilder.vertex(scaledWidth, scaledHeight, -90.0D).uv(1.0F, 1.0F).endVertex();
+				bufferbuilder.vertex(scaledWidth, 0.0D, -90.0D).uv(1.0F, 0.0F).endVertex();
+				bufferbuilder.vertex(0.0D, 0.0D, -90.0D).uv(0.0F, 0.0F).endVertex();
+				tessellator.end();
+				stack.popPose();
 			}
 		}
 	}
@@ -83,13 +83,13 @@ public class RenderOverlays {
 	@SubscribeEvent
 	public static void renderScuteOverAir(RenderGameOverlayEvent.Pre event) {
 		if (event.getType() == RenderGameOverlayEvent.ElementType.AIR) {
-			int scaledWidth = MC.getMainWindow().getScaledWidth();
-			int scaledHeight = MC.getMainWindow().getScaledHeight();
+			int scaledWidth = MC.getWindow().getGuiScaledWidth();
+			int scaledHeight = MC.getWindow().getGuiScaledHeight();
 			ClientPlayerEntity player = MC.player;
-			boolean inWater = player.areEyesInFluid(FluidTags.WATER);
+			boolean inWater = player.isEyeInFluid(FluidTags.WATER);
 			if (inWater) {
 				ItemStack turtleHelmet = ItemStack.EMPTY;
-				for (ItemStack stack : player.getArmorInventoryList()) {
+				for (ItemStack stack : player.getArmorSlots()) {
 					if (stack.getItem() == Items.TURTLE_HELMET) {
 						turtleHelmet = stack;
 					}
@@ -99,29 +99,29 @@ public class RenderOverlays {
 					event.setCanceled(true);
 					
 					MatrixStack stack = event.getMatrixStack();
-					stack.push();
+					stack.pushPose();
 					RenderSystem.enableBlend();
 					int left = scaledWidth / 2 + 91;
 					int top = scaledHeight - ForgeIngameGui.right_height;
-					int durability = turtleHelmet.getDamage();
+					int durability = turtleHelmet.getDamageValue();
 					int maxDurability = turtleHelmet.getMaxDamage();
 					
-					MC.textureManager.bindTexture(new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/scute_bubble_depleted.png"));
+					MC.textureManager.bind(new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/scute_bubble_depleted.png"));
 					for (int i = 0; i < 10; i++) {
 						int l = left - (i * 8) - 9;
 						int l2 = l + 9;
 						int t = top;
 						int t2 = t + 9;
 						Tessellator tessellator = Tessellator.getInstance();
-						BufferBuilder bufferbuilder = tessellator.getBuffer();
+						BufferBuilder bufferbuilder = tessellator.getBuilder();
 						bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-						bufferbuilder.pos(l, t2, 0).tex(0, 1).endVertex();
-						bufferbuilder.pos(l2, t2, 0).tex(1, 1).endVertex();
-						bufferbuilder.pos(l2, t, 0).tex(1, 0).endVertex();
-						bufferbuilder.pos(l, t, 0).tex(0, 0).endVertex();
-						tessellator.draw();
+						bufferbuilder.vertex(l, t2, 0).uv(0, 1).endVertex();
+						bufferbuilder.vertex(l2, t2, 0).uv(1, 1).endVertex();
+						bufferbuilder.vertex(l2, t, 0).uv(1, 0).endVertex();
+						bufferbuilder.vertex(l, t, 0).uv(0, 0).endVertex();
+						tessellator.end();
 					}
-					MC.textureManager.bindTexture(new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/scute_bubble.png"));
+					MC.textureManager.bind(new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/scute_bubble.png"));
 					double amount = MathHelper.clamp(10 - Math.floor((double) durability / maxDurability * 10.0), 1, 10);
 					for (int i = 0; i < amount; i++) {
 						int l = left - (i * 8) - 9;
@@ -129,23 +129,23 @@ public class RenderOverlays {
 						int t = top;
 						int t2 = t + 9;
 						Tessellator tessellator = Tessellator.getInstance();
-						BufferBuilder bufferbuilder = tessellator.getBuffer();
+						BufferBuilder bufferbuilder = tessellator.getBuilder();
 						bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-						bufferbuilder.pos(l, t2, 0).tex(0, 1).endVertex();
-						bufferbuilder.pos(l2, t2, 0).tex(1, 1).endVertex();
-						bufferbuilder.pos(l2, t, 0).tex(1, 0).endVertex();
-						bufferbuilder.pos(l, t, 0).tex(0, 0).endVertex();
-						tessellator.draw();
+						bufferbuilder.vertex(l, t2, 0).uv(0, 1).endVertex();
+						bufferbuilder.vertex(l2, t2, 0).uv(1, 1).endVertex();
+						bufferbuilder.vertex(l2, t, 0).uv(1, 0).endVertex();
+						bufferbuilder.vertex(l, t, 0).uv(0, 0).endVertex();
+						tessellator.end();
 					}
 					ForgeIngameGui.right_height += 10;
 					
 					RenderSystem.disableBlend();
-					stack.pop();
+					stack.popPose();
 				}
 			}
 		}
-		if (event.getType() == ElementType.TEXT && MC.player.isPassenger() && MC.player.getRidingEntity() instanceof ThrasherEntity && MC.ingameGUI.overlayMessage.getString().equals(I18n.format("mount.onboard", I18n.format("key.keyboard.left.shift")))) {
-			MC.ingameGUI.setOverlayMessage(new StringTextComponent(""), false);
+		if (event.getType() == ElementType.TEXT && MC.player.isPassenger() && MC.player.getVehicle() instanceof ThrasherEntity && MC.gui.overlayMessageString.getString().equals(I18n.get("mount.onboard", I18n.get("key.keyboard.left.shift")))) {
+			MC.gui.setOverlayMessage(new StringTextComponent(""), false);
 		}
 	}
 }

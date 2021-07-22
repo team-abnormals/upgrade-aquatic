@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import net.minecraft.item.Item.Properties;
+
 public class JellyfishBucketItem extends BucketItem {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TROPICAL_FISH_BUCKET);
 
@@ -39,7 +41,7 @@ public class JellyfishBucketItem extends BucketItem {
 		super(supplier, builder);
 	}
 
-	public void onLiquidPlaced(World worldIn, ItemStack stack, BlockPos pos) {
+	public void checkExtraContent(World worldIn, ItemStack stack, BlockPos pos) {
 		if (worldIn instanceof ServerWorld) {
 			this.placeEntity((ServerWorld) worldIn, stack, pos);
 		}
@@ -88,14 +90,14 @@ public class JellyfishBucketItem extends BucketItem {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		CompoundNBT compoundnbt = stack.getTag();
 		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 			AbstractJellyfishEntity jellyfish = this.getEntityInStack(stack, worldIn, null);
 			
 			if(jellyfish != null) {
 				TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
-				tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + jellyfish.getBucketName() + "_jellyfish").mergeStyle(atextformatting)));
+				tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + jellyfish.getBucketName() + "_jellyfish").withStyle(atextformatting)));
 				
 				tooltip.add(jellyfish.getYieldingTorchMessage());
 			}
@@ -103,7 +105,7 @@ public class JellyfishBucketItem extends BucketItem {
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this, group, items);
 	}
 }

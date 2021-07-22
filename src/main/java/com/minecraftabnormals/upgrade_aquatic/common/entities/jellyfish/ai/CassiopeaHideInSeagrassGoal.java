@@ -7,6 +7,8 @@ import net.minecraft.tags.FluidTags;
 
 import java.util.EnumSet;
 
+import net.minecraft.entity.ai.goal.Goal.Flag;
+
 /**
  * @author SmellyModder(Luke Tonon)
  */
@@ -17,19 +19,19 @@ public class CassiopeaHideInSeagrassGoal extends Goal {
 
 	public CassiopeaHideInSeagrassGoal(CassiopeaJellyfishEntity jellyfish) {
 		this.jellyfish = jellyfish;
-		this.setMutexFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));
+		this.setFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));
 	}
 
 	@Override
-	public boolean shouldExecute() {
-		return this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.isInSeagrass() && !this.jellyfish.hasHideCooldown();
+	public boolean canUse() {
+		return this.jellyfish.isEyeInFluid(FluidTags.WATER) && this.isInSeagrass() && !this.jellyfish.hasHideCooldown();
 	}
 
 	@Override
-	public void startExecuting() {
+	public void start() {
 		this.ticksPassed = 0;
-		this.ticksTillEnd = this.jellyfish.getRNG().nextInt(40) + 80;
-		this.jellyfish.hideCooldown = this.jellyfish.getRNG().nextInt(200) + 200;
+		this.ticksTillEnd = this.jellyfish.getRandom().nextInt(40) + 80;
+		this.jellyfish.hideCooldown = this.jellyfish.getRandom().nextInt(200) + 200;
 	}
 
 	@Override
@@ -38,11 +40,11 @@ public class CassiopeaHideInSeagrassGoal extends Goal {
 	}
 
 	@Override
-	public boolean shouldContinueExecuting() {
-		return this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.isInSeagrass() && this.ticksPassed < this.ticksTillEnd;
+	public boolean canContinueToUse() {
+		return this.jellyfish.isEyeInFluid(FluidTags.WATER) && this.isInSeagrass() && this.ticksPassed < this.ticksTillEnd;
 	}
 
 	private boolean isInSeagrass() {
-		return this.jellyfish.getBlockState().getBlock() == Blocks.SEAGRASS || this.jellyfish.getBlockState().getBlock() == Blocks.TALL_SEAGRASS;
+		return this.jellyfish.getFeetBlockState().getBlock() == Blocks.SEAGRASS || this.jellyfish.getFeetBlockState().getBlock() == Blocks.TALL_SEAGRASS;
 	}
 }

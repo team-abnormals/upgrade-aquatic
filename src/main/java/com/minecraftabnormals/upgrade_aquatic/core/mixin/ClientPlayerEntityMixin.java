@@ -18,9 +18,9 @@ public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
 		super(p_i50991_1_, p_i50991_2_);
 	}
 
-	@Inject(at = @At(shift = Shift.AFTER, value = "HEAD"), method = "updateRidden()V")
+	@Inject(at = @At(shift = Shift.AFTER, value = "HEAD"), method = "rideTick()V")
 	private void tempFixClientDismount(CallbackInfo info) {
-		if (this.wantsToStopRiding() && this.isPassenger()) Minecraft.getInstance().player.movementInput.sneaking = false;
+		if (this.wantsToStopRiding() && this.isPassenger()) Minecraft.getInstance().player.input.shiftKeyDown = false;
 	}
 	
 }

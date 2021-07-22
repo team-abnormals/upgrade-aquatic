@@ -15,10 +15,9 @@ public final class EntityMixin {
 	private void preventThrasherSuffocationDamage(DamageSource source, CallbackInfoReturnable<Boolean> info) {
 		if (source == DamageSource.IN_WALL) {
 			Entity entity = ((Entity) (Object) this);
-			if (entity.isAlive() && entity.isEntityInsideOpaqueBlock() && entity.getRidingEntity() instanceof ThrasherEntity) {
+			if (entity.isAlive() && entity.isInWall() && entity.getVehicle() instanceof ThrasherEntity) {
 				info.setReturnValue(true);
 			}
 		}
 	}
-
 }

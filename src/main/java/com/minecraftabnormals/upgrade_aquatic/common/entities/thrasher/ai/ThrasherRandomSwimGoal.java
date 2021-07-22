@@ -17,13 +17,13 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 		this.thrasher = thrasher;
 	}
 	
-	public boolean shouldExecute() {
-		if(!this.mustUpdate) {
-			if(this.thrasher.getIdleTime() >= 100) {
+	public boolean canUse() {
+		if(!this.forceTrigger) {
+			if(this.thrasher.getNoActionTime() >= 100) {
 				return false;
 			}
 
-			if(this.thrasher.getRNG().nextInt(this.executionChance) != 0) {
+			if(this.thrasher.getRandom().nextInt(this.interval) != 0) {
 				return false;
 			}
 		}
@@ -32,26 +32,26 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 		if(vec3d == null) {
 			return false;
 		} else {
-			this.x = vec3d.x;
-			this.y = vec3d.y;
-			this.z = vec3d.z;
-			this.mustUpdate = false;
+			this.wantedX = vec3d.x;
+			this.wantedY = vec3d.y;
+			this.wantedZ = vec3d.z;
+			this.forceTrigger = false;
 			return true;
 	    }
 	}
 	
 	@Override
-	public boolean shouldContinueExecuting() {
-		return super.shouldContinueExecuting();
+	public boolean canContinueToUse() {
+		return super.canContinueToUse();
 	}
 	
 	@Nullable
 	@Override
 	protected Vector3d getPosition() {
 		//Tries to go deep when it has an entity in its mouth
-		Vector3d vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.creature, 15, 8, !this.thrasher.getPassengers().isEmpty());
+		Vector3d vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 15, 8, !this.thrasher.getPassengers().isEmpty());
 		
-		for(int i = 0; vec3d != null && !this.creature.world.getBlockState(new BlockPos(vec3d)).allowsMovement(this.creature.world, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.creature, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
+		for(int i = 0; vec3d != null && !this.mob.level.getBlockState(new BlockPos(vec3d)).isPathfindable(this.mob.level, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
 			;
 		}
 		

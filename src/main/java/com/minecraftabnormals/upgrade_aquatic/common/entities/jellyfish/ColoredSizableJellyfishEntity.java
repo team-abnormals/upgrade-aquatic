@@ -20,8 +20,8 @@ import java.util.Random;
 import java.util.TreeMap;
 
 public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEntity implements IAgeableEntity {
-	protected static final DataParameter<Integer> COLOR = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.VARINT);
-	protected static final DataParameter<Float> SIZE = EntityDataManager.createKey(ColoredSizableJellyfishEntity.class, DataSerializers.FLOAT);
+	protected static final DataParameter<Integer> COLOR = EntityDataManager.defineId(ColoredSizableJellyfishEntity.class, DataSerializers.INT);
+	protected static final DataParameter<Float> SIZE = EntityDataManager.defineId(ColoredSizableJellyfishEntity.class, DataSerializers.FLOAT);
 	private static final JellyfishSizeMap NATURAL_SIZES = new JellyfishSizeMap(new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34)));
 	private final ColoredSizableBucketProcessor bucketProcessor;
 
@@ -31,40 +31,40 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	}
 
 	@Override
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(COLOR, 0);
-		this.dataManager.register(SIZE, this.getDefaultSize());
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(COLOR, 0);
+		this.entityData.define(SIZE, this.getDefaultSize());
 	}
 
 	@Override
-	public void notifyDataManagerChange(DataParameter<?> key) {
-		super.notifyDataManagerChange(key);
+	public void onSyncedDataUpdated(DataParameter<?> key) {
+		super.onSyncedDataUpdated(key);
 		if (SIZE.equals(key)) {
-			this.recalculateSize();
+			this.refreshDimensions();
 		}
 	}
 
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
+	public void addAdditionalSaveData(CompoundNBT compound) {
+		super.addAdditionalSaveData(compound);
 		compound.putInt("JellyColor", this.getColor());
 		compound.putFloat("Size", this.getSize());
 	}
 
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
+	public void readAdditionalSaveData(CompoundNBT compound) {
+		super.readAdditionalSaveData(compound);
 		this.setColor(compound.getInt("JellyColor"));
 		this.setSize(compound.getFloat("Size"), false);
 	}
 
 	@Override
-	public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
-		spawnDataIn = super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+	public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		boolean updateSize = false;
 
-		Random rand = this.getRNG();
+		Random rand = this.getRandom();
 		int color = rand.nextInt(3);
 		float size = this.getNaturalSizeMap().randomSize(rand);
 		if (!(dataTag != null && this.isFromBucket())) {
@@ -85,11 +85,11 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	}
 
 	public int getColor() {
-		return this.dataManager.get(COLOR);
+		return this.entityData.get(COLOR);
 	}
 
 	public void setColor(int color) {
-		this.dataManager.set(COLOR, color);
+		this.entityData.set(COLOR, color);
 	}
 
 	public JellyfishSizeMap getNaturalSizeMap() {
@@ -97,7 +97,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	}
 
 	public void setSize(float size, boolean updateHealth) {
-		this.dataManager.set(SIZE, size);
+		this.entityData.set(SIZE, size);
 		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.getHealthSizeMultiplier() * size);
 		if (updateHealth) {
 			this.setHealth(this.getMaxHealth());
@@ -105,7 +105,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	}
 
 	public float getSize() {
-		return this.dataManager.get(SIZE);
+		return this.entityData.get(SIZE);
 	}
 
 	@Override

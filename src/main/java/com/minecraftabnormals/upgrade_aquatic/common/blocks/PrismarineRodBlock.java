@@ -5,6 +5,8 @@ import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class PrismarineRodBlock extends RotatedPillarBlock {
 
 	public PrismarineRodBlock(Properties properties) {

@@ -9,47 +9,49 @@ import net.minecraft.tags.ItemTags;
 
 import java.util.EnumSet;
 
+import net.minecraft.entity.ai.goal.Goal.Flag;
+
 public final class PikeTemptGoal extends Goal {
-	private static final EntityPredicate CAN_FOLLOW = new EntityPredicate().setDistance(10.0D).allowFriendlyFire().allowInvulnerable();
+	private static final EntityPredicate CAN_FOLLOW = new EntityPredicate().range(10.0D).allowSameTeam().allowInvulnerable();
 	private final PikeEntity pike;
 	private PlayerEntity tempter;
 	private int cooldown;
 
 	public PikeTemptGoal(PikeEntity pike) {
 		this.pike = pike;
-		this.setMutexFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+		this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
 	}
 
-	public boolean shouldExecute() {
+	public boolean canUse() {
 		if (this.cooldown > 0) {
 			this.cooldown--;
             return false;
 		} else {
-			this.tempter = this.pike.world.getClosestPlayer(CAN_FOLLOW, this.pike);
+			this.tempter = this.pike.level.getNearestPlayer(CAN_FOLLOW, this.pike);
 			if (this.tempter == null) {
 				return false;
 			} else {
-				return this.isTemptedBy(this.tempter.getHeldItemMainhand()) || this.isTemptedBy(this.tempter.getHeldItemOffhand());
+				return this.isTemptedBy(this.tempter.getMainHandItem()) || this.isTemptedBy(this.tempter.getOffhandItem());
 			}
 		}
 	}
 
-	public void resetTask() {
+	public void stop() {
 		this.tempter = null;
-		this.pike.getNavigator().clearPath();
+		this.pike.getNavigation().stop();
 		this.cooldown = 100;
 	}
 
 	public void tick() {
-		this.pike.getLookController().setLookPositionWithEntity(this.tempter, this.pike.getHorizontalFaceSpeed() + 20.0F, this.pike.getVerticalFaceSpeed());
-		if (this.pike.getDistanceSq(this.tempter) < 6.25D) {
-			this.pike.getNavigator().clearPath();
+		this.pike.getLookControl().setLookAt(this.tempter, this.pike.getMaxHeadYRot() + 20.0F, this.pike.getMaxHeadXRot());
+		if (this.pike.distanceToSqr(this.tempter) < 6.25D) {
+			this.pike.getNavigation().stop();
 		} else {
-			this.pike.getNavigator().tryMoveToEntityLiving(this.tempter, 1.0F);
+			this.pike.getNavigation().moveTo(this.tempter, 1.0F);
 		}
 	}
       
 	private boolean isTemptedBy(ItemStack stack) {
-		return stack.getItem().isIn(ItemTags.FISHES);
+		return stack.getItem().is(ItemTags.FISHES);
 	}
 }

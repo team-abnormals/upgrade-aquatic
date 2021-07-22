@@ -16,23 +16,23 @@ import net.minecraft.world.World;
 
 public class UluluEntity extends MobEntity {
 
-	private static final DataParameter<Integer> ULULU_SIZE = EntityDataManager.createKey(UluluEntity.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> ULULU_SIZE = EntityDataManager.defineId(UluluEntity.class, DataSerializers.INT);
 
 	public float squishFactor;
 	public float prevSquishFactor;
 
 	public UluluEntity(EntityType<? extends UluluEntity> type, World worldIn) {
 		super(type, worldIn);
-		this.moveController = new UluluEntity.MoveHelperController(this);
+		this.moveControl = new UluluEntity.MoveHelperController(this);
 	}
 
 	public int getUluluSize() {
-		return this.dataManager.get(ULULU_SIZE);
+		return this.entityData.get(ULULU_SIZE);
 	}
 
-	protected void registerData() {
-		super.registerData();
-		this.dataManager.register(ULULU_SIZE, 1);
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(ULULU_SIZE, 1);
 	}
 
 	public boolean isSmallUlulu() {
@@ -40,16 +40,16 @@ public class UluluEntity extends MobEntity {
 	}
 
 	@Override
-	protected ResourceLocation getLootTable() {
-	      return this.isSmallUlulu() ? LootTables.EMPTY : this.getType().getLootTable();
+	protected ResourceLocation getDefaultLootTable() {
+	      return this.isSmallUlulu() ? LootTables.EMPTY : this.getType().getDefaultLootTable();
 	   }
 	
-	public EntitySize getSize(Pose poseIn) {
-	      return super.getSize(poseIn);
+	public EntitySize getDimensions(Pose poseIn) {
+	      return super.getDimensions(poseIn);
 	   }
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 18.0D);
+		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 18.0D);
 	}
 
 	static class MoveHelperController extends MovementController {

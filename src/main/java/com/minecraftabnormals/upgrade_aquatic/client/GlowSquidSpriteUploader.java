@@ -29,7 +29,7 @@ public class GlowSquidSpriteUploader extends SpriteUploader {
 	}
 
 	@Override
-	protected Stream<ResourceLocation> getResourceLocations() {
+	protected Stream<ResourceLocation> getResourcesToLoad() {
 		return Stream.of(SQUID_SPRITE, GLOW_SPRITE);
 	}
 
@@ -43,7 +43,7 @@ public class GlowSquidSpriteUploader extends SpriteUploader {
 			Minecraft minecraft = Minecraft.getInstance();
 			IResourceManager resourceManager = minecraft.getResourceManager();
 			if (resourceManager instanceof IReloadableResourceManager) {
-				((IReloadableResourceManager) resourceManager).addReloadListener(uploader = new GlowSquidSpriteUploader(minecraft.textureManager, ATLAS_LOCATION, "entity/glow_squid"));
+				((IReloadableResourceManager) resourceManager).registerReloadListener(uploader = new GlowSquidSpriteUploader(minecraft.textureManager, ATLAS_LOCATION, "entity/glow_squid"));
 			}
 		});
 	}

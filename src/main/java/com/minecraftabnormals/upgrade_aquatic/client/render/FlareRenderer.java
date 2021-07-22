@@ -21,21 +21,21 @@ public class FlareRenderer extends MobRenderer<FlareEntity, FlareModel<FlareEnti
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(FlareEntity entity) {
+	public ResourceLocation getTextureLocation(FlareEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/flare/flare.png");
 	}
 	
 	@Override
-	protected void preRenderCallback(FlareEntity flare, MatrixStack matrixStack, float partialTickTime) {
+	protected void scale(FlareEntity flare, MatrixStack matrixStack, float partialTickTime) {
 		int i = flare.getPhantomSize();
 		float f = 1.0F + 0.15F * (float)i;
 		matrixStack.scale(f, f, f);
 	}
 	
 	@Override
-	protected void applyRotations(FlareEntity flare, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(flare, matrixStack, ageInTicks, rotationYaw, partialTicks);
-		matrixStack.rotate(Vector3f.XP.rotationDegrees(flare.rotationPitch));
+	protected void setupRotations(FlareEntity flare, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.setupRotations(flare, matrixStack, ageInTicks, rotationYaw, partialTicks);
+		matrixStack.mulPose(Vector3f.XP.rotationDegrees(flare.xRot));
 	}
 
 }

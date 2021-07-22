@@ -8,6 +8,8 @@ import net.minecraft.world.World;
 
 import java.util.EnumSet;
 
+import net.minecraft.entity.ai.goal.Goal.Flag;
+
 public class CassiopeaJellyfishFlipGoal extends Goal {
 	private final CassiopeaJellyfishEntity jellyfish;
 	private World world;
@@ -15,16 +17,16 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 
 	public CassiopeaJellyfishFlipGoal(CassiopeaJellyfishEntity jellyfish) {
 		this.jellyfish = jellyfish;
-		this.world = jellyfish.world;
-		this.setMutexFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));
+		this.world = jellyfish.level;
+		this.setFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));
 	}
 
 	@Override
-	public boolean shouldExecute() {
-		if (this.jellyfish.getRNG().nextFloat() < 0.025F && this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.world.isDaytime()) {
-			BlockPos pos = this.jellyfish.getPosition();
+	public boolean canUse() {
+		if (this.jellyfish.getRandom().nextFloat() < 0.025F && this.jellyfish.isEyeInFluid(FluidTags.WATER) && this.world.isDay()) {
+			BlockPos pos = this.jellyfish.blockPosition();
 			if (pos.getY() >= this.world.getSeaLevel() - 2) {
-				if (this.world.getDimensionType().hasSkyLight() && this.world.canBlockSeeSky(pos)) {
+				if (this.world.dimensionType().hasSkyLight() && this.world.canSeeSkyFromBelowWater(pos)) {
 					return !this.jellyfish.hasUpsideDownCooldown() && !this.jellyfish.isOnGround();
 				}
 			}
@@ -33,9 +35,9 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 	}
 
 	@Override
-	public void startExecuting() {
+	public void start() {
 		this.ticksPassed = 0;
-		this.jellyfish.upsideDownCooldown = this.jellyfish.getRNG().nextInt(1200) + 1600;
+		this.jellyfish.upsideDownCooldown = this.jellyfish.getRandom().nextInt(1200) + 1600;
 		this.jellyfish.lockedRotations[1] = 180.0F;
 	}
 
@@ -45,7 +47,7 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 	}
 
 	@Override
-	public boolean shouldContinueExecuting() {
-		return this.ticksPassed < 40 && !this.jellyfish.isOnGround() && this.jellyfish.areEyesInFluid(FluidTags.WATER) && this.world.isDaytime() && this.jellyfish.getPosition().getY() >= this.world.getSeaLevel() - 4;
+	public boolean canContinueToUse() {
+		return this.ticksPassed < 40 && !this.jellyfish.isOnGround() && this.jellyfish.isEyeInFluid(FluidTags.WATER) && this.world.isDay() && this.jellyfish.blockPosition().getY() >= this.world.getSeaLevel() - 4;
 	}
 }

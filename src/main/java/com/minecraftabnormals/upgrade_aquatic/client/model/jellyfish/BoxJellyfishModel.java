@@ -23,40 +23,40 @@ public class BoxJellyfishModel<E extends BoxJellyfishEntity> extends EndimatorEn
     public EndimatorModelRenderer tentacleSW;
 
     public BoxJellyfishModel() {
-        this.textureWidth = 48;
-        this.textureHeight = 42;
+        this.texWidth = 48;
+        this.texHeight = 42;
         this.tentacleN = new EndimatorModelRenderer(this, 0, 22);
-        this.tentacleN.setRotationPoint(0.0F, 5.0F, -3.0F);
+        this.tentacleN.setPos(0.0F, 5.0F, -3.0F);
         this.tentacleN.addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1, 0.0F);
         this.setRotateAngle(tentacleN, 0.0F, 3.141592653589793F, 0.0F);
         this.tentacleNW = new EndimatorModelRenderer(this, 0, 22);
-        this.tentacleNW.setRotationPoint(3.0F, 5.0F, -3.0F);
+        this.tentacleNW.setPos(3.0F, 5.0F, -3.0F);
         this.tentacleNW.addBox(-0.5F, 0.0F, -0.5F, 1, 16, 1, 0.0F);
         this.setRotateAngle(tentacleNW, 0.0F, 2.356194490192345F, 0.0F);
         this.tentacleW = new EndimatorModelRenderer(this, 0, 22);
-        this.tentacleW.setRotationPoint(3.0F, 5.0F, 0.0F);
+        this.tentacleW.setPos(3.0F, 5.0F, 0.0F);
         this.tentacleW.addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1, 0.0F);
         this.setRotateAngle(tentacleW, 0.0F, 1.5707963267948966F, 0.0F);
         this.tentacleE = new EndimatorModelRenderer(this, 0, 22);
-        this.tentacleE.setRotationPoint(-3.0F, 5.0F, 0.0F);
+        this.tentacleE.setPos(-3.0F, 5.0F, 0.0F);
         this.tentacleE.addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1, 0.0F);
         this.setRotateAngle(tentacleE, 0.0F, 1.5707963267948966F, 0.0F);
         this.tentacleS = new EndimatorModelRenderer(this, 0, 22);
-        this.tentacleS.setRotationPoint(0.0F, 5.0F, 3.0F);
+        this.tentacleS.setPos(0.0F, 5.0F, 3.0F);
         this.tentacleS.addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1, 0.0F);
         this.tentacleNE = new EndimatorModelRenderer(this, 0, 22);
-        this.tentacleNE.setRotationPoint(-3.0F, 5.0F, -3.0F);
+        this.tentacleNE.setPos(-3.0F, 5.0F, -3.0F);
         this.tentacleNE.addBox(-0.5F, 0.0F, -0.5F, 1, 16, 1, 0.0F);
         this.setRotateAngle(tentacleNE, 0.0F, -2.356194490192345F, 0.0F);
         this.body = new EndimatorModelRenderer(this, 0, 0);
-        this.body.setRotationPoint(0.0F, 19.0F, 0.0F);
+        this.body.setPos(0.0F, 19.0F, 0.0F);
         this.body.addBox(-6.0F, -5.0F, -6.0F, 12, 10, 12, 0.0F);
         this.tentacleSE = new EndimatorModelRenderer(this, 0, 22);
-        this.tentacleSE.setRotationPoint(-3.0F, 5.0F, 3.0F);
+        this.tentacleSE.setPos(-3.0F, 5.0F, 3.0F);
         this.tentacleSE.addBox(-0.5F, 0.0F, -0.5F, 1, 16, 1, 0.0F);
         this.setRotateAngle(tentacleSE, 0.0F, 5.497787143782138F, 0.0F);
         this.tentacleSW = new EndimatorModelRenderer(this, 0, 22);
-        this.tentacleSW.setRotationPoint(3.0F, 5.0F, 3.0F);
+        this.tentacleSW.setPos(3.0F, 5.0F, 3.0F);
         this.tentacleSW.addBox(-0.5F, 0.0F, -0.5F, 1, 16, 1, 0.0F);
         this.setRotateAngle(tentacleSW, 0.0F, 0.7853981633974483F, 0.0F);
         this.body.addChild(this.tentacleN);
@@ -73,19 +73,19 @@ public class BoxJellyfishModel<E extends BoxJellyfishEntity> extends EndimatorEn
     
     
     @Override
-    public void render(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
     	this.animateModel(this.entity);
     	this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
     }
     
     @Override
-    public void setRotationAngles(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-    	super.setRotationAngles(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+    public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    	super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
     	this.revertBoxesToDefaultValues();
     	
     	float[] rotations = entity.getRotationController().getRotations(ClientInfo.getPartialTicks());
-    	this.body.rotateAngleY = (float) Math.toRadians(rotations[0]);
-    	this.body.rotateAngleX = (float) Math.toRadians(rotations[1]);
+    	this.body.yRot = (float) Math.toRadians(rotations[0]);
+    	this.body.xRot = (float) Math.toRadians(rotations[1]);
     }
     
     @Override
@@ -135,8 +135,8 @@ public class BoxJellyfishModel<E extends BoxJellyfishEntity> extends EndimatorEn
      * This is a helper function from Tabula to set the rotation of model parts
      */
     public void setRotateAngle(EndimatorModelRenderer EndimatorModelRenderer, float x, float y, float z) {
-        EndimatorModelRenderer.rotateAngleX = x;
-        EndimatorModelRenderer.rotateAngleY = y;
-        EndimatorModelRenderer.rotateAngleZ = z;
+        EndimatorModelRenderer.xRot = x;
+        EndimatorModelRenderer.yRot = y;
+        EndimatorModelRenderer.zRot = z;
     }
 }

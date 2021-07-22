@@ -9,51 +9,53 @@ import net.minecraft.util.math.vector.Vector3d;
 
 import java.util.EnumSet;
 
+import net.minecraft.entity.ai.goal.Goal.Flag;
+
 public class BoxJellyfishHuntGoal extends Goal {
 	private final BoxJellyfishEntity hunter;
 	private int noSightTicks;
 
 	public BoxJellyfishHuntGoal(BoxJellyfishEntity hunter) {
 		this.hunter = hunter;
-		this.setMutexFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+		this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
 	}
 
 	@Override
-	public boolean shouldExecute() {
-		LivingEntity target = this.hunter.getAttackTarget();
-		if (this.hunter.isInWater() && target != null && target.isInWater() && target.isAlive() && target.getDistance(this.hunter) <= 10) {
+	public boolean canUse() {
+		LivingEntity target = this.hunter.getTarget();
+		if (this.hunter.isInWater() && target != null && target.isInWater() && target.isAlive() && target.distanceTo(this.hunter) <= 10) {
 			return true;
 		} else if (target != null) {
-			this.hunter.setAttackTarget(null);
+			this.hunter.setTarget(null);
 		}
 		return false;
 	}
 
 	@Override
-	public boolean shouldContinueExecuting() {
-		return super.shouldContinueExecuting() && this.noSightTicks < 20;
+	public boolean canContinueToUse() {
+		return super.canContinueToUse() && this.noSightTicks < 20;
 	}
 
 	@Override
-	public void startExecuting() {
+	public void start() {
 		this.hunter.setHuntingCooldown();
 		this.noSightTicks = 0;
 	}
 
 	@Override
 	public void tick() {
-		LivingEntity target = this.hunter.getAttackTarget();
-		Vector3d distance = new Vector3d(target.getPosX() - this.hunter.getPosX(), target.getPosY() - this.hunter.getPosY(), target.getPosZ() - this.hunter.getPosZ());
+		LivingEntity target = this.hunter.getTarget();
+		Vector3d distance = new Vector3d(target.getX() - this.hunter.getX(), target.getY() - this.hunter.getY(), target.getZ() - this.hunter.getZ());
 
-		float pitch = -((float) (MathHelper.atan2(distance.getY(), MathHelper.sqrt(distance.getX() * distance.getX() + distance.getZ() * distance.getZ())) * (double) (180F / (float) Math.PI)));
-		float yaw = (float) (MathHelper.atan2(distance.getZ(), distance.getX()) * (double) (180F / (float) Math.PI)) - 90.0F;
+		float pitch = -((float) (MathHelper.atan2(distance.y(), MathHelper.sqrt(distance.x() * distance.x() + distance.z() * distance.z())) * (double) (180F / (float) Math.PI)));
+		float yaw = (float) (MathHelper.atan2(distance.z(), distance.x()) * (double) (180F / (float) Math.PI)) - 90.0F;
 
 		this.hunter.lockedRotations[0] = MathHelper.wrapDegrees(yaw);
 		this.hunter.lockedRotations[1] = MathHelper.wrapDegrees(pitch + 90.0F);
 
 		float[] rotations = this.hunter.getRotationController().getRotations(1.0F);
 
-		if (!this.hunter.canEntityBeSeen(target)) {
+		if (!this.hunter.canSee(target)) {
 			this.noSightTicks++;
 		}
 

@@ -20,12 +20,12 @@ public class GreatThrasherRenderer extends MobRenderer<GreatThrasherEntity, Thra
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(GreatThrasherEntity entity) {
+	public ResourceLocation getTextureLocation(GreatThrasherEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher.png");
 	}
 	
 	@Override
-	protected void preRenderCallback(GreatThrasherEntity thrasher, MatrixStack matrixStack, float partialTickTime) {
+	protected void scale(GreatThrasherEntity thrasher, MatrixStack matrixStack, float partialTickTime) {
 		float scale = 1.75F;
 		matrixStack.scale(scale, scale, scale);
 	}

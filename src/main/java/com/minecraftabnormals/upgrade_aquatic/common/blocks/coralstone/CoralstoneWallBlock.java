@@ -18,6 +18,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class CoralstoneWallBlock extends WallBlock {
 
@@ -34,22 +36,22 @@ public class CoralstoneWallBlock extends WallBlock {
 		}
 
 		for (int i = 0; i < 4; i++) {
-			BlockPos blockpos = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
+			BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 			UABlocks.CORALSTONE_WALL_CONVERSION_MAP.forEach((input, output) -> {
 				if (input.get() == worldIn.getBlockState(blockpos).getBlock()) {
-					worldIn.setBlockState(pos, BlockUtil.transferAllBlockStates(state, output.get().getDefaultState()), 2);
+					worldIn.setBlock(pos, BlockUtil.transferAllBlockStates(state, output.get().defaultBlockState()), 2);
 				}
 			});
 		}
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-		ItemStack stack = player.getHeldItem(hand);
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+		ItemStack stack = player.getItemInHand(hand);
 		if (stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_WALL.get()) {
-			world.playSound(null, pos, SoundEvents.ENTITY_MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
-			stack.damageItem(1, player, (entity) -> entity.sendBreakAnimation(hand));
-			world.setBlockState(pos, BlockUtil.transferAllBlockStates(state, UABlocks.CORALSTONE_WALL.get().getDefaultState()), 2);
+			world.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
+			stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(hand));
+			world.setBlock(pos, BlockUtil.transferAllBlockStates(state, UABlocks.CORALSTONE_WALL.get().defaultBlockState()), 2);
 			return ActionResultType.SUCCESS;
 		}
 		return ActionResultType.PASS;

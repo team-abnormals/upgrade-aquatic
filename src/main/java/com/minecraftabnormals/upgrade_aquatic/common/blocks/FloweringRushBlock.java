@@ -36,15 +36,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowable {
-	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+	private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.PEONY);
 
 	public FloweringRushBlock(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER).with(WATERLOGGED, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, false));
 	}
 	
 	@Override
@@ -53,99 +55,99 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 	}
 	
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HALF, WATERLOGGED);
 	}
 	
-	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
 		return false;
 	}
 	
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), 3);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
 	
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
-		return block.isIn(BlockTags.BAMBOO_PLANTABLE_ON);
+		return block.is(BlockTags.BAMBOO_PLANTABLE_ON);
 	}
 	
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		BlockState groundState = worldIn.getBlockState(currentPos.down());
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		BlockState groundState = worldIn.getBlockState(currentPos.below());
 		FluidState fluidState = state.getFluidState();
 		FluidState upperFluidState = state.getFluidState();
-		if(state.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+		if(state.getValue(WATERLOGGED)) {
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
-		if(state.get(HALF) == DoubleBlockHalf.LOWER) {
-			return fluidState.getLevel() >= 8 && this.isValidGround(groundState, worldIn, currentPos.down()) && worldIn.getBlockState(currentPos.up()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.up()).get(HALF) == DoubleBlockHalf.UPPER ? state : Blocks.AIR.getDefaultState();
+		if(state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+			return fluidState.getAmount() >= 8 && this.isValidGround(groundState, worldIn, currentPos.below()) && worldIn.getBlockState(currentPos.above()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.above()).getValue(HALF) == DoubleBlockHalf.UPPER ? state : Blocks.AIR.defaultBlockState();
 		} else {
-			return upperFluidState.isEmpty() && worldIn.getBlockState(currentPos.down()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.down()).get(HALF) == DoubleBlockHalf.LOWER ? state : Blocks.AIR.getDefaultState();
+			return upperFluidState.isEmpty() && worldIn.getBlockState(currentPos.below()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.below()).getValue(HALF) == DoubleBlockHalf.LOWER ? state : Blocks.AIR.defaultBlockState();
 		}
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		if(state.get(HALF) == DoubleBlockHalf.LOWER) {
-			BlockPos blockpos = pos.down();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		if(state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+			BlockPos blockpos = pos.below();
 			FluidState ifluidstate = worldIn.getFluidState(pos);
-			return worldIn.getBlockState(pos.up()).isAir() && this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos) && ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() >= 8;
+			return worldIn.getBlockState(pos.above()).isAir() && this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos) && ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() >= 8;
 		} else {
-			BlockState blockstate = worldIn.getBlockState(pos.down());
-			if(state.getBlock() != this) return super.isValidPosition(state, worldIn, pos);
-			return blockstate.getBlock() == this && blockstate.get(HALF) == DoubleBlockHalf.LOWER;
+			BlockState blockstate = worldIn.getBlockState(pos.below());
+			if(state.getBlock() != this) return super.canSurvive(state, worldIn, pos);
+			return blockstate.getBlock() == this && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER;
 		}
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		return super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
+		return super.getStateForPlacement(context).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
 	}
 	
 	@SuppressWarnings("deprecation")
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 	
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		spawnAsEntity(worldIn, pos, new ItemStack(this));
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		popResource(worldIn, pos, new ItemStack(this));
 	}
 	
 	@Override
-	public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
-		super.harvestBlock(worldIn, player, pos, Blocks.AIR.getDefaultState(), te, stack);
+	public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+		super.playerDestroy(worldIn, player, pos, Blocks.AIR.defaultBlockState(), te, stack);
 	}
 
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		DoubleBlockHalf doubleblockhalf = state.get(HALF);
-		BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
+	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
+		BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if(blockstate.getBlock() == this && blockstate.get(HALF) != doubleblockhalf) {
-			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
-			if(!worldIn.isRemote && !player.isCreative()) {
-				spawnDrops(state, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
-				spawnDrops(blockstate, worldIn, pos, (TileEntity)null, player, player.getHeldItemMainhand());
+		if(blockstate.getBlock() == this && blockstate.getValue(HALF) != doubleblockhalf) {
+			worldIn.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
+			if(!worldIn.isClientSide && !player.isCreative()) {
+				dropResources(state, worldIn, pos, (TileEntity)null, player, player.getMainHandItem());
+				dropResources(blockstate, worldIn, pos, (TileEntity)null, player, player.getMainHandItem());
 			}
-			if(blockstate.get(HALF) == DoubleBlockHalf.LOWER) {
+			if(blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
 				worldIn.destroyBlock(blockpos, false);
 			}
 		}
 
-		super.onBlockHarvested(worldIn, pos, state, player);
+		super.playerWillDestroy(worldIn, pos, state, player);
 	}
 	
 	public Block.OffsetType getOffsetType() {
@@ -153,12 +155,12 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public long getPositionRandom(BlockState state, BlockPos pos) {
-		return MathHelper.getCoordinateRandom(pos.getX(), pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+	public long getSeed(BlockState state, BlockPos pos) {
+		return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

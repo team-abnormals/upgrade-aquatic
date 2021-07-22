@@ -31,9 +31,9 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.func_233666_p_()
-				.createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D)
-				.createMutableAttribute(Attributes.MAX_HEALTH, 7.0D);
+		return MobEntity.createMobAttributes()
+				.add(Attributes.ATTACK_DAMAGE, 1.0D)
+				.add(Attributes.MAX_HEALTH, 7.0D);
 	}
 
 
@@ -50,13 +50,13 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 		if (this.healCooldown > 0) {
 			this.healCooldown--;
 		} else {
-			if (this.ticksExisted % 5 == 0) {
+			if (this.tickCount % 5 == 0) {
 				this.heal(0.5F);
 			}
 		}
 
 		if (this.prevHealth > this.getHealth()) {
-			this.healCooldown = this.getRNG().nextInt(40) + 20;
+			this.healCooldown = this.getRandom().nextInt(40) + 20;
 		}
 
 		this.prevHealth = this.getHealth();
@@ -72,14 +72,14 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	}
 
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
+	public void readAdditionalSaveData(CompoundNBT compound) {
+		super.readAdditionalSaveData(compound);
 		this.healCooldown = compound.getInt("HealCooldown");
 	}
 
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
+	public void addAdditionalSaveData(CompoundNBT compound) {
+		super.addAdditionalSaveData(compound);
 		compound.putInt("HealCooldown", this.healCooldown);
 	}
 
@@ -95,7 +95,7 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 
 	@Override
 	public JellyTorchType getJellyTorchType() {
-		return this.getRNG().nextFloat() < 0.75F ? JellyTorchType.WHITE : JellyTorchType.RED;
+		return this.getRandom().nextFloat() < 0.75F ? JellyTorchType.WHITE : JellyTorchType.RED;
 	}
 
 	@Override
@@ -112,15 +112,15 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	public ITextComponent getYieldingTorchMessage() {
 		JellyTorchType white = JellyTorchType.WHITE;
 		JellyTorchType red = JellyTorchType.RED;
-		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").mergeStyle(TextFormatting.GRAY))
-				.append((new TranslationTextComponent("tooltip.upgrade_aquatic." + white.toString().toLowerCase() + "_jelly_torch")).mergeStyle(white.color))
-				.append(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").mergeStyle(TextFormatting.GRAY))
-				.append((new TranslationTextComponent("tooltip.upgrade_aquatic." + red.toString().toLowerCase() + "_jelly_torch")).mergeStyle(red.color))
+		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(TextFormatting.GRAY))
+				.append((new TranslationTextComponent("tooltip.upgrade_aquatic." + white.toString().toLowerCase() + "_jelly_torch")).withStyle(white.color))
+				.append(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(TextFormatting.GRAY))
+				.append((new TranslationTextComponent("tooltip.upgrade_aquatic." + red.toString().toLowerCase() + "_jelly_torch")).withStyle(red.color))
 				;
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnClusterSize() {
 		return 3;
 	}
 

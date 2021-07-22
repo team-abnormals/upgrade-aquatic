@@ -28,7 +28,7 @@ public class AnvilEvents {
 			int j = 0;
 			int k = 0;
 			boolean flag = rightItem.getItem() == Items.ENCHANTED_BOOK && !EnchantedBookItem.getEnchantments(rightItem).isEmpty();
-			int l2 = Math.min(cloneLeftStack.getDamage(), cloneLeftStack.getMaxDamage() / 4);
+			int l2 = Math.min(cloneLeftStack.getDamageValue(), cloneLeftStack.getMaxDamage() / 4);
 			if (l2 <= 0) {
 				event.setOutput(ItemStack.EMPTY);
 				event.setCost(0);
@@ -37,23 +37,23 @@ public class AnvilEvents {
 
 			int i3;
 			for(i3 = 0; l2 > 0 && i3 < rightItem.getCount(); ++i3) {
-				int j3 = cloneLeftStack.getDamage() - l2;
-				cloneLeftStack.setDamage(j3);
+				int j3 = cloneLeftStack.getDamageValue() - l2;
+				cloneLeftStack.setDamageValue(j3);
 				i++;
-				l2 = Math.min(cloneLeftStack.getDamage(), cloneLeftStack.getMaxDamage() / 4);
+				l2 = Math.min(cloneLeftStack.getDamageValue(), cloneLeftStack.getMaxDamage() / 4);
 			}
 			event.setMaterialCost(i3);
             
 			if (StringUtils.isBlank(event.getName())) {
-				if (leftItem.hasDisplayName()) {
+				if (leftItem.hasCustomHoverName()) {
 					k = 1;
 					i += k;
-					cloneLeftStack.clearCustomName();
+					cloneLeftStack.resetHoverName();
 				}
-			} else if (!event.getName().equals(leftItem.getDisplayName().getString())) {
+			} else if (!event.getName().equals(leftItem.getHoverName().getString())) {
 				k = 1;
 				i += k;
-				cloneLeftStack.setDisplayName(new StringTextComponent(event.getName()));
+				cloneLeftStack.setHoverName(new StringTextComponent(event.getName()));
 			}
 			if (flag && !cloneLeftStack.isBookEnchantable(rightItem)) cloneLeftStack = ItemStack.EMPTY;
 
@@ -71,9 +71,9 @@ public class AnvilEvents {
 			}
 
 			if (!cloneLeftStack.isEmpty()) {
-				int k2 = cloneLeftStack.getRepairCost();
-				if (!rightItem.isEmpty() && k2 < rightItem.getRepairCost()) {
-					k2 = rightItem.getRepairCost();
+				int k2 = cloneLeftStack.getBaseRepairCost();
+				if (!rightItem.isEmpty() && k2 < rightItem.getBaseRepairCost()) {
+					k2 = rightItem.getBaseRepairCost();
 				}
 
 				if (k != i || k == 0) {

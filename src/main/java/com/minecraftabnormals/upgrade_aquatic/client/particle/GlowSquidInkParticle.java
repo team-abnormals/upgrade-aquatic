@@ -11,42 +11,42 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class GlowSquidInkParticle extends SimpleAnimatedParticle {
 	private GlowSquidInkParticle(ClientWorld world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, IAnimatedSprite animatedSprite) {
 		super(world, posX, posY, posZ, animatedSprite, 0.0F);
-		this.particleScale = 0.5F;
-		this.setAlphaF(1.0F);
+		this.quadSize = 0.5F;
+		this.setAlpha(1.0F);
 		this.setColor(66F / 256F, 215F / 256F, 165F / 256F);
-		this.maxAge = (int) ((double) (this.particleScale * 12.0F) / (Math.random() * (double) 0.8F + (double) 0.2F));
-		this.selectSpriteWithAge(animatedSprite);
-		this.canCollide = false;
-		this.motionX = motionX;
-		this.motionY = motionY;
-		this.motionZ = motionZ;
+		this.lifetime = (int) ((double) (this.quadSize * 12.0F) / (Math.random() * (double) 0.8F + (double) 0.2F));
+		this.setSpriteFromAge(animatedSprite);
+		this.hasPhysics = false;
+		this.xd = motionX;
+		this.yd = motionY;
+		this.zd = motionZ;
 		this.setBaseAirFriction(0.0F);
 	}
 
 	@Override
 	public void tick() {
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
-		if (this.age++ >= this.maxAge) {
-			this.setExpired();
+		this.xo = this.x;
+		this.yo = this.y;
+		this.zo = this.z;
+		if (this.age++ >= this.lifetime) {
+			this.remove();
 		} else {
-			this.selectSpriteWithAge(this.spriteWithAge);
-			if (this.age > this.maxAge / 2) {
-				this.setAlphaF(1.0F - ((float) this.age - (float) (this.maxAge / 2)) / (float) this.maxAge);
+			this.setSpriteFromAge(this.sprites);
+			if (this.age > this.lifetime / 2) {
+				this.setAlpha(1.0F - ((float) this.age - (float) (this.lifetime / 2)) / (float) this.lifetime);
 			}
 
-			this.move(this.motionX, this.motionY, this.motionZ);
-			if (this.world.getBlockState(new BlockPos(this.posX, this.posY, this.posZ)).isAir()) {
-				this.motionY -= (double) 0.008F;
+			this.move(this.xd, this.yd, this.zd);
+			if (this.level.getBlockState(new BlockPos(this.x, this.y, this.z)).isAir()) {
+				this.yd -= (double) 0.008F;
 			}
 
-			this.motionX *= (double) 0.92F;
-			this.motionY *= (double) 0.92F;
-			this.motionZ *= (double) 0.92F;
+			this.xd *= (double) 0.92F;
+			this.yd *= (double) 0.92F;
+			this.zd *= (double) 0.92F;
 			if (this.onGround) {
-				this.motionX *= (double) 0.7F;
-				this.motionZ *= (double) 0.7F;
+				this.xd *= (double) 0.7F;
+				this.zd *= (double) 0.7F;
 			}
 
 		}
@@ -65,7 +65,7 @@ public class GlowSquidInkParticle extends SimpleAnimatedParticle {
 			this.spriteSet = p_i50599_1_;
 		}
 
-		public Particle makeParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			return new GlowSquidInkParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, this.spriteSet);
 		}
 	}

@@ -23,6 +23,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 /**
  * @author SmellyModder(Luke Tonon)
  */
@@ -31,49 +33,49 @@ public class ToothLanternBlock extends Block implements IWaterLoggable {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final VoxelShape[] SHAPES = new VoxelShape[] {
 		VoxelShapes.or( // UP
-				makeCuboidShape(7.0F, 0.0F, 7.0D, 9.0D, 4.0D, 9.0D), 
-				makeCuboidShape(4.0F, 4.0F, 4.0F, 12.0F, 5.0F, 12.0F), 
-				makeCuboidShape(5.0F, 5.0F, 5.0F, 11.0F, 13.0F, 11.0F), 
-				makeCuboidShape(4.0F, 13.0F, 4.0F, 12.0F, 14.0F, 12.0F)), 
+				box(7.0F, 0.0F, 7.0D, 9.0D, 4.0D, 9.0D), 
+				box(4.0F, 4.0F, 4.0F, 12.0F, 5.0F, 12.0F), 
+				box(5.0F, 5.0F, 5.0F, 11.0F, 13.0F, 11.0F), 
+				box(4.0F, 13.0F, 4.0F, 12.0F, 14.0F, 12.0F)), 
 		VoxelShapes.or( // DOWN
-				makeCuboidShape(7.0F, 12.0F, 7.0D, 9.0D, 16.0D, 9.0D), 
-				makeCuboidShape(4.0F, 2.0F, 4.0F, 12.0F, 3.0F, 12.0F), 
-				makeCuboidShape(5.0F, 3.0F, 5.0F, 11.0F, 11.0F, 11.0F), 
-				makeCuboidShape(4.0F, 11.0F, 4.0F, 12.0F, 12.0F, 12.0F)), 
+				box(7.0F, 12.0F, 7.0D, 9.0D, 16.0D, 9.0D), 
+				box(4.0F, 2.0F, 4.0F, 12.0F, 3.0F, 12.0F), 
+				box(5.0F, 3.0F, 5.0F, 11.0F, 11.0F, 11.0F), 
+				box(4.0F, 11.0F, 4.0F, 12.0F, 12.0F, 12.0F)), 
 		VoxelShapes.or( // NORTH
-				makeCuboidShape(7.0F, 12.0F, 10.0D, 9.0D, 16.0D, 12.0D),
-				makeCuboidShape(7.0F, 14.0F, 10.0D, 9.0D, 16.0D, 16.0D), 
-				makeCuboidShape(4.0F, 2.0F, 7.0F, 12.0F, 3.0F, 15.0F), 
-				makeCuboidShape(5.0F, 3.0F, 8.0F, 11.0F, 11.0F, 14.0F), 
-				makeCuboidShape(4.0F, 11.0F, 7.0F, 12.0F, 12.0F, 15.0F)), 
+				box(7.0F, 12.0F, 10.0D, 9.0D, 16.0D, 12.0D),
+				box(7.0F, 14.0F, 10.0D, 9.0D, 16.0D, 16.0D), 
+				box(4.0F, 2.0F, 7.0F, 12.0F, 3.0F, 15.0F), 
+				box(5.0F, 3.0F, 8.0F, 11.0F, 11.0F, 14.0F), 
+				box(4.0F, 11.0F, 7.0F, 12.0F, 12.0F, 15.0F)), 
 		VoxelShapes.or( // EAST
-				makeCuboidShape(4.0F, 12.0F, 7.0D, 6.0D, 16.0D, 9.0D),
-				makeCuboidShape(0.0F, 14.0F, 7.0D, 6.0D, 16.0D, 9.0D), 
-				makeCuboidShape(1.0F, 2.0F, 4.0F, 9.0F, 3.0F, 12.0F), 
-				makeCuboidShape(2.0F, 3.0F, 5.0F, 8.0F, 11.0F, 11.0F), 
-				makeCuboidShape(1.0F, 11.0F, 4.0F, 9.0F, 12.0F, 12.0F)), 
+				box(4.0F, 12.0F, 7.0D, 6.0D, 16.0D, 9.0D),
+				box(0.0F, 14.0F, 7.0D, 6.0D, 16.0D, 9.0D), 
+				box(1.0F, 2.0F, 4.0F, 9.0F, 3.0F, 12.0F), 
+				box(2.0F, 3.0F, 5.0F, 8.0F, 11.0F, 11.0F), 
+				box(1.0F, 11.0F, 4.0F, 9.0F, 12.0F, 12.0F)), 
 		VoxelShapes.or( // SOUTH
-				makeCuboidShape(7.0F, 12.0F, 4.0D, 9.0D, 16.0D, 6.0D),
-				makeCuboidShape(7.0F, 14.0F, 0.0D, 9.0D, 16.0D, 6.0D), 
-				makeCuboidShape(4.0F, 2.0F, 1.0F, 12.0F, 3.0F, 9.0F), 
-				makeCuboidShape(5.0F, 3.0F, 2.0F, 11.0F, 11.0F, 8.0F), 
-				makeCuboidShape(4.0F, 11.0F, 1.0F, 12.0F, 12.0F, 9.0F)), 
+				box(7.0F, 12.0F, 4.0D, 9.0D, 16.0D, 6.0D),
+				box(7.0F, 14.0F, 0.0D, 9.0D, 16.0D, 6.0D), 
+				box(4.0F, 2.0F, 1.0F, 12.0F, 3.0F, 9.0F), 
+				box(5.0F, 3.0F, 2.0F, 11.0F, 11.0F, 8.0F), 
+				box(4.0F, 11.0F, 1.0F, 12.0F, 12.0F, 9.0F)), 
 		VoxelShapes.or( // WEST
-				makeCuboidShape(10.0F, 12.0F, 7.0D, 12.0D, 16.0D, 9.0D),
-				makeCuboidShape(10.0F, 14.0F, 7.0D, 16.0D, 16.0D, 9.0D), 
-				makeCuboidShape(7.0F, 2.0F, 4.0F, 15.0F, 3.0F, 12.0F), 
-				makeCuboidShape(8.0F, 3.0F, 5.0F, 14.0F, 11.0F, 11.0F), 
-				makeCuboidShape(7.0F, 11.0F, 4.0F, 15.0F, 12.0F, 12.0F)), 
+				box(10.0F, 12.0F, 7.0D, 12.0D, 16.0D, 9.0D),
+				box(10.0F, 14.0F, 7.0D, 16.0D, 16.0D, 9.0D), 
+				box(7.0F, 2.0F, 4.0F, 15.0F, 3.0F, 12.0F), 
+				box(8.0F, 3.0F, 5.0F, 14.0F, 11.0F, 11.0F), 
+				box(7.0F, 11.0F, 4.0F, 15.0F, 12.0F, 12.0F)), 
 	};
 
 	public ToothLanternBlock(Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}
 	
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		switch(state.get(FACING)) {
+		switch(state.getValue(FACING)) {
 		case UP:
 			return SHAPES[0];
 		case DOWN:
@@ -92,40 +94,40 @@ public class ToothLanternBlock extends Block implements IWaterLoggable {
 	
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		Direction direction = context.getFace();
-		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		return this.getDefaultState().with(FACING, direction).with(WATERLOGGED, ifluidstate.isTagged(FluidTags.WATER) && ifluidstate.getLevel() == 8);
+		Direction direction = context.getClickedFace();
+		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
+		return this.defaultBlockState().setValue(FACING, direction).setValue(WATERLOGGED, ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8);
 	}
 	
 	@Override
-	public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
-		Direction direction = state.get(FACING);
-		BlockPos blockpos = pos.offset(direction.getOpposite());
-		return Block.hasEnoughSolidSide(world, blockpos, direction);
+	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
+		Direction direction = state.getValue(FACING);
+		BlockPos blockpos = pos.relative(direction.getOpposite());
+		return Block.canSupportCenter(world, blockpos, direction);
 	}
 	
 	@Override
-	public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
-		return this.isValidPosition(state, world, currentPos) ? state : Blocks.AIR.getDefaultState();
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+		return this.canSurvive(state, world, currentPos) ? state : Blocks.AIR.defaultBlockState();
 	}
 	
 	@Override
 	public BlockState rotate(BlockState state, Rotation rotation) {
-		return state.with(FACING, rotation.rotate(state.get(FACING)));
+		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
 	}
 	
 	@Override
 	public BlockState mirror(BlockState state, Mirror mirror) {
-		return state.with(FACING, mirror.mirror(state.get(FACING)));
+		return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
 	}
 	
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, WATERLOGGED);
 	}
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState();
 	}
 }

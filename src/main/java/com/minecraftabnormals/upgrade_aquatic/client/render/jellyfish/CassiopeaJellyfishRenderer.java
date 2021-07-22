@@ -22,12 +22,12 @@ public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<Cassio
 	
 	@Override
 	public void render(CassiopeaJellyfishEntity jellyfish, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-		this.shadowSize *= jellyfish.getSize();
+		this.shadowRadius *= jellyfish.getSize();
 		super.render(jellyfish, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(CassiopeaJellyfishEntity jellyfish) {
+	public ResourceLocation getTextureLocation(CassiopeaJellyfishEntity jellyfish) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
 	
@@ -37,12 +37,12 @@ public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<Cassio
 	}
 	
 	@Override
-	protected RenderType func_230496_a_(CassiopeaJellyfishEntity jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
-		return RenderType.getEntityTranslucent(this.getEntityTexture(jellyfish));
+	protected RenderType getRenderType(CassiopeaJellyfishEntity jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
+		return RenderType.entityTranslucent(this.getTextureLocation(jellyfish));
 	}
 	
 	@Override
-	protected void preRenderCallback(CassiopeaJellyfishEntity jellyfish, MatrixStack matrixStack, float partialTickTime) {
+	protected void scale(CassiopeaJellyfishEntity jellyfish, MatrixStack matrixStack, float partialTickTime) {
 		float size = jellyfish.getSize();
 		matrixStack.scale(size, size, size);
 	}

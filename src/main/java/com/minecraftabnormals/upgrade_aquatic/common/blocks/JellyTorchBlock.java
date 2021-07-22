@@ -23,6 +23,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler, ILiquidContainer {
 	private final JellyTorchType torchType;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -30,7 +32,7 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
 	public JellyTorchBlock(Properties props, JellyTorchType torchType) {
 		super(props, null);
 		this.torchType = torchType;
-		this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, false));
+		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}
 	
 	@Override
@@ -46,26 +48,26 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
     }
 
 	@Override
-	public void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	public void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
 	}
 	
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.get(WATERLOGGED)) {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if (stateIn.getValue(WATERLOGGED)) {
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
-	    return super.updatePostPlacement(stateIn, facing, stateIn, worldIn, currentPos, facingPos);
+	    return super.updateShape(stateIn, facing, stateIn, worldIn, currentPos, facingPos);
 	}
 	
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		FluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-		return super.getStateForPlacement(context).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
+		return super.getStateForPlacement(context).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
 	}
 	
 	@Override
-	public Fluid pickupFluid(IWorld worldIn, BlockPos pos, BlockState state) {
-		if (state.get(WATERLOGGED)) {
-			worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(false)), 3);
+	public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
+		if (state.getValue(WATERLOGGED)) {
+			worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(false)), 3);
 			return Fluids.WATER;
 		} else {
 	        return Fluids.EMPTY;
@@ -74,20 +76,20 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
 	
 	@SuppressWarnings("deprecation")
 	public FluidState getFluidState(BlockState state) {
-		return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	@Override
-	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-		return !state.get(WATERLOGGED) && fluidIn == Fluids.WATER;
+	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
+		return !state.getValue(WATERLOGGED) && fluidIn == Fluids.WATER;
 	}
 	
 	@Override
-	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-		if (!state.get(WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER) {
-			if (!worldIn.isRemote()) {
-				worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);
-	            worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
+		if (!state.getValue(WATERLOGGED) && fluidStateIn.getType() == Fluids.WATER) {
+			if (!worldIn.isClientSide()) {
+				worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(true)), 3);
+	            worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 	         }
 	         return true;
 		} else {

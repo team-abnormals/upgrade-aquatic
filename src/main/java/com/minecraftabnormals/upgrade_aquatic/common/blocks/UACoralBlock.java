@@ -7,6 +7,8 @@ import net.minecraft.block.CoralPlantBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class UACoralBlock extends CoralPlantBlock {
 
 	public UACoralBlock(Block deadState, Properties props) {

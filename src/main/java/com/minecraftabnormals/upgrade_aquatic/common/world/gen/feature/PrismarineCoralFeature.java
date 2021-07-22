@@ -16,19 +16,19 @@ import java.util.Random;
  */
 public class PrismarineCoralFeature extends Feature<NoFeatureConfig> {
 	protected static final BlockState CORAL_BLOCK_BLOCK(boolean elder) {
-		return !elder ? UABlocks.PRISMARINE_CORAL_BLOCK.get().getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_BLOCK.get().getDefaultState();
+		return !elder ? UABlocks.PRISMARINE_CORAL_BLOCK.get().defaultBlockState() : UABlocks.ELDER_PRISMARINE_CORAL_BLOCK.get().defaultBlockState();
 	}
 	protected static final BlockState CORAL_BLOCK(boolean elder) {
-		return !elder ? UABlocks.PRISMARINE_CORAL.get().getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL.get().getDefaultState();
+		return !elder ? UABlocks.PRISMARINE_CORAL.get().defaultBlockState() : UABlocks.ELDER_PRISMARINE_CORAL.get().defaultBlockState();
 	}
 	protected static final BlockState CORAL_FAN(boolean elder) {
-		return !elder ? UABlocks.PRISMARINE_CORAL_FAN.get().getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_FAN.get().getDefaultState();
+		return !elder ? UABlocks.PRISMARINE_CORAL_FAN.get().defaultBlockState() : UABlocks.ELDER_PRISMARINE_CORAL_FAN.get().defaultBlockState();
 	}
 	protected static final BlockState CORAL_WALL_FAN(boolean elder) {
-		return !elder ? UABlocks.PRISMARINE_CORAL_WALL_FAN.get().getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.get().getDefaultState();
+		return !elder ? UABlocks.PRISMARINE_CORAL_WALL_FAN.get().defaultBlockState() : UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.get().defaultBlockState();
 	}
 	protected static final BlockState CORAL_SHOWER(boolean elder) {
-		return !elder ? UABlocks.PRISMARINE_CORAL_SHOWER.get().getDefaultState() : UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.get().getDefaultState();
+		return !elder ? UABlocks.PRISMARINE_CORAL_SHOWER.get().defaultBlockState() : UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.get().defaultBlockState();
 	}
 
 	public PrismarineCoralFeature(Codec<NoFeatureConfig> configFactoryIn) {
@@ -36,7 +36,7 @@ public class PrismarineCoralFeature extends Feature<NoFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 //		if(rand.nextDouble() <= 1) {
 			PrismarineCoralShelfFeature.placeFeature(worldIn, generator, rand, pos, config);
 //		} else {

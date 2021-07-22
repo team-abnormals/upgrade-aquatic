@@ -20,18 +20,18 @@ public class LionfishRenderer extends MobRenderer<LionfishEntity, LionfishModel<
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(LionfishEntity entity) {
+	public ResourceLocation getTextureLocation(LionfishEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/lionfish.png");
 	}
 	
 	@Override
-	protected void applyRotations(LionfishEntity entityLiving, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(entityLiving, matrixStack, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(LionfishEntity entityLiving, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.setupRotations(entityLiving, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.0F * MathHelper.sin(0.6F * ageInTicks);
-		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));
+		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
 		if (!entityLiving.isInWater()) {
 			matrixStack.translate(0.1F, 0.1F, -0.1F);
-			matrixStack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
 

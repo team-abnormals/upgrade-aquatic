@@ -13,6 +13,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class ToothTrapdoorBlock extends TrapDoorBlock {
 
 	public ToothTrapdoorBlock(Properties properties) {
@@ -20,31 +22,31 @@ public class ToothTrapdoorBlock extends TrapDoorBlock {
 	}
 	
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (state.get(POWERED)) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (state.getValue(POWERED)) {
 			return ActionResultType.SUCCESS;
 		} else {
-			state = state.func_235896_a_(OPEN);
-			worldIn.setBlockState(pos, state, 2);
-	         if (state.get(WATERLOGGED)) {
-	            worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+			state = state.cycle(OPEN);
+			worldIn.setBlock(pos, state, 2);
+	         if (state.getValue(WATERLOGGED)) {
+	            worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 	         }
 
-	         this.playSound(player, worldIn, pos, state.get(OPEN));
-			worldIn.getPendingBlockTicks().scheduleTick(pos, this, 20);
+	         this.playSound(player, worldIn, pos, state.getValue(OPEN));
+			worldIn.getBlockTicks().scheduleTick(pos, this, 20);
 			return ActionResultType.SUCCESS;
 		}
 	}
 	
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (!worldIn.isRemote) {
-			state = state.func_235896_a_(OPEN);
-			worldIn.setBlockState(pos, state, 2);
-			if (state.get(WATERLOGGED)) {
-				worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+		if (!worldIn.isClientSide) {
+			state = state.cycle(OPEN);
+			worldIn.setBlock(pos, state, 2);
+			if (state.getValue(WATERLOGGED)) {
+				worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			}
-			this.playSound((PlayerEntity)null, worldIn, pos, state.get(OPEN));
+			this.playSound((PlayerEntity)null, worldIn, pos, state.getValue(OPEN));
 		}
 	}
 

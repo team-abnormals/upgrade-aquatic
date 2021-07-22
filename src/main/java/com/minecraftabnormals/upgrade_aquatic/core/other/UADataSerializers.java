@@ -14,14 +14,14 @@ public final class UADataSerializers {
 
 	public static final IDataSerializer<PikeType> PIKE_TYPE = new IDataSerializer<PikeType>() {
 		public void write(PacketBuffer buf, PikeType value) {
-			buf.writeEnumValue(value);
+			buf.writeEnum(value);
 		}
 
 		public PikeType read(PacketBuffer buf) {
-			return buf.readEnumValue(PikeType.class);
+			return buf.readEnum(PikeType.class);
 		}
 
-		public PikeType copyValue(PikeType type) {
+		public PikeType copy(PikeType type) {
 			return type;
 		}
 	};
@@ -41,7 +41,7 @@ public final class UADataSerializers {
 		}
 
 		@Override
-		public EntitySize copyValue(EntitySize value) {
+		public EntitySize copy(EntitySize value) {
 			return value;
 		}
 	};

@@ -28,7 +28,7 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
+		return MobEntity.createMobAttributes().add(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
 
 	@Override
@@ -55,23 +55,23 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 
 		if (this.isInWater()) {
 			if (this.isEndimationPlaying(BOOST_ANIMATION)) {
-				this.setMotion(this.getMotion().scale(1.15F));
+				this.setDeltaMovement(this.getDeltaMovement().scale(1.15F));
 			} else if (this.isEndimationPlaying(SWIM_ANIMATION)) {
-				this.setMotion(this.getMotion().scale(1.05F));
+				this.setDeltaMovement(this.getDeltaMovement().scale(1.05F));
 			}
 		}
 	}
 
 	@Override
-	public void writeAdditional(CompoundNBT compound) {
-		super.writeAdditional(compound);
+	public void addAdditionalSaveData(CompoundNBT compound) {
+		super.addAdditionalSaveData(compound);
 		compound.putInt("UpsideDownCooldown", this.upsideDownCooldown);
 		compound.putInt("HideCooldown", this.hideCooldown);
 	}
 
 	@Override
-	public void readAdditional(CompoundNBT compound) {
-		super.readAdditional(compound);
+	public void readAdditionalSaveData(CompoundNBT compound) {
+		super.readAdditionalSaveData(compound);
 		this.upsideDownCooldown = compound.getInt("UpsideDownCooldown");
 		this.hideCooldown = compound.getInt("HideCooldown");
 	}
@@ -85,8 +85,8 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	@Override
-	public EntitySize getSize(Pose pose) {
-		return super.getSize(pose).scale(this.getSize());
+	public EntitySize getDimensions(Pose pose) {
+		return super.getDimensions(pose).scale(this.getSize());
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	@Override
-	public int getMaxSpawnedInChunk() {
+	public int getMaxSpawnClusterSize() {
 		return 3;
 	}
 
@@ -147,8 +147,8 @@ public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 
 	@Override
 	public boolean stingEntity(LivingEntity livingEntity) {
-		if ((this.getAttackTarget() == livingEntity || this.getRevengeTarget() == livingEntity) && this.getRNG().nextFloat() < 0.5F) {
-			return livingEntity.attackEntityFrom(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+		if ((this.getTarget() == livingEntity || this.getLastHurtByMob() == livingEntity) && this.getRandom().nextFloat() < 0.5F) {
+			return livingEntity.hurt(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
 		}
 		return false;
 	}

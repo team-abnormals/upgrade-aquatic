@@ -19,8 +19,8 @@ public abstract class SquidEntityMixin extends Entity {
 		super(entityTypeIn, worldIn);
 	}
 
-	@Inject(at = @At("HEAD"), method = "squirtInk", cancellable = true)
+	@Inject(at = @At("HEAD"), method = "spawnInk", cancellable = true)
 	private void squirtInk(CallbackInfo info) {
-		GlowingInkItem.createEffectCloud(new EffectInstance(Effects.BLINDNESS, 100), this.world, this.getBoundingBox().expand(2.5F, 2.5F, 2.5F));
+		GlowingInkItem.createEffectCloud(new EffectInstance(Effects.BLINDNESS, 100), this.level, this.getBoundingBox().expandTowards(2.5F, 2.5F, 2.5F));
 	}
 }

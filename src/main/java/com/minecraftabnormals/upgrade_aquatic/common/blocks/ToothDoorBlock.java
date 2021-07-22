@@ -13,6 +13,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class ToothDoorBlock extends DoorBlock {
 
 	public ToothDoorBlock(Properties builder) {
@@ -20,33 +22,33 @@ public class ToothDoorBlock extends DoorBlock {
 	}
 
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		if (state.get(POWERED)) {
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		if (state.getValue(POWERED)) {
 			return ActionResultType.SUCCESS;
 		} else {
-			state = state.func_235896_a_(OPEN);
-			worldIn.setBlockState(pos, state, 10);
-			worldIn.playEvent(player, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
-			worldIn.getPendingBlockTicks().scheduleTick(pos, this, 20);
+			state = state.cycle(OPEN);
+			worldIn.setBlock(pos, state, 10);
+			worldIn.levelEvent(player, state.getValue(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+			worldIn.getBlockTicks().scheduleTick(pos, this, 20);
 			return ActionResultType.SUCCESS;
 		}
 	}
 	
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if (!worldIn.isRemote) {
-			state = state.func_235896_a_(OPEN);
-			worldIn.setBlockState(pos, state, 10);
-			worldIn.playEvent((PlayerEntity)null, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+		if (!worldIn.isClientSide) {
+			state = state.cycle(OPEN);
+			worldIn.setBlock(pos, state, 10);
+			worldIn.levelEvent((PlayerEntity)null, state.getValue(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
 		}
 	}
 
 	private int getCloseSound() {
-		return this.material == Material.IRON ? 1011 : 1012;
+		return this.material == Material.METAL ? 1011 : 1012;
 	}
 
 	private int getOpenSound() {
-		return this.material == Material.IRON ? 1005 : 1006;
+		return this.material == Material.METAL ? 1005 : 1006;
 	}
 
 }

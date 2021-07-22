@@ -22,12 +22,12 @@ public class BoxJellyfishRenderer extends AbstractJellyfishRenderer<BoxJellyfish
 	
 	@Override
 	public void render(BoxJellyfishEntity jellyfish, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-		this.shadowSize *= jellyfish.getSize();
+		this.shadowRadius *= jellyfish.getSize();
 		super.render(jellyfish, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(BoxJellyfishEntity jellyfish) {
+	public ResourceLocation getTextureLocation(BoxJellyfishEntity jellyfish) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/box/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
 	
@@ -37,12 +37,12 @@ public class BoxJellyfishRenderer extends AbstractJellyfishRenderer<BoxJellyfish
 	}
 	
 	@Override
-	protected RenderType func_230496_a_(BoxJellyfishEntity jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
-		return RenderType.getEntityTranslucent(this.getEntityTexture(jellyfish));
+	protected RenderType getRenderType(BoxJellyfishEntity jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
+		return RenderType.entityTranslucent(this.getTextureLocation(jellyfish));
 	}
 	
 	@Override
-	protected void preRenderCallback(BoxJellyfishEntity jellyfish, MatrixStack matrixStack, float partialTickTime) {
+	protected void scale(BoxJellyfishEntity jellyfish, MatrixStack matrixStack, float partialTickTime) {
 		float size = jellyfish.getSize();
 		matrixStack.scale(size, size, size);
 	}

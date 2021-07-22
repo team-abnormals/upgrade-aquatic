@@ -17,11 +17,11 @@ public class GooseEntity extends ChickenEntity {
 	}
 
 	@Override
-	public GooseEntity func_241840_a(ServerWorld world, AgeableEntity ageable) {
-		return UAEntities.GOOSE.get().create(this.world);
+	public GooseEntity getBreedOffspring(ServerWorld world, AgeableEntity ageable) {
+		return UAEntities.GOOSE.get().create(this.level);
 	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.func_233666_p_().createMutableAttribute(Attributes.MAX_HEALTH, 6.0D).createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.3D);
+		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 6.0D).add(Attributes.MOVEMENT_SPEED, 0.3D);
 	}
 }

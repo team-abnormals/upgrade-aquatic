@@ -24,23 +24,23 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(PikeEntity pike) {
+	public ResourceLocation getTextureLocation(PikeEntity pike) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s.png", pike.getPikeType().name().toLowerCase()));
 	}
 	
 	@Override
-	protected void applyRotations(PikeEntity pike, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(pike, matrixStack, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(PikeEntity pike, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.setupRotations(pike, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * MathHelper.sin(0.6F * ageInTicks);
-		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));
+		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
 		if (!pike.isInWater()) {
 			matrixStack.translate(0.1F, 0.1F, -0.1F);
-			matrixStack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
 	
 	@Override
-	protected void preRenderCallback(PikeEntity pike, MatrixStack matrixStack, float partialTickTime) {
+	protected void scale(PikeEntity pike, MatrixStack matrixStack, float partialTickTime) {
 		float scale = pike.getPikeType().pikeSize.renderSize;
 		matrixStack.scale(scale, scale, scale);
 	}

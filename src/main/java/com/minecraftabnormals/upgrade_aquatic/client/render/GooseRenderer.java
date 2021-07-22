@@ -18,14 +18,14 @@ public class GooseRenderer extends MobRenderer<GooseEntity, GooseModel<GooseEnti
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(GooseEntity entity) {
+	public ResourceLocation getTextureLocation(GooseEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/goose.png");
 	}
 	
 	@Override
-	protected float handleRotationFloat(GooseEntity livingBase, float partialTicks) {
-		float f = MathHelper.lerp(partialTicks, livingBase.oFlap, livingBase.wingRotation);
-		float f1 = MathHelper.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.destPos);
+	protected float getBob(GooseEntity livingBase, float partialTicks) {
+		float f = MathHelper.lerp(partialTicks, livingBase.oFlap, livingBase.flap);
+		float f1 = MathHelper.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.flapSpeed);
 		return (MathHelper.sin(f) + 1.0F) * f1;
 	}
 }

@@ -39,7 +39,7 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(NautilusEntity nautilus) {
+	public ResourceLocation getTextureLocation(NautilusEntity nautilus) {
 		String textureSuffix = "";
 		
 		if(nautilus.hasCustomName()) {
@@ -54,13 +54,13 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 	}
 	
 	@Override
-	protected void applyRotations(NautilusEntity nautilus, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.applyRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(NautilusEntity nautilus, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+		super.setupRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 0.3F * MathHelper.sin(0.6F * ageInTicks);
-		matrixStack.rotate(Vector3f.YP.rotationDegrees(f));
-		if(!nautilus.isInWater() && !nautilus.areEyesInFluid(FluidTags.WATER)) {
+		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
+		if(!nautilus.isInWater() && !nautilus.isEyeInFluid(FluidTags.WATER)) {
 			matrixStack.translate(0.2F, 0.14F, 0.0F);
-			matrixStack.rotate(Vector3f.ZP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
 }

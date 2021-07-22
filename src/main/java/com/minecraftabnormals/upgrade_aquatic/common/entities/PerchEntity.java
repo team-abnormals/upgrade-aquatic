@@ -36,12 +36,12 @@ public class PerchEntity extends AbstractGroupFishEntity {
 	public List<BlockPos> getNearbySeagrass() {
 		List<BlockPos> seagrasses = Lists.newArrayList();
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		for (int yy = this.getPosition().getY() - 6; yy <= this.getPosY() + 6; yy++) {
-			for (int xx = this.getPosition().getX() - 12; xx <= this.getPosX() + 12; xx++) {
-				for (int zz = this.getPosition().getZ() - 12; zz <= this.getPosZ() + 12; zz++) {
-					mutable.setPos(xx, yy, zz);
-					BlockState block = this.world.getBlockState(mutable);
-					if (block.isIn(Blocks.SEAGRASS) || block.isIn(Blocks.TALL_SEAGRASS)) {
+		for (int yy = this.blockPosition().getY() - 6; yy <= this.getY() + 6; yy++) {
+			for (int xx = this.blockPosition().getX() - 12; xx <= this.getX() + 12; xx++) {
+				for (int zz = this.blockPosition().getZ() - 12; zz <= this.getZ() + 12; zz++) {
+					mutable.set(xx, yy, zz);
+					BlockState block = this.level.getBlockState(mutable);
+					if (block.is(Blocks.SEAGRASS) || block.is(Blocks.TALL_SEAGRASS)) {
 						seagrasses.add(mutable);
 					}
 				}
@@ -50,7 +50,7 @@ public class PerchEntity extends AbstractGroupFishEntity {
 		return seagrasses;
 	}
 
-	public ItemStack getFishBucket() {
+	public ItemStack getBucketItemStack() {
 		return new ItemStack(UAItems.PERCH_BUCKET.get());
 	}
 

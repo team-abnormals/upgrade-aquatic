@@ -17,20 +17,20 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import java.util.Random;
 
 public class FloweringRushFeature extends Feature<NoFeatureConfig> {
-	private static final BlockState FLOWERING_RUSH = UABlocks.FLOWERING_RUSH.get().getDefaultState();
+	private static final BlockState FLOWERING_RUSH = UABlocks.FLOWERING_RUSH.get().defaultBlockState();
 
 	public FloweringRushFeature(Codec<NoFeatureConfig> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
 	@Override
-	public boolean generate(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		boolean flag = false;
 
 		for(int i = 0; i < 64; ++i) {
-			BlockPos blockpos = pos.add(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(2) - rand.nextInt(2), rand.nextInt(4) - rand.nextInt(4));
-			if(blockpos.getY() < worldIn.getWorld().getHeight() - 2 && worldIn.getBlockState(blockpos.down()).getBlock().isIn(BlockTags.BAMBOO_PLANTABLE_ON)) {
-	            if(worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER && worldIn.isAirBlock(blockpos.up())) {
+			BlockPos blockpos = pos.offset(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(2) - rand.nextInt(2), rand.nextInt(4) - rand.nextInt(4));
+			if(blockpos.getY() < worldIn.getLevel().getMaxBuildHeight() - 2 && worldIn.getBlockState(blockpos.below()).getBlock().is(BlockTags.BAMBOO_PLANTABLE_ON)) {
+	            if(worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER && worldIn.isEmptyBlock(blockpos.above())) {
 	            	this.placeFloweringRush(worldIn, blockpos);
 	            	flag = true;
 	            }
@@ -41,7 +41,7 @@ public class FloweringRushFeature extends Feature<NoFeatureConfig> {
 	}
 	
 	private void placeFloweringRush(IWorld world, BlockPos pos) {
-		world.setBlockState(pos, FLOWERING_RUSH.with(FloweringRushBlock.WATERLOGGED, true), 2);
-		world.setBlockState(pos.up(), FLOWERING_RUSH.with(FloweringRushBlock.HALF, DoubleBlockHalf.UPPER), 2);
+		world.setBlock(pos, FLOWERING_RUSH.setValue(FloweringRushBlock.WATERLOGGED, true), 2);
+		world.setBlock(pos.above(), FLOWERING_RUSH.setValue(FloweringRushBlock.HALF, DoubleBlockHalf.UPPER), 2);
 	}
 }

@@ -36,9 +36,11 @@ import net.minecraftforge.common.IForgeShearable;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 @SuppressWarnings("deprecation")
 public class MulberryVineBlock extends Block implements IForgeShearable, IGrowable {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(5.0, 4.0, 5.0, 13.0, 16.0, 13.0);
+	protected static final VoxelShape SHAPE = Block.box(5.0, 4.0, 5.0, 13.0, 16.0, 13.0);
 
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
 	public static final BooleanProperty DOUBLE = BooleanProperty.create("double");
@@ -46,18 +48,18 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	
 	public MulberryVineBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(AGE, 0).with(DOUBLE, false));
+        this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0).setValue(DOUBLE, false));
 	}
 	
 	@Override
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(AGE, DOUBLE);
 	}
 
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		Vector3d Vector3d = state.getOffset(worldIn, pos);
-		return SHAPE.withOffset(Vector3d.x, Vector3d.y, Vector3d.z);
+		return SHAPE.move(Vector3d.x, Vector3d.y, Vector3d.z);
 	}
 
 	@Override
@@ -66,66 +68,66 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	}
 
 	@Override
-	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-		return useContext.getItem().getItem() == this.asItem() && !state.get(DOUBLE) && state.get(AGE) < 2 || super.isReplaceable(state, useContext);
+	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
+		return useContext.getItemInHand().getItem() == this.asItem() && !state.getValue(DOUBLE) && state.getValue(AGE) < 2 || super.canBeReplaced(state, useContext);
 	}
 
 	@Override
 	public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean moving) {
-		if (world.getBlockState(pos.up()) == Blocks.AIR.getDefaultState()) {
+		if (world.getBlockState(pos.above()) == Blocks.AIR.defaultBlockState()) {
 			world.removeBlock(pos, false);
 		}
 	}    
 
-	public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public int getLightBlock(BlockState state, IBlockReader worldIn, BlockPos pos) {
 	    return 1;
 	}
 	
 	@Override
-	public boolean canGrow(IBlockReader arg0, BlockPos arg1, BlockState state, boolean arg3) {
-		return state.get(AGE) < 4;
+	public boolean isValidBonemealTarget(IBlockReader arg0, BlockPos arg1, BlockState state, boolean arg3) {
+		return state.getValue(AGE) < 4;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World arg0, Random arg1, BlockPos arg2, BlockState state) {
-		return state.get(AGE) < 4;
+	public boolean isBonemealSuccess(World arg0, Random arg1, BlockPos arg2, BlockState state) {
+		return state.getValue(AGE) < 4;
 	}
 	
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		int i = state.get(AGE);
+	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+		int i = state.getValue(AGE);
 		boolean flag = i == 4;
-		if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL) {
+		if (!flag && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
 			return ActionResultType.PASS;
-		} else if (player.getHeldItem(handIn).getItem() == Items.SHEARS && state.get(DOUBLE)) {
-			player.getHeldItem(handIn).damageItem(1, player, (onBroken) -> { onBroken.sendBreakAnimation(handIn); });
-			worldIn.playSound(null, pos, SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			if (state.get(AGE) == 4) spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
-			worldIn.setBlockState(pos, state.with(DOUBLE, false), 2);
+		} else if (player.getItemInHand(handIn).getItem() == Items.SHEARS && state.getValue(DOUBLE)) {
+			player.getItemInHand(handIn).hurtAndBreak(1, player, (onBroken) -> { onBroken.broadcastBreakEvent(handIn); });
+			worldIn.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
+			if (state.getValue(AGE) == 4) popResource(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
+			worldIn.setBlock(pos, state.setValue(DOUBLE, false), 2);
 			return ActionResultType.SUCCESS;
 		} else if (flag) {
-			spawnAsEntity(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), state.get(DOUBLE) ? 2 : 1));
-			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
-			worldIn.setBlockState(pos, state.with(AGE, 1), 2);
+			popResource(worldIn, pos, new ItemStack(UAItems.MULBERRY.get(), state.getValue(DOUBLE) ? 2 : 1));
+			worldIn.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
+			worldIn.setBlock(pos, state.setValue(AGE, 1), 2);
 			
 			if (player instanceof ServerPlayerEntity && player.isAlive()) {
     			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
-    			if(!player.world.isRemote()) {
+    			if(!player.level.isClientSide()) {
     				UACriteriaTriggers.PICK_MULBERRIES.trigger(serverPlayer); 
     			}
     		}
 			
 			return ActionResultType.SUCCESS;
 		} else {
-			return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+			return super.use(state, worldIn, pos, player, handIn, hit);
 		}
 	}
 	
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		int i = state.get(AGE);
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		int i = state.getValue(AGE);
 		if (i < 4 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
-			worldIn.setBlockState(pos, state.with(AGE, i + 1));
+			worldIn.setBlockAndUpdate(pos, state.setValue(AGE, i + 1));
 			ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
@@ -133,20 +135,20 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random rand) {
 		super.tick(state, worldIn, pos, rand);
-		int i = state.get(AGE);
-		if (i < 4 && worldIn.getLightSubtracted(pos.up(), 0) >= 7 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
-			worldIn.setBlockState(pos, state.with(AGE, i + 1), 2);
+		int i = state.getValue(AGE);
+		if (i < 4 && worldIn.getRawBrightness(pos.above(), 0) >= 7 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
+			worldIn.setBlock(pos, state.setValue(AGE, i + 1), 2);
 			ForgeHooks.onCropsGrowPost(worldIn, pos, state);
 		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-	    if (worldIn.isRainingAt(pos.up())) {
+	    if (worldIn.isRainingAt(pos.above())) {
 	        if (rand.nextInt(15) == 1) {
-	            BlockPos blockpos = pos.down();
+	            BlockPos blockpos = pos.below();
 	            BlockState blockstate = worldIn.getBlockState(blockpos);
-	            if (!blockstate.isSolid() || !blockstate.isSolidSide(worldIn, blockpos, Direction.UP)) {
+	            if (!blockstate.canOcclude() || !blockstate.isFaceSturdy(worldIn, blockpos, Direction.UP)) {
 	                double d0 = ((float)pos.getX() + rand.nextFloat());
 	                double d1 = pos.getY() - 0.05D;
 	                double d2 = ((float)pos.getZ() + rand.nextFloat());
@@ -162,13 +164,13 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	}
 
 	protected boolean isStateValid(World worldIn, BlockPos pos) {
-	    Block block = worldIn.getBlockState(pos.up()).getBlock();
-	    return block.isIn(BlockTags.LEAVES) || block.isIn(BlockTags.LOGS);
+	    Block block = worldIn.getBlockState(pos.above()).getBlock();
+	    return block.is(BlockTags.LEAVES) || block.is(BlockTags.LOGS);
 	}
 	
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	public float getShadeBrightness(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return 1.0F;
 	}
 	
@@ -179,14 +181,14 @@ public class MulberryVineBlock extends Block implements IForgeShearable, IGrowab
 	@Override
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-	    World world = context.getWorld();
-	    BlockPos pos = context.getPos();
-	    BlockState state = context.getWorld().getBlockState(context.getPos());
-		if (state.getBlock() == this && !state.get(DOUBLE) && state.get(AGE) < 2) {
-			return state.with(DOUBLE, true);
+	    World world = context.getLevel();
+	    BlockPos pos = context.getClickedPos();
+	    BlockState state = context.getLevel().getBlockState(context.getClickedPos());
+		if (state.getBlock() == this && !state.getValue(DOUBLE) && state.getValue(AGE) < 2) {
+			return state.setValue(DOUBLE, true);
 		}
 	    if (isStateValid(world, pos)) {
-	        return getDefaultState();
+	        return defaultBlockState();
 	    }
 	    return null;
 	}

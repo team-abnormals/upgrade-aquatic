@@ -61,9 +61,9 @@ public enum PikeType {
 
 	public static PikeType getRandom(Random rand, Biome.Category category, boolean fromBucket) {
 		WeightedList<List<PikeType>> possibleRarityTypes = Util.make(new WeightedList<>(), (list) -> {
-			for (PikeRarity rarity : PikeRarity.values()) list.func_226313_a_(PikeType.getTypeList(category, rarity, fromBucket), rarity.weight);
+			for (PikeRarity rarity : PikeRarity.values()) list.add(PikeType.getTypeList(category, rarity, fromBucket), rarity.weight);
 		});
-		List<PikeType> possibleTypes = possibleRarityTypes.func_226318_b_(rand);
+		List<PikeType> possibleTypes = possibleRarityTypes.getOne(rand);
 		PikeType type = possibleTypes.get(rand.nextInt(possibleTypes.size()));
 		Integer spottedVariant = type.spottedVariant;
 		return spottedVariant != null && rand.nextFloat() < 0.2F ? PikeType.getTypeById(spottedVariant) : type;

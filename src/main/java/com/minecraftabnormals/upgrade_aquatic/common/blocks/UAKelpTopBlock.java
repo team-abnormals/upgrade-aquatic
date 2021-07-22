@@ -15,6 +15,8 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.Random;
 
+import net.minecraft.block.AbstractBlock.Properties;
+
 public class UAKelpTopBlock extends KelpTopBlock {
 	private KelpType kelpType;
 	
@@ -25,41 +27,41 @@ public class UAKelpTopBlock extends KelpTopBlock {
 	
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		if(!state.isValidPosition(worldIn, pos)) {
+		if(!state.canSurvive(worldIn, pos)) {
 			worldIn.destroyBlock(pos, true);
 		} else {
-			BlockPos blockpos = pos.up();
+			BlockPos blockpos = pos.above();
 			BlockState blockstate = worldIn.getBlockState(blockpos);
-			if(blockstate.getBlock() == Blocks.WATER && state.get(AGE) < 25 && random.nextDouble() < this.kelpType.getGrowChance()) {
-				worldIn.setBlockState(blockpos, state.func_235896_a_(AGE));
+			if(blockstate.getBlock() == Blocks.WATER && state.getValue(AGE) < 25 && random.nextDouble() < this.kelpType.getGrowChance()) {
+				worldIn.setBlockAndUpdate(blockpos, state.cycle(AGE));
 			}
 		}
 	}
 	
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		BlockPos blockpos = pos.down();
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		BlockPos blockpos = pos.below();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
 		Block block = blockstate.getBlock();
 		if(block == Blocks.MAGMA_BLOCK) {
 			return false;
 		} else {
-			return block == this || block == this.getPlantBlock() || blockstate.isSolidSide(worldIn, blockpos, Direction.UP);
+			return block == this || block == this.getPlantBlock() || blockstate.isFaceSturdy(worldIn, blockpos, Direction.UP);
 		}
 	}
 	
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if(!stateIn.isValidPosition(worldIn, currentPos)) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		if(!stateIn.canSurvive(worldIn, currentPos)) {
 			if(facing == Direction.DOWN) {
-				return Blocks.AIR.getDefaultState();
+				return Blocks.AIR.defaultBlockState();
 			}
-			worldIn.getPendingBlockTicks().scheduleTick(currentPos, this, 1);
+			worldIn.getBlockTicks().scheduleTick(currentPos, this, 1);
 		}
 
 		if(facing == Direction.UP && facingState.getBlock() == this) {
-			return this.getPlantBlock().getDefaultState();
+			return this.getPlantBlock().defaultBlockState();
 		} else {
-			worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			return stateIn;
 		}
 	}

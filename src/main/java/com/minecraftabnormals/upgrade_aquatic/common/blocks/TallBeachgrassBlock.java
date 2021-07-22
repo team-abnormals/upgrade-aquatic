@@ -32,13 +32,13 @@ import javax.annotation.Nullable;
 import java.util.Random;
 
 public class TallBeachgrassBlock extends Block implements IGrowable {
-	private static final VoxelShape SHAPE = Block.makeCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+	private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.LARGE_FERN);
 
 	public TallBeachgrassBlock(Block.Properties properties) {
 		super(properties);
-		this.setDefaultState(this.stateContainer.getBaseState().with(HALF, DoubleBlockHalf.LOWER));
+		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER));
 	}
 	
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
@@ -46,72 +46,72 @@ public class TallBeachgrassBlock extends Block implements IGrowable {
 	}
 	
 	@Override
-	public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
+	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
 		return false;
 	}
 	
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
-		return block.isIn(BlockTags.SAND);
+		return block.is(BlockTags.SAND);
 	}
 	   
 	@SuppressWarnings("deprecation")
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		DoubleBlockHalf doubleblockhalf = stateIn.get(HALF);
-		if (facing.getAxis() != Direction.Axis.Y || doubleblockhalf == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.get(HALF) != doubleblockhalf) {
-			return doubleblockhalf == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		DoubleBlockHalf doubleblockhalf = stateIn.getValue(HALF);
+		if (facing.getAxis() != Direction.Axis.Y || doubleblockhalf == DoubleBlockHalf.LOWER != (facing == Direction.UP) || facingState.getBlock() == this && facingState.getValue(HALF) != doubleblockhalf) {
+			return doubleblockhalf == DoubleBlockHalf.LOWER && facing == Direction.DOWN && !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		} else {
-			return Blocks.AIR.getDefaultState();
+			return Blocks.AIR.defaultBlockState();
 		}
 	}
 
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		BlockPos blockpos = context.getPos();
-		return blockpos.getY() < context.getWorld().getHeight() - 1 && context.getWorld().getBlockState(blockpos.up()).isReplaceable(context) ? super.getStateForPlacement(context) : null;
+		BlockPos blockpos = context.getClickedPos();
+		return blockpos.getY() < context.getLevel().getMaxBuildHeight() - 1 && context.getLevel().getBlockState(blockpos.above()).canBeReplaced(context) ? super.getStateForPlacement(context) : null;
 	}
 
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-		worldIn.setBlockState(pos.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), 3);
+	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
 
-	public boolean isValidPosition(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		if (state.get(HALF) != DoubleBlockHalf.UPPER) {
-			return this.isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos);
+	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+		if (state.getValue(HALF) != DoubleBlockHalf.UPPER) {
+			return this.isValidGround(worldIn.getBlockState(pos.below()), worldIn, pos);
 		} else {
-			BlockState blockstate = worldIn.getBlockState(pos.down());
-			if (state.getBlock() != this) this.isValidGround(worldIn.getBlockState(pos.down()), worldIn, pos); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
-			return blockstate.getBlock() == this && blockstate.get(HALF) == DoubleBlockHalf.LOWER;
+			BlockState blockstate = worldIn.getBlockState(pos.below());
+			if (state.getBlock() != this) this.isValidGround(worldIn.getBlockState(pos.below()), worldIn, pos); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+			return blockstate.getBlock() == this && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER;
 		}
 	}
 
 	public void placeAt(IWorld p_196390_1_, BlockPos p_196390_2_, int flags) {
-		p_196390_1_.setBlockState(p_196390_2_, this.getDefaultState().with(HALF, DoubleBlockHalf.LOWER), flags);
-		p_196390_1_.setBlockState(p_196390_2_.up(), this.getDefaultState().with(HALF, DoubleBlockHalf.UPPER), flags);
+		p_196390_1_.setBlock(p_196390_2_, this.defaultBlockState().setValue(HALF, DoubleBlockHalf.LOWER), flags);
+		p_196390_1_.setBlock(p_196390_2_.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), flags);
 	}
 
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		DoubleBlockHalf doubleblockhalf = state.get(HALF);
-		BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.up() : pos.down();
+	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
+		BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if (blockstate.getBlock() == this && blockstate.get(HALF) != doubleblockhalf) {
-			worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 35);
-			worldIn.playEvent(player, 2001, blockpos, Block.getStateId(blockstate));
-			if(!worldIn.isRemote && !player.isCreative() && player.getHeldItemMainhand().getItem() instanceof ShearsItem) {
-				spawnAsEntity(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS.get()));
-				spawnAsEntity(worldIn, pos.up(), new ItemStack(UABlocks.BEACHGRASS.get()));
-			} else if(!worldIn.isRemote && !player.isCreative() && !(player.getHeldItemMainhand().getItem() instanceof ShearsItem)) {
+		if (blockstate.getBlock() == this && blockstate.getValue(HALF) != doubleblockhalf) {
+			worldIn.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
+			worldIn.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
+			if(!worldIn.isClientSide && !player.isCreative() && player.getMainHandItem().getItem() instanceof ShearsItem) {
+				popResource(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS.get()));
+				popResource(worldIn, pos.above(), new ItemStack(UABlocks.BEACHGRASS.get()));
+			} else if(!worldIn.isClientSide && !player.isCreative() && !(player.getMainHandItem().getItem() instanceof ShearsItem)) {
 				Random rand = new Random();
 				if(rand.nextFloat() < 0.125F) {
-					spawnAsEntity(worldIn, pos, new ItemStack(Items.BEETROOT_SEEDS));
+					popResource(worldIn, pos, new ItemStack(Items.BEETROOT_SEEDS));
 				}
 			}
 		}
 
-		super.onBlockHarvested(worldIn, pos, state, player);
+		super.playerWillDestroy(worldIn, pos, state, player);
 	}
 
-	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HALF);
 	}
 
@@ -124,44 +124,44 @@ public class TallBeachgrassBlock extends Block implements IGrowable {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public long getPositionRandom(BlockState state, BlockPos pos) {
-		return MathHelper.getCoordinateRandom(pos.getX(), pos.down(state.get(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+	public long getSeed(BlockState state, BlockPos pos) {
+		return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
 	
 	@Override
-	public boolean canGrow(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 	
 	@Override
-	public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		if(!worldIn.isRemote) {
-			BlockState blockstate = UABlocks.BEACHGRASS.get().getDefaultState();
+	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+		if(!worldIn.isClientSide) {
+			BlockState blockstate = UABlocks.BEACHGRASS.get().defaultBlockState();
 			cont:
 			for(int i = 0; i < 128; ++i) {
 				BlockPos blockpos = pos;
 				
 				for(int j = 0; j < i / 16; j++) {
-					blockpos = blockpos.add(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-					if(Block.isOpaque(worldIn.getBlockState(blockpos).getCollisionShape(worldIn, blockpos))) {
+					blockpos = blockpos.offset(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
+					if(Block.isShapeFullBlock(worldIn.getBlockState(blockpos).getCollisionShape(worldIn, blockpos))) {
 						continue cont;
 					}
 				}
 				
-				if(blockstate.isValidPosition(worldIn, blockpos) && worldIn.isAirBlock(blockpos) && rand.nextFloat() <= 0.10F) {
-					worldIn.setBlockState(blockpos, blockstate);
+				if(blockstate.canSurvive(worldIn, blockpos) && worldIn.isEmptyBlock(blockpos) && rand.nextFloat() <= 0.10F) {
+					worldIn.setBlockAndUpdate(blockpos, blockstate);
 				}
 			}
 		}
 	}
 
 	@Override
-	public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 }
