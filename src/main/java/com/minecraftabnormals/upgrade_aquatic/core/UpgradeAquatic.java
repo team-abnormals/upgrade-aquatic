@@ -69,7 +69,7 @@ public class UpgradeAquatic {
 			UAEffects.registerBrewingRecipes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
 			UAFeatures.Configured.registerConfiguredFeatures();
-			ObfuscationReflectionHelper.setPrivateValue(AbstractBlock.class, Blocks.BUBBLE_COLUMN, true, "isRandomlyTicking");
+			ObfuscationReflectionHelper.setPrivateValue(AbstractBlock.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
 		});
 	}
 

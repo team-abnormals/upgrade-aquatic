@@ -67,7 +67,7 @@ public class LootEvents {
 	@SuppressWarnings("unchecked")
 	private static void addEntry(LootPool pool, LootEntry entry) {
 		try {
-			List<LootEntry> lootEntries = (List<LootEntry>) ObfuscationReflectionHelper.findField(LootPool.class, "entries").get(pool);
+			List<LootEntry> lootEntries = (List<LootEntry>) ObfuscationReflectionHelper.findField(LootPool.class, "field_186453_a").get(pool);
 			if (lootEntries.stream().anyMatch(e -> e == entry)) {
 				throw new RuntimeException("Attempted to add a duplicate entry to pool: " + entry);
 			}

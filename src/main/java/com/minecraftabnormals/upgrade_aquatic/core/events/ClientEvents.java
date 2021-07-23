@@ -30,8 +30,8 @@ public class ClientEvents {
 			ClientPlayerEntity clientPlayer = (ClientPlayerEntity) event.getEntity();
 			if (clientPlayer.getVehicle() instanceof ThrasherEntity) {
 				ThrasherEntity thrasher = (ThrasherEntity) clientPlayer.getVehicle();
-				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "swimAmount");
-				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "swimAmountO");
+				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "field_205017_bL");
+				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "field_205018_bM");
 				clientPlayer.xRot = 0.0F;
 				clientPlayer.yRot = thrasher.yRot + (90.0F % 360);
 				clientPlayer.yBodyRot = thrasher.yBodyRot + (90.0F % 360);
