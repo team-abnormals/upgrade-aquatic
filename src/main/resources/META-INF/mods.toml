@@ -9,7 +9,7 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
     logoFile = "logo.png"
     authors = "Team Abnormals"
     credits = "SmellyModder, bageldotjpg, Cameron, five, SystemZee, Ocelot, Endergized"
-    displayURL="https://www.teamabnormals.com/mods/upgrade-aquatic"
+    displayURL = "https://www.teamabnormals.com/mods/upgrade-aquatic"
     displayName = "Upgrade Aquatic"
     description = '''
     Expands upon Update Aquatic and aquatic life as a whole with new enemies, sea creatures, and building blocks.
