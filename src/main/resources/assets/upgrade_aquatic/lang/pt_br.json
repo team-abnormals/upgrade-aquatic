@@ -4,7 +4,7 @@
   "block.upgrade_aquatic.guardian_spine": "Espinha de guardião",
   "block.upgrade_aquatic.elder_guardian_spine": "Espinha de guardião-mestre",
 
-  "block.upgrade_aquatic.elder_eye": "Olho-mestre",
+  "block.upgrade_aquatic.elder_eye": "Olho mestre",
   
   "block.upgrade_aquatic.dead_acan_coral": "Coral-de-acan morto",
   "block.upgrade_aquatic.dead_acan_coral_block": "Bloco de coral-de-acan morto",
@@ -14,10 +14,10 @@
   "block.upgrade_aquatic.acan_coral_block": "Bloco de coral-de-acan",
   "block.upgrade_aquatic.acan_coral_fan": "Gorgônia-de-acan",
   
-  "block.upgrade_aquatic.elder_prismarine_coral": "Coral-de-prismarinho-ancião",
-  "block.upgrade_aquatic.elder_prismarine_coral_block": "Bloco de coral-de-prismarinho-ancião",
-  "block.upgrade_aquatic.elder_prismarine_coral_fan": "Gorgônia-de-prismarinho-ancião",
-  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Chuveiro-de-prismarinho-ancião",
+  "block.upgrade_aquatic.elder_prismarine_coral": "Coral-de-prismarinho-mestre",
+  "block.upgrade_aquatic.elder_prismarine_coral_block": "Bloco de coral-de-prismarinho-mestre",
+  "block.upgrade_aquatic.elder_prismarine_coral_fan": "Gorgônia-de-prismarinho-mestre",
+  "block.upgrade_aquatic.elder_prismarine_coral_shower": "Chuveiro-de-prismarinho-mestre",
   
   "block.upgrade_aquatic.prismarine_coral": "Coral-de-prismarinho",
   "block.upgrade_aquatic.prismarine_coral_block": "Bloco de coral-de-prismarinho",
@@ -163,7 +163,7 @@
   "block.upgrade_aquatic.silk_coralstone": "Pedra-coral-de-seda",
   "block.upgrade_aquatic.chrome_coralstone": "Pedra-coral-de-cromo",
   "block.upgrade_aquatic.prismarine_coralstone": "Pedra-coral-de-prismarinho",
-  "block.upgrade_aquatic.elder_coralstone": "Pedra-coral-de-prismarinho-ancião",
+  "block.upgrade_aquatic.elder_coralstone": "Pedra-coral-de-prismarinho-mestre",
   "block.upgrade_aquatic.dead_coralstone": "Pedra-coral morta",
   
   "block.upgrade_aquatic.chiseled_coralstone": "Pedra-coral talhada",
@@ -183,7 +183,7 @@
   "block.upgrade_aquatic.chiseled_silk_coralstone": "Pedra-coral-de-seda talhada",
   "block.upgrade_aquatic.chiseled_chrome_coralstone": "Pedra-coral-de-cromo talhada",
   "block.upgrade_aquatic.chiseled_prismarine_coralstone": "Pedra-coral-de-prismarinho talhada",
-  "block.upgrade_aquatic.elder_chiseled_coralstone": "Pedra-coral-de-prismarinho-ancião talhada",
+  "block.upgrade_aquatic.elder_chiseled_coralstone": "Pedra-coral-de-prismarinho-mestre talhada",
   "block.upgrade_aquatic.chiseled_dead_coralstone": "Pedra-coral morta talhada",
   
   "block.upgrade_aquatic.coralstone_slab": "Laje de pedra-coral",
@@ -203,7 +203,7 @@
   "block.upgrade_aquatic.silk_coralstone_slab": "Laje de pedra-coral-de-seda",
   "block.upgrade_aquatic.chrome_coralstone_slab": "Laje de pedra-coral-de-cromo",
   "block.upgrade_aquatic.prismarine_coralstone_slab": "Laje de pedra-coral-de-prismarinho",
-  "block.upgrade_aquatic.elder_coralstone_slab": "Laje de pedra-coral-de-prismarinho-ancião",
+  "block.upgrade_aquatic.elder_coralstone_slab": "Laje de pedra-coral-de-prismarinho-mestre",
   "block.upgrade_aquatic.dead_coralstone_slab": "Laje de pedra-coral morta",
 
   "block.upgrade_aquatic.coralstone_stairs": "Escadas de pedra-coral",
@@ -223,7 +223,7 @@
   "block.upgrade_aquatic.silk_coralstone_stairs": "Escadas de pedra-coral-de-seda",
   "block.upgrade_aquatic.chrome_coralstone_stairs": "Escadas de pedra-coral-de-cromo",
   "block.upgrade_aquatic.prismarine_coralstone_stairs": "Escadas de pedra-coral-de-prismarinho",
-  "block.upgrade_aquatic.elder_coralstone_stairs": "Escadas de pedra-coral-de-prismarinho-ancião",
+  "block.upgrade_aquatic.elder_coralstone_stairs": "Escadas de pedra-coral-de-prismarinho-mestre",
   "block.upgrade_aquatic.dead_coralstone_stairs": "Escadas de pedra-coral morta",
   
   "block.upgrade_aquatic.coralstone_wall": "Muro de pedra-coral",
@@ -243,7 +243,7 @@
   "block.upgrade_aquatic.silk_coralstone_wall": "Muro de pedra-coral-de-seda",
   "block.upgrade_aquatic.chrome_coralstone_wall": "Muro de pedra-coral-de-cromo",
   "block.upgrade_aquatic.prismarine_coralstone_wall": "Muro de pedra-coral-de-prismarinho",
-  "block.upgrade_aquatic.elder_coralstone_wall": "Muro de pedra-coral-de-prismarinho-ancião",
+  "block.upgrade_aquatic.elder_coralstone_wall": "Muro de pedra-coral-de-prismarinho-mestre",
   "block.upgrade_aquatic.dead_coralstone_wall": "Muro de pedra-coral morta",
   
   "block.upgrade_aquatic.coralstone_slab": "Laje vertical de pedra-coral",
@@ -263,7 +263,7 @@
   "block.upgrade_aquatic.silk_coralstone_slab": "Laje vertical de pedra-coral-de-seda",
   "block.upgrade_aquatic.chrome_coralstone_vertical_slab": "Laje vertical de pedra-coral-de-cromo",
   "block.upgrade_aquatic.prismarine_coralstone_slab": "Laje vertical de pedra-coral-de-prismarinho",
-  "block.upgrade_aquatic.elder_coralstone_slab": "Laje vertical de pedra-coral-de-prismarinho-ancião",
+  "block.upgrade_aquatic.elder_coralstone_slab": "Laje vertical de pedra-coral-de-prismarinho-mestre",
   "block.upgrade_aquatic.dead_coralstone_slab": "Laje vertical de pedra-coral morta",
   
   "block.upgrade_aquatic.tooth_block": "Bloco de dente",
@@ -452,10 +452,10 @@
   "block.upgrade_aquatic.luminous_prismarine_stairs": "Escadas de prismarinho luminoso",
   "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Laje vertical de prismarinho luminoso",
   
-  "block.upgrade_aquatic.luminous_elder_prismarine": "Prismarinho-ancião luminoso",
-  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Laje de prismarinho-ancião luminoso",
-  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Escadas de prismarinho-ancião luminoso",
-  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Laje vertical de prismarinho-ancião luminoso",
+  "block.upgrade_aquatic.luminous_elder_prismarine": "Prismarinho mestre luminoso",
+  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Laje de prismarinho mestre luminoso",
+  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Escadas de prismarinho mestre luminoso",
+  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Laje vertical de prismarinho mestre luminoso",
   
   "_comment": "Items",
   
