@@ -1,5 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.core;
 
+import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
 import com.minecraftabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
@@ -60,6 +61,7 @@ public class UpgradeAquatic {
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UAConfig.COMMON_SPEC);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, UAConfig.CLIENT_SPEC);
+		DataUtil.registerConfigCondition(UpgradeAquatic.MOD_ID, UAConfig.COMMON, UAConfig.CLIENT);
 	}
 
 	private void setupCommon(final FMLCommonSetupEvent event) {

@@ -1,5 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.core;
 
+import com.minecraftabnormals.abnormals_core.core.annotations.ConfigKey;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import org.apache.commons.lang3.tuple.Pair;
@@ -7,25 +8,58 @@ import org.apache.commons.lang3.tuple.Pair;
 public class UAConfig {
 
 	public static class Common {
+
+		@ConfigKey("clerics_buy_thrasher_teeth")
 		public final ConfigValue<Boolean> clericsBuyThrasherTeeth;
+
+		@ConfigKey("drowned_has_swimming_animation")
 		public final ConfigValue<Boolean> drownedSwimmingAnimation;
+
+		@ConfigKey("leatherworkers_sell_bedrolls")
 		public final ConfigValue<Boolean> leatherworkersSellBedrolls;
 
+
+		@ConfigKey("deep_ocean_mob_max_spawn_height")
 		public final ConfigValue<Integer> deepOceanMobMaxHeight;
 
+
+		@ConfigKey("glow_squid_weight")
 		public final ConfigValue<Integer> glowSquidWeight;
+
+		@ConfigKey("thrasher_weight")
 		public final ConfigValue<Integer> thrasherWeight;
+
+		@ConfigKey("nautilus_weight")
 		public final ConfigValue<Integer> nautilusWeight;
+
+		@ConfigKey("lionfish_weight")
 		public final ConfigValue<Integer> lionfishWeight;
+
+		@ConfigKey("pike_weight")
 		public final ConfigValue<Integer> pikeWeight;
+
+		@ConfigKey("perch_weight")
 		public final ConfigValue<Integer> perchWeight;
+
+		@ConfigKey("pike_weight_swamp")
 		public final ConfigValue<Integer> pikeSwampWeight;
+
+		@ConfigKey("lionfish_weight_swamp")
 		public final ConfigValue<Integer> squidSwampWeight;
 
+		@ConfigKey("beachgrass_frequency")
 		public final ConfigValue<Integer> beachgrassFrequency;
+
+		@ConfigKey("searocket_frequency")
 		public final ConfigValue<Integer> searocketFrequency;
+
+		@ConfigKey("pickerelweed_frequency")
 		public final ConfigValue<Integer> pickerelweedFrequency;
+
+		@ConfigKey("pickerelweed_frequency_extra")
 		public final ConfigValue<Integer> pickerelweedExtraFrequency;
+
+		@ConfigKey("flowering_rush_frequency")
 		public final ConfigValue<Integer> floweringRushFrequency;
 
 		public Common(ForgeConfigSpec.Builder builder) {
@@ -66,7 +100,11 @@ public class UAConfig {
 	}
 
 	public static class Client {
+
+		@ConfigKey("show_unobtainable_description")
 		public final ConfigValue<Boolean> showUnobtainableDescription;
+
+		@ConfigKey("days_till_insomnia_overlay")
 		public final ConfigValue<Integer> daysTillRenderInsomniaOverlay;
 
 		public Client(ForgeConfigSpec.Builder builder) {
