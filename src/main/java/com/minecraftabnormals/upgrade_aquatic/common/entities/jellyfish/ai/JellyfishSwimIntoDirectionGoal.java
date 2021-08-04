@@ -13,8 +13,6 @@ import net.minecraft.util.math.RayTraceResult.Type;
 import java.util.EnumSet;
 import java.util.Random;
 
-import net.minecraft.entity.ai.goal.Goal.Flag;
-
 public class JellyfishSwimIntoDirectionGoal extends Goal {
 	private final AbstractJellyfishEntity jellyfish;
 	private final Endimation swimAnimation;

@@ -32,8 +32,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import net.minecraft.item.Item.Properties;
-
 public class JellyfishBucketItem extends BucketItem {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TROPICAL_FISH_BUCKET);
 

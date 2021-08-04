@@ -43,7 +43,7 @@ public class UAEntities {
 	public static final RegistryObject<EntityType<ImmortalJellyfishEntity>> IMMORTAL_JELLYFISH = HELPER.createLivingEntity("immortal_jellyfish", ImmortalJellyfishEntity::new, EntityClassification.WATER_CREATURE, 0.625F, 0.5F);
 
 	@SubscribeEvent
-	public static void onEntityAttributes(EntityAttributeCreationEvent event) {
+	public static void registerAttributes(EntityAttributeCreationEvent event) {
 		event.put(NAUTILUS.get(), NautilusEntity.registerAttributes().build());
 		event.put(PIKE.get(), PikeEntity.registerAttributes().build());
 		event.put(LIONFISH.get(), LionfishEntity.registerAttributes().build());

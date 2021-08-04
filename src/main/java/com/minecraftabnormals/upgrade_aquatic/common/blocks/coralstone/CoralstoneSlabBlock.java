@@ -23,8 +23,6 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @SuppressWarnings("deprecation")
 public class CoralstoneSlabBlock extends SlabBlock {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");

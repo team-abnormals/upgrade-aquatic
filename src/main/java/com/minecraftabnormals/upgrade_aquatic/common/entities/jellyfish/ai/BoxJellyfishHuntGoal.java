@@ -9,8 +9,6 @@ import net.minecraft.util.math.vector.Vector3d;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.ai.goal.Goal.Flag;
-
 public class BoxJellyfishHuntGoal extends Goal {
 	private final BoxJellyfishEntity hunter;
 	private int noSightTicks;

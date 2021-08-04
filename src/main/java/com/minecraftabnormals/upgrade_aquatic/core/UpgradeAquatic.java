@@ -11,7 +11,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -27,7 +27,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod(value = UpgradeAquatic.MOD_ID)
 public class UpgradeAquatic {
-	public static UpgradeAquatic instance;
 	public static final String NETWORK_PROTOCOL = "1";
 	public static final String MOD_ID = "upgrade_aquatic";
 	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> {
@@ -41,28 +40,30 @@ public class UpgradeAquatic {
 			.simpleChannel();
 
 	public UpgradeAquatic() {
-		instance = this;
-		this.setupMessages();
-		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-		modEventBus.addListener(this::setupCommon);
+		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		REGISTRY_HELPER.register(modEventBus);
-		UAEffects.EFFECTS.register(modEventBus);
-		UAEffects.POTIONS.register(modEventBus);
-		UAFeatures.FEATURES.register(modEventBus);
-		UAParticles.PARTICLES.register(modEventBus);
-		UADataSerializers.SERIALIZERS.register(modEventBus);
+		this.setupMessages();
+
+		REGISTRY_HELPER.register(bus);
+		UAEffects.EFFECTS.register(bus);
+		UAEffects.POTIONS.register(bus);
+		UAFeatures.FEATURES.register(bus);
+		UAParticles.PARTICLES.register(bus);
+		UADataSerializers.SERIALIZERS.register(bus);
+		MinecraftForge.EVENT_BUS.register(this);
+
+		bus.addListener(this::commonSetup);
+		bus.addListener(this::clientSetup);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-			modEventBus.addListener(EventPriority.LOWEST, this::setupClient);
-			GlowSquidSpriteUploader.init(modEventBus);
+			GlowSquidSpriteUploader.init(bus);
 		});
 
 		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UAConfig.COMMON_SPEC);
 		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, UAConfig.CLIENT_SPEC);
 	}
 
-	private void setupCommon(final FMLCommonSetupEvent event) {
+	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			UACompat.registerCompat();
 			UASpawns.registerSpawns();
@@ -73,7 +74,7 @@ public class UpgradeAquatic {
 		});
 	}
 
-	private void setupClient(final FMLClientSetupEvent event) {
+	private void clientSetup(FMLClientSetupEvent event) {
 		UAEntities.registerRenderers();
 		UATileEntities.registerRenderers();
 		event.enqueueWork(() -> {

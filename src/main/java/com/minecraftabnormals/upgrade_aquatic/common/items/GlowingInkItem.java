@@ -21,8 +21,6 @@ import net.minecraft.world.World;
 
 import java.util.Map;
 
-import net.minecraft.item.Item.Properties;
-
 public class GlowingInkItem extends Item {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.INK_SAC);
 

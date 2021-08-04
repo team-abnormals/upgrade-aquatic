@@ -25,8 +25,6 @@ import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @SuppressWarnings("deprecation")
 public class CoralstoneStairsBlock extends StairsBlock {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");

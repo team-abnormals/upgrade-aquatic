@@ -10,8 +10,6 @@ import net.minecraft.nbt.CompoundNBT;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.item.Item.Properties;
-
 public class JellyfishSpawnEggItem extends AbnormalsSpawnEggItem {
 
 	public JellyfishSpawnEggItem(int primaryColor, int secondaryColor, Properties properties) {

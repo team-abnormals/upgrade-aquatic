@@ -20,8 +20,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class PickerelweedBlock extends DirectionalBlock implements IBucketPickupHandler, ILiquidContainer {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape[] SHAPES = new VoxelShape[] {

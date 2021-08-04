@@ -7,8 +7,6 @@ import net.minecraft.tags.FluidTags;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.ai.goal.Goal.Flag;
-
 /**
  * @author SmellyModder(Luke Tonon)
  */

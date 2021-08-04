@@ -1,14 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.helper;
 
 import com.minecraftabnormals.abnormals_core.core.AbnormalsCore;
-import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 public class JellyfishSizeMap {
     protected final TreeMap<Float, Integer> sizeMap;

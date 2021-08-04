@@ -9,8 +9,6 @@ import net.minecraft.tags.ItemTags;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.ai.goal.Goal.Flag;
-
 public final class PikeTemptGoal extends Goal {
 	private static final EntityPredicate CAN_FOLLOW = new EntityPredicate().range(10.0D).allowSameTeam().allowInvulnerable();
 	private final PikeEntity pike;

@@ -23,8 +23,6 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 /**
  * @author SmellyModder(Luke Tonon)
  */

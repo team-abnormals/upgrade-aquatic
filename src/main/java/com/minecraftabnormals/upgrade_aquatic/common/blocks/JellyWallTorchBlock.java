@@ -28,8 +28,6 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class JellyWallTorchBlock extends JellyTorchBlock {
 	public static final DirectionProperty HORIZONTAL_FACING = HorizontalBlock.FACING;
     private static final Map<Direction, VoxelShape> SHAPES = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(5.5d, 3d, 11d, 10.5d, 13d, 16d), Direction.SOUTH, Block.box(5.5d, 3d, 0d, 10.5d, 13d, 5d), Direction.WEST, Block.box(11d, 3d, 5.5d, 16d, 13d, 10.5d), Direction.EAST, Block.box(0d, 3d, 5.5d, 5d, 13d, 10.5d)));

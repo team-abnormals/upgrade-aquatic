@@ -7,8 +7,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class ScuteBlock extends DirectionalBlock {
 
 	public ScuteBlock(Properties properties) {

@@ -2,7 +2,6 @@ package com.minecraftabnormals.upgrade_aquatic.core.other;
 
 import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -10,10 +9,8 @@ import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.biome.BiomeColors;
-import net.minecraftforge.fml.RegistryObject;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class UAClientCompat {
 	private static final RenderType CUTOUT = RenderType.cutout();

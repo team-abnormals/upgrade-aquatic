@@ -16,8 +16,6 @@ import net.minecraft.world.server.ServerWorld;
 
 import java.util.function.Supplier;
 
-import net.minecraft.item.Item.Properties;
-
 public class GlowSquidBucketItem extends SquidBucketItem {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(UAItems.SQUID_BUCKET);
 

@@ -12,8 +12,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class UACoralFanBlock extends CoralFinBlock {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.HORN_CORAL_FAN);
 

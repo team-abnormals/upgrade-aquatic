@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @SuppressWarnings("deprecation")
 public class CoralstoneBlock extends Block {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");

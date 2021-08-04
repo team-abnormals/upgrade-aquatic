@@ -17,8 +17,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.List;
 import java.util.function.Supplier;
 
-import net.minecraft.item.Item.Properties;
-
 public class PikeBucketItem extends MobBucketItem {
 
 	public PikeBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {

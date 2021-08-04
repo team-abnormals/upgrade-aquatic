@@ -22,8 +22,6 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class ElderEyeBlock extends DirectionalBlock implements IBucketPickupHandler, ILiquidContainer {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");

@@ -7,6 +7,8 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
     modId = "upgrade_aquatic"
     version = "${file.jarVersion}"
     logoFile = "logo.png"
+    itemIcon = "upgrade_aquatic:pike"
+    configBackground = "upgrade_aquatic:textures/block/coralstone.png"
     authors = "Team Abnormals"
     credits = "SmellyModder, bageldotjpg, Cameron, five, SystemZee, Ocelot, Endergized"
     displayURL = "https://www.teamabnormals.com/mods/upgrade-aquatic"
@@ -14,10 +16,6 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
     description = '''
     Expands upon Update Aquatic and aquatic life as a whole with new enemies, sea creatures, and building blocks.
     '''
-
-[modproperties.upgrade_aquatic]
-    catalogueItemIcon = "upgrade_aquatic:pike"
-    configuredBackground = "upgrade_aquatic:textures/block/coralstone.png"
 
 [[dependencies.upgrade_aquatic]]
     modId = "minecraft"
@@ -29,7 +27,7 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
 [[dependencies.upgrade_aquatic]]
     modId = "forge"
     mandatory = true
-    versionRange = "[36.1.0,)"
+    versionRange = "[36.2.0,)"
     ordering = "NONE"
     side = "BOTH"
 

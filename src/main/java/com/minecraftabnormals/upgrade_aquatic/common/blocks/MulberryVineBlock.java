@@ -36,8 +36,6 @@ import net.minecraftforge.common.IForgeShearable;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 @SuppressWarnings("deprecation")
 public class MulberryVineBlock extends Block implements IForgeShearable, IGrowable {
 	protected static final VoxelShape SHAPE = Block.box(5.0, 4.0, 5.0, 13.0, 16.0, 13.0);

@@ -9,8 +9,6 @@ import net.minecraft.util.math.RayTraceResult.Type;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.ai.goal.Goal.Flag;
-
 public class JellyfishBoostGoal extends Goal {
 	private final AbstractJellyfishEntity jellyfish;
 	private final Endimation boostAnimation;

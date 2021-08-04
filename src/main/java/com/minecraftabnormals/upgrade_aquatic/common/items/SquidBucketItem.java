@@ -22,8 +22,6 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
-import net.minecraft.item.Item.Properties;
-
 public class SquidBucketItem extends BucketItem {
 	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.TROPICAL_FISH_BUCKET);
 

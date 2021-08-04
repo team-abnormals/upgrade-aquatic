@@ -22,9 +22,6 @@ import net.minecraft.world.server.ServerWorld;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-import com.minecraftabnormals.abnormals_core.common.blocks.VerticalSlabBlock.VerticalSlabType;
-import net.minecraft.block.AbstractBlock.Properties;
-
 @SuppressWarnings("deprecation")
 public class CoralstoneVerticalSlabBlock extends VerticalSlabBlock {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");

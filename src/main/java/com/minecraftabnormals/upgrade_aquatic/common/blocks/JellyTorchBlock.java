@@ -23,8 +23,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 import java.util.function.Supplier;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler, ILiquidContainer {
 	private final JellyTorchType torchType;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;

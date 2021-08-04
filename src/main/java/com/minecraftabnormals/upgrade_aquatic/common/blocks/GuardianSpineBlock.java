@@ -32,8 +32,6 @@ import net.minecraftforge.common.ToolType;
 
 import java.util.Random;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class GuardianSpineBlock extends DirectionalBlock implements IBucketPickupHandler, ILiquidContainer {
 	public static final BooleanProperty DRAWN = BooleanProperty.create("drawn");
 	public static final BooleanProperty ELDER = BooleanProperty.create("elder");

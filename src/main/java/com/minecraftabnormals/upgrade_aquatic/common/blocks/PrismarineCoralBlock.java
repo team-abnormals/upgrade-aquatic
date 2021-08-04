@@ -6,8 +6,6 @@ import net.minecraft.block.CoralBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
-import net.minecraft.block.AbstractBlock.Properties;
-
 public class PrismarineCoralBlock extends CoralBlock {
 
 	public PrismarineCoralBlock(Block block, Properties properties) {

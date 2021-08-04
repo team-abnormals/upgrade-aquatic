@@ -5,8 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import net.minecraft.item.Item.Properties;
-
 public class BoiledPickerelweedItem extends Item {
 	final boolean isPurple;
 	
