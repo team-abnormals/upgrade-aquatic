@@ -447,7 +447,7 @@
   "block.upgrade_aquatic.luminous_prismarine": "Świetlny pryzmaryn",
   "block.upgrade_aquatic.luminous_prismarine_slab": "Świetlna pryzmarynowa płyta",
   "block.upgrade_aquatic.luminous_prismarine_stairs": "Świetlne pryzmarynowe schody",
-  "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Luminous Prismarine Vertical płyta",
+  "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Pionowa świetlna pryzmarynowa płyta",
   
   "block.upgrade_aquatic.luminous_elder_prismarine": "Świetlny prapryzmaryn",
   "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Świetlna prapryzmarynowa płyta",
@@ -537,8 +537,6 @@
   "tooltip.upgrade_aquatic.pink_jelly_torch": "różową galaretkową pochodnię",
   "tooltip.upgrade_aquatic.purple_jelly_torch": "fioletową galaretkową pochodnię",
   "tooltip.upgrade_aquatic.white_jelly_torch": "białą galaretkową pochodnię",
-  
-  "tooltip.upgrade_aquatic.unobtainable": "Nie do zdobycia",
 
   "entity.upgrade_aquatic.nautilus": "Łodzik",
   "entity.upgrade_aquatic.pike": "Szczupak",
