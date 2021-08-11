@@ -537,6 +537,8 @@
   "tooltip.upgrade_aquatic.pink_jelly_torch": "różową galaretkową pochodnię",
   "tooltip.upgrade_aquatic.purple_jelly_torch": "fioletową galaretkową pochodnię",
   "tooltip.upgrade_aquatic.white_jelly_torch": "białą galaretkową pochodnię",
+  
+  "tooltip.upgrade_aquatic.unobtainable": "Nie do zdobycia",
 
   "entity.upgrade_aquatic.nautilus": "Łodzik",
   "entity.upgrade_aquatic.pike": "Szczupak",
