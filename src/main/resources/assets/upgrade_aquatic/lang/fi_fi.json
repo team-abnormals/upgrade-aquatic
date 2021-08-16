@@ -432,7 +432,7 @@
 	"block.upgrade_aquatic.flowering_rush": "Sarjarimpi",
 
 	"block.upgrade_aquatic.mulberry_vine": "Mulperiköynnös",
-	"block.upgrade_aquatic.mulberry_punnet": "Laatikko mulperi-marjoja",
+	"block.upgrade_aquatic.mulberry_punnet": "Laatikko mulperimarjoja",
 	"block.upgrade_aquatic.mulberry_jam_block": "Mulperihillokuutio",
 
 	"block.upgrade_aquatic.prismarine_rod_bundle": "Prismariinisauvanippu",
@@ -490,7 +490,7 @@
 	"item.upgrade_aquatic.perch": "Raaka ahven",
 	"item.upgrade_aquatic.cooked_perch": "Paistettu ahven",
 
-	"item.upgrade_aquatic.mulberry": "Mulperi-marja",
+	"item.upgrade_aquatic.mulberry": "Mulperimarja",
 	"item.upgrade_aquatic.mulberry_jam_bottle": "Mulperihillopullo",
 	"item.upgrade_aquatic.mulberry_bread": "Mulperileipä",
 	"item.upgrade_aquatic.mulberry_pie": "Mulperipiirakka",
@@ -537,6 +537,8 @@
 	"tooltip.upgrade_aquatic.pink_jelly_torch": "Vaaleanpunainen meduusasoihtu",
 	"tooltip.upgrade_aquatic.purple_jelly_torch": "Violetti meduusasoihtu",
 	"tooltip.upgrade_aquatic.white_jelly_torch": "Valkoinen meduusasoihtu",
+
+	"tooltip.upgrade_aquatic.unobtainable": "Ei saatavilla",
 
 	"entity.upgrade_aquatic.nautilus": "Helmivene",
 	"entity.upgrade_aquatic.pike": "Hauki",
