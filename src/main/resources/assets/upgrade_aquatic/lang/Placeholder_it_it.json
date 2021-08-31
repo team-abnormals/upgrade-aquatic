@@ -1,23 +1,23 @@
 {
-  "block.upgrade_aquatic.guardian_spine": "Guardian Spine",
-  "block.upgrade_aquatic.elder_guardian_spine": "Elder Guardian Spine",
-  "block.upgrade_aquatic.elder_eye": "Elder Eye",
+  "block.upgrade_aquatic.guardian_spine": "Spina di guardiano",
+  "block.upgrade_aquatic.elder_guardian_spine": "Spina di guardiano antico",
+  "block.upgrade_aquatic.elder_eye": "Occhio antico",
 
-  "block.upgrade_aquatic.dead_acan_coral": "Dead Acan Coral",
-  "block.upgrade_aquatic.dead_acan_coral_block": "Dead Acan Coral Block",
+  "block.upgrade_aquatic.dead_acan_coral": "Corallo acan morto",
+  "block.upgrade_aquatic.dead_acan_coral_block": "Blocco di corallo acan morto",
   "block.upgrade_aquatic.dead_acan_coral_fan": "Dead Acan Coral Fan",
   
-  "block.upgrade_aquatic.acan_coral": "Acan Coral",
-  "block.upgrade_aquatic.acan_coral_block": "Acan Coral Block",
+  "block.upgrade_aquatic.acan_coral": "Corallo acan",
+  "block.upgrade_aquatic.acan_coral_block": "Blocco di corallo acan",
   "block.upgrade_aquatic.acan_coral_fan": "Acan Coral Fan",
   
-  "block.upgrade_aquatic.elder_prismarine_coral": "Elder Prismarine Coral",
-  "block.upgrade_aquatic.elder_prismarine_coral_block": "Elder Prismarine Coral Block",
+  "block.upgrade_aquatic.elder_prismarine_coral": "Corallo di prismarino antico",
+  "block.upgrade_aquatic.elder_prismarine_coral_block": "Blocco di corallo di prismarino antico",
   "block.upgrade_aquatic.elder_prismarine_coral_fan": "Elder Prismarine Coral Fan",
   "block.upgrade_aquatic.elder_prismarine_coral_shower": "Elder Prismarine Coral Shower",
   
-  "block.upgrade_aquatic.prismarine_coral": "Prismarine Coral",
-  "block.upgrade_aquatic.prismarine_coral_block": "Prismarine Coral Block",
+  "block.upgrade_aquatic.prismarine_coral": "Corallo di prismarino",
+  "block.upgrade_aquatic.prismarine_coral_block": "Blocco di corallo di prismarino",
   "block.upgrade_aquatic.prismarine_coral_fan": "Prismarine Coral Fan",
   "block.upgrade_aquatic.prismarine_coral_shower": "Prismarine Coral Shower",
   
