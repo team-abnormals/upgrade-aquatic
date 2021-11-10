@@ -17,24 +17,24 @@ public class GreatThrasherEntity extends ThrasherEntity {
 		super(type, world);
 		this.xpReward = 55;
 	}
-	
+
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-    	return MobEntity.createMobAttributes()
-    		.add(Attributes.MAX_HEALTH, 125.0D)
-    		.add(Attributes.ATTACK_DAMAGE, 8.0D)
-    		.add(Attributes.ARMOR, 16.0D);
-    }
-	
+		return MobEntity.createMobAttributes()
+				.add(Attributes.MAX_HEALTH, 125.0D)
+				.add(Attributes.ATTACK_DAMAGE, 8.0D)
+				.add(Attributes.ARMOR, 16.0D);
+	}
+
 	@Override
 	public float getMountDistance() {
 		return 2.1F;
 	}
-	
+
 	@Override
 	public double getPassengersRidingOffset() {
 		return 0.875F;
 	}
-	
+
 	@Override
 	protected double getStunDamageThreshold() {
 		return 8.0F;
@@ -49,7 +49,7 @@ public class GreatThrasherEntity extends ThrasherEntity {
 	protected float getVoicePitch() {
 		return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 0.75F;
 	}
-	
+
 	@Override
 	public ItemStack getPickedResult(RayTraceResult target) {
 		return new ItemStack(UAItems.GREAT_THRASHER_SPAWN_EGG.get());

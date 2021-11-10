@@ -13,7 +13,7 @@ public class EmbeddedAmmoniteBlock extends DirectionalBlock {
 		super(builder);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
 	}
-	
+
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING);

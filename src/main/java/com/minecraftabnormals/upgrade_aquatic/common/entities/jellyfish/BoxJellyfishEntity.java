@@ -21,7 +21,7 @@ import net.minecraft.world.World;
  * @author SmellyModder(Luke Tonon)
  */
 public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
-	private RotationController rotationController;
+	private final RotationController rotationController;
 	private int huntingCooldown;
 
 	public BoxJellyfishEntity(EntityType<? extends BoxJellyfishEntity> type, World world) {

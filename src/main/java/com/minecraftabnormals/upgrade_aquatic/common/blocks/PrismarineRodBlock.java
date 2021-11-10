@@ -10,7 +10,7 @@ public class PrismarineRodBlock extends RotatedPillarBlock {
 	public PrismarineRodBlock(Properties properties) {
 		super(properties);
 	}
-	
+
 	@Override
 	public boolean isConduitFrame(BlockState state, IWorldReader world, BlockPos pos, BlockPos conduit) {
 		return true;

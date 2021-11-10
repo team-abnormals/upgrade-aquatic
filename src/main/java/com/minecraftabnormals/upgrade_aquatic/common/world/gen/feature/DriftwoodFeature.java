@@ -76,10 +76,11 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> {
 			return false;
 		}
 	}
-	
+
 	private boolean isDirectionOpen(IWorld world, BlockPos pos, Direction direction, int length) {
 		BlockPos.Mutable mutable = new BlockPos.Mutable().set(pos);
-		if (direction == Direction.UP) return world.getFluidState(mutable).getType().is(FluidTags.WATER) && world.isEmptyBlock(mutable.above()) && world.isEmptyBlock(mutable.above(2));
+		if (direction == Direction.UP)
+			return world.getFluidState(mutable).getType().is(FluidTags.WATER) && world.isEmptyBlock(mutable.above()) && world.isEmptyBlock(mutable.above(2));
 		for (int i = 0; i < length; i++) {
 			mutable.relative(direction, i);
 			if (!world.isEmptyBlock(mutable) && !world.getFluidState(mutable).getType().is(FluidTags.WATER)) {
@@ -88,7 +89,7 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> {
 		}
 		return true;
 	}
-	
+
 	private boolean canFitInOcean(IWorld world, BlockPos pos, Direction direction, int length) {
 		for (int i = 0; i < length; i++) {
 			if (world.getBlockState(pos.relative(direction, i)).getBlock() != Blocks.WATER) {
@@ -97,7 +98,7 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> {
 		}
 		return true;
 	}
-	
+
 	private boolean isGroundForDirectionMostlySuitable(IWorld world, BlockPos pos, Direction direction, int length) {
 		int foundGaps = 0;
 		for (int i = 0; i < length; i++) {
@@ -113,7 +114,7 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> {
 		}
 		return foundGaps < Math.ceil(length / 2);
 	}
-	
+
 	private boolean isNearWater(IWorld world, BlockPos pos) {
 		Biome biome = world.getBiome(pos);
 		int foundWaterSpots = 0;
@@ -142,19 +143,20 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> {
 		}
 		return foundWaterSpots >= 3;
 	}
-	
+
 	private void placeDriftwoodLog(IWorld world, BlockPos pos, Direction direction, @Nullable GenerationPiece driftwood) {
-		if (driftwood != null) driftwood.addBlockPiece(DRIFTWOOD_LOG.setValue(RotatedPillarBlock.AXIS, direction.getAxis()), pos);
+		if (driftwood != null)
+			driftwood.addBlockPiece(DRIFTWOOD_LOG.setValue(RotatedPillarBlock.AXIS, direction.getAxis()), pos);
 		else world.setBlock(pos, DRIFTWOOD_LOG.setValue(RotatedPillarBlock.AXIS, direction.getAxis()), 2);
 	}
-	
+
 	private void placeBranch(IWorld world, BlockPos startPos, Direction direction, Random rand, boolean isLarge, GenerationPiece driftwood) {
 		int size = isLarge ? rand.nextInt(2) + 1 : 1;
-		
+
 		Direction branchDirection = rand.nextBoolean() ? direction.getClockWise() : direction.getCounterClockWise();
-		
-		for(int i = 1; i < size + 1; i++) {
-			Block[] sideBlocks = new Block[] { world.getBlockState(startPos.relative(branchDirection, i).relative(branchDirection.getClockWise())).getBlock(), world.getBlockState(startPos.relative(branchDirection, i).relative(branchDirection.getCounterClockWise())).getBlock() };
+
+		for (int i = 1; i < size + 1; i++) {
+			Block[] sideBlocks = new Block[]{world.getBlockState(startPos.relative(branchDirection, i).relative(branchDirection.getClockWise())).getBlock(), world.getBlockState(startPos.relative(branchDirection, i).relative(branchDirection.getCounterClockWise())).getBlock()};
 			if (this.isBlockPlaceableAtPos(world, startPos.relative(branchDirection, i), world.getBiome(startPos.relative(branchDirection, i)).getBiomeCategory() == Category.OCEAN) && sideBlocks[0] != DRIFTWOOD_LOG.getBlock() && sideBlocks[1] != DRIFTWOOD_LOG.getBlock()) {
 				this.placeDriftwoodLog(world, startPos.relative(branchDirection, i), branchDirection, driftwood);
 			} else {
@@ -162,7 +164,7 @@ public class DriftwoodFeature extends Feature<NoFeatureConfig> {
 			}
 		}
 	}
-	
+
 	private boolean isBlockPlaceableAtPos(IWorld world, BlockPos pos, boolean inOcean) {
 		Block block = world.getBlockState(pos).getBlock();
 		return inOcean ? world.isEmptyBlock(pos) || block == Blocks.WATER : world.isEmptyBlock(pos);

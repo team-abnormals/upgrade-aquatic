@@ -32,7 +32,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT)
 public class RenderOverlays {
 	private static final Minecraft MC = Minecraft.getInstance();
-	
+
 	@SubscribeEvent
 	public static void renderOverlays(RenderGameOverlayEvent event) {
 		if (event.getType() == RenderGameOverlayEvent.ElementType.VIGNETTE) {
@@ -60,7 +60,7 @@ public class RenderOverlays {
 			}
 			if (MC.options.getCameraType() == PointOfView.FIRST_PERSON && UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getCommandSenderWorld().dimension() == World.OVERWORLD) {
 				MatrixStack stack = event.getMatrixStack();
-				
+
 				stack.pushPose();
 				MC.textureManager.bind(new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/insomnia.png"));
 				RenderSystem.enableBlend();
@@ -79,7 +79,7 @@ public class RenderOverlays {
 			}
 		}
 	}
-	
+
 	@SubscribeEvent
 	public static void renderScuteOverAir(RenderGameOverlayEvent.Pre event) {
 		if (event.getType() == RenderGameOverlayEvent.ElementType.AIR) {
@@ -94,10 +94,10 @@ public class RenderOverlays {
 						turtleHelmet = stack;
 					}
 				}
-				
+
 				if (!turtleHelmet.isEmpty()) {
 					event.setCanceled(true);
-					
+
 					MatrixStack stack = event.getMatrixStack();
 					stack.pushPose();
 					RenderSystem.enableBlend();
@@ -105,7 +105,7 @@ public class RenderOverlays {
 					int top = scaledHeight - ForgeIngameGui.right_height;
 					int durability = turtleHelmet.getDamageValue();
 					int maxDurability = turtleHelmet.getMaxDamage();
-					
+
 					MC.textureManager.bind(new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/scute_bubble_depleted.png"));
 					for (int i = 0; i < 10; i++) {
 						int l = left - (i * 8) - 9;
@@ -138,7 +138,7 @@ public class RenderOverlays {
 						tessellator.end();
 					}
 					ForgeIngameGui.right_height += 10;
-					
+
 					RenderSystem.disableBlend();
 					stack.popPose();
 				}

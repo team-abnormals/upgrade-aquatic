@@ -18,7 +18,7 @@ public class UACoralFanBlock extends CoralFinBlock {
 	public UACoralFanBlock(Block deadState, Properties props) {
 		super(deadState, props);
 	}
-	
+
 	@Override
 	public boolean isConduitFrame(BlockState state, IWorldReader world, BlockPos pos, BlockPos conduit) {
 		return state.getBlock() == UABlocks.PRISMARINE_CORAL_FAN.get();

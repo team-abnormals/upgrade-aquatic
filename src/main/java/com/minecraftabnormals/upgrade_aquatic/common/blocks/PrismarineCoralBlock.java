@@ -11,7 +11,7 @@ public class PrismarineCoralBlock extends CoralBlock {
 	public PrismarineCoralBlock(Block block, Properties properties) {
 		super(block, properties);
 	}
-	
+
 	@Override
 	public boolean isConduitFrame(BlockState state, IWorldReader world, BlockPos pos, BlockPos conduit) {
 		return true;

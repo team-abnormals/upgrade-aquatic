@@ -149,9 +149,9 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 			worldIn.setBlock(pos, Blocks.DIRT.defaultBlockState(), 18);
 		}
 	}
-	
+
 	public static boolean isValidGround(IWorld world, BlockPos pos) {
-		return world.getBlockState(pos).canSustainPlant(world, pos, Direction.UP, (IPlantable)UABlocks.RIVER_SAPLING.get());
+		return world.getBlockState(pos).canSustainPlant(world, pos, Direction.UP, (IPlantable) UABlocks.RIVER_SAPLING.get());
 	}
 
 //	@Override

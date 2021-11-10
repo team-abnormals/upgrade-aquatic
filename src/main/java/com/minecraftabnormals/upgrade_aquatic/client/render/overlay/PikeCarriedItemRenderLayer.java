@@ -16,22 +16,22 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PikeCarriedItemRenderLayer extends LayerRenderer<PikeEntity, PikeModel<PikeEntity>> {
-	
+
 	public PikeCarriedItemRenderLayer(IEntityRenderer<PikeEntity, PikeModel<PikeEntity>> renderer) {
 		super(renderer);
 	}
-	
+
 	@Override
 	public void render(MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int packedLightIn, PikeEntity pike, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		ItemStack itemstack = pike.getItemBySlot(EquipmentSlotType.MAINHAND);
-		if(!itemstack.isEmpty()) {
+		if (!itemstack.isEmpty()) {
 			if (!itemstack.isEmpty()) {
 				matrixStack.pushPose();
-				
+
 				matrixStack.translate((this.getParentModel()).nose.x / 16.0F, (this.getParentModel()).nose.y / 16.0F + 1.3F, (this.getParentModel()).nose.z / 16.0F - 0.5F);
-				
+
 				matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-				
+
 				Minecraft.getInstance().getItemInHandRenderer().renderItem(pike, itemstack, ItemCameraTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
 				matrixStack.popPose();
 			}

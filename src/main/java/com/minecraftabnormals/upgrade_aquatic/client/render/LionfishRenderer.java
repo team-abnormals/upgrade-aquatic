@@ -18,12 +18,12 @@ public class LionfishRenderer extends MobRenderer<LionfishEntity, LionfishModel<
 	public LionfishRenderer(EntityRendererManager manager) {
 		super(manager, new LionfishModel<>(), 0.45F);
 	}
-	
+
 	@Override
 	public ResourceLocation getTextureLocation(LionfishEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/lionfish.png");
 	}
-	
+
 	@Override
 	protected void setupRotations(LionfishEntity entityLiving, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(entityLiving, matrixStack, ageInTicks, rotationYaw, partialTicks);

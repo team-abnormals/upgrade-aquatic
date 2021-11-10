@@ -11,8 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
 public class UAKelpBlock extends KelpBlock {
-	private KelpType kelpType;
-	private Block kelpTopBlock;
+	private final KelpType kelpType;
+	private final Block kelpTopBlock;
 
 	public UAKelpBlock(KelpType kelpType, Block kelpTopBlock, Properties props) {
 		super(props);
@@ -28,15 +28,15 @@ public class UAKelpBlock extends KelpBlock {
 	@Override
 	protected AbstractTopPlantBlock getHeadBlock() {
 		switch (this.kelpType) {
-		default:
-		case TONGUE:
-			return (AbstractTopPlantBlock) UABlocks.TONGUE_KELP.get();
-		case THORNY:
-			return (AbstractTopPlantBlock) UABlocks.THORNY_KELP.get();
-		case OCHRE:
-			return (AbstractTopPlantBlock) UABlocks.OCHRE_KELP.get();
-		case POLAR:
-			return (AbstractTopPlantBlock) UABlocks.POLAR_KELP.get();
+			default:
+			case TONGUE:
+				return (AbstractTopPlantBlock) UABlocks.TONGUE_KELP.get();
+			case THORNY:
+				return (AbstractTopPlantBlock) UABlocks.THORNY_KELP.get();
+			case OCHRE:
+				return (AbstractTopPlantBlock) UABlocks.OCHRE_KELP.get();
+			case POLAR:
+				return (AbstractTopPlantBlock) UABlocks.POLAR_KELP.get();
 		}
 	}
 }

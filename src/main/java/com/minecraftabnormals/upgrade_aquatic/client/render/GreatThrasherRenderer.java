@@ -12,7 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GreatThrasherRenderer extends MobRenderer<GreatThrasherEntity, ThrasherModel<GreatThrasherEntity>>{
+public class GreatThrasherRenderer extends MobRenderer<GreatThrasherEntity, ThrasherModel<GreatThrasherEntity>> {
 
 	public GreatThrasherRenderer(EntityRendererManager renderer) {
 		super(renderer, new ThrasherModel<>(), 1.575F);
@@ -23,11 +23,11 @@ public class GreatThrasherRenderer extends MobRenderer<GreatThrasherEntity, Thra
 	public ResourceLocation getTextureLocation(GreatThrasherEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher.png");
 	}
-	
+
 	@Override
 	protected void scale(GreatThrasherEntity thrasher, MatrixStack matrixStack, float partialTickTime) {
 		float scale = 1.75F;
 		matrixStack.scale(scale, scale, scale);
 	}
-	
+
 }

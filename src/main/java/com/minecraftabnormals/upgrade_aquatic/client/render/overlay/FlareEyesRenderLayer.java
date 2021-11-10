@@ -16,9 +16,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class FlareEyesRenderLayer<T extends FlareEntity, M extends FlareModel<T>> extends LayerRenderer<T, M> {	
+public class FlareEyesRenderLayer<T extends FlareEntity, M extends FlareModel<T>> extends LayerRenderer<T, M> {
 	private static final ResourceLocation EYES_LAYER = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/flare/flare_eyes.png");
-	
+
 	public FlareEyesRenderLayer(IEntityRenderer<T, M> renderer) {
 		super(renderer);
 	}
@@ -28,7 +28,7 @@ public class FlareEyesRenderLayer<T extends FlareEntity, M extends FlareModel<T>
 		ClientInfo.MINECRAFT.getTextureManager().bind(EYES_LAYER);
 
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveEntity(EYES_LAYER));
-		
+
 		this.getParentModel().setupAnim(flare, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}

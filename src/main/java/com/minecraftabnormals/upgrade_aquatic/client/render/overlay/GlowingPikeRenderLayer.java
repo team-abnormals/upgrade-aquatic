@@ -18,25 +18,25 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GlowingPikeRenderLayer<T extends PikeEntity, M extends PikeModel<T>> extends LayerRenderer<T, M> {
-	
+
 	public GlowingPikeRenderLayer(IEntityRenderer<T, M> renderer) {
 		super(renderer);
 	}
-	
+
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T pike, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		if (pike.getPikeType().rarity != PikeRarity.LEGENDARY) return;
-		
+
 		ClientInfo.MINECRAFT.getTextureManager().bind(this.getPikeOverlayTexture(pike));
 
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveEntity(this.getPikeOverlayTexture(pike)));
-		
+
 		this.getParentModel().setupAnim(pike, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
-	
+
 	private ResourceLocation getPikeOverlayTexture(PikeEntity pike) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s_glow.png", pike.getPikeType().name().toLowerCase()));
 	}
-	
+
 }

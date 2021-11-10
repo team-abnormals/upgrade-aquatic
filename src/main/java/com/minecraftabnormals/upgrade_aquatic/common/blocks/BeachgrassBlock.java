@@ -35,7 +35,7 @@ public class BeachgrassBlock extends Block implements IGrowable {
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
 		return SHAPE;
 	}
-	
+
 	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
@@ -43,19 +43,19 @@ public class BeachgrassBlock extends Block implements IGrowable {
 	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
-	
+
 	@Override
 	public void performBonemeal(ServerWorld world, Random rand, BlockPos pos, BlockState state) {
 		TallBeachgrassBlock plant = (TallBeachgrassBlock) UABlocks.TALL_BEACHGRASS.get();
-		if(plant.defaultBlockState().canSurvive(world, pos) && world.isEmptyBlock(pos.above())) {
+		if (plant.defaultBlockState().canSurvive(world, pos) && world.isEmptyBlock(pos.above())) {
 			plant.placeAt(world, pos, 2);
 		}
 	}
-	
+
 	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XYZ;
 	}
-	
+
 	@Override
 	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
 		return true;
@@ -64,12 +64,12 @@ public class BeachgrassBlock extends Block implements IGrowable {
 	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
 		return true;
 	}
-	
+
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
 		return block.is(BlockTags.SAND);
 	}
-	
+
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
 	}

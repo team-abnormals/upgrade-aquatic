@@ -13,22 +13,22 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.DamageSource;
 
 public final class PikeAttackGoal extends MeleeAttackGoal {
-	
+
 	public PikeAttackGoal(CreatureEntity creature, double speedIn, boolean useLongMemory) {
 		super(creature, speedIn, useLongMemory);
 	}
-	
+
 	@Override
 	public boolean canUse() {
 		PikeEntity pike = (PikeEntity) this.mob;
 		return pike.getAttackCooldown() <= 0 && pike.getTarget() != null && !pike.getItemBySlot(EquipmentSlotType.MAINHAND).getItem().is(ItemTags.FISHES) && pike.isInWater() && pike.getCaughtEntity() == null && !(pike.getTarget() instanceof PufferfishEntity) && super.canUse();
 	}
-	
+
 	@Override
 	public boolean canContinueToUse() {
 		return !this.mob.getItemBySlot(EquipmentSlotType.MAINHAND).getItem().is(ItemTags.FISHES) && this.mob.isInWater() && super.canContinueToUse();
 	}
-	
+
 	@Override
 	protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
 		PikeEntity pike = (PikeEntity) this.mob;
@@ -46,7 +46,7 @@ public final class PikeAttackGoal extends MeleeAttackGoal {
 			}
 		}
 	}
-	
+
 	@Override
 	public void start() {
 		PikeEntity pike = (PikeEntity) this.mob;

@@ -22,7 +22,7 @@ public class PikeBucketItem extends MobBucketItem {
 	public PikeBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
 		super(UAEntities.PIKE::get, supplier, builder);
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
@@ -32,5 +32,5 @@ public class PikeBucketItem extends MobBucketItem {
 			tooltip.add((new TranslationTextComponent(String.format("tooltip.upgrade_aquatic.%s_pike", type.toString().toLowerCase())).withStyle(TextFormatting.ITALIC, type.rarity.formatting)));
 		}
 	}
-	
+
 }

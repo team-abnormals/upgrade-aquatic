@@ -1,4 +1,3 @@
-
 package com.minecraftabnormals.upgrade_aquatic.client.render.overlay;
 
 import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
@@ -21,23 +20,23 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ThrasherRenderLayer<T extends ThrasherEntity, M extends ThrasherModel<T>> extends LayerRenderer<T, M> {
 	private static final ResourceLocation THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/thrasher_emissive.png");
 	private static final ResourceLocation GREAT_THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher_emissive.png");
-	
+
 	public ThrasherRenderLayer(IEntityRenderer<T, M> renderer) {
 		super(renderer);
 	}
-	
+
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T thrasher, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		ClientInfo.MINECRAFT.getTextureManager().bind(this.getThrasherFrostLayer(thrasher));
 
 		int stunnedAnimation = (int) (thrasher.STUNNED_ANIMATION.getAnimationProgress() * 240);
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveEntity(this.getThrasherFrostLayer(thrasher)));
-		
+
 		this.getParentModel().setupAnim(thrasher, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, stunnedAnimation, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
-	
+
 	public ResourceLocation getThrasherFrostLayer(ThrasherEntity thrasher) {
-		return thrasher instanceof GreatThrasherEntity ? GREAT_THRASHER_FROST: THRASHER_FROST;
+		return thrasher instanceof GreatThrasherEntity ? GREAT_THRASHER_FROST : THRASHER_FROST;
 	}
 }

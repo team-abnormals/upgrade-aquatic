@@ -31,13 +31,13 @@ public class ToothDoorBlock extends DoorBlock {
 			return ActionResultType.SUCCESS;
 		}
 	}
-	
+
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isClientSide) {
 			state = state.cycle(OPEN);
 			worldIn.setBlock(pos, state, 10);
-			worldIn.levelEvent((PlayerEntity)null, state.getValue(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+			worldIn.levelEvent(null, state.getValue(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
 		}
 	}
 

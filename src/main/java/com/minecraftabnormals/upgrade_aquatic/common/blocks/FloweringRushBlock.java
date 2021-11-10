@@ -46,70 +46,70 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, false));
 	}
-	
+
 	@Override
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
 		return SHAPE;
 	}
-	
+
 	@Override
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(HALF, WATERLOGGED);
 	}
-	
+
 	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
 		return false;
 	}
-	
+
 	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
-	
+
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
 		return block.is(BlockTags.BAMBOO_PLANTABLE_ON);
 	}
-	
+
 	@Override
 	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState groundState = worldIn.getBlockState(currentPos.below());
 		FluidState fluidState = state.getFluidState();
 		FluidState upperFluidState = state.getFluidState();
-		if(state.getValue(WATERLOGGED)) {
+		if (state.getValue(WATERLOGGED)) {
 			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
-		if(state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
 			return fluidState.getAmount() >= 8 && this.isValidGround(groundState, worldIn, currentPos.below()) && worldIn.getBlockState(currentPos.above()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.above()).getValue(HALF) == DoubleBlockHalf.UPPER ? state : Blocks.AIR.defaultBlockState();
 		} else {
 			return upperFluidState.isEmpty() && worldIn.getBlockState(currentPos.below()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.below()).getValue(HALF) == DoubleBlockHalf.LOWER ? state : Blocks.AIR.defaultBlockState();
 		}
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
-		if(state.getValue(HALF) == DoubleBlockHalf.LOWER) {
+		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
 			BlockPos blockpos = pos.below();
 			FluidState ifluidstate = worldIn.getFluidState(pos);
 			return worldIn.getBlockState(pos.above()).isAir() && this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos) && ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() >= 8;
 		} else {
 			BlockState blockstate = worldIn.getBlockState(pos.below());
-			if(state.getBlock() != this) return super.canSurvive(state, worldIn, pos);
+			if (state.getBlock() != this) return super.canSurvive(state, worldIn, pos);
 			return blockstate.getBlock() == this && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER;
 		}
 	}
-	
+
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
 		return super.getStateForPlacement(context).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	@Override
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
-	
+
 	@Override
 	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
@@ -124,7 +124,7 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
 		popResource(worldIn, pos, new ItemStack(this));
 	}
-	
+
 	@Override
 	public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
 		super.playerDestroy(worldIn, player, pos, Blocks.AIR.defaultBlockState(), te, stack);
@@ -134,20 +134,20 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 		DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
 		BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		if(blockstate.getBlock() == this && blockstate.getValue(HALF) != doubleblockhalf) {
+		if (blockstate.getBlock() == this && blockstate.getValue(HALF) != doubleblockhalf) {
 			worldIn.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
-			if(!worldIn.isClientSide && !player.isCreative()) {
-				dropResources(state, worldIn, pos, (TileEntity)null, player, player.getMainHandItem());
-				dropResources(blockstate, worldIn, pos, (TileEntity)null, player, player.getMainHandItem());
+			if (!worldIn.isClientSide && !player.isCreative()) {
+				dropResources(state, worldIn, pos, null, player, player.getMainHandItem());
+				dropResources(blockstate, worldIn, pos, null, player, player.getMainHandItem());
 			}
-			if(blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
+			if (blockstate.getValue(HALF) == DoubleBlockHalf.LOWER) {
 				worldIn.destroyBlock(blockpos, false);
 			}
 		}
 
 		super.playerWillDestroy(worldIn, pos, state, player);
 	}
-	
+
 	public Block.OffsetType getOffsetType() {
 		return Block.OffsetType.XZ;
 	}

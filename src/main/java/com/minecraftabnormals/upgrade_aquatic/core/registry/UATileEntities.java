@@ -14,9 +14,9 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UATileEntities {
 	public static final TileEntitySubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getTileEntitySubHelper();
-	
-	public static final RegistryObject<TileEntityType<ElderEyeTileEntity>> ELDER_EYE = HELPER.createTileEntity("elder_eye", ElderEyeTileEntity::new, () -> new Block[] {UABlocks.ELDER_EYE.get()});
-	public static final RegistryObject<TileEntityType<BedrollTileEntity>> BEDROLL = HELPER.createTileEntity("bedroll", BedrollTileEntity::new, () -> new Block[] {UABlocks.BEDROLL.get(), UABlocks.GRAY_BEDROLL.get(), UABlocks.LIGHT_GRAY_BEDROLL.get(), UABlocks.BROWN_BEDROLL.get(), UABlocks.WHITE_BEDROLL.get(), UABlocks.BLACK_BEDROLL.get(), UABlocks.PINK_BEDROLL.get(), UABlocks.RED_BEDROLL.get(), UABlocks.ORANGE_BEDROLL.get(), UABlocks.YELLOW_BEDROLL.get(), UABlocks.LIME_BEDROLL.get(), UABlocks.GREEN_BEDROLL.get(), UABlocks.LIGHT_BLUE_BEDROLL.get(), UABlocks.BLUE_BEDROLL.get(), UABlocks.CYAN_BEDROLL.get(), UABlocks.MAGENTA_BEDROLL.get(), UABlocks.PURPLE_BEDROLL.get()});
+
+	public static final RegistryObject<TileEntityType<ElderEyeTileEntity>> ELDER_EYE = HELPER.createTileEntity("elder_eye", ElderEyeTileEntity::new, () -> new Block[]{UABlocks.ELDER_EYE.get()});
+	public static final RegistryObject<TileEntityType<BedrollTileEntity>> BEDROLL = HELPER.createTileEntity("bedroll", BedrollTileEntity::new, () -> new Block[]{UABlocks.BEDROLL.get(), UABlocks.GRAY_BEDROLL.get(), UABlocks.LIGHT_GRAY_BEDROLL.get(), UABlocks.BROWN_BEDROLL.get(), UABlocks.WHITE_BEDROLL.get(), UABlocks.BLACK_BEDROLL.get(), UABlocks.PINK_BEDROLL.get(), UABlocks.RED_BEDROLL.get(), UABlocks.ORANGE_BEDROLL.get(), UABlocks.YELLOW_BEDROLL.get(), UABlocks.LIME_BEDROLL.get(), UABlocks.GREEN_BEDROLL.get(), UABlocks.LIGHT_BLUE_BEDROLL.get(), UABlocks.BLUE_BEDROLL.get(), UABlocks.CYAN_BEDROLL.get(), UABlocks.MAGENTA_BEDROLL.get(), UABlocks.PURPLE_BEDROLL.get()});
 
 	public static void registerRenderers() {
 		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), ElderEyeTileEntityRenderer::new);

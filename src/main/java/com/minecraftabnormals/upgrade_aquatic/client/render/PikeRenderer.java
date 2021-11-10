@@ -27,7 +27,7 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 	public ResourceLocation getTextureLocation(PikeEntity pike) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s.png", pike.getPikeType().name().toLowerCase()));
 	}
-	
+
 	@Override
 	protected void setupRotations(PikeEntity pike, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(pike, matrixStack, ageInTicks, rotationYaw, partialTicks);
@@ -38,11 +38,11 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 			matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}
 	}
-	
+
 	@Override
 	protected void scale(PikeEntity pike, MatrixStack matrixStack, float partialTickTime) {
 		float scale = pike.getPikeType().pikeSize.renderSize;
 		matrixStack.scale(scale, scale, scale);
 	}
-	
+
 }

@@ -28,8 +28,8 @@ import java.util.function.Supplier;
 public class CoralstoneBlock extends Block {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 	@Nullable
-	private Block[] growableCoralBlocks;
-	private boolean chiseled;
+	private final Block[] growableCoralBlocks;
+	private final boolean chiseled;
 
 	public CoralstoneBlock(Properties properties, boolean chiseled) {
 		this(properties, chiseled, null);

@@ -22,5 +22,5 @@ public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
 	private void tempFixClientDismount(CallbackInfo info) {
 		if (this.wantsToStopRiding() && this.isPassenger()) Minecraft.getInstance().player.input.shiftKeyDown = false;
 	}
-	
+
 }

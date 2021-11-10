@@ -149,7 +149,7 @@ public class EntityEvents {
 		if (entity instanceof DrownedEntity && UAConfig.COMMON.drownedSwimmingAnimation.get() && entity.isEffectiveAi()) {
 			Pose pose = Entity.getHorizontalDistanceSqr(entity.getDeltaMovement()) >= 0.000625F && entity.getCommandSenderWorld().getFluidState(entity.blockPosition().below()).is(FluidTags.WATER) ? Pose.SWIMMING : Pose.STANDING;
 			if (entity.getPose() != pose)
-				((DrownedEntity) entity).setPose(pose);
+				entity.setPose(pose);
 		}
 	}
 

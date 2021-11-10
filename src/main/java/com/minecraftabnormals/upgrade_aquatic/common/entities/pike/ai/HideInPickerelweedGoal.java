@@ -8,11 +8,11 @@ import net.minecraft.util.math.vector.Vector3d;
 import javax.annotation.Nullable;
 
 public final class HideInPickerelweedGoal extends RandomWalkingGoal {
-	
+
 	public HideInPickerelweedGoal(PikeEntity pike) {
 		super(pike, 1.1D, 25);
 	}
-	
+
 	@Override
 	public boolean canUse() {
 		if (!this.forceTrigger && (this.mob.getNoActionTime() >= 100 || this.mob.getRandom().nextInt(this.interval) != 0)) {
@@ -23,7 +23,7 @@ public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 		if (vec3d == null) {
 			return false;
 		} else {
-			if(((PikeEntity) this.mob).isPickerelweedNearby()) {
+			if (((PikeEntity) this.mob).isPickerelweedNearby()) {
 				this.wantedX = vec3d.x;
 				this.wantedY = vec3d.y;
 				this.wantedZ = vec3d.z;
@@ -33,7 +33,7 @@ public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean canContinueToUse() {
 		return ((PikeEntity) this.mob).isPickerelweedNearby() && super.canContinueToUse();
@@ -49,5 +49,5 @@ public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 		}
 		return null;
 	}
-	
+
 }

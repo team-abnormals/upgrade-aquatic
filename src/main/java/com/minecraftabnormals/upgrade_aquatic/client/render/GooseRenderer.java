@@ -16,12 +16,12 @@ public class GooseRenderer extends MobRenderer<GooseEntity, GooseModel<GooseEnti
 	public GooseRenderer(EntityRendererManager manager) {
 		super(manager, new GooseModel<>(), 0.25F);
 	}
-	
+
 	@Override
 	public ResourceLocation getTextureLocation(GooseEntity entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/goose.png");
 	}
-	
+
 	@Override
 	protected float getBob(GooseEntity livingBase, float partialTicks) {
 		float f = MathHelper.lerp(partialTicks, livingBase.oFlap, livingBase.flap);

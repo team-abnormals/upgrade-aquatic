@@ -27,7 +27,7 @@ import java.util.Random;
 public class CoralstoneSlabBlock extends SlabBlock {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 	@Nullable
-	private Block[] growableCoralBlocks;
+	private final Block[] growableCoralBlocks;
 
 	public CoralstoneSlabBlock(Properties properties, @Nullable Block[] growableCoralBlocks) {
 		super(properties);

@@ -16,20 +16,20 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 		super(thrasher, speed, chance);
 		this.thrasher = thrasher;
 	}
-	
+
 	public boolean canUse() {
-		if(!this.forceTrigger) {
-			if(this.thrasher.getNoActionTime() >= 100) {
+		if (!this.forceTrigger) {
+			if (this.thrasher.getNoActionTime() >= 100) {
 				return false;
 			}
 
-			if(this.thrasher.getRandom().nextInt(this.interval) != 0) {
+			if (this.thrasher.getRandom().nextInt(this.interval) != 0) {
 				return false;
 			}
 		}
 
 		Vector3d vec3d = this.getPosition();
-		if(vec3d == null) {
+		if (vec3d == null) {
 			return false;
 		} else {
 			this.wantedX = vec3d.x;
@@ -37,24 +37,23 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 			this.wantedZ = vec3d.z;
 			this.forceTrigger = false;
 			return true;
-	    }
+		}
 	}
-	
+
 	@Override
 	public boolean canContinueToUse() {
 		return super.canContinueToUse();
 	}
-	
+
 	@Nullable
 	@Override
 	protected Vector3d getPosition() {
 		//Tries to go deep when it has an entity in its mouth
 		Vector3d vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 15, 8, !this.thrasher.getPassengers().isEmpty());
-		
-		for(int i = 0; vec3d != null && !this.mob.level.getBlockState(new BlockPos(vec3d)).isPathfindable(this.mob.level, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
-			;
+
+		for (int i = 0; vec3d != null && !this.mob.level.getBlockState(new BlockPos(vec3d)).isPathfindable(this.mob.level, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
 		}
-		
+
 		return vec3d;
 	}
 }

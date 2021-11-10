@@ -12,15 +12,15 @@ public class UACoralDeadBlock extends DeadCoralPlantBlock {
 	public UACoralDeadBlock(Properties props) {
 		super(props);
 	}
-	
+
 	@Override
 	public ToolType getHarvestTool(BlockState p_getHarvestTool_1_) {
 		return ToolType.PICKAXE;
 	}
-	
+
 	@Override
 	public boolean isConduitFrame(BlockState state, IWorldReader world, BlockPos pos, BlockPos conduit) {
 		return state.getBlock() == UABlocks.ELDER_PRISMARINE_CORAL.get();
 	}
-	
+
 }

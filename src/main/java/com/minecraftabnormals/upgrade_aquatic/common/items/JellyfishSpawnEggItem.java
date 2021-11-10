@@ -17,11 +17,11 @@ public class JellyfishSpawnEggItem extends AbnormalsSpawnEggItem {
 	}
 
 	@Override
-	public EntityType<?> getType(CompoundNBT compound){
-		if(compound != null && compound.contains("EntityTag", 10)) {
+	public EntityType<?> getType(CompoundNBT compound) {
+		if (compound != null && compound.contains("EntityTag", 10)) {
 			CompoundNBT entityTag = compound.getCompound("EntityTag");
 
-			if(entityTag.contains("id", 8)) {
+			if (entityTag.contains("id", 8)) {
 				return EntityType.byString(entityTag.getString("id")).orElse(getRandomJellyfish());
 			}
 		}

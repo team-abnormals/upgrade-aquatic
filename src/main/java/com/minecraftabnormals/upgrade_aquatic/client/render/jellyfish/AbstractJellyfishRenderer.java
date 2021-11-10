@@ -11,7 +11,7 @@ public abstract class AbstractJellyfishRenderer<J extends AbstractJellyfishEntit
 	public AbstractJellyfishRenderer(EntityRendererManager renderManagerIn, EndimatorEntityModel<J> entityModelIn, float shadowSizeIn) {
 		super(renderManagerIn, entityModelIn, shadowSizeIn);
 	}
-	
+
 	public abstract ResourceLocation getOverlayTexture(J jellyfish);
 
 }

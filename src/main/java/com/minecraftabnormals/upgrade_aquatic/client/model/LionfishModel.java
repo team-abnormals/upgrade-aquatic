@@ -9,75 +9,76 @@ import net.minecraft.util.math.MathHelper;
 
 /**
  * ModelLionfish
+ *
  * @authors MCVinnyq & SmellyModder
  * Created using Tabula 7.0.0
  */
 public class LionfishModel<T extends Entity> extends EntityModel<T> {
-    public ModelRenderer body;
-    public ModelRenderer topfin;
-    public ModelRenderer bottomfin;
-    public ModelRenderer tail;
-    public ModelRenderer head;
-    public ModelRenderer right_fin;
-    public ModelRenderer left_fin;
-    public ModelRenderer headFin;
+	public ModelRenderer body;
+	public ModelRenderer topfin;
+	public ModelRenderer bottomfin;
+	public ModelRenderer tail;
+	public ModelRenderer head;
+	public ModelRenderer right_fin;
+	public ModelRenderer left_fin;
+	public ModelRenderer headFin;
 
-    public LionfishModel() {
-        this.texWidth = 64;
-        this.texHeight = 32;
-        this.body = new ModelRenderer(this, 0, 19);
-        this.body.setPos(0.0F, 19.0F, -5.0F);
-        this.body.addBox(-1.5F, -2.5F, 0.0F, 3, 5, 8, 0.0F);
-        this.right_fin = new ModelRenderer(this, 14, 11);
-        this.right_fin.setPos(-1.5F, 0.5F, 5.0F);
-        this.right_fin.addBox(0.0F, 0.0F, -4.0F, 0, 8, 8, 0.0F);
-        this.setRotateAngle(right_fin, 0.0F, -0.0F, 0.4363323129985824F);
-        this.bottomfin = new ModelRenderer(this, 40, 20);
-        this.bottomfin.setPos(0.0F, 2.0F, 0.0F);
-        this.bottomfin.addBox(0.0F, 0.0F, 0.0F, 0, 4, 8, 0.0F);
-        this.head = new ModelRenderer(this, 0, 11);
-        this.head.setPos(0.0F, 0.0F, 0.0F);
-        this.head.addBox(-1.5F, -2.5F, -3.0F, 3, 4, 3, 0.0F);
-        this.left_fin = new ModelRenderer(this, 14, 11);
-        this.left_fin.setPos(1.5F, 0.5F, 4.0F);
-        this.left_fin.addBox(0.0F, 0.0F, -4.0F, 0, 8, 8, 0.0F);
-        this.setRotateAngle(left_fin, 0.0F, -0.0F, -0.4363323129985824F);
-        this.topfin = new ModelRenderer(this, 22, 19);
-        this.topfin.setPos(0.0F, 0.0F, 0.0F);
-        this.topfin.addBox(0.0F, -7.0F, 0.0F, 0, 5, 8, 0.0F);
-        this.headFin = new ModelRenderer(this, 0, 18);
-        this.headFin.setPos(0.0F, 0.0F, 0.0F);
-        this.headFin.addBox(0.0F, -7.0F, -3.0F, 0, 5, 4, 0.0F);
-        this.tail = new ModelRenderer(this, 0, -9);
-        this.tail.setPos(0.0F, 0.0F, 8.0F);
-        this.tail.addBox(0.0F, -5.0F, 0.0F, 0, 10, 10, 0.0F);
-        this.body.addChild(this.right_fin);
-        this.body.addChild(this.bottomfin);
-        this.body.addChild(this.head);
-        this.body.addChild(this.left_fin);
-        this.body.addChild(this.topfin);
-        this.head.addChild(this.headFin);
-        this.body.addChild(this.tail);
-    }
-    
-    @Override
-    public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-    	this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-    }
+	public LionfishModel() {
+		this.texWidth = 64;
+		this.texHeight = 32;
+		this.body = new ModelRenderer(this, 0, 19);
+		this.body.setPos(0.0F, 19.0F, -5.0F);
+		this.body.addBox(-1.5F, -2.5F, 0.0F, 3, 5, 8, 0.0F);
+		this.right_fin = new ModelRenderer(this, 14, 11);
+		this.right_fin.setPos(-1.5F, 0.5F, 5.0F);
+		this.right_fin.addBox(0.0F, 0.0F, -4.0F, 0, 8, 8, 0.0F);
+		this.setRotateAngle(right_fin, 0.0F, -0.0F, 0.4363323129985824F);
+		this.bottomfin = new ModelRenderer(this, 40, 20);
+		this.bottomfin.setPos(0.0F, 2.0F, 0.0F);
+		this.bottomfin.addBox(0.0F, 0.0F, 0.0F, 0, 4, 8, 0.0F);
+		this.head = new ModelRenderer(this, 0, 11);
+		this.head.setPos(0.0F, 0.0F, 0.0F);
+		this.head.addBox(-1.5F, -2.5F, -3.0F, 3, 4, 3, 0.0F);
+		this.left_fin = new ModelRenderer(this, 14, 11);
+		this.left_fin.setPos(1.5F, 0.5F, 4.0F);
+		this.left_fin.addBox(0.0F, 0.0F, -4.0F, 0, 8, 8, 0.0F);
+		this.setRotateAngle(left_fin, 0.0F, -0.0F, -0.4363323129985824F);
+		this.topfin = new ModelRenderer(this, 22, 19);
+		this.topfin.setPos(0.0F, 0.0F, 0.0F);
+		this.topfin.addBox(0.0F, -7.0F, 0.0F, 0, 5, 8, 0.0F);
+		this.headFin = new ModelRenderer(this, 0, 18);
+		this.headFin.setPos(0.0F, 0.0F, 0.0F);
+		this.headFin.addBox(0.0F, -7.0F, -3.0F, 0, 5, 4, 0.0F);
+		this.tail = new ModelRenderer(this, 0, -9);
+		this.tail.setPos(0.0F, 0.0F, 8.0F);
+		this.tail.addBox(0.0F, -5.0F, 0.0F, 0, 10, 10, 0.0F);
+		this.body.addChild(this.right_fin);
+		this.body.addChild(this.bottomfin);
+		this.body.addChild(this.head);
+		this.body.addChild(this.left_fin);
+		this.body.addChild(this.topfin);
+		this.head.addChild(this.headFin);
+		this.body.addChild(this.tail);
+	}
 
-    @Override
-    public void setupAnim(T lionfish, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-    	boolean outOfWater = !lionfish.isInWater();
-    	
-    	float multiplier = outOfWater ? 1.35F : 1.1F;
-    	float thetaModifier = outOfWater ? 1.7F : 1.0F;
-    	
-    	this.tail.yRot = -multiplier * 0.20F * MathHelper.sin(thetaModifier * 0.65F * ageInTicks);
-    }
+	@Override
+	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	}
 
-    public void setRotateAngle(ModelRenderer ModelRenderer, float x, float y, float z) {
-        ModelRenderer.xRot = x;
-        ModelRenderer.yRot = y;
-        ModelRenderer.zRot = z;
-    }
+	@Override
+	public void setupAnim(T lionfish, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		boolean outOfWater = !lionfish.isInWater();
+
+		float multiplier = outOfWater ? 1.35F : 1.1F;
+		float thetaModifier = outOfWater ? 1.7F : 1.0F;
+
+		this.tail.yRot = -multiplier * 0.20F * MathHelper.sin(thetaModifier * 0.65F * ageInTicks);
+	}
+
+	public void setRotateAngle(ModelRenderer ModelRenderer, float x, float y, float z) {
+		ModelRenderer.xRot = x;
+		ModelRenderer.yRot = y;
+		ModelRenderer.zRot = z;
+	}
 }

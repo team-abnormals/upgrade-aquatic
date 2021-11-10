@@ -29,7 +29,7 @@ import java.util.function.Supplier;
 public class CoralstoneStairsBlock extends StairsBlock {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 	@Nullable
-	private Block[] growableCoralBlocks;
+	private final Block[] growableCoralBlocks;
 
 	public CoralstoneStairsBlock(Supplier<BlockState> state, Properties properties, @Nullable Block[] growableCoralBlocks) {
 		super(state, properties);

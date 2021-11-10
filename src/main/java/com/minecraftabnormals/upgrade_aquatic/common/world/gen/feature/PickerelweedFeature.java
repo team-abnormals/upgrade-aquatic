@@ -141,17 +141,11 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> {
 	}
 
 	public boolean isValidBlock(IWorld world, BlockPos pos) {
-		if (world.isEmptyBlock(pos) || world.getBlockState(pos).getFluidState().is(FluidTags.WATER)) {
-			return true;
-		}
-		return false;
+		return world.isEmptyBlock(pos) || world.getBlockState(pos).getFluidState().is(FluidTags.WATER);
 	}
 
 	public boolean shouldPlace(IWorld world, BlockPos pos) {
-		if (world.getFluidState(pos.below().west()).is(FluidTags.WATER) || world.getFluidState(pos.below().east()).is(FluidTags.WATER) || world.getFluidState(pos.below().north()).is(FluidTags.WATER) || world.getFluidState(pos.below().south()).is(FluidTags.WATER)) {
-			return true;
-		}
-		return false;
+		return world.getFluidState(pos.below().west()).is(FluidTags.WATER) || world.getFluidState(pos.below().east()).is(FluidTags.WATER) || world.getFluidState(pos.below().north()).is(FluidTags.WATER) || world.getFluidState(pos.below().south()).is(FluidTags.WATER);
 	}
 
 }

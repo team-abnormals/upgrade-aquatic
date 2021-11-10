@@ -61,11 +61,11 @@ public class DrownedModelMixin<T extends ZombieEntity> extends ZombieModel<T> {
 			}
 		}
 	}
-    
+
 	private float getArmAngleSq(float limbSwing) {
-		return -65.0F * limbSwing + limbSwing * limbSwing; 
+		return -65.0F * limbSwing + limbSwing * limbSwing;
 	}
-    
+
 	private float getHorizontalMotion(Vector3d motion) {
 		double x = motion.x();
 		double z = motion.z();

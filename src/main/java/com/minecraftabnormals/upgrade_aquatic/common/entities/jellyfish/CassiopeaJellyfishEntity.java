@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class CassiopeaJellyfishEntity extends ColoredSizableJellyfishEntity {
 	public int upsideDownCooldown;
 	public int hideCooldown;
-	private RotationController rotationController;
+	private final RotationController rotationController;
 
 	public CassiopeaJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, World world) {
 		super(type, world);

@@ -10,7 +10,7 @@ import java.util.EnumSet;
 
 public class CassiopeaJellyfishFlipGoal extends Goal {
 	private final CassiopeaJellyfishEntity jellyfish;
-	private World world;
+	private final World world;
 	private int ticksPassed;
 
 	public CassiopeaJellyfishFlipGoal(CassiopeaJellyfishEntity jellyfish) {

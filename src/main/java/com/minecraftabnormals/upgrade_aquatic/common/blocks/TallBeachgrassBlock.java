@@ -40,21 +40,21 @@ public class TallBeachgrassBlock extends Block implements IGrowable {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER));
 	}
-	
+
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
 		return SHAPE;
 	}
-	
+
 	@Override
 	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
 		return false;
 	}
-	
+
 	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		Block block = state.getBlock();
 		return block.is(BlockTags.SAND);
 	}
-	   
+
 	@SuppressWarnings("deprecation")
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		DoubleBlockHalf doubleblockhalf = stateIn.getValue(HALF);
@@ -80,7 +80,8 @@ public class TallBeachgrassBlock extends Block implements IGrowable {
 			return this.isValidGround(worldIn.getBlockState(pos.below()), worldIn, pos);
 		} else {
 			BlockState blockstate = worldIn.getBlockState(pos.below());
-			if (state.getBlock() != this) this.isValidGround(worldIn.getBlockState(pos.below()), worldIn, pos); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
+			if (state.getBlock() != this)
+				this.isValidGround(worldIn.getBlockState(pos.below()), worldIn, pos); //Forge: This function is called during world gen and placement, before this block is set, so if we are not 'here' then assume it's the pre-check.
 			return blockstate.getBlock() == this && blockstate.getValue(HALF) == DoubleBlockHalf.LOWER;
 		}
 	}
@@ -97,12 +98,12 @@ public class TallBeachgrassBlock extends Block implements IGrowable {
 		if (blockstate.getBlock() == this && blockstate.getValue(HALF) != doubleblockhalf) {
 			worldIn.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
 			worldIn.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
-			if(!worldIn.isClientSide && !player.isCreative() && player.getMainHandItem().getItem() instanceof ShearsItem) {
+			if (!worldIn.isClientSide && !player.isCreative() && player.getMainHandItem().getItem() instanceof ShearsItem) {
 				popResource(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS.get()));
 				popResource(worldIn, pos.above(), new ItemStack(UABlocks.BEACHGRASS.get()));
-			} else if(!worldIn.isClientSide && !player.isCreative() && !(player.getMainHandItem().getItem() instanceof ShearsItem)) {
+			} else if (!worldIn.isClientSide && !player.isCreative() && !(player.getMainHandItem().getItem() instanceof ShearsItem)) {
 				Random rand = new Random();
-				if(rand.nextFloat() < 0.125F) {
+				if (rand.nextFloat() < 0.125F) {
 					popResource(worldIn, pos, new ItemStack(Items.BEETROOT_SEEDS));
 				}
 			}
@@ -127,7 +128,7 @@ public class TallBeachgrassBlock extends Block implements IGrowable {
 	public long getSeed(BlockState state, BlockPos pos) {
 		return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
-	
+
 	@Override
 	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
@@ -137,23 +138,23 @@ public class TallBeachgrassBlock extends Block implements IGrowable {
 	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
-	
+
 	@Override
 	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
-		if(!worldIn.isClientSide) {
+		if (!worldIn.isClientSide) {
 			BlockState blockstate = UABlocks.BEACHGRASS.get().defaultBlockState();
 			cont:
-			for(int i = 0; i < 128; ++i) {
+			for (int i = 0; i < 128; ++i) {
 				BlockPos blockpos = pos;
-				
-				for(int j = 0; j < i / 16; j++) {
+
+				for (int j = 0; j < i / 16; j++) {
 					blockpos = blockpos.offset(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);
-					if(Block.isShapeFullBlock(worldIn.getBlockState(blockpos).getCollisionShape(worldIn, blockpos))) {
+					if (Block.isShapeFullBlock(worldIn.getBlockState(blockpos).getCollisionShape(worldIn, blockpos))) {
 						continue cont;
 					}
 				}
-				
-				if(blockstate.canSurvive(worldIn, blockpos) && worldIn.isEmptyBlock(blockpos) && rand.nextFloat() <= 0.10F) {
+
+				if (blockstate.canSurvive(worldIn, blockpos) && worldIn.isEmptyBlock(blockpos) && rand.nextFloat() <= 0.10F) {
 					worldIn.setBlockAndUpdate(blockpos, blockstate);
 				}
 			}

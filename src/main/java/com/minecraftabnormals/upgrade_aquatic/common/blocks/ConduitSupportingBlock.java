@@ -10,7 +10,7 @@ public class ConduitSupportingBlock extends Block {
 	public ConduitSupportingBlock(Properties properties) {
 		super(properties);
 	}
-	
+
 	@Override
 	public boolean isConduitFrame(BlockState state, IWorldReader world, BlockPos pos, BlockPos conduit) {
 		return true;

@@ -41,12 +41,12 @@ public class UluluEntity extends MobEntity {
 
 	@Override
 	protected ResourceLocation getDefaultLootTable() {
-	      return this.isSmallUlulu() ? LootTables.EMPTY : this.getType().getDefaultLootTable();
-	   }
-	
+		return this.isSmallUlulu() ? LootTables.EMPTY : this.getType().getDefaultLootTable();
+	}
+
 	public EntitySize getDimensions(Pose poseIn) {
-	      return super.getDimensions(poseIn);
-	   }
+		return super.getDimensions(poseIn);
+	}
 
 	public static AttributeModifierMap.MutableAttribute registerAttributes() {
 		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 18.0D);

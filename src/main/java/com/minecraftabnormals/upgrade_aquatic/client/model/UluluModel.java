@@ -8,19 +8,19 @@ import net.minecraft.client.renderer.model.ModelRenderer;
 
 
 public class UluluModel<T extends UluluEntity> extends EntityModel<T> {
-	
+
 	public ModelRenderer body;
-	
+
 	public UluluModel() {
 		texWidth = 128;
 		texHeight = 64;
 		this.body = new ModelRenderer(this, 0, 0);
-        this.body.setPos(-12.4F, -0.2F, -11.3F);
-        this.body.addBox(0.0F, 0.0F, 0.0F, 24, 24, 24, 0.0F);
+		this.body.setPos(-12.4F, -0.2F, -11.3F);
+		this.body.addBox(0.0F, 0.0F, 0.0F, 24, 24, 24, 0.0F);
 	}
 
 	@Override
-	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
 		this.body.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 
@@ -33,6 +33,6 @@ public class UluluModel<T extends UluluEntity> extends EntityModel<T> {
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

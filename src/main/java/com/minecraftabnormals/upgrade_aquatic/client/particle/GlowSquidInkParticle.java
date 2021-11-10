@@ -38,20 +38,20 @@ public class GlowSquidInkParticle extends SimpleAnimatedParticle {
 
 			this.move(this.xd, this.yd, this.zd);
 			if (this.level.getBlockState(new BlockPos(this.x, this.y, this.z)).isAir()) {
-				this.yd -= (double) 0.008F;
+				this.yd -= 0.008F;
 			}
 
-			this.xd *= (double) 0.92F;
-			this.yd *= (double) 0.92F;
-			this.zd *= (double) 0.92F;
+			this.xd *= 0.92F;
+			this.yd *= 0.92F;
+			this.zd *= 0.92F;
 			if (this.onGround) {
-				this.xd *= (double) 0.7F;
-				this.zd *= (double) 0.7F;
+				this.xd *= 0.7F;
+				this.zd *= 0.7F;
 			}
 
 		}
 	}
-	
+
 	@Override
 	public IParticleRenderType getRenderType() {
 		return IParticleRenderType.PARTICLE_SHEET_LIT;

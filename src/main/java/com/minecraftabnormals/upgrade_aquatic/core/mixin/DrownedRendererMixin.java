@@ -16,7 +16,7 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<DrownedEntity, 
 	private DrownedRendererMixin(EntityRendererManager manager, DrownedModel<DrownedEntity> model, DrownedModel<DrownedEntity> model2, DrownedModel<DrownedEntity> model3) {
 		super(manager, model, model2, model3);
 	}
-	
+
 	/**
 	 * @author Upgrade Aquatic
 	 * @reason Replace the Drowned swimming animation

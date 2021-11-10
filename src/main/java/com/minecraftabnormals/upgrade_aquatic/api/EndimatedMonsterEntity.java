@@ -18,7 +18,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 public abstract class EndimatedMonsterEntity extends EndimatedEntity implements IMob {
-	
+
 	protected EndimatedMonsterEntity(EntityType<? extends EndimatedMonsterEntity> type, World p_i48553_2_) {
 		super(type, p_i48553_2_);
 		this.xpReward = 5;
@@ -57,9 +57,9 @@ public abstract class EndimatedMonsterEntity extends EndimatedEntity implements 
 	}
 
 	public boolean hurt(DamageSource source, float amount) {
-		return this.isInvulnerableTo(source) ? false : super.hurt(source, amount);
+		return !this.isInvulnerableTo(source) && super.hurt(source, amount);
 	}
-	
+
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
 		return SoundEvents.HOSTILE_HURT;
 	}
@@ -103,12 +103,12 @@ public abstract class EndimatedMonsterEntity extends EndimatedEntity implements 
 
 	public ItemStack getProjectile(ItemStack shootable) {
 		if (shootable.getItem() instanceof ShootableItem) {
-			Predicate<ItemStack> predicate = ((ShootableItem)shootable.getItem()).getSupportedHeldProjectiles();
+			Predicate<ItemStack> predicate = ((ShootableItem) shootable.getItem()).getSupportedHeldProjectiles();
 			ItemStack itemstack = ShootableItem.getHeldProjectile(this, predicate);
 			return itemstack.isEmpty() ? new ItemStack(Items.ARROW) : itemstack;
 		} else {
 			return ItemStack.EMPTY;
 		}
 	}
-	
+
 }

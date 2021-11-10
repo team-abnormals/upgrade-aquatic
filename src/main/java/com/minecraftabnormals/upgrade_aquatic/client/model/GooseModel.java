@@ -14,7 +14,7 @@ public class GooseModel<T extends Entity> extends AgeableModel<T> {
 	private final ModelRenderer rightWing;
 	private final ModelRenderer leftLeg;
 	private final ModelRenderer rightLeg;
-	
+
 
 	public GooseModel() {
 		texWidth = 64;
@@ -64,10 +64,10 @@ public class GooseModel<T extends Entity> extends AgeableModel<T> {
 	}
 
 	public void setupAnim(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.neck.xRot = headPitch * ((float)Math.PI / 180F);
-		this.neck.yRot = netHeadYaw * ((float)Math.PI / 180F);
+		this.neck.xRot = headPitch * ((float) Math.PI / 180F);
+		this.neck.yRot = netHeadYaw * ((float) Math.PI / 180F);
 		this.rightLeg.xRot = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		this.leftLeg.xRot = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
+		this.leftLeg.xRot = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 		this.rightWing.zRot = ageInTicks;
 		this.leftWing.zRot = -ageInTicks;
 	}

@@ -53,7 +53,7 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(FACING, PART, OCCUPIED, WATERLOGGED);
 	}
-	
+
 	@Override
 	public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
 		if (state.getValue(WATERLOGGED)) {
@@ -63,33 +63,33 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 			return Fluids.EMPTY;
 		}
 	}
-	
+
 	public FluidState getFluidState(BlockState state) {
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
-	
+
 	@Override
 	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
 		return fluidIn == Fluids.WATER;
 	}
-	
+
 	@Override
 	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		if (fluidStateIn.getType() == Fluids.WATER) {
 			if (!worldIn.isClientSide()) {
 				worldIn.setBlock(pos, state.setValue(WATERLOGGED, true), 3);
-	            worldIn.getLiquidTicks().scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
+				worldIn.getLiquidTicks().scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
 			}
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
 		super.fallOn(worldIn, pos, entityIn, fallDistance * 0.2F);
 	}
-	
+
 	public void updateEntityAfterFallOn(IBlockReader worldIn, Entity entityIn) {
 		if (entityIn.isCrouching()) {
 			super.updateEntityAfterFallOn(worldIn, entityIn);
@@ -100,7 +100,7 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 			}
 		}
 	}
-	
+
 	@Override
 	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.getValue(WATERLOGGED)) {
@@ -112,7 +112,7 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 			return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 		}
 	}
-	
+
 	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			super.onRemove(state, worldIn, pos, newState, isMoving);
@@ -135,37 +135,37 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 		}
 		super.playerWillDestroy(worldIn, pos, state, player);
 	}
-	
+
 	private static Direction getDirectionToOther(BedPart part, Direction direction) {
 		return part == BedPart.FOOT ? direction : direction.getOpposite();
 	}
-	
+
 	@Nullable
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		Direction enumfacing = context.getHorizontalDirection();
 		BlockPos blockpos = context.getClickedPos();
 		BlockPos blockpos1 = blockpos.relative(enumfacing);
-		
+
 		if (context.getLevel().getBlockState(blockpos).getBlock() == Blocks.WATER) {
 			return context.getLevel().getBlockState(blockpos1).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, enumfacing).setValue(WATERLOGGED, Boolean.TRUE) : null;
 		} else {
 			return context.getLevel().getBlockState(blockpos1).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, enumfacing).setValue(WATERLOGGED, Boolean.FALSE) : null;
 		}
 	}
-	
+
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}
-	
+
 	public PushReaction getPistonPushReaction(BlockState state) {
 		return PushReaction.DESTROY;
 	}
-	
+
 	public BlockRenderType getRenderShape(BlockState state) {
 		return BlockRenderType.MODEL;
 	}
-	
+
 	@Override
 	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.setPlacedBy(worldIn, pos, state, placer, stack);
@@ -176,7 +176,7 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 			state.updateNeighbourShapes(worldIn, pos, 3);
 		}
 	}
-	
+
 	@OnlyIn(Dist.CLIENT)
 	public DyeColor getColor() {
 		return this.color;

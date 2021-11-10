@@ -35,7 +35,7 @@ public enum PikeType {
 	MUSTARD_SOUTHERN(19, PikeSize.MEDIUM, PikeRarity.RARE, null, null),
 	LEMON_SOUTHERN(20, PikeSize.MEDIUM, PikeRarity.RARE, null, null),
 	GOLDEN_SOUTHERN(21, PikeSize.MEDIUM, PikeRarity.SUPER_RARE, null, null);
-	
+
 	public final int id;
 	public final PikeSize pikeSize;
 	public final PikeRarity rarity;
@@ -43,15 +43,15 @@ public enum PikeType {
 	private final Integer spottedVariant;
 	@Nullable
 	private final Biome.Category biomeCategory;
-	
-	private PikeType(int id, PikeSize pikeSize, PikeRarity rarity, @Nullable Integer spottedVariant, @Nullable Biome.Category biomeCategory) {
+
+	PikeType(int id, PikeSize pikeSize, PikeRarity rarity, @Nullable Integer spottedVariant, @Nullable Biome.Category biomeCategory) {
 		this.id = id;
 		this.pikeSize = pikeSize;
 		this.rarity = rarity;
 		this.spottedVariant = spottedVariant;
 		this.biomeCategory = biomeCategory;
 	}
-	
+
 	public static PikeType getTypeById(int id) {
 		for (PikeType type : values()) {
 			if (type.id == id) return type;
@@ -61,14 +61,15 @@ public enum PikeType {
 
 	public static PikeType getRandom(Random rand, Biome.Category category, boolean fromBucket) {
 		WeightedList<List<PikeType>> possibleRarityTypes = Util.make(new WeightedList<>(), (list) -> {
-			for (PikeRarity rarity : PikeRarity.values()) list.add(PikeType.getTypeList(category, rarity, fromBucket), rarity.weight);
+			for (PikeRarity rarity : PikeRarity.values())
+				list.add(PikeType.getTypeList(category, rarity, fromBucket), rarity.weight);
 		});
 		List<PikeType> possibleTypes = possibleRarityTypes.getOne(rand);
 		PikeType type = possibleTypes.get(rand.nextInt(possibleTypes.size()));
 		Integer spottedVariant = type.spottedVariant;
 		return spottedVariant != null && rand.nextFloat() < 0.2F ? PikeType.getTypeById(spottedVariant) : type;
 	}
-	
+
 	private static List<PikeType> getTypeList(Biome.Category category, PikeRarity rarity, boolean fromBucket) {
 		List<PikeType> pikeTypes = Lists.newArrayList();
 		List<PikeType> spotted = Lists.newArrayList();
@@ -83,33 +84,33 @@ public enum PikeType {
 		}
 		return pikeTypes;
 	}
-	
+
 	public enum PikeSize {
 		SMALL(1.2F, 1.4F),
 		MEDIUM(1.5F, 1.7F),
 		LARGE(1.7F, 1.9F),
 		HUGE(2.3F, 2.5F);
-		
+
 		public final float renderSize;
 		public final float boxSize;
-		
-		private PikeSize(float renderSize, float boxSize) {
+
+		PikeSize(float renderSize, float boxSize) {
 			this.renderSize = renderSize;
 			this.boxSize = boxSize;
 		}
 	}
-	
+
 	public enum PikeRarity {
 		COMMON(TextFormatting.GRAY, 55),
 		UNCOMMON(TextFormatting.GREEN, 25),
 		RARE(TextFormatting.BLUE, 15),
 		SUPER_RARE(TextFormatting.GOLD, 5),
 		LEGENDARY(TextFormatting.LIGHT_PURPLE, 1);
-		
+
 		public final TextFormatting formatting;
 		private final int weight;
-		
-		private PikeRarity(TextFormatting formatting, int weight) {
+
+		PikeRarity(TextFormatting formatting, int weight) {
 			this.formatting = formatting;
 			this.weight = weight;
 		}

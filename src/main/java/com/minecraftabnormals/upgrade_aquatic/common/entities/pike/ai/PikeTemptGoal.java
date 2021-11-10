@@ -23,7 +23,7 @@ public final class PikeTemptGoal extends Goal {
 	public boolean canUse() {
 		if (this.cooldown > 0) {
 			this.cooldown--;
-            return false;
+			return false;
 		} else {
 			this.tempter = this.pike.level.getNearestPlayer(CAN_FOLLOW, this.pike);
 			if (this.tempter == null) {
@@ -48,7 +48,7 @@ public final class PikeTemptGoal extends Goal {
 			this.pike.getNavigation().moveTo(this.tempter, 1.0F);
 		}
 	}
-      
+
 	private boolean isTemptedBy(ItemStack stack) {
 		return stack.getItem().is(ItemTags.FISHES);
 	}

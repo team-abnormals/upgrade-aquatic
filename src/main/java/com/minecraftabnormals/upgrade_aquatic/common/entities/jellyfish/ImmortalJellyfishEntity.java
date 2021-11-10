@@ -19,7 +19,7 @@ import net.minecraft.world.World;
  */
 public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	private final BucketProcessor<ImmortalJellyfishEntity> bucketProcessor;
-	private RotationController rotationController;
+	private final RotationController rotationController;
 	private int healCooldown;
 	private float prevHealth;
 

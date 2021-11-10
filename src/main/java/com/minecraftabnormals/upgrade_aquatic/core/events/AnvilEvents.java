@@ -20,7 +20,7 @@ public class AnvilEvents {
 
 	@SubscribeEvent
 	public static void onAnvilUpdate(AnvilUpdateEvent event) {
-		if(event.getLeft().getItem() == Items.TRIDENT && event.getRight().getItem() == UAItems.THRASHER_TOOTH.get()) {
+		if (event.getLeft().getItem() == Items.TRIDENT && event.getRight().getItem() == UAItems.THRASHER_TOOTH.get()) {
 			ItemStack leftItem = event.getLeft();
 			ItemStack cloneLeftStack = event.getLeft().copy();
 			ItemStack rightItem = event.getRight();
@@ -36,14 +36,14 @@ public class AnvilEvents {
 			}
 
 			int i3;
-			for(i3 = 0; l2 > 0 && i3 < rightItem.getCount(); ++i3) {
+			for (i3 = 0; l2 > 0 && i3 < rightItem.getCount(); ++i3) {
 				int j3 = cloneLeftStack.getDamageValue() - l2;
 				cloneLeftStack.setDamageValue(j3);
 				i++;
 				l2 = Math.min(cloneLeftStack.getDamageValue(), cloneLeftStack.getMaxDamage() / 4);
 			}
 			event.setMaterialCost(i3);
-            
+
 			if (StringUtils.isBlank(event.getName())) {
 				if (leftItem.hasCustomHoverName()) {
 					k = 1;
@@ -83,10 +83,10 @@ public class AnvilEvents {
 				cloneLeftStack.setRepairCost(k2);
 				Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(cloneLeftStack);
 				EnchantmentHelper.setEnchantments(map, cloneLeftStack);
-                
+
 				event.setOutput(cloneLeftStack);
 			}
 		}
 	}
-	
+
 }

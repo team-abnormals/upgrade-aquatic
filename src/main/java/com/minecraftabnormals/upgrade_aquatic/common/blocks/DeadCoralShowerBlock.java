@@ -27,11 +27,11 @@ public class DeadCoralShowerBlock extends DeadCoralPlantBlock {
 	public DeadCoralShowerBlock() {
 		super(Block.Properties.of(Material.STONE, MaterialColor.WOOD).noCollission().strength(0F));
 	}
-	
+
 	public DeadCoralShowerBlock(Block.Properties properties) {
 		super(properties);
 	}
-	
+
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
@@ -50,7 +50,7 @@ public class DeadCoralShowerBlock extends DeadCoralPlantBlock {
 			return facing == Direction.UP && !this.canSurvive(stateIn, worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
 		}
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
@@ -62,10 +62,10 @@ public class DeadCoralShowerBlock extends DeadCoralPlantBlock {
 		double d2 = (double) pos.getZ() + 0.5D + zOffset;
 		worldIn.addParticle(UAParticles.ELDER_PRISMARINE_SHOWER.get(), d0, d1, d2, 0d, 0.004d, 0d);
 	}
-	
+
 	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.above();
 		return worldIn.getBlockState(blockpos).isFaceSturdy(worldIn, blockpos, Direction.DOWN);
 	}
-	
+
 }

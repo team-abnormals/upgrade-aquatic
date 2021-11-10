@@ -22,42 +22,42 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 public class ElderEyeTileEntityRenderer extends TileEntityRenderer<ElderEyeTileEntity> {
 	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(UpgradeAquatic.MOD_ID + ":textures/tile/guardian_eye.png");
 	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(UpgradeAquatic.MOD_ID + ":textures/tile/guardian_eye_dim.png");
-	private ElderEyeModel model;
-	
+	private final ElderEyeModel model;
+
 	public ElderEyeTileEntityRenderer(TileEntityRendererDispatcher renderDispatcher) {
 		super(renderDispatcher);
 		this.model = new ElderEyeModel();
 	}
-	
+
 	@Override
 	public void render(ElderEyeTileEntity te, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		matrixStack.pushPose();
 		matrixStack.translate(0.5D, 1.5D, 0.5D);
-		
+
 		BlockState eyeState = te.hasLevel() ? te.getBlockState() : UABlocks.ELDER_EYE.get().defaultBlockState();
 		Direction facing = eyeState.getValue(ElderEyeBlock.FACING);
-		
-		if(facing == Direction.DOWN) {
+
+		if (facing == Direction.DOWN) {
 			matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
 			matrixStack.translate(0.0F, 1.25F, 0.75F);
-		} else if(facing == Direction.UP){
+		} else if (facing == Direction.UP) {
 			matrixStack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
 			matrixStack.translate(0.0F, 1.25F, -1.25F);
-		} else if(facing == Direction.NORTH) {
+		} else if (facing == Direction.NORTH) {
 			matrixStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
-		} else if(facing == Direction.EAST) {
+		} else if (facing == Direction.EAST) {
 			matrixStack.mulPose(Vector3f.YP.rotationDegrees(90.0F));
-		} else if(facing == Direction.WEST) {
+		} else if (facing == Direction.WEST) {
 			matrixStack.mulPose(Vector3f.YP.rotationDegrees(-90.0F));
 		}
-		
+
 		matrixStack.scale(1.0F, -1.0F, -1.0F);
-		
+
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(this.getEyeTexture(eyeState.getValue(ElderEyeBlock.ACTIVE))));
 		this.model.render(matrixStack, ivertexbuilder, combinedLightIn, combinedOverlayIn);
 		matrixStack.popPose();
 	}
-	
+
 	private ResourceLocation getEyeTexture(boolean active) {
 		return active ? ELDER_EYE_TEXTURE : ELDER_EYE_DIM_TEXTURE;
 	}

@@ -327,7 +327,7 @@ public abstract class AbstractJellyfishEntity extends BucketableWaterMobEntity i
 
 	public static class RotationController {
 		public boolean rotating;
-		private AbstractJellyfishEntity jellyfish;
+		private final AbstractJellyfishEntity jellyfish;
 		private float prevYaw, yaw, startingYaw;
 		private float prevPitch, pitch, startingPitch;
 		private float setYaw, setPitch;

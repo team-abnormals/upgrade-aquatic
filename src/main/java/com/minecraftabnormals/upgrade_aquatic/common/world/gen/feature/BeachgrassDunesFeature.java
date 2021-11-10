@@ -22,35 +22,35 @@ public class BeachgrassDunesFeature extends Feature<NoFeatureConfig> {
 
 	@Override
 	public boolean place(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
-		for(BlockState blockstate = world.getBlockState(pos); (world.isEmptyBlock(pos) || blockstate.is(BlockTags.LEAVES)) && pos.getY() > 0; blockstate = world.getBlockState(pos)) {
+		for (BlockState blockstate = world.getBlockState(pos); (world.isEmptyBlock(pos) || blockstate.is(BlockTags.LEAVES)) && pos.getY() > 0; blockstate = world.getBlockState(pos)) {
 			pos = pos.below();
 		}
-		
+
 		int grassesPlaced = 0;
-		
-		if(pos.getY() >= world.getSeaLevel() + 6) {
-			for(int j = 0; j < 128; ++j) {
+
+		if (pos.getY() >= world.getSeaLevel() + 6) {
+			for (int j = 0; j < 128; ++j) {
 				BlockPos blockpos = pos.offset(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(4) - rand.nextInt(4));
-				if(world.isEmptyBlock(blockpos) && UABlocks.BEACHGRASS.get().defaultBlockState().canSurvive(world, blockpos)) {
+				if (world.isEmptyBlock(blockpos) && UABlocks.BEACHGRASS.get().defaultBlockState().canSurvive(world, blockpos)) {
 					this.placeBeachgrass(world, blockpos, rand);
 					grassesPlaced++;
 				}
-			}	
+			}
 		} else {
 			return true;
 		}
 
 		return grassesPlaced > 0;
 	}
-	
+
 	private void placeBeachgrass(IWorld world, BlockPos pos, Random rand) {
-		if(rand.nextFloat() < 0.30F) {
+		if (rand.nextFloat() < 0.30F) {
 			TallBeachgrassBlock beachGrass = (TallBeachgrassBlock) UABlocks.TALL_BEACHGRASS.get();
-			if(world.isEmptyBlock(pos) && world.isEmptyBlock(pos.above())) {
+			if (world.isEmptyBlock(pos) && world.isEmptyBlock(pos.above())) {
 				beachGrass.placeAt(world, pos, 2);
 			}
 		} else {
-			if(world.isEmptyBlock(pos)) {
+			if (world.isEmptyBlock(pos)) {
 				world.setBlock(pos, UABlocks.BEACHGRASS.get().defaultBlockState(), 2);
 			}
 		}

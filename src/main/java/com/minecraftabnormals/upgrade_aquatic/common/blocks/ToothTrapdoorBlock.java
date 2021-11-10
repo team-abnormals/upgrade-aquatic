@@ -18,7 +18,7 @@ public class ToothTrapdoorBlock extends TrapDoorBlock {
 	public ToothTrapdoorBlock(Properties properties) {
 		super(properties);
 	}
-	
+
 	@Override
 	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
 		if (state.getValue(POWERED)) {
@@ -26,16 +26,16 @@ public class ToothTrapdoorBlock extends TrapDoorBlock {
 		} else {
 			state = state.cycle(OPEN);
 			worldIn.setBlock(pos, state, 2);
-	         if (state.getValue(WATERLOGGED)) {
-	            worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
-	         }
+			if (state.getValue(WATERLOGGED)) {
+				worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			}
 
-	         this.playSound(player, worldIn, pos, state.getValue(OPEN));
+			this.playSound(player, worldIn, pos, state.getValue(OPEN));
 			worldIn.getBlockTicks().scheduleTick(pos, this, 20);
 			return ActionResultType.SUCCESS;
 		}
 	}
-	
+
 	@Override
 	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isClientSide) {
@@ -44,7 +44,7 @@ public class ToothTrapdoorBlock extends TrapDoorBlock {
 			if (state.getValue(WATERLOGGED)) {
 				worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			}
-			this.playSound((PlayerEntity)null, worldIn, pos, state.getValue(OPEN));
+			this.playSound(null, worldIn, pos, state.getValue(OPEN));
 		}
 	}
 

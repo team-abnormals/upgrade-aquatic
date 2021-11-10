@@ -41,24 +41,24 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 	@Override
 	public ResourceLocation getTextureLocation(NautilusEntity nautilus) {
 		String textureSuffix = "";
-		
-		if(nautilus.hasCustomName()) {
+
+		if (nautilus.hasCustomName()) {
 			String name = nautilus.getName().getString().toLowerCase().trim();
-			for(Map.Entry<List<String>, String> entries : SKINS.entrySet()) {
-				if(entries.getKey().contains(name)) {
+			for (Map.Entry<List<String>, String> entries : SKINS.entrySet()) {
+				if (entries.getKey().contains(name)) {
 					textureSuffix = "_" + entries.getValue();
 				}
 			}
 		}
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
 	}
-	
+
 	@Override
 	protected void setupRotations(NautilusEntity nautilus, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 0.3F * MathHelper.sin(0.6F * ageInTicks);
 		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
-		if(!nautilus.isInWater() && !nautilus.isEyeInFluid(FluidTags.WATER)) {
+		if (!nautilus.isInWater() && !nautilus.isEyeInFluid(FluidTags.WATER)) {
 			matrixStack.translate(0.2F, 0.14F, 0.0F);
 			matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
 		}

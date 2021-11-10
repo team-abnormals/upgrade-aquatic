@@ -10,18 +10,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ElderPrismarineShowerParticle extends PrismarineShowerParticle {
-	
+
 	public ElderPrismarineShowerParticle(IAnimatedSprite animatedSprite, ClientWorld world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
 		super(animatedSprite, world, posX, posY, posZ, motionX, motionY, motionZ);
 	}
 
 	public static class Factory implements IParticleFactory<BasicParticleType> {
-		private IAnimatedSprite animatedSprite;
+		private final IAnimatedSprite animatedSprite;
 
 		public Factory(IAnimatedSprite animatedSprite) {
 			this.animatedSprite = animatedSprite;
 		}
-    	
+
 		@Override
 		public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			return new ElderPrismarineShowerParticle(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);

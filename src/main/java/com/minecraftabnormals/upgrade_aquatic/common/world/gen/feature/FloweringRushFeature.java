@@ -27,19 +27,19 @@ public class FloweringRushFeature extends Feature<NoFeatureConfig> {
 	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		boolean flag = false;
 
-		for(int i = 0; i < 64; ++i) {
+		for (int i = 0; i < 64; ++i) {
 			BlockPos blockpos = pos.offset(rand.nextInt(4) - rand.nextInt(4), rand.nextInt(2) - rand.nextInt(2), rand.nextInt(4) - rand.nextInt(4));
-			if(blockpos.getY() < worldIn.getLevel().getMaxBuildHeight() - 2 && worldIn.getBlockState(blockpos.below()).getBlock().is(BlockTags.BAMBOO_PLANTABLE_ON)) {
-	            if(worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER && worldIn.isEmptyBlock(blockpos.above())) {
-	            	this.placeFloweringRush(worldIn, blockpos);
-	            	flag = true;
-	            }
+			if (blockpos.getY() < worldIn.getLevel().getMaxBuildHeight() - 2 && worldIn.getBlockState(blockpos.below()).getBlock().is(BlockTags.BAMBOO_PLANTABLE_ON)) {
+				if (worldIn.getBlockState(blockpos).getBlock() == Blocks.WATER && worldIn.isEmptyBlock(blockpos.above())) {
+					this.placeFloweringRush(worldIn, blockpos);
+					flag = true;
+				}
 			}
 		}
 
 		return flag;
 	}
-	
+
 	private void placeFloweringRush(IWorld world, BlockPos pos) {
 		world.setBlock(pos, FLOWERING_RUSH.setValue(FloweringRushBlock.WATERLOGGED, true), 2);
 		world.setBlock(pos.above(), FLOWERING_RUSH.setValue(FloweringRushBlock.HALF, DoubleBlockHalf.UPPER), 2);

@@ -23,7 +23,7 @@ public class UASounds {
 	public static final RegistryObject<SoundEvent> ENTITY_PERCH_DEATH = HELPER.createSoundEvent("entity.perch.death");
 	public static final RegistryObject<SoundEvent> ENTITY_PERCH_HURT = HELPER.createSoundEvent("entity.perch.hurt");
 	public static final RegistryObject<SoundEvent> ENTITY_PERCH_FLOP = HELPER.createSoundEvent("entity.perch.flop");
-	
+
 	public static final RegistryObject<SoundEvent> ENTITY_THRASHER_THRASH = HELPER.createSoundEvent("entity.thrasher.thrash");
 	public static final RegistryObject<SoundEvent> ENTITY_THRASHER_SONAR_FIRE = HELPER.createSoundEvent("entity.thrasher.sonar_fire");
 	public static final RegistryObject<SoundEvent> ENTITY_THRASHER_FLOP = HELPER.createSoundEvent("entity.thrasher.flop");

@@ -78,9 +78,12 @@ public class UASpawns {
 		}
 
 		if (event.getCategory() == Biome.Category.SWAMP) {
-			if (UAConfig.COMMON.pikeSwampWeight.get() > 0) spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeSwampWeight.get(), 1, 2));
-			if (UAConfig.COMMON.squidSwampWeight.get() > 0) spawns.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SQUID, UAConfig.COMMON.squidSwampWeight.get(), 1, 2));
-			if (UAConfig.COMMON.perchWeight.get() > 0) spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PERCH.get(), UAConfig.COMMON.perchWeight.get(), 1, 6));
+			if (UAConfig.COMMON.pikeSwampWeight.get() > 0)
+				spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PIKE.get(), UAConfig.COMMON.pikeSwampWeight.get(), 1, 2));
+			if (UAConfig.COMMON.squidSwampWeight.get() > 0)
+				spawns.addSpawn(EntityClassification.WATER_CREATURE, new MobSpawnInfo.Spawners(EntityType.SQUID, UAConfig.COMMON.squidSwampWeight.get(), 1, 2));
+			if (UAConfig.COMMON.perchWeight.get() > 0)
+				spawns.addSpawn(EntityClassification.WATER_AMBIENT, new MobSpawnInfo.Spawners(UAEntities.PERCH.get(), UAConfig.COMMON.perchWeight.get(), 1, 6));
 		}
 	}
 

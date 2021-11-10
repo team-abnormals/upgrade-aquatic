@@ -16,18 +16,18 @@ import net.minecraft.util.math.MathHelper;
 
 public class JellyfishEmissiveLayer<T extends AbstractJellyfishEntity, M extends EndimatorEntityModel<T>> extends LayerRenderer<T, M> {
 	private final AbstractJellyfishRenderer<T> jellyfishRenderer;
-	
+
 	public JellyfishEmissiveLayer(IEntityRenderer<T, M> renderer, AbstractJellyfishRenderer<T> jellyfishRenderer) {
 		super(renderer);
 		this.jellyfishRenderer = jellyfishRenderer;
 	}
-	
+
 	@Override
 	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T jellyfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		ClientInfo.MINECRAFT.getTextureManager().bind(this.jellyfishRenderer.getOverlayTexture(jellyfish));
-		
+
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveTransluscentEntityWithDiffusedLight(this.jellyfishRenderer.getOverlayTexture(jellyfish), true));
-		
+
 		this.getParentModel().setupAnim(jellyfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, MathHelper.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingRenderer.getOverlayCoords(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
 	}

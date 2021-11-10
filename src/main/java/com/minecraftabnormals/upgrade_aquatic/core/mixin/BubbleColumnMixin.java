@@ -17,19 +17,19 @@ import java.util.Random;
 
 @Mixin(BubbleColumnBlock.class)
 public final class BubbleColumnMixin {
-    @Inject(at = @At("HEAD"), method = "tick")
-    private void tick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo info) {
-    	BlockPos abovePos = pos.above();
+	@Inject(at = @At("HEAD"), method = "tick")
+	private void tick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo info) {
+		BlockPos abovePos = pos.above();
 		Block aboveBlock = world.getBlockState(abovePos).getBlock();
 		boolean noFallingBlockAbove = world.getEntitiesOfClass(FallingBlockEntity.class, new AxisAlignedBB(pos)).isEmpty();
-		
+
 		if (noFallingBlockAbove) {
 			UABlocks.FALLABLES.forEach((inputBlock, outputBlock) -> {
 				if (inputBlock.get() == aboveBlock) {
 					this.spawnFallingBlock(world, pos, outputBlock.get());
 				}
 			});
-			
+
 			if (UABlocks.ATMOSHPERIC_FALLABLES != null) {
 				UABlocks.ATMOSHPERIC_FALLABLES.forEach((inputBlock, outputBlock) -> {
 					if (inputBlock.get() == aboveBlock) {
@@ -38,9 +38,9 @@ public final class BubbleColumnMixin {
 				});
 			}
 		}
-    }
-    
-    private void spawnFallingBlock(ServerWorld world, BlockPos pos, Block block) {
+	}
+
+	private void spawnFallingBlock(ServerWorld world, BlockPos pos, Block block) {
 		FallingBlockEntity fallingblockentity = new FallingBlockEntity(world, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, block.defaultBlockState());
 		fallingblockentity.time = 1;
 		world.addFreshEntity(fallingblockentity);

@@ -27,12 +27,12 @@ public class CoralShowerBlock extends CoralPlantBlock {
 	public CoralShowerBlock(Block deadBlock, Properties props) {
 		super(deadBlock, props);
 	}
-	
+
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return SHAPE;
 	}
-	
+
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
@@ -44,7 +44,7 @@ public class CoralShowerBlock extends CoralPlantBlock {
 		double d2 = (double) pos.getZ() + 0.5D + zOffset;
 		worldIn.addParticle(UAParticles.PRISMARINE_SHOWER.get(), d0, d1, d2, 0d, 0.004d, 0d);
 	}
-	
+
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
@@ -64,15 +64,15 @@ public class CoralShowerBlock extends CoralPlantBlock {
 			return facing == Direction.UP && !this.canSurvive(stateIn, worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : stateIn;
 		}
 	}
-	
+
 	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.above();
 		return worldIn.getBlockState(blockpos).isFaceSturdy(worldIn, blockpos, Direction.DOWN);
 	}
-	
+
 	@Override
 	public boolean isConduitFrame(BlockState state, IWorldReader world, BlockPos pos, BlockPos conduit) {
 		return true;
 	}
-	
+
 }

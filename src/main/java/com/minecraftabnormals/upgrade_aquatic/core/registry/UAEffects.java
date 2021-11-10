@@ -18,23 +18,23 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class UAEffects {
 	public static final DeferredRegister<Effect> EFFECTS = DeferredRegister.create(ForgeRegistries.POTIONS, UpgradeAquatic.MOD_ID);
 	public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, UpgradeAquatic.MOD_ID);
-	
-	public static final RegistryObject<Effect> INSOMNIA    = EFFECTS.register("insomnia", InsomniaEffect::new);
+
+	public static final RegistryObject<Effect> INSOMNIA = EFFECTS.register("insomnia", InsomniaEffect::new);
 	public static final RegistryObject<Effect> RESTFULNESS = EFFECTS.register("restfulness", RestfulnessEffect::new);
-	public static final RegistryObject<Effect> REPELLENCE  = EFFECTS.register("repellence", RepellenceEffect::new);
-    public static final RegistryObject<Effect> VIBING      = EFFECTS.register("vibing", VibingEffect::new);
-	
-	public static final RegistryObject<Potion> INSOMNIA_NORMAL    = POTIONS.register("insomnia", () -> new Potion(new EffectInstance(INSOMNIA.get())));
-	public static final RegistryObject<Potion> INSOMNIA_STRONG    = POTIONS.register("insomnia_strong", () -> new Potion(new EffectInstance(INSOMNIA.get(), 0, 1)));
+	public static final RegistryObject<Effect> REPELLENCE = EFFECTS.register("repellence", RepellenceEffect::new);
+	public static final RegistryObject<Effect> VIBING = EFFECTS.register("vibing", VibingEffect::new);
+
+	public static final RegistryObject<Potion> INSOMNIA_NORMAL = POTIONS.register("insomnia", () -> new Potion(new EffectInstance(INSOMNIA.get())));
+	public static final RegistryObject<Potion> INSOMNIA_STRONG = POTIONS.register("insomnia_strong", () -> new Potion(new EffectInstance(INSOMNIA.get(), 0, 1)));
 	public static final RegistryObject<Potion> RESTFULNESS_NORMAL = POTIONS.register("restfulness", () -> new Potion(new EffectInstance(RESTFULNESS.get())));
 	public static final RegistryObject<Potion> RESTFULNESS_STRONG = POTIONS.register("restfulness_strong", () -> new Potion(new EffectInstance(RESTFULNESS.get(), 0, 1)));
-	public static final RegistryObject<Potion> REPELLENCE_NORMAL  = POTIONS.register("repellence", () -> new Potion(new EffectInstance(REPELLENCE.get(), 3600)));
-	public static final RegistryObject<Potion> REPELLENCE_STRONG  = POTIONS.register("repellence_strong", () -> new Potion(new EffectInstance(REPELLENCE.get(), 1800, 1)));
-	public static final RegistryObject<Potion> REPELLENCE_LONG    = POTIONS.register("repellence_long", () -> new Potion(new EffectInstance(REPELLENCE.get(), 9600)));
-	public static final RegistryObject<Potion> VIBING_NORMAL      = POTIONS.register("vibing", () -> new Potion(new EffectInstance(VIBING.get(), 3600)));
-	public static final RegistryObject<Potion> VIBING_STRONG      = POTIONS.register("vibing_strong", () -> new Potion(new EffectInstance(VIBING.get(), 1800, 1)));
-	public static final RegistryObject<Potion> VIBING_LONG        = POTIONS.register("vibing_long", () -> new Potion(new EffectInstance(VIBING.get(), 9600)));
-	
+	public static final RegistryObject<Potion> REPELLENCE_NORMAL = POTIONS.register("repellence", () -> new Potion(new EffectInstance(REPELLENCE.get(), 3600)));
+	public static final RegistryObject<Potion> REPELLENCE_STRONG = POTIONS.register("repellence_strong", () -> new Potion(new EffectInstance(REPELLENCE.get(), 1800, 1)));
+	public static final RegistryObject<Potion> REPELLENCE_LONG = POTIONS.register("repellence_long", () -> new Potion(new EffectInstance(REPELLENCE.get(), 9600)));
+	public static final RegistryObject<Potion> VIBING_NORMAL = POTIONS.register("vibing", () -> new Potion(new EffectInstance(VIBING.get(), 3600)));
+	public static final RegistryObject<Potion> VIBING_STRONG = POTIONS.register("vibing_strong", () -> new Potion(new EffectInstance(VIBING.get(), 1800, 1)));
+	public static final RegistryObject<Potion> VIBING_LONG = POTIONS.register("vibing_long", () -> new Potion(new EffectInstance(VIBING.get(), 9600)));
+
 	public static void registerBrewingRecipes() {
 		DataUtil.addMix(Potions.AWKWARD, Items.COCOA_BEANS, RESTFULNESS_NORMAL.get());
 		DataUtil.addMix(RESTFULNESS_NORMAL.get(), Items.GLOWSTONE_DUST, RESTFULNESS_STRONG.get());

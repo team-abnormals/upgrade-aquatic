@@ -7,11 +7,11 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
 public class JellyfishDamageSource extends EntityDamageSource {
-	
+
 	public JellyfishDamageSource(AbstractJellyfishEntity jellyfish) {
 		super("upgrade_aquatic.jellyfishSting", jellyfish);
 	}
-	
+
 	@Override
 	public ITextComponent getLocalizedDeathMessage(LivingEntity entityLivingBase) {
 		String message = "death.attack." + this.msgId;

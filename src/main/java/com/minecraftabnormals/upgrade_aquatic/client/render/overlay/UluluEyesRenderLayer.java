@@ -25,7 +25,7 @@ public class UluluEyesRenderLayer<T extends UluluEntity, M extends UluluModel<T>
 		ClientInfo.MINECRAFT.getTextureManager().bind(EYES_LAYER);
 
 		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveEntity(EYES_LAYER));
-		
+
 		this.getParentModel().setupAnim(ululu, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}

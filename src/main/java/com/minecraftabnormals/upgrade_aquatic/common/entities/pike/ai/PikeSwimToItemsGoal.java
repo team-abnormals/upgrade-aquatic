@@ -9,11 +9,11 @@ import java.util.List;
 
 public final class PikeSwimToItemsGoal extends Goal {
 	private final PikeEntity pike;
-	
+
 	public PikeSwimToItemsGoal(PikeEntity pike) {
 		this.pike = pike;
 	}
-	
+
 	@Override
 	public boolean canUse() {
 		List<ItemEntity> list = this.pike.level.getEntitiesOfClass(ItemEntity.class, this.pike.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), PikeEntity.ITEM_SELECTOR);
@@ -29,7 +29,7 @@ public final class PikeSwimToItemsGoal extends Goal {
 	public void tick() {
 		if (this.pike.getItemBySlot(EquipmentSlotType.MAINHAND).isEmpty()) this.moveTowardsNearestItem();
 	}
-	
+
 	private void moveTowardsNearestItem() {
 		List<ItemEntity> list = this.pike.level.getEntitiesOfClass(ItemEntity.class, this.pike.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), PikeEntity.ITEM_SELECTOR);
 		if (!list.isEmpty()) this.pike.getNavigation().moveTo(list.get(0), 1.2F);

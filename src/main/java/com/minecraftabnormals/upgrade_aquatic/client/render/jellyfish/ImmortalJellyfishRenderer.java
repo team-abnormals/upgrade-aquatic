@@ -14,17 +14,17 @@ public class ImmortalJellyfishRenderer<I extends ImmortalJellyfishEntity> extend
 		super(renderManager, new ImmortalJellyfishModel<>(), 0.25F);
 		this.addLayer(new JellyfishEmissiveLayer<>(this, this));
 	}
-	
+
 	@Override
 	public ResourceLocation getTextureLocation(I jellyfish) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
-	
+
 	@Override
 	public ResourceLocation getOverlayTexture(I jellyfish) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
 	}
-	
+
 	@Override
 	protected RenderType getRenderType(I jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
 		return RenderType.entityTranslucent(this.getTextureLocation(jellyfish));

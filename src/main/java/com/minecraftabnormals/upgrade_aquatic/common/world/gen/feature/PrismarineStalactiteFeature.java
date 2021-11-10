@@ -18,21 +18,21 @@ public class PrismarineStalactiteFeature extends PrismarineCoralFeature {
 	public PrismarineStalactiteFeature(Codec<NoFeatureConfig> config) {
 		super(config);
 	}
-	
+
 	@Override
 	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		return false;
 	}
-	
+
 	public static boolean placeFeature(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
 		Direction randDirection = Direction.getRandom(rand);
-		if(randDirection == Direction.UP || randDirection == Direction.DOWN) {
+		if (randDirection == Direction.UP || randDirection == Direction.DOWN) {
 			randDirection = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
 		}
-		if(isInRavine(world, pos, randDirection, rand) && pos.getY() >= 25) {
-			for(int y = 0; y <= 8; y++) {
+		if (isInRavine(world, pos, randDirection, rand) && pos.getY() >= 25) {
+			for (int y = 0; y <= 8; y++) {
 				BlockPos checkPos = pos.above(y);
-				if(world.getBlockState(checkPos).getBlock() == Blocks.STONE) {
+				if (world.getBlockState(checkPos).getBlock() == Blocks.STONE) {
 					int a = rand.nextInt(3) + 3;
 					int b = 4;
 					int c = rand.nextInt(5) + 4;
@@ -55,7 +55,7 @@ public class PrismarineStalactiteFeature extends PrismarineCoralFeature {
 		}
 		return false;
 	}
-	
+
 	public static void createStalactiteLayer(IWorld world, BlockPos pos, Random rand, int a, int b, int c) {
 		MathUtil.Equation r = (theta) -> (Math.cos(b * theta) / c + 1) * a;
 		for (int i = -(a / c + a); i < a / c + a; i++) {
@@ -68,13 +68,13 @@ public class PrismarineStalactiteFeature extends PrismarineCoralFeature {
 			}
 		}
 	}
-	
+
 	public static boolean isInRavine(IWorld world, BlockPos pos, Direction randDirection, Random rand) {
-		for(int i = 0; i < 19; i++) {
+		for (int i = 0; i < 19; i++) {
 			BlockPos checkPos = pos.relative(randDirection, rand.nextInt(2) + 1).below(i);
-			if(world.getBlockState(checkPos).getBlock() == Blocks.MAGMA_BLOCK || world.getBlockState(checkPos).getBlock() == Blocks.OBSIDIAN) {
+			if (world.getBlockState(checkPos).getBlock() == Blocks.MAGMA_BLOCK || world.getBlockState(checkPos).getBlock() == Blocks.OBSIDIAN) {
 				return true;
-			} else if(!world.getBlockState(checkPos).getMaterial().isReplaceable()) {
+			} else if (!world.getBlockState(checkPos).getMaterial().isReplaceable()) {
 				return false;
 			}
 		}

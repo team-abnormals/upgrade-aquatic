@@ -44,7 +44,7 @@ public class JellyfishBucketItem extends BucketItem {
 			this.placeEntity((ServerWorld) worldIn, stack, pos);
 		}
 	}
-	
+
 	@Override
 	protected void playEmptySound(@Nullable PlayerEntity player, IWorld worldIn, BlockPos pos) {
 		worldIn.playSound(player, pos, UASounds.ITEM_BUCKET_EMPTY_JELLYFISH.get(), SoundCategory.NEUTRAL, 1.0F, 1.0F);
@@ -56,7 +56,7 @@ public class JellyfishBucketItem extends BucketItem {
 			jellyfish.setFromBucket(true);
 		}
 	}
-	
+
 	@Nullable
 	public AbstractJellyfishEntity getEntityInStack(ItemStack stack, World world, @Nullable BlockPos pos) {
 		CompoundNBT compoundnbt = stack.getTag();
@@ -64,13 +64,13 @@ public class JellyfishBucketItem extends BucketItem {
 			CompoundNBT jellyfishTag = compoundnbt.getCompound("JellyfishTag");
 			String entityId = jellyfishTag.getString("EntityId");
 			EntityType<?> jellyfishType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MOD_ID + ":" + entityId));
-			Entity entity = pos != null ? jellyfishType.spawn((ServerWorld)world, stack, null, pos, SpawnReason.BUCKET, true, false) : jellyfishType.create(world);
+			Entity entity = pos != null ? jellyfishType.spawn((ServerWorld) world, stack, null, pos, SpawnReason.BUCKET, true, false) : jellyfishType.create(world);
 			AbstractJellyfishEntity jellyfish = entity instanceof AbstractJellyfishEntity ? (AbstractJellyfishEntity) entity : null;
-			
+
 			if (jellyfish == null) {
 				return null;
 			}
-			
+
 			jellyfish.getBucketProcessor().read(jellyfishTag);
 			return jellyfish;
 		} else if (pos != null) {
@@ -79,11 +79,11 @@ public class JellyfishBucketItem extends BucketItem {
 		}
 		return null;
 	}
-	
+
 	private AbstractJellyfishEntity getRandomJellyfish(ItemStack stack, World world, @Nullable BlockPos pos) {
 		Random rand = new Random();
 		List<JellyfishRegistry.JellyfishEntry<?>> commonJellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);
-		return (AbstractJellyfishEntity) commonJellies.get(rand.nextInt(commonJellies.size())).jellyfish.get().spawn((ServerWorld)world, stack, null, pos, SpawnReason.BUCKET, true, false);
+		return (AbstractJellyfishEntity) commonJellies.get(rand.nextInt(commonJellies.size())).jellyfish.get().spawn((ServerWorld) world, stack, null, pos, SpawnReason.BUCKET, true, false);
 	}
 
 	@Override
@@ -92,11 +92,11 @@ public class JellyfishBucketItem extends BucketItem {
 		CompoundNBT compoundnbt = stack.getTag();
 		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 			AbstractJellyfishEntity jellyfish = this.getEntityInStack(stack, worldIn, null);
-			
-			if(jellyfish != null) {
-				TextFormatting[] atextformatting = new TextFormatting[] {TextFormatting.ITALIC, TextFormatting.GRAY};
+
+			if (jellyfish != null) {
+				TextFormatting[] atextformatting = new TextFormatting[]{TextFormatting.ITALIC, TextFormatting.GRAY};
 				tooltip.add((new TranslationTextComponent("tooltip.upgrade_aquatic." + jellyfish.getBucketName() + "_jellyfish").withStyle(atextformatting)));
-				
+
 				tooltip.add(jellyfish.getYieldingTorchMessage());
 			}
 		}
