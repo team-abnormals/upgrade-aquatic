@@ -550,7 +550,7 @@
   "advancements.nether.sleepless_slave.title": "Purging o' St. Mary",
   "advancements.nether.sleepless_slave.description": "Make an Angel outta the Flyin' Devil by forcin' him to endure a Caulkless Night",
 
-	"effect.upgrade_aquatic.restfulness": "Wide Awake",
+  "effect.upgrade_aquatic.restfulness": "Wide Awake",
 	"item.minecraft.potion.effect.restfulness": "Clap o' Thunder",
 	"item.minecraft.potion.effect.restfulness_strong": "Clap o' Thunder",
 	"item.minecraft.splash_potion.effect.restfulness": "Grenade o' Clappin' Thunder",
