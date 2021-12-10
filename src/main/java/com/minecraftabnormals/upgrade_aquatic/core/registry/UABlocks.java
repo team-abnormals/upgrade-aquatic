@@ -438,7 +438,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_LOG = HELPER.createBlock("stripped_driftwood_log", () -> new StrippedLogBlock(UAProperties.DRIFTWOOD), ItemGroup.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD = HELPER.createBlock("stripped_driftwood", () -> new StrippedWoodBlock(UAProperties.DRIFTWOOD), ItemGroup.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_LOG = HELPER.createBlock("driftwood_log", () -> new AbnormalsLogBlock(STRIPPED_DRIFTWOOD_LOG, UAProperties.DRIFTWOOD), ItemGroup.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD = HELPER.createBlock("driftwood", () -> new WoodBlock(STRIPPED_DRIFTWOOD_LOG, UAProperties.DRIFTWOOD), ItemGroup.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD = HELPER.createBlock("driftwood", () -> new WoodBlock(STRIPPED_DRIFTWOOD, UAProperties.DRIFTWOOD), ItemGroup.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_PLANKS = HELPER.createBlock("driftwood_planks", () -> new PlanksBlock(UAProperties.DRIFTWOOD), ItemGroup.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_DOOR = HELPER.createBlock("driftwood_door", () -> new WoodDoorBlock(UAProperties.DRIFTWOOD), ItemGroup.TAB_REDSTONE);
 	public static final RegistryObject<Block> DRIFTWOOD_SLAB = HELPER.createBlock("driftwood_slab", () -> new WoodSlabBlock(UAProperties.DRIFTWOOD), ItemGroup.TAB_BUILDING_BLOCKS);
