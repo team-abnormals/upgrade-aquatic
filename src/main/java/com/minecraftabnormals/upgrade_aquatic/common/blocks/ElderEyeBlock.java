@@ -33,9 +33,9 @@ public class ElderEyeBlock extends DirectionalBlock implements IBucketPickupHand
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any()
 				.setValue(FACING, Direction.SOUTH)
-				.setValue(POWERED, Boolean.valueOf(false))
-				.setValue(ACTIVE, Boolean.valueOf(false))
-				.setValue(WATERLOGGED, Boolean.valueOf(false))
+				.setValue(POWERED, false)
+				.setValue(ACTIVE, false)
+				.setValue(WATERLOGGED, false)
 		);
 	}
 
@@ -79,7 +79,7 @@ public class ElderEyeBlock extends DirectionalBlock implements IBucketPickupHand
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
 		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
 		return this.defaultBlockState()
-				.setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER))
+				.setValue(WATERLOGGED, ifluidstate.getType() == Fluids.WATER)
 				.setValue(FACING, context.getNearestLookingDirection().getOpposite());
 	}
 
@@ -136,7 +136,7 @@ public class ElderEyeBlock extends DirectionalBlock implements IBucketPickupHand
 
 	public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
 		if (state.getValue(WATERLOGGED)) {
-			worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(false)), 3);
+			worldIn.setBlock(pos, state.setValue(WATERLOGGED, false), 3);
 			return Fluids.WATER;
 		} else {
 			return Fluids.EMPTY;
@@ -147,7 +147,7 @@ public class ElderEyeBlock extends DirectionalBlock implements IBucketPickupHand
 	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
 		if (!state.getValue(WATERLOGGED) && fluidStateIn.getType() == Fluids.WATER) {
 			if (!worldIn.isClientSide()) {
-				worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(true)), 3);
+				worldIn.setBlock(pos, state.setValue(WATERLOGGED, true), 3);
 				worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			}
 			return true;
