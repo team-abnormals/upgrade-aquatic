@@ -16,11 +16,11 @@
   },
   "conditions": [
     {
-      "type": "abnormals_core:quark_flag",
+      "type": "blueprint:quark_flag",
       "flag": "elder_prismarine_underground_biome"
     },
     {
-      "type": "abnormals_core:quark_flag",
+      "type": "blueprint:quark_flag",
       "flag": "vertical_slabs"
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "parent": "abnormals_core:block/vertical_slab",
+  "parent": "blueprint:block/vertical_slab",
   "textures": {
     "bottom": "upgrade_aquatic:block/luminous_prismarine",
     "top": "upgrade_aquatic:block/luminous_prismarine",

@@ -7,7 +7,7 @@
   "count": 2,
   "conditions": [
     {
-      "type": "abnormals_core:quark_flag",
+      "type": "blueprint:quark_flag",
       "flag": "vertical_slabs"
     }
   ]

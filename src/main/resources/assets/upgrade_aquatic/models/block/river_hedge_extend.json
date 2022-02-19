@@ -1,5 +1,5 @@
 {
-  "parent": "abnormals_core:block/hedge_extend",
+  "parent": "blueprint:block/hedge_extend",
   "textures": {
     "leaf": "upgrade_aquatic:block/river_leaves"
   }

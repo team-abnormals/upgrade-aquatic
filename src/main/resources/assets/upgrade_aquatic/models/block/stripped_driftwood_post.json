@@ -1,5 +1,5 @@
 {
-  "parent": "abnormals_core:block/post",
+  "parent": "blueprint:block/post",
   "textures": {
     "texture": "upgrade_aquatic:block/stripped_driftwood_log"
   }

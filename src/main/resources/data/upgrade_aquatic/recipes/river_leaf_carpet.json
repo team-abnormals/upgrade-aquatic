@@ -21,7 +21,7 @@
           "modid": "quark"
         },
         {
-          "type": "abnormals_core:quark_flag",
+          "type": "blueprint:quark_flag",
           "flag": "leaf_carpet"
         }
       ]

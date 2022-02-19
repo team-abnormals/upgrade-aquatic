@@ -16,7 +16,7 @@
   },
   "conditions": [
     {
-      "type": "abnormals_core:quark_flag",
+      "type": "blueprint:quark_flag",
       "flag": "vertical_planks"
     }
   ]

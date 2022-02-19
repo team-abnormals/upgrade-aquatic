@@ -29,27 +29,27 @@
     },
     {   
     	"when": { "chain_down": true },
-        "apply": { "model": "abnormals_core:block/chain_small" }
+        "apply": { "model": "blueprint:block/chain_small" }
     },
     {   
     	"when": { "chain_up": true },
-        "apply": { "model": "abnormals_core:block/chain_small_top" }
+        "apply": { "model": "blueprint:block/chain_small_top" }
     },
     {   
     	"when": { "chain_north": true },
-        "apply": { "model": "abnormals_core:block/chain_small_top", "x": 90 }
+        "apply": { "model": "blueprint:block/chain_small_top", "x": 90 }
     },
     {   
     	"when": { "chain_south": true },
-        "apply": { "model": "abnormals_core:block/chain_small", "x": 90 }
+        "apply": { "model": "blueprint:block/chain_small", "x": 90 }
     },
     {   
     	"when": { "chain_east": true },
-        "apply": { "model": "abnormals_core:block/chain_small_top", "x": 90, "y": 90 }
+        "apply": { "model": "blueprint:block/chain_small_top", "x": 90, "y": 90 }
     },
     {   
     	"when": { "chain_west": true },
-        "apply": { "model": "abnormals_core:block/chain_small", "x": 90, "y": 90 }
+        "apply": { "model": "blueprint:block/chain_small", "x": 90, "y": 90 }
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-    "parent": "abnormals_core:block/vertical_slab",
+    "parent": "blueprint:block/vertical_slab",
     "textures": {
         "side": "upgrade_aquatic:block/kelpy_stone_bricks",
         "top": "upgrade_aquatic:block/kelpy_stone_bricks",

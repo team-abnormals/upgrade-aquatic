@@ -1,5 +1,5 @@
 {
-    "parent": "abnormals_core:block/vertical_slab",
+    "parent": "blueprint:block/vertical_slab",
     "textures": {
         "side": "upgrade_aquatic:block/ochre_kelpy_cobblestone",
         "top": "upgrade_aquatic:block/ochre_kelpy_cobblestone",
