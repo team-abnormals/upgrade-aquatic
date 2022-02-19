@@ -1,37 +1,42 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADamageSources;
-import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.*;
-import net.minecraft.util.Direction.Axis;
-import net.minecraft.util.Direction.AxisDirection;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.Direction.AxisDirection;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Random;
 
-public class GuardianSpineBlock extends DirectionalBlock implements IBucketPickupHandler, ILiquidContainer {
+public class GuardianSpineBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
 	public static final BooleanProperty DRAWN = BooleanProperty.create("drawn");
 	public static final BooleanProperty ELDER = BooleanProperty.create("elder");
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -74,17 +79,12 @@ public class GuardianSpineBlock extends DirectionalBlock implements IBucketPicku
 	}
 
 	@Override
-	public boolean isPathfindable(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+	public boolean isPathfindable(BlockState state, BlockGetter worldIn, BlockPos pos, PathComputationType type) {
 		return state.getValue(DRAWN);
 	}
 
 	@Override
-	public ToolType getHarvestTool(BlockState state) {
-		return ToolType.PICKAXE;
-	}
-
-	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+	public VoxelShape getShape(BlockState state, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
 		if (!state.getValue(ELDER)) {
 			if (state.getValue(DRAWN)) {
 				if (state.getValue(FACING).getAxis() == Axis.Y) {
@@ -144,12 +144,12 @@ public class GuardianSpineBlock extends DirectionalBlock implements IBucketPicku
 		return null;
 	}
 
-	public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof LivingEntity && state.getValue(DRAWN)) {
-			entityIn.makeStuckInBlock(state, new Vector3d(0.25D, 0.5D, 0.25D));
+			entityIn.makeStuckInBlock(state, new Vec3(0.25D, 0.5D, 0.25D));
 			if (!entityIn.isInvulnerable()) {
 				if (state.getValue(ELDER))
-					((LivingEntity) entityIn).addEffect(new EffectInstance(Effects.DIG_SLOWDOWN, 40));
+					((LivingEntity) entityIn).addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 40));
 			}
 			if (!worldIn.isClientSide && (entityIn.xOld != entityIn.getX() || entityIn.zOld != entityIn.getZ() || entityIn.yOld != entityIn.getY())) {
 				double d0 = Math.abs(entityIn.getX() - entityIn.xOld);
@@ -175,58 +175,48 @@ public class GuardianSpineBlock extends DirectionalBlock implements IBucketPicku
 		return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
 	}
 
-	public void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, WATERLOGGED, DRAWN, ELDER);
 	}
 
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_) {
+	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_) {
 		if (!worldIn.isClientSide) {
 			boolean flag = state.getValue(DRAWN);
 			if (flag != worldIn.hasNeighborSignal(pos)) {
 				if (flag) {
-					worldIn.getBlockTicks().scheduleTick(pos, this, 1);
+					worldIn.scheduleTick(pos, this, 1);
 				} else {
 					float pitch = state.getValue(ELDER) ? 0.85F : 1.0F;
-					worldIn.playSound(null, pos, SoundEvents.PISTON_EXTEND, SoundCategory.BLOCKS, 0.3F, pitch);
+					worldIn.playSound(null, pos, SoundEvents.PISTON_EXTEND, SoundSource.BLOCKS, 0.3F, pitch);
 					worldIn.setBlock(pos, state.cycle(DRAWN), 2);
 				}
 			}
 		}
 	}
 
-	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isClientSide) {
 			if (state.getValue(DRAWN) && !worldIn.hasNeighborSignal(pos)) {
 				float pitch = state.getValue(ELDER) ? 0.85F : 1.0F;
-				worldIn.playSound(null, pos, SoundEvents.PISTON_CONTRACT, SoundCategory.BLOCKS, 0.3F, pitch);
+				worldIn.playSound(null, pos, SoundEvents.PISTON_CONTRACT, SoundSource.BLOCKS, 0.3F, pitch);
 				worldIn.setBlock(pos, state.cycle(DRAWN), 2);
 			}
 		}
 	}
 
 	@SuppressWarnings("deprecation")
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.getValue(WATERLOGGED)) {
-			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 		return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
 	}
 
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		Direction direction = context.getClickedFace();
 		BlockState state = context.getLevel().getBlockState(context.getClickedPos().relative(direction.getOpposite()));
 		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
-		return state.getBlock() == this && state.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER)).setValue(DRAWN, Boolean.valueOf(context.getLevel().hasNeighborSignal(context.getClickedPos()))) : this.defaultBlockState().setValue(FACING, direction).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER)).setValue(DRAWN, Boolean.valueOf(context.getLevel().hasNeighborSignal(context.getClickedPos())));
-	}
-
-	@Override
-	public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
-		if (state.getValue(WATERLOGGED)) {
-			worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(false)), 3);
-			return Fluids.WATER;
-		} else {
-			return Fluids.EMPTY;
-		}
+		return state.getBlock() == this && state.getValue(FACING) == direction ? this.defaultBlockState().setValue(FACING, direction.getOpposite()).setValue(WATERLOGGED, ifluidstate.getType() == Fluids.WATER).setValue(DRAWN, Boolean.valueOf(context.getLevel().hasNeighborSignal(context.getClickedPos()))) : this.defaultBlockState().setValue(FACING, direction).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER)).setValue(DRAWN, Boolean.valueOf(context.getLevel().hasNeighborSignal(context.getClickedPos())));
 	}
 
 	@SuppressWarnings("deprecation")
@@ -235,26 +225,8 @@ public class GuardianSpineBlock extends DirectionalBlock implements IBucketPicku
 	}
 
 	@Override
-	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-		return !state.getValue(WATERLOGGED) && fluidIn == Fluids.WATER;
-	}
-
-	@Override
-	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-		if (!state.getValue(WATERLOGGED) && fluidStateIn.getType() == Fluids.WATER) {
-			if (!worldIn.isClientSide()) {
-				worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(true)), 3);
-				worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
-			}
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public PathNodeType getAiPathNodeType(BlockState state, IBlockReader world, BlockPos pos, MobEntity entity) {
-		return PathNodeType.LAVA;
+	public BlockPathTypes getAiPathNodeType(BlockState state, BlockGetter world, BlockPos pos, Mob entity) {
+		return BlockPathTypes.LAVA;
 	}
 
 }

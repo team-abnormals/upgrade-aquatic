@@ -1,17 +1,19 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
-import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
-import com.minecraftabnormals.abnormals_core.core.util.EntityUtil;
-import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
-import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
+import com.teamabnormals.blueprint.core.endimator.Endimation;
+import com.teamabnormals.blueprint.core.util.EntityUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
+import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.HitResult.Type;
 
 import java.util.EnumSet;
 import java.util.Random;
+
+import net.minecraft.world.entity.ai.goal.Goal.Flag;
 
 public class JellyfishSwimIntoDirectionGoal extends Goal {
 	private final AbstractJellyfishEntity jellyfish;
@@ -74,13 +76,13 @@ public class JellyfishSwimIntoDirectionGoal extends Goal {
 		float upperChance = this.jellyfish.position().y() < this.jellyfish.level.getSeaLevel() - 6 ? 0.5F : 0.2F;
 		if (this.jellyfish.isOnGround() || rotations[0] == 0.0F && rotations[1] == 0.0F || EntityUtil.rayTraceUpWithCustomDirection(this.jellyfish, rotations[1], rotations[0], 1.0F, 1.0F).getType() == Type.BLOCK) {
 			return new float[]{
-					(float) MathHelper.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand)),
-					(float) MathHelper.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand))
+					(float) Mth.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand)),
+					(float) Mth.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 180.0F, rand))
 			};
 		}
 		return new float[]{
-				rotations[0] + (float) MathHelper.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand)),
-				rand.nextFloat() < upperChance ? (float) MathUtil.makeNegativeRandomly(rand.nextFloat() * 50.0F, rand) : rotations[1] + (float) MathHelper.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand))
+				rotations[0] + (float) Mth.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand)),
+				rand.nextFloat() < upperChance ? (float) MathUtil.makeNegativeRandomly(rand.nextFloat() * 50.0F, rand) : rotations[1] + (float) Mth.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand))
 		};
 	}
 }

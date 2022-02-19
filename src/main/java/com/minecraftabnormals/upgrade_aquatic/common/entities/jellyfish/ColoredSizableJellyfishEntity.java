@@ -1,31 +1,31 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 
 import com.google.common.collect.ImmutableMap;
-import com.minecraftabnormals.abnormals_core.core.api.IAgeableEntity;
+import com.teamabnormals.blueprint.core.api.IAgeableEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.helper.JellyfishSizeMap;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.IServerWorld;
-import net.minecraft.world.World;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.Level;
 
 import java.util.Random;
 import java.util.TreeMap;
 
 public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEntity implements IAgeableEntity {
-	protected static final DataParameter<Integer> COLOR = EntityDataManager.defineId(ColoredSizableJellyfishEntity.class, DataSerializers.INT);
-	protected static final DataParameter<Float> SIZE = EntityDataManager.defineId(ColoredSizableJellyfishEntity.class, DataSerializers.FLOAT);
+	protected static final EntityDataAccessor<Integer> COLOR = SynchedEntityData.defineId(ColoredSizableJellyfishEntity.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Float> SIZE = SynchedEntityData.defineId(ColoredSizableJellyfishEntity.class, EntityDataSerializers.FLOAT);
 	private static final JellyfishSizeMap NATURAL_SIZES = new JellyfishSizeMap(new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34)));
 	private final ColoredSizableBucketProcessor bucketProcessor;
 
-	public ColoredSizableJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, World world) {
+	public ColoredSizableJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, Level world) {
 		super(type, world);
 		this.bucketProcessor = new ColoredSizableBucketProcessor(this);
 	}
@@ -38,7 +38,7 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	}
 
 	@Override
-	public void onSyncedDataUpdated(DataParameter<?> key) {
+	public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
 		super.onSyncedDataUpdated(key);
 		if (SIZE.equals(key)) {
 			this.refreshDimensions();
@@ -46,21 +46,21 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundNBT compound) {
+	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putInt("JellyColor", this.getColor());
 		compound.putFloat("Size", this.getSize());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundNBT compound) {
+	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setColor(compound.getInt("JellyColor"));
 		this.setSize(compound.getFloat("Size"), false);
 	}
 
 	@Override
-	public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, SpawnGroupData spawnDataIn, CompoundTag dataTag) {
 		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 		boolean updateSize = false;
 
@@ -156,22 +156,22 @@ public abstract class ColoredSizableJellyfishEntity extends AbstractJellyfishEnt
 		}
 
 		@Override
-		public CompoundNBT write() {
-			CompoundNBT nbt = super.write();
+		public CompoundTag write() {
+			CompoundTag nbt = super.write();
 			nbt.putInt("Color", this.jellyfish.getColor());
 			nbt.putFloat("Size", this.jellyfish.getSize());
 			return nbt;
 		}
 
 		@Override
-		public void read(CompoundNBT nbt) {
+		public void read(CompoundTag nbt) {
 			this.jellyfish.setColor(nbt.getInt("Color"));
 			this.jellyfish.setSize(nbt.getFloat("Size"), true);
 		}
 
 	}
 
-	static class SpawnData implements ILivingEntityData {
+	static class SpawnData implements SpawnGroupData {
 		private final float size;
 		private final int color;
 

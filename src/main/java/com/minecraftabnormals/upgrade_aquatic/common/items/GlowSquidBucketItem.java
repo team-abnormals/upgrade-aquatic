@@ -1,44 +1,43 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
-import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.Supplier;
 
 public class GlowSquidBucketItem extends SquidBucketItem {
-	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(UAItems.SQUID_BUCKET);
+	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(UAItems.SQUID_BUCKET);
 
 	public GlowSquidBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
 		super(supplier, builder);
 	}
 
-	public void checkExtraContent(World worldIn, ItemStack stack, BlockPos pos) {
-		if (worldIn instanceof ServerWorld) {
-			this.placeEntity((ServerWorld) worldIn, stack, pos);
+	public void checkExtraContent(Level worldIn, ItemStack stack, BlockPos pos) {
+		if (worldIn instanceof ServerLevel) {
+			this.placeEntity((ServerLevel) worldIn, stack, pos);
 		}
 	}
 
-	private void placeEntity(ServerWorld worldIn, ItemStack stack, BlockPos pos) {
-		Entity entity = UAEntities.GLOW_SQUID.get().spawn(worldIn, stack, null, pos, SpawnReason.BUCKET, true, false);
-		if (entity instanceof SquidEntity) {
-			((SquidEntity) entity).setPersistenceRequired();
+	private void placeEntity(ServerLevel worldIn, ItemStack stack, BlockPos pos) {
+		Entity entity = UAEntities.GLOW_SQUID.get().spawn(worldIn, stack, null, pos, MobSpawnType.BUCKET, true, false);
+		if (entity instanceof Squid) {
+			((Squid) entity).setPersistenceRequired();
 		}
 	}
-
 
 	@Override
-	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this, group, items);
 	}
 }

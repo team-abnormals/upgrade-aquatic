@@ -1,22 +1,22 @@
 package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedDoublePlantBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.PickerelweedPlantBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
-import net.minecraft.fluid.FluidState;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biome.BiomeCategory;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -24,21 +24,21 @@ import java.util.function.Supplier;
 /**
  * @author - SmellyModder(Luke Tonon)
  */
-public class PickerelweedFeature extends Feature<NoFeatureConfig> {
+public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.BLUE_PICKERELWEED.get().defaultBlockState();
 	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PURPLE_PICKERELWEED.get().defaultBlockState();
 
-	public PickerelweedFeature(Codec<NoFeatureConfig> configFactory) {
+	public PickerelweedFeature(Codec<NoneFeatureConfiguration> configFactory) {
 		super(configFactory);
 	}
 
 	@Override
-	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
 		Biome biome = worldIn.getBiome(pos);
 		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().canSurvive(worldIn, pos.below())) {
-			if (biome.getBiomeCategory() == Category.RIVER || biome.getBiomeCategory() == Category.SWAMP || biome.getRegistryName().equals(Biomes.FLOWER_FOREST.location())) {
+			if (biome.getBiomeCategory() == BiomeCategory.RIVER || biome.getBiomeCategory() == BiomeCategory.SWAMP || biome.getRegistryName().equals(Biomes.FLOWER_FOREST.location())) {
 				boolean purpleGen;
-				if (biome.getBiomeCategory() == Category.SWAMP) {
+				if (biome.getBiomeCategory() == BiomeCategory.SWAMP) {
 					purpleGen = rand.nextFloat() >= 0.60D;
 				} else {
 					purpleGen = !(rand.nextFloat() >= 0.60D);
@@ -65,7 +65,7 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> {
 		return false;
 	}
 
-	public void generatePickerelweedPatch(IWorld world, BlockPos pos, boolean purple, int randomDesign) {
+	public void generatePickerelweedPatch(LevelAccessor world, BlockPos pos, boolean purple, int randomDesign) {
 		// 0 - a, 1 - b, 2 - c
 		int[] patterns = new int[3];
 		switch (randomDesign) {
@@ -140,11 +140,11 @@ public class PickerelweedFeature extends Feature<NoFeatureConfig> {
 		}
 	}
 
-	public boolean isValidBlock(IWorld world, BlockPos pos) {
+	public boolean isValidBlock(LevelAccessor world, BlockPos pos) {
 		return world.isEmptyBlock(pos) || world.getBlockState(pos).getFluidState().is(FluidTags.WATER);
 	}
 
-	public boolean shouldPlace(IWorld world, BlockPos pos) {
+	public boolean shouldPlace(LevelAccessor world, BlockPos pos) {
 		return world.getFluidState(pos.below().west()).is(FluidTags.WATER) || world.getFluidState(pos.below().east()).is(FluidTags.WATER) || world.getFluidState(pos.below().north()).is(FluidTags.WATER) || world.getFluidState(pos.below().south()).is(FluidTags.WATER);
 	}
 

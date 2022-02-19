@@ -2,9 +2,9 @@ package com.minecraftabnormals.upgrade_aquatic.core.other;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeType;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.datasync.IDataSerializer;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraftforge.registries.DataSerializerEntry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -12,12 +12,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 public final class UADataSerializers {
 	public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(ForgeRegistries.DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
 
-	public static final IDataSerializer<PikeType> PIKE_TYPE = new IDataSerializer<PikeType>() {
-		public void write(PacketBuffer buf, PikeType value) {
+	public static final EntityDataSerializer<PikeType> PIKE_TYPE = new EntityDataSerializer<PikeType>() {
+		public void write(FriendlyByteBuf buf, PikeType value) {
 			buf.writeEnum(value);
 		}
 
-		public PikeType read(PacketBuffer buf) {
+		public PikeType read(FriendlyByteBuf buf) {
 			return buf.readEnum(PikeType.class);
 		}
 
@@ -27,21 +27,21 @@ public final class UADataSerializers {
 	};
 
 	//TODO: Move to AC
-	public static final IDataSerializer<EntitySize> ENTITY_SIZE = new IDataSerializer<EntitySize>() {
+	public static final EntityDataSerializer<EntityDimensions> ENTITY_SIZE = new EntityDataSerializer<EntityDimensions>() {
 		@Override
-		public void write(PacketBuffer buf, EntitySize value) {
+		public void write(FriendlyByteBuf buf, EntityDimensions value) {
 			buf.writeFloat(value.width);
 			buf.writeFloat(value.height);
 			buf.writeBoolean(value.fixed);
 		}
 
 		@Override
-		public EntitySize read(PacketBuffer buf) {
-			return new EntitySize(buf.readFloat(), buf.readFloat(), buf.readBoolean());
+		public EntityDimensions read(FriendlyByteBuf buf) {
+			return new EntityDimensions(buf.readFloat(), buf.readFloat(), buf.readBoolean());
 		}
 
 		@Override
-		public EntitySize copy(EntitySize value) {
+		public EntityDimensions copy(EntityDimensions value) {
 			return value;
 		}
 	};

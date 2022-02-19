@@ -1,10 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.common.damagesource;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.damagesource.EntityDamageSource;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 public class JellyfishDamageSource extends EntityDamageSource {
 
@@ -13,9 +13,9 @@ public class JellyfishDamageSource extends EntityDamageSource {
 	}
 
 	@Override
-	public ITextComponent getLocalizedDeathMessage(LivingEntity entityLivingBase) {
+	public Component getLocalizedDeathMessage(LivingEntity entityLivingBase) {
 		String message = "death.attack." + this.msgId;
-		return new TranslationTextComponent(message, entityLivingBase.getDisplayName(), this.entity.getDisplayName());
+		return new TranslatableComponent(message, entityLivingBase.getDisplayName(), this.entity.getDisplayName());
 	}
 
 }

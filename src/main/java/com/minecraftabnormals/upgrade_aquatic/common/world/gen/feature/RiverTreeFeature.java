@@ -3,34 +3,34 @@ package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.MulberryVineBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.IWorldWriter;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.IWorldGenerationBaseReader;
-import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.LevelWriter;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.LevelSimulatedRW;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.common.IPlantable;
 
 import java.util.Random;
 
 @SuppressWarnings("deprecation")
-public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
-	public RiverTreeFeature(Codec<BaseTreeFeatureConfig> config) {
+public class RiverTreeFeature extends Feature<TreeConfiguration> {
+	public RiverTreeFeature(Codec<TreeConfiguration> config) {
 		super(config);
 	}
 
 	@Override
-	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos position, BaseTreeFeatureConfig config) {
+	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos position, TreeConfiguration config) {
 		int height = 3 + rand.nextInt(2) + rand.nextInt(2);
 		boolean flag = true;
 
@@ -41,7 +41,7 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 					k = 0;
 				if (j >= position.getY() + 1 + height - 2)
 					k = 2;
-				BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
+				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 				for (int l = position.getX() - k; l <= position.getX() + k && flag; ++l) {
 					for (int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1) {
 						if (j >= 0 && j < worldIn.getMaxBuildHeight()) {
@@ -89,7 +89,7 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 		}
 	}
 
-	private void createLeaves(IWorldGenerationReader worldIn, BlockPos newPos, Random rand, boolean small, BaseTreeFeatureConfig config) {
+	private void createLeaves(LevelSimulatedRW worldIn, BlockPos newPos, Random rand, boolean small, TreeConfiguration config) {
 		int leafSize = 1;
 		for (int k3 = -leafSize; k3 <= leafSize; ++k3) {
 			for (int j4 = -leafSize; j4 <= leafSize; ++j4) {
@@ -109,48 +109,48 @@ public class RiverTreeFeature extends Feature<BaseTreeFeatureConfig> {
 		}
 	}
 
-	private void placeLogAt(IWorldWriter worldIn, BlockPos pos, Random rand, BaseTreeFeatureConfig config) {
+	private void placeLogAt(LevelWriter worldIn, BlockPos pos, Random rand, TreeConfiguration config) {
 		this.setLogState(worldIn, pos, UABlocks.RIVER_LOG.get().defaultBlockState());
 	}
 
-	private void placeLeafAt(IWorldGenerationReader world, BlockPos pos, Random rand, BaseTreeFeatureConfig config) {
+	private void placeLeafAt(LevelSimulatedRW world, BlockPos pos, Random rand, TreeConfiguration config) {
 		if (isAirOrLeaves(world, pos)) {
 			this.setLogState(world, pos, UABlocks.RIVER_LEAVES.get().defaultBlockState().setValue(LeavesBlock.DISTANCE, 1));
 		}
 		if (isAir(world, pos.below()) && rand.nextInt(3) == 0 && rand.nextBoolean()) {
 			BlockState state = UABlocks.MULBERRY_VINE.get().defaultBlockState().setValue(MulberryVineBlock.AGE, 4).setValue(MulberryVineBlock.DOUBLE, rand.nextBoolean());
-			if (state.canSurvive((IWorldReader) world, pos.below()))
+			if (state.canSurvive((LevelReader) world, pos.below()))
 				this.setLogState(world, pos.below(), state);
 		}
 	}
 
-	protected final void setLogState(IWorldWriter worldIn, BlockPos pos, BlockState state) {
+	protected final void setLogState(LevelWriter worldIn, BlockPos pos, BlockState state) {
 		worldIn.setBlock(pos, state, 18);
 	}
 
-	public static boolean isAir(IWorldGenerationBaseReader worldIn, BlockPos pos) {
-		if (!(worldIn instanceof net.minecraft.world.IBlockReader)) // FORGE: Redirect to state method when possible
+	public static boolean isAir(LevelSimulatedReader worldIn, BlockPos pos) {
+		if (!(worldIn instanceof net.minecraft.world.level.BlockGetter)) // FORGE: Redirect to state method when possible
 			return worldIn.isStateAtPosition(pos, BlockState::isAir);
 		else
-			return worldIn.isStateAtPosition(pos, state -> state.isAir((net.minecraft.world.IBlockReader) worldIn, pos));
+			return worldIn.isStateAtPosition(pos, state -> state.isAir((net.minecraft.world.level.BlockGetter) worldIn, pos));
 	}
 
-	public static boolean isAirOrLeaves(IWorldGenerationBaseReader worldIn, BlockPos pos) {
-		if (worldIn instanceof net.minecraft.world.IWorldReader) // FORGE: Redirect to state method when possible
-			return worldIn.isStateAtPosition(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.IWorldReader) worldIn, pos));
+	public static boolean isAirOrLeaves(LevelSimulatedReader worldIn, BlockPos pos) {
+		if (worldIn instanceof net.minecraft.world.level.LevelReader) // FORGE: Redirect to state method when possible
+			return worldIn.isStateAtPosition(pos, state -> state.canBeReplacedByLeaves((net.minecraft.world.level.LevelReader) worldIn, pos));
 		return worldIn.isStateAtPosition(pos, (state) -> {
 			return state.isAir() || state.is(BlockTags.LEAVES);
 		});
 	}
 
-	public static void setDirtAt(IWorld worldIn, BlockPos pos) {
+	public static void setDirtAt(LevelAccessor worldIn, BlockPos pos) {
 		Block block = worldIn.getBlockState(pos).getBlock();
 		if (block == Blocks.GRASS_BLOCK || block == Blocks.FARMLAND) {
 			worldIn.setBlock(pos, Blocks.DIRT.defaultBlockState(), 18);
 		}
 	}
 
-	public static boolean isValidGround(IWorld world, BlockPos pos) {
+	public static boolean isValidGround(LevelAccessor world, BlockPos pos) {
 		return world.getBlockState(pos).canSustainPlant(world, pos, Direction.UP, (IPlantable) UABlocks.RIVER_SAPLING.get());
 	}
 

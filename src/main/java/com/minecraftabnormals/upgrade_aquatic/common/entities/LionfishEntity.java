@@ -1,62 +1,62 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities;
 
-import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.entity.passive.fish.TropicalFishEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.pathfinding.SwimmerPathNavigator;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
+import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.TropicalFish;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class LionfishEntity extends BucketableWaterMobEntity {
+public class LionfishEntity extends BucketableWaterAnimal {
 	private static final Predicate<LivingEntity> ENEMY_MATCHER = (entity) -> {
 		if (entity == null) {
 			return false;
 		} else {
-			return !(entity instanceof LionfishEntity) && !(entity instanceof AbstractFishEntity);
+			return !(entity instanceof LionfishEntity) && !(entity instanceof AbstractFish);
 		}
 	};
-	private static final DataParameter<Boolean> HUNGY = EntityDataManager.defineId(LionfishEntity.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> TIME_TILL_HUNGRY = EntityDataManager.defineId(LionfishEntity.class, DataSerializers.INT);
+	private static final EntityDataAccessor<Boolean> HUNGY = SynchedEntityData.defineId(LionfishEntity.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> TIME_TILL_HUNGRY = SynchedEntityData.defineId(LionfishEntity.class, EntityDataSerializers.INT);
 	int lastTimeSinceHungry;
 
-	public LionfishEntity(EntityType<? extends LionfishEntity> type, World world) {
+	public LionfishEntity(EntityType<? extends LionfishEntity> type, Level world) {
 		super(UAEntities.LIONFISH.get(), world);
 		this.moveControl = new LionfishEntity.MoveHelperController(this);
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D);
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0D);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 						}
 					}
 
-					Vector3d vec3d = this.getPosition();
+					Vec3 vec3d = this.getPosition();
 					if (vec3d == null) {
 						return false;
 					} else {
@@ -98,7 +98,7 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 
 		});
 		this.goalSelector.addGoal(4, new LionfishEntity.LionfishAttackGoal(this, 12D, true));
-		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<TropicalFishEntity>(this, TropicalFishEntity.class, true) {
+		this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<TropicalFish>(this, TropicalFish.class, true) {
 
 			@Override
 			public boolean canUse() {
@@ -131,20 +131,20 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 		this.entityData.set(TIME_TILL_HUNGRY, ticks);
 	}
 
-	public void addAdditionalSaveData(CompoundNBT compound) {
+	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putBoolean("IsHungry", this.isHungry());
 		compound.putInt("TimeTillHungry", this.getTimeTillHungry());
 	}
 
-	public void readAdditionalSaveData(CompoundNBT compound) {
+	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setHungry(compound.getBoolean("IsHungry"));
 		this.setTimeTillHungry(compound.getInt("TimeTillHungry"));
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
+	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
 		return sizeIn.height * 0.85F;
 	}
 
@@ -154,7 +154,7 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
+	public ItemStack getPickedResult(HitResult target) {
 		return new ItemStack(UAItems.LIONFISH_SPAWN_EGG.get());
 	}
 
@@ -164,16 +164,16 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 	}
 
 	@Override
-	protected PathNavigator createNavigation(World worldIn) {
-		return new SwimmerPathNavigator(this, worldIn);
+	protected PathNavigation createNavigation(Level worldIn) {
+		return new WaterBoundPathNavigation(this, worldIn);
 	}
 
-	public static boolean coralCondition(EntityType<? extends Entity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if (((World) world).dimension() != World.OVERWORLD) return false;
+	public static boolean coralCondition(EntityType<? extends Entity> entityType, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+		if (((Level) world).dimension() != Level.OVERWORLD) return false;
 		for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
-					if (world.getBlockState(new BlockPos(xx, yy, zz)).getBlock().is(BlockTags.CORAL_BLOCKS)) {
+					if (world.getBlockState(new BlockPos(xx, yy, zz)).is(BlockTags.CORAL_BLOCKS)) {
 						return true;
 					}
 				}
@@ -209,9 +209,9 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 
 	private void attack(LivingEntity entity) {
 		if (entity.hurt(DamageSource.mobAttack(this), 2.0F) && entity.isInWater()) {
-			entity.addEffect(new EffectInstance(Effects.POISON, 70, 1));
+			entity.addEffect(new MobEffectInstance(MobEffects.POISON, 70, 1));
 			this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0F, 1.0F);
-			if (entity instanceof PlayerEntity) {
+			if (entity instanceof Player) {
 				this.setTarget(entity);
 			}
 		}
@@ -219,17 +219,15 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 
 	public boolean hurt(DamageSource source, float amount) {
 		Entity entitySource = source.getEntity();
-		if (entitySource instanceof LivingEntity && !(entitySource instanceof PlayerEntity && ((PlayerEntity) entitySource).abilities.instabuild)) {
-			if (entitySource instanceof PlayerEntity) {
+		if (entitySource instanceof LivingEntity && !(entitySource instanceof Player && ((Player) entitySource).getAbilities().instabuild)) {
+			if (entitySource instanceof Player) {
 				this.setTarget((LivingEntity) entitySource);
 			}
-			return super.hurt(source, amount);
-		} else {
-			return super.hurt(source, amount);
 		}
+		return super.hurt(source, amount);
 	}
 
-	public void travel(Vector3d p_213352_1_) {
+	public void travel(Vec3 p_213352_1_) {
 		if (this.isEffectiveAi() && this.isInWater()) {
 			this.moveRelative(0.01F, p_213352_1_);
 			this.move(MoverType.SELF, this.getDeltaMovement());
@@ -266,7 +264,7 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 		return SoundEvents.FISH_SWIM;
 	}
 
-	static class MoveHelperController extends MovementController {
+	static class MoveHelperController extends MoveControl {
 		private final LionfishEntity lionfish;
 
 		MoveHelperController(LionfishEntity lionfish) {
@@ -279,17 +277,17 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 				this.lionfish.setDeltaMovement(this.lionfish.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
 			}
 
-			if (this.operation == MovementController.Action.MOVE_TO && !this.lionfish.getNavigation().isDone()) {
+			if (this.operation == MoveControl.Operation.MOVE_TO && !this.lionfish.getNavigation().isDone()) {
 				double d0 = this.wantedX - this.lionfish.getX();
 				double d1 = this.wantedY - this.lionfish.getY();
 				double d2 = this.wantedZ - this.lionfish.getZ();
-				double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+				double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
 				d1 = d1 / d3;
-				float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-				this.lionfish.yRot = this.rotlerp(this.lionfish.yRot, f, 90.0F);
-				this.lionfish.yBodyRot = this.lionfish.yRot;
+				float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
+				this.lionfish.setYRot(this.rotlerp(this.lionfish.getYRot(), f, 90.0F));
+				this.lionfish.yBodyRot = this.lionfish.getYRot();
 				float f1 = (float) (this.speedModifier * this.lionfish.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
-				this.lionfish.setSpeed(MathHelper.lerp(0.125F, this.lionfish.getSpeed(), f1));
+				this.lionfish.setSpeed(Mth.lerp(0.125F, this.lionfish.getSpeed(), f1));
 				this.lionfish.setDeltaMovement(this.lionfish.getDeltaMovement().add(0.0D, (double) this.lionfish.getSpeed() * d1 * 0.03D, 0.0D));
 			}
 		}
@@ -297,7 +295,7 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 
 	static class LionfishAttackGoal extends MeleeAttackGoal {
 
-		public LionfishAttackGoal(CreatureEntity creature, double speedIn, boolean useLongMemory) {
+		public LionfishAttackGoal(PathfinderMob creature, double speedIn, boolean useLongMemory) {
 			super(creature, speedIn, useLongMemory);
 		}
 
@@ -314,7 +312,7 @@ public class LionfishEntity extends BucketableWaterMobEntity {
 				((LionfishEntity) this.mob).attack(enemy);
 				((LionfishEntity) this.mob).setHungry(false);
 				((LionfishEntity) this.mob).setTimeTillHungry(mob.getRandom().nextInt(300) + 300);
-				if (enemy instanceof PlayerEntity) {
+				if (enemy instanceof Player) {
 					mob.setTarget(null);
 					this.stop();
 				}

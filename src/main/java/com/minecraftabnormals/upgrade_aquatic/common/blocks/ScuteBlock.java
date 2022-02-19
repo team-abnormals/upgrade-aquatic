@@ -1,11 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DirectionalBlock;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.core.Direction;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class ScuteBlock extends DirectionalBlock {
 
@@ -14,12 +16,12 @@ public class ScuteBlock extends DirectionalBlock {
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
 	}
 
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(FACING, context.getClickedFace());
 	}
 }

@@ -1,25 +1,25 @@
 package com.minecraftabnormals.upgrade_aquatic.client.particle;
 
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.particle.*;
-import net.minecraft.client.renderer.ActiveRenderInfo;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.Camera;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class SpectralConsumeParticle extends SpriteTexturedParticle {
-	protected final IAnimatedSprite animatedSprite;
+public class SpectralConsumeParticle extends TextureSheetParticle {
+	protected final SpriteSet animatedSprite;
 	private final float scale;
 	private final int MAX_FRAME_ID = 3;
 	protected int currentFrame = 0;
 	private boolean directionRight = true;
 	private int lastTick = 0;
 
-	public SpectralConsumeParticle(IAnimatedSprite animatedSprite, ClientWorld world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
+	public SpectralConsumeParticle(SpriteSet animatedSprite, ClientLevel world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
 		super(world, posX, posY, posZ, motionX, motionY, motionZ);
 		this.scale = this.quadSize = this.random.nextFloat() * 0.6F + 0.2F;
 		this.rCol = 1f;
@@ -34,7 +34,7 @@ public class SpectralConsumeParticle extends SpriteTexturedParticle {
 	}
 
 	@Override
-	public void render(IVertexBuilder p_225606_1_, ActiveRenderInfo activeInfo, float partialTicks) {
+	public void render(VertexConsumer p_225606_1_, Camera activeInfo, float partialTicks) {
 		Entity entity = activeInfo.getEntity();
 		if (entity.tickCount >= this.lastTick + 5) {
 			if (this.currentFrame == MAX_FRAME_ID) {
@@ -61,14 +61,14 @@ public class SpectralConsumeParticle extends SpriteTexturedParticle {
 	}
 
 	@Override
-	public IParticleRenderType getRenderType() {
-		return IParticleRenderType.PARTICLE_SHEET_OPAQUE;
+	public ParticleRenderType getRenderType() {
+		return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
 	}
 
 	@Override
 	public int getLightColor(float partialTick) {
 		float f = ((float) this.age + partialTick) / (float) this.lifetime;
-		f = MathHelper.clamp(f, 0f, 1f);
+		f = Mth.clamp(f, 0f, 1f);
 		int i = super.getLightColor(partialTick);
 		int j = i & 255;
 		int k = i >> 16 & 255;
@@ -79,15 +79,15 @@ public class SpectralConsumeParticle extends SpriteTexturedParticle {
 		return j | k << 16;
 	}
 
-	public static class Factory implements IParticleFactory<BasicParticleType> {
-		private final IAnimatedSprite animatedSprite;
+	public static class Factory implements ParticleProvider<SimpleParticleType> {
+		private final SpriteSet animatedSprite;
 
-		public Factory(IAnimatedSprite animatedSprite) {
+		public Factory(SpriteSet animatedSprite) {
 			this.animatedSprite = animatedSprite;
 		}
 
 		@Override
-		public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			return new SpectralConsumeParticle(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);
 		}
 	}

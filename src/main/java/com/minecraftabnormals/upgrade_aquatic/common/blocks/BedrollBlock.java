@@ -1,37 +1,41 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
 import com.minecraftabnormals.upgrade_aquatic.common.tileentities.BedrollTileEntity;
-import net.minecraft.block.*;
-import net.minecraft.block.material.PushReaction;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BedPart;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiquidContainer {
+public class BedrollBlock extends BedBlock implements SimpleWaterloggedBlock {
 	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
 	public static final BooleanProperty OCCUPIED = BlockStateProperties.OCCUPIED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -45,23 +49,13 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 
 	@Override
-	public TileEntity newBlockEntity(IBlockReader worldIn) {
-		return new BedrollTileEntity(this.color);
+	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+		return new BedrollTileEntity(this.color, pos, state);
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, PART, OCCUPIED, WATERLOGGED);
-	}
-
-	@Override
-	public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
-		if (state.getValue(WATERLOGGED)) {
-			worldIn.setBlock(pos, state.setValue(WATERLOGGED, false), 3);
-			return Fluids.WATER;
-		} else {
-			return Fluids.EMPTY;
-		}
 	}
 
 	public FluidState getFluidState(BlockState state) {
@@ -69,28 +63,11 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 
 	@Override
-	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-		return fluidIn == Fluids.WATER;
+	public void fallOn(Level worldIn, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
+		super.fallOn(worldIn, state, pos, entityIn, fallDistance * 0.2F);
 	}
 
-	@Override
-	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-		if (fluidStateIn.getType() == Fluids.WATER) {
-			if (!worldIn.isClientSide()) {
-				worldIn.setBlock(pos, state.setValue(WATERLOGGED, true), 3);
-				worldIn.getLiquidTicks().scheduleTick(pos, fluidStateIn.getType(), fluidStateIn.getType().getTickDelay(worldIn));
-			}
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public void fallOn(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
-		super.fallOn(worldIn, pos, entityIn, fallDistance * 0.2F);
-	}
-
-	public void updateEntityAfterFallOn(IBlockReader worldIn, Entity entityIn) {
+	public void updateEntityAfterFallOn(BlockGetter worldIn, Entity entityIn) {
 		if (entityIn.isCrouching()) {
 			super.updateEntityAfterFallOn(worldIn, entityIn);
 		} else if (entityIn.getDeltaMovement().y < 0.0D) {
@@ -102,9 +79,9 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.getValue(WATERLOGGED)) {
-			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 		if (facing == getDirectionToOther(stateIn.getValue(PART), stateIn.getValue(FACING))) {
 			return facingState.is(this) && facingState.getValue(PART) != stateIn.getValue(PART) ? stateIn.setValue(OCCUPIED, facingState.getValue(OCCUPIED)) : Blocks.AIR.defaultBlockState();
@@ -113,7 +90,7 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 		}
 	}
 
-	public void onRemove(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
 			super.onRemove(state, worldIn, pos, newState, isMoving);
 			worldIn.removeBlockEntity(pos);
@@ -121,7 +98,7 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 
 	@Override
-	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide && player.isCreative()) {
 			BedPart bedpart = state.getValue(PART);
 			if (bedpart == BedPart.FOOT) {
@@ -141,7 +118,7 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 
 	@Nullable
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		Direction enumfacing = context.getHorizontalDirection();
 		BlockPos blockpos = context.getClickedPos();
 		BlockPos blockpos1 = blockpos.relative(enumfacing);
@@ -154,7 +131,7 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return SHAPE;
 	}
 
@@ -162,12 +139,12 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 		return PushReaction.DESTROY;
 	}
 
-	public BlockRenderType getRenderShape(BlockState state) {
-		return BlockRenderType.MODEL;
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.MODEL;
 	}
 
 	@Override
-	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.setPlacedBy(worldIn, pos, state, placer, stack);
 		if (!worldIn.isClientSide) {
 			BlockPos blockpos = pos.relative(state.getValue(FACING));
@@ -185,6 +162,6 @@ public class BedrollBlock extends BedBlock implements IBucketPickupHandler, ILiq
 	@OnlyIn(Dist.CLIENT)
 	public long getSeed(BlockState state, BlockPos pos) {
 		BlockPos blockpos = pos.relative(state.getValue(FACING), state.getValue(PART) == BedPart.HEAD ? 0 : 1);
-		return MathHelper.getSeed(blockpos.getX(), pos.getY(), blockpos.getZ());
+		return Mth.getSeed(blockpos.getX(), pos.getY(), blockpos.getZ());
 	}
 }

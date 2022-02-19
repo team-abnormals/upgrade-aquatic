@@ -1,18 +1,18 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.EnumSet;
 
 public final class PikeTemptGoal extends Goal {
-	private static final EntityPredicate CAN_FOLLOW = new EntityPredicate().range(10.0D).allowSameTeam().allowInvulnerable();
+	private static final TargetingConditions CAN_FOLLOW = TargetingConditions.forNonCombat().range(10.0D).ignoreLineOfSight();
 	private final PikeEntity pike;
-	private PlayerEntity tempter;
+	private Player tempter;
 	private int cooldown;
 
 	public PikeTemptGoal(PikeEntity pike) {
@@ -50,6 +50,6 @@ public final class PikeTemptGoal extends Goal {
 	}
 
 	private boolean isTemptedBy(ItemStack stack) {
-		return stack.getItem().is(ItemTags.FISHES);
+		return stack.is(ItemTags.FISHES);
 	}
 }

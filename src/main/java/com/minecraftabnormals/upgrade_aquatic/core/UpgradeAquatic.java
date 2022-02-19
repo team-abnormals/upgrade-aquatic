@@ -1,37 +1,43 @@
 package com.minecraftabnormals.upgrade_aquatic.core;
 
-import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
 import com.minecraftabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
-import com.minecraftabnormals.upgrade_aquatic.core.other.*;
-import com.minecraftabnormals.upgrade_aquatic.core.registry.*;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UAClientCompat;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UACompat;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UADataSerializers;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
+import com.minecraftabnormals.upgrade_aquatic.core.other.UASpawns;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEffects;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAFeatures;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.minecraftabnormals.upgrade_aquatic.core.registry.UATileEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
+import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod(value = UpgradeAquatic.MOD_ID)
 public class UpgradeAquatic {
 	public static final String NETWORK_PROTOCOL = "1";
 	public static final String MOD_ID = "upgrade_aquatic";
-	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> {
-		helper.putSubHelper(ForgeRegistries.ITEMS, new UAItemSubRegistryHelper(helper));
-	});
+	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(ForgeRegistries.ITEMS, new UAItemSubRegistryHelper(helper)));
 
 	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(UpgradeAquatic.MOD_ID, "net"))
 			.networkProtocolVersion(() -> NETWORK_PROTOCOL)
@@ -41,11 +47,12 @@ public class UpgradeAquatic {
 
 	public UpgradeAquatic() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+		ModLoadingContext context = ModLoadingContext.get();
 
 		this.setupMessages();
 
 		REGISTRY_HELPER.register(bus);
-		UAEffects.EFFECTS.register(bus);
+		UAEffects.MOB_EFFECTS.register(bus);
 		UAEffects.POTIONS.register(bus);
 		UAFeatures.FEATURES.register(bus);
 		UAParticles.PARTICLES.register(bus);
@@ -59,8 +66,8 @@ public class UpgradeAquatic {
 			GlowSquidSpriteUploader.init(bus);
 		});
 
-		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UAConfig.COMMON_SPEC);
-		ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, UAConfig.CLIENT_SPEC);
+		context.registerConfig(ModConfig.Type.COMMON, UAConfig.COMMON_SPEC);
+		context.registerConfig(ModConfig.Type.CLIENT, UAConfig.CLIENT_SPEC);
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
@@ -70,7 +77,7 @@ public class UpgradeAquatic {
 			UAEffects.registerBrewingRecipes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
 			UAFeatures.Configured.registerConfiguredFeatures();
-			ObfuscationReflectionHelper.setPrivateValue(AbstractBlock.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
+			ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
 		});
 	}
 

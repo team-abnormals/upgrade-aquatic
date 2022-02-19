@@ -2,27 +2,29 @@ package com.minecraftabnormals.upgrade_aquatic.common.tileentities;
 
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.BedrollBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UATileEntities;
-import net.minecraft.item.DyeColor;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BedrollTileEntity extends TileEntity {
+public class BedrollTileEntity extends BlockEntity {
 	private DyeColor color;
 
-	public BedrollTileEntity() {
-		super(UATileEntities.BEDROLL.get());
+	public BedrollTileEntity(BlockPos pos, BlockState state) {
+		super(UATileEntities.BEDROLL.get(), pos, state);
 	}
 
-	public BedrollTileEntity(DyeColor colorIn) {
-		this();
+	public BedrollTileEntity(DyeColor colorIn, BlockPos pos, BlockState state) {
+		this(pos, state);
 		this.setColor(colorIn);
 	}
 
 	@Override
-	public SUpdateTileEntityPacket getUpdatePacket() {
-		return new SUpdateTileEntityPacket(this.worldPosition, 11, this.getUpdateTag());
+	public ClientboundBlockEntityDataPacket getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@OnlyIn(Dist.CLIENT)

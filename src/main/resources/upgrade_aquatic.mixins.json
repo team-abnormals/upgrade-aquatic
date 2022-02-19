@@ -1,21 +1,21 @@
 {
   "required": true,
   "package": "com.minecraftabnormals.upgrade_aquatic.core.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "refmap": "upgrade_aquatic.refmap.json",
   "mixins": [
-    "BubbleColumnMixin",
+    "BubbleColumnBlockMixin",
     "EntityMixin",
     "LivingEntityMixin",
-    "SignTileEntityMixin",
+    "SignBlockEntityMixin",
     "SquidEntityMixin"
   ],
   "client": [
-    "ClientPlayerEntityMixin",
+    "LocalPlayerMixin",
     "DrownedModelMixin",
     "DrownedRendererMixin",
-    "SignTileEntityRendererMixin"
+    "SignRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

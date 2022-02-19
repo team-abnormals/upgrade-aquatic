@@ -2,20 +2,20 @@ package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks.KelpType;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.KelpTopBlock;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.KelpBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.Random;
 
-public class UAKelpTopBlock extends KelpTopBlock {
+public class UAKelpTopBlock extends KelpBlock {
 	private final KelpType kelpType;
 
 	public UAKelpTopBlock(KelpType kelpType, Properties props) {
@@ -24,7 +24,7 @@ public class UAKelpTopBlock extends KelpTopBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
 		if (!state.canSurvive(worldIn, pos)) {
 			worldIn.destroyBlock(pos, true);
 		} else {
@@ -36,7 +36,7 @@ public class UAKelpTopBlock extends KelpTopBlock {
 		}
 	}
 
-	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.below();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
 		Block block = blockstate.getBlock();
@@ -48,34 +48,29 @@ public class UAKelpTopBlock extends KelpTopBlock {
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (!stateIn.canSurvive(worldIn, currentPos)) {
 			if (facing == Direction.DOWN) {
 				return Blocks.AIR.defaultBlockState();
 			}
-			worldIn.getBlockTicks().scheduleTick(currentPos, this, 1);
+			worldIn.scheduleTick(currentPos, this, 1);
 		}
 
 		if (facing == Direction.UP && facingState.getBlock() == this) {
 			return this.getPlantBlock().defaultBlockState();
 		} else {
-			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			return stateIn;
 		}
 	}
 
 	public Block getPlantBlock() {
-		switch (this.kelpType) {
-			default:
-			case TONGUE:
-				return UABlocks.TONGUE_KELP_PLANT.get();
-			case THORNY:
-				return UABlocks.THORNY_KELP_PLANT.get();
-			case OCHRE:
-				return UABlocks.OCHRE_KELP_PLANT.get();
-			case POLAR:
-				return UABlocks.POLAR_KELP_PLANT.get();
-		}
+		return switch (this.kelpType) {
+			case TONGUE -> UABlocks.TONGUE_KELP_PLANT.get();
+			case THORNY -> UABlocks.THORNY_KELP_PLANT.get();
+			case OCHRE -> UABlocks.OCHRE_KELP_PLANT.get();
+			case POLAR -> UABlocks.POLAR_KELP_PLANT.get();
+		};
 	}
 
 }

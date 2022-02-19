@@ -4,14 +4,14 @@ import com.google.common.collect.Maps;
 import com.minecraftabnormals.upgrade_aquatic.client.model.NautilusModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.NautilusEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.Util;
+import net.minecraft.util.Mth;
+import com.mojang.math.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -34,7 +34,7 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 		skins.put(Arrays.asList("snail", "snail nautilus"), "snail");
 	});
 
-	public NautilusRenderer(EntityRendererManager renderManager) {
+	public NautilusRenderer(EntityRenderDispatcher renderManager) {
 		super(renderManager, new NautilusModel<>(), 0.25F);
 	}
 
@@ -54,9 +54,9 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 	}
 
 	@Override
-	protected void setupRotations(NautilusEntity nautilus, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void setupRotations(NautilusEntity nautilus, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
-		float f = 0.3F * MathHelper.sin(0.6F * ageInTicks);
+		float f = 0.3F * Mth.sin(0.6F * ageInTicks);
 		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
 		if (!nautilus.isInWater() && !nautilus.isEyeInFluid(FluidTags.WATER)) {
 			matrixStack.translate(0.2F, 0.14F, 0.0F);

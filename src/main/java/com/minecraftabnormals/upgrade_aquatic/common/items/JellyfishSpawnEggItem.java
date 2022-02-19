@@ -1,25 +1,25 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
-import com.minecraftabnormals.abnormals_core.common.items.AbnormalsSpawnEggItem;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.minecraftabnormals.upgrade_aquatic.core.other.JellyfishRegistry.JellyfishEntry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Rarity;
-import net.minecraft.nbt.CompoundNBT;
+import com.teamabnormals.blueprint.common.item.BlueprintSpawnEggItem;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Rarity;
 
 import java.util.List;
 import java.util.Random;
 
-public class JellyfishSpawnEggItem extends AbnormalsSpawnEggItem {
+public class JellyfishSpawnEggItem extends BlueprintSpawnEggItem {
 
 	public JellyfishSpawnEggItem(int primaryColor, int secondaryColor, Properties properties) {
 		super(null, primaryColor, secondaryColor, properties);
 	}
 
 	@Override
-	public EntityType<?> getType(CompoundNBT compound) {
+	public EntityType<?> getType(CompoundTag compound) {
 		if (compound != null && compound.contains("EntityTag", 10)) {
-			CompoundNBT entityTag = compound.getCompound("EntityTag");
+			CompoundTag entityTag = compound.getCompound("EntityTag");
 
 			if (entityTag.contains("id", 8)) {
 				return EntityType.byString(entityTag.getString("id")).orElse(getRandomJellyfish());

@@ -1,11 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model;
 
-import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorEntityModel;
-import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorModelRenderer;
+import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
+import com.teamabnormals.blueprint.core.endimator.entity.EndimatorModelRenderer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.util.math.MathHelper;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.util.Mth;
 
 /**
  * ModelThrasher - SmellyModder
@@ -92,7 +92,7 @@ public class ThrasherModel<E extends ThrasherEntity> extends EndimatorEntityMode
 	}
 
 	@Override
-	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		this.animateModel(this.entity);
 		this.neck.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
@@ -116,17 +116,17 @@ public class ThrasherModel<E extends ThrasherEntity> extends EndimatorEntityMode
 
 		EndimatorModelRenderer[] boxes = new EndimatorModelRenderer[]{this.body, this.tail_holder, this.tail_holder_2};
 		for (int i = 1; i < boxes.length + 1; i++) {
-			boxes[i - 1].yRot = MathHelper.sin(tailAnimation) * (float) Math.PI * (0.045F * i);
+			boxes[i - 1].yRot = Mth.sin(tailAnimation) * (float) Math.PI * (0.045F * i);
 		}
 
 		if (thrasher.isMoving() && thrasher.isInWater()) {
-			this.tail.zRot = MathHelper.sin((float) ((thrasher.tickCount + ageInTicks) * 2 * Math.PI * 0.8125D));
+			this.tail.zRot = Mth.sin((float) ((thrasher.tickCount + ageInTicks) * 2 * Math.PI * 0.8125D));
 		}
 
-		this.right_fin.zRot = (float) (-MathHelper.cos(finWaveAnimation) * (float) Math.PI * 0.13);
-		this.right_fin_2.zRot = (float) (-MathHelper.cos(finWaveAnimation - 1.5F) * (float) Math.PI * 0.1);
-		this.left_fin.zRot = (float) (MathHelper.cos(finWaveAnimation) * (float) Math.PI * 0.13);
-		this.left_fin_2.zRot = (float) (MathHelper.cos(finWaveAnimation - 1.5F) * (float) Math.PI * 0.1);
+		this.right_fin.zRot = (float) (-Mth.cos(finWaveAnimation) * (float) Math.PI * 0.13);
+		this.right_fin_2.zRot = (float) (-Mth.cos(finWaveAnimation - 1.5F) * (float) Math.PI * 0.1);
+		this.left_fin.zRot = (float) (Mth.cos(finWaveAnimation) * (float) Math.PI * 0.13);
+		this.left_fin_2.zRot = (float) (Mth.cos(finWaveAnimation - 1.5F) * (float) Math.PI * 0.1);
 	}
 
 	@Override

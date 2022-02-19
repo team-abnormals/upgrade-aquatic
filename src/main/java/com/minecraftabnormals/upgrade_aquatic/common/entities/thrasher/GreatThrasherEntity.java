@@ -1,25 +1,25 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.level.Level;
 
 public class GreatThrasherEntity extends ThrasherEntity {
-	private static final EntitySize DEFAULT_SIZE = EntitySize.fixed(2.8F, 1.575F);
+	private static final EntityDimensions DEFAULT_SIZE = EntityDimensions.fixed(2.8F, 1.575F);
 
-	public GreatThrasherEntity(EntityType<? extends ThrasherEntity> type, World world) {
+	public GreatThrasherEntity(EntityType<? extends ThrasherEntity> type, Level world) {
 		super(type, world);
 		this.xpReward = 55;
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.createMobAttributes()
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Mob.createMobAttributes()
 				.add(Attributes.MAX_HEALTH, 125.0D)
 				.add(Attributes.ATTACK_DAMAGE, 8.0D)
 				.add(Attributes.ARMOR, 16.0D);
@@ -41,17 +41,17 @@ public class GreatThrasherEntity extends ThrasherEntity {
 	}
 
 	@Override
-	protected EntitySize getDefaultSize() {
+	protected EntityDimensions getDefaultSize() {
 		return DEFAULT_SIZE;
 	}
 
 	@Override
-	protected float getVoicePitch() {
+	public float getVoicePitch() {
 		return (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 0.75F;
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
+	public ItemStack getPickedResult(HitResult target) {
 		return new ItemStack(UAItems.GREAT_THRASHER_SPAWN_EGG.get());
 	}
 }

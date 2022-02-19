@@ -1,64 +1,66 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.IWaterLoggable;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 /**
  * @author SmellyModder(Luke Tonon)
  */
-public class ToothLanternBlock extends Block implements IWaterLoggable {
+public class ToothLanternBlock extends Block implements SimpleWaterloggedBlock {
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final VoxelShape[] SHAPES = new VoxelShape[]{
-			VoxelShapes.or( // UP
+			Shapes.or( // UP
 					box(7.0F, 0.0F, 7.0D, 9.0D, 4.0D, 9.0D),
 					box(4.0F, 4.0F, 4.0F, 12.0F, 5.0F, 12.0F),
 					box(5.0F, 5.0F, 5.0F, 11.0F, 13.0F, 11.0F),
 					box(4.0F, 13.0F, 4.0F, 12.0F, 14.0F, 12.0F)),
-			VoxelShapes.or( // DOWN
+			Shapes.or( // DOWN
 					box(7.0F, 12.0F, 7.0D, 9.0D, 16.0D, 9.0D),
 					box(4.0F, 2.0F, 4.0F, 12.0F, 3.0F, 12.0F),
 					box(5.0F, 3.0F, 5.0F, 11.0F, 11.0F, 11.0F),
 					box(4.0F, 11.0F, 4.0F, 12.0F, 12.0F, 12.0F)),
-			VoxelShapes.or( // NORTH
+			Shapes.or( // NORTH
 					box(7.0F, 12.0F, 10.0D, 9.0D, 16.0D, 12.0D),
 					box(7.0F, 14.0F, 10.0D, 9.0D, 16.0D, 16.0D),
 					box(4.0F, 2.0F, 7.0F, 12.0F, 3.0F, 15.0F),
 					box(5.0F, 3.0F, 8.0F, 11.0F, 11.0F, 14.0F),
 					box(4.0F, 11.0F, 7.0F, 12.0F, 12.0F, 15.0F)),
-			VoxelShapes.or( // EAST
+			Shapes.or( // EAST
 					box(4.0F, 12.0F, 7.0D, 6.0D, 16.0D, 9.0D),
 					box(0.0F, 14.0F, 7.0D, 6.0D, 16.0D, 9.0D),
 					box(1.0F, 2.0F, 4.0F, 9.0F, 3.0F, 12.0F),
 					box(2.0F, 3.0F, 5.0F, 8.0F, 11.0F, 11.0F),
 					box(1.0F, 11.0F, 4.0F, 9.0F, 12.0F, 12.0F)),
-			VoxelShapes.or( // SOUTH
+			Shapes.or( // SOUTH
 					box(7.0F, 12.0F, 4.0D, 9.0D, 16.0D, 6.0D),
 					box(7.0F, 14.0F, 0.0D, 9.0D, 16.0D, 6.0D),
 					box(4.0F, 2.0F, 1.0F, 12.0F, 3.0F, 9.0F),
 					box(5.0F, 3.0F, 2.0F, 11.0F, 11.0F, 8.0F),
 					box(4.0F, 11.0F, 1.0F, 12.0F, 12.0F, 9.0F)),
-			VoxelShapes.or( // WEST
+			Shapes.or( // WEST
 					box(10.0F, 12.0F, 7.0D, 12.0D, 16.0D, 9.0D),
 					box(10.0F, 14.0F, 7.0D, 16.0D, 16.0D, 9.0D),
 					box(7.0F, 2.0F, 4.0F, 15.0F, 3.0F, 12.0F),
@@ -72,7 +74,7 @@ public class ToothLanternBlock extends Block implements IWaterLoggable {
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		switch (state.getValue(FACING)) {
 			case UP:
 				return SHAPES[0];
@@ -91,21 +93,21 @@ public class ToothLanternBlock extends Block implements IWaterLoggable {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		Direction direction = context.getClickedFace();
 		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
 		return this.defaultBlockState().setValue(FACING, direction).setValue(WATERLOGGED, ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader world, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
 		Direction direction = state.getValue(FACING);
 		BlockPos blockpos = pos.relative(direction.getOpposite());
 		return Block.canSupportCenter(world, blockpos, direction);
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor world, BlockPos currentPos, BlockPos facingPos) {
 		return this.canSurvive(state, world, currentPos) ? state : Blocks.AIR.defaultBlockState();
 	}
 
@@ -120,7 +122,7 @@ public class ToothLanternBlock extends Block implements IWaterLoggable {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING, WATERLOGGED);
 	}
 

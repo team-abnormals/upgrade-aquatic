@@ -1,32 +1,32 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.TurtleEntity;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.entity.passive.fish.PufferfishEntity;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Turtle;
+import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.Pufferfish;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
 
 public final class PikeAttackGoal extends MeleeAttackGoal {
 
-	public PikeAttackGoal(CreatureEntity creature, double speedIn, boolean useLongMemory) {
+	public PikeAttackGoal(PathfinderMob creature, double speedIn, boolean useLongMemory) {
 		super(creature, speedIn, useLongMemory);
 	}
 
 	@Override
 	public boolean canUse() {
 		PikeEntity pike = (PikeEntity) this.mob;
-		return pike.getAttackCooldown() <= 0 && pike.getTarget() != null && !pike.getItemBySlot(EquipmentSlotType.MAINHAND).getItem().is(ItemTags.FISHES) && pike.isInWater() && pike.getCaughtEntity() == null && !(pike.getTarget() instanceof PufferfishEntity) && super.canUse();
+		return pike.getAttackCooldown() <= 0 && pike.getTarget() != null && !pike.getItemBySlot(EquipmentSlot.MAINHAND).is(ItemTags.FISHES) && pike.isInWater() && pike.getCaughtEntity() == null && !(pike.getTarget() instanceof Pufferfish) && super.canUse();
 	}
 
 	@Override
 	public boolean canContinueToUse() {
-		return !this.mob.getItemBySlot(EquipmentSlotType.MAINHAND).getItem().is(ItemTags.FISHES) && this.mob.isInWater() && super.canContinueToUse();
+		return !this.mob.getItemBySlot(EquipmentSlot.MAINHAND).is(ItemTags.FISHES) && this.mob.isInWater() && super.canContinueToUse();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public final class PikeAttackGoal extends MeleeAttackGoal {
 		if (distToEnemySqr <= attackReach && this.isTimeToAttack()) {
 			this.resetAttackCooldown();
 			if (pike.getTarget() != null) {
-				if (enemy instanceof AbstractFishEntity || enemy instanceof AnimalEntity) {
+				if (enemy instanceof AbstractFish || enemy instanceof Animal) {
 					pike.setAttackCooldown(pike.getRandom().nextInt(550) + 50);
 					enemy.startRiding(pike, true);
 					pike.setTarget(null);
@@ -50,8 +50,8 @@ public final class PikeAttackGoal extends MeleeAttackGoal {
 	@Override
 	public void start() {
 		PikeEntity pike = (PikeEntity) this.mob;
-		if (pike.getItemBySlot(EquipmentSlotType.MAINHAND) != null && pike.getTarget() instanceof AbstractFishEntity || pike.getItemBySlot(EquipmentSlotType.MAINHAND) != null && pike.getTarget() instanceof TurtleEntity) {
-			pike.spitOutItem(pike.getItemBySlot(EquipmentSlotType.MAINHAND));
+		if (pike.getItemBySlot(EquipmentSlot.MAINHAND) != null && pike.getTarget() instanceof AbstractFish || pike.getItemBySlot(EquipmentSlot.MAINHAND) != null && pike.getTarget() instanceof Turtle) {
+			pike.spitOutItem(pike.getItemBySlot(EquipmentSlot.MAINHAND));
 		}
 		super.start();
 	}

@@ -1,36 +1,45 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
 import com.google.common.collect.Maps;
-import com.minecraftabnormals.abnormals_core.core.util.BlockUtil;
-import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
-import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.item.*;
-import net.minecraft.particles.IParticleData;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.*;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import com.teamabnormals.blueprint.core.util.BlockUtil;
+import com.teamabnormals.blueprint.core.util.NetworkUtil;
+import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
+import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import java.util.Map;
+import java.util.Random;
 
 public class GlowingInkItem extends Item {
-	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.INK_SAC);
+	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.INK_SAC);
 
 	public GlowingInkItem(Properties properties) {
 		super(properties);
 	}
 
 	@Override
-	public ActionResultType useOn(ItemUseContext context) {
-		World world = context.getLevel();
+	public InteractionResult useOn(UseOnContext context) {
+		Level world = context.getLevel();
 		BlockPos pos = context.getClickedPos();
 		BlockState state = world.getBlockState(pos);
 
@@ -40,19 +49,20 @@ public class GlowingInkItem extends Item {
 		if (DEAD_CORAL_CONVERSION_MAP.containsKey(state.getBlock())) {
 			Block livingCoral = DEAD_CORAL_CONVERSION_MAP.get(state.getBlock());
 			world.setBlockAndUpdate(pos, BlockUtil.transferAllBlockStates(state, livingCoral.defaultBlockState()));
-			world.getBlockTicks().scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
-			world.playSound(context.getPlayer(), pos, SoundEvents.SQUID_SQUIRT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			world.scheduleTick(pos, livingCoral, 60 + world.getRandom().nextInt(40));
+			world.playSound(context.getPlayer(), pos, SoundEvents.SQUID_SQUIRT, SoundSource.BLOCKS, 1.0F, 1.0F);
 			if (!world.isClientSide()) squirtInk(UAParticles.GLOW_SQUID_INK.get(), pos);
-			if (context.getPlayer() != null && !context.getPlayer().abilities.instabuild)
+			if (context.getPlayer() != null && !context.getPlayer().getAbilities().instabuild)
 				context.getItemInHand().shrink(1);
-			return ActionResultType.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
 
 		return super.useOn(context);
 	}
 
-	public static void squirtInk(IParticleData particle, BlockPos posIn) {
+	public static void squirtInk(ParticleOptions particle, BlockPos posIn) {
 		String particleRegistryName = particle.getType().getRegistryName().toString();
+		Random random = new Random();
 		NetworkUtil.spawnParticle(particleRegistryName, (double) posIn.getX() + 0.5D, (double) posIn.getY() + 0.5D, (double) posIn.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 		for (int i = 0; i < 15; ++i) {
 			double d1 = random.nextGaussian() * 0.02D;
@@ -63,15 +73,15 @@ public class GlowingInkItem extends Item {
 		}
 	}
 
-	public static void createEffectCloud(EffectInstance effectInstance, World world, AxisAlignedBB aabb) {
+	public static void createEffectCloud(MobEffectInstance effectInstance, Level world, AABB aabb) {
 		for (LivingEntity entity : world.getEntitiesOfClass(LivingEntity.class, aabb)) {
-			if (!(entity instanceof SquidEntity))
+			if (!(entity instanceof Squid))
 				entity.addEffect(effectInstance);
 		}
 	}
 
 	@Override
-	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this, group, items);
 	}
 

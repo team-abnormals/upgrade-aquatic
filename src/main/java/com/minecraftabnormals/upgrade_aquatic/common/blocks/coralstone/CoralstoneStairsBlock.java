@@ -1,32 +1,39 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks.coralstone;
 
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CoralWallFanBlock;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.Half;
-import net.minecraft.state.properties.StairsShape;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.CoralWallFanBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 import java.util.function.Supplier;
 
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+
 @SuppressWarnings("deprecation")
-public class CoralstoneStairsBlock extends StairsBlock {
+public class CoralstoneStairsBlock extends StairBlock {
 	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
 	@Nullable
 	private final Block[] growableCoralBlocks;
@@ -44,12 +51,12 @@ public class CoralstoneStairsBlock extends StairsBlock {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(POWERED, FACING, HALF, SHAPE, WATERLOGGED);
 	}
 
 	@Override
-	public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isAreaLoaded(pos, 3)) return;
 
 		if (this.growableCoralBlocks == null && state.getBlock() != UABlocks.DEAD_CORALSTONE_STAIRS.get()) {
@@ -82,7 +89,7 @@ public class CoralstoneStairsBlock extends StairsBlock {
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		if (!worldIn.isClientSide) {
 			boolean flag = state.getValue(POWERED);
 			if (flag != worldIn.hasNeighborSignal(pos)) {
@@ -92,7 +99,7 @@ public class CoralstoneStairsBlock extends StairsBlock {
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_STAIRS.get()) {
 			BlockState newState = UABlocks.CORALSTONE_STAIRS.get().defaultBlockState()
@@ -101,20 +108,20 @@ public class CoralstoneStairsBlock extends StairsBlock {
 					.setValue(SHAPE, state.getValue(SHAPE))
 					.setValue(WATERLOGGED, state.getValue(WATERLOGGED)
 					);
-			world.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
+			world.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.PLAYERS, 1.0F, 0.8F);
 			stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(hand));
 			world.setBlock(pos, newState, 2);
-			return ActionResultType.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
-		return ActionResultType.FAIL;
+		return InteractionResult.FAIL;
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return super.getStateForPlacement(context).setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()));
 	}
 
-	private boolean isValidPosToGrow(World world, BlockPos pos, FluidState fluidState) {
+	private boolean isValidPosToGrow(Level world, BlockPos pos, FluidState fluidState) {
 		return world.getBlockState(pos).getMaterial().isReplaceable() && fluidState.getAmount() >= 8 && fluidState.is(FluidTags.WATER);
 	}
 }

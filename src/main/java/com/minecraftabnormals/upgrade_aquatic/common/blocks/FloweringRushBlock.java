@@ -1,46 +1,50 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import com.minecraftabnormals.abnormals_core.core.util.item.filling.TargetedItemGroupFiller;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.block.*;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.DoubleBlockHalf;
+import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowable {
+public class FloweringRushBlock extends Block implements SimpleWaterloggedBlock, BonemealableBlock {
 	private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
-	private static final TargetedItemGroupFiller FILLER = new TargetedItemGroupFiller(() -> Items.PEONY);
+	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.PEONY);
 
 	public FloweringRushBlock(Properties properties) {
 		super(properties);
@@ -48,35 +52,34 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+	public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
 		return SHAPE;
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(HALF, WATERLOGGED);
 	}
 
-	public boolean canBeReplaced(BlockState state, BlockItemUseContext useContext) {
+	public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
 		return false;
 	}
 
-	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
 
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		Block block = state.getBlock();
-		return block.is(BlockTags.BAMBOO_PLANTABLE_ON);
+	protected boolean isValidGround(BlockState state, BlockGetter worldIn, BlockPos pos) {
+		return state.is(BlockTags.BAMBOO_PLANTABLE_ON);
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		BlockState groundState = worldIn.getBlockState(currentPos.below());
 		FluidState fluidState = state.getFluidState();
 		FluidState upperFluidState = state.getFluidState();
 		if (state.getValue(WATERLOGGED)) {
-			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
 			return fluidState.getAmount() >= 8 && this.isValidGround(groundState, worldIn, currentPos.below()) && worldIn.getBlockState(currentPos.above()).getBlock() == UABlocks.FLOWERING_RUSH.get() && worldIn.getBlockState(currentPos.above()).getValue(HALF) == DoubleBlockHalf.UPPER ? state : Blocks.AIR.defaultBlockState();
@@ -87,7 +90,7 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		if (state.getValue(HALF) == DoubleBlockHalf.LOWER) {
 			BlockPos blockpos = pos.below();
 			FluidState ifluidstate = worldIn.getFluidState(pos);
@@ -99,9 +102,9 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 		}
 	}
 
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
-		return super.getStateForPlacement(context).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
+		return super.getStateForPlacement(context).setValue(WATERLOGGED, ifluidstate.getType() == Fluids.WATER);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -111,26 +114,26 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
 		popResource(worldIn, pos, new ItemStack(this));
 	}
 
 	@Override
-	public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+	public void playerDestroy(Level worldIn, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity te, ItemStack stack) {
 		super.playerDestroy(worldIn, player, pos, Blocks.AIR.defaultBlockState(), te, stack);
 	}
 
-	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
 		BlockPos blockpos = doubleblockhalf == DoubleBlockHalf.LOWER ? pos.above() : pos.below();
 		BlockState blockstate = worldIn.getBlockState(blockpos);
@@ -154,11 +157,11 @@ public class FloweringRushBlock extends Block implements IWaterLoggable, IGrowab
 
 	@OnlyIn(Dist.CLIENT)
 	public long getSeed(BlockState state, BlockPos pos) {
-		return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+		return Mth.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
 
 	@Override
-	public void fillItemCategory(ItemGroup group, NonNullList<ItemStack> items) {
+	public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
 		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

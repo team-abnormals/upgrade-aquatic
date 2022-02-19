@@ -1,12 +1,12 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model.jellyfish;
 
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
-import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorEntityModel;
-import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorModelRenderer;
+import com.teamabnormals.blueprint.client.ClientInfo;
+import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
+import com.teamabnormals.blueprint.core.endimator.entity.EndimatorModelRenderer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ImmortalJellyfishEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.util.math.MathHelper;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.util.Mth;
 
 /**
  * ModelImmortalJellyfish - Undefined
@@ -83,7 +83,7 @@ public class ImmortalJellyfishModel<E extends ImmortalJellyfishEntity> extends E
 	}
 
 	@Override
-	public void renderToBuffer(MatrixStack matrixStackIn, IVertexBuilder bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		this.animateModel(this.entity);
 
 		this.innerBody.render(matrixStackIn, bufferIn, 240, packedOverlayIn, red, green, blue, alpha);
@@ -99,16 +99,16 @@ public class ImmortalJellyfishModel<E extends ImmortalJellyfishEntity> extends E
 		this.body.xRot = this.innerBody.xRot = (float) Math.toRadians(rotations[1]);
 
 		if (entity.isInWater()) {
-			this.tentacleNorth.xRot += 0.1F * MathHelper.sin(0.2F * ageInTicks);
-			this.tentacleNorthEast.xRot -= 0.12F * MathHelper.sin(0.225F * ageInTicks);
-			this.tentacleNorthWest.xRot += 0.1F * MathHelper.sin(0.2F * ageInTicks);
+			this.tentacleNorth.xRot += 0.1F * Mth.sin(0.2F * ageInTicks);
+			this.tentacleNorthEast.xRot -= 0.12F * Mth.sin(0.225F * ageInTicks);
+			this.tentacleNorthWest.xRot += 0.1F * Mth.sin(0.2F * ageInTicks);
 
-			this.tentacleSouth.xRot -= 0.1F * MathHelper.sin(0.2F * ageInTicks);
-			this.tentacleSouthEast.xRot += 0.12F * MathHelper.sin(0.2F * ageInTicks);
-			this.tentacleSouthWest.xRot -= 0.1F * MathHelper.sin(0.225F * ageInTicks);
+			this.tentacleSouth.xRot -= 0.1F * Mth.sin(0.2F * ageInTicks);
+			this.tentacleSouthEast.xRot += 0.12F * Mth.sin(0.2F * ageInTicks);
+			this.tentacleSouthWest.xRot -= 0.1F * Mth.sin(0.225F * ageInTicks);
 
-			this.tentacleEast.zRot += 0.1F * MathHelper.sin(0.2F * ageInTicks);
-			this.tentacleWest.zRot -= 0.1F * MathHelper.sin(0.225F * ageInTicks);
+			this.tentacleEast.zRot += 0.1F * Mth.sin(0.2F * ageInTicks);
+			this.tentacleWest.zRot -= 0.1F * Mth.sin(0.225F * ageInTicks);
 		}
 	}
 

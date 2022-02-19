@@ -1,29 +1,29 @@
 package com.minecraftabnormals.upgrade_aquatic.client.particle;
 
-import net.minecraft.client.particle.IAnimatedSprite;
-import net.minecraft.client.particle.IParticleFactory;
+import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particles.BasicParticleType;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ElderPrismarineShowerParticle extends PrismarineShowerParticle {
 
-	public ElderPrismarineShowerParticle(IAnimatedSprite animatedSprite, ClientWorld world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
+	public ElderPrismarineShowerParticle(SpriteSet animatedSprite, ClientLevel world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ) {
 		super(animatedSprite, world, posX, posY, posZ, motionX, motionY, motionZ);
 	}
 
-	public static class Factory implements IParticleFactory<BasicParticleType> {
-		private final IAnimatedSprite animatedSprite;
+	public static class Factory implements ParticleProvider<SimpleParticleType> {
+		private final SpriteSet animatedSprite;
 
-		public Factory(IAnimatedSprite animatedSprite) {
+		public Factory(SpriteSet animatedSprite) {
 			this.animatedSprite = animatedSprite;
 		}
 
 		@Override
-		public Particle createParticle(BasicParticleType type, ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType type, ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			return new ElderPrismarineShowerParticle(this.animatedSprite, world, x, y, z, xSpeed, ySpeed, zSpeed);
 		}
 	}

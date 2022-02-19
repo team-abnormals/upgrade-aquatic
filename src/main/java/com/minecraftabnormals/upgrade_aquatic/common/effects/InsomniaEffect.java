@@ -3,33 +3,32 @@ package com.minecraftabnormals.upgrade_aquatic.common.effects;
 import com.minecraftabnormals.upgrade_aquatic.common.advancement.UACriteriaTriggers;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.FlareEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.PhantomEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.potion.EffectType;
-import net.minecraft.potion.InstantEffect;
-import net.minecraft.stats.StatisticsManager;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Phantom;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.InstantenousMobEffect;
+import net.minecraft.stats.StatsCounter;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
 
-public class InsomniaEffect extends InstantEffect {
+public class InsomniaEffect extends InstantenousMobEffect {
 
 	public InsomniaEffect() {
-		super(EffectType.HARMFUL, 0xa075b4);
+		super(MobEffectCategory.HARMFUL, 0xa075b4);
 	}
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		if (entity instanceof ServerPlayerEntity) {
-			ServerPlayerEntity playerMP = (ServerPlayerEntity) entity;
-			StatisticsManager statisticsManager = playerMP.getStats();
+		if (entity instanceof ServerPlayer playerMP) {
+			StatsCounter statisticsManager = playerMP.getStats();
 			statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), (24000 * (amplifier + 1)));
-		} else if (entity instanceof PhantomEntity) {
+		} else if (entity instanceof Phantom) {
 			FlareEntity flare = UAEntities.FLARE.get().create(entity.level);
-			flare.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.yRot, entity.xRot);
-			flare.setNoAi(((MobEntity) entity).isNoAi());
+			flare.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.getYRot(), entity.getXRot());
+			flare.setNoAi(((Mob) entity).isNoAi());
 			if (entity.hasCustomName()) {
 				flare.setCustomName(entity.getCustomName());
 				flare.setCustomNameVisible(entity.isCustomNameVisible());
@@ -37,11 +36,10 @@ public class InsomniaEffect extends InstantEffect {
 			flare.setHealth(entity.getHealth());
 			if (flare.getHealth() > 0) {
 				entity.level.addFreshEntity(flare);
-				entity.remove(true);
+				entity.discard();
 			}
-			PlayerEntity player = entity.getCommandSenderWorld().getNearestPlayer(entity, 11);
-			if (player instanceof ServerPlayerEntity && player.isAlive()) {
-				ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+			Player player = entity.getCommandSenderWorld().getNearestPlayer(entity, 11);
+			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
 				if (!entity.level.isClientSide()) {
 					UACriteriaTriggers.CONVERT_PHANTOM.trigger(serverPlayer);
 				}

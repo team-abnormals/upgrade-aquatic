@@ -1,11 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
-import com.minecraftabnormals.abnormals_core.core.util.EntityUtil;
-import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
+import com.teamabnormals.blueprint.core.util.EntityUtil;
+import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.phys.HitResult.Type;
 
 public class ThrasherGrabGoal extends MeleeAttackGoal {
 	private final ThrasherEntity thrasher;

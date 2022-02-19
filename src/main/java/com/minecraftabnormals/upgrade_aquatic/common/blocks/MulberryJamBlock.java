@@ -1,25 +1,29 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HalfTransparentBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class MulberryJamBlock extends BreakableBlock implements IWaterLoggable {
+public class MulberryJamBlock extends HalfTransparentBlock implements SimpleWaterloggedBlock {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public MulberryJamBlock(Properties properties) {
@@ -27,12 +31,8 @@ public class MulberryJamBlock extends BreakableBlock implements IWaterLoggable {
 		this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
 	}
 
-	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
-		return false;
-	}
-
-	public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-		return VoxelShapes.empty();
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+		return Shapes.empty();
 	}
 
 	public boolean isStickyBlock(BlockState state) {
@@ -55,12 +55,12 @@ public class MulberryJamBlock extends BreakableBlock implements IWaterLoggable {
 		return super.canStickTo(state, other);
 	}
 
-	public void entityInside(BlockState state, World world, BlockPos pos, Entity entity) {
-		entity.makeStuckInBlock(state, new Vector3d(0.2D, 0.2D, 0.2D));
+	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
+		entity.makeStuckInBlock(state, new Vec3(0.2D, 0.2D, 0.2D));
 	}
 
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		IWorld iworld = context.getLevel();
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		LevelAccessor iworld = context.getLevel();
 		BlockPos blockpos = context.getClickedPos();
 		boolean flag = iworld.getFluidState(blockpos).getType() == Fluids.WATER;
 		return this.defaultBlockState().setValue(WATERLOGGED, flag);
@@ -73,7 +73,7 @@ public class MulberryJamBlock extends BreakableBlock implements IWaterLoggable {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
 	}
 }

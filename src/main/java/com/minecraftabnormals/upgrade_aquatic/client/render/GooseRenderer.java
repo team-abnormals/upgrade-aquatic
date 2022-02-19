@@ -3,17 +3,17 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 import com.minecraftabnormals.upgrade_aquatic.client.model.GooseModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.GooseEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GooseRenderer extends MobRenderer<GooseEntity, GooseModel<GooseEntity>> {
 
-	public GooseRenderer(EntityRendererManager manager) {
+	public GooseRenderer(EntityRenderDispatcher manager) {
 		super(manager, new GooseModel<>(), 0.25F);
 	}
 
@@ -24,8 +24,8 @@ public class GooseRenderer extends MobRenderer<GooseEntity, GooseModel<GooseEnti
 
 	@Override
 	protected float getBob(GooseEntity livingBase, float partialTicks) {
-		float f = MathHelper.lerp(partialTicks, livingBase.oFlap, livingBase.flap);
-		float f1 = MathHelper.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.flapSpeed);
-		return (MathHelper.sin(f) + 1.0F) * f1;
+		float f = Mth.lerp(partialTicks, livingBase.oFlap, livingBase.flap);
+		float f1 = Mth.lerp(partialTicks, livingBase.oFlapSpeed, livingBase.flapSpeed);
+		return (Mth.sin(f) + 1.0F) * f1;
 	}
 }

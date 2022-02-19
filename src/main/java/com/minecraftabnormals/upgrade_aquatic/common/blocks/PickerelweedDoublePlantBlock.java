@@ -2,40 +2,44 @@ package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IWaterLoggable {
+public class PickerelweedDoublePlantBlock extends Block implements BonemealableBlock, SimpleWaterloggedBlock {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -46,23 +50,23 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 		this.registerDefaultState(this.stateDefinition.any().setValue(HALF, DoubleBlockHalf.LOWER).setValue(FAKE_WATERLOGGED, false));
 	}
 
-	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
+	public VoxelShape getShape(BlockState p_220053_1_, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
 		return SHAPE;
 	}
 
 	@Override
-	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
+	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
 		return this == UABlocks.TALL_BLUE_PICKERELWEED.get() ? new ItemStack(UABlocks.BLUE_PICKERELWEED.get()) : new ItemStack(UABlocks.PURPLE_PICKERELWEED.get());
 	}
 
 	@Override
-	public void entityInside(BlockState state, World worldIn, BlockPos pos, Entity entity) {
+	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
 		if (!(entity instanceof PikeEntity)) {
-			entity.makeStuckInBlock(state, new Vector3d(0.75D, 0.75D, 0.75D));
+			entity.makeStuckInBlock(state, new Vec3(0.75D, 0.75D, 0.75D));
 		}
 	}
 
-	protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos) {
+	protected boolean isValidGround(BlockState state, BlockGetter worldIn, BlockPos pos) {
 		Block block = state.getBlock();
 		return block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT || block == Blocks.PODZOL || block == Blocks.CLAY;
 	}
@@ -72,10 +76,10 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		DoubleBlockHalf doubleblockhalf = stateIn.getValue(HALF);
 		if (stateIn.getValue(WATERLOGGED)) {
-			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 			if (doubleblockhalf == DoubleBlockHalf.UPPER && !stateIn.getValue(FAKE_WATERLOGGED)) {
 				stateIn = stateIn.setValue(FAKE_WATERLOGGED, true);
 				if (worldIn.getBlockState(currentPos.below()).hasProperty(FAKE_WATERLOGGED))
@@ -94,17 +98,17 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 	}
 
 	@Nullable
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
 		BlockPos blockpos = context.getClickedPos();
 		return blockpos.getY() < context.getLevel().getMaxBuildHeight() - 1 && context.getLevel().getBlockState(blockpos.above()).canBeReplaced(context) ? super.getStateForPlacement(context).setValue(WATERLOGGED, ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8).setValue(FAKE_WATERLOGGED, ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8) : null;
 	}
 
-	public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
 		worldIn.setBlock(pos.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER), 3);
 	}
 
-	public boolean canSurvive(BlockState state, IWorldReader worldIn, BlockPos pos) {
+	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		if (state.getValue(HALF) != DoubleBlockHalf.UPPER) {
 			return this.isValidGround(worldIn.getBlockState(pos.below()), worldIn, pos);
 		} else {
@@ -115,7 +119,7 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 		}
 	}
 
-	public void placeAt(IWorld p_196390_1_, BlockPos p_196390_2_, int flags) {
+	public void placeAt(LevelAccessor p_196390_1_, BlockPos p_196390_2_, int flags) {
 		FluidState ifluidstate = p_196390_1_.getFluidState(p_196390_2_);
 		FluidState ifluidstateUp = p_196390_1_.getFluidState(p_196390_2_.above());
 		boolean applyFakeWaterLogging = ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() == 8 || ifluidstateUp.is(FluidTags.WATER) && ifluidstateUp.getAmount() == 8;
@@ -123,16 +127,16 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 		p_196390_1_.setBlock(p_196390_2_.above(), this.defaultBlockState().setValue(HALF, DoubleBlockHalf.UPPER).setValue(WATERLOGGED, ifluidstateUp.is(FluidTags.WATER) && ifluidstateUp.getAmount() == 8).setValue(FAKE_WATERLOGGED, applyFakeWaterLogging), flags);
 	}
 
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(HALF, WATERLOGGED, FAKE_WATERLOGGED);
 	}
 
 	@Override
-	public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face) {
+	public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
 		return state.getValue(WATERLOGGED) ? 0 : 60;
 	}
 
-	public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
 		return true;
 	}
 
@@ -142,21 +146,21 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 
 	@OnlyIn(Dist.CLIENT)
 	public long getSeed(BlockState state, BlockPos pos) {
-		return MathHelper.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
+		return Mth.getSeed(pos.getX(), pos.below(state.getValue(HALF) == DoubleBlockHalf.LOWER ? 0 : 1).getY(), pos.getZ());
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(IBlockReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
 	@Override
-	public boolean isBonemealSuccess(World worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
 		if (!worldIn.isClientSide) {
 			cont:
 			for (int i = 0; i < 128; ++i) {
@@ -183,9 +187,9 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 	}
 
 	@Override
-	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide) {
-			if (player.abilities.instabuild) {
+			if (player.getAbilities().instabuild) {
 				removeBottomHalf(worldIn, pos, state, player);
 			} else {
 				dropResources(state, worldIn, pos, null, player, player.getMainHandItem());
@@ -196,11 +200,11 @@ public class PickerelweedDoublePlantBlock extends Block implements IGrowable, IW
 	}
 
 	@Override
-	public void playerDestroy(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
+	public void playerDestroy(Level worldIn, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity te, ItemStack stack) {
 		super.playerDestroy(worldIn, player, pos, Blocks.AIR.defaultBlockState(), te, stack);
 	}
 
-	protected static void removeBottomHalf(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+	protected static void removeBottomHalf(Level world, BlockPos pos, BlockState state, Player player) {
 		DoubleBlockHalf doubleblockhalf = state.getValue(HALF);
 		if (doubleblockhalf == DoubleBlockHalf.UPPER) {
 			BlockPos blockpos = pos.below();

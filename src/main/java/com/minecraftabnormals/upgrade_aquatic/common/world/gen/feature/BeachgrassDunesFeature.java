@@ -3,25 +3,25 @@ package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.TallBeachgrassBlock;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
 
-public class BeachgrassDunesFeature extends Feature<NoFeatureConfig> {
+public class BeachgrassDunesFeature extends Feature<NoneFeatureConfiguration> {
 
-	public BeachgrassDunesFeature(Codec<NoFeatureConfig> config) {
+	public BeachgrassDunesFeature(Codec<NoneFeatureConfiguration> config) {
 		super(config);
 	}
 
 	@Override
-	public boolean place(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
 		for (BlockState blockstate = world.getBlockState(pos); (world.isEmptyBlock(pos) || blockstate.is(BlockTags.LEAVES)) && pos.getY() > 0; blockstate = world.getBlockState(pos)) {
 			pos = pos.below();
 		}
@@ -43,7 +43,7 @@ public class BeachgrassDunesFeature extends Feature<NoFeatureConfig> {
 		return grassesPlaced > 0;
 	}
 
-	private void placeBeachgrass(IWorld world, BlockPos pos, Random rand) {
+	private void placeBeachgrass(LevelAccessor world, BlockPos pos, Random rand) {
 		if (rand.nextFloat() < 0.30F) {
 			TallBeachgrassBlock beachGrass = (TallBeachgrassBlock) UABlocks.TALL_BEACHGRASS.get();
 			if (world.isEmptyBlock(pos) && world.isEmptyBlock(pos.above())) {

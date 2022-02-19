@@ -1,18 +1,18 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 
-import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
+import com.teamabnormals.blueprint.core.endimator.Endimation;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.JellyTorchType;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwimIntoDirectionGoal;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.Level;
 
 /**
  * @author SmellyModder(Luke Tonon)
@@ -23,15 +23,15 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	private int healCooldown;
 	private float prevHealth;
 
-	public ImmortalJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, World world) {
+	public ImmortalJellyfishEntity(EntityType<? extends AbstractJellyfishEntity> type, Level world) {
 		super(type, world);
 		this.rotationController = new RotationController(this);
 		this.bucketProcessor = new BucketProcessor<>("immortal_jellyfish", this);
 		this.prevHealth = this.getHealth();
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.createMobAttributes()
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Mob.createMobAttributes()
 				.add(Attributes.ATTACK_DAMAGE, 1.0D)
 				.add(Attributes.MAX_HEALTH, 7.0D);
 	}
@@ -72,13 +72,13 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundNBT compound) {
+	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.healCooldown = compound.getInt("HealCooldown");
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundNBT compound) {
+	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putInt("HealCooldown", this.healCooldown);
 	}
@@ -109,13 +109,13 @@ public class ImmortalJellyfishEntity extends AbstractJellyfishEntity {
 	}
 
 	@Override
-	public ITextComponent getYieldingTorchMessage() {
+	public Component getYieldingTorchMessage() {
 		JellyTorchType white = JellyTorchType.WHITE;
 		JellyTorchType red = JellyTorchType.RED;
-		return (new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(TextFormatting.GRAY))
-				.append((new TranslationTextComponent("tooltip.upgrade_aquatic." + white.toString().toLowerCase() + "_jelly_torch")).withStyle(white.color))
-				.append(new TranslationTextComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(TextFormatting.GRAY))
-				.append((new TranslationTextComponent("tooltip.upgrade_aquatic." + red.toString().toLowerCase() + "_jelly_torch")).withStyle(red.color))
+		return (new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(ChatFormatting.GRAY))
+				.append((new TranslatableComponent("tooltip.upgrade_aquatic." + white.toString().toLowerCase() + "_jelly_torch")).withStyle(white.color))
+				.append(new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(ChatFormatting.GRAY))
+				.append((new TranslatableComponent("tooltip.upgrade_aquatic." + red.toString().toLowerCase() + "_jelly_torch")).withStyle(red.color))
 				;
 	}
 

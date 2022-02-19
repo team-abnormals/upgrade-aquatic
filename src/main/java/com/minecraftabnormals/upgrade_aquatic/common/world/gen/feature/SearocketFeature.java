@@ -1,31 +1,31 @@
 package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class SearocketFeature extends Feature<NoFeatureConfig> {
+public class SearocketFeature extends Feature<NoneFeatureConfiguration> {
 
 	private static final Supplier<BlockState> SEAROCKET(boolean pink) {
 		return pink ? () -> UABlocks.PINK_SEAROCKET.get().defaultBlockState() : () -> UABlocks.WHITE_SEAROCKET.get().defaultBlockState();
 	}
 
-	public SearocketFeature(Codec<NoFeatureConfig> configFactoryIn) {
+	public SearocketFeature(Codec<NoneFeatureConfiguration> configFactoryIn) {
 		super(configFactoryIn);
 	}
 
 	@Override
-	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
 		boolean colorType;
 		if (worldIn.getBiome(pos).getBaseTemperature() < 0.2D) {
 			colorType = rand.nextFloat() <= 0.25F;
@@ -43,7 +43,7 @@ public class SearocketFeature extends Feature<NoFeatureConfig> {
 		return false;
 	}
 
-	public void generateSearocketPatch(IWorld world, BlockPos pos, boolean pink, int randomDesign) {
+	public void generateSearocketPatch(LevelAccessor world, BlockPos pos, boolean pink, int randomDesign) {
 		// 0 - a, 1 - b, 2 - c
 		int[] patterns = new int[3];
 		switch (randomDesign) {

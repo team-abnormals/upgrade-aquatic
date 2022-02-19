@@ -1,10 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike;
 
 import com.google.common.collect.Lists;
-import net.minecraft.util.Util;
-import net.minecraft.util.WeightedList;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.Util;
+import net.minecraft.world.entity.ai.behavior.WeightedList;
+import net.minecraft.ChatFormatting;
+import net.minecraft.world.level.biome.Biome;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Random;
  * @author SmellyModder (Luke Tonon)
  */
 public enum PikeType {
-	AMUR(1, PikeSize.SMALL, PikeRarity.UNCOMMON, null, Biome.Category.SWAMP),
+	AMUR(1, PikeSize.SMALL, PikeRarity.UNCOMMON, null, Biome.BiomeCategory.SWAMP),
 	REDFIN(2, PikeSize.SMALL, PikeRarity.COMMON, null, null),
 	BROWN_NORTHERN(3, PikeSize.LARGE, PikeRarity.COMMON, 8, null),
 	MAHOGANY_NORTHERN(4, PikeSize.LARGE, PikeRarity.UNCOMMON, 9, null),
@@ -27,9 +27,9 @@ public enum PikeType {
 	SPOTTED_OLIVE_NORTHERN(11, PikeSize.LARGE, PikeRarity.SUPER_RARE, null, null),
 	SUPERCHARGED(12, PikeSize.LARGE, PikeRarity.LEGENDARY, null, null),
 	OBSIDIAN(13, PikeSize.LARGE, PikeRarity.LEGENDARY, null, null),
-	MUSKELLUNGE(14, PikeSize.HUGE, PikeRarity.SUPER_RARE, null, Biome.Category.RIVER),
-	CHAIN_PICKEREL(15, PikeSize.SMALL, PikeRarity.COMMON, null, Biome.Category.RIVER),
-	GRASS_PICKEREL(16, PikeSize.SMALL, PikeRarity.COMMON, null, Biome.Category.SWAMP),
+	MUSKELLUNGE(14, PikeSize.HUGE, PikeRarity.SUPER_RARE, null, Biome.BiomeCategory.RIVER),
+	CHAIN_PICKEREL(15, PikeSize.SMALL, PikeRarity.COMMON, null, Biome.BiomeCategory.RIVER),
+	GRASS_PICKEREL(16, PikeSize.SMALL, PikeRarity.COMMON, null, Biome.BiomeCategory.SWAMP),
 	BLACK_SOUTHERN(17, PikeSize.MEDIUM, PikeRarity.COMMON, null, null),
 	EBONY_SOUTHERN(18, PikeSize.MEDIUM, PikeRarity.UNCOMMON, null, null),
 	MUSTARD_SOUTHERN(19, PikeSize.MEDIUM, PikeRarity.RARE, null, null),
@@ -42,9 +42,9 @@ public enum PikeType {
 	@Nullable
 	private final Integer spottedVariant;
 	@Nullable
-	private final Biome.Category biomeCategory;
+	private final Biome.BiomeCategory biomeCategory;
 
-	PikeType(int id, PikeSize pikeSize, PikeRarity rarity, @Nullable Integer spottedVariant, @Nullable Biome.Category biomeCategory) {
+	PikeType(int id, PikeSize pikeSize, PikeRarity rarity, @Nullable Integer spottedVariant, @Nullable Biome.BiomeCategory biomeCategory) {
 		this.id = id;
 		this.pikeSize = pikeSize;
 		this.rarity = rarity;
@@ -59,7 +59,7 @@ public enum PikeType {
 		return PikeType.AMUR;
 	}
 
-	public static PikeType getRandom(Random rand, Biome.Category category, boolean fromBucket) {
+	public static PikeType getRandom(Random rand, Biome.BiomeCategory category, boolean fromBucket) {
 		WeightedList<List<PikeType>> possibleRarityTypes = Util.make(new WeightedList<>(), (list) -> {
 			for (PikeRarity rarity : PikeRarity.values())
 				list.add(PikeType.getTypeList(category, rarity, fromBucket), rarity.weight);
@@ -70,7 +70,7 @@ public enum PikeType {
 		return spottedVariant != null && rand.nextFloat() < 0.2F ? PikeType.getTypeById(spottedVariant) : type;
 	}
 
-	private static List<PikeType> getTypeList(Biome.Category category, PikeRarity rarity, boolean fromBucket) {
+	private static List<PikeType> getTypeList(Biome.BiomeCategory category, PikeRarity rarity, boolean fromBucket) {
 		List<PikeType> pikeTypes = Lists.newArrayList();
 		List<PikeType> spotted = Lists.newArrayList();
 		for (PikeType type : PikeType.values()) {
@@ -101,16 +101,16 @@ public enum PikeType {
 	}
 
 	public enum PikeRarity {
-		COMMON(TextFormatting.GRAY, 55),
-		UNCOMMON(TextFormatting.GREEN, 25),
-		RARE(TextFormatting.BLUE, 15),
-		SUPER_RARE(TextFormatting.GOLD, 5),
-		LEGENDARY(TextFormatting.LIGHT_PURPLE, 1);
+		COMMON(ChatFormatting.GRAY, 55),
+		UNCOMMON(ChatFormatting.GREEN, 25),
+		RARE(ChatFormatting.BLUE, 15),
+		SUPER_RARE(ChatFormatting.GOLD, 5),
+		LEGENDARY(ChatFormatting.LIGHT_PURPLE, 1);
 
-		public final TextFormatting formatting;
+		public final ChatFormatting formatting;
 		private final int weight;
 
-		PikeRarity(TextFormatting formatting, int weight) {
+		PikeRarity(ChatFormatting formatting, int weight) {
 			this.formatting = formatting;
 			this.weight = weight;
 		}

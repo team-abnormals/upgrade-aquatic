@@ -1,11 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
-import com.minecraftabnormals.abnormals_core.core.api.AdvancedRandomPositionGenerator;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import com.teamabnormals.blueprint.core.api.AdvancedRandomPositionGenerator;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
@@ -28,7 +28,7 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 			}
 		}
 
-		Vector3d vec3d = this.getPosition();
+		Vec3 vec3d = this.getPosition();
 		if (vec3d == null) {
 			return false;
 		} else {
@@ -47,11 +47,11 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 
 	@Nullable
 	@Override
-	protected Vector3d getPosition() {
+	protected Vec3 getPosition() {
 		//Tries to go deep when it has an entity in its mouth
-		Vector3d vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 15, 8, !this.thrasher.getPassengers().isEmpty());
+		Vec3 vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 15, 8, !this.thrasher.getPassengers().isEmpty());
 
-		for (int i = 0; vec3d != null && !this.mob.level.getBlockState(new BlockPos(vec3d)).isPathfindable(this.mob.level, new BlockPos(vec3d), PathType.WATER) && i++ < 10; vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
+		for (int i = 0; vec3d != null && !this.mob.level.getBlockState(new BlockPos(vec3d)).isPathfindable(this.mob.level, new BlockPos(vec3d), PathComputationType.WATER) && i++ < 10; vec3d = AdvancedRandomPositionGenerator.findRandomTarget(this.mob, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
 		}
 
 		return vec3d;

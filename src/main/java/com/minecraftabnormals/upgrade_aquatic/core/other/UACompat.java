@@ -1,11 +1,8 @@
 package com.minecraftabnormals.upgrade_aquatic.core.other;
 
-import com.minecraftabnormals.abnormals_core.core.registry.LootInjectionRegistry;
-import com.minecraftabnormals.abnormals_core.core.util.DataUtil;
-import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import net.minecraft.loot.LootTables;
+import com.teamabnormals.blueprint.core.util.DataUtil;
 
 public class UACompat {
 
@@ -15,11 +12,12 @@ public class UACompat {
 		registerFlammables();
 	}
 
+	//TODO: Replace with Loot Modifiers
 	public static void registerLootInjectors() {
-		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(UpgradeAquatic.MOD_ID);
-		injector.addLootInjection(injector.buildLootPool("tooth_ruins", 1, 0), LootTables.UNDERWATER_RUIN_BIG);
-		injector.addLootInjection(injector.buildLootPool("tooth_treasure", 1, 0), LootTables.BURIED_TREASURE);
-		injector.addLootInjection(injector.buildLootPool("pickerelweed_structures", 1, 0), LootTables.SHIPWRECK_SUPPLY);
+//		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(UpgradeAquatic.MOD_ID);
+//		injector.addLootInjection(injector.buildLootPool("tooth_ruins", 1, 0), BuiltInLootTables.UNDERWATER_RUIN_BIG);
+//		injector.addLootInjection(injector.buildLootPool("tooth_treasure", 1, 0), BuiltInLootTables.BURIED_TREASURE);
+//		injector.addLootInjection(injector.buildLootPool("pickerelweed_structures", 1, 0), BuiltInLootTables.SHIPWRECK_SUPPLY);
 	}
 
 	public static void registerCompostables() {

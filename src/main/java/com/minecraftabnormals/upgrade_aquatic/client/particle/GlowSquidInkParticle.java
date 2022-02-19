@@ -1,15 +1,15 @@
 package com.minecraftabnormals.upgrade_aquatic.client.particle;
 
 import net.minecraft.client.particle.*;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.BlockPos;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GlowSquidInkParticle extends SimpleAnimatedParticle {
-	private GlowSquidInkParticle(ClientWorld world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, IAnimatedSprite animatedSprite) {
+	private GlowSquidInkParticle(ClientLevel world, double posX, double posY, double posZ, double motionX, double motionY, double motionZ, SpriteSet animatedSprite) {
 		super(world, posX, posY, posZ, animatedSprite, 0.0F);
 		this.quadSize = 0.5F;
 		this.setAlpha(1.0F);
@@ -53,19 +53,19 @@ public class GlowSquidInkParticle extends SimpleAnimatedParticle {
 	}
 
 	@Override
-	public IParticleRenderType getRenderType() {
-		return IParticleRenderType.PARTICLE_SHEET_LIT;
+	public ParticleRenderType getRenderType() {
+		return ParticleRenderType.PARTICLE_SHEET_LIT;
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static class Factory implements IParticleFactory<BasicParticleType> {
-		private final IAnimatedSprite spriteSet;
+	public static class Factory implements ParticleProvider<SimpleParticleType> {
+		private final SpriteSet spriteSet;
 
-		public Factory(IAnimatedSprite p_i50599_1_) {
+		public Factory(SpriteSet p_i50599_1_) {
 			this.spriteSet = p_i50599_1_;
 		}
 
-		public Particle createParticle(BasicParticleType typeIn, ClientWorld worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			return new GlowSquidInkParticle(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, this.spriteSet);
 		}
 	}

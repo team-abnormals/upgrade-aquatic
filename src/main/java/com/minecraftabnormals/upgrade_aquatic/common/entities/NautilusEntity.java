@@ -1,58 +1,62 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities;
 
-import com.minecraftabnormals.abnormals_core.common.entity.BucketableWaterMobEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
-import net.minecraft.entity.ai.goal.RandomSwimmingGoal;
-import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.pathfinding.SwimmerPathNavigator;
+import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.world.entity.ai.goal.PanicGoal;
+import net.minecraft.world.entity.ai.goal.RandomSwimmingGoal;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
-public class NautilusEntity extends BucketableWaterMobEntity {
-	private static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(NautilusEntity.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(NautilusEntity.class, DataSerializers.BOOLEAN);
+public class NautilusEntity extends BucketableWaterAnimal {
+	private static final EntityDataAccessor<Boolean> MOVING = SynchedEntityData.defineId(NautilusEntity.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> FLEEING = SynchedEntityData.defineId(NautilusEntity.class, EntityDataSerializers.BOOLEAN);
 
-	public NautilusEntity(EntityType<? extends NautilusEntity> type, World worldIn) {
+	public NautilusEntity(EntityType<? extends NautilusEntity> type, Level worldIn) {
 		super(type, worldIn);
 		this.moveControl = new NautilusEntity.MoveHelperController(this);
 	}
 
-	public NautilusEntity(World world, double posX, double posY, double posZ) {
+	public NautilusEntity(Level world, double posX, double posY, double posZ) {
 		this(UAEntities.NAUTILUS.get(), world);
 		this.setPos(posX, posY, posZ);
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 18.0D);
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 18.0D);
 	}
 
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new PanicGoal(this, 1.65D));
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<PlayerEntity>(this, PlayerEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NO_SPECTATORS::test) {
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<Player>(this, Player.class, 9.0F, 1.5D, 1.2D, EntitySelector.NO_SPECTATORS::test) {
 
 			@Override
 			public void start() {
@@ -67,7 +71,7 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 			}
 
 		});
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<SquidEntity>(this, SquidEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NO_SPECTATORS::test) {
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<Squid>(this, Squid.class, 9.0F, 1.5D, 1.2D, EntitySelector.NO_SPECTATORS::test) {
 
 			@Override
 			public void start() {
@@ -82,7 +86,7 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 			}
 
 		});
-		this.goalSelector.addGoal(2, new AvoidEntityGoal<ThrasherEntity>(this, ThrasherEntity.class, 9.0F, 1.5D, 1.2D, EntityPredicates.NO_SPECTATORS::test) {
+		this.goalSelector.addGoal(2, new AvoidEntityGoal<ThrasherEntity>(this, ThrasherEntity.class, 9.0F, 1.5D, 1.2D, EntitySelector.NO_SPECTATORS::test) {
 
 			@Override
 			public void start() {
@@ -101,8 +105,8 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 	}
 
 	@Override
-	protected PathNavigator createNavigation(World worldIn) {
-		return new SwimmerPathNavigator(this, worldIn);
+	protected PathNavigation createNavigation(Level worldIn) {
+		return new WaterBoundPathNavigation(this, worldIn);
 	}
 
 	@Override
@@ -147,13 +151,13 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 		this.entityData.set(MOVING, p_203706_1_);
 	}
 
-	public void addAdditionalSaveData(CompoundNBT compound) {
+	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putBoolean("Moving", this.isMoving());
 		compound.putBoolean("Fleeing", this.isMoving());
 	}
 
-	public void readAdditionalSaveData(CompoundNBT compound) {
+	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setMoving(compound.getBoolean("Moving"));
 		this.setMoving(compound.getBoolean("Fleeing"));
@@ -166,7 +170,7 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 	@Override
 	public void aiStep() {
 		if (this.isMoving() && this.isInWater() && this.wasEyeInWater) {
-			Vector3d vec3d1 = this.getViewVector(0.0F);
+			Vec3 vec3d1 = this.getViewVector(0.0F);
 
 			if (this.getCommandSenderWorld().getGameTime() % 2 == 0) {
 				this.level.addParticle(ParticleTypes.BUBBLE, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.x * 0.75D, this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - vec3d1.y * 1D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.z * 0.75D, 0.0D, 0.0D, 0.0D);
@@ -175,7 +179,7 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 		super.aiStep();
 	}
 
-	public void travel(Vector3d p_213352_1_) {
+	public void travel(Vec3 p_213352_1_) {
 		if (this.isEffectiveAi() && this.isInWater()) {
 			this.moveRelative(0.01F, p_213352_1_);
 			this.move(MoverType.SELF, this.getDeltaMovement());
@@ -197,12 +201,12 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
+	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
 		return sizeIn.height * 0.65F;
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
+	public ItemStack getPickedResult(HitResult target) {
 		return new ItemStack(UAItems.NAUTILUS_SPAWN_EGG.get());
 	}
 
@@ -211,7 +215,7 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 		return 8;
 	}
 
-	static class MoveHelperController extends MovementController {
+	static class MoveHelperController extends MoveControl {
 		private final NautilusEntity nautilus;
 
 		MoveHelperController(NautilusEntity nautilus) {
@@ -224,17 +228,17 @@ public class NautilusEntity extends BucketableWaterMobEntity {
 				this.nautilus.setDeltaMovement(this.nautilus.getDeltaMovement().add(0.0D, 0.005D, 0.0D));
 			}
 
-			if (this.operation == MovementController.Action.MOVE_TO && !this.nautilus.getNavigation().isDone()) {
+			if (this.operation == MoveControl.Operation.MOVE_TO && !this.nautilus.getNavigation().isDone()) {
 				double d0 = this.wantedX - this.nautilus.getX();
 				double d1 = this.wantedY - this.nautilus.getY();
 				double d2 = this.wantedZ - this.nautilus.getZ();
-				double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
+				double d3 = Mth.sqrt((float) (d0 * d0 + d1 * d1 + d2 * d2));
 				d1 = d1 / d3;
-				float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
-				this.nautilus.yRot = this.rotlerp(this.nautilus.yRot, f, 90.0F);
-				this.nautilus.yBodyRot = this.nautilus.yRot;
+				float f = (float) (Mth.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
+				this.nautilus.setYRot(this.rotlerp(this.nautilus.getYRot(), f, 90.0F));
+				this.nautilus.yBodyRot = this.nautilus.getYRot();
 				float f1 = (float) (this.speedModifier * this.nautilus.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
-				this.nautilus.setSpeed(MathHelper.lerp(0.125F, this.nautilus.getSpeed(), f1));
+				this.nautilus.setSpeed(Mth.lerp(0.125F, this.nautilus.getSpeed(), f1));
 				this.nautilus.setDeltaMovement(this.nautilus.getDeltaMovement().add(0.0D, (double) this.nautilus.getSpeed() * d1 * 0.03D, 0.0D));
 				nautilus.setMoving(true);
 			} else {

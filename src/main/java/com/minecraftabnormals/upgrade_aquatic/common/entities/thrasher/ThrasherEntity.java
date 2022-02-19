@@ -1,46 +1,55 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher;
 
-import com.minecraftabnormals.abnormals_core.core.endimator.ControlledEndimation;
-import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
-import com.minecraftabnormals.upgrade_aquatic.api.EndimatedMonsterEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
-import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.*;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFindDetectionPointGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherFireSonarGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherGrabGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherRandomSwimGoal;
+import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai.ThrasherThrashGoal;
 import com.minecraftabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UASounds;
-import net.minecraft.block.BlockState;
+import com.teamabnormals.blueprint.core.endimator.ControlledEndimation;
+import com.teamabnormals.blueprint.core.endimator.Endimation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
-import net.minecraft.entity.ai.controller.LookController;
-import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.SquidEntity;
-import net.minecraft.entity.passive.WaterMobEntity;
-import net.minecraft.entity.passive.fish.PufferfishEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.PathNavigator;
-import net.minecraft.pathfinding.SwimmerPathNavigator;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.*;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.util.Mth;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.LookControl;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
+import net.minecraft.world.entity.animal.Pufferfish;
+import net.minecraft.world.entity.animal.Squid;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.monster.Enemy;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -51,15 +60,15 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public class ThrasherEntity extends EndimatedMonsterEntity {
+public class ThrasherEntity extends Monster {
 	public static final Predicate<Entity> ENEMY_MATCHER = (entity) -> {
 		if (entity == null) {
 			return false;
 		}
-		if (entity instanceof PlayerEntity && !(((PlayerEntity) entity).isCreative() || entity.isSpectator())) {
+		if (entity instanceof Player && !(((Player) entity).isCreative() || entity.isSpectator())) {
 			return entity.isInWater();
 		}
-		return (entity instanceof WaterMobEntity && !(entity instanceof IMob) && !(entity instanceof ThrasherEntity) && !(entity instanceof PufferfishEntity) && !(entity instanceof SquidEntity) && !(entity instanceof LionfishEntity)) && entity.isInWater();
+		return (entity instanceof WaterAnimal && !(entity instanceof Enemy) && !(entity instanceof ThrasherEntity) && !(entity instanceof Pufferfish) && !(entity instanceof Squid) && !(entity instanceof LionfishEntity)) && entity.isInWater();
 	};
 	public static final Endimation SNAP_AT_PRAY_ANIMATION = new Endimation(10);
 	public static final Endimation HURT_ANIMATION = new Endimation(10);
@@ -67,13 +76,13 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	public static final Endimation SONAR_FIRE_ANIMATION = new Endimation(30);
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
 	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE));
-	private static final DataParameter<Boolean> MOVING = EntityDataManager.defineId(ThrasherEntity.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> WATER_TIME = EntityDataManager.defineId(ThrasherEntity.class, DataSerializers.INT);
-	private static final DataParameter<Integer> STUN_TIME = EntityDataManager.defineId(ThrasherEntity.class, DataSerializers.INT);
-	private static final DataParameter<Integer> HITS_TILL_STUN = EntityDataManager.defineId(ThrasherEntity.class, DataSerializers.INT);
-	private static final DataParameter<Optional<BlockPos>> POSSIBLE_DETECTION_POINT = EntityDataManager.defineId(ThrasherEntity.class, DataSerializers.OPTIONAL_BLOCK_POS);
-	private static final DataParameter<EntitySize> CAUGHT_SIZE = EntityDataManager.defineId(ThrasherEntity.class, UADataSerializers.ENTITY_SIZE);
-	private static final EntitySize DEFAULT_SIZE = EntitySize.fixed(1.6F, 0.9F);
+	private static final EntityDataAccessor<Boolean> MOVING = SynchedEntityData.defineId(ThrasherEntity.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> WATER_TIME = SynchedEntityData.defineId(ThrasherEntity.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> STUN_TIME = SynchedEntityData.defineId(ThrasherEntity.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> HITS_TILL_STUN = SynchedEntityData.defineId(ThrasherEntity.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Optional<BlockPos>> POSSIBLE_DETECTION_POINT = SynchedEntityData.defineId(ThrasherEntity.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
+	private static final EntityDataAccessor<EntityDimensions> CAUGHT_SIZE = SynchedEntityData.defineId(ThrasherEntity.class, UADataSerializers.ENTITY_SIZE);
+	private static final EntityDimensions DEFAULT_SIZE = EntityDimensions.fixed(1.6F, 0.9F);
 	public final ControlledEndimation STUNNED_ANIMATION = new ControlledEndimation(10, 10);
 	protected int ticksSinceLastSonarFire;
 	protected float prevTailAnimation;
@@ -83,7 +92,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	protected float finAnimation;
 	protected float finSpeed;
 
-	public ThrasherEntity(EntityType<? extends ThrasherEntity> type, World world) {
+	public ThrasherEntity(EntityType<? extends ThrasherEntity> type, Level world) {
 		super(type, world);
 		this.xpReward = 30;
 		this.moveControl = new ThrasherEntity.ThrasherMoveController(this);
@@ -92,8 +101,8 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		this.prevTailAnimation = this.tailAnimation;
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.createMobAttributes()
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Mob.createMobAttributes()
 				.add(Attributes.ATTACK_DAMAGE, 5.0D)
 				.add(Attributes.MOVEMENT_SPEED, 0.55D)
 				.add(Attributes.FOLLOW_RANGE, 32.0D)
@@ -102,9 +111,9 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 				.add(Attributes.ARMOR, 8.0D);
 	}
 
-	public static boolean thrasherCondition(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason spawnReason, BlockPos pos, Random random) {
-		if (((World) world).dimension() != World.OVERWORLD) return false;
-		return pos.getY() <= 30 && (((World) world).isNight() || random.nextFloat() < 0.75F);
+	public static boolean thrasherCondition(EntityType<? extends PathfinderMob> entityType, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+		if (((Level) world).dimension() != Level.OVERWORLD) return false;
+		return pos.getY() <= 30 && (((Level) world).isNight() || random.nextFloat() < 0.75F);
 	}
 
 	@Override
@@ -128,8 +137,8 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	}
 
 	@Override
-	public CreatureAttribute getMobType() {
-		return CreatureAttribute.WATER;
+	public MobType getMobType() {
+		return MobType.WATER;
 	}
 
 	@Override
@@ -149,22 +158,22 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 
 	@Nullable
 	@Override
-	public ILivingEntityData finalizeSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
 		this.setAirSupply(this.getMaxAirSupply());
-		if (reason == SpawnReason.NATURAL && worldIn.getBiome(this.blockPosition()).getRegistryName().equals(Biomes.DEEP_FROZEN_OCEAN.location())) {
+		if (reason == MobSpawnType.NATURAL && worldIn.getBiome(this.blockPosition()).getRegistryName().equals(Biomes.DEEP_FROZEN_OCEAN.location())) {
 			Random rand = new Random();
 			if (rand.nextFloat() < 0.25F) {
 				GreatThrasherEntity greatThrasher = UAEntities.GREAT_THRASHER.get().create(this.level);
-				greatThrasher.moveTo(this.getX(), this.getY(), this.getZ(), this.yRot, this.xRot);
+				greatThrasher.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
 				this.level.addFreshEntity(greatThrasher);
-				this.remove();
+				this.discard();
 			}
 		}
 		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 
 	@Override
-	public void onSyncedDataUpdated(DataParameter<?> key) {
+	public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
 		if (HITS_TILL_STUN.equals(key) && this.tickCount > 10) {
 			if (this.getHitsLeftTillStun() == 0) {
 				this.setStunned(((this.getRandom().nextInt(2) + 2) * 20) + this.getRandom().nextInt(10));
@@ -180,13 +189,13 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		if (passenger instanceof LivingEntity) {
 			float distance = this.getMountDistance();
 
-			double dx = Math.cos((this.yRot + 90) * Math.PI / 180.0D) * distance;
-			double dy = -Math.sin(this.xRot * (Math.PI / 180.0D));
-			double dz = Math.sin((this.yRot + 90) * Math.PI / 180.0D) * distance;
+			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+			double dy = -Math.sin(this.getXRot() * (Math.PI / 180.0D));
+			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
 
-			Vector3d riderPos = new Vector3d(this.getX() + dx, this.getY(), this.getZ() + dz);
+			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY(), this.getZ() + dz);
 
-			double offset = passenger instanceof PlayerEntity ? this.getPassengersRidingOffset() - 0.2D : this.getPassengersRidingOffset() - 0.5F;
+			double offset = passenger instanceof Player ? this.getPassengersRidingOffset() - 0.2D : this.getPassengersRidingOffset() - 0.5F;
 
 			passenger.setPos(riderPos.x, this.getY() + dy + offset, riderPos.z);
 		} else {
@@ -198,8 +207,8 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	protected void addPassenger(Entity passenger) {
 		super.addPassenger(passenger);
 		if (!this.level.isClientSide && passenger instanceof LivingEntity && passenger.getVehicle() == this && this.getPassengers().indexOf(passenger) == 0) {
-			EntitySize defaultSize = this.getDefaultSize();
-			this.setCaughtSize(EntitySize.fixed(defaultSize.width + passenger.getDimensions(passenger.getPose()).width, defaultSize.height));
+			EntityDimensions defaultSize = this.getDefaultSize();
+			this.setCaughtSize(EntityDimensions.fixed(defaultSize.width + passenger.getDimensions(passenger.getPose()).width, defaultSize.height));
 		}
 	}
 
@@ -209,9 +218,9 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		if (!this.level.isClientSide) {
 			if (!this.getPassengers().isEmpty()) {
 				Entity indexZeroPassenger = this.getPassengers().get(0);
-				EntitySize defaultSize = this.getDefaultSize();
+				EntityDimensions defaultSize = this.getDefaultSize();
 				if (indexZeroPassenger instanceof LivingEntity && passenger.getVehicle() == this) {
-					this.setCaughtSize(EntitySize.fixed(defaultSize.width + passenger.getDimensions(passenger.getPose()).width, defaultSize.height));
+					this.setCaughtSize(EntityDimensions.fixed(defaultSize.width + passenger.getDimensions(passenger.getPose()).width, defaultSize.height));
 				} else {
 					this.setCaughtSize(defaultSize);
 				}
@@ -231,7 +240,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	}
 
 	@Override
-	public boolean shouldRiderFaceForward(PlayerEntity player) {
+	public boolean shouldRiderFaceForward(Player player) {
 		return true;
 	}
 
@@ -246,7 +255,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	}
 
 	@Override
-	public EntitySize getDimensions(Pose pose) {
+	public EntityDimensions getDimensions(Pose pose) {
 		if (!this.getPassengers().isEmpty()) {
 			return this.getCaughtSize();
 		}
@@ -254,14 +263,14 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	}
 
 	@Override
-	public boolean checkSpawnObstruction(IWorldReader worldIn) {
+	public boolean checkSpawnObstruction(LevelReader worldIn) {
 		return worldIn.isUnobstructed(this);
 	}
 
 	@Override
 	public void onEndimationStart(Endimation animationStarted) {
 		if (animationStarted == THRASH_ANIMATION) {
-			ModifiableAttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+			AttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 			if (!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
 				knockbackResistance.addTransientModifier(KNOCKBACK_RESISTANCE_MODIFIER);
 			}
@@ -271,7 +280,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	@Override
 	public void onEndimationEnd(Endimation animationEnded) {
 		if (animationEnded == THRASH_ANIMATION) {
-			ModifiableAttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+			AttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 			if (knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
 				knockbackResistance.removeModifier(KNOCKBACK_RESISTANCE_MODIFIER);
 			}
@@ -290,43 +299,34 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	public boolean hurt(DamageSource source, float amount) {
 		Entity entitySource = source.getEntity();
 		if (entitySource instanceof LivingEntity) {
-			Vector3d difference = new Vector3d(
+			Vec3 difference = new Vec3(
 					entitySource.getX() - this.getX(),
 					entitySource.getY() - this.getY(),
 					entitySource.getZ() - this.getZ()
 			);
 			if (difference.length() <= 8) {
 				if (entitySource.isInWater()) {
-					if (entitySource instanceof PlayerEntity && !((PlayerEntity) entitySource).isCreative() && !entitySource.isSpectator()) {
+					if (entitySource instanceof Player && !((Player) entitySource).isCreative() && !entitySource.isSpectator()) {
 						this.setTarget((LivingEntity) entitySource);
-					} else if (!(entitySource instanceof PlayerEntity)) {
+					} else if (!(entitySource instanceof Player)) {
 						this.setTarget((LivingEntity) entitySource);
 					}
 				}
 				if (this.getHitsLeftTillStun() > 0) {
-					int difficultyDividend = 0;
-					switch (this.level.getDifficulty()) {
-						default:
-						case EASY:
-						case PEACEFUL:
-							difficultyDividend = 10;
-							break;
-						case NORMAL:
-							difficultyDividend = 12;
-							break;
-						case HARD:
-							difficultyDividend = 16;
-							break;
-					}
+					int difficultyDividend = switch (this.level.getDifficulty()) {
+						case EASY, PEACEFUL -> 10;
+						case NORMAL -> 12;
+						case HARD -> 16;
+					};
 					int chance = amount >= this.getStunDamageThreshold() ? 1 : difficultyDividend / (int) Math.max(1, amount);
 					if (this.getRandom().nextInt(chance) == 0) {
 						this.setHitsTillStun(this.getHitsLeftTillStun() - 1);
 					}
 				}
 			} else {
-				if (entitySource instanceof PlayerEntity && !((PlayerEntity) entitySource).isCreative() && !entitySource.isSpectator()) {
+				if (entitySource instanceof Player && !((Player) entitySource).isCreative() && !entitySource.isSpectator()) {
 					this.setPossibleDetectionPoint(entitySource.blockPosition().offset(this.getRandom().nextInt(2), this.getRandom().nextInt(2), this.getRandom().nextInt(2)));
-				} else if (!(entitySource instanceof PlayerEntity)) {
+				} else if (!(entitySource instanceof Player)) {
 					this.setPossibleDetectionPoint(entitySource.blockPosition().offset(this.getRandom().nextInt(2), this.getRandom().nextInt(2), this.getRandom().nextInt(2)));
 				}
 			}
@@ -335,8 +335,8 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	}
 
 	@Override
-	protected PathNavigator createNavigation(World worldIn) {
-		return new SwimmerPathNavigator(this, worldIn);
+	protected PathNavigation createNavigation(Level worldIn) {
+		return new WaterBoundPathNavigation(this, worldIn);
 	}
 
 	@Override
@@ -350,7 +350,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntitySize sizeIn) {
+	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
 		return 0.65F;
 	}
 
@@ -376,15 +376,15 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 
 	@OnlyIn(Dist.CLIENT)
 	public float getTailAnimation(float ptc) {
-		return MathHelper.lerp(ptc, this.prevTailAnimation, this.tailAnimation);
+		return Mth.lerp(ptc, this.prevTailAnimation, this.tailAnimation);
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public float getFinAnimation(float ptc) {
-		return MathHelper.lerp(ptc, this.prevFinAnimation, this.finAnimation);
+		return Mth.lerp(ptc, this.prevFinAnimation, this.finAnimation);
 	}
 
-	public void travel(Vector3d p_213352_1_) {
+	public void travel(Vec3 p_213352_1_) {
 		if (this.isEffectiveAi() && this.isInWater()) {
 			this.moveRelative(0.1F, p_213352_1_);
 			this.move(MoverType.SELF, this.getDeltaMovement());
@@ -422,14 +422,14 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 
 				if (!this.isInWater() && !this.isStunned() && this.onGround) {
 					this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.2F, 0.5D, (this.random.nextFloat() * 2.0F - 1.0F) * 0.2F));
-					this.yRot = this.random.nextFloat() * 360.0F;
-					this.xRot = this.random.nextFloat() * -50.0F;
+					this.setYRot(this.random.nextFloat() * 360.0F);
+					this.setXRot(this.random.nextFloat() * -50.0F);
 					this.onGround = false;
 					this.hasImpulse = true;
 					this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 				}
 			}
-			if (this.isWorldRemote()) {
+			if (this.level.isClientSide()) {
 				if (!this.getPassengers().isEmpty() && this.isEndimationPlaying(THRASH_ANIMATION) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
 					Entity passenger = this.getPassengers().get(0);
 					for (int i = 0; i < 3; ++i) {
@@ -504,7 +504,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 			}
 
 			if (this.isMoving() && this.isInWater()) {
-				Vector3d vec3d1 = this.getViewVector(0.0F);
+				Vec3 vec3d1 = this.getViewVector(0.0F);
 
 				for (int i = 0; i < 2; ++i) {
 					this.level.addParticle(ParticleTypes.BUBBLE, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.x * 1.5D, this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - vec3d1.y * 1.5D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
@@ -515,7 +515,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 	}
 
 	@Override
-	public ItemStack getPickedResult(RayTraceResult target) {
+	public ItemStack getPickedResult(HitResult target) {
 		return new ItemStack(UAItems.THRASHER_SPAWN_EGG.get());
 	}
 
@@ -610,11 +610,11 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		this.getEntityData().set(POSSIBLE_DETECTION_POINT, Optional.ofNullable(detectionPoint));
 	}
 
-	public EntitySize getCaughtSize() {
+	public EntityDimensions getCaughtSize() {
 		return this.entityData.get(CAUGHT_SIZE);
 	}
 
-	public void setCaughtSize(EntitySize caughtSize) {
+	public void setCaughtSize(EntityDimensions caughtSize) {
 		this.entityData.set(CAUGHT_SIZE, caughtSize);
 	}
 
@@ -630,7 +630,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		this.entityData.set(STUN_TIME, ticks);
 	}
 
-	public void addAdditionalSaveData(CompoundNBT compound) {
+	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putBoolean("IsMoving", this.isMoving());
 		compound.putInt("WaterTicks", this.getWaterTime());
@@ -638,15 +638,15 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		compound.putInt("TicksSinceLastSonarFire", this.getTicksSinceLastSonarFire());
 
 		if (this.getPossibleDetectionPoint() != null) {
-			compound.put("DetectionPoint", NBTUtil.writeBlockPos(this.getPossibleDetectionPoint()));
+			compound.put("DetectionPoint", NbtUtils.writeBlockPos(this.getPossibleDetectionPoint()));
 		}
 	}
 
-	protected EntitySize getDefaultSize() {
+	protected EntityDimensions getDefaultSize() {
 		return DEFAULT_SIZE;
 	}
 
-	public void readAdditionalSaveData(CompoundNBT compound) {
+	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.setMoving(compound.getBoolean("IsMoving"));
 		this.setWaterTime(compound.getInt("WaterTicks"));
@@ -654,11 +654,11 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		this.ticksSinceLastSonarFire = compound.getInt("TicksSinceLastSonarFire");
 
 		if (this.getPossibleDetectionPoint() != null) {
-			this.setPossibleDetectionPoint(NBTUtil.readBlockPos(compound.getCompound("DetectionPoint")));
+			this.setPossibleDetectionPoint(NbtUtils.readBlockPos(compound.getCompound("DetectionPoint")));
 		}
 	}
 
-	static class ThrasherMoveController extends MovementController {
+	static class ThrasherMoveController extends MoveControl {
 		private final ThrasherEntity thrasher;
 
 		public ThrasherMoveController(ThrasherEntity thrasher) {
@@ -667,30 +667,30 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		}
 
 		public void tick() {
-			if (this.operation == MovementController.Action.MOVE_TO && !this.thrasher.getNavigation().isDone() && this.thrasher.getStunTime() <= 0) {
-				Vector3d vec3d = new Vector3d(this.wantedX - this.thrasher.getX(), this.wantedY - this.thrasher.getY(), this.wantedZ - this.thrasher.getZ());
+			if (this.operation == MoveControl.Operation.MOVE_TO && !this.thrasher.getNavigation().isDone() && this.thrasher.getStunTime() <= 0) {
+				Vec3 vec3d = new Vec3(this.wantedX - this.thrasher.getX(), this.wantedY - this.thrasher.getY(), this.wantedZ - this.thrasher.getZ());
 				double d0 = vec3d.length();
 				double d1 = vec3d.y / d0;
-				float f = (float) (MathHelper.atan2(vec3d.z, vec3d.x) * (double) (180F / (float) Math.PI)) - 90F;
+				float f = (float) (Mth.atan2(vec3d.z, vec3d.x) * (double) (180F / (float) Math.PI)) - 90F;
 
-				this.thrasher.yRot = this.rotlerp(this.thrasher.yRot, f, 10.0F);
-				this.thrasher.yBodyRot = this.thrasher.yRot;
-				this.thrasher.yHeadRot = this.thrasher.yRot;
+				this.thrasher.setYRot(this.rotlerp(this.thrasher.getYRot(), f, 10.0F));
+				this.thrasher.yBodyRot = this.thrasher.getYRot();
+				this.thrasher.yHeadRot = this.thrasher.getYRot();
 
 				float f1 = (float) (this.speedModifier * this.thrasher.getAttribute(Attributes.MOVEMENT_SPEED).getValue());
-				float f2 = MathHelper.lerp(0.125F, this.thrasher.getSpeed(), f1);
+				float f2 = Mth.lerp(0.125F, this.thrasher.getSpeed(), f1);
 
 				this.thrasher.setSpeed(f2);
 
 				double d2 = Math.sin((double) (this.thrasher.tickCount + this.thrasher.getId()) * 0.5D) * 0.05D;
-				double d3 = Math.cos(this.thrasher.yRot * ((float) Math.PI / 180F));
-				double d4 = Math.sin(this.thrasher.yRot * ((float) Math.PI / 180F));
+				double d3 = Math.cos(this.thrasher.getYRot() * ((float) Math.PI / 180F));
+				double d4 = Math.sin(this.thrasher.getYRot() * ((float) Math.PI / 180F));
 				double d5 = Math.sin((double) (this.thrasher.tickCount + this.thrasher.getId()) * 0.75D) * 0.05D;
 
 				if (this.thrasher.isInWater()) {
-					float f3 = -((float) (MathHelper.atan2(vec3d.y, MathHelper.sqrt(vec3d.x * vec3d.x + vec3d.z * vec3d.z)) * (double) (180F / (float) Math.PI)));
-					f3 = MathHelper.clamp(MathHelper.wrapDegrees(f3), -85.0F, 85.0F);
-					this.thrasher.xRot = this.rotlerp(this.thrasher.xRot, f3, 5.0F);
+					float f3 = -((float) (Mth.atan2(vec3d.y, Mth.sqrt((float) (vec3d.x * vec3d.x + vec3d.z * vec3d.z))) * (double) (180F / (float) Math.PI)));
+					f3 = Mth.clamp(Mth.wrapDegrees(f3), -85.0F, 85.0F);
+					this.thrasher.setXRot(this.rotlerp(this.thrasher.getXRot(), f3, 5.0F));
 				}
 
 				this.thrasher.setDeltaMovement(this.thrasher.getDeltaMovement().add(d2 * d3, d5 * (d4 + d3) * 0.25D + (double) f2 * d1 * 0.1D, d2 * d4));
@@ -703,7 +703,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 		}
 	}
 
-	public static class ThrasherLookController extends LookController {
+	public static class ThrasherLookController extends LookControl {
 		private boolean isTurningForSonar;
 
 		public ThrasherLookController(ThrasherEntity thrasher) {
@@ -730,7 +730,7 @@ public class ThrasherEntity extends EndimatedMonsterEntity {
 				}
 			}
 
-			float wrappedDegrees = MathHelper.wrapDegrees(this.mob.yHeadRot - this.mob.yBodyRot);
+			float wrappedDegrees = Mth.wrapDegrees(this.mob.yHeadRot - this.mob.yBodyRot);
 			float angleLimit = this.mob.getPassengers().isEmpty() ? 10.0F : 5.0F;
 			if (wrappedDegrees < -angleLimit) {
 				this.mob.yBodyRot -= 4.0F;

@@ -1,15 +1,15 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
-import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatedEntity;
-import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
+import com.teamabnormals.blueprint.core.endimator.entity.EndimatedEntity;
+import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.util.Mth;
 
 import java.util.EnumSet;
 
@@ -26,8 +26,8 @@ public class ThrasherThrashGoal extends Goal {
 	@Override
 	public boolean canUse() {
 		Entity passenger = !thrasher.getPassengers().isEmpty() ? this.thrasher.getPassengers().get(0) : null;
-		if (passenger instanceof PlayerEntity) {
-			if (((PlayerEntity) passenger).isCreative() || passenger.isSpectator()) {
+		if (passenger instanceof Player) {
+			if (((Player) passenger).isCreative() || passenger.isSpectator()) {
 				return false;
 			}
 		}
@@ -37,8 +37,8 @@ public class ThrasherThrashGoal extends Goal {
 	@Override
 	public boolean canContinueToUse() {
 		Entity passenger = !thrasher.getPassengers().isEmpty() ? this.thrasher.getPassengers().get(0) : null;
-		if (passenger instanceof PlayerEntity) {
-			if (((PlayerEntity) passenger).isCreative() || passenger.isSpectator()) {
+		if (passenger instanceof Player) {
+			if (((Player) passenger).isCreative() || passenger.isSpectator()) {
 				return false;
 			}
 		}
@@ -47,7 +47,7 @@ public class ThrasherThrashGoal extends Goal {
 
 	@Override
 	public void start() {
-		this.originalYaw = this.thrasher.yRot;
+		this.originalYaw = this.thrasher.getYRot();
 		this.thrasher.setHitsTillStun(this.thrasher.getRandom().nextInt(2) + 2);
 		NetworkUtil.setPlayingAnimationMessage(this.thrasher, ThrasherEntity.THRASH_ANIMATION);
 	}
@@ -65,15 +65,15 @@ public class ThrasherThrashGoal extends Goal {
 
 		this.thrasher.getNavigation().stop();
 
-		this.thrasher.yRotO = this.thrasher.yRot;
+		this.thrasher.yRotO = this.thrasher.getYRot();
 
-		this.thrasher.yBodyRot = (this.originalYaw) + 75 * MathHelper.cos(this.thrasher.tickCount * 0.5F) * 1F;
-		this.thrasher.yRot = (this.originalYaw) + 75 * MathHelper.cos(this.thrasher.tickCount * 0.5F) * 1F;
+		this.thrasher.yBodyRot = (this.originalYaw) + 75 * Mth.cos(this.thrasher.tickCount * 0.5F) * 1F;
+		this.thrasher.setYRot((this.originalYaw) + 75 * Mth.cos(this.thrasher.tickCount * 0.5F) * 1F);
 
 		Entity entity = this.thrasher.getPassengers().get(0);
 
-		if (entity instanceof PlayerEntity) {
-			this.disablePlayersShield((PlayerEntity) entity);
+		if (entity instanceof Player) {
+			this.disablePlayersShield((Player) entity);
 		}
 
 		entity.setShiftKeyDown(false);
@@ -84,7 +84,7 @@ public class ThrasherThrashGoal extends Goal {
 		}
 	}
 
-	private void disablePlayersShield(PlayerEntity player) {
+	private void disablePlayersShield(Player player) {
 		player.getCooldowns().addCooldown(Items.SHIELD, 30);
 	}
 }

@@ -1,10 +1,10 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry.util;
 
-import com.minecraftabnormals.abnormals_core.core.util.registry.ItemSubRegistryHelper;
-import com.minecraftabnormals.abnormals_core.core.util.registry.RegistryHelper;
+import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
+import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.minecraftabnormals.upgrade_aquatic.common.items.JellyfishSpawnEggItem;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.RegistryObject;
 
 public class UAItemSubRegistryHelper extends ItemSubRegistryHelper {
 

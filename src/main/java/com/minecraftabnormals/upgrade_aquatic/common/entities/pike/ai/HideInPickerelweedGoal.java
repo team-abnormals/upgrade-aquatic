@@ -1,13 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.pike.ai;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.pike.PikeEntity;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-public final class HideInPickerelweedGoal extends RandomWalkingGoal {
+public final class HideInPickerelweedGoal extends RandomStrollGoal {
 
 	public HideInPickerelweedGoal(PikeEntity pike) {
 		super(pike, 1.1D, 25);
@@ -19,7 +19,7 @@ public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 			return false;
 		}
 
-		Vector3d vec3d = this.getPosition();
+		Vec3 vec3d = this.getPosition();
 		if (vec3d == null) {
 			return false;
 		} else {
@@ -40,12 +40,12 @@ public final class HideInPickerelweedGoal extends RandomWalkingGoal {
 	}
 
 	@Nullable
-	protected Vector3d getPosition() {
+	protected Vec3 getPosition() {
 		PikeEntity pike = (PikeEntity) this.mob;
 		if (pike.isPickerelweedNearby()) {
 			int pickedWeed = pike.getRandom().nextInt(pike.getNearbyPickerelweeds().size());
 			BlockPos pos = pike.getNearbyPickerelweeds().get(pickedWeed);
-			return new Vector3d(pos.getX(), pos.getY(), pos.getZ());
+			return new Vec3(pos.getX(), pos.getY(), pos.getZ());
 		}
 		return null;
 	}

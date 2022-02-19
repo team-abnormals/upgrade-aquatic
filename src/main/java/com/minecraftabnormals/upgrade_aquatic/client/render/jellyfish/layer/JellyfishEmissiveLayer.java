@@ -1,34 +1,34 @@
 package com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.layer;
 
-import com.minecraftabnormals.abnormals_core.client.ACRenderTypes;
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
-import com.minecraftabnormals.abnormals_core.core.endimator.entity.EndimatorEntityModel;
-import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
+import com.teamabnormals.blueprint.client.ACRenderTypes;
+import com.teamabnormals.blueprint.client.ClientInfo;
+import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.AbstractJellyfishRenderer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
-import net.minecraft.client.renderer.entity.LivingRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.util.math.MathHelper;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.util.Mth;
 
-public class JellyfishEmissiveLayer<T extends AbstractJellyfishEntity, M extends EndimatorEntityModel<T>> extends LayerRenderer<T, M> {
+public class JellyfishEmissiveLayer<T extends AbstractJellyfishEntity, M extends EndimatorEntityModel<T>> extends RenderLayer<T, M> {
 	private final AbstractJellyfishRenderer<T> jellyfishRenderer;
 
-	public JellyfishEmissiveLayer(IEntityRenderer<T, M> renderer, AbstractJellyfishRenderer<T> jellyfishRenderer) {
+	public JellyfishEmissiveLayer(RenderLayerParent<T, M> renderer, AbstractJellyfishRenderer<T> jellyfishRenderer) {
 		super(renderer);
 		this.jellyfishRenderer = jellyfishRenderer;
 	}
 
 	@Override
-	public void render(MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn, T jellyfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, T jellyfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		ClientInfo.MINECRAFT.getTextureManager().bind(this.jellyfishRenderer.getOverlayTexture(jellyfish));
 
-		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveTransluscentEntityWithDiffusedLight(this.jellyfishRenderer.getOverlayTexture(jellyfish), true));
+		VertexConsumer ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveTransluscentEntityWithDiffusedLight(this.jellyfishRenderer.getOverlayTexture(jellyfish), true));
 
 		this.getParentModel().setupAnim(jellyfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, MathHelper.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingRenderer.getOverlayCoords(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
+		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, Mth.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingEntityRenderer.getOverlayCoords(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
 	}
 }

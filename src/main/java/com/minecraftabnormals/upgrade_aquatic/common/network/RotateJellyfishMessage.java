@@ -1,11 +1,11 @@
 package com.minecraftabnormals.upgrade_aquatic.common.network;
 
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.network.PacketBuffer;
+import com.teamabnormals.blueprint.client.ClientInfo;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
@@ -27,14 +27,14 @@ public class RotateJellyfishMessage {
 		this.pitch = pitch;
 	}
 
-	public void serialize(PacketBuffer buf) {
+	public void serialize(FriendlyByteBuf buf) {
 		buf.writeInt(this.entityId);
 		buf.writeInt(this.tickLength);
 		buf.writeFloat(this.yaw);
 		buf.writeFloat(this.pitch);
 	}
 
-	public static RotateJellyfishMessage deserialize(PacketBuffer buf) {
+	public static RotateJellyfishMessage deserialize(FriendlyByteBuf buf) {
 		return new RotateJellyfishMessage(buf.readInt(), buf.readInt(), buf.readFloat(), buf.readFloat());
 	}
 
@@ -42,7 +42,7 @@ public class RotateJellyfishMessage {
 		NetworkEvent.Context context = ctx.get();
 		if (context.getDirection().getReceptionSide() == LogicalSide.CLIENT) {
 			context.enqueueWork(() -> {
-				Entity entity = ClientInfo.getClientPlayerWorld().getEntity(message.entityId);
+				Entity entity = ClientInfo.getClientPlayerLevel().getEntity(message.entityId);
 				if (entity instanceof AbstractJellyfishEntity) {
 					((AbstractJellyfishEntity) entity).getRotationController().rotate(message.yaw, message.pitch, message.tickLength);
 				}

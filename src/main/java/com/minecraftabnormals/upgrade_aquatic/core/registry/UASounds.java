@@ -1,12 +1,12 @@
 package com.minecraftabnormals.upgrade_aquatic.core.registry;
 
-import com.minecraftabnormals.abnormals_core.core.util.registry.SoundSubRegistryHelper;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import net.minecraft.block.SoundType;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraftforge.fml.RegistryObject;
+import com.teamabnormals.blueprint.core.util.registry.SoundSubRegistryHelper;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class UASounds {

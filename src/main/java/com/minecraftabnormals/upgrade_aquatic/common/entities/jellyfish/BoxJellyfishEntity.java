@@ -1,21 +1,28 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish;
 
-import com.minecraftabnormals.abnormals_core.common.entity.ai.PredicateAttackGoal;
-import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
+import com.teamabnormals.blueprint.common.entity.ai.PredicateAttackGoal;
+import com.teamabnormals.blueprint.core.endimator.Endimation;
 import com.minecraftabnormals.upgrade_aquatic.common.blocks.JellyTorchBlock.JellyTorchType;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.BoxJellyfishHuntGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishBoostGoal;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai.JellyfishSwimIntoDirectionGoal;
 import net.minecraft.entity.*;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.passive.fish.AbstractFishEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.level.Level;
+
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Pose;
 
 /**
  * @author SmellyModder(Luke Tonon)
@@ -24,13 +31,13 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	private final RotationController rotationController;
 	private int huntingCooldown;
 
-	public BoxJellyfishEntity(EntityType<? extends BoxJellyfishEntity> type, World world) {
+	public BoxJellyfishEntity(EntityType<? extends BoxJellyfishEntity> type, Level world) {
 		super(type, world);
 		this.rotationController = new RotationController(this);
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.createMobAttributes().add(Attributes.ATTACK_DAMAGE, 5.0D);
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Mob.createMobAttributes().add(Attributes.ATTACK_DAMAGE, 5.0D);
 	}
 
 	@Override
@@ -39,7 +46,7 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, SWIM_ANIMATION));
 		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, BOOST_ANIMATION));
 
-		this.targetSelector.addGoal(1, new PredicateAttackGoal<>(this, AbstractFishEntity.class, 150, true, true, null, owner -> !((BoxJellyfishEntity) owner).hasCooldown() && !((BoxJellyfishEntity) owner).hasHuntingCooldown()));
+		this.targetSelector.addGoal(1, new PredicateAttackGoal<>(this, AbstractFish.class, 150, true, true, null, owner -> !((BoxJellyfishEntity) owner).hasCooldown() && !((BoxJellyfishEntity) owner).hasHuntingCooldown()));
 	}
 
 	@Override
@@ -63,19 +70,19 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundNBT compound) {
+	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		compound.putInt("HuntingCooldown", this.huntingCooldown);
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundNBT compound) {
+	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.huntingCooldown = compound.getInt("HuntingCooldown");
 	}
 
 	@Override
-	public EntitySize getDimensions(Pose pose) {
+	public EntityDimensions getDimensions(Pose pose) {
 		return super.getDimensions(pose).scale(this.getSize());
 	}
 
@@ -88,7 +95,7 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntitySize size) {
+	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions size) {
 		return size.height * 0.5F;
 	}
 
@@ -97,7 +104,7 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 		if (super.hurt(source, amount)) {
 			Entity entity = source.getEntity();
 			if (entity instanceof LivingEntity && this.getTarget() == null && !entity.isSpectator()) {
-				if (!(entity instanceof PlayerEntity && ((PlayerEntity) entity).isCreative())) {
+				if (!(entity instanceof Player && ((Player) entity).isCreative())) {
 					this.setTarget((LivingEntity) entity);
 				}
 			}
@@ -140,7 +147,7 @@ public class BoxJellyfishEntity extends ColoredSizableJellyfishEntity {
 	@Override
 	public boolean stingEntity(LivingEntity livingEntity) {
 		if (super.stingEntity(livingEntity)) {
-			livingEntity.addEffect(new EffectInstance(Effects.POISON, 600, 1));
+			livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 600, 1));
 			if (this.getTarget() == null) {
 				this.setTarget(livingEntity);
 			}

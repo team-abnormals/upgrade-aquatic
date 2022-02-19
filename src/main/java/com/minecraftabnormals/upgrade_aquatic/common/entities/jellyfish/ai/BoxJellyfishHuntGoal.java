@@ -1,13 +1,15 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
-import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
+import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.BoxJellyfishEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
+
+import net.minecraft.world.entity.ai.goal.Goal.Flag;
 
 public class BoxJellyfishHuntGoal extends Goal {
 	private final BoxJellyfishEntity hunter;
@@ -43,17 +45,17 @@ public class BoxJellyfishHuntGoal extends Goal {
 	@Override
 	public void tick() {
 		LivingEntity target = this.hunter.getTarget();
-		Vector3d distance = new Vector3d(target.getX() - this.hunter.getX(), target.getY() - this.hunter.getY(), target.getZ() - this.hunter.getZ());
+		Vec3 distance = new Vec3(target.getX() - this.hunter.getX(), target.getY() - this.hunter.getY(), target.getZ() - this.hunter.getZ());
 
-		float pitch = -((float) (MathHelper.atan2(distance.y(), MathHelper.sqrt(distance.x() * distance.x() + distance.z() * distance.z())) * (double) (180F / (float) Math.PI)));
-		float yaw = (float) (MathHelper.atan2(distance.z(), distance.x()) * (double) (180F / (float) Math.PI)) - 90.0F;
+		float pitch = -((float) (Mth.atan2(distance.y(), Mth.sqrt((float) (distance.x() * distance.x() + distance.z() * distance.z()))) * (double) (180F / (float) Math.PI)));
+		float yaw = (float) (Mth.atan2(distance.z(), distance.x()) * (double) (180F / (float) Math.PI)) - 90.0F;
 
-		this.hunter.lockedRotations[0] = MathHelper.wrapDegrees(yaw);
-		this.hunter.lockedRotations[1] = MathHelper.wrapDegrees(pitch + 90.0F);
+		this.hunter.lockedRotations[0] = Mth.wrapDegrees(yaw);
+		this.hunter.lockedRotations[1] = Mth.wrapDegrees(pitch + 90.0F);
 
 		float[] rotations = this.hunter.getRotationController().getRotations(1.0F);
 
-		if (!this.hunter.canSee(target)) {
+		if (!this.hunter.hasLineOfSight(target)) {
 			this.noSightTicks++;
 		}
 

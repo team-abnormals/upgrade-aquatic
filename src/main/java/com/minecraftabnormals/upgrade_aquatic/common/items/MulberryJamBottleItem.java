@@ -1,29 +1,28 @@
 package com.minecraftabnormals.upgrade_aquatic.common.items;
 
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.UseAction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.level.Level;
 
 public class MulberryJamBottleItem extends Item {
 	public MulberryJamBottleItem(Item.Properties properties) {
 		super(properties);
 	}
 
-	public ItemStack finishUsingItem(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+	public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
 		super.finishUsingItem(stack, worldIn, entityLiving);
-		if (entityLiving instanceof ServerPlayerEntity) {
-			ServerPlayerEntity serverplayerentity = (ServerPlayerEntity) entityLiving;
+		if (entityLiving instanceof ServerPlayer serverplayerentity) {
 			CriteriaTriggers.CONSUME_ITEM.trigger(serverplayerentity, stack);
 			serverplayerentity.awardStat(Stats.ITEM_USED.get(this));
 		}
@@ -31,10 +30,9 @@ public class MulberryJamBottleItem extends Item {
 		if (stack.isEmpty()) {
 			return new ItemStack(Items.GLASS_BOTTLE);
 		} else {
-			if (entityLiving instanceof PlayerEntity && !((PlayerEntity) entityLiving).abilities.instabuild) {
+			if (entityLiving instanceof Player playerentity && !((Player) entityLiving).getAbilities().instabuild) {
 				ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
-				PlayerEntity playerentity = (PlayerEntity) entityLiving;
-				if (!playerentity.inventory.add(itemstack)) {
+				if (!playerentity.getInventory().add(itemstack)) {
 					playerentity.drop(itemstack, false);
 				}
 			}
@@ -47,8 +45,8 @@ public class MulberryJamBottleItem extends Item {
 		return 40;
 	}
 
-	public UseAction getUseAnimation(ItemStack stack) {
-		return UseAction.DRINK;
+	public UseAnim getUseAnimation(ItemStack stack) {
+		return UseAnim.DRINK;
 	}
 
 	public SoundEvent getDrinkingSound() {
@@ -59,8 +57,8 @@ public class MulberryJamBottleItem extends Item {
 		return SoundEvents.HONEY_DRINK;
 	}
 
-	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
 		playerIn.startUsingItem(handIn);
-		return ActionResult.success(playerIn.getItemInHand(handIn));
+		return InteractionResultHolder.success(playerIn.getItemInHand(handIn));
 	}
 }

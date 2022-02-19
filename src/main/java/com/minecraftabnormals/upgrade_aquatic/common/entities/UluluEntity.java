@@ -1,27 +1,27 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities;
 
-import net.minecraft.entity.EntitySize;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.controller.MovementController;
-import net.minecraft.loot.LootTables;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.MoveControl;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 
-public class UluluEntity extends MobEntity {
+public class UluluEntity extends Mob {
 
-	private static final DataParameter<Integer> ULULU_SIZE = EntityDataManager.defineId(UluluEntity.class, DataSerializers.INT);
+	private static final EntityDataAccessor<Integer> ULULU_SIZE = SynchedEntityData.defineId(UluluEntity.class, EntityDataSerializers.INT);
 
 	public float squishFactor;
 	public float prevSquishFactor;
 
-	public UluluEntity(EntityType<? extends UluluEntity> type, World worldIn) {
+	public UluluEntity(EntityType<? extends UluluEntity> type, Level worldIn) {
 		super(type, worldIn);
 		this.moveControl = new UluluEntity.MoveHelperController(this);
 	}
@@ -41,18 +41,18 @@ public class UluluEntity extends MobEntity {
 
 	@Override
 	protected ResourceLocation getDefaultLootTable() {
-		return this.isSmallUlulu() ? LootTables.EMPTY : this.getType().getDefaultLootTable();
+		return this.isSmallUlulu() ? BuiltInLootTables.EMPTY : this.getType().getDefaultLootTable();
 	}
 
-	public EntitySize getDimensions(Pose poseIn) {
+	public EntityDimensions getDimensions(Pose poseIn) {
 		return super.getDimensions(poseIn);
 	}
 
-	public static AttributeModifierMap.MutableAttribute registerAttributes() {
-		return MobEntity.createMobAttributes().add(Attributes.MAX_HEALTH, 18.0D);
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 18.0D);
 	}
 
-	static class MoveHelperController extends MovementController {
+	static class MoveHelperController extends MoveControl {
 		@SuppressWarnings("unused")
 		private final UluluEntity ululu;
 

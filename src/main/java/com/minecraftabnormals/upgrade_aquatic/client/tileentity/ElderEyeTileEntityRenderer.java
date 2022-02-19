@@ -5,32 +5,32 @@ import com.minecraftabnormals.upgrade_aquatic.common.blocks.ElderEyeBlock;
 import com.minecraftabnormals.upgrade_aquatic.common.tileentities.ElderEyeTileEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import com.mojang.math.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ElderEyeTileEntityRenderer extends TileEntityRenderer<ElderEyeTileEntity> {
+public class ElderEyeTileEntityRenderer extends BlockEntityRenderer<ElderEyeTileEntity> {
 	private static final ResourceLocation ELDER_EYE_TEXTURE = new ResourceLocation(UpgradeAquatic.MOD_ID + ":textures/tile/guardian_eye.png");
 	private static final ResourceLocation ELDER_EYE_DIM_TEXTURE = new ResourceLocation(UpgradeAquatic.MOD_ID + ":textures/tile/guardian_eye_dim.png");
 	private final ElderEyeModel model;
 
-	public ElderEyeTileEntityRenderer(TileEntityRendererDispatcher renderDispatcher) {
+	public ElderEyeTileEntityRenderer(BlockEntityRenderDispatcher renderDispatcher) {
 		super(renderDispatcher);
 		this.model = new ElderEyeModel();
 	}
 
 	@Override
-	public void render(ElderEyeTileEntity te, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
+	public void render(ElderEyeTileEntity te, float partialTicks, PoseStack matrixStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn) {
 		matrixStack.pushPose();
 		matrixStack.translate(0.5D, 1.5D, 0.5D);
 
@@ -53,7 +53,7 @@ public class ElderEyeTileEntityRenderer extends TileEntityRenderer<ElderEyeTileE
 
 		matrixStack.scale(1.0F, -1.0F, -1.0F);
 
-		IVertexBuilder ivertexbuilder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(this.getEyeTexture(eyeState.getValue(ElderEyeBlock.ACTIVE))));
+		VertexConsumer ivertexbuilder = bufferIn.getBuffer(RenderType.entityCutoutNoCull(this.getEyeTexture(eyeState.getValue(ElderEyeBlock.ACTIVE))));
 		this.model.render(matrixStack, ivertexbuilder, combinedLightIn, combinedOverlayIn);
 		matrixStack.popPose();
 	}

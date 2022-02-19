@@ -1,9 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.helper;
 
-import com.minecraftabnormals.abnormals_core.core.AbnormalsCore;
+import com.teamabnormals.blueprint.core.Blueprint;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class JellyfishSizeMap {
 	protected final TreeMap<Float, Integer> sizeMap;
@@ -15,7 +19,7 @@ public class JellyfishSizeMap {
 		for (int weight : this.sizeMap.values())
 			totalWeight += weight;
 		this.totalWeight = totalWeight;
-		if (this.sizeMap.isEmpty()) AbnormalsCore.LOGGER.error("Inputted size map cannot be empty!");
+		if (this.sizeMap.isEmpty()) Blueprint.LOGGER.error("Inputted size map cannot be empty!");
 	}
 
 	public int size() {

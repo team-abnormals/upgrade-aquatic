@@ -4,7 +4,7 @@ buildscript {
         maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
     }
     dependencies {
-        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "4.1.+", changing: true
+        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "5.1.+", changing: true
         classpath group: "org.spongepowered", name: "mixingradle", version: "0.7-SNAPSHOT"
     }
 }
@@ -19,13 +19,13 @@ mixin {
 }
 
 version = "${project.minecraft}-${project.modVersion}"
-group = "com.minecraftabnormals"
+group = "com.teamabnormals"
 archivesBaseName = project.modId
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = "1.8"
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: "official", version: "1.16.5"
+    mappings channel: "official", version: "1.18"
     accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
     runs {
         client {
@@ -70,14 +70,18 @@ minecraft {
     }
 }
 
+sourceSets.main.resources {
+    srcDir "src/generated/resources"
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
-    implementation fg.deobf("com.minecraftabnormals:abnormals-core:${project.minecraft}-${project.abnormalsCore}")
+    implementation fg.deobf("com.teamabnormals:blueprint:${project.minecraft}-${project.blueprint}")
 
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
 
-    annotationProcessor "org.spongepowered:mixin:0.8.2:processor"
+    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }
 
 repositories {

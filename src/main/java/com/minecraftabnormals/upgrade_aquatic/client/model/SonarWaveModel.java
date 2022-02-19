@@ -1,6 +1,6 @@
 package com.minecraftabnormals.upgrade_aquatic.client.model;
 
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
+import com.teamabnormals.blueprint.client.ClientInfo;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.SonarWaveEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;

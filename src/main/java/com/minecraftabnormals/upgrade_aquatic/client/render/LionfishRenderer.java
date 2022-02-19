@@ -3,19 +3,19 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 import com.minecraftabnormals.upgrade_aquatic.client.model.LionfishModel;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.LionfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import com.mojang.math.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class LionfishRenderer extends MobRenderer<LionfishEntity, LionfishModel<LionfishEntity>> {
 
-	public LionfishRenderer(EntityRendererManager manager) {
+	public LionfishRenderer(EntityRenderDispatcher manager) {
 		super(manager, new LionfishModel<>(), 0.45F);
 	}
 
@@ -25,9 +25,9 @@ public class LionfishRenderer extends MobRenderer<LionfishEntity, LionfishModel<
 	}
 
 	@Override
-	protected void setupRotations(LionfishEntity entityLiving, MatrixStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void setupRotations(LionfishEntity entityLiving, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(entityLiving, matrixStack, ageInTicks, rotationYaw, partialTicks);
-		float f = 4.0F * MathHelper.sin(0.6F * ageInTicks);
+		float f = 4.0F * Mth.sin(0.6F * ageInTicks);
 		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
 		if (!entityLiving.isInWater()) {
 			matrixStack.translate(0.1F, 0.1F, -0.1F);

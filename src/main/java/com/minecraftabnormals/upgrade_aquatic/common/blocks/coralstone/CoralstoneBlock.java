@@ -1,28 +1,35 @@
 package com.minecraftabnormals.upgrade_aquatic.common.blocks.coralstone;
 
-import com.minecraftabnormals.abnormals_core.core.util.BlockUtil;
+import com.teamabnormals.blueprint.core.util.BlockUtil;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CoralWallFanBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.CoralWallFanBlock;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Supplier;
+
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 @SuppressWarnings("deprecation")
 public class CoralstoneBlock extends Block {
@@ -43,20 +50,20 @@ public class CoralstoneBlock extends Block {
 	}
 
 	@Override
-	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_CORALSTONE.get() && state.getBlock() != UABlocks.CORALSTONE.get()) {
 			BlockState newState = this.chiseled ? UABlocks.CHISELED_CORALSTONE.get().defaultBlockState() : UABlocks.CORALSTONE.get().defaultBlockState();
-			world.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundCategory.PLAYERS, 1.0F, 0.8F);
+			world.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.PLAYERS, 1.0F, 0.8F);
 			stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(hand));
 			world.setBlock(pos, newState, 2);
-			return ActionResultType.SUCCESS;
+			return InteractionResult.SUCCESS;
 		}
 		return super.use(state, world, pos, player, hand, hit);
 	}
 
 	@Override
-	public void tick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
 		if (!worldIn.isAreaLoaded(pos, 3)) return;
 
 		Block block = state.getBlock();
@@ -87,7 +94,7 @@ public class CoralstoneBlock extends Block {
 	}
 
 	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+	public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
 		if (!worldIn.isClientSide) {
 			boolean flag = state.getValue(POWERED);
 			if (flag != worldIn.hasNeighborSignal(pos)) {
@@ -97,16 +104,16 @@ public class CoralstoneBlock extends Block {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()));
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(POWERED);
 	}
 
-	public static void tickConversion(Map<Supplier<Block>, Supplier<Block>> conversionMap, BlockState state, ServerWorld world, BlockPos pos, Random random) {
+	public static void tickConversion(Map<Supplier<Block>, Supplier<Block>> conversionMap, BlockState state, ServerLevel world, BlockPos pos, Random random) {
 		for (int i = 0; i < 4; i++) {
 			Block randomBlock = world.getBlockState(pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1)).getBlock();
 			conversionMap.forEach((input, output) -> {

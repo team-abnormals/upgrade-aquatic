@@ -1,17 +1,17 @@
 package com.minecraftabnormals.upgrade_aquatic.common.world.gen.feature;
 
-import com.minecraftabnormals.abnormals_core.core.util.MathUtil;
+import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.DeadCoralWallFanBlock;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BaseCoralWallFanBlock;
+import net.minecraft.core.Direction;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
 
@@ -20,16 +20,16 @@ import java.util.Random;
  */
 public class PrismarineCoralShelfFeature extends PrismarineCoralFeature {
 
-	public PrismarineCoralShelfFeature(Codec<NoFeatureConfig> config) {
+	public PrismarineCoralShelfFeature(Codec<NoneFeatureConfiguration> config) {
 		super(config);
 	}
 
 	@Override
-	public boolean place(ISeedReader worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
 		return false;
 	}
 
-	public static boolean placeFeature(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
+	public static boolean placeFeature(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
 		Direction direction = Direction.getRandom(rand);
 		if (direction == Direction.UP || direction == Direction.DOWN) {
 			direction = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;
@@ -58,7 +58,7 @@ public class PrismarineCoralShelfFeature extends PrismarineCoralFeature {
 		return false;
 	}
 
-	private static boolean shouldPlace(IWorld world, BlockPos pos, Direction randDirection, Random rand) {
+	private static boolean shouldPlace(LevelAccessor world, BlockPos pos, Direction randDirection, Random rand) {
 		for (int i = 0; i < 13; i++) {
 			BlockPos checkPos = pos.relative(randDirection, rand.nextInt(2) + 1).below(i);
 			if (world.getBlockState(checkPos).getBlock() == Blocks.MAGMA_BLOCK || world.getBlockState(checkPos).getBlock() == Blocks.OBSIDIAN) {
@@ -72,7 +72,7 @@ public class PrismarineCoralShelfFeature extends PrismarineCoralFeature {
 		return false;
 	}
 
-	private static void addShelf(IWorld world, BlockPos pos, Random rand, int a, int b, int c, boolean isElder) {
+	private static void addShelf(LevelAccessor world, BlockPos pos, Random rand, int a, int b, int c, boolean isElder) {
 		MathUtil.Equation r = (theta) -> {
 			return (Math.cos(b * theta) / c + 1) * a;
 		};
@@ -96,7 +96,7 @@ public class PrismarineCoralShelfFeature extends PrismarineCoralFeature {
 							if (rand.nextFloat() < 0.85F) {
 								BlockPos blockpos1 = placingPos.relative(direction);
 								if (world.getBlockState(blockpos1).getBlock() == Blocks.WATER) {
-									BlockState blockstate1 = CORAL_WALL_FAN(isElder).setValue(DeadCoralWallFanBlock.FACING, direction);
+									BlockState blockstate1 = CORAL_WALL_FAN(isElder).setValue(BaseCoralWallFanBlock.FACING, direction);
 									world.setBlock(blockpos1, blockstate1, 2);
 								}
 							}

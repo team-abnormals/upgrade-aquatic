@@ -1,38 +1,38 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher;
 
-import com.minecraftabnormals.abnormals_core.client.ClientInfo;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MoverType;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
+import com.teamabnormals.blueprint.client.ClientInfo;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.network.FMLPlayMessages;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
+import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class SonarWaveEntity extends Entity {
-	private static final DataParameter<Integer> OWNER_ID = EntityDataManager.defineId(SonarWaveEntity.class, DataSerializers.INT);
+	private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(SonarWaveEntity.class, EntityDataSerializers.INT);
 	private float growProgress = 0;
 	private float prevGrowProgress = 0;
 
-	public SonarWaveEntity(EntityType<? extends SonarWaveEntity> type, World worldIn) {
+	public SonarWaveEntity(EntityType<? extends SonarWaveEntity> type, Level worldIn) {
 		super(type, worldIn);
 		this.blocksBuilding = true;
 	}
 
-	public SonarWaveEntity(World worldIn, double x, double y, double z) {
+	public SonarWaveEntity(Level worldIn, double x, double y, double z) {
 		this(UAEntities.SONAR_WAVE.get(), worldIn);
 		this.setPos(x, y, z);
 		this.xo = x;
@@ -40,7 +40,7 @@ public class SonarWaveEntity extends Entity {
 		this.zo = z;
 	}
 
-	public SonarWaveEntity(FMLPlayMessages.SpawnEntity spawnEntity, World world) {
+	public SonarWaveEntity(PlayMessages.SpawnEntity spawnEntity, Level world) {
 		this(UAEntities.SONAR_WAVE.get(), world);
 	}
 
@@ -65,38 +65,38 @@ public class SonarWaveEntity extends Entity {
 			}
 		}
 
-		Vector3d motion = this.getDeltaMovement();
-		float horizontalMotionMagnitude = MathHelper.sqrt(getHorizontalDistanceSqr(motion));
+		Vec3 motion = this.getDeltaMovement();
+		float horizontalMotionMagnitude = Mth.sqrt((float) motion.horizontalDistanceSqr());
 		double motionX = motion.x();
 		double motionY = motion.y();
 		double motionZ = motion.z();
 
 		if (this.xRotO == 0.0F && this.yRotO == 0.0F) {
-			this.yRot = (float) (MathHelper.atan2(motionX, motionZ) * (double) (180F / (float) Math.PI));
-			this.xRot = (float) (MathHelper.atan2(motionY, horizontalMotionMagnitude) * (double) (180F / (float) Math.PI));
-			this.yRotO = this.yRot;
-			this.xRotO = this.xRot;
+			this.setYRot((float) (Mth.atan2(motionX, motionZ) * (double) (180F / (float) Math.PI)));
+			this.setXRot((float) (Mth.atan2(motionY, horizontalMotionMagnitude) * (double) (180F / (float) Math.PI)));
+			this.yRotO = this.getYRot();
+			this.xRotO = this.getXRot();
 		}
 
-		this.yRot = (float) (MathHelper.atan2(motionX, motionZ) * (double) (180F / (float) Math.PI));
+		this.setYRot((float) (Mth.atan2(motionX, motionZ) * (double) (180F / (float) Math.PI)));
 
-		for (this.xRot = (float) (MathHelper.atan2(motionY, horizontalMotionMagnitude) * (double) (180F / (float) Math.PI)); this.xRot - this.xRotO < -180.0F; this.xRotO -= 360.0F) {
+		for (this.setXRot((float) (Mth.atan2(motionY, horizontalMotionMagnitude) * (double) (180F / (float) Math.PI))); this.getXRot() - this.xRotO < -180.0F; this.xRotO -= 360.0F) {
 		}
 
-		while (this.xRot - this.xRotO >= 180.0F) {
+		while (this.getXRot() - this.xRotO >= 180.0F) {
 			this.xRotO += 360.0F;
 		}
 
-		while (this.yRot - this.yRotO < -180.0F) {
+		while (this.getYRot() - this.yRotO < -180.0F) {
 			this.yRotO -= 360.0F;
 		}
 
-		while (this.yRot - this.yRotO >= 180.0F) {
+		while (this.getYRot() - this.yRotO >= 180.0F) {
 			this.yRotO += 360.0F;
 		}
 
-		this.xRot = MathHelper.lerp(0.2F, this.xRotO, this.xRot);
-		this.yRot = MathHelper.lerp(0.2F, this.yRotO, this.yRot);
+		this.setXRot(Mth.lerp(0.2F, this.xRotO, this.getXRot()));
+		this.setYRot(Mth.lerp(0.2F, this.yRotO, this.getYRot()));
 
 		this.prevGrowProgress = this.growProgress;
 
@@ -107,7 +107,7 @@ public class SonarWaveEntity extends Entity {
 		}
 
 		if (this.tickCount > 40) {
-			this.remove();
+			this.discard();
 		}
 	}
 
@@ -116,21 +116,21 @@ public class SonarWaveEntity extends Entity {
 	}
 
 	public void fireSonarWave(ThrasherEntity thrasher) {
-		float xMotion = -MathHelper.sin(thrasher.yRot * ((float) Math.PI / 180F)) * MathHelper.cos(thrasher.xRot * ((float) Math.PI / 180F));
-		float yMotion = -MathHelper.sin(thrasher.xRot * ((float) Math.PI / 180F));
-		float zMotion = MathHelper.cos(thrasher.yRot * ((float) Math.PI / 180F)) * MathHelper.cos(thrasher.xRot * ((float) Math.PI / 180F));
+		float xMotion = -Mth.sin(thrasher.getYRot() * ((float) Math.PI / 180F)) * Mth.cos(thrasher.getXRot() * ((float) Math.PI / 180F));
+		float yMotion = -Mth.sin(thrasher.getXRot() * ((float) Math.PI / 180F));
+		float zMotion = Mth.cos(thrasher.getYRot() * ((float) Math.PI / 180F)) * Mth.cos(thrasher.getXRot() * ((float) Math.PI / 180F));
 
-		Vector3d motion = new Vector3d(xMotion, yMotion, zMotion).normalize().scale(0.75D);
+		Vec3 motion = new Vec3(xMotion, yMotion, zMotion).normalize().scale(0.75D);
 
 		this.setDeltaMovement(motion);
 		this.setOwnerId(thrasher.getId());
 		this.setPos(thrasher.getX() + xMotion, thrasher.getY(), thrasher.getZ() + zMotion);
 
-		float motionSqrt = MathHelper.sqrt(getHorizontalDistanceSqr(motion));
-		this.yRot = (float) (MathHelper.atan2(motion.x, motion.z) * (180F / Math.PI));
-		this.xRot = (float) (MathHelper.atan2(motion.y, motionSqrt) * (180F / Math.PI));
-		this.yRotO = this.yRot;
-		this.xRotO = this.xRot;
+		float motionSqrt = Mth.sqrt((float) motion.horizontalDistanceSqr());
+		this.setYRot((float) (Mth.atan2(motion.x, motion.z) * (180F / Math.PI)));
+		this.setYRot((float) (Mth.atan2(motion.y, motionSqrt) * (180F / Math.PI)));
+		this.yRotO = this.getYRot();
+		this.xRotO = this.getXRot();
 	}
 
 	@Override
@@ -157,17 +157,17 @@ public class SonarWaveEntity extends Entity {
 
 	@OnlyIn(Dist.CLIENT)
 	public float getGrowProgress() {
-		return MathHelper.lerp(ClientInfo.getPartialTicks(), this.prevGrowProgress, this.growProgress);
+		return Mth.lerp(ClientInfo.getPartialTicks(), this.prevGrowProgress, this.growProgress);
 	}
 
 	@Override
-	protected void readAdditionalSaveData(CompoundNBT compound) {
+	protected void readAdditionalSaveData(CompoundTag compound) {
 		this.setOwnerId(compound.getInt("OwnerId"));
 		this.growProgress = compound.getFloat("GrowProgress");
 	}
 
 	@Override
-	protected void addAdditionalSaveData(CompoundNBT compound) {
+	protected void addAdditionalSaveData(CompoundTag compound) {
 		compound.putInt("OwnerId", this.getOwnerId());
 		compound.putFloat("GrowProgress", this.growProgress);
 	}
@@ -190,7 +190,7 @@ public class SonarWaveEntity extends Entity {
 	}
 
 	@Override
-	public IPacket<?> getAddEntityPacket() {
+	public Packet<?> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

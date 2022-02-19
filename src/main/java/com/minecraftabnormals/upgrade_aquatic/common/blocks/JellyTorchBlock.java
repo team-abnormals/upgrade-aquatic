@@ -2,28 +2,29 @@ package com.minecraftabnormals.upgrade_aquatic.common.blocks;
 
 import com.minecraftabnormals.upgrade_aquatic.client.particle.UAParticles;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.block.*;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.particles.BasicParticleType;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.TorchBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
-public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler, ILiquidContainer {
+public class JellyTorchBlock extends TorchBlock implements SimpleWaterloggedBlock {
 	private final JellyTorchType torchType;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -35,7 +36,7 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState state, World world, BlockPos pos, Random rand) {
+	public void animateTick(BlockState state, Level world, BlockPos pos, Random rand) {
 		double xOffset = rand.nextBoolean() ? -(Math.random() * 0.1) : (Math.random() * 0.1);
 		double yOffset = rand.nextBoolean() ? -(Math.random() * 0.1) : (Math.random() * 0.1);
 		double zOffset = rand.nextBoolean() ? -(Math.random() * 0.1) : (Math.random() * 0.1);
@@ -46,30 +47,20 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
 	}
 
 	@Override
-	public void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
 	}
 
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
 		if (stateIn.getValue(WATERLOGGED)) {
-			worldIn.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
 		}
 		return super.updateShape(stateIn, facing, stateIn, worldIn, currentPos, facingPos);
 	}
 
-	public BlockState getStateForPlacement(BlockItemUseContext context) {
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
-		return super.getStateForPlacement(context).setValue(WATERLOGGED, Boolean.valueOf(ifluidstate.getType() == Fluids.WATER));
-	}
-
-	@Override
-	public Fluid takeLiquid(IWorld worldIn, BlockPos pos, BlockState state) {
-		if (state.getValue(WATERLOGGED)) {
-			worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(false)), 3);
-			return Fluids.WATER;
-		} else {
-			return Fluids.EMPTY;
-		}
+		return super.getStateForPlacement(context).setValue(WATERLOGGED, ifluidstate.getType() == Fluids.WATER);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -77,108 +68,72 @@ public class JellyTorchBlock extends TorchBlock implements IBucketPickupHandler,
 		return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
-	@Override
-	public boolean canPlaceLiquid(IBlockReader worldIn, BlockPos pos, BlockState state, Fluid fluidIn) {
-		return !state.getValue(WATERLOGGED) && fluidIn == Fluids.WATER;
-	}
-
-	@Override
-	public boolean placeLiquid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn) {
-		if (!state.getValue(WATERLOGGED) && fluidStateIn.getType() == Fluids.WATER) {
-			if (!worldIn.isClientSide()) {
-				worldIn.setBlock(pos, state.setValue(WATERLOGGED, Boolean.valueOf(true)), 3);
-				worldIn.getLiquidTicks().scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
-			}
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public enum JellyTorchType {
 		PINK(
-				TextFormatting.LIGHT_PURPLE,
+				ChatFormatting.LIGHT_PURPLE,
 				() -> UABlocks.PINK_JELLY_TORCH.get()
 		),
 		PURPLE(
-				TextFormatting.DARK_PURPLE,
+				ChatFormatting.DARK_PURPLE,
 				() -> UABlocks.PURPLE_JELLY_TORCH.get()
 		),
 		BLUE(
-				TextFormatting.BLUE,
+				ChatFormatting.BLUE,
 				() -> UABlocks.BLUE_JELLY_TORCH.get()
 		),
 		GREEN(
-				TextFormatting.GREEN,
+				ChatFormatting.GREEN,
 				() -> UABlocks.GREEN_JELLY_TORCH.get()
 		),
 		YELLOW(
-				TextFormatting.YELLOW,
+				ChatFormatting.YELLOW,
 				() -> UABlocks.YELLOW_JELLY_TORCH.get()
 		),
 		ORANGE(
-				TextFormatting.GOLD,
+				ChatFormatting.GOLD,
 				() -> UABlocks.ORANGE_JELLY_TORCH.get()
 		),
 		RED(
-				TextFormatting.RED,
+				ChatFormatting.RED,
 				() -> UABlocks.RED_JELLY_TORCH.get()
 		),
 		WHITE(
-				TextFormatting.WHITE,
+				ChatFormatting.WHITE,
 				() -> UABlocks.WHITE_JELLY_TORCH.get()
 		);
 
-		public final TextFormatting color;
+		public final ChatFormatting color;
 		public final Supplier<Block> torch;
 
-		JellyTorchType(TextFormatting color, Supplier<Block> torch) {
+		JellyTorchType(ChatFormatting color, Supplier<Block> torch) {
 			this.color = color;
 			this.torch = torch;
 		}
 
-		public static BasicParticleType getTorchParticleType(JellyTorchType type) {
-			switch (type) {
-				default:
-				case PINK:
-					return UAParticles.PINK_JELLY_FLAME.get();
-				case PURPLE:
-					return UAParticles.PURPLE_JELLY_FLAME.get();
-				case BLUE:
-					return UAParticles.BLUE_JELLY_FLAME.get();
-				case GREEN:
-					return UAParticles.GREEN_JELLY_FLAME.get();
-				case YELLOW:
-					return UAParticles.YELLOW_JELLY_FLAME.get();
-				case ORANGE:
-					return UAParticles.ORANGE_JELLY_FLAME.get();
-				case RED:
-					return UAParticles.RED_JELLY_FLAME.get();
-				case WHITE:
-					return UAParticles.WHITE_JELLY_FLAME.get();
-			}
+		public static SimpleParticleType getTorchParticleType(JellyTorchType type) {
+			return switch (type) {
+				case PINK -> UAParticles.PINK_JELLY_FLAME.get();
+				case PURPLE -> UAParticles.PURPLE_JELLY_FLAME.get();
+				case BLUE -> UAParticles.BLUE_JELLY_FLAME.get();
+				case GREEN -> UAParticles.GREEN_JELLY_FLAME.get();
+				case YELLOW -> UAParticles.YELLOW_JELLY_FLAME.get();
+				case ORANGE -> UAParticles.ORANGE_JELLY_FLAME.get();
+				case RED -> UAParticles.RED_JELLY_FLAME.get();
+				case WHITE -> UAParticles.WHITE_JELLY_FLAME.get();
+			};
 		}
 
-		public static BasicParticleType getBlobParticleType(JellyTorchType type) {
-			switch (type) {
-				default:
-				case PINK:
-					return UAParticles.PINK_JELLY_BLOB.get();
-				case PURPLE:
-					return UAParticles.PURPLE_JELLY_BLOB.get();
-				case BLUE:
-					return UAParticles.BLUE_JELLY_BLOB.get();
-				case GREEN:
-					return UAParticles.GREEN_JELLY_BLOB.get();
-				case YELLOW:
-					return UAParticles.YELLOW_JELLY_BLOB.get();
-				case ORANGE:
-					return UAParticles.ORANGE_JELLY_BLOB.get();
-				case RED:
-					return UAParticles.RED_JELLY_BLOB.get();
-				case WHITE:
-					return UAParticles.WHITE_JELLY_BLOB.get();
-			}
+		public static SimpleParticleType getBlobParticleType(JellyTorchType type) {
+			return switch (type) {
+				case PINK -> UAParticles.PINK_JELLY_BLOB.get();
+				case PURPLE -> UAParticles.PURPLE_JELLY_BLOB.get();
+				case BLUE -> UAParticles.BLUE_JELLY_BLOB.get();
+				case GREEN -> UAParticles.GREEN_JELLY_BLOB.get();
+				case YELLOW -> UAParticles.YELLOW_JELLY_BLOB.get();
+				case ORANGE -> UAParticles.ORANGE_JELLY_BLOB.get();
+				case RED -> UAParticles.RED_JELLY_BLOB.get();
+				case WHITE -> UAParticles.WHITE_JELLY_BLOB.get();
+			};
 		}
 	}
 }

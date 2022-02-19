@@ -1,13 +1,15 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
-import com.minecraftabnormals.abnormals_core.core.endimator.Endimation;
-import com.minecraftabnormals.abnormals_core.core.util.EntityUtil;
-import com.minecraftabnormals.abnormals_core.core.util.NetworkUtil;
+import com.teamabnormals.blueprint.core.endimator.Endimation;
+import com.teamabnormals.blueprint.core.util.EntityUtil;
+import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.AbstractJellyfishEntity;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.phys.HitResult.Type;
 
 import java.util.EnumSet;
+
+import net.minecraft.world.entity.ai.goal.Goal.Flag;
 
 public class JellyfishBoostGoal extends Goal {
 	private final AbstractJellyfishEntity jellyfish;

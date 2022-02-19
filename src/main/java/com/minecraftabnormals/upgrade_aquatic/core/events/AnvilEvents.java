@@ -2,12 +2,12 @@ package com.minecraftabnormals.upgrade_aquatic.core.events;
 
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAItems;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.item.EnchantedBookItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.EnchantedBookItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -53,7 +53,7 @@ public class AnvilEvents {
 			} else if (!event.getName().equals(leftItem.getHoverName().getString())) {
 				k = 1;
 				i += k;
-				cloneLeftStack.setHoverName(new StringTextComponent(event.getName()));
+				cloneLeftStack.setHoverName(new TextComponent(event.getName()));
 			}
 			if (flag && !cloneLeftStack.isBookEnchantable(rightItem)) cloneLeftStack = ItemStack.EMPTY;
 

@@ -1,13 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ai;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.thrasher.ThrasherEntity;
-import net.minecraft.entity.EntityPredicate;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
-import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.phys.AABB;
 
 import java.util.EnumSet;
 import java.util.Random;
@@ -52,15 +52,15 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	}
 
 	private void findNearestTarget() {
-		this.foundTarget = this.thrasher.level.getNearestEntity(this.thrasher.level.getEntitiesOfClass(LivingEntity.class, this.getTargetableArea(32), ThrasherEntity.ENEMY_MATCHER), new EntityPredicate().range(this.getTargetDistance()).selector(null), this.thrasher, this.thrasher.getX(), this.thrasher.getY() + this.thrasher.getEyeHeight(), this.thrasher.getZ());
+		this.foundTarget = this.thrasher.level.getNearestEntity(this.thrasher.level.getEntitiesOfClass(LivingEntity.class, this.getTargetableArea(32), ThrasherEntity.ENEMY_MATCHER), TargetingConditions.forCombat().range(this.getTargetDistance()).selector(null), this.thrasher, this.thrasher.getX(), this.thrasher.getY() + this.thrasher.getEyeHeight(), this.thrasher.getZ());
 	}
 
 	private double getTargetDistance() {
-		ModifiableAttributeInstance iattributeinstance = this.thrasher.getAttribute(Attributes.FOLLOW_RANGE);
+		AttributeInstance iattributeinstance = this.thrasher.getAttribute(Attributes.FOLLOW_RANGE);
 		return iattributeinstance == null ? 16.0D : iattributeinstance.getValue();
 	}
 
-	private AxisAlignedBB getTargetableArea(double targetDistance) {
+	private AABB getTargetableArea(double targetDistance) {
 		return this.thrasher.getBoundingBox().inflate(targetDistance, 4.0D, targetDistance);
 	}
 }

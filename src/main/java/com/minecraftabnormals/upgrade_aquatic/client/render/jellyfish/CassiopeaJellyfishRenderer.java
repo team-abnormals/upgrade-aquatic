@@ -4,24 +4,24 @@ import com.minecraftabnormals.upgrade_aquatic.client.model.jellyfish.CassiopeaJe
 import com.minecraftabnormals.upgrade_aquatic.client.render.jellyfish.layer.JellyfishEmissiveLayer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.CassiopeaJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<CassiopeaJellyfishEntity> {
 
-	public CassiopeaJellyfishRenderer(EntityRendererManager renderManager) {
+	public CassiopeaJellyfishRenderer(EntityRenderDispatcher renderManager) {
 		super(renderManager, new CassiopeaJellyfishModel<>(), 0.25F);
 		this.addLayer(new JellyfishEmissiveLayer<>(this, this));
 	}
 
 	@Override
-	public void render(CassiopeaJellyfishEntity jellyfish, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
+	public void render(CassiopeaJellyfishEntity jellyfish, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
 		this.shadowRadius *= jellyfish.getSize();
 		super.render(jellyfish, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}
@@ -42,7 +42,7 @@ public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<Cassio
 	}
 
 	@Override
-	protected void scale(CassiopeaJellyfishEntity jellyfish, MatrixStack matrixStack, float partialTickTime) {
+	protected void scale(CassiopeaJellyfishEntity jellyfish, PoseStack matrixStack, float partialTickTime) {
 		float size = jellyfish.getSize();
 		matrixStack.scale(size, size, size);
 	}

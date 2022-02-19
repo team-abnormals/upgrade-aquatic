@@ -1,9 +1,9 @@
 package com.minecraftabnormals.upgrade_aquatic.common.advancement;
 
-import com.minecraftabnormals.abnormals_core.common.advancement.EmptyTrigger;
+import com.teamabnormals.blueprint.common.advancement.EmptyTrigger;
 import com.minecraftabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)

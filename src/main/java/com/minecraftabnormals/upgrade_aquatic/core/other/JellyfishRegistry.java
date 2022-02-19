@@ -7,8 +7,8 @@ import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.BoxJelly
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.CassiopeaJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ImmortalJellyfishEntity;
 import com.minecraftabnormals.upgrade_aquatic.core.registry.UAEntities;
-import net.minecraft.entity.EntityType;
-import net.minecraft.item.Rarity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.Rarity;
 
 import java.util.List;
 import java.util.Map;

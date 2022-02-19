@@ -1,16 +1,18 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.ai;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.jellyfish.CassiopeaJellyfishEntity;
-import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import java.util.EnumSet;
 
+import net.minecraft.world.entity.ai.goal.Goal.Flag;
+
 public class CassiopeaJellyfishFlipGoal extends Goal {
 	private final CassiopeaJellyfishEntity jellyfish;
-	private final World world;
+	private final Level world;
 	private int ticksPassed;
 
 	public CassiopeaJellyfishFlipGoal(CassiopeaJellyfishEntity jellyfish) {

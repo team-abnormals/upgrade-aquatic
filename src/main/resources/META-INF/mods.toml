@@ -20,20 +20,20 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
 [[dependencies.upgrade_aquatic]]
     modId = "minecraft"
     mandatory = true
-    versionRange = "[1.16.5,1.17)"
+    versionRange = "[1.18.1,1.19)"
     ordering = "AFTER"
     side = "BOTH"
 
 [[dependencies.upgrade_aquatic]]
     modId = "forge"
     mandatory = true
-    versionRange = "[36.2.0,)"
+    versionRange = "[39.0.0,)"
     ordering = "NONE"
     side = "BOTH"
 
 [[dependencies.upgrade_aquatic]]
-    modId = "abnormals_core"
+    modId = "blueprint"
     mandatory = true
-    versionRange = "[3.2.0,)"
+    versionRange = "[5.0.0,)"
     ordering = "AFTER"
     side = "BOTH"

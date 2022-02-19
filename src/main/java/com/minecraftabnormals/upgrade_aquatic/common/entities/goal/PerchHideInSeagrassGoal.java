@@ -1,13 +1,13 @@
 package com.minecraftabnormals.upgrade_aquatic.common.entities.goal;
 
 import com.minecraftabnormals.upgrade_aquatic.common.entities.PerchEntity;
-import net.minecraft.entity.ai.goal.RandomWalkingGoal;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
-public class PerchHideInSeagrassGoal extends RandomWalkingGoal {
+public class PerchHideInSeagrassGoal extends RandomStrollGoal {
 
 	public PerchHideInSeagrassGoal(PerchEntity creature) {
 		super(creature, 1.1D, 25);
@@ -19,7 +19,7 @@ public class PerchHideInSeagrassGoal extends RandomWalkingGoal {
 			return false;
 		}
 
-		Vector3d vec3d = this.getPosition();
+		Vec3 vec3d = this.getPosition();
 		if (vec3d == null) {
 			return false;
 		} else {
@@ -41,12 +41,12 @@ public class PerchHideInSeagrassGoal extends RandomWalkingGoal {
 
 
 	@Nullable
-	protected Vector3d getPosition() {
+	protected Vec3 getPosition() {
 		PerchEntity perch = (PerchEntity) this.mob;
 		if (perch.isSeagrassNearby()) {
 			int seagrass = perch.getRandom().nextInt(perch.getNearbySeagrass().size());
 			BlockPos pos = perch.getNearbySeagrass().get(seagrass);
-			return new Vector3d(pos.getX(), pos.getY(), pos.getZ());
+			return new Vec3(pos.getX(), pos.getY(), pos.getZ());
 		}
 		return null;
 	}

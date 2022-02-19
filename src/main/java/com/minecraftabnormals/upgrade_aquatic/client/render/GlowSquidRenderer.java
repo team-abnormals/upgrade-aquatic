@@ -3,32 +3,32 @@ package com.minecraftabnormals.upgrade_aquatic.client.render;
 import com.minecraftabnormals.upgrade_aquatic.client.model.GlowSquidModel;
 import com.minecraftabnormals.upgrade_aquatic.client.render.overlay.GlowSquidRenderLayer;
 import com.minecraftabnormals.upgrade_aquatic.common.entities.GlowSquidEntity;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.texture.MissingTextureSprite;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3f;
+import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import com.mojang.math.Vector3f;
 
 /**
  * @author Ocelot
  */
 public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, GlowSquidModel> {
-	public GlowSquidRenderer(EntityRendererManager renderManagerIn) {
+	public GlowSquidRenderer(EntityRenderDispatcher renderManagerIn) {
 		super(renderManagerIn, new GlowSquidModel(false), 0.7F);
 		this.addLayer(new GlowSquidRenderLayer(this));
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(GlowSquidEntity entity) {
-		return MissingTextureSprite.getLocation();
+		return MissingTextureAtlasSprite.getLocation();
 	}
 
 	@Override
-	protected void setupRotations(GlowSquidEntity entityLiving, MatrixStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-		float f = MathHelper.lerp(partialTicks, entityLiving.xBodyRotO, entityLiving.xBodyRot);
-		float f1 = MathHelper.lerp(partialTicks, entityLiving.zBodyRotO, entityLiving.zBodyRot);
+	protected void setupRotations(GlowSquidEntity entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+		float f = Mth.lerp(partialTicks, entityLiving.xBodyRotO, entityLiving.xBodyRot);
+		float f1 = Mth.lerp(partialTicks, entityLiving.zBodyRotO, entityLiving.zBodyRot);
 		matrixStackIn.translate(0.0D, 0.5D, 0.0D);
 		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(180.0F - rotationYaw));
 		matrixStackIn.mulPose(Vector3f.XP.rotationDegrees(f));
@@ -38,6 +38,6 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, GlowSquidMod
 
 	@Override
 	protected float getBob(GlowSquidEntity livingBase, float partialTicks) {
-		return MathHelper.lerp(partialTicks, livingBase.oldTentacleAngle, livingBase.tentacleAngle);
+		return Mth.lerp(partialTicks, livingBase.oldTentacleAngle, livingBase.tentacleAngle);
 	}
 }
