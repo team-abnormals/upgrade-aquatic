@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.FlareEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Flare;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class FlareModel<F extends FlareEntity> extends EntityModel<F> {
+public class FlareModel<F extends Flare> extends EntityModel<F> {
 	public ModelPart base;
 	public ModelPart tail;
 	public ModelPart left_shoulder;

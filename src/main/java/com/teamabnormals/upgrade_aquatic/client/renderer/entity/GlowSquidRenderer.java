@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
 import com.teamabnormals.upgrade_aquatic.client.model.GlowSquidModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.GlowSquidRenderLayer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.GlowSquidEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.GlowSquid;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -14,19 +14,19 @@ import com.mojang.math.Vector3f;
 /**
  * @author Ocelot
  */
-public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, GlowSquidModel> {
+public class GlowSquidRenderer extends MobRenderer<GlowSquid, GlowSquidModel> {
 	public GlowSquidRenderer(EntityRenderDispatcher renderManagerIn) {
 		super(renderManagerIn, new GlowSquidModel(false), 0.7F);
 		this.addLayer(new GlowSquidRenderLayer(this));
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(GlowSquidEntity entity) {
+	public ResourceLocation getTextureLocation(GlowSquid entity) {
 		return MissingTextureAtlasSprite.getLocation();
 	}
 
 	@Override
-	protected void setupRotations(GlowSquidEntity entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void setupRotations(GlowSquid entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 		float f = Mth.lerp(partialTicks, entityLiving.xBodyRotO, entityLiving.xBodyRot);
 		float f1 = Mth.lerp(partialTicks, entityLiving.zBodyRotO, entityLiving.zBodyRot);
 		matrixStackIn.translate(0.0D, 0.5D, 0.0D);
@@ -37,7 +37,7 @@ public class GlowSquidRenderer extends MobRenderer<GlowSquidEntity, GlowSquidMod
 	}
 
 	@Override
-	protected float getBob(GlowSquidEntity livingBase, float partialTicks) {
+	protected float getBob(GlowSquid livingBase, float partialTicks) {
 		return Mth.lerp(partialTicks, livingBase.oldTentacleAngle, livingBase.tentacleAngle);
 	}
 }

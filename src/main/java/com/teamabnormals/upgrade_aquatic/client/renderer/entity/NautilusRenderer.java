@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
 import com.google.common.collect.Maps;
 import com.teamabnormals.upgrade_aquatic.client.model.NautilusModel;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.NautilusEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Nautilus;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @OnlyIn(Dist.CLIENT)
-public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<NautilusEntity>> {
+public class NautilusRenderer extends MobRenderer<Nautilus, NautilusModel<Nautilus>> {
 	private static final Map<List<String>, String> SKINS = Util.make(Maps.newHashMap(), (skins) -> {
 		skins.put(Arrays.asList("smelly", "thefaceofgaming"), "smelly");
 		skins.put(Arrays.asList("abnormal", "abnautilus", "abnortilus", "mca"), "mca");
@@ -39,7 +39,7 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(NautilusEntity nautilus) {
+	public ResourceLocation getTextureLocation(Nautilus nautilus) {
 		String textureSuffix = "";
 
 		if (nautilus.hasCustomName()) {
@@ -54,7 +54,7 @@ public class NautilusRenderer extends MobRenderer<NautilusEntity, NautilusModel<
 	}
 
 	@Override
-	protected void setupRotations(NautilusEntity nautilus, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void setupRotations(Nautilus nautilus, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 0.3F * Mth.sin(0.6F * ageInTicks);
 		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));

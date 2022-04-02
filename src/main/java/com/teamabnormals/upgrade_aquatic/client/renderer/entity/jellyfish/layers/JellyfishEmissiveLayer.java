@@ -5,7 +5,7 @@ import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.AbstractJellyfishRenderer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.util.Mth;
 
-public class JellyfishEmissiveLayer<T extends AbstractJellyfishEntity, M extends EndimatorEntityModel<T>> extends RenderLayer<T, M> {
+public class JellyfishEmissiveLayer<T extends AbstractJellyfish, M extends EndimatorEntityModel<T>> extends RenderLayer<T, M> {
 	private final AbstractJellyfishRenderer<T> jellyfishRenderer;
 
 	public JellyfishEmissiveLayer(RenderLayerParent<T, M> renderer, AbstractJellyfishRenderer<T> jellyfishRenderer) {

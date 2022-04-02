@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
 import com.teamabnormals.blueprint.client.ACRenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.model.SonarWaveModel;
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.thrasher.SonarWaveEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.projectile.SonarWave;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -15,7 +15,7 @@ import net.minecraft.util.math.vector.Vector3f;
 
 import SonarWaveModel;
 
-public class SonarWaveRenderer extends EntityRenderer<SonarWaveEntity> {
+public class SonarWaveRenderer extends EntityRenderer<SonarWave> {
 	private final SonarWaveModel SONAR_MODEL = new SonarWaveModel();
 
 	public SonarWaveRenderer(EntityRendererManager renderManager) {
@@ -24,7 +24,7 @@ public class SonarWaveRenderer extends EntityRenderer<SonarWaveEntity> {
 	}
 
 	@Override
-	public void render(SonarWaveEntity sonarWave, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int packedLightIn) {
+	public void render(SonarWave sonarWave, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer bufferIn, int packedLightIn) {
 		matrixStack.pushPose();
 		matrixStack.translate(0.0F, -0.7F, 0.0F);
 		matrixStack.mulPose(Vector3f.YP.rotationDegrees(sonarWave.yRot));
@@ -37,7 +37,7 @@ public class SonarWaveRenderer extends EntityRenderer<SonarWaveEntity> {
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(SonarWaveEntity entity) {
+	public ResourceLocation getTextureLocation(SonarWave entity) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/sonar.png");
 	}
 }

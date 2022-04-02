@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers;
 import com.teamabnormals.blueprint.client.ACRenderTypes;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.upgrade_aquatic.client.model.FlareModel;
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.FlareEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Flare;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class FlareEyesRenderLayer<T extends FlareEntity, M extends FlareModel<T>> extends RenderLayer<T, M> {
+public class FlareEyesRenderLayer<T extends Flare, M extends FlareModel<T>> extends RenderLayer<T, M> {
 	private static final ResourceLocation EYES_LAYER = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/flare/flare_eyes.png");
 
 	public FlareEyesRenderLayer(RenderLayerParent<T, M> renderer) {

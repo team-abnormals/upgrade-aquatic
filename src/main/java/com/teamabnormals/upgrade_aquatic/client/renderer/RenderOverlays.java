@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.thrasher.ThrasherEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -144,7 +144,7 @@ public class RenderOverlays {
 				}
 			}
 		}
-		if (event.getType() == ElementType.TEXT && MC.player.isPassenger() && MC.player.getVehicle() instanceof ThrasherEntity && MC.gui.overlayMessageString.getString().equals(I18n.get("mount.onboard", I18n.get("key.keyboard.left.shift")))) {
+		if (event.getType() == ElementType.TEXT && MC.player.isPassenger() && MC.player.getVehicle() instanceof Thrasher && MC.gui.overlayMessageString.getString().equals(I18n.get("mount.onboard", I18n.get("key.keyboard.left.shift")))) {
 			MC.gui.setOverlayMessage(new TextComponent(""), false);
 		}
 	}

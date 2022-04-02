@@ -1,13 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.UluluEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Ululu;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 
 
-public class UluluModel<T extends UluluEntity> extends EntityModel<T> {
+public class UluluModel<T extends Ululu> extends EntityModel<T> {
 
 	public ModelPart body;
 

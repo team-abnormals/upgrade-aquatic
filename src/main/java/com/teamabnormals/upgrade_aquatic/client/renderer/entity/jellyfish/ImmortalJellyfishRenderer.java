@@ -2,13 +2,13 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish;
 
 import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.ImmortalJellyfishModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.layers.JellyfishEmissiveLayer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.ImmortalJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.ImmortalJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 
-public class ImmortalJellyfishRenderer<I extends ImmortalJellyfishEntity> extends AbstractJellyfishRenderer<I> {
+public class ImmortalJellyfishRenderer<I extends ImmortalJellyfish> extends AbstractJellyfishRenderer<I> {
 
 	public ImmortalJellyfishRenderer(EntityRenderDispatcher renderManager) {
 		super(renderManager, new ImmortalJellyfishModel<>(), 0.25F);

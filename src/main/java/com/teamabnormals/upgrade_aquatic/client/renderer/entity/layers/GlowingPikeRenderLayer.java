@@ -3,8 +3,8 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers;
 import com.teamabnormals.blueprint.client.ACRenderTypes;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.upgrade_aquatic.client.model.PikeModel;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeEntity;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeType.PikeRarity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.PikeType.PikeRarity;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GlowingPikeRenderLayer<T extends PikeEntity, M extends PikeModel<T>> extends RenderLayer<T, M> {
+public class GlowingPikeRenderLayer<T extends Pike, M extends PikeModel<T>> extends RenderLayer<T, M> {
 
 	public GlowingPikeRenderLayer(RenderLayerParent<T, M> renderer) {
 		super(renderer);
@@ -35,7 +35,7 @@ public class GlowingPikeRenderLayer<T extends PikeEntity, M extends PikeModel<T>
 		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	private ResourceLocation getPikeOverlayTexture(PikeEntity pike) {
+	private ResourceLocation getPikeOverlayTexture(Pike pike) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s_glow.png", pike.getPikeType().name().toLowerCase()));
 	}
 

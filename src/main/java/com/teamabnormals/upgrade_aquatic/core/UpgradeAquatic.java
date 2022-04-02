@@ -8,11 +8,11 @@ import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.teamabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.other.UASpawns;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEffects;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAMobEffects;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlockEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -52,8 +52,8 @@ public class UpgradeAquatic {
 		this.setupMessages();
 
 		REGISTRY_HELPER.register(bus);
-		UAEffects.MOB_EFFECTS.register(bus);
-		UAEffects.POTIONS.register(bus);
+		UAMobEffects.MOB_EFFECTS.register(bus);
+		UAMobEffects.POTIONS.register(bus);
 		UAFeatures.FEATURES.register(bus);
 		UAParticleTypes.PARTICLES.register(bus);
 		UADataSerializers.SERIALIZERS.register(bus);
@@ -74,16 +74,16 @@ public class UpgradeAquatic {
 		event.enqueueWork(() -> {
 			UACompat.registerCompat();
 			UASpawns.registerSpawns();
-			UAEffects.registerBrewingRecipes();
+			UAMobEffects.registerBrewingRecipes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
 			UAFeatures.Configured.registerConfiguredFeatures();
-			ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "field_149789_z");
+			ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "f_60445_");
 		});
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
-		UAEntities.registerRenderers();
-		UATileEntities.registerRenderers();
+		UAEntityTypes.registerRenderers();
+		UABlockEntityTypes.registerRenderers();
 		event.enqueueWork(() -> {
 			UAItems.registerItemProperties();
 			UAClientCompat.registerClientCompat();

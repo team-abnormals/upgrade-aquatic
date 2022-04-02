@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.mixin;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.thrasher.ThrasherEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,7 +15,7 @@ public final class EntityMixin {
 	private void preventThrasherSuffocationDamage(DamageSource source, CallbackInfoReturnable<Boolean> info) {
 		if (source == DamageSource.IN_WALL) {
 			Entity entity = ((Entity) (Object) this);
-			if (entity.isAlive() && entity.isInWall() && entity.getVehicle() instanceof ThrasherEntity) {
+			if (entity.isAlive() && entity.isInWall() && entity.getVehicle() instanceof Thrasher) {
 				info.setReturnValue(true);
 			}
 		}

@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class PikeModel<T extends PikeEntity> extends EntityModel<T> {
+public class PikeModel<T extends Pike> extends EntityModel<T> {
 	public ModelPart body_front;
 	public ModelPart neck;
 	public ModelPart body_back;

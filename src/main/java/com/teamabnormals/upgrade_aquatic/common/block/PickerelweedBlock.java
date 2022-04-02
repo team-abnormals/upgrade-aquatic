@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
@@ -75,7 +75,7 @@ public class PickerelweedBlock extends DirectionalBlock implements SimpleWaterlo
 
 	@Override
 	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
-		if (!(entity instanceof PikeEntity)) {
+		if (!(entity instanceof Pike)) {
 			if (!this.isBoiled) {
 				entity.makeStuckInBlock(state, new Vec3(0.6D, 1.0, 0.6D));
 			}

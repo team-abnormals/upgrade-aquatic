@@ -20,7 +20,7 @@ public abstract class SquidMixin extends Entity {
 	}
 
 	@Inject(at = @At("HEAD"), method = "spawnInk")
-	private void squirtInk(CallbackInfo info) {
+	private void spawnInk(CallbackInfo info) {
 		GlowingInkItem.createEffectCloud(new MobEffectInstance(MobEffects.BLINDNESS, 100), this.level, this.getBoundingBox().expandTowards(2.5F, 2.5F, 2.5F));
 	}
 }

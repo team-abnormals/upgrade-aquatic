@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers;
 
 import com.teamabnormals.upgrade_aquatic.client.model.PikeModel;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -15,14 +15,14 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class PikeCarriedItemRenderLayer extends RenderLayer<PikeEntity, PikeModel<PikeEntity>> {
+public class PikeCarriedItemRenderLayer extends RenderLayer<Pike, PikeModel<Pike>> {
 
-	public PikeCarriedItemRenderLayer(RenderLayerParent<PikeEntity, PikeModel<PikeEntity>> renderer) {
+	public PikeCarriedItemRenderLayer(RenderLayerParent<Pike, PikeModel<Pike>> renderer) {
 		super(renderer);
 	}
 
 	@Override
-	public void render(PoseStack matrixStack, MultiBufferSource bufferIn, int packedLightIn, PikeEntity pike, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void render(PoseStack matrixStack, MultiBufferSource bufferIn, int packedLightIn, Pike pike, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		ItemStack itemstack = pike.getItemBySlot(EquipmentSlot.MAINHAND);
 		if (!itemstack.isEmpty()) {
 			if (!itemstack.isEmpty()) {

@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorModelRenderer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.BoxJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.BoxJellyfish;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
@@ -11,7 +11,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
  * BoxJelly - SnakeBlock
  * Created using Tabula 7.0.0
  */
-public class BoxJellyfishModel<E extends BoxJellyfishEntity> extends EndimatorEntityModel<E> {
+public class BoxJellyfishModel<E extends BoxJellyfish> extends EndimatorEntityModel<E> {
 	public EndimatorModelRenderer body;
 	public EndimatorModelRenderer tentacleW;
 	public EndimatorModelRenderer tentacleS;
@@ -92,8 +92,8 @@ public class BoxJellyfishModel<E extends BoxJellyfishEntity> extends EndimatorEn
 	public void animateModel(E jellyfish) {
 		super.animateModel(jellyfish);
 
-		if (jellyfish.isEndimationPlaying(BoxJellyfishEntity.SWIM_ANIMATION)) {
-			this.setEndimationToPlay(BoxJellyfishEntity.SWIM_ANIMATION);
+		if (jellyfish.isEndimationPlaying(BoxJellyfish.SWIM_ANIMATION)) {
+			this.setEndimationToPlay(BoxJellyfish.SWIM_ANIMATION);
 
 			this.startKeyframe(10);
 			this.rotate(this.tentacleN, 0.52F, 0.0F, 0.0F);
@@ -109,8 +109,8 @@ public class BoxJellyfishModel<E extends BoxJellyfishEntity> extends EndimatorEn
 			this.endKeyframe();
 
 			this.resetKeyframe(10);
-		} else if (jellyfish.isEndimationPlaying(BoxJellyfishEntity.BOOST_ANIMATION)) {
-			this.setEndimationToPlay(BoxJellyfishEntity.BOOST_ANIMATION);
+		} else if (jellyfish.isEndimationPlaying(BoxJellyfish.BOOST_ANIMATION)) {
+			this.setEndimationToPlay(BoxJellyfish.BOOST_ANIMATION);
 
 			this.startKeyframe(10);
 			this.rotate(this.tentacleN, 0.3F, 0.0F, 0.0F);

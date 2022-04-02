@@ -1,9 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.common.item;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
-import com.teamabnormals.upgrade_aquatic.core.registry.UASounds;
+import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry.JellyfishEntry;
 import net.minecraft.ChatFormatting;
@@ -52,25 +52,25 @@ public class JellyfishBucketItem extends BucketItem {
 
 	@Override
 	protected void playEmptySound(@Nullable Player player, LevelAccessor worldIn, BlockPos pos) {
-		worldIn.playSound(player, pos, UASounds.ITEM_BUCKET_EMPTY_JELLYFISH.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
+		worldIn.playSound(player, pos, UASoundEvents.ITEM_BUCKET_EMPTY_JELLYFISH.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 	}
 
 	private void placeEntity(ServerLevel world, ItemStack stack, BlockPos pos) {
-		AbstractJellyfishEntity jellyfish = this.getEntityInStack(stack, world, pos);
+		AbstractJellyfish jellyfish = this.getEntityInStack(stack, world, pos);
 		if (jellyfish != null) {
 			jellyfish.setFromBucket(true);
 		}
 	}
 
 	@Nullable
-	public AbstractJellyfishEntity getEntityInStack(ItemStack stack, Level world, @Nullable BlockPos pos) {
+	public AbstractJellyfish getEntityInStack(ItemStack stack, Level world, @Nullable BlockPos pos) {
 		CompoundTag compoundnbt = stack.getTag();
 		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
 			CompoundTag jellyfishTag = compoundnbt.getCompound("JellyfishTag");
 			String entityId = jellyfishTag.getString("EntityId");
 			EntityType<?> jellyfishType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MOD_ID + ":" + entityId));
 			Entity entity = pos != null ? jellyfishType.spawn((ServerLevel) world, stack, null, pos, MobSpawnType.BUCKET, true, false) : jellyfishType.create(world);
-			AbstractJellyfishEntity jellyfish = entity instanceof AbstractJellyfishEntity ? (AbstractJellyfishEntity) entity : null;
+			AbstractJellyfish jellyfish = entity instanceof AbstractJellyfish ? (AbstractJellyfish) entity : null;
 
 			if (jellyfish == null) {
 				return null;
@@ -79,16 +79,16 @@ public class JellyfishBucketItem extends BucketItem {
 			jellyfish.getBucketProcessor().read(jellyfishTag);
 			return jellyfish;
 		} else if (pos != null) {
-			AbstractJellyfishEntity jellyfish = this.getRandomJellyfish(stack, world, pos);
+			AbstractJellyfish jellyfish = this.getRandomJellyfish(stack, world, pos);
 			return jellyfish;
 		}
 		return null;
 	}
 
-	private AbstractJellyfishEntity getRandomJellyfish(ItemStack stack, Level world, @Nullable BlockPos pos) {
+	private AbstractJellyfish getRandomJellyfish(ItemStack stack, Level world, @Nullable BlockPos pos) {
 		Random rand = new Random();
 		List<JellyfishEntry<?>> commonJellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);
-		return (AbstractJellyfishEntity) commonJellies.get(rand.nextInt(commonJellies.size())).jellyfish.get().spawn((ServerLevel) world, stack, null, pos, MobSpawnType.BUCKET, true, false);
+		return (AbstractJellyfish) commonJellies.get(rand.nextInt(commonJellies.size())).jellyfish.get().spawn((ServerLevel) world, stack, null, pos, MobSpawnType.BUCKET, true, false);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class JellyfishBucketItem extends BucketItem {
 	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
 		CompoundTag compoundnbt = stack.getTag();
 		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
-			AbstractJellyfishEntity jellyfish = this.getEntityInStack(stack, worldIn, null);
+			AbstractJellyfish jellyfish = this.getEntityInStack(stack, worldIn, null);
 
 			if (jellyfish != null) {
 				ChatFormatting[] atextformatting = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.GRAY};

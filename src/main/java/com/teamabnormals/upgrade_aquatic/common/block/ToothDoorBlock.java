@@ -21,15 +21,13 @@ public class ToothDoorBlock extends DoorBlock {
 
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		if (state.getValue(POWERED)) {
-			return InteractionResult.SUCCESS;
-		} else {
+		if (!state.getValue(POWERED)) {
 			state = state.cycle(OPEN);
 			worldIn.setBlock(pos, state, 10);
 			worldIn.levelEvent(player, state.getValue(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
 			worldIn.scheduleTick(pos, this, 20);
-			return InteractionResult.SUCCESS;
 		}
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override

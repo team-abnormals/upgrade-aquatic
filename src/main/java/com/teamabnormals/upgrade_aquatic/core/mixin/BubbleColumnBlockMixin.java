@@ -1,13 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.core.mixin;
 
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.BubbleColumnBlock;
-import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BubbleColumnBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -41,7 +41,7 @@ public final class BubbleColumnBlockMixin {
 	}
 
 	private void spawnFallingBlock(ServerLevel world, BlockPos pos, Block block) {
-		FallingBlockEntity fallingblockentity = new FallingBlockEntity(world, pos.getX() + 0.5F, pos.getY(), pos.getZ() + 0.5F, block.defaultBlockState());
+		FallingBlockEntity fallingblockentity = FallingBlockEntity.fall(world, pos, block.defaultBlockState());
 		fallingblockentity.time = 1;
 		world.addFreshEntity(fallingblockentity);
 	}

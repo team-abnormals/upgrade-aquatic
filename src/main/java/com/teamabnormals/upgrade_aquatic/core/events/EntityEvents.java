@@ -1,21 +1,21 @@
 package com.teamabnormals.upgrade_aquatic.core.events;
 
+import com.teamabnormals.blueprint.core.util.TradeUtil;
+import com.teamabnormals.blueprint.core.util.TradeUtil.BlueprintTrade;
 import com.teamabnormals.upgrade_aquatic.api.IGlowable;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
-import com.teamabnormals.upgrade_aquatic.core.other.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.common.block.BedrollBlock;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.LionfishEntity;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeEntity;
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.thrasher.ThrasherEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.common.item.GlowingInkItem;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.blueprint.core.util.TradeUtil;
-import com.teamabnormals.blueprint.core.util.TradeUtil.BlueprintTrade;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -76,22 +76,21 @@ public class EntityEvents {
 		if (event.getWorld().isClientSide) return;
 
 		Entity entity = event.getEntity();
-		if (entity instanceof Drowned) {
-			((PathfinderMob) entity).goalSelector.addGoal(3, new AvoidEntityGoal<>((PathfinderMob) entity, Turtle.class, 6.0F, 1.0D, 1.2D));
+		if (entity instanceof Drowned drowned) {
+			drowned.goalSelector.addGoal(3, new AvoidEntityGoal<>(drowned, Turtle.class, 6.0F, 1.0D, 1.2D));
 		}
-		if (entity instanceof AbstractFish) {
-			((AbstractFish) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((PathfinderMob) entity, PikeEntity.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_HIDING_IN_PICKERELWEED::test));
+		if (entity instanceof AbstractFish fish) {
+			fish.goalSelector.addGoal(2, new AvoidEntityGoal<>(fish, Pike.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_HIDING_IN_PICKERELWEED::test));
 			if (entity instanceof TropicalFish) {
-				((AbstractFish) entity).goalSelector.addGoal(2, new AvoidEntityGoal<>((PathfinderMob) entity, LionfishEntity.class, 8.0F, 1.6D, 1.4D, EntitySelector.ENTITY_STILL_ALIVE::test));
+				fish.goalSelector.addGoal(2, new AvoidEntityGoal<>(fish, Lionfish.class, 8.0F, 1.6D, 1.4D, EntitySelector.ENTITY_STILL_ALIVE::test));
 			}
 		}
-		if (entity instanceof WaterAnimal && !(entity instanceof Enemy)) {
-			if (!(entity instanceof Dolphin)) {
-				((Mob) entity).goalSelector.addGoal(1, new AvoidEntityGoal<>((PathfinderMob) entity, ThrasherEntity.class, 20.0F, 1.4D, 1.6D, EntitySelector.ENTITY_STILL_ALIVE::test));
-			}
-			if (entity instanceof Dolphin) {
-				((Mob) entity).targetSelector.addGoal(0, (new HurtByTargetGoal((Dolphin) entity, ThrasherEntity.class)).setAlertOthers());
-				((Mob) entity).goalSelector.addGoal(1, new MeleeAttackGoal((Dolphin) entity, 1.2D, true));
+		if (entity instanceof WaterAnimal waterAnimal && !(entity instanceof Enemy)) {
+			if (entity instanceof Dolphin dolphin) {
+				dolphin.targetSelector.addGoal(0, (new HurtByTargetGoal(dolphin, Thrasher.class)).setAlertOthers());
+				dolphin.goalSelector.addGoal(1, new MeleeAttackGoal(dolphin, 1.2D, true));
+			} else {
+				waterAnimal.goalSelector.addGoal(1, new AvoidEntityGoal<>(waterAnimal, Thrasher.class, 20.0F, 1.4D, 1.6D, EntitySelector.ENTITY_STILL_ALIVE::test));
 			}
 		}
 	}
@@ -178,7 +177,7 @@ public class EntityEvents {
 			ItemStack bucket = ItemStack.EMPTY;
 			if (entity.getType() == EntityType.SQUID) {
 				bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
-			} else if (entity.getType() == UAEntities.GLOW_SQUID.get()) {
+			} else if (entity.getType() == UAEntityTypes.GLOW_SQUID.get()) {
 				bucket = new ItemStack(UAItems.GLOW_SQUID_BUCKET.get());
 			} else {
 				return;
@@ -233,9 +232,7 @@ public class EntityEvents {
 	public static void onPlayerMount(EntityMountEvent event) {
 		Entity mountingEntity = event.getEntityMounting();
 		Entity entityBeingMounted = event.getEntityBeingMounted();
-		if (mountingEntity instanceof Player && entityBeingMounted instanceof ThrasherEntity) {
-			Player player = (Player) mountingEntity;
-			ThrasherEntity thrasher = (ThrasherEntity) entityBeingMounted;
+		if (mountingEntity instanceof Player player && entityBeingMounted instanceof Thrasher thrasher) {
 			if (event.isDismounting() && player.isAlive() && !player.isCreative() && !player.isSpectator() && thrasher.isAlive() && !thrasher.isStunned()) {
 				event.setCanceled(true);
 			}

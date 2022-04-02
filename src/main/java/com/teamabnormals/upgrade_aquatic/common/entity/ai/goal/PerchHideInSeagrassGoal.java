@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.PerchEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Perch;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 public class PerchHideInSeagrassGoal extends RandomStrollGoal {
 
-	public PerchHideInSeagrassGoal(PerchEntity creature) {
+	public PerchHideInSeagrassGoal(Perch creature) {
 		super(creature, 1.1D, 25);
 	}
 
@@ -23,7 +23,7 @@ public class PerchHideInSeagrassGoal extends RandomStrollGoal {
 		if (vec3d == null) {
 			return false;
 		} else {
-			if (((PerchEntity) this.mob).isSeagrassNearby()) {
+			if (((Perch) this.mob).isSeagrassNearby()) {
 				this.wantedX = vec3d.x;
 				this.wantedY = vec3d.y;
 				this.wantedZ = vec3d.z;
@@ -36,13 +36,13 @@ public class PerchHideInSeagrassGoal extends RandomStrollGoal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return ((PerchEntity) this.mob).isSeagrassNearby() && super.canContinueToUse();
+		return ((Perch) this.mob).isSeagrassNearby() && super.canContinueToUse();
 	}
 
 
 	@Nullable
 	protected Vec3 getPosition() {
-		PerchEntity perch = (PerchEntity) this.mob;
+		Perch perch = (Perch) this.mob;
 		if (perch.isSeagrassNearby()) {
 			int seagrass = perch.getRandom().nextInt(perch.getNearbySeagrass().size());
 			BlockPos pos = perch.getNearbySeagrass().get(seagrass);

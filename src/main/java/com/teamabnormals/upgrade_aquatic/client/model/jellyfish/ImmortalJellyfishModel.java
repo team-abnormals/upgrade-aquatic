@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorModelRenderer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.ImmortalJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.ImmortalJellyfish;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.util.Mth;
@@ -12,7 +12,7 @@ import net.minecraft.util.Mth;
  * ModelImmortalJellyfish - Undefined
  * Created using Tabula 7.0.0
  */
-public class ImmortalJellyfishModel<E extends ImmortalJellyfishEntity> extends EndimatorEntityModel<E> {
+public class ImmortalJellyfishModel<E extends ImmortalJellyfish> extends EndimatorEntityModel<E> {
 	public EndimatorModelRenderer body;
 	public EndimatorModelRenderer innerBody;
 	public EndimatorModelRenderer tentacleEast;
@@ -116,8 +116,8 @@ public class ImmortalJellyfishModel<E extends ImmortalJellyfishEntity> extends E
 	public void animateModel(E jellyfish) {
 		super.animateModel(jellyfish);
 
-		if (jellyfish.isEndimationPlaying(ImmortalJellyfishEntity.SWIM_ANIMATION)) {
-			this.setEndimationToPlay(ImmortalJellyfishEntity.SWIM_ANIMATION);
+		if (jellyfish.isEndimationPlaying(ImmortalJellyfish.SWIM_ANIMATION)) {
+			this.setEndimationToPlay(ImmortalJellyfish.SWIM_ANIMATION);
 
 			this.startKeyframe(10);
 			this.rotate(this.tentacleNorth, 0.45F, 0.0F, 0.0F);
@@ -138,8 +138,8 @@ public class ImmortalJellyfishModel<E extends ImmortalJellyfishEntity> extends E
 			this.endKeyframe();
 
 			this.resetKeyframe(10);
-		} else if (jellyfish.isEndimationPlaying(ImmortalJellyfishEntity.BOOST_ANIMATION)) {
-			this.setEndimationToPlay(ImmortalJellyfishEntity.BOOST_ANIMATION);
+		} else if (jellyfish.isEndimationPlaying(ImmortalJellyfish.BOOST_ANIMATION)) {
+			this.setEndimationToPlay(ImmortalJellyfish.BOOST_ANIMATION);
 
 			this.startKeyframe(10);
 			this.rotate(this.tentacleNorth, 0.35F, 0.0F, 0.0F);

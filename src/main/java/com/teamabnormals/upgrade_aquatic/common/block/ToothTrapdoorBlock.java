@@ -21,9 +21,7 @@ public class ToothTrapdoorBlock extends TrapDoorBlock {
 
 	@Override
 	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-		if (state.getValue(POWERED)) {
-			return InteractionResult.SUCCESS;
-		} else {
+		if (!state.getValue(POWERED)) {
 			state = state.cycle(OPEN);
 			worldIn.setBlock(pos, state, 2);
 			if (state.getValue(WATERLOGGED)) {
@@ -32,8 +30,8 @@ public class ToothTrapdoorBlock extends TrapDoorBlock {
 
 			this.playSound(player, worldIn, pos, state.getValue(OPEN));
 			worldIn.scheduleTick(pos, this, 20);
-			return InteractionResult.SUCCESS;
 		}
+		return InteractionResult.SUCCESS;
 	}
 
 	@Override

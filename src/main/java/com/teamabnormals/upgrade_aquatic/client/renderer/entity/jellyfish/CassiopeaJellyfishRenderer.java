@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish;
 
 import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.CassiopeaJellyfishModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.layers.JellyfishEmissiveLayer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.CassiopeaJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.CassiopeaJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<CassiopeaJellyfishEntity> {
+public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<CassiopeaJellyfish> {
 
 	public CassiopeaJellyfishRenderer(EntityRenderDispatcher renderManager) {
 		super(renderManager, new CassiopeaJellyfishModel<>(), 0.25F);
@@ -21,28 +21,28 @@ public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<Cassio
 	}
 
 	@Override
-	public void render(CassiopeaJellyfishEntity jellyfish, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
+	public void render(CassiopeaJellyfish jellyfish, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {
 		this.shadowRadius *= jellyfish.getSize();
 		super.render(jellyfish, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(CassiopeaJellyfishEntity jellyfish) {
+	public ResourceLocation getTextureLocation(CassiopeaJellyfish jellyfish) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish.png");
 	}
 
 	@Override
-	public ResourceLocation getOverlayTexture(CassiopeaJellyfishEntity jellyfish) {
+	public ResourceLocation getOverlayTexture(CassiopeaJellyfish jellyfish) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
 	}
 
 	@Override
-	protected RenderType getRenderType(CassiopeaJellyfishEntity jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
+	protected RenderType getRenderType(CassiopeaJellyfish jellyfish, boolean p_230496_2_, boolean p_230496_3_, boolean p_230496_4_) {
 		return RenderType.entityTranslucent(this.getTextureLocation(jellyfish));
 	}
 
 	@Override
-	protected void scale(CassiopeaJellyfishEntity jellyfish, PoseStack matrixStack, float partialTickTime) {
+	protected void scale(CassiopeaJellyfish jellyfish, PoseStack matrixStack, float partialTickTime) {
 		float size = jellyfish.getSize();
 		matrixStack.scale(size, size, size);
 	}

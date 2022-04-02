@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.events;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.thrasher.ThrasherEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -27,7 +27,7 @@ public class ClientEvents {
 	@SubscribeEvent
 	public static void onEntityRenderPre(RenderLivingEvent.Pre<?, ?> event) {
 		if (event.getEntity() instanceof LocalPlayer clientPlayer) {
-			if (clientPlayer.getVehicle() instanceof ThrasherEntity thrasher) {
+			if (clientPlayer.getVehicle() instanceof Thrasher thrasher) {
 				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "f_20931_");
 				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "f_20932_");
 				clientPlayer.setXRot(0.0F);
@@ -41,7 +41,7 @@ public class ClientEvents {
 	public static void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
 		PoseStack stack = event.getPoseStack();
 		stack.pushPose();
-		if (event.getEntityLiving().getVehicle() instanceof ThrasherEntity thrasher) {
+		if (event.getEntityLiving().getVehicle() instanceof Thrasher thrasher) {
 			double dx = Math.cos((Mth.lerp(event.getPartialTick(), thrasher.yRotO, thrasher.getYRot())) * Math.PI / 180.0D);
 			double dz = Math.sin((Mth.lerp(event.getPartialTick(), thrasher.yRotO, thrasher.getYRot())) * Math.PI / 180.0D);
 

@@ -3,8 +3,8 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers;
 import com.teamabnormals.blueprint.client.ACRenderTypes;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.upgrade_aquatic.client.model.ThrasherModel;
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.thrasher.GreatThrasherEntity;
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.thrasher.ThrasherEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.GreatThrasher;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -17,7 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class ThrasherRenderLayer<T extends ThrasherEntity, M extends ThrasherModel<T>> extends RenderLayer<T, M> {
+public class ThrasherRenderLayer<T extends Thrasher, M extends ThrasherModel<T>> extends RenderLayer<T, M> {
 	private static final ResourceLocation THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/thrasher_emissive.png");
 	private static final ResourceLocation GREAT_THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher_emissive.png");
 
@@ -36,7 +36,7 @@ public class ThrasherRenderLayer<T extends ThrasherEntity, M extends ThrasherMod
 		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, stunnedAnimation, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public ResourceLocation getThrasherFrostLayer(ThrasherEntity thrasher) {
-		return thrasher instanceof GreatThrasherEntity ? GREAT_THRASHER_FROST : THRASHER_FROST;
+	public ResourceLocation getThrasherFrostLayer(Thrasher thrasher) {
+		return thrasher instanceof GreatThrasher ? GREAT_THRASHER_FROST : THRASHER_FROST;
 	}
 }

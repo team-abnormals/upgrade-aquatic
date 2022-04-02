@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
 import com.teamabnormals.upgrade_aquatic.common.block.entity.ElderEyeBlockEntity;
-import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -137,6 +137,6 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntity) {
-		return createTickerHelper(blockEntity, UATileEntities.ELDER_EYE.get(), ElderEyeBlockEntity::tick);
+		return createTickerHelper(blockEntity, UABlockEntityTypes.ELDER_EYE.get(), ElderEyeBlockEntity::tick);
 	}
 }

@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 import com.teamabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.GlowingPikeRenderLayer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.PikeCarriedItemRenderLayer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
@@ -15,7 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>> {
+public class PikeRenderer extends MobRenderer<Pike, PikeModel<Pike>> {
 
 	public PikeRenderer(EntityRenderDispatcher manager) {
 		super(manager, new PikeModel<>(), 0.6F);
@@ -24,12 +24,12 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 	}
 
 	@Override
-	public ResourceLocation getTextureLocation(PikeEntity pike) {
+	public ResourceLocation getTextureLocation(Pike pike) {
 		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s.png", pike.getPikeType().name().toLowerCase()));
 	}
 
 	@Override
-	protected void setupRotations(PikeEntity pike, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void setupRotations(Pike pike, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(pike, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * Mth.sin(0.6F * ageInTicks);
 		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
@@ -40,7 +40,7 @@ public class PikeRenderer extends MobRenderer<PikeEntity, PikeModel<PikeEntity>>
 	}
 
 	@Override
-	protected void scale(PikeEntity pike, PoseStack matrixStack, float partialTickTime) {
+	protected void scale(Pike pike, PoseStack matrixStack, float partialTickTime) {
 		float scale = pike.getPikeType().pikeSize.renderSize;
 		matrixStack.scale(scale, scale, scale);
 	}

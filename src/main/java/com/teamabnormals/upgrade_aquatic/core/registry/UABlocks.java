@@ -1,15 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.google.common.collect.Maps;
-import com.minecraftabnormals.upgrade_aquatic.common.blocks.*;
-import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneBlock;
-import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneSlabBlock;
-import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneStairsBlock;
-import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneVerticalSlabBlock;
-import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneWallBlock;
-import com.teamabnormals.upgrade_aquatic.common.block.grower.RiverTreeGrower;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.other.UAProperties;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.block.*;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
@@ -21,8 +12,17 @@ import com.teamabnormals.blueprint.common.block.thatch.ThatchSlabBlock;
 import com.teamabnormals.blueprint.common.block.thatch.ThatchStairBlock;
 import com.teamabnormals.blueprint.common.block.thatch.ThatchVerticalSlabBlock;
 import com.teamabnormals.blueprint.common.block.wood.*;
+import com.teamabnormals.blueprint.core.util.PropertyUtil;
+import com.teamabnormals.blueprint.core.util.PropertyUtil.WoodSetProperties;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.block.*;
+import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneBlock;
+import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneSlabBlock;
+import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneStairsBlock;
+import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneVerticalSlabBlock;
+import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneWallBlock;
+import com.teamabnormals.upgrade_aquatic.common.block.grower.RiverTreeGrower;
+import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
@@ -36,14 +36,14 @@ import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Map;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class UABlocks {
 	public static final BlockSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getBlockSubHelper();
 
@@ -220,7 +220,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> TOOTH_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "tooth_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(TOOTH_BRICKS.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> TOOTH_TRAPDOOR = HELPER.createBlock("tooth_trapdoor", () -> new ToothTrapdoorBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> TOOTH_DOOR = HELPER.createBlock("tooth_door", () -> new ToothDoorBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> TOOTH_LANTERN = HELPER.createBlock("tooth_lantern", () -> new ToothLanternBlock(Properties.copy(Blocks.END_STONE).sound(UASounds.TOOTH_LANTERN).noOcclusion().lightLevel((unknown) -> 15)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> TOOTH_LANTERN = HELPER.createBlock("tooth_lantern", () -> new ToothLanternBlock(Properties.copy(Blocks.END_STONE).sound(UASoundEvents.TOOTH_LANTERN).noOcclusion().lightLevel((unknown) -> 15)), CreativeModeTab.TAB_DECORATIONS);
 
 	public static final RegistryObject<Block> SCUTE_BLOCK = HELPER.createBlock("scute_block", () -> new ScuteBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> SCUTE_SHINGLES = HELPER.createBlock("scute_shingles", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -440,56 +440,56 @@ public class UABlocks {
 
 	public static final RegistryObject<Block> PRISMARINE_ROD_BUNDLE = HELPER.createBlock("prismarine_rod_bundle", () -> new PrismarineRodBlock(Properties.copy(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_LOG = HELPER.createBlock("stripped_driftwood_log", () -> new StrippedLogBlock(UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD = HELPER.createBlock("stripped_driftwood", () -> new StrippedWoodBlock(UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_LOG = HELPER.createBlock("driftwood_log", () -> new LogBlock(STRIPPED_DRIFTWOOD_LOG, UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD = HELPER.createBlock("driftwood", () -> new WoodBlock(STRIPPED_DRIFTWOOD, UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_PLANKS = HELPER.createBlock("driftwood_planks", () -> new PlanksBlock(UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_DOOR = HELPER.createBlock("driftwood_door", () -> new WoodDoorBlock(UAProperties.DRIFTWOOD), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> DRIFTWOOD_SLAB = HELPER.createBlock("driftwood_slab", () -> new WoodSlabBlock(UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_STAIRS = HELPER.createBlock("driftwood_stairs", () -> new WoodStairBlock(DRIFTWOOD_PLANKS.get().defaultBlockState(), UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_FENCE = HELPER.createFuelBlock("driftwood_fence", () -> new WoodFenceBlock(UAProperties.DRIFTWOOD), 300, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DRIFTWOOD_FENCE_GATE = HELPER.createFuelBlock("driftwood_fence_gate", () -> new WoodFenceGateBlock(UAProperties.DRIFTWOOD), 300, CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> DRIFTWOOD_PRESSURE_PLATE = HELPER.createBlock("driftwood_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> DRIFTWOOD_BUTTON = HELPER.createBlock("driftwood_button", () -> new BlueprintWoodButtonBlock(Properties.copy(UABlocks.DRIFTWOOD.get()).noCollission()), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> DRIFTWOOD_TRAPDOOR = HELPER.createBlock("driftwood_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.DRIFTWOOD), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> VERTICAL_DRIFTWOOD_PLANKS = HELPER.createCompatBlock("quark", "vertical_driftwood_planks", () -> new Block(UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "driftwood_vertical_slab", () -> new VerticalSlabBlock(UAProperties.DRIFTWOOD), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_BOOKSHELF = HELPER.createCompatFuelBlock("quark", "driftwood_bookshelf", () -> new BookshelfBlock(Properties.copy(Blocks.BOOKSHELF)), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_LADDER = HELPER.createCompatFuelBlock("quark", "driftwood_ladder", () -> new BlueprintLadderBlock(Properties.copy(Blocks.LADDER)), 300, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_POST = HELPER.createCompatBlock("quark", "stripped_driftwood_post", () -> new WoodPostBlock(UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_POST = HELPER.createCompatBlock("quark", "driftwood_post", () -> new WoodPostBlock(STRIPPED_DRIFTWOOD_POST, UAProperties.DRIFTWOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> DRIFTWOOD_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "driftwood_beehive", () -> new BlueprintBeehiveBlock(Properties.copy(Blocks.BEEHIVE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> DRIFTWOOD_SIGN = HELPER.createSignBlock("driftwood", MaterialColor.COLOR_GRAY);
-	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> DRIFTWOOD_CHEST = HELPER.createCompatChestBlocks("quark", "driftwood", MaterialColor.COLOR_GRAY);
+	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_LOG = HELPER.createBlock("stripped_driftwood_log", () -> new StrippedLogBlock(UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD = HELPER.createBlock("stripped_driftwood", () -> new StrippedWoodBlock(UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_LOG = HELPER.createBlock("driftwood_log", () -> new LogBlock(STRIPPED_DRIFTWOOD_LOG, UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD = HELPER.createBlock("driftwood", () -> new WoodBlock(STRIPPED_DRIFTWOOD, UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_PLANKS = HELPER.createBlock("driftwood_planks", () -> new PlanksBlock(UAProperties.DRIFTWOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_DOOR = HELPER.createBlock("driftwood_door", () -> new WoodDoorBlock(UAProperties.DRIFTWOOD.door()), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> DRIFTWOOD_SLAB = HELPER.createBlock("driftwood_slab", () -> new WoodSlabBlock(UAProperties.DRIFTWOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_STAIRS = HELPER.createBlock("driftwood_stairs", () -> new WoodStairBlock(DRIFTWOOD_PLANKS.get().defaultBlockState(), UAProperties.DRIFTWOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_FENCE = HELPER.createFuelBlock("driftwood_fence", () -> new WoodFenceBlock(UAProperties.DRIFTWOOD.planks()), 300, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DRIFTWOOD_FENCE_GATE = HELPER.createFuelBlock("driftwood_fence_gate", () -> new WoodFenceGateBlock(UAProperties.DRIFTWOOD.planks()), 300, CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> DRIFTWOOD_PRESSURE_PLATE = HELPER.createBlock("driftwood_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD.pressurePlate()), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> DRIFTWOOD_BUTTON = HELPER.createBlock("driftwood_button", () -> new BlueprintWoodButtonBlock(UAProperties.DRIFTWOOD.button()), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> DRIFTWOOD_TRAPDOOR = HELPER.createBlock("driftwood_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.DRIFTWOOD.trapdoor()), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> VERTICAL_DRIFTWOOD_PLANKS = HELPER.createCompatBlock("quark", "vertical_driftwood_planks", () -> new Block(UAProperties.DRIFTWOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "driftwood_vertical_slab", () -> new VerticalSlabBlock(UAProperties.DRIFTWOOD.planks()), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_BOOKSHELF = HELPER.createCompatFuelBlock("quark", "driftwood_bookshelf", () -> new BookshelfBlock(UAProperties.DRIFTWOOD.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_LADDER = HELPER.createCompatFuelBlock("quark", "driftwood_ladder", () -> new BlueprintLadderBlock(PropertyUtil.LADDER), 300, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_POST = HELPER.createCompatBlock("quark", "stripped_driftwood_post", () -> new WoodPostBlock(UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_POST = HELPER.createCompatBlock("quark", "driftwood_post", () -> new WoodPostBlock(STRIPPED_DRIFTWOOD_POST, UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "driftwood_beehive", () -> new BlueprintBeehiveBlock(UAProperties.DRIFTWOOD.beehive()), CreativeModeTab.TAB_DECORATIONS);
+	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> DRIFTWOOD_SIGN = HELPER.createSignBlock("driftwood", MaterialColor.STONE);
+	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> DRIFTWOOD_CHEST = HELPER.createCompatChestBlocks("quark", "driftwood", MaterialColor.STONE);
 
-	public static final RegistryObject<Block> STRIPPED_RIVER_LOG = HELPER.createBlock("stripped_river_log", () -> new StrippedLogBlock(UAProperties.RIVER_WOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> STRIPPED_RIVER_WOOD = HELPER.createBlock("stripped_river_wood", () -> new StrippedWoodBlock(UAProperties.RIVER_WOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_LOG = HELPER.createBlock("river_log", () -> new LogBlock(STRIPPED_RIVER_LOG, UAProperties.RIVER_WOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_WOOD = HELPER.createBlock("river_wood", () -> new WoodBlock(STRIPPED_RIVER_WOOD, UAProperties.RIVER_WOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_LEAVES = HELPER.createBlock("river_leaves", () -> new BlueprintLeavesBlock(UAProperties.LEAVES), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> RIVER_SAPLING = HELPER.createBlock("river_sapling", () -> new BlueprintSaplingBlock(new RiverTreeGrower(), Block.Properties.copy(Blocks.OAK_SAPLING)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POTTED_RIVER_SAPLING = HELPER.createBlockNoItem("potted_river_sapling", () -> new FlowerPotBlock(RIVER_SAPLING.get(), Block.Properties.copy(Blocks.POTTED_ALLIUM)));
-	public static final RegistryObject<Block> RIVER_PLANKS = HELPER.createBlock("river_planks", () -> new PlanksBlock(UAProperties.RIVER_WOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_DOOR = HELPER.createBlock("river_door", () -> new WoodDoorBlock(UAProperties.RIVER_WOOD), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> RIVER_SLAB = HELPER.createBlock("river_slab", () -> new WoodSlabBlock(UAProperties.RIVER_WOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_STAIRS = HELPER.createBlock("river_stairs", () -> new WoodStairBlock(RIVER_PLANKS.get().defaultBlockState(), UAProperties.RIVER_WOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_FENCE = HELPER.createFuelBlock("river_fence", () -> new WoodFenceBlock(UAProperties.RIVER_WOOD), 300, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> RIVER_FENCE_GATE = HELPER.createFuelBlock("river_fence_gate", () -> new WoodFenceGateBlock(UAProperties.RIVER_WOOD), 300, CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> RIVER_PRESSURE_PLATE = HELPER.createBlock("river_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.RIVER_WOOD), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> RIVER_BUTTON = HELPER.createBlock("river_button", () -> new BlueprintWoodButtonBlock(Properties.copy(UABlocks.RIVER_WOOD.get()).noCollission()), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> RIVER_TRAPDOOR = HELPER.createBlock("river_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.RIVER_WOOD), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> RIVER_LEAF_CARPET = HELPER.createCompatBlock("quark", "river_leaf_carpet", () -> new LeafCarpetBlock(UAProperties.LEAF_CARPET), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> VERTICAL_RIVER_PLANKS = HELPER.createCompatBlock("quark", "vertical_river_planks", () -> new Block(UAProperties.RIVER_WOOD), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "river_vertical_slab", () -> new VerticalSlabBlock(UAProperties.RIVER_WOOD), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_BOOKSHELF = HELPER.createCompatFuelBlock("quark", "river_bookshelf", () -> new BookshelfBlock(Properties.copy(Blocks.BOOKSHELF)), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_LADDER = HELPER.createCompatFuelBlock("quark", "river_ladder", () -> new BlueprintLadderBlock(Properties.copy(Blocks.LADDER)), 300, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> STRIPPED_RIVER_POST = HELPER.createCompatFuelBlock("quark", "stripped_river_post", () -> new WoodPostBlock(UAProperties.RIVER_WOOD), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_POST = HELPER.createCompatFuelBlock("quark", "river_post", () -> new WoodPostBlock(STRIPPED_RIVER_POST, UAProperties.RIVER_WOOD), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> RIVER_HEDGE = HELPER.createCompatFuelBlock("quark", "river_hedge", () -> new HedgeBlock(UAProperties.RIVER_WOOD), 300, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> RIVER_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "river_beehive", () -> new BlueprintBeehiveBlock(Properties.copy(Blocks.BEEHIVE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> RIVER_SIGN = HELPER.createSignBlock("river", MaterialColor.COLOR_GRAY);
-	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> RIVER_CHEST = HELPER.createCompatChestBlocks("quark", "river", MaterialColor.COLOR_GRAY);
+	public static final RegistryObject<Block> STRIPPED_RIVER_LOG = HELPER.createBlock("stripped_river_log", () -> new StrippedLogBlock(UAProperties.RIVER_WOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> STRIPPED_RIVER_WOOD = HELPER.createBlock("stripped_river_wood", () -> new StrippedWoodBlock(UAProperties.RIVER_WOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_LOG = HELPER.createBlock("river_log", () -> new LogBlock(STRIPPED_RIVER_LOG, UAProperties.RIVER_WOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_WOOD = HELPER.createBlock("river_wood", () -> new WoodBlock(STRIPPED_RIVER_WOOD, UAProperties.RIVER_WOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_LEAVES = HELPER.createBlock("river_leaves", () -> new BlueprintLeavesBlock(UAProperties.RIVER_WOOD.leaves()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> RIVER_SAPLING = HELPER.createBlock("river_sapling", () -> new BlueprintSaplingBlock(new RiverTreeGrower(), PropertyUtil.SAPLING), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POTTED_RIVER_SAPLING = HELPER.createBlockNoItem("potted_river_sapling", () -> new FlowerPotBlock(RIVER_SAPLING.get(), PropertyUtil.FLOWER_POT));
+	public static final RegistryObject<Block> RIVER_PLANKS = HELPER.createBlock("river_planks", () -> new PlanksBlock(UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_DOOR = HELPER.createBlock("river_door", () -> new WoodDoorBlock(UAProperties.RIVER_WOOD.door()), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> RIVER_SLAB = HELPER.createBlock("river_slab", () -> new WoodSlabBlock(UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_STAIRS = HELPER.createBlock("river_stairs", () -> new WoodStairBlock(RIVER_PLANKS.get().defaultBlockState(), UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_FENCE = HELPER.createFuelBlock("river_fence", () -> new WoodFenceBlock(UAProperties.RIVER_WOOD.planks()), 300, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> RIVER_FENCE_GATE = HELPER.createFuelBlock("river_fence_gate", () -> new WoodFenceGateBlock(UAProperties.RIVER_WOOD.planks()), 300, CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> RIVER_PRESSURE_PLATE = HELPER.createBlock("river_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.RIVER_WOOD.pressurePlate()), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> RIVER_BUTTON = HELPER.createBlock("river_button", () -> new BlueprintWoodButtonBlock(UAProperties.RIVER_WOOD.button()), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> RIVER_TRAPDOOR = HELPER.createBlock("river_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.RIVER_WOOD.trapdoor()), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> RIVER_LEAF_CARPET = HELPER.createCompatBlock("quark", "river_leaf_carpet", () -> new LeafCarpetBlock(UAProperties.RIVER_WOOD.leafCarpet()), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> VERTICAL_RIVER_PLANKS = HELPER.createCompatBlock("quark", "vertical_river_planks", () -> new Block(UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "river_vertical_slab", () -> new VerticalSlabBlock(UAProperties.RIVER_WOOD.planks()), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_BOOKSHELF = HELPER.createCompatFuelBlock("quark", "river_bookshelf", () -> new BookshelfBlock(UAProperties.RIVER_WOOD.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_LADDER = HELPER.createCompatFuelBlock("quark", "river_ladder", () -> new BlueprintLadderBlock(PropertyUtil.LADDER), 300, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> STRIPPED_RIVER_POST = HELPER.createCompatFuelBlock("quark", "stripped_river_post", () -> new WoodPostBlock(UAProperties.RIVER_WOOD.log()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_POST = HELPER.createCompatFuelBlock("quark", "river_post", () -> new WoodPostBlock(STRIPPED_RIVER_POST, UAProperties.RIVER_WOOD.log()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_HEDGE = HELPER.createCompatFuelBlock("quark", "river_hedge", () -> new HedgeBlock(UAProperties.RIVER_WOOD.log()), 300, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> RIVER_BEEHIVE = HELPER.createCompatBlock("buzzier_bees", "river_beehive", () -> new BlueprintBeehiveBlock(UAProperties.RIVER_WOOD.beehive()), CreativeModeTab.TAB_DECORATIONS);
+	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> RIVER_SIGN = HELPER.createSignBlock("river", MaterialColor.COLOR_BROWN);
+	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> RIVER_CHEST = HELPER.createCompatChestBlocks("quark", "river", MaterialColor.COLOR_BROWN);
 
 	public static final RegistryObject<Block> BEACHGRASS = HELPER.createBlock("beachgrass", () -> new BeachgrassBlock(Properties.copy(Blocks.GRASS)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> TALL_BEACHGRASS = HELPER.createBlock("tall_beachgrass", () -> new TallBeachgrassBlock(Properties.copy(Blocks.GRASS)), CreativeModeTab.TAB_DECORATIONS);
@@ -509,9 +509,56 @@ public class UABlocks {
 	public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "luminous_elder_prismarine_vertical_slab", () -> new VerticalSlabBlock(UAProperties.LUMINOUS_ELDER_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 	private static Supplier<BedrollBlock> createBedroll(DyeColor color) {
-		return () -> new BedrollBlock(color, BlockBehaviour.Properties.of(Material.WOOL, (state) -> {
-			return state.getValue(BedBlock.PART) == BedPart.FOOT ? color.getMaterialColor() : MaterialColor.WOOL;
-		}).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion());
+		return () -> new BedrollBlock(color, BlockBehaviour.Properties.of(Material.WOOL, (state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? color.getMaterialColor() : MaterialColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion());
+	}
+
+	public static final class UAProperties {
+		public static final WoodSetProperties DRIFTWOOD = WoodSetProperties.builder(MaterialColor.STONE).build();
+		public static final WoodSetProperties RIVER_WOOD = WoodSetProperties.builder(MaterialColor.COLOR_BROWN).build();
+
+		public static final BlockBehaviour.Properties DEAD_CORAL_BLOCK = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).strength(1.5F, 6.0F);
+		public static final BlockBehaviour.Properties DEAD_CORAL = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).noCollission().strength(0F, 0F);
+
+		public static final BlockBehaviour.Properties LUMINOUS_PRISMARINE = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.DIAMOND).strength(1.5F, 6.0F).lightLevel((unknown) -> (8)).hasPostProcess(PropertyUtil::always).emissiveRendering(PropertyUtil::always);
+		public static final BlockBehaviour.Properties LUMINOUS_ELDER_PRISMARINE = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_WHITE).strength(1.5F, 6.0F).lightLevel((unknown) -> (8)).hasPostProcess(PropertyUtil::always).emissiveRendering(PropertyUtil::always);
+
+		public static final BlockBehaviour.Properties CORALSTONE = Properties.copy(Blocks.STONE).randomTicks();
+
+		public static final BlockBehaviour.Properties SPINES = BlockBehaviour.Properties.of(Material.GRASS).noCollission().strength(1.5F);
+		public static final BlockBehaviour.Properties ELDER_EYE = BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.TERRACOTTA_WHITE).sound(SoundType.METAL).strength(1.0F);
+		public static final BlockBehaviour.Properties PICKERELWEED = BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.GRASS).randomTicks().noCollission().strength(0.0F).sound(SoundType.WET_GRASS);
+		public static final BlockBehaviour.Properties BEACHGRASS_THATCH = BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.COLOR_YELLOW).strength(0.5F).sound(SoundType.GRASS).noOcclusion();
+
+		public static BlockBehaviour.Properties createCoral(MaterialColor color) {
+			return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().sound(SoundType.WET_GRASS);
+		}
+
+		public static BlockBehaviour.Properties createCoralBlock(MaterialColor color) {
+			return BlockBehaviour.Properties.of(Material.STONE, color).strength(1.5F, 6.0F).sound(SoundType.CORAL_BLOCK);
+		}
+
+		public static BlockBehaviour.Properties createCoralFan(MaterialColor color) {
+			return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().strength(0).sound(SoundType.WET_GRASS);
+		}
+
+		public static BlockBehaviour.Properties createPrismarineCoral(boolean elder) {
+			MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.TERRACOTTA_WHITE;
+			return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().lightLevel((unknown) -> (5)).sound(SoundType.GLASS);
+		}
+
+		public static BlockBehaviour.Properties createPrismarineCoralBlock(boolean elder) {
+			MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.TERRACOTTA_WHITE;
+			return BlockBehaviour.Properties.of(Material.STONE, color).strength(1.5F, 6.0F).lightLevel((unknown) -> (6)).sound(SoundType.GLASS);
+		}
+
+		public static BlockBehaviour.Properties createSearocket(boolean pink) {
+			MaterialColor color = pink ? MaterialColor.COLOR_PINK : MaterialColor.TERRACOTTA_WHITE;
+			return BlockBehaviour.Properties.of(Material.PLANT, color).randomTicks().noCollission().strength(0.0F).sound(SoundType.GRASS);
+		}
+
+		public static BlockBehaviour.Properties createPickerelweedBlock(boolean isBoiled) {
+			return isBoiled ? BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.PLANT).strength(0.5F, 5).noOcclusion().sound(SoundType.GRASS) : BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.GRASS).noOcclusion().strength(0.5F, 5).sound(SoundType.WET_GRASS);
+		}
 	}
 
 	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {

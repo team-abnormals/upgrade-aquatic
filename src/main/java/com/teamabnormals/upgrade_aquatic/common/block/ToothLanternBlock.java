@@ -73,21 +73,14 @@ public class ToothLanternBlock extends Block implements SimpleWaterloggedBlock {
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-		switch (state.getValue(FACING)) {
-			case UP:
-				return SHAPES[0];
-			case DOWN:
-			default:
-				return SHAPES[1];
-			case NORTH:
-				return SHAPES[2];
-			case EAST:
-				return SHAPES[3];
-			case SOUTH:
-				return SHAPES[4];
-			case WEST:
-				return SHAPES[5];
-		}
+		return switch (state.getValue(FACING)) {
+			case UP -> SHAPES[0];
+			default -> SHAPES[1];
+			case NORTH -> SHAPES[2];
+			case EAST -> SHAPES[3];
+			case SOUTH -> SHAPES[4];
+			case WEST -> SHAPES[5];
+		};
 	}
 
 	@Override

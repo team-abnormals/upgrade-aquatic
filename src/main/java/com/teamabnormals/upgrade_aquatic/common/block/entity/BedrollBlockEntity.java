@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block.entity;
 
 import com.teamabnormals.upgrade_aquatic.common.block.BedrollBlock;
-import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.DyeColor;
@@ -14,7 +14,7 @@ public class BedrollBlockEntity extends BlockEntity {
 	private DyeColor color;
 
 	public BedrollBlockEntity(BlockPos pos, BlockState state) {
-		super(UATileEntities.BEDROLL.get(), pos, state);
+		super(UABlockEntityTypes.BEDROLL.get(), pos, state);
 	}
 
 	public BedrollBlockEntity(DyeColor colorIn, BlockPos pos, BlockState state) {

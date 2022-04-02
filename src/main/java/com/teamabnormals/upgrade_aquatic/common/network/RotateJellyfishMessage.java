@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.network;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
@@ -43,8 +43,8 @@ public class RotateJellyfishMessage {
 		if (context.getDirection().getReceptionSide() == LogicalSide.CLIENT) {
 			context.enqueueWork(() -> {
 				Entity entity = ClientInfo.getClientPlayerLevel().getEntity(message.entityId);
-				if (entity instanceof AbstractJellyfishEntity) {
-					((AbstractJellyfishEntity) entity).getRotationController().rotate(message.yaw, message.pitch, message.tickLength);
+				if (entity instanceof AbstractJellyfish) {
+					((AbstractJellyfish) entity).getRotationController().rotate(message.yaw, message.pitch, message.tickLength);
 				}
 			});
 			context.setPacketHandled(true);

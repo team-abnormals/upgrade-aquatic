@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorModelRenderer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.CassiopeaJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.CassiopeaJellyfish;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
@@ -11,7 +11,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
  * ModelCassiopeaJellyfish - SnakeBlock
  * Created using Tabula 7.0.0
  */
-public class CassiopeaJellyfishModel<E extends CassiopeaJellyfishEntity> extends EndimatorEntityModel<E> {
+public class CassiopeaJellyfishModel<E extends CassiopeaJellyfish> extends EndimatorEntityModel<E> {
 	public EndimatorModelRenderer cap;
 	public EndimatorModelRenderer cross1;
 	public EndimatorModelRenderer cross2;
@@ -82,8 +82,8 @@ public class CassiopeaJellyfishModel<E extends CassiopeaJellyfishEntity> extends
 	public void animateModel(E jellyfish) {
 		super.animateModel(jellyfish);
 
-		if (jellyfish.isEndimationPlaying(CassiopeaJellyfishEntity.SWIM_ANIMATION)) {
-			this.setEndimationToPlay(CassiopeaJellyfishEntity.SWIM_ANIMATION);
+		if (jellyfish.isEndimationPlaying(CassiopeaJellyfish.SWIM_ANIMATION)) {
+			this.setEndimationToPlay(CassiopeaJellyfish.SWIM_ANIMATION);
 
 			this.startKeyframe(5);
 			this.rotate(this.tentacleN, 0.25F, 0.0F, 0.0F);
@@ -111,8 +111,8 @@ public class CassiopeaJellyfishModel<E extends CassiopeaJellyfishEntity> extends
 			this.endKeyframe();
 
 			this.resetKeyframe(5);
-		} else if (jellyfish.isEndimationPlaying(CassiopeaJellyfishEntity.BOOST_ANIMATION)) {
-			this.setEndimationToPlay(CassiopeaJellyfishEntity.BOOST_ANIMATION);
+		} else if (jellyfish.isEndimationPlaying(CassiopeaJellyfish.BOOST_ANIMATION)) {
+			this.setEndimationToPlay(CassiopeaJellyfish.BOOST_ANIMATION);
 
 			this.startKeyframe(5);
 			this.rotate(this.tentacleN, 0.3F, 0.0F, 0.0F);

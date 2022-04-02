@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.effect;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.FlareEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Flare;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.StatsCounter;
@@ -25,7 +25,7 @@ public class RestfulnessMobEffect extends InstantenousMobEffect {
 			statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), -(24000 * (amplifier + 1)));
 		} else if (entity instanceof Phantom) {
 			entity.hurt(DamageSource.MAGIC, Float.MAX_VALUE);
-		} else if (entity instanceof FlareEntity) {
+		} else if (entity instanceof Flare) {
 			Phantom phantom = EntityType.PHANTOM.create(entity.level);
 			phantom.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.getYRot(), entity.getXRot());
 			phantom.setNoAi(((Mob) entity).isNoAi());

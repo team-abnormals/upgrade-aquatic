@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.NautilusEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Nautilus;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -14,7 +14,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  * Created using Tabula 7.0.0
  */
 @OnlyIn(Dist.CLIENT)
-public class NautilusModel<T extends NautilusEntity> extends EntityModel<T> {
+public class NautilusModel<T extends Nautilus> extends EntityModel<T> {
 	public static final float SCALE = 0.6F;
 	public ModelPart shell;
 	public ModelPart head;

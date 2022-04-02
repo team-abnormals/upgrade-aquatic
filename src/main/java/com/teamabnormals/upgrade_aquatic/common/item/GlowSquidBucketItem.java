@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.item;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
 import net.minecraft.core.BlockPos;
@@ -30,7 +30,7 @@ public class GlowSquidBucketItem extends SquidBucketItem {
 	}
 
 	private void placeEntity(ServerLevel worldIn, ItemStack stack, BlockPos pos) {
-		Entity entity = UAEntities.GLOW_SQUID.get().spawn(worldIn, stack, null, pos, MobSpawnType.BUCKET, true, false);
+		Entity entity = UAEntityTypes.GLOW_SQUID.get().spawn(worldIn, stack, null, pos, MobSpawnType.BUCKET, true, false);
 		if (entity instanceof Squid) {
 			((Squid) entity).setPersistenceRequired();
 		}

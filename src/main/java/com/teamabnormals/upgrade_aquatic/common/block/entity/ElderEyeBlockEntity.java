@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block.entity;
 
 import com.teamabnormals.upgrade_aquatic.common.block.ElderEyeBlock;
-import com.teamabnormals.upgrade_aquatic.core.registry.UATileEntities;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -20,7 +20,7 @@ import java.util.stream.IntStream;
 public class ElderEyeBlockEntity extends BlockEntity {
 
 	public ElderEyeBlockEntity(BlockPos pos, BlockState state) {
-		super(UATileEntities.ELDER_EYE.get(), pos, state);
+		super(UABlockEntityTypes.ELDER_EYE.get(), pos, state);
 	}
 
 	public static void tick(Level level, BlockPos pos, BlockState state, ElderEyeBlockEntity tileEntity) {

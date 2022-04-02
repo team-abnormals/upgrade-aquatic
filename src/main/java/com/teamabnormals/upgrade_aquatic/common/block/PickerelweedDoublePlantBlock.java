@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -61,7 +61,7 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 
 	@Override
 	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
-		if (!(entity instanceof PikeEntity)) {
+		if (!(entity instanceof Pike)) {
 			entity.makeStuckInBlock(state, new Vec3(0.75D, 0.75D, 0.75D));
 		}
 	}

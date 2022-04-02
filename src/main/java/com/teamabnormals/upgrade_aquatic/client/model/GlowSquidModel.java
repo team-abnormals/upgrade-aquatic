@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.model;
 import com.google.common.collect.ImmutableList;
 import com.teamabnormals.blueprint.client.ACRenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.GlowSquidEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.GlowSquid;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
@@ -17,7 +17,7 @@ import java.util.Arrays;
 /**
  * @author Ocelot
  */
-public class GlowSquidModel extends ListModel<GlowSquidEntity> {
+public class GlowSquidModel extends ListModel<GlowSquid> {
 	private final boolean emissive;
 	private final ModelPart body;
 	private final ModelPart[] legs = new ModelPart[8];
@@ -53,7 +53,7 @@ public class GlowSquidModel extends ListModel<GlowSquidEntity> {
 	}
 
 	@Override
-	public void setupAnim(GlowSquidEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+	public void setupAnim(GlowSquid entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		for (ModelPart modelrenderer : this.legs) {
 			modelrenderer.xRot = ageInTicks;
 		}

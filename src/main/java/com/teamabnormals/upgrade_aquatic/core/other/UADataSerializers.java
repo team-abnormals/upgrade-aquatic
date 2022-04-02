@@ -1,16 +1,16 @@
 package com.teamabnormals.upgrade_aquatic.core.other;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.pike.PikeType;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.PikeType;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraftforge.registries.DataSerializerEntry;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ForgeRegistries.Keys;
 
 public final class UADataSerializers {
-	public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(ForgeRegistries.DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
+	public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(Keys.DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
 
 	public static final EntityDataSerializer<PikeType> PIKE_TYPE = new EntityDataSerializer<PikeType>() {
 		public void write(FriendlyByteBuf buf, PikeType value) {

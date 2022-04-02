@@ -2,9 +2,9 @@ package com.teamabnormals.upgrade_aquatic.core.mixin.client;
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.multiplayer.ClientLevel;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.At.Shift;
@@ -20,7 +20,8 @@ public class LocalPlayerMixin extends AbstractClientPlayer {
 
 	@Inject(at = @At(shift = Shift.AFTER, value = "HEAD"), method = "rideTick()V")
 	private void tempFixClientDismount(CallbackInfo info) {
-		if (this.wantsToStopRiding() && this.isPassenger()) Minecraft.getInstance().player.input.shiftKeyDown = false;
+		if (this.wantsToStopRiding() && this.isPassenger())
+			Minecraft.getInstance().player.input.shiftKeyDown = false;
 	}
 
 }

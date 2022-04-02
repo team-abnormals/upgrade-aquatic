@@ -7,9 +7,9 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
-public class VibingEffect extends MobEffect {
+public class VibingMobEffect extends MobEffect {
 
-	public VibingEffect() {
+	public VibingMobEffect() {
 		super(MobEffectCategory.NEUTRAL, 0xffb5f4);
 	}
 

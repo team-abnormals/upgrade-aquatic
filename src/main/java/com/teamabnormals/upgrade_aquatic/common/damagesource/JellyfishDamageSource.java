@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.damagesource;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfishEntity;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.damagesource.EntityDamageSource;
 import net.minecraft.network.chat.Component;
@@ -8,7 +8,7 @@ import net.minecraft.network.chat.TranslatableComponent;
 
 public class JellyfishDamageSource extends EntityDamageSource {
 
-	public JellyfishDamageSource(AbstractJellyfishEntity jellyfish) {
+	public JellyfishDamageSource(AbstractJellyfish jellyfish) {
 		super("upgrade_aquatic.jellyfishSting", jellyfish);
 	}
 

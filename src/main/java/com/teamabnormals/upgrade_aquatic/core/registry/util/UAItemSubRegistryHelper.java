@@ -13,9 +13,6 @@ public class UAItemSubRegistryHelper extends ItemSubRegistryHelper {
 	}
 
 	public RegistryObject<JellyfishSpawnEggItem> createJellyfishSpawnEggItem(String entityName, int primaryColor, int secondaryColor) {
-		JellyfishSpawnEggItem eggItem = new JellyfishSpawnEggItem(primaryColor, secondaryColor, (new Item.Properties())); // Disabled temporarily -> .group(ItemGroup.MISC)
-		RegistryObject<JellyfishSpawnEggItem> spawnEgg = this.deferredRegister.register(entityName + "_spawn_egg", () -> eggItem);
-		this.spawnEggs.add(eggItem);
-		return spawnEgg;
+		return this.deferredRegister.register(entityName + "_spawn_egg", () -> new JellyfishSpawnEggItem(primaryColor, secondaryColor, (new Item.Properties())));
 	}
 }
