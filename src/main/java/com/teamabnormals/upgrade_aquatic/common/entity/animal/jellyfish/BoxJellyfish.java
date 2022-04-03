@@ -1,12 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish;
 
 import com.teamabnormals.blueprint.common.entity.ai.PredicateAttackGoal;
-import com.teamabnormals.blueprint.core.endimator.Endimation;
+import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.BoxJellyfishHuntGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishBoostGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishSwimIntoDirectionGoal;
-import net.minecraft.entity.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -42,8 +42,8 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new BoxJellyfishHuntGoal(this));
-		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, SWIM_ANIMATION));
-		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, BOOST_ANIMATION));
+		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAEndimations.JELLYFISH_SWIM));
+		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAEndimations.JELLYFISH_BOOST));
 
 		this.targetSelector.addGoal(1, new PredicateAttackGoal<>(this, AbstractFish.class, 150, true, true, null, owner -> !((BoxJellyfish) owner).hasCooldown() && !((BoxJellyfish) owner).hasHuntingCooldown()));
 	}
@@ -54,18 +54,18 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 
 		if (this.hasHuntingCooldown()) this.huntingCooldown--;
 
-		if (this.isEndimationPlaying(BOOST_ANIMATION) && this.isInWater()) {
+		if (this.isEndimationPlaying(UAEndimations.JELLYFISH_BOOST) && this.isInWater()) {
 			this.setDeltaMovement(this.getDeltaMovement().scale(1.15F));
 		}
 	}
 
 	@Override
-	public void onEndimationStart(Endimation endimation) {
-		if (endimation == SWIM_ANIMATION) {
+	public void onEndimationStart(PlayableEndimation endimation, PlayableEndimation oldEndimation) {
+		if (endimation == UAEndimations.JELLYFISH_SWIM) {
 			this.getRotationController().addVelocityForLookDirection(0.6F, this.getSize());
-		} else if (endimation == BOOST_ANIMATION) {
+		} else if (endimation == UAEndimations.JELLYFISH_BOOST) {
 			this.getRotationController().addVelocityForLookDirection(0.25F, this.getSize());
-		}
+		};
 	}
 
 	@Override
@@ -114,28 +114,20 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 
 	@Override
 	public String getBucketName() {
-		switch (this.getColor()) {
-			default:
-			case 0:
-				return "box";
-			case 1:
-				return "red_box";
-			case 2:
-				return "white_box";
-		}
+		return switch (this.getColor()) {
+			default -> "box";
+			case 1 -> "red_box";
+			case 2 -> "white_box";
+		};
 	}
 
 	@Override
 	public JellyTorchType getJellyTorchType() {
-		switch (this.getColor()) {
-			default:
-			case 0:
-				return JellyTorchType.BLUE;
-			case 1:
-				return JellyTorchType.RED;
-			case 2:
-				return JellyTorchType.WHITE;
-		}
+		return switch (this.getColor()) {
+			default -> JellyTorchType.BLUE;
+			case 1 -> JellyTorchType.RED;
+			case 2 -> JellyTorchType.WHITE;
+		};
 	}
 
 	@Override

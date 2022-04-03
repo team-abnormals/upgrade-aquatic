@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
 public class Ululu extends Mob {
-
 	private static final EntityDataAccessor<Integer> ULULU_SIZE = SynchedEntityData.defineId(Ululu.class, EntityDataSerializers.INT);
 
 	public float squishFactor;
@@ -61,5 +60,4 @@ public class Ululu extends Mob {
 			this.ululu = ululu;
 		}
 	}
-
 }

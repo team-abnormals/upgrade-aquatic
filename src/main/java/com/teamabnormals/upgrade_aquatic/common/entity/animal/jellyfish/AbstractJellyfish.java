@@ -1,8 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish;
 
 import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
-import com.teamabnormals.blueprint.core.endimator.Endimation;
-import com.teamabnormals.blueprint.core.endimator.entity.IEndimatedEntity;
+import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
@@ -13,7 +12,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.entity.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -52,9 +50,7 @@ import java.util.function.Predicate;
 /**
  * @author SmellyModder(Luke Tonon)
  */
-public abstract class AbstractJellyfish extends BucketableWaterAnimal implements IEndimatedEntity {
-	public static final Endimation SWIM_ANIMATION = new Endimation(20);
-	public static final Endimation BOOST_ANIMATION = new Endimation(20);
+public abstract class AbstractJellyfish extends BucketableWaterAnimal implements Endimatable {
 	protected static final EntityDataAccessor<Integer> COOLDOWN = SynchedEntityData.defineId(AbstractJellyfish.class, EntityDataSerializers.INT);
 	private static final Predicate<LivingEntity> CAN_STING = (entity) -> {
 		if (entity instanceof Player) {
@@ -63,8 +59,6 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 		return !entity.isSpectator() && !(entity instanceof AbstractJellyfish || entity instanceof Turtle);
 	};
 	public float[] lockedRotations = new float[2];
-	private Endimation playingEndimation = BLANK_ANIMATION;
-	private int animationTick;
 
 	public AbstractJellyfish(EntityType<? extends AbstractJellyfish> type, Level world) {
 		super(type, world);
@@ -181,8 +175,8 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 		if (item == Items.WATER_BUCKET && this.isAlive()) {
 			this.playSound(UASoundEvents.ITEM_BUCKET_FILL_JELLYFISH.get(), 1.0F, 1.0F);
 			itemstack.shrink(1);
-			ItemStack bucket = this.getBucket();
-			this.setBucketData(bucket);
+			ItemStack bucket = this.getBucketItemStack();
+			this.saveToBucketTag(bucket);
 			if (!this.level.isClientSide) {
 				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, bucket);
 			}
@@ -256,36 +250,6 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 
 	public boolean hasCooldown() {
 		return this.getCooldown() > 0;
-	}
-
-	@Override
-	public Endimation getPlayingEndimation() {
-		return this.playingEndimation;
-	}
-
-	@Override
-	public void setPlayingEndimation(Endimation endimationToPlay) {
-		this.onEndimationEnd(this.playingEndimation);
-		this.playingEndimation = endimationToPlay;
-		this.setAnimationTick(0);
-	}
-
-	@Override
-	public int getAnimationTick() {
-		return this.animationTick;
-	}
-
-	@Override
-	public void setAnimationTick(int animationTick) {
-		this.animationTick = animationTick;
-	}
-
-	@Override
-	public Endimation[] getEndimations() {
-		return new Endimation[]{
-				SWIM_ANIMATION,
-				BOOST_ANIMATION
-		};
 	}
 
 	@Override
@@ -433,7 +397,6 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 			return nbt;
 		}
 
-		public void read(CompoundTag nbt) {
-		}
+		public void read(CompoundTag nbt) {}
 	}
 }

@@ -1,11 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish;
 
 import com.google.common.collect.ImmutableMap;
-import com.teamabnormals.blueprint.core.api.IAgeableEntity;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.util.JellyfishSizeMap;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnGroupData;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.nbt.CompoundTag;
@@ -19,7 +17,7 @@ import net.minecraft.world.level.Level;
 import java.util.Random;
 import java.util.TreeMap;
 
-public abstract class ColoredSizableJellyfish extends AbstractJellyfish implements IAgeableEntity {
+public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 	protected static final EntityDataAccessor<Integer> COLOR = SynchedEntityData.defineId(ColoredSizableJellyfish.class, EntityDataSerializers.INT);
 	protected static final EntityDataAccessor<Float> SIZE = SynchedEntityData.defineId(ColoredSizableJellyfish.class, EntityDataSerializers.FLOAT);
 	private static final JellyfishSizeMap NATURAL_SIZES = new JellyfishSizeMap(new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34)));
@@ -67,12 +65,13 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish implemen
 		Random rand = this.getRandom();
 		int color = rand.nextInt(3);
 		float size = this.getNaturalSizeMap().randomSize(rand);
-		if (!(dataTag != null && this.isFromBucket())) {
+		boolean fromBucket = this.fromBucket();
+		if (!(dataTag != null && fromBucket)) {
 			if (spawnDataIn instanceof SpawnData) {
 				size = ((SpawnData) spawnDataIn).size;
 				color = ((SpawnData) spawnDataIn).color;
 			} else {
-				if (!this.isFromBucket()) {
+				if (!fromBucket) {
 					spawnDataIn = new SpawnData(size, color);
 					updateSize = true;
 				}
@@ -106,36 +105,6 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish implemen
 
 	public float getSize() {
 		return this.entityData.get(SIZE);
-	}
-
-	@Override
-	public boolean hasGrowthProgress() {
-		return false;
-	}
-
-	@Override
-	public void resetGrowthProgress() {
-	}
-
-	@Override
-	public boolean canAge(boolean isGrowing) {
-		float size = this.getSize();
-		JellyfishSizeMap map = this.getNaturalSizeMap();
-		if (map.containsKey(size)) {
-			return (isGrowing ? map.higherKey(size) : map.lowerKey(size)) != null;
-		}
-		return false;
-	}
-
-	@Override
-	public LivingEntity attemptAging(boolean isGrowing) {
-		float size = this.getSize();
-		JellyfishSizeMap map = this.getNaturalSizeMap();
-		if (map.containsKey(size)) {
-			Float newSize = isGrowing ? map.higherKey(size) : map.lowerKey(size);
-			if (newSize != null) this.setSize(newSize, false);
-		}
-		return this;
 	}
 
 	@Override

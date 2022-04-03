@@ -1,8 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher;
 
-import com.teamabnormals.blueprint.core.endimator.entity.EndimatedEntity;
+import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -49,14 +50,14 @@ public class ThrasherThrashGoal extends Goal {
 	public void start() {
 		this.originalYaw = this.thrasher.getYRot();
 		this.thrasher.setHitsTillStun(this.thrasher.getRandom().nextInt(2) + 2);
-		NetworkUtil.setPlayingAnimationMessage(this.thrasher, Thrasher.THRASH_ANIMATION);
+		NetworkUtil.setPlayingAnimation(this.thrasher, UAEndimations.THRASHER_THRASH);
 	}
 
 	@Override
 	public void stop() {
 		this.originalYaw = 0;
 		this.thrashedTicks = 0;
-		NetworkUtil.setPlayingAnimationMessage(this.thrasher, EndimatedEntity.BLANK_ANIMATION);
+		NetworkUtil.setPlayingAnimation(this.thrasher, PlayableEndimation.BLANK);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish;
 
-import com.teamabnormals.blueprint.core.endimator.Endimation;
+import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.util.EntityUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
@@ -11,11 +11,11 @@ import java.util.EnumSet;
 
 public class JellyfishBoostGoal extends Goal {
 	private final AbstractJellyfish jellyfish;
-	private final Endimation boostAnimation;
+	private final PlayableEndimation boostEndimation;
 
-	public JellyfishBoostGoal(AbstractJellyfish jellyfish, Endimation boostAnimation) {
+	public JellyfishBoostGoal(AbstractJellyfish jellyfish, PlayableEndimation boostEndimation) {
 		this.jellyfish = jellyfish;
-		this.boostAnimation = boostAnimation;
+		this.boostEndimation = boostEndimation;
 		this.setFlags(EnumSet.of(Flag.MOVE));
 	}
 
@@ -36,6 +36,6 @@ public class JellyfishBoostGoal extends Goal {
 
 	@Override
 	public void start() {
-		NetworkUtil.setPlayingAnimationMessage(this.jellyfish, this.boostAnimation);
+		NetworkUtil.setPlayingAnimation(this.jellyfish, this.boostEndimation);
 	}
 }

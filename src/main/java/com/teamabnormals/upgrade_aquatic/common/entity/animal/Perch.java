@@ -17,8 +17,6 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class Perch extends AbstractSchoolingFish {
-	public int hideCooldown;
-
 	public Perch(EntityType<? extends Perch> type, Level world) {
 		super(type, world);
 	}

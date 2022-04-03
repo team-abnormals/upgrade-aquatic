@@ -1,12 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.animal;
 
 import com.google.common.collect.Lists;
-import net.minecraft.Util;
-import net.minecraft.world.entity.ai.behavior.WeightedList;
 import net.minecraft.ChatFormatting;
+import net.minecraft.util.random.Weight;
+import net.minecraft.util.random.WeightedEntry;
+import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.level.biome.Biome;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -60,19 +62,15 @@ public enum PikeType {
 	}
 
 	public static PikeType getRandom(Random rand, Biome.BiomeCategory category, boolean fromBucket) {
-		WeightedList<List<PikeType>> possibleRarityTypes = Util.make(new WeightedList<>(), (list) -> {
-			for (PikeRarity rarity : PikeRarity.values())
-				list.add(PikeType.getTypeList(category, rarity, fromBucket), rarity.weight);
-		});
-		List<PikeType> possibleTypes = possibleRarityTypes.getOne(rand);
+		List<PikeType> possibleTypes = getPossibleTypes(category, WeightedRandomList.create(PikeRarity.values()).getRandom(rand).orElseThrow(), fromBucket);
 		PikeType type = possibleTypes.get(rand.nextInt(possibleTypes.size()));
 		Integer spottedVariant = type.spottedVariant;
 		return spottedVariant != null && rand.nextFloat() < 0.2F ? PikeType.getTypeById(spottedVariant) : type;
 	}
 
-	private static List<PikeType> getTypeList(Biome.BiomeCategory category, PikeRarity rarity, boolean fromBucket) {
+	private static List<PikeType> getPossibleTypes(Biome.BiomeCategory category, PikeRarity rarity, boolean fromBucket) {
 		List<PikeType> pikeTypes = Lists.newArrayList();
-		List<PikeType> spotted = Lists.newArrayList();
+		HashSet<PikeType> spotted = new HashSet<>();
 		for (PikeType type : PikeType.values()) {
 			if ((fromBucket || type.biomeCategory == null || type.biomeCategory == category) && type.rarity == rarity && !spotted.contains(type)) {
 				Integer spottedVariant = type.spottedVariant;
@@ -100,7 +98,7 @@ public enum PikeType {
 		}
 	}
 
-	public enum PikeRarity {
+	public enum PikeRarity implements WeightedEntry {
 		COMMON(ChatFormatting.GRAY, 55),
 		UNCOMMON(ChatFormatting.GREEN, 25),
 		RARE(ChatFormatting.BLUE, 15),
@@ -108,11 +106,16 @@ public enum PikeType {
 		LEGENDARY(ChatFormatting.LIGHT_PURPLE, 1);
 
 		public final ChatFormatting formatting;
-		private final int weight;
+		private final Weight weight;
 
 		PikeRarity(ChatFormatting formatting, int weight) {
 			this.formatting = formatting;
-			this.weight = weight;
+			this.weight = Weight.of(weight);
+		}
+
+		@Override
+		public Weight getWeight() {
+			return this.weight;
 		}
 	}
 }

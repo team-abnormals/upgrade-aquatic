@@ -1,13 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish;
 
-import com.teamabnormals.blueprint.core.endimator.Endimation;
+import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.CassiopeaHideInSeagrassGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.CassiopeaJellyfishFlipGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishBoostGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishSwimIntoDirectionGoal;
 import com.teamabnormals.upgrade_aquatic.core.other.UADamageSources;
-import net.minecraft.entity.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -40,8 +40,8 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new CassiopeaHideInSeagrassGoal(this));
 		this.goalSelector.addGoal(2, new CassiopeaJellyfishFlipGoal(this));
-		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, SWIM_ANIMATION));
-		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, BOOST_ANIMATION));
+		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAEndimations.JELLYFISH_SWIM));
+		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAEndimations.JELLYFISH_BOOST));
 
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
@@ -59,9 +59,9 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 		}
 
 		if (this.isInWater()) {
-			if (this.isEndimationPlaying(BOOST_ANIMATION)) {
+			if (this.isEndimationPlaying(UAEndimations.JELLYFISH_BOOST)) {
 				this.setDeltaMovement(this.getDeltaMovement().scale(1.15F));
-			} else if (this.isEndimationPlaying(SWIM_ANIMATION)) {
+			} else if (this.isEndimationPlaying(UAEndimations.JELLYFISH_SWIM)) {
 				this.setDeltaMovement(this.getDeltaMovement().scale(1.05F));
 			}
 		}
@@ -105,11 +105,11 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	}
 
 	@Override
-	public void onEndimationStart(Endimation endimation) {
+	public void onEndimationStart(PlayableEndimation endimation, PlayableEndimation oldEndimation) {
 		float sizeForce = this.getSize() < 0.6F ? 0.85F : this.getSize();
-		if (endimation == SWIM_ANIMATION) {
+		if (endimation == UAEndimations.JELLYFISH_SWIM) {
 			this.getRotationController().addVelocityForLookDirection(0.3F, sizeForce);
-		} else if (endimation == BOOST_ANIMATION) {
+		} else if (endimation == UAEndimations.JELLYFISH_BOOST) {
 			this.getRotationController().addVelocityForLookDirection(0.2F, sizeForce);
 		}
 	}
@@ -121,28 +121,20 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 
 	@Override
 	public String getBucketName() {
-		switch (this.getColor()) {
-			default:
-			case 0:
-				return "cassiopea";
-			case 1:
-				return "blue_cassiopea";
-			case 2:
-				return "white_cassiopea";
-		}
+		return switch (this.getColor()) {
+			default -> "cassiopea";
+			case 1 -> "blue_cassiopea";
+			case 2 -> "white_cassiopea";
+		};
 	}
 
 	@Override
 	public JellyTorchType getJellyTorchType() {
-		switch (this.getColor()) {
-			default:
-			case 0:
-				return JellyTorchType.GREEN;
-			case 1:
-				return JellyTorchType.BLUE;
-			case 2:
-				return JellyTorchType.WHITE;
-		}
+		return switch (this.getColor()) {
+			default -> JellyTorchType.GREEN;
+			case 1 -> JellyTorchType.BLUE;
+			case 2 -> JellyTorchType.WHITE;
+		};
 	}
 
 	@Override

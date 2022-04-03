@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher;
 import com.teamabnormals.blueprint.core.util.EntityUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.phys.HitResult.Type;
@@ -42,7 +43,7 @@ public class ThrasherGrabGoal extends MeleeAttackGoal {
 		double attackReachSqr = this.getAttackReachSqr(enemy);
 		if (distToEnemySqr <= attackReachSqr + 0.75F && this.getTicksUntilNextAttack() <= 0) {
 			if (this.thrasher.isNoEndimationPlaying()) {
-				NetworkUtil.setPlayingAnimationMessage(this.thrasher, Thrasher.SNAP_AT_PRAY_ANIMATION);
+				NetworkUtil.setPlayingAnimation(this.thrasher, UAEndimations.THRASHER_SNAP_AT_PRAY);
 			}
 		}
 

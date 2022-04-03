@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish;
 
-import com.teamabnormals.blueprint.core.endimator.Endimation;
+import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.util.EntityUtil;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
@@ -15,13 +15,13 @@ import java.util.Random;
 
 public class JellyfishSwimIntoDirectionGoal extends Goal {
 	private final AbstractJellyfish jellyfish;
-	private final Endimation swimAnimation;
+	private final PlayableEndimation swimEndimation;
 	private float yaw, pitch;
 	private int ticksAtRotation;
 
-	public JellyfishSwimIntoDirectionGoal(AbstractJellyfish jellyfish, Endimation swimAnimation) {
+	public JellyfishSwimIntoDirectionGoal(AbstractJellyfish jellyfish, PlayableEndimation swimEndimation) {
 		this.jellyfish = jellyfish;
-		this.swimAnimation = swimAnimation;
+		this.swimEndimation = swimEndimation;
 		this.setFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));
 	}
 
@@ -60,7 +60,7 @@ public class JellyfishSwimIntoDirectionGoal extends Goal {
 		}
 
 		if (this.ticksAtRotation >= 5) {
-			NetworkUtil.setPlayingAnimationMessage(this.jellyfish, this.swimAnimation);
+			NetworkUtil.setPlayingAnimation(this.jellyfish, this.swimEndimation);
 		}
 	}
 
