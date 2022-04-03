@@ -1,6 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
 import com.teamabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
+import com.teamabnormals.upgrade_aquatic.client.model.*;
+import com.teamabnormals.upgrade_aquatic.client.renderer.entity.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
@@ -9,16 +12,15 @@ import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.teamabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.other.UASpawns;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAMobEffects;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlockEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -64,6 +66,8 @@ public class UpgradeAquatic {
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
 			GlowSquidSpriteUploader.init(bus);
+			bus.addListener(this::registerLayerDefinitions);
+			bus.addListener(this::registerRenderers);
 		});
 
 		context.registerConfig(ModConfig.Type.COMMON, UAConfig.COMMON_SPEC);
@@ -82,12 +86,41 @@ public class UpgradeAquatic {
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
-		UAEntityTypes.registerRenderers();
-		UABlockEntityTypes.registerRenderers();
 		event.enqueueWork(() -> {
 			UAItems.registerItemProperties();
 			UAClientCompat.registerClientCompat();
 		});
+	}
+
+	private void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+		event.registerLayerDefinition(NautilusModel.LOCATION, NautilusModel::createBodyLayer);
+		event.registerLayerDefinition(PikeModel.LOCATION, PikeModel::createBodyLayer);
+		event.registerLayerDefinition(LionfishModel.LOCATION, LionfishModel::createBodyLayer);
+		event.registerLayerDefinition(PerchModel.LOCATION, PerchModel::createBodyLayer);
+		event.registerLayerDefinition(ThrasherModel.LOCATION, ThrasherModel::createBodyLayer);
+		event.registerLayerDefinition(FlareModel.LOCATION, FlareModel::createBodyLayer);
+		event.registerLayerDefinition(SonarWaveModel.LOCATION, SonarWaveModel::createBodyLayer);
+		event.registerLayerDefinition(UluluModel.LOCATION, UluluModel::createBodyLayer);
+		event.registerLayerDefinition(GooseModel.LOCATION, GooseModel::createBodyLayer);
+	}
+
+	private void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+		event.registerEntityRenderer(UAEntityTypes.NAUTILUS.get(), NautilusRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.PIKE.get(), PikeRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.LIONFISH.get(), LionfishRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.PERCH.get(), PerchRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.THRASHER.get(), ThrasherRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.GREAT_THRASHER.get(), GreatThrasherRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.FLARE.get(), FlareRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.SONAR_WAVE.get(), SonarWaveRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.ULULU.get(), UluluRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.GOOSE.get(), GooseRenderer::new);
+//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GLOW_SQUID.get(), GlowSquidRenderer::new);
+//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
+//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);
+//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);
+
+//		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), ElderEyeTileEntityRenderer::new);
 	}
 
 	void setupMessages() {

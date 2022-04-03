@@ -6,7 +6,7 @@ import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorch
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.BoxJellyfishHuntGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishBoostGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishSwimIntoDirectionGoal;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -42,8 +42,8 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new BoxJellyfishHuntGoal(this));
-		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAEndimations.JELLYFISH_SWIM));
-		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAEndimations.JELLYFISH_BOOST));
+		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAPlayableEndimations.JELLYFISH_SWIM));
+		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAPlayableEndimations.JELLYFISH_BOOST));
 
 		this.targetSelector.addGoal(1, new PredicateAttackGoal<>(this, AbstractFish.class, 150, true, true, null, owner -> !((BoxJellyfish) owner).hasCooldown() && !((BoxJellyfish) owner).hasHuntingCooldown()));
 	}
@@ -54,16 +54,16 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 
 		if (this.hasHuntingCooldown()) this.huntingCooldown--;
 
-		if (this.isEndimationPlaying(UAEndimations.JELLYFISH_BOOST) && this.isInWater()) {
+		if (this.isEndimationPlaying(UAPlayableEndimations.JELLYFISH_BOOST) && this.isInWater()) {
 			this.setDeltaMovement(this.getDeltaMovement().scale(1.15F));
 		}
 	}
 
 	@Override
 	public void onEndimationStart(PlayableEndimation endimation, PlayableEndimation oldEndimation) {
-		if (endimation == UAEndimations.JELLYFISH_SWIM) {
+		if (endimation == UAPlayableEndimations.JELLYFISH_SWIM) {
 			this.getRotationController().addVelocityForLookDirection(0.6F, this.getSize());
-		} else if (endimation == UAEndimations.JELLYFISH_BOOST) {
+		} else if (endimation == UAPlayableEndimations.JELLYFISH_BOOST) {
 			this.getRotationController().addVelocityForLookDirection(0.25F, this.getSize());
 		};
 	}

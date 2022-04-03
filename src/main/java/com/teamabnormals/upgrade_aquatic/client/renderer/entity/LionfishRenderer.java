@@ -4,7 +4,7 @@ import com.teamabnormals.upgrade_aquatic.client.model.LionfishModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -15,8 +15,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class LionfishRenderer extends MobRenderer<Lionfish, LionfishModel<Lionfish>> {
 
-	public LionfishRenderer(EntityRenderDispatcher manager) {
-		super(manager, new LionfishModel<>(), 0.45F);
+	public LionfishRenderer(EntityRendererProvider.Context context) {
+		super(context, new LionfishModel<>(context.bakeLayer(LionfishModel.LOCATION)), 0.45F);
 	}
 
 	@Override

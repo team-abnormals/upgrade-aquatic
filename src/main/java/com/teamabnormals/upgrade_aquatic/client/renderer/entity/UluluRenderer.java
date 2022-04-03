@@ -5,19 +5,15 @@ import com.teamabnormals.upgrade_aquatic.common.entity.animal.Ululu;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class UluluRenderer extends MobRenderer<Ululu, UluluModel<Ululu>> {
 
-	public UluluRenderer(EntityRenderDispatcher manager) {
-		super(manager, new UluluModel<>(), 0.9F);
-	}
-
-	public UluluRenderer(EntityRenderDispatcher p_i50961_1_, UluluModel<Ululu> p_i50961_2_, float p_i50961_3_) {
-		super(p_i50961_1_, p_i50961_2_, p_i50961_3_);
+	public UluluRenderer(EntityRendererProvider.Context context) {
+		super(context, new UluluModel<>(context.bakeLayer(UluluModel.LOCATION)), 0.9F);
 	}
 
 	public void render(Ululu entityIn, float entityYaw, float partialTicks, PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn) {

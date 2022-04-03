@@ -11,7 +11,7 @@ import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.Thrasher
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.ThrasherThrashGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
@@ -254,7 +254,7 @@ public class Thrasher extends Monster implements Endimatable {
 
 	@Override
 	public void onEndimationStart(PlayableEndimation endimation, PlayableEndimation oldEndimation) {
-		if (endimation == UAEndimations.THRASHER_THRASH) {
+		if (endimation == UAPlayableEndimations.THRASHER_THRASH) {
 			AttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 			if (!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
 				knockbackResistance.addTransientModifier(KNOCKBACK_RESISTANCE_MODIFIER);
@@ -264,7 +264,7 @@ public class Thrasher extends Monster implements Endimatable {
 
 	@Override
 	public void onEndimationEnd(PlayableEndimation endimation, PlayableEndimation newEndimation) {
-		if (endimation == UAEndimations.THRASHER_THRASH) {
+		if (endimation == UAPlayableEndimations.THRASHER_THRASH) {
 			AttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
 			if (knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
 				knockbackResistance.removeModifier(KNOCKBACK_RESISTANCE_MODIFIER);
@@ -310,7 +310,7 @@ public class Thrasher extends Monster implements Endimatable {
 				}
 			}
 		}
-		if (!this.level.isClientSide() && this.isNoEndimationPlaying()) NetworkUtil.setPlayingAnimation(this, UAEndimations.THRASHER_HURT);
+		if (!this.level.isClientSide() && this.isNoEndimationPlaying()) NetworkUtil.setPlayingAnimation(this, UAPlayableEndimations.THRASHER_HURT);
 		return super.hurt(source, amount);
 	}
 
@@ -387,7 +387,7 @@ public class Thrasher extends Monster implements Endimatable {
 		}
 
 		if (!this.isNoAi()) {
-			if (this.isEndimationPlaying(UAEndimations.THRASHER_SONAR_FIRE)) {
+			if (this.isEndimationPlaying(UAPlayableEndimations.THRASHER_SONAR_FIRE)) {
 				this.ticksSinceLastSonarFire = 0;
 			} else {
 				this.ticksSinceLastSonarFire++;
@@ -410,7 +410,7 @@ public class Thrasher extends Monster implements Endimatable {
 				}
 			}
 			if (this.level.isClientSide()) {
-				if (!this.getPassengers().isEmpty() && this.isEndimationPlaying(UAEndimations.THRASHER_THRASH) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
+				if (!this.getPassengers().isEmpty() && this.isEndimationPlaying(UAPlayableEndimations.THRASHER_THRASH) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
 					Entity passenger = this.getPassengers().get(0);
 					for (int i = 0; i < 3; ++i) {
 						if (passenger.isEyeInFluid(FluidTags.WATER)) {
@@ -435,7 +435,7 @@ public class Thrasher extends Monster implements Endimatable {
 				this.prevTailAnimation = this.tailAnimation;
 				this.prevFinAnimation = this.finAnimation;
 
-				if (!this.isInWater() || (this.isEndimationPlaying(UAEndimations.THRASHER_THRASH) || this.isEndimationPlaying(UAEndimations.THRASHER_SONAR_FIRE))) {
+				if (!this.isInWater() || (this.isEndimationPlaying(UAPlayableEndimations.THRASHER_THRASH) || this.isEndimationPlaying(UAPlayableEndimations.THRASHER_SONAR_FIRE))) {
 					this.tailSpeed = 1.1F;
 					this.finSpeed = 0.875F;
 				} else if (this.isMoving()) {
@@ -510,7 +510,7 @@ public class Thrasher extends Monster implements Endimatable {
 	@Nullable
 	@Override
 	protected SoundEvent getAmbientSound() {
-		if (this.isEndimationPlaying(UAEndimations.THRASHER_THRASH)) return null;
+		if (this.isEndimationPlaying(UAPlayableEndimations.THRASHER_THRASH)) return null;
 		return this.isInWater() ? UASoundEvents.ENTITY_THRASHER_AMBIENT.get() : UASoundEvents.ENTITY_THRASHER_AMBIENT_LAND.get();
 	}
 

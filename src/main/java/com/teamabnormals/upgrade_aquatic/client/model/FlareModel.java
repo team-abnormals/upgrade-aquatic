@@ -3,8 +3,16 @@ package com.teamabnormals.upgrade_aquatic.client.model;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Flare;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,6 +23,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class FlareModel<F extends Flare> extends EntityModel<F> {
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "flare"), "main");
+
 	public ModelPart base;
 	public ModelPart tail;
 	public ModelPart left_shoulder;
@@ -25,65 +35,36 @@ public class FlareModel<F extends Flare> extends EntityModel<F> {
 	public ModelPart right_wing;
 	public ModelPart shape13;
 
-	public FlareModel() {
-		this.texWidth = 64;
-		this.texHeight = 64;
-		this.head = new ModelPart(this, 0, 0);
-		this.head.setPos(2.5F, 1.2F, 0.0F);
-		this.head.addBox(-3.5F, 0.0F, -5.0F, 7, 4, 5, 0.0F);
-		this.setRotateAngle(head, 0.349066F, 0.0F, 0.0F);
-		this.right_wing = new ModelPart(this, 0, 46);
-		this.right_wing.setPos(-6.0F, 0.0F, 0.5F);
-		this.right_wing.addBox(-13.0F, 0.0F, -5.0F, 13, 1, 10, 0.0F);
-		this.setRotateAngle(right_wing, 0.0F, -0.0F, -0.17453292519943295F);
-		this.left_shoulder = new ModelPart(this, 27, 16);
-		this.left_shoulder.mirror = true;
-		this.left_shoulder.setPos(5.0F, 0.0F, 4.5F);
-		this.left_shoulder.addBox(0.0F, 0.0F, -4.5F, 6, 2, 9, 0.0F);
-		this.setRotateAngle(left_shoulder, -0.0F, 0.0F, 0.17453292519943295F);
-		this.tail = new ModelPart(this, 0, 20);
-		this.tail.setPos(2.5F, 0.0F, 9.0F);
-		this.tail.addBox(-2.5F, 0.0F, 0.0F, 5, 3, 10, 0.0F);
-		this.setRotateAngle(tail, -0.17453292519943295F, 0.0F, 0.0F);
-		this.shape13 = new ModelPart(this, 26, 0);
-		this.shape13.setPos(0.0F, 2.0F, -3.0F);
-		this.shape13.addBox(-4.5F, 0.0F, -3.0F, 9, 2, 5, 0.0F);
-		this.right_shoulder = new ModelPart(this, 27, 16);
-		this.right_shoulder.setPos(0.0F, 0.0F, 4.5F);
-		this.right_shoulder.addBox(-6.0F, 0.0F, -4.5F, 6, 2, 9, 0.0F);
-		this.setRotateAngle(right_shoulder, 0.0F, 0.0F, -0.17453292519943295F);
-		this.tail_end = new ModelPart(this, 0, 33);
-		this.tail_end.setPos(0.0F, 0.0F, 10.0F);
-		this.tail_end.addBox(-1.5F, 0.0F, 0.0F, 3, 3, 10, 0.0F);
-		this.setRotateAngle(tail_end, -0.17453292519943295F, 0.0F, 0.0F);
-		this.left_wing = new ModelPart(this, 0, 46);
-		this.left_wing.mirror = true;
-		this.left_wing.setPos(6.0F, 0.0F, 0.5F);
-		this.left_wing.addBox(0.0F, 0.0F, -5.0F, 13, 1, 10, 0.0F);
-		this.setRotateAngle(left_wing, 0.0F, 0.0F, 0.17453292519943295F);
-		this.base = new ModelPart(this, 0, 8);
-		this.base.setPos(-2.5F, 18.0F, -5.0F);
-		this.base.addBox(0.0F, 0.0F, 0.0F, 5, 3, 9, 0.0F);
-		this.setRotateAngle(base, -0.174533F, 0.0F, 0.0F);
-		this.base.addChild(this.head);
-		this.right_shoulder.addChild(this.right_wing);
-		this.base.addChild(this.left_shoulder);
-		this.base.addChild(this.tail);
-		this.head.addChild(this.shape13);
-		this.base.addChild(this.right_shoulder);
-		this.tail.addChild(this.tail_end);
-		this.left_shoulder.addChild(this.left_wing);
+	public FlareModel(ModelPart root) {
+		this.base = root.getChild("base");
+		this.head = this.base.getChild("head");
+		this.shape13 = this.head.getChild("shape13");
+		this.left_shoulder = this.base.getChild("left_shoulder");
+		this.left_wing = this.left_shoulder.getChild("left_wing");
+		this.tail = this.base.getChild("tail");
+		this.tail_end = this.tail.getChild("tail_end");
+		this.right_shoulder = this.base.getChild("right_shoulder");
+		this.right_wing = this.right_shoulder.getChild("right_wing");
+	}
+
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition root = meshdefinition.getRoot();
+		PartDefinition base = root.addOrReplaceChild("base", CubeListBuilder.create().texOffs(0, 8).addBox(0.0F, 0.0F, 0.0F, 5.0F, 3.0F, 9.0F, false), PartPose.offsetAndRotation(-2.5F, 18.0F, -5.0F, -0.174533F, 0.0F, 0.0F));
+		PartDefinition head = base.addOrReplaceChild("head", CubeListBuilder.create().texOffs(0, 0).addBox(-3.5F, 0.0F, -5.0F, 7.0F, 4.0F, 5.0F, false), PartPose.offsetAndRotation(2.5F, 1.2F, 0.0F, 0.349066F, 0.0F, 0.0F));
+		PartDefinition shape13 = head.addOrReplaceChild("shape13", CubeListBuilder.create().texOffs(26, 0).addBox(-4.5F, 0.0F, -3.0F, 9.0F, 2.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, 2.0F, -3.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition left_shoulder = base.addOrReplaceChild("left_shoulder", CubeListBuilder.create().texOffs(27, 25).addBox(0.0F, 0.0F, -4.5F, 6.0F, 2.0F, 9.0F, true), PartPose.offsetAndRotation(5.0F, 0.0F, 4.5F, -0.0F, 0.0F, 0.17453292F));
+		PartDefinition left_wing = left_shoulder.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(0, 56).addBox(0.0F, 0.0F, -5.0F, 13.0F, 1.0F, 10.0F, true), PartPose.offsetAndRotation(6.0F, 0.0F, 0.5F, 0.0F, 0.0F, 0.17453292F));
+		PartDefinition tail = base.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 20).addBox(-2.5F, 0.0F, 0.0F, 5.0F, 3.0F, 10.0F, false), PartPose.offsetAndRotation(2.5F, 0.0F, 9.0F, -0.17453292F, 0.0F, 0.0F));
+		PartDefinition tail_end = tail.addOrReplaceChild("tail_end", CubeListBuilder.create().texOffs(0, 33).addBox(-1.5F, 0.0F, 0.0F, 3.0F, 3.0F, 10.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 10.0F, -0.17453292F, 0.0F, 0.0F));
+		PartDefinition right_shoulder = base.addOrReplaceChild("right_shoulder", CubeListBuilder.create().texOffs(27, 16).addBox(-6.0F, 0.0F, -4.5F, 6.0F, 2.0F, 9.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 4.5F, 0.0F, 0.0F, -0.17453292F));
+		PartDefinition right_wing = right_shoulder.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(0, 46).addBox(-13.0F, 0.0F, -5.0F, 13.0F, 1.0F, 10.0F, false), PartPose.offsetAndRotation(-6.0F, 0.0F, 0.5F, 0.0F, -0.0F, -0.17453292F));
+		return LayerDefinition.create(meshdefinition, 64, 64);
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		this.base.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
-	}
-
-	public void setRotateAngle(ModelPart ModelRenderer, float x, float y, float z) {
-		ModelRenderer.xRot = x;
-		ModelRenderer.yRot = y;
-		ModelRenderer.zRot = z;
 	}
 
 	@Override

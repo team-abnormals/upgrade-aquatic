@@ -3,8 +3,16 @@ package com.teamabnormals.upgrade_aquatic.client.model;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -15,6 +23,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class PikeModel<T extends Pike> extends EntityModel<T> {
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "pike"), "main");
+
 	public ModelPart body_front;
 	public ModelPart neck;
 	public ModelPart body_back;
@@ -28,62 +38,37 @@ public class PikeModel<T extends Pike> extends EntityModel<T> {
 	public ModelPart left_dorsal;
 	public ModelPart right_dorsal;
 
-	public PikeModel() {
-		this.texWidth = 32;
-		this.texHeight = 32;
-		this.left_fin_2 = new ModelPart(this, 10, 27);
-		this.left_fin_2.setPos(1.1F, 3.0F, 1.5F);
-		this.left_fin_2.addBox(0.0F, 0.0F, 0.0F, 0, 2, 3, 0.0F);
-		this.setRotateAngle(left_fin_2, 0.0F, 0.0F, -0.8726646259971648F);
-		this.body_front = new ModelPart(this, 0, 0);
-		this.body_front.setPos(0.0F, 19.5F, 1.0F);
-		this.body_front.addBox(-1.5F, -1.5F, -3.5F, 3, 5, 7, 0.0F);
-		this.nose = new ModelPart(this, 0, 28);
-		this.nose.setPos(0.5F, 1.0F, -2.0F);
-		this.nose.addBox(0.0F, 0.0F, 0.0F, 2, 2, 2, 0.0F);
-		this.left_fin_1 = new ModelPart(this, 18, 28);
-		this.left_fin_1.setPos(1.1F, 3.0F, -3.0F);
-		this.left_fin_1.addBox(0.0F, 0.0F, 0.0F, 0, 2, 2, 0.0F);
-		this.setRotateAngle(left_fin_1, 0.0F, 0.0F, -0.8726646259971648F);
-		this.right_fin_2 = new ModelPart(this, 10, 27);
-		this.right_fin_2.setPos(-1.0F, 3.0F, 2.5F);
-		this.right_fin_2.addBox(0.0F, 0.0F, 0.0F, 0, 2, 3, 0.0F);
-		this.setRotateAngle(right_fin_2, 0.0F, 0.0F, 0.8726646259971648F);
-		this.tailfin = new ModelPart(this, 22, 15);
-		this.tailfin.setPos(0.0F, 0.5F, 7.0F);
-		this.tailfin.addBox(0.0F, 0.0F, 0.0F, 0, 5, 5, 0.0F);
-		this.right_fin_1 = new ModelPart(this, 18, 28);
-		this.right_fin_1.setPos(-1.1F, 3.0F, -3.0F);
-		this.right_fin_1.addBox(0.0F, 0.0F, 0.0F, 0, 2, 2, 0.0F);
-		this.setRotateAngle(right_fin_1, 0.0F, 0.0F, 0.8726646259971648F);
-		this.top_dorsal = new ModelPart(this, 24, 24);
-		this.top_dorsal.setPos(0.0F, -1.5F, 5.0F);
-		this.top_dorsal.addBox(0.0F, 0.0F, 0.0F, 0, 2, 4, 0.0F);
-		this.left_dorsal = new ModelPart(this, 24, 26);
-		this.left_dorsal.setPos(1.1F, 5.0F, 5.0F);
-		this.left_dorsal.addBox(0.0F, 0.0F, 0.0F, 0, 2, 4, 0.0F);
-		this.setRotateAngle(left_dorsal, 0.0F, 0.0F, -0.8726646259971648F);
-		this.neck = new ModelPart(this, 20, 12);
-		this.neck.setPos(-1.5F, -0.5F, -6.5F);
-		this.neck.addBox(0.0F, 0.0F, 0.0F, 3, 4, 3, 0.0F);
-		this.right_dorsal = new ModelPart(this, 24, 26);
-		this.right_dorsal.setPos(-1.1F, 5.0F, 5.0F);
-		this.right_dorsal.addBox(0.0F, 0.0F, 0.0F, 0, 2, 4, 0.0F);
-		this.setRotateAngle(right_dorsal, 0.0F, 0.0F, 0.8726646259971648F);
-		this.body_back = new ModelPart(this, 0, 12);
-		this.body_back.setPos(0.0F, -2.0F, 3.5F);
-		this.body_back.addBox(-1.5F, 0.5F, 0.0F, 3, 5, 7, 0.0F);
-		this.body_front.addChild(this.left_fin_2);
-		this.neck.addChild(this.nose);
-		this.body_front.addChild(this.left_fin_1);
-		this.body_front.addChild(this.right_fin_2);
-		this.body_back.addChild(this.tailfin);
-		this.body_front.addChild(this.right_fin_1);
-		this.body_back.addChild(this.top_dorsal);
-		this.body_back.addChild(this.left_dorsal);
-		this.body_front.addChild(this.neck);
-		this.body_back.addChild(this.right_dorsal);
-		this.body_front.addChild(this.body_back);
+	public PikeModel(ModelPart root) {
+		this.body_front = root.getChild("body_front");
+		this.left_fin_2 = this.body_front.getChild("left_fin_2");
+		this.left_fin_1 = this.body_front.getChild("left_fin_1");
+		this.right_fin_2 = this.body_front.getChild("right_fin_2");
+		this.right_fin_1 = this.body_front.getChild("right_fin_1");
+		this.neck = this.body_front.getChild("neck");
+		this.nose = this.neck.getChild("nose");
+		this.body_back = this.body_front.getChild("body_back");
+		this.tailfin = this.body_back.getChild("tailfin");
+		this.top_dorsal = this.body_back.getChild("top_dorsal");
+		this.left_dorsal = this.body_back.getChild("left_dorsal");
+		this.right_dorsal = this.body_back.getChild("right_dorsal");
+	}
+
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition root = meshdefinition.getRoot();
+		PartDefinition body_front = root.addOrReplaceChild("body_front", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -1.5F, -3.5F, 3.0F, 5.0F, 7.0F, false), PartPose.offsetAndRotation(0.0F, 19.5F, 1.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition left_fin_2 = body_front.addOrReplaceChild("left_fin_2", CubeListBuilder.create().texOffs(10, 27).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 3.0F, false), PartPose.offsetAndRotation(1.1F, 3.0F, 1.5F, 0.0F, 0.0F, -0.87266463F));
+		PartDefinition left_fin_1 = body_front.addOrReplaceChild("left_fin_1", CubeListBuilder.create().texOffs(18, 28).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 2.0F, false), PartPose.offsetAndRotation(1.1F, 3.0F, -3.0F, 0.0F, 0.0F, -0.87266463F));
+		PartDefinition right_fin_2 = body_front.addOrReplaceChild("right_fin_2", CubeListBuilder.create().texOffs(10, 27).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 3.0F, false), PartPose.offsetAndRotation(-1.0F, 3.0F, 2.5F, 0.0F, 0.0F, 0.87266463F));
+		PartDefinition right_fin_1 = body_front.addOrReplaceChild("right_fin_1", CubeListBuilder.create().texOffs(18, 28).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 2.0F, false), PartPose.offsetAndRotation(-1.1F, 3.0F, -3.0F, 0.0F, 0.0F, 0.87266463F));
+		PartDefinition neck = body_front.addOrReplaceChild("neck", CubeListBuilder.create().texOffs(20, 12).addBox(0.0F, 0.0F, 0.0F, 3.0F, 4.0F, 3.0F, false), PartPose.offsetAndRotation(-1.5F, -0.5F, -6.5F, 0.0F, 0.0F, 0.0F));
+		PartDefinition nose = neck.addOrReplaceChild("nose", CubeListBuilder.create().texOffs(0, 28).addBox(0.0F, 0.0F, 0.0F, 2.0F, 2.0F, 2.0F, false), PartPose.offsetAndRotation(0.5F, 1.0F, -2.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition body_back = body_front.addOrReplaceChild("body_back", CubeListBuilder.create().texOffs(0, 12).addBox(-1.5F, 0.5F, 0.0F, 3.0F, 5.0F, 7.0F, false), PartPose.offsetAndRotation(0.0F, -2.0F, 3.5F, 0.0F, 0.0F, 0.0F));
+		PartDefinition tailfin = body_back.addOrReplaceChild("tailfin", CubeListBuilder.create().texOffs(22, 15).addBox(0.0F, 0.0F, 0.0F, 0.0F, 5.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, 0.5F, 7.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition top_dorsal = body_back.addOrReplaceChild("top_dorsal", CubeListBuilder.create().texOffs(24, 24).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 4.0F, false), PartPose.offsetAndRotation(0.0F, -1.5F, 5.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition left_dorsal = body_back.addOrReplaceChild("left_dorsal", CubeListBuilder.create().texOffs(24, 26).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 4.0F, false), PartPose.offsetAndRotation(1.1F, 5.0F, 5.0F, 0.0F, 0.0F, -0.87266463F));
+		PartDefinition right_dorsal = body_back.addOrReplaceChild("right_dorsal", CubeListBuilder.create().texOffs(24, 26).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 4.0F, false), PartPose.offsetAndRotation(-1.1F, 5.0F, 5.0F, 0.0F, 0.0F, 0.87266463F));
+		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
 	@Override
@@ -99,11 +84,5 @@ public class PikeModel<T extends Pike> extends EntityModel<T> {
 		float thetaModifier = outOfWater ? 1.7F : 1.0F;
 
 		this.body_back.yRot = multiplier * 0.25F * Mth.sin(thetaModifier * 0.6F * ageInTicks);
-	}
-
-	public void setRotateAngle(ModelPart ModelRenderer, float x, float y, float z) {
-		ModelRenderer.xRot = x;
-		ModelRenderer.yRot = y;
-		ModelRenderer.zRot = z;
 	}
 }

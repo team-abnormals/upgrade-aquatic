@@ -4,7 +4,7 @@ import com.teamabnormals.upgrade_aquatic.client.model.PerchModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Perch;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -13,8 +13,8 @@ import com.mojang.math.Vector3f;
 public class PerchRenderer extends MobRenderer<Perch, PerchModel<Perch>> {
 	private static final ResourceLocation PERCH_LOCATION = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/perch.png");
 
-	public PerchRenderer(EntityRenderDispatcher renderManagerIn) {
-		super(renderManagerIn, new PerchModel<>(), 0.3F);
+	public PerchRenderer(EntityRendererProvider.Context context) {
+		super(context, new PerchModel<>(context.bakeLayer(PerchModel.LOCATION)), 0.3F);
 	}
 
 	public ResourceLocation getTextureLocation(Perch entity) {

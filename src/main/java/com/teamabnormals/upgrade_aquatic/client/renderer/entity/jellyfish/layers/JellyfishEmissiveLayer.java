@@ -1,7 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.layers;
 
-import com.teamabnormals.blueprint.client.ACRenderTypes;
-import com.teamabnormals.blueprint.client.ClientInfo;
+import com.teamabnormals.blueprint.client.BlueprintRenderTypes;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.AbstractJellyfishRenderer;
@@ -24,10 +23,7 @@ public class JellyfishEmissiveLayer<T extends AbstractJellyfish, M extends Endim
 
 	@Override
 	public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, T jellyfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-		ClientInfo.MINECRAFT.getTextureManager().bind(this.jellyfishRenderer.getOverlayTexture(jellyfish));
-
-		VertexConsumer ivertexbuilder = bufferIn.getBuffer(ACRenderTypes.getEmissiveTransluscentEntityWithDiffusedLight(this.jellyfishRenderer.getOverlayTexture(jellyfish), true));
-
+		VertexConsumer ivertexbuilder = bufferIn.getBuffer(BlueprintRenderTypes.getUnshadedTranslucentEntity(this.jellyfishRenderer.getOverlayTexture(jellyfish), true));
 		this.getParentModel().setupAnim(jellyfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
 		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, Mth.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingEntityRenderer.getOverlayCoords(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
 	}

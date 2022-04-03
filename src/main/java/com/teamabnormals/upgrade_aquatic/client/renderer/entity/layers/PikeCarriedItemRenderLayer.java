@@ -27,11 +27,8 @@ public class PikeCarriedItemRenderLayer extends RenderLayer<Pike, PikeModel<Pike
 		if (!itemstack.isEmpty()) {
 			if (!itemstack.isEmpty()) {
 				matrixStack.pushPose();
-
 				matrixStack.translate((this.getParentModel()).nose.x / 16.0F, (this.getParentModel()).nose.y / 16.0F + 1.3F, (this.getParentModel()).nose.z / 16.0F - 0.5F);
-
 				matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-
 				Minecraft.getInstance().getItemInHandRenderer().renderItem(pike, itemstack, ItemTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
 				matrixStack.popPose();
 			}

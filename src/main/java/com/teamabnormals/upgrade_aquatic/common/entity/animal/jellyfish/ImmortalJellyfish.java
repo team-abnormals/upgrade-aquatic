@@ -4,7 +4,7 @@ import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishBoostGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishSwimIntoDirectionGoal;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -39,8 +39,8 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAEndimations.JELLYFISH_SWIM));
-		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAEndimations.JELLYFISH_BOOST));
+		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAPlayableEndimations.JELLYFISH_SWIM));
+		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAPlayableEndimations.JELLYFISH_BOOST));
 	}
 
 	@Override
@@ -64,9 +64,9 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 
 	@Override
 	public void onEndimationStart(PlayableEndimation endimation, PlayableEndimation oldEndimation) {
-		if (endimation == UAEndimations.JELLYFISH_SWIM) {
+		if (endimation == UAPlayableEndimations.JELLYFISH_SWIM) {
 			this.getRotationController().addVelocityForLookDirection(0.35F, 1.0F);
-		} else if (endimation == UAEndimations.JELLYFISH_BOOST) {
+		} else if (endimation == UAPlayableEndimations.JELLYFISH_BOOST) {
 			this.getRotationController().addVelocityForLookDirection(0.2F, 1.0F);
 		}
 	}

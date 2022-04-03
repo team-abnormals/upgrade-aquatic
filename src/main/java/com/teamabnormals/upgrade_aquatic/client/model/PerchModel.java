@@ -1,17 +1,24 @@
-package com.teamabnormals.upgrade_aquatic.client.model;// Made with Blockbench 3.8.2
-// Exported for Minecraft version 1.15
-// Paste this class into your mod and generate all required imports
-
+package com.teamabnormals.upgrade_aquatic.client.model;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.model.ListModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.util.Mth;
 
 public class PerchModel<T extends Entity> extends ListModel<T> {
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "perch"), "main");
+
 	public ModelPart perch;
 	public ModelPart body;
 	public ModelPart sidefin1;
@@ -21,53 +28,29 @@ public class PerchModel<T extends Entity> extends ListModel<T> {
 	public ModelPart backfin1;
 	public ModelPart backfin2;
 
-	public PerchModel() {
-		texWidth = 32;
-		texHeight = 32;
+	public PerchModel(ModelPart root) {
+		this.perch = root.getChild("perch");
+		this.body = this.perch.getChild("body");
+		this.sidefin1 = this.body.getChild("sidefin1");
+		this.sidefin2 = this.body.getChild("sidefin2");
+		this.frontfin1 = this.body.getChild("frontfin1");
+		this.frontfin2 = this.body.getChild("frontfin2");
+		this.backfin1 = this.body.getChild("backfin1");
+		this.backfin2 = this.body.getChild("backfin2");
+	}
 
-		perch = new ModelPart(this);
-		perch.setPos(0.0F, 22.0F, 0.0F);
-
-		body = new ModelPart(this);
-		body.setPos(0.0F, 0.0F, 0.0F);
-		perch.addChild(body);
-		body.texOffs(0, 0).addBox(-1.0F, -5.0F, -4.0F, 2.0F, 5.0F, 11.0F, 0.0F, false);
-		body.texOffs(15, 0).addBox(-1.0F, -3.0F, -7.0F, 2.0F, 3.0F, 3.0F, 0.0F, false);
-		body.texOffs(0, 7).addBox(0.0F, -8.0F, -2.0F, 0.0F, 3.0F, 9.0F, 0.0F, false);
-
-		sidefin1 = new ModelPart(this);
-		sidefin1.setPos(1.0F, -2.0F, -4.0F);
-		body.addChild(sidefin1);
-		setRotationAngle(sidefin1, 0.0F, 0.2618F, 0.0F);
-		sidefin1.texOffs(15, 2).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 4.0F, 0.0F, false);
-
-		sidefin2 = new ModelPart(this);
-		sidefin2.setPos(-1.0F, -2.0F, -4.0F);
-		body.addChild(sidefin2);
-		setRotationAngle(sidefin2, 0.0F, -0.2618F, 0.0F);
-		sidefin2.texOffs(15, 2).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 4.0F, 0.0F, false);
-
-		frontfin1 = new ModelPart(this);
-		frontfin1.setPos(0.5F, 0.0F, -2.0F);
-		body.addChild(frontfin1);
-		setRotationAngle(frontfin1, 0.0F, 0.0873F, 0.0F);
-		frontfin1.texOffs(0, 15).addBox(-0.0872F, 0.0F, -1.0038F, 0.0F, 2.0F, 4.0F, 0.0F, false);
-
-		frontfin2 = new ModelPart(this);
-		frontfin2.setPos(-0.5F, 0.0F, -2.0F);
-		body.addChild(frontfin2);
-		setRotationAngle(frontfin2, 0.0F, -0.0873F, 0.0F);
-		frontfin2.texOffs(0, 15).addBox(0.0872F, 0.0F, -1.0038F, 0.0F, 2.0F, 4.0F, 0.0F, false);
-
-		backfin1 = new ModelPart(this);
-		backfin1.setPos(0.0F, 0.0F, 5.0F);
-		body.addChild(backfin1);
-		backfin1.texOffs(0, 15).addBox(0.0F, 0.0F, -2.0F, 0.0F, 2.0F, 4.0F, 0.0F, false);
-
-		backfin2 = new ModelPart(this);
-		backfin2.setPos(0.0F, -2.0F, 7.0F);
-		body.addChild(backfin2);
-		backfin2.texOffs(0, 0).addBox(0.0F, -3.0F, 0.0F, 0.0F, 5.0F, 5.0F, 0.0F, false);
+	public static LayerDefinition createBodyLayer() {
+		MeshDefinition meshdefinition = new MeshDefinition();
+		PartDefinition root = meshdefinition.getRoot();
+		PartDefinition perch = root.addOrReplaceChild("perch", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 22.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition body = perch.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -5.0F, -4.0F, 2.0F, 5.0F, 11.0F, false).texOffs(15, 0).addBox(-1.0F, -3.0F, -7.0F, 2.0F, 3.0F, 3.0F, false).texOffs(0, 7).addBox(0.0F, -8.0F, -2.0F, 0.0F, 3.0F, 9.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition sidefin1 = body.addOrReplaceChild("sidefin1", CubeListBuilder.create().texOffs(15, 2).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 4.0F, false), PartPose.offsetAndRotation(1.0F, -2.0F, -4.0F, 0.0F, 0.2618F, 0.0F));
+		PartDefinition sidefin2 = body.addOrReplaceChild("sidefin2", CubeListBuilder.create().texOffs(15, 2).addBox(0.0F, 0.0F, 0.0F, 0.0F, 2.0F, 4.0F, false), PartPose.offsetAndRotation(-1.0F, -2.0F, -4.0F, 0.0F, -0.2618F, 0.0F));
+		PartDefinition frontfin1 = body.addOrReplaceChild("frontfin1", CubeListBuilder.create().texOffs(0, 15).addBox(-0.0872F, 0.0F, -1.0038F, 0.0F, 2.0F, 4.0F, false), PartPose.offsetAndRotation(0.5F, 0.0F, -2.0F, 0.0F, 0.0873F, 0.0F));
+		PartDefinition frontfin2 = body.addOrReplaceChild("frontfin2", CubeListBuilder.create().texOffs(0, 15).addBox(0.0872F, 0.0F, -1.0038F, 0.0F, 2.0F, 4.0F, false), PartPose.offsetAndRotation(-0.5F, 0.0F, -2.0F, 0.0F, -0.0873F, 0.0F));
+		PartDefinition backfin1 = body.addOrReplaceChild("backfin1", CubeListBuilder.create().texOffs(0, 15).addBox(0.0F, 0.0F, -2.0F, 0.0F, 2.0F, 4.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, 5.0F, 0.0F, 0.0F, 0.0F));
+		PartDefinition backfin2 = body.addOrReplaceChild("backfin2", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -3.0F, 0.0F, 0.0F, 5.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, -2.0F, 7.0F, 0.0F, 0.0F, 0.0F));
+		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
 
 	@Override

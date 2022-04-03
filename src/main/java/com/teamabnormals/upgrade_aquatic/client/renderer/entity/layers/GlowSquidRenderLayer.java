@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers;
 
-import com.teamabnormals.blueprint.client.ACRenderTypes;
+import com.teamabnormals.blueprint.client.BlueprintRenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
 import com.teamabnormals.upgrade_aquatic.client.model.GlowSquidModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.GlowSquid;
@@ -24,6 +24,6 @@ public class GlowSquidRenderLayer extends RenderLayer<GlowSquid, GlowSquidModel>
 	@Override
 	public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, GlowSquid entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.model.setupAnim(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.model.renderToBuffer(matrixStackIn, bufferIn.getBuffer(ACRenderTypes.getEmissiveTransluscentEntity(GlowSquidSpriteUploader.ATLAS_LOCATION, false)), packedLightIn, LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F), 1, 1, 1, 1);
+		this.model.renderToBuffer(matrixStackIn, bufferIn.getBuffer(BlueprintRenderTypes.getUnshadedTranslucentEntity(GlowSquidSpriteUploader.ATLAS_LOCATION, false)), packedLightIn, LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F), 1, 1, 1, 1);
 	}
 }

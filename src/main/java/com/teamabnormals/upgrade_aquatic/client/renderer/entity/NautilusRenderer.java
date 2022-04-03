@@ -1,56 +1,41 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
-import com.google.common.collect.Maps;
+import com.teamabnormals.blueprint.client.EntitySkinHelper;
 import com.teamabnormals.upgrade_aquatic.client.model.NautilusModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Nautilus;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.Util;
 import net.minecraft.util.Mth;
 import com.mojang.math.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 @OnlyIn(Dist.CLIENT)
 public class NautilusRenderer extends MobRenderer<Nautilus, NautilusModel<Nautilus>> {
-	private static final Map<List<String>, String> SKINS = Util.make(Maps.newHashMap(), (skins) -> {
-		skins.put(Arrays.asList("smelly", "thefaceofgaming"), "smelly");
-		skins.put(Arrays.asList("abnormal", "abnautilus", "abnortilus", "mca"), "mca");
-		skins.put(Arrays.asList("five", "epic"), "five");
-		skins.put(Arrays.asList("neon membrane", "cell membrane", "cell"), "cell");
-		skins.put(Arrays.asList("tb"), "tb");
-		skins.put(Arrays.asList("bagel", "shy guy", "legobagel"), "bagel");
-		skins.put(Arrays.asList("sadcat"), "sadcat");
-		skins.put(Arrays.asList("cameron", "cam", "cringe"), "cameron");
-		skins.put(Arrays.asList("snake", "snautilus", "snakeblock", "snake block"), "snake_block");
-		skins.put(Arrays.asList("snail", "snail nautilus"), "snail");
+	private static final EntitySkinHelper<Nautilus> SKIN_HELPER = EntitySkinHelper.create(UpgradeAquatic.MOD_ID, "textures/entity/nautilus", "nautilus", helper -> {
+		helper.putSkins("smelly", "smelly", "thefaceofgaming");
+		helper.putSkins("mca", "abnormal", "abnautilus", "abnortilus", "mca");
+		helper.putSkins("five", "five", "epic");
+		helper.putSkins("cell", "neon membrane", "cell membrane", "cell");
+		helper.putSkins("tb", "tb");
+		helper.putSkins("bagel", "bagel", "shy guy", "legobagel");
+		helper.putSkins("sadcat", "sadcat");
+		helper.putSkins("cameron", "cameron", "cam", "cringe");
+		helper.putSkins("snake_block", "snake", "snautilus", "snakeblock", "snake block");
+		helper.putSkins("snail", "snail", "snail nautilus");
 	});
 
-	public NautilusRenderer(EntityRenderDispatcher renderManager) {
-		super(renderManager, new NautilusModel<>(), 0.25F);
+	public NautilusRenderer(EntityRendererProvider.Context context) {
+		super(context, new NautilusModel<>(context.bakeLayer(NautilusModel.LOCATION)), 0.25F);
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(Nautilus nautilus) {
-		String textureSuffix = "";
-
-		if (nautilus.hasCustomName()) {
-			String name = nautilus.getName().getString().toLowerCase().trim();
-			for (Map.Entry<List<String>, String> entries : SKINS.entrySet()) {
-				if (entries.getKey().contains(name)) {
-					textureSuffix = "_" + entries.getValue();
-				}
-			}
-		}
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/nautilus/nautilus" + textureSuffix + ".png");
+		return SKIN_HELPER.getSkinForEntityOrElse(nautilus, new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/nautilus/nautilus.png"));
 	}
 
 	@Override

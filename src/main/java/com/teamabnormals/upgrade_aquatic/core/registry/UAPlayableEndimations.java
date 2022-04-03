@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public final class UAEndimations {
+public final class UAPlayableEndimations {
 	public static final PlayableEndimation JELLYFISH_SWIM = register("jellyfish/swim", 20, PlayableEndimation.LoopType.NONE);
 	public static final PlayableEndimation JELLYFISH_BOOST = register("jellyfish/boost", 20, PlayableEndimation.LoopType.NONE);
 	public static final PlayableEndimation THRASHER_SNAP_AT_PRAY = register("thrasher/snap_at_pray", 10, PlayableEndimation.LoopType.NONE);

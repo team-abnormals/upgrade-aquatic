@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish;
 
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.BoxJellyfish;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -59,7 +59,7 @@ public class BoxJellyfishHuntGoal extends Goal {
 		}
 
 		if (this.hunter.isNoEndimationPlaying() && Math.abs(rotations[0] - this.hunter.lockedRotations[0]) < 7.5F) {
-			NetworkUtil.setPlayingAnimation(this.hunter, UAEndimations.JELLYFISH_SWIM);
+			NetworkUtil.setPlayingAnimation(this.hunter, UAPlayableEndimations.JELLYFISH_SWIM);
 		}
 	}
 }

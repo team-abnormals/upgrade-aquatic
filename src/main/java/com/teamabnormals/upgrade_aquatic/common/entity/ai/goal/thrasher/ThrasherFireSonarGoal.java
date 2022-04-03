@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher;
 
 import com.teamabnormals.upgrade_aquatic.common.entity.projectile.SonarWave;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.blueprint.core.util.EntityUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
@@ -73,7 +73,7 @@ public class ThrasherFireSonarGoal extends Goal {
 			if (this.sonarTicks == 0 && SonarPhase.shouldContinueExecutingPhase(SonarPhase.FIRE, this.thrasher, this.sonarTicks)) {
 				this.originalYaw = this.thrasher.getYRot();
 				this.originalPitch = this.thrasher.getXRot();
-				NetworkUtil.setPlayingAnimation(this.thrasher, UAEndimations.THRASHER_SONAR_FIRE);
+				NetworkUtil.setPlayingAnimation(this.thrasher, UAPlayableEndimations.THRASHER_SONAR_FIRE);
 				this.thrasher.playSound(this.thrasher.getSonarFireSound(), 3.5F, 1.0F);
 			}
 

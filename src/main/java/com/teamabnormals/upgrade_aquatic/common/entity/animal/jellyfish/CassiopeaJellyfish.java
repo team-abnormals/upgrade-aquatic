@@ -7,7 +7,7 @@ import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.Cassiop
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishBoostGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishSwimIntoDirectionGoal;
 import com.teamabnormals.upgrade_aquatic.core.other.UADamageSources;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEndimations;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -40,8 +40,8 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new CassiopeaHideInSeagrassGoal(this));
 		this.goalSelector.addGoal(2, new CassiopeaJellyfishFlipGoal(this));
-		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAEndimations.JELLYFISH_SWIM));
-		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAEndimations.JELLYFISH_BOOST));
+		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAPlayableEndimations.JELLYFISH_SWIM));
+		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAPlayableEndimations.JELLYFISH_BOOST));
 
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
@@ -59,9 +59,9 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 		}
 
 		if (this.isInWater()) {
-			if (this.isEndimationPlaying(UAEndimations.JELLYFISH_BOOST)) {
+			if (this.isEndimationPlaying(UAPlayableEndimations.JELLYFISH_BOOST)) {
 				this.setDeltaMovement(this.getDeltaMovement().scale(1.15F));
-			} else if (this.isEndimationPlaying(UAEndimations.JELLYFISH_SWIM)) {
+			} else if (this.isEndimationPlaying(UAPlayableEndimations.JELLYFISH_SWIM)) {
 				this.setDeltaMovement(this.getDeltaMovement().scale(1.05F));
 			}
 		}
@@ -107,9 +107,9 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	@Override
 	public void onEndimationStart(PlayableEndimation endimation, PlayableEndimation oldEndimation) {
 		float sizeForce = this.getSize() < 0.6F ? 0.85F : this.getSize();
-		if (endimation == UAEndimations.JELLYFISH_SWIM) {
+		if (endimation == UAPlayableEndimations.JELLYFISH_SWIM) {
 			this.getRotationController().addVelocityForLookDirection(0.3F, sizeForce);
-		} else if (endimation == UAEndimations.JELLYFISH_BOOST) {
+		} else if (endimation == UAPlayableEndimations.JELLYFISH_BOOST) {
 			this.getRotationController().addVelocityForLookDirection(0.2F, sizeForce);
 		}
 	}
