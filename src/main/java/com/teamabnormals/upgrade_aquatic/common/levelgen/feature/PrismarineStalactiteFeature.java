@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
@@ -20,11 +21,15 @@ public class PrismarineStalactiteFeature extends PrismarineCoralFeature {
 	}
 
 	@Override
-	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		return false;
 	}
 
-	public static boolean placeFeature(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
+	public static boolean placeFeature(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+		WorldGenLevel world = context.level();
+		Random rand = context.random();
+		BlockPos pos = context.origin();
+
 		Direction randDirection = Direction.getRandom(rand);
 		if (randDirection == Direction.UP || randDirection == Direction.DOWN) {
 			randDirection = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;

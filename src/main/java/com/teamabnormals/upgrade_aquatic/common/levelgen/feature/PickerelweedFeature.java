@@ -1,22 +1,23 @@
 package com.teamabnormals.upgrade_aquatic.common.levelgen.feature;
 
+import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.common.block.PickerelweedDoublePlantBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.PickerelweedPlantBlock;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.mojang.serialization.Codec;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.core.Holder;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.material.FluidState;
 
 import java.util.Random;
 import java.util.function.Supplier;
@@ -33,12 +34,15 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	@Override
-	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
-		Biome biome = worldIn.getBiome(pos);
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+		WorldGenLevel worldIn = context.level();
+		Random rand = context.random();
+		BlockPos pos = context.origin();
+		Holder<Biome> biome = worldIn.getBiome(pos);
 		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().canSurvive(worldIn, pos.below())) {
-			if (biome.getBiomeCategory() == BiomeCategory.RIVER || biome.getBiomeCategory() == BiomeCategory.SWAMP || biome.getRegistryName().equals(Biomes.FLOWER_FOREST.location())) {
+			if (Biome.getBiomeCategory(biome) == BiomeCategory.RIVER || Biome.getBiomeCategory(biome) == BiomeCategory.SWAMP || biome.value().getRegistryName().equals(Biomes.FLOWER_FOREST.location())) {
 				boolean purpleGen;
-				if (biome.getBiomeCategory() == BiomeCategory.SWAMP) {
+				if (Biome.getBiomeCategory(biome) == BiomeCategory.SWAMP) {
 					purpleGen = rand.nextFloat() >= 0.60D;
 				} else {
 					purpleGen = !(rand.nextFloat() >= 0.60D);
@@ -48,9 +52,9 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 				}
 			} else {
 				boolean purpleGen;
-				if (biome.getBaseTemperature() < 0.2D) {
+				if (biome.value().getBaseTemperature() < 0.2D) {
 					purpleGen = rand.nextFloat() >= 0.75D;
-				} else if (biome.getBaseTemperature() < 1.0D) {
+				} else if (biome.value().getBaseTemperature() < 1.0D) {
 					purpleGen = rand.nextBoolean();
 				} else {
 					purpleGen = !(rand.nextFloat() >= 0.75D);

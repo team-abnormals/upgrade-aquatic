@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
@@ -40,9 +41,9 @@ public class PrismarineCoralFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	@Override
-	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 //		if(rand.nextDouble() <= 1) {
-		PrismarineCoralShelfFeature.placeFeature(worldIn, generator, rand, pos, config);
+		PrismarineCoralShelfFeature.placeFeature(context);
 //		} else {
 //			FeaturePrismarineStalactite.placeFeature(worldIn, generator, rand, pos, config);
 //		}

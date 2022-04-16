@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.item;
 
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry.JellyfishEntry;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Rarity;
@@ -13,7 +14,7 @@ import java.util.Random;
 public class JellyfishSpawnEggItem extends ForgeSpawnEggItem {
 
 	public JellyfishSpawnEggItem(int primaryColor, int secondaryColor, Properties properties) {
-		super(null, primaryColor, secondaryColor, properties);
+		super(UAEntityTypes.BOX_JELLYFISH, primaryColor, secondaryColor, properties);
 	}
 
 	@Override

@@ -1,16 +1,16 @@
 package com.teamabnormals.upgrade_aquatic.common.levelgen.feature;
 
+import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.mojang.serialization.Codec;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BaseCoralWallFanBlock;
-import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.BaseCoralWallFanBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
@@ -25,11 +25,15 @@ public class PrismarineCoralShelfFeature extends PrismarineCoralFeature {
 	}
 
 	@Override
-	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		return false;
 	}
 
-	public static boolean placeFeature(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
+	public static boolean placeFeature(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+		WorldGenLevel world = context.level();
+		Random rand = context.random();
+		BlockPos pos = context.origin();
+
 		Direction direction = Direction.getRandom(rand);
 		if (direction == Direction.UP || direction == Direction.DOWN) {
 			direction = rand.nextBoolean() ? Direction.NORTH : Direction.SOUTH;

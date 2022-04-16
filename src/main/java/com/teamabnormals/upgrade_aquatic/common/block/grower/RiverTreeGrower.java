@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block.grower;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAConfiguredFeatures;
 import net.minecraft.core.Holder;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -13,7 +13,7 @@ public class RiverTreeGrower extends AbstractTreeGrower {
 	@Nullable
 	@Override
 	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean p_225546_2_) {
-		return UAFeatures.RIVER_TREE.get().configured(UAFeatures.Configs.RIVER_TREE_CONFIG);
+		return UAConfiguredFeatures.RIVER_TREE;
 	}
 
 }

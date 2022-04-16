@@ -1,14 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.common.levelgen.feature;
 
+import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.mojang.serialization.Codec;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
 import java.util.Random;
@@ -25,9 +25,13 @@ public class SearocketFeature extends Feature<NoneFeatureConfiguration> {
 	}
 
 	@Override
-	public boolean place(WorldGenLevel worldIn, ChunkGenerator generator, Random rand, BlockPos pos, NoneFeatureConfiguration config) {
+	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
+		WorldGenLevel worldIn = context.level();
+		Random rand = context.random();
+		BlockPos pos = context.origin();
+
 		boolean colorType;
-		if (worldIn.getBiome(pos).getBaseTemperature() < 0.2D) {
+		if (worldIn.getBiome(pos).value().getBaseTemperature() < 0.2D) {
 			colorType = rand.nextFloat() <= 0.25F;
 			if (SEAROCKET(colorType).get().canSurvive(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));

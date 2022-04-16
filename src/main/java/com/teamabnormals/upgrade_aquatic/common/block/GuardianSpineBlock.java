@@ -51,21 +51,21 @@ public class GuardianSpineBlock extends DirectionalBlock implements SimpleWaterl
 	};
 	protected static final VoxelShape[] SHAPES_RETRACTED = {
 			Block.box(6.0D, 0.0D, 6.0D, 10.0D, 1.0D, 10.0D),
-			Block.box(16.0D, 6.0D, 6.0D, 15.0D, 10.0D, 10.0D),
-			Block.box(6.0D, 6.0D, 16.0D, 10.0D, 10.0D, 15.0D),
-			Block.box(6.0D, 16.0D, 6.0D, 10.0D, 15.0D, 10.0D),
+			Block.box(15.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D),
+			Block.box(6.0D, 6.0D, 15.0D, 10.0D, 10.0D, 16.0D),
+			Block.box(6.0D, 15.0D, 6.0D, 10.0D, 16.0D, 10.0D),
 			//Elder
 			Block.box(4.0D, 0.0D, 4.0D, 12.0D, 1.0D, 12.0D),
-			Block.box(16.0D, 4.0D, 4.0D, 15.0D, 12.0D, 12.0D),
-			Block.box(4.0D, 4.0D, 16.0D, 12.0D, 12.0D, 15.0D),
-			Block.box(4.0D, 16.0D, 4.0D, 12.0D, 15.0D, 12.0D),
+			Block.box(15.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D),
+			Block.box(4.0D, 4.0D, 15.0D, 12.0D, 12.0D, 16.0D),
+			Block.box(4.0D, 15.0D, 4.0D, 12.0D, 16.0D, 12.0D),
 
 			//Fixers Elder
 			Block.box(0.0D, 4.0D, 4.0D, 1.0D, 12.0D, 12.0D),
-			Block.box(4.0D, 4.0D, 1.0D, 12.0D, 12.0D, 0.0D),
+			Block.box(4.0D, 4.0D, 0.0D, 12.0D, 12.0D, 1.0D),
 			//Fixes
 			Block.box(0.0D, 6.0D, 6.0D, 1.0D, 10.0D, 10.0D),
-			Block.box(6.0D, 6.0D, 1.0D, 10.0D, 10.0D, 0.0D),
+			Block.box(6.0D, 6.0D, 0.0D, 10.0D, 10.0D, 1.0D),
 	};
 
 	public GuardianSpineBlock(Properties props, boolean elder) {

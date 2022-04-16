@@ -1,23 +1,27 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
+import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.upgrade_aquatic.client.GlowSquidSpriteUploader;
 import com.teamabnormals.upgrade_aquatic.client.model.*;
-import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.*;
+import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.BoxJellyfishModel;
+import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.CassiopeaJellyfishModel;
+import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.ImmortalJellyfishModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.*;
-import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.*;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
+import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.BoxJellyfishRenderer;
+import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.CassiopeaJellyfishRenderer;
+import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.ImmortalJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.teamabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.other.UASpawns;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAMobEffects;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAMobEffects;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
-import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -82,7 +86,6 @@ public class UpgradeAquatic {
 			UASpawns.registerSpawns();
 			UAMobEffects.registerBrewingRecipes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
-			UAFeatures.Configured.registerConfiguredFeatures();
 			ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "f_60445_");
 		});
 	}
@@ -103,6 +106,7 @@ public class UpgradeAquatic {
 		event.registerLayerDefinition(FlareModel.LOCATION, FlareModel::createBodyLayer);
 		event.registerLayerDefinition(SonarWaveModel.LOCATION, SonarWaveModel::createBodyLayer);
 		event.registerLayerDefinition(UluluModel.LOCATION, UluluModel::createBodyLayer);
+		event.registerLayerDefinition(GlowSquidModel.LOCATION, GlowSquidModel::createBodyLayer);
 		event.registerLayerDefinition(GooseModel.LOCATION, GooseModel::createBodyLayer);
 		event.registerLayerDefinition(BoxJellyfishModel.LOCATION, BoxJellyfishModel::createBodyLayer);
 		event.registerLayerDefinition(CassiopeaJellyfishModel.LOCATION, CassiopeaJellyfishModel::createBodyLayer);
@@ -120,7 +124,7 @@ public class UpgradeAquatic {
 		event.registerEntityRenderer(UAEntityTypes.SONAR_WAVE.get(), SonarWaveRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.ULULU.get(), UluluRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.GOOSE.get(), GooseRenderer::new);
-//		event.registerEntityRenderer(UAEntities.GLOW_SQUID.get(), GlowSquidRenderer::new);
+		event.registerEntityRenderer(UAEntityTypes.GLOW_SQUID.get(), GlowSquidRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);

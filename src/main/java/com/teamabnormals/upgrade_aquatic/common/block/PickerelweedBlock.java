@@ -27,10 +27,10 @@ public class PickerelweedBlock extends DirectionalBlock implements SimpleWaterlo
 	private static final VoxelShape[] SHAPES = new VoxelShape[]{
 			Block.box(0.0D, 5.0D, 0.0D, 16.0D, 16.0D, 16.0D),
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D),
-			Block.box(0.0D, 0.0D, 16.0D, 16.0D, 16.0D, 5.0D),
-			Block.box(0.0D, 0.0D, 11.0D, 16.0D, 16.0D, 0.0D),
-			Block.box(16.0D, 0.0D, 0.0D, 5.0D, 16.0D, 16.0D),
-			Block.box(11.0D, 0.0D, 0.0D, 0.0D, 16.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 5.0D, 16.0D, 16.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 11.0D),
+			Block.box(5.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 11.0D, 16.0D, 16.0D),
 	};
 	private final boolean isBoiled;
 
