@@ -89,6 +89,11 @@ public class ThrasherFireSonarGoal extends Goal {
 		}
 	}
 
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
 	private void stablilizeDirection() {
 		this.thrasher.yRotO = this.originalYaw;
 		this.thrasher.xRotO = this.originalPitch;

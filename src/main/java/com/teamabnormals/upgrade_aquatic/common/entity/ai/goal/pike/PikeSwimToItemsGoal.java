@@ -34,4 +34,9 @@ public final class PikeSwimToItemsGoal extends Goal {
 		List<ItemEntity> list = this.pike.level.getEntitiesOfClass(ItemEntity.class, this.pike.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), Pike.ITEM_SELECTOR);
 		if (!list.isEmpty()) this.pike.getNavigation().moveTo(list.get(0), 1.2F);
 	}
+
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
 }

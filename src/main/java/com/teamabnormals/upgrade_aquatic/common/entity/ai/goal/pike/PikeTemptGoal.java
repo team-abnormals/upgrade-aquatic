@@ -52,4 +52,9 @@ public final class PikeTemptGoal extends Goal {
 	private boolean isTemptedBy(ItemStack stack) {
 		return stack.is(ItemTags.FISHES);
 	}
+
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
 }

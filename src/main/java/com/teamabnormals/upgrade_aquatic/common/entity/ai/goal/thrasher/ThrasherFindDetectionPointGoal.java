@@ -51,6 +51,11 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 		this.foundPos = this.foundTarget.blockPosition().offset(rand.nextInt(2), rand.nextInt(2), rand.nextInt(2));
 	}
 
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
 	private void findNearestTarget() {
 		this.foundTarget = this.thrasher.level.getNearestEntity(this.thrasher.level.getEntitiesOfClass(LivingEntity.class, this.getTargetableArea(32), Thrasher.ENEMY_MATCHER), TargetingConditions.forCombat().range(this.getTargetDistance()).selector(null), this.thrasher, this.thrasher.getX(), this.thrasher.getY() + this.thrasher.getEyeHeight(), this.thrasher.getZ());
 	}

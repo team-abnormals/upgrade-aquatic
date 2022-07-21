@@ -39,7 +39,6 @@ public class PerchHideInSeagrassGoal extends RandomStrollGoal {
 		return ((Perch) this.mob).isSeagrassNearby() && super.canContinueToUse();
 	}
 
-
 	@Nullable
 	protected Vec3 getPosition() {
 		Perch perch = (Perch) this.mob;
@@ -50,4 +49,10 @@ public class PerchHideInSeagrassGoal extends RandomStrollGoal {
 		}
 		return null;
 	}
+
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
 }

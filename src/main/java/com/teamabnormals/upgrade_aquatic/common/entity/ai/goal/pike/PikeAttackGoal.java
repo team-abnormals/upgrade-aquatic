@@ -56,4 +56,9 @@ public final class PikeAttackGoal extends MeleeAttackGoal {
 		super.start();
 	}
 
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
 }

@@ -45,4 +45,9 @@ public class CassiopeaHideInSeagrassGoal extends Goal {
 	private boolean isInSeagrass() {
 		return this.jellyfish.getFeetBlockState().getBlock() == Blocks.SEAGRASS || this.jellyfish.getFeetBlockState().getBlock() == Blocks.TALL_SEAGRASS;
 	}
+
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
 }

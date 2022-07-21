@@ -85,6 +85,11 @@ public class ThrasherThrashGoal extends Goal {
 		}
 	}
 
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
 	private void disablePlayersShield(Player player) {
 		player.getCooldowns().addCooldown(Items.SHIELD, 30);
 	}

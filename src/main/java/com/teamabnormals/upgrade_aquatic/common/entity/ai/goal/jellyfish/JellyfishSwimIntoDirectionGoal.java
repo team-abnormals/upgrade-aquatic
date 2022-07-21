@@ -69,6 +69,11 @@ public class JellyfishSwimIntoDirectionGoal extends Goal {
 		this.ticksAtRotation = 0;
 	}
 
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
 	private float[] generateDirection(Random rand) {
 		float[] rotations = this.jellyfish.getRotationController().getRotations(1.0F);
 		float upperChance = this.jellyfish.position().y() < this.jellyfish.level.getSeaLevel() - 6 ? 0.5F : 0.2F;
@@ -83,4 +88,6 @@ public class JellyfishSwimIntoDirectionGoal extends Goal {
 				rand.nextFloat() < upperChance ? (float) MathUtil.makeNegativeRandomly(rand.nextFloat() * 50.0F, rand) : rotations[1] + (float) Mth.wrapDegrees(MathUtil.makeNegativeRandomly(rand.nextFloat() * 100.0F, rand))
 		};
 	}
+
+
 }

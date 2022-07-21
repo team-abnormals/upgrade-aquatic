@@ -62,4 +62,9 @@ public class BoxJellyfishHuntGoal extends Goal {
 			NetworkUtil.setPlayingAnimation(this.hunter, UAPlayableEndimations.JELLYFISH_SWIM);
 		}
 	}
+
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
 }

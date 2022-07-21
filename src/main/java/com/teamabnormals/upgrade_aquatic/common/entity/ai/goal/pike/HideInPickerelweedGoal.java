@@ -50,4 +50,9 @@ public final class HideInPickerelweedGoal extends RandomStrollGoal {
 		return null;
 	}
 
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
 }

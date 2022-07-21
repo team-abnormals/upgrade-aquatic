@@ -38,4 +38,9 @@ public class JellyfishBoostGoal extends Goal {
 	public void start() {
 		NetworkUtil.setPlayingAnimation(this.jellyfish, this.boostEndimation);
 	}
+
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
 }
