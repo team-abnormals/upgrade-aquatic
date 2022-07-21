@@ -22,12 +22,6 @@ public class UAConfig {
 		public final ConfigValue<Integer> pikeSwampWeight;
 		public final ConfigValue<Integer> squidSwampWeight;
 
-		public final ConfigValue<Integer> beachgrassFrequency;
-		public final ConfigValue<Integer> searocketFrequency;
-		public final ConfigValue<Integer> pickerelweedFrequency;
-		public final ConfigValue<Integer> pickerelweedExtraFrequency;
-		public final ConfigValue<Integer> floweringRushFrequency;
-
 		public Common(ForgeConfigSpec.Builder builder) {
 			builder.push("items");
 			builder.push("trades");
@@ -51,16 +45,6 @@ public class UAConfig {
 			this.squidSwampWeight = builder.define("Squid spawn weight (swamps)", 5);
 			builder.pop();
 
-			builder.pop();
-
-			builder.push("world");
-			builder.push("generation");
-			this.beachgrassFrequency = builder.define("Beachgrass frequency (beaches)", 18);
-			this.searocketFrequency = builder.define("Searocket frequency (beaches)", 15);
-			this.pickerelweedFrequency = builder.define("Pickerelweed frequency (jungles, swamps, rivers)", 28);
-			this.pickerelweedExtraFrequency = builder.define("Pickerelweed frequency (flower forests)", 90);
-			this.floweringRushFrequency = builder.define("Flowering Rush frequency (rivers)", 15);
-			builder.pop();
 			builder.pop();
 		}
 	}

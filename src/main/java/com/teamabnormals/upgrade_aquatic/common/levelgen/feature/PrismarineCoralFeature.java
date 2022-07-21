@@ -3,14 +3,9 @@ package com.teamabnormals.upgrade_aquatic.common.levelgen.feature;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import java.util.Random;
 
 /**
  * @author - SmellyModder(Luke Tonon)
