@@ -11,21 +11,21 @@
 				},
 				{
 					"time": 0.25,
-					"transform": [-20, 0, 0],
+					"transform": [-9, 0, 0],
 					"interpolation": {
 						"type": "catmullrom"
 					}
 				},
 				{
 					"time": 0.5,
-					"transform": [20, 0, 0],
+					"transform": [9, 0, 0],
 					"interpolation": {
 						"type": "catmullrom"
 					}
 				},
 				{
 					"time": 2.5,
-					"transform": [20, 0, 0],
+					"transform": [9, 0, 0],
 					"interpolation": {
 						"type": "catmullrom"
 					}
@@ -50,21 +50,21 @@
 				},
 				{
 					"time": 0.25,
-					"transform": [20, 0, 0],
+					"transform": [9, 0, 0],
 					"interpolation": {
 						"type": "catmullrom"
 					}
 				},
 				{
 					"time": 0.5,
-					"transform": [-20, 0, 0],
+					"transform": [-9, 0, 0],
 					"interpolation": {
 						"type": "catmullrom"
 					}
 				},
 				{
 					"time": 2.5,
-					"transform": [-20, 0, 0],
+					"transform": [-9, 0, 0],
 					"interpolation": {
 						"type": "catmullrom"
 					}
