@@ -31,7 +31,6 @@ public class UAEntityTypes {
 	public static final RegistryObject<EntityType<Flare>> FLARE = HELPER.createLivingEntity("flare", Flare::new, MobCategory.MONSTER, 0.9F, 0.5F);
 	public static final RegistryObject<EntityType<Ululu>> ULULU = HELPER.createLivingEntity("ululu", Ululu::new, MobCategory.MONSTER, 2.04F, 2.04F);
 	public static final RegistryObject<EntityType<Goose>> GOOSE = HELPER.createLivingEntity("goose", Goose::new, MobCategory.CREATURE, 0.5F, 0.9F);
-	public static final RegistryObject<EntityType<GlowSquid>> GLOW_SQUID = HELPER.createLivingEntity("glow_squid", GlowSquid::new, MobCategory.WATER_CREATURE, 0.8F, 0.8F);
 
 	public static final RegistryObject<EntityType<BoxJellyfish>> BOX_JELLYFISH = HELPER.createLivingEntity("box_jellyfish", BoxJellyfish::new, MobCategory.WATER_CREATURE, 0.75F, 0.625F);
 	public static final RegistryObject<EntityType<CassiopeaJellyfish>> CASSIOPEA_JELLYFISH = HELPER.createLivingEntity("cassiopea_jellyfish", CassiopeaJellyfish::new, MobCategory.WATER_CREATURE, 0.6875F, 0.25F);
@@ -48,28 +47,9 @@ public class UAEntityTypes {
 		event.put(FLARE.get(), Flare.registerAttributes().build());
 		event.put(ULULU.get(), Ululu.registerAttributes().build());
 		event.put(GOOSE.get(), Goose.registerAttributes().build());
-		event.put(GLOW_SQUID.get(), GlowSquid.createAttributes().build());
 
 		event.put(BOX_JELLYFISH.get(), BoxJellyfish.registerAttributes().build());
 		event.put(CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfish.registerAttributes().build());
 		event.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfish.registerAttributes().build());
-	}
-
-	public static void registerRenderers() {
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.NAUTILUS.get(), NautilusRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.PIKE.get(), PikeRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.LIONFISH.get(), LionfishRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.PERCH.get(), PerchRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.THRASHER.get(), ThrasherRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GREAT_THRASHER.get(), GreatThrasherRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.FLARE.get(), FlareRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.SONAR_WAVE.get(), SonarWaveRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.ULULU.get(), UluluRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GOOSE.get(), GooseRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.GLOW_SQUID.get(), GlowSquidRenderer::new);
-//
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);
-//		RenderingRegistry.registerEntityRenderingHandler(UAEntities.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);
 	}
 }

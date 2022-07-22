@@ -1,10 +1,10 @@
 package com.teamabnormals.upgrade_aquatic.core.mixin;
 
-import com.teamabnormals.upgrade_aquatic.common.item.GlowingInkItem;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,6 +21,10 @@ public abstract class SquidMixin extends Entity {
 
 	@Inject(at = @At("HEAD"), method = "spawnInk")
 	private void spawnInk(CallbackInfo info) {
-		GlowingInkItem.createEffectCloud(new MobEffectInstance(MobEffects.BLINDNESS, 100), this.level, this.getBoundingBox().expandTowards(2.5F, 2.5F, 2.5F));
+		for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().expandTowards(2.5F, 2.5F, 2.5F))) {
+			if (!(entity instanceof Squid))
+				entity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 100));
+		}
 	}
+
 }

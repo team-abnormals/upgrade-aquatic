@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
 
 import javax.annotation.Nullable;
@@ -29,18 +30,21 @@ public class SquidBucketItem extends BucketItem {
 		super(supplier, builder);
 	}
 
-	public void checkExtraContent(Level worldIn, ItemStack stack, BlockPos pos) {
-		if (worldIn instanceof ServerLevel) {
-			this.placeEntity((ServerLevel) worldIn, stack, pos);
+	@Override
+	public void checkExtraContent(@Nullable Player player, Level level, ItemStack stack, BlockPos pos) {
+		if (level instanceof ServerLevel) {
+			this.placeEntity((ServerLevel) level, stack, pos);
+			level.gameEvent(player, GameEvent.ENTITY_PLACE, pos);
 		}
 	}
 
+	@Override
 	protected void playEmptySound(@Nullable Player player, LevelAccessor world, BlockPos pos) {
 		world.playSound(player, pos, SoundEvents.BUCKET_EMPTY_FISH, SoundSource.NEUTRAL, 1.0F, 1.0F);
 	}
 
-	private void placeEntity(ServerLevel worldIn, ItemStack stack, BlockPos pos) {
-		Entity entity = EntityType.SQUID.spawn(worldIn, stack, null, pos, MobSpawnType.BUCKET, true, false);
+	protected void placeEntity(ServerLevel level, ItemStack stack, BlockPos pos) {
+		Entity entity = EntityType.SQUID.spawn(level, stack, null, pos, MobSpawnType.BUCKET, true, false);
 		if (entity instanceof Squid) {
 			((Squid) entity).setPersistenceRequired();
 		}

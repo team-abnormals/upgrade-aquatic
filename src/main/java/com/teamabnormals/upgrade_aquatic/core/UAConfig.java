@@ -52,6 +52,7 @@ public class UAConfig {
 	public static class Client {
 		public final ConfigValue<Boolean> showUnobtainableDescription;
 		public final ConfigValue<Integer> daysTillRenderInsomniaOverlay;
+		public final ConfigValue<Boolean> replaceGlowSquidRenderer;
 
 		public Client(ForgeConfigSpec.Builder builder) {
 			builder.push("misc");
@@ -59,6 +60,7 @@ public class UAConfig {
 			this.daysTillRenderInsomniaOverlay = builder
 					.comment("The amount of days till the insomnia overlay is rendered", "Setting to 3 will make the overlay indicate phantom spawns", "Setting to 0 will disable the overlay")
 					.define("Days until insomnia overlay", 0);
+			this.replaceGlowSquidRenderer = builder.comment("If Glow Squids should use our Glow Squid Renderer.").define("Replace Glow Squid Renderer", true);
 			builder.pop();
 		}
 	}

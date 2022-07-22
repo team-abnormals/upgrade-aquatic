@@ -2,34 +2,27 @@ package com.teamabnormals.upgrade_aquatic.core.events;
 
 import com.teamabnormals.blueprint.core.util.TradeUtil;
 import com.teamabnormals.blueprint.core.util.TradeUtil.BlueprintTrade;
-import com.teamabnormals.upgrade_aquatic.api.IGlowable;
 import com.teamabnormals.upgrade_aquatic.api.util.UAEntityPredicates;
 import com.teamabnormals.upgrade_aquatic.common.block.BedrollBlock;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
-import com.teamabnormals.upgrade_aquatic.common.item.GlowingInkItem;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.game.ClientboundAwardStatsPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.StatsCounter;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -51,14 +44,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
@@ -91,40 +82,6 @@ public class EntityEvents {
 				dolphin.goalSelector.addGoal(1, new MeleeAttackGoal(dolphin, 1.2D, true));
 			} else {
 				waterAnimal.goalSelector.addGoal(1, new AvoidEntityGoal<>(waterAnimal, Thrasher.class, 20.0F, 1.4D, 1.6D, EntitySelector.ENTITY_STILL_ALIVE::test));
-			}
-		}
-	}
-
-	@SubscribeEvent
-	public static void rightClickItem(PlayerInteractEvent.RightClickBlock event) {
-		Level world = event.getWorld();
-		BlockPos pos = event.getPos();
-		Player player = event.getPlayer();
-		ItemStack stack = event.getItemStack();
-
-		if (!player.isSecondaryUseActive()) {
-			if (stack.getItem() == UAItems.GLOWING_INK_SAC.get()) {
-				if (world.getBlockEntity(pos) instanceof IGlowable te) {
-					if (te.setGlowing(true)) {
-						if (!player.getAbilities().instabuild) stack.shrink(1);
-						if (!world.isClientSide()) GlowingInkItem.squirtInk(UAParticleTypes.GLOW_SQUID_INK.get(), pos);
-						world.playSound(player, pos, SoundEvents.SQUID_SQUIRT, SoundSource.BLOCKS, 1.0F, 1.0F);
-						event.setCanceled(true);
-						event.setCancellationResult(InteractionResult.SUCCESS);
-					}
-				}
-			}
-
-			if (stack.getItem() == Items.INK_SAC) {
-				if (world.getBlockEntity(pos) instanceof IGlowable te) {
-					if (te.setGlowing(false)) {
-						if (!player.getAbilities().instabuild) stack.shrink(1);
-						if (!world.isClientSide()) GlowingInkItem.squirtInk(ParticleTypes.SQUID_INK, pos);
-						world.playSound(player, pos, SoundEvents.SQUID_SQUIRT, SoundSource.BLOCKS, 1.0F, 1.0F);
-						event.setCanceled(true);
-						event.setCancellationResult(InteractionResult.SUCCESS);
-					}
-				}
 			}
 		}
 	}
@@ -174,10 +131,10 @@ public class EntityEvents {
 		Player player = event.getPlayer();
 		ItemStack stack = event.getItemStack();
 		if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof Squid) {
-			ItemStack bucket = ItemStack.EMPTY;
+			ItemStack bucket;
 			if (entity.getType() == EntityType.SQUID) {
 				bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
-			} else if (entity.getType() == UAEntityTypes.GLOW_SQUID.get()) {
+			} else if (entity.getType() == EntityType.GLOW_SQUID) {
 				bucket = new ItemStack(UAItems.GLOW_SQUID_BUCKET.get());
 			} else {
 				return;

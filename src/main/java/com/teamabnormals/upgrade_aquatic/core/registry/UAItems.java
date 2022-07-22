@@ -44,7 +44,6 @@ public class UAItems {
 
 	public static final RegistryObject<Item> PRISMARINE_ROD = HELPER.createItem("prismarine_rod", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 	public static final RegistryObject<Item> THRASHER_TOOTH = HELPER.createItem("thrasher_tooth", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-	public static final RegistryObject<Item> GLOWING_INK_SAC = HELPER.createItem("glowing_ink_sac", () -> new GlowingInkItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 	public static final RegistryObject<Item> BOILED_BLUE_PICKERELWEED = HELPER.createItem("boiled_blue_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(Foods.BLUE_PICKERELWEED), false));
 	public static final RegistryObject<Item> BOILED_PURPLE_PICKERELWEED = HELPER.createItem("boiled_purple_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(Foods.PURPLE_PICKERELWEED), true));
 
@@ -68,7 +67,6 @@ public class UAItems {
 	public static final RegistryObject<ForgeSpawnEggItem> GREAT_THRASHER_SPAWN_EGG = HELPER.createSpawnEggItem("great_thrasher", UAEntityTypes.GREAT_THRASHER::get, 10078409, 13294289);
 	public static final RegistryObject<ForgeSpawnEggItem> FLARE_SPAWN_EGG = HELPER.createSpawnEggItem("flare", UAEntityTypes.FLARE::get, 4532619, 14494960);
 	public static final RegistryObject<JellyfishSpawnEggItem> JELLYFISH_SPAWN_EGG = HELPER.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);
-	public static final RegistryObject<ForgeSpawnEggItem> GLOW_SQUID_SPAWN_EGG = HELPER.createSpawnEggItem("glow_squid", UAEntityTypes.GLOW_SQUID::get, 0x358080, 0x42D7A5);
 	public static final RegistryObject<ForgeSpawnEggItem> GOOSE_SPAWN_EGG = HELPER.createSpawnEggItem("goose", UAEntityTypes.GOOSE::get, 16448255, 16751914);
 
 	public static class Foods {

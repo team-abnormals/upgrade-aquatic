@@ -1,17 +1,16 @@
 package com.teamabnormals.upgrade_aquatic.common.item;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 
 import java.util.function.Supplier;
@@ -23,14 +22,9 @@ public class GlowSquidBucketItem extends SquidBucketItem {
 		super(supplier, builder);
 	}
 
-	public void checkExtraContent(Level worldIn, ItemStack stack, BlockPos pos) {
-		if (worldIn instanceof ServerLevel) {
-			this.placeEntity((ServerLevel) worldIn, stack, pos);
-		}
-	}
-
-	private void placeEntity(ServerLevel worldIn, ItemStack stack, BlockPos pos) {
-		Entity entity = UAEntityTypes.GLOW_SQUID.get().spawn(worldIn, stack, null, pos, MobSpawnType.BUCKET, true, false);
+	@Override
+	protected void placeEntity(ServerLevel level, ItemStack stack, BlockPos pos) {
+		Entity entity = EntityType.GLOW_SQUID.spawn(level, stack, null, pos, MobSpawnType.BUCKET, true, false);
 		if (entity instanceof Squid) {
 			((Squid) entity).setPersistenceRequired();
 		}

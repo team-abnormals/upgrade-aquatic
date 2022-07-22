@@ -26,6 +26,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
@@ -119,7 +120,7 @@ public class UpgradeAquatic {
 		event.registerLayerDefinition(FlareModel.LOCATION, FlareModel::createBodyLayer);
 		event.registerLayerDefinition(SonarWaveModel.LOCATION, SonarWaveModel::createBodyLayer);
 		event.registerLayerDefinition(UluluModel.LOCATION, UluluModel::createBodyLayer);
-		event.registerLayerDefinition(GlowSquidModel.LOCATION, GlowSquidModel::createBodyLayer);
+		event.registerLayerDefinition(UAGlowSquidModel.LOCATION, UAGlowSquidModel::createBodyLayer);
 		event.registerLayerDefinition(GooseModel.LOCATION, GooseModel::createBodyLayer);
 		event.registerLayerDefinition(BoxJellyfishModel.LOCATION, BoxJellyfishModel::createBodyLayer);
 		event.registerLayerDefinition(CassiopeaJellyfishModel.LOCATION, CassiopeaJellyfishModel::createBodyLayer);
@@ -137,10 +138,11 @@ public class UpgradeAquatic {
 		event.registerEntityRenderer(UAEntityTypes.SONAR_WAVE.get(), SonarWaveRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.ULULU.get(), UluluRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.GOOSE.get(), GooseRenderer::new);
-		event.registerEntityRenderer(UAEntityTypes.GLOW_SQUID.get(), GlowSquidRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);
+
+		if (UAConfig.CLIENT.replaceGlowSquidRenderer.get()) event.registerEntityRenderer(EntityType.GLOW_SQUID, UAGlowSquidRenderer::new);
 
 //		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), ElderEyeTileEntityRenderer::new);
 	}

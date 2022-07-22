@@ -1,22 +1,23 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
-import com.teamabnormals.upgrade_aquatic.client.model.GlowSquidModel;
+import com.teamabnormals.upgrade_aquatic.client.model.UAGlowSquidModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.GlowSquidRenderLayer;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.GlowSquid;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.SquidRenderer;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.GlowSquid;
 
-public class GlowSquidRenderer extends SquidRenderer<GlowSquid> {
+public class UAGlowSquidRenderer extends SquidRenderer<GlowSquid> {
 
-	public GlowSquidRenderer(EntityRendererProvider.Context context) {
-		super(context, new GlowSquidModel<>(context.bakeLayer(GlowSquidModel.LOCATION), false));
-		this.addLayer(new GlowSquidRenderLayer(new GlowSquidModel<>(context.bakeLayer(GlowSquidModel.LOCATION), true), this));
+	public UAGlowSquidRenderer(EntityRendererProvider.Context context) {
+		super(context, new UAGlowSquidModel<>(context.bakeLayer(UAGlowSquidModel.LOCATION), false));
+		this.addLayer(new GlowSquidRenderLayer(new UAGlowSquidModel<>(context.bakeLayer(UAGlowSquidModel.LOCATION), true), this));
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(GlowSquid entity) {
 		return MissingTextureAtlasSprite.getLocation();
 	}
+
 }
