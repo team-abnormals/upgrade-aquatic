@@ -11,6 +11,7 @@ import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.BoxJel
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.CassiopeaJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.ImmortalJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
+import com.teamabnormals.upgrade_aquatic.core.data.server.UALootModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
@@ -22,6 +23,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAMobEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -37,6 +39,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -68,6 +71,7 @@ public class UpgradeAquatic {
 		MinecraftForge.EVENT_BUS.register(this);
 
 		bus.addListener(this::commonSetup);
+		bus.addListener(this::dataSetup);
 		bus.addListener(this::clientSetup);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
@@ -88,6 +92,13 @@ public class UpgradeAquatic {
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
 			ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "f_60445_");
 		});
+	}
+
+	private void dataSetup(GatherDataEvent event) {
+		DataGenerator generator = event.getGenerator();
+		if (event.includeServer()) {
+			generator.addProvider(new UALootModifierProvider(generator));
+		}
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {

@@ -7,17 +7,8 @@ import com.teamabnormals.blueprint.core.util.DataUtil;
 public class UACompat {
 
 	public static void registerCompat() {
-		registerLootInjectors();
 		registerCompostables();
 		registerFlammables();
-	}
-
-	//TODO: Replace with Loot Modifiers
-	public static void registerLootInjectors() {
-//		LootInjectionRegistry.LootInjector injector = new LootInjectionRegistry.LootInjector(UpgradeAquatic.MOD_ID);
-//		injector.addLootInjection(injector.buildLootPool("tooth_ruins", 1, 0), BuiltInLootTables.UNDERWATER_RUIN_BIG);
-//		injector.addLootInjection(injector.buildLootPool("tooth_treasure", 1, 0), BuiltInLootTables.BURIED_TREASURE);
-//		injector.addLootInjection(injector.buildLootPool("pickerelweed_structures", 1, 0), BuiltInLootTables.SHIPWRECK_SUPPLY);
 	}
 
 	public static void registerCompostables() {
@@ -115,4 +106,5 @@ public class UACompat {
 		DataUtil.registerFlammable(UABlocks.STRIPPED_RIVER_POST.get(), 5, 20);
 		DataUtil.registerFlammable(UABlocks.RIVER_HEDGE.get(), 5, 20);
 	}
+
 }
