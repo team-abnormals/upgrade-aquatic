@@ -17,8 +17,13 @@
     "hidden": false
   },
   "criteria": {
-    "tamed": {
+    "convert_phantom": {
       "trigger": "upgrade_aquatic:convert_phantom"
     }
-  }
+  },
+  "requirements": [
+    [
+      "convert_phantom"
+    ]
+  ]
 }

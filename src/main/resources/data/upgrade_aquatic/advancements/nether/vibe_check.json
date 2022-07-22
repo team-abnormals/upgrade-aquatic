@@ -20,15 +20,15 @@
     "experience": 100
   },
   "criteria": {
-    "1": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:potion", "nbt": "{Potion:'upgrade_aquatic:vibing'}" } ] } },
-    "2": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:potion", "nbt": "{Potion:'upgrade_aquatic:vibing_long'}" } ] } },
-    "3": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:potion", "nbt": "{Potion:'upgrade_aquatic:vibing_strong'}" } ] } },
-    "4": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:splash_potion", "nbt": "{Potion:'upgrade_aquatic:vibing'}" } ] } },
-    "5": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:splash_potion", "nbt": "{Potion:'upgrade_aquatic:vibing_long'}" } ] } },
-    "6": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:splash_potion", "nbt": "{Potion:'upgrade_aquatic:vibing_strong'}" } ] } },
-    "7": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:lingering_potion", "nbt": "{Potion:'upgrade_aquatic:vibing'}" } ] } },
-    "8": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:lingering_potion", "nbt": "{Potion:'upgrade_aquatic:vibing_long'}" } ] } },
-    "9": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "item": "minecraft:lingering_potion", "nbt": "{Potion:'upgrade_aquatic:vibing_strong'}" } ] } }
+    "1": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:potion"], "nbt": "{Potion:'upgrade_aquatic:vibing'}" } ] } },
+    "2": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:potion"], "nbt": "{Potion:'upgrade_aquatic:vibing_long'}" } ] } },
+    "3": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:potion"], "nbt": "{Potion:'upgrade_aquatic:vibing_strong'}" } ] } },
+    "4": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:splash_potion"], "nbt": "{Potion:'upgrade_aquatic:vibing'}" } ] } },
+    "5": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:splash_potion"], "nbt": "{Potion:'upgrade_aquatic:vibing_long'}" } ] } },
+    "6": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:splash_potion"], "nbt": "{Potion:'upgrade_aquatic:vibing_strong'}" } ] } },
+    "7": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:lingering_potion"], "nbt": "{Potion:'upgrade_aquatic:vibing'}" } ] } },
+    "8": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:lingering_potion"], "nbt": "{Potion:'upgrade_aquatic:vibing_long'}" } ] } },
+    "9": { "trigger": "minecraft:inventory_changed", "conditions": { "items": [ { "items": ["minecraft:lingering_potion"], "nbt": "{Potion:'upgrade_aquatic:vibing_strong'}" } ] } }
   },
   "requirements": [
     ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
