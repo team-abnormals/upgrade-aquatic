@@ -13,7 +13,6 @@ public class UAConfig {
 
 		public final ConfigValue<Integer> deepOceanMobMaxHeight;
 
-		public final ConfigValue<Integer> glowSquidWeight;
 		public final ConfigValue<Integer> thrasherWeight;
 		public final ConfigValue<Integer> nautilusWeight;
 		public final ConfigValue<Integer> lionfishWeight;
@@ -35,7 +34,6 @@ public class UAConfig {
 			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("Deep ocean mob max height", 30, 0, 255);
 
 			builder.push("spawns");
-			this.glowSquidWeight = builder.define("Glow Squid spawn weight (oceans)", 67);
 			this.thrasherWeight = builder.define("Thrasher spawn weight (cold oceans)", 90);
 			this.nautilusWeight = builder.define("Nautilus spawn weight (warm oceans)", 51);
 			this.lionfishWeight = builder.define("Lionfish spawn weight (coral reefs)", 15);

@@ -2,7 +2,6 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 
 
 import com.teamabnormals.upgrade_aquatic.client.particle.ElderPrismarineShowerParticle;
-import com.teamabnormals.upgrade_aquatic.client.particle.GlowSquidInkParticle;
 import com.teamabnormals.upgrade_aquatic.client.particle.JellyTorchParticle;
 import com.teamabnormals.upgrade_aquatic.client.particle.PrismarineShowerParticle;
 import com.teamabnormals.upgrade_aquatic.client.particle.SpectralConsumeParticle;
@@ -42,7 +41,6 @@ public class UAParticleTypes {
 	public static final RegistryObject<SimpleParticleType> ORANGE_JELLY_BLOB = registerSimpleParticleType("orange_jelly_blob", false);
 	public static final RegistryObject<SimpleParticleType> RED_JELLY_BLOB = registerSimpleParticleType("red_jelly_blob", false);
 	public static final RegistryObject<SimpleParticleType> WHITE_JELLY_BLOB = registerSimpleParticleType("white_jelly_blob", false);
-	public static final RegistryObject<SimpleParticleType> GLOW_SQUID_INK = registerSimpleParticleType("glow_squid_ink", true);
 
 	private static RegistryObject<SimpleParticleType> registerSimpleParticleType(String name, boolean alwaysShow) {
 		return PARTICLES.register(name, () -> new SimpleParticleType(alwaysShow));
@@ -107,9 +105,6 @@ public class UAParticleTypes {
 		}
 		if (WHITE_JELLY_BLOB.isPresent()) {
 			particleEngine.register(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
-		if (GLOW_SQUID_INK.isPresent()) {
-			particleEngine.register(GLOW_SQUID_INK.get(), GlowSquidInkParticle.Factory::new);
 		}
 	}
 }
