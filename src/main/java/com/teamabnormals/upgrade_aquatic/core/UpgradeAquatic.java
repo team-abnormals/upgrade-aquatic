@@ -11,6 +11,7 @@ import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.BoxJel
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.CassiopeaJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.ImmortalJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
+import com.teamabnormals.upgrade_aquatic.core.data.server.UAAdvancementModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UALootModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
@@ -98,6 +99,7 @@ public class UpgradeAquatic {
 		DataGenerator generator = event.getGenerator();
 		if (event.includeServer()) {
 			generator.addProvider(new UALootModifierProvider(generator));
+			generator.addProvider(new UAAdvancementModifierProvider(generator));
 		}
 	}
 

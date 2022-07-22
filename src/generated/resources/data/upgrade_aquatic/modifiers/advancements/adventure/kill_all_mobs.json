@@ -1,11 +1,10 @@
 {
-  "advancement": "minecraft:adventure/kill_a_mob",
+  "selector": "minecraft:adventure/kill_all_mobs",
+  "priority": "normal",
   "modifiers": [
     {
-      "type": "indexed_requirements",
+      "type": "criteria",
       "config": {
-        "mode": "modify",
-        "index": 0,
         "criteria": {
           "upgrade_aquatic:thrasher": {
             "trigger": "minecraft:player_killed_entity",
@@ -111,7 +110,8 @@
           [
             "upgrade_aquatic:immortal_jellyfish"
           ]
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ]

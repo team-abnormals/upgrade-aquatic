@@ -1,5 +1,6 @@
 {
-  "advancement": "minecraft:adventure/throw_trident",
+  "selector": "minecraft:adventure/throw_trident",
+  "priority": "normal",
   "modifiers": [
     {
       "type": "parent",

@@ -1,17 +1,18 @@
 {
-  "advancement": "minecraft:husbandry/fishy_business",
+  "selector": "minecraft:husbandry/fishy_business",
+  "priority": "normal",
   "modifiers": [
     {
-      "type": "indexed_requirements",
+      "type": "criteria",
       "config": {
-        "mode": "modify",
-        "index": 0,
         "criteria": {
           "upgrade_aquatic:pike": {
             "trigger": "minecraft:fishing_rod_hooked",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:pike"
+                "items": [
+                  "upgrade_aquatic:pike"
+                ]
               }
             }
           },
@@ -19,7 +20,9 @@
             "trigger": "minecraft:fishing_rod_hooked",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:lionfish"
+                "items": [
+                  "upgrade_aquatic:lionfish"
+                ]
               }
             }
           },
@@ -27,21 +30,23 @@
             "trigger": "minecraft:fishing_rod_hooked",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:perch"
+                "items": [
+                  "upgrade_aquatic:perch"
+                ]
               }
             }
           }
         },
-        "requirements": [
-          [
-            "upgrade_aquatic:pike"
-          ],
-          [
-            "upgrade_aquatic:lionfish"
-          ],
-          [
-            "upgrade_aquatic:perch"
-          ]
+        "indexed_requirements": [
+          {
+            "index": 0,
+            "replace": false,
+            "requirements": [
+              "upgrade_aquatic:pike",
+              "upgrade_aquatic:lionfish",
+              "upgrade_aquatic:perch"
+            ]
+          }
         ]
       }
     }

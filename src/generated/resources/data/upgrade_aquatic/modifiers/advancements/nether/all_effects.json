@@ -1,5 +1,6 @@
 {
-  "advancement": "minecraft:nether/all_potions",
+  "selector": "minecraft:nether/all_effects",
+  "priority": "normal",
   "modifiers": [
     {
       "type": "effects_changed",
@@ -7,8 +8,8 @@
         "criteria": "all_effects",
         "removes": false,
         "effects": {
-          "upgrade_aquatic:vibing": {},
-          "upgrade_aquatic:repellence": {}
+          "upgrade_aquatic:repellence": {},
+          "upgrade_aquatic:vibing": {}
         }
       }
     }

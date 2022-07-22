@@ -1,16 +1,18 @@
 {
-  "advancement": "minecraft:husbandry/balanced_diet",
+  "selector": "minecraft:husbandry/balanced_diet",
+  "priority": "normal",
   "modifiers": [
     {
       "type": "criteria",
       "config": {
-        "mode": "modify",
         "criteria": {
           "upgrade_aquatic:boiled_blue_pickerelweed": {
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:boiled_blue_pickerelweed"
+                "items": [
+                  "upgrade_aquatic:boiled_blue_pickerelweed"
+                ]
               }
             }
           },
@@ -18,7 +20,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:boiled_purple_pickerelweed"
+                "items": [
+                  "upgrade_aquatic:boiled_purple_pickerelweed"
+                ]
               }
             }
           },
@@ -26,7 +30,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:pike"
+                "items": [
+                  "upgrade_aquatic:pike"
+                ]
               }
             }
           },
@@ -34,7 +40,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:cooked_pike"
+                "items": [
+                  "upgrade_aquatic:cooked_pike"
+                ]
               }
             }
           },
@@ -42,7 +50,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:lionfish"
+                "items": [
+                  "upgrade_aquatic:lionfish"
+                ]
               }
             }
           },
@@ -50,7 +60,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:cooked_lionfish"
+                "items": [
+                  "upgrade_aquatic:cooked_lionfish"
+                ]
               }
             }
           },
@@ -58,7 +70,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:perch"
+                "items": [
+                  "upgrade_aquatic:perch"
+                ]
               }
             }
           },
@@ -66,7 +80,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:cooked_perch"
+                "items": [
+                  "upgrade_aquatic:cooked_perch"
+                ]
               }
             }
           },
@@ -74,7 +90,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:mulberry"
+                "items": [
+                  "upgrade_aquatic:mulberry"
+                ]
               }
             }
           },
@@ -82,7 +100,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:mulberry_jam_bottle"
+                "items": [
+                  "upgrade_aquatic:mulberry_jam_bottle"
+                ]
               }
             }
           },
@@ -90,7 +110,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:mulberry_bread"
+                "items": [
+                  "upgrade_aquatic:mulberry_bread"
+                ]
               }
             }
           },
@@ -98,7 +120,9 @@
             "trigger": "minecraft:consume_item",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:mulberry_pie"
+                "items": [
+                  "upgrade_aquatic:mulberry_pie"
+                ]
               }
             }
           }
@@ -140,7 +164,8 @@
           [
             "upgrade_aquatic:mulberry_pie"
           ]
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ]

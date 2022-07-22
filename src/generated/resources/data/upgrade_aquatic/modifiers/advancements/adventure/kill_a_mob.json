@@ -1,0 +1,111 @@
+{
+  "selector": "minecraft:adventure/kill_a_mob",
+  "priority": "normal",
+  "modifiers": [
+    {
+      "type": "criteria",
+      "config": {
+        "criteria": {
+          "upgrade_aquatic:thrasher": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "upgrade_aquatic:thrasher"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "upgrade_aquatic:great_thrasher": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "upgrade_aquatic:great_thrasher"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "upgrade_aquatic:flare": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "upgrade_aquatic:flare"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "upgrade_aquatic:box_jellyfish": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "upgrade_aquatic:box_jellyfish"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "upgrade_aquatic:cassiopea_jellyfish": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "upgrade_aquatic:cassiopea_jellyfish"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          },
+          "upgrade_aquatic:immortal_jellyfish": {
+            "trigger": "minecraft:player_killed_entity",
+            "conditions": {
+              "entity": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "predicate": {
+                    "type": "upgrade_aquatic:immortal_jellyfish"
+                  },
+                  "entity": "this"
+                }
+              ]
+            }
+          }
+        },
+        "indexed_requirements": [
+          {
+            "index": 0,
+            "replace": false,
+            "requirements": [
+              "upgrade_aquatic:thrasher",
+              "upgrade_aquatic:great_thrasher",
+              "upgrade_aquatic:flare",
+              "upgrade_aquatic:box_jellyfish",
+              "upgrade_aquatic:cassiopea_jellyfish",
+              "upgrade_aquatic:immortal_jellyfish"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

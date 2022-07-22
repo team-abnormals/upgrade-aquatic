@@ -1,17 +1,18 @@
 {
-  "advancement": "minecraft:husbandry/tactical_fishing",
+  "selector": "minecraft:husbandry/tactical_fishing",
+  "priority": "normal",
   "modifiers": [
     {
-      "type": "indexed_requirements",
+      "type": "criteria",
       "config": {
-        "mode": "modify",
-        "index": 0,
         "criteria": {
           "upgrade_aquatic:nautilus_bucket": {
             "trigger": "minecraft:filled_bucket",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:nautilus_bucket"
+                "items": [
+                  "upgrade_aquatic:nautilus_bucket"
+                ]
               }
             }
           },
@@ -19,7 +20,9 @@
             "trigger": "minecraft:filled_bucket",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:pike_bucket"
+                "items": [
+                  "upgrade_aquatic:pike_bucket"
+                ]
               }
             }
           },
@@ -27,7 +30,9 @@
             "trigger": "minecraft:filled_bucket",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:lionfish_bucket"
+                "items": [
+                  "upgrade_aquatic:lionfish_bucket"
+                ]
               }
             }
           },
@@ -35,7 +40,9 @@
             "trigger": "minecraft:filled_bucket",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:perch_bucket"
+                "items": [
+                  "upgrade_aquatic:perch_bucket"
+                ]
               }
             }
           },
@@ -43,7 +50,9 @@
             "trigger": "minecraft:filled_bucket",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:squid_bucket"
+                "items": [
+                  "upgrade_aquatic:squid_bucket"
+                ]
               }
             }
           },
@@ -51,7 +60,9 @@
             "trigger": "minecraft:filled_bucket",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:glow_squid_bucket"
+                "items": [
+                  "upgrade_aquatic:glow_squid_bucket"
+                ]
               }
             }
           },
@@ -59,33 +70,27 @@
             "trigger": "minecraft:filled_bucket",
             "conditions": {
               "item": {
-                "item": "upgrade_aquatic:jellyfish_bucket"
+                "items": [
+                  "upgrade_aquatic:jellyfish_bucket"
+                ]
               }
             }
           }
         },
-        "requirements": [
-          [
-            "upgrade_aquatic:nautilus_bucket"
-          ],
-          [
-            "upgrade_aquatic:pike_bucket"
-          ],
-          [
-            "upgrade_aquatic:lionfish_bucket"
-          ],
-          [
-            "upgrade_aquatic:perch_bucket"
-          ],
-          [
-            "upgrade_aquatic:squid_bucket"
-          ],
-          [
-            "upgrade_aquatic:glow_squid_bucket"
-          ],
-          [
-            "upgrade_aquatic:jellyfish_bucket"
-          ]
+        "indexed_requirements": [
+          {
+            "index": 0,
+            "replace": false,
+            "requirements": [
+              "upgrade_aquatic:nautilus_bucket",
+              "upgrade_aquatic:pike_bucket",
+              "upgrade_aquatic:lionfish_bucket",
+              "upgrade_aquatic:perch_bucket",
+              "upgrade_aquatic:squid_bucket",
+              "upgrade_aquatic:glow_squid_bucket",
+              "upgrade_aquatic:jellyfish_bucket"
+            ]
+          }
         ]
       }
     }
