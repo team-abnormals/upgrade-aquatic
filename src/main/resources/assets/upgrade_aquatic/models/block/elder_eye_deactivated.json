@@ -1,0 +1,6 @@
+{
+	"parent": "upgrade_aquatic:block/elder_eye_activated",
+	"textures": {
+		"eye": "upgrade_aquatic:block/elder_eye_deactivated"
+	}
+}

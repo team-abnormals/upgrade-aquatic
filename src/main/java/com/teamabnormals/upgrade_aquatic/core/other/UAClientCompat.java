@@ -132,6 +132,8 @@ public class UAClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.ELDER_PRISMARINE_CORAL_SHOWER.get(), CUTOUT);
 
+		ItemBlockRenderTypes.setRenderLayer(UABlocks.ELDER_EYE.get(), CUTOUT);
+
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.BLUE_JELLY_TORCH.get(), TRANSLUSCENT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.GREEN_JELLY_TORCH.get(), TRANSLUSCENT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RED_JELLY_TORCH.get(), TRANSLUSCENT);

@@ -1,0 +1,7 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "upgrade_aquatic:block/elder_eye_activated_down",
+	"textures": {
+		"eye": "upgrade_aquatic:block/elder_eye_deactivated"
+	}
+}

@@ -143,8 +143,6 @@ public class UpgradeAquatic {
 		event.registerEntityRenderer(UAEntityTypes.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);
 
 		if (UAConfig.CLIENT.replaceGlowSquidRenderer.get()) event.registerEntityRenderer(EntityType.GLOW_SQUID, UAGlowSquidRenderer::new);
-
-//		ClientRegistry.bindTileEntityRenderer(UATileEntities.ELDER_EYE.get(), ElderEyeTileEntityRenderer::new);
 	}
 
 	void setupMessages() {

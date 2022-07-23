@@ -1,5 +1,16 @@
 {
     "variants": {
-        "": { "model": "upgrade_aquatic:block/elder_eye" }
+        "facing=east,active=true": { "model": "upgrade_aquatic:block/elder_eye_activated", "y": 90 },
+        "facing=south,active=true": { "model": "upgrade_aquatic:block/elder_eye_activated", "y": 180 },
+        "facing=west,active=true": { "model": "upgrade_aquatic:block/elder_eye_activated", "y": 270 },
+        "facing=north,active=true": { "model": "upgrade_aquatic:block/elder_eye_activated" },
+        "facing=up,active=true": { "model": "upgrade_aquatic:block/elder_eye_activated_up" },
+        "facing=down,active=true": { "model": "upgrade_aquatic:block/elder_eye_activated_down" },
+        "facing=east,active=false": { "model": "upgrade_aquatic:block/elder_eye_deactivated", "y": 90 },
+        "facing=south,active=false": { "model": "upgrade_aquatic:block/elder_eye_deactivated", "y": 180 },
+        "facing=west,active=false": { "model": "upgrade_aquatic:block/elder_eye_deactivated", "y": 270 },
+        "facing=north,active=false": { "model": "upgrade_aquatic:block/elder_eye_deactivated" },
+        "facing=up,active=false": { "model": "upgrade_aquatic:block/elder_eye_deactivated_up" },
+        "facing=down,active=false": { "model": "upgrade_aquatic:block/elder_eye_deactivated_down" }
     }
 }

@@ -23,7 +23,7 @@ public class ElderEyeBlockEntity extends BlockEntity {
 		super(UABlockEntityTypes.ELDER_EYE.get(), pos, state);
 	}
 
-	public static void tick(Level level, BlockPos pos, BlockState state, ElderEyeBlockEntity tileEntity) {
+	public static void tick(Level level, BlockPos pos, BlockState state, ElderEyeBlockEntity elderEye) {
 		if (level.getGameTime() % 4 == 0 && !level.isClientSide) {
 			if (!(state.getBlock() instanceof ElderEyeBlock)) return;
 
@@ -52,7 +52,6 @@ public class ElderEyeBlockEntity extends BlockEntity {
 					};
 
 					for (int b = 1; b < Math.abs(IntStream.of(posCheck).sum()); b++) {
-
 						if (!level.getBlockState(pos.relative(facing, b)).isAir()) {
 							if (level.getBlockState(pos.relative(facing, b)).getMaterial().blocksMotion()) {
 								entityCount--;
@@ -62,7 +61,6 @@ public class ElderEyeBlockEntity extends BlockEntity {
 								}
 							}
 						}
-
 					}
 				}
 			}
@@ -78,11 +76,9 @@ public class ElderEyeBlockEntity extends BlockEntity {
 		int i;
 		for (i = 1; i < 13; i++) {
 			if (level.getBlockState(pos.relative(direction, i)).getMaterial() != Material.AIR) {
-
 				if (level.getBlockState(pos.relative(direction, i)).getMaterial() != Material.WATER) {
 					break;
 				}
-
 			}
 		}
 		return i;
