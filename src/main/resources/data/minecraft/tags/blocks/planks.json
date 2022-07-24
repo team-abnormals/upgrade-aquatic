@@ -2,8 +2,6 @@
   "replace": false,
   "values": [
     "upgrade_aquatic:driftwood_planks",
-    "upgrade_aquatic:vertical_driftwood_planks",
-    "upgrade_aquatic:river_planks",
-    "upgrade_aquatic:vertical_river_planks"
+    "upgrade_aquatic:river_planks"
   ]
 }
