@@ -453,7 +453,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> DRIFTWOOD_PRESSURE_PLATE = HELPER.createBlock("driftwood_pressure_plate", () -> new WoodPressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD.pressurePlate()), CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> DRIFTWOOD_BUTTON = HELPER.createBlock("driftwood_button", () -> new BlueprintWoodButtonBlock(UAProperties.DRIFTWOOD.button()), CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> DRIFTWOOD_TRAPDOOR = HELPER.createBlock("driftwood_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.DRIFTWOOD.trapdoor()), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> VERTICAL_DRIFTWOOD_PLANKS = HELPER.createCompatBlock("quark", "vertical_driftwood_planks", () -> new Block(UAProperties.DRIFTWOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> DRIFTWOOD_BOARDS = HELPER.createCompatBlock("woodworks", "driftwood_boards", () -> new Block(UAProperties.DRIFTWOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "driftwood_vertical_slab", () -> new VerticalSlabBlock(UAProperties.DRIFTWOOD.planks()), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_BOOKSHELF = HELPER.createCompatFuelBlock("quark", "driftwood_bookshelf", () -> new BookshelfBlock(UAProperties.DRIFTWOOD.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_LADDER = HELPER.createCompatFuelBlock("quark", "driftwood_ladder", () -> new BlueprintLadderBlock(PropertyUtil.LADDER), 300, CreativeModeTab.TAB_DECORATIONS);
@@ -480,7 +480,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> RIVER_BUTTON = HELPER.createBlock("river_button", () -> new BlueprintWoodButtonBlock(UAProperties.RIVER_WOOD.button()), CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> RIVER_TRAPDOOR = HELPER.createBlock("river_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.RIVER_WOOD.trapdoor()), CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> RIVER_LEAF_CARPET = HELPER.createCompatBlock("quark", "river_leaf_carpet", () -> new LeafCarpetBlock(UAProperties.RIVER_WOOD.leafCarpet()), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> VERTICAL_RIVER_PLANKS = HELPER.createCompatBlock("quark", "vertical_river_planks", () -> new Block(UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> RIVER_BOARDS = HELPER.createCompatBlock("woodworks", "river_boards", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "river_vertical_slab", () -> new VerticalSlabBlock(UAProperties.RIVER_WOOD.planks()), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_BOOKSHELF = HELPER.createCompatFuelBlock("quark", "river_bookshelf", () -> new BookshelfBlock(UAProperties.RIVER_WOOD.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_LADDER = HELPER.createCompatFuelBlock("quark", "river_ladder", () -> new BlueprintLadderBlock(PropertyUtil.LADDER), 300, CreativeModeTab.TAB_DECORATIONS);

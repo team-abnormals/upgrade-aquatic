@@ -1,0 +1,14 @@
+{
+	"variants": {
+		"axis=x": {
+			"model": "upgrade_aquatic:block/driftwood_boards_horizontal",
+			"y": 90
+		},
+		"axis=y": {
+			"model": "upgrade_aquatic:block/driftwood_boards"
+		},
+		"axis=z": {
+			"model": "upgrade_aquatic:block/driftwood_boards_horizontal"
+		}
+	}
+}

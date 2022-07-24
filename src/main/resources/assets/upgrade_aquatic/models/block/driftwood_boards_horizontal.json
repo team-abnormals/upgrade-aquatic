@@ -1,0 +1,6 @@
+{
+	"parent": "blueprint:block/template_boards_horizontal",
+	"textures": {
+		"all": "upgrade_aquatic:block/driftwood_boards"
+	}
+}

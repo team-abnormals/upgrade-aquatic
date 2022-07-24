@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "upgrade_aquatic:vertical_driftwood_planks"
+          "name": "upgrade_aquatic:river_boards"
         }
       ],
       "conditions": [

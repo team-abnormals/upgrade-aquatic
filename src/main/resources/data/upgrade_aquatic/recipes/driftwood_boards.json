@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "#",
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:driftwood_planks"
+    }
+  },
+  "result": {
+    "item": "upgrade_aquatic:driftwood_boards",
+    "count": 3
+  },
+  "conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "woodworks"
+        },
+        {
+          "type": "woodworks:config",
+          "value": "wooden_boards"
+        }
+      ]
+    }
+  ]
+}
