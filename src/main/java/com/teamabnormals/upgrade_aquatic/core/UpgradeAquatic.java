@@ -13,6 +13,7 @@ import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.Immort
 import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UAAdvancementModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UALootModifierProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABlockTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
@@ -101,6 +102,7 @@ public class UpgradeAquatic {
 		if (event.includeServer()) {
 			generator.addProvider(new UALootModifierProvider(generator));
 			generator.addProvider(new UAAdvancementModifierProvider(generator));
+			generator.addProvider(new UABlockTagsProvider(generator, event.getExistingFileHelper()));
 		}
 	}
 

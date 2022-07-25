@@ -686,7 +686,6 @@ public class UABlocks {
 		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric:red_arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric:red_arid_sand")));
 	}) : null;
 
-
 	public enum KelpType {
 		TONGUE(0.14D), THORNY(0.14D), OCHRE(0.14D), POLAR(0.14D);
 
