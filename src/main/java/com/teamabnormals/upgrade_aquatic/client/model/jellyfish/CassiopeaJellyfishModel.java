@@ -32,25 +32,25 @@ public class CassiopeaJellyfishModel<E extends CassiopeaJellyfish> extends Endim
 
 	public CassiopeaJellyfishModel(ModelPart root) {
 		this.cap = root.getChild("cap");
-		this.cross1 = root.getChild("cross1");
-		this.cross2 = root.getChild("cross2");
-		this.thing = root.getChild("thing");
-		this.tentacleT = root.getChild("tentacleT");
-		this.tentacleE = root.getChild("tentacleE");
-		this.tentacleN = root.getChild("tentacleN");
-		this.tentacleW = root.getChild("tentacleW");
+		this.cross1 = this.cap.getChild("cross1");
+		this.cross2 = this.cap.getChild("cross2");
+		this.thing = this.cap.getChild("thing");
+		this.tentacleT = this.thing.getChild("tentacleT");
+		this.tentacleE = this.thing.getChild("tentacleE");
+		this.tentacleN = this.thing.getChild("tentacleN");
+		this.tentacleW = this.thing.getChild("tentacleW");
 	}
 
 	public static EndimatorLayerDefinition createBodyLayer() {
 		EndimatorPartDefinition root = EndimatorPartDefinition.root();
-		EndimatorPartDefinition cap = root.addOrReplaceChild("cap", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 21.5F, 0.0F, 0.0F, 0.0F, 0.0F));
-		EndimatorPartDefinition cross1 = root.addOrReplaceChild("cross1", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 1.5F, 0.0F, 0.0F, 0.0F, 0.0F));
-		EndimatorPartDefinition cross2 = root.addOrReplaceChild("cross2", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 1.5F, 0.0F, 0.0F, 1.5707964F, 0.0F));
-		EndimatorPartDefinition thing = root.addOrReplaceChild("thing", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		EndimatorPartDefinition tentacleT = root.addOrReplaceChild("tentacleT", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 0.5F, 4.5F, 0.0F, 0.0F, 0.0F));
-		EndimatorPartDefinition tentacleE = root.addOrReplaceChild("tentacleE", CubeListBuilder.create(), PartPose.offsetAndRotation(-4.5F, 0.5F, 0.0F, 0.0F, -1.5707964F, 0.0F));
-		EndimatorPartDefinition tentacleN = root.addOrReplaceChild("tentacleN", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 0.5F, -4.5F, 0.0F, -3.1415927F, 0.0F));
-		EndimatorPartDefinition tentacleW = root.addOrReplaceChild("tentacleW", CubeListBuilder.create(), PartPose.offsetAndRotation(4.5F, 0.5F, 0.0F, 0.0F, 1.5707964F, 0.0F));
+		EndimatorPartDefinition cap = root.addOrReplaceChild("cap", CubeListBuilder.create().addBox(-5.5F, -1.5F, -5.5F, 11, 3, 11), PartPose.offsetAndRotation(0.0F, 21.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+		EndimatorPartDefinition cross1 = cap.addOrReplaceChild("cross1", CubeListBuilder.create().texOffs(18, 24).addBox(-3.5F, 0.0F, 0.0F, 7, 13, 0), PartPose.offsetAndRotation(0.0F, 1.5F, 0.0F, 0.0F, 0.0F, 0.0F));
+		EndimatorPartDefinition cross2 = cap.addOrReplaceChild("cross2", CubeListBuilder.create().texOffs(18, 24).addBox(-3.5F, 0.0F, 0.0F, 7, 13, 0), PartPose.offsetAndRotation(0.0F, 1.5F, 0.0F, 0.0F, 1.5707964F, 0.0F));
+		EndimatorPartDefinition thing = cap.addOrReplaceChild("thing", CubeListBuilder.create().texOffs(0, 14).addBox(-4.5F, -0.5F, -4.5F, 9, 1, 9), PartPose.offsetAndRotation(0.0F, 2.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		EndimatorPartDefinition tentacleT = thing.addOrReplaceChild("tentacleT", CubeListBuilder.create().texOffs(0, 32).addBox(-4.5F, 0.0F, 0.0F, 9, 7, 0), PartPose.offsetAndRotation(0.0F, 0.5F, 4.5F, 0.0F, 0.0F, 0.0F));
+		EndimatorPartDefinition tentacleE = thing.addOrReplaceChild("tentacleE", CubeListBuilder.create().texOffs(0, 24).addBox(-4.5F, 0.0F, 0.0F, 9, 7, 0), PartPose.offsetAndRotation(-4.5F, 0.5F, 0.0F, 0.0F, -1.5707964F, 0.0F));
+		EndimatorPartDefinition tentacleN = thing.addOrReplaceChild("tentacleN", CubeListBuilder.create().texOffs(0, 32).addBox(-4.5F, 0.0F, 0.0F, 9, 7, 0), PartPose.offsetAndRotation(0.0F, 0.5F, -4.5F, 0.0F, -3.1415927F, 0.0F));
+		EndimatorPartDefinition tentacleW = thing.addOrReplaceChild("tentacleW", CubeListBuilder.create().texOffs(0, 24).addBox(-4.5F, 0.0F, 0.0F, 9, 7, 0), PartPose.offsetAndRotation(4.5F, 0.5F, 0.0F, 0.0F, 1.5707964F, 0.0F));
 		return new EndimatorLayerDefinition(root, 44, 52);
 	}
 

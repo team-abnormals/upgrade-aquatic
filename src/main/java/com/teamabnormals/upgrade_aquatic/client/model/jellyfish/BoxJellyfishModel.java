@@ -33,27 +33,27 @@ public class BoxJellyfishModel<E extends BoxJellyfish> extends EndimatorEntityMo
 
 	public BoxJellyfishModel(ModelPart root) {
 		this.body = root.getChild("body");
-		this.tentacleW = root.getChild("tentacleW");
-		this.tentacleS = root.getChild("tentacleS");
-		this.tentacleE = root.getChild("tentacleE");
-		this.tentacleN = root.getChild("tentacleN");
-		this.tentacleNE = root.getChild("tentacleNE");
-		this.tentacleSE = root.getChild("tentacleSE");
-		this.tentacleNW = root.getChild("tentacleNW");
-		this.tentacleSW = root.getChild("tentacleSW");
+		this.tentacleW = this.body.getChild("tentacleW");
+		this.tentacleS = this.body.getChild("tentacleS");
+		this.tentacleE = this.body.getChild("tentacleE");
+		this.tentacleN = this.body.getChild("tentacleN");
+		this.tentacleNE = this.body.getChild("tentacleNE");
+		this.tentacleSE = this.body.getChild("tentacleSE");
+		this.tentacleNW = this.body.getChild("tentacleNW");
+		this.tentacleSW = this.body.getChild("tentacleSW");
 	}
 
 	public static EndimatorLayerDefinition createBodyLayer() {
 		EndimatorPartDefinition root = EndimatorPartDefinition.root();
-		EndimatorPartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 19.0F, 0.0F, 0.0F, 0.0F, 0.0F));
-		EndimatorPartDefinition tentacleW = root.addOrReplaceChild("tentacleW", CubeListBuilder.create(), PartPose.offsetAndRotation(3.0F, 5.0F, 0.0F, 0.0F, 1.5707964F, 0.0F));
-		EndimatorPartDefinition tentacleS = root.addOrReplaceChild("tentacleS", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 5.0F, 3.0F, 0.0F, 0.0F, 0.0F));
-		EndimatorPartDefinition tentacleE = root.addOrReplaceChild("tentacleE", CubeListBuilder.create(), PartPose.offsetAndRotation(-3.0F, 5.0F, 0.0F, 0.0F, 1.5707964F, 0.0F));
-		EndimatorPartDefinition tentacleN = root.addOrReplaceChild("tentacleN", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, 5.0F, -3.0F, 0.0F, 3.1415927F, 0.0F));
-		EndimatorPartDefinition tentacleNE = root.addOrReplaceChild("tentacleNE", CubeListBuilder.create(), PartPose.offsetAndRotation(-3.0F, 5.0F, -3.0F, 0.0F, -2.3561945F, 0.0F));
-		EndimatorPartDefinition tentacleSE = root.addOrReplaceChild("tentacleSE", CubeListBuilder.create(), PartPose.offsetAndRotation(-3.0F, 5.0F, 3.0F, 0.0F, 5.497787F, 0.0F));
-		EndimatorPartDefinition tentacleNW = root.addOrReplaceChild("tentacleNW", CubeListBuilder.create(), PartPose.offsetAndRotation(3.0F, 5.0F, -3.0F, 0.0F, 2.3561945F, 0.0F));
-		EndimatorPartDefinition tentacleSW = root.addOrReplaceChild("tentacleSW", CubeListBuilder.create(), PartPose.offsetAndRotation(3.0F, 5.0F, 3.0F, 0.0F, 0.7853982F, 0.0F));
+		EndimatorPartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().addBox(-6.0F, -5.0F, -6.0F, 12, 10, 12), PartPose.offsetAndRotation(0.0F, 19.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		EndimatorPartDefinition tentacleW = body.addOrReplaceChild("tentacleW", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1), PartPose.offsetAndRotation(3.0F, 5.0F, 0.0F, 0.0F, 1.5707964F, 0.0F));
+		EndimatorPartDefinition tentacleS = body.addOrReplaceChild("tentacleS", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1), PartPose.offsetAndRotation(0.0F, 5.0F, 3.0F, 0.0F, 0.0F, 0.0F));
+		EndimatorPartDefinition tentacleE = body.addOrReplaceChild("tentacleE", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1), PartPose.offsetAndRotation(-3.0F, 5.0F, 0.0F, 0.0F, 1.5707964F, 0.0F));
+		EndimatorPartDefinition tentacleN = body.addOrReplaceChild("tentacleN", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 0.0F, -0.5F, 1, 18, 1), PartPose.offsetAndRotation(0.0F, 5.0F, -3.0F, 0.0F, 3.1415927F, 0.0F));
+		EndimatorPartDefinition tentacleNE = body.addOrReplaceChild("tentacleNE", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 0.0F, -0.5F, 1, 16, 1), PartPose.offsetAndRotation(-3.0F, 5.0F, -3.0F, 0.0F, -2.3561945F, 0.0F));
+		EndimatorPartDefinition tentacleSE = body.addOrReplaceChild("tentacleSE", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 0.0F, -0.5F, 1, 16, 1), PartPose.offsetAndRotation(-3.0F, 5.0F, 3.0F, 0.0F, 5.497787F, 0.0F));
+		EndimatorPartDefinition tentacleNW = body.addOrReplaceChild("tentacleNW", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 0.0F, -0.5F, 1, 16, 1), PartPose.offsetAndRotation(3.0F, 5.0F, -3.0F, 0.0F, 2.3561945F, 0.0F));
+		EndimatorPartDefinition tentacleSW = body.addOrReplaceChild("tentacleSW", CubeListBuilder.create().texOffs(0, 22).addBox(-0.5F, 0.0F, -0.5F, 1, 16, 1), PartPose.offsetAndRotation(3.0F, 5.0F, 3.0F, 0.0F, 0.7853982F, 0.0F));
 		return new EndimatorLayerDefinition(root, 48, 42);
 	}
 
