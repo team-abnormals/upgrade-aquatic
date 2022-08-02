@@ -1,7 +1,7 @@
                    ABNORMALS LICENSE
                  Version 1.0, June 2020
 
-Copyright (c) 2020 Minecraft Abnormals. All Rights Reserved.
+Copyright (c) 2020 Team Abnormals. All Rights Reserved.
 
 Permissions are hereby granted below to any person having a copy of
 this software and/or its associated files:
