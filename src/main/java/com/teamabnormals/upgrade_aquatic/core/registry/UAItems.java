@@ -86,19 +86,27 @@ public class UAItems {
 	@OnlyIn(Dist.CLIENT)
 	public static void registerItemProperties() {
 		ItemProperties.register(JELLYFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity, num) -> {
-			CompoundTag compoundTag = stack.getTag();
-			if (compoundTag != null && compoundTag.contains("JellyfishDisplayTag")) {
-				return AbstractJellyfish.BucketDisplayInfo.readVariant(compoundTag.getCompound("JellyfishDisplayTag"));
+			CompoundTag tag = stack.getTag();
+			if (tag != null && tag.contains("JellyfishDisplayTag")) {
+				return AbstractJellyfish.BucketDisplayInfo.readVariant(tag.getCompound("JellyfishDisplayTag"));
 			}
 			return 0.0F;
 		});
 
 		ItemProperties.register(PIKE_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity, num) -> {
-			CompoundTag compoundnbt = stack.getTag();
-			if (compoundnbt != null && compoundnbt.contains("BucketVariantTag", 3)) {
-				return compoundnbt.getInt("BucketVariantTag");
+			CompoundTag tag = stack.getTag();
+			if (tag != null && tag.contains("BucketVariantTag", 3)) {
+				return tag.getInt("BucketVariantTag");
 			}
 			return 2;
+		});
+
+		ItemProperties.register(Items.AXOLOTL_BUCKET, new ResourceLocation("variant"), (stack, world, entity, num) -> {
+			CompoundTag tag = stack.getTag();
+			if (tag != null && tag.contains("Variant")) {
+				return tag.getInt("Variant");
+			}
+			return 0;
 		});
 	}
 }
