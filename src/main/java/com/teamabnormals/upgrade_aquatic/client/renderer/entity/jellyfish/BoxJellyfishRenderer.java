@@ -28,12 +28,12 @@ public class BoxJellyfishRenderer extends AbstractJellyfishRenderer<BoxJellyfish
 
 	@Override
 	public ResourceLocation getTextureLocation(BoxJellyfish jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/box/" + jellyfish.getBucketName() + "_jellyfish.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/box/" + jellyfish.getVariantName() + "_jellyfish.png");
 	}
 
 	@Override
 	public ResourceLocation getOverlayTexture(BoxJellyfish jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/box/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/box/" + jellyfish.getVariantName() + "_jellyfish_overlay.png");
 	}
 
 	@Override

@@ -105,9 +105,15 @@ public class JellyTorchBlock extends TorchBlock implements SimpleWaterloggedBloc
 		public final ChatFormatting color;
 		public final Supplier<Block> torch;
 
+		private static final JellyTorchType[] VALUES = values();
+
 		JellyTorchType(ChatFormatting color, Supplier<Block> torch) {
 			this.color = color;
 			this.torch = torch;
+		}
+
+		public static JellyTorchType getByOrdinal(int ordinal) {
+			return VALUES[ordinal];
 		}
 
 		public static SimpleParticleType getTorchParticleType(JellyTorchType type) {

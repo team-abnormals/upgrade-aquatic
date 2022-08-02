@@ -21,11 +21,9 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 	protected static final EntityDataAccessor<Integer> COLOR = SynchedEntityData.defineId(ColoredSizableJellyfish.class, EntityDataSerializers.INT);
 	protected static final EntityDataAccessor<Float> SIZE = SynchedEntityData.defineId(ColoredSizableJellyfish.class, EntityDataSerializers.FLOAT);
 	private static final JellyfishSizeMap NATURAL_SIZES = new JellyfishSizeMap(new TreeMap<>(ImmutableMap.of(0.5F, 3, 0.65F, 3, 1.0F, 34)));
-	private final ColoredSizableBucketProcessor bucketProcessor;
 
 	public ColoredSizableJellyfish(EntityType<? extends AbstractJellyfish> type, Level world) {
 		super(type, world);
-		this.bucketProcessor = new ColoredSizableBucketProcessor(this);
 	}
 
 	@Override
@@ -44,17 +42,17 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("JellyColor", this.getColor());
-		compound.putFloat("Size", this.getSize());
+	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		super.addAdditionalSaveDataSharedWithBucket(compoundTag);
+		compoundTag.putInt("JellyColor", this.getColor());
+		compoundTag.putFloat("Size", this.getSize());
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.setColor(compound.getInt("JellyColor"));
-		this.setSize(compound.getFloat("Size"), false);
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		super.readAdditionalSaveDataSharedWithBucket(compoundTag);
+		this.setColor(compoundTag.getInt("JellyColor"));
+		this.setSize(compoundTag.getFloat("Size"), false);
 	}
 
 	@Override
@@ -107,38 +105,9 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 		return this.entityData.get(SIZE);
 	}
 
-	@Override
-	public BucketProcessor<?> getBucketProcessor() {
-		return this.bucketProcessor;
-	}
-
-	protected abstract String getBucketEntityId();
-
 	protected abstract float getDefaultSize();
 
 	protected abstract float getHealthSizeMultiplier();
-
-	protected static class ColoredSizableBucketProcessor extends BucketProcessor<ColoredSizableJellyfish> {
-
-		public ColoredSizableBucketProcessor(ColoredSizableJellyfish jellyfish) {
-			super(jellyfish.getBucketEntityId(), jellyfish);
-		}
-
-		@Override
-		public CompoundTag write() {
-			CompoundTag nbt = super.write();
-			nbt.putInt("Color", this.jellyfish.getColor());
-			nbt.putFloat("Size", this.jellyfish.getSize());
-			return nbt;
-		}
-
-		@Override
-		public void read(CompoundTag nbt) {
-			this.jellyfish.setColor(nbt.getInt("Color"));
-			this.jellyfish.setSize(nbt.getFloat("Size"), true);
-		}
-
-	}
 
 	static class SpawnData implements SpawnGroupData {
 		private final float size;

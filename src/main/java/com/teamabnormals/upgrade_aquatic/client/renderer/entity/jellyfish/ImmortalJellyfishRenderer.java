@@ -17,12 +17,12 @@ public class ImmortalJellyfishRenderer<I extends ImmortalJellyfish> extends Abst
 
 	@Override
 	public ResourceLocation getTextureLocation(I jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/immortal/immortal_jellyfish.png");
 	}
 
 	@Override
 	public ResourceLocation getOverlayTexture(I jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/immortal/" + jellyfish.getBucketName() + "_jellyfish_overlay.png");
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/immortal/immortal_jellyfish_overlay.png");
 	}
 
 	@Override

@@ -5,10 +5,7 @@ import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorch
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishBoostGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishSwimIntoDirectionGoal;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
-import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -18,7 +15,6 @@ import net.minecraft.world.level.Level;
  * @author SmellyModder(Luke Tonon)
  */
 public class ImmortalJellyfish extends AbstractJellyfish {
-	private final BucketProcessor<ImmortalJellyfish> bucketProcessor;
 	private final RotationController rotationController;
 	private int healCooldown;
 	private float prevHealth;
@@ -26,7 +22,6 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 	public ImmortalJellyfish(EntityType<? extends AbstractJellyfish> type, Level world) {
 		super(type, world);
 		this.rotationController = new RotationController(this);
-		this.bucketProcessor = new BucketProcessor<>("immortal_jellyfish", this);
 		this.prevHealth = this.getHealth();
 	}
 
@@ -35,7 +30,6 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 				.add(Attributes.ATTACK_DAMAGE, 1.0D)
 				.add(Attributes.MAX_HEALTH, 7.0D);
 	}
-
 
 	@Override
 	protected void registerGoals() {
@@ -49,10 +43,8 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 
 		if (this.healCooldown > 0) {
 			this.healCooldown--;
-		} else {
-			if (this.tickCount % 5 == 0) {
-				this.heal(0.5F);
-			}
+		} else if (this.tickCount % 5 == 0) {
+			this.heal(0.5F);
 		}
 
 		if (this.prevHealth > this.getHealth()) {
@@ -72,15 +64,15 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.healCooldown = compound.getInt("HealCooldown");
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		super.readAdditionalSaveDataSharedWithBucket(compoundTag);
+		this.healCooldown = compoundTag.getInt("HealCooldown");
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("HealCooldown", this.healCooldown);
+	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		super.addAdditionalSaveDataSharedWithBucket(compoundTag);
+		compoundTag.putInt("HealCooldown", this.healCooldown);
 	}
 
 	@Override
@@ -89,8 +81,8 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 	}
 
 	@Override
-	public String getBucketName() {
-		return "immortal";
+	public BucketDisplayInfo getBucketDisplayInfo() {
+		return this.bucketDisplayInfo("immortal", 7, JellyTorchType.WHITE, JellyTorchType.RED);
 	}
 
 	@Override
@@ -104,28 +96,7 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 	}
 
 	@Override
-	public int getIdSuffix() {
-		return 7;
-	}
-
-	@Override
-	public Component getYieldingTorchMessage() {
-		JellyTorchType white = JellyTorchType.WHITE;
-		JellyTorchType red = JellyTorchType.RED;
-		return (new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(ChatFormatting.GRAY))
-				.append((new TranslatableComponent("tooltip.upgrade_aquatic." + white.toString().toLowerCase() + "_jelly_torch")).withStyle(white.color))
-				.append(new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(ChatFormatting.GRAY))
-				.append((new TranslatableComponent("tooltip.upgrade_aquatic." + red.toString().toLowerCase() + "_jelly_torch")).withStyle(red.color))
-				;
-	}
-
-	@Override
 	public int getMaxSpawnClusterSize() {
 		return 3;
-	}
-
-	@Override
-	public BucketProcessor<?> getBucketProcessor() {
-		return this.bucketProcessor;
 	}
 }

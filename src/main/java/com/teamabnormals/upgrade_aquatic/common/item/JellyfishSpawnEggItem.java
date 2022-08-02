@@ -30,8 +30,7 @@ public class JellyfishSpawnEggItem extends ForgeSpawnEggItem {
 	}
 
 	private EntityType<?> getRandomJellyfish() {
-		Random rand = new Random();
 		List<JellyfishEntry<?>> jellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);
-		return jellies.get(rand.nextInt(jellies.size())).jellyfish.get();
+		return jellies.get(new Random().nextInt(jellies.size())).jellyfish().get();
 	}
 }

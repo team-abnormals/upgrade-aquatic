@@ -6,14 +6,19 @@ import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.other.UADamageSources;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntArrayTag;
+import net.minecraft.nbt.IntTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -44,18 +49,17 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
 
+import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
 /**
- * @author SmellyModder(Luke Tonon)
+ * @author SmellyModder (Luke Tonon)
  */
 public abstract class AbstractJellyfish extends BucketableWaterAnimal implements Endimatable {
 	protected static final EntityDataAccessor<Integer> COOLDOWN = SynchedEntityData.defineId(AbstractJellyfish.class, EntityDataSerializers.INT);
 	private static final Predicate<LivingEntity> CAN_STING = (entity) -> {
-		if (entity instanceof Player) {
-			return !entity.isSpectator() && !((Player) entity).isCreative();
-		}
+		if (entity instanceof Player && ((Player) entity).isCreative()) return false;
 		return !entity.isSpectator() && !(entity instanceof AbstractJellyfish || entity instanceof Turtle);
 	};
 	public float[] lockedRotations = new float[2];
@@ -82,7 +86,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
-		this.setCooldown(compound.getInt("CooldownTicks"));
+		this.readAdditionalSaveDataSharedWithBucket(compound);
 		this.lockedRotations[0] = compound.getFloat("LockedYaw");
 		this.lockedRotations[1] = compound.getFloat("LockedPitch");
 	}
@@ -90,15 +94,22 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
-		compound.putInt("CooldownTicks", this.getCooldown());
+		this.addAdditionalSaveDataSharedWithBucket(compound);
 		compound.putFloat("LockedYaw", this.lockedRotations[0]);
 		compound.putFloat("LockedPitch", this.lockedRotations[1]);
+	}
+
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		this.setCooldown(compoundTag.getInt("CooldownTicks"));
+	}
+
+	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		compoundTag.putInt("CooldownTicks", this.getCooldown());
 	}
 
 	@Override
 	public void tick() {
 		super.tick();
-		this.endimateTick();
 		this.getRotationController().tick();
 
 		this.setYRot(0);
@@ -235,9 +246,19 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void saveToBucketTag(ItemStack bucket) {
 		super.saveToBucketTag(bucket);
-		bucket.getOrCreateTag().put("JellyfishTag", this.getBucketProcessor().write());
+		CompoundTag compoundTag = bucket.getOrCreateTag();
+		compoundTag.putString("EntityType", Registry.ENTITY_TYPE.getKey(this.getType()).toString());
+		compoundTag.put("JellyfishDisplayTag", this.getBucketDisplayInfo().write());
+		this.addAdditionalSaveDataSharedWithBucket(compoundTag);
+	}
+
+	@Override
+	public void loadFromBucketTag(CompoundTag compoundTag) {
+		super.loadFromBucketTag(compoundTag);
+		this.readAdditionalSaveDataSharedWithBucket(compoundTag);
 	}
 
 	public int getCooldown() {
@@ -269,16 +290,14 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 
 	public abstract RotationController getRotationController();
 
-	public abstract BucketProcessor<?> getBucketProcessor();
-
-	public abstract String getBucketName();
+	public abstract BucketDisplayInfo getBucketDisplayInfo();
 
 	public abstract JellyTorchType getJellyTorchType();
 
 	public abstract float getCooldownChance();
 
-	public int getIdSuffix() {
-		return this.getJellyTorchType().ordinal();
+	protected final BucketDisplayInfo bucketDisplayInfo(String name, int subId, JellyTorchType... yieldingTorchTypes) {
+		return new BucketDisplayInfo(name, JellyfishRegistry.IDS.get(this.getClass()), subId, yieldingTorchTypes);
 	}
 
 	protected boolean stingEntity(LivingEntity livingEntity) {
@@ -287,11 +306,6 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 			return true;
 		}
 		return false;
-	}
-
-	public Component getYieldingTorchMessage() {
-		JellyTorchType torchType = this.getJellyTorchType();
-		return (new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(ChatFormatting.GRAY)).append((new TranslatableComponent("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase() + "_jelly_torch")).withStyle(torchType.color));
 	}
 
 	protected ItemStack getTorchByType(JellyTorchType type) {
@@ -382,21 +396,40 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 		}
 	}
 
-	public static class BucketProcessor<J extends AbstractJellyfish> {
-		protected final J jellyfish;
-		private final String entityId;
+	public static record BucketDisplayInfo(String name, int id, int subId, JellyTorchType... yieldingTorchTypes) {
+		public static float readVariant(CompoundTag compoundTag) {
+			return compoundTag.getInt("Id") + 0.1F * compoundTag.getInt("SubId");
+		}
 
-		public BucketProcessor(String entityId, J jellyfish) {
-			this.entityId = entityId;
-			this.jellyfish = jellyfish;
+		public static void appendHoverText(List<Component> tooltip, CompoundTag compoundTag) {
+			String name = compoundTag.getString("Name");
+			if (!name.isEmpty()) tooltip.add((new TranslatableComponent("tooltip.upgrade_aquatic." + name + "_jellyfish").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY)));
+			if (!compoundTag.contains("YieldingTorchTypes", 11)) return;
+			int[] yieldingTorchTypes = ((IntArrayTag) compoundTag.get("YieldingTorchTypes")).getAsIntArray();
+			int length = yieldingTorchTypes.length;
+			if (length <= 0) return;
+			MutableComponent component = new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(ChatFormatting.GRAY);
+			while (true) {
+				JellyTorchType torchType = JellyTorchType.getByOrdinal(yieldingTorchTypes[length - 1]);
+				component = component.append((new TranslatableComponent("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase() + "_jelly_torch")).withStyle(torchType.color));
+				if (--length > 0) {
+					component = component.append(new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(ChatFormatting.GRAY));
+				} else break;
+			}
+			tooltip.add(component);
 		}
 
 		public CompoundTag write() {
-			CompoundTag nbt = new CompoundTag();
-			nbt.putString("EntityId", this.entityId);
-			return nbt;
+			CompoundTag compoundTag = new CompoundTag();
+			compoundTag.putString("Name", this.name);
+			compoundTag.putInt("Id", this.id);
+			compoundTag.putInt("SubId", this.subId);
+			IntArrayTag yieldingTorchTypesTag = new IntArrayTag(new int[0]);
+			for (JellyTorchType jellyTorchType : this.yieldingTorchTypes) {
+				yieldingTorchTypesTag.add(IntTag.valueOf(jellyTorchType.ordinal()));
+			}
+			compoundTag.put("YieldingTorchTypes", yieldingTorchTypesTag);
+			return compoundTag;
 		}
-
-		public void read(CompoundTag nbt) {}
 	}
 }

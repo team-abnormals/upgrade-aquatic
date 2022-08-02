@@ -68,17 +68,17 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("UpsideDownCooldown", this.upsideDownCooldown);
-		compound.putInt("HideCooldown", this.hideCooldown);
+	public void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		super.addAdditionalSaveDataSharedWithBucket(compoundTag);
+		compoundTag.putInt("UpsideDownCooldown", this.upsideDownCooldown);
+		compoundTag.putInt("HideCooldown", this.hideCooldown);
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.upsideDownCooldown = compound.getInt("UpsideDownCooldown");
-		this.hideCooldown = compound.getInt("HideCooldown");
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		super.readAdditionalSaveDataSharedWithBucket(compoundTag);
+		this.upsideDownCooldown = compoundTag.getInt("UpsideDownCooldown");
+		this.hideCooldown = compoundTag.getInt("HideCooldown");
 	}
 
 	public boolean hasUpsideDownCooldown() {
@@ -119,13 +119,18 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 		return this.rotationController;
 	}
 
-	@Override
-	public String getBucketName() {
+	public String getVariantName() {
 		return switch (this.getColor()) {
 			default -> "cassiopea";
 			case 1 -> "blue_cassiopea";
 			case 2 -> "white_cassiopea";
 		};
+	}
+
+	@Override
+	public BucketDisplayInfo getBucketDisplayInfo() {
+		JellyTorchType jellyTorchType = this.getJellyTorchType();
+		return this.bucketDisplayInfo(this.getVariantName(), jellyTorchType.ordinal(), jellyTorchType);
 	}
 
 	@Override
@@ -158,10 +163,5 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	@Override
 	protected float getDefaultSize() {
 		return 0.85F;
-	}
-
-	@Override
-	protected String getBucketEntityId() {
-		return "cassiopea_jellyfish";
 	}
 }

@@ -16,9 +16,9 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 /**
- * Registry class for the jellyfish
+ * Registry class for the jellyfish.
  *
- * @author SmellyModder(Luke Tonon)
+ * @author SmellyModder (Luke Tonon)
  */
 public class JellyfishRegistry {
 	public static final List<JellyfishEntry<?>> JELLYFISHES = Lists.newArrayList();
@@ -31,52 +31,29 @@ public class JellyfishRegistry {
 	}
 
 	public static <J extends AbstractJellyfish> void registerJellyfish(Supplier<EntityType<J>> jellyfish, Class<J> jellyfishClass, Rarity rarity) {
-		JELLYFISHES.add(new JellyfishEntry<J>(jellyfish, rarity));
-		IDS.putIfAbsent(jellyfishClass, getNextId());
+		JELLYFISHES.add(new JellyfishEntry<>(jellyfish, rarity));
+		IDS.putIfAbsent(jellyfishClass, IDS.size() + 1);
 	}
 
 	public static List<JellyfishEntry<?>> collectJelliesMatchingRarity(Rarity rarity) {
-		List<JellyfishEntry<?>> jellies = JELLYFISHES;
-		jellies.removeIf(jellyfish -> jellyfish.rarity != rarity);
-		return jellies;
+		return JELLYFISHES.stream().filter(jellyfish -> jellyfish.rarity == rarity).toList();
 	}
 
-	public static JellyfishEntry<?> getRandomJellyfish(Random rand) {
-		float chance = rand.nextFloat();
-		if (chance > 50.0F) {
+	public static JellyfishEntry<?> getRandomJellyfish(Random random) {
+		float chance = random.nextFloat();
+		if (chance > 0.5F) {
 			List<JellyfishEntry<?>> commonJellies = collectJelliesMatchingRarity(Rarity.COMMON);
-			return commonJellies.get(rand.nextInt(commonJellies.size()));
-		} else if (chance < 50.0F && chance > 15.0F) {
+			return commonJellies.get(random.nextInt(commonJellies.size()));
+		} else if (chance > 0.15F) {
 			List<JellyfishEntry<?>> uncommonJellies = collectJelliesMatchingRarity(Rarity.UNCOMMON);
-			return uncommonJellies.get(rand.nextInt(uncommonJellies.size()));
-		} else if (chance < 15.0F && chance > 0.5F) {
-			List<JellyfishEntry<?>> rarerJellies = collectJelliesMatchingRarity(Rarity.RARE);
-			return rarerJellies.get(rand.nextInt(rarerJellies.size()));
+			return uncommonJellies.get(random.nextInt(uncommonJellies.size()));
+		} else if (chance > 0.05F) {
+			List<JellyfishEntry<?>> rareJellies = collectJelliesMatchingRarity(Rarity.RARE);
+			return rareJellies.get(random.nextInt(rareJellies.size()));
 		}
 		List<JellyfishEntry<?>> epicJellies = collectJelliesMatchingRarity(Rarity.EPIC);
-		return epicJellies.get(rand.nextInt(epicJellies.size()));
+		return epicJellies.get(random.nextInt(epicJellies.size()));
 	}
 
-	public static int getNextId() {
-		int id = 0;
-		if (!IDS.isEmpty()) {
-			for (Map.Entry<Class<? extends AbstractJellyfish>, Integer> entries : IDS.entrySet()) {
-				int ids = entries.getValue();
-				if (ids > id) {
-					id = ids;
-				}
-			}
-		}
-		return id + 1;
-	}
-
-	public static class JellyfishEntry<J extends AbstractJellyfish> {
-		public final Supplier<EntityType<J>> jellyfish;
-		public final Rarity rarity;
-
-		public JellyfishEntry(Supplier<EntityType<J>> jellyfish, Rarity rarity) {
-			this.jellyfish = jellyfish;
-			this.rarity = rarity;
-		}
-	}
+	public record JellyfishEntry<J extends AbstractJellyfish>(Supplier<EntityType<J>> jellyfish, Rarity rarity) {}
 }

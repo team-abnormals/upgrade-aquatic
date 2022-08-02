@@ -69,15 +69,15 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 	}
 
 	@Override
-	public void addAdditionalSaveData(CompoundTag compound) {
-		super.addAdditionalSaveData(compound);
-		compound.putInt("HuntingCooldown", this.huntingCooldown);
+	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		super.addAdditionalSaveDataSharedWithBucket(compoundTag);
+		compoundTag.putInt("HuntingCooldown", this.huntingCooldown);
 	}
 
 	@Override
-	public void readAdditionalSaveData(CompoundTag compound) {
-		super.readAdditionalSaveData(compound);
-		this.huntingCooldown = compound.getInt("HuntingCooldown");
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
+		super.readAdditionalSaveDataSharedWithBucket(compoundTag);
+		this.huntingCooldown = compoundTag.getInt("HuntingCooldown");
 	}
 
 	@Override
@@ -112,13 +112,18 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 		return false;
 	}
 
-	@Override
-	public String getBucketName() {
+	public String getVariantName() {
 		return switch (this.getColor()) {
 			default -> "box";
 			case 1 -> "red_box";
 			case 2 -> "white_box";
 		};
+	}
+
+	@Override
+	public BucketDisplayInfo getBucketDisplayInfo() {
+		JellyTorchType jellyTorchType = this.getJellyTorchType();
+		return this.bucketDisplayInfo(this.getVariantName(), jellyTorchType.ordinal(), jellyTorchType);
 	}
 
 	@Override
@@ -145,11 +150,6 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 			return true;
 		}
 		return false;
-	}
-
-	@Override
-	protected String getBucketEntityId() {
-		return "box_jellyfish";
 	}
 
 	@Override

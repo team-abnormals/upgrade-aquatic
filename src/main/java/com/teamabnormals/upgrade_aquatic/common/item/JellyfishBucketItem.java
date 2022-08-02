@@ -1,17 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.common.item;
 
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
-import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry.JellyfishEntry;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -44,66 +40,38 @@ public class JellyfishBucketItem extends BucketItem {
 		super(supplier, builder);
 	}
 
-	public void checkExtraContent(Level worldIn, ItemStack stack, BlockPos pos) {
-		if (worldIn instanceof ServerLevel) {
-			this.placeEntity((ServerLevel) worldIn, stack, pos);
-		}
-	}
-
 	@Override
-	protected void playEmptySound(@Nullable Player player, LevelAccessor worldIn, BlockPos pos) {
-		worldIn.playSound(player, pos, UASoundEvents.ITEM_BUCKET_EMPTY_JELLYFISH.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
-	}
-
-	private void placeEntity(ServerLevel world, ItemStack stack, BlockPos pos) {
-		AbstractJellyfish jellyfish = this.getEntityInStack(stack, world, pos);
-		if (jellyfish != null) {
+	public void checkExtraContent(@Nullable Player player, Level level, ItemStack stack, BlockPos pos) {
+		if (level instanceof ServerLevel) {
+			CompoundTag compoundTag = stack.getTag();
+			AbstractJellyfish jellyfish;
+			if (compoundTag != null && compoundTag.contains("EntityType")) {
+				EntityType<?> type = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(compoundTag.getString("EntityType")));
+				if (type == null) return;
+				Entity entity = type.spawn((ServerLevel) level, stack, null, pos, MobSpawnType.BUCKET, true, false);
+				if (!(entity instanceof AbstractJellyfish)) return;
+				jellyfish = (AbstractJellyfish) entity;
+			} else {
+				List<JellyfishRegistry.JellyfishEntry<?>> jellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);
+				jellyfish = (AbstractJellyfish) jellies.get(new Random().nextInt(jellies.size())).jellyfish().get().spawn((ServerLevel) level, stack, null, pos, MobSpawnType.BUCKET, true, false);
+				if (jellyfish == null) return;
+			}
+			jellyfish.loadFromBucketTag(stack.getOrCreateTag());
 			jellyfish.setFromBucket(true);
 		}
 	}
 
-	@Nullable
-	public AbstractJellyfish getEntityInStack(ItemStack stack, Level world, @Nullable BlockPos pos) {
-		CompoundTag compoundnbt = stack.getTag();
-		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
-			CompoundTag jellyfishTag = compoundnbt.getCompound("JellyfishTag");
-			String entityId = jellyfishTag.getString("EntityId");
-			EntityType<?> jellyfishType = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(UpgradeAquatic.MOD_ID + ":" + entityId));
-			Entity entity = pos != null ? jellyfishType.spawn((ServerLevel) world, stack, null, pos, MobSpawnType.BUCKET, true, false) : jellyfishType.create(world);
-			AbstractJellyfish jellyfish = entity instanceof AbstractJellyfish ? (AbstractJellyfish) entity : null;
-
-			if (jellyfish == null) {
-				return null;
-			}
-
-			jellyfish.getBucketProcessor().read(jellyfishTag);
-			return jellyfish;
-		} else if (pos != null) {
-			AbstractJellyfish jellyfish = this.getRandomJellyfish(stack, world, pos);
-			return jellyfish;
-		}
-		return null;
-	}
-
-	private AbstractJellyfish getRandomJellyfish(ItemStack stack, Level world, @Nullable BlockPos pos) {
-		Random rand = new Random();
-		List<JellyfishEntry<?>> commonJellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);
-		return (AbstractJellyfish) commonJellies.get(rand.nextInt(commonJellies.size())).jellyfish.get().spawn((ServerLevel) world, stack, null, pos, MobSpawnType.BUCKET, true, false);
+	@Override
+	protected void playEmptySound(@Nullable Player player, LevelAccessor levelAccessor, BlockPos pos) {
+		levelAccessor.playSound(player, pos, UASoundEvents.ITEM_BUCKET_EMPTY_JELLYFISH.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
 	}
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-		CompoundTag compoundnbt = stack.getTag();
-		if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
-			AbstractJellyfish jellyfish = this.getEntityInStack(stack, worldIn, null);
-
-			if (jellyfish != null) {
-				ChatFormatting[] atextformatting = new ChatFormatting[]{ChatFormatting.ITALIC, ChatFormatting.GRAY};
-				tooltip.add((new TranslatableComponent("tooltip.upgrade_aquatic." + jellyfish.getBucketName() + "_jellyfish").withStyle(atextformatting)));
-
-				tooltip.add(jellyfish.getYieldingTorchMessage());
-			}
+		CompoundTag compoundTag = stack.getTag();
+		if (compoundTag != null && compoundTag.contains("JellyfishDisplayTag")) {
+			AbstractJellyfish.BucketDisplayInfo.appendHoverText(tooltip, compoundTag.getCompound("JellyfishDisplayTag"));
 		}
 	}
 

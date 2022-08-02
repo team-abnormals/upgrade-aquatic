@@ -1,13 +1,10 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
-import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.blueprint.common.item.BlueprintMobBucketItem;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.item.*;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -89,16 +86,9 @@ public class UAItems {
 	@OnlyIn(Dist.CLIENT)
 	public static void registerItemProperties() {
 		ItemProperties.register(JELLYFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity, num) -> {
-			if (world == null) {
-				world = (ClientLevel) ClientInfo.getClientPlayerLevel();
-			}
-
-			CompoundTag compoundnbt = stack.getTag();
-			if (compoundnbt != null && compoundnbt.contains("JellyfishTag")) {
-				AbstractJellyfish jellyfish = ((JellyfishBucketItem) stack.getItem()).getEntityInStack(stack, world, null);
-				if (jellyfish != null) {
-					return (float) JellyfishRegistry.IDS.get(jellyfish.getClass()) + (0.1F * (float) jellyfish.getIdSuffix());
-				}
+			CompoundTag compoundTag = stack.getTag();
+			if (compoundTag != null && compoundTag.contains("JellyfishDisplayTag")) {
+				return AbstractJellyfish.BucketDisplayInfo.readVariant(compoundTag.getCompound("JellyfishDisplayTag"));
 			}
 			return 0.0F;
 		});
