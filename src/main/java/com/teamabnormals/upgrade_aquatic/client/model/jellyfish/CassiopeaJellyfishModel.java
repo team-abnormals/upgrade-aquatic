@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 
-import com.teamabnormals.blueprint.client.ClientInfo;
+import com.teamabnormals.blueprint.core.endimator.Endimator;
+import com.teamabnormals.blueprint.core.endimator.EndimatorModelPart;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorLayerDefinition;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorPartDefinition;
@@ -13,6 +14,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 /**
  * ModelCassiopeaJellyfish - SnakeBlock
@@ -21,24 +23,27 @@ import net.minecraft.resources.ResourceLocation;
 public class CassiopeaJellyfishModel<E extends CassiopeaJellyfish> extends EndimatorEntityModel<E> {
 	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "cassiopea_jellyfish"), "main");
 
-	public ModelPart cap;
-	public ModelPart cross1;
-	public ModelPart cross2;
-	public ModelPart thing;
-	public ModelPart tentacleT;
-	public ModelPart tentacleE;
-	public ModelPart tentacleN;
-	public ModelPart tentacleW;
+	public EndimatorModelPart cap;
+	public EndimatorModelPart cross1;
+	public EndimatorModelPart cross2;
+	public EndimatorModelPart thing;
+	public EndimatorModelPart tentacleT;
+	public EndimatorModelPart tentacleE;
+	public EndimatorModelPart tentacleN;
+	public EndimatorModelPart tentacleW;
 
+	@SuppressWarnings("all")
 	public CassiopeaJellyfishModel(ModelPart root) {
-		this.cap = root.getChild("cap");
-		this.cross1 = this.cap.getChild("cross1");
-		this.cross2 = this.cap.getChild("cross2");
-		this.thing = this.cap.getChild("thing");
-		this.tentacleT = this.thing.getChild("tentacleT");
-		this.tentacleE = this.thing.getChild("tentacleE");
-		this.tentacleN = this.thing.getChild("tentacleN");
-		this.tentacleW = this.thing.getChild("tentacleW");
+		this.cap = (EndimatorModelPart) root.getChild("cap");
+		this.cross1 = (EndimatorModelPart) this.cap.getChild("cross1");
+		this.cross2 = (EndimatorModelPart) this.cap.getChild("cross2");
+		this.thing = (EndimatorModelPart) this.cap.getChild("thing");
+		this.tentacleT = (EndimatorModelPart) this.thing.getChild("tentacleT");
+		this.tentacleE = (EndimatorModelPart) this.thing.getChild("tentacleE");
+		this.tentacleN = (EndimatorModelPart) this.thing.getChild("tentacleN");
+		this.tentacleW = (EndimatorModelPart) this.thing.getChild("tentacleW");
+		this.cap.setShouldScaleChildren(false);
+		this.endimator = Endimator.compile(root);
 	}
 
 	public static EndimatorLayerDefinition createBodyLayer() {
@@ -55,15 +60,21 @@ public class CassiopeaJellyfishModel<E extends CassiopeaJellyfish> extends Endim
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.cap.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		//TODO: Use Endimator in 1.19
+		float amplifier = Math.min(limbSwingAmount, 0.25F) * 4.0F;
+		float tentacleAngle = (0.45F * Mth.abs(Mth.sin(0.8F * limbSwing + 0.384F)) - 0.2F) * amplifier;
+		this.tentacleN.xRot = tentacleAngle;
+		this.tentacleE.xRot = tentacleAngle;
+		this.tentacleT.xRot = tentacleAngle;
+		this.tentacleW.xRot = tentacleAngle;
+		float xzScale = 1.0F + (0.15F * Mth.sin(0.8F * limbSwing - 0.34F) + 0.05F) * amplifier;
+		this.cap.setScale(xzScale, 1.0F + (-0.125F * Mth.sin(0.8F * limbSwing + 0.201F) + 0.025F) * amplifier, xzScale);
 	}
 
 	@Override
-	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		float[] rotations = entity.getRotationController().getRotations(ClientInfo.getPartialTicks());
-		this.cap.yRot = (float) Math.toRadians(rotations[0]);
-		this.cap.xRot = (float) Math.toRadians(rotations[1]);
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+		this.cap.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 }

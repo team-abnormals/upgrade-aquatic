@@ -10,7 +10,6 @@ import com.teamabnormals.upgrade_aquatic.client.renderer.entity.*;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.BoxJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.CassiopeaJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.ImmortalJellyfishRenderer;
-import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UAAdvancementModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UALootModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABlockTagsProvider;
@@ -26,7 +25,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAMobEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -43,27 +41,16 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod(value = UpgradeAquatic.MOD_ID)
 public class UpgradeAquatic {
-	public static final String NETWORK_PROTOCOL = "1";
 	public static final String MOD_ID = "upgrade_aquatic";
 	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(ForgeRegistries.ITEMS, new UAItemSubRegistryHelper(helper)));
-
-	public static final SimpleChannel CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(UpgradeAquatic.MOD_ID, "net"))
-			.networkProtocolVersion(() -> NETWORK_PROTOCOL)
-			.clientAcceptedVersions(NETWORK_PROTOCOL::equals)
-			.serverAcceptedVersions(NETWORK_PROTOCOL::equals)
-			.simpleChannel();
 
 	public UpgradeAquatic() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		ModLoadingContext context = ModLoadingContext.get();
-
-		this.setupMessages();
 
 		REGISTRY_HELPER.register(bus);
 		UAMobEffects.MOB_EFFECTS.register(bus);
@@ -145,14 +132,5 @@ public class UpgradeAquatic {
 		event.registerEntityRenderer(UAEntityTypes.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);
 
 		if (UAConfig.CLIENT.replaceGlowSquidRenderer.get()) event.registerEntityRenderer(EntityType.GLOW_SQUID, UAGlowSquidRenderer::new);
-	}
-
-	void setupMessages() {
-		int id = -1;
-
-		CHANNEL.messageBuilder(RotateJellyfishMessage.class, id++)
-				.encoder(RotateJellyfishMessage::serialize).decoder(RotateJellyfishMessage::deserialize)
-				.consumer(RotateJellyfishMessage::handle)
-				.add();
 	}
 }

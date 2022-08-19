@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 
-import com.teamabnormals.blueprint.client.ClientInfo;
+import com.teamabnormals.blueprint.core.endimator.Endimator;
+import com.teamabnormals.blueprint.core.endimator.EndimatorModelPart;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorLayerDefinition;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorPartDefinition;
@@ -22,30 +23,33 @@ import net.minecraft.util.Mth;
 public class ImmortalJellyfishModel<E extends ImmortalJellyfish> extends EndimatorEntityModel<E> {
 	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "immortal_jellyfish"), "main");
 
-	public ModelPart body;
-	public ModelPart innerBody;
-	public ModelPart tentacleEast;
-	public ModelPart tentacleWest;
-	public ModelPart bottomBody;
-	public ModelPart tentacleSouth;
-	public ModelPart tentacleNorth;
-	public ModelPart tentacleSouthEast;
-	public ModelPart tentacleSouthWest;
-	public ModelPart tentacleNorthEast;
-	public ModelPart tentacleNorthWest;
+	public EndimatorModelPart body;
+	public EndimatorModelPart innerBody;
+	public EndimatorModelPart tentacleEast;
+	public EndimatorModelPart tentacleWest;
+	public EndimatorModelPart bottomBody;
+	public EndimatorModelPart tentacleSouth;
+	public EndimatorModelPart tentacleNorth;
+	public EndimatorModelPart tentacleSouthEast;
+	public EndimatorModelPart tentacleSouthWest;
+	public EndimatorModelPart tentacleNorthEast;
+	public EndimatorModelPart tentacleNorthWest;
 
+	@SuppressWarnings("all")
 	public ImmortalJellyfishModel(ModelPart root) {
-		this.body = root.getChild("body");
-		this.innerBody = root.getChild("innerBody");
-		this.tentacleEast = this.body.getChild("tentacleEast");
-		this.tentacleWest = this.body.getChild("tentacleWest");
-		this.bottomBody = this.body.getChild("bottomBody");
-		this.tentacleSouth = this.body.getChild("tentacleSouth");
-		this.tentacleNorth = this.body.getChild("tentacleNorth");
-		this.tentacleSouthEast = this.body.getChild("tentacleSouthEast");
-		this.tentacleSouthWest = this.body.getChild("tentacleSouthWest");
-		this.tentacleNorthEast = this.body.getChild("tentacleNorthEast");
-		this.tentacleNorthWest = this.body.getChild("tentacleNorthWest");
+		this.body = (EndimatorModelPart) root.getChild("body");
+		this.innerBody = (EndimatorModelPart) root.getChild("innerBody");
+		this.tentacleEast = (EndimatorModelPart) this.body.getChild("tentacleEast");
+		this.tentacleWest = (EndimatorModelPart) this.body.getChild("tentacleWest");
+		this.bottomBody = (EndimatorModelPart) this.body.getChild("bottomBody");
+		this.tentacleSouth = (EndimatorModelPart) this.body.getChild("tentacleSouth");
+		this.tentacleNorth = (EndimatorModelPart) this.body.getChild("tentacleNorth");
+		this.tentacleSouthEast = (EndimatorModelPart) this.body.getChild("tentacleSouthEast");
+		this.tentacleSouthWest = (EndimatorModelPart) this.body.getChild("tentacleSouthWest");
+		this.tentacleNorthEast = (EndimatorModelPart) this.body.getChild("tentacleNorthEast");
+		this.tentacleNorthWest = (EndimatorModelPart) this.body.getChild("tentacleNorthWest");
+		this.body.setShouldScaleChildren(false);
+		this.endimator = Endimator.compile(root);
 	}
 	
 	public static EndimatorLayerDefinition createBodyLayer() {
@@ -73,22 +77,24 @@ public class ImmortalJellyfishModel<E extends ImmortalJellyfish> extends Endimat
 	@Override
 	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-
-		float[] rotations = entity.getRotationController().getRotations(ClientInfo.getPartialTicks());
-		this.body.yRot = this.innerBody.yRot = (float) Math.toRadians(rotations[0]);
-		this.body.xRot = this.innerBody.xRot = (float) Math.toRadians(rotations[1]);
-
-		if (entity.isInWater()) {
-			this.tentacleNorth.xRot += 0.1F * Mth.sin(0.2F * ageInTicks);
-			this.tentacleNorthEast.xRot -= 0.12F * Mth.sin(0.225F * ageInTicks);
-			this.tentacleNorthWest.xRot += 0.1F * Mth.sin(0.2F * ageInTicks);
-
-			this.tentacleSouth.xRot -= 0.1F * Mth.sin(0.2F * ageInTicks);
-			this.tentacleSouthEast.xRot += 0.12F * Mth.sin(0.2F * ageInTicks);
-			this.tentacleSouthWest.xRot -= 0.1F * Mth.sin(0.225F * ageInTicks);
-
-			this.tentacleEast.zRot += 0.1F * Mth.sin(0.2F * ageInTicks);
-			this.tentacleWest.zRot -= 0.1F * Mth.sin(0.225F * ageInTicks);
-		}
+		//TODO: Use Endimator in 1.19
+		float amplifier = Math.min(limbSwingAmount, 0.25F) * 4.0F;
+		float progress = Mth.sin(limbSwing) * amplifier;
+		float tentacleAngle = 0.45F * progress;
+		this.tentacleNorth.xRot = tentacleAngle;
+		this.tentacleNorthEast.xRot = tentacleAngle;
+		this.tentacleNorthWest.xRot = tentacleAngle;
+		this.tentacleSouth.xRot = tentacleAngle;
+		this.tentacleSouthEast.xRot = tentacleAngle;
+		this.tentacleSouthWest.xRot = -tentacleAngle;
+		this.tentacleEast.zRot = tentacleAngle;
+		this.tentacleWest.zRot = tentacleAngle;
+		progress = Mth.abs(progress);
+		float xzScale = 1.0F + 0.15F * progress;
+		float yScale = 1.0F - 0.25F * progress;
+		this.body.setScale(xzScale, yScale, xzScale);
+		this.body.setOffset(0.0F, 0.04166666666F * progress, 0.0F);
+		this.innerBody.setScale(xzScale, yScale, xzScale);
+		this.innerBody.y = 20.0F + 1.5F * progress;
 	}
 }

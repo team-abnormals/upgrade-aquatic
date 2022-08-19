@@ -4,8 +4,6 @@ import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
-import com.teamabnormals.upgrade_aquatic.common.network.RotateJellyfishMessage;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.other.UADamageSources;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -36,6 +34,8 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.LookControl;
+import net.minecraft.world.entity.ai.control.SmoothSwimmingMoveControl;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.ai.navigation.WaterBoundPathNavigation;
 import net.minecraft.world.entity.animal.Turtle;
@@ -47,7 +47,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.PacketDistributor;
 
 import java.util.List;
 import java.util.Random;
@@ -58,18 +57,20 @@ import java.util.function.Predicate;
  */
 public abstract class AbstractJellyfish extends BucketableWaterAnimal implements Endimatable {
 	protected static final EntityDataAccessor<Integer> COOLDOWN = SynchedEntityData.defineId(AbstractJellyfish.class, EntityDataSerializers.INT);
+
 	private static final Predicate<LivingEntity> CAN_STING = (entity) -> {
 		if (entity instanceof Player && ((Player) entity).isCreative()) return false;
 		return !entity.isSpectator() && !(entity instanceof AbstractJellyfish || entity instanceof Turtle);
 	};
-	public float[] lockedRotations = new float[2];
 
 	public AbstractJellyfish(EntityType<? extends AbstractJellyfish> type, Level world) {
 		super(type, world);
+		this.lookControl = new JellyfishLookControl(this);
+		this.moveControl = new SmoothSwimmingMoveControl(this, 45, 10, 1.0F, 0.0F, true);
 	}
 
-	public static AttributeSupplier.Builder registerAttributes() {
-		return Mob.createMobAttributes().add(Attributes.ATTACK_DAMAGE, 2.0D);
+	public static AttributeSupplier.Builder createAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MOVEMENT_SPEED, 1.25F).add(Attributes.ATTACK_DAMAGE, 2.0D);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -87,16 +88,12 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
 		this.readAdditionalSaveDataSharedWithBucket(compound);
-		this.lockedRotations[0] = compound.getFloat("LockedYaw");
-		this.lockedRotations[1] = compound.getFloat("LockedPitch");
 	}
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
 		this.addAdditionalSaveDataSharedWithBucket(compound);
-		compound.putFloat("LockedYaw", this.lockedRotations[0]);
-		compound.putFloat("LockedPitch", this.lockedRotations[1]);
 	}
 
 	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
@@ -110,17 +107,25 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	@Override
 	public void tick() {
 		super.tick();
-		this.getRotationController().tick();
-
-		this.setYRot(0);
-		this.yHeadRot = this.yBodyRot = 0;
 
 		if (this.isEffectiveAi()) {
-			if (!this.isPassenger()) {
-				this.getRotationController().rotate(this.lockedRotations[0], this.lockedRotations[1], 25);
-			} else {
-				this.getRotationController().rotate(0.0F, 0.0F, 1);
+			if (this.isPassenger()) {
+				this.setYRot(0.0F);
+				this.setXRot(0.0F);
 				this.setAirSupply(this.getMaxAirSupply());
+			} else if (this.isInWater() && this.getNavigation().isDone()) {
+				float yaw = this.getYRot();
+				float pitch = this.getXRot();
+				float pitchFactor = Mth.cos(pitch * ((float) Math.PI / 180F));
+				float x = -Mth.sin(yaw * ((float) Math.PI / 180F)) * pitchFactor;
+				float y = -Mth.sin(pitch * ((float) Math.PI / 180F));
+				float z = Mth.cos(yaw * ((float) Math.PI / 180F)) * pitchFactor;
+				Vec3 motion = new Vec3(x, y, z).normalize().scale(0.01666666666F);
+				this.push(motion.x, motion.y, motion.z);
+			}
+
+			if (!this.level.isClientSide && (Mth.abs(this.xRotO - this.getXRot()) >= 1.0F || Mth.abs(this.yRotO - this.getYRot()) >= 1.0F)) {
+				this.hasImpulse = true;
 			}
 		}
 
@@ -163,20 +168,9 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 		}
 	}
 
-	//TODO: Rework this
-	public boolean willBeBoostedOutOfWater(float yaw, float pitch) {
-		yaw = yaw + this.getYRot();
-		pitch = pitch - 90.0F;
-		float x = -Mth.sin(yaw * ((float) Math.PI / 180F)) * Mth.cos(pitch * ((float) Math.PI / 180F));
-		float y = -Mth.sin(pitch * ((float) Math.PI / 180F));
-		float z = Mth.cos(yaw * ((float) Math.PI / 180F)) * Mth.cos(pitch * ((float) Math.PI / 180F));
-		Vec3 motion = new Vec3(x, y, z).normalize();
-		return this.level.isEmptyBlock(new BlockPos(this.position().add(motion)));
-	}
-
 	@Override
-	public PathNavigation getNavigation() {
-		return new WaterBoundPathNavigation(this, this.level);
+	protected PathNavigation createNavigation(Level level) {
+		return new WaterBoundPathNavigation(this, level);
 	}
 
 	@Override
@@ -288,7 +282,10 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 		return new ItemStack(UAItems.JELLYFISH_SPAWN_EGG.get());
 	}
 
-	public abstract RotationController getRotationController();
+	@Override
+	public void calculateEntityAnimation(LivingEntity entity, boolean p_233629_2_) {
+		super.calculateEntityAnimation(entity, true);
+	}
 
 	public abstract BucketDisplayInfo getBucketDisplayInfo();
 
@@ -312,88 +309,17 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 		return new ItemStack(type.torch.get());
 	}
 
-	public static class RotationController {
-		public boolean rotating;
-		private final AbstractJellyfish jellyfish;
-		private float prevYaw, yaw, startingYaw;
-		private float prevPitch, pitch, startingPitch;
-		private float setYaw, setPitch;
-		private int tickLength;
-		private int ticksSinceNotRotating;
+	public static class JellyfishLookControl extends LookControl {
 
-		RotationController(AbstractJellyfish jellyfish) {
-			this.jellyfish = jellyfish;
-			this.startingPitch = jellyfish.getXRot();
-			this.startingYaw = jellyfish.getYRot();
-			this.tickLength = 1;
+		public JellyfishLookControl(Mob mob) {
+			super(mob);
 		}
 
-		protected void tick() {
-			this.prevYaw = this.yaw;
-			this.prevPitch = this.pitch;
-
-			if (!this.rotating) {
-				this.ticksSinceNotRotating++;
-
-				if (this.ticksSinceNotRotating > 5) {
-					if (this.setYaw != 0.0F) this.startingYaw = this.yaw;
-					if (this.setPitch != 0.0F) this.startingPitch = this.pitch;
-
-					this.setYaw = 0.0F;
-					this.setPitch = 0.0F;
-					this.tickLength = 20;
-				}
-			}
-
-			this.yaw = this.clamp((this.setYaw - this.startingYaw) <= 0, this.yaw + ((this.setYaw - this.startingYaw) / this.tickLength), this.startingYaw, this.setYaw);
-			this.pitch = this.clamp((this.setPitch - this.startingPitch) <= 0, this.pitch + ((this.setPitch - this.startingPitch) / this.tickLength), this.startingPitch, this.setPitch);
-			this.rotating = false;
+		@Override
+		protected boolean resetXRotOnTick() {
+			return false;
 		}
 
-		private float clamp(boolean invert, float num, float min, float max) {
-			if (invert) {
-				return Math.max(num, max);
-			} else {
-				if (num < min) {
-					return min;
-				} else {
-					return Math.min(num, max);
-				}
-			}
-		}
-
-		public void rotate(float yaw, float pitch, int tickLength) {
-			if (this.setYaw != yaw) this.startingYaw = this.yaw;
-			if (this.setPitch != pitch) this.startingPitch = this.pitch;
-
-			this.setYaw = yaw;
-			this.setPitch = pitch;
-			this.tickLength = tickLength;
-			this.rotating = true;
-			this.ticksSinceNotRotating = 0;
-
-			if (!this.jellyfish.level.isClientSide) {
-				UpgradeAquatic.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> this.jellyfish), new RotateJellyfishMessage(this.jellyfish.getId(), tickLength, yaw, pitch));
-			}
-		}
-
-		public float[] getRotations(float ptc) {
-			return new float[]{Mth.lerp(ptc, this.prevYaw, this.yaw), Mth.lerp(ptc, this.prevPitch, this.pitch)};
-		}
-
-		public void addVelocityForLookDirection(float force, float sizeScale) {
-			float[] rotations = this.getRotations(1.0F);
-			float yaw = rotations[0] + this.jellyfish.getYRot();
-			float pitch = rotations[1] - 90.0F;
-
-			float x = -Mth.sin(yaw * ((float) Math.PI / 180F)) * Mth.cos(pitch * ((float) Math.PI / 180F));
-			float y = -Mth.sin(pitch * ((float) Math.PI / 180F));
-			float z = Mth.cos(yaw * ((float) Math.PI / 180F)) * Mth.cos(pitch * ((float) Math.PI / 180F));
-
-			Vec3 motion = new Vec3(x, y, z).normalize().scale(force).scale(sizeScale);
-
-			this.jellyfish.push(motion.x, motion.y, motion.z);
-		}
 	}
 
 	public static record BucketDisplayInfo(String name, int id, int subId, JellyTorchType... yieldingTorchTypes) {

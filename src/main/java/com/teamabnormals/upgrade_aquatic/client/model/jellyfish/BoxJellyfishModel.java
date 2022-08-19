@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 
-import com.teamabnormals.blueprint.client.ClientInfo;
+import com.teamabnormals.blueprint.core.endimator.Endimator;
+import com.teamabnormals.blueprint.core.endimator.EndimatorModelPart;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorLayerDefinition;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorPartDefinition;
@@ -13,6 +14,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 
 /**
  * BoxJelly - SnakeBlock
@@ -21,26 +23,29 @@ import net.minecraft.resources.ResourceLocation;
 public class BoxJellyfishModel<E extends BoxJellyfish> extends EndimatorEntityModel<E> {
 	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "box_jellyfish"), "main");
 
-	public ModelPart body;
-	public ModelPart tentacleW;
-	public ModelPart tentacleS;
-	public ModelPart tentacleE;
-	public ModelPart tentacleN;
-	public ModelPart tentacleNE;
-	public ModelPart tentacleSE;
-	public ModelPart tentacleNW;
-	public ModelPart tentacleSW;
+	public EndimatorModelPart body;
+	public EndimatorModelPart tentacleW;
+	public EndimatorModelPart tentacleS;
+	public EndimatorModelPart tentacleE;
+	public EndimatorModelPart tentacleN;
+	public EndimatorModelPart tentacleNE;
+	public EndimatorModelPart tentacleSE;
+	public EndimatorModelPart tentacleNW;
+	public EndimatorModelPart tentacleSW;
 
+	@SuppressWarnings("all")
 	public BoxJellyfishModel(ModelPart root) {
-		this.body = root.getChild("body");
-		this.tentacleW = this.body.getChild("tentacleW");
-		this.tentacleS = this.body.getChild("tentacleS");
-		this.tentacleE = this.body.getChild("tentacleE");
-		this.tentacleN = this.body.getChild("tentacleN");
-		this.tentacleNE = this.body.getChild("tentacleNE");
-		this.tentacleSE = this.body.getChild("tentacleSE");
-		this.tentacleNW = this.body.getChild("tentacleNW");
-		this.tentacleSW = this.body.getChild("tentacleSW");
+		this.body = (EndimatorModelPart) root.getChild("body");
+		this.tentacleW = (EndimatorModelPart) this.body.getChild("tentacleW");
+		this.tentacleS = (EndimatorModelPart) this.body.getChild("tentacleS");
+		this.tentacleE = (EndimatorModelPart) this.body.getChild("tentacleE");
+		this.tentacleN = (EndimatorModelPart) this.body.getChild("tentacleN");
+		this.tentacleNE = (EndimatorModelPart) this.body.getChild("tentacleNE");
+		this.tentacleSE = (EndimatorModelPart) this.body.getChild("tentacleSE");
+		this.tentacleNW = (EndimatorModelPart) this.body.getChild("tentacleNW");
+		this.tentacleSW = (EndimatorModelPart) this.body.getChild("tentacleSW");
+		this.body.setShouldScaleChildren(false);
+		this.endimator = Endimator.compile(root);
 	}
 
 	public static EndimatorLayerDefinition createBodyLayer() {
@@ -58,15 +63,25 @@ public class BoxJellyfishModel<E extends BoxJellyfish> extends EndimatorEntityMo
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+		//TODO: Use Endimator in 1.19
+		float progress = Mth.abs(Mth.cos(limbSwing * 0.8F)) * Math.min(limbSwingAmount, 0.25F) * 4.0F;
+		float tentacleAngleOffset = 0.5236F * progress;
+		this.tentacleN.xRot = tentacleAngleOffset;
+		this.tentacleNW.xRot = tentacleAngleOffset;
+		this.tentacleNE.xRot = tentacleAngleOffset;
+		this.tentacleE.xRot = -tentacleAngleOffset;
+		this.tentacleSE.xRot = tentacleAngleOffset;
+		this.tentacleS.xRot = tentacleAngleOffset;
+		this.tentacleSW.xRot = tentacleAngleOffset;
+		this.tentacleW.xRot = tentacleAngleOffset;
+		float xzScale = 1.0F + 0.5F * progress;
+		this.body.setScale(xzScale, 1.0F - 0.15F * progress, xzScale);
 	}
 
 	@Override
-	public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		super.setupAnim(entity, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		float[] rotations = entity.getRotationController().getRotations(ClientInfo.getPartialTicks());
-		this.body.yRot = (float) Math.toRadians(rotations[0]);
-		this.body.xRot = (float) Math.toRadians(rotations[1]);
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
 	}
 }

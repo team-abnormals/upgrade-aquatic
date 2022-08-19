@@ -1,12 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish;
 
 import com.teamabnormals.blueprint.common.entity.ai.PredicateAttackGoal;
-import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
-import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.BoxJellyfishHuntGoal;
-import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishBoostGoal;
-import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishSwimIntoDirectionGoal;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
+import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishRandomSwimmingGoal;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -15,10 +11,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -27,23 +23,26 @@ import net.minecraft.world.level.Level;
  * @author SmellyModder(Luke Tonon)
  */
 public class BoxJellyfish extends ColoredSizableJellyfish {
-	private final RotationController rotationController;
 	private int huntingCooldown;
 
 	public BoxJellyfish(EntityType<? extends BoxJellyfish> type, Level world) {
 		super(type, world);
-		this.rotationController = new RotationController(this);
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {
-		return Mob.createMobAttributes().add(Attributes.ATTACK_DAMAGE, 5.0D);
+		return AbstractJellyfish.createAttributes().add(Attributes.ATTACK_DAMAGE, 5.0D);
 	}
 
 	@Override
 	protected void registerGoals() {
-		this.goalSelector.addGoal(1, new BoxJellyfishHuntGoal(this));
-		this.goalSelector.addGoal(2, new JellyfishSwimIntoDirectionGoal(this, UAPlayableEndimations.JELLYFISH_SWIM));
-		this.goalSelector.addGoal(3, new JellyfishBoostGoal(this, UAPlayableEndimations.JELLYFISH_BOOST));
+		this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 4.0F, true) {
+			@Override
+			public void stop() {
+				super.stop();
+				if (this.mob.getTarget() == null) ((BoxJellyfish) this.mob).setHuntingCooldown();
+			}
+		});
+		this.goalSelector.addGoal(2, new JellyfishRandomSwimmingGoal(this));
 
 		this.targetSelector.addGoal(1, new PredicateAttackGoal<>(this, AbstractFish.class, 150, true, true, null, owner -> !((BoxJellyfish) owner).hasCooldown() && !((BoxJellyfish) owner).hasHuntingCooldown()));
 	}
@@ -53,19 +52,6 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 		super.tick();
 
 		if (this.hasHuntingCooldown()) this.huntingCooldown--;
-
-		if (this.isEndimationPlaying(UAPlayableEndimations.JELLYFISH_BOOST) && this.isInWater()) {
-			this.setDeltaMovement(this.getDeltaMovement().scale(1.15F));
-		}
-	}
-
-	@Override
-	public void onEndimationStart(PlayableEndimation endimation, PlayableEndimation oldEndimation) {
-		if (endimation == UAPlayableEndimations.JELLYFISH_SWIM) {
-			this.getRotationController().addVelocityForLookDirection(0.6F, this.getSize());
-		} else if (endimation == UAPlayableEndimations.JELLYFISH_BOOST) {
-			this.getRotationController().addVelocityForLookDirection(0.25F, this.getSize());
-		};
 	}
 
 	@Override
@@ -160,11 +146,6 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 	@Override
 	protected float getHealthSizeMultiplier() {
 		return 8.0F;
-	}
-
-	@Override
-	public RotationController getRotationController() {
-		return this.rotationController;
 	}
 
 	@Override

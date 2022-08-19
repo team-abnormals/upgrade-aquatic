@@ -455,7 +455,6 @@ public class Thrasher extends Monster implements Endimatable {
 					this.finSpeed += (0.01125F - this.finSpeed) * 0.05F;
 				}
 
-				//TODO: Test this
 				var stunAnimation = this.stunAnimation;
 				if (this.isStunned()) {
 					if (stunAnimation.getTick() >= 10) {
