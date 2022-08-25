@@ -60,6 +60,7 @@ public class UAFeatures {
 
 		if (category == BiomeCategory.OCEAN) {
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_OCEAN);
+			generation.addCarver(Carving.AIR, UAWorldCarvers.UAConfiguredWorldCarvers.UNDERWATER_CANYON.getHolder().get());
 		}
 
 		if (category == BiomeCategory.BEACH) {

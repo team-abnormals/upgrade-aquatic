@@ -23,6 +23,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAMobEffects;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAWorldCarvers;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.entity.EntityType;
@@ -56,6 +57,8 @@ public class UpgradeAquatic {
 		UAMobEffects.MOB_EFFECTS.register(bus);
 		UAMobEffects.POTIONS.register(bus);
 		UAFeatures.FEATURES.register(bus);
+		UAWorldCarvers.WORLD_CARVERS.register(bus);
+		UAWorldCarvers.UAConfiguredWorldCarvers.CONFIGURED_WORLD_CARVERS.register(bus);
 		UAParticleTypes.PARTICLES.register(bus);
 		UADataSerializers.SERIALIZERS.register(bus);
 		MinecraftForge.EVENT_BUS.register(this);
