@@ -39,8 +39,6 @@ import java.util.List;
 public class UAFeatures {
 	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, UpgradeAquatic.MOD_ID);
 
-	public static final RegistryObject<Feature<NoneFeatureConfiguration>> PRISMARINE_CORAL_SHELF = FEATURES.register("prismarine_coral_shelf", () -> new PrismarineCoralShelfFeature(NoneFeatureConfiguration.CODEC));
-	public static final RegistryObject<Feature<NoneFeatureConfiguration>> PRISMARINE_CORAL_STALACTITE = FEATURES.register("prismarine_coral_stalactite", () -> new PrismarineStalactiteFeature(NoneFeatureConfiguration.CODEC));
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> PRISMARINE_CORAL = FEATURES.register("prismarine_coral", () -> new PrismarineCoralFeature(NoneFeatureConfiguration.CODEC));
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> PICKERELWEED = FEATURES.register("pickerelweed", () -> new PickerelweedFeature(NoneFeatureConfiguration.CODEC));
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> SEAROCKET = FEATURES.register("searocket", () -> new SearocketFeature(NoneFeatureConfiguration.CODEC));
@@ -56,10 +54,9 @@ public class UAFeatures {
 		BiomeCategory category = event.getCategory();
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
 
-		generation.addFeature(GenerationStep.Decoration.RAW_GENERATION, UAPlacedFeatures.PRISMARINE_CORAL);
-
 		if (category == BiomeCategory.OCEAN) {
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_OCEAN);
+			generation.addFeature(GenerationStep.Decoration.RAW_GENERATION, UAPlacedFeatures.PRISMARINE_CORAL);
 			generation.addCarver(Carving.AIR, UAWorldCarvers.UAConfiguredWorldCarvers.UNDERWATER_CANYON.getHolder().get());
 		}
 
@@ -120,7 +117,7 @@ public class UAFeatures {
 		public static final Holder<PlacedFeature> ORE_AMMONITE = register("ore_ammonite", UAConfiguredFeatures.ORE_AMMONITE, commonOrePlacement(30, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(73))));
 		public static final Holder<PlacedFeature> BEACHGRASS_DUNES = register("beachgrass_dunes", UAConfiguredFeatures.BEACHGRASS_DUNES, VegetationPlacements.worldSurfaceSquaredWithCount(14));
 		public static final Holder<PlacedFeature> RIVER_TREE = register("trees_river", UAConfiguredFeatures.RIVER_TREE, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.5F, 2)));
-		public static final Holder<PlacedFeature> PRISMARINE_CORAL = register("prismarine_coral", UAConfiguredFeatures.PRISMARINE_CORAL, CarvingMaskPlacement.forStep(Carving.LIQUID), RarityFilter.onAverageOnceEvery(10), BiomeFilter.biome());
+		public static final Holder<PlacedFeature> PRISMARINE_CORAL = register("prismarine_coral", UAConfiguredFeatures.PRISMARINE_CORAL, CarvingMaskPlacement.forStep(Carving.AIR), RarityFilter.onAverageOnceEvery(256), BiomeFilter.biome());
 
 		public static final Holder<PlacedFeature> PATCH_SEAROCKET = register("patch_searocket", UAConfiguredFeatures.PATCH_SEAROCKET, RarityFilter.onAverageOnceEvery(15), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final Holder<PlacedFeature> PATCH_PICKERELWEED = register("patch_pickerelweed", UAConfiguredFeatures.PATCH_PICKERELWEED, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
