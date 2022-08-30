@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "modid": "boatload",
+          "type": "forge:mod_loaded"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "furnace_boat",
+        "pattern": [
+          "F",
+          "B"
+        ],
+        "key": {
+          "F": {
+            "item": "minecraft:furnace"
+          },
+          "B": {
+            "item": "upgrade_aquatic:river_boat"
+          }
+        },
+        "result": {
+          "item": "upgrade_aquatic:river_furnace_boat"
+        }
+      }
+    }
+  ]
+}

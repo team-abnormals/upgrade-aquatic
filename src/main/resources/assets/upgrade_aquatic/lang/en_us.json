@@ -458,7 +458,13 @@
   "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Luminous Elder Prismarine Vertical Slab",
   
   "item.upgrade_aquatic.driftwood_boat": "Driftwood Boat",
+  "item.upgrade_aquatic.driftwood_furnace_boat": "Driftwood Boat with Furnace",
+  "item.upgrade_aquatic.driftwood_chest_boat": "Driftwood Boat with Chest",
+  "item.upgrade_aquatic.large_driftwood_boat": "Large Driftwood Boat",
   "item.upgrade_aquatic.river_boat": "River Boat",
+  "item.upgrade_aquatic.river_furnace_boat": "River Boat with Furnace",
+  "item.upgrade_aquatic.river_chest_boat": "River Boat with Chest",
+  "item.upgrade_aquatic.large_river_boat": "Large River Boat",
   
   "item.upgrade_aquatic.prismarine_rod": "Prismarine Rod",
   "item.upgrade_aquatic.thrasher_tooth": "Thrasher Tooth",
