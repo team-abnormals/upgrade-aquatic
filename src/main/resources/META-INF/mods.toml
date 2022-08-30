@@ -34,6 +34,6 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
 [[dependencies.upgrade_aquatic]]
     modId = "blueprint"
     mandatory = true
-    versionRange = "[5.4.1,)"
+    versionRange = "[5.4.4,)"
     ordering = "AFTER"
     side = "BOTH"
