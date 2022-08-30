@@ -1,8 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.levelgen.feature;
 
+import com.mojang.serialization.Codec;
 import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;

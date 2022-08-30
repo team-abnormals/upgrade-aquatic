@@ -22,89 +22,89 @@ import net.minecraftforge.registries.RegistryObject;
 public class UAParticleTypes {
 	public static final DeferredRegister<ParticleType<?>> PARTICLES = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, UpgradeAquatic.MOD_ID);
 
-	public static final RegistryObject<SimpleParticleType> PRISMARINE_SHOWER = registerSimpleParticleType("prismarine_shower", false);
-	public static final RegistryObject<SimpleParticleType> ELDER_PRISMARINE_SHOWER = registerSimpleParticleType("elder_prismarine_shower", false);
-	public static final RegistryObject<SimpleParticleType> SPECTRAL_CONSUME = registerSimpleParticleType("spectral_consume", false);
-	public static final RegistryObject<SimpleParticleType> PINK_JELLY_FLAME = registerSimpleParticleType("pink_jelly_flame", false);
-	public static final RegistryObject<SimpleParticleType> PURPLE_JELLY_FLAME = registerSimpleParticleType("purple_jelly_flame", false);
-	public static final RegistryObject<SimpleParticleType> BLUE_JELLY_FLAME = registerSimpleParticleType("blue_jelly_flame", false);
-	public static final RegistryObject<SimpleParticleType> GREEN_JELLY_FLAME = registerSimpleParticleType("green_jelly_flame", false);
-	public static final RegistryObject<SimpleParticleType> YELLOW_JELLY_FLAME = registerSimpleParticleType("yellow_jelly_flame", false);
-	public static final RegistryObject<SimpleParticleType> ORANGE_JELLY_FLAME = registerSimpleParticleType("orange_jelly_flame", false);
-	public static final RegistryObject<SimpleParticleType> RED_JELLY_FLAME = registerSimpleParticleType("red_jelly_flame", false);
-	public static final RegistryObject<SimpleParticleType> WHITE_JELLY_FLAME = registerSimpleParticleType("white_jelly_flame", false);
-	public static final RegistryObject<SimpleParticleType> PINK_JELLY_BLOB = registerSimpleParticleType("pink_jelly_blob", false);
-	public static final RegistryObject<SimpleParticleType> PURPLE_JELLY_BLOB = registerSimpleParticleType("purple_jelly_blob", false);
-	public static final RegistryObject<SimpleParticleType> BLUE_JELLY_BLOB = registerSimpleParticleType("blue_jelly_blob", false);
-	public static final RegistryObject<SimpleParticleType> GREEN_JELLY_BLOB = registerSimpleParticleType("green_jelly_blob", false);
-	public static final RegistryObject<SimpleParticleType> YELLOW_JELLY_BLOB = registerSimpleParticleType("yellow_jelly_blob", false);
-	public static final RegistryObject<SimpleParticleType> ORANGE_JELLY_BLOB = registerSimpleParticleType("orange_jelly_blob", false);
-	public static final RegistryObject<SimpleParticleType> RED_JELLY_BLOB = registerSimpleParticleType("red_jelly_blob", false);
-	public static final RegistryObject<SimpleParticleType> WHITE_JELLY_BLOB = registerSimpleParticleType("white_jelly_blob", false);
+	public static final RegistryObject<SimpleParticleType> PRISMARINE_SHOWER = register("prismarine_shower");
+	public static final RegistryObject<SimpleParticleType> ELDER_PRISMARINE_SHOWER = register("elder_prismarine_shower");
+	public static final RegistryObject<SimpleParticleType> SPECTRAL_CONSUME = register("spectral_consume");
+	public static final RegistryObject<SimpleParticleType> PINK_JELLY_FLAME = register("pink_jelly_flame");
+	public static final RegistryObject<SimpleParticleType> PURPLE_JELLY_FLAME = register("purple_jelly_flame");
+	public static final RegistryObject<SimpleParticleType> BLUE_JELLY_FLAME = register("blue_jelly_flame");
+	public static final RegistryObject<SimpleParticleType> GREEN_JELLY_FLAME = register("green_jelly_flame");
+	public static final RegistryObject<SimpleParticleType> YELLOW_JELLY_FLAME = register("yellow_jelly_flame");
+	public static final RegistryObject<SimpleParticleType> ORANGE_JELLY_FLAME = register("orange_jelly_flame");
+	public static final RegistryObject<SimpleParticleType> RED_JELLY_FLAME = register("red_jelly_flame");
+	public static final RegistryObject<SimpleParticleType> WHITE_JELLY_FLAME = register("white_jelly_flame");
+	public static final RegistryObject<SimpleParticleType> PINK_JELLY_BLOB = register("pink_jelly_blob");
+	public static final RegistryObject<SimpleParticleType> PURPLE_JELLY_BLOB = register("purple_jelly_blob");
+	public static final RegistryObject<SimpleParticleType> BLUE_JELLY_BLOB = register("blue_jelly_blob");
+	public static final RegistryObject<SimpleParticleType> GREEN_JELLY_BLOB = register("green_jelly_blob");
+	public static final RegistryObject<SimpleParticleType> YELLOW_JELLY_BLOB = register("yellow_jelly_blob");
+	public static final RegistryObject<SimpleParticleType> ORANGE_JELLY_BLOB = register("orange_jelly_blob");
+	public static final RegistryObject<SimpleParticleType> RED_JELLY_BLOB = register("red_jelly_blob");
+	public static final RegistryObject<SimpleParticleType> WHITE_JELLY_BLOB = register("white_jelly_blob");
 
-	private static RegistryObject<SimpleParticleType> registerSimpleParticleType(String name, boolean alwaysShow) {
-		return PARTICLES.register(name, () -> new SimpleParticleType(alwaysShow));
+	private static RegistryObject<SimpleParticleType> register(String name) {
+		return PARTICLES.register(name, () -> new SimpleParticleType(false));
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void registerParticleTypes(ParticleFactoryRegisterEvent event) {
-		ParticleEngine particleEngine = Minecraft.getInstance().particleEngine;
+		ParticleEngine engine = Minecraft.getInstance().particleEngine;
 		if (PRISMARINE_SHOWER.isPresent()) {
-			particleEngine.register(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
+			engine.register(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
 		}
 		if (ELDER_PRISMARINE_SHOWER.isPresent()) {
-			particleEngine.register(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);
+			engine.register(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);
 		}
 		if (SPECTRAL_CONSUME.isPresent()) {
-			particleEngine.register(SPECTRAL_CONSUME.get(), SpectralConsumeParticle.Factory::new);
+			engine.register(SPECTRAL_CONSUME.get(), SpectralConsumeParticle.Factory::new);
 		}
 		if (PINK_JELLY_FLAME.isPresent()) {
-			particleEngine.register(PINK_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+			engine.register(PINK_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 		}
 		if (PURPLE_JELLY_FLAME.isPresent()) {
-			particleEngine.register(PURPLE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+			engine.register(PURPLE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 		}
 		if (BLUE_JELLY_FLAME.isPresent()) {
-			particleEngine.register(BLUE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+			engine.register(BLUE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 		}
 		if (GREEN_JELLY_FLAME.isPresent()) {
-			particleEngine.register(GREEN_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+			engine.register(GREEN_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 		}
 		if (YELLOW_JELLY_FLAME.isPresent()) {
-			particleEngine.register(YELLOW_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+			engine.register(YELLOW_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 		}
 		if (ORANGE_JELLY_FLAME.isPresent()) {
-			particleEngine.register(ORANGE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+			engine.register(ORANGE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 		}
 		if (RED_JELLY_FLAME.isPresent()) {
-			particleEngine.register(RED_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+			engine.register(RED_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 		}
 		if (WHITE_JELLY_FLAME.isPresent()) {
-			particleEngine.register(WHITE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+			engine.register(WHITE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
 		}
 		if (PINK_JELLY_BLOB.isPresent()) {
-			particleEngine.register(PINK_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			engine.register(PINK_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 		}
 		if (PURPLE_JELLY_BLOB.isPresent()) {
-			particleEngine.register(PURPLE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			engine.register(PURPLE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 		}
 		if (BLUE_JELLY_BLOB.isPresent()) {
-			particleEngine.register(BLUE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			engine.register(BLUE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 		}
 		if (GREEN_JELLY_BLOB.isPresent()) {
-			particleEngine.register(GREEN_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			engine.register(GREEN_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 		}
 		if (YELLOW_JELLY_BLOB.isPresent()) {
-			particleEngine.register(YELLOW_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			engine.register(YELLOW_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 		}
 		if (ORANGE_JELLY_BLOB.isPresent()) {
-			particleEngine.register(ORANGE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			engine.register(ORANGE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 		}
 		if (RED_JELLY_BLOB.isPresent()) {
-			particleEngine.register(RED_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			engine.register(RED_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 		}
 		if (WHITE_JELLY_BLOB.isPresent()) {
-			particleEngine.register(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+			engine.register(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 		}
 	}
 }

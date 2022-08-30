@@ -3,12 +3,12 @@ package com.teamabnormals.upgrade_aquatic.core.other;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
-import net.minecraft.world.level.FoliageColor;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.FoliageColor;
 
 import java.util.Arrays;
 

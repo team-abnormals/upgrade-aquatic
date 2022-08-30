@@ -1,9 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
+import com.teamabnormals.blueprint.core.util.registry.BlockEntitySubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.block.entity.BedrollBlockEntity;
 import com.teamabnormals.upgrade_aquatic.common.block.entity.ElderEyeBlockEntity;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.blueprint.core.util.registry.BlockEntitySubRegistryHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;

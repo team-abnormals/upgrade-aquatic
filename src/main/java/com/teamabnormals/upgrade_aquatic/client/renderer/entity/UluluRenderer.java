@@ -1,9 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.upgrade_aquatic.client.model.UluluModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Ululu;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;

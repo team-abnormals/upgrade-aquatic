@@ -3,11 +3,7 @@ package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.util;
 import com.teamabnormals.blueprint.core.Blueprint;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 public class JellyfishSizeMap {
 	protected final TreeMap<Float, Integer> sizeMap;

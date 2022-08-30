@@ -1,8 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.Ululu;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.Ululu;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;

@@ -2,12 +2,12 @@ package com.teamabnormals.upgrade_aquatic.client;
 
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.TextureAtlasHolder;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.resources.TextureAtlasHolder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ReloadableResourceManager;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;

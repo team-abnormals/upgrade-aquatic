@@ -4,9 +4,9 @@ import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimationManager;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public final class UAPlayableEndimations {
 	public static final PlayableEndimation THRASHER_SNAP_AT_PRAY = register("thrasher/snap_at_pray", 10, PlayableEndimation.LoopType.NONE);
 	public static final PlayableEndimation THRASHER_HURT = register("thrasher/hurt", 10, PlayableEndimation.LoopType.NONE);

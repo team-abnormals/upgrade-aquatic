@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block.coralstone;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.blueprint.core.util.BlockUtil;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;

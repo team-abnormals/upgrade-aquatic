@@ -1,12 +1,11 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.blueprint.core.util.registry.SoundSubRegistryHelper;
+import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.common.util.ForgeSoundType;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.RegistryObject;
 

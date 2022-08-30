@@ -1,10 +1,10 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.BoxJellyfishModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.layers.JellyfishEmissiveLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.BoxJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;

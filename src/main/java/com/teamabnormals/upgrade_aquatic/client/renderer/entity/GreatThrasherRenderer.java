@@ -1,10 +1,10 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.upgrade_aquatic.client.model.ThrasherModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.ThrasherRenderLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.GreatThrasher;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

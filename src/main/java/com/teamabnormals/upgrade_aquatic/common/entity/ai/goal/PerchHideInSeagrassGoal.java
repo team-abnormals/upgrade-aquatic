@@ -1,8 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal;
 
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Perch;
-import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;

@@ -1,13 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.blueprint.core.endimator.Endimator;
 import com.teamabnormals.blueprint.core.endimator.EndimatorModelPart;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorLayerDefinition;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorPartDefinition;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.CassiopeaJellyfish;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

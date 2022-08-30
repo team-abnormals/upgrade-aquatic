@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

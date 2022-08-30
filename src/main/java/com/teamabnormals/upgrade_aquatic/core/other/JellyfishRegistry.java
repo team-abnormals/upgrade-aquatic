@@ -55,5 +55,6 @@ public class JellyfishRegistry {
 		return epicJellies.get(random.nextInt(epicJellies.size()));
 	}
 
-	public record JellyfishEntry<J extends AbstractJellyfish>(Supplier<EntityType<J>> jellyfish, Rarity rarity) {}
+	public record JellyfishEntry<J extends AbstractJellyfish>(Supplier<EntityType<J>> jellyfish, Rarity rarity) {
+	}
 }

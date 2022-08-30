@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block.coralstone;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.blueprint.common.block.VerticalSlabBlock;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

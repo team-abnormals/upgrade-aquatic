@@ -1,9 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class PrismarineRodBlock extends RotatedPillarBlock {
 

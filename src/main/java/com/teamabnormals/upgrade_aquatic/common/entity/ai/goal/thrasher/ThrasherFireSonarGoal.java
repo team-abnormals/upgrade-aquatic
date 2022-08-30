@@ -1,11 +1,11 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.projectile.SonarWave;
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.blueprint.core.util.EntityUtil;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
+import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
+import com.teamabnormals.upgrade_aquatic.common.entity.projectile.SonarWave;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.level.block.Blocks;

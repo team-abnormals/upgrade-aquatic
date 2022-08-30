@@ -7,8 +7,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 
 public class GreatThrasher extends Thrasher {
 	private static final EntityDimensions DEFAULT_SIZE = EntityDimensions.fixed(2.8F, 1.575F);

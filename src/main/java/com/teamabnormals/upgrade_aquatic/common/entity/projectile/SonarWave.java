@@ -1,8 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.common.entity.projectile;
 
+import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
-import com.teamabnormals.blueprint.client.ClientInfo;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;

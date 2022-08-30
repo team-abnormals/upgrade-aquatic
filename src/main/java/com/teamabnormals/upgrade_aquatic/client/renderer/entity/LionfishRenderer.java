@@ -1,14 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 import com.teamabnormals.upgrade_aquatic.client.model.LionfishModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import com.mojang.math.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

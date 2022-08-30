@@ -1,13 +1,13 @@
 package com.teamabnormals.upgrade_aquatic.client.model.jellyfish;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.blueprint.core.endimator.Endimator;
 import com.teamabnormals.blueprint.core.endimator.EndimatorModelPart;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorLayerDefinition;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorPartDefinition;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.ImmortalJellyfish;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -51,7 +51,7 @@ public class ImmortalJellyfishModel<E extends ImmortalJellyfish> extends Endimat
 		this.body.setShouldScaleChildren(false);
 		this.endimator = Endimator.compile(root);
 	}
-	
+
 	public static EndimatorLayerDefinition createBodyLayer() {
 		EndimatorPartDefinition root = EndimatorPartDefinition.root();
 		EndimatorPartDefinition body = root.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 28).addBox(-4.0F, -4.0F, -4.0F, 8, 7, 8), PartPose.offsetAndRotation(0.0F, 20.0F, 0.0F, 0.0F, 0.0F, 0.0F));
@@ -67,7 +67,7 @@ public class ImmortalJellyfishModel<E extends ImmortalJellyfish> extends Endimat
 		EndimatorPartDefinition tentacleNorthWest = body.addOrReplaceChild("tentacleNorthWest", CubeListBuilder.create().texOffs(0, -8).addBox(0.0F, 0.0F, 0.0F, 0, 8, 8), PartPose.offsetAndRotation(3.4F, 3.8F, -3.4F, 0.43633232F, 2.3561945F, 0.0F));
 		return new EndimatorLayerDefinition(root, 64, 64);
 	}
-	
+
 	@Override
 	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
 		this.innerBody.render(matrixStackIn, bufferIn, 240, packedOverlayIn, red, green, blue, alpha);

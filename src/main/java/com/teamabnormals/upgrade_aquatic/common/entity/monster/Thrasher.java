@@ -4,16 +4,12 @@ import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.TimedEndimation;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
-import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.ThrasherFindDetectionPointGoal;
-import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.ThrasherFireSonarGoal;
-import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.ThrasherGrabGoal;
-import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.ThrasherRandomSwimGoal;
-import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.ThrasherThrashGoal;
+import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.*;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -273,10 +269,12 @@ public class Thrasher extends Monster implements Endimatable {
 	}
 
 	@Override
-	public void onInsideBubbleColumn(boolean downwards) {}
+	public void onInsideBubbleColumn(boolean downwards) {
+	}
 
 	@Override
-	public void onAboveBubbleCol(boolean downwards) {}
+	public void onAboveBubbleCol(boolean downwards) {
+	}
 
 	@Override
 	public boolean hurt(DamageSource source, float amount) {
@@ -531,7 +529,8 @@ public class Thrasher extends Monster implements Endimatable {
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, BlockState blockIn) {}
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
+	}
 
 	@Override
 	public int getAmbientSoundInterval() {

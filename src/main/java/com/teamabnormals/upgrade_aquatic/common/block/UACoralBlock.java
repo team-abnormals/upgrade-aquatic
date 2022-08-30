@@ -1,11 +1,11 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.CoralPlantBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CoralPlantBlock;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class UACoralBlock extends CoralPlantBlock {
 

@@ -1,18 +1,18 @@
 package com.teamabnormals.upgrade_aquatic.common.effect;
 
-import com.teamabnormals.upgrade_aquatic.core.other.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Flare;
+import com.teamabnormals.upgrade_aquatic.core.other.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.stats.StatsCounter;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.InstantenousMobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.effect.InstantenousMobEffect;
-import net.minecraft.stats.StatsCounter;
-import net.minecraft.stats.Stats;
-import net.minecraft.world.damagesource.DamageSource;
 
 public class InsomniaMobEffect extends InstantenousMobEffect {
 

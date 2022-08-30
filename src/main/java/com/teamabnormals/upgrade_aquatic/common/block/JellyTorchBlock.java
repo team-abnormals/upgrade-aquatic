@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

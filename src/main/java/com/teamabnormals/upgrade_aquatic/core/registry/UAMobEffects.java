@@ -1,11 +1,11 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
+import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.common.effect.InsomniaMobEffect;
 import com.teamabnormals.upgrade_aquatic.common.effect.RepellenceMobEffect;
 import com.teamabnormals.upgrade_aquatic.common.effect.RestfulnessMobEffect;
 import com.teamabnormals.upgrade_aquatic.common.effect.VibingMobEffect;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.blueprint.core.util.DataUtil;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Items;

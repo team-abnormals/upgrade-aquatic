@@ -1,9 +1,9 @@
 package com.teamabnormals.upgrade_aquatic.core.events;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.TranslatableComponent;
