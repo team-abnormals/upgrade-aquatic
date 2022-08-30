@@ -41,6 +41,7 @@ public class UAClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_SAPLING.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAVES.get(), CUTOUT_MIPPED);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAF_CARPET.get(), CUTOUT_MIPPED);
+		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAF_PILE.get(), CUTOUT_MIPPED);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_HEDGE.get(), CUTOUT_MIPPED);
 
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.BLUE_PICKERELWEED.get(), CUTOUT);
@@ -171,7 +172,7 @@ public class UAClientCompat {
 		BlockColors blockColors = Minecraft.getInstance().getBlockColors();
 		ItemColors itemColors = Minecraft.getInstance().getItemColors();
 
-		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE, UABlocks.MULBERRY_VINE));
-		DataUtil.registerBlockItemColor(itemColors, (color, items) -> FoliageColor.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE));
+		DataUtil.registerBlockColor(blockColors, (x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_PILE, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE, UABlocks.MULBERRY_VINE));
+		DataUtil.registerBlockItemColor(itemColors, (color, items) -> FoliageColor.get(0.5D, 1.0D), Arrays.asList(UABlocks.RIVER_LEAVES, UABlocks.RIVER_LEAF_PILE, UABlocks.RIVER_LEAF_CARPET, UABlocks.RIVER_HEDGE));
 	}
 }

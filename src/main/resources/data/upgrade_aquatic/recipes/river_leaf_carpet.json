@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "leaf_carpet",
   "pattern": [
     "##"
   ],
@@ -14,17 +15,8 @@
   },
   "conditions": [
     {
-      "type": "forge:and",
-      "values": [
-        {
-          "type": "forge:mod_loaded",
-          "modid": "quark"
-        },
-        {
-          "type": "blueprint:quark_flag",
-          "flag": "leaf_carpet"
-        }
-      ]
+      "type": "blueprint:quark_flag",
+      "flag": "leaf_carpet"
     }
   ]
 }

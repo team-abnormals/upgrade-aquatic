@@ -1,32 +1,40 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#",
-    "#",
-    "#"
-  ],
-  "key": {
-    "#": {
-      "item": "upgrade_aquatic:river_planks"
-    }
-  },
-  "result": {
-    "item": "upgrade_aquatic:river_boards",
-    "count": 3
-  },
-  "conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "blueprint:and",
-      "values": [
+      "conditions": [
         {
-          "type": "forge:mod_loaded",
-          "modid": "woodworks"
-        },
-        {
-          "type": "woodworks:config",
-          "value": "wooden_boards"
+          "type": "blueprint:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "woodworks"
+            },
+            {
+              "type": "woodworks:config",
+              "value": "wooden_boards"
+            }
+          ]
         }
-      ]
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "wooden_boards",
+        "pattern": [
+          "#",
+          "#",
+          "#"
+        ],
+        "key": {
+          "#": {
+            "item": "upgrade_aquatic:river_planks"
+          }
+        },
+        "result": {
+          "item": "upgrade_aquatic:river_boards",
+          "count": 3
+        }
+      }
     }
   ]
 }

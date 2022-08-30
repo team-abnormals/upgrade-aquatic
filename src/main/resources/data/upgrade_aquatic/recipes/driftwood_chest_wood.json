@@ -1,33 +1,40 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "driftwood_chest",
-  "pattern": [
-    "###",
-    "# #",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "tag": "upgrade_aquatic:driftwood_logs"
-    }
-  },
-  "result": {
-    "item": "upgrade_aquatic:driftwood_chest",
-    "count": 4
-  },
-  "conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "forge:and",
-      "values": [
+      "conditions": [
         {
-          "type": "blueprint:quark_flag",
-          "flag": "wood_to_chest_recipes"
-        },
-        {
-          "type": "blueprint:quark_flag",
-          "flag": "variant_chests"
+          "values": [
+            {
+              "flag": "variant_chests",
+              "type": "blueprint:quark_flag"
+            },
+            {
+              "flag": "wood_to_chest_recipes",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:and"
         }
-      ]
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "wooden_chest",
+        "pattern": [
+          "###",
+          "# #",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "tag": "upgrade_aquatic:driftwood_logs"
+          }
+        },
+        "result": {
+          "item": "upgrade_aquatic:driftwood_chest",
+          "count": 4
+        }
+      }
     }
   ]
-} 
+}

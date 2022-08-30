@@ -1,20 +1,46 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "upgrade_aquatic:driftwood_chest"
-    },
-    {
-      "item": "minecraft:tripwire_hook"
-    }
-  ],
-  "result": {
-    "item": "upgrade_aquatic:driftwood_trapped_chest"
-  },
-  "conditions": [
-    {
-      "type": "blueprint:quark_flag",
-      "flag": "variant_chests"
+      "conditions": [
+        {
+          "values": [
+            {
+              "type": "blueprint:and",
+              "values": [
+                {
+                  "type": "forge:mod_loaded",
+                  "modid": "woodworks"
+                },
+                {
+                  "type": "woodworks:config",
+                  "value": "wooden_chests"
+                }
+              ]
+            },
+            {
+              "flag": "variant_chests",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:or"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "group": "wooden_trapped_chest",
+        "ingredients": [
+          {
+            "item": "upgrade_aquatic:driftwood_chest"
+          },
+          {
+            "item": "minecraft:tripwire_hook"
+          }
+        ],
+        "result": {
+          "item": "upgrade_aquatic:driftwood_trapped_chest"
+        }
+      }
     }
   ]
 }

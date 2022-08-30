@@ -1,25 +1,51 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###",
-    "XXX",
-    "###"
-  ],
-  "key": {
-    "#": {
-      "item": "upgrade_aquatic:river_planks"
-    },
-    "X": {
-      "item": "minecraft:book"
-    }
-  },
-  "result": {
-    "item": "upgrade_aquatic:river_bookshelf"
-  },
-  "conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "blueprint:quark_flag",
-      "flag": "variant_bookshelves"
+      "conditions": [
+        {
+          "values": [
+            {
+              "type": "blueprint:and",
+              "values": [
+                {
+                  "type": "forge:mod_loaded",
+                  "modid": "woodworks"
+                },
+                {
+                  "type": "woodworks:config",
+                  "value": "wooden_bookshelves"
+                }
+              ]
+            },
+            {
+              "flag": "variant_bookshelves",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:or"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "wooden_bookshelf",
+        "pattern": [
+          "###",
+          "XXX",
+          "###"
+        ],
+        "key": {
+          "#": {
+            "item": "upgrade_aquatic:river_planks"
+          },
+          "X": {
+            "item": "minecraft:book"
+          }
+        },
+        "result": {
+          "item": "upgrade_aquatic:river_bookshelf"
+        }
+      }
     }
   ]
 }

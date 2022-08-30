@@ -2,7 +2,7 @@
 	"variants": {
 		"axis=x": {
 			"model": "upgrade_aquatic:block/river_boards_horizontal",
-			"y": 90
+			"y": 270
 		},
 		"axis=y": {
 			"model": "upgrade_aquatic:block/river_boards"

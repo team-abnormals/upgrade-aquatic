@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "upgrade_aquatic:item/river_chest_boat"
+  }
+}

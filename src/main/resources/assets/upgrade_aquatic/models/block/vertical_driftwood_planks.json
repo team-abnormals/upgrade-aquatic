@@ -1,0 +1,6 @@
+{
+  "parent": "blueprint:block/vertical_planks",
+  "textures": {
+    "all": "upgrade_aquatic:block/driftwood_planks"
+  }
+}

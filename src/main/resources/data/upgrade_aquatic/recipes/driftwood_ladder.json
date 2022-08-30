@@ -1,27 +1,52 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "upgrade_aquatic",
-  "pattern": [
-    "# #",
-    "#W#",
-    "# #"
-  ],
-  "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "W": {
-      "item": "upgrade_aquatic:driftwood_planks"
-    }
-  },
-  "result": {
-    "item": "upgrade_aquatic:driftwood_ladder",
-    "count": 4
-  },
-  "conditions": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "type": "blueprint:quark_flag",
-      "flag": "variant_ladders"
+      "conditions": [
+        {
+          "values": [
+            {
+              "type": "blueprint:and",
+              "values": [
+                {
+                  "type": "forge:mod_loaded",
+                  "modid": "woodworks"
+                },
+                {
+                  "type": "woodworks:config",
+                  "value": "wooden_ladders"
+                }
+              ]
+            },
+            {
+              "flag": "variant_ladders",
+              "type": "blueprint:quark_flag"
+            }
+          ],
+          "type": "forge:or"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "wooden_ladder",
+        "pattern": [
+          "S S",
+          "S#S",
+          "S S"
+        ],
+        "key": {
+          "#": {
+            "item": "upgrade_aquatic:driftwood_planks"
+          },
+          "S": {
+            "item": "minecraft:stick"
+          }
+        },
+        "result": {
+          "item": "upgrade_aquatic:driftwood_ladder",
+          "count": 4
+        }
+      }
     }
   ]
 }

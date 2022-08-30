@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "upgrade_aquatic",
+  "group": "wooden_fence",
   "pattern": [
     "W#W",
     "W#W"

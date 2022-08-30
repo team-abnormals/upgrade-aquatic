@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "upgrade_aquatic",
+  "group": "wooden_button",
   "ingredients": [
     {
       "item": "upgrade_aquatic:driftwood_planks"

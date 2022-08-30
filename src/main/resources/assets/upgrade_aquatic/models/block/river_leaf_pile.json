@@ -1,0 +1,6 @@
+{
+  "parent": "blueprint:block/tinted_leaf_pile",
+  "textures": {
+    "all": "upgrade_aquatic:block/river_leaves"
+  }
+}

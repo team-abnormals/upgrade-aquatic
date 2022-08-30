@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "leaf_pile",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:river_leaves"
+    }
+  ],
+  "result": {
+    "item": "upgrade_aquatic:river_leaf_pile",
+    "count": 4
+  }
+}
