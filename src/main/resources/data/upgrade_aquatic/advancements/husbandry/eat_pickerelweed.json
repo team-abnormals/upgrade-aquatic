@@ -20,7 +20,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "upgrade_aquatic:boiled_blue_pickerelweed"
+          "items": [
+            "upgrade_aquatic:boiled_blue_pickerelweed"
+          ]
         }
       }
     },
@@ -28,7 +30,9 @@
       "trigger": "minecraft:consume_item",
       "conditions": {
         "item": {
-          "item": "upgrade_aquatic:boiled_purple_pickerelweed"
+          "items": [
+            "upgrade_aquatic:boiled_purple_pickerelweed"
+          ]
         }
       }
     }
