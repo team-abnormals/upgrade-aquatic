@@ -88,6 +88,7 @@ public class UACompat {
 		DataUtil.registerFlammable(UABlocks.DRIFTWOOD_BOOKSHELF.get(), 30, 20);
 		DataUtil.registerFlammable(UABlocks.DRIFTWOOD_POST.get(), 5, 20);
 		DataUtil.registerFlammable(UABlocks.STRIPPED_DRIFTWOOD_POST.get(), 5, 20);
+		DataUtil.registerFlammable(UABlocks.DRIFTWOOD_BEEHIVE.get(), 5, 20);
 
 		DataUtil.registerFlammable(UABlocks.RIVER_LEAVES.get(), 30, 60);
 		DataUtil.registerFlammable(UABlocks.RIVER_LOG.get(), 5, 5);
@@ -108,6 +109,7 @@ public class UACompat {
 		DataUtil.registerFlammable(UABlocks.RIVER_POST.get(), 5, 20);
 		DataUtil.registerFlammable(UABlocks.STRIPPED_RIVER_POST.get(), 5, 20);
 		DataUtil.registerFlammable(UABlocks.RIVER_HEDGE.get(), 5, 20);
+		DataUtil.registerFlammable(UABlocks.RIVER_BEEHIVE.get(), 5, 20);
 	}
 
 }
