@@ -47,48 +47,6 @@
                 }
               ]
             }
-          },
-          "upgrade_aquatic:box_jellyfish": {
-            "trigger": "minecraft:player_killed_entity",
-            "conditions": {
-              "entity": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "predicate": {
-                    "type": "upgrade_aquatic:box_jellyfish"
-                  },
-                  "entity": "this"
-                }
-              ]
-            }
-          },
-          "upgrade_aquatic:cassiopea_jellyfish": {
-            "trigger": "minecraft:player_killed_entity",
-            "conditions": {
-              "entity": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "predicate": {
-                    "type": "upgrade_aquatic:cassiopea_jellyfish"
-                  },
-                  "entity": "this"
-                }
-              ]
-            }
-          },
-          "upgrade_aquatic:immortal_jellyfish": {
-            "trigger": "minecraft:player_killed_entity",
-            "conditions": {
-              "entity": [
-                {
-                  "condition": "minecraft:entity_properties",
-                  "predicate": {
-                    "type": "upgrade_aquatic:immortal_jellyfish"
-                  },
-                  "entity": "this"
-                }
-              ]
-            }
           }
         },
         "indexed_requirements": [
@@ -98,10 +56,7 @@
             "requirements": [
               "upgrade_aquatic:thrasher",
               "upgrade_aquatic:great_thrasher",
-              "upgrade_aquatic:flare",
-              "upgrade_aquatic:box_jellyfish",
-              "upgrade_aquatic:cassiopea_jellyfish",
-              "upgrade_aquatic:immortal_jellyfish"
+              "upgrade_aquatic:flare"
             ]
           }
         ]

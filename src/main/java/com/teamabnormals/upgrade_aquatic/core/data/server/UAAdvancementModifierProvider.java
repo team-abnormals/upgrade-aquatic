@@ -20,7 +20,7 @@ import net.minecraft.world.item.MobBucketItem;
 import java.util.ArrayList;
 
 public final class UAAdvancementModifierProvider extends AdvancementModifierProvider {
-	private static final EntityType<?>[] MOBS_TO_KILL = new EntityType[]{UAEntityTypes.THRASHER.get(), UAEntityTypes.GREAT_THRASHER.get(), UAEntityTypes.FLARE.get(), UAEntityTypes.BOX_JELLYFISH.get(), UAEntityTypes.CASSIOPEA_JELLYFISH.get(), UAEntityTypes.IMMORTAL_JELLYFISH.get()};
+	private static final EntityType<?>[] MOBS_TO_KILL = new EntityType[]{UAEntityTypes.THRASHER.get(), UAEntityTypes.GREAT_THRASHER.get(), UAEntityTypes.FLARE.get()};
 
 	public UAAdvancementModifierProvider(DataGenerator dataGenerator) {
 		super(dataGenerator, UpgradeAquatic.MOD_ID);
