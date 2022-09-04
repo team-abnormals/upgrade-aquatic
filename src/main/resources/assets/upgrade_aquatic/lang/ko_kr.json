@@ -446,12 +446,7 @@
   "block.upgrade_aquatic.luminous_prismarine_slab": "빛나는 프리즈머린 반 블록",
   "block.upgrade_aquatic.luminous_prismarine_stairs": "빛나는 프리즈머린 계단",
   "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "빛나는 프리즈머린 세로 반 블록",
-  
-  "block.upgrade_aquatic.luminous_elder_prismarine": "빛나는 엘더 프리즈머린",
-  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "빛나는 엘더 프리즈머린 반 블록",
-  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "빛나는 엘더 프리즈머린 계단",
-  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "빛나는 엘더 프리즈머린 세로 반 블록",
-  
+
   "_comment2": "Items",
   
   "item.upgrade_aquatic.driftwood_boat": "유목 보트",

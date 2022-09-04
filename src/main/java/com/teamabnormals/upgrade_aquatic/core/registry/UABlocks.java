@@ -506,11 +506,6 @@ public class UABlocks {
 	public static final RegistryObject<Block> LUMINOUS_PRISMARINE_SLAB = HELPER.createBlock("luminous_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> LUMINOUS_PRISMARINE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "luminous_prismarine_vertical_slab", () -> new VerticalSlabBlock(UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-	public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE = HELPER.createCompatBlock("quark", "luminous_elder_prismarine", () -> new ConduitSupportingBlock(UAProperties.LUMINOUS_ELDER_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE_STAIRS = HELPER.createCompatBlock("quark", "luminous_elder_prismarine_stairs", () -> new StairBlock(() -> LUMINOUS_ELDER_PRISMARINE.get().defaultBlockState(), UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE_SLAB = HELPER.createCompatBlock("quark", "luminous_elder_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_ELDER_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> LUMINOUS_ELDER_PRISMARINE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "luminous_elder_prismarine_vertical_slab", () -> new VerticalSlabBlock(UAProperties.LUMINOUS_ELDER_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
 	private static Supplier<BedrollBlock> createBedroll(DyeColor color) {
 		return () -> new BedrollBlock(color, BlockBehaviour.Properties.of(Material.WOOL, (state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? color.getMaterialColor() : MaterialColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion());
 	}
@@ -523,7 +518,6 @@ public class UABlocks {
 		public static final BlockBehaviour.Properties DEAD_CORAL = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().noCollission().instabreak();
 
 		public static final BlockBehaviour.Properties LUMINOUS_PRISMARINE = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.DIAMOND).strength(1.5F, 6.0F).lightLevel((unknown) -> (8)).hasPostProcess(PropertyUtil::always).emissiveRendering(PropertyUtil::always);
-		public static final BlockBehaviour.Properties LUMINOUS_ELDER_PRISMARINE = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_WHITE).strength(1.5F, 6.0F).lightLevel((unknown) -> (8)).hasPostProcess(PropertyUtil::always).emissiveRendering(PropertyUtil::always);
 
 		public static final BlockBehaviour.Properties CORALSTONE = Properties.copy(Blocks.STONE).randomTicks();
 

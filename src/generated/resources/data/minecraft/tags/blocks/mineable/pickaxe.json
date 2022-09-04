@@ -252,10 +252,6 @@
     "upgrade_aquatic:luminous_prismarine",
     "upgrade_aquatic:luminous_prismarine_stairs",
     "upgrade_aquatic:luminous_prismarine_slab",
-    "upgrade_aquatic:luminous_prismarine_vertical_slab",
-    "upgrade_aquatic:luminous_elder_prismarine",
-    "upgrade_aquatic:luminous_elder_prismarine_stairs",
-    "upgrade_aquatic:luminous_elder_prismarine_slab",
-    "upgrade_aquatic:luminous_elder_prismarine_vertical_slab"
+    "upgrade_aquatic:luminous_prismarine_vertical_slab"
   ]
 }

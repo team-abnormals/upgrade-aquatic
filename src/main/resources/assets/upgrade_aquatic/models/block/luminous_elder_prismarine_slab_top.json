@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "upgrade_aquatic:block/luminous_elder_prismarine",
-    "top": "upgrade_aquatic:block/luminous_elder_prismarine",
-    "side": "upgrade_aquatic:block/luminous_elder_prismarine"
-  }
-}

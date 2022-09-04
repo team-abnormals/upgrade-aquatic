@@ -450,11 +450,6 @@
   "block.upgrade_aquatic.luminous_prismarine_stairs": "Leuchtprismarintreppe",
   "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Vertikale Leuchtprismarinstufe",
 
-  "block.upgrade_aquatic.luminous_elder_prismarine": "Leuchtgroßprismarin",
-  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Leuchtgroßprismarinstufe",
-  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Leuchtgroßprismarintreppe",
-  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Vertikale Leuchtgroßprismarinstufe",
-
   "item.upgrade_aquatic.driftwood_boat": "Treibholzboot",
   "item.upgrade_aquatic.river_boat": "Flussholzboot",
   

@@ -448,12 +448,7 @@
     "block.upgrade_aquatic.luminous_prismarine_slab": "明るいプリズマリンのハーフブロック",
     "block.upgrade_aquatic.luminous_prismarine_stairs": "明るいプリズマリンの階段",
     "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "明るいプリズマリンの縦ハーフブロック",
-    
-    "block.upgrade_aquatic.luminous_elder_prismarine": "明るいエルダープリズマリン",
-    "block.upgrade_aquatic.luminous_elder_prismarine_slab": "明るいエルダープリズマリンのハーフブロック",
-    "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "明るいエルダープリズマリンの階段",
-    "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "明るいエルダープリズマリンの縦ハーフブロック",
-    
+
     "item.upgrade_aquatic.driftwood_boat": "流木のボート",
     "item.upgrade_aquatic.river_boat": "リバーのボート",
     

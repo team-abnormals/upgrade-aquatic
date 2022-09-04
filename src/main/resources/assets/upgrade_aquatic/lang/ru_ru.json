@@ -446,12 +446,7 @@
   "block.upgrade_aquatic.luminous_prismarine_slab": "Плита из светящегося призмарина",
   "block.upgrade_aquatic.luminous_prismarine_stairs": "Ступеньки из светящегося призмарина",
   "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Вертикальная плита из светящегося призмарина",
-  
-  "block.upgrade_aquatic.luminous_elder_prismarine": "Светящийся древний призмарин",
-  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Плита из светящегося древнего призмарина",
-  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Ступеньки из светящегося древнего призмарина",
-  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Вертикальная плита из светящегося древнего призмарина",
-  
+
   "_comment": "Предметы",
 
   "item.upgrade_aquatic.driftwood_boat": "Плавниковая лодка",

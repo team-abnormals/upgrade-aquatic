@@ -451,12 +451,7 @@
   "block.upgrade_aquatic.luminous_prismarine_slab": "Laje de prismarinho luminoso",
   "block.upgrade_aquatic.luminous_prismarine_stairs": "Escadas de prismarinho luminoso",
   "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Laje vertical de prismarinho luminoso",
-  
-  "block.upgrade_aquatic.luminous_elder_prismarine": "Prismarinho mestre luminoso",
-  "block.upgrade_aquatic.luminous_elder_prismarine_slab": "Laje de prismarinho mestre luminoso",
-  "block.upgrade_aquatic.luminous_elder_prismarine_stairs": "Escadas de prismarinho mestre luminoso",
-  "block.upgrade_aquatic.luminous_elder_prismarine_vertical_slab": "Laje vertical de prismarinho mestre luminoso",
-  
+
   "_comment": "Items",
   
   "item.upgrade_aquatic.driftwood_boat": "Bote de madeira-flutuante",
