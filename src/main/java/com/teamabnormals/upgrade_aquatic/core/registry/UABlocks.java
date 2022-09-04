@@ -103,16 +103,16 @@ public class UABlocks {
 	public static final RegistryObject<Block> DEAD_CHROME_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_chrome_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
 	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_WALL_FAN = HELPER.createBlockNoItem("elder_prismarine_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.createPrismarineCoral(true)));
 
-	public static final RegistryObject<Block> ACAN_CORAL_WALL_FAN = HELPER.createBlockNoItem("acan_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_ACAN_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.COLOR_CYAN)));
-	public static final RegistryObject<Block> FINGER_CORAL_WALL_FAN = HELPER.createBlockNoItem("finger_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_FINGER_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_ORANGE)));
-	public static final RegistryObject<Block> STAR_CORAL_WALL_FAN = HELPER.createBlockNoItem("star_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_STAR_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.COLOR_LIGHT_GREEN)));
-	public static final RegistryObject<Block> MOSS_CORAL_WALL_FAN = HELPER.createBlockNoItem("moss_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_MOSS_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.COLOR_GREEN)));
-	public static final RegistryObject<Block> PETAL_CORAL_WALL_FAN = HELPER.createBlockNoItem("petal_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_PETAL_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.COLOR_LIGHT_BLUE)));
-	public static final RegistryObject<Block> BRANCH_CORAL_WALL_FAN = HELPER.createBlockNoItem("branch_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_BRANCH_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_GRAY)));
-	public static final RegistryObject<Block> ROCK_CORAL_WALL_FAN = HELPER.createBlockNoItem("rock_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_ROCK_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_BROWN)));
-	public static final RegistryObject<Block> PILLOW_CORAL_WALL_FAN = HELPER.createBlockNoItem("pillow_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_PILLOW_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_WHITE)));
-	public static final RegistryObject<Block> SILK_CORAL_WALL_FAN = HELPER.createBlockNoItem("silk_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_SILK_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_PURPLE)));
-	public static final RegistryObject<Block> CHROME_CORAL_WALL_FAN = HELPER.createBlockNoItem("chrome_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_CHROME_CORAL_WALL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_GRAY)));
+	public static final RegistryObject<Block> ACAN_CORAL_WALL_FAN = HELPER.createBlockNoItem("acan_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_ACAN_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_CYAN)));
+	public static final RegistryObject<Block> FINGER_CORAL_WALL_FAN = HELPER.createBlockNoItem("finger_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_FINGER_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_ORANGE)));
+	public static final RegistryObject<Block> STAR_CORAL_WALL_FAN = HELPER.createBlockNoItem("star_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_STAR_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_GREEN)));
+	public static final RegistryObject<Block> MOSS_CORAL_WALL_FAN = HELPER.createBlockNoItem("moss_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_MOSS_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_GREEN)));
+	public static final RegistryObject<Block> PETAL_CORAL_WALL_FAN = HELPER.createBlockNoItem("petal_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_PETAL_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_BLUE)));
+	public static final RegistryObject<Block> BRANCH_CORAL_WALL_FAN = HELPER.createBlockNoItem("branch_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_BRANCH_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)));
+	public static final RegistryObject<Block> ROCK_CORAL_WALL_FAN = HELPER.createBlockNoItem("rock_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_ROCK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_BROWN)));
+	public static final RegistryObject<Block> PILLOW_CORAL_WALL_FAN = HELPER.createBlockNoItem("pillow_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_PILLOW_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_WHITE)));
+	public static final RegistryObject<Block> SILK_CORAL_WALL_FAN = HELPER.createBlockNoItem("silk_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_SILK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_PURPLE)));
+	public static final RegistryObject<Block> CHROME_CORAL_WALL_FAN = HELPER.createBlockNoItem("chrome_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_CHROME_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)));
 	public static final RegistryObject<Block> PRISMARINE_CORAL_WALL_FAN = HELPER.createBlockNoItem("prismarine_coral_wall_fan", () -> new UACoralWallFanBlock(ELDER_PRISMARINE_CORAL_WALL_FAN.get(), UAProperties.createPrismarineCoral(false)));
 
 	public static final RegistryObject<Block> DEAD_ACAN_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_acan_coral_fan", UACoralFanDeadBlock::new, DEAD_ACAN_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
@@ -127,16 +127,16 @@ public class UABlocks {
 	public static final RegistryObject<Block> DEAD_CHROME_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_chrome_coral_fan", UACoralFanDeadBlock::new, DEAD_CHROME_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_FAN = HELPER.createStandingAndWallBlock("elder_prismarine_coral_fan", () -> new UACoralFanDeadBlock(UAProperties.createPrismarineCoral(true)), ELDER_PRISMARINE_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
 
-	public static final RegistryObject<Block> ACAN_CORAL_FAN = HELPER.createStandingAndWallBlock("acan_coral_fan", () -> new UACoralFanBlock(DEAD_ACAN_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.COLOR_CYAN)), ACAN_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> FINGER_CORAL_FAN = HELPER.createStandingAndWallBlock("finger_coral_fan", () -> new UACoralFanBlock(DEAD_FINGER_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_ORANGE)), FINGER_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> STAR_CORAL_FAN = HELPER.createStandingAndWallBlock("star_coral_fan", () -> new UACoralFanBlock(DEAD_STAR_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.COLOR_LIGHT_GREEN)), STAR_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> MOSS_CORAL_FAN = HELPER.createStandingAndWallBlock("moss_coral_fan", () -> new UACoralFanBlock(DEAD_MOSS_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.COLOR_GREEN)), MOSS_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PETAL_CORAL_FAN = HELPER.createStandingAndWallBlock("petal_coral_fan", () -> new UACoralFanBlock(DEAD_PETAL_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.COLOR_LIGHT_BLUE)), PETAL_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BRANCH_CORAL_FAN = HELPER.createStandingAndWallBlock("branch_coral_fan", () -> new UACoralFanBlock(DEAD_BRANCH_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_GRAY)), BRANCH_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> ROCK_CORAL_FAN = HELPER.createStandingAndWallBlock("rock_coral_fan", () -> new UACoralFanBlock(DEAD_ROCK_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_BROWN)), ROCK_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PILLOW_CORAL_FAN = HELPER.createStandingAndWallBlock("pillow_coral_fan", () -> new UACoralFanBlock(DEAD_PILLOW_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_WHITE)), PILLOW_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> SILK_CORAL_FAN = HELPER.createStandingAndWallBlock("silk_coral_fan", () -> new UACoralFanBlock(DEAD_SILK_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_PURPLE)), SILK_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> CHROME_CORAL_FAN = HELPER.createStandingAndWallBlock("chrome_coral_fan", () -> new UACoralFanBlock(DEAD_CHROME_CORAL_FAN.get(), UAProperties.createCoralFan(MaterialColor.TERRACOTTA_GRAY)), CHROME_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> ACAN_CORAL_FAN = HELPER.createStandingAndWallBlock("acan_coral_fan", () -> new UACoralFanBlock(DEAD_ACAN_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_CYAN)), ACAN_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> FINGER_CORAL_FAN = HELPER.createStandingAndWallBlock("finger_coral_fan", () -> new UACoralFanBlock(DEAD_FINGER_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_ORANGE)), FINGER_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> STAR_CORAL_FAN = HELPER.createStandingAndWallBlock("star_coral_fan", () -> new UACoralFanBlock(DEAD_STAR_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_GREEN)), STAR_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> MOSS_CORAL_FAN = HELPER.createStandingAndWallBlock("moss_coral_fan", () -> new UACoralFanBlock(DEAD_MOSS_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_GREEN)), MOSS_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PETAL_CORAL_FAN = HELPER.createStandingAndWallBlock("petal_coral_fan", () -> new UACoralFanBlock(DEAD_PETAL_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_BLUE)), PETAL_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BRANCH_CORAL_FAN = HELPER.createStandingAndWallBlock("branch_coral_fan", () -> new UACoralFanBlock(DEAD_BRANCH_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)), BRANCH_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> ROCK_CORAL_FAN = HELPER.createStandingAndWallBlock("rock_coral_fan", () -> new UACoralFanBlock(DEAD_ROCK_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_BROWN)), ROCK_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PILLOW_CORAL_FAN = HELPER.createStandingAndWallBlock("pillow_coral_fan", () -> new UACoralFanBlock(DEAD_PILLOW_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_WHITE)), PILLOW_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> SILK_CORAL_FAN = HELPER.createStandingAndWallBlock("silk_coral_fan", () -> new UACoralFanBlock(DEAD_SILK_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_PURPLE)), SILK_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CHROME_CORAL_FAN = HELPER.createStandingAndWallBlock("chrome_coral_fan", () -> new UACoralFanBlock(DEAD_CHROME_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)), CHROME_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> PRISMARINE_CORAL_FAN = HELPER.createStandingAndWallBlock("prismarine_coral_fan", () -> new UACoralFanBlock(ELDER_PRISMARINE_CORAL_FAN.get(), UAProperties.createPrismarineCoral(false)), PRISMARINE_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
 
 	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_SHOWER = HELPER.createBlock("elder_prismarine_coral_shower", () -> new DeadCoralShowerBlock(UAProperties.createPrismarineCoral(true)), CreativeModeTab.TAB_DECORATIONS);
@@ -519,8 +519,8 @@ public class UABlocks {
 		public static final WoodSetProperties DRIFTWOOD = WoodSetProperties.builder(MaterialColor.STONE).build();
 		public static final WoodSetProperties RIVER_WOOD = WoodSetProperties.builder(MaterialColor.COLOR_BROWN).build();
 
-		public static final BlockBehaviour.Properties DEAD_CORAL_BLOCK = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).strength(1.5F, 6.0F);
-		public static final BlockBehaviour.Properties DEAD_CORAL = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).noCollission().strength(0F, 0F);
+		public static final BlockBehaviour.Properties DEAD_CORAL_BLOCK = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().strength(1.5F, 6.0F);
+		public static final BlockBehaviour.Properties DEAD_CORAL = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_GRAY).requiresCorrectToolForDrops().noCollission().instabreak();
 
 		public static final BlockBehaviour.Properties LUMINOUS_PRISMARINE = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.DIAMOND).strength(1.5F, 6.0F).lightLevel((unknown) -> (8)).hasPostProcess(PropertyUtil::always).emissiveRendering(PropertyUtil::always);
 		public static final BlockBehaviour.Properties LUMINOUS_ELDER_PRISMARINE = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_WHITE).strength(1.5F, 6.0F).lightLevel((unknown) -> (8)).hasPostProcess(PropertyUtil::always).emissiveRendering(PropertyUtil::always);
@@ -533,25 +533,21 @@ public class UABlocks {
 		public static final BlockBehaviour.Properties BEACHGRASS_THATCH = BlockBehaviour.Properties.of(Material.GRASS, MaterialColor.COLOR_YELLOW).strength(0.5F).sound(SoundType.GRASS).noOcclusion();
 
 		public static BlockBehaviour.Properties createCoral(MaterialColor color) {
-			return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().sound(SoundType.WET_GRASS);
+			return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().instabreak().sound(SoundType.WET_GRASS);
 		}
 
 		public static BlockBehaviour.Properties createCoralBlock(MaterialColor color) {
-			return BlockBehaviour.Properties.of(Material.STONE, color).strength(1.5F, 6.0F).sound(SoundType.CORAL_BLOCK);
-		}
-
-		public static BlockBehaviour.Properties createCoralFan(MaterialColor color) {
-			return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().strength(0).sound(SoundType.WET_GRASS);
+			return BlockBehaviour.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.5F, 6.0F).sound(SoundType.CORAL_BLOCK);
 		}
 
 		public static BlockBehaviour.Properties createPrismarineCoral(boolean elder) {
 			MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.TERRACOTTA_WHITE;
-			return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().lightLevel((unknown) -> (5)).sound(SoundType.GLASS);
+			return BlockBehaviour.Properties.of(Material.WATER_PLANT, color).noCollission().instabreak().lightLevel((unknown) -> (5)).sound(SoundType.GLASS);
 		}
 
 		public static BlockBehaviour.Properties createPrismarineCoralBlock(boolean elder) {
 			MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.TERRACOTTA_WHITE;
-			return BlockBehaviour.Properties.of(Material.STONE, color).strength(1.5F, 6.0F).lightLevel((unknown) -> (6)).sound(SoundType.GLASS);
+			return BlockBehaviour.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.5F, 6.0F).lightLevel((unknown) -> (6)).sound(SoundType.GLASS);
 		}
 
 		public static BlockBehaviour.Properties createSearocket(boolean pink) {
