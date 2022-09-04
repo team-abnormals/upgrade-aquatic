@@ -7,6 +7,7 @@ import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.*;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
+import com.teamabnormals.upgrade_aquatic.core.other.UAEntityTypeTags;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAPlayableEndimations;
@@ -66,7 +67,7 @@ public class Thrasher extends Monster implements Endimatable {
 		if (entity instanceof Player && !(((Player) entity).isCreative() || entity.isSpectator())) {
 			return entity.isInWater();
 		}
-		return (entity instanceof WaterAnimal && !(entity instanceof Enemy) && !(entity instanceof Thrasher) && !(entity instanceof Pufferfish) && !(entity instanceof Squid) && !(entity instanceof Lionfish)) && entity.isInWater();
+		return entity.getType().is(UAEntityTypeTags.THRASHER_SONAR_TARGETS) && entity.isInWater();
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
 	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE));

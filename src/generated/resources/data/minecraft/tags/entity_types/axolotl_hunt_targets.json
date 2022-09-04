@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "upgrade_aquatic:pike",
+    "upgrade_aquatic:perch",
+    "upgrade_aquatic:lionfish"
+  ]
+}

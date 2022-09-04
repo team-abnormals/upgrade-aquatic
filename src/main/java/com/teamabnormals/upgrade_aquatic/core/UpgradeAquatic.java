@@ -13,6 +13,7 @@ import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.Immort
 import com.teamabnormals.upgrade_aquatic.core.data.server.UAAdvancementModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UALootModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABlockTagsProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UAEntityTypeTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.other.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -80,10 +82,13 @@ public class UpgradeAquatic {
 
 	private void dataSetup(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
+		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+
 		if (event.includeServer()) {
 			generator.addProvider(new UALootModifierProvider(generator));
 			generator.addProvider(new UAAdvancementModifierProvider(generator));
-			generator.addProvider(new UABlockTagsProvider(generator, event.getExistingFileHelper()));
+			generator.addProvider(new UABlockTagsProvider(generator, existingFileHelper));
+			generator.addProvider(new UAEntityTypeTagsProvider(generator, existingFileHelper));
 		}
 	}
 

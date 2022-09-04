@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:tropical_fish",
+    "minecraft:dolphin",
+    "minecraft:axolotl",
+    "upgrade_aquatic:perch",
+    "upgrade_aquatic:pike",
+    "upgrade_aquatic:nautilus",
+    "#upgrade_aquatic:jellyfish"
+  ]
+}

@@ -53,6 +53,7 @@ import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class EntityEvents {
