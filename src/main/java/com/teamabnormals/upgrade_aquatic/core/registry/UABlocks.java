@@ -478,14 +478,14 @@ public class UABlocks {
 	public static final RegistryObject<Block> RIVER_FENCE_GATE = HELPER.createFuelBlock("river_fence_gate", () -> new WoodFenceGateBlock(UAProperties.RIVER_WOOD.planks()), 300, CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> RIVER_DOOR = HELPER.createBlock("river_door", () -> new WoodDoorBlock(UAProperties.RIVER_WOOD.door()), CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> RIVER_TRAPDOOR = HELPER.createBlock("river_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.RIVER_WOOD.trapdoor()), CreativeModeTab.TAB_REDSTONE);
-	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> RIVER_SIGN = HELPER.createSignBlock("river", MaterialColor.COLOR_BROWN);
+	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> RIVER_SIGNS = HELPER.createSignBlock("river", MaterialColor.COLOR_BROWN);
 
 	public static final RegistryObject<Block> RIVER_BOARDS = HELPER.createCompatBlock("woodworks", "river_boards", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_BOOKSHELF = HELPER.createCompatFuelBlock("woodworks", "river_bookshelf", () -> new BookshelfBlock(UAProperties.RIVER_WOOD.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_LADDER = HELPER.createCompatFuelBlock("woodworks", "river_ladder", () -> new BlueprintLadderBlock(UAProperties.RIVER_WOOD.ladder()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> RIVER_BEEHIVE = HELPER.createCompatBlock("woodworks", "river_beehive", () -> new BlueprintBeehiveBlock(UAProperties.RIVER_WOOD.beehive()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> RIVER_LEAF_PILE = HELPER.createCompatBlock("woodworks", "river_leaf_pile", () -> new LeafPileBlock(UAProperties.RIVER_WOOD.leafPile()), CreativeModeTab.TAB_DECORATIONS);
-	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> RIVER_CHEST = HELPER.createCompatChestBlocks("woodworks", "river", MaterialColor.COLOR_BROWN);
+	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> RIVER_CHESTS = HELPER.createCompatChestBlocks("woodworks", "river", MaterialColor.COLOR_BROWN);
 
 	public static final RegistryObject<Block> VERTICAL_RIVER_PLANKS = HELPER.createCompatBlock("quark", "vertical_river_planks", () -> new Block(UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "river_vertical_slab", () -> new VerticalSlabBlock(UAProperties.RIVER_WOOD.planks()), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);

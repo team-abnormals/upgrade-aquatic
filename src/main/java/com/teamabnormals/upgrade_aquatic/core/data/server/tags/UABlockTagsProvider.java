@@ -25,7 +25,7 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 		TagAppender<Block> mineableWithHoe = this.tag(BlockTags.MINEABLE_WITH_HOE);
 
 		mineableWithAxe.add(MULBERRY_PUNNET.get());
-		mineableWithAxe.add(RIVER_BOARDS.get(), RIVER_BOOKSHELF.get(), RIVER_LADDER.get(), RIVER_BEEHIVE.get(), RIVER_CHEST.getFirst().get(), RIVER_CHEST.getSecond().get(), RIVER_HEDGE.get(), RIVER_POST.get(), STRIPPED_RIVER_POST.get());
+		mineableWithAxe.add(RIVER_BOARDS.get(), RIVER_BOOKSHELF.get(), RIVER_LADDER.get(), RIVER_BEEHIVE.get(), RIVER_CHESTS.getFirst().get(), RIVER_CHESTS.getSecond().get(), RIVER_HEDGE.get(), RIVER_POST.get(), STRIPPED_RIVER_POST.get());
 		mineableWithAxe.add(DRIFTWOOD_BOARDS.get(), DRIFTWOOD_BOOKSHELF.get(), DRIFTWOOD_LADDER.get(), DRIFTWOOD_BEEHIVE.get(), DRIFTWOOD_CHEST.getFirst().get(), DRIFTWOOD_CHEST.getSecond().get(), DRIFTWOOD_POST.get(), STRIPPED_DRIFTWOOD_POST.get());
 		mineableWithPickaxe.add(EMBEDDED_AMMONITE.get(), PRISMARINE_ROD_BUNDLE.get(), ELDER_GUARDIAN_SPINE.get(), GUARDIAN_SPINE.get(), ELDER_EYE.get());
 		mineableWithHoe.add(RIVER_LEAVES.get(), RIVER_LEAF_PILE.get(), RIVER_LEAF_CARPET.get());
