@@ -1,13 +1,35 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "group": "leaf_pile",
-  "ingredients": [
+  "type": "forge:conditional",
+  "recipes": [
     {
-      "item": "upgrade_aquatic:river_leaves"
+      "conditions": [
+        {
+          "type": "blueprint:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "woodworks"
+            },
+            {
+              "type": "woodworks:config",
+              "value": "leaf_piles"
+            }
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "group": "leaf_pile",
+        "ingredients": [
+          {
+            "item": "upgrade_aquatic:river_leaves"
+          }
+        ],
+        "result": {
+          "count": 4,
+          "item": "upgrade_aquatic:river_leaf_pile"
+        }
+      }
     }
-  ],
-  "result": {
-    "item": "upgrade_aquatic:river_leaf_pile",
-    "count": 4
-  }
+  ]
 }

@@ -1,16 +1,38 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "group": "leaves",
-  "pattern": [
-    "##",
-    "##"
-  ],
-  "key": {
-    "#": {
-      "item": "upgrade_aquatic:river_leaf_pile"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "blueprint:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "woodworks"
+            },
+            {
+              "type": "woodworks:config",
+              "value": "leaf_piles"
+            }
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "group": "leaves",
+        "key": {
+          "#": {
+            "item": "upgrade_aquatic:river_leaf_pile"
+          }
+        },
+        "pattern": [
+          "##",
+          "##"
+        ],
+        "result": {
+          "item": "upgrade_aquatic:river_leaves"
+        }
+      }
     }
-  },
-  "result": {
-    "item": "upgrade_aquatic:river_leaves"
-  }
+  ]
 }
