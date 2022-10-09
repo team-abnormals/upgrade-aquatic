@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
+import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.common.levelgen.feature.*;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.core.Holder;
@@ -60,7 +61,7 @@ public class UAFeatures {
 			generation.addCarver(Carving.AIR, UAWorldCarvers.UAConfiguredWorldCarvers.UNDERWATER_CANYON.getHolder().get());
 		}
 
-		if (category == BiomeCategory.BEACH) {
+		if (category == BiomeCategory.BEACH && !DataUtil.matchesKeys(biome, Biomes.STONY_SHORE)) {
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BEACH);
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_SEAROCKET);
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.BEACHGRASS_DUNES);
@@ -76,11 +77,11 @@ public class UAFeatures {
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_SWAMP);
 		}
 
-		if (biome.equals(Biomes.FLOWER_FOREST.location())) {
+		if (DataUtil.matchesKeys(biome, Biomes.FLOWER_FOREST)) {
 			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED_EXTRA);
 		}
 
-		if (category == BiomeCategory.BEACH || category == BiomeCategory.OCEAN || biome.equals(Biomes.STONY_SHORE.location())) {
+		if (category == BiomeCategory.BEACH || category == BiomeCategory.OCEAN || DataUtil.matchesKeys(biome, Biomes.STONY_SHORE)) {
 			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, UAPlacedFeatures.ORE_AMMONITE);
 		}
 
