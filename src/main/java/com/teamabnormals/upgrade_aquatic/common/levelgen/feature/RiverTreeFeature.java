@@ -34,7 +34,7 @@ public class RiverTreeFeature extends Feature<TreeConfiguration> {
 		int height = config.trunkPlacer.getTreeHeight(random);
 		boolean flag = true;
 
-		if (origin.getY() >= 1 && origin.getY() + height + 1 <= level.getMaxBuildHeight()) {
+		if (origin.getY() > level.getMinBuildHeight() && origin.getY() + height + 1 <= level.getMaxBuildHeight()) {
 			for (int j = origin.getY(); j <= origin.getY() + 1 + height; ++j) {
 				int k = 1;
 				if (j == origin.getY())
