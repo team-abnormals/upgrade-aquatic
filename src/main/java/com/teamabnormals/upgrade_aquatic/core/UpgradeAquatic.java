@@ -12,6 +12,7 @@ import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.Cassio
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.ImmortalJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UAAdvancementModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UALootModifierProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.UAStructureRepaletterProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABlockTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UAEntityTypeTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.other.*;
@@ -89,6 +90,7 @@ public class UpgradeAquatic {
 			generator.addProvider(new UAAdvancementModifierProvider(generator));
 			generator.addProvider(new UABlockTagsProvider(generator, existingFileHelper));
 			generator.addProvider(new UAEntityTypeTagsProvider(generator, existingFileHelper));
+			generator.addProvider(new UAStructureRepaletterProvider(generator));
 		}
 	}
 

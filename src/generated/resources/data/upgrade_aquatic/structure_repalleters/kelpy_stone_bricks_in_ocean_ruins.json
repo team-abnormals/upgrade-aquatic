@@ -1,0 +1,13 @@
+{
+  "selector": {
+    "type": "names",
+    "config": [
+      "minecraft:ocean_ruin_warm",
+      "minecraft:ocean_ruin_cold"
+    ]
+  },
+  "priority": "normal",
+  "replaces_block": "minecraft:mossy_stone_bricks",
+  "replaces_with": "upgrade_aquatic:kelpy_stone_bricks",
+  "type": "blueprint:simple"
+}
