@@ -58,9 +58,10 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 		} else {
 			Direction direction = Direction.from2DDataValue(rand.nextInt(4));
 			int length = rand.nextInt(3) + 3;
-			if ((rand.nextFloat() < 0.25F && Biome.getBiomeCategory(world.getBiome(pos)) == BiomeCategory.OCEAN && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).getBlock() == Blocks.WATER && world.isEmptyBlock(pos.above())) || (Biome.getBiomeCategory(world.getBiome(pos)) != BiomeCategory.OCEAN && this.isNearWater(world, pos) && downState.is(BlockTags.DIRT) || downState.is(Tags.Blocks.SAND) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
+			pos = pos.below();
+			if ((rand.nextInt(150) == 0 && Biome.getBiomeCategory(world.getBiome(pos)) == BiomeCategory.OCEAN && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).is(Blocks.WATER) && world.isEmptyBlock(pos.above())) || (Biome.getBiomeCategory(world.getBiome(pos)) != BiomeCategory.OCEAN && this.isNearWater(world, pos) && (downState.is(BlockTags.DIRT) || downState.is(BlockTags.SAND)) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
 				GenerationPiece driftwood = new GenerationPiece((iworld, part) -> {
-					return world.isEmptyBlock(part.pos) || world.getFluidState(part.pos).getType().is(FluidTags.WATER);
+					return world.isEmptyBlock(part.pos) || world.getFluidState(part.pos).is(FluidTags.WATER);
 				});
 				for (int i = 0; i < length; i++) {
 					this.placeDriftwoodLog(world, pos.relative(direction, i), direction, driftwood);
@@ -96,7 +97,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 
 	private boolean canFitInOcean(LevelAccessor world, BlockPos pos, Direction direction, int length) {
 		for (int i = 0; i < length; i++) {
-			if (world.getBlockState(pos.relative(direction, i)).getBlock() != Blocks.WATER) {
+			if (!world.getBlockState(pos.relative(direction, i)).is(Blocks.WATER)) {
 				return false;
 			}
 		}

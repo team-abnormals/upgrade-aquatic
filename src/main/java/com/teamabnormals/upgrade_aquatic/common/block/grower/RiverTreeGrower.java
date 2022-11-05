@@ -13,7 +13,7 @@ public class RiverTreeGrower extends AbstractTreeGrower {
 	@Nullable
 	@Override
 	protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random randomIn, boolean p_225546_2_) {
-		return UAConfiguredFeatures.RIVER_TREE;
+		return UAConfiguredFeatures.RIVER_TREE.getHolder().get();
 	}
 
 }

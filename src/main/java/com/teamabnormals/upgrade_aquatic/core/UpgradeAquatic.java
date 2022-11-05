@@ -17,6 +17,8 @@ import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABlockTagsProvid
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UAEntityTypeTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.other.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.*;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAConfiguredFeatures;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.entity.EntityType;
@@ -51,6 +53,8 @@ public class UpgradeAquatic {
 		UAMobEffects.MOB_EFFECTS.register(bus);
 		UAMobEffects.POTIONS.register(bus);
 		UAFeatures.FEATURES.register(bus);
+		UAConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
+		UAPlacedFeatures.PLACED_FEATURES.register(bus);
 		UAWorldCarvers.WORLD_CARVERS.register(bus);
 		UAWorldCarvers.UAConfiguredWorldCarvers.CONFIGURED_WORLD_CARVERS.register(bus);
 		UAParticleTypes.PARTICLES.register(bus);

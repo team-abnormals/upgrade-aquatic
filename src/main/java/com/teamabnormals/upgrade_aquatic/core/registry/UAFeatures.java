@@ -1,10 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
+import com.google.common.collect.ImmutableList;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.common.levelgen.feature.*;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAWorldCarvers.UAConfiguredWorldCarvers;
 import net.minecraft.core.Holder;
-import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -35,6 +37,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class UAFeatures {
@@ -56,41 +59,41 @@ public class UAFeatures {
 		BiomeGenerationSettingsBuilder generation = event.getGeneration();
 
 		if (category == BiomeCategory.OCEAN) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_OCEAN);
-			generation.addFeature(GenerationStep.Decoration.RAW_GENERATION, UAPlacedFeatures.PRISMARINE_CORAL);
-			generation.addCarver(Carving.AIR, UAWorldCarvers.UAConfiguredWorldCarvers.UNDERWATER_CANYON.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_OCEAN.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.RAW_GENERATION, UAPlacedFeatures.PRISMARINE_CORAL.getHolder().get());
+			generation.addCarver(Carving.AIR, UAConfiguredWorldCarvers.UNDERWATER_CANYON.getHolder().get());
 		}
 
 		if (category == BiomeCategory.BEACH && !DataUtil.matchesKeys(biome, Biomes.STONY_SHORE)) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BEACH);
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_SEAROCKET);
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.BEACHGRASS_DUNES);
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BEACH.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_SEAROCKET.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.BEACHGRASS_DUNES.getHolder().get());
 		}
 
 		if (category == BiomeCategory.RIVER) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.RIVER_TREE);
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_RIVER);
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_FLOWERING_RUSH);
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.RIVER_TREE.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_RIVER.getHolder().get());
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_FLOWERING_RUSH.getHolder().get());
 		}
 
 		if (category == BiomeCategory.SWAMP) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_SWAMP);
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_SWAMP.getHolder().get());
 		}
 
 		if (DataUtil.matchesKeys(biome, Biomes.FLOWER_FOREST)) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED_EXTRA);
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED_EXTRA.getHolder().get());
 		}
 
 		if (category == BiomeCategory.BEACH || category == BiomeCategory.OCEAN || DataUtil.matchesKeys(biome, Biomes.STONY_SHORE)) {
-			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, UAPlacedFeatures.ORE_AMMONITE);
+			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, UAPlacedFeatures.ORE_AMMONITE.getHolder().get());
 		}
 
 		if ((category == BiomeCategory.JUNGLE || category == BiomeCategory.SWAMP || category == BiomeCategory.RIVER) && !biome.toString().contains("marsh")) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED);
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED.getHolder().get());
 		}
 
 		if (biome.toString().contains("rainforest_basin")) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BASIN);
+			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BASIN.getHolder().get());
 		}
 	}
 
@@ -99,37 +102,41 @@ public class UAFeatures {
 	}
 
 	public static final class UAConfiguredFeatures {
-		public static final Holder<ConfiguredFeature<?, ?>> ORE_AMMONITE = register("ore_ammonite", Feature.ORE, new OreConfiguration(OreFeatures.NATURAL_STONE, UABlocks.EMBEDDED_AMMONITE.get().defaultBlockState(), 3));
-		public static final Holder<ConfiguredFeature<?, ?>> BEACHGRASS_DUNES = register("beachgrass_dunes", UAFeatures.DUNES.get(), FeatureConfiguration.NONE);
-		public static final Holder<ConfiguredFeature<?, ?>> RIVER_TREE = register("river_tree", UAFeatures.RIVER_TREE.get(), Configs.RIVER_TREE_CONFIG);
-		public static final Holder<ConfiguredFeature<?, ?>> PRISMARINE_CORAL = register("prismarine_coral", UAFeatures.PRISMARINE_CORAL.get(), FeatureConfiguration.NONE);
+		public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, UpgradeAquatic.MOD_ID);
 
-		public static final Holder<ConfiguredFeature<?, ?>> PATCH_SEAROCKET = register("patch_searocket", UAFeatures.SEAROCKET.get(), FeatureConfiguration.NONE);
-		public static final Holder<ConfiguredFeature<?, ?>> PATCH_PICKERELWEED = register("patch_pickerelweed", UAFeatures.PICKERELWEED.get(), FeatureConfiguration.NONE);
-		public static final Holder<ConfiguredFeature<?, ?>> PATCH_FLOWERING_RUSH = register("patch_flowering_rush", UAFeatures.FLOWERING_RUSH.get(), FeatureConfiguration.NONE);
-		public static final Holder<ConfiguredFeature<?, ?>> DRIFTWOOD = register("driftwood", UAFeatures.DRIFTWOOD.get(), FeatureConfiguration.NONE);
+		public static final RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_AMMONITE = register("ore_ammonite", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(OreFeatures.NATURAL_STONE, UABlocks.EMBEDDED_AMMONITE.get().defaultBlockState(), 3)));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> BEACHGRASS_DUNES = register("beachgrass_dunes", () -> new ConfiguredFeature<>(UAFeatures.DUNES.get(), FeatureConfiguration.NONE));
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> RIVER_TREE = register("river_tree", () -> new ConfiguredFeature<>(UAFeatures.RIVER_TREE.get(), Configs.RIVER_TREE_CONFIG));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PRISMARINE_CORAL = register("prismarine_coral", () -> new ConfiguredFeature<>(UAFeatures.PRISMARINE_CORAL.get(), FeatureConfiguration.NONE));
 
-		public static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<?, ?>> register(String name, F feature, FC config) {
-			return BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_FEATURE, new ResourceLocation(UpgradeAquatic.MOD_ID, name), new ConfiguredFeature<>(feature, config));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PATCH_SEAROCKET = register("patch_searocket", () -> new ConfiguredFeature<>(UAFeatures.SEAROCKET.get(), FeatureConfiguration.NONE));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PATCH_PICKERELWEED = register("patch_pickerelweed", () -> new ConfiguredFeature<>(UAFeatures.PICKERELWEED.get(), FeatureConfiguration.NONE));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PATCH_FLOWERING_RUSH = register("patch_flowering_rush", () -> new ConfiguredFeature<>(UAFeatures.FLOWERING_RUSH.get(), FeatureConfiguration.NONE));
+		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> DRIFTWOOD = register("driftwood", () -> new ConfiguredFeature<>(UAFeatures.DRIFTWOOD.get(), FeatureConfiguration.NONE));
+
+		private static <FC extends FeatureConfiguration, F extends Feature<FC>> RegistryObject<ConfiguredFeature<FC, ?>> register(String name, Supplier<ConfiguredFeature<FC, F>> feature) {
+			return CONFIGURED_FEATURES.register(name, feature);
 		}
 	}
 
 	public static final class UAPlacedFeatures {
-		public static final Holder<PlacedFeature> ORE_AMMONITE = register("ore_ammonite", UAConfiguredFeatures.ORE_AMMONITE, commonOrePlacement(30, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(73))));
-		public static final Holder<PlacedFeature> BEACHGRASS_DUNES = register("beachgrass_dunes", UAConfiguredFeatures.BEACHGRASS_DUNES, VegetationPlacements.worldSurfaceSquaredWithCount(14));
-		public static final Holder<PlacedFeature> RIVER_TREE = register("trees_river", UAConfiguredFeatures.RIVER_TREE, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.5F, 2)));
-		public static final Holder<PlacedFeature> PRISMARINE_CORAL = register("prismarine_coral", UAConfiguredFeatures.PRISMARINE_CORAL, CarvingMaskPlacement.forStep(Carving.AIR), RarityFilter.onAverageOnceEvery(256), BiomeFilter.biome());
+		public static final DeferredRegister<PlacedFeature> PLACED_FEATURES = DeferredRegister.create(Registry.PLACED_FEATURE_REGISTRY, UpgradeAquatic.MOD_ID);
 
-		public static final Holder<PlacedFeature> PATCH_SEAROCKET = register("patch_searocket", UAConfiguredFeatures.PATCH_SEAROCKET, RarityFilter.onAverageOnceEvery(15), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final Holder<PlacedFeature> PATCH_PICKERELWEED = register("patch_pickerelweed", UAConfiguredFeatures.PATCH_PICKERELWEED, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final Holder<PlacedFeature> PATCH_PICKERELWEED_EXTRA = register("patch_pickerelweed_extra", UAConfiguredFeatures.PATCH_PICKERELWEED, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final Holder<PlacedFeature> PATCH_FLOWERING_RUSH = register("patch_flowering_rush", UAConfiguredFeatures.PATCH_FLOWERING_RUSH, RarityFilter.onAverageOnceEvery(12), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> ORE_AMMONITE = register("ore_ammonite", UAConfiguredFeatures.ORE_AMMONITE, commonOrePlacement(30, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(73))));
+		public static final RegistryObject<PlacedFeature> BEACHGRASS_DUNES = register("beachgrass_dunes", UAConfiguredFeatures.BEACHGRASS_DUNES, VegetationPlacements.worldSurfaceSquaredWithCount(14));
+		public static final RegistryObject<PlacedFeature> RIVER_TREE = register("trees_river", UAConfiguredFeatures.RIVER_TREE, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.5F, 2)));
+		public static final RegistryObject<PlacedFeature> PRISMARINE_CORAL = register("prismarine_coral", UAConfiguredFeatures.PRISMARINE_CORAL, CarvingMaskPlacement.forStep(Carving.AIR), RarityFilter.onAverageOnceEvery(256), BiomeFilter.biome());
 
-		public static final Holder<PlacedFeature> DRIFTWOOD_OCEAN = register("driftwood_ocean", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(1));
-		public static final Holder<PlacedFeature> DRIFTWOOD_BEACH = register("driftwood_beach", UAConfiguredFeatures.DRIFTWOOD, RarityFilter.onAverageOnceEvery(7), CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final Holder<PlacedFeature> DRIFTWOOD_RIVER = register("driftwood_river", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(1));
-		public static final Holder<PlacedFeature> DRIFTWOOD_SWAMP = register("driftwood_swamp", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(1));
-		public static final Holder<PlacedFeature> DRIFTWOOD_BASIN = register("driftwood_basin", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(2));
+		public static final RegistryObject<PlacedFeature> PATCH_SEAROCKET = register("patch_searocket", UAConfiguredFeatures.PATCH_SEAROCKET, RarityFilter.onAverageOnceEvery(15), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> PATCH_PICKERELWEED = register("patch_pickerelweed", UAConfiguredFeatures.PATCH_PICKERELWEED, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> PATCH_PICKERELWEED_EXTRA = register("patch_pickerelweed_extra", UAConfiguredFeatures.PATCH_PICKERELWEED, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> PATCH_FLOWERING_RUSH = register("patch_flowering_rush", UAConfiguredFeatures.PATCH_FLOWERING_RUSH, RarityFilter.onAverageOnceEvery(12), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+
+		public static final RegistryObject<PlacedFeature> DRIFTWOOD_OCEAN = register("driftwood_ocean", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(1));
+		public static final RegistryObject<PlacedFeature> DRIFTWOOD_BEACH = register("driftwood_beach", UAConfiguredFeatures.DRIFTWOOD, RarityFilter.onAverageOnceEvery(7), CountPlacement.of(2), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> DRIFTWOOD_RIVER = register("driftwood_river", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(1));
+		public static final RegistryObject<PlacedFeature> DRIFTWOOD_SWAMP = register("driftwood_swamp", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(1));
+		public static final RegistryObject<PlacedFeature> DRIFTWOOD_BASIN = register("driftwood_basin", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(2));
 
 		private static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {
 			return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());
@@ -139,12 +146,12 @@ public class UAFeatures {
 			return orePlacement(CountPlacement.of(count), modifier);
 		}
 
-		public static Holder<PlacedFeature> register(String name, Holder<? extends ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
+		public static RegistryObject<PlacedFeature> register(String name, RegistryObject<? extends ConfiguredFeature<?, ?>> configuredFeature, PlacementModifier... placementModifiers) {
 			return register(name, configuredFeature, List.of(placementModifiers));
 		}
 
-		public static Holder<PlacedFeature> register(String name, Holder<? extends ConfiguredFeature<?, ?>> configuredFeature, List<PlacementModifier> placementModifiers) {
-			return BuiltinRegistries.register(BuiltinRegistries.PLACED_FEATURE, new ResourceLocation(UpgradeAquatic.MOD_ID, name), new PlacedFeature(Holder.hackyErase(configuredFeature), placementModifiers));
+		private static RegistryObject<PlacedFeature> register(String name, RegistryObject<? extends ConfiguredFeature<?, ?>> feature, List<PlacementModifier> placementModifiers) {
+			return PLACED_FEATURES.register(name, () -> new PlacedFeature((Holder<ConfiguredFeature<?, ?>>) feature.getHolder().get(), ImmutableList.copyOf(placementModifiers)));
 		}
 	}
 }

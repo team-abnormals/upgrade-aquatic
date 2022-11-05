@@ -41,8 +41,8 @@ public class UAConfig {
 			this.drownedSwimmingAnimation = builder.comment("Give Drowneds a swimming animation, like in bedrock edition").define("Drowned swimming animation", true);
 			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("Deep ocean mob max height", 30, 0, 255);
 			builder.push("spawns");
-			this.thrasherWeight = builder.define("Thrasher spawn weight (cold oceans)", 90);
-			this.nautilusWeight = builder.define("Nautilus spawn weight (warm oceans)", 51);
+			this.thrasherWeight = builder.define("Thrasher spawn weight (cold oceans)", 10);
+			this.nautilusWeight = builder.define("Nautilus spawn weight (warm oceans)", 50);
 			this.lionfishWeight = builder.define("Lionfish spawn weight (coral reefs)", 15);
 			this.pikeWeight = builder.define("Pike spawn weight (rivers)", 11);
 			this.perchWeight = builder.define("Perch spawn weight (swamps)", 5);
