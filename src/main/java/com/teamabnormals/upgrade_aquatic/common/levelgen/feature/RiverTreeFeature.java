@@ -44,7 +44,7 @@ public class RiverTreeFeature extends Feature<TreeConfiguration> {
 				BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 				for (int l = origin.getX() - k; l <= origin.getX() + k && flag; ++l) {
 					for (int i1 = origin.getZ() - k; i1 <= origin.getZ() + k && flag; ++i1) {
-						if (j >= 0 && j < level.getMaxBuildHeight()) {
+						if (j >= level.getMinBuildHeight() && j < level.getMaxBuildHeight()) {
 							if (!TreeFeature.isAirOrLeaves(level, blockpos$mutableblockpos.set(l, j, i1)))
 								flag = false;
 						} else
