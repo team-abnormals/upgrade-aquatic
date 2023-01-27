@@ -2,7 +2,6 @@ package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish;
 
 import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
-import com.teamabnormals.blueprint.core.util.MathUtil;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.other.UADamageSources;
@@ -17,13 +16,13 @@ import net.minecraft.nbt.IntArrayTag;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -70,7 +69,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	}
 
 	@SuppressWarnings("deprecation")
-	public static <J extends AbstractJellyfish> boolean defaultSpawnCondition(EntityType<J> entity, LevelAccessor world, MobSpawnType reason, BlockPos pos, Random random) {
+	public static <J extends AbstractJellyfish> boolean defaultSpawnCondition(EntityType<J> entity, LevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
 		return pos.getY() > 45 && pos.getY() < world.getSeaLevel();
 	}
 
@@ -135,7 +134,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 
 			if (this.level.isClientSide && this.level.getGameTime() % 4 == 0) {
 				for (int i = 0; i < 2; i++) {
-					this.level.addParticle(JellyTorchType.getBlobParticleType(this.getJellyTorchType()), this.getRandomX(0.5D), this.getY() + this.getEyeHeight(), this.getRandomZ(0.5D), MathUtil.makeNegativeRandomly(this.random.nextDouble() * 0.05F, this.getRandom()), -this.random.nextDouble() * 0.05F, MathUtil.makeNegativeRandomly(this.random.nextDouble() * 0.05F, this.getRandom()));
+					this.level.addParticle(JellyTorchType.getBlobParticleType(this.getJellyTorchType()), this.getRandomX(0.5D), this.getY() + this.getEyeHeight(), this.getRandomZ(0.5D), makeNegativeRandomly(this.random.nextDouble() * 0.05F, this.getRandom()), -this.random.nextDouble() * 0.05F, makeNegativeRandomly(this.random.nextDouble() * 0.05F, this.getRandom()));
 				}
 			}
 		}
@@ -151,6 +150,10 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 				this.setDeltaMovement(this.getDeltaMovement().subtract(0.0F, 0.005F, 0.0F));
 			}
 		}
+	}
+
+	public static double makeNegativeRandomly(double value, RandomSource rand) {
+		return rand.nextBoolean() ? -value : value;
 	}
 
 	@Override
@@ -325,17 +328,17 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 
 		public static void appendHoverText(List<Component> tooltip, CompoundTag compoundTag) {
 			String name = compoundTag.getString("Name");
-			if (!name.isEmpty()) tooltip.add((new TranslatableComponent("tooltip.upgrade_aquatic." + name + "_jellyfish").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY)));
+			if (!name.isEmpty()) tooltip.add((Component.translatable("tooltip.upgrade_aquatic." + name + "_jellyfish").withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY)));
 			if (!compoundTag.contains("YieldingTorchTypes", 11)) return;
 			int[] yieldingTorchTypes = ((IntArrayTag) compoundTag.get("YieldingTorchTypes")).getAsIntArray();
 			int length = yieldingTorchTypes.length;
 			if (length <= 0) return;
-			MutableComponent component = new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(ChatFormatting.GRAY);
+			MutableComponent component = Component.translatable("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(ChatFormatting.GRAY);
 			while (true) {
 				JellyTorchType torchType = JellyTorchType.getByOrdinal(yieldingTorchTypes[length - 1]);
-				component = component.append((new TranslatableComponent("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase() + "_jelly_torch")).withStyle(torchType.color));
+				component = component.append((Component.translatable("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase() + "_jelly_torch")).withStyle(torchType.color));
 				if (--length > 0) {
-					component = component.append(new TranslatableComponent("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(ChatFormatting.GRAY));
+					component = component.append(Component.translatable("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(ChatFormatting.GRAY));
 				} else break;
 			}
 			tooltip.add(component);

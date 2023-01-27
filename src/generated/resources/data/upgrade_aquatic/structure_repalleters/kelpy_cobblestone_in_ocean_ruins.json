@@ -1,13 +1,13 @@
 {
+  "type": "blueprint:simple",
+  "priority": "normal",
+  "replaces_block": "minecraft:mossy_cobblestone",
+  "replaces_with": "upgrade_aquatic:kelpy_cobblestone",
   "selector": {
     "type": "names",
     "config": [
       "minecraft:ocean_ruin_warm",
       "minecraft:ocean_ruin_cold"
     ]
-  },
-  "priority": "normal",
-  "replaces_block": "minecraft:mossy_cobblestone",
-  "replaces_with": "upgrade_aquatic:kelpy_cobblestone",
-  "type": "blueprint:simple"
+  }
 }

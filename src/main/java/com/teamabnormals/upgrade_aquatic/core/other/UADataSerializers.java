@@ -5,12 +5,11 @@ import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.world.entity.EntityDimensions;
-import net.minecraftforge.registries.DataSerializerEntry;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries.Keys;
 
 public final class UADataSerializers {
-	public static final DeferredRegister<DataSerializerEntry> SERIALIZERS = DeferredRegister.create(Keys.DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
+	public static final DeferredRegister<EntityDataSerializer<?>> SERIALIZERS = DeferredRegister.create(Keys.ENTITY_DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
 
 	public static final EntityDataSerializer<PikeType> PIKE_TYPE = new EntityDataSerializer<PikeType>() {
 		public void write(FriendlyByteBuf buf, PikeType value) {
@@ -47,7 +46,7 @@ public final class UADataSerializers {
 	};
 
 	static {
-		SERIALIZERS.register("pike_type", () -> new DataSerializerEntry(PIKE_TYPE));
-		SERIALIZERS.register("entity_size", () -> new DataSerializerEntry(ENTITY_SIZE));
+		SERIALIZERS.register("pike_type", () -> PIKE_TYPE);
+		SERIALIZERS.register("entity_size", () -> ENTITY_SIZE);
 	}
 }

@@ -1,32 +1,23 @@
 {
-  "selector": "minecraft:chests/shipwreck_supply",
-  "priority": "normal",
   "modifiers": [
     {
       "type": "pools",
       "config": {
-        "replace": false,
         "pools": [
           {
-            "name": "upgrade_aquatic:pickerelweed",
-            "rolls": {
-              "type": "minecraft:uniform",
-              "min": 1.0,
-              "max": 2.0
-            },
             "bonus_rolls": 0.0,
             "entries": [
               {
                 "type": "minecraft:item",
                 "functions": [
                   {
-                    "function": "minecraft:set_count",
+                    "add": false,
                     "count": {
                       "type": "minecraft:uniform",
-                      "min": 1.0,
-                      "max": 3.0
+                      "max": 3.0,
+                      "min": 1.0
                     },
-                    "add": false
+                    "function": "minecraft:set_count"
                   }
                 ],
                 "name": "upgrade_aquatic:purple_pickerelweed"
@@ -35,21 +26,30 @@
                 "type": "minecraft:item",
                 "functions": [
                   {
-                    "function": "minecraft:set_count",
+                    "add": false,
                     "count": {
                       "type": "minecraft:uniform",
-                      "min": 1.0,
-                      "max": 3.0
+                      "max": 3.0,
+                      "min": 1.0
                     },
-                    "add": false
+                    "function": "minecraft:set_count"
                   }
                 ],
                 "name": "upgrade_aquatic:blue_pickerelweed"
               }
-            ]
+            ],
+            "name": "upgrade_aquatic:pickerelweed",
+            "rolls": {
+              "type": "minecraft:uniform",
+              "max": 2.0,
+              "min": 1.0
+            }
           }
-        ]
+        ],
+        "replace": false
       }
     }
-  ]
+  ],
+  "priority": "normal",
+  "selector": "minecraft:chests/shipwreck_supply"
 }

@@ -5,6 +5,7 @@ import com.mojang.math.Vector3f;
 import com.teamabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -16,9 +17,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class PikeCarriedItemRenderLayer extends RenderLayer<Pike, PikeModel<Pike>> {
+	private final ItemInHandRenderer itemInHandRenderer;
 
-	public PikeCarriedItemRenderLayer(RenderLayerParent<Pike, PikeModel<Pike>> renderer) {
+	public PikeCarriedItemRenderLayer(RenderLayerParent<Pike, PikeModel<Pike>> renderer, ItemInHandRenderer itemInHandRenderer) {
 		super(renderer);
+		this.itemInHandRenderer = itemInHandRenderer;
 	}
 
 	@Override
@@ -29,7 +32,7 @@ public class PikeCarriedItemRenderLayer extends RenderLayer<Pike, PikeModel<Pike
 				matrixStack.pushPose();
 				matrixStack.translate((this.getParentModel()).nose.x / 16.0F, (this.getParentModel()).nose.y / 16.0F + 1.3F, (this.getParentModel()).nose.z / 16.0F - 0.5F);
 				matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-				Minecraft.getInstance().getItemInHandRenderer().renderItem(pike, itemstack, ItemTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
+				this.itemInHandRenderer.renderItem(pike, itemstack, ItemTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
 				matrixStack.popPose();
 			}
 		}

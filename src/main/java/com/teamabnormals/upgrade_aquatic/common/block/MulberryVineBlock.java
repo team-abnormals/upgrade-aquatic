@@ -10,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -91,7 +92,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level arg0, Random arg1, BlockPos arg2, BlockState state) {
+	public boolean isBonemealSuccess(Level arg0, RandomSource arg1, BlockPos arg2, BlockState state) {
 		return state.getValue(AGE) < 4;
 	}
 
@@ -128,7 +129,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		int i = state.getValue(AGE);
 		if (i < 4 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, true)) {
 			worldIn.setBlockAndUpdate(pos, state.setValue(AGE, i + 1));
@@ -137,7 +138,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random rand) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource rand) {
 		super.tick(state, worldIn, pos, rand);
 		int i = state.getValue(AGE);
 		if (i < 4 && worldIn.getRawBrightness(pos.above(), 0) >= 7 && ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(5) == 0)) {
@@ -147,7 +148,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
 		if (worldIn.isRainingAt(pos.above())) {
 			if (rand.nextInt(15) == 1) {
 				BlockPos blockpos = pos.below();

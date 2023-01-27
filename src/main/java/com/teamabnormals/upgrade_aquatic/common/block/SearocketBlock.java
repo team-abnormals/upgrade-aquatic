@@ -6,6 +6,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -59,12 +60,12 @@ public class SearocketBlock extends FlowerBlock implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level arg0, Random arg1, BlockPos arg2, BlockState arg3) {
+	public boolean isBonemealSuccess(Level arg0, RandomSource arg1, BlockPos arg2, BlockState arg3) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		popResource(world, pos, new ItemStack(this));
 	}
 

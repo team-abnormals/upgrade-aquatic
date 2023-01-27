@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.core.other;
+package com.teamabnormals.upgrade_aquatic.core.other.tags;
 
 import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;

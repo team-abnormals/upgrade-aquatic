@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core.mixin;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BubbleColumnBlock;
@@ -18,7 +19,7 @@ import java.util.Random;
 @Mixin(BubbleColumnBlock.class)
 public final class BubbleColumnBlockMixin {
 	@Inject(at = @At("HEAD"), method = "tick")
-	private void tick(BlockState state, ServerLevel world, BlockPos pos, Random random, CallbackInfo info) {
+	private void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo info) {
 		BlockPos abovePos = pos.above();
 		Block aboveBlock = world.getBlockState(abovePos).getBlock();
 		boolean noFallingBlockAbove = world.getEntitiesOfClass(FallingBlockEntity.class, new AABB(pos)).isEmpty();

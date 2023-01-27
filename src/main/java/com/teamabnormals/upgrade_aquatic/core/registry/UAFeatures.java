@@ -1,20 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.google.common.collect.ImmutableList;
-import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.common.levelgen.feature.*;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAWorldCarvers.UAConfiguredWorldCarvers;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.data.worldgen.features.OreFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.biome.Biome.BiomeCategory;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.GenerationStep.Carving;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -28,9 +22,6 @@ import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlac
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraftforge.common.world.BiomeGenerationSettingsBuilder;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -50,52 +41,6 @@ public class UAFeatures {
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> DRIFTWOOD = FEATURES.register("driftwood", () -> new DriftwoodFeature(NoneFeatureConfiguration.CODEC));
 	public static final RegistryObject<Feature<NoneFeatureConfiguration>> DUNES = FEATURES.register("dunes", () -> new BeachgrassDunesFeature(NoneFeatureConfiguration.CODEC));
 	public static final RegistryObject<Feature<TreeConfiguration>> RIVER_TREE = FEATURES.register("river_tree", () -> new RiverTreeFeature(TreeConfiguration.CODEC));
-
-	@SubscribeEvent
-	public static void onBiomeLoad(BiomeLoadingEvent event) {
-		if (event.getName() == null) return;
-		ResourceLocation biome = event.getName();
-		BiomeCategory category = event.getCategory();
-		BiomeGenerationSettingsBuilder generation = event.getGeneration();
-
-		if (category == BiomeCategory.OCEAN) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_OCEAN.getHolder().get());
-			generation.addFeature(GenerationStep.Decoration.RAW_GENERATION, UAPlacedFeatures.PRISMARINE_CORAL.getHolder().get());
-			generation.addCarver(Carving.AIR, UAConfiguredWorldCarvers.UNDERWATER_CANYON.getHolder().get());
-		}
-
-		if (category == BiomeCategory.BEACH && !DataUtil.matchesKeys(biome, Biomes.STONY_SHORE)) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BEACH.getHolder().get());
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_SEAROCKET.getHolder().get());
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.BEACHGRASS_DUNES.getHolder().get());
-		}
-
-		if (category == BiomeCategory.RIVER) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.RIVER_TREE.getHolder().get());
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_RIVER.getHolder().get());
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_FLOWERING_RUSH.getHolder().get());
-		}
-
-		if (category == BiomeCategory.SWAMP) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_SWAMP.getHolder().get());
-		}
-
-		if (DataUtil.matchesKeys(biome, Biomes.FLOWER_FOREST)) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED_EXTRA.getHolder().get());
-		}
-
-		if (category == BiomeCategory.BEACH || category == BiomeCategory.OCEAN || DataUtil.matchesKeys(biome, Biomes.STONY_SHORE)) {
-			generation.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, UAPlacedFeatures.ORE_AMMONITE.getHolder().get());
-		}
-
-		if ((category == BiomeCategory.JUNGLE || category == BiomeCategory.SWAMP || category == BiomeCategory.RIVER) && !biome.toString().contains("marsh")) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED.getHolder().get());
-		}
-
-		if (biome.toString().contains("rainforest_basin")) {
-			generation.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BASIN.getHolder().get());
-		}
-	}
 
 	public static final class Configs {
 		public static final TreeConfiguration RIVER_TREE_CONFIG = new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(UABlocks.RIVER_LOG.get()), new StraightTrunkPlacer(3, 1, 1), BlockStateProvider.simple(UABlocks.RIVER_LEAVES.get()), new BlobFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), 0), new TwoLayersFeatureSize(0, 0, 0)).ignoreVines().build();

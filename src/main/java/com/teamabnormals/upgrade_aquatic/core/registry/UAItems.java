@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
+import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.item.BlueprintMobBucketItem;
 import com.teamabnormals.blueprint.core.util.registry.AbstractSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
@@ -27,12 +28,10 @@ import net.minecraftforge.registries.RegistryObject;
 public class UAItems {
 	public static final UAItemSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getItemSubHelper();
 
-	public static final RegistryObject<Item> DRIFTWOOD_BOAT = HELPER.createBoatItem("driftwood", UABlocks.DRIFTWOOD_PLANKS);
-	public static final RegistryObject<Item> DRIFTWOOD_CHEST_BOAT = HELPER.createItem("driftwood_chest_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.DRIFTWOOD_CHEST_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> DRIFTWOOD_BOAT = HELPER.createBoatAndChestBoatItem("driftwood", UABlocks.DRIFTWOOD_PLANKS);
 	public static final RegistryObject<Item> DRIFTWOOD_FURNACE_BOAT = HELPER.createItem("driftwood_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.DRIFTWOOD_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
 	public static final RegistryObject<Item> LARGE_DRIFTWOOD_BOAT = HELPER.createItem("large_driftwood_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_DRIFTWOOD_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
-	public static final RegistryObject<Item> RIVER_BOAT = HELPER.createBoatItem("river", UABlocks.RIVER_PLANKS);
-	public static final RegistryObject<Item> RIVER_CHEST_BOAT = HELPER.createItem("river_chest_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.RIVER_CHEST_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> RIVER_BOAT = HELPER.createBoatAndChestBoatItem("river", UABlocks.RIVER_PLANKS);
 	public static final RegistryObject<Item> RIVER_FURNACE_BOAT = HELPER.createItem("river_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.RIVER_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
 	public static final RegistryObject<Item> LARGE_RIVER_BOAT = HELPER.createItem("large_river_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_RIVER_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
 

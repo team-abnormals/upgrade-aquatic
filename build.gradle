@@ -78,9 +78,11 @@ dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
     implementation fg.deobf("com.teamabnormals:blueprint:${project.minecraft}-${project.blueprint}")
 
-    compileOnly fg.deobf("com.teamabnormals:boatload:${project.minecraft}-${project.boatload}")
-    compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}:${project.jei}")
+    compileOnly fg.deobf("com.teamabnormals:boatload:1.19-${project.boatload}")
+
+    compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}-common-api:${project.jei}")
+    compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}-forge-api:${project.jei}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}-forge:${project.jei}")
 
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 }

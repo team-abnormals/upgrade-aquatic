@@ -12,16 +12,7 @@ public class UAConfig {
 		public final ConfigValue<Boolean> leatherworkersSellBedrolls;
 
 		public final ConfigValue<Boolean> kelpyOceanRuins;
-
 		public final ConfigValue<Integer> deepOceanMobMaxHeight;
-
-		public final ConfigValue<Integer> thrasherWeight;
-		public final ConfigValue<Integer> nautilusWeight;
-		public final ConfigValue<Integer> lionfishWeight;
-		public final ConfigValue<Integer> pikeWeight;
-		public final ConfigValue<Integer> perchWeight;
-		public final ConfigValue<Integer> pikeSwampWeight;
-		public final ConfigValue<Integer> squidSwampWeight;
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			builder.push("items");
@@ -40,16 +31,6 @@ public class UAConfig {
 			builder.push("mobs");
 			this.drownedSwimmingAnimation = builder.comment("Give Drowneds a swimming animation, like in bedrock edition").define("Drowned swimming animation", true);
 			this.deepOceanMobMaxHeight = builder.comment("The max height that deep ocean mobs can spawn at").defineInRange("Deep ocean mob max height", 30, 0, 255);
-			builder.push("spawns");
-			this.thrasherWeight = builder.define("Thrasher spawn weight (cold oceans)", 10);
-			this.nautilusWeight = builder.define("Nautilus spawn weight (warm oceans)", 50);
-			this.lionfishWeight = builder.define("Lionfish spawn weight (coral reefs)", 15);
-			this.pikeWeight = builder.define("Pike spawn weight (rivers)", 11);
-			this.perchWeight = builder.define("Perch spawn weight (swamps)", 5);
-			this.pikeSwampWeight = builder.define("Pike spawn weight (swamps)", 5);
-			this.squidSwampWeight = builder.define("Squid spawn weight (swamps)", 5);
-			builder.pop();
-
 			builder.pop();
 		}
 	}

@@ -5,7 +5,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MobBucketItem;
@@ -29,7 +28,7 @@ public class PikeBucketItem extends MobBucketItem {
 		CompoundTag compoundnbt = stack.getTag();
 		if (compoundnbt != null && compoundnbt.contains("BucketVariantTag", 3)) {
 			PikeType type = PikeType.getTypeById(compoundnbt.getInt("BucketVariantTag"));
-			tooltip.add((new TranslatableComponent(String.format("tooltip.upgrade_aquatic.%s_pike", type.toString().toLowerCase())).withStyle(ChatFormatting.ITALIC, type.rarity.formatting)));
+			tooltip.add((Component.translatable(String.format("tooltip.upgrade_aquatic.%s_pike", type.toString().toLowerCase())).withStyle(ChatFormatting.ITALIC, type.rarity.formatting)));
 		}
 	}
 }

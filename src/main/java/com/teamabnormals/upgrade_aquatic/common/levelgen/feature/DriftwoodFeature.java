@@ -7,12 +7,13 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -23,7 +24,6 @@ import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConf
 import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 
@@ -34,7 +34,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		WorldGenLevel world = context.level();
-		Random rand = context.random();
+		RandomSource rand = context.random();
 		BlockPos pos = context.origin();
 
 		boolean standing = rand.nextFloat() < 0.25F;
@@ -59,7 +59,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 			Direction direction = Direction.from2DDataValue(rand.nextInt(4));
 			int length = rand.nextInt(3) + 3;
 			pos = pos.below();
-			if ((rand.nextInt(150) == 0 && Biome.getBiomeCategory(world.getBiome(pos)) == BiomeCategory.OCEAN && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).is(Blocks.WATER) && world.isEmptyBlock(pos.above())) || (Biome.getBiomeCategory(world.getBiome(pos)) != BiomeCategory.OCEAN && this.isNearWater(world, pos) && (downState.is(BlockTags.DIRT) || downState.is(BlockTags.SAND)) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
+			if ((rand.nextInt(150) == 0 && world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).is(Blocks.WATER) && world.isEmptyBlock(pos.above())) || (!world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.isNearWater(world, pos) && (downState.is(BlockTags.DIRT) || downState.is(BlockTags.SAND)) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
 				GenerationPiece driftwood = new GenerationPiece((iworld, part) -> {
 					return world.isEmptyBlock(part.pos) || world.getFluidState(part.pos).is(FluidTags.WATER);
 				});
@@ -70,7 +70,8 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 					}
 					if (rand.nextBoolean()) {
 						Direction upOrDown = rand.nextBoolean() ? Direction.UP : Direction.DOWN;
-						if (this.isBlockPlaceableAtPos(world, pos.relative(direction, i).relative(upOrDown), Biome.getBiomeCategory(world.getBiome(pos.relative(direction, i).relative(upOrDown))) == BiomeCategory.OCEAN) && BlockUtil.isPosNotTouchingBlock(world, pos.relative(direction, i).relative(upOrDown), UABlocks.DRIFTWOOD_LOG.get(), Direction.UP, Direction.DOWN)) {
+						if (this.isBlockPlaceableAtPos(world, pos.relative(direction, i).relative(upOrDown), world.getBiome(pos.relative(direction, i).relative(upOrDown)).is(BiomeTags.IS_OCEAN)) &&
+						BlockUtil.isPosNotTouchingBlock(world, pos.relative(direction, i).relative(upOrDown), UABlocks.DRIFTWOOD_LOG.get(), Direction.UP, Direction.DOWN)){
 							this.placeDriftwoodLog(world, pos.relative(direction, i).relative(upOrDown), upOrDown, driftwood);
 						}
 					}
@@ -108,7 +109,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 		int foundGaps = 0;
 		for (int i = 0; i < length; i++) {
 			if (!world.getBlockState(pos.below().relative(direction, i)).is(BlockTags.DIRT) && !world.getBlockState(pos.below().relative(direction, i)).is(BlockTags.SAND)) {
-				if (Biome.getBiomeCategory(world.getBiome(pos.below().relative(direction, i))) != BiomeCategory.OCEAN) {
+				if (world.getBiome(pos.below().relative(direction, i)).is(BiomeTags.IS_OCEAN)) {
 					foundGaps++;
 				} else {
 					if (world.getBlockState(pos.below().relative(direction, i)).getBlock() != Blocks.WATER) {
@@ -123,7 +124,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 	private boolean isNearWater(LevelAccessor world, BlockPos pos) {
 		Holder<Biome> biome = world.getBiome(pos);
 		int foundWaterSpots = 0;
-		if (Biome.getBiomeCategory(biome) == BiomeCategory.RIVER) {
+		if (biome.is(BiomeTags.IS_RIVER)) {
 			for (int y = pos.getY() - 2; y < pos.getY(); y++) {
 				for (int x = pos.getX() - 3; x < pos.getX() + 3; x++) {
 					for (int z = pos.getZ() - 3; z < pos.getZ() + 3; z++) {
@@ -155,14 +156,14 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 		else world.setBlock(pos, UABlocks.DRIFTWOOD_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, direction.getAxis()), 2);
 	}
 
-	private void placeBranch(LevelAccessor world, BlockPos startPos, Direction direction, Random rand, boolean isLarge, GenerationPiece driftwood) {
+	private void placeBranch(LevelAccessor world, BlockPos startPos, Direction direction, RandomSource rand, boolean isLarge, GenerationPiece driftwood) {
 		int size = isLarge ? rand.nextInt(2) + 1 : 1;
 
 		Direction branchDirection = rand.nextBoolean() ? direction.getClockWise() : direction.getCounterClockWise();
 
 		for (int i = 1; i < size + 1; i++) {
 			Block[] sideBlocks = new Block[]{world.getBlockState(startPos.relative(branchDirection, i).relative(branchDirection.getClockWise())).getBlock(), world.getBlockState(startPos.relative(branchDirection, i).relative(branchDirection.getCounterClockWise())).getBlock()};
-			if (this.isBlockPlaceableAtPos(world, startPos.relative(branchDirection, i), Biome.getBiomeCategory(world.getBiome(startPos.relative(branchDirection, i))) == BiomeCategory.OCEAN) && sideBlocks[0] != UABlocks.DRIFTWOOD_LOG.get() && sideBlocks[1] != UABlocks.DRIFTWOOD_LOG.get()) {
+			if (this.isBlockPlaceableAtPos(world, startPos.relative(branchDirection, i), world.getBiome(startPos.relative(branchDirection, i)).is(BiomeTags.IS_OCEAN)) && sideBlocks[0] != UABlocks.DRIFTWOOD_LOG.get() && sideBlocks[1] != UABlocks.DRIFTWOOD_LOG.get()) {
 				this.placeDriftwoodLog(world, startPos.relative(branchDirection, i), branchDirection, driftwood);
 			} else {
 				break;

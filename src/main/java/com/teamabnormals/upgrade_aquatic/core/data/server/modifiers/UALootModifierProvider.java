@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.core.data.server;
+package com.teamabnormals.upgrade_aquatic.core.data.server.modifiers;
 
 import com.teamabnormals.blueprint.common.loot.modification.LootModifierProvider;
 import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolEntriesModifier;

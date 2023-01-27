@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_beach",
+  "features": [
+    "upgrade_aquatic:driftwood_beach",
+    "upgrade_aquatic:patch_searocket",
+    "upgrade_aquatic:beachgrass_dunes"
+  ],
+  "step": "vegetal_decoration"
+}

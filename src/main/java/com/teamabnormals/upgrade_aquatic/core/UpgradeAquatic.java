@@ -10,9 +10,11 @@ import com.teamabnormals.upgrade_aquatic.client.renderer.entity.*;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.BoxJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.CassiopeaJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.ImmortalJellyfishRenderer;
-import com.teamabnormals.upgrade_aquatic.core.data.server.UAAdvancementModifierProvider;
-import com.teamabnormals.upgrade_aquatic.core.data.server.UALootModifierProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UAStructureRepaletterProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.modifiers.UAAdvancementModifierProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.modifiers.UABiomeModifierProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.modifiers.UALootModifierProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABiomeTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABlockTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UAEntityTypeTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.other.*;
@@ -28,6 +30,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -37,7 +40,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod(value = UpgradeAquatic.MOD_ID)
@@ -59,6 +61,8 @@ public class UpgradeAquatic {
 		UAWorldCarvers.UAConfiguredWorldCarvers.CONFIGURED_WORLD_CARVERS.register(bus);
 		UAParticleTypes.PARTICLES.register(bus);
 		UADataSerializers.SERIALIZERS.register(bus);
+		UABiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
+
 		MinecraftForge.EVENT_BUS.register(this);
 
 		bus.addListener(this::commonSetup);
@@ -89,13 +93,14 @@ public class UpgradeAquatic {
 		DataGenerator generator = event.getGenerator();
 		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-		if (event.includeServer()) {
-			generator.addProvider(new UALootModifierProvider(generator));
-			generator.addProvider(new UAAdvancementModifierProvider(generator));
-			generator.addProvider(new UABlockTagsProvider(generator, existingFileHelper));
-			generator.addProvider(new UAEntityTypeTagsProvider(generator, existingFileHelper));
-			generator.addProvider(new UAStructureRepaletterProvider(generator));
-		}
+		boolean includeServer = event.includeServer();
+		generator.addProvider(includeServer, new UALootModifierProvider(generator));
+		generator.addProvider(includeServer, new UAAdvancementModifierProvider(generator));
+		generator.addProvider(includeServer, new UABlockTagsProvider(generator, existingFileHelper));
+		generator.addProvider(includeServer, new UAEntityTypeTagsProvider(generator, existingFileHelper));
+		generator.addProvider(includeServer, new UABiomeTagsProvider(generator, existingFileHelper));
+		generator.addProvider(includeServer, UABiomeModifierProvider.create(generator, existingFileHelper));
+		generator.addProvider(includeServer, new UAStructureRepaletterProvider(generator));
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
@@ -136,6 +141,7 @@ public class UpgradeAquatic {
 		event.registerEntityRenderer(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);
 
-		if (UAConfig.CLIENT.replaceGlowSquidRenderer.get()) event.registerEntityRenderer(EntityType.GLOW_SQUID, UAGlowSquidRenderer::new);
+		//if (UAConfig.CLIENT.replaceGlowSquidRenderer.get())
+			event.registerEntityRenderer(EntityType.GLOW_SQUID, UAGlowSquidRenderer::new);
 	}
 }

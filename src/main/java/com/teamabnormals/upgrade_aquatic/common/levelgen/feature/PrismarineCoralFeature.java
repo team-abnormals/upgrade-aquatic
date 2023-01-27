@@ -6,6 +6,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.BaseCoralWallFanBlock;
@@ -49,7 +50,7 @@ public class PrismarineCoralFeature extends Feature<NoneFeatureConfiguration> {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		WorldGenLevel world = context.level();
-		Random rand = context.random();
+		RandomSource rand = context.random();
 		BlockPos pos = context.origin();
 		if (shouldPlace(world, pos)) {
 			int a = rand.nextInt(4) + 2;
@@ -95,7 +96,7 @@ public class PrismarineCoralFeature extends Feature<NoneFeatureConfiguration> {
 		return false;
 	}
 
-	private static void addShelf(LevelAccessor world, BlockPos pos, Random rand, int a, int b, int c, boolean isElder) {
+	private static void addShelf(LevelAccessor world, BlockPos pos, RandomSource rand, int a, int b, int c, boolean isElder) {
 		MathUtil.Equation r = (theta) -> (Math.cos(b * theta) / c + 1) * a;
 		for (int i = -(a / c + a); i < a / c + a; i++) {
 			for (int j = -(a / c + a); j < a / c + a; j++) {

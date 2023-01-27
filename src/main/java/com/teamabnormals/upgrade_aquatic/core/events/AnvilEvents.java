@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.core.events;
 
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -53,7 +53,7 @@ public class AnvilEvents {
 			} else if (!event.getName().equals(leftItem.getHoverName().getString())) {
 				k = 1;
 				i += k;
-				cloneLeftStack.setHoverName(new TextComponent(event.getName()));
+				cloneLeftStack.setHoverName(Component.literal(event.getName()));
 			}
 			if (flag && !cloneLeftStack.isBookEnchantable(rightItem)) cloneLeftStack = ItemStack.EMPTY;
 

@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.data.server.tags;
 
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.other.UAEntityTypeTags;
+import com.teamabnormals.upgrade_aquatic.core.other.tags.UAEntityTypeTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;

@@ -1,24 +1,20 @@
 {
-  "selector": "minecraft:gameplay/fishing/junk",
-  "priority": "normal",
   "modifiers": [
     {
       "type": "entries",
       "config": {
-        "replace": false,
-        "index": 0,
         "entries": [
           {
             "type": "minecraft:item",
-            "weight": 10,
             "functions": [
               {
-                "function": "minecraft:set_count",
+                "add": false,
                 "count": 5.0,
-                "add": false
+                "function": "minecraft:set_count"
               }
             ],
-            "name": "upgrade_aquatic:driftwood_log"
+            "name": "upgrade_aquatic:driftwood_log",
+            "weight": 10
           },
           {
             "type": "minecraft:item",
@@ -41,8 +37,8 @@
                 ]
               }
             ],
-            "weight": 12,
-            "name": "upgrade_aquatic:blue_pickerelweed"
+            "name": "upgrade_aquatic:blue_pickerelweed",
+            "weight": 12
           },
           {
             "type": "minecraft:item",
@@ -65,11 +61,15 @@
                 ]
               }
             ],
-            "weight": 12,
-            "name": "upgrade_aquatic:purple_pickerelweed"
+            "name": "upgrade_aquatic:purple_pickerelweed",
+            "weight": 12
           }
-        ]
+        ],
+        "index": 0,
+        "replace": false
       }
     }
-  ]
+  ],
+  "priority": "normal",
+  "selector": "minecraft:gameplay/fishing/junk"
 }

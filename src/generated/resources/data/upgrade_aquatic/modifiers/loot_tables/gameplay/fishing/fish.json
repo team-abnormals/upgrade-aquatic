@@ -1,12 +1,8 @@
 {
-  "selector": "minecraft:gameplay/fishing/fish",
-  "priority": "normal",
   "modifiers": [
     {
       "type": "entries",
       "config": {
-        "replace": false,
-        "index": 0,
         "entries": [
           {
             "type": "minecraft:item",
@@ -29,8 +25,8 @@
                 ]
               }
             ],
-            "weight": 11,
-            "name": "upgrade_aquatic:pike"
+            "name": "upgrade_aquatic:pike",
+            "weight": 11
           },
           {
             "type": "minecraft:item",
@@ -42,8 +38,8 @@
                 }
               }
             ],
-            "weight": 18,
-            "name": "upgrade_aquatic:perch"
+            "name": "upgrade_aquatic:perch",
+            "weight": 18
           },
           {
             "type": "minecraft:item",
@@ -55,11 +51,15 @@
                 }
               }
             ],
-            "weight": 5,
-            "name": "upgrade_aquatic:lionfish"
+            "name": "upgrade_aquatic:lionfish",
+            "weight": 5
           }
-        ]
+        ],
+        "index": 0,
+        "replace": false
       }
     }
-  ]
+  ],
+  "priority": "normal",
+  "selector": "minecraft:gameplay/fishing/fish"
 }

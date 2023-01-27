@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#upgrade_aquatic:has_feature/ammonite_ore",
+  "features": "upgrade_aquatic:ore_ammonite",
+  "step": "underground_ores"
+}

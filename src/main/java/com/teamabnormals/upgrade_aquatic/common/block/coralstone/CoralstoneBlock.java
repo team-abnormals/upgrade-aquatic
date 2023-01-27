@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -60,7 +61,7 @@ public class CoralstoneBlock extends Block {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (!worldIn.isAreaLoaded(pos, 3)) return;
 
 		Block block = state.getBlock();
@@ -110,7 +111,7 @@ public class CoralstoneBlock extends Block {
 		builder.add(POWERED);
 	}
 
-	public static void tickConversion(Map<Supplier<Block>, Supplier<Block>> conversionMap, BlockState state, ServerLevel world, BlockPos pos, Random random) {
+	public static void tickConversion(Map<Supplier<Block>, Supplier<Block>> conversionMap, BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
 		for (int i = 0; i < 4; i++) {
 			Block randomBlock = world.getBlockState(pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1)).getBlock();
 			conversionMap.forEach((input, output) -> {

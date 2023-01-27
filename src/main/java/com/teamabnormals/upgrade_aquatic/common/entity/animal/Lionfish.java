@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -173,7 +174,7 @@ public class Lionfish extends BucketableWaterAnimal {
 		return new WaterBoundPathNavigation(this, worldIn);
 	}
 
-	public static boolean coralCondition(EntityType<? extends Entity> entityType, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, Random random) {
+	public static boolean coralCondition(EntityType<? extends Entity> entityType, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
 		if (((Level) world).dimension() != Level.OVERWORLD) return false;
 		for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {

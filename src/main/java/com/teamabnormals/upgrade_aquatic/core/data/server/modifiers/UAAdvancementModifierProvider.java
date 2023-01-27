@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.core.data.server;
+package com.teamabnormals.upgrade_aquatic.core.data.server.modifiers;
 
 import com.teamabnormals.blueprint.common.advancement.modification.AdvancementModifierProvider;
 import com.teamabnormals.blueprint.common.advancement.modification.modifiers.CriteriaModifier;
@@ -16,6 +16,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.MobBucketItem;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,7 @@ public final class UAAdvancementModifierProvider extends AdvancementModifierProv
 		UAItems.HELPER.getDeferredRegister().getEntries().forEach(registryObject -> {
 			Item item = registryObject.get();
 			if (item.isEdible()) {
-				balancedDiet.addCriterion(item.getRegistryName().getPath(), ConsumeItemTrigger.TriggerInstance.usedItem(item));
+				balancedDiet.addCriterion(ForgeRegistries.ITEMS.getKey(item).getPath(), ConsumeItemTrigger.TriggerInstance.usedItem(item));
 			}
 		});
 		this.entry("husbandry/balanced_diet").selects("husbandry/balanced_diet").addModifier(balancedDiet.requirements(RequirementsStrategy.AND).build());
@@ -55,7 +56,7 @@ public final class UAAdvancementModifierProvider extends AdvancementModifierProv
 		CriteriaModifier.Builder killAllMobs = CriteriaModifier.builder(this.modId);
 		ArrayList<String> names = new ArrayList<>();
 		for (EntityType<?> entityType : MOBS_TO_KILL) {
-			String name = entityType.getRegistryName().getPath();
+			String name = ForgeRegistries.ENTITY_TYPES.getKey(entityType).getPath();
 			KilledTrigger.TriggerInstance triggerInstance = KilledTrigger.TriggerInstance.playerKilledEntity(EntityPredicate.Builder.entity().of(entityType));
 			killAMob.addCriterion(name, triggerInstance);
 			killAllMobs.addCriterion(name, triggerInstance);
@@ -70,7 +71,7 @@ public final class UAAdvancementModifierProvider extends AdvancementModifierProv
 		for (var object : UAItems.HELPER.getDeferredRegister().getEntries()) {
 			Item item = object.get();
 			if (item instanceof MobBucketItem) {
-				String name = item.getRegistryName().getPath();
+				String name = ForgeRegistries.ITEMS.getKey(item).getPath();
 				tacticalFishing.addCriterion(name, FilledBucketTrigger.TriggerInstance.filledBucket(ItemPredicate.Builder.item().of(item).build()));
 				names.add(name);
 			}

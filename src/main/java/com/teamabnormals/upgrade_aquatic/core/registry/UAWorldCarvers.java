@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.levelgen.carver.UnderwaterCanyon
 import com.teamabnormals.upgrade_aquatic.common.levelgen.carver.UnderwaterCanyonWorldCarver;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.core.Registry;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.TrapezoidFloat;
 import net.minecraft.util.valueproviders.UniformFloat;
@@ -25,6 +26,6 @@ public class UAWorldCarvers {
 	public static final class UAConfiguredWorldCarvers {
 		public static final DeferredRegister<ConfiguredWorldCarver<?>> CONFIGURED_WORLD_CARVERS = DeferredRegister.create(Registry.CONFIGURED_CARVER_REGISTRY, UpgradeAquatic.MOD_ID);
 
-		public static final RegistryObject<ConfiguredWorldCarver<?>> UNDERWATER_CANYON = CONFIGURED_WORLD_CARVERS.register("underwater_canyon", () -> UAWorldCarvers.UNDERWATER_CANYON.get().configured(new UnderwaterCanyonCarverConfiguration(0.0333F, UniformHeight.of(VerticalAnchor.absolute(38), VerticalAnchor.absolute(58)), ConstantFloat.of(3.0F), VerticalAnchor.aboveBottom(8), CarverDebugSettings.of(false, Blocks.WARPED_BUTTON.defaultBlockState()), UniformFloat.of(-0.125F, 0.125F), new CanyonCarverConfiguration.CanyonShapeConfiguration(UniformFloat.of(0.75F, 1.0F), TrapezoidFloat.of(5.0F, 8.0F, 2.0F), 3, UniformFloat.of(0.75F, 1.0F), 2.5F, 0.0F), VerticalAnchor.absolute(10))));
+		public static final RegistryObject<ConfiguredWorldCarver<?>> UNDERWATER_CANYON = CONFIGURED_WORLD_CARVERS.register("underwater_canyon", () -> UAWorldCarvers.UNDERWATER_CANYON.get().configured(new UnderwaterCanyonCarverConfiguration(0.0333F, UniformHeight.of(VerticalAnchor.absolute(38), VerticalAnchor.absolute(58)), ConstantFloat.of(3.0F), VerticalAnchor.aboveBottom(8), CarverDebugSettings.of(false, Blocks.WARPED_BUTTON.defaultBlockState()), Registry.BLOCK.getOrCreateTag(BlockTags.OVERWORLD_CARVER_REPLACEABLES), UniformFloat.of(-0.125F, 0.125F), new CanyonCarverConfiguration.CanyonShapeConfiguration(UniformFloat.of(0.75F, 1.0F), TrapezoidFloat.of(5.0F, 8.0F, 2.0F), 3, UniformFloat.of(0.75F, 1.0F), 2.5F, 0.0F), VerticalAnchor.absolute(10))));
 	}
 }

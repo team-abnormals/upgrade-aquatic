@@ -8,6 +8,7 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -105,7 +106,7 @@ public class TallBeachgrassBlock extends Block implements BonemealableBlock {
 				popResource(worldIn, pos, new ItemStack(UABlocks.BEACHGRASS.get()));
 				popResource(worldIn, pos.above(), new ItemStack(UABlocks.BEACHGRASS.get()));
 			} else if (!worldIn.isClientSide && !player.isCreative() && !(player.getMainHandItem().getItem() instanceof ShearsItem)) {
-				Random rand = new Random();
+				RandomSource rand = RandomSource.create();
 				if (rand.nextFloat() < 0.125F) {
 					popResource(worldIn, pos, new ItemStack(Items.BEETROOT_SEEDS));
 				}
@@ -138,12 +139,12 @@ public class TallBeachgrassBlock extends Block implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel worldIn, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		if (!worldIn.isClientSide) {
 			BlockState blockstate = UABlocks.BEACHGRASS.get().defaultBlockState();
 			cont:

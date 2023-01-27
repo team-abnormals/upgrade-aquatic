@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -27,7 +28,7 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 	}
 
 	@Override
-	public boolean carve(CarvingContext p_190611_, UnderwaterCanyonCarverConfiguration p_190612_, ChunkAccess p_190613_, Function<BlockPos, Holder<Biome>> p_190614_, Random p_190615_, Aquifer p_190616_, ChunkPos p_190617_, CarvingMask p_190618_) {
+	public boolean carve(CarvingContext p_190611_, UnderwaterCanyonCarverConfiguration p_190612_, ChunkAccess p_190613_, Function<BlockPos, Holder<Biome>> p_190614_, RandomSource p_190615_, Aquifer p_190616_, ChunkPos p_190617_, CarvingMask p_190618_) {
 		int i = (this.getRange() * 2 - 1) * 16;
 		double d0 = p_190617_.getBlockX(p_190615_.nextInt(16));
 		int j = p_190612_.y.sample(p_190615_, p_190611_);
@@ -42,7 +43,7 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 	}
 
 	private void doCarve(CarvingContext p_190594_, UnderwaterCanyonCarverConfiguration p_190595_, ChunkAccess p_190596_, Function<BlockPos, Holder<Biome>> p_190597_, long p_190598_, Aquifer p_190599_, double p_190600_, double p_190601_, double p_190602_, float p_190603_, float p_190604_, float p_190605_, int p_190606_, int p_190607_, double p_190608_, CarvingMask p_190609_) {
-		Random random = new Random(p_190598_);
+		RandomSource random = RandomSource.create(p_190598_);
 		float[] afloat = this.initWidthFactors(p_190594_, p_190595_, random);
 		float f = 0.0F;
 		float f1 = 0.0F;
@@ -76,7 +77,7 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 		}
 	}
 
-	private void carveEllipsoid(CarvingContext p_190754_, UnderwaterCanyonCarverConfiguration p_190755_, ChunkAccess p_190756_, Function<BlockPos, Holder<Biome>> p_190757_, Aquifer p_190758_, double p_190759_, double p_190760_, double p_190761_, double p_190762_, double p_190763_, Random random, CarvingMask p_190764_, WorldCarver.CarveSkipChecker p_190765_) {
+	private void carveEllipsoid(CarvingContext p_190754_, UnderwaterCanyonCarverConfiguration p_190755_, ChunkAccess p_190756_, Function<BlockPos, Holder<Biome>> p_190757_, Aquifer p_190758_, double p_190759_, double p_190760_, double p_190761_, double p_190762_, double p_190763_, RandomSource random, CarvingMask p_190764_, WorldCarver.CarveSkipChecker p_190765_) {
 		ChunkPos chunkpos = p_190756_.getPos();
 		double d0 = chunkpos.getMiddleBlockX();
 		double d1 = chunkpos.getMiddleBlockZ();
@@ -119,7 +120,7 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 	}
 
 	@SuppressWarnings("deprecation")
-	protected void carveBlock(CarvingContext context, UnderwaterCanyonCarverConfiguration configuration, ChunkAccess chunkAccess, Function<BlockPos, Holder<Biome>> p_190747_, Random random, CarvingMask carvingMask, BlockPos.MutableBlockPos pos, BlockPos.MutableBlockPos mutablePos, Aquifer aquifer, MutableBoolean p_190752_, int minY) {
+	protected void carveBlock(CarvingContext context, UnderwaterCanyonCarverConfiguration configuration, ChunkAccess chunkAccess, Function<BlockPos, Holder<Biome>> p_190747_, RandomSource random, CarvingMask carvingMask, BlockPos.MutableBlockPos pos, BlockPos.MutableBlockPos mutablePos, Aquifer aquifer, MutableBoolean p_190752_, int minY) {
 		BlockState blockstate = chunkAccess.getBlockState(pos);
 		if (blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(Blocks.MYCELIUM)) {
 			p_190752_.setTrue();
@@ -127,7 +128,7 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 
 		int y = pos.getY();
 		int magmaAndObsidianLevel = configuration.magmaAndObsidianLevel.resolveY(context);
-		if (!this.canReplaceBlock(blockstate) || y < magmaAndObsidianLevel) return;
+		if (!this.canReplaceBlock(configuration, blockstate) || y < magmaAndObsidianLevel) return;
 
 		BlockState state;
 		if (y <= configuration.lavaLevel.resolveY(context)) {
@@ -170,7 +171,7 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 		}
 	}
 
-	private float[] initWidthFactors(CarvingContext p_159061_, UnderwaterCanyonCarverConfiguration p_159062_, Random p_159063_) {
+	private float[] initWidthFactors(CarvingContext p_159061_, UnderwaterCanyonCarverConfiguration p_159062_, RandomSource p_159063_) {
 		int i = p_159061_.getGenDepth();
 		float[] afloat = new float[i];
 		float f = 1.0F;
@@ -186,7 +187,7 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 		return afloat;
 	}
 
-	private double updateVerticalRadius(UnderwaterCanyonCarverConfiguration p_159026_, Random p_159027_, double p_159028_, float p_159029_, float p_159030_) {
+	private double updateVerticalRadius(UnderwaterCanyonCarverConfiguration p_159026_, RandomSource p_159027_, double p_159028_, float p_159029_, float p_159030_) {
 		float f = 1.0F - Mth.abs(0.5F - p_159030_ / p_159029_) * 2.0F;
 		float f1 = p_159026_.shape.verticalRadiusDefaultFactor + p_159026_.shape.verticalRadiusCenterFactor * f;
 		return (double) f1 * p_159028_ * (double) Mth.randomBetween(p_159027_, 0.75F, 1.0F);
@@ -198,7 +199,7 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 	}
 
 	@Override
-	public boolean isStartChunk(UnderwaterCanyonCarverConfiguration configuration, Random random) {
+	public boolean isStartChunk(UnderwaterCanyonCarverConfiguration configuration, RandomSource random) {
 		return random.nextFloat() <= configuration.probability;
 	}
 

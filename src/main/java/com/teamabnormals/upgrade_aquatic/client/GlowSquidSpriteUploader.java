@@ -8,7 +8,7 @@ import net.minecraft.client.resources.TextureAtlasHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ReloadableResourceManager;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 
@@ -39,7 +39,7 @@ public class GlowSquidSpriteUploader extends TextureAtlasHolder {
 	 * @param bus The bus to register to
 	 */
 	public static void init(IEventBus bus) {
-		bus.addListener(EventPriority.NORMAL, false, ColorHandlerEvent.Block.class, event -> {
+		bus.addListener(EventPriority.NORMAL, false, RegisterColorHandlersEvent.class, event -> {
 			Minecraft minecraft = Minecraft.getInstance();
 			ResourceManager resourceManager = minecraft.getResourceManager();
 			if (resourceManager instanceof ReloadableResourceManager) {

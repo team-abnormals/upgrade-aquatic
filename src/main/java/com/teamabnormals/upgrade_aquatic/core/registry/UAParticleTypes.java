@@ -6,11 +6,9 @@ import com.teamabnormals.upgrade_aquatic.client.particle.JellyTorchParticle;
 import com.teamabnormals.upgrade_aquatic.client.particle.PrismarineShowerParticle;
 import com.teamabnormals.upgrade_aquatic.client.particle.SpectralConsumeParticle;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -47,64 +45,25 @@ public class UAParticleTypes {
 	}
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public static void registerParticleTypes(ParticleFactoryRegisterEvent event) {
-		ParticleEngine engine = Minecraft.getInstance().particleEngine;
-		if (PRISMARINE_SHOWER.isPresent()) {
-			engine.register(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
-		}
-		if (ELDER_PRISMARINE_SHOWER.isPresent()) {
-			engine.register(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);
-		}
-		if (SPECTRAL_CONSUME.isPresent()) {
-			engine.register(SPECTRAL_CONSUME.get(), SpectralConsumeParticle.Factory::new);
-		}
-		if (PINK_JELLY_FLAME.isPresent()) {
-			engine.register(PINK_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		}
-		if (PURPLE_JELLY_FLAME.isPresent()) {
-			engine.register(PURPLE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		}
-		if (BLUE_JELLY_FLAME.isPresent()) {
-			engine.register(BLUE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		}
-		if (GREEN_JELLY_FLAME.isPresent()) {
-			engine.register(GREEN_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		}
-		if (YELLOW_JELLY_FLAME.isPresent()) {
-			engine.register(YELLOW_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		}
-		if (ORANGE_JELLY_FLAME.isPresent()) {
-			engine.register(ORANGE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		}
-		if (RED_JELLY_FLAME.isPresent()) {
-			engine.register(RED_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		}
-		if (WHITE_JELLY_FLAME.isPresent()) {
-			engine.register(WHITE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		}
-		if (PINK_JELLY_BLOB.isPresent()) {
-			engine.register(PINK_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
-		if (PURPLE_JELLY_BLOB.isPresent()) {
-			engine.register(PURPLE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
-		if (BLUE_JELLY_BLOB.isPresent()) {
-			engine.register(BLUE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
-		if (GREEN_JELLY_BLOB.isPresent()) {
-			engine.register(GREEN_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
-		if (YELLOW_JELLY_BLOB.isPresent()) {
-			engine.register(YELLOW_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
-		if (ORANGE_JELLY_BLOB.isPresent()) {
-			engine.register(ORANGE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
-		if (RED_JELLY_BLOB.isPresent()) {
-			engine.register(RED_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
-		if (WHITE_JELLY_BLOB.isPresent()) {
-			engine.register(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		}
+	public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
+		event.register(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
+		event.register(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);
+		event.register(SPECTRAL_CONSUME.get(), SpectralConsumeParticle.Factory::new);
+		event.register(PINK_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.register(PURPLE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.register(BLUE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.register(GREEN_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.register(YELLOW_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.register(ORANGE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.register(RED_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.register(WHITE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.register(PINK_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.register(PURPLE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.register(BLUE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.register(GREEN_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.register(YELLOW_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.register(ORANGE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.register(RED_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.register(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 	}
 }

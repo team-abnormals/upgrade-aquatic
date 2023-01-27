@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#forge:is_swamp",
+  "features": "upgrade_aquatic:driftwood_swamp",
+  "step": "vegetal_decoration"
+}

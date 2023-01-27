@@ -7,11 +7,12 @@ import com.teamabnormals.upgrade_aquatic.common.block.PickerelweedPlantBlock;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.Biome.BiomeCategory;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -19,7 +20,6 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.FluidState;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 /**
@@ -36,13 +36,13 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
 		WorldGenLevel worldIn = context.level();
-		Random rand = context.random();
+		RandomSource rand = context.random();
 		BlockPos pos = context.origin();
 		Holder<Biome> biome = worldIn.getBiome(pos);
 		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().canSurvive(worldIn, pos.below())) {
-			if (Biome.getBiomeCategory(biome) == BiomeCategory.RIVER || Biome.getBiomeCategory(biome) == BiomeCategory.SWAMP || biome.value().getRegistryName().equals(Biomes.FLOWER_FOREST.location())) {
+			if (biome.is(BiomeTags.IS_RIVER) || biome.is(BiomeTags.HAS_SWAMP_HUT) || biome.is(Biomes.FLOWER_FOREST)) {
 				boolean purpleGen;
-				if (Biome.getBiomeCategory(biome) == BiomeCategory.SWAMP) {
+				if (biome.is(BiomeTags.HAS_SWAMP_HUT)) {
 					purpleGen = rand.nextFloat() >= 0.60D;
 				} else {
 					purpleGen = !(rand.nextFloat() >= 0.60D);

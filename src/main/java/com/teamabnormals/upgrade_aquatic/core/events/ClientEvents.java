@@ -6,7 +6,7 @@ import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,6 +20,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT)
 public class ClientEvents {
@@ -41,7 +42,7 @@ public class ClientEvents {
 	public static void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
 		PoseStack stack = event.getPoseStack();
 		stack.pushPose();
-		if (event.getEntityLiving().getVehicle() instanceof Thrasher thrasher) {
+		if (event.getEntity().getVehicle() instanceof Thrasher thrasher) {
 			double dx = Math.cos((Mth.lerp(event.getPartialTick(), thrasher.yRotO, thrasher.getYRot())) * Math.PI / 180.0D);
 			double dz = Math.sin((Mth.lerp(event.getPartialTick(), thrasher.yRotO, thrasher.getYRot())) * Math.PI / 180.0D);
 
@@ -57,15 +58,15 @@ public class ClientEvents {
 	@SubscribeEvent
 	public static void onItemTooltip(ItemTooltipEvent event) {
 		Item item = event.getItemStack().getItem();
-		ResourceLocation name = item.getRegistryName();
-		Player player = event.getPlayer();
+		ResourceLocation name = ForgeRegistries.ITEMS.getKey(item);
+		Player player = event.getEntity();
 		if (name == null || player == null)
 			return;
 
 		if (player.getAbilities().instabuild && UAConfig.CLIENT.showUnobtainableDescription.get() && name.getNamespace().equals(UpgradeAquatic.MOD_ID)) {
 			String id = name.getPath();
 			if (id.contains("jelly") || id.contains("tongue_kelp") || id.contains("polar_kelp") || id.contains("ochre_kelp") || id.contains("thorny_kelp"))
-				event.getToolTip().add(new TranslatableComponent("tooltip.upgrade_aquatic.unobtainable").withStyle(ChatFormatting.GRAY));
+				event.getToolTip().add(Component.translatable("tooltip.upgrade_aquatic.unobtainable").withStyle(ChatFormatting.GRAY));
 		}
 	}
 }

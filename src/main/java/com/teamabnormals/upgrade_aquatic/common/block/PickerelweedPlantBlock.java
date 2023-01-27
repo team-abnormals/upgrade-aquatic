@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -47,7 +48,7 @@ public class PickerelweedPlantBlock extends Block implements BonemealableBlock, 
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, Random random) {
+	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (random.nextFloat() <= 0.03F && state.getValue(WATERLOGGED)) {
 			this.performBonemeal(worldIn, random, pos, state);
 		}
@@ -61,7 +62,7 @@ public class PickerelweedPlantBlock extends Block implements BonemealableBlock, 
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, Random rand, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource rand, BlockPos pos, BlockState state) {
 		FluidState ifluidstate = world.getFluidState(pos.above());
 		PickerelweedDoublePlantBlock doubleplantblock = (PickerelweedDoublePlantBlock) (this == UABlocks.BLUE_PICKERELWEED.get() ? UABlocks.TALL_BLUE_PICKERELWEED.get() : UABlocks.TALL_PURPLE_PICKERELWEED.get());
 		if (doubleplantblock.defaultBlockState().canSurvive(world, pos) && (world.isEmptyBlock(pos.above()) || ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() >= 6)) {
@@ -111,7 +112,7 @@ public class PickerelweedPlantBlock extends Block implements BonemealableBlock, 
 		return true;
 	}
 
-	public boolean isBonemealSuccess(Level worldIn, Random rand, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level worldIn, RandomSource rand, BlockPos pos, BlockState state) {
 		return true;
 	}
 

@@ -42,9 +42,9 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityMountEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
@@ -53,14 +53,13 @@ import net.minecraftforge.event.village.WandererTradesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class EntityEvents {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
-	public static void onEntitySpawned(EntityJoinWorldEvent event) {
-		if (event.getWorld().isClientSide) return;
+	public static void onEntitySpawned(EntityJoinLevelEvent event) {
+		if (event.getLevel().isClientSide) return;
 
 		Entity entity = event.getEntity();
 		if (entity instanceof Drowned drowned) {
@@ -83,8 +82,8 @@ public class EntityEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEntityUpdate(LivingUpdateEvent event) {
-		LivingEntity entity = event.getEntityLiving();
+	public static void onEntityUpdate(LivingTickEvent event) {
+		LivingEntity entity = event.getEntity();
 		if (entity instanceof Phantom) {
 			if (((Phantom) entity).getTarget() instanceof ServerPlayer serverPlayer) {
 				StatsCounter statisticsManager = serverPlayer.getStats();
@@ -102,7 +101,7 @@ public class EntityEvents {
 
 	@SubscribeEvent
 	public static void onPlayerSleep(PlayerSleepInBedEvent event) {
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
 		if (event.getResultStatus() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
 			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
@@ -124,7 +123,7 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onInteractEntity(EntityInteract event) {
 		Entity entity = event.getTarget();
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		ItemStack stack = event.getItemStack();
 		if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof Squid) {
 			ItemStack bucket;
@@ -144,7 +143,7 @@ public class EntityEvents {
 				bucket.setHoverName(entity.getCustomName());
 			}
 
-			if (!event.getWorld().isClientSide) {
+			if (!event.getLevel().isClientSide) {
 				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, bucket);
 			}
 
