@@ -388,6 +388,7 @@
   "block.upgrade_aquatic.driftwood_button": "Korzeniowy przycisk",
   "block.upgrade_aquatic.driftwood_door": "Korzeniowe drzwi",
   "block.upgrade_aquatic.driftwood_trapdoor": "Korzeniowa klapa",
+  "block.upgrade_aquatic.driftwood_boards": "Korzeniowy parkiet",
   "block.upgrade_aquatic.vertical_driftwood_planks": "Pionowe korzeniowe deski",
   "block.upgrade_aquatic.driftwood_vertical_slab": "Pionowa korzeniowa płyta",
   "block.upgrade_aquatic.driftwood_bookshelf": "Korzeniowa biblioteczka",
@@ -401,7 +402,8 @@
   "block.upgrade_aquatic.driftwood_beehive": "Korzeniowy ul",
   
   "block.upgrade_aquatic.river_leaves": "Nadrzeczne liście",
-  "block.upgrade_aquatic.river_sapling": "Sadzonka nadrzeczna",
+  "block.upgrade_aquatic.river_sapling": "Nadrzeczna sadzonka",
+  "block.upgrade_aquatic.river_leaf_pile": "Sterta nadrzecznych liści",
   "block.upgrade_aquatic.river_leaf_carpet": "Warstwa nadrzecznych liści",
   "block.upgrade_aquatic.river_log": "Nadrzeczny pień",
   "block.upgrade_aquatic.river_wood": "Nadrzeczne drewno",
@@ -416,6 +418,7 @@
   "block.upgrade_aquatic.river_button": "Nadrzeczny przycisk",
   "block.upgrade_aquatic.river_door": "Nadrzeczne drzwi",
   "block.upgrade_aquatic.river_trapdoor": "Nadrzeczna klapa",
+  "block.upgrade_aquatic.river_boards": "Nadrzeczny parkiet",
   "block.upgrade_aquatic.vertical_river_planks": "Pionowe nadrzeczne deski",
   "block.upgrade_aquatic.river_vertical_slab": "Pionowa nadrzeczna płyta",
   "block.upgrade_aquatic.river_bookshelf": "Nadrzeczna biblioteczka",
@@ -450,11 +453,16 @@
   "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Pionowa świetlna pryzmarynowa płyta",
 
   "item.upgrade_aquatic.driftwood_boat": "Korzeniowa łódka",
+  "item.upgrade_aquatic.driftwood_furnace_boat": "Korzeniowa łódka z piecem",
+  "item.upgrade_aquatic.driftwood_chest_boat": "Korzeniowa łódka ze skrzynią",
+  "item.upgrade_aquatic.large_driftwood_boat": "Wielka korzeniowa łódka",
   "item.upgrade_aquatic.river_boat": "Nadrzeczna łódka",
+  "item.upgrade_aquatic.river_furnace_boat": "Nadrzeczna łódka z piecem",
+  "item.upgrade_aquatic.river_chest_boat": "Nadrzeczna łódka ze skrzynią",
+  "item.upgrade_aquatic.large_river_boat": "Wielka nadrzeczna łódka",
   
   "item.upgrade_aquatic.prismarine_rod": "Pryzmarynowa różdżka",
   "item.upgrade_aquatic.thrasher_tooth": "Ząb młocarza",
-  "item.upgrade_aquatic.glowing_ink_sac": "Torbiel ze świecącym atramentem",
   
   "item.upgrade_aquatic.nautilus_bucket": "Wiadro z łodzikiem",
   "item.upgrade_aquatic.pike_bucket": "Wiadro ze szczupakiem",
@@ -474,7 +482,6 @@
   "item.upgrade_aquatic.flare_spawn_egg": "Jajo przyzywające migotkę",
   "item.upgrade_aquatic.goose_spawn_egg": "Jajo przyzywające gęś",
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Jajo przyzywające meduzę",
-  "item.upgrade_aquatic.glow_squid_spawn_egg": "Jajo przyzywające świecącą kałamarnicę",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Gotowany fioletowy rozpław sercowaty",
   "item.upgrade_aquatic.boiled_blue_pickerelweed": "Gotowany niebieski rozpław sercowaty",
@@ -512,13 +519,13 @@
   "tooltip.upgrade_aquatic.lemon_southern_pike": "Cytrynowy szczupak południowy",
   "tooltip.upgrade_aquatic.golden_southern_pike": "Złoty szczupak południowy",
   
-  "tooltip.upgrade_aquatic.box_jellyfish": "Meduza-kostkowiec",
-  "tooltip.upgrade_aquatic.red_box_jellyfish": "Czerwona meduza-kostkowiec",
-  "tooltip.upgrade_aquatic.white_box_jellyfish": "Biała meduza-kostkowiec",
+  "tooltip.upgrade_aquatic.box_jellyfish": "Kubopław",
+  "tooltip.upgrade_aquatic.red_box_jellyfish": "Czerwony kubopław",
+  "tooltip.upgrade_aquatic.white_box_jellyfish": "Biały kubopław",
   
-  "tooltip.upgrade_aquatic.cassiopea_jellyfish": "Korzeniogęba meduza",
-  "tooltip.upgrade_aquatic.blue_cassiopea_jellyfish": "Niebieska korzeniogęba meduza",
-  "tooltip.upgrade_aquatic.white_cassiopea_jellyfish": "Biała korzeniogęba meduza",
+  "tooltip.upgrade_aquatic.cassiopea_jellyfish": "Krążkopław",
+  "tooltip.upgrade_aquatic.blue_cassiopea_jellyfish": "Niebieski krążkopław",
+  "tooltip.upgrade_aquatic.white_cassiopea_jellyfish": "Biały krążkopław",
   
   "tooltip.upgrade_aquatic.immortal_jellyfish": "Nieśmiertelna meduza",
   
@@ -545,10 +552,9 @@
   "entity.upgrade_aquatic.ululu": "Ululu",
   "entity.upgrade_aquatic.sonar_wave": "Sonar",
   "entity.upgrade_aquatic.goose": "Gęś",
-  "entity.upgrade_aquatic.glow_squid": "Świecąca kałamarnica",
   
-  "entity.upgrade_aquatic.box_jellyfish": "Meduza-kostkowiec",
-  "entity.upgrade_aquatic.cassiopea_jellyfish": "Korzeniogęba meduza",
+  "entity.upgrade_aquatic.box_jellyfish": "Kubopław",
+  "entity.upgrade_aquatic.cassiopea_jellyfish": "Krążkopław",
   "entity.upgrade_aquatic.immortal_jellyfish": "Nieśmiertelna meduza",
 
   "effect.upgrade_aquatic.insomnia": "Bezsenność",
