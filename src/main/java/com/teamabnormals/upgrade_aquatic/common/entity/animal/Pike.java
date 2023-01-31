@@ -61,6 +61,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -323,7 +324,7 @@ public class Pike extends BucketableWaterAnimal {
 				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {
 					if (world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof PickerelweedPlantBlock || world.getBlockState(new BlockPos(xx, yy, zz)).getBlock() instanceof PickerelweedDoublePlantBlock) {
 						if (random.nextFloat() <= 0.125F)
-							if (world.getBiome(pos).is(BiomeTags.HAS_SWAMP_HUT)) {
+							if (world.getBiome(pos).is(Tags.Biomes.IS_SWAMP)) {
 								return random.nextFloat() <= 0.25F;
 							}
 						return true;

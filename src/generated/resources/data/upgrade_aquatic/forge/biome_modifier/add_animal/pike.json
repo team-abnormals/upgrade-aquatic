@@ -5,6 +5,6 @@
     "type": "upgrade_aquatic:pike",
     "maxCount": 2,
     "minCount": 1,
-    "weight": 11
+    "weight": 20
   }
 }

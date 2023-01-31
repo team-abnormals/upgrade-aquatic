@@ -19,6 +19,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraftforge.common.Tags;
 
 import java.util.function.Supplier;
 
@@ -40,14 +41,14 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 		BlockPos pos = context.origin();
 		Holder<Biome> biome = worldIn.getBiome(pos);
 		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().canSurvive(worldIn, pos.below())) {
-			if (biome.is(BiomeTags.IS_RIVER) || biome.is(BiomeTags.HAS_SWAMP_HUT) || biome.is(Biomes.FLOWER_FOREST)) {
+			if (biome.is(BiomeTags.IS_RIVER) || biome.is(Tags.Biomes.IS_SWAMP) || biome.is(Biomes.FLOWER_FOREST)) {
 				boolean purpleGen;
-				if (biome.is(BiomeTags.HAS_SWAMP_HUT)) {
+				if (biome.is(Tags.Biomes.IS_SWAMP)) {
 					purpleGen = rand.nextFloat() >= 0.60D;
 				} else {
 					purpleGen = !(rand.nextFloat() >= 0.60D);
 				}
-				if (rand.nextInt() <= 0.90D) {
+				if (rand.nextDouble() <= 0.90D) {
 					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(8));
 				}
 			} else {
@@ -60,7 +61,7 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 					purpleGen = !(rand.nextFloat() >= 0.75D);
 				}
 
-				if (rand.nextInt() <= 0.35D) {
+				if (rand.nextDouble() <= 0.35D) {
 					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(8));
 				}
 			}

@@ -10,6 +10,7 @@ import net.minecraft.util.random.Weight;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ import java.util.List;
  * @author SmellyModder (Luke Tonon)
  */
 public enum PikeType {
-	AMUR(1, PikeSize.SMALL, PikeRarity.UNCOMMON, null, BiomeTags.HAS_SWAMP_HUT),
+	AMUR(1, PikeSize.SMALL, PikeRarity.UNCOMMON, null, Tags.Biomes.IS_SWAMP),
 	REDFIN(2, PikeSize.SMALL, PikeRarity.COMMON, null, null),
 	BROWN_NORTHERN(3, PikeSize.LARGE, PikeRarity.COMMON, 8, null),
 	MAHOGANY_NORTHERN(4, PikeSize.LARGE, PikeRarity.UNCOMMON, 9, null),
@@ -34,7 +35,7 @@ public enum PikeType {
 	OBSIDIAN(13, PikeSize.LARGE, PikeRarity.LEGENDARY, null, null),
 	MUSKELLUNGE(14, PikeSize.HUGE, PikeRarity.SUPER_RARE, null, BiomeTags.IS_RIVER),
 	CHAIN_PICKEREL(15, PikeSize.SMALL, PikeRarity.COMMON, null, BiomeTags.IS_RIVER),
-	GRASS_PICKEREL(16, PikeSize.SMALL, PikeRarity.COMMON, null, BiomeTags.HAS_SWAMP_HUT),
+	GRASS_PICKEREL(16, PikeSize.SMALL, PikeRarity.COMMON, null, Tags.Biomes.IS_SWAMP),
 	BLACK_SOUTHERN(17, PikeSize.MEDIUM, PikeRarity.COMMON, null, null),
 	EBONY_SOUTHERN(18, PikeSize.MEDIUM, PikeRarity.UNCOMMON, null, null),
 	MUSTARD_SOUTHERN(19, PikeSize.MEDIUM, PikeRarity.RARE, null, null),

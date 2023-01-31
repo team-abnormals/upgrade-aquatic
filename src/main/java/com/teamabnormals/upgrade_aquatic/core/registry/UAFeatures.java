@@ -73,7 +73,7 @@ public class UAFeatures {
 		public static final RegistryObject<PlacedFeature> PRISMARINE_CORAL = register("prismarine_coral", UAConfiguredFeatures.PRISMARINE_CORAL, CarvingMaskPlacement.forStep(Carving.AIR), RarityFilter.onAverageOnceEvery(256), BiomeFilter.biome());
 
 		public static final RegistryObject<PlacedFeature> PATCH_SEAROCKET = register("patch_searocket", UAConfiguredFeatures.PATCH_SEAROCKET, RarityFilter.onAverageOnceEvery(15), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final RegistryObject<PlacedFeature> PATCH_PICKERELWEED = register("patch_pickerelweed", UAConfiguredFeatures.PATCH_PICKERELWEED, RarityFilter.onAverageOnceEvery(5), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> PATCH_PICKERELWEED = register("patch_pickerelweed", UAConfiguredFeatures.PATCH_PICKERELWEED, RarityFilter.onAverageOnceEvery(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_PICKERELWEED_EXTRA = register("patch_pickerelweed_extra", UAConfiguredFeatures.PATCH_PICKERELWEED, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_FLOWERING_RUSH = register("patch_flowering_rush", UAConfiguredFeatures.PATCH_FLOWERING_RUSH, RarityFilter.onAverageOnceEvery(12), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 
