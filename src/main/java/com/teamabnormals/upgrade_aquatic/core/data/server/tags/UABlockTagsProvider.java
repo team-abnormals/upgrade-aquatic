@@ -34,7 +34,7 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 			String path = block.getId().getPath();
 			if (path.contains("luminous_prismarine") || (path.contains("dead") && path.contains("coral")) || path.contains("coral_block") || path.contains("tooth") || path.contains("scute") || path.contains("coralstone") || path.contains("kelpy_cobblestone") || path.contains("kelpy_stone")) {
 				mineableWithPickaxe.add(block.get());
-			} else if (path.contains("beachgrass") || path.contains("pickerelweed_block")) {
+			} else if (path.contains("beachgrass") || path.contains("pickerelweed_block") || path.contains("kelp_block")) {
 				mineableWithHoe.add(block.get());
 			}
 		}
