@@ -23,6 +23,7 @@ import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.StatsCounter;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -36,6 +37,7 @@ import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -125,35 +127,27 @@ public class EntityEvents {
 		Entity entity = event.getTarget();
 		Player player = event.getEntity();
 		ItemStack stack = event.getItemStack();
-		if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof Squid) {
+		if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof Squid squid) {
+			squid.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0F, 1.0F);
 			ItemStack bucket;
-			if (entity.getType() == EntityType.SQUID) {
+			if (squid.getType() == EntityType.SQUID) {
 				bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
-			} else if (entity.getType() == EntityType.GLOW_SQUID) {
+			} else if (squid.getType() == EntityType.GLOW_SQUID) {
 				bucket = new ItemStack(UAItems.GLOW_SQUID_BUCKET.get());
 			} else {
 				return;
 			}
 
-			player.swing(event.getHand());
-			entity.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0F, 1.0F);
-			stack.shrink(1);
-
-			if (entity.hasCustomName()) {
-				bucket.setHoverName(entity.getCustomName());
-			}
-
-			if (!event.getLevel().isClientSide) {
+			Bucketable.saveDefaultDataToBucketTag(squid, bucket);
+			ItemStack itemstack2 = ItemUtils.createFilledResult(stack, player, bucket, false);
+			player.setItemInHand(event.getHand(), itemstack2);
+			if (!event.getLevel().isClientSide()) {
 				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, bucket);
 			}
 
-			if (stack.isEmpty()) {
-				player.setItemInHand(event.getHand(), bucket);
-			} else if (!player.getInventory().add(bucket)) {
-				player.drop(bucket, false);
-			}
-
 			entity.discard();
+			event.setCanceled(true);
+			event.setCancellationResult(InteractionResult.sidedSuccess(event.getLevel().isClientSide()));
 		}
 	}
 
