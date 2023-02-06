@@ -8,12 +8,11 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-
-import java.util.Random;
 
 public class BeachgrassDunesFeature extends Feature<NoneFeatureConfiguration> {
 
@@ -50,9 +49,9 @@ public class BeachgrassDunesFeature extends Feature<NoneFeatureConfiguration> {
 
 	private void placeBeachgrass(LevelAccessor world, BlockPos pos, RandomSource rand) {
 		if (rand.nextFloat() < 0.30F) {
-			TallBeachgrassBlock beachGrass = (TallBeachgrassBlock) UABlocks.TALL_BEACHGRASS.get();
+			TallBeachgrassBlock plant = (TallBeachgrassBlock) UABlocks.TALL_BEACHGRASS.get();
 			if (world.isEmptyBlock(pos) && world.isEmptyBlock(pos.above())) {
-				beachGrass.placeAt(world, pos, 2);
+				DoublePlantBlock.placeAt(world, plant.defaultBlockState(), pos, 2);
 			}
 		} else {
 			if (world.isEmptyBlock(pos)) {
