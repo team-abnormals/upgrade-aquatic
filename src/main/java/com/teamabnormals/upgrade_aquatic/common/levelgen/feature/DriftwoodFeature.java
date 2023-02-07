@@ -58,8 +58,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 		} else {
 			Direction direction = Direction.from2DDataValue(rand.nextInt(4));
 			int length = rand.nextInt(3) + 3;
-			pos = pos.below();
-			if ((rand.nextInt(150) == 0 && world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).is(Blocks.WATER) && world.isEmptyBlock(pos.above())) || (!world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.isNearWater(world, pos) && (downState.is(BlockTags.DIRT) || downState.is(BlockTags.SAND)) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
+			if ((rand.nextFloat() < 0.25F && world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).getBlock() == Blocks.WATER && world.isEmptyBlock(pos.above())) || (!world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.isNearWater(world, pos) && downState.is(BlockTags.DIRT) || downState.is(Tags.Blocks.SAND) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
 				GenerationPiece driftwood = new GenerationPiece((iworld, part) -> {
 					return world.isEmptyBlock(part.pos) || world.getFluidState(part.pos).is(FluidTags.WATER);
 				});
@@ -70,8 +69,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 					}
 					if (rand.nextBoolean()) {
 						Direction upOrDown = rand.nextBoolean() ? Direction.UP : Direction.DOWN;
-						if (this.isBlockPlaceableAtPos(world, pos.relative(direction, i).relative(upOrDown), world.getBiome(pos.relative(direction, i).relative(upOrDown)).is(BiomeTags.IS_OCEAN)) &&
-						BlockUtil.isPosNotTouchingBlock(world, pos.relative(direction, i).relative(upOrDown), UABlocks.DRIFTWOOD_LOG.get(), Direction.UP, Direction.DOWN)){
+						if (this.isBlockPlaceableAtPos(world, pos.relative(direction, i).relative(upOrDown), world.getBiome(pos.relative(direction, i).relative(upOrDown)).is(BiomeTags.IS_OCEAN)) && BlockUtil.isPosNotTouchingBlock(world, pos.relative(direction, i).relative(upOrDown), UABlocks.DRIFTWOOD_LOG.get(), Direction.UP, Direction.DOWN)) {
 							this.placeDriftwoodLog(world, pos.relative(direction, i).relative(upOrDown), upOrDown, driftwood);
 						}
 					}
@@ -86,7 +84,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 	private boolean isDirectionOpen(LevelAccessor world, BlockPos pos, Direction direction, int length) {
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos().set(pos);
 		if (direction == Direction.UP)
-			return world.getFluidState(mutable).getType().is(FluidTags.WATER) && world.isEmptyBlock(mutable.above()) && world.isEmptyBlock(mutable.above(2));
+			return world.getFluidState(mutable).is(FluidTags.WATER) && world.isEmptyBlock(mutable.above()) && world.isEmptyBlock(mutable.above(2));
 		for (int i = 0; i < length; i++) {
 			mutable.relative(direction, i);
 			if (!world.isEmptyBlock(mutable) && !world.getFluidState(mutable).getType().is(FluidTags.WATER)) {
@@ -129,7 +127,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 				for (int x = pos.getX() - 3; x < pos.getX() + 3; x++) {
 					for (int z = pos.getZ() - 3; z < pos.getZ() + 3; z++) {
 						BlockPos currentPos = new BlockPos(x, y, z);
-						if (world.canSeeSkyFromBelowWater(currentPos) && world.getBlockState(currentPos).getBlock() == Blocks.WATER) {
+						if (world.canSeeSkyFromBelowWater(currentPos) && world.getBlockState(currentPos).is(Blocks.WATER)) {
 							foundWaterSpots++;
 						}
 					}
@@ -140,7 +138,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 				for (int x = pos.getX() - 2; x < pos.getX() + 2; x++) {
 					for (int z = pos.getZ() - 2; z < pos.getZ() + 2; z++) {
 						BlockPos currentPos = new BlockPos(x, y, z);
-						if (world.canSeeSkyFromBelowWater(currentPos) && world.getBlockState(currentPos).getBlock() == Blocks.WATER) {
+						if (world.canSeeSkyFromBelowWater(currentPos) && world.getBlockState(currentPos).is(Blocks.WATER)) {
 							foundWaterSpots++;
 						}
 					}
