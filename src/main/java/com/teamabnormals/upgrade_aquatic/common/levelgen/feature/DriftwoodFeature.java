@@ -58,6 +58,8 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 		} else {
 			Direction direction = Direction.from2DDataValue(rand.nextInt(4));
 			int length = rand.nextInt(3) + 3;
+			if (world.getBiome(pos).is(BiomeTags.IS_OCEAN))
+				pos = pos.below();
 			if ((rand.nextFloat() < 0.25F && world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).getBlock() == Blocks.WATER && world.isEmptyBlock(pos.above())) || (!world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.isNearWater(world, pos) && downState.is(BlockTags.DIRT) || downState.is(Tags.Blocks.SAND) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
 				GenerationPiece driftwood = new GenerationPiece((iworld, part) -> {
 					return world.isEmptyBlock(part.pos) || world.getFluidState(part.pos).is(FluidTags.WATER);
