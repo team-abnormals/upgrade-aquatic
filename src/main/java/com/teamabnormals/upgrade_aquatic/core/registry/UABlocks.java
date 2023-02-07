@@ -27,6 +27,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockBehaviour.OffsetType;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.material.Material;
@@ -43,6 +44,94 @@ import java.util.function.Supplier;
 public class UABlocks {
 	public static final BlockSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getBlockSubHelper();
 
+	public static final RegistryObject<Block> EMBEDDED_AMMONITE = HELPER.createBlock("embedded_ammonite", () -> new EmbeddedAmmoniteBlock(Properties.copy(Blocks.STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> WHITE_SEAROCKET = HELPER.createBlock("white_searocket", () -> new SearocketBlock(() -> MobEffects.WATER_BREATHING, 9, PropertyUtil.FLOWER.offsetType(OffsetType.XZ)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PINK_SEAROCKET = HELPER.createBlock("pink_searocket", () -> new SearocketBlock(() -> MobEffects.WATER_BREATHING, 9, PropertyUtil.FLOWER.offsetType(OffsetType.XZ)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> FLOWERING_RUSH = HELPER.createBlock("flowering_rush", () -> new FloweringRushBlock(Properties.copy(Blocks.PEONY).sound(SoundType.WET_GRASS)), CreativeModeTab.TAB_DECORATIONS);
+
+	public static final RegistryObject<Block> BLUE_PICKERELWEED = HELPER.createBlock("blue_pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED), CreativeModeTab.TAB_MISC);
+	public static final RegistryObject<Block> TALL_BLUE_PICKERELWEED = HELPER.createBlockNoItem("tall_blue_pickerelweed", () -> new PickerelweedDoublePlantBlock(UAProperties.PICKERELWEED));
+	public static final RegistryObject<Block> PURPLE_PICKERELWEED = HELPER.createBlock("purple_pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED), CreativeModeTab.TAB_MISC);
+	public static final RegistryObject<Block> TALL_PURPLE_PICKERELWEED = HELPER.createBlockNoItem("tall_purple_pickerelweed", () -> new PickerelweedDoublePlantBlock(UAProperties.PICKERELWEED));
+
+	public static final RegistryObject<Block> BLUE_PICKERELWEED_BLOCK = HELPER.createBlock("blue_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(false), false), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> PURPLE_PICKERELWEED_BLOCK = HELPER.createBlock("purple_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(false), false), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BOILED_BLUE_PICKERELWEED_BLOCK = HELPER.createBlock("boiled_blue_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(true), true), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BOILED_PURPLE_PICKERELWEED_BLOCK = HELPER.createBlock("boiled_purple_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(true), true), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> POTTED_WHITE_SEAROCKET = HELPER.createBlockNoItem("potted_white_searocket", () -> new FlowerPotBlock(WHITE_SEAROCKET.get(), Block.Properties.of(Material.DECORATION).strength(0.0F)));
+	public static final RegistryObject<Block> POTTED_PINK_SEAROCKET = HELPER.createBlockNoItem("potted_pink_searocket", () -> new FlowerPotBlock(PINK_SEAROCKET.get(), Block.Properties.of(Material.DECORATION).strength(0.0F)));
+	public static final RegistryObject<Block> POTTED_BLUE_PICKERELWEED = HELPER.createBlockNoItem("potted_blue_pickerelweed", () -> new FlowerPotBlock(BLUE_PICKERELWEED.get(), Block.Properties.of(Material.DECORATION).strength(0.0F)));
+	public static final RegistryObject<Block> POTTED_PURPLE_PICKERELWEED = HELPER.createBlockNoItem("potted_purple_pickerelweed", () -> new FlowerPotBlock(PURPLE_PICKERELWEED.get(), Block.Properties.of(Material.DECORATION).strength(0.0F)));
+
+	public static final RegistryObject<Block> BEACHGRASS = HELPER.createBlock("beachgrass", () -> new BeachgrassBlock(Properties.copy(Blocks.FERN)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> TALL_BEACHGRASS = HELPER.createBlock("tall_beachgrass", () -> new TallBeachgrassBlock(Properties.copy(Blocks.LARGE_FERN)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BEACHGRASS_THATCH = HELPER.createBlock("beachgrass_thatch", () -> new ThatchBlock(UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BEACHGRASS_THATCH_SLAB = HELPER.createBlock("beachgrass_thatch_slab", () -> new ThatchSlabBlock(UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BEACHGRASS_THATCH_STAIRS = HELPER.createBlock("beachgrass_thatch_stairs", () -> new ThatchStairBlock(BEACHGRASS_THATCH.get().defaultBlockState(), UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "beachgrass_thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> MULBERRY_VINE = HELPER.createBlockNoItem("mulberry_vine", () -> new MulberryVineBlock(Block.Properties.copy(Blocks.SWEET_BERRY_BUSH).randomTicks().noOcclusion()));
+	public static final RegistryObject<Block> MULBERRY_JAM_BLOCK = HELPER.createBlock("mulberry_jam_block", () -> new MulberryJamBlock(Block.Properties.copy(Blocks.SLIME_BLOCK)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> MULBERRY_PUNNET = HELPER.createCompatBlock("quark", "mulberry_punnet", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_PINK).strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
+
+	public static final RegistryObject<Block> PRISMARINE_ROD_BUNDLE = HELPER.createBlock("prismarine_rod_bundle", () -> new PrismarineRodBlock(Properties.copy(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LUMINOUS_PRISMARINE = HELPER.createBlock("luminous_prismarine", () -> new ConduitFrameBlock(UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LUMINOUS_PRISMARINE_STAIRS = HELPER.createBlock("luminous_prismarine_stairs", () -> new StairBlock(() -> LUMINOUS_PRISMARINE.get().defaultBlockState(), UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LUMINOUS_PRISMARINE_SLAB = HELPER.createBlock("luminous_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> LUMINOUS_PRISMARINE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "luminous_prismarine_vertical_slab", () -> new VerticalSlabBlock(UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> GLASS_TRAPDOOR = HELPER.createBlock("glass_trapdoor", () -> new TrapDoorBlock(Properties.copy(Blocks.GLASS)), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> GLASS_DOOR = HELPER.createBlock("glass_door", () -> new DoorBlock(Properties.copy(Blocks.GLASS)), CreativeModeTab.TAB_REDSTONE);
+
+	public static final RegistryObject<Block> BEDROLL = HELPER.createBlock("bedroll", createBedroll(DyeColor.BROWN), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> WHITE_BEDROLL = HELPER.createBlock("white_bedroll", createBedroll(DyeColor.WHITE), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> ORANGE_BEDROLL = HELPER.createBlock("orange_bedroll", createBedroll(DyeColor.ORANGE), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> MAGENTA_BEDROLL = HELPER.createBlock("magenta_bedroll", createBedroll(DyeColor.MAGENTA), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> LIGHT_BLUE_BEDROLL = HELPER.createBlock("light_blue_bedroll", createBedroll(DyeColor.LIGHT_BLUE), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> YELLOW_BEDROLL = HELPER.createBlock("yellow_bedroll", createBedroll(DyeColor.YELLOW), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> LIME_BEDROLL = HELPER.createBlock("lime_bedroll", createBedroll(DyeColor.LIME), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PINK_BEDROLL = HELPER.createBlock("pink_bedroll", createBedroll(DyeColor.PINK), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> GRAY_BEDROLL = HELPER.createBlock("gray_bedroll", createBedroll(DyeColor.GRAY), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> LIGHT_GRAY_BEDROLL = HELPER.createBlock("light_gray_bedroll", createBedroll(DyeColor.LIGHT_GRAY), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CYAN_BEDROLL = HELPER.createBlock("cyan_bedroll", createBedroll(DyeColor.CYAN), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PURPLE_BEDROLL = HELPER.createBlock("purple_bedroll", createBedroll(DyeColor.PURPLE), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BLUE_BEDROLL = HELPER.createBlock("blue_bedroll", createBedroll(DyeColor.BLUE), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BROWN_BEDROLL = HELPER.createBlock("brown_bedroll", createBedroll(DyeColor.BROWN), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> GREEN_BEDROLL = HELPER.createBlock("green_bedroll", createBedroll(DyeColor.GREEN), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> RED_BEDROLL = HELPER.createBlock("red_bedroll", createBedroll(DyeColor.RED), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BLACK_BEDROLL = HELPER.createBlock("black_bedroll", createBedroll(DyeColor.BLACK), CreativeModeTab.TAB_DECORATIONS);
+
+	public static final RegistryObject<Block> TOOTH_BLOCK = HELPER.createBlock("tooth_block", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_TILES = HELPER.createBlock("tooth_tiles", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_STAIRS = HELPER.createBlock("tooth_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_SLAB = HELPER.createBlock("tooth_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_WALL = HELPER.createBlock("tooth_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> TOOTH_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "tooth_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(TOOTH_TILES.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_BRICKS = HELPER.createBlock("tooth_bricks", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> CHISELED_TOOTH_BRICKS = HELPER.createBlock("chiseled_tooth_bricks", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_BRICK_STAIRS = HELPER.createBlock("tooth_brick_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_BRICK_SLAB = HELPER.createBlock("tooth_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_BRICK_WALL = HELPER.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> TOOTH_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "tooth_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(TOOTH_BRICKS.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TOOTH_TRAPDOOR = HELPER.createBlock("tooth_trapdoor", () -> new ToothTrapdoorBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> TOOTH_DOOR = HELPER.createBlock("tooth_door", () -> new ToothDoorBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_REDSTONE);
+	public static final RegistryObject<Block> TOOTH_LANTERN = HELPER.createBlock("tooth_lantern", () -> new ToothLanternBlock(Properties.copy(Blocks.END_STONE).sound(UASoundEvents.TOOTH_LANTERN).noOcclusion().lightLevel((unknown) -> 15)), CreativeModeTab.TAB_DECORATIONS);
+
+	public static final RegistryObject<Block> SCUTE_BLOCK = HELPER.createBlock("scute_block", () -> new ScuteBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_SHINGLES = HELPER.createBlock("scute_shingles", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_SHINGLE_STAIRS = HELPER.createBlock("scute_shingle_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_SHINGLE_SLAB = HELPER.createBlock("scute_shingle_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_SHINGLE_WALL = HELPER.createBlock("scute_shingle_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> SCUTE_SHINGLE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "scute_shingle_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(SCUTE_SHINGLES.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> CHISELED_SCUTE_SHINGLES = HELPER.createBlock("chiseled_scute_shingles", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT = HELPER.createBlock("scute_pavement", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT_STAIRS = HELPER.createBlock("scute_pavement_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT_SLAB = HELPER.createBlock("scute_pavement_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT_WALL = HELPER.createBlock("scute_pavement_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> SCUTE_PAVEMENT_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "scute_pavement_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(SCUTE_PAVEMENT.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
 	public static final RegistryObject<Block> DEAD_ACAN_CORAL_BLOCK = HELPER.createBlock("dead_acan_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DEAD_FINGER_CORAL_BLOCK = HELPER.createBlock("dead_finger_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DEAD_STAR_CORAL_BLOCK = HELPER.createBlock("dead_star_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -53,7 +142,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> DEAD_PILLOW_CORAL_BLOCK = HELPER.createBlock("dead_pillow_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DEAD_SILK_CORAL_BLOCK = HELPER.createBlock("dead_silk_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DEAD_CHROME_CORAL_BLOCK = HELPER.createBlock("dead_chrome_coral_block", () -> new InjectedBlock(Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), UAProperties.DEAD_CORAL_BLOCK), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_BLOCK = HELPER.createInjectedBlock("elder_prismarine_coral_block", Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), () -> new ConduitSupportingBlock(UAProperties.createPrismarineCoralBlock(true)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_BLOCK = HELPER.createInjectedBlock("elder_prismarine_coral_block", Blocks.DEAD_HORN_CORAL_BLOCK.asItem(), () -> new ConduitFrameBlock(UAProperties.createPrismarineCoralBlock(true)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 	public static final RegistryObject<Block> ACAN_CORAL_BLOCK = HELPER.createInjectedBlock("acan_coral_block", Blocks.HORN_CORAL_BLOCK.asItem(), () -> new CoralBlock(DEAD_ACAN_CORAL_BLOCK.get(), UAProperties.createCoralBlock(MaterialColor.COLOR_CYAN)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> FINGER_CORAL_BLOCK = HELPER.createInjectedBlock("finger_coral_block", Blocks.HORN_CORAL_BLOCK.asItem(), () -> new CoralBlock(DEAD_FINGER_CORAL_BLOCK.get(), UAProperties.createCoralBlock(MaterialColor.TERRACOTTA_ORANGE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -65,67 +154,67 @@ public class UABlocks {
 	public static final RegistryObject<Block> PILLOW_CORAL_BLOCK = HELPER.createInjectedBlock("pillow_coral_block", Blocks.HORN_CORAL_BLOCK.asItem(), () -> new CoralBlock(DEAD_PILLOW_CORAL_BLOCK.get(), UAProperties.createCoralBlock(MaterialColor.TERRACOTTA_WHITE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> SILK_CORAL_BLOCK = HELPER.createInjectedBlock("silk_coral_block", Blocks.HORN_CORAL_BLOCK.asItem(), () -> new CoralBlock(DEAD_SILK_CORAL_BLOCK.get(), UAProperties.createCoralBlock(MaterialColor.COLOR_PURPLE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> CHROME_CORAL_BLOCK = HELPER.createInjectedBlock("chrome_coral_block", Blocks.HORN_CORAL_BLOCK.asItem(), () -> new CoralBlock(DEAD_CHROME_CORAL_BLOCK.get(), UAProperties.createCoralBlock(MaterialColor.TERRACOTTA_GRAY)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> PRISMARINE_CORAL_BLOCK = HELPER.createInjectedBlock("prismarine_coral_block", Blocks.HORN_CORAL_BLOCK.asItem(), () -> new PrismarineCoralBlock(ELDER_PRISMARINE_CORAL_BLOCK.get(), UAProperties.createPrismarineCoralBlock(false)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> PRISMARINE_CORAL_BLOCK = HELPER.createBlock("prismarine_coral_block", () -> new PrismarineCoralBlock(ELDER_PRISMARINE_CORAL_BLOCK.get(), UAProperties.createPrismarineCoralBlock(false)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-	public static final RegistryObject<Block> DEAD_ACAN_CORAL = HELPER.createInjectedBlock("dead_acan_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_FINGER_CORAL = HELPER.createInjectedBlock("dead_finger_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_STAR_CORAL = HELPER.createInjectedBlock("dead_star_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_MOSS_CORAL = HELPER.createInjectedBlock("dead_moss_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_PETAL_CORAL = HELPER.createInjectedBlock("dead_petal_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_BRANCH_CORAL = HELPER.createInjectedBlock("dead_branch_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_ROCK_CORAL = HELPER.createInjectedBlock("dead_rock_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_PILLOW_CORAL = HELPER.createInjectedBlock("dead_pillow_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_SILK_CORAL = HELPER.createInjectedBlock("dead_silk_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_CHROME_CORAL = HELPER.createInjectedBlock("dead_chrome_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL = HELPER.createInjectedBlock("elder_prismarine_coral", Blocks.DEAD_HORN_CORAL.asItem(), () -> new UACoralDeadBlock(UAProperties.createPrismarineCoral(true)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_ACAN_CORAL = HELPER.createBlock("dead_acan_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_FINGER_CORAL = HELPER.createBlock("dead_finger_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_STAR_CORAL = HELPER.createBlock("dead_star_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_MOSS_CORAL = HELPER.createBlock("dead_moss_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_PETAL_CORAL = HELPER.createBlock("dead_petal_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_BRANCH_CORAL = HELPER.createBlock("dead_branch_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_ROCK_CORAL = HELPER.createBlock("dead_rock_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_PILLOW_CORAL = HELPER.createBlock("dead_pillow_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_SILK_CORAL = HELPER.createBlock("dead_silk_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_CHROME_CORAL = HELPER.createBlock("dead_chrome_coral", () -> new UABaseCoralPlantBlock(UAProperties.DEAD_CORAL), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL = HELPER.createBlock("elder_prismarine_coral", () -> new UABaseCoralPlantBlock(UAProperties.createPrismarineCoral(true)), CreativeModeTab.TAB_DECORATIONS);
 
-	public static final RegistryObject<Block> ACAN_CORAL = HELPER.createInjectedBlock("acan_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_ACAN_CORAL.get(), UAProperties.createCoral(MaterialColor.COLOR_CYAN)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> FINGER_CORAL = HELPER.createInjectedBlock("finger_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_FINGER_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_ORANGE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> STAR_CORAL = HELPER.createInjectedBlock("star_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_STAR_CORAL.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_GREEN)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> MOSS_CORAL = HELPER.createInjectedBlock("moss_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_MOSS_CORAL.get(), UAProperties.createCoral(MaterialColor.COLOR_GREEN)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PETAL_CORAL = HELPER.createInjectedBlock("petal_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_PETAL_CORAL.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_BLUE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BRANCH_CORAL = HELPER.createInjectedBlock("branch_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_BRANCH_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> ROCK_CORAL = HELPER.createInjectedBlock("rock_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_ROCK_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_BROWN)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PILLOW_CORAL = HELPER.createInjectedBlock("pillow_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_PILLOW_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_WHITE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> SILK_CORAL = HELPER.createInjectedBlock("silk_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_SILK_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_PURPLE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> CHROME_CORAL = HELPER.createInjectedBlock("chrome_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(DEAD_CHROME_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PRISMARINE_CORAL = HELPER.createInjectedBlock("prismarine_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralBlock(ELDER_PRISMARINE_CORAL.get(), UAProperties.createPrismarineCoral(false)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> ACAN_CORAL = HELPER.createInjectedBlock("acan_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_ACAN_CORAL.get(), UAProperties.createCoral(MaterialColor.COLOR_CYAN)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> FINGER_CORAL = HELPER.createInjectedBlock("finger_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_FINGER_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_ORANGE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> STAR_CORAL = HELPER.createInjectedBlock("star_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_STAR_CORAL.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_GREEN)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> MOSS_CORAL = HELPER.createInjectedBlock("moss_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_MOSS_CORAL.get(), UAProperties.createCoral(MaterialColor.COLOR_GREEN)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PETAL_CORAL = HELPER.createInjectedBlock("petal_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_PETAL_CORAL.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_BLUE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> BRANCH_CORAL = HELPER.createInjectedBlock("branch_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_BRANCH_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> ROCK_CORAL = HELPER.createInjectedBlock("rock_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_ROCK_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_BROWN)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PILLOW_CORAL = HELPER.createInjectedBlock("pillow_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_PILLOW_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_WHITE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> SILK_CORAL = HELPER.createInjectedBlock("silk_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_SILK_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_PURPLE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> CHROME_CORAL = HELPER.createInjectedBlock("chrome_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(DEAD_CHROME_CORAL.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> PRISMARINE_CORAL = HELPER.createInjectedBlock("prismarine_coral", Blocks.HORN_CORAL.asItem(), () -> new UACoralPlantBlock(ELDER_PRISMARINE_CORAL.get(), UAProperties.createPrismarineCoral(false)), CreativeModeTab.TAB_DECORATIONS);
 
-	public static final RegistryObject<Block> DEAD_ACAN_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_acan_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_FINGER_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_finger_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_STAR_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_star_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_MOSS_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_moss_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_PETAL_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_petal_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_BRANCH_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_branch_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_ROCK_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_rock_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_PILLOW_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_pillow_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_SILK_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_silk_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> DEAD_CHROME_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_chrome_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.DEAD_CORAL));
-	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_WALL_FAN = HELPER.createBlockNoItem("elder_prismarine_coral_wall_fan", () -> new UACoralWallFanDeadBlock(UAProperties.createPrismarineCoral(true)));
+	public static final RegistryObject<Block> DEAD_ACAN_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_acan_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_FINGER_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_finger_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_STAR_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_star_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_MOSS_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_moss_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_PETAL_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_petal_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_BRANCH_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_branch_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_ROCK_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_rock_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_PILLOW_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_pillow_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_SILK_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_silk_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> DEAD_CHROME_CORAL_WALL_FAN = HELPER.createBlockNoItem("dead_chrome_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_WALL_FAN = HELPER.createBlockNoItem("elder_prismarine_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.createPrismarineCoral(true)));
 
-	public static final RegistryObject<Block> ACAN_CORAL_WALL_FAN = HELPER.createBlockNoItem("acan_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_ACAN_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_CYAN)));
-	public static final RegistryObject<Block> FINGER_CORAL_WALL_FAN = HELPER.createBlockNoItem("finger_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_FINGER_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_ORANGE)));
-	public static final RegistryObject<Block> STAR_CORAL_WALL_FAN = HELPER.createBlockNoItem("star_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_STAR_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_GREEN)));
-	public static final RegistryObject<Block> MOSS_CORAL_WALL_FAN = HELPER.createBlockNoItem("moss_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_MOSS_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_GREEN)));
-	public static final RegistryObject<Block> PETAL_CORAL_WALL_FAN = HELPER.createBlockNoItem("petal_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_PETAL_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_BLUE)));
-	public static final RegistryObject<Block> BRANCH_CORAL_WALL_FAN = HELPER.createBlockNoItem("branch_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_BRANCH_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)));
-	public static final RegistryObject<Block> ROCK_CORAL_WALL_FAN = HELPER.createBlockNoItem("rock_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_ROCK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_BROWN)));
-	public static final RegistryObject<Block> PILLOW_CORAL_WALL_FAN = HELPER.createBlockNoItem("pillow_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_PILLOW_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_WHITE)));
-	public static final RegistryObject<Block> SILK_CORAL_WALL_FAN = HELPER.createBlockNoItem("silk_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_SILK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_PURPLE)));
-	public static final RegistryObject<Block> CHROME_CORAL_WALL_FAN = HELPER.createBlockNoItem("chrome_coral_wall_fan", () -> new UACoralWallFanBlock(DEAD_CHROME_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)));
-	public static final RegistryObject<Block> PRISMARINE_CORAL_WALL_FAN = HELPER.createBlockNoItem("prismarine_coral_wall_fan", () -> new UACoralWallFanBlock(ELDER_PRISMARINE_CORAL_WALL_FAN.get(), UAProperties.createPrismarineCoral(false)));
+	public static final RegistryObject<Block> ACAN_CORAL_WALL_FAN = HELPER.createBlockNoItem("acan_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_ACAN_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_CYAN)));
+	public static final RegistryObject<Block> FINGER_CORAL_WALL_FAN = HELPER.createBlockNoItem("finger_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_FINGER_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_ORANGE)));
+	public static final RegistryObject<Block> STAR_CORAL_WALL_FAN = HELPER.createBlockNoItem("star_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_STAR_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_GREEN)));
+	public static final RegistryObject<Block> MOSS_CORAL_WALL_FAN = HELPER.createBlockNoItem("moss_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_MOSS_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_GREEN)));
+	public static final RegistryObject<Block> PETAL_CORAL_WALL_FAN = HELPER.createBlockNoItem("petal_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_PETAL_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_LIGHT_BLUE)));
+	public static final RegistryObject<Block> BRANCH_CORAL_WALL_FAN = HELPER.createBlockNoItem("branch_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_BRANCH_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)));
+	public static final RegistryObject<Block> ROCK_CORAL_WALL_FAN = HELPER.createBlockNoItem("rock_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_ROCK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_BROWN)));
+	public static final RegistryObject<Block> PILLOW_CORAL_WALL_FAN = HELPER.createBlockNoItem("pillow_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_PILLOW_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_WHITE)));
+	public static final RegistryObject<Block> SILK_CORAL_WALL_FAN = HELPER.createBlockNoItem("silk_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_SILK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_PURPLE)));
+	public static final RegistryObject<Block> CHROME_CORAL_WALL_FAN = HELPER.createBlockNoItem("chrome_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_CHROME_CORAL_WALL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_GRAY)));
+	public static final RegistryObject<Block> PRISMARINE_CORAL_WALL_FAN = HELPER.createBlockNoItem("prismarine_coral_wall_fan", () -> new CoralWallFanBlock(ELDER_PRISMARINE_CORAL_WALL_FAN.get(), UAProperties.createPrismarineCoral(false)));
 
-	public static final RegistryObject<Block> DEAD_ACAN_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_acan_coral_fan", UACoralFanDeadBlock::new, DEAD_ACAN_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_FINGER_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_finger_coral_fan", UACoralFanDeadBlock::new, DEAD_FINGER_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_STAR_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_star_coral_fan", UACoralFanDeadBlock::new, DEAD_STAR_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_MOSS_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_moss_coral_fan", UACoralFanDeadBlock::new, DEAD_MOSS_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_PETAL_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_petal_coral_fan", UACoralFanDeadBlock::new, DEAD_PETAL_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_BRANCH_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_branch_coral_fan", UACoralFanDeadBlock::new, DEAD_BRANCH_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_ROCK_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_rock_coral_fan", UACoralFanDeadBlock::new, DEAD_ROCK_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_PILLOW_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_pillow_coral_fan", UACoralFanDeadBlock::new, DEAD_PILLOW_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_SILK_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_silk_coral_fan", UACoralFanDeadBlock::new, DEAD_SILK_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> DEAD_CHROME_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_chrome_coral_fan", UACoralFanDeadBlock::new, DEAD_CHROME_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_FAN = HELPER.createStandingAndWallBlock("elder_prismarine_coral_fan", () -> new UACoralFanDeadBlock(UAProperties.createPrismarineCoral(true)), ELDER_PRISMARINE_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_ACAN_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_acan_coral_fan", UABaseCoralFanBlock::new, DEAD_ACAN_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_FINGER_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_finger_coral_fan", UABaseCoralFanBlock::new, DEAD_FINGER_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_STAR_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_star_coral_fan", UABaseCoralFanBlock::new, DEAD_STAR_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_MOSS_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_moss_coral_fan", UABaseCoralFanBlock::new, DEAD_MOSS_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_PETAL_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_petal_coral_fan", UABaseCoralFanBlock::new, DEAD_PETAL_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_BRANCH_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_branch_coral_fan", UABaseCoralFanBlock::new, DEAD_BRANCH_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_ROCK_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_rock_coral_fan", UABaseCoralFanBlock::new, DEAD_ROCK_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_PILLOW_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_pillow_coral_fan", UABaseCoralFanBlock::new, DEAD_PILLOW_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_SILK_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_silk_coral_fan", UABaseCoralFanBlock::new, DEAD_SILK_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> DEAD_CHROME_CORAL_FAN = HELPER.createStandingAndWallBlock("dead_chrome_coral_fan", UABaseCoralFanBlock::new, DEAD_CHROME_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_FAN = HELPER.createStandingAndWallBlock("elder_prismarine_coral_fan", () -> new UABaseCoralFanBlock(UAProperties.createPrismarineCoral(true)), ELDER_PRISMARINE_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
 
 	public static final RegistryObject<Block> ACAN_CORAL_FAN = HELPER.createStandingAndWallBlock("acan_coral_fan", () -> new UACoralFanBlock(DEAD_ACAN_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.COLOR_CYAN)), ACAN_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> FINGER_CORAL_FAN = HELPER.createStandingAndWallBlock("finger_coral_fan", () -> new UACoralFanBlock(DEAD_FINGER_CORAL_FAN.get(), UAProperties.createCoral(MaterialColor.TERRACOTTA_ORANGE)), FINGER_CORAL_WALL_FAN, CreativeModeTab.TAB_DECORATIONS);
@@ -163,76 +252,6 @@ public class UABlocks {
 	public static final RegistryObject<Block> ORANGE_JELLY_TORCH = HELPER.createStandingAndWallBlock("orange_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.ORANGE), ORANGE_JELLY_WALL_TORCH, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> RED_JELLY_TORCH = HELPER.createStandingAndWallBlock("red_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.RED), RED_JELLY_WALL_TORCH, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> WHITE_JELLY_TORCH = HELPER.createStandingAndWallBlock("white_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.WHITE), WHITE_JELLY_WALL_TORCH, CreativeModeTab.TAB_DECORATIONS);
-
-	public static final RegistryObject<Block> EMBEDDED_AMMONITE = HELPER.createBlock("embedded_ammonite", () -> new EmbeddedAmmoniteBlock(Properties.copy(Blocks.STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
-	public static final RegistryObject<Block> BEDROLL = HELPER.createBlock("bedroll", createBedroll(DyeColor.BROWN), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> WHITE_BEDROLL = HELPER.createBlock("white_bedroll", createBedroll(DyeColor.WHITE), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> ORANGE_BEDROLL = HELPER.createBlock("orange_bedroll", createBedroll(DyeColor.ORANGE), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> MAGENTA_BEDROLL = HELPER.createBlock("magenta_bedroll", createBedroll(DyeColor.MAGENTA), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> LIGHT_BLUE_BEDROLL = HELPER.createBlock("light_blue_bedroll", createBedroll(DyeColor.LIGHT_BLUE), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> YELLOW_BEDROLL = HELPER.createBlock("yellow_bedroll", createBedroll(DyeColor.YELLOW), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> LIME_BEDROLL = HELPER.createBlock("lime_bedroll", createBedroll(DyeColor.LIME), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PINK_BEDROLL = HELPER.createBlock("pink_bedroll", createBedroll(DyeColor.PINK), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> GRAY_BEDROLL = HELPER.createBlock("gray_bedroll", createBedroll(DyeColor.GRAY), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> LIGHT_GRAY_BEDROLL = HELPER.createBlock("light_gray_bedroll", createBedroll(DyeColor.LIGHT_GRAY), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> CYAN_BEDROLL = HELPER.createBlock("cyan_bedroll", createBedroll(DyeColor.CYAN), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PURPLE_BEDROLL = HELPER.createBlock("purple_bedroll", createBedroll(DyeColor.PURPLE), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BLUE_BEDROLL = HELPER.createBlock("blue_bedroll", createBedroll(DyeColor.BLUE), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BROWN_BEDROLL = HELPER.createBlock("brown_bedroll", createBedroll(DyeColor.BROWN), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> GREEN_BEDROLL = HELPER.createBlock("green_bedroll", createBedroll(DyeColor.GREEN), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> RED_BEDROLL = HELPER.createBlock("red_bedroll", createBedroll(DyeColor.RED), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BLACK_BEDROLL = HELPER.createBlock("black_bedroll", createBedroll(DyeColor.BLACK), CreativeModeTab.TAB_DECORATIONS);
-
-	public static final RegistryObject<Block> BLUE_PICKERELWEED = HELPER.createBlock("blue_pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED), CreativeModeTab.TAB_MISC);
-	public static final RegistryObject<Block> TALL_BLUE_PICKERELWEED = HELPER.createBlockNoItem("tall_blue_pickerelweed", () -> new PickerelweedDoublePlantBlock(UAProperties.PICKERELWEED));
-	public static final RegistryObject<Block> PURPLE_PICKERELWEED = HELPER.createBlock("purple_pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED), CreativeModeTab.TAB_MISC);
-	public static final RegistryObject<Block> TALL_PURPLE_PICKERELWEED = HELPER.createBlockNoItem("tall_purple_pickerelweed", () -> new PickerelweedDoublePlantBlock(UAProperties.PICKERELWEED));
-
-	public static final RegistryObject<Block> WHITE_SEAROCKET = HELPER.createBlock("white_searocket", () -> new SearocketBlock(MobEffects.WATER_BREATHING, 9, UAProperties.createSearocket(false)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> PINK_SEAROCKET = HELPER.createBlock("pink_searocket", () -> new SearocketBlock(MobEffects.WATER_BREATHING, 9, UAProperties.createSearocket(true)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> FLOWERING_RUSH = HELPER.createBlock("flowering_rush", () -> new FloweringRushBlock(Properties.copy(Blocks.PEONY).sound(SoundType.WET_GRASS)), CreativeModeTab.TAB_DECORATIONS);
-
-	public static final RegistryObject<Block> MULBERRY_VINE = HELPER.createBlockNoItem("mulberry_vine", () -> new MulberryVineBlock(Block.Properties.copy(Blocks.SWEET_BERRY_BUSH).randomTicks().noOcclusion()));
-	public static final RegistryObject<Block> MULBERRY_JAM_BLOCK = HELPER.createBlock("mulberry_jam_block", () -> new MulberryJamBlock(Block.Properties.copy(Blocks.SLIME_BLOCK)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> MULBERRY_PUNNET = HELPER.createCompatBlock("quark", "mulberry_punnet", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_PINK).strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
-
-	public static final RegistryObject<Block> POTTED_BLUE_PICKERELWEED = HELPER.createBlockNoItem("potted_blue_pickerelweed", () -> new FlowerPotBlock(BLUE_PICKERELWEED.get(), Block.Properties.of(Material.DECORATION).strength(0.0F)));
-	public static final RegistryObject<Block> POTTED_PURPLE_PICKERELWEED = HELPER.createBlockNoItem("potted_purple_pickerelweed", () -> new FlowerPotBlock(PURPLE_PICKERELWEED.get(), Block.Properties.of(Material.DECORATION).strength(0.0F)));
-	public static final RegistryObject<Block> POTTED_WHITE_SEAROCKET = HELPER.createBlockNoItem("potted_white_searocket", () -> new FlowerPotBlock(WHITE_SEAROCKET.get(), Block.Properties.of(Material.DECORATION).strength(0.0F)));
-	public static final RegistryObject<Block> POTTED_PINK_SEAROCKET = HELPER.createBlockNoItem("potted_pink_searocket", () -> new FlowerPotBlock(PINK_SEAROCKET.get(), Block.Properties.of(Material.DECORATION).strength(0.0F)));
-
-	public static final RegistryObject<Block> TOOTH_BLOCK = HELPER.createBlock("tooth_block", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_TILES = HELPER.createBlock("tooth_tiles", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_STAIRS = HELPER.createBlock("tooth_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_SLAB = HELPER.createBlock("tooth_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_WALL = HELPER.createBlock("tooth_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TOOTH_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "tooth_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(TOOTH_TILES.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_BRICKS = HELPER.createBlock("tooth_bricks", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> CHISELED_TOOTH_BRICKS = HELPER.createBlock("chiseled_tooth_bricks", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_BRICK_STAIRS = HELPER.createBlock("tooth_brick_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_BRICK_SLAB = HELPER.createBlock("tooth_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_BRICK_WALL = HELPER.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TOOTH_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "tooth_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(TOOTH_BRICKS.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TOOTH_TRAPDOOR = HELPER.createBlock("tooth_trapdoor", () -> new ToothTrapdoorBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> TOOTH_DOOR = HELPER.createBlock("tooth_door", () -> new ToothDoorBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> TOOTH_LANTERN = HELPER.createBlock("tooth_lantern", () -> new ToothLanternBlock(Properties.copy(Blocks.END_STONE).sound(UASoundEvents.TOOTH_LANTERN).noOcclusion().lightLevel((unknown) -> 15)), CreativeModeTab.TAB_DECORATIONS);
-
-	public static final RegistryObject<Block> SCUTE_BLOCK = HELPER.createBlock("scute_block", () -> new ScuteBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SCUTE_SHINGLES = HELPER.createBlock("scute_shingles", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SCUTE_SHINGLE_STAIRS = HELPER.createBlock("scute_shingle_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SCUTE_SHINGLE_SLAB = HELPER.createBlock("scute_shingle_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SCUTE_SHINGLE_WALL = HELPER.createBlock("scute_shingle_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> SCUTE_SHINGLE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "scute_shingle_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(SCUTE_SHINGLES.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> CHISELED_SCUTE_SHINGLES = HELPER.createBlock("chiseled_scute_shingles", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SCUTE_PAVEMENT = HELPER.createBlock("scute_pavement", () -> new Block(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SCUTE_PAVEMENT_STAIRS = HELPER.createBlock("scute_pavement_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SCUTE_PAVEMENT_SLAB = HELPER.createBlock("scute_pavement_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> SCUTE_PAVEMENT_WALL = HELPER.createBlock("scute_pavement_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> SCUTE_PAVEMENT_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "scute_pavement_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(SCUTE_PAVEMENT.get())), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
-	public static final RegistryObject<Block> GLASS_TRAPDOOR = HELPER.createBlock("glass_trapdoor", () -> new TrapDoorBlock(Properties.copy(Blocks.GLASS)), CreativeModeTab.TAB_REDSTONE);
-	public static final RegistryObject<Block> GLASS_DOOR = HELPER.createBlock("glass_door", () -> new DoorBlock(Properties.copy(Blocks.GLASS)), CreativeModeTab.TAB_REDSTONE);
 
 	public static final RegistryObject<Block> CORALSTONE = HELPER.createBlock("coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> BUBBLE_CORALSTONE = HELPER.createBlock("bubble_coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false, new Block[]{Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -354,14 +373,14 @@ public class UABlocks {
 	public static final RegistryObject<Block> ELDER_PRISMARINE_CORALSTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "elder_prismarine_coralstone_vertical_slab", () -> new CoralstoneVerticalSlabBlock(UAProperties.CORALSTONE, null), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DEAD_CORALSTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "dead_coralstone_vertical_slab", () -> new CoralstoneVerticalSlabBlock(UAProperties.CORALSTONE, null), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-	public static final RegistryObject<Block> TONGUE_KELP = HELPER.createBlock("tongue_kelp", () -> new UAKelpTopBlock(KelpType.TONGUE, Properties.copy(Blocks.KELP)), CreativeModeTab.TAB_MISC);
-	public static final RegistryObject<Block> THORNY_KELP = HELPER.createBlock("thorny_kelp", () -> new UAKelpTopBlock(KelpType.THORNY, Properties.copy(Blocks.KELP)), CreativeModeTab.TAB_MISC);
-	public static final RegistryObject<Block> OCHRE_KELP = HELPER.createBlock("ochre_kelp", () -> new UAKelpTopBlock(KelpType.OCHRE, Properties.copy(Blocks.KELP)), CreativeModeTab.TAB_MISC);
-	public static final RegistryObject<Block> POLAR_KELP = HELPER.createBlock("polar_kelp", () -> new UAKelpTopBlock(KelpType.POLAR, Properties.copy(Blocks.KELP)), CreativeModeTab.TAB_MISC);
-	public static final RegistryObject<Block> TONGUE_KELP_PLANT = HELPER.createBlockNoItem("tongue_kelp_plant", () -> new UAKelpBlock(KelpType.TONGUE, TONGUE_KELP.get(), Properties.copy(Blocks.KELP_PLANT)));
-	public static final RegistryObject<Block> THORNY_KELP_PLANT = HELPER.createBlockNoItem("thorny_kelp_plant", () -> new UAKelpBlock(KelpType.THORNY, THORNY_KELP.get(), Properties.copy(Blocks.KELP_PLANT)));
-	public static final RegistryObject<Block> OCHRE_KELP_PLANT = HELPER.createBlockNoItem("ochre_kelp_plant", () -> new UAKelpBlock(KelpType.OCHRE, OCHRE_KELP.get(), Properties.copy(Blocks.KELP_PLANT)));
-	public static final RegistryObject<Block> POLAR_KELP_PLANT = HELPER.createBlockNoItem("polar_kelp_plant", () -> new UAKelpBlock(KelpType.POLAR, POLAR_KELP.get(), Properties.copy(Blocks.KELP_PLANT)));
+	public static final RegistryObject<Block> TONGUE_KELP = HELPER.createBlock("tongue_kelp", () -> new UAKelpBlock(KelpType.TONGUE, Properties.copy(Blocks.KELP)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> THORNY_KELP = HELPER.createBlock("thorny_kelp", () -> new UAKelpBlock(KelpType.THORNY, Properties.copy(Blocks.KELP)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> OCHRE_KELP = HELPER.createBlock("ochre_kelp", () -> new UAKelpBlock(KelpType.OCHRE, Properties.copy(Blocks.KELP)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POLAR_KELP = HELPER.createBlock("polar_kelp", () -> new UAKelpBlock(KelpType.POLAR, Properties.copy(Blocks.KELP)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> TONGUE_KELP_PLANT = HELPER.createBlockNoItem("tongue_kelp_plant", () -> new UAKelpPlantBlock(KelpType.TONGUE, Properties.copy(Blocks.KELP_PLANT)));
+	public static final RegistryObject<Block> THORNY_KELP_PLANT = HELPER.createBlockNoItem("thorny_kelp_plant", () -> new UAKelpPlantBlock(KelpType.THORNY, Properties.copy(Blocks.KELP_PLANT)));
+	public static final RegistryObject<Block> OCHRE_KELP_PLANT = HELPER.createBlockNoItem("ochre_kelp_plant", () -> new UAKelpPlantBlock(KelpType.OCHRE, Properties.copy(Blocks.KELP_PLANT)));
+	public static final RegistryObject<Block> POLAR_KELP_PLANT = HELPER.createBlockNoItem("polar_kelp_plant", () -> new UAKelpPlantBlock(KelpType.POLAR, Properties.copy(Blocks.KELP_PLANT)));
 
 	public static final RegistryObject<Block> KELP_BLOCK = HELPER.createBlock("kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> TONGUE_KELP_BLOCK = HELPER.createBlock("tongue_kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -370,71 +389,59 @@ public class UABlocks {
 	public static final RegistryObject<Block> POLAR_KELP_BLOCK = HELPER.createBlock("polar_kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 	public static final RegistryObject<Block> KELPY_COBBLESTONE = HELPER.createBlock("kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE = HELPER.createBlock("tongue_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE = HELPER.createBlock("thorny_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE = HELPER.createBlock("ochre_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE = HELPER.createBlock("polar_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
 	public static final RegistryObject<Block> KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("kelpy_cobblestone_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("tongue_kelpy_cobblestone_stairs", () -> new StairBlock(() -> TONGUE_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("thorny_kelpy_cobblestone_stairs", () -> new StairBlock(() -> THORNY_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("ochre_kelpy_cobblestone_stairs", () -> new StairBlock(() -> OCHRE_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("polar_kelpy_cobblestone_stairs", () -> new StairBlock(() -> POLAR_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
 	public static final RegistryObject<Block> KELPY_COBBLESTONE_SLAB = HELPER.createBlock("kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("tongue_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("thorny_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("ochre_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("polar_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
 	public static final RegistryObject<Block> KELPY_COBBLESTONE_WALL = HELPER.createBlock("kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_WALL = HELPER.createBlock("tongue_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_WALL = HELPER.createBlock("thorny_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_WALL = HELPER.createBlock("ochre_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_WALL = HELPER.createBlock("polar_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
-
-	public static final RegistryObject<Block> KELPY_STONE_BRICKS = HELPER.createBlock("kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICKS = HELPER.createBlock("tongue_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICKS = HELPER.createBlock("thorny_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICKS = HELPER.createBlock("ochre_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICKS = HELPER.createBlock("polar_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
-	public static final RegistryObject<Block> KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new StairBlock(() -> KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("tongue_kelpy_stone_brick_stairs", () -> new StairBlock(() -> TONGUE_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("thorny_kelpy_stone_brick_stairs", () -> new StairBlock(() -> THORNY_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("ochre_kelpy_stone_brick_stairs", () -> new StairBlock(() -> OCHRE_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("polar_kelpy_stone_brick_stairs", () -> new StairBlock(() -> POLAR_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
-	public static final RegistryObject<Block> KELPY_STONE_BRICK_SLAB = HELPER.createBlock("kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("tongue_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("thorny_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("ochre_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("polar_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
-	public static final RegistryObject<Block> KELPY_STONE_BRICK_WALL = HELPER.createBlock("kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_WALL = HELPER.createBlock("tongue_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_WALL = HELPER.createBlock("thorny_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_WALL = HELPER.createBlock("ochre_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_WALL = HELPER.createBlock("polar_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
-
 	public static final RegistryObject<Block> KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "tongue_kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "thorny_kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "ochre_kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "polar_kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
+	public static final RegistryObject<Block> KELPY_STONE_BRICKS = HELPER.createBlock("kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new StairBlock(() -> KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> KELPY_STONE_BRICK_SLAB = HELPER.createBlock("kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> KELPY_STONE_BRICK_WALL = HELPER.createBlock("kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> KELPY_STONE_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "kelpy_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE = HELPER.createBlock("tongue_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("tongue_kelpy_cobblestone_stairs", () -> new StairBlock(() -> TONGUE_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("tongue_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_WALL = HELPER.createBlock("tongue_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "tongue_kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICKS = HELPER.createBlock("tongue_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("tongue_kelpy_stone_brick_stairs", () -> new StairBlock(() -> TONGUE_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("tongue_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_WALL = HELPER.createBlock("tongue_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "tongue_kelpy_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE = HELPER.createBlock("thorny_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("thorny_kelpy_cobblestone_stairs", () -> new StairBlock(() -> THORNY_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("thorny_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_WALL = HELPER.createBlock("thorny_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "thorny_kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICKS = HELPER.createBlock("thorny_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("thorny_kelpy_stone_brick_stairs", () -> new StairBlock(() -> THORNY_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("thorny_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_WALL = HELPER.createBlock("thorny_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "thorny_kelpy_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE = HELPER.createBlock("ochre_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("ochre_kelpy_cobblestone_stairs", () -> new StairBlock(() -> OCHRE_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("ochre_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_WALL = HELPER.createBlock("ochre_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "ochre_kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICKS = HELPER.createBlock("ochre_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("ochre_kelpy_stone_brick_stairs", () -> new StairBlock(() -> OCHRE_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("ochre_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_WALL = HELPER.createBlock("ochre_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "ochre_kelpy_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE = HELPER.createBlock("polar_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("polar_kelpy_cobblestone_stairs", () -> new StairBlock(() -> POLAR_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("polar_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_WALL = HELPER.createBlock("polar_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_DECORATIONS);
+	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "polar_kelpy_cobblestone_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.COBBLESTONE)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICKS = HELPER.createBlock("polar_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("polar_kelpy_stone_brick_stairs", () -> new StairBlock(() -> POLAR_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("polar_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_WALL = HELPER.createBlock("polar_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "polar_kelpy_stone_brick_vertical_slab", () -> new VerticalSlabBlock(Properties.copy(Blocks.STONE_BRICKS)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
-	public static final RegistryObject<Block> BLUE_PICKERELWEED_BLOCK = HELPER.createBlock("blue_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(false), false), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> PURPLE_PICKERELWEED_BLOCK = HELPER.createBlock("purple_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(false), false), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> BOILED_BLUE_PICKERELWEED_BLOCK = HELPER.createBlock("boiled_blue_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(true), true), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> BOILED_PURPLE_PICKERELWEED_BLOCK = HELPER.createBlock("boiled_purple_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(true), true), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
-	public static final RegistryObject<Block> PRISMARINE_ROD_BUNDLE = HELPER.createBlock("prismarine_rod_bundle", () -> new PrismarineRodBlock(Properties.copy(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL)), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_LOG = HELPER.createBlock("stripped_driftwood_log", () -> new StrippedLogBlock(UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD = HELPER.createBlock("stripped_driftwood", () -> new StrippedWoodBlock(UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -450,13 +457,11 @@ public class UABlocks {
 	public static final RegistryObject<Block> DRIFTWOOD_DOOR = HELPER.createBlock("driftwood_door", () -> new WoodDoorBlock(UAProperties.DRIFTWOOD.door()), CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> DRIFTWOOD_TRAPDOOR = HELPER.createBlock("driftwood_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.DRIFTWOOD.trapdoor()), CreativeModeTab.TAB_REDSTONE);
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> DRIFTWOOD_SIGN = HELPER.createSignBlock("driftwood", MaterialColor.STONE);
-
 	public static final RegistryObject<Block> DRIFTWOOD_BOARDS = HELPER.createCompatFuelBlock("woodworks", "driftwood_boards", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.planks()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_BOOKSHELF = HELPER.createCompatFuelBlock("woodworks", "driftwood_bookshelf", () -> new BookshelfBlock(UAProperties.DRIFTWOOD.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_LADDER = HELPER.createCompatFuelBlock("woodworks", "driftwood_ladder", () -> new BlueprintLadderBlock(UAProperties.DRIFTWOOD.ladder()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> DRIFTWOOD_BEEHIVE = HELPER.createCompatBlock("woodworks", "driftwood_beehive", () -> new BlueprintBeehiveBlock(UAProperties.DRIFTWOOD.beehive()), CreativeModeTab.TAB_DECORATIONS);
 	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> DRIFTWOOD_CHEST = HELPER.createCompatChestBlocks("woodworks", "driftwood", MaterialColor.STONE);
-
 	public static final RegistryObject<Block> VERTICAL_DRIFTWOOD_PLANKS = HELPER.createCompatBlock("quark", "vertical_driftwood_planks", () -> new Block(UAProperties.DRIFTWOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> DRIFTWOOD_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "driftwood_vertical_slab", () -> new VerticalSlabBlock(UAProperties.DRIFTWOOD.planks()), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_POST = HELPER.createCompatBlock("quark", "stripped_driftwood_post", () -> new WoodPostBlock(UAProperties.DRIFTWOOD.log()), CreativeModeTab.TAB_BUILDING_BLOCKS);
@@ -479,32 +484,18 @@ public class UABlocks {
 	public static final RegistryObject<Block> RIVER_DOOR = HELPER.createBlock("river_door", () -> new WoodDoorBlock(UAProperties.RIVER_WOOD.door()), CreativeModeTab.TAB_REDSTONE);
 	public static final RegistryObject<Block> RIVER_TRAPDOOR = HELPER.createBlock("river_trapdoor", () -> new WoodTrapDoorBlock(UAProperties.RIVER_WOOD.trapdoor()), CreativeModeTab.TAB_REDSTONE);
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> RIVER_SIGNS = HELPER.createSignBlock("river", MaterialColor.COLOR_BROWN);
-
 	public static final RegistryObject<Block> RIVER_BOARDS = HELPER.createCompatFuelBlock("woodworks", "river_boards", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.planks()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_BOOKSHELF = HELPER.createCompatFuelBlock("woodworks", "river_bookshelf", () -> new BookshelfBlock(UAProperties.RIVER_WOOD.bookshelf()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_LADDER = HELPER.createCompatFuelBlock("woodworks", "river_ladder", () -> new BlueprintLadderBlock(UAProperties.RIVER_WOOD.ladder()), 300, CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> RIVER_BEEHIVE = HELPER.createCompatBlock("woodworks", "river_beehive", () -> new BlueprintBeehiveBlock(UAProperties.RIVER_WOOD.beehive()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> RIVER_LEAF_PILE = HELPER.createCompatBlock("woodworks", "river_leaf_pile", () -> new LeafPileBlock(UAProperties.RIVER_WOOD.leafPile()), CreativeModeTab.TAB_DECORATIONS);
 	public static final Pair<RegistryObject<BlueprintChestBlock>, RegistryObject<BlueprintTrappedChestBlock>> RIVER_CHESTS = HELPER.createCompatChestBlocks("woodworks", "river", MaterialColor.COLOR_BROWN);
-
 	public static final RegistryObject<Block> VERTICAL_RIVER_PLANKS = HELPER.createCompatBlock("quark", "vertical_river_planks", () -> new Block(UAProperties.RIVER_WOOD.planks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_VERTICAL_SLAB = HELPER.createCompatFuelBlock("quark", "river_vertical_slab", () -> new VerticalSlabBlock(UAProperties.RIVER_WOOD.planks()), 150, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> STRIPPED_RIVER_POST = HELPER.createCompatFuelBlock("quark", "stripped_river_post", () -> new WoodPostBlock(UAProperties.RIVER_WOOD.log()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_POST = HELPER.createCompatFuelBlock("quark", "river_post", () -> new WoodPostBlock(STRIPPED_RIVER_POST, UAProperties.RIVER_WOOD.log()), 300, CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> RIVER_LEAF_CARPET = HELPER.createCompatBlock("quark", "river_leaf_carpet", () -> new LeafCarpetBlock(UAProperties.RIVER_WOOD.leafCarpet()), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> RIVER_HEDGE = HELPER.createCompatFuelBlock("quark", "river_hedge", () -> new HedgeBlock(UAProperties.RIVER_WOOD.log()), 300, CreativeModeTab.TAB_DECORATIONS);
-
-	public static final RegistryObject<Block> BEACHGRASS = HELPER.createBlock("beachgrass", () -> new BeachgrassBlock(Properties.copy(Blocks.FERN)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> TALL_BEACHGRASS = HELPER.createBlock("tall_beachgrass", () -> new TallBeachgrassBlock(Properties.copy(Blocks.LARGE_FERN)), CreativeModeTab.TAB_DECORATIONS);
-	public static final RegistryObject<Block> BEACHGRASS_THATCH = HELPER.createBlock("beachgrass_thatch", () -> new ThatchBlock(UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> BEACHGRASS_THATCH_SLAB = HELPER.createBlock("beachgrass_thatch_slab", () -> new ThatchSlabBlock(UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> BEACHGRASS_THATCH_STAIRS = HELPER.createBlock("beachgrass_thatch_stairs", () -> new ThatchStairBlock(BEACHGRASS_THATCH.get().defaultBlockState(), UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "beachgrass_thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
-	public static final RegistryObject<Block> LUMINOUS_PRISMARINE = HELPER.createBlock("luminous_prismarine", () -> new ConduitSupportingBlock(UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> LUMINOUS_PRISMARINE_STAIRS = HELPER.createBlock("luminous_prismarine_stairs", () -> new StairBlock(() -> LUMINOUS_PRISMARINE.get().defaultBlockState(), UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> LUMINOUS_PRISMARINE_SLAB = HELPER.createBlock("luminous_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
-	public static final RegistryObject<Block> LUMINOUS_PRISMARINE_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "luminous_prismarine_vertical_slab", () -> new VerticalSlabBlock(UAProperties.LUMINOUS_PRISMARINE), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
 	private static Supplier<BedrollBlock> createBedroll(DyeColor color) {
 		return () -> new BedrollBlock(color, BlockBehaviour.Properties.of(Material.WOOL, (state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? color.getMaterialColor() : MaterialColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion());
@@ -542,11 +533,6 @@ public class UABlocks {
 		public static BlockBehaviour.Properties createPrismarineCoralBlock(boolean elder) {
 			MaterialColor color = !elder ? MaterialColor.DIAMOND : MaterialColor.TERRACOTTA_WHITE;
 			return BlockBehaviour.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.5F, 6.0F).lightLevel((unknown) -> (6)).sound(SoundType.GLASS);
-		}
-
-		public static BlockBehaviour.Properties createSearocket(boolean pink) {
-			MaterialColor color = pink ? MaterialColor.COLOR_PINK : MaterialColor.TERRACOTTA_WHITE;
-			return BlockBehaviour.Properties.of(Material.PLANT, color).randomTicks().noCollission().strength(0.0F).sound(SoundType.GRASS);
 		}
 
 		public static BlockBehaviour.Properties createPickerelweedBlock(boolean isBoiled) {
@@ -675,21 +661,11 @@ public class UABlocks {
 	});
 
 	public static final Map<Supplier<Block>, Supplier<Block>> ATMOSHPERIC_FALLABLES = ModList.get().isLoaded("atmospheric") ? Util.make(Maps.newHashMap(), (fallables) -> {
-		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric:arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric:arid_sand")));
-		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric:red_arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric:red_arid_sand")));
+		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "arid_sand")));
+		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "red_arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "red_arid_sand")));
 	}) : null;
 
 	public enum KelpType {
-		TONGUE(0.14D), THORNY(0.14D), OCHRE(0.14D), POLAR(0.14D);
-
-		private final double growChance;
-
-		KelpType(double growChance) {
-			this.growChance = growChance;
-		}
-
-		public double getGrowChance() {
-			return this.growChance;
-		}
+		TONGUE, THORNY, OCHRE, POLAR
 	}
 }

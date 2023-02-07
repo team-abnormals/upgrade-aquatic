@@ -46,7 +46,7 @@ public class BedrollBlock extends BedBlock implements SimpleWaterloggedBlock {
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return new BedrollBlockEntity(this.color, pos, state);
+		return new BedrollBlockEntity(pos, state);
 	}
 
 	@Override

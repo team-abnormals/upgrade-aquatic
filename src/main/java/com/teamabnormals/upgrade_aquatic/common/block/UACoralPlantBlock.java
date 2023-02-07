@@ -6,12 +6,12 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CoralFanBlock;
+import net.minecraft.world.level.block.CoralPlantBlock;
 
-public class UACoralFanBlock extends CoralFanBlock {
-	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.HORN_CORAL_FAN);
+public class UACoralPlantBlock extends CoralPlantBlock {
+	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.HORN_CORAL);
 
-	public UACoralFanBlock(Block deadState, Properties props) {
+	public UACoralPlantBlock(Block deadState, Properties props) {
 		super(deadState, props);
 	}
 

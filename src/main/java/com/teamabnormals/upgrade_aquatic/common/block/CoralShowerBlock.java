@@ -46,8 +46,8 @@ public class CoralShowerBlock extends CoralPlantBlock {
 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		FluidState ifluidstate = context.getLevel().getFluidState(context.getClickedPos());
-		return this.defaultBlockState().setValue(WATERLOGGED, ifluidstate.getType() == Fluids.WATER);
+		FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+		return this.defaultBlockState().setValue(WATERLOGGED, fluidState.is(Fluids.WATER));
 	}
 
 	@Override
@@ -64,14 +64,9 @@ public class CoralShowerBlock extends CoralPlantBlock {
 		}
 	}
 
+	@Override
 	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
 		BlockPos blockpos = pos.above();
 		return worldIn.getBlockState(blockpos).isFaceSturdy(worldIn, blockpos, Direction.DOWN);
 	}
-
-	@Override
-	public boolean isConduitFrame(BlockState state, LevelReader world, BlockPos pos, BlockPos conduit) {
-		return true;
-	}
-
 }

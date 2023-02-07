@@ -14,6 +14,7 @@ public class ScuteBlock extends DirectionalBlock {
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
 	}
 
+	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(FACING);
 	}

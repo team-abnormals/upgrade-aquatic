@@ -19,6 +19,7 @@ public class EmbeddedAmmoniteBlock extends DirectionalBlock {
 		builder.add(FACING);
 	}
 
+	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return this.defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite());
 	}

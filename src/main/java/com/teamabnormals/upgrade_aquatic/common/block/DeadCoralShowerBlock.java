@@ -13,8 +13,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,10 +20,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class DeadCoralShowerBlock extends BaseCoralPlantBlock {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 1.0D, 2.0D, 14.0D, 16.0D, 14.0D);
-
-	public DeadCoralShowerBlock() {
-		super(Block.Properties.of(Material.STONE, MaterialColor.WOOD).noCollission().strength(0F));
-	}
 
 	public DeadCoralShowerBlock(Block.Properties properties) {
 		super(properties);
@@ -52,19 +46,19 @@ public class DeadCoralShowerBlock extends BaseCoralPlantBlock {
 
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, RandomSource rand) {
+	public void animateTick(BlockState stateIn, Level level, BlockPos pos, RandomSource rand) {
 		double xOffset = rand.nextBoolean() ? -(Math.random() * 0.4) : (Math.random() * 0.4);
 		double yOffset = rand.nextBoolean() ? -(Math.random() * 0.4) : (Math.random() * 0.4);
 		double zOffset = rand.nextBoolean() ? -(Math.random() * 0.4) : (Math.random() * 0.4);
 		double d0 = (double) pos.getX() + 0.5D + xOffset;
 		double d1 = (double) pos.getY() + 0.5D + yOffset;
 		double d2 = (double) pos.getZ() + 0.5D + zOffset;
-		worldIn.addParticle(UAParticleTypes.ELDER_PRISMARINE_SHOWER.get(), d0, d1, d2, 0d, 0.004d, 0d);
+		level.addParticle(UAParticleTypes.ELDER_PRISMARINE_SHOWER.get(), d0, d1, d2, 0d, 0.004d, 0d);
 	}
 
-	public boolean canSurvive(BlockState state, LevelReader worldIn, BlockPos pos) {
+	@Override
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		BlockPos blockpos = pos.above();
-		return worldIn.getBlockState(blockpos).isFaceSturdy(worldIn, blockpos, Direction.DOWN);
+		return level.getBlockState(blockpos).isFaceSturdy(level, blockpos, Direction.DOWN);
 	}
-
 }

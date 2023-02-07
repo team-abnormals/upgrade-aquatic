@@ -98,10 +98,6 @@ public class PickerelweedPlantBlock extends Block implements BonemealableBlock, 
 		return this.isValidGround(worldIn.getBlockState(blockpos), worldIn, blockpos);
 	}
 
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XYZ;
-	}
-
 	@Override
 	public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face) {
 		return state.getValue(WATERLOGGED) ? 0 : 60;
@@ -118,5 +114,4 @@ public class PickerelweedPlantBlock extends Block implements BonemealableBlock, 
 	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
 		return true;
 	}
-
 }

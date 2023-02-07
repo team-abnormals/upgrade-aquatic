@@ -1,21 +1,18 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CoralWallFanBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class UACoralWallFanBlock extends CoralWallFanBlock {
+public class ConduitFrameBlock extends Block {
 
-	public UACoralWallFanBlock(Block deadState, Properties props) {
-		super(deadState, props);
+	public ConduitFrameBlock(Properties properties) {
+		super(properties);
 	}
 
 	@Override
 	public boolean isConduitFrame(BlockState state, LevelReader world, BlockPos pos, BlockPos conduit) {
-		return state.getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN.get();
+		return true;
 	}
-
 }

@@ -5,14 +5,13 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CoralFanBlock;
+import net.minecraft.world.level.block.BaseCoralPlantBlock;
 
-public class UACoralFanBlock extends CoralFanBlock {
-	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.HORN_CORAL_FAN);
+public class UABaseCoralPlantBlock extends BaseCoralPlantBlock {
+	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.DEAD_HORN_CORAL);
 
-	public UACoralFanBlock(Block deadState, Properties props) {
-		super(deadState, props);
+	public UABaseCoralPlantBlock(Properties props) {
+		super(props);
 	}
 
 	@Override

@@ -49,9 +49,9 @@ public class UAFeatures {
 	public static final class UAConfiguredFeatures {
 		public static final DeferredRegister<ConfiguredFeature<?, ?>> CONFIGURED_FEATURES = DeferredRegister.create(Registry.CONFIGURED_FEATURE_REGISTRY, UpgradeAquatic.MOD_ID);
 
+		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> RIVER_TREE = register("river_tree", () -> new ConfiguredFeature<>(UAFeatures.RIVER_TREE.get(), Configs.RIVER_TREE_CONFIG));
 		public static final RegistryObject<ConfiguredFeature<OreConfiguration, ?>> ORE_AMMONITE = register("ore_ammonite", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(OreFeatures.NATURAL_STONE, UABlocks.EMBEDDED_AMMONITE.get().defaultBlockState(), 3)));
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> BEACHGRASS_DUNES = register("beachgrass_dunes", () -> new ConfiguredFeature<>(UAFeatures.DUNES.get(), FeatureConfiguration.NONE));
-		public static final RegistryObject<ConfiguredFeature<TreeConfiguration, ?>> RIVER_TREE = register("river_tree", () -> new ConfiguredFeature<>(UAFeatures.RIVER_TREE.get(), Configs.RIVER_TREE_CONFIG));
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PRISMARINE_CORAL = register("prismarine_coral", () -> new ConfiguredFeature<>(UAFeatures.PRISMARINE_CORAL.get(), FeatureConfiguration.NONE));
 
 		public static final RegistryObject<ConfiguredFeature<NoneFeatureConfiguration, ?>> PATCH_SEAROCKET = register("patch_searocket", () -> new ConfiguredFeature<>(UAFeatures.SEAROCKET.get(), FeatureConfiguration.NONE));

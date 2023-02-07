@@ -15,5 +15,4 @@ public class PrismarineRodBlock extends RotatedPillarBlock {
 	public boolean isConduitFrame(BlockState state, LevelReader world, BlockPos pos, BlockPos conduit) {
 		return true;
 	}
-
 }
