@@ -41,7 +41,7 @@ public class UAClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_SAPLING.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAVES.get(), CUTOUT_MIPPED);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAF_CARPET.get(), CUTOUT_MIPPED);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAF_PILE.get(), CUTOUT_MIPPED);
+		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAF_PILE.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_HEDGE.get(), CUTOUT_MIPPED);
 
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.BLUE_PICKERELWEED.get(), CUTOUT);
