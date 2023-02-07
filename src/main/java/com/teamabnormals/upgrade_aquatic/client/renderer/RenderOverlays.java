@@ -145,4 +145,10 @@ public class RenderOverlays {
 
 	}
 
+	@SubscribeEvent
+	public static void removeMountMessage(CustomizeGuiOverlayEvent.DebugText event) {
+		if (MC.player.isPassenger() && MC.player.getVehicle() instanceof Thrasher && MC.gui.overlayMessageString.getString().equals(I18n.get("mount.onboard", I18n.get("key.keyboard.left.shift")))) {
+			MC.gui.setOverlayMessage(Component.literal(""), false);
+		}
+	}
 }
