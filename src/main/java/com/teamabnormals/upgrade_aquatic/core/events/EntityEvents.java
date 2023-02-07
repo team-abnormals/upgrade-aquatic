@@ -42,6 +42,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -154,21 +155,19 @@ public class EntityEvents {
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event) {
 		Player player = event.player;
-		ItemStack headSlotStack = player.getItemBySlot(EquipmentSlot.HEAD);
 		if (!event.player.level.isClientSide && event.player.level.getGameTime() % 5 == 0 && event.player instanceof ServerPlayer serverPlayer) {
 			StatsCounter statisticsManager = serverPlayer.getStats();
 			Object2IntMap<Stat<?>> object2intmap = new Object2IntOpenHashMap<>();
 			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
 			serverPlayer.connection.send(new ClientboundAwardStatsPacket(object2intmap));
 		}
-		if (player.isEffectiveAi() && !headSlotStack.isEmpty() && headSlotStack.getItem() == Items.TURTLE_HELMET) {
+		ItemStack headSlotStack = player.getItemBySlot(EquipmentSlot.HEAD);
+		if (event.phase == Phase.END && player.isEffectiveAi() && !headSlotStack.isEmpty() && headSlotStack.is(Items.TURTLE_HELMET)) {
 			int timeTillDamage = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 40 * (1 + EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 40;
 			if (player.isEyeInFluid(FluidTags.WATER)) {
-				player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 210));
+				player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 100));
 				if (player.level.getGameTime() % timeTillDamage == 0) {
-					headSlotStack.hurtAndBreak(1, player, (p_213341_0_) -> {
-						p_213341_0_.broadcastBreakEvent(EquipmentSlot.HEAD);
-					});
+					headSlotStack.hurtAndBreak(1, player, (p_213341_0_) -> p_213341_0_.broadcastBreakEvent(EquipmentSlot.HEAD));
 				}
 			}
 		}
