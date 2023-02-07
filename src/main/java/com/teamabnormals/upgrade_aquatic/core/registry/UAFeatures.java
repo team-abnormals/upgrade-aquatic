@@ -75,13 +75,13 @@ public class UAFeatures {
 		public static final RegistryObject<PlacedFeature> PATCH_SEAROCKET = register("patch_searocket", UAConfiguredFeatures.PATCH_SEAROCKET, RarityFilter.onAverageOnceEvery(15), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_PICKERELWEED = register("patch_pickerelweed", UAConfiguredFeatures.PATCH_PICKERELWEED, RarityFilter.onAverageOnceEvery(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> PATCH_PICKERELWEED_EXTRA = register("patch_pickerelweed_extra", UAConfiguredFeatures.PATCH_PICKERELWEED, InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-		public static final RegistryObject<PlacedFeature> PATCH_FLOWERING_RUSH = register("patch_flowering_rush", UAConfiguredFeatures.PATCH_FLOWERING_RUSH, RarityFilter.onAverageOnceEvery(12), CountPlacement.of(3), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> PATCH_FLOWERING_RUSH = register("patch_flowering_rush", UAConfiguredFeatures.PATCH_FLOWERING_RUSH, RarityFilter.onAverageOnceEvery(6), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 
-		public static final RegistryObject<PlacedFeature> DRIFTWOOD_OCEAN = register("driftwood_ocean", UAConfiguredFeatures.DRIFTWOOD, RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
+		public static final RegistryObject<PlacedFeature> DRIFTWOOD_OCEAN = register("driftwood_ocean", UAConfiguredFeatures.DRIFTWOOD, RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> DRIFTWOOD_BEACH = register("driftwood_beach", UAConfiguredFeatures.DRIFTWOOD, RarityFilter.onAverageOnceEvery(4), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
 		public static final RegistryObject<PlacedFeature> DRIFTWOOD_RIVER = register("driftwood_river", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(3));
 		public static final RegistryObject<PlacedFeature> DRIFTWOOD_SWAMP = register("driftwood_swamp", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(4));
-		public static final RegistryObject<PlacedFeature> DRIFTWOOD_BASIN = register("driftwood_basin", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(5));
+		public static final RegistryObject<PlacedFeature> DRIFTWOOD_EXTRA = register("driftwood_extra", UAConfiguredFeatures.DRIFTWOOD, VegetationPlacements.worldSurfaceSquaredWithCount(5));
 
 		private static List<PlacementModifier> orePlacement(PlacementModifier p_195347_, PlacementModifier p_195348_) {
 			return List.of(p_195347_, InSquarePlacement.spread(), p_195348_, BiomeFilter.biome());

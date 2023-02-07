@@ -8,18 +8,21 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAWorldCarvers.UAConfiguredWorldCarvers;
 import net.minecraft.core.HolderSet;
-import net.minecraft.core.HolderSet.Direct;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.RegistryOps;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.GenerationStep.Carving;
+import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraftforge.common.Tags;
@@ -37,60 +40,83 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class UABiomeModifierProvider {
+	private static final RegistryAccess ACCESS = RegistryAccess.builtinCopy();
+	private static final Registry<Biome> BIOME_REGISTRY = ACCESS.registryOrThrow(Registry.BIOME_REGISTRY);
+	private static final Registry<PlacedFeature> PLACED_FEATURES = ACCESS.registryOrThrow(Registry.PLACED_FEATURE_REGISTRY);
+	private static final Registry<ConfiguredWorldCarver<?>> CARVERS = ACCESS.registryOrThrow(Registry.CONFIGURED_CARVER_REGISTRY);
+	private static final HashMap<ResourceLocation, BiomeModifier> MODIFIERS = new HashMap<>();
 
 	public static JsonCodecProvider<BiomeModifier> create(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		RegistryAccess access = RegistryAccess.builtinCopy();
-		Registry<Biome> biomeRegistry = access.registryOrThrow(Registry.BIOME_REGISTRY);
-		Registry<PlacedFeature> placedFeatures = access.registryOrThrow(Registry.PLACED_FEATURE_REGISTRY);
-		Registry<ConfiguredWorldCarver<?>> carvers = access.registryOrThrow(Registry.CONFIGURED_CARVER_REGISTRY);
-		HashMap<ResourceLocation, BiomeModifier> modifiers = new HashMap<>();
+		addFeature("beach_vegetation", Biomes.BEACH, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_SEAROCKET, UAPlacedFeatures.BEACHGRASS_DUNES);
+		addFeature("river_tree", BiomeTags.IS_RIVER, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.RIVER_TREE);
+		addFeature("flowering_rush", Biomes.RIVER, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_FLOWERING_RUSH);
+		addFeature("pickerelweed", UABiomeTags.HAS_PICKERELWEED, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED);
+		addFeature("pickerelweed_extra", UABiomeTags.HAS_EXTRA_PICKERELWEED, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED_EXTRA);
+		addFeature("ammonite_ore", UABiomeTags.HAS_AMMONITE_ORE, Decoration.UNDERGROUND_ORES, UAPlacedFeatures.ORE_AMMONITE);
+		addFeature("prismarine_coral", BiomeTags.IS_OCEAN, Decoration.RAW_GENERATION, UAPlacedFeatures.PRISMARINE_CORAL);
 
-		addModifier(modifiers, "add_feature/beach_features", new AddFeaturesBiomeModifier(tag(biomeRegistry, BiomeTags.IS_BEACH), of(placedFeatures, UAPlacedFeatures.DRIFTWOOD_BEACH, UAPlacedFeatures.PATCH_SEAROCKET, UAPlacedFeatures.BEACHGRASS_DUNES), GenerationStep.Decoration.VEGETAL_DECORATION));
-		addModifier(modifiers, "add_feature/river_features", new AddFeaturesBiomeModifier(tag(biomeRegistry, BiomeTags.IS_RIVER), of(placedFeatures, UAPlacedFeatures.RIVER_TREE, UAPlacedFeatures.DRIFTWOOD_RIVER, UAPlacedFeatures.PATCH_FLOWERING_RUSH), GenerationStep.Decoration.VEGETAL_DECORATION));
-		addModifier(modifiers, "add_feature/driftwood/swamp", new AddFeaturesBiomeModifier(tag(biomeRegistry, Tags.Biomes.IS_SWAMP), of(placedFeatures, UAPlacedFeatures.DRIFTWOOD_SWAMP), GenerationStep.Decoration.VEGETAL_DECORATION));
-		addModifier(modifiers, "add_feature/driftwood/rainforest_basin", new AddFeaturesBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_EXTRA_DRIFTWOOD), of(placedFeatures, UAPlacedFeatures.DRIFTWOOD_BASIN), GenerationStep.Decoration.VEGETAL_DECORATION));
-		addModifier(modifiers, "add_feature/driftwood/ocean", new AddFeaturesBiomeModifier(tag(biomeRegistry, BiomeTags.IS_OCEAN), of(placedFeatures, UAPlacedFeatures.DRIFTWOOD_OCEAN), GenerationStep.Decoration.VEGETAL_DECORATION));
+		addFeature("driftwood", BiomeTags.IS_OCEAN, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_OCEAN);
+		addFeature("driftwood_beach", BiomeTags.IS_BEACH, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BEACH);
+		addFeature("driftwood_river", BiomeTags.IS_RIVER, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_RIVER);
+		addFeature("driftwood_swamp", Tags.Biomes.IS_SWAMP, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_SWAMP);
+		addFeature("driftwood_extra", UABiomeTags.HAS_EXTRA_DRIFTWOOD, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_EXTRA);
 
-		addModifier(modifiers, "add_feature/pickerelweed", new AddFeaturesBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_PICKERELWEED), of(placedFeatures, UAPlacedFeatures.PATCH_PICKERELWEED), GenerationStep.Decoration.VEGETAL_DECORATION));
-		addModifier(modifiers, "add_feature/extra_pickerelweed", new AddFeaturesBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_EXTRA_PICKERELWEED), of(placedFeatures, UAPlacedFeatures.PATCH_PICKERELWEED_EXTRA), GenerationStep.Decoration.VEGETAL_DECORATION));
-		addModifier(modifiers, "add_feature/ammonite_ore", new AddFeaturesBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_AMMONITE_ORE), of(placedFeatures, UAPlacedFeatures.ORE_AMMONITE), GenerationStep.Decoration.UNDERGROUND_ORES));
-		addModifier(modifiers, "add_feature/prismarine_coral", new AddFeaturesBiomeModifier(tag(biomeRegistry, BiomeTags.IS_OCEAN), of(placedFeatures, UAPlacedFeatures.PRISMARINE_CORAL), GenerationStep.Decoration.RAW_GENERATION));
+		addCarver("underwater_canyon", BiomeTags.IS_OCEAN, Carving.AIR, UAConfiguredWorldCarvers.UNDERWATER_CANYON);
 
-		addModifier(modifiers, "add_carver/underwater_canyon", new AddCarversBiomeModifier(tag(biomeRegistry, BiomeTags.IS_OCEAN), ofCarver(carvers, UAConfiguredWorldCarvers.UNDERWATER_CANYON), GenerationStep.Carving.AIR));
+		addSpawn("thrasher", UABiomeTags.HAS_THRASHER, new MobSpawnSettings.SpawnerData(UAEntityTypes.THRASHER.get(), 10, 1, 2));
+		addSpawn("nautilus", UABiomeTags.HAS_NAUTILUS, new MobSpawnSettings.SpawnerData(UAEntityTypes.NAUTILUS.get(), 50, 1, 4));
+		addSpawn("lionfish", UABiomeTags.HAS_LIONFISH, new MobSpawnSettings.SpawnerData(UAEntityTypes.LIONFISH.get(), 15, 1, 1));
+		addSpawn("pike", UABiomeTags.HAS_PIKE, new MobSpawnSettings.SpawnerData(UAEntityTypes.PIKE.get(), 20, 1, 2));
+		addSpawn("squid", UABiomeTags.HAS_SQUID, new MobSpawnSettings.SpawnerData(EntityType.SQUID, 5, 1, 2));
+		addSpawn("pike_extra", UABiomeTags.HAS_EXTRA_PIKE, new MobSpawnSettings.SpawnerData(UAEntityTypes.PIKE.get(), 10, 1, 2));
+		addSpawn("perch", UABiomeTags.HAS_PERCH, new MobSpawnSettings.SpawnerData(UAEntityTypes.PERCH.get(), 5, 1, 6));
+//		addSpawn("box_jellyfish", UABiomeTags.HAS_JELLYFISH, new MobSpawnSettings.SpawnerData(UAEntityTypes.BOX_JELLYFISH.get(), 6, 1, 2));
+//		addSpawn("immortal_jellyfish", UABiomeTags.HAS_JELLYFISH, new MobSpawnSettings.SpawnerData(UAEntityTypes.IMMORTAL_JELLYFISH.get(), 7, 1, 3));
+//		addSpawn("cassiopea_jellyfish", UABiomeTags.HAS_CASSIOPEA_JELLYFISH, new MobSpawnSettings.SpawnerData(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), 7, 1, 3));
 
-		addModifier(modifiers, "add_monster/thrasher", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_THRASHER), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.THRASHER.get(), 10, 1, 2))));
-		addModifier(modifiers, "add_animal/nautilus", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_NAUTILUS), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.NAUTILUS.get(), 50, 1, 4))));
-		addModifier(modifiers, "add_animal/lionfish", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_LIONFISH), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.LIONFISH.get(), 15, 1, 1))));
-
-		addModifier(modifiers, "add_animal/pike", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_PIKE), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.PIKE.get(), 20, 1, 2))));
-		addModifier(modifiers, "add_animal/squid", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_SQUID), List.of(new MobSpawnSettings.SpawnerData(EntityType.SQUID, 5, 1, 2))));
-		addModifier(modifiers, "add_animal/pike_extra", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_EXTRA_PIKE), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.PIKE.get(), 10, 1, 2))));
-		addModifier(modifiers, "add_animal/perch", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_PERCH), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.PERCH.get(), 5, 1, 6))));
-
-//		addModifier(modifiers, "add_animal/jellyfish/box", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_JELLYFISH), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.BOX_JELLYFISH.get(), 6, 1, 2))));
-//		addModifier(modifiers, "add_animal/jellyfish/immortal", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_JELLYFISH), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.IMMORTAL_JELLYFISH.get(), 7, 1, 3))));
-//		addModifier(modifiers, "add_animal/jellyfish/cassiopea", new AddSpawnsBiomeModifier(tag(biomeRegistry, UABiomeTags.HAS_CASSIOPEA_JELLYFISH), List.of(new MobSpawnSettings.SpawnerData(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), 7, 1, 3))));
-
-		return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, UpgradeAquatic.MOD_ID, RegistryOps.create(JsonOps.INSTANCE, access), ForgeRegistries.Keys.BIOME_MODIFIERS, modifiers);
-	}
-
-	private static HolderSet<Biome> tag(Registry<Biome> biomeRegistry, TagKey<Biome> tagKey) {
-		return new HolderSet.Named<>(biomeRegistry, tagKey);
-	}
-
-	private static void addModifier(HashMap<ResourceLocation, BiomeModifier> modifiers, String name, BiomeModifier modifier) {
-		modifiers.put(new ResourceLocation(UpgradeAquatic.MOD_ID, name), modifier);
+		return JsonCodecProvider.forDatapackRegistry(generator, existingFileHelper, UpgradeAquatic.MOD_ID, RegistryOps.create(JsonOps.INSTANCE, ACCESS), ForgeRegistries.Keys.BIOME_MODIFIERS, MODIFIERS);
 	}
 
 	@SafeVarargs
-	@SuppressWarnings("ConstantConditions")
-	private static HolderSet<PlacedFeature> of(Registry<PlacedFeature> placedFeatures, RegistryObject<PlacedFeature>... features) {
-		return HolderSet.direct(Stream.of(features).map(registryObject -> placedFeatures.getOrCreateHolderOrThrow(registryObject.getKey())).collect(Collectors.toList()));
+	private static void addFeature(String name, ResourceKey<Biome> biome, GenerationStep.Decoration step, RegistryObject<PlacedFeature>... features) {
+		addFeature(name, biomeSet(biome), step, features);
 	}
 
 	@SafeVarargs
-	@SuppressWarnings("ConstantConditions")
-	private static Direct<ConfiguredWorldCarver<?>> ofCarver(Registry<ConfiguredWorldCarver<?>> placedFeatures, RegistryObject<ConfiguredWorldCarver<?>>... features) {
-		return HolderSet.direct(Stream.of(features).map(registryObject -> placedFeatures.getOrCreateHolderOrThrow(registryObject.getKey())).collect(Collectors.toList()));
+	private static void addFeature(String name, TagKey<Biome> biomes, GenerationStep.Decoration step, RegistryObject<PlacedFeature>... features) {
+		addFeature(name, new HolderSet.Named<>(BIOME_REGISTRY, biomes), step, features);
+	}
+
+	@SafeVarargs
+	private static void addFeature(String name, HolderSet<Biome> biomes, GenerationStep.Decoration step, RegistryObject<PlacedFeature>... features) {
+		addModifier("add_feature/" + name, new AddFeaturesBiomeModifier(biomes, featureSet(features), step));
+	}
+
+	@SafeVarargs
+	private static void addCarver(String name, TagKey<Biome> tagKey, GenerationStep.Carving step, RegistryObject<ConfiguredWorldCarver<?>>... carvers) {
+		addModifier("add_carver/" + name, new AddCarversBiomeModifier(new HolderSet.Named<>(BIOME_REGISTRY, tagKey), carverSet(carvers), step));
+	}
+
+	private static void addSpawn(String name, TagKey<Biome> tagKey, MobSpawnSettings.SpawnerData... spawns) {
+		addModifier("add_spawn/" + name, new AddSpawnsBiomeModifier(new HolderSet.Named<>(BIOME_REGISTRY, tagKey), List.of(spawns)));
+	}
+
+	private static void addModifier(String name, BiomeModifier modifier) {
+		MODIFIERS.put(new ResourceLocation(UpgradeAquatic.MOD_ID, name), modifier);
+	}
+
+	@SafeVarargs
+	private static HolderSet<Biome> biomeSet(ResourceKey<Biome>... biomes) {
+		return HolderSet.direct(Stream.of(biomes).map(BIOME_REGISTRY::getOrCreateHolderOrThrow).collect(Collectors.toList()));
+	}
+
+	@SafeVarargs
+	private static HolderSet<PlacedFeature> featureSet(RegistryObject<PlacedFeature>... features) {
+		return HolderSet.direct(Stream.of(features).map(registryObject -> PLACED_FEATURES.getOrCreateHolderOrThrow(registryObject.getKey())).collect(Collectors.toList()));
+	}
+
+	@SafeVarargs
+	private static HolderSet<ConfiguredWorldCarver<?>> carverSet(RegistryObject<ConfiguredWorldCarver<?>>... carvers) {
+		return HolderSet.direct(Stream.of(carvers).map(registryObject -> CARVERS.getOrCreateHolderOrThrow(registryObject.getKey())).collect(Collectors.toList()));
 	}
 }
