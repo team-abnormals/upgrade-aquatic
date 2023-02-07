@@ -36,7 +36,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Random;
 import java.util.function.Predicate;
 
 public class Lionfish extends BucketableWaterAnimal {

@@ -14,8 +14,6 @@ import net.minecraft.world.level.block.KelpBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 
-import java.util.Random;
-
 public class UAKelpTopBlock extends KelpBlock {
 	private final KelpType kelpType;
 

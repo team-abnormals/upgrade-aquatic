@@ -39,7 +39,6 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class MulberryVineBlock extends Block implements IForgeShearable, BonemealableBlock {

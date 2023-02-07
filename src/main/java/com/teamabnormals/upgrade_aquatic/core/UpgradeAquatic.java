@@ -140,8 +140,6 @@ public class UpgradeAquatic {
 		event.registerEntityRenderer(UAEntityTypes.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.IMMORTAL_JELLYFISH.get(), ImmortalJellyfishRenderer::new);
-
-		//if (UAConfig.CLIENT.replaceGlowSquidRenderer.get())
-			event.registerEntityRenderer(EntityType.GLOW_SQUID, UAGlowSquidRenderer::new);
+		event.registerEntityRenderer(EntityType.GLOW_SQUID, UAGlowSquidRenderer::new);
 	}
 }

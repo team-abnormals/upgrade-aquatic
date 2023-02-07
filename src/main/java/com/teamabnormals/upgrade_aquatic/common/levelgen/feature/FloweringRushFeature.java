@@ -14,8 +14,6 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-import java.util.Random;
-
 public class FloweringRushFeature extends Feature<NoneFeatureConfiguration> {
 	public FloweringRushFeature(Codec<NoneFeatureConfiguration> configFactoryIn) {
 		super(configFactoryIn);

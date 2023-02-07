@@ -12,8 +12,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.Random;
-
 public class ToothTrapdoorBlock extends TrapDoorBlock {
 
 	public ToothTrapdoorBlock(Properties properties) {

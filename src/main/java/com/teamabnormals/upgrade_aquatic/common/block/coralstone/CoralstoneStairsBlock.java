@@ -27,7 +27,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 import java.util.function.Supplier;
 
 @SuppressWarnings("deprecation")

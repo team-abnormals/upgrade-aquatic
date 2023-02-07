@@ -18,7 +18,6 @@ import net.minecraft.world.level.levelgen.carver.CarvingContext;
 import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import org.apache.commons.lang3.mutable.MutableBoolean;
 
-import java.util.Random;
 import java.util.function.Function;
 
 public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCarverConfiguration> {

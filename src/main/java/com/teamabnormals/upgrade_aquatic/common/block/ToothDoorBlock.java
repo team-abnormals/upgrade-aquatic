@@ -12,8 +12,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.Random;
-
 public class ToothDoorBlock extends DoorBlock {
 
 	public ToothDoorBlock(Properties builder) {

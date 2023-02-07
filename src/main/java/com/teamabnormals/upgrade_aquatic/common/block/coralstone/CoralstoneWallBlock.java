@@ -17,8 +17,6 @@ import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
-import java.util.Random;
-
 @SuppressWarnings("deprecation")
 public class CoralstoneWallBlock extends WallBlock {
 

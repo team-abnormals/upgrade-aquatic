@@ -31,8 +31,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.Random;
-
 public class GuardianSpineBlock extends DirectionalBlock implements SimpleWaterloggedBlock {
 	public static final BooleanProperty DRAWN = BooleanProperty.create("drawn");
 	public static final BooleanProperty ELDER = BooleanProperty.create("elder");

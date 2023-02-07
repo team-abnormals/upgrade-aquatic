@@ -25,7 +25,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 @SuppressWarnings("deprecation")
 public class CoralstoneVerticalSlabBlock extends VerticalSlabBlock {

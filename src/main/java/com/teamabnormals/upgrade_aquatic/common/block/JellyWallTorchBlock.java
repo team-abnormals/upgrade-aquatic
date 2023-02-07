@@ -23,7 +23,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.Map;
-import java.util.Random;
 
 public class JellyWallTorchBlock extends JellyTorchBlock {
 	public static final DirectionProperty HORIZONTAL_FACING = HorizontalDirectionalBlock.FACING;
