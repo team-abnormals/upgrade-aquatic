@@ -4,7 +4,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.GlowSquid;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.level.Level;
@@ -23,9 +22,8 @@ public abstract class SquidMixin extends Entity {
 	@Inject(at = @At("HEAD"), method = "spawnInk")
 	private void spawnInk(CallbackInfo info) {
 		for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.5F, 2.5F, 2.5F))) {
-			if (!(entity instanceof Squid))
-				entity.addEffect(new MobEffectInstance(((Squid) (Object) this) instanceof GlowSquid ? MobEffects.GLOWING : MobEffects.BLINDNESS, 100));
+			if (this.getType() == EntityType.SQUID && !(entity instanceof Squid))
+				entity.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 100));
 		}
 	}
-
 }
