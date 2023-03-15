@@ -21,7 +21,7 @@ import java.util.List;
  */
 public enum PikeType {
 	AMUR(1, PikeSize.SMALL, PikeRarity.UNCOMMON, null, Tags.Biomes.IS_SWAMP),
-	REDFIN(2, PikeSize.SMALL, PikeRarity.COMMON, null, null),
+	REDFIN_PICKEREL(2, PikeSize.SMALL, PikeRarity.COMMON, null, null),
 	BROWN_NORTHERN(3, PikeSize.LARGE, PikeRarity.COMMON, 8, null),
 	MAHOGANY_NORTHERN(4, PikeSize.LARGE, PikeRarity.UNCOMMON, 9, null),
 	JADE_NORTHERN(5, PikeSize.LARGE, PikeRarity.RARE, 10, null),
