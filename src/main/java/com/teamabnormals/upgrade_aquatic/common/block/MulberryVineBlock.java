@@ -77,7 +77,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	@Override
 	public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos fromPos, boolean moving) {
 		if (world.getBlockState(pos.above()) == Blocks.AIR.defaultBlockState()) {
-			world.removeBlock(pos, false);
+			world.destroyBlock(pos, true);
 		}
 	}
 
