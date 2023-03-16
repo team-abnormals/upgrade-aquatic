@@ -1,5 +1,5 @@
 {
   "values": [
-    "minecraft:swamp"
+    "#forge:is_swamp"
   ]
 }

@@ -7,6 +7,7 @@ import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 public class UABiomeTagsProvider extends BiomeTagsProvider {
@@ -22,8 +23,8 @@ public class UABiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(UABiomeTags.HAS_GREAT_THRASHER).add(Biomes.DEEP_FROZEN_OCEAN);
 		this.tag(UABiomeTags.HAS_LIONFISH).add(Biomes.WARM_OCEAN);
 
-		this.tag(UABiomeTags.HAS_PIKE).addTag(BiomeTags.IS_RIVER);
-		this.tag(UABiomeTags.HAS_EXTRA_PIKE).add(Biomes.SWAMP);
+		this.tag(UABiomeTags.HAS_PIKE).add(Biomes.RIVER);
+		this.tag(UABiomeTags.HAS_EXTRA_PIKE).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(UABiomeTags.HAS_SQUID).add(Biomes.SWAMP);
 		this.tag(UABiomeTags.HAS_PERCH).add(Biomes.SWAMP);
 
@@ -31,8 +32,8 @@ public class UABiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(UABiomeTags.HAS_JELLYFISH).add(Biomes.WARM_OCEAN).addTag(UABiomeTags.HAS_CASSIOPEA_JELLYFISH);
 
 		this.tag(UABiomeTags.HAS_AMMONITE_ORE).addTag(BiomeTags.IS_BEACH).addTag(BiomeTags.IS_OCEAN).add(Biomes.STONY_SHORE);
-		this.tag(UABiomeTags.HAS_PICKERELWEED).addTag(BiomeTags.IS_JUNGLE).addTag(BiomeTags.IS_RIVER).add(Biomes.SWAMP);
-		this.tag(UABiomeTags.HAS_EXTRA_DRIFTWOOD).addOptional(new ResourceLocation("atmospheric", "rainforest_basin"));
+		this.tag(UABiomeTags.HAS_PICKERELWEED).addTag(BiomeTags.IS_JUNGLE).add(Biomes.RIVER).addTag(Tags.Biomes.IS_SWAMP);
+		this.tag(UABiomeTags.HAS_EXTRA_DRIFTWOOD).addOptional(new ResourceLocation("atmospheric", "rainforest_basin")).addOptional(new ResourceLocation("atmospheric", "sparse_rainforest_basin"));
 		this.tag(UABiomeTags.HAS_EXTRA_PICKERELWEED).add(Biomes.FLOWER_FOREST);
 	}
 }

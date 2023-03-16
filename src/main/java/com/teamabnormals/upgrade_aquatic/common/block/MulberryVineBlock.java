@@ -60,13 +60,8 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		Vec3 Vector3d = state.getOffset(level, pos);
-		return SHAPE.move(Vector3d.x, Vector3d.y, Vector3d.z);
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockGetter reader, BlockPos pos, CollisionContext context) {
-		return Shapes.empty();
+		Vec3 vec3 = state.getOffset(level, pos);
+		return SHAPE.move(vec3.x, vec3.y, vec3.z);
 	}
 
 	@Override
@@ -80,10 +75,6 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 			dropResources(state, level, pos);
 			level.removeBlock(pos, false);
 		}
-	}
-
-	public int getLightBlock(BlockState state, BlockGetter level, BlockPos pos) {
-		return 1;
 	}
 
 	@Override
@@ -163,24 +154,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 		}
 	}
 
-	@Override
-	public boolean isLadder(BlockState state, LevelReader world, BlockPos pos, LivingEntity entity) {
-		return true;
-	}
-
 	protected boolean isStateValid(Level level, BlockPos pos) {
 		BlockState block = level.getBlockState(pos.above());
 		return block.is(BlockTags.LEAVES) || block.is(BlockTags.LOGS);
-	}
-
-	@Override
-	@OnlyIn(Dist.CLIENT)
-	public float getShadeBrightness(BlockState state, BlockGetter level, BlockPos pos) {
-		return 1.0F;
-	}
-
-	public Block.OffsetType getOffsetType() {
-		return Block.OffsetType.XZ;
 	}
 
 	@Override
@@ -196,11 +172,6 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 			return defaultBlockState();
 		}
 		return null;
-	}
-
-	@Override
-	public boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
-		return true;
 	}
 }
 

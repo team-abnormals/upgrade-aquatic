@@ -71,7 +71,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> BEACHGRASS_THATCH_STAIRS = HELPER.createBlock("beachgrass_thatch_stairs", () -> new ThatchStairBlock(BEACHGRASS_THATCH.get().defaultBlockState(), UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
 	public static final RegistryObject<Block> BEACHGRASS_THATCH_VERTICAL_SLAB = HELPER.createCompatBlock("quark", "beachgrass_thatch_vertical_slab", () -> new ThatchVerticalSlabBlock(UAProperties.BEACHGRASS_THATCH), CreativeModeTab.TAB_BUILDING_BLOCKS);
 
-	public static final RegistryObject<Block> MULBERRY_VINE = HELPER.createBlockNoItem("mulberry_vine", () -> new MulberryVineBlock(Block.Properties.copy(Blocks.SWEET_BERRY_BUSH).randomTicks().noOcclusion()));
+	public static final RegistryObject<Block> MULBERRY_VINE = HELPER.createBlockNoItem("mulberry_vine", () -> new MulberryVineBlock(Block.Properties.of(Material.PLANT).randomTicks().noCollission().sound(SoundType.SWEET_BERRY_BUSH).offsetType(BlockBehaviour.OffsetType.XZ)));
 	public static final RegistryObject<Block> MULBERRY_JAM_BLOCK = HELPER.createBlock("mulberry_jam_block", () -> new MulberryJamBlock(Block.Properties.copy(Blocks.SLIME_BLOCK)), CreativeModeTab.TAB_DECORATIONS);
 	public static final RegistryObject<Block> MULBERRY_PUNNET = HELPER.createCompatBlock("quark", "mulberry_punnet", () -> new Block(Block.Properties.of(Material.WOOD, MaterialColor.TERRACOTTA_PINK).strength(1.5F).sound(SoundType.WOOD)), CreativeModeTab.TAB_DECORATIONS);
 
