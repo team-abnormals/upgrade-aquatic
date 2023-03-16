@@ -5,6 +5,12 @@
   "replaces_with": "upgrade_aquatic:kelpy_stone_bricks",
   "selector": {
     "type": "names",
+    "conditions": [
+      {
+        "type": "upgrade_aquatic:config",
+        "value": "kelpy_ocean_ruins"
+      }
+    ],
     "config": [
       "minecraft:ocean_ruin_warm",
       "minecraft:ocean_ruin_cold"

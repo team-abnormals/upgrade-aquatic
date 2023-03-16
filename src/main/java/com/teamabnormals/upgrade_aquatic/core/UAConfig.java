@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core;
 
+import com.teamabnormals.blueprint.core.annotations.ConfigKey;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import org.apache.commons.lang3.tuple.Pair;
@@ -11,6 +12,7 @@ public class UAConfig {
 		public final ConfigValue<Boolean> drownedSwimmingAnimation;
 		public final ConfigValue<Boolean> leatherworkersSellBedrolls;
 
+		@ConfigKey("kelpy_ocean_ruins")
 		public final ConfigValue<Boolean> kelpyOceanRuins;
 		public final ConfigValue<Integer> deepOceanMobMaxHeight;
 

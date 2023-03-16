@@ -62,6 +62,7 @@ public class UpgradeAquatic {
 		UAParticleTypes.PARTICLES.register(bus);
 		UADataSerializers.SERIALIZERS.register(bus);
 		UABiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
+		UALootConditions.LOOT_CONDITION_TYPES.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 
