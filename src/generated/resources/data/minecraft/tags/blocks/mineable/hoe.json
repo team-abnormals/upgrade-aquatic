@@ -3,11 +3,6 @@
     "upgrade_aquatic:river_leaves",
     "upgrade_aquatic:river_leaf_pile",
     "upgrade_aquatic:river_leaf_carpet",
-    "upgrade_aquatic:kelp_block",
-    "upgrade_aquatic:tongue_kelp_block",
-    "upgrade_aquatic:thorny_kelp_block",
-    "upgrade_aquatic:ochre_kelp_block",
-    "upgrade_aquatic:polar_kelp_block",
     "upgrade_aquatic:blue_pickerelweed_block",
     "upgrade_aquatic:purple_pickerelweed_block",
     "upgrade_aquatic:boiled_blue_pickerelweed_block",
@@ -17,6 +12,11 @@
     "upgrade_aquatic:beachgrass_thatch",
     "upgrade_aquatic:beachgrass_thatch_slab",
     "upgrade_aquatic:beachgrass_thatch_stairs",
-    "upgrade_aquatic:beachgrass_thatch_vertical_slab"
+    "upgrade_aquatic:beachgrass_thatch_vertical_slab",
+    "upgrade_aquatic:kelp_block",
+    "upgrade_aquatic:tongue_kelp_block",
+    "upgrade_aquatic:thorny_kelp_block",
+    "upgrade_aquatic:ochre_kelp_block",
+    "upgrade_aquatic:polar_kelp_block"
   ]
 }
