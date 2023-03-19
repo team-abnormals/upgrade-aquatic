@@ -46,8 +46,8 @@ public class MulberryJamBlock extends HalfTransparentBlock implements SimpleWate
 
 	public boolean canStickTo(BlockState state, BlockState other) {
 		if (other.getBlock() == Blocks.SLIME_BLOCK) return false;
-		if (other.getBlock() == Blocks.HONEY_BLOCK) return true;
-		if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("autumnity", "snail_slime_block")))
+		if (other.getBlock() == Blocks.HONEY_BLOCK) return false;
+		if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("autumnity", "snail_goo_block")))
 			return false;
 		if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "aloe_gel_block")))
 			return false;
