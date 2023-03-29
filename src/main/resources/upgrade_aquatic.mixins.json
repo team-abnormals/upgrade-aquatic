@@ -8,12 +8,13 @@
     "BubbleColumnBlockMixin",
     "EntityMixin",
     "LivingEntityMixin",
-    "SquidMixin"
+    "SquidMixin",
+    "TridentItemMixin"
   ],
   "client": [
-    "client.LocalPlayerMixin",
     "client.DrownedModelMixin",
-    "client.DrownedRendererMixin"
+    "client.DrownedRendererMixin",
+    "client.LocalPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -69,7 +69,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	}
 
 	@SuppressWarnings("deprecation")
-	public static <J extends AbstractJellyfish> boolean defaultSpawnCondition(EntityType<J> entity, LevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
+	public static <J extends AbstractJellyfish> boolean checkJellyfishSpawnRules(EntityType<J> entity, LevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
 		return pos.getY() > 45 && pos.getY() < world.getSeaLevel();
 	}
 

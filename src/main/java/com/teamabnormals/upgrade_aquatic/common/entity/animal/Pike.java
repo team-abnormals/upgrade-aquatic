@@ -317,8 +317,7 @@ public class Pike extends BucketableWaterAnimal {
 		return spawnDataIn;
 	}
 
-	public static boolean pickerelCondition(EntityType<? extends Pike> entityType, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
-		if (((Level) world).dimension() != Level.OVERWORLD) return false;
+	public static boolean checkPikeSpawnRules(EntityType<? extends Pike> entityType, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
 		for (int yy = pos.getY() - 2; yy <= pos.getY() + 2; yy++) {
 			for (int xx = pos.getX() - 6; xx <= pos.getX() + 6; xx++) {
 				for (int zz = pos.getZ() - 6; zz <= pos.getZ() + 6; zz++) {

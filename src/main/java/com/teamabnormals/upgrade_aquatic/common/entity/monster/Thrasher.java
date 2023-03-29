@@ -24,6 +24,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -39,7 +40,6 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -102,9 +102,8 @@ public class Thrasher extends Monster implements Endimatable {
 				.add(Attributes.ARMOR, 8.0D);
 	}
 
-	public static boolean thrasherCondition(EntityType<? extends PathfinderMob> entityType, LevelAccessor world, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
-		if (((Level) world).dimension() != Level.OVERWORLD) return false;
-		return pos.getY() <= 30 && (((Level) world).isNight() || random.nextFloat() < 0.75F);
+	public static boolean checkThrasherSpawnRules(EntityType<? extends PathfinderMob> entityType, ServerLevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
+		return level.getDifficulty() != Difficulty.PEACEFUL && pos.getY() <= 30 && (level.getLevel().isNight() || random.nextFloat() < 0.75F);
 	}
 
 	@Override

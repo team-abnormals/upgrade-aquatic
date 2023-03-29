@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public final class EntityMixin {
+public abstract class EntityMixin {
 
 	@Inject(at = @At("HEAD"), method = "isInvulnerableTo", cancellable = true)
 	private void preventThrasherSuffocationDamage(DamageSource source, CallbackInfoReturnable<Boolean> info) {

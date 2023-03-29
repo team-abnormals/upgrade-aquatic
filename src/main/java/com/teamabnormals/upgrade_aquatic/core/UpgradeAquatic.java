@@ -17,7 +17,10 @@ import com.teamabnormals.upgrade_aquatic.core.data.server.modifiers.UALootModifi
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABiomeTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABlockTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UAEntityTypeTagsProvider;
-import com.teamabnormals.upgrade_aquatic.core.other.*;
+import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
+import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
+import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
+import com.teamabnormals.upgrade_aquatic.core.other.UADispenseBehaviorRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAConfiguredFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatures;
@@ -83,7 +86,7 @@ public class UpgradeAquatic {
 	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			UACompat.registerCompat();
-			UASpawns.registerSpawns();
+			UAEntityTypes.registerSpawnPlacements();
 			UAMobEffects.registerBrewingRecipes();
 			UADispenseBehaviorRegistry.registerDispenseBehaviors();
 			ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "f_60445_");

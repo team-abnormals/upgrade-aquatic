@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.core.events;
+package com.teamabnormals.upgrade_aquatic.core.other;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
@@ -23,7 +23,7 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT)
-public class ClientEvents {
+public class UAClientEvents {
 
 	@SubscribeEvent
 	public static void onEntityRenderPre(RenderLivingEvent.Pre<?, ?> event) {

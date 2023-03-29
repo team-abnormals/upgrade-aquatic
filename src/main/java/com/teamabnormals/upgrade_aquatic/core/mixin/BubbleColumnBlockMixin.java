@@ -15,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BubbleColumnBlock.class)
-public final class BubbleColumnBlockMixin {
+public abstract class BubbleColumnBlockMixin {
+
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo info) {
 		BlockPos abovePos = pos.above();

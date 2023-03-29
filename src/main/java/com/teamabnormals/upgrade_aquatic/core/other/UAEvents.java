@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.core.events;
+package com.teamabnormals.upgrade_aquatic.core.other;
 
 import com.teamabnormals.blueprint.core.util.BlockUtil;
 import com.teamabnormals.blueprint.core.util.TradeUtil;
@@ -10,7 +10,6 @@ import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.other.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -68,7 +67,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
-public class EntityEvents {
+public class UAEvents {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onEntitySpawned(EntityJoinLevelEvent event) {

@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.teamabnormals.blueprint.core.util.registry.EntitySubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.*;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.BoxJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.CassiopeaJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.ImmortalJellyfish;
@@ -12,6 +13,9 @@ import com.teamabnormals.upgrade_aquatic.common.entity.projectile.SonarWave;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -51,5 +55,18 @@ public class UAEntityTypes {
 		event.put(BOX_JELLYFISH.get(), BoxJellyfish.registerAttributes().build());
 		event.put(CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfish.registerAttributes().build());
 		event.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfish.registerAttributes().build());
+	}
+
+	public static void registerSpawnPlacements() {
+		SpawnPlacements.register(UAEntityTypes.NAUTILUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Nautilus::checkNautilusSpawnRules);
+		SpawnPlacements.register(UAEntityTypes.LIONFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Lionfish::checkLionfishSpawnRules);
+		SpawnPlacements.register(UAEntityTypes.PIKE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Pike::checkPikeSpawnRules);
+		SpawnPlacements.register(UAEntityTypes.PERCH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, WaterAnimal::checkSurfaceWaterAnimalSpawnRules);
+		SpawnPlacements.register(UAEntityTypes.THRASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Thrasher::checkThrasherSpawnRules);
+		SpawnPlacements.register(UAEntityTypes.GREAT_THRASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Thrasher::checkThrasherSpawnRules);
+
+		SpawnPlacements.register(UAEntityTypes.BOX_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules);
+		SpawnPlacements.register(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules);
+		SpawnPlacements.register(UAEntityTypes.IMMORTAL_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules);
 	}
 }

@@ -2,8 +2,10 @@ package com.teamabnormals.upgrade_aquatic.common.entity.animal;
 
 import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
+import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -13,6 +15,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -27,6 +30,8 @@ import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -46,6 +51,10 @@ public class Nautilus extends BucketableWaterAnimal {
 
 	public static AttributeSupplier.Builder registerAttributes() {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 18.0D);
+	}
+
+	public static boolean checkNautilusSpawnRules(EntityType<? extends PathfinderMob> entityType, LevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
+		return pos.getY() <= UAConfig.COMMON.deepOceanMobMaxHeight.get() && level.getFluidState(pos.below()).is(FluidTags.WATER) && level.getBlockState(pos.above()).is(Blocks.WATER);
 	}
 
 	@Override
