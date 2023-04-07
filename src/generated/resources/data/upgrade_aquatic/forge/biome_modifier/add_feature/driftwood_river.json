@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#minecraft:is_river",
+  "biomes": "#upgrade_aquatic:has_feature/driftwood_river",
   "features": "upgrade_aquatic:driftwood_river",
   "step": "vegetal_decoration"
 }
