@@ -1,7 +1,7 @@
 {
-    "values": [
-        "#minecraft:is_river",
-        "#minecraft:is_jungle",
-        "#forge:is_swamp"
-    ]
+  "values": [
+    "#minecraft:is_river",
+    "#minecraft:is_jungle",
+    "#forge:is_swamp"
+  ]
 }
