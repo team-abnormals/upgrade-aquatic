@@ -1,6 +1,12 @@
 {
   "values": [
-    "atmospheric:rainforest_basin",
-    "atmospheric:sparse_rainforest_basin"
+    {
+      "id": "atmospheric:rainforest_basin",
+      "required": false
+    }
+    {
+      "id": "atmospheric:sparse_rainforest_basin",
+      "required": false
+    }
   ]
 }
