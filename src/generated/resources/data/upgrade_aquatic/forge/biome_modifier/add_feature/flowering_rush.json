@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "minecraft:river",
+  "biomes": "#upgrade_aquatic:has_feature/flowering_rush",
   "features": "upgrade_aquatic:patch_flowering_rush",
   "step": "vegetal_decoration"
 }
