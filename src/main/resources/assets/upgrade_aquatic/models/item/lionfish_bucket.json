@@ -1,6 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "upgrade_aquatic:item/bucket/lionfish_bucket"
+        "layer0": "upgrade_aquatic:item/lower_bucket",
+        "layer1": "upgrade_aquatic:item/bucket_content/lionfish"
     }
 }

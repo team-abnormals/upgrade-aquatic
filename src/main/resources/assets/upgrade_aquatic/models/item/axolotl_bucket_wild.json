@@ -1,6 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "upgrade_aquatic:item/axolotl_bucket_wild"
+    "layer0": "upgrade_aquatic:item/lower_bucket",
+    "layer1": "minecraft:item/bucket_content/axolotl_wild"
   }
 }

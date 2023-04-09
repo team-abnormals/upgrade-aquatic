@@ -1,6 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "upgrade_aquatic:item/bucket/pike_bucket_16"
+        "layer0": "upgrade_aquatic:item/lower_bucket",
+        "layer1": "upgrade_aquatic:item/bucket_content/pike_16"
     }
 }

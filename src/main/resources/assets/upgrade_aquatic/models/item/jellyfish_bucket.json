@@ -1,50 +1,51 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "upgrade_aquatic:item/bucket/jellyfish_bucket_box"
+        "layer0": "upgrade_aquatic:item/lower_bucket",
+        "layer1": "upgrade_aquatic:item/bucket_content/box_jellyfish"
     },
     "overrides": [
         {
             "predicate": {
                 "variant": 1.2
             },
-            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_box"
+            "model": "upgrade_aquatic:item/buckets/box_jellyfish_bucket"
         },
         {
             "predicate": {
                 "variant": 1.6
             },
-            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_red_box"
+            "model": "upgrade_aquatic:item/buckets/box_jellyfish_bucket_red"
         },
         {
             "predicate": {
                 "variant": 1.7
             },
-            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_white_box"
+            "model": "upgrade_aquatic:item/buckets/box_jellyfish_bucket_white"
         },
         {
             "predicate": {
                 "variant": 2.2
             },
-            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_blue_cassiopea"
+            "model": "upgrade_aquatic:item/buckets/cassiopea_jellyfish_bucket_blue"
         },
         {
             "predicate": {
                 "variant": 2.3
             },
-            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_cassiopea"
+            "model": "upgrade_aquatic:item/buckets/cassiopea_jellyfish_bucket"
         },
         {
             "predicate": {
                 "variant": 2.7
             },
-            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_white_cassiopea"
+            "model": "upgrade_aquatic:item/buckets/cassiopea_jellyfish_bucket_white"
         },
         {
             "predicate": {
                 "variant": 3.7
             },
-            "model": "upgrade_aquatic:item/buckets/jellyfish_bucket_immortal"
+            "model": "upgrade_aquatic:item/buckets/immortal_jellyfish_bucket"
         }
     ]
 }
