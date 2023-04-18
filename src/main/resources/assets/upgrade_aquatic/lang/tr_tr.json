@@ -605,11 +605,11 @@
   "item.minecraft.tipped_arrow.effect.vibing_strong": "Keyif Oku",
   "item.minecraft.tipped_arrow.effect.vibing_long": "Keyif Oku",
   
-  "death.attack.upgrade_aquatic.guardianSpine": "%1$s was spiked to death by a Gardiyan Spine",
-  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s was spiked to death by a Gardiyan Spine whilst trying to escape %2$s",
-  "death.attack.upgrade_aquatic.elderGardiyanSpine": "%1$s was spiked to death by an Yaşlı Gardiyan Spine",
-  "death.attack.upgrade_aquatic.elderGardiyanSpine.player": "%1$s was spiked to death by an Yaşlı Gardiyan Spine whilst trying to escape %2$s",
-  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s was stung to death by %2$s",
+  "death.attack.upgrade_aquatic.guardianSpine": "%1$s, bir Gardiyan Dikeni tarafından çivilenerek öldürüldü",
+  "death.attack.upgrade_aquatic.guardianSpine.player": "%1$s, %2$s'dan kaçmaya çalışırken bir Gardiyan Dikeni tarafından çivilenerek öldürüldü ",
+  "death.attack.upgrade_aquatic.elderGardiyanSpine": "%1$s, bir Yaşlı Gardiyan Dikeni tarafından çivilenerek öldürüldü",
+  "death.attack.upgrade_aquatic.elderGardiyanSpine.player": "%1$s, %2$s'dan kaçmaya çalışırken bir Yaşlı Gardiyan Dikeni tarafından çivilenerek öldürüldü",
+  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s, %2$s tarafından sokularak öldürüldü",
 
   "advancements.adventure.tooth_fairy.title": "Diş Perisi",
   "advancements.adventure.tooth_fairy.description": "Soğuk suların derinliklerinde gizlenen antik bir dehşet olan Kördehşet'in dişlerini toplayın",
