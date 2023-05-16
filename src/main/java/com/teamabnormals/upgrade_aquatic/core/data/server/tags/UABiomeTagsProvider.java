@@ -32,7 +32,7 @@ public class UABiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(UABiomeTags.HAS_JELLYFISH).add(Biomes.WARM_OCEAN).addTag(UABiomeTags.HAS_CASSIOPEA_JELLYFISH);
 
 		this.tag(UABiomeTags.HAS_AMMONITE_ORE).addTag(BiomeTags.IS_BEACH).addTag(BiomeTags.IS_OCEAN);
-		this.tag(UABiomeTags.PRISMARINE_CORAL).addTag(BiomeTags.IS_OCEAN);
+		this.tag(UABiomeTags.HAS_PRISMARINE_CORAL).addTag(BiomeTags.IS_OCEAN);
 		this.tag(UABiomeTags.HAS_BEACH_VEGETATION).add(Biomes.BEACH);
 		this.tag(UABiomeTags.HAS_RIVER_TREE).add(Biomes.RIVER);
 		this.tag(UABiomeTags.HAS_FLOWERING_RUSH).add(Biomes.FLOWER_FOREST);
