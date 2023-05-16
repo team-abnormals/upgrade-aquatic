@@ -47,21 +47,21 @@ public class UABiomeModifierProvider {
 	private static final HashMap<ResourceLocation, BiomeModifier> MODIFIERS = new HashMap<>();
 
 	public static JsonCodecProvider<BiomeModifier> create(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		addFeature("beach_vegetation", Biomes.BEACH, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_SEAROCKET, UAPlacedFeatures.BEACHGRASS_DUNES);
-		addFeature("river_tree", BiomeTags.IS_RIVER, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.RIVER_TREE);
-		addFeature("flowering_rush", Biomes.RIVER, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_FLOWERING_RUSH);
+		addFeature("beach_vegetation", UABiomeTags.HAS_BEACH_VEGETATION, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_SEAROCKET, UAPlacedFeatures.BEACHGRASS_DUNES);
+		addFeature("river_tree", UABiomeTags.HAS_RIVER_TREE, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.RIVER_TREE);
+		addFeature("flowering_rush", UABiomeTags.HAS_FLOWERING_RUSH, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_FLOWERING_RUSH);
 		addFeature("pickerelweed", UABiomeTags.HAS_PICKERELWEED, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED);
 		addFeature("pickerelweed_extra", UABiomeTags.HAS_EXTRA_PICKERELWEED, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_PICKERELWEED_EXTRA);
 		addFeature("ammonite_ore", UABiomeTags.HAS_AMMONITE_ORE, Decoration.UNDERGROUND_ORES, UAPlacedFeatures.ORE_AMMONITE);
-		addFeature("prismarine_coral", BiomeTags.IS_OCEAN, Decoration.RAW_GENERATION, UAPlacedFeatures.PRISMARINE_CORAL);
+		addFeature("prismarine_coral", UABiomeTags.HAS_PRISMARINE_CORAL, Decoration.RAW_GENERATION, UAPlacedFeatures.PRISMARINE_CORAL);
 
-		addFeature("driftwood", BiomeTags.IS_OCEAN, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_OCEAN);
-		addFeature("driftwood_beach", BiomeTags.IS_BEACH, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BEACH);
-		addFeature("driftwood_river", BiomeTags.IS_RIVER, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_RIVER);
-		addFeature("driftwood_swamp", Tags.Biomes.IS_SWAMP, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_SWAMP);
+		addFeature("driftwood", UABiomeTags.HAS_DRIFTWOOD, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_OCEAN);
+		addFeature("driftwood_beach", UABiomeTags.HAS_DRIFTWOOD_BEACH, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_BEACH);
+		addFeature("driftwood_river", UABiomeTags.HAS_DRIFTWOOD_RIVER, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_RIVER);
+		addFeature("driftwood_swamp", UABiomeTags.HAS_DRIFTWOOD_SWAMP, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_SWAMP);
 		addFeature("driftwood_extra", UABiomeTags.HAS_EXTRA_DRIFTWOOD, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.DRIFTWOOD_EXTRA);
 
-		addCarver("underwater_canyon", BiomeTags.IS_OCEAN, Carving.AIR, UAConfiguredWorldCarvers.UNDERWATER_CANYON);
+		addCarver("underwater_canyon", UABiomeTags.HAS_UNDERWATER_CANYON, Carving.AIR, UAConfiguredWorldCarvers.UNDERWATER_CANYON);
 
 		addSpawn("thrasher", UABiomeTags.HAS_THRASHER, new MobSpawnSettings.SpawnerData(UAEntityTypes.THRASHER.get(), 10, 1, 2));
 		addSpawn("nautilus", UABiomeTags.HAS_NAUTILUS, new MobSpawnSettings.SpawnerData(UAEntityTypes.NAUTILUS.get(), 50, 1, 4));
