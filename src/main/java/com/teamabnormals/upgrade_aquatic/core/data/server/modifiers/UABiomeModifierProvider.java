@@ -67,7 +67,6 @@ public class UABiomeModifierProvider {
 		addSpawn("lionfish", UABiomeTags.HAS_LIONFISH, new MobSpawnSettings.SpawnerData(UAEntityTypes.LIONFISH.get(), 15, 1, 1));
 		addSpawn("pike", UABiomeTags.HAS_PIKE, new MobSpawnSettings.SpawnerData(UAEntityTypes.PIKE.get(), 20, 1, 2));
 		addSpawn("squid", UABiomeTags.HAS_SQUID, new MobSpawnSettings.SpawnerData(EntityType.SQUID, 5, 1, 2));
-		addSpawn("pike_extra", UABiomeTags.HAS_EXTRA_PIKE, new MobSpawnSettings.SpawnerData(UAEntityTypes.PIKE.get(), 10, 1, 2));
 		addSpawn("perch", UABiomeTags.HAS_PERCH, new MobSpawnSettings.SpawnerData(UAEntityTypes.PERCH.get(), 5, 1, 6));
 //		addSpawn("box_jellyfish", UABiomeTags.HAS_JELLYFISH, new MobSpawnSettings.SpawnerData(UAEntityTypes.BOX_JELLYFISH.get(), 6, 1, 2));
 //		addSpawn("immortal_jellyfish", UABiomeTags.HAS_JELLYFISH, new MobSpawnSettings.SpawnerData(UAEntityTypes.IMMORTAL_JELLYFISH.get(), 7, 1, 3));
