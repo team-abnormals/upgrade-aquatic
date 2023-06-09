@@ -2,6 +2,7 @@
   "values": [
     "minecraft:cold_ocean",
     "minecraft:deep_cold_ocean",
+    "minecraft:frozen_ocean",
     "#upgrade_aquatic:has_monster/great_thrasher"
   ]
 }
