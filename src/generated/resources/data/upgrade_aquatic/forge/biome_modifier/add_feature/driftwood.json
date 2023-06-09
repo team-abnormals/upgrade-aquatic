@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#upgrade_aquatic:has_feature/driftwood",
+  "biomes": "#minecraft:is_ocean",
   "features": "upgrade_aquatic:driftwood_ocean",
   "step": "vegetal_decoration"
 }

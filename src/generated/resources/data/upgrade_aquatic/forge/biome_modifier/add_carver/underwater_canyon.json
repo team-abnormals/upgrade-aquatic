@@ -1,6 +1,6 @@
 {
   "type": "upgrade_aquatic:add_carvers",
-  "biomes": "#upgrade_aquatic:has_carver/underwater_canyon",
+  "biomes": "#minecraft:is_ocean",
   "carvers": "upgrade_aquatic:underwater_canyon",
   "step": "air"
 }

@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#upgrade_aquatic:has_feature/prismarine_coral",
+  "biomes": "#minecraft:is_ocean",
   "features": "upgrade_aquatic:prismarine_coral",
   "step": "raw_generation"
 }

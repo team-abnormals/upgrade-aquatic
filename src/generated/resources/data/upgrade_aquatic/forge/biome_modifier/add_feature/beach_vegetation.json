@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#upgrade_aquatic:has_feature/beach_vegetation",
+  "biomes": "minecraft:beach",
   "features": [
     "upgrade_aquatic:patch_searocket",
     "upgrade_aquatic:beachgrass_dunes"

@@ -1,6 +1,6 @@
 {
   "type": "forge:add_features",
-  "biomes": "#upgrade_aquatic:has_feature/river_tree",
+  "biomes": "#minecraft:is_river",
   "features": "upgrade_aquatic:trees_river",
   "step": "vegetal_decoration"
 }
