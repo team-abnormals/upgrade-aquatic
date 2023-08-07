@@ -71,18 +71,24 @@ public class ThrasherThrashGoal extends Goal {
 		this.thrasher.yBodyRot = (this.originalYaw) + 75 * Mth.cos(this.thrasher.tickCount * 0.5F) * 1F;
 		this.thrasher.setYRot((this.originalYaw) + 75 * Mth.cos(this.thrasher.tickCount * 0.5F) * 1F);
 
-		Entity entity = this.thrasher.getPassengers().get(0);
+		boolean flag = false;
+        	Entity entity = null;
+        	for(Entity ent : this.trasher.getPassengers()) {
+          		flag = true;
+          		entity = ent;
+          		break;
+        	}
 
-		if (entity instanceof Player) {
-			this.disablePlayersShield((Player) entity);
-		}
+        	if (entity instanceof Player player) {
+            		this.disablePlayersShield(player);
+        	}
+                
+        	if(flag) entity.setShiftKeyDown(false);
 
-		entity.setShiftKeyDown(false);
-
-		if (this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
-			this.thrasher.playSound(this.thrasher.getThrashingSound(), 1.0F, Math.max(0.75F, this.thrasher.getRandom().nextFloat()));
-			entity.hurt(DamageSource.mobAttack(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-		}
+        	if (this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
+            		this.thrasher.playSound(this.thrasher.getThrashingSound(), 1.0F, Math.max(0.75F, this.thrasher.getRandom().nextFloat()));
+            		if(flag) entity.hurt(DamageSource.mobAttack(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+        	}
 	}
 
 	@Override
