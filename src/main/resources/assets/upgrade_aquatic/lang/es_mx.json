@@ -399,6 +399,7 @@
   "block.upgrade_aquatic.driftwood_post": "Poste de deriva",
   "block.upgrade_aquatic.stripped_driftwood_post": "Poste de deriva sin corteza",
   "block.upgrade_aquatic.driftwood_beehive": "Apiario de abejas de deriva",
+  "block.upgrade_aquatic.driftwood_boards": "Tablones de deriva",
   
   "block.upgrade_aquatic.river_leaves": "Hojas ribereñas",
   "block.upgrade_aquatic.river_sapling": "Retoño ribereño",
@@ -428,6 +429,8 @@
   "block.upgrade_aquatic.stripped_river_post": "Poste ribereño sin corteza",
   "block.upgrade_aquatic.river_hedge": "Seto ribereño",
   "block.upgrade_aquatic.river_beehive": "Apiario de abejas ribereño",
+  "block.upgrade_aquatic.river_boards": "Tablones ribereños",
+  "block.upgrade_aquatic.river_leaf_pile": "Montón de hojas ribereñas",
   
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
 
@@ -450,7 +453,14 @@
   "block.upgrade_aquatic.luminous_prismarine_vertical_slab": "Losa vertical de prismarina luminosa",
 
   "item.upgrade_aquatic.driftwood_boat": "Bote de deriva",
+  "item.upgrade_aquatic.driftwood_furnace_boat": "Bote de deriva con horno",
+  "item.upgrade_aquatic.driftwood_chest_boat": "Bote de deriva con cofre",
+  "item.upgrade_aquatic.large_driftwood_boat": "Bote de deriva grande",
+
   "item.upgrade_aquatic.river_boat": "Bote ribereño",
+  "item.upgrade_aquatic.river_furnace_boat": "Bote ribereño con horno",
+  "item.upgrade_aquatic.river_chest_boat": "Bote ribereño con cofre",
+  "item.upgrade_aquatic.large_river_boat": "Bote ribereño grande",
   
   "item.upgrade_aquatic.prismarine_rod": "Vara de prismarina",
   "item.upgrade_aquatic.thrasher_tooth": "Diente de triturador",
