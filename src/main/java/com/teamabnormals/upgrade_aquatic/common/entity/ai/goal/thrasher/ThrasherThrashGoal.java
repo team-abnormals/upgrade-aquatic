@@ -27,8 +27,8 @@ public class ThrasherThrashGoal extends Goal {
 	@Override
 	public boolean canUse() {
 		Entity passenger = !thrasher.getPassengers().isEmpty() ? this.thrasher.getPassengers().get(0) : null;
-		if (passenger instanceof Player) {
-			if (((Player) passenger).isCreative() || passenger.isSpectator()) {
+		if (passenger instanceof Player player) {
+			if (player.isCreative() || passenger.isSpectator()) {
 				return false;
 			}
 		}
@@ -38,8 +38,8 @@ public class ThrasherThrashGoal extends Goal {
 	@Override
 	public boolean canContinueToUse() {
 		Entity passenger = !thrasher.getPassengers().isEmpty() ? this.thrasher.getPassengers().get(0) : null;
-		if (passenger instanceof Player) {
-			if (((Player) passenger).isCreative() || passenger.isSpectator()) {
+		if (passenger instanceof Player player) {
+			if (player.isCreative() || passenger.isSpectator()) {
 				return false;
 			}
 		}
@@ -63,25 +63,25 @@ public class ThrasherThrashGoal extends Goal {
 	@Override
 	public void tick() {
 		this.thrashedTicks++;
-
 		this.thrasher.getNavigation().stop();
-
 		this.thrasher.yRotO = this.thrasher.getYRot();
-
 		this.thrasher.yBodyRot = (this.originalYaw) + 75 * Mth.cos(this.thrasher.tickCount * 0.5F) * 1F;
 		this.thrasher.setYRot((this.originalYaw) + 75 * Mth.cos(this.thrasher.tickCount * 0.5F) * 1F);
 
 		Entity entity = this.thrasher.getPassengers().get(0);
-
-		if (entity instanceof Player) {
-			this.disablePlayersShield((Player) entity);
+		if (entity instanceof Player player) {
+			this.disablePlayersShield(player);
 		}
 
-		entity.setShiftKeyDown(false);
+		if (entity != null) {
+			entity.setShiftKeyDown(false);
+		}
 
 		if (this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
 			this.thrasher.playSound(this.thrasher.getThrashingSound(), 1.0F, Math.max(0.75F, this.thrasher.getRandom().nextFloat()));
-			entity.hurt(DamageSource.mobAttack(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+			if (entity != null) {
+				entity.hurt(DamageSource.mobAttack(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+			}
 		}
 	}
 
