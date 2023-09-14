@@ -44,6 +44,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.function.Predicate;
 
@@ -193,7 +194,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 
 			this.discard();
 			return InteractionResult.SUCCESS;
-		} else if (itemstack.isEmpty() && this.getName().getString().toLowerCase().trim().equals("jellysox345")) {
+		} else if (itemstack.isEmpty() && this.getName().getString().toLowerCase(Locale.ROOT).trim().equals("jellysox345")) {
 			this.startRiding(player);
 			return InteractionResult.SUCCESS;
 		} else if (item == UAItems.PRISMARINE_ROD.get() && !this.hasCooldown()) {
@@ -336,7 +337,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 			MutableComponent component = Component.translatable("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(ChatFormatting.GRAY);
 			while (true) {
 				JellyTorchType torchType = JellyTorchType.getByOrdinal(yieldingTorchTypes[length - 1]);
-				component = component.append((Component.translatable("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase() + "_jelly_torch")).withStyle(torchType.color));
+				component = component.append((Component.translatable("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase(Locale.ROOT) + "_jelly_torch")).withStyle(torchType.color));
 				if (--length > 0) {
 					component = component.append(Component.translatable("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(ChatFormatting.GRAY));
 				} else break;

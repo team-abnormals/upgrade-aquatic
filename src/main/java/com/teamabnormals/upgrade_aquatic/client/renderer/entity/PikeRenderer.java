@@ -14,6 +14,8 @@ import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Locale;
+
 @OnlyIn(Dist.CLIENT)
 public class PikeRenderer extends MobRenderer<Pike, PikeModel<Pike>> {
 
@@ -25,7 +27,7 @@ public class PikeRenderer extends MobRenderer<Pike, PikeModel<Pike>> {
 
 	@Override
 	public ResourceLocation getTextureLocation(Pike pike) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s.png", pike.getPikeType().name().toLowerCase()));
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s.png", pike.getPikeType().name().toLowerCase(Locale.ROOT)));
 	}
 
 	@Override

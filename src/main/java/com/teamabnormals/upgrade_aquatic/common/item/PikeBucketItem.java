@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
+import java.util.Locale;
 
 public class PikeBucketItem extends MobBucketItem {
 
@@ -28,7 +29,7 @@ public class PikeBucketItem extends MobBucketItem {
 		CompoundTag compoundnbt = stack.getTag();
 		if (compoundnbt != null && compoundnbt.contains("BucketVariantTag", 3)) {
 			PikeType type = PikeType.getTypeById(compoundnbt.getInt("BucketVariantTag"));
-			tooltip.add((Component.translatable(String.format("tooltip.upgrade_aquatic.%s_pike", type.toString().toLowerCase())).withStyle(ChatFormatting.ITALIC, type.rarity.formatting)));
+			tooltip.add((Component.translatable(String.format("tooltip.upgrade_aquatic.%s_pike", type.toString().toLowerCase(Locale.ROOT))).withStyle(ChatFormatting.ITALIC, type.rarity.formatting)));
 		}
 	}
 }

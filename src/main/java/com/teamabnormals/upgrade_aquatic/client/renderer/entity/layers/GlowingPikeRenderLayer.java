@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import java.util.Locale;
+
 @OnlyIn(Dist.CLIENT)
 public class GlowingPikeRenderLayer<T extends Pike, M extends PikeModel<T>> extends RenderLayer<T, M> {
 
@@ -29,7 +31,7 @@ public class GlowingPikeRenderLayer<T extends Pike, M extends PikeModel<T>> exte
 	}
 
 	private ResourceLocation getPikeOverlayTexture(Pike pike) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s_glow.png", pike.getPikeType().name().toLowerCase()));
+		return new ResourceLocation(UpgradeAquatic.MOD_ID, String.format("textures/entity/pike/%s_glow.png", pike.getPikeType().name().toLowerCase(Locale.ROOT)));
 	}
 
 }
