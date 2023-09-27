@@ -78,7 +78,11 @@ public class FloweringRushBlock extends BlueprintTallFlowerBlock implements Simp
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
-		return super.getStateForPlacement(context).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+		BlockState state = super.getStateForPlacement(context);
+		if (state != null) {
+			return state.setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
+		}
+		return null;
 	}
 
 	@Override
