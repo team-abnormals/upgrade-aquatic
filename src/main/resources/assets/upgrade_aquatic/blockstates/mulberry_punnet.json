@@ -1,7 +1,30 @@
 {
   "variants": {
-    "": {
+    "facing=down": {
+      "model": "upgrade_aquatic:block/mulberry_punnet",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "upgrade_aquatic:block/mulberry_punnet",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "upgrade_aquatic:block/mulberry_punnet",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "upgrade_aquatic:block/mulberry_punnet",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
       "model": "upgrade_aquatic:block/mulberry_punnet"
+    },
+    "facing=west": {
+      "model": "upgrade_aquatic:block/mulberry_punnet",
+      "x": 90,
+      "y": 270
     }
   }
 }

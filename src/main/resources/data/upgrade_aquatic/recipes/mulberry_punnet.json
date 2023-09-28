@@ -16,8 +16,8 @@
   },
   "conditions": [
     {
-      "type": "blueprint:quark_flag",
-       "flag": "berry_sack"
+      "type": "forge:mod_loaded",
+      "modid": "berry_good"
     }
   ]
 }
