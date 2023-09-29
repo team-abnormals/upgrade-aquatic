@@ -496,6 +496,9 @@
   "item.upgrade_aquatic.mulberry_jam_bottle": "Mulberry Jam Bottle",
   "item.upgrade_aquatic.mulberry_bread": "Mulberry Bread",
   "item.upgrade_aquatic.mulberry_pie": "Mulberry Pie",
+
+  "item.upgrade_aquatic.music_disc_atlantis": "Music Disc",
+  "item.upgrade_aquatic.music_disc_atlantis.desc": "hatsondogs - Atlantis",
   
   "tooltip.upgrade_aquatic.amur_pike": "Amur Pike",  
   "tooltip.upgrade_aquatic.redfin_pickerel_pike": "Redfin Pickerel",

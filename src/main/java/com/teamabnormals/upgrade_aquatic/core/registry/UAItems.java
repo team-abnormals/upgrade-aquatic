@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.item.BlueprintMobBucketItem;
+import com.teamabnormals.blueprint.common.item.BlueprintRecordItem;
 import com.teamabnormals.blueprint.core.util.registry.AbstractSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.item.*;
@@ -59,6 +60,8 @@ public class UAItems {
 	public static final RegistryObject<Item> MULBERRY_JAM_BOTTLE = HELPER.createItem("mulberry_jam_bottle", () -> new MulberryJamBottleItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).stacksTo(16).craftRemainder(Items.GLASS_BOTTLE).food(Foods.MULBERRY_JAM)));
 	public static final RegistryObject<Item> MULBERRY_BREAD = HELPER.createItem("mulberry_bread", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(Foods.MULBERRY_BREAD)));
 	public static final RegistryObject<Item> MULBERRY_PIE = HELPER.createItem("mulberry_pie", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(Foods.MULBERRY_PIE)));
+
+	public static final RegistryObject<Item> MUSIC_DISC_ATLANTIS = HELPER.createItem("music_disc_atlantis", () -> new BlueprintRecordItem(14, UASoundEvents.MUSIC_DISC_ATLANTIS, new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_MISC).rarity(Rarity.RARE), 114));
 
 	public static final RegistryObject<ForgeSpawnEggItem> NAUTILUS_SPAWN_EGG = HELPER.createSpawnEggItem("nautilus", UAEntityTypes.NAUTILUS::get, 14596231, 16744272);
 	public static final RegistryObject<ForgeSpawnEggItem> PIKE_SPAWN_EGG = HELPER.createSpawnEggItem("pike", UAEntityTypes.PIKE::get, 4806944, 13002040);

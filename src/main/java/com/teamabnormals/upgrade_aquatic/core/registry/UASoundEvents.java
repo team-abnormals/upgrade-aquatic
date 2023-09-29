@@ -47,5 +47,7 @@ public class UASoundEvents {
 	public static final RegistryObject<SoundEvent> ITEM_BUCKET_EMPTY_JELLYFISH = HELPER.createSoundEvent("item.bucket.empty_jellyfish");
 	public static final RegistryObject<SoundEvent> ITEM_BUCKET_FILL_JELLYFISH = HELPER.createSoundEvent("item.bucket.fill_jellyfish");
 
+	public static final RegistryObject<SoundEvent> MUSIC_DISC_ATLANTIS = HELPER.createSoundEvent("music_disc.atlantis");
+
 	public static final SoundType TOOTH_LANTERN = new ForgeSoundType(1.0F, 1.0F, () -> SoundEvents.GLASS_BREAK, () -> SoundEvents.END_PORTAL_FRAME_FILL, () -> SoundEvents.END_PORTAL_FRAME_FILL, () -> SoundEvents.END_PORTAL_FRAME_FILL, () -> SoundEvents.END_PORTAL_FRAME_FILL);
 }

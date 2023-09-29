@@ -1,4 +1,13 @@
 {
+  "music_disc.atlantis": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "upgrade_aquatic:records/atlantis",
+        "stream": true
+      }
+    ]
+  },
   "entity.pike.ambient": {
     "sounds": []
   },
