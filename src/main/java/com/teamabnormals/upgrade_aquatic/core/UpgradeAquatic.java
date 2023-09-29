@@ -17,6 +17,7 @@ import com.teamabnormals.upgrade_aquatic.core.data.server.modifiers.UALootModifi
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABiomeTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UABlockTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UAEntityTypeTagsProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.tags.UAPaintingVariantTagsProvider;
 import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
@@ -66,6 +67,7 @@ public class UpgradeAquatic {
 		UADataSerializers.SERIALIZERS.register(bus);
 		UABiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
 		UALootConditions.LOOT_CONDITION_TYPES.register(bus);
+		UAPaintingVariants.PAINTING_VARIANTS.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 
@@ -95,15 +97,16 @@ public class UpgradeAquatic {
 
 	private void dataSetup(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
-		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+		ExistingFileHelper fileHelper = event.getExistingFileHelper();
 
 		boolean includeServer = event.includeServer();
 		generator.addProvider(includeServer, new UALootModifierProvider(generator));
 		generator.addProvider(includeServer, new UAAdvancementModifierProvider(generator));
-		generator.addProvider(includeServer, new UABlockTagsProvider(generator, existingFileHelper));
-		generator.addProvider(includeServer, new UAEntityTypeTagsProvider(generator, existingFileHelper));
-		generator.addProvider(includeServer, new UABiomeTagsProvider(generator, existingFileHelper));
-		generator.addProvider(includeServer, UABiomeModifierProvider.create(generator, existingFileHelper));
+		generator.addProvider(includeServer, new UABlockTagsProvider(generator, fileHelper));
+		generator.addProvider(includeServer, new UAEntityTypeTagsProvider(generator, fileHelper));
+		generator.addProvider(includeServer, new UABiomeTagsProvider(generator, fileHelper));
+		generator.addProvider(includeServer, new UAPaintingVariantTagsProvider(generator, fileHelper));
+		generator.addProvider(includeServer, UABiomeModifierProvider.create(generator, fileHelper));
 		generator.addProvider(includeServer, new UAStructureRepaletterProvider(generator));
 	}
 
