@@ -499,6 +499,8 @@
 
   "item.upgrade_aquatic.music_disc_atlantis": "Music Disc",
   "item.upgrade_aquatic.music_disc_atlantis.desc": "hatsondogs - Atlantis",
+  "item.upgrade_aquatic.disc_fragment_atlantis": "Disc Fragment",
+  "item.upgrade_aquatic.disc_fragment_atlantis.desc": "Music Disc - Atlantis",
   
   "tooltip.upgrade_aquatic.amur_pike": "Amur Pike",  
   "tooltip.upgrade_aquatic.redfin_pickerel_pike": "Redfin Pickerel",
