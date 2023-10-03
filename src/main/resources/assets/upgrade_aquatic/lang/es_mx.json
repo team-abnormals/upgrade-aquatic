@@ -435,7 +435,7 @@
   "block.upgrade_aquatic.flowering_rush": "Junco florido",
 
   "block.upgrade_aquatic.mulberry_vine": "Morera",
-  "block.upgrade_aquatic.mulberry_punnet": "Canastilla de moras",
+  "block.upgrade_aquatic.mulberry_punnet": "Canasta de moras",
   "block.upgrade_aquatic.mulberry_jam_block": "Bloque de mermelada de moras",
   
   "block.upgrade_aquatic.prismarine_rod_bundle": "Fardo de varas de prismarina",
@@ -456,7 +456,6 @@
   "item.upgrade_aquatic.driftwood_furnace_boat": "Bote de deriva con horno",
   "item.upgrade_aquatic.driftwood_chest_boat": "Bote de deriva con cofre",
   "item.upgrade_aquatic.large_driftwood_boat": "Bote de deriva grande",
-
   "item.upgrade_aquatic.river_boat": "Bote ribereño",
   "item.upgrade_aquatic.river_furnace_boat": "Bote ribereño con horno",
   "item.upgrade_aquatic.river_chest_boat": "Bote ribereño con cofre",
@@ -464,7 +463,6 @@
   
   "item.upgrade_aquatic.prismarine_rod": "Vara de prismarina",
   "item.upgrade_aquatic.thrasher_tooth": "Diente de triturador",
-  "item.upgrade_aquatic.glowing_ink_sac": "Saco de tinta luminosa",
   
   "item.upgrade_aquatic.nautilus_bucket": "Cubeta con nautilo",
   "item.upgrade_aquatic.pike_bucket": "Cubeta con lucio",
@@ -484,7 +482,6 @@
   "item.upgrade_aquatic.flare_spawn_egg": "Generar llamarada",
   "item.upgrade_aquatic.goose_spawn_egg": "Generar ganso",
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Generar medusa",
-  "item.upgrade_aquatic.glow_squid_spawn_egg": "Generar calamar luminoso",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Espiga de agua morada hervida",
   "item.upgrade_aquatic.boiled_blue_pickerelweed": "Espiga de agua azul hervida",
@@ -499,6 +496,11 @@
   "item.upgrade_aquatic.mulberry_jam_bottle": "Botella de mermelada de moras",
   "item.upgrade_aquatic.mulberry_bread": "Pan de moras",
   "item.upgrade_aquatic.mulberry_pie": "Pastel de moras",
+  
+  "item.upgrade_aquatic.music_disc_atlantis": "Disco",
+  "item.upgrade_aquatic.music_disc_atlantis.desc": "hatsondogs - Atlantis",
+  "item.upgrade_aquatic.disc_fragment_atlantis": "Fragmento de disco",
+  "item.upgrade_aquatic.disc_fragment_atlantis.desc": "Disco - Atlantis",
 
   "tooltip.upgrade_aquatic.amur_pike": "Lucio del pacífico",  
   "tooltip.upgrade_aquatic.redfin_pike": "Lucio de aletas rojas",  
@@ -555,7 +557,6 @@
   "entity.upgrade_aquatic.ululu": "Ululu",
   "entity.upgrade_aquatic.sonar_wave": "Onda sonar",
   "entity.upgrade_aquatic.goose": "Ganso",
-  "entity.upgrade_aquatic.glow_squid": "Calamar luminoso",
 
   "entity.upgrade_aquatic.box_jellyfish": "Medusa de caja",
   "entity.upgrade_aquatic.cassiopea_jellyfish": "Medusa invertida",
