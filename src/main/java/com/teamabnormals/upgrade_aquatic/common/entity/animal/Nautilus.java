@@ -54,7 +54,7 @@ public class Nautilus extends BucketableWaterAnimal {
 	}
 
 	public static boolean checkNautilusSpawnRules(EntityType<? extends PathfinderMob> entityType, LevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
-		return pos.getY() <= UAConfig.COMMON.deepOceanMobMaxHeight.get() && level.getFluidState(pos.below()).is(FluidTags.WATER) && level.getBlockState(pos.above()).is(Blocks.WATER);
+		return pos.getY() <= UAConfig.COMMON.nautilusMaxSpawnHeight.get() && level.getFluidState(pos.below()).is(FluidTags.WATER) && level.getBlockState(pos.above()).is(Blocks.WATER);
 	}
 
 	@Override
