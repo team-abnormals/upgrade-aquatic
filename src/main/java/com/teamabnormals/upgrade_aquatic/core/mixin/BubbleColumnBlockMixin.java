@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.mixin;
 
+import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -19,19 +20,33 @@ public abstract class BubbleColumnBlockMixin {
 
 	@Inject(at = @At("HEAD"), method = "tick")
 	private void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, CallbackInfo info) {
+		if (!state.getValue(BubbleColumnBlock.DRAG_DOWN) && UAConfig.COMMON.renewableSandRequiresMagmaBlocks.get()) {
+			return;
+		}
+
 		BlockPos abovePos = pos.above();
 		Block aboveBlock = world.getBlockState(abovePos).getBlock();
 		boolean noFallingBlockAbove = world.getEntitiesOfClass(FallingBlockEntity.class, new AABB(pos)).isEmpty();
 
 		if (noFallingBlockAbove) {
-			UABlocks.FALLABLES.forEach((inputBlock, outputBlock) -> {
-				if (inputBlock.get() == aboveBlock) {
-					this.spawnFallingBlock(world, pos, outputBlock.get());
-				}
-			});
+			if (UAConfig.COMMON.renewableSand.get()) {
+				UABlocks.SAND_FALLABLES.forEach((inputBlock, outputBlock) -> {
+					if (inputBlock.get() == aboveBlock) {
+						this.spawnFallingBlock(world, pos, outputBlock.get());
+					}
+				});
 
-			if (UABlocks.ATMOSHPERIC_FALLABLES != null) {
-				UABlocks.ATMOSHPERIC_FALLABLES.forEach((inputBlock, outputBlock) -> {
+				if (UABlocks.ATMOSPHERIC_SAND_FALLABLES != null) {
+					UABlocks.ATMOSPHERIC_SAND_FALLABLES.forEach((inputBlock, outputBlock) -> {
+						if (inputBlock.get() == aboveBlock) {
+							this.spawnFallingBlock(world, pos, outputBlock.get());
+						}
+					});
+				}
+			}
+
+			if (UAConfig.COMMON.renewableGravel.get()) {
+				UABlocks.GRAVEL_FALLABLES.forEach((inputBlock, outputBlock) -> {
 					if (inputBlock.get() == aboveBlock) {
 						this.spawnFallingBlock(world, pos, outputBlock.get());
 					}

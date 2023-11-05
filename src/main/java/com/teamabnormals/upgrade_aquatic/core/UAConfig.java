@@ -17,10 +17,16 @@ public class UAConfig {
 
 		@ConfigKey("kelpy_ocean_ruins")
 		public final BooleanValue kelpyOceanRuins;
+
 		public final IntValue nautilusMaxSpawnHeight;
+
 		public final IntValue thrasherMaxSpawnHeight;
 		public final DoubleValue greatThrasherSpawnChance;
 		public final DoubleValue thrasherDaytimeSpawnChance;
+
+		public final BooleanValue renewableSand;
+		public final BooleanValue renewableSandRequiresMagmaBlocks;
+		public final BooleanValue renewableGravel;
 
 		public Common(ForgeConfigSpec.Builder builder) {
 			builder.push("items");
@@ -43,6 +49,14 @@ public class UAConfig {
 			this.thrasherMaxSpawnHeight = builder.comment("The max height that Thrashers can spawn at").defineInRange("Thrasher max spawn height", 30, -64, 320);
 			this.thrasherDaytimeSpawnChance = builder.comment("The chance of a Thrasher spawning during the daytime").defineInRange("Thrasher daytime spawn chance", 0.75D, 0.0D, 1.0D);
 			this.greatThrasherSpawnChance = builder.comment("The chance a Thrasher has of spawning as a Great Thrasher in Deep Frozen Oceans").defineInRange("Great Thrasher spawn chance", 0.25D, 0.0D, 1.0D);
+			builder.pop();
+			builder.pop();
+
+			builder.push("misc");
+			builder.push("renewable_sand");
+			this.renewableSand = builder.comment("If Sand variants should be renewable by placing their respective Sandstone above a Bubble Column").define("Renewable Sand", true);
+			this.renewableSandRequiresMagmaBlocks = builder.comment("If 'drag' Bubble Columns from Magma Blocks should be required to renew Sand and Gravel").define("Renewable Sand requires Magma Blocks", true);
+			this.renewableGravel = builder.comment("If Gravel should be renewable by placing Cobblestone above a Bubble Column").define("Renewable Gravel", true);
 			builder.pop();
 			builder.pop();
 		}
