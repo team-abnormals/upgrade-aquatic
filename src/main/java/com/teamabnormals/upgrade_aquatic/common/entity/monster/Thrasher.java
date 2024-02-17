@@ -5,6 +5,7 @@ import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.TimedEndimation;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.*;
+import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.teamabnormals.upgrade_aquatic.core.other.tags.UABiomeTags;
 import com.teamabnormals.upgrade_aquatic.core.other.tags.UAEntityTypeTags;
@@ -103,7 +104,7 @@ public class Thrasher extends Monster implements Endimatable {
 	}
 
 	public static boolean checkThrasherSpawnRules(EntityType<? extends PathfinderMob> entityType, ServerLevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
-		return level.getDifficulty() != Difficulty.PEACEFUL && pos.getY() <= 30 && (level.getLevel().isNight() || random.nextFloat() < 0.75F);
+		return level.getDifficulty() != Difficulty.PEACEFUL && pos.getY() <= UAConfig.COMMON.thrasherMaxSpawnHeight.get() && (level.getLevel().isNight() || random.nextDouble() < UAConfig.COMMON.thrasherDaytimeSpawnChance.get());
 	}
 
 	@Override
@@ -137,7 +138,7 @@ public class Thrasher extends Monster implements Endimatable {
 		this.setAirSupply(this.getMaxAirSupply());
 		if (reason == MobSpawnType.NATURAL && worldIn.getBiome(this.blockPosition()).is(UABiomeTags.HAS_GREAT_THRASHER)) {
 			Random rand = new Random();
-			if (rand.nextFloat() < 0.25F) {
+			if (rand.nextDouble() < UAConfig.COMMON.greatThrasherSpawnChance.get()) {
 				GreatThrasher greatThrasher = UAEntityTypes.GREAT_THRASHER.get().create(this.level);
 				if (greatThrasher != null) {
 					greatThrasher.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());

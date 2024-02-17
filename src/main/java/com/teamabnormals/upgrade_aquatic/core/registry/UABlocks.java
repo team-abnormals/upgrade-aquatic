@@ -653,16 +653,19 @@ public class UABlocks {
 		conversions.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CORALSTONE_VERTICAL_SLAB);
 	});
 
-	public static final Map<Supplier<Block>, Supplier<Block>> FALLABLES = Util.make(Maps.newHashMap(), (fallables) -> {
+	public static final Map<Supplier<Block>, Supplier<Block>> SAND_FALLABLES = Util.make(Maps.newHashMap(), (fallables) -> {
 		fallables.put(() -> Blocks.SANDSTONE, () -> Blocks.SAND);
 		fallables.put(() -> Blocks.RED_SANDSTONE, () -> Blocks.RED_SAND);
-		fallables.put(() -> Blocks.COBBLESTONE, () -> Blocks.GRAVEL);
 	});
 
-	public static final Map<Supplier<Block>, Supplier<Block>> ATMOSHPERIC_FALLABLES = ModList.get().isLoaded("atmospheric") ? Util.make(Maps.newHashMap(), (fallables) -> {
+	public static final Map<Supplier<Block>, Supplier<Block>> ATMOSPHERIC_SAND_FALLABLES = ModList.get().isLoaded("atmospheric") ? Util.make(Maps.newHashMap(), (fallables) -> {
 		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "arid_sand")));
 		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "red_arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "red_arid_sand")));
 	}) : null;
+
+	public static final Map<Supplier<Block>, Supplier<Block>> GRAVEL_FALLABLES = Util.make(Maps.newHashMap(), (fallables) -> {
+		fallables.put(() -> Blocks.COBBLESTONE, () -> Blocks.GRAVEL);
+	});
 
 	public enum KelpType {
 		TONGUE, THORNY, OCHRE, POLAR
