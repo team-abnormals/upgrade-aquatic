@@ -2,8 +2,8 @@
   "replace": false,
   "values": [
     "upgrade_aquatic:river_chest",
-    "upgrade_aquatic:river_trapped_chest",
+    "upgrade_aquatic:trapped_river_chest",
     "upgrade_aquatic:driftwood_chest",
-    "upgrade_aquatic:driftwood_trapped_chest"
+    "upgrade_aquatic:trapped_driftwood_chest"
   ]
 }

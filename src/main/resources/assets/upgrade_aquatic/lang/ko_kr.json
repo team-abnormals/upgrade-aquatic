@@ -398,7 +398,7 @@
   "block.upgrade_aquatic.driftwood_sign": "유목 표지판",
   "block.upgrade_aquatic.driftwood_wall_sign": "유목 벽 표지판",
   "block.upgrade_aquatic.driftwood_chest": "유목 상자",
-  "block.upgrade_aquatic.driftwood_trapped_chest": "유목 덫 상자",
+  "block.upgrade_aquatic.trapped_driftwood_chest": "유목 덫 상자",
   "block.upgrade_aquatic.driftwood_beehive": "유목 벌통",
   
   "block.upgrade_aquatic.river_leaves": "강가 나무 잎",
@@ -424,7 +424,7 @@
   "block.upgrade_aquatic.river_sign": "강가 나무 표지판",
   "block.upgrade_aquatic.river_wall_sign": "강가 나무 벽 표지판",
   "block.upgrade_aquatic.river_chest": "강가 나무 상자",
-  "block.upgrade_aquatic.river_trapped_chest": "강가 나무 덫 상자",
+  "block.upgrade_aquatic.trapped_river_chest": "강가 나무 덫 상자",
   "block.upgrade_aquatic.river_beehive": "강가 나무 벌통",
   
   "block.upgrade_aquatic.flowering_rush": "구주꽃골",

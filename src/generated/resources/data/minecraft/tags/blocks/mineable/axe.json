@@ -6,12 +6,12 @@
     "upgrade_aquatic:river_ladder",
     "upgrade_aquatic:river_beehive",
     "upgrade_aquatic:river_chest",
-    "upgrade_aquatic:river_trapped_chest",
+    "upgrade_aquatic:trapped_river_chest",
     "upgrade_aquatic:driftwood_boards",
     "upgrade_aquatic:driftwood_bookshelf",
     "upgrade_aquatic:driftwood_ladder",
     "upgrade_aquatic:driftwood_beehive",
     "upgrade_aquatic:driftwood_chest",
-    "upgrade_aquatic:driftwood_trapped_chest"
+    "upgrade_aquatic:trapped_driftwood_chest"
   ]
 }

@@ -350,7 +350,7 @@
   "block.upgrade_aquatic.driftwood_sign": "浮木告示牌",
   "block.upgrade_aquatic.driftwood_wall_sign": "墙上的浮木告示牌",
   "block.upgrade_aquatic.driftwood_chest": "浮木箱子",
-  "block.upgrade_aquatic.driftwood_trapped_chest": "浮木陷阱箱",
+  "block.upgrade_aquatic.trapped_driftwood_chest": "浮木陷阱箱",
   "block.upgrade_aquatic.driftwood_beehive": "浮木蜂箱",
   
   "block.upgrade_aquatic.river_leaves": "桑树树叶",
@@ -376,7 +376,7 @@
   "block.upgrade_aquatic.river_sign": "桑木告示牌",
   "block.upgrade_aquatic.river_wall_sign": "墙上的桑木告示牌",
   "block.upgrade_aquatic.river_chest": "桑木箱子",
-  "block.upgrade_aquatic.river_trapped_chest": "桑木陷阱箱",
+  "block.upgrade_aquatic.trapped_river_chest": "桑木陷阱箱",
   "block.upgrade_aquatic.river_beehive": "桑木蜂箱",
 
   "block.upgrade_aquatic.flowering_rush": "开花灯芯草",

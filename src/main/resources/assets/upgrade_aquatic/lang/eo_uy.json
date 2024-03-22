@@ -348,7 +348,7 @@
   "block.upgrade_aquatic.driftwood_sign": "Flosligna ŝildeto",
   "block.upgrade_aquatic.driftwood_wall_sign": "Flosligna ŝildeto",
   "block.upgrade_aquatic.driftwood_chest": "Flosligna kesto",
-  "block.upgrade_aquatic.driftwood_trapped_chest": "Flosligna baskulkesto",
+  "block.upgrade_aquatic.trapped_driftwood_chest": "Flosligna baskulkesto",
   "block.upgrade_aquatic.driftwood_beehive": "Flosligna abelujo",
   
   "block.upgrade_aquatic.river_leaves": "Riveraj folioj",
@@ -374,7 +374,7 @@
   "block.upgrade_aquatic.river_sign": "Rivera ŝildeto",
   "block.upgrade_aquatic.river_wall_sign": "Rivera ŝildeto",
   "block.upgrade_aquatic.river_chest": "Rivera kesto",
-  "block.upgrade_aquatic.river_trapped_chest": "Rivera baskulkesto",
+  "block.upgrade_aquatic.trapped_river_chest": "Rivera baskulkesto",
   "block.upgrade_aquatic.river_beehive": "Rivera abelujo",
   
   "block.upgrade_aquatic.flowering_rush": "Floranta junko",

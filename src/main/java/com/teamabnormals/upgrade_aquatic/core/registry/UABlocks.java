@@ -431,7 +431,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> DRIFTWOOD_LADDER = HELPER.createFuelBlock("driftwood_ladder", () -> new LadderBlock(UAProperties.DRIFTWOOD.ladder()), 300);
 	public static final RegistryObject<Block> DRIFTWOOD_BEEHIVE = HELPER.createBlock("driftwood_beehive", () -> new BlueprintBeehiveBlock(UAProperties.DRIFTWOOD.beehive()));
 	public static final RegistryObject<BlueprintChestBlock> DRIFTWOOD_CHEST = HELPER.createChestBlock("driftwood", UAProperties.DRIFTWOOD.chest());
-	public static final RegistryObject<BlueprintTrappedChestBlock> TRAPPED_DRIFTWOOD_CHEST = HELPER.createTrappedChestBlock("driftwood", UAProperties.DRIFTWOOD.chest());
+	public static final RegistryObject<BlueprintTrappedChestBlock> TRAPPED_DRIFTWOOD_CHEST = HELPER.createTrappedChestBlockNamed("driftwood", UAProperties.DRIFTWOOD.chest());
 
 	public static final RegistryObject<Block> STRIPPED_RIVER_LOG = HELPER.createBlock("stripped_river_log", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.log()));
 	public static final RegistryObject<Block> STRIPPED_RIVER_WOOD = HELPER.createBlock("stripped_river_wood", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.log()));
@@ -456,7 +456,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> RIVER_BEEHIVE = HELPER.createBlock("river_beehive", () -> new BlueprintBeehiveBlock(UAProperties.RIVER_WOOD.beehive()));
 	public static final RegistryObject<Block> RIVER_LEAF_PILE = HELPER.createBlock("river_leaf_pile", () -> new LeafPileBlock(UAProperties.RIVER_WOOD.leafPile()));
 	public static final RegistryObject<BlueprintChestBlock> RIVER_CHEST = HELPER.createChestBlock("river", UAProperties.RIVER_WOOD.chest());
-	public static final RegistryObject<BlueprintTrappedChestBlock> TRAPPED_RIVER_CHEST = HELPER.createTrappedChestBlock("river", UAProperties.RIVER_WOOD.chest());
+	public static final RegistryObject<BlueprintTrappedChestBlock> TRAPPED_RIVER_CHEST = HELPER.createTrappedChestBlockNamed("river", UAProperties.RIVER_WOOD.chest());
 
 	private static Supplier<BedrollBlock> createBedroll(DyeColor color) {
 		return () -> new BedrollBlock(color, BlockBehaviour.Properties.of().mapColor((state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? color.getMapColor() : MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion());

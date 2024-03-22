@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "upgrade_aquatic:river_trapped_chest"
+          "name": "upgrade_aquatic:trapped_river_chest"
         }
       ],
       "conditions": [

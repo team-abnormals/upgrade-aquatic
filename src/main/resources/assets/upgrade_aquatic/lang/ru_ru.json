@@ -398,7 +398,7 @@
   "block.upgrade_aquatic.driftwood_sign": "Плавниковая табличка",
   "block.upgrade_aquatic.driftwood_wall_sign": "Плавниковая табличка на стене",
   "block.upgrade_aquatic.driftwood_chest": "Плавниковый сундук",
-  "block.upgrade_aquatic.driftwood_trapped_chest": "Плавниковый сундук-ловушка",
+  "block.upgrade_aquatic.trapped_driftwood_chest": "Плавниковый сундук-ловушка",
   "block.upgrade_aquatic.driftwood_beehive": "Плавниковый улей",
   
   "block.upgrade_aquatic.river_leaves": "Листья речного дерева",
@@ -424,7 +424,7 @@
   "block.upgrade_aquatic.river_sign": "Табличка из речного дерева",
   "block.upgrade_aquatic.river_wall_sign": "Табличка из речного дерева на стене",
   "block.upgrade_aquatic.river_chest": "Сундук из речного дерева",
-  "block.upgrade_aquatic.river_trapped_chest": "Сундук-ловушка из речного дерева",
+  "block.upgrade_aquatic.trapped_river_chest": "Сундук-ловушка из речного дерева",
   "block.upgrade_aquatic.river_beehive": "Улей из речного дерева",
   
   "block.upgrade_aquatic.flowering_rush": "Зонтичный сусак",
