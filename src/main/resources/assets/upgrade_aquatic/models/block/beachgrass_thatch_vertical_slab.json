@@ -1,7 +1,0 @@
-{
-	"parent": "blueprint:block/template_thatch_vertical_slab",
-	"textures": {
-		"thatch": "upgrade_aquatic:block/beachgrass_thatch",
-		"extrudes": "upgrade_aquatic:block/beachgrass_thatch_extrudes"
-	}
-}

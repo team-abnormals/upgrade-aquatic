@@ -1,8 +1,0 @@
-{
-    "parent": "blueprint:block/vertical_slab",
-    "textures": {
-        "side": "upgrade_aquatic:block/tongue_kelpy_cobblestone",
-        "top": "upgrade_aquatic:block/tongue_kelpy_cobblestone",
-        "bottom": "upgrade_aquatic:block/tongue_kelpy_cobblestone"
-    }
-}

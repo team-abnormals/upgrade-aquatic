@@ -19,8 +19,17 @@
               ]
             },
             {
-              "flag": "variant_chests",
-              "type": "blueprint:quark_flag"
+              "type": "blueprint:and",
+              "values": [
+                {
+                  "type": "forge:mod_loaded",
+                  "modid": "quark"
+                },
+                {
+                  "type": "quark:flag",
+                  "flag": "variant_chests"
+                }
+              ]
             }
           ],
           "type": "forge:or"

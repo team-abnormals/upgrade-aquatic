@@ -1,7 +1,0 @@
-{
-  "parent": "blueprint:block/hedge_post",
-  "textures": {
-    "log": "upgrade_aquatic:block/river_log",
-    "leaf": "upgrade_aquatic:block/river_leaves"
-  }
-}

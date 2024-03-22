@@ -1,6 +1,0 @@
-{
-  "parent": "blueprint:block/hedge_side",
-  "textures": {
-    "leaf": "upgrade_aquatic:block/river_leaves"
-  }
-}

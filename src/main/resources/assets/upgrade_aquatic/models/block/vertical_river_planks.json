@@ -1,6 +1,0 @@
-{
-  "parent": "blueprint:block/vertical_planks",
-  "textures": {
-    "all": "upgrade_aquatic:block/river_planks"
-  }
-}

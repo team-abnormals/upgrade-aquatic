@@ -1,8 +1,0 @@
-{
-    "parent": "blueprint:block/vertical_slab",
-    "textures": {
-        "side": "upgrade_aquatic:block/polar_kelpy_stone_bricks",
-        "top": "upgrade_aquatic:block/polar_kelpy_stone_bricks",
-        "bottom": "upgrade_aquatic:block/polar_kelpy_stone_bricks"
-    }
-}

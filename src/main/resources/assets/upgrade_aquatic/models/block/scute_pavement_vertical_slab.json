@@ -1,8 +1,0 @@
-{
-    "parent": "blueprint:block/vertical_slab",
-    "textures": {
-        "side": "upgrade_aquatic:block/scute_pavement",
-        "top": "upgrade_aquatic:block/scute_pavement",
-        "bottom": "upgrade_aquatic:block/scute_pavement"
-    }
-}

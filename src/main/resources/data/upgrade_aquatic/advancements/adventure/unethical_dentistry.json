@@ -18,63 +18,146 @@
   "criteria": {
     "tooth_block": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_block" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_tiles": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_tiles" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_tiles",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_stairs": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_stairs" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_stairs",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_slab": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_slab" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_slab",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_wall": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_wall" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_wall",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_bricks": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_bricks" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_bricks",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "chiseled_tooth_bricks": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:chiseled_tooth_bricks" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:chiseled_tooth_bricks",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_brick_stairs": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_brick_stairs" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_brick_stairs",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_brick_slab": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_brick_slab" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_brick_slab",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_brick_wall": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_brick_wall" }
-    },
-    "tooth_brick_vertical_slab": {
-      "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_brick_vertical_slab" }
-    },
-    "tooth_vertical_slab": {
-      "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_vertical_slab" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_brick_wall",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_door": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_door" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_door",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_trapdoor": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_trapdoor" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_trapdoor",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     },
     "tooth_lantern": {
       "trigger": "minecraft:placed_block",
-      "conditions": { "block": "upgrade_aquatic:tooth_lantern" }
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_lantern",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -89,8 +172,6 @@
       "tooth_brick_stairs",
       "tooth_brick_slab",
       "tooth_brick_wall",
-      "tooth_brick_vertical_slab",
-      "tooth_vertical_slab",
       "tooth_door",
       "tooth_trapdoor",
       "tooth_lantern"

@@ -1,8 +1,0 @@
-{
-    "parent": "blueprint:block/vertical_slab",
-    "textures": {
-        "bottom": "upgrade_aquatic:block/dead_coralstone",
-        "top": "upgrade_aquatic:block/dead_coralstone",
-        "side": "upgrade_aquatic:block/dead_coralstone"
-    }
-}

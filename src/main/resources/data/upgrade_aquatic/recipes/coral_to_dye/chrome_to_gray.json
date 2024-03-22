@@ -17,8 +17,17 @@
   },
   "conditions": [
     {
-      "type": "blueprint:quark_flag",
-      "flag": "coral_to_dye"
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "forge:mod_loaded",
+          "modid": "quark"
+        },
+        {
+          "type": "quark:flag",
+          "flag": "coral_to_dye"
+        }
+      ]
     }
   ]
 }

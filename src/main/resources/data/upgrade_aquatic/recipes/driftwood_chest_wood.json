@@ -4,17 +4,21 @@
     {
       "conditions": [
         {
+          "type": "blueprint:and",
           "values": [
             {
-              "flag": "variant_chests",
-              "type": "blueprint:quark_flag"
+              "type": "forge:mod_loaded",
+              "modid": "quark"
             },
             {
-              "flag": "wood_to_chest_recipes",
-              "type": "blueprint:quark_flag"
+              "type": "quark:flag",
+              "flag": "variant_chests"
+            },
+            {
+              "type": "quark:flag",
+              "flag": "wood_to_chest_recipes"
             }
-          ],
-          "type": "forge:and"
+          ]
         }
       ],
       "recipe": {
