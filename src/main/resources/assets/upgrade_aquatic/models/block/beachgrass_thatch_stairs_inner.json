@@ -1,5 +1,5 @@
 {
-	"parent": "blueprint:block/thatch/thatch_stairs_inner",
+	"parent": "blueprint:block/template_thatch_stairs_inner",
 	"textures": {
 		"thatch": "upgrade_aquatic:block/beachgrass_thatch",
 		"extrudes": "upgrade_aquatic:block/beachgrass_thatch_extrudes"
