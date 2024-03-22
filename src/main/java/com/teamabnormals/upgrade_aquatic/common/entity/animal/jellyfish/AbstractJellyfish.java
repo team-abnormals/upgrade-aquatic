@@ -4,13 +4,13 @@ import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
-import com.teamabnormals.upgrade_aquatic.core.other.UADamageSources;
+import com.teamabnormals.upgrade_aquatic.core.other.UADamageTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntArrayTag;
 import net.minecraft.nbt.IntTag;
@@ -120,7 +120,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 				this.push(motion.x, motion.y, motion.z);
 			}
 
-			if (!this.level.isClientSide && (Mth.abs(this.xRotO - this.getXRot()) >= 1.0F || Mth.abs(this.yRotO - this.getYRot()) >= 1.0F)) {
+			if (!this.level().isClientSide && (Mth.abs(this.xRotO - this.getXRot()) >= 1.0F || Mth.abs(this.yRotO - this.getYRot()) >= 1.0F)) {
 				this.hasImpulse = true;
 			}
 		}
@@ -129,19 +129,19 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 			if (this.isEffectiveAi()) {
 				this.setCooldown(this.getCooldown() - 1);
 				if (!this.hasCooldown()) {
-					this.playSound(UASoundEvents.ENTITY_JELLYFISH_COOLDOWN_END.get(), 1.0F, this.random.nextFloat() * 0.15F + 1.0F);
+					this.playSound(UASoundEvents.JELLYFISH_COOLDOWN_END.get(), 1.0F, this.random.nextFloat() * 0.15F + 1.0F);
 				}
 			}
 
-			if (this.level.isClientSide && this.level.getGameTime() % 4 == 0) {
+			if (this.level().isClientSide && this.level().getGameTime() % 4 == 0) {
 				for (int i = 0; i < 2; i++) {
-					this.level.addParticle(JellyTorchType.getBlobParticleType(this.getJellyTorchType()), this.getRandomX(0.5D), this.getY() + this.getEyeHeight(), this.getRandomZ(0.5D), makeNegativeRandomly(this.random.nextDouble() * 0.05F, this.getRandom()), -this.random.nextDouble() * 0.05F, makeNegativeRandomly(this.random.nextDouble() * 0.05F, this.getRandom()));
+					this.level().addParticle(JellyTorchType.getBlobParticleType(this.getJellyTorchType()), this.getRandomX(0.5D), this.getY() + this.getEyeHeight(), this.getRandomZ(0.5D), makeNegativeRandomly(this.random.nextDouble() * 0.05F, this.getRandom()), -this.random.nextDouble() * 0.05F, makeNegativeRandomly(this.random.nextDouble() * 0.05F, this.getRandom()));
 				}
 			}
 		}
 
 		if (this.isAlive()) {
-			for (LivingEntity entities : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.15D), CAN_STING)) {
+			for (LivingEntity entities : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.15D), CAN_STING)) {
 				if (entities.isAlive()) {
 					this.stingEntity(entities);
 				}
@@ -178,11 +178,11 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 		ItemStack itemstack = player.getItemInHand(hand);
 		Item item = itemstack.getItem();
 		if (item == Items.WATER_BUCKET && this.isAlive()) {
-			this.playSound(UASoundEvents.ITEM_BUCKET_FILL_JELLYFISH.get(), 1.0F, 1.0F);
+			this.playSound(UASoundEvents.BUCKET_FILL_JELLYFISH.get(), 1.0F, 1.0F);
 			itemstack.shrink(1);
 			ItemStack bucket = this.getBucketItemStack();
 			this.saveToBucketTag(bucket);
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, bucket);
 			}
 
@@ -201,11 +201,11 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 			Random rand = new Random();
 			if (this.isEffectiveAi() && rand.nextFloat() < this.getCooldownChance()) {
 				this.setCooldown(20 * (rand.nextInt(16) + 15));
-				this.playSound(UASoundEvents.ENTITY_JELLYFISH_COOLDOWN_START.get(), 1.0F, this.random.nextFloat() * 0.15F + 1.0F);
+				this.playSound(UASoundEvents.JELLYFISH_COOLDOWN_START.get(), 1.0F, this.random.nextFloat() * 0.15F + 1.0F);
 			}
 			itemstack.shrink(1);
 			player.addItem(this.getTorchByType(this.getJellyTorchType()));
-			this.playSound(UASoundEvents.ENTITY_JELLYFISH_HARVEST.get(), 1.0F, this.random.nextFloat() * 0.15F + 1.0F);
+			this.playSound(UASoundEvents.JELLYFISH_HARVEST.get(), 1.0F, this.random.nextFloat() * 0.15F + 1.0F);
 			return InteractionResult.SUCCESS;
 		}
 		return super.mobInteract(player, hand);
@@ -213,17 +213,17 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return this.isInWater() ? UASoundEvents.ENTITY_JELLYFISH_AMBIENT.get() : null;
+		return this.isInWater() ? UASoundEvents.JELLYFISH_AMBIENT.get() : null;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return UASoundEvents.ENTITY_JELLYFISH_HURT.get();
+		return UASoundEvents.JELLYFISH_HURT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return UASoundEvents.ENTITY_JELLYFISH_DEATH.get();
+		return UASoundEvents.JELLYFISH_DEATH.get();
 	}
 
 	@Override
@@ -244,7 +244,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	public void saveToBucketTag(ItemStack bucket) {
 		super.saveToBucketTag(bucket);
 		CompoundTag compoundTag = bucket.getOrCreateTag();
-		compoundTag.putString("EntityType", Registry.ENTITY_TYPE.getKey(this.getType()).toString());
+		compoundTag.putString("EntityType", this.level().registryAccess().registryOrThrow(Registries.ENTITY_TYPE).getKey(this.getType()).toString());
 		compoundTag.put("JellyfishDisplayTag", this.getBucketDisplayInfo().write());
 		this.addAdditionalSaveDataSharedWithBucket(compoundTag);
 	}
@@ -274,7 +274,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 
 	@Override
 	public SoundEvent getPickupSound() {
-		return UASoundEvents.ITEM_BUCKET_FILL_JELLYFISH.get();
+		return UASoundEvents.BUCKET_FILL_JELLYFISH.get();
 	}
 
 	@Override
@@ -283,8 +283,8 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	}
 
 	@Override
-	public void calculateEntityAnimation(LivingEntity entity, boolean p_233629_2_) {
-		super.calculateEntityAnimation(entity, true);
+	public void calculateEntityAnimation(boolean p_233629_2_) {
+		super.calculateEntityAnimation(true);
 	}
 
 	public abstract BucketDisplayInfo getBucketDisplayInfo();
@@ -298,8 +298,8 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	}
 
 	protected boolean stingEntity(LivingEntity livingEntity) {
-		if (livingEntity.hurt(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
-			this.playSound(UASoundEvents.ENTITY_JELLYFISH_STING.get(), 0.5F, this.random.nextFloat() * 0.2F + 1.0F);
+		if (livingEntity.hurt(UADamageTypes.jellyfishSting(this.level(), this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue())) {
+			this.playSound(UASoundEvents.JELLYFISH_STING.get(), 0.5F, this.random.nextFloat() * 0.2F + 1.0F);
 			return true;
 		}
 		return false;

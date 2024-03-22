@@ -126,7 +126,7 @@ public class UAEvents {
 		BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
 		if (event.getResultStatus() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
 			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
-				if (!player.level.isClientSide()) {
+				if (!player.level().isClientSide()) {
 					UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer);
 				}
 			}
@@ -172,12 +172,12 @@ public class UAEvents {
 	@SubscribeEvent
 	public static void onLivingDrops(LivingDropsEvent event) {
 		if (event.getEntity() instanceof Pike && event.getEntity().isOnFire()) {
-			Level level = event.getEntity().getLevel();
+			Level level = event.getEntity().level();
 			for (ItemEntity itemEntity : event.getDrops()) {
 				ItemStack stack = itemEntity.getItem();
 				Optional<SmeltingRecipe> optional = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SimpleContainer(stack), level);
 				if (optional.isPresent()) {
-					ItemStack itemstack = optional.get().getResultItem();
+					ItemStack itemstack = optional.get().getResultItem(level.registryAccess());
 					if (!itemstack.isEmpty()) {
 						ItemStack itemstack1 = itemstack.copy();
 						itemstack1.setCount(stack.getCount() * itemstack.getCount());
@@ -191,7 +191,7 @@ public class UAEvents {
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent event) {
 		Player player = event.player;
-		if (!event.player.level.isClientSide && event.player.level.getGameTime() % 5 == 0 && event.player instanceof ServerPlayer serverPlayer) {
+		if (!event.player.level().isClientSide && event.player.level().getGameTime() % 5 == 0 && event.player instanceof ServerPlayer serverPlayer) {
 			StatsCounter statisticsManager = serverPlayer.getStats();
 			Object2IntMap<Stat<?>> object2intmap = new Object2IntOpenHashMap<>();
 			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
@@ -202,7 +202,7 @@ public class UAEvents {
 			int timeTillDamage = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 40 * (1 + EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 40;
 			if (player.isEyeInFluid(FluidTags.WATER)) {
 				player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 100));
-				if (player.level.getGameTime() % timeTillDamage == 0) {
+				if (player.level().getGameTime() % timeTillDamage == 0) {
 					headSlotStack.hurtAndBreak(1, player, (p_213341_0_) -> p_213341_0_.broadcastBreakEvent(EquipmentSlot.HEAD));
 				}
 			}

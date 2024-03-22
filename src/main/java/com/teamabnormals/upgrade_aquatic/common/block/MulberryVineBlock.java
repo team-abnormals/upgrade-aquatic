@@ -80,7 +80,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter arg0, BlockPos arg1, BlockState state, boolean arg3) {
+	public boolean isValidBonemealTarget(LevelReader arg0, BlockPos arg1, BlockState state, boolean arg3) {
 		return state.getValue(AGE) < 4;
 	}
 
@@ -110,7 +110,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 
 			if (player instanceof ServerPlayer && player.isAlive()) {
 				ServerPlayer serverPlayer = (ServerPlayer) player;
-				if (!player.level.isClientSide()) {
+				if (!player.level().isClientSide()) {
 					UACriteriaTriggers.PICK_MULBERRIES.trigger(serverPlayer);
 				}
 			}

@@ -183,7 +183,7 @@ public class Nautilus extends BucketableWaterAnimal {
 			Vec3 vec3d1 = this.getViewVector(0.0F);
 
 			if (this.getCommandSenderWorld().getGameTime() % 2 == 0) {
-				this.level.addParticle(ParticleTypes.BUBBLE, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.x * 0.75D, this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - vec3d1.y * 1D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.z * 0.75D, 0.0D, 0.0D, 0.0D);
+				this.level().addParticle(ParticleTypes.BUBBLE, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.x * 0.75D, this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - vec3d1.y * 1D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.z * 0.75D, 0.0D, 0.0D, 0.0D);
 			}
 		}
 		super.aiStep();

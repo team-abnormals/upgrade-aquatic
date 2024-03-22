@@ -1,12 +1,12 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.blueprint.common.block.BlueprintFlowerBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -14,7 +14,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.function.Supplier;
 
-public class SearocketBlock extends BlueprintFlowerBlock {
+public class SearocketBlock extends FlowerBlock {
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
 	public SearocketBlock(Supplier<MobEffect> effect, int effectDuration, Properties properties) {

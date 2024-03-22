@@ -1,15 +1,10 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.blueprint.core.util.item.filling.TargetedItemCategoryFiller;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -22,7 +17,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class TallBeachgrassBlock extends DoublePlantBlock implements BonemealableBlock {
-	private static final TargetedItemCategoryFiller FILLER = new TargetedItemCategoryFiller(() -> Items.LARGE_FERN);
 	private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
 	public TallBeachgrassBlock(Block.Properties properties) {
@@ -50,7 +44,7 @@ public class TallBeachgrassBlock extends DoublePlantBlock implements Bonemealabl
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
@@ -79,10 +73,5 @@ public class TallBeachgrassBlock extends DoublePlantBlock implements Bonemealabl
 				}
 			}
 		}
-	}
-
-	@Override
-	public void fillItemCategory(CreativeModeTab group, NonNullList<ItemStack> items) {
-		FILLER.fillItem(this.asItem(), group, items);
 	}
 }

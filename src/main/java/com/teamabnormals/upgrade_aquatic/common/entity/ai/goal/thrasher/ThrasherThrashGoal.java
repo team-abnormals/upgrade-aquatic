@@ -80,7 +80,7 @@ public class ThrasherThrashGoal extends Goal {
 		if (this.thrashedTicks % 5 == 0 && this.thrashedTicks > 0) {
 			this.thrasher.playSound(this.thrasher.getThrashingSound(), 1.0F, Math.max(0.75F, this.thrasher.getRandom().nextFloat()));
 			if (entity != null) {
-				entity.hurt(DamageSource.mobAttack(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+				entity.hurt(entity.damageSources().mobAttack(this.thrasher), (float) this.thrasher.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
 			}
 		}
 	}

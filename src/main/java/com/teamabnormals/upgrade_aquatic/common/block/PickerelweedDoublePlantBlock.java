@@ -150,7 +150,7 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(BlockGetter worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 
@@ -174,7 +174,7 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 					}
 				}
 
-				if (blockstate.canSurvive(worldIn, blockpos) && worldIn.getBlockState(blockpos).getMaterial().isReplaceable() && rand.nextFloat() <= 0.10F) {
+				if (blockstate.canSurvive(worldIn, blockpos) && worldIn.getBlockState(blockpos).canBeReplaced() && rand.nextFloat() <= 0.10F) {
 					BlockState blockstate1 = worldIn.getBlockState(blockpos);
 					if (blockstate1.getFluidState().is(FluidTags.WATER) && worldIn.getFluidState(blockpos).getAmount() == 8) {
 						worldIn.setBlock(blockpos, blockstate.setValue(WATERLOGGED, true), 3);

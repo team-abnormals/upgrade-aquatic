@@ -121,10 +121,10 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 					for (int j = -(patterns[0] / patterns[2] + patterns[0]); j < patterns[0] / patterns[2] + patterns[0]; j++) {
 						double radius = r.compute(Math.atan2(j, i));
 						BlockPos placingPos = pos.offset(i, 0, j);
-						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
+						if (world.getBlockState(placingPos).canBeReplaced() && (i * i + j * j) < radius * radius) {
 							if (i * i + j * j > (radius - 1) * (radius - 1)) {
 								FluidState ifluidstate = world.getFluidState(placingPos);
-								if (PURPLE_PICKERELWEED.get().canSurvive(world, placingPos) && world.getBlockState(placingPos.above()).getMaterial().isReplaceable() && world.getRandom().nextDouble() <= 0.85D) {
+								if (PURPLE_PICKERELWEED.get().canSurvive(world, placingPos) && world.getBlockState(placingPos.above()).canBeReplaced() && world.getRandom().nextDouble() <= 0.85D) {
 									if (purple) {
 										world.setBlock(placingPos, PURPLE_PICKERELWEED.get().setValue(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.is(FluidTags.WATER)), 2);
 									} else {

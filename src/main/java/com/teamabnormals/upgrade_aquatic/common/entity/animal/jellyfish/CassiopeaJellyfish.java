@@ -4,7 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorch
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.CassiopeaHideInSeagrassGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.CassiopeaJellyfishFlipGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishRandomSwimmingGoal;
-import com.teamabnormals.upgrade_aquatic.core.other.UADamageSources;
+import com.teamabnormals.upgrade_aquatic.core.other.UADamageTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
@@ -120,7 +120,7 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	@Override
 	public boolean stingEntity(LivingEntity livingEntity) {
 		if ((this.getTarget() == livingEntity || this.getLastHurtByMob() == livingEntity) && this.getRandom().nextFloat() < 0.5F) {
-			return livingEntity.hurt(UADamageSources.causeJellyfishDamage(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+			return livingEntity.hurt(UADamageTypes.jellyfishSting(this.level(), this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
 		}
 		return false;
 	}

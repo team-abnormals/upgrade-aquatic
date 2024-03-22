@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 3,
+    "targets": [
+      {
+        "state": {
+          "Name": "upgrade_aquatic:embedded_ammonite",
+          "Properties": {
+            "facing": "north"
+          }
+        },
+        "target": {
+          "block": "minecraft:stone",
+          "predicate_type": "minecraft:block_match"
+        }
+      }
+    ]
+  }
+}

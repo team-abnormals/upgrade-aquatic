@@ -39,8 +39,8 @@
   "selector": {
     "type": "names",
     "config": [
-      "minecraft:chests/underwater_ruin_big",
-      "minecraft:chests/buried_treasure"
+      "minecraft:chests/buried_treasure",
+      "minecraft:chests/underwater_ruin_big"
     ]
   }
 }

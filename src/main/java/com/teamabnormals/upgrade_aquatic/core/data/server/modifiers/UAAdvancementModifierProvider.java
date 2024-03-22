@@ -10,7 +10,8 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAMobEffects;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
@@ -19,16 +20,17 @@ import net.minecraft.world.item.MobBucketItem;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 public final class UAAdvancementModifierProvider extends AdvancementModifierProvider {
 	private static final EntityType<?>[] MOBS_TO_KILL = new EntityType[]{UAEntityTypes.THRASHER.get(), UAEntityTypes.GREAT_THRASHER.get(), UAEntityTypes.FLARE.get()};
 
-	public UAAdvancementModifierProvider(DataGenerator dataGenerator) {
-		super(dataGenerator, UpgradeAquatic.MOD_ID);
+	public UAAdvancementModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
+		super(UpgradeAquatic.MOD_ID, output, provider);
 	}
 
 	@Override
-	protected void registerEntries() {
+	protected void registerEntries(Provider provider) {
 		MobEffectsPredicate predicate = MobEffectsPredicate.effects();
 		UAMobEffects.MOB_EFFECTS.getEntries().forEach(mobEffect -> {
 			MobEffect effect = mobEffect.get();

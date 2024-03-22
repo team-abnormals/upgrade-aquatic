@@ -28,7 +28,7 @@ public class UABiomeModifierTypes {
 			).apply(builder, AddCarversBiomeModifier::new))
 	);
 
-	public static record AddCarversBiomeModifier(HolderSet<Biome> biomes, HolderSet<ConfiguredWorldCarver<?>> features, Carving step) implements BiomeModifier {
+	public record AddCarversBiomeModifier(HolderSet<Biome> biomes, HolderSet<ConfiguredWorldCarver<?>> features, Carving step) implements BiomeModifier {
 		@Override
 		public void modify(Holder<Biome> biome, Phase phase, Builder builder) {
 			if (phase == Phase.ADD && this.biomes.contains(biome)) {

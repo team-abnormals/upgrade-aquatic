@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.upgrade_aquatic.client.model.FlareModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.FlareEyesRenderLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Flare;
@@ -35,7 +35,7 @@ public class FlareRenderer extends MobRenderer<Flare, FlareModel<Flare>> {
 	@Override
 	protected void setupRotations(Flare flare, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(flare, matrixStack, ageInTicks, rotationYaw, partialTicks);
-		matrixStack.mulPose(Vector3f.XP.rotationDegrees(flare.getXRot()));
+		matrixStack.mulPose(Axis.XP.rotationDegrees(flare.getXRot()));
 	}
 
 }

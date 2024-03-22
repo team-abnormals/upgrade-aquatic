@@ -2,23 +2,25 @@ package com.teamabnormals.upgrade_aquatic.core.data.server.tags;
 
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.tags.UAEntityTypeTags;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
 
 import static com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes.*;
 
 public class UAEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
-	public UAEntityTypeTagsProvider(DataGenerator dataGenerator, @Nullable ExistingFileHelper existingFileHelper) {
-		super(dataGenerator, UpgradeAquatic.MOD_ID, existingFileHelper);
+	public UAEntityTypeTagsProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper helper) {
+		super(output, provider, UpgradeAquatic.MOD_ID, helper);
 	}
 
 	@Override
-	protected void addTags() {
+	public void addTags(Provider provider) {
 		this.tag(EntityTypeTags.AXOLOTL_HUNT_TARGETS).add(PIKE.get(), PERCH.get(), LIONFISH.get());
 		this.tag(EntityTypeTags.AXOLOTL_ALWAYS_HOSTILES).add(THRASHER.get(), GREAT_THRASHER.get());
 

@@ -41,7 +41,7 @@ public final class PikeAttackGoal extends MeleeAttackGoal {
 					enemy.startRiding(pike, true);
 					pike.setTarget(null);
 				} else {
-					enemy.hurt(DamageSource.mobAttack(pike), 1.5F);
+					enemy.hurt(pike.damageSources().mobAttack(pike), 1.5F);
 				}
 			}
 		}

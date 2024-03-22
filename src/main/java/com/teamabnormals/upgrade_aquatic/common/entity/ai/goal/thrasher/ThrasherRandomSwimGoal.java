@@ -51,7 +51,7 @@ public class ThrasherRandomSwimGoal extends RandomSwimmingGoal {
 		//Tries to go deep when it has an entity in its mouth
 		Vec3 vec3d = AdvancedRandomPos.findRandomTarget(this.mob, 15, 8, !this.thrasher.getPassengers().isEmpty());
 
-		for (int i = 0; vec3d != null && !this.mob.level.getBlockState(new BlockPos(vec3d)).isPathfindable(this.mob.level, new BlockPos(vec3d), PathComputationType.WATER) && i++ < 10; vec3d = AdvancedRandomPos.findRandomTarget(this.mob, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
+		for (int i = 0; vec3d != null && !this.mob.level().getBlockState(BlockPos.containing(vec3d)).isPathfindable(this.mob.level(), BlockPos.containing(vec3d), PathComputationType.WATER) && i++ < 10; vec3d = AdvancedRandomPos.findRandomTarget(this.mob, 10, 8, !this.thrasher.getPassengers().isEmpty())) {
 		}
 
 		return vec3d;

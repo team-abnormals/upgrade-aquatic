@@ -22,7 +22,7 @@ public abstract class SquidMixin extends Entity {
 
 	@Inject(at = @At("HEAD"), method = "spawnInk")
 	private void spawnInk(CallbackInfo info) {
-		for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.5F, 2.5F, 2.5F))) {
+		for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(2.5F, 2.5F, 2.5F))) {
 			if (!(entity instanceof Squid))
 				entity.addEffect(new MobEffectInstance(((Squid) (Object) this) instanceof GlowSquid ? MobEffects.NIGHT_VISION : MobEffects.BLINDNESS, 100));
 		}

@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.upgrade_aquatic.core.other.UADamageSources;
+import com.teamabnormals.upgrade_aquatic.core.other.UADamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Axis;
@@ -139,22 +139,22 @@ public class GuardianSpineBlock extends DirectionalBlock implements SimpleWaterl
 		return null;
 	}
 
-	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entityIn) {
-		if (entityIn instanceof LivingEntity && state.getValue(DRAWN)) {
-			entityIn.makeStuckInBlock(state, new Vec3(0.25D, 0.5D, 0.25D));
-			if (!entityIn.isInvulnerable()) {
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+		if (entity instanceof LivingEntity && state.getValue(DRAWN)) {
+			entity.makeStuckInBlock(state, new Vec3(0.25D, 0.5D, 0.25D));
+			if (!entity.isInvulnerable()) {
 				if (state.getValue(ELDER))
-					((LivingEntity) entityIn).addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 40));
+					((LivingEntity) entity).addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 40));
 			}
-			if (!worldIn.isClientSide && (entityIn.xOld != entityIn.getX() || entityIn.zOld != entityIn.getZ() || entityIn.yOld != entityIn.getY())) {
-				double d0 = Math.abs(entityIn.getX() - entityIn.xOld);
-				double d1 = Math.abs(entityIn.getZ() - entityIn.zOld);
-				double d2 = Math.abs(entityIn.getY() - entityIn.yOld);
+			if (!level.isClientSide() && (entity.xOld != entity.getX() || entity.zOld != entity.getZ() || entity.yOld != entity.getY())) {
+				double d0 = Math.abs(entity.getX() - entity.xOld);
+				double d1 = Math.abs(entity.getZ() - entity.zOld);
+				double d2 = Math.abs(entity.getY() - entity.yOld);
 				if (d0 >= 0.003D || d1 >= 0.003D || d2 >= 0.003D) {
 					if (state.getValue(ELDER)) {
-						entityIn.hurt(UADamageSources.ELDER_GUARDIAN_SPINE, 3.0F);
+						entity.hurt(UADamageTypes.guardianSpine(level, true), 3.0F);
 					} else {
-						entityIn.hurt(UADamageSources.GUARDIAN_SPINE, 2.0F);
+						entity.hurt(UADamageTypes.guardianSpine(level, false), 2.0F);
 					}
 				}
 			}

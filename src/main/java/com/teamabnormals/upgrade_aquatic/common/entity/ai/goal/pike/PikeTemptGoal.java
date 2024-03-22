@@ -25,7 +25,7 @@ public final class PikeTemptGoal extends Goal {
 			this.cooldown--;
 			return false;
 		} else {
-			this.tempter = this.pike.level.getNearestPlayer(CAN_FOLLOW, this.pike);
+			this.tempter = this.pike.level().getNearestPlayer(CAN_FOLLOW, this.pike);
 			if (this.tempter == null) {
 				return false;
 			} else {

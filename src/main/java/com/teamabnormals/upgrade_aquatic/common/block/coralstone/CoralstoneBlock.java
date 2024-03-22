@@ -72,7 +72,7 @@ public class CoralstoneBlock extends Block {
 			Direction randDirection = this.growableCoralBlocks.length > 3 ? Direction.getRandom(random) : Direction.from3DDataValue(random.nextInt(5) + 1);
 			BlockPos growPos = pos.relative(randDirection);
 			FluidState fluidState = worldIn.getBlockState(growPos).getFluidState();
-			boolean isValidPosToGrow = worldIn.getBlockState(growPos).getMaterial().isReplaceable() && fluidState.getAmount() >= 8 && fluidState.is(FluidTags.WATER);
+			boolean isValidPosToGrow = worldIn.getBlockState(growPos).canBeReplaced() && fluidState.getAmount() >= 8 && fluidState.is(FluidTags.WATER);
 
 			if (isValidPosToGrow && state.getValue(POWERED)) {
 				if (randDirection.get3DDataValue() > 1) {

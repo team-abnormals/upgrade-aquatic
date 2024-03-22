@@ -5,6 +5,7 @@ import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -57,7 +58,7 @@ public class SonarWave extends Entity {
 		this.move(MoverType.SELF, this.getDeltaMovement());
 
 		if (this.getThrasherOwner() != null) {
-			List<Entity> entities = this.level.getEntities(this.getThrasherOwner(), this.getBoundingBox().inflate(this.growProgress), Thrasher.ENEMY_MATCHER);
+			List<Entity> entities = this.level().getEntities(this.getThrasherOwner(), this.getBoundingBox().inflate(this.growProgress), Thrasher.ENEMY_MATCHER);
 
 			for (Entity entity : entities) {
 				if (entity instanceof LivingEntity && this.getThrasherOwner().getTarget() == null) {
@@ -183,7 +184,7 @@ public class SonarWave extends Entity {
 
 	@Nullable
 	public Thrasher getThrasherOwner() {
-		Entity owner = this.level.getEntity(this.getOwnerId());
+		Entity owner = this.level().getEntity(this.getOwnerId());
 		if (owner instanceof Thrasher) {
 			return (Thrasher) owner;
 		}
@@ -191,7 +192,7 @@ public class SonarWave extends Entity {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

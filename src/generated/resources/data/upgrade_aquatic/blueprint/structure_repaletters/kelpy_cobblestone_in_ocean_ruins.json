@@ -1,0 +1,20 @@
+{
+  "repaletter": {
+    "type": "blueprint:simple",
+    "replaces_block": "minecraft:mossy_cobblestone",
+    "replaces_with": "upgrade_aquatic:kelpy_cobblestone"
+  },
+  "structures": {
+    "type": "blueprint:conditional",
+    "conditions": [
+      {
+        "type": "upgrade_aquatic:config",
+        "value": "kelpy_ocean_ruins"
+      }
+    ],
+    "value": [
+      "minecraft:ocean_ruin_warm",
+      "minecraft:ocean_ruin_cold"
+    ]
+  }
+}

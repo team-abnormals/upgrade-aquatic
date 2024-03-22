@@ -119,6 +119,6 @@ public class CoralstoneStairsBlock extends StairBlock {
 	}
 
 	private boolean isValidPosToGrow(Level world, BlockPos pos, FluidState fluidState) {
-		return world.getBlockState(pos).getMaterial().isReplaceable() && fluidState.getAmount() >= 8 && fluidState.is(FluidTags.WATER);
+		return world.getBlockState(pos).canBeReplaced() && fluidState.getAmount() >= 8 && fluidState.is(FluidTags.WATER);
 	}
 }

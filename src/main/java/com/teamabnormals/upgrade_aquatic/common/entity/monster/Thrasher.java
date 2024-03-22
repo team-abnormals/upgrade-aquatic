@@ -139,10 +139,10 @@ public class Thrasher extends Monster implements Endimatable {
 		if (reason == MobSpawnType.NATURAL && worldIn.getBiome(this.blockPosition()).is(UABiomeTags.HAS_GREAT_THRASHER)) {
 			Random rand = new Random();
 			if (rand.nextDouble() < UAConfig.COMMON.greatThrasherSpawnChance.get()) {
-				GreatThrasher greatThrasher = UAEntityTypes.GREAT_THRASHER.get().create(this.level);
+				GreatThrasher greatThrasher = UAEntityTypes.GREAT_THRASHER.get().create(this.level());
 				if (greatThrasher != null) {
 					greatThrasher.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), this.getXRot());
-					this.level.addFreshEntity(greatThrasher);
+					this.level().addFreshEntity(greatThrasher);
 					this.discard();
 				}
 			}
@@ -163,7 +163,7 @@ public class Thrasher extends Monster implements Endimatable {
 	}
 
 	@Override
-	public void positionRider(Entity passenger) {
+	public void positionRider(Entity passenger, Entity.MoveFunction function) {
 		if (passenger instanceof LivingEntity) {
 			float distance = this.getMountDistance();
 
@@ -175,7 +175,7 @@ public class Thrasher extends Monster implements Endimatable {
 
 			double offset = passenger instanceof Player ? this.getPassengersRidingOffset() - 0.2D : this.getPassengersRidingOffset() - 0.5F;
 
-			passenger.setPos(riderPos.x, this.getY() + dy + offset, riderPos.z);
+			function.accept(passenger, riderPos.x, this.getY() + dy + offset, riderPos.z);
 		} else {
 			super.positionRider(passenger);
 		}
@@ -184,7 +184,7 @@ public class Thrasher extends Monster implements Endimatable {
 	@Override
 	protected void addPassenger(Entity passenger) {
 		super.addPassenger(passenger);
-		if (!this.level.isClientSide && passenger instanceof LivingEntity && passenger.getVehicle() == this && this.getPassengers().indexOf(passenger) == 0) {
+		if (!this.level().isClientSide && passenger instanceof LivingEntity && passenger.getVehicle() == this && this.getPassengers().indexOf(passenger) == 0) {
 			EntityDimensions defaultSize = this.getDefaultSize();
 			this.setCaughtSize(EntityDimensions.fixed(defaultSize.width + passenger.getDimensions(passenger.getPose()).width, defaultSize.height));
 		}
@@ -193,7 +193,7 @@ public class Thrasher extends Monster implements Endimatable {
 	@Override
 	protected void removePassenger(Entity passenger) {
 		super.removePassenger(passenger);
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			if (!this.getPassengers().isEmpty()) {
 				Entity indexZeroPassenger = this.getPassengers().get(0);
 				EntityDimensions defaultSize = this.getDefaultSize();
@@ -287,7 +287,7 @@ public class Thrasher extends Monster implements Endimatable {
 					}
 				}
 				if (this.getHitsLeftTillStun() > 0) {
-					int difficultyDividend = switch (this.level.getDifficulty()) {
+					int difficultyDividend = switch (this.level().getDifficulty()) {
 						case EASY, PEACEFUL -> 10;
 						case NORMAL -> 12;
 						case HARD -> 16;
@@ -305,7 +305,7 @@ public class Thrasher extends Monster implements Endimatable {
 				}
 			}
 		}
-		if (!this.level.isClientSide() && this.isNoEndimationPlaying()) NetworkUtil.setPlayingAnimation(this, UAPlayableEndimations.THRASHER_HURT);
+		if (!this.level().isClientSide() && this.isNoEndimationPlaying()) NetworkUtil.setPlayingAnimation(this, UAPlayableEndimations.THRASHER_HURT);
 		return super.hurt(source, amount);
 	}
 
@@ -337,11 +337,6 @@ public class Thrasher extends Monster implements Endimatable {
 	@Override
 	public int getMaxHeadYRot() {
 		return 1;
-	}
-
-	@Override
-	public boolean rideableUnderWater() {
-		return true;
 	}
 
 	@Override
@@ -392,29 +387,29 @@ public class Thrasher extends Monster implements Endimatable {
 			} else {
 				this.setWaterTime(this.getWaterTime() - 1);
 				if (this.getWaterTime() <= 0) {
-					this.hurt(DamageSource.DRY_OUT, 1.0F);
+					this.hurt(this.damageSources().dryOut(), 1.0F);
 				}
 
-				if (!this.isInWater() && !this.isStunned() && this.onGround) {
+				if (!this.isInWater() && !this.isStunned() && this.onGround()) {
 					this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.2F, 0.5D, (this.random.nextFloat() * 2.0F - 1.0F) * 0.2F));
 					this.setYRot(this.random.nextFloat() * 360.0F);
 					this.setXRot(this.random.nextFloat() * -50.0F);
-					this.onGround = false;
+					this.setOnGround(false);
 					this.hasImpulse = true;
 					this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 				}
 			}
-			if (this.level.isClientSide()) {
+			if (this.level().isClientSide()) {
 				if (!this.getPassengers().isEmpty() && this.isEndimationPlaying(UAPlayableEndimations.THRASHER_THRASH) && this.getAnimationTick() % 2 == 0 && this.getAnimationTick() > 5) {
 					Entity passenger = this.getPassengers().get(0);
 					for (int i = 0; i < 3; ++i) {
 						if (passenger.isEyeInFluid(FluidTags.WATER)) {
-							this.level.addParticle(ParticleTypes.BUBBLE, passenger.getX() + (this.getRandom().nextDouble() - 0.5D) * (double) passenger.getBbWidth(), passenger.getY(), passenger.getZ() + (this.getRandom().nextDouble() - 0.5D) * (double) passenger.getBbWidth(), (this.getRandom().nextDouble() - 0.5D) * 2.0D, -this.getRandom().nextDouble(), (this.getRandom().nextDouble() - 0.5D) * 2.0D);
+							this.level().addParticle(ParticleTypes.BUBBLE, passenger.getX() + (this.getRandom().nextDouble() - 0.5D) * (double) passenger.getBbWidth(), passenger.getY(), passenger.getZ() + (this.getRandom().nextDouble() - 0.5D) * (double) passenger.getBbWidth(), (this.getRandom().nextDouble() - 0.5D) * 2.0D, -this.getRandom().nextDouble(), (this.getRandom().nextDouble() - 0.5D) * 2.0D);
 						}
 					}
 				}
 			}
-			if (!this.level.isClientSide && this.isStunned()) {
+			if (!this.level().isClientSide && this.isStunned()) {
 				if (!this.getPassengers().isEmpty()) {
 					this.ejectPassengers();
 				}
@@ -426,7 +421,7 @@ public class Thrasher extends Monster implements Endimatable {
 	@Override
 	public void aiStep() {
 		if (this.isAlive()) {
-			if (this.level.isClientSide) {
+			if (this.level().isClientSide) {
 				this.prevTailAnimation = this.tailAnimation;
 				this.prevFinAnimation = this.finAnimation;
 
@@ -467,7 +462,7 @@ public class Thrasher extends Monster implements Endimatable {
 			}
 
 			if (!this.isStunned()) {
-				List<LivingEntity> nearbyEntities = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.5F), Thrasher.ENEMY_MATCHER);
+				List<LivingEntity> nearbyEntities = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.5F), Thrasher.ENEMY_MATCHER);
 				for (LivingEntity entities : nearbyEntities) {
 					if (this.getTarget() == null) {
 						this.setTarget(entities);
@@ -479,7 +474,7 @@ public class Thrasher extends Monster implements Endimatable {
 				Vec3 vec3d1 = this.getViewVector(0.0F);
 
 				for (int i = 0; i < 2; ++i) {
-					this.level.addParticle(ParticleTypes.BUBBLE, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.x * 1.5D, this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - vec3d1.y * 1.5D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
+					this.level().addParticle(ParticleTypes.BUBBLE, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.x * 1.5D, this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - vec3d1.y * 1.5D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
@@ -493,31 +488,31 @@ public class Thrasher extends Monster implements Endimatable {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return this.isInWater() ? UASoundEvents.ENTITY_THRASHER_HURT.get() : UASoundEvents.ENTITY_THRASHER_HURT_LAND.get();
+		return this.isInWater() ? UASoundEvents.THRASHER_HURT.get() : UASoundEvents.THRASHER_HURT_LAND.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return this.isInWater() ? UASoundEvents.ENTITY_THRASHER_DEATH.get() : UASoundEvents.ENTITY_THRASHER_DEATH_LAND.get();
+		return this.isInWater() ? UASoundEvents.THRASHER_DEATH.get() : UASoundEvents.THRASHER_DEATH_LAND.get();
 	}
 
 	@Nullable
 	@Override
 	protected SoundEvent getAmbientSound() {
 		if (this.isEndimationPlaying(UAPlayableEndimations.THRASHER_THRASH)) return null;
-		return this.isInWater() ? UASoundEvents.ENTITY_THRASHER_AMBIENT.get() : UASoundEvents.ENTITY_THRASHER_AMBIENT_LAND.get();
+		return this.isInWater() ? UASoundEvents.THRASHER_AMBIENT.get() : UASoundEvents.THRASHER_AMBIENT_LAND.get();
 	}
 
 	protected SoundEvent getFlopSound() {
-		return UASoundEvents.ENTITY_THRASHER_FLOP.get();
+		return UASoundEvents.THRASHER_FLOP.get();
 	}
 
 	public SoundEvent getSonarFireSound() {
-		return UASoundEvents.ENTITY_THRASHER_SONAR_FIRE.get();
+		return UASoundEvents.THRASHER_SONAR_FIRE.get();
 	}
 
 	public SoundEvent getThrashingSound() {
-		return UASoundEvents.ENTITY_THRASHER_THRASH.get();
+		return UASoundEvents.THRASHER_THRASH.get();
 	}
 
 	@Override

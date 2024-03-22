@@ -6,7 +6,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
 public class UABiomeTags {
-
 	public static final TagKey<Biome> HAS_NAUTILUS = biomeTag("has_animal/nautilus");
 	public static final TagKey<Biome> HAS_LIONFISH = biomeTag("has_animal/lionfish");
 	public static final TagKey<Biome> HAS_PIKE = biomeTag("has_animal/pike");

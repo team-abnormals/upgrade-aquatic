@@ -103,7 +103,7 @@ public class PickerelweedPlantBlock extends Block implements BonemealableBlock, 
 		return state.getValue(WATERLOGGED) ? 0 : 60;
 	}
 
-	public boolean isValidBonemealTarget(BlockGetter world, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state, boolean isClient) {
 		return true;
 	}
 

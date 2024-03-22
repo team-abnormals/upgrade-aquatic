@@ -18,7 +18,7 @@ public class Goose extends Chicken {
 
 	@Override
 	public Goose getBreedOffspring(ServerLevel world, AgeableMob ageable) {
-		return UAEntityTypes.GOOSE.get().create(this.level);
+		return UAEntityTypes.GOOSE.get().create(this.level());
 	}
 
 	public static AttributeSupplier.Builder registerAttributes() {

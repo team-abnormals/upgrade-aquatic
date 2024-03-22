@@ -1,0 +1,16 @@
+{
+  "feature": "upgrade_aquatic:prismarine_coral",
+  "placement": [
+    {
+      "type": "minecraft:carving_mask",
+      "step": "air"
+    },
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 256
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

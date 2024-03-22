@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.upgrade_aquatic.client.model.PerchModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Perch;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
@@ -24,10 +24,10 @@ public class PerchRenderer extends MobRenderer<Perch, PerchModel<Perch>> {
 	protected void setupRotations(Perch entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * Mth.sin(0.6F * ageInTicks);
-		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f));
+		matrixStackIn.mulPose(Axis.YP.rotationDegrees(f));
 		if (!entityLiving.isInWater()) {
 			matrixStackIn.translate(0.1F, 0.1F, -0.1F);
-			matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
+			matrixStackIn.mulPose(Axis.ZP.rotationDegrees(90.0F));
 		}
 	}
 }

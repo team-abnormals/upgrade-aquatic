@@ -7,7 +7,8 @@ import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.advancements.critereon.LocationPredicate;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -19,15 +20,16 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public final class UALootModifierProvider extends LootModifierProvider {
 
-	public UALootModifierProvider(DataGenerator dataGenerator) {
-		super(dataGenerator, UpgradeAquatic.MOD_ID);
+	public UALootModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
+		super(UpgradeAquatic.MOD_ID, output, provider);
 	}
 
 	@Override
-	protected void registerEntries() {
+	protected void registerEntries(Provider provider) {
 		var inSwamp = LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.SWAMP));
 		var inRiver = LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.RIVER));
 		var inWarmOcean = LocationCheck.checkLocation(LocationPredicate.Builder.location().setBiome(Biomes.WARM_OCEAN));

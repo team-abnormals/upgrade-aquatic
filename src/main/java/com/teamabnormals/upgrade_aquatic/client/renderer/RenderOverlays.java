@@ -57,7 +57,7 @@ public class RenderOverlays {
 				opacity = 0F;
 			}
 			if (MC.options.getCameraType() == CameraType.FIRST_PERSON && UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getCommandSenderWorld().dimension() == Level.OVERWORLD) {
-				PoseStack stack = event.getPoseStack();
+				PoseStack stack = event.getGuiGraphics().pose();
 
 				stack.pushPose();
 				RenderSystem.setShaderTexture(0, new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/insomnia.png"));
@@ -96,7 +96,7 @@ public class RenderOverlays {
 				if (!turtleHelmet.isEmpty()) {
 					event.setCanceled(true);
 
-					PoseStack stack = event.getPoseStack();
+					PoseStack stack = event.getGuiGraphics().pose();
 					stack.pushPose();
 					RenderSystem.enableBlend();
 					int left = scaledWidth / 2 + 91;

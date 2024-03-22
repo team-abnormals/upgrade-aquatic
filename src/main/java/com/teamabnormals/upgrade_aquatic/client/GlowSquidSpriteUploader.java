@@ -24,13 +24,8 @@ public class GlowSquidSpriteUploader extends TextureAtlasHolder {
 
 	private static GlowSquidSpriteUploader uploader;
 
-	public GlowSquidSpriteUploader(TextureManager textureManagerIn, ResourceLocation atlasTextureLocation, String prefixIn) {
-		super(textureManagerIn, atlasTextureLocation, prefixIn);
-	}
-
-	@Override
-	protected Stream<ResourceLocation> getResourcesToLoad() {
-		return Stream.of(SQUID_SPRITE, GLOW_SPRITE);
+	public GlowSquidSpriteUploader(TextureManager textureManagerIn) {
+		super(textureManagerIn, ATLAS_LOCATION, SQUID_SPRITE);
 	}
 
 	/**
@@ -43,7 +38,7 @@ public class GlowSquidSpriteUploader extends TextureAtlasHolder {
 			Minecraft minecraft = Minecraft.getInstance();
 			ResourceManager resourceManager = minecraft.getResourceManager();
 			if (resourceManager instanceof ReloadableResourceManager) {
-				((ReloadableResourceManager) resourceManager).registerReloadListener(uploader = new GlowSquidSpriteUploader(minecraft.textureManager, ATLAS_LOCATION, "entity/glow_squid"));
+				((ReloadableResourceManager) resourceManager).registerReloadListener(uploader = new GlowSquidSpriteUploader(minecraft.textureManager));
 			}
 		});
 	}

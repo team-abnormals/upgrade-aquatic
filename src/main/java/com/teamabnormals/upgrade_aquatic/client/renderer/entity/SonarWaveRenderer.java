@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.blueprint.client.BlueprintRenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.model.SonarWaveModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.projectile.SonarWave;
@@ -26,7 +26,7 @@ public class SonarWaveRenderer extends EntityRenderer<SonarWave> {
 	public void render(SonarWave sonarWave, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn) {
 		poseStack.pushPose();
 		poseStack.translate(0.0F, -0.7F, 0.0F);
-		poseStack.mulPose(Vector3f.YP.rotationDegrees(sonarWave.getYRot()));
+		poseStack.mulPose(Axis.YP.rotationDegrees(sonarWave.getYRot()));
 
 		VertexConsumer vertexConsumer = bufferIn.getBuffer(BlueprintRenderTypes.getUnshadedTranslucentEntity(this.getTextureLocation(sonarWave), true));
 		this.sonarWaveModel.setupAnim(sonarWave, 0.0F, 0.0F, partialTicks, sonarWave.getYRot(), sonarWave.getXRot());

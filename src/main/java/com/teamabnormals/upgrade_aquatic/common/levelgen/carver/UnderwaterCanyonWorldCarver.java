@@ -134,9 +134,9 @@ public class UnderwaterCanyonWorldCarver extends WorldCarver<UnderwaterCanyonCar
 			state = LAVA.createLegacyBlock();
 		} else if (y == magmaAndObsidianLevel) {
 			mutablePos.setWithOffset(pos, Direction.DOWN);
-			if (!chunkAccess.getBlockState(mutablePos).getMaterial().isSolid()) {
+			if (!chunkAccess.getBlockState(mutablePos).isSolid()) {
 				mutablePos.move(Direction.DOWN);
-				if (!chunkAccess.getBlockState(mutablePos).getMaterial().isSolid()) return;
+				if (!chunkAccess.getBlockState(mutablePos).isSolid()) return;
 				mutablePos.move(Direction.UP);
 				chunkAccess.setBlockState(mutablePos, Blocks.OBSIDIAN.defaultBlockState(), false);
 			}

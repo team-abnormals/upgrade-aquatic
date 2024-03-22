@@ -16,7 +16,7 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 
 	public CassiopeaJellyfishFlipGoal(CassiopeaJellyfish jellyfish) {
 		this.jellyfish = jellyfish;
-		this.world = jellyfish.level;
+		this.world = jellyfish.level();
 		this.setFlags(EnumSet.of(Flag.LOOK, Flag.MOVE));
 	}
 
@@ -26,7 +26,7 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 			BlockPos pos = this.jellyfish.blockPosition();
 			if (pos.getY() >= this.world.getSeaLevel() - 2) {
 				if (this.world.dimensionType().hasSkyLight() && this.world.canSeeSkyFromBelowWater(pos)) {
-					return !this.jellyfish.hasUpsideDownCooldown() && !this.jellyfish.isOnGround();
+					return !this.jellyfish.hasUpsideDownCooldown() && !this.jellyfish.onGround();
 				}
 			}
 		}
@@ -50,7 +50,7 @@ public class CassiopeaJellyfishFlipGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return this.ticksPassed < 40 && !this.jellyfish.isOnGround() && this.jellyfish.isEyeInFluid(FluidTags.WATER) && this.world.isDay() && this.jellyfish.blockPosition().getY() >= this.world.getSeaLevel() - 4;
+		return this.ticksPassed < 40 && !this.jellyfish.onGround() && this.jellyfish.isEyeInFluid(FluidTags.WATER) && this.world.isDay() && this.jellyfish.blockPosition().getY() >= this.world.getSeaLevel() - 4;
 	}
 
 	@Override

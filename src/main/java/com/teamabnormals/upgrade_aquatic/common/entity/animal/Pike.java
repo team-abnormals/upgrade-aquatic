@@ -55,7 +55,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -179,23 +179,23 @@ public class Pike extends BucketableWaterAnimal {
 
 		if (this.dropEatingLootCooldown > 0) this.dropEatingLootCooldown--;
 
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.05F));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
 
-		if (this.level.getGameTime() % 20 == 0) {
+		if (this.level().getGameTime() % 20 == 0) {
 			LivingEntity caughtEntity = this.getCaughtEntity();
 			if (caughtEntity != null && (!this.isPickerelweedNearby() || this.isHidingInPickerelweed())) {
-				this.level.playSound(null, this.blockPosition(), UASoundEvents.ENTITY_PIKE_BITE.get(), SoundSource.HOSTILE, 0.8F, 0.90F);
-				if (this.level.isClientSide && caughtEntity.getHealth() <= 1 && this.getPikeType() == PikeType.SPECTRAL) {
+				this.level().playSound(null, this.blockPosition(), UASoundEvents.PIKE_BITE.get(), SoundSource.HOSTILE, 0.8F, 0.90F);
+				if (this.level().isClientSide && caughtEntity.getHealth() <= 1 && this.getPikeType() == PikeType.SPECTRAL) {
 					for (int i = 0; i < 3; ++i) {
-						this.level.addParticle(UAParticleTypes.SPECTRAL_CONSUME.get(), caughtEntity.getX() + (caughtEntity.getRandom().nextDouble() - 0.5D) * (double) caughtEntity.getBbWidth(), caughtEntity.getY() + caughtEntity.getRandom().nextDouble() * (double) caughtEntity.getBbHeight() - 0.25D, caughtEntity.getZ() + (caughtEntity.getRandom().nextDouble() - 0.5D) * (double) caughtEntity.getBbWidth(), (this.getCaughtEntity().getRandom().nextDouble() - 0.5D) * 2.0D, -caughtEntity.getRandom().nextDouble(), (caughtEntity.getRandom().nextDouble() - 0.5D) * 2.0D);
+						this.level().addParticle(UAParticleTypes.SPECTRAL_CONSUME.get(), caughtEntity.getX() + (caughtEntity.getRandom().nextDouble() - 0.5D) * (double) caughtEntity.getBbWidth(), caughtEntity.getY() + caughtEntity.getRandom().nextDouble() * (double) caughtEntity.getBbHeight() - 0.25D, caughtEntity.getZ() + (caughtEntity.getRandom().nextDouble() - 0.5D) * (double) caughtEntity.getBbWidth(), (this.getCaughtEntity().getRandom().nextDouble() - 0.5D) * 2.0D, -caughtEntity.getRandom().nextDouble(), (caughtEntity.getRandom().nextDouble() - 0.5D) * 2.0D);
 					}
 				}
-				caughtEntity.hurt(DamageSource.mobAttack(this), 1.0F);
+				caughtEntity.hurt(this.damageSources().mobAttack(this), 1.0F);
 			}
 		}
 
@@ -204,16 +204,16 @@ public class Pike extends BucketableWaterAnimal {
 		}
 
 		ItemStack itemstack = this.getItemBySlot(EquipmentSlot.MAINHAND);
-		if (!this.level.isClientSide && this.isAlive() && this.isEffectiveAi() && !itemstack.isEmpty() && this.canEatItem(itemstack) && this.isInWater()) {
+		if (!this.level().isClientSide && this.isAlive() && this.isEffectiveAi() && !itemstack.isEmpty() && this.canEatItem(itemstack) && this.isInWater()) {
 			if (this.eatTicks > 600) {
-				ItemStack itemstackFood = itemstack.finishUsingItem(this.level, this);
+				ItemStack itemstackFood = itemstack.finishUsingItem(this.level(), this);
 				if (!itemstack.isEmpty()) {
 					this.setItemSlot(EquipmentSlot.MAINHAND, itemstackFood);
 				}
 
 				if (this.dropEatingLootCooldown <= 0) {
 					if (this.random.nextFloat() < 0.2F) {
-						for (ItemStack stacks : this.generateFishingLoot((ServerLevel) this.level)) {
+						for (ItemStack stacks : this.generateFishingLoot()) {
 							if (stacks.getCount() > 0) {
 								stacks.shrink(stacks.getCount() - 1);
 							}
@@ -229,7 +229,7 @@ public class Pike extends BucketableWaterAnimal {
 				this.eatTicks = 0;
 			} else if (this.eatTicks > 560 && this.random.nextFloat() < 0.1F) {
 				this.playSound(this.getEatingSound(itemstack), 1.0F, 1.0F);
-				this.level.broadcastEntityEvent(this, (byte) 45);
+				this.level().broadcastEntityEvent(this, (byte) 45);
 			}
 		}
 
@@ -237,14 +237,14 @@ public class Pike extends BucketableWaterAnimal {
 			Vec3 vec3d1 = this.getViewVector(0.0F);
 
 			for (int i = 0; i < 2; ++i) {
-				this.level.addParticle(ParticleTypes.BUBBLE, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.x * 1.5D, this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - vec3d1.y * 1.5D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
+				this.level().addParticle(ParticleTypes.BUBBLE, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.x * 1.5D, this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - vec3d1.y * 1.5D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth() - vec3d1.z * 1.5D, 0.0D, 0.0D, 0.0D);
 			}
 		}
 
 		if (this.getPikeType() == PikeType.OBSIDIAN && this.isLit()) {
-			if (this.level.isClientSide) {
+			if (this.level().isClientSide) {
 				for (int i = 0; i < 2; i++) {
-					this.level.addParticle(ParticleTypes.PORTAL, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth(), this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - 0.25D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth(), (this.random.nextDouble() - 0.5D) * 2.0D, -this.random.nextDouble(), (this.random.nextDouble() - 0.5D) * 2.0D);
+					this.level().addParticle(ParticleTypes.PORTAL, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth(), this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - 0.25D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth(), (this.random.nextDouble() - 0.5D) * 2.0D, -this.random.nextDouble(), (this.random.nextDouble() - 0.5D) * 2.0D);
 				}
 			}
 		}
@@ -279,7 +279,7 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, SpawnGroupData spawnDataIn, CompoundTag dataTag) {
 		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		int type = PikeType.getRandom(this.random, level.getBiome(this.blockPosition()), reason == MobSpawnType.BUCKET).id;
+		int type = PikeType.getRandom(this.random, this.level().getBiome(this.blockPosition()), reason == MobSpawnType.BUCKET).id;
 		if (dataTag != null && dataTag.contains("BucketVariantTag", 3)) {
 			this.setPikeType(PikeType.getTypeById(dataTag.getInt("BucketVariantTag")));
 			this.dropEatingLootCooldown = dataTag.getInt("EatingLootDropCooldown");
@@ -306,7 +306,7 @@ public class Pike extends BucketableWaterAnimal {
 		this.setPikeType(PikeType.getTypeById(type));
 
 		if (this.random.nextFloat() <= 0.10F && this.isEffectiveAi()) {
-			List<ItemStack> generatedFishingLoot = this.generateFishingLoot((ServerLevel) this.level);
+			List<ItemStack> generatedFishingLoot = this.generateFishingLoot();
 			for (ItemStack itemstack : generatedFishingLoot) {
 				this.setItemSlot(EquipmentSlot.MAINHAND, itemstack);
 			}
@@ -411,12 +411,12 @@ public class Pike extends BucketableWaterAnimal {
 
 	public void spitOutItem(ItemStack stackIn) {
 		if (!stackIn.isEmpty()) {
-			if (!this.level.isClientSide) {
-				ItemEntity itementity = new ItemEntity(this.level, this.getX() + this.getLookAngle().x, this.getY() + 1.0D, this.getZ() + this.getLookAngle().z, stackIn);
+			if (!this.level().isClientSide) {
+				ItemEntity itementity = new ItemEntity(this.level(), this.getX() + this.getLookAngle().x, this.getY() + 1.0D, this.getZ() + this.getLookAngle().z, stackIn);
 				itementity.setPickUpDelay(40);
 				itementity.setThrower(this.getUUID());
-				this.playSound(UASoundEvents.ENTITY_PIKE_SPIT.get(), 1.0F, 1.0F);
-				this.level.addFreshEntity(itementity);
+				this.playSound(UASoundEvents.PIKE_SPIT.get(), 1.0F, 1.0F);
+				this.level().addFreshEntity(itementity);
 				this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
 			}
 		}
@@ -441,7 +441,7 @@ public class Pike extends BucketableWaterAnimal {
 			for (int xx = this.blockPosition().getX() - 12; xx <= this.getX() + 12; xx++) {
 				for (int zz = this.blockPosition().getZ() - 12; zz <= this.getZ() + 12; zz++) {
 					mutable.set(xx, yy, zz);
-					Block block = this.level.getBlockState(mutable).getBlock();
+					Block block = this.level().getBlockState(mutable).getBlock();
 					if (block instanceof PickerelweedPlantBlock || block instanceof PickerelweedDoublePlantBlock) {
 						pickerelweeds.add(mutable);
 					}
@@ -451,11 +451,11 @@ public class Pike extends BucketableWaterAnimal {
 		return pickerelweeds;
 	}
 
-	private List<ItemStack> generateFishingLoot(ServerLevel world) {
-		LootContext.Builder lootcontext$builder = (new LootContext.Builder((ServerLevel) this.level)).withParameter(LootContextParams.ORIGIN, this.position()).withParameter(LootContextParams.TOOL, new ItemStack(Items.FISHING_ROD)).withRandom(this.random).withLuck((float) 1 + 1);
-		lootcontext$builder.withParameter(LootContextParams.KILLER_ENTITY, this).withParameter(LootContextParams.THIS_ENTITY, this);
-		LootTable loottable = this.getRandom().nextFloat() >= 0.1F ? this.level.getServer().getLootTables().get(BuiltInLootTables.FISHING_JUNK) : this.level.getServer().getLootTables().get(BuiltInLootTables.FISHING_TREASURE);
-		return loottable.getRandomItems(lootcontext$builder.create(LootContextParamSets.FISHING));
+	private List<ItemStack> generateFishingLoot() {
+		LootParams.Builder builder = (new LootParams.Builder((ServerLevel) this.level())).withParameter(LootContextParams.ORIGIN, this.position()).withParameter(LootContextParams.TOOL, new ItemStack(Items.FISHING_ROD)).withLuck((float) 1 + 1);
+		builder.withParameter(LootContextParams.KILLER_ENTITY, this).withParameter(LootContextParams.THIS_ENTITY, this);
+		LootTable loottable = this.level().getServer().getLootData().getLootTable(this.getRandom().nextFloat() >= 0.1F ? BuiltInLootTables.FISHING_JUNK : BuiltInLootTables.FISHING_TREASURE);
+		return loottable.getRandomItems(builder.create(LootContextParamSets.FISHING));
 	}
 
 	@Override
@@ -506,7 +506,7 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	private void spawnItem(ItemStack stack) {
-		this.level.addFreshEntity(new ItemEntity(this.level, this.getX(), this.getY(), this.getZ(), stack));
+		this.level().addFreshEntity(new ItemEntity(this.level(), this.getX(), this.getY(), this.getZ(), stack));
 	}
 
 	@Override
@@ -516,7 +516,7 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	@Override
-	public void positionRider(Entity passenger) {
+	public void positionRider(Entity passenger, Entity.MoveFunction function) {
 		if (passenger instanceof AbstractFish || passenger instanceof Animal) {
 			float distance = 0.7F;
 
@@ -524,7 +524,7 @@ public class Pike extends BucketableWaterAnimal {
 			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
 
 			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY() + this.getPassengersRidingOffset() + this.getPassengers().get(0).getMyRidingOffset(), this.getZ() + dz);
-			passenger.setPos(riderPos.x, riderPos.y, riderPos.z);
+			function.accept(passenger, riderPos.x, riderPos.y, riderPos.z);
 		} else {
 			super.positionRider(passenger);
 		}
@@ -533,11 +533,6 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	public double getPassengersRidingOffset() {
 		return this.getDimensions(this.getPose()).height * 0.075D;
-	}
-
-	@Override
-	public boolean rideableUnderWater() {
-		return true;
 	}
 
 	@Override
@@ -592,21 +587,21 @@ public class Pike extends BucketableWaterAnimal {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return UASoundEvents.ENTITY_PIKE_AMBIENT.get();
+		return UASoundEvents.PIKE_AMBIENT.get();
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return UASoundEvents.ENTITY_PIKE_DEATH.get();
+		return UASoundEvents.PIKE_DEATH.get();
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return UASoundEvents.ENTITY_PIKE_HURT.get();
+		return UASoundEvents.PIKE_HURT.get();
 	}
 
 	protected SoundEvent getFlopSound() {
-		return UASoundEvents.ENTITY_PIKE_FLOP.get();
+		return UASoundEvents.PIKE_FLOP.get();
 	}
 
 	@Override

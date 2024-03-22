@@ -23,7 +23,7 @@ public abstract class LivingEntityMixin extends Entity {
 
 	@Inject(at = @At("HEAD"), method = "setPosToBed", cancellable = true)
 	private void setPosToBed(BlockPos pos, CallbackInfo info) {
-		if (this.level.getBlockState(pos).getBlock() instanceof BedrollBlock) {
+		if (this.level().getBlockState(pos).getBlock() instanceof BedrollBlock) {
 			this.setPos(pos.getX() + 0.5D, pos.getY() + 0.1875D, pos.getZ() + 0.5D);
 			info.cancel();
 		}

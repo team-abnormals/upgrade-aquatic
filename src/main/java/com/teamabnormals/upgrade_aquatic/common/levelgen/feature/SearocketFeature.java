@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 
 public class SearocketFeature extends Feature<NoneFeatureConfiguration> {
 
-	private static final Supplier<BlockState> SEAROCKET(boolean pink) {
+	private static Supplier<BlockState> searocket(boolean pink) {
 		return pink ? () -> UABlocks.PINK_SEAROCKET.get().defaultBlockState() : () -> UABlocks.WHITE_SEAROCKET.get().defaultBlockState();
 	}
 
@@ -33,13 +33,13 @@ public class SearocketFeature extends Feature<NoneFeatureConfiguration> {
 		boolean colorType;
 		if (worldIn.getBiome(pos).value().getBaseTemperature() < 0.2D) {
 			colorType = rand.nextFloat() <= 0.25F;
-			if (SEAROCKET(colorType).get().canSurvive(worldIn, pos)) {
+			if (searocket(colorType).get().canSurvive(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));
 				return true;
 			}
 		} else {
 			colorType = rand.nextFloat() <= 0.75F;
-			if (SEAROCKET(colorType).get().canSurvive(worldIn, pos)) {
+			if (searocket(colorType).get().canSurvive(worldIn, pos)) {
 				this.generateSearocketPatch(worldIn, pos, colorType, rand.nextInt(8));
 				return true;
 			}
@@ -97,9 +97,9 @@ public class SearocketFeature extends Feature<NoneFeatureConfiguration> {
 					for (int j = -(patterns[0] / patterns[2] + patterns[0]); j < patterns[0] / patterns[2] + patterns[0]; j++) {
 						double radius = r.compute(Math.atan2(j, i));
 						BlockPos placingPos = pos.offset(i, 0, j);
-						if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius) {
-							if (SEAROCKET(pink).get().canSurvive(world, placingPos) && world.getFluidState(placingPos).isEmpty()) {
-								world.setBlock(placingPos, SEAROCKET(pink).get(), 2);
+						if (world.getBlockState(placingPos).canBeReplaced() && (i * i + j * j) < radius * radius) {
+							if (searocket(pink).get().canSurvive(world, placingPos) && world.getFluidState(placingPos).isEmpty()) {
+								world.setBlock(placingPos, searocket(pink).get(), 2);
 							}
 						}
 					}

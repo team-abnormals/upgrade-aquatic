@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.blueprint.client.EntitySkinHelper;
 import com.teamabnormals.upgrade_aquatic.client.model.NautilusModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Nautilus;
@@ -42,10 +42,10 @@ public class NautilusRenderer extends MobRenderer<Nautilus, NautilusModel<Nautil
 	protected void setupRotations(Nautilus nautilus, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 0.3F * Mth.sin(0.6F * ageInTicks);
-		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
+		matrixStack.mulPose(Axis.YP.rotationDegrees(f));
 		if (!nautilus.isInWater() && !nautilus.isEyeInFluid(FluidTags.WATER)) {
 			matrixStack.translate(0.2F, 0.14F, 0.0F);
-			matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
 		}
 	}
 }

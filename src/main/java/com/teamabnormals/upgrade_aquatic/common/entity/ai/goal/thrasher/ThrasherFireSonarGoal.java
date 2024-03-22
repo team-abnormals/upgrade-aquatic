@@ -82,9 +82,9 @@ public class ThrasherFireSonarGoal extends Goal {
 			this.stablilizeDirection();
 
 			if (this.sonarTicks % 5 == 0 && this.sonarTicks < this.sonarFireDuration) {
-				SonarWave sonarWave = UAEntityTypes.SONAR_WAVE.get().create(this.thrasher.level);
+				SonarWave sonarWave = UAEntityTypes.SONAR_WAVE.get().create(this.thrasher.level());
 				sonarWave.fireSonarWave(this.thrasher);
-				this.thrasher.level.addFreshEntity(sonarWave);
+				this.thrasher.level().addFreshEntity(sonarWave);
 			}
 		}
 	}
@@ -113,7 +113,7 @@ public class ThrasherFireSonarGoal extends Goal {
 		}
 
 		public static boolean shouldContinueExecutingPhase(@Nullable SonarPhase phase, Thrasher thrasher, int sonarTicks) {
-			boolean defaultCondition = !thrasher.isStunned() && thrasher.isInWater() && thrasher.getPassengers().isEmpty() && thrasher.getTarget() == null && thrasher.getPossibleDetectionPoint() != null && thrasher.level.getBlockState(thrasher.blockPosition().below()).getBlock() == Blocks.WATER;
+			boolean defaultCondition = !thrasher.isStunned() && thrasher.isInWater() && thrasher.getPassengers().isEmpty() && thrasher.getTarget() == null && thrasher.getPossibleDetectionPoint() != null && thrasher.level().getBlockState(thrasher.blockPosition().below()).getBlock() == Blocks.WATER;
 			if (phase == null) {
 				return defaultCondition;
 			}

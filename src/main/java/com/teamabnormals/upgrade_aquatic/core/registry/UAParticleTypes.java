@@ -47,24 +47,24 @@ public class UAParticleTypes {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
-		event.register(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
-		event.register(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);
-		event.register(SPECTRAL_CONSUME.get(), SpectralConsumeParticle.Factory::new);
-		event.register(PINK_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		event.register(PURPLE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		event.register(BLUE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		event.register(GREEN_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		event.register(YELLOW_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		event.register(ORANGE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		event.register(RED_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		event.register(WHITE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
-		event.register(PINK_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		event.register(PURPLE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		event.register(BLUE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		event.register(GREEN_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		event.register(YELLOW_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		event.register(ORANGE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		event.register(RED_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
-		event.register(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
+		event.registerSpriteSet(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);
+		event.registerSpriteSet(SPECTRAL_CONSUME.get(), SpectralConsumeParticle.Factory::new);
+		event.registerSpriteSet(PINK_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(PURPLE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(BLUE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(GREEN_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(YELLOW_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(ORANGE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(RED_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(WHITE_JELLY_FLAME.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(PINK_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(PURPLE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(BLUE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(GREEN_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(YELLOW_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(ORANGE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(RED_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
+		event.registerSpriteSet(WHITE_JELLY_BLOB.get(), JellyTorchParticle.Factory::new);
 	}
 }

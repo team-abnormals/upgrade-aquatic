@@ -17,6 +17,8 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent.Operation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.RegistryObject;
@@ -57,16 +59,17 @@ public class UAEntityTypes {
 		event.put(IMMORTAL_JELLYFISH.get(), ImmortalJellyfish.registerAttributes().build());
 	}
 
-	public static void registerSpawnPlacements() {
-		SpawnPlacements.register(UAEntityTypes.NAUTILUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Nautilus::checkNautilusSpawnRules);
-		SpawnPlacements.register(UAEntityTypes.LIONFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Lionfish::checkLionfishSpawnRules);
-		SpawnPlacements.register(UAEntityTypes.PIKE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Pike::checkPikeSpawnRules);
-		SpawnPlacements.register(UAEntityTypes.PERCH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, WaterAnimal::checkSurfaceWaterAnimalSpawnRules);
-		SpawnPlacements.register(UAEntityTypes.THRASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Thrasher::checkThrasherSpawnRules);
-		SpawnPlacements.register(UAEntityTypes.GREAT_THRASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Thrasher::checkThrasherSpawnRules);
+	@SubscribeEvent
+	public static void registerEntitySpawnPlacements(SpawnPlacementRegisterEvent event) {
+		event.register(UAEntityTypes.NAUTILUS.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Nautilus::checkNautilusSpawnRules, Operation.AND);
+		event.register(UAEntityTypes.LIONFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Lionfish::checkLionfishSpawnRules, Operation.AND);
+		event.register(UAEntityTypes.PIKE.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Pike::checkPikeSpawnRules, Operation.AND);
+		event.register(UAEntityTypes.PERCH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, WaterAnimal::checkSurfaceWaterAnimalSpawnRules, Operation.AND);
+		event.register(UAEntityTypes.THRASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Thrasher::checkThrasherSpawnRules, Operation.AND);
+		event.register(UAEntityTypes.GREAT_THRASHER.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, Thrasher::checkThrasherSpawnRules, Operation.AND);
 
-		SpawnPlacements.register(UAEntityTypes.BOX_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules);
-		SpawnPlacements.register(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules);
-		SpawnPlacements.register(UAEntityTypes.IMMORTAL_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules);
+		event.register(UAEntityTypes.BOX_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules, Operation.AND);
+		event.register(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules, Operation.AND);
+		event.register(UAEntityTypes.IMMORTAL_JELLYFISH.get(), SpawnPlacements.Type.IN_WATER, Heightmap.Types.MOTION_BLOCKING, AbstractJellyfish::checkJellyfishSpawnRules, Operation.AND);
 	}
 }

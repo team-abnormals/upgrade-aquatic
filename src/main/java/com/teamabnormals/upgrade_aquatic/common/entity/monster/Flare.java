@@ -110,29 +110,29 @@ public class Flare extends FlyingMob {
 
 	public void tick() {
 		super.tick();
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			float f = Mth.cos((float) (this.getId() * 3 + this.tickCount) * 0.13F + (float) Math.PI);
 			float f1 = Mth.cos((float) (this.getId() * 3 + this.tickCount + 1) * 0.13F + (float) Math.PI);
 			if (f > 0.0F && f1 <= 0.0F) {
-				this.level.playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.PHANTOM_FLAP, this.getSoundSource(), 0.95F + this.random.nextFloat() * 0.05F, 0.95F + this.random.nextFloat() * 0.05F, false);
+				this.level().playLocalSound(this.getX(), this.getY(), this.getZ(), SoundEvents.PHANTOM_FLAP, this.getSoundSource(), 0.95F + this.random.nextFloat() * 0.05F, 0.95F + this.random.nextFloat() * 0.05F, false);
 			}
 
 			int i = this.getPhantomSize();
 			float f2 = Mth.cos(this.getYRot() * ((float) Math.PI / 180F)) * (1.3F + 0.21F * (float) i);
 			float f3 = Mth.sin(this.getYRot() * ((float) Math.PI / 180F)) * (1.3F + 0.21F * (float) i);
 			float f4 = (0.3F + f * 0.45F) * ((float) i * 0.2F + 1.0F);
-			this.level.addParticle(ParticleTypes.PORTAL, this.getX() + (double) f2, this.getY() + (double) f4, this.getZ() + (double) f3, 0.0D, 0.0D, 0.0D);
-			this.level.addParticle(ParticleTypes.PORTAL, this.getX() - (double) f2, this.getY() + (double) f4, this.getZ() - (double) f3, 0.0D, 0.0D, 0.0D);
+			this.level().addParticle(ParticleTypes.PORTAL, this.getX() + (double) f2, this.getY() + (double) f4, this.getZ() + (double) f3, 0.0D, 0.0D, 0.0D);
+			this.level().addParticle(ParticleTypes.PORTAL, this.getX() - (double) f2, this.getY() + (double) f4, this.getZ() - (double) f3, 0.0D, 0.0D, 0.0D);
 		}
 
-		if (!this.level.isClientSide && this.level.getDifficulty() == Difficulty.PEACEFUL) {
+		if (!this.level().isClientSide && this.level().getDifficulty() == Difficulty.PEACEFUL) {
 			this.discard();
 		}
 	}
 
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-		this.orbitPosition = (new BlockPos(this.position())).above(5);
+		this.orbitPosition = this.blockPosition().above(5);
 		this.setPhantomSize(0);
 		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
@@ -216,7 +216,7 @@ public class Flare extends FlyingMob {
 				return false;
 			} else {
 				this.tickDelay = 60;
-				List<LivingEntity> list = Flare.this.level.getNearbyEntities(LivingEntity.class, this.attackTargeting, Flare.this, Flare.this.getBoundingBox().inflate(16.0D, 64.0D, 16.0D));
+				List<LivingEntity> list = Flare.this.level().getNearbyEntities(LivingEntity.class, this.attackTargeting, Flare.this, Flare.this.getBoundingBox().inflate(16.0D, 64.0D, 16.0D));
 				if (!list.isEmpty()) {
 					for (LivingEntity mob : list) {
 						if (Flare.this.canAttack(mob, TargetingConditions.DEFAULT)) {
@@ -384,12 +384,12 @@ public class Flare extends FlyingMob {
 				this.selectNext();
 			}
 
-			if (Flare.this.orbitOffset.y < Flare.this.getY() && !Flare.this.level.isEmptyBlock((new BlockPos(Flare.this.position())).below(1))) {
+			if (Flare.this.orbitOffset.y < Flare.this.getY() && !Flare.this.level().isEmptyBlock(Flare.this.blockPosition().below(1))) {
 				this.height = Math.max(1.0F, this.height);
 				this.selectNext();
 			}
 
-			if (Flare.this.orbitOffset.y > Flare.this.getY() && !Flare.this.level.isEmptyBlock((new BlockPos(Flare.this.position())).above(1))) {
+			if (Flare.this.orbitOffset.y > Flare.this.getY() && !Flare.this.level().isEmptyBlock(Flare.this.blockPosition().above(1))) {
 				this.height = Math.min(-1.0F, this.height);
 				this.selectNext();
 			}
@@ -398,7 +398,7 @@ public class Flare extends FlyingMob {
 
 		private void selectNext() {
 			if (BlockPos.ZERO.equals(Flare.this.orbitPosition)) {
-				Flare.this.orbitPosition = new BlockPos(Flare.this.position());
+				Flare.this.orbitPosition = Flare.this.blockPosition();
 			}
 
 			this.angle += this.clockwise * 15.0F * ((float) Math.PI / 180F);
@@ -433,7 +433,7 @@ public class Flare extends FlyingMob {
 		 * Reset the task's internal state. Called when this task is interrupted by another one
 		 */
 		public void stop() {
-			Flare.this.orbitPosition = Flare.this.level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, Flare.this.orbitPosition).above(10 + Flare.this.random.nextInt(20));
+			Flare.this.orbitPosition = Flare.this.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, Flare.this.orbitPosition).above(10 + Flare.this.random.nextInt(20));
 		}
 
 		/**
@@ -453,9 +453,9 @@ public class Flare extends FlyingMob {
 		}
 
 		private void setAnchorAboveTarget() {
-			Flare.this.orbitPosition = (new BlockPos(Flare.this.getTarget().position())).above(20 + Flare.this.random.nextInt(20));
-			if (Flare.this.orbitPosition.getY() < Flare.this.level.getSeaLevel()) {
-				Flare.this.orbitPosition = new BlockPos(Flare.this.orbitPosition.getX(), Flare.this.level.getSeaLevel() + 1, Flare.this.orbitPosition.getZ());
+			Flare.this.orbitPosition = (Flare.this.getTarget().blockPosition()).above(20 + Flare.this.random.nextInt(20));
+			if (Flare.this.orbitPosition.getY() < Flare.this.level().getSeaLevel()) {
+				Flare.this.orbitPosition = new BlockPos(Flare.this.orbitPosition.getX(), Flare.this.level().getSeaLevel() + 1, Flare.this.orbitPosition.getZ());
 			}
 
 		}
@@ -486,7 +486,7 @@ public class Flare extends FlyingMob {
 					return false;
 				} else {
 					if (Flare.this.tickCount % 20 == 0) {
-						List<Cat> list = Flare.this.level.getEntitiesOfClass(Cat.class, Flare.this.getBoundingBox().inflate(16.0D), EntitySelector.ENTITY_STILL_ALIVE);
+						List<Cat> list = Flare.this.level().getEntitiesOfClass(Cat.class, Flare.this.getBoundingBox().inflate(16.0D), EntitySelector.ENTITY_STILL_ALIVE);
 						if (!list.isEmpty()) {
 							for (Cat catentity : list) {
 								catentity.hiss();
@@ -528,7 +528,7 @@ public class Flare extends FlyingMob {
 			if (Flare.this.getBoundingBox().inflate(0.2F).intersects(livingentity.getBoundingBox())) {
 				Flare.this.doHurtTarget(livingentity);
 				Flare.this.attackPhase = Flare.AttackPhase.CIRCLE;
-				Flare.this.level.levelEvent(1039, new BlockPos(Flare.this.position()), 0);
+				Flare.this.level().levelEvent(1039, Flare.this.blockPosition(), 0);
 			} else if (Flare.this.horizontalCollision || Flare.this.hurtTime > 0) {
 				Flare.this.attackPhase = Flare.AttackPhase.CIRCLE;
 			}

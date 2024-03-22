@@ -1,15 +1,15 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import net.minecraft.client.renderer.ItemInHandRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -30,8 +30,8 @@ public class PikeCarriedItemRenderLayer extends RenderLayer<Pike, PikeModel<Pike
 			if (!itemstack.isEmpty()) {
 				matrixStack.pushPose();
 				matrixStack.translate((this.getParentModel()).nose.x / 16.0F, (this.getParentModel()).nose.y / 16.0F + 1.3F, (this.getParentModel()).nose.z / 16.0F - 0.5F);
-				matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F));
-				this.itemInHandRenderer.renderItem(pike, itemstack, ItemTransforms.TransformType.GROUND, false, matrixStack, bufferIn, packedLightIn);
+				matrixStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+				this.itemInHandRenderer.renderItem(pike, itemstack, ItemDisplayContext.GROUND, false, matrixStack, bufferIn, packedLightIn);
 				matrixStack.popPose();
 			}
 		}

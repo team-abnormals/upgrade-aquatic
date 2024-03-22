@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.teamabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.GlowingPikeRenderLayer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.PikeCarriedItemRenderLayer;
@@ -34,10 +34,10 @@ public class PikeRenderer extends MobRenderer<Pike, PikeModel<Pike>> {
 	protected void setupRotations(Pike pike, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
 		super.setupRotations(pike, matrixStack, ageInTicks, rotationYaw, partialTicks);
 		float f = 4.3F * Mth.sin(0.6F * ageInTicks);
-		matrixStack.mulPose(Vector3f.YP.rotationDegrees(f));
+		matrixStack.mulPose(Axis.YP.rotationDegrees(f));
 		if (!pike.isInWater()) {
 			matrixStack.translate(0.1F, 0.1F, -0.1F);
-			matrixStack.mulPose(Vector3f.ZP.rotationDegrees(90.0F));
+			matrixStack.mulPose(Axis.ZP.rotationDegrees(90.0F));
 		}
 	}
 

@@ -7,16 +7,11 @@
     "upgrade_aquatic:river_beehive",
     "upgrade_aquatic:river_chest",
     "upgrade_aquatic:river_trapped_chest",
-    "upgrade_aquatic:river_hedge",
-    "upgrade_aquatic:river_post",
-    "upgrade_aquatic:stripped_river_post",
     "upgrade_aquatic:driftwood_boards",
     "upgrade_aquatic:driftwood_bookshelf",
     "upgrade_aquatic:driftwood_ladder",
     "upgrade_aquatic:driftwood_beehive",
     "upgrade_aquatic:driftwood_chest",
-    "upgrade_aquatic:driftwood_trapped_chest",
-    "upgrade_aquatic:driftwood_post",
-    "upgrade_aquatic:stripped_driftwood_post"
+    "upgrade_aquatic:driftwood_trapped_chest"
   ]
 }

@@ -189,14 +189,14 @@ public class Lionfish extends BucketableWaterAnimal {
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.isInWater() && this.onGround && this.verticalCollision) {
+		if (!this.isInWater() && this.onGround() && this.verticalCollision) {
 			this.setDeltaMovement(this.getDeltaMovement().add((this.random.nextFloat() * 2.0F - 1.0F) * 0.035F, 0.4F, (this.random.nextFloat() * 2.0F - 1.0F) * 0.035F));
-			this.onGround = false;
+			this.setOnGround(false);
 			this.hasImpulse = true;
 			this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
 		}
 		if (this.isAlive()) {
-			for (LivingEntity entity : this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.3D), ENEMY_MATCHER)) {
+			for (LivingEntity entity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.3D), ENEMY_MATCHER)) {
 				if (entity.isAlive()) {
 					this.attack(entity);
 				}
@@ -212,7 +212,7 @@ public class Lionfish extends BucketableWaterAnimal {
 	}
 
 	private void attack(LivingEntity entity) {
-		if (entity.hurt(DamageSource.mobAttack(this), 2.0F) && entity.isInWater()) {
+		if (entity.hurt(this.damageSources().mobAttack(this), 2.0F) && entity.isInWater()) {
 			entity.addEffect(new MobEffectInstance(MobEffects.POISON, 70, 1));
 			this.playSound(SoundEvents.PUFFER_FISH_STING, 1.0F, 1.0F);
 			if (entity instanceof Player) {

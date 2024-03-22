@@ -24,9 +24,9 @@ public class RestfulnessMobEffect extends InstantenousMobEffect {
 			StatsCounter statisticsManager = playerMP.getStats();
 			statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), -(24000 * (amplifier + 1)));
 		} else if (entity instanceof Phantom) {
-			entity.hurt(DamageSource.MAGIC, Float.MAX_VALUE);
+			entity.hurt(entity.damageSources().magic(), Float.MAX_VALUE);
 		} else if (entity instanceof Flare) {
-			Phantom phantom = EntityType.PHANTOM.create(entity.level);
+			Phantom phantom = EntityType.PHANTOM.create(entity.level());
 			phantom.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.getYRot(), entity.getXRot());
 			phantom.setNoAi(((Mob) entity).isNoAi());
 			if (entity.hasCustomName()) {
@@ -35,7 +35,7 @@ public class RestfulnessMobEffect extends InstantenousMobEffect {
 			}
 			phantom.setHealth(entity.getHealth());
 			if (phantom.getHealth() > 0) {
-				entity.level.addFreshEntity(phantom);
+				entity.level().addFreshEntity(phantom);
 				entity.discard();
 			}
 			entity.discard();

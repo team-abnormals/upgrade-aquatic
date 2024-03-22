@@ -26,7 +26,7 @@ public class InsomniaMobEffect extends InstantenousMobEffect {
 			StatsCounter statisticsManager = playerMP.getStats();
 			statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), (24000 * (amplifier + 1)));
 		} else if (entity instanceof Phantom) {
-			Flare flare = UAEntityTypes.FLARE.get().create(entity.level);
+			Flare flare = UAEntityTypes.FLARE.get().create(entity.level());
 			flare.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.getYRot(), entity.getXRot());
 			flare.setNoAi(((Mob) entity).isNoAi());
 			if (entity.hasCustomName()) {
@@ -35,17 +35,17 @@ public class InsomniaMobEffect extends InstantenousMobEffect {
 			}
 			flare.setHealth(entity.getHealth());
 			if (flare.getHealth() > 0) {
-				entity.level.addFreshEntity(flare);
+				entity.level().addFreshEntity(flare);
 				entity.discard();
 			}
 			Player player = entity.getCommandSenderWorld().getNearestPlayer(entity, 11);
 			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
-				if (!entity.level.isClientSide()) {
+				if (!entity.level().isClientSide()) {
 					UACriteriaTriggers.CONVERT_PHANTOM.trigger(serverPlayer);
 				}
 			}
 		} else if (entity instanceof Flare) {
-			entity.hurt(DamageSource.MAGIC, Float.MAX_VALUE);
+			entity.hurt(entity.damageSources().magic(), Float.MAX_VALUE);
 		}
 	}
 

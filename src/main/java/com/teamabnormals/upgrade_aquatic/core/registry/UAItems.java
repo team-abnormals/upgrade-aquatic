@@ -1,9 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.mojang.datafixers.util.Pair;
-import com.teamabnormals.blueprint.common.item.BlueprintMobBucketItem;
 import com.teamabnormals.blueprint.common.item.BlueprintRecordItem;
-import com.teamabnormals.blueprint.core.util.registry.AbstractSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.item.*;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
@@ -29,40 +27,40 @@ import net.minecraftforge.registries.RegistryObject;
 public class UAItems {
 	public static final UAItemSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getItemSubHelper();
 
-	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> DRIFTWOOD_BOAT = HELPER.createBoatAndChestBoatItem("driftwood", UABlocks.DRIFTWOOD_PLANKS);
-	public static final RegistryObject<Item> DRIFTWOOD_FURNACE_BOAT = HELPER.createItem("driftwood_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.DRIFTWOOD_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
-	public static final RegistryObject<Item> LARGE_DRIFTWOOD_BOAT = HELPER.createItem("large_driftwood_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_DRIFTWOOD_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
-	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> RIVER_BOAT = HELPER.createBoatAndChestBoatItem("river", UABlocks.RIVER_PLANKS);
-	public static final RegistryObject<Item> RIVER_FURNACE_BOAT = HELPER.createItem("river_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.RIVER_FURNACE_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
-	public static final RegistryObject<Item> LARGE_RIVER_BOAT = HELPER.createItem("large_river_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_RIVER_BOAT : () -> new Item(new Item.Properties().tab(AbstractSubRegistryHelper.areModsLoaded("boatload") ? CreativeModeTab.TAB_TRANSPORTATION : null)));
+	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> DRIFTWOOD_BOAT = HELPER.createBoatAndChestBoatItem("driftwood", UABlocks.DRIFTWOOD_PLANKS, false);
+	public static final RegistryObject<Item> DRIFTWOOD_FURNACE_BOAT = HELPER.createItem("driftwood_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.DRIFTWOOD_FURNACE_BOAT : () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> LARGE_DRIFTWOOD_BOAT = HELPER.createItem("large_driftwood_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_DRIFTWOOD_BOAT : () -> new Item(new Item.Properties()));
+	public static final Pair<RegistryObject<Item>, RegistryObject<Item>> RIVER_BOAT = HELPER.createBoatAndChestBoatItem("river", UABlocks.RIVER_PLANKS, false);
+	public static final RegistryObject<Item> RIVER_FURNACE_BOAT = HELPER.createItem("river_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.RIVER_FURNACE_BOAT : () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> LARGE_RIVER_BOAT = HELPER.createItem("large_river_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_RIVER_BOAT : () -> new Item(new Item.Properties()));
 
-	public static final RegistryObject<Item> NAUTILUS_BUCKET = HELPER.createItem("nautilus_bucket", () -> new BlueprintMobBucketItem(UAEntityTypes.NAUTILUS::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
-	public static final RegistryObject<Item> PIKE_BUCKET = HELPER.createItem("pike_bucket", () -> new PikeBucketItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
-	public static final RegistryObject<Item> LIONFISH_BUCKET = HELPER.createItem("lionfish_bucket", () -> new BlueprintMobBucketItem(UAEntityTypes.LIONFISH::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
-	public static final RegistryObject<Item> PERCH_BUCKET = HELPER.createItem("perch_bucket", () -> new MobBucketItem(UAEntityTypes.PERCH, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
-	public static final RegistryObject<Item> SQUID_BUCKET = HELPER.createItem("squid_bucket", () -> new SquidBucketItem(() -> Fluids.WATER, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
-	public static final RegistryObject<Item> GLOW_SQUID_BUCKET = HELPER.createItem("glow_squid_bucket", () -> new GlowSquidBucketItem(() -> Fluids.WATER, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
+	public static final RegistryObject<Item> NAUTILUS_BUCKET = HELPER.createItem("nautilus_bucket", () -> new MobBucketItem(UAEntityTypes.NAUTILUS::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> PIKE_BUCKET = HELPER.createItem("pike_bucket", () -> new PikeBucketItem(new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> LIONFISH_BUCKET = HELPER.createItem("lionfish_bucket", () -> new MobBucketItem(UAEntityTypes.LIONFISH::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> PERCH_BUCKET = HELPER.createItem("perch_bucket", () -> new MobBucketItem(UAEntityTypes.PERCH, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> SQUID_BUCKET = HELPER.createItem("squid_bucket", () -> new SquidBucketItem(() -> Fluids.WATER, new Item.Properties().stacksTo(1)));
+	public static final RegistryObject<Item> GLOW_SQUID_BUCKET = HELPER.createItem("glow_squid_bucket", () -> new GlowSquidBucketItem(() -> Fluids.WATER, new Item.Properties().stacksTo(1)));
 	public static final RegistryObject<Item> JELLYFISH_BUCKET = HELPER.createItem("jellyfish_bucket", () -> new JellyfishBucketItem(() -> Fluids.WATER, new Item.Properties().stacksTo(1)));
 
-	public static final RegistryObject<Item> PRISMARINE_ROD = HELPER.createItem("prismarine_rod", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-	public static final RegistryObject<Item> THRASHER_TOOTH = HELPER.createItem("thrasher_tooth", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-	public static final RegistryObject<Item> BOILED_BLUE_PICKERELWEED = HELPER.createItem("boiled_blue_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.BLUE_PICKERELWEED), false));
-	public static final RegistryObject<Item> BOILED_PURPLE_PICKERELWEED = HELPER.createItem("boiled_purple_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.PURPLE_PICKERELWEED), true));
+	public static final RegistryObject<Item> PRISMARINE_ROD = HELPER.createItem("prismarine_rod", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> THRASHER_TOOTH = HELPER.createItem("thrasher_tooth", () -> new Item(new Item.Properties()));
+	public static final RegistryObject<Item> BOILED_BLUE_PICKERELWEED = HELPER.createItem("boiled_blue_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().food(UAFoods.BLUE_PICKERELWEED), false));
+	public static final RegistryObject<Item> BOILED_PURPLE_PICKERELWEED = HELPER.createItem("boiled_purple_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().food(UAFoods.PURPLE_PICKERELWEED), true));
 
-	public static final RegistryObject<Item> PIKE = HELPER.createItem("pike", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.PIKE)));
-	public static final RegistryObject<Item> COOKED_PIKE = HELPER.createItem("cooked_pike", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.COOKED_PIKE)));
-	public static final RegistryObject<Item> LIONFISH = HELPER.createItem("lionfish", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.LIONFISH)));
-	public static final RegistryObject<Item> COOKED_LIONFISH = HELPER.createItem("cooked_lionfish", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.COOKED_LIONFISH)));
-	public static final RegistryObject<Item> PERCH = HELPER.createItem("perch", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.PERCH)));
-	public static final RegistryObject<Item> COOKED_PERCH = HELPER.createItem("cooked_perch", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.COOKED_PERCH)));
+	public static final RegistryObject<Item> PIKE = HELPER.createItem("pike", () -> new Item(new Item.Properties().food(UAFoods.PIKE)));
+	public static final RegistryObject<Item> COOKED_PIKE = HELPER.createItem("cooked_pike", () -> new Item(new Item.Properties().food(UAFoods.COOKED_PIKE)));
+	public static final RegistryObject<Item> LIONFISH = HELPER.createItem("lionfish", () -> new Item(new Item.Properties().food(UAFoods.LIONFISH)));
+	public static final RegistryObject<Item> COOKED_LIONFISH = HELPER.createItem("cooked_lionfish", () -> new Item(new Item.Properties().food(UAFoods.COOKED_LIONFISH)));
+	public static final RegistryObject<Item> PERCH = HELPER.createItem("perch", () -> new Item(new Item.Properties().food(UAFoods.PERCH)));
+	public static final RegistryObject<Item> COOKED_PERCH = HELPER.createItem("cooked_perch", () -> new Item(new Item.Properties().food(UAFoods.COOKED_PERCH)));
 
-	public static final RegistryObject<Item> MULBERRY = HELPER.createItem("mulberry", () -> new ItemNameBlockItem(UABlocks.MULBERRY_VINE.get(), new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.MULBERRY)));
-	public static final RegistryObject<Item> MULBERRY_JAM_BOTTLE = HELPER.createItem("mulberry_jam_bottle", () -> new MulberryJamBottleItem(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).stacksTo(16).craftRemainder(Items.GLASS_BOTTLE).food(UAFoods.MULBERRY_JAM)));
-	public static final RegistryObject<Item> MULBERRY_BREAD = HELPER.createItem("mulberry_bread", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.MULBERRY_BREAD)));
-	public static final RegistryObject<Item> MULBERRY_PIE = HELPER.createItem("mulberry_pie", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(UAFoods.MULBERRY_PIE)));
+	public static final RegistryObject<Item> MULBERRY = HELPER.createItem("mulberry", () -> new ItemNameBlockItem(UABlocks.MULBERRY_VINE.get(), new Item.Properties().food(UAFoods.MULBERRY)));
+	public static final RegistryObject<Item> MULBERRY_JAM_BOTTLE = HELPER.createItem("mulberry_jam_bottle", () -> new MulberryJamBottleItem(new Item.Properties().stacksTo(16).craftRemainder(Items.GLASS_BOTTLE).food(UAFoods.MULBERRY_JAM)));
+	public static final RegistryObject<Item> MULBERRY_BREAD = HELPER.createItem("mulberry_bread", () -> new Item(new Item.Properties().food(UAFoods.MULBERRY_BREAD)));
+	public static final RegistryObject<Item> MULBERRY_PIE = HELPER.createItem("mulberry_pie", () -> new Item(new Item.Properties().food(UAFoods.MULBERRY_PIE)));
 
-	public static final RegistryObject<Item> MUSIC_DISC_ATLANTIS = HELPER.createItem("music_disc_atlantis", () -> new BlueprintRecordItem(14, UASoundEvents.MUSIC_DISC_ATLANTIS, new Item.Properties().stacksTo(1).tab(CreativeModeTab.TAB_MISC).rarity(Rarity.RARE), 114));
-	public static final RegistryObject<Item> DISC_FRAGMENT_ATLANTIS = HELPER.createItem("disc_fragment_atlantis", () -> new DiscFragmentItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+	public static final RegistryObject<Item> MUSIC_DISC_ATLANTIS = HELPER.createItem("music_disc_atlantis", () -> new BlueprintRecordItem(14, UASoundEvents.MUSIC_DISC_ATLANTIS, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 114));
+	public static final RegistryObject<Item> DISC_FRAGMENT_ATLANTIS = HELPER.createItem("disc_fragment_atlantis", () -> new DiscFragmentItem(new Item.Properties()));
 
 	public static final RegistryObject<ForgeSpawnEggItem> NAUTILUS_SPAWN_EGG = HELPER.createSpawnEggItem("nautilus", UAEntityTypes.NAUTILUS::get, 14596231, 16744272);
 	public static final RegistryObject<ForgeSpawnEggItem> PIKE_SPAWN_EGG = HELPER.createSpawnEggItem("pike", UAEntityTypes.PIKE::get, 4806944, 13002040);

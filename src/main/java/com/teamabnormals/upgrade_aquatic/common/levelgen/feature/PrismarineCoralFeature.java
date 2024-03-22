@@ -100,7 +100,7 @@ public class PrismarineCoralFeature extends Feature<NoneFeatureConfiguration> {
 			for (int j = -(a / c + a); j < a / c + a; j++) {
 				double radius = r.compute(Math.atan2(j, i));
 				BlockPos placingPos = pos.offset(i, 0, j);
-				if (world.getBlockState(placingPos).getMaterial().isReplaceable() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN.get() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.get() && (i * i + j * j) < radius * radius) {
+				if (world.getBlockState(placingPos).canBeReplaced() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.PRISMARINE_CORAL_WALL_FAN.get() && (i * i + j * j) < radius * radius || world.getBlockState(placingPos).getBlock() == UABlocks.ELDER_PRISMARINE_CORAL_WALL_FAN.get() && (i * i + j * j) < radius * radius) {
 					world.setBlock(placingPos, coralBlock(isElder), 2);
 					if (rand.nextBoolean()) {
 						BlockPos above = placingPos.above();

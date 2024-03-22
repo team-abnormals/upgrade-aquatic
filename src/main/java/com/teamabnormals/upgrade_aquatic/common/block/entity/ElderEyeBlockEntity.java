@@ -9,9 +9,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 
 import java.util.List;
@@ -53,7 +53,7 @@ public class ElderEyeBlockEntity extends BlockEntity {
 
 					for (int b = 1; b < Math.abs(IntStream.of(posCheck).sum()); b++) {
 						if (!level.getBlockState(pos.relative(facing, b)).isAir()) {
-							if (level.getBlockState(pos.relative(facing, b)).getMaterial().blocksMotion()) {
+							if (level.getBlockState(pos.relative(facing, b)).blocksMotion()) {
 								entityCount--;
 								if (entityCount <= 0) {
 									hasEntity = false;
@@ -75,8 +75,8 @@ public class ElderEyeBlockEntity extends BlockEntity {
 	public static int calcRange(Level level, BlockPos pos, Direction direction) {
 		int i;
 		for (i = 1; i < 13; i++) {
-			if (level.getBlockState(pos.relative(direction, i)).getMaterial() != Material.AIR) {
-				if (level.getBlockState(pos.relative(direction, i)).getMaterial() != Material.WATER) {
+			if (level.getBlockState(pos.relative(direction, i)).isAir()) {
+				if (level.getBlockState(pos.relative(direction, i)).is(Blocks.WATER)) {
 					break;
 				}
 			}

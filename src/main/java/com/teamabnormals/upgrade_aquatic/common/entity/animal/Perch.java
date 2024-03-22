@@ -37,7 +37,7 @@ public class Perch extends AbstractSchoolingFish {
 			for (int xx = this.blockPosition().getX() - 12; xx <= this.getX() + 12; xx++) {
 				for (int zz = this.blockPosition().getZ() - 12; zz <= this.getZ() + 12; zz++) {
 					mutable.set(xx, yy, zz);
-					BlockState block = this.level.getBlockState(mutable);
+					BlockState block = this.level().getBlockState(mutable);
 					if (block.is(Blocks.SEAGRASS) || block.is(Blocks.TALL_SEAGRASS)) {
 						seagrasses.add(mutable);
 					}
@@ -52,18 +52,18 @@ public class Perch extends AbstractSchoolingFish {
 	}
 
 	protected SoundEvent getAmbientSound() {
-		return UASoundEvents.ENTITY_PERCH_AMBIENT.get();
+		return UASoundEvents.PERCH_AMBIENT.get();
 	}
 
 	protected SoundEvent getDeathSound() {
-		return UASoundEvents.ENTITY_PERCH_DEATH.get();
+		return UASoundEvents.PERCH_DEATH.get();
 	}
 
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return UASoundEvents.ENTITY_PERCH_HURT.get();
+		return UASoundEvents.PERCH_HURT.get();
 	}
 
 	protected SoundEvent getFlopSound() {
-		return UASoundEvents.ENTITY_PERCH_FLOP.get();
+		return UASoundEvents.PERCH_FLOP.get();
 	}
 }
