@@ -73,6 +73,13 @@ public final class UALootModifierProvider extends LootModifierProvider {
 				.selects(BuiltInLootTables.SHIPWRECK_SUPPLY)
 				.addModifier(new LootPoolsModifier(List.of(pickerelweedPool), false));
 
+		this.entry(BuiltInLootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY.getPath())
+				.selects(BuiltInLootTables.OCEAN_RUIN_COLD_ARCHAEOLOGY)
+				.addModifier(new LootPoolEntriesModifier(false, 0,
+						LootItem.lootTableItem(UAItems.DISC_FRAGMENT_ATLANTIS.get()).build(),
+						LootItem.lootTableItem(UAItems.PREDATOR_POTTERY_SHERD.get()).build()
+				));
+
 		LootPool elderGuardianAdditionsPool = LootPool.lootPool()
 				.name(UpgradeAquatic.MOD_ID + ":elder_guardian")
 				.setRolls(ConstantValue.exactly(1))

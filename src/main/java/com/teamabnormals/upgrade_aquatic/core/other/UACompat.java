@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.core.other;
 
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.UADecoratedPotPatterns;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 
 public class UACompat {
@@ -9,6 +10,7 @@ public class UACompat {
 	public static void registerCompat() {
 		registerCompostables();
 		registerFlammables();
+		UADecoratedPotPatterns.registerDecoratedPotPatterns();
 	}
 
 	public static void registerCompostables() {

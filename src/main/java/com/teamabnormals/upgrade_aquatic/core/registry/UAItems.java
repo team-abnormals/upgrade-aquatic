@@ -62,6 +62,8 @@ public class UAItems {
 	public static final RegistryObject<Item> MUSIC_DISC_ATLANTIS = HELPER.createItem("music_disc_atlantis", () -> new BlueprintRecordItem(14, UASoundEvents.MUSIC_DISC_ATLANTIS, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 114));
 	public static final RegistryObject<Item> DISC_FRAGMENT_ATLANTIS = HELPER.createItem("disc_fragment_atlantis", () -> new DiscFragmentItem(new Item.Properties()));
 
+	public static final RegistryObject<Item> PREDATOR_POTTERY_SHERD = HELPER.createItem("predator_pottery_sherd", () -> new Item(new Item.Properties()));
+
 	public static final RegistryObject<ForgeSpawnEggItem> NAUTILUS_SPAWN_EGG = HELPER.createSpawnEggItem("nautilus", UAEntityTypes.NAUTILUS::get, 14596231, 16744272);
 	public static final RegistryObject<ForgeSpawnEggItem> PIKE_SPAWN_EGG = HELPER.createSpawnEggItem("pike", UAEntityTypes.PIKE::get, 4806944, 13002040);
 	public static final RegistryObject<ForgeSpawnEggItem> LIONFISH_SPAWN_EGG = HELPER.createSpawnEggItem("lionfish", UAEntityTypes.LIONFISH::get, 15281931, 16111310);

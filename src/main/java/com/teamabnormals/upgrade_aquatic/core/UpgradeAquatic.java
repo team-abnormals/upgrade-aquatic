@@ -67,6 +67,7 @@ public class UpgradeAquatic {
 		UALootConditions.LOOT_CONDITION_TYPES.register(bus);
 		UAPaintingVariants.PAINTING_VARIANTS.register(bus);
 		UAFeatures.TREE_DECORATORS.register(bus);
+		UADecoratedPotPatterns.DECORATED_POT_PATTERNS.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
 

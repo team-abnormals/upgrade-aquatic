@@ -1,0 +1,23 @@
+{
+  "modifiers": [
+    {
+      "type": "entries",
+      "config": {
+        "entries": [
+          {
+            "type": "minecraft:item",
+            "name": "upgrade_aquatic:disc_fragment_atlantis"
+          },
+          {
+            "type": "minecraft:item",
+            "name": "upgrade_aquatic:predator_pottery_sherd"
+          }
+        ],
+        "index": 0,
+        "replace": false
+      }
+    }
+  ],
+  "priority": "normal",
+  "selector": "minecraft:archaeology/ocean_ruin_cold"
+}
