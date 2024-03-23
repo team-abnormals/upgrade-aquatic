@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/chiseled_bookshelf_inventory",
+  "textures": {
+    "front": "upgrade_aquatic:block/chiseled_river_bookshelf_empty",
+    "side": "upgrade_aquatic:block/chiseled_river_bookshelf_side",
+    "top": "upgrade_aquatic:block/chiseled_river_bookshelf_top"
+  }
+}

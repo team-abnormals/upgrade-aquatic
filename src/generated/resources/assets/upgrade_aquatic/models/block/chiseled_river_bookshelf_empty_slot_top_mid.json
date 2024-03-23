@@ -1,0 +1,6 @@
+{
+  "parent": "upgrade_aquatic:block/chiseled_river_bookshelf_slot_top_mid",
+  "textures": {
+    "texture": "upgrade_aquatic:block/chiseled_river_bookshelf_empty"
+  }
+}

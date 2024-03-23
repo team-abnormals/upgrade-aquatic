@@ -27,8 +27,8 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 		IntrinsicTagAppender<Block> mineableWithHoe = this.tag(BlockTags.MINEABLE_WITH_HOE);
 
 		mineableWithAxe.add(MULBERRY_PUNNET.get());
-		mineableWithAxe.add(RIVER_BOARDS.get(), RIVER_BOOKSHELF.get(), RIVER_LADDER.get(), RIVER_BEEHIVE.get(), RIVER_CHEST.get(), TRAPPED_RIVER_CHEST.get());
-		mineableWithAxe.add(DRIFTWOOD_BOARDS.get(), DRIFTWOOD_BOOKSHELF.get(), DRIFTWOOD_LADDER.get(), DRIFTWOOD_BEEHIVE.get(), DRIFTWOOD_CHEST.get(), TRAPPED_DRIFTWOOD_CHEST.get());
+		mineableWithAxe.add(RIVER_BOARDS.get(), RIVER_BOOKSHELF.get(), CHISELED_RIVER_BOOKSHELF.get(), RIVER_LADDER.get(), RIVER_BEEHIVE.get(), RIVER_CHEST.get(), TRAPPED_RIVER_CHEST.get());
+		mineableWithAxe.add(DRIFTWOOD_BOARDS.get(), DRIFTWOOD_BOOKSHELF.get(), CHISELED_DRIFTWOOD_BOOKSHELF.get(), DRIFTWOOD_LADDER.get(), DRIFTWOOD_BEEHIVE.get(), DRIFTWOOD_CHEST.get(), TRAPPED_DRIFTWOOD_CHEST.get());
 		mineableWithPickaxe.add(EMBEDDED_AMMONITE.get(), PRISMARINE_ROD_BUNDLE.get(), ELDER_GUARDIAN_SPINE.get(), GUARDIAN_SPINE.get(), ELDER_EYE.get());
 		mineableWithHoe.add(RIVER_LEAVES.get(), RIVER_LEAF_PILE.get());
 
@@ -40,6 +40,9 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 				mineableWithHoe.add(block.get());
 			}
 		}
+
+		this.tag(BlockTags.CEILING_HANGING_SIGNS).add(DRIFTWOOD_HANGING_SIGNS.getFirst().get(), RIVER_HANGING_SIGNS.getFirst().get());
+		this.tag(BlockTags.WALL_HANGING_SIGNS).add(DRIFTWOOD_HANGING_SIGNS.getSecond().get(), RIVER_HANGING_SIGNS.getSecond().get());
 	}
 
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "upgrade_aquatic:block/driftwood_planks",
+    "side": "upgrade_aquatic:block/driftwood_bookshelf"
+  }
+}

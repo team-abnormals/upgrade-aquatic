@@ -8,11 +8,14 @@ import com.teamabnormals.blueprint.common.block.LeafPileBlock;
 import com.teamabnormals.blueprint.common.block.LogBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintChestBlock;
 import com.teamabnormals.blueprint.common.block.chest.BlueprintTrappedChestBlock;
+import com.teamabnormals.blueprint.common.block.sign.BlueprintCeilingHangingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintStandingSignBlock;
+import com.teamabnormals.blueprint.common.block.sign.BlueprintWallHangingSignBlock;
 import com.teamabnormals.blueprint.common.block.sign.BlueprintWallSignBlock;
 import com.teamabnormals.blueprint.common.block.thatch.ThatchBlock;
 import com.teamabnormals.blueprint.common.block.thatch.ThatchSlabBlock;
 import com.teamabnormals.blueprint.common.block.thatch.ThatchStairBlock;
+import com.teamabnormals.blueprint.core.api.WoodTypeRegistryHelper;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.PropertyUtil.WoodSetProperties;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
@@ -426,8 +429,10 @@ public class UABlocks {
 	public static final RegistryObject<Block> DRIFTWOOD_DOOR = HELPER.createBlock("driftwood_door", () -> new DoorBlock(UAProperties.DRIFTWOOD.door(), UAProperties.DRIFTWOOD_BLOCK_SET));
 	public static final RegistryObject<Block> DRIFTWOOD_TRAPDOOR = HELPER.createBlock("driftwood_trapdoor", () -> new TrapDoorBlock(UAProperties.DRIFTWOOD.trapdoor(), UAProperties.DRIFTWOOD_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> DRIFTWOOD_SIGN = HELPER.createSignBlock("driftwood", UAProperties.DRIFTWOOD_WOOD_TYPE, UAProperties.DRIFTWOOD.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> DRIFTWOOD_HANGING_SIGNS = HELPER.createHangingSignBlock("driftwood", UAProperties.DRIFTWOOD_WOOD_TYPE, UAProperties.DRIFTWOOD.hangingSign());
 	public static final RegistryObject<Block> DRIFTWOOD_BOARDS = HELPER.createFuelBlock("driftwood_boards", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.planks()), 300);
 	public static final RegistryObject<Block> DRIFTWOOD_BOOKSHELF = HELPER.createFuelBlock("driftwood_bookshelf", () -> new Block(UAProperties.DRIFTWOOD.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_DRIFTWOOD_BOOKSHELF = HELPER.createFuelBlock("chiseled_driftwood_bookshelf", () -> new ChiseledDriftwoodBookShelfBlock(UAProperties.DRIFTWOOD.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> DRIFTWOOD_LADDER = HELPER.createFuelBlock("driftwood_ladder", () -> new LadderBlock(UAProperties.DRIFTWOOD.ladder()), 300);
 	public static final RegistryObject<Block> DRIFTWOOD_BEEHIVE = HELPER.createBlock("driftwood_beehive", () -> new BlueprintBeehiveBlock(UAProperties.DRIFTWOOD.beehive()));
 	public static final RegistryObject<BlueprintChestBlock> DRIFTWOOD_CHEST = HELPER.createChestBlock("driftwood", UAProperties.DRIFTWOOD.chest());
@@ -450,8 +455,10 @@ public class UABlocks {
 	public static final RegistryObject<Block> RIVER_DOOR = HELPER.createBlock("river_door", () -> new DoorBlock(UAProperties.RIVER_WOOD.door(), UAProperties.RIVER_BLOCK_SET));
 	public static final RegistryObject<Block> RIVER_TRAPDOOR = HELPER.createBlock("river_trapdoor", () -> new TrapDoorBlock(UAProperties.RIVER_WOOD.trapdoor(), UAProperties.RIVER_BLOCK_SET));
 	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> RIVER_SIGNS = HELPER.createSignBlock("river", UAProperties.RIVER_WOOD_TYPE, UAProperties.RIVER_WOOD.sign());
+	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> RIVER_HANGING_SIGNS = HELPER.createHangingSignBlock("river", UAProperties.RIVER_WOOD_TYPE, UAProperties.RIVER_WOOD.hangingSign());
 	public static final RegistryObject<Block> RIVER_BOARDS = HELPER.createFuelBlock("river_boards", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.planks()), 300);
 	public static final RegistryObject<Block> RIVER_BOOKSHELF = HELPER.createFuelBlock("river_bookshelf", () -> new Block(UAProperties.RIVER_WOOD.bookshelf()), 300);
+	public static final RegistryObject<Block> CHISELED_RIVER_BOOKSHELF = HELPER.createFuelBlock("chiseled_river_bookshelf", () -> new ChiseledRiverBookShelfBlock(UAProperties.RIVER_WOOD.chiseledBookshelf()), 300);
 	public static final RegistryObject<Block> RIVER_LADDER = HELPER.createFuelBlock("river_ladder", () -> new LadderBlock(UAProperties.RIVER_WOOD.ladder()), 300);
 	public static final RegistryObject<Block> RIVER_BEEHIVE = HELPER.createBlock("river_beehive", () -> new BlueprintBeehiveBlock(UAProperties.RIVER_WOOD.beehive()));
 	public static final RegistryObject<Block> RIVER_LEAF_PILE = HELPER.createBlock("river_leaf_pile", () -> new LeafPileBlock(UAProperties.RIVER_WOOD.leafPile()));
@@ -463,14 +470,13 @@ public class UABlocks {
 	}
 
 	public static final class UAProperties {
-
 		public static final BlockSetType DRIFTWOOD_BLOCK_SET = BlockSetType.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":driftwood"));
 		public static final BlockSetType RIVER_BLOCK_SET = BlockSetType.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":river"));
 		public static final BlockSetType TOOTH_BLOCK_SET = BlockSetType.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":tooth"));
 		public static final BlockSetType GLASS_BLOCK_SET = BlockSetType.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":glass"));
 
-		public static final WoodType DRIFTWOOD_WOOD_TYPE = WoodType.register(new WoodType(UpgradeAquatic.MOD_ID + ":driftwood", DRIFTWOOD_BLOCK_SET));
-		public static final WoodType RIVER_WOOD_TYPE = WoodType.register(new WoodType(UpgradeAquatic.MOD_ID + ":river", RIVER_BLOCK_SET));
+		public static final WoodType DRIFTWOOD_WOOD_TYPE = WoodTypeRegistryHelper.registerWoodType(new WoodType(UpgradeAquatic.MOD_ID + ":driftwood", DRIFTWOOD_BLOCK_SET));
+		public static final WoodType RIVER_WOOD_TYPE = WoodTypeRegistryHelper.registerWoodType(new WoodType(UpgradeAquatic.MOD_ID + ":river", RIVER_BLOCK_SET));
 
 		public static final WoodSetProperties DRIFTWOOD = WoodSetProperties.builder(MapColor.STONE).build();
 		public static final WoodSetProperties RIVER_WOOD = WoodSetProperties.builder(MapColor.COLOR_BROWN).build();

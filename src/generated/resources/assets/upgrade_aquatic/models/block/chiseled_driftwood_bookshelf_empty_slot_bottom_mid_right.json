@@ -1,0 +1,6 @@
+{
+  "parent": "upgrade_aquatic:block/chiseled_driftwood_bookshelf_slot_bottom_mid_right",
+  "textures": {
+    "texture": "upgrade_aquatic:block/chiseled_driftwood_bookshelf_empty"
+  }
+}
