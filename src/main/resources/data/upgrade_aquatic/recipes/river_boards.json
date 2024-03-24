@@ -22,17 +22,15 @@
         "group": "wooden_boards",
         "pattern": [
           "#",
-          "#",
           "#"
         ],
         "key": {
           "#": {
-            "item": "upgrade_aquatic:river_planks"
+            "item": "upgrade_aquatic:river_slab"
           }
         },
         "result": {
-          "item": "upgrade_aquatic:river_boards",
-          "count": 3
+          "item": "upgrade_aquatic:river_boards"
         }
       }
     }

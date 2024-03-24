@@ -22,17 +22,15 @@
         "group": "wooden_boards",
         "pattern": [
           "#",
-          "#",
           "#"
         ],
         "key": {
           "#": {
-            "item": "upgrade_aquatic:driftwood_planks"
+            "item": "upgrade_aquatic:driftwood_slab"
           }
         },
         "result": {
-          "item": "upgrade_aquatic:driftwood_boards",
-          "count": 3
+          "item": "upgrade_aquatic:driftwood_boards"
         }
       }
     }
