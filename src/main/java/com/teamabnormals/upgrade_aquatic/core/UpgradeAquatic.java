@@ -74,6 +74,8 @@ public class UpgradeAquatic {
 		bus.addListener(this::clientSetup);
 
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+			UABlocks.setupTabEditors();
+			UAItems.setupTabEditors();
 			GlowSquidSpriteUploader.init(bus);
 			bus.addListener(this::registerLayerDefinitions);
 			bus.addListener(this::registerRenderers);

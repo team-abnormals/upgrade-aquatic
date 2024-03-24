@@ -18,6 +18,7 @@ import com.teamabnormals.blueprint.common.block.thatch.ThatchStairBlock;
 import com.teamabnormals.blueprint.core.api.WoodTypeRegistryHelper;
 import com.teamabnormals.blueprint.core.util.PropertyUtil;
 import com.teamabnormals.blueprint.core.util.PropertyUtil.WoodSetProperties;
+import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.block.*;
 import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneBlock;
@@ -26,12 +27,15 @@ import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneStair
 import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneWallBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.grower.RiverTreeGrower;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAConstants;
 import net.minecraft.Util;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
@@ -46,7 +50,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
+
+import static net.minecraft.world.item.CreativeModeTabs.*;
+import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class UABlocks {
@@ -428,7 +436,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> DRIFTWOOD_FENCE_GATE = HELPER.createFuelBlock("driftwood_fence_gate", () -> new FenceGateBlock(UAProperties.DRIFTWOOD.planks(), UAProperties.DRIFTWOOD_WOOD_TYPE), 300);
 	public static final RegistryObject<Block> DRIFTWOOD_DOOR = HELPER.createBlock("driftwood_door", () -> new DoorBlock(UAProperties.DRIFTWOOD.door(), UAProperties.DRIFTWOOD_BLOCK_SET));
 	public static final RegistryObject<Block> DRIFTWOOD_TRAPDOOR = HELPER.createBlock("driftwood_trapdoor", () -> new TrapDoorBlock(UAProperties.DRIFTWOOD.trapdoor(), UAProperties.DRIFTWOOD_BLOCK_SET));
-	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> DRIFTWOOD_SIGN = HELPER.createSignBlock("driftwood", UAProperties.DRIFTWOOD_WOOD_TYPE, UAProperties.DRIFTWOOD.sign());
+	public static final Pair<RegistryObject<BlueprintStandingSignBlock>, RegistryObject<BlueprintWallSignBlock>> DRIFTWOOD_SIGNS = HELPER.createSignBlock("driftwood", UAProperties.DRIFTWOOD_WOOD_TYPE, UAProperties.DRIFTWOOD.sign());
 	public static final Pair<RegistryObject<BlueprintCeilingHangingSignBlock>, RegistryObject<BlueprintWallHangingSignBlock>> DRIFTWOOD_HANGING_SIGNS = HELPER.createHangingSignBlock("driftwood", UAProperties.DRIFTWOOD_WOOD_TYPE, UAProperties.DRIFTWOOD.hangingSign());
 	public static final RegistryObject<Block> DRIFTWOOD_BOARDS = HELPER.createFuelBlock("driftwood_boards", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.planks()), 300);
 	public static final RegistryObject<Block> DRIFTWOOD_BOOKSHELF = HELPER.createFuelBlock("driftwood_bookshelf", () -> new Block(UAProperties.DRIFTWOOD.bookshelf()), 300);
@@ -468,6 +476,98 @@ public class UABlocks {
 	private static Supplier<BedrollBlock> createBedroll(DyeColor color) {
 		return () -> new BedrollBlock(color, BlockBehaviour.Properties.of().mapColor((state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? color.getMapColor() : MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion());
 	}
+
+	public static void setupTabEditors() {
+		CreativeModeTabContentsPopulator.mod(UpgradeAquatic.MOD_ID)
+				.tab(BUILDING_BLOCKS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK), RIVER_LOG, RIVER_WOOD, STRIPPED_RIVER_LOG, STRIPPED_RIVER_WOOD, RIVER_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), RIVER_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK),
+						RIVER_STAIRS, RIVER_SLAB, RIVER_FENCE, RIVER_FENCE_GATE, RIVER_DOOR, RIVER_TRAPDOOR, RIVER_PRESSURE_PLATE, RIVER_BUTTON,
+						DRIFTWOOD_LOG, DRIFTWOOD, STRIPPED_DRIFTWOOD_LOG, STRIPPED_DRIFTWOOD, DRIFTWOOD_PLANKS)
+				.addItemsBefore(modLoaded(Blocks.BAMBOO_BLOCK, "woodworks"), DRIFTWOOD_BOARDS)
+				.addItemsBefore(of(Blocks.BAMBOO_BLOCK), DRIFTWOOD_STAIRS, DRIFTWOOD_SLAB, DRIFTWOOD_FENCE, DRIFTWOOD_FENCE_GATE, DRIFTWOOD_DOOR, DRIFTWOOD_TRAPDOOR, DRIFTWOOD_PRESSURE_PLATE, DRIFTWOOD_BUTTON)
+				.addItemsBefore(of(Blocks.STONE), BEACHGRASS_THATCH, BEACHGRASS_THATCH_STAIRS, BEACHGRASS_THATCH_SLAB)
+				.addItemsBefore(of(Blocks.SMOOTH_STONE), KELPY_COBBLESTONE, KELPY_COBBLESTONE_STAIRS, KELPY_COBBLESTONE_SLAB, KELPY_COBBLESTONE_WALL)
+				.addItemsBefore(of(Blocks.GRANITE), KELPY_STONE_BRICKS, KELPY_STONE_BRICK_STAIRS, KELPY_STONE_BRICK_SLAB, KELPY_STONE_BRICK_WALL)
+				.addItemsBefore(of(Blocks.NETHERRACK),
+						LUMINOUS_PRISMARINE, LUMINOUS_PRISMARINE_STAIRS, LUMINOUS_PRISMARINE_SLAB, PRISMARINE_ROD_BUNDLE,
+						SCUTE_BLOCK, SCUTE_SHINGLES, SCUTE_SHINGLE_STAIRS, SCUTE_SHINGLE_SLAB, SCUTE_SHINGLE_WALL, CHISELED_SCUTE_SHINGLES, SCUTE_PAVEMENT, SCUTE_PAVEMENT_STAIRS, SCUTE_PAVEMENT_SLAB, SCUTE_PAVEMENT_WALL,
+						TOOTH_BLOCK, TOOTH_BRICKS, TOOTH_BRICK_STAIRS, TOOTH_BRICK_SLAB, TOOTH_BRICK_WALL, CHISELED_TOOTH_BRICKS, TOOTH_TILES, TOOTH_STAIRS, TOOTH_SLAB, TOOTH_WALL, TOOTH_DOOR, TOOTH_TRAPDOOR,
+						CORALSTONE, CORALSTONE_STAIRS, CORALSTONE_SLAB, CORALSTONE_WALL, CHISELED_CORALSTONE,
+						TUBE_CORALSTONE, TUBE_CORALSTONE_STAIRS, TUBE_CORALSTONE_SLAB, TUBE_CORALSTONE_WALL, TUBE_CHISELED_CORALSTONE,
+						BRAIN_CORALSTONE, BRAIN_CORALSTONE_STAIRS, BRAIN_CORALSTONE_SLAB, BRAIN_CORALSTONE_WALL, BRAIN_CHISELED_CORALSTONE,
+						BUBBLE_CORALSTONE, BUBBLE_CORALSTONE_STAIRS, BUBBLE_CORALSTONE_SLAB, BUBBLE_CORALSTONE_WALL, BUBBLE_CHISELED_CORALSTONE,
+						FIRE_CORALSTONE, FIRE_CORALSTONE_STAIRS, FIRE_CORALSTONE_SLAB, FIRE_CORALSTONE_WALL, FIRE_CHISELED_CORALSTONE,
+						HORN_CORALSTONE, HORN_CORALSTONE_STAIRS, HORN_CORALSTONE_SLAB, HORN_CORALSTONE_WALL, HORN_CHISELED_CORALSTONE,
+						ACAN_CORALSTONE, ACAN_CORALSTONE_STAIRS, ACAN_CORALSTONE_SLAB, ACAN_CORALSTONE_WALL, ACAN_CHISELED_CORALSTONE,
+						FINGER_CORALSTONE, FINGER_CORALSTONE_STAIRS, FINGER_CORALSTONE_SLAB, FINGER_CORALSTONE_WALL, FINGER_CHISELED_CORALSTONE,
+						STAR_CORALSTONE, STAR_CORALSTONE_STAIRS, STAR_CORALSTONE_SLAB, STAR_CORALSTONE_WALL, STAR_CHISELED_CORALSTONE,
+						MOSS_CORALSTONE, MOSS_CORALSTONE_STAIRS, MOSS_CORALSTONE_SLAB, MOSS_CORALSTONE_WALL, MOSS_CHISELED_CORALSTONE,
+						PETAL_CORALSTONE, PETAL_CORALSTONE_STAIRS, PETAL_CORALSTONE_SLAB, PETAL_CORALSTONE_WALL, PETAL_CHISELED_CORALSTONE,
+						BRANCH_CORALSTONE, BRANCH_CORALSTONE_STAIRS, BRANCH_CORALSTONE_SLAB, BRANCH_CORALSTONE_WALL, BRANCH_CHISELED_CORALSTONE,
+						ROCK_CORALSTONE, ROCK_CORALSTONE_STAIRS, ROCK_CORALSTONE_SLAB, ROCK_CORALSTONE_WALL, ROCK_CHISELED_CORALSTONE,
+						PILLOW_CORALSTONE, PILLOW_CORALSTONE_STAIRS, PILLOW_CORALSTONE_SLAB, PILLOW_CORALSTONE_WALL, PILLOW_CHISELED_CORALSTONE,
+						SILK_CORALSTONE, SILK_CORALSTONE_STAIRS, SILK_CORALSTONE_SLAB, SILK_CORALSTONE_WALL, SILK_CHISELED_CORALSTONE,
+						CHROME_CORALSTONE, CHROME_CORALSTONE_STAIRS, CHROME_CORALSTONE_SLAB, CHROME_CORALSTONE_WALL, CHROME_CHISELED_CORALSTONE,
+						PRISMARINE_CORALSTONE, PRISMARINE_CORALSTONE_STAIRS, PRISMARINE_CORALSTONE_SLAB, PRISMARINE_CORALSTONE_WALL, PRISMARINE_CHISELED_CORALSTONE,
+						DEAD_CORALSTONE, DEAD_CORALSTONE_STAIRS, DEAD_CORALSTONE_SLAB, DEAD_CORALSTONE_WALL, DEAD_CHISELED_CORALSTONE,
+						ELDER_PRISMARINE_CORALSTONE, ELDER_PRISMARINE_CORALSTONE_STAIRS, ELDER_PRISMARINE_CORALSTONE_SLAB, ELDER_PRISMARINE_CORALSTONE_WALL, CHISELED_ELDER_PRISMARINE_CORALSTONE
+				)
+				.tab(COLORED_BLOCKS)
+				.addItemsBefore(of(Blocks.CANDLE), WHITE_BEDROLL, LIGHT_GRAY_BEDROLL, GRAY_BEDROLL, BLACK_BEDROLL, BROWN_BEDROLL, RED_BEDROLL, ORANGE_BEDROLL, YELLOW_BEDROLL, LIME_BEDROLL, GREEN_BEDROLL, CYAN_BEDROLL, LIGHT_BLUE_BEDROLL, BLUE_BEDROLL, PURPLE_BEDROLL, MAGENTA_BEDROLL, PINK_BEDROLL)
+				.tab(FUNCTIONAL_BLOCKS)
+				.addItemsBefore(of(Blocks.SEA_LANTERN), TOOTH_LANTERN)
+				.addItemsBefore(of(Blocks.BAMBOO_SIGN), DRIFTWOOD_SIGNS.getFirst(), DRIFTWOOD_HANGING_SIGNS.getFirst(), RIVER_SIGNS.getFirst(), RIVER_HANGING_SIGNS.getFirst())
+				.addItemsBefore(of(Blocks.CANDLE), WHITE_BEDROLL, LIGHT_GRAY_BEDROLL, GRAY_BEDROLL, BLACK_BEDROLL, BROWN_BEDROLL, RED_BEDROLL, ORANGE_BEDROLL, YELLOW_BEDROLL, LIME_BEDROLL, GREEN_BEDROLL, CYAN_BEDROLL, LIGHT_BLUE_BEDROLL, BLUE_BEDROLL, PURPLE_BEDROLL, MAGENTA_BEDROLL, PINK_BEDROLL)
+				.tab(NATURAL_BLOCKS)
+				.addItemsBefore(of(Blocks.NETHER_GOLD_ORE), EMBEDDED_AMMONITE)
+				.addItemsBefore(of(Blocks.DEAD_BUSH), BEACHGRASS)
+				.addItemsBefore(of(Blocks.SUNFLOWER), TALL_BEACHGRASS)
+				.addItemsBefore(of(Blocks.KELP), BLUE_PICKERELWEED, PURPLE_PICKERELWEED)
+				.addItemsBefore(of(Blocks.DRIED_KELP_BLOCK), BLUE_PICKERELWEED_BLOCK, BOILED_BLUE_PICKERELWEED_BLOCK, PURPLE_PICKERELWEED_BLOCK, BOILED_PURPLE_PICKERELWEED_BLOCK, KELP_BLOCK)
+				.addItemsBefore(of(Blocks.MUSHROOM_STEM), DRIFTWOOD_LOG, RIVER_LOG)
+				.addItemsBefore(of(Blocks.AZALEA_LEAVES), RIVER_LEAVES)
+				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), RIVER_LEAF_PILE)
+				.addItemsBefore(of(Blocks.AZALEA), RIVER_SAPLING)
+				.addItemsBefore(of(Blocks.TORCHFLOWER), WHITE_SEAROCKET, PINK_SEAROCKET)
+				.addItemsBefore(of(Blocks.PITCHER_PLANT), FLOWERING_RUSH)
+				.addItemsAfter(of(Blocks.HONEY_BLOCK), MULBERRY_JAM_BLOCK)
+				.addItemsAfter(of(Blocks.HORN_CORAL_BLOCK), ACAN_CORAL_BLOCK, FINGER_CORAL_BLOCK, STAR_CORAL_BLOCK, MOSS_CORAL_BLOCK, PETAL_CORAL_BLOCK, BRANCH_CORAL_BLOCK, ROCK_CORAL_BLOCK, PILLOW_CORAL_BLOCK, SILK_CORAL_BLOCK, CHROME_CORAL_BLOCK, PRISMARINE_CORAL_BLOCK)
+				.addItemsAfter(of(Blocks.DEAD_HORN_CORAL_BLOCK), DEAD_ACAN_CORAL_BLOCK, DEAD_FINGER_CORAL_BLOCK, DEAD_STAR_CORAL_BLOCK, DEAD_MOSS_CORAL_BLOCK, DEAD_PETAL_CORAL_BLOCK, DEAD_BRANCH_CORAL_BLOCK, DEAD_ROCK_CORAL_BLOCK, DEAD_PILLOW_CORAL_BLOCK, DEAD_SILK_CORAL_BLOCK, DEAD_CHROME_CORAL_BLOCK, ELDER_PRISMARINE_CORAL_BLOCK)
+				.addItemsAfter(of(Blocks.HORN_CORAL), ACAN_CORAL, FINGER_CORAL, STAR_CORAL, MOSS_CORAL, PETAL_CORAL, BRANCH_CORAL, ROCK_CORAL, PILLOW_CORAL, SILK_CORAL, CHROME_CORAL, PRISMARINE_CORAL)
+				.addItemsAfter(of(Blocks.DEAD_HORN_CORAL), DEAD_ACAN_CORAL, DEAD_FINGER_CORAL, DEAD_STAR_CORAL, DEAD_MOSS_CORAL, DEAD_PETAL_CORAL, DEAD_BRANCH_CORAL, DEAD_ROCK_CORAL, DEAD_PILLOW_CORAL, DEAD_SILK_CORAL, DEAD_CHROME_CORAL, ELDER_PRISMARINE_CORAL)
+				.addItemsAfter(of(Blocks.HORN_CORAL_FAN), ACAN_CORAL_FAN, FINGER_CORAL_FAN, STAR_CORAL_FAN, MOSS_CORAL_FAN, PETAL_CORAL_FAN, BRANCH_CORAL_FAN, ROCK_CORAL_FAN, PILLOW_CORAL_FAN, SILK_CORAL_FAN, CHROME_CORAL_FAN, PRISMARINE_CORAL_FAN)
+				.addItemsAfter(of(Blocks.DEAD_HORN_CORAL_FAN), DEAD_ACAN_CORAL_FAN, DEAD_FINGER_CORAL_FAN, DEAD_STAR_CORAL_FAN, DEAD_MOSS_CORAL_FAN, DEAD_PETAL_CORAL_FAN, DEAD_BRANCH_CORAL_FAN, DEAD_ROCK_CORAL_FAN, DEAD_PILLOW_CORAL_FAN, DEAD_SILK_CORAL_FAN, DEAD_CHROME_CORAL_FAN, ELDER_PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_SHOWER, ELDER_PRISMARINE_CORAL_SHOWER)
+				.tab(REDSTONE_BLOCKS)
+				.addItemsBefore(of(Blocks.SCULK_SENSOR), GUARDIAN_SPINE, ELDER_GUARDIAN_SPINE, ELDER_EYE);
+
+		CreativeModeTabContentsPopulator.mod("berry_good_1")
+				.tab(NATURAL_BLOCKS)
+				.addItemsAfter(ofID(UAConstants.GLOW_BERRY_BASKET), MULBERRY_PUNNET);
+
+		CreativeModeTabContentsPopulator.mod("woodworks_1")
+				.tab(FUNCTIONAL_BLOCKS)
+				.addItemsBefore(ofID(UAConstants.BAMBOO_LADDER), DRIFTWOOD_LADDER, RIVER_LADDER)
+				.addItemsBefore(ofID(UAConstants.BAMBOO_BEEHIVE), DRIFTWOOD_BEEHIVE, RIVER_BEEHIVE)
+				.addItemsBefore(ofID(UAConstants.CHISELED_BAMBOO_BOOKSHELF), DRIFTWOOD_BOOKSHELF, CHISELED_DRIFTWOOD_BOOKSHELF, RIVER_BOOKSHELF, CHISELED_RIVER_BOOKSHELF)
+				.addItemsBefore(ofID(UAConstants.BAMBOO_CLOSET), DRIFTWOOD_CHEST, RIVER_CHEST)
+				.tab(REDSTONE_BLOCKS)
+				.addItemsBefore(ofID(UAConstants.TRAPPED_BAMBOO_CLOSET), TRAPPED_DRIFTWOOD_CHEST, TRAPPED_RIVER_CHEST);
+	}
+
+	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
+		return stack -> of(item).test(stack) && BlockSubRegistryHelper.areModsLoaded(modids);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, ItemLike fallback, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) ? of(ForgeRegistries.ITEMS.getValue(location)) : of(fallback)).test(stack);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) && of(ForgeRegistries.ITEMS.getValue(location)).test(stack));
+	}
+
 
 	public static final class UAProperties {
 		public static final BlockSetType DRIFTWOOD_BLOCK_SET = BlockSetType.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":driftwood"));

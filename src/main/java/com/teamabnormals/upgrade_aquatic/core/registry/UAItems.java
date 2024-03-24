@@ -2,6 +2,8 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.item.BlueprintRecordItem;
+import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
+import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.item.*;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
@@ -11,17 +13,26 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Predicate;
+
+import static com.teamabnormals.blueprint.core.util.item.ItemStackUtil.is;
+import static net.minecraft.world.item.CreativeModeTabs.*;
+import static net.minecraft.world.item.crafting.Ingredient.of;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class UAItems {
@@ -73,6 +84,45 @@ public class UAItems {
 	public static final RegistryObject<ForgeSpawnEggItem> FLARE_SPAWN_EGG = HELPER.createSpawnEggItem("flare", UAEntityTypes.FLARE::get, 4532619, 14494960);
 	public static final RegistryObject<JellyfishSpawnEggItem> JELLYFISH_SPAWN_EGG = HELPER.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);
 	public static final RegistryObject<ForgeSpawnEggItem> GOOSE_SPAWN_EGG = HELPER.createSpawnEggItem("goose", UAEntityTypes.GOOSE::get, 16448255, 16751914);
+
+
+	public static void setupTabEditors() {
+		CreativeModeTabContentsPopulator.mod(UpgradeAquatic.MOD_ID)
+				.tab(FOOD_AND_DRINKS)
+				.addItemsAfter(of(Items.GLOW_BERRIES), MULBERRY)
+				.addItemsAfter(of(Items.BREAD), MULBERRY_BREAD)
+				.addItemsAfter(of(Items.PUMPKIN_PIE), MULBERRY_PIE)
+				.addItemsAfter(of(Items.HONEY_BOTTLE), MULBERRY_JAM_BOTTLE)
+				.addItemsBefore(of(Items.TROPICAL_FISH), PIKE, COOKED_PIKE, PERCH, COOKED_PERCH, LIONFISH, COOKED_LIONFISH)
+				.addItemsBefore(of(Items.DRIED_KELP), BOILED_BLUE_PICKERELWEED, BOILED_PURPLE_PICKERELWEED)
+				.tab(INGREDIENTS)
+				.addItemsAfter(of(Items.PRISMARINE_SHARD), PRISMARINE_ROD)
+				.addItemsAfter(of(Items.NAUTILUS_SHELL), THRASHER_TOOTH)
+				.addItemsAfter(of(Items.HEART_OF_THE_SEA), DISC_FRAGMENT_ATLANTIS)
+				.addItemsAlphabetically(stack -> stack.is(ItemTags.DECORATED_POT_SHERDS), PREDATOR_POTTERY_SHERD)
+				.tab(TOOLS_AND_UTILITIES)
+				.addItemsAfter(of(Items.SALMON_BUCKET), PIKE_BUCKET, PERCH_BUCKET, LIONFISH_BUCKET)
+				.addItemsAfter(of(Items.AXOLOTL_BUCKET), NAUTILUS_BUCKET, SQUID_BUCKET, GLOW_SQUID_BUCKET)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), DRIFTWOOD_BOAT.getFirst(), DRIFTWOOD_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), DRIFTWOOD_FURNACE_BOAT, LARGE_DRIFTWOOD_BOAT)
+				.addItemsBefore(of(Items.BAMBOO_RAFT), RIVER_BOAT.getFirst(), RIVER_BOAT.getSecond())
+				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), RIVER_FURNACE_BOAT, LARGE_RIVER_BOAT)
+				.addItemsAfter(of(Items.MUSIC_DISC_5), MUSIC_DISC_ATLANTIS)
+				.tab(SPAWN_EGGS)
+				.addItemsAlphabetically(is(SpawnEggItem.class), NAUTILUS_SPAWN_EGG, PIKE_SPAWN_EGG, LIONFISH_SPAWN_EGG, PERCH_SPAWN_EGG, THRASHER_SPAWN_EGG, GREAT_THRASHER_SPAWN_EGG);
+	}
+
+	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
+		return stack -> of(item).test(stack) && BlockSubRegistryHelper.areModsLoaded(modids);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, ItemLike fallback, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) ? of(ForgeRegistries.ITEMS.getValue(location)) : of(fallback)).test(stack);
+	}
+
+	public static Predicate<ItemStack> ofID(ResourceLocation location, String... modids) {
+		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) && of(ForgeRegistries.ITEMS.getValue(location)).test(stack));
+	}
 
 	public static class UAFoods {
 		public static final FoodProperties MULBERRY = new FoodProperties.Builder().nutrition(3).saturationMod(0.1F).build();
