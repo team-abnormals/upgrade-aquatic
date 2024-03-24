@@ -1,0 +1,43 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "blueprint:and",
+          "values": [
+            {
+              "type": "forge:mod_loaded",
+              "modid": "woodworks"
+            },
+            {
+              "type": "woodworks:config",
+              "value": "wooden_bookshelves"
+            }
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "building",
+        "key": {
+          "#": {
+            "item": "upgrade_aquatic:river_planks"
+          },
+          "X": {
+            "item": "upgrade_aquatic:river_slab"
+          }
+        },
+        "pattern": [
+          "###",
+          "XXX",
+          "###"
+        ],
+        "result": {
+          "item": "upgrade_aquatic:chiseled_river_bookshelf"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}
