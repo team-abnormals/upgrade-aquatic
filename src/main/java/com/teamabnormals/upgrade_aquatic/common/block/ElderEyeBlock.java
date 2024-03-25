@@ -47,7 +47,7 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 		this.registerDefaultState(this.stateDefinition.any()
 				.setValue(FACING, Direction.SOUTH)
 				.setValue(POWER, 0)
-				.setValue(ACTIVE, false)
+				.setValue(ACTIVE, true)
 				.setValue(WATERLOGGED, false)
 		);
 	}
@@ -57,16 +57,19 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 		return state.getValue(FACING) == Direction.DOWN ? DOWN_BOX_SIZE : BOX_SIZE;
 	}
 
+	@Override
 	public boolean isSignalSource(BlockState state) {
 		return true;
 	}
 
-	public int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-		return blockState.getValue(POWER);
+	@Override
+	public int getDirectSignal(BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
+		return state.getValue(POWER);
 	}
 
-	public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-		return blockState.getValue(POWER);
+	@Override
+	public int getSignal(BlockState state, BlockGetter blockAccess, BlockPos pos, Direction side) {
+		return state.getValue(POWER);
 	}
 
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -92,16 +95,15 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		boolean flag = state.getValue(ACTIVE);
-		if (flag) {
-			worldIn.playSound(null, pos, SoundEvents.CONDUIT_DEACTIVATE, SoundSource.BLOCKS, 0.3F, 1.0F);
-			worldIn.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(POWER, 0));
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		if (state.getValue(ACTIVE)) {
+			level.playSound(null, pos, SoundEvents.CONDUIT_DEACTIVATE, SoundSource.BLOCKS, 0.3F, 1.0F);
+			level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(POWER, 0));
 		} else {
-			worldIn.playSound(null, pos, SoundEvents.CONDUIT_ACTIVATE, SoundSource.BLOCKS, 0.3F, 1.0F);
-			worldIn.setBlockAndUpdate(pos, state.setValue(ACTIVE, true).setValue(POWER, 0));
+			level.playSound(null, pos, SoundEvents.CONDUIT_ACTIVATE, SoundSource.BLOCKS, 0.3F, 1.0F);
+			level.setBlockAndUpdate(pos, state.setValue(ACTIVE, true).setValue(POWER, 0));
 		}
-		this.updateRedstoneNeighbors(state, worldIn, pos);
+		this.updateRedstoneNeighbors(state, level, pos);
 		return InteractionResult.SUCCESS;
 	}
 
@@ -113,12 +115,12 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 		return stateIn;
 	}
 
-	public void updateRedstoneNeighbors(BlockState p_196378_1_, Level p_196378_2_, BlockPos p_196378_3_) {
-		p_196378_2_.updateNeighborsAt(p_196378_3_, this);
-		p_196378_2_.updateNeighborsAt(p_196378_3_.relative(Direction.NORTH), this);
-		p_196378_2_.updateNeighborsAt(p_196378_3_.relative(Direction.SOUTH), this);
-		p_196378_2_.updateNeighborsAt(p_196378_3_.relative(Direction.WEST), this);
-		p_196378_2_.updateNeighborsAt(p_196378_3_.relative(Direction.EAST), this);
+	public void updateRedstoneNeighbors(BlockState p_196378_1_, Level level, BlockPos pos) {
+		level.updateNeighborsAt(pos, this);
+		level.updateNeighborsAt(pos.relative(Direction.NORTH), this);
+		level.updateNeighborsAt(pos.relative(Direction.SOUTH), this);
+		level.updateNeighborsAt(pos.relative(Direction.WEST), this);
+		level.updateNeighborsAt(pos.relative(Direction.EAST), this);
 	}
 
 	@SuppressWarnings("deprecation")
