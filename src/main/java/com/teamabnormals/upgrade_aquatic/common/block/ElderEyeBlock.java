@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -34,7 +35,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 
 public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
-	public static final BooleanProperty POWERED = BooleanProperty.create("powered");
+	public static final IntegerProperty POWER = BlockStateProperties.POWER;
 	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	public static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -45,7 +46,7 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any()
 				.setValue(FACING, Direction.SOUTH)
-				.setValue(POWERED, false)
+				.setValue(POWER, 0)
 				.setValue(ACTIVE, false)
 				.setValue(WATERLOGGED, false)
 		);
@@ -61,15 +62,15 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 	}
 
 	public int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-		return blockState.getValue(POWERED) ? 15 : 0;
+		return blockState.getValue(POWER);
 	}
 
 	public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-		return blockState.getValue(POWERED) ? 15 : 0;
+		return blockState.getValue(POWER);
 	}
 
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(FACING, POWERED, ACTIVE, WATERLOGGED);
+		builder.add(FACING, POWER, ACTIVE, WATERLOGGED);
 	}
 
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
@@ -82,7 +83,7 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 	@SuppressWarnings("deprecation")
 	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (!isMoving && state.getBlock() != newState.getBlock()) {
-			if (state.getValue(POWERED)) {
+			if (state.getValue(POWER) > 0) {
 				this.updateRedstoneNeighbors(state, worldIn, pos);
 			}
 
@@ -95,10 +96,10 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 		boolean flag = state.getValue(ACTIVE);
 		if (flag) {
 			worldIn.playSound(null, pos, SoundEvents.CONDUIT_DEACTIVATE, SoundSource.BLOCKS, 0.3F, 1.0F);
-			worldIn.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(POWERED, false));
+			worldIn.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(POWER, 0));
 		} else {
 			worldIn.playSound(null, pos, SoundEvents.CONDUIT_ACTIVATE, SoundSource.BLOCKS, 0.3F, 1.0F);
-			worldIn.setBlockAndUpdate(pos, state.setValue(ACTIVE, true).setValue(POWERED, false));
+			worldIn.setBlockAndUpdate(pos, state.setValue(ACTIVE, true).setValue(POWER, 0));
 		}
 		this.updateRedstoneNeighbors(state, worldIn, pos);
 		return InteractionResult.SUCCESS;
