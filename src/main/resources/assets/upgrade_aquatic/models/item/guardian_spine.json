@@ -1,6 +1,0 @@
-{
-  "parent": "upgrade_aquatic:block/guardian_spine",
-  "textures": {
-    "layer0": "upgrade_aquatic:block/guardian_spine"
-  }
-}

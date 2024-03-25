@@ -29,7 +29,7 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 		mineableWithAxe.add(MULBERRY_PUNNET.get());
 		mineableWithAxe.add(RIVER_BOARDS.get(), RIVER_BOOKSHELF.get(), CHISELED_RIVER_BOOKSHELF.get(), RIVER_LADDER.get(), RIVER_BEEHIVE.get(), RIVER_CHEST.get(), TRAPPED_RIVER_CHEST.get());
 		mineableWithAxe.add(DRIFTWOOD_BOARDS.get(), DRIFTWOOD_BOOKSHELF.get(), CHISELED_DRIFTWOOD_BOOKSHELF.get(), DRIFTWOOD_LADDER.get(), DRIFTWOOD_BEEHIVE.get(), DRIFTWOOD_CHEST.get(), TRAPPED_DRIFTWOOD_CHEST.get());
-		mineableWithPickaxe.add(EMBEDDED_AMMONITE.get(), PRISMARINE_ROD_BUNDLE.get(), ELDER_GUARDIAN_SPINE.get(), GUARDIAN_SPINE.get(), ELDER_EYE.get());
+		mineableWithPickaxe.add(EMBEDDED_AMMONITE.get(), PRISMARINE_ROD_BUNDLE.get(), ELDER_EYE.get());
 		mineableWithHoe.add(RIVER_LEAVES.get(), RIVER_LEAF_PILE.get());
 
 		for (RegistryObject<Block> block : HELPER.getDeferredRegister().getEntries()) {

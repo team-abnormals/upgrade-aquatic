@@ -13,7 +13,6 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LocationCheck;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -80,24 +79,13 @@ public final class UALootModifierProvider extends LootModifierProvider {
 						LootItem.lootTableItem(UAItems.PREDATOR_POTTERY_SHERD.get()).build()
 				));
 
-		LootPool elderGuardianAdditionsPool = LootPool.lootPool()
-				.name(UpgradeAquatic.MOD_ID + ":elder_guardian")
-				.setRolls(ConstantValue.exactly(1))
-				.add(LootItem.lootTableItem(UABlocks.ELDER_EYE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-				.add(LootItem.lootTableItem(UABlocks.ELDER_GUARDIAN_SPINE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 2.0F))))
-				.build();
 		this.entry("entities/elder_guardian")
 				.selects("entities/elder_guardian")
-				.addModifier(new LootPoolsModifier(List.of(elderGuardianAdditionsPool), false));
-
-		LootPool guardianAdditionsPool = LootPool.lootPool()
-				.name(UpgradeAquatic.MOD_ID + ":guardian")
-				.setRolls(ConstantValue.exactly(1))
-				.add(LootItem.lootTableItem(UABlocks.GUARDIAN_SPINE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F))).apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F))))
-				.build();
-		this.entry("entities/guardian")
-				.selects("entities/guardian")
-				.addModifier(new LootPoolsModifier(List.of(guardianAdditionsPool), false));
+				.addModifier(new LootPoolsModifier(List.of(LootPool.lootPool()
+						.name(UpgradeAquatic.MOD_ID + ":elder_guardian")
+						.setRolls(ConstantValue.exactly(1))
+						.add(LootItem.lootTableItem(UABlocks.ELDER_EYE.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+						.build()), false));
 	}
 
 }

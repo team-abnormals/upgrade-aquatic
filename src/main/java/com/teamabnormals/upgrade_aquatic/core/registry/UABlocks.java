@@ -241,8 +241,6 @@ public class UABlocks {
 	public static final RegistryObject<Block> ELDER_PRISMARINE_CORAL_SHOWER = HELPER.createBlock("elder_prismarine_coral_shower", () -> new DeadCoralShowerBlock(UAProperties.createPrismarineCoral(true)));
 	public static final RegistryObject<Block> PRISMARINE_CORAL_SHOWER = HELPER.createBlock("prismarine_coral_shower", () -> new CoralShowerBlock(ELDER_PRISMARINE_CORAL_SHOWER.get(), UAProperties.createPrismarineCoral(false)));
 
-	public static final RegistryObject<Block> ELDER_GUARDIAN_SPINE = HELPER.createBlock("elder_guardian_spine", () -> new GuardianSpineBlock(UAProperties.SPINES, true));
-	public static final RegistryObject<Block> GUARDIAN_SPINE = HELPER.createBlock("guardian_spine", () -> new GuardianSpineBlock(UAProperties.SPINES, false));
 	public static final RegistryObject<Block> ELDER_EYE = HELPER.createRareBlock("elder_eye", () -> new ElderEyeBlock(UAProperties.ELDER_EYE), Rarity.RARE);
 
 	public static final RegistryObject<Block> PINK_JELLY_WALL_TORCH = HELPER.createBlockNoItem("pink_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PINK));
@@ -542,7 +540,7 @@ public class UABlocks {
 				.addItemsAfter(of(Blocks.DEAD_HORN_CORAL_FAN), DEAD_ACAN_CORAL_FAN, DEAD_FINGER_CORAL_FAN, DEAD_STAR_CORAL_FAN, DEAD_MOSS_CORAL_FAN, DEAD_PETAL_CORAL_FAN, DEAD_BRANCH_CORAL_FAN, DEAD_ROCK_CORAL_FAN, DEAD_PILLOW_CORAL_FAN, DEAD_SILK_CORAL_FAN, DEAD_CHROME_CORAL_FAN, ELDER_PRISMARINE_CORAL_FAN, PRISMARINE_CORAL_SHOWER, ELDER_PRISMARINE_CORAL_SHOWER)
 				.tab(REDSTONE_BLOCKS)
 				.addItemsAfter(of(Blocks.HONEY_BLOCK), MULBERRY_JAM_BLOCK)
-				.addItemsBefore(of(Blocks.SCULK_SENSOR), GUARDIAN_SPINE, ELDER_GUARDIAN_SPINE, ELDER_EYE);
+				.addItemsBefore(of(Blocks.SCULK_SENSOR), ELDER_EYE);
 
 		CreativeModeTabContentsPopulator.mod("berry_good_1")
 				.tab(NATURAL_BLOCKS)
@@ -591,7 +589,6 @@ public class UABlocks {
 
 		public static final BlockBehaviour.Properties CORALSTONE = Properties.copy(Blocks.STONE).randomTicks();
 
-		public static final BlockBehaviour.Properties SPINES = BlockBehaviour.Properties.of().noCollission().strength(1.5F);
 		public static final BlockBehaviour.Properties ELDER_EYE = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).sound(SoundType.METAL).strength(1.0F);
 		public static final BlockBehaviour.Properties PICKERELWEED = BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).randomTicks().noCollission().strength(0.0F).sound(SoundType.WET_GRASS);
 		public static final BlockBehaviour.Properties BEACHGRASS_THATCH = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_YELLOW).strength(0.5F).sound(SoundType.GRASS).noOcclusion();
