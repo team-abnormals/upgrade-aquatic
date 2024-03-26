@@ -119,15 +119,15 @@
 
   "block.upgrade_aquatic.embedded_ammonite": "Husk o' Buried Fossil",
 
-  "block.upgrade_aquatic.blue_pickerelweed": "Mermaid Weed o' Blue",
+  "block.upgrade_aquatic.pickerelweed": "Mermaid Weed o' Blue",
   "block.upgrade_aquatic.purple_pickerelweed": "Mermaid Weed o' Purple",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Tall Mermaid Weed o' Blue",
+  "block.upgrade_aquatic.tall_pickerelweed": "Tall Mermaid Weed o' Blue",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Tall Mermaid Weed o' Purple",
 
   "block.upgrade_aquatic.white_searocket": "White Land's Farewell",
   "block.upgrade_aquatic.pink_searocket": "Pink Land's Farewell",
 
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Captive Blue Mermaid Weed",
+  "block.upgrade_aquatic.potted_pickerelweed": "Captive Blue Mermaid Weed",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Captive Purple Mermaid Weed",
   "block.upgrade_aquatic.potted_white_searocket": "Captive White Land's Farewell",
   "block.upgrade_aquatic.potted_pink_searocket": "Captive Pink Land's Farewell",
@@ -491,7 +491,7 @@
   "item.upgrade_aquatic.mulberry_pie": "Tart o' River Capers",
 
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Boil'd Mermaid Weed o' Purple",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Boil'd Mermaid Weed o' Blue",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Boil'd Mermaid Weed o' Blue",
   "item.upgrade_aquatic.pike": "Raw Pikefish",
   "item.upgrade_aquatic.cooked_pike": "Smoked Pikefish",
   "item.upgrade_aquatic.lionfish": "Raw Porcupine o' Sea",

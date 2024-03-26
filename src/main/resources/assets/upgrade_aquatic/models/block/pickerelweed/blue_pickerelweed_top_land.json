@@ -1,6 +1,0 @@
-{
-    "parent": "block/cross",
-    "textures": {
-        "cross": "upgrade_aquatic:block/blue_pickerelweed_top_land"
-    }
-}

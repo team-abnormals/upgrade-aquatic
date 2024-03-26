@@ -66,20 +66,14 @@ public class UABlocks {
 	public static final RegistryObject<Block> PINK_SEAROCKET = HELPER.createBlock("pink_searocket", () -> new SearocketBlock(() -> MobEffects.WATER_BREATHING, 9, PropertyUtil.flower()));
 	public static final RegistryObject<Block> FLOWERING_RUSH = HELPER.createBlock("flowering_rush", () -> new FloweringRushBlock(Properties.copy(Blocks.PEONY).sound(SoundType.WET_GRASS)));
 
-	public static final RegistryObject<Block> BLUE_PICKERELWEED = HELPER.createBlock("blue_pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED));
-	public static final RegistryObject<Block> TALL_BLUE_PICKERELWEED = HELPER.createBlockNoItem("tall_blue_pickerelweed", () -> new PickerelweedDoublePlantBlock(UAProperties.PICKERELWEED));
-	public static final RegistryObject<Block> PURPLE_PICKERELWEED = HELPER.createBlock("purple_pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED));
-	public static final RegistryObject<Block> TALL_PURPLE_PICKERELWEED = HELPER.createBlockNoItem("tall_purple_pickerelweed", () -> new PickerelweedDoublePlantBlock(UAProperties.PICKERELWEED));
-
-	public static final RegistryObject<Block> BLUE_PICKERELWEED_BLOCK = HELPER.createBlock("blue_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(false), false));
-	public static final RegistryObject<Block> PURPLE_PICKERELWEED_BLOCK = HELPER.createBlock("purple_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(false), false));
-	public static final RegistryObject<Block> BOILED_BLUE_PICKERELWEED_BLOCK = HELPER.createBlock("boiled_blue_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(true), true));
-	public static final RegistryObject<Block> BOILED_PURPLE_PICKERELWEED_BLOCK = HELPER.createBlock("boiled_purple_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(true), true));
+	public static final RegistryObject<Block> PICKERELWEED = HELPER.createBlock("pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED));
+	public static final RegistryObject<Block> TALL_PICKERELWEED = HELPER.createBlockNoItem("tall_pickerelweed", () -> new PickerelweedDoublePlantBlock(UAProperties.PICKERELWEED));
+	public static final RegistryObject<Block> PICKERELWEED_BLOCK = HELPER.createBlock("pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(false), false));
+	public static final RegistryObject<Block> BOILED_PICKERELWEED_BLOCK = HELPER.createBlock("boiled_pickerelweed_block", () -> new PickerelweedBlock(UAProperties.createPickerelweedBlock(true), true));
 
 	public static final RegistryObject<Block> POTTED_WHITE_SEAROCKET = HELPER.createBlockNoItem("potted_white_searocket", () -> new FlowerPotBlock(WHITE_SEAROCKET.get(), PropertyUtil.flowerPot()));
 	public static final RegistryObject<Block> POTTED_PINK_SEAROCKET = HELPER.createBlockNoItem("potted_pink_searocket", () -> new FlowerPotBlock(PINK_SEAROCKET.get(), PropertyUtil.flowerPot()));
-	public static final RegistryObject<Block> POTTED_BLUE_PICKERELWEED = HELPER.createBlockNoItem("potted_blue_pickerelweed", () -> new FlowerPotBlock(BLUE_PICKERELWEED.get(), PropertyUtil.flowerPot()));
-	public static final RegistryObject<Block> POTTED_PURPLE_PICKERELWEED = HELPER.createBlockNoItem("potted_purple_pickerelweed", () -> new FlowerPotBlock(PURPLE_PICKERELWEED.get(), PropertyUtil.flowerPot()));
+	public static final RegistryObject<Block> POTTED_PICKERELWEED = HELPER.createBlockNoItem("potted_pickerelweed", () -> new FlowerPotBlock(PICKERELWEED.get(), PropertyUtil.flowerPot()));
 
 	public static final RegistryObject<Block> BEACHGRASS = HELPER.createBlock("beachgrass", () -> new BeachgrassBlock(Properties.copy(Blocks.FERN)));
 	public static final RegistryObject<Block> TALL_BEACHGRASS = HELPER.createBlock("tall_beachgrass", () -> new TallBeachgrassBlock(Properties.copy(Blocks.LARGE_FERN)));
@@ -523,8 +517,8 @@ public class UABlocks {
 				.addItemsBefore(of(Blocks.NETHER_GOLD_ORE), EMBEDDED_AMMONITE)
 				.addItemsBefore(of(Blocks.DEAD_BUSH), BEACHGRASS)
 				.addItemsBefore(of(Blocks.SUNFLOWER), TALL_BEACHGRASS)
-				.addItemsBefore(of(Blocks.KELP), BLUE_PICKERELWEED, PURPLE_PICKERELWEED)
-				.addItemsBefore(of(Blocks.DRIED_KELP_BLOCK), BLUE_PICKERELWEED_BLOCK, BOILED_BLUE_PICKERELWEED_BLOCK, PURPLE_PICKERELWEED_BLOCK, BOILED_PURPLE_PICKERELWEED_BLOCK, KELP_BLOCK)
+				.addItemsBefore(of(Blocks.KELP), PICKERELWEED)
+				.addItemsBefore(of(Blocks.DRIED_KELP_BLOCK), PICKERELWEED_BLOCK, BOILED_PICKERELWEED_BLOCK, KELP_BLOCK)
 				.addItemsBefore(of(Blocks.MUSHROOM_STEM), DRIFTWOOD_LOG, RIVER_LOG)
 				.addItemsBefore(of(Blocks.AZALEA_LEAVES), RIVER_LEAVES)
 				.addItemsBefore(modLoaded(Blocks.AZALEA_LEAVES, "woodworks"), RIVER_LEAF_PILE)

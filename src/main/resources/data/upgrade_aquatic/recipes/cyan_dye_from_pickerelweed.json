@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:blue_pickerelweed"
+      "item": "upgrade_aquatic:pickerelweed"
     }
   ],
   "result": {

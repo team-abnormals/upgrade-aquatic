@@ -56,7 +56,7 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 
 	@Override
 	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-		return this == UABlocks.TALL_BLUE_PICKERELWEED.get() ? new ItemStack(UABlocks.BLUE_PICKERELWEED.get()) : new ItemStack(UABlocks.PURPLE_PICKERELWEED.get());
+		return new ItemStack(UABlocks.PICKERELWEED.get());
 	}
 
 	@Override
@@ -165,7 +165,7 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 			cont:
 			for (int i = 0; i < 128; ++i) {
 				BlockPos blockpos = pos;
-				BlockState blockstate = this == UABlocks.TALL_BLUE_PICKERELWEED.get() ? UABlocks.BLUE_PICKERELWEED.get().defaultBlockState() : UABlocks.PURPLE_PICKERELWEED.get().defaultBlockState();
+				BlockState blockstate = UABlocks.PICKERELWEED.get().defaultBlockState();
 
 				for (int j = 0; j < i / 16; ++j) {
 					blockpos = blockpos.offset(rand.nextInt(3) - 1, (rand.nextInt(3) - 1) * rand.nextInt(3) / 2, rand.nextInt(3) - 1);

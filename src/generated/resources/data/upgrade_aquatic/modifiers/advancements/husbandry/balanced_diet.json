@@ -4,21 +4,11 @@
       "type": "criteria",
       "config": {
         "criteria": {
-          "upgrade_aquatic:boiled_blue_pickerelweed": {
+          "upgrade_aquatic:boiled_pickerelweed": {
             "conditions": {
               "item": {
                 "items": [
-                  "upgrade_aquatic:boiled_blue_pickerelweed"
-                ]
-              }
-            },
-            "trigger": "minecraft:consume_item"
-          },
-          "upgrade_aquatic:boiled_purple_pickerelweed": {
-            "conditions": {
-              "item": {
-                "items": [
-                  "upgrade_aquatic:boiled_purple_pickerelweed"
+                  "upgrade_aquatic:boiled_pickerelweed"
                 ]
               }
             },
@@ -127,10 +117,7 @@
         },
         "requirements": [
           [
-            "upgrade_aquatic:boiled_blue_pickerelweed"
-          ],
-          [
-            "upgrade_aquatic:boiled_purple_pickerelweed"
+            "upgrade_aquatic:boiled_pickerelweed"
           ],
           [
             "upgrade_aquatic:pike"

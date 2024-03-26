@@ -130,15 +130,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Sacco a pelo giallo",
   "block.upgrade_aquatic.brown_bedroll": "Sacco a pelo marrone",
   
-  "block.upgrade_aquatic.blue_pickerelweed": "Pontederia blu",
+  "block.upgrade_aquatic.pickerelweed": "Pontederia blu",
   "block.upgrade_aquatic.purple_pickerelweed": "Pontederia viola",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Pontederia blu alta",
+  "block.upgrade_aquatic.tall_pickerelweed": "Pontederia blu alta",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Pontederia viola alta",
   
   "block.upgrade_aquatic.white_searocket": "Ravastrello bianco",
   "block.upgrade_aquatic.pink_searocket": "Ravastrello rosa",
   
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Vaso con pontederia blu",
+  "block.upgrade_aquatic.potted_pickerelweed": "Vaso con pontederia blu",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Vaso con pontederia viola",
   "block.upgrade_aquatic.potted_white_searocket": "Vaso con ravastrello bianco",
   "block.upgrade_aquatic.potted_pink_searocket": "Vaso con ravastrello rosa",
@@ -370,9 +370,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Lastra verticale di mattoni di pietra algali ocra",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Lastra verticale di mattoni di pietra algali polari",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Blocco di pontederia blu",
+  "block.upgrade_aquatic.pickerelweed_block": "Blocco di pontederia blu",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Blocco di pontederia viola",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Blocco di pontederia blu bollita",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Blocco di pontederia blu bollita",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Blocco di pontederia viola bollita",
   
   "block.upgrade_aquatic.driftwood": "Legno alla deriva",
@@ -484,7 +484,7 @@
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Uovo generatore di medusa",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Pontederia viola bollita",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Pontederia blu bollita",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Pontederia blu bollita",
   "item.upgrade_aquatic.pike": "Luccio crudo",
   "item.upgrade_aquatic.cooked_pike": "Luccio cotto",
   "item.upgrade_aquatic.lionfish": "Pesce leone crudo",

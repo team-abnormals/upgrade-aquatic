@@ -130,15 +130,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Sarı Uyku Tulumu",
   "block.upgrade_aquatic.brown_bedroll": "Kahverengi Uyku Tulumu",
   
-  "block.upgrade_aquatic.blue_pickerelweed": "Mavi Turşu Otu",
+  "block.upgrade_aquatic.pickerelweed": "Mavi Turşu Otu",
   "block.upgrade_aquatic.purple_pickerelweed": "Mor Turşu Otu",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Uzun Mavi Turşu Otu",
+  "block.upgrade_aquatic.tall_pickerelweed": "Uzun Mavi Turşu Otu",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Uzun Mor Turşu Otu",
   
   "block.upgrade_aquatic.white_searocket": "Beyaz Deniz Teresi",
   "block.upgrade_aquatic.pink_searocket": "Pembe Deniz Teresi",
   
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Saksıda Mavi Turşu Otu",
+  "block.upgrade_aquatic.potted_pickerelweed": "Saksıda Mavi Turşu Otu",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Saksıda Mor Turşu Otu",
   "block.upgrade_aquatic.potted_white_searocket": "Saksıda Beyaz Deniz Teresi",
   "block.upgrade_aquatic.potted_pink_searocket": "Saksıda Pembe Deniz Teresi",
@@ -370,9 +370,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Okre Su Yosunlu Taş Tuğlası Dikey Basamak",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Kutup Su Yosunlu Taş Tuğlası Dikey Basamak",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Mavi Turşu Otu Bloğu",
+  "block.upgrade_aquatic.pickerelweed_block": "Mavi Turşu Otu Bloğu",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Mor Turşu Otu Bloğu",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Haşlanmış Mavi Turşu Otu Bloğu",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Haşlanmış Mavi Turşu Otu Bloğu",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Haşlanmış Mor Turşu Otu Bloğu",
   
   "block.upgrade_aquatic.driftwood": "Akıntıodunu",
@@ -484,7 +484,7 @@
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Denizanası Çağırma Yumurtası",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Haşlanmış Mor Turşu Otu",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Haşlanmış Mavi Turşu Otu",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Haşlanmış Mavi Turşu Otu",
   "item.upgrade_aquatic.pike": "Çiğ Turna Balığı",
   "item.upgrade_aquatic.cooked_pike": "Pişmiş Turna Balığı",
   "item.upgrade_aquatic.lionfish": "Çiğ Aslan Balığı",

@@ -2,10 +2,8 @@
   "values": [
     "upgrade_aquatic:river_leaves",
     "upgrade_aquatic:river_leaf_pile",
-    "upgrade_aquatic:blue_pickerelweed_block",
-    "upgrade_aquatic:purple_pickerelweed_block",
-    "upgrade_aquatic:boiled_blue_pickerelweed_block",
-    "upgrade_aquatic:boiled_purple_pickerelweed_block",
+    "upgrade_aquatic:pickerelweed_block",
+    "upgrade_aquatic:boiled_pickerelweed_block",
     "upgrade_aquatic:beachgrass",
     "upgrade_aquatic:tall_beachgrass",
     "upgrade_aquatic:beachgrass_thatch",

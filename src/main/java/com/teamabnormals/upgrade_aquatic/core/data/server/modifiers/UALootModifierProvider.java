@@ -45,12 +45,9 @@ public final class UALootModifierProvider extends LootModifierProvider {
 
 		this.entry(BuiltInLootTables.FISHING_JUNK.getPath())
 				.selects(BuiltInLootTables.FISHING_JUNK)
-				.addModifier(new LootPoolEntriesModifier(
-						false,
-						0,
+				.addModifier(new LootPoolEntriesModifier(false, 0,
 						LootItem.lootTableItem(UABlocks.DRIFTWOOD_LOG.get()).setWeight(10).apply(SetItemCountFunction.setCount(ConstantValue.exactly(5))).build(),
-						LootItem.lootTableItem(UABlocks.BLUE_PICKERELWEED.get()).setWeight(12).when(inSwamp.or(inRiver)).build(),
-						LootItem.lootTableItem(UABlocks.PURPLE_PICKERELWEED.get()).setWeight(12).when(inSwamp.or(inRiver)).build()
+						LootItem.lootTableItem(UABlocks.PICKERELWEED.get()).setWeight(12).when(inSwamp.or(inRiver)).build()
 				));
 
 		LootPool toothPool = LootPool.lootPool()
@@ -65,8 +62,7 @@ public final class UALootModifierProvider extends LootModifierProvider {
 		LootPool pickerelweedPool = LootPool.lootPool()
 				.name(UpgradeAquatic.MOD_ID + ":pickerelweed")
 				.setRolls(UniformGenerator.between(1, 2))
-				.add(LootItem.lootTableItem(UABlocks.PURPLE_PICKERELWEED.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))).setWeight(1))
-				.add(LootItem.lootTableItem(UABlocks.BLUE_PICKERELWEED.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))).setWeight(1))
+				.add(LootItem.lootTableItem(UABlocks.PICKERELWEED.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3))).setWeight(1))
 				.build();
 		this.entry("pickerelweed_structures")
 				.selects(BuiltInLootTables.SHIPWRECK_SUPPLY)

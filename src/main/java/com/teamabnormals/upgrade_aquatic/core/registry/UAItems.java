@@ -55,8 +55,7 @@ public class UAItems {
 
 	public static final RegistryObject<Item> PRISMARINE_ROD = HELPER.createItem("prismarine_rod", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> THRASHER_TOOTH = HELPER.createItem("thrasher_tooth", () -> new Item(new Item.Properties()));
-	public static final RegistryObject<Item> BOILED_BLUE_PICKERELWEED = HELPER.createItem("boiled_blue_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().food(UAFoods.BLUE_PICKERELWEED), false));
-	public static final RegistryObject<Item> BOILED_PURPLE_PICKERELWEED = HELPER.createItem("boiled_purple_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().food(UAFoods.PURPLE_PICKERELWEED), true));
+	public static final RegistryObject<Item> BOILED_PICKERELWEED = HELPER.createItem("boiled_pickerelweed", () -> new BoiledPickerelweedItem(new Item.Properties().food(UAFoods.PICKERELWEED)));
 
 	public static final RegistryObject<Item> PIKE = HELPER.createItem("pike", () -> new Item(new Item.Properties().food(UAFoods.PIKE)));
 	public static final RegistryObject<Item> COOKED_PIKE = HELPER.createItem("cooked_pike", () -> new Item(new Item.Properties().food(UAFoods.COOKED_PIKE)));
@@ -94,7 +93,7 @@ public class UAItems {
 				.addItemsAfter(of(Items.PUMPKIN_PIE), MULBERRY_PIE)
 				.addItemsAfter(of(Items.HONEY_BOTTLE), MULBERRY_JAM_BOTTLE)
 				.addItemsBefore(of(Items.TROPICAL_FISH), PIKE, COOKED_PIKE, PERCH, COOKED_PERCH, LIONFISH, COOKED_LIONFISH)
-				.addItemsBefore(of(Items.DRIED_KELP), BOILED_BLUE_PICKERELWEED, BOILED_PURPLE_PICKERELWEED)
+				.addItemsBefore(of(Items.DRIED_KELP), BOILED_PICKERELWEED)
 				.tab(INGREDIENTS)
 				.addItemsAfter(of(Items.PRISMARINE_SHARD), PRISMARINE_ROD)
 				.addItemsAfter(of(Items.NAUTILUS_SHELL), THRASHER_TOOTH)
@@ -130,8 +129,7 @@ public class UAItems {
 		public static final FoodProperties MULBERRY_BREAD = new FoodProperties.Builder().nutrition(9).saturationMod(0.4F).build();
 		public static final FoodProperties MULBERRY_PIE = new FoodProperties.Builder().nutrition(7).saturationMod(0.6F).build();
 
-		public static final FoodProperties PURPLE_PICKERELWEED = new FoodProperties.Builder().nutrition(3).saturationMod(0.0F).alwaysEat().build();
-		public static final FoodProperties BLUE_PICKERELWEED = new FoodProperties.Builder().nutrition(2).saturationMod(0.0F).alwaysEat().build();
+		public static final FoodProperties PICKERELWEED = new FoodProperties.Builder().nutrition(2).saturationMod(0.0F).alwaysEat().build();
 
 		public static final FoodProperties PIKE = new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).build();
 		public static final FoodProperties COOKED_PIKE = new FoodProperties.Builder().nutrition(8).saturationMod(0.8F).build();

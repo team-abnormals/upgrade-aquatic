@@ -133,15 +133,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "노란색 침낭",
   "block.upgrade_aquatic.brown_bedroll": "갈색 침낭",
   
-  "block.upgrade_aquatic.blue_pickerelweed": "파란색 물옥잠",
+  "block.upgrade_aquatic.pickerelweed": "파란색 물옥잠",
   "block.upgrade_aquatic.purple_pickerelweed": "보라색 물옥잠",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "키 큰 파란색 물옥잠",
+  "block.upgrade_aquatic.tall_pickerelweed": "키 큰 파란색 물옥잠",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "키 큰 보라색 물옥잠",
   
   "block.upgrade_aquatic.white_searocket": "하얀색 서양갯냉이",
   "block.upgrade_aquatic.pink_searocket": "분홍색 서양갯냉이",
   
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "화분에 심은 파란색 물옥잠",
+  "block.upgrade_aquatic.potted_pickerelweed": "화분에 심은 파란색 물옥잠",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "화분에 심은 보라색 물옥잠",
   "block.upgrade_aquatic.potted_white_searocket": "화분에 심은 하얀색 서양갯냉이",
   "block.upgrade_aquatic.potted_pink_searocket": "화분에 심은 분홍색 서양갯냉이",
@@ -373,9 +373,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "황토 켈프 석재 벽돌 세로 반 블록",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "극지 켈프 석재 벽돌 세로 반 블록",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "파란색 물옥잠 블록",
+  "block.upgrade_aquatic.pickerelweed_block": "파란색 물옥잠 블록",
   "block.upgrade_aquatic.purple_pickerelweed_block": "보라색 물옥잠 블록",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "끓인 파란색 물옥잠 블록",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "끓인 파란색 물옥잠 블록",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "끓인 보라색 물옥잠 블록",
   
   "block.upgrade_aquatic.driftwood": "유목",
@@ -475,7 +475,7 @@
   "item.upgrade_aquatic.glow_squid_spawn_egg": "발광 오징어 생성 알",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "끓인 보라색 물옥잠",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "끓인 파란색 물옥잠",
+  "item.upgrade_aquatic.boiled_pickerelweed": "끓인 파란색 물옥잠",
   "item.upgrade_aquatic.pike": "생꼬치고기",
   "item.upgrade_aquatic.cooked_pike": "익힌 꼬치고기",
   "item.upgrade_aquatic.lionfish": "생쏠배감펭",

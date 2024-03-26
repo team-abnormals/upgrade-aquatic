@@ -27,8 +27,7 @@ import java.util.function.Supplier;
  * @author - SmellyModder(Luke Tonon)
  */
 public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
-	private static final Supplier<BlockState> BLUE_PICKERELWEED = () -> UABlocks.BLUE_PICKERELWEED.get().defaultBlockState();
-	private static final Supplier<BlockState> PURPLE_PICKERELWEED = () -> UABlocks.PURPLE_PICKERELWEED.get().defaultBlockState();
+	private static final Supplier<BlockState> PICKERELWEED = () -> UABlocks.PICKERELWEED.get().defaultBlockState();
 
 	public PickerelweedFeature(Codec<NoneFeatureConfiguration> configFactory) {
 		super(configFactory);
@@ -40,29 +39,14 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 		RandomSource rand = context.random();
 		BlockPos pos = context.origin();
 		Holder<Biome> biome = worldIn.getBiome(pos);
-		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && BLUE_PICKERELWEED.get().canSurvive(worldIn, pos.below())) {
+		if (isValidBlock(worldIn, pos) && this.shouldPlace(worldIn, pos) && PICKERELWEED.get().canSurvive(worldIn, pos.below())) {
 			if (biome.is(BiomeTags.IS_RIVER) || biome.is(Tags.Biomes.IS_SWAMP) || biome.is(Biomes.FLOWER_FOREST)) {
-				boolean purpleGen;
-				if (biome.is(Tags.Biomes.IS_SWAMP)) {
-					purpleGen = rand.nextFloat() >= 0.60D;
-				} else {
-					purpleGen = !(rand.nextFloat() >= 0.60D);
-				}
 				if (rand.nextDouble() <= 0.90D) {
-					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(8));
+					this.generatePickerelweedPatch(worldIn, pos, rand.nextInt(8));
 				}
 			} else {
-				boolean purpleGen;
-				if (biome.value().getBaseTemperature() < 0.2D) {
-					purpleGen = rand.nextFloat() >= 0.75D;
-				} else if (biome.value().getBaseTemperature() < 1.0D) {
-					purpleGen = rand.nextBoolean();
-				} else {
-					purpleGen = !(rand.nextFloat() >= 0.75D);
-				}
-
 				if (rand.nextDouble() <= 0.35D) {
-					this.generatePickerelweedPatch(worldIn, pos, purpleGen, rand.nextInt(8));
+					this.generatePickerelweedPatch(worldIn, pos, rand.nextInt(8));
 				}
 			}
 			return true;
@@ -70,7 +54,7 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 		return false;
 	}
 
-	public void generatePickerelweedPatch(LevelAccessor world, BlockPos pos, boolean purple, int randomDesign) {
+	public void generatePickerelweedPatch(LevelAccessor world, BlockPos pos, int randomDesign) {
 		// 0 - a, 1 - b, 2 - c
 		int[] patterns = new int[3];
 		switch (randomDesign) {
@@ -109,10 +93,8 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 				patterns[2] = 6;
 		}
 		BlockPos startPos = pos;
-		PickerelweedDoublePlantBlock doubleplantblock = (PickerelweedDoublePlantBlock) (!purple ? UABlocks.TALL_BLUE_PICKERELWEED.get() : UABlocks.TALL_PURPLE_PICKERELWEED.get());
-		MathUtil.Equation r = (theta) -> {
-			return (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
-		};
+		PickerelweedDoublePlantBlock doubleplantblock = (PickerelweedDoublePlantBlock) UABlocks.TALL_PICKERELWEED.get();
+		MathUtil.Equation r = (theta) -> (Math.cos(patterns[1] * theta) / patterns[2] + 1) * patterns[0];
 		if (!world.isEmptyBlock(startPos.below()) && !world.isEmptyBlock(startPos.below(2)) && !world.isEmptyBlock(startPos.below(3))) {
 			int repeatsDown = world.getRandom().nextInt(2) + 2;
 			for (int repeats = 0; repeats < repeatsDown; repeats++) {
@@ -124,13 +106,9 @@ public class PickerelweedFeature extends Feature<NoneFeatureConfiguration> {
 						if (world.getBlockState(placingPos).canBeReplaced() && (i * i + j * j) < radius * radius) {
 							if (i * i + j * j > (radius - 1) * (radius - 1)) {
 								FluidState ifluidstate = world.getFluidState(placingPos);
-								if (PURPLE_PICKERELWEED.get().canSurvive(world, placingPos) && world.getBlockState(placingPos.above()).canBeReplaced() && world.getRandom().nextDouble() <= 0.85D) {
-									if (purple) {
-										world.setBlock(placingPos, PURPLE_PICKERELWEED.get().setValue(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.is(FluidTags.WATER)), 2);
-									} else {
-										world.setBlock(placingPos, BLUE_PICKERELWEED.get().setValue(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.is(FluidTags.WATER)), 2);
-									}
-								} else if (PURPLE_PICKERELWEED.get().canSurvive(world, placingPos)) {
+								if (PICKERELWEED.get().canSurvive(world, placingPos) && world.getBlockState(placingPos.above()).canBeReplaced() && world.getRandom().nextDouble() <= 0.85D) {
+									world.setBlock(placingPos, PICKERELWEED.get().setValue(PickerelweedPlantBlock.WATERLOGGED, ifluidstate.is(FluidTags.WATER)), 2);
+								} else if (PICKERELWEED.get().canSurvive(world, placingPos)) {
 									doubleplantblock.placeAt(world, placingPos, 2);
 								}
 							} else {

@@ -130,15 +130,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Żółty śpiwór",
   "block.upgrade_aquatic.brown_bedroll": "Brązowy śpiwór",
   
-  "block.upgrade_aquatic.blue_pickerelweed": "Niebieski rozpław sercowaty",
+  "block.upgrade_aquatic.pickerelweed": "Niebieski rozpław sercowaty",
   "block.upgrade_aquatic.purple_pickerelweed": "Fioletowy rozpław sercowaty",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Wysoki niebieski rozpław sercowaty",
+  "block.upgrade_aquatic.tall_pickerelweed": "Wysoki niebieski rozpław sercowaty",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Wysoki fioletowy rozpław sercowaty",
   
   "block.upgrade_aquatic.white_searocket": "Biała rukwiel nadmorska",
   "block.upgrade_aquatic.pink_searocket": "Różowa rukwiel nadmorska",
   
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Niebieski rozpław sercowaty w doniczce",
+  "block.upgrade_aquatic.potted_pickerelweed": "Niebieski rozpław sercowaty w doniczce",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Fioletowy rozpław sercowaty w doniczce",
   "block.upgrade_aquatic.potted_white_searocket": "Biała rukwiel nadmorska w doniczce",
   "block.upgrade_aquatic.potted_pink_searocket": "Różowa rukwiel nadmorska w doniczce",
@@ -370,9 +370,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Pionowa ochrowa zwodorościała kamienna ceglana płyta",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Pionowa polarna zwodorościała kamienna ceglana płyta",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Blok niebieskiego rozpławu sercowatego",
+  "block.upgrade_aquatic.pickerelweed_block": "Blok niebieskiego rozpławu sercowatego",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Blok fioletowego rozpławu sercowatego",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Blok gotowanego niebieskiego rozpławu sercowatego",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Blok gotowanego niebieskiego rozpławu sercowatego",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Blok gotowanego fioletowego rozpławu sercowatego",
   
   "block.upgrade_aquatic.driftwood": "Korzeniowe drewno",
@@ -484,7 +484,7 @@
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Jajo przyzywające meduzę",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Gotowany fioletowy rozpław sercowaty",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Gotowany niebieski rozpław sercowaty",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Gotowany niebieski rozpław sercowaty",
   "item.upgrade_aquatic.pike": "Surowy szczupak",
   "item.upgrade_aquatic.cooked_pike": "Pieczony szczupak",
   "item.upgrade_aquatic.lionfish": "Surowa skrzydlica",

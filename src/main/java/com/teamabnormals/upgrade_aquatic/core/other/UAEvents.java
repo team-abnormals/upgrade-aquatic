@@ -53,9 +53,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
-import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityEvent;
@@ -264,9 +261,28 @@ public class UAEvents {
 
 	@SubscribeEvent
 	public static void onWandererTradesEvent(WandererTradesEvent event) {
-		TradeUtil.addWandererTrades(event, new BlueprintTrade(1, UABlocks.BEACHGRASS.get().asItem(), 1, 12, 1), new BlueprintTrade(1, UABlocks.WHITE_SEAROCKET.get().asItem(), 1, 8, 1), new BlueprintTrade(1, UABlocks.PINK_SEAROCKET.get().asItem(), 1, 8, 1), new BlueprintTrade(1, UABlocks.BLUE_PICKERELWEED.get().asItem(), 1, 8, 1), new BlueprintTrade(1, UABlocks.PURPLE_PICKERELWEED.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.FINGER_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.ACAN_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.BRANCH_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.PILLOW_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.SILK_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.PETAL_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.MOSS_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.ROCK_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.STAR_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(3, UABlocks.CHROME_CORAL_BLOCK.get().asItem(), 1, 8, 1), new BlueprintTrade(5, UABlocks.EMBEDDED_AMMONITE.get().asItem(), 1, 5, 1));
+		TradeUtil.addWandererTrades(event,
+				new BlueprintTrade(1, UABlocks.BEACHGRASS.get().asItem(), 1, 12, 1),
+				new BlueprintTrade(1, UABlocks.WHITE_SEAROCKET.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(1, UABlocks.PINK_SEAROCKET.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(1, UABlocks.PICKERELWEED.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.FINGER_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.ACAN_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.BRANCH_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.PILLOW_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.SILK_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.PETAL_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.MOSS_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.ROCK_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.STAR_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(3, UABlocks.CHROME_CORAL_BLOCK.get().asItem(), 1, 8, 1),
+				new BlueprintTrade(5, UABlocks.EMBEDDED_AMMONITE.get().asItem(), 1, 5, 1));
 
-		TradeUtil.addRareWandererTrades(event, new BlueprintTrade(2, UABlocks.DRIFTWOOD_LOG.get().asItem(), 1, 16, 1), new BlueprintTrade(5, UAItems.PIKE_BUCKET.get(), 1, 4, 1), new BlueprintTrade(5, UAItems.LIONFISH_BUCKET.get(), 1, 4, 1), new BlueprintTrade(5, UAItems.NAUTILUS_BUCKET.get(), 1, 4, 1));
+		TradeUtil.addRareWandererTrades(event,
+				new BlueprintTrade(2, UABlocks.DRIFTWOOD_LOG.get().asItem(), 1, 16, 1),
+				new BlueprintTrade(5, UAItems.PIKE_BUCKET.get(), 1, 4, 1),
+				new BlueprintTrade(5, UAItems.LIONFISH_BUCKET.get(), 1, 4, 1),
+				new BlueprintTrade(5, UAItems.NAUTILUS_BUCKET.get(), 1, 4, 1));
 	}
 
 	@SubscribeEvent
@@ -285,9 +301,12 @@ public class UAEvents {
 
 		TradeUtil.addVillagerTrades(event, VillagerProfession.MASON, TradeUtil.MASTER, new BlueprintTrade(5, UABlocks.TOOTH_TILES.get().asItem(), 1, 12, 30), new BlueprintTrade(5, UABlocks.TOOTH_BRICKS.get().asItem(), 1, 12, 30));
 
-		if (UAConfig.COMMON.clericsBuyThrasherTeeth.get()) TradeUtil.addVillagerTrades(event, VillagerProfession.CLERIC, TradeUtil.EXPERT, new BlueprintTrade(UAItems.THRASHER_TOOTH.get(), 1, 1, 12, 15));
+		if (UAConfig.COMMON.clericsBuyThrasherTeeth.get()) {
+			TradeUtil.addVillagerTrades(event, VillagerProfession.CLERIC, TradeUtil.EXPERT, new BlueprintTrade(UAItems.THRASHER_TOOTH.get(), 1, 1, 12, 15));
+		}
 
-		if (UAConfig.COMMON.leatherworkersSellBedrolls.get())
+		if (UAConfig.COMMON.leatherworkersSellBedrolls.get()) {
 			TradeUtil.addVillagerTrades(event, VillagerProfession.LEATHERWORKER, TradeUtil.APPRENTICE, new BlueprintTrade(1, UABlocks.BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.WHITE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.ORANGE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.MAGENTA_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.LIGHT_BLUE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.YELLOW_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.LIME_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.PINK_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.GRAY_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.LIGHT_GRAY_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.CYAN_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.PURPLE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.BLUE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.BROWN_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.GREEN_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.RED_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.BLACK_BEDROLL.get().asItem(), 1, 8, 10));
+		}
 	}
 }

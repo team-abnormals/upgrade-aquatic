@@ -38,10 +38,8 @@ public class UAClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAVES.get(), CUTOUT_MIPPED);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.RIVER_LEAF_PILE.get(), CUTOUT);
 
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.BLUE_PICKERELWEED.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.PURPLE_PICKERELWEED.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.TALL_BLUE_PICKERELWEED.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.TALL_PURPLE_PICKERELWEED.get(), CUTOUT);
+		ItemBlockRenderTypes.setRenderLayer(UABlocks.PICKERELWEED.get(), CUTOUT);
+		ItemBlockRenderTypes.setRenderLayer(UABlocks.TALL_PICKERELWEED.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.PINK_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.WHITE_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.FLOWERING_RUSH.get(), CUTOUT);
@@ -154,8 +152,7 @@ public class UAClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POLAR_KELP_PLANT.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.TONGUE_KELP_PLANT.get(), CUTOUT);
 
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_PURPLE_PICKERELWEED.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_BLUE_PICKERELWEED.get(), CUTOUT);
+		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_PICKERELWEED.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_PINK_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_WHITE_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_RIVER_SAPLING.get(), CUTOUT);

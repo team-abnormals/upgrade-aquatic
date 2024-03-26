@@ -130,15 +130,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Жовтий спальний мішок",
   "block.upgrade_aquatic.brown_bedroll": "Коричневий спальний мішок",
 
-  "block.upgrade_aquatic.blue_pickerelweed": "Синій щучий бур'ян",
+  "block.upgrade_aquatic.pickerelweed": "Синій щучий бур'ян",
   "block.upgrade_aquatic.purple_pickerelweed": "Фіолетовий щучий бур'ян",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Високий синій щучий бур'ян",
+  "block.upgrade_aquatic.tall_pickerelweed": "Високий синій щучий бур'ян",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Високий фіолетовий щучий бур'ян",
 
   "block.upgrade_aquatic.white_searocket": "Біла морська гірчиця",
   "block.upgrade_aquatic.pink_searocket": "Рожева морська гірчиця",
 
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Синій щучий бур'ян у горщику",
+  "block.upgrade_aquatic.potted_pickerelweed": "Синій щучий бур'ян у горщику",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Фіолетовий щучий бур'ян у горщику",
   "block.upgrade_aquatic.potted_white_searocket": "Біла морська гірчиця в горщику",
   "block.upgrade_aquatic.potted_pink_searocket": "Рожева морська гірчиця в горщику",
@@ -370,9 +370,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Вертикальна плита з кам'яної цегли у вохровій ламінарії",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Вертикальна плита з кам'яної цегли в полярній ламінарії",
 
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Блок синього щучого бур'яну",
+  "block.upgrade_aquatic.pickerelweed_block": "Блок синього щучого бур'яну",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Блок фіолетового щучого бур'яну",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Блок вареного синього щучого бур'яну",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Блок вареного синього щучого бур'яну",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Блок вареного фіолетового щучого бур'яну",
 
   "block.upgrade_aquatic.driftwood": "Дрейфівна деревина",
@@ -484,7 +484,7 @@
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Яйце виклику медузи",
 
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Варений фіолетовий щучий бур'ян",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Варений синій щучий бур'ян",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Варений синій щучий бур'ян",
   "item.upgrade_aquatic.pike": "Сира щука",
   "item.upgrade_aquatic.cooked_pike": "Смажена щука",
   "item.upgrade_aquatic.lionfish": "Сира крилатка",

@@ -130,15 +130,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Yellow Bedroll",
   "block.upgrade_aquatic.brown_bedroll": "Brown Bedroll",
   
-  "block.upgrade_aquatic.blue_pickerelweed": "Blue Pickerelweed",
+  "block.upgrade_aquatic.pickerelweed": "Blue Pickerelweed",
   "block.upgrade_aquatic.purple_pickerelweed": "Purple Pickerelweed",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Tall Blue Pickerelweed",
+  "block.upgrade_aquatic.tall_pickerelweed": "Tall Blue Pickerelweed",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Tall Purple Pickerelweed",
   
   "block.upgrade_aquatic.white_searocket": "White Searocket",
   "block.upgrade_aquatic.pink_searocket": "Carnation Searocket",
   
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Potted Blue Pickerelweed",
+  "block.upgrade_aquatic.potted_pickerelweed": "Potted Blue Pickerelweed",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Potted Purple Pickerelweed",
   "block.upgrade_aquatic.potted_white_searocket": "Potted White Searocket",
   "block.upgrade_aquatic.potted_pink_searocket": "Potted Pink Searocket",
@@ -370,9 +370,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Ochre Kelpy Stone Brick Vertical Slab",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Polar Kelpy Stone Brick Vertical Slab",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Block of Blue Pickerelweed",
+  "block.upgrade_aquatic.pickerelweed_block": "Block of Blue Pickerelweed",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Block of Purple Pickerelweed",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Block of Boiled Blue Pickerelweed",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Block of Boiled Blue Pickerelweed",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Block of Boiled Purple Pickerelweed",
   
   "block.upgrade_aquatic.driftwood": "Drifted Wood",
@@ -484,7 +484,7 @@
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Adder Stone O' Jellyfish",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Boiled Purple Pickerelweed",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Boiled Blue Pickerelweed",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Boiled Blue Pickerelweed",
   "item.upgrade_aquatic.pike": "Raw Pike",
   "item.upgrade_aquatic.cooked_pike": "Roasted Pike",
   "item.upgrade_aquatic.lionfish": "Raw Lionfish",

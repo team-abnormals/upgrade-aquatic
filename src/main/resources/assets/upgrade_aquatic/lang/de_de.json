@@ -131,15 +131,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Gelber Schlafsack",
   "block.upgrade_aquatic.brown_bedroll": "Brauner Schlafsack",
   
-  "block.upgrade_aquatic.blue_pickerelweed": "Blaues Herzblättriges Hechtkraut",
+  "block.upgrade_aquatic.pickerelweed": "Blaues Herzblättriges Hechtkraut",
   "block.upgrade_aquatic.purple_pickerelweed": "Violettes Herzblättriges Hechtkraut",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Hohes blaues Herzblättriges Hechtkraut",
+  "block.upgrade_aquatic.tall_pickerelweed": "Hohes blaues Herzblättriges Hechtkraut",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Hohes violettes Herzblättriges Hechtkraut",
   
   "block.upgrade_aquatic.white_searocket": "Weißer Meersenf",
   "block.upgrade_aquatic.pink_searocket": "Rosa Meersenf",
   
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Eingetopftes blaues Herzblättriges Hechtkraut",
+  "block.upgrade_aquatic.potted_pickerelweed": "Eingetopftes blaues Herzblättriges Hechtkraut",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Eingetopftes violettes Herzblättriges Hechtkraut",
   "block.upgrade_aquatic.potted_white_searocket": "Eingetopfter weißer Meersenf",
   "block.upgrade_aquatic.potted_pink_searocket": "Eingetopfter rosa Meersenf",
@@ -371,9 +371,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Vertikale ockerbetangste Steinziegelstufe",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Vertikale polarbetangste Steinziegelstufe",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Blauer Herzblättriges-Hechtkraut-Block",
+  "block.upgrade_aquatic.pickerelweed_block": "Blauer Herzblättriges-Hechtkraut-Block",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Violetter Herzblättriges-Hechtkraut-Block",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Gekochter blauer Herzblättriges-Hechtkraut-Block",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Gekochter blauer Herzblättriges-Hechtkraut-Block",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Gekochter violetter Herzblättriges-Hechtkraut-Block",
   
   "block.upgrade_aquatic.driftwood": "Treibholz",
@@ -478,7 +478,7 @@
   "item.upgrade_aquatic.glow_squid_spawn_egg": "Glühtintenfisch-Spawn-Ei",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Gekochter violetter Herzblättriges Hechtkraut",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Gekochter blauer Herzblättriges Hechtkraut",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Gekochter blauer Herzblättriges Hechtkraut",
   "item.upgrade_aquatic.pike": "Roher Hecht",
   "item.upgrade_aquatic.cooked_pike": "Gebratener Hecht",
   "item.upgrade_aquatic.lionfish": "Roher Rotfeuerfisch",

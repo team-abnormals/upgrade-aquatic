@@ -135,15 +135,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Sac de couchage jaune",
   "block.upgrade_aquatic.brown_bedroll": "Sac de couchage marron",
 
-  "block.upgrade_aquatic.blue_pickerelweed": "Pontédérie bleue",
+  "block.upgrade_aquatic.pickerelweed": "Pontédérie bleue",
   "block.upgrade_aquatic.purple_pickerelweed": "Pontédérie violette",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Grande pontédérie bleue",
+  "block.upgrade_aquatic.tall_pickerelweed": "Grande pontédérie bleue",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Grande pontédérie violette",
 
   "block.upgrade_aquatic.white_searocket": "Roquette de mer blanche",
   "block.upgrade_aquatic.pink_searocket": "Roquette de mer rose",
 
- "block.upgrade_aquatic.potted_blue_pickerelweed": "Pontédérie bleue en pot",
+ "block.upgrade_aquatic.potted_pickerelweed": "Pontédérie bleue en pot",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Pontédérie violette en pot",
   "block.upgrade_aquatic.potted_white_searocket": "Roquette de mer blanche en pot",
   "block.upgrade_aquatic.potted_pink_searocket": "Roquette de mer rose en pot",
@@ -325,9 +325,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_wall": "Ochre Kelpy Stone Brick Wall",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_wall": "Polar Kelpy Stone Brick Wall",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Blue Pickerelweed Block",
+  "block.upgrade_aquatic.pickerelweed_block": "Blue Pickerelweed Block",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Purple Pickerelweed Block",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Boiled Blue Pickerelweed Block",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Boiled Blue Pickerelweed Block",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Boiled Purple Pickerelweed Block",
   
   "block.upgrade_aquatic.driftwood": "Driftwood",
@@ -431,7 +431,7 @@
   "item.upgrade_aquatic.lionfish_spawn_egg": "Œuf d'apparition de rascasse",  
 
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Pontédérie bleue bouillie",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Pontédérie violette bouillie",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Pontédérie violette bouillie",
   "item.upgrade_aquatic.pike": "Brochet cru",
   "item.upgrade_aquatic.cooked_pike": "Brochet cuit",
   "item.upgrade_aquatic.lionfish": "Rascasse crue",

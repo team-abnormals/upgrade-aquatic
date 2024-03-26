@@ -20,22 +20,7 @@
                     "function": "minecraft:set_count"
                   }
                 ],
-                "name": "upgrade_aquatic:purple_pickerelweed"
-              },
-              {
-                "type": "minecraft:item",
-                "functions": [
-                  {
-                    "add": false,
-                    "count": {
-                      "type": "minecraft:uniform",
-                      "max": 3.0,
-                      "min": 1.0
-                    },
-                    "function": "minecraft:set_count"
-                  }
-                ],
-                "name": "upgrade_aquatic:blue_pickerelweed"
+                "name": "upgrade_aquatic:pickerelweed"
               }
             ],
             "name": "upgrade_aquatic:pickerelweed",

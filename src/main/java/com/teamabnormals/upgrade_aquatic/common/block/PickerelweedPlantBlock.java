@@ -63,7 +63,7 @@ public class PickerelweedPlantBlock extends Block implements BonemealableBlock, 
 	@Override
 	public void performBonemeal(ServerLevel world, RandomSource rand, BlockPos pos, BlockState state) {
 		FluidState ifluidstate = world.getFluidState(pos.above());
-		PickerelweedDoublePlantBlock doubleplantblock = (PickerelweedDoublePlantBlock) (this == UABlocks.BLUE_PICKERELWEED.get() ? UABlocks.TALL_BLUE_PICKERELWEED.get() : UABlocks.TALL_PURPLE_PICKERELWEED.get());
+		PickerelweedDoublePlantBlock doubleplantblock = (PickerelweedDoublePlantBlock) UABlocks.TALL_PICKERELWEED.get();
 		if (doubleplantblock.defaultBlockState().canSurvive(world, pos) && (world.isEmptyBlock(pos.above()) || ifluidstate.is(FluidTags.WATER) && ifluidstate.getAmount() >= 6)) {
 			doubleplantblock.placeAt(world, pos, 2);
 		}

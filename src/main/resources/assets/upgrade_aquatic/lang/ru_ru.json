@@ -133,15 +133,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Желтый спальник",
   "block.upgrade_aquatic.brown_bedroll": "Коричневый спальник",
 
-  "block.upgrade_aquatic.blue_pickerelweed": "Синяя понтедерия",
+  "block.upgrade_aquatic.pickerelweed": "Синяя понтедерия",
   "block.upgrade_aquatic.purple_pickerelweed": "Фиолетовая понтедерия",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Высокая синяя понтедерия",
+  "block.upgrade_aquatic.tall_pickerelweed": "Высокая синяя понтедерия",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Высокая фиолетовая понтедерия",
   
   "block.upgrade_aquatic.white_searocket": "Белая морская горчица",
   "block.upgrade_aquatic.pink_searocket": "Розовая морская горчица",
   
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Синяя понтедерия в горшке",
+  "block.upgrade_aquatic.potted_pickerelweed": "Синяя понтедерия в горшке",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Фиолетовая понтедерия в горшке",
   "block.upgrade_aquatic.potted_white_searocket": "Белая морская горчица в горшке",
   "block.upgrade_aquatic.potted_pink_searocket": "Розовая морская горчица в горшке",
@@ -373,9 +373,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в охристой ламинарии",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_vertical_slab": "Вертикальная плита из каменного кирпича в полярной ламинарии",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Блок синей понтедерии",
+  "block.upgrade_aquatic.pickerelweed_block": "Блок синей понтедерии",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Блок фиолетовой понтедерии",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Блок вареной синей понтедерии",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Блок вареной синей понтедерии",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Блок вареной фиолетовой понтедерии",
 
   "block.upgrade_aquatic.driftwood": "Плавник",
@@ -475,7 +475,7 @@
   "item.upgrade_aquatic.glow_squid_spawn_egg": "Яйцо призыва светящегося спрута",
 
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Вареная фиолетовая понтедерия",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Вареная синяя понтедерия",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Вареная синяя понтедерия",
   "item.upgrade_aquatic.pike": "Сырая щука",
   "item.upgrade_aquatic.cooked_pike": "Жареная щука",
   "item.upgrade_aquatic.lionfish": "Сырая крылатка-зебра",

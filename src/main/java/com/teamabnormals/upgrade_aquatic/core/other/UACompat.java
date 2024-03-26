@@ -28,15 +28,10 @@ public class UACompat {
 		DataUtil.registerCompostable(UABlocks.BEACHGRASS_THATCH_STAIRS.get(), 0.65F);
 		DataUtil.registerCompostable(UABlocks.BEACHGRASS_THATCH_SLAB.get(), 0.65F);
 
-		DataUtil.registerCompostable(UABlocks.BLUE_PICKERELWEED.get(), 0.30F);
-		DataUtil.registerCompostable(UAItems.BOILED_BLUE_PICKERELWEED.get(), 0.30F);
-		DataUtil.registerCompostable(UABlocks.BLUE_PICKERELWEED_BLOCK.get(), 0.50F);
-		DataUtil.registerCompostable(UABlocks.BOILED_BLUE_PICKERELWEED_BLOCK.get(), 0.50F);
-
-		DataUtil.registerCompostable(UABlocks.PURPLE_PICKERELWEED.get(), 0.30F);
-		DataUtil.registerCompostable(UAItems.BOILED_PURPLE_PICKERELWEED.get(), 0.30F);
-		DataUtil.registerCompostable(UABlocks.PURPLE_PICKERELWEED_BLOCK.get(), 0.50F);
-		DataUtil.registerCompostable(UABlocks.BOILED_PURPLE_PICKERELWEED_BLOCK.get(), 0.50F);
+		DataUtil.registerCompostable(UABlocks.PICKERELWEED.get(), 0.30F);
+		DataUtil.registerCompostable(UAItems.BOILED_PICKERELWEED.get(), 0.30F);
+		DataUtil.registerCompostable(UABlocks.PICKERELWEED_BLOCK.get(), 0.50F);
+		DataUtil.registerCompostable(UABlocks.BOILED_PICKERELWEED_BLOCK.get(), 0.50F);
 
 		DataUtil.registerCompostable(UABlocks.FLOWERING_RUSH.get(), 0.65F);
 		DataUtil.registerCompostable(UABlocks.WHITE_SEAROCKET.get(), 0.65F);
@@ -57,14 +52,10 @@ public class UACompat {
 	public static void registerFlammables() {
 		DataUtil.registerFlammable(UABlocks.MULBERRY_VINE.get(), 60, 100);
 
-		DataUtil.registerFlammable(UABlocks.BLUE_PICKERELWEED_BLOCK.get(), 30, 60);
-		DataUtil.registerFlammable(UABlocks.PURPLE_PICKERELWEED_BLOCK.get(), 30, 60);
-		DataUtil.registerFlammable(UABlocks.BOILED_BLUE_PICKERELWEED_BLOCK.get(), 30, 60);
-		DataUtil.registerFlammable(UABlocks.BOILED_PURPLE_PICKERELWEED_BLOCK.get(), 30, 60);
-		DataUtil.registerFlammable(UABlocks.BLUE_PICKERELWEED.get(), 60, 100);
-		DataUtil.registerFlammable(UABlocks.PURPLE_PICKERELWEED.get(), 60, 100);
-		DataUtil.registerFlammable(UABlocks.TALL_BLUE_PICKERELWEED.get(), 60, 100);
-		DataUtil.registerFlammable(UABlocks.TALL_PURPLE_PICKERELWEED.get(), 60, 100);
+		DataUtil.registerFlammable(UABlocks.PICKERELWEED_BLOCK.get(), 30, 60);
+		DataUtil.registerFlammable(UABlocks.BOILED_PICKERELWEED_BLOCK.get(), 30, 60);
+		DataUtil.registerFlammable(UABlocks.PICKERELWEED.get(), 60, 100);
+		DataUtil.registerFlammable(UABlocks.TALL_PICKERELWEED.get(), 60, 100);
 
 		DataUtil.registerFlammable(UABlocks.BEACHGRASS.get(), 60, 20);
 		DataUtil.registerFlammable(UABlocks.TALL_BEACHGRASS.get(), 60, 20);

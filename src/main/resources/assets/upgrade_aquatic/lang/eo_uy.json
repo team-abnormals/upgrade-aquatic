@@ -133,15 +133,15 @@
   "block.upgrade_aquatic.yellow_bedroll": "Flava dormosako",
   "block.upgrade_aquatic.brown_bedroll": "Bruna dormosako",
   
-  "block.upgrade_aquatic.blue_pickerelweed": "Blua ezokplanto",
+  "block.upgrade_aquatic.pickerelweed": "Blua ezokplanto",
   "block.upgrade_aquatic.purple_pickerelweed": "Violkolora ezokplanto",
-  "block.upgrade_aquatic.tall_blue_pickerelweed": "Alta blua ezokplanto",
+  "block.upgrade_aquatic.tall_pickerelweed": "Alta blua ezokplanto",
   "block.upgrade_aquatic.tall_purple_pickerelweed": "Alta viola ezokplanto",
   
   "block.upgrade_aquatic.white_searocket": "Blanka kakelo",
   "block.upgrade_aquatic.pink_searocket": "Rozkolora kakelo",
   
-  "block.upgrade_aquatic.potted_blue_pickerelweed": "Enpota blua ezokplanto",
+  "block.upgrade_aquatic.potted_pickerelweed": "Enpota blua ezokplanto",
   "block.upgrade_aquatic.potted_purple_pickerelweed": "Enpota viola ezokplanto",
   "block.upgrade_aquatic.potted_white_searocket": "Enpota blanka kakelo",
   "block.upgrade_aquatic.potted_pink_searocket": "Enpota rozkolora kakelo",
@@ -323,9 +323,9 @@
   "block.upgrade_aquatic.ochre_kelpy_stone_brick_wall": "Okra alga ŝtonbrika muro",
   "block.upgrade_aquatic.polar_kelpy_stone_brick_wall": "Polusa alga ŝtonbrika muro",
   
-  "block.upgrade_aquatic.blue_pickerelweed_block": "Blua ezokplanta bloko",
+  "block.upgrade_aquatic.pickerelweed_block": "Blua ezokplanta bloko",
   "block.upgrade_aquatic.purple_pickerelweed_block": "Violkolora ezokplanta bloko",
-  "block.upgrade_aquatic.boiled_blue_pickerelweed_block": "Boligita blua ezokplanta bloko",
+  "block.upgrade_aquatic.boiled_pickerelweed_block": "Boligita blua ezokplanta bloko",
   "block.upgrade_aquatic.boiled_purple_pickerelweed_block": "Boligita viola ezokplanta bloko",
   
   "block.upgrade_aquatic.driftwood": "Flosligno",
@@ -449,7 +449,7 @@
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Aperigovo de meduzo",
   
   "item.upgrade_aquatic.boiled_purple_pickerelweed": "Boligita viola ezokplanto",
-  "item.upgrade_aquatic.boiled_blue_pickerelweed": "Boligita blua ezokplanto",
+  "item.upgrade_aquatic.boiled_pickerelweed": "Boligita blua ezokplanto",
   "item.upgrade_aquatic.pike": "Kruda ezoko",
   "item.upgrade_aquatic.cooked_pike": "Kuirita ezoko",
   "item.upgrade_aquatic.lionfish": "Kruda lepuo",
