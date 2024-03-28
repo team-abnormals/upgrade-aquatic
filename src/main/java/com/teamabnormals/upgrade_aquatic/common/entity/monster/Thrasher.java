@@ -208,6 +208,11 @@ public class Thrasher extends Monster implements Endimatable {
 		}
 	}
 
+	@Nullable
+	public LivingEntity getControllingPassenger() {
+		return null;
+	}
+
 	public float getMountDistance() {
 		return 1.2F;
 	}
