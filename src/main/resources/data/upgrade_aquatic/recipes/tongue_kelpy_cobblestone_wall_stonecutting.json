@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "upgrade_aquatic:tongue_kelpy_cobblestone"
-  },
-  "result": "upgrade_aquatic:tongue_kelpy_cobblestone_wall",
-  "count": 1
-}

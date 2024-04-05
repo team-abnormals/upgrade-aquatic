@@ -355,20 +355,7 @@ public class UABlocks {
 	public static final RegistryObject<Block> ELDER_PRISMARINE_CORALSTONE_WALL = HELPER.createBlock("elder_prismarine_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
 	public static final RegistryObject<Block> DEAD_CORALSTONE_WALL = HELPER.createBlock("dead_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
 
-	public static final RegistryObject<Block> TONGUE_KELP = HELPER.createBlock("tongue_kelp", () -> new UAKelpBlock(KelpType.TONGUE, Properties.copy(Blocks.KELP)));
-	public static final RegistryObject<Block> THORNY_KELP = HELPER.createBlock("thorny_kelp", () -> new UAKelpBlock(KelpType.THORNY, Properties.copy(Blocks.KELP)));
-	public static final RegistryObject<Block> OCHRE_KELP = HELPER.createBlock("ochre_kelp", () -> new UAKelpBlock(KelpType.OCHRE, Properties.copy(Blocks.KELP)));
-	public static final RegistryObject<Block> POLAR_KELP = HELPER.createBlock("polar_kelp", () -> new UAKelpBlock(KelpType.POLAR, Properties.copy(Blocks.KELP)));
-	public static final RegistryObject<Block> TONGUE_KELP_PLANT = HELPER.createBlockNoItem("tongue_kelp_plant", () -> new UAKelpPlantBlock(KelpType.TONGUE, Properties.copy(Blocks.KELP_PLANT)));
-	public static final RegistryObject<Block> THORNY_KELP_PLANT = HELPER.createBlockNoItem("thorny_kelp_plant", () -> new UAKelpPlantBlock(KelpType.THORNY, Properties.copy(Blocks.KELP_PLANT)));
-	public static final RegistryObject<Block> OCHRE_KELP_PLANT = HELPER.createBlockNoItem("ochre_kelp_plant", () -> new UAKelpPlantBlock(KelpType.OCHRE, Properties.copy(Blocks.KELP_PLANT)));
-	public static final RegistryObject<Block> POLAR_KELP_PLANT = HELPER.createBlockNoItem("polar_kelp_plant", () -> new UAKelpPlantBlock(KelpType.POLAR, Properties.copy(Blocks.KELP_PLANT)));
-
 	public static final RegistryObject<Block> KELP_BLOCK = HELPER.createBlock("kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
-	public static final RegistryObject<Block> TONGUE_KELP_BLOCK = HELPER.createBlock("tongue_kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
-	public static final RegistryObject<Block> THORNY_KELP_BLOCK = HELPER.createBlock("thorny_kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
-	public static final RegistryObject<Block> OCHRE_KELP_BLOCK = HELPER.createBlock("ochre_kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
-	public static final RegistryObject<Block> POLAR_KELP_BLOCK = HELPER.createBlock("polar_kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
 
 	public static final RegistryObject<Block> KELPY_COBBLESTONE = HELPER.createBlock("kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)));
 	public static final RegistryObject<Block> KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("kelpy_cobblestone_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)));
@@ -378,42 +365,6 @@ public class UABlocks {
 	public static final RegistryObject<Block> KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new StairBlock(() -> KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)));
 	public static final RegistryObject<Block> KELPY_STONE_BRICK_SLAB = HELPER.createBlock("kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)));
 	public static final RegistryObject<Block> KELPY_STONE_BRICK_WALL = HELPER.createBlock("kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)));
-
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE = HELPER.createBlock("tongue_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("tongue_kelpy_cobblestone_stairs", () -> new StairBlock(() -> TONGUE_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("tongue_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> TONGUE_KELPY_COBBLESTONE_WALL = HELPER.createBlock("tongue_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICKS = HELPER.createBlock("tongue_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("tongue_kelpy_stone_brick_stairs", () -> new StairBlock(() -> TONGUE_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("tongue_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> TONGUE_KELPY_STONE_BRICK_WALL = HELPER.createBlock("tongue_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)));
-
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE = HELPER.createBlock("thorny_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("thorny_kelpy_cobblestone_stairs", () -> new StairBlock(() -> THORNY_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("thorny_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> THORNY_KELPY_COBBLESTONE_WALL = HELPER.createBlock("thorny_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICKS = HELPER.createBlock("thorny_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("thorny_kelpy_stone_brick_stairs", () -> new StairBlock(() -> THORNY_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("thorny_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> THORNY_KELPY_STONE_BRICK_WALL = HELPER.createBlock("thorny_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)));
-
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE = HELPER.createBlock("ochre_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("ochre_kelpy_cobblestone_stairs", () -> new StairBlock(() -> OCHRE_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("ochre_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> OCHRE_KELPY_COBBLESTONE_WALL = HELPER.createBlock("ochre_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICKS = HELPER.createBlock("ochre_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("ochre_kelpy_stone_brick_stairs", () -> new StairBlock(() -> OCHRE_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("ochre_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> OCHRE_KELPY_STONE_BRICK_WALL = HELPER.createBlock("ochre_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)));
-
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE = HELPER.createBlock("polar_kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("polar_kelpy_cobblestone_stairs", () -> new StairBlock(() -> POLAR_KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_SLAB = HELPER.createBlock("polar_kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> POLAR_KELPY_COBBLESTONE_WALL = HELPER.createBlock("polar_kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICKS = HELPER.createBlock("polar_kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("polar_kelpy_stone_brick_stairs", () -> new StairBlock(() -> POLAR_KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_SLAB = HELPER.createBlock("polar_kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final RegistryObject<Block> POLAR_KELPY_STONE_BRICK_WALL = HELPER.createBlock("polar_kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)));
 
 	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD_LOG = HELPER.createBlock("stripped_driftwood_log", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.log()));
 	public static final RegistryObject<Block> STRIPPED_DRIFTWOOD = HELPER.createBlock("stripped_driftwood", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.log()));
@@ -508,11 +459,11 @@ public class UABlocks {
 				)
 				.tab(COLORED_BLOCKS)
 				.addItemsBefore(of(Blocks.SHULKER_BOX), GLASS_DOOR, GLASS_TRAPDOOR)
-				.addItemsBefore(of(Blocks.CANDLE), WHITE_BEDROLL, LIGHT_GRAY_BEDROLL, GRAY_BEDROLL, BLACK_BEDROLL, BROWN_BEDROLL, RED_BEDROLL, ORANGE_BEDROLL, YELLOW_BEDROLL, LIME_BEDROLL, GREEN_BEDROLL, CYAN_BEDROLL, LIGHT_BLUE_BEDROLL, BLUE_BEDROLL, PURPLE_BEDROLL, MAGENTA_BEDROLL, PINK_BEDROLL)
+				.addItemsBefore(of(Blocks.CANDLE), BEDROLL, WHITE_BEDROLL, LIGHT_GRAY_BEDROLL, GRAY_BEDROLL, BLACK_BEDROLL, BROWN_BEDROLL, RED_BEDROLL, ORANGE_BEDROLL, YELLOW_BEDROLL, LIME_BEDROLL, GREEN_BEDROLL, CYAN_BEDROLL, LIGHT_BLUE_BEDROLL, BLUE_BEDROLL, PURPLE_BEDROLL, MAGENTA_BEDROLL, PINK_BEDROLL)
 				.tab(FUNCTIONAL_BLOCKS)
 				.addItemsBefore(of(Blocks.SEA_LANTERN), TOOTH_LANTERN)
 				.addItemsBefore(of(Blocks.BAMBOO_SIGN), DRIFTWOOD_SIGNS.getFirst(), DRIFTWOOD_HANGING_SIGNS.getFirst(), RIVER_SIGNS.getFirst(), RIVER_HANGING_SIGNS.getFirst())
-				.addItemsBefore(of(Blocks.CANDLE), WHITE_BEDROLL, LIGHT_GRAY_BEDROLL, GRAY_BEDROLL, BLACK_BEDROLL, BROWN_BEDROLL, RED_BEDROLL, ORANGE_BEDROLL, YELLOW_BEDROLL, LIME_BEDROLL, GREEN_BEDROLL, CYAN_BEDROLL, LIGHT_BLUE_BEDROLL, BLUE_BEDROLL, PURPLE_BEDROLL, MAGENTA_BEDROLL, PINK_BEDROLL)
+				.addItemsBefore(of(Blocks.CANDLE), BEDROLL, WHITE_BEDROLL, LIGHT_GRAY_BEDROLL, GRAY_BEDROLL, BLACK_BEDROLL, BROWN_BEDROLL, RED_BEDROLL, ORANGE_BEDROLL, YELLOW_BEDROLL, LIME_BEDROLL, GREEN_BEDROLL, CYAN_BEDROLL, LIGHT_BLUE_BEDROLL, BLUE_BEDROLL, PURPLE_BEDROLL, MAGENTA_BEDROLL, PINK_BEDROLL)
 				.tab(NATURAL_BLOCKS)
 				.addItemsBefore(of(Blocks.NETHER_GOLD_ORE), EMBEDDED_AMMONITE)
 				.addItemsBefore(of(Blocks.DEAD_BUSH), BEACHGRASS)

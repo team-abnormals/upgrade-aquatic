@@ -3,8 +3,8 @@
   "biomes": "#upgrade_aquatic:has_animal/squid",
   "spawners": {
     "type": "minecraft:squid",
-    "maxCount": 2,
+    "maxCount": 4,
     "minCount": 1,
-    "weight": 5
+    "weight": 2
   }
 }

@@ -143,15 +143,6 @@ public class UAClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.PURPLE_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.WHITE_JELLY_WALL_TORCH.get(), TRANSLUSCENT);
 
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.OCHRE_KELP.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.THORNY_KELP.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.POLAR_KELP.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.TONGUE_KELP.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.OCHRE_KELP_PLANT.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.THORNY_KELP_PLANT.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.POLAR_KELP_PLANT.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.TONGUE_KELP_PLANT.get(), CUTOUT);
-
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_PICKERELWEED.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_PINK_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_WHITE_SEAROCKET.get(), CUTOUT);

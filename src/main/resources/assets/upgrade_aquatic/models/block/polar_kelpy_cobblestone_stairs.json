@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "upgrade_aquatic:block/polar_kelpy_cobblestone",
-    "top": "upgrade_aquatic:block/polar_kelpy_cobblestone",
-    "side": "upgrade_aquatic:block/polar_kelpy_cobblestone"
-  }
-}

@@ -35,7 +35,6 @@ public class UAEntityTypes {
 	public static final RegistryObject<EntityType<Thrasher>> THRASHER = HELPER.createLivingEntity("thrasher", Thrasher::new, MobCategory.MONSTER, 1.6F, 0.9F);
 	public static final RegistryObject<EntityType<GreatThrasher>> GREAT_THRASHER = HELPER.createLivingEntity("great_thrasher", GreatThrasher::new, MobCategory.MONSTER, 2.8F, 1.575F);
 	public static final RegistryObject<EntityType<Flare>> FLARE = HELPER.createLivingEntity("flare", Flare::new, MobCategory.MONSTER, 0.9F, 0.5F);
-	public static final RegistryObject<EntityType<Ululu>> ULULU = HELPER.createLivingEntity("ululu", Ululu::new, MobCategory.MONSTER, 2.04F, 2.04F);
 	public static final RegistryObject<EntityType<Goose>> GOOSE = HELPER.createLivingEntity("goose", Goose::new, MobCategory.CREATURE, 0.5F, 0.9F);
 
 	public static final RegistryObject<EntityType<BoxJellyfish>> BOX_JELLYFISH = HELPER.createLivingEntity("box_jellyfish", BoxJellyfish::new, MobCategory.WATER_CREATURE, 0.75F, 0.625F);
@@ -51,7 +50,6 @@ public class UAEntityTypes {
 		event.put(THRASHER.get(), Thrasher.registerAttributes().build());
 		event.put(GREAT_THRASHER.get(), GreatThrasher.registerAttributes().build());
 		event.put(FLARE.get(), Flare.registerAttributes().build());
-		event.put(ULULU.get(), Ululu.registerAttributes().build());
 		event.put(GOOSE.get(), Goose.registerAttributes().build());
 
 		event.put(BOX_JELLYFISH.get(), BoxJellyfish.registerAttributes().build());

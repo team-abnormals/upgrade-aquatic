@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "upgrade_aquatic:block/thorny_kelpy_stone_bricks"
-    }
-}

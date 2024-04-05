@@ -84,7 +84,6 @@ public class UAItems {
 	public static final RegistryObject<JellyfishSpawnEggItem> JELLYFISH_SPAWN_EGG = HELPER.createJellyfishSpawnEggItem("jellyfish", 3911164, 16019855);
 	public static final RegistryObject<ForgeSpawnEggItem> GOOSE_SPAWN_EGG = HELPER.createSpawnEggItem("goose", UAEntityTypes.GOOSE::get, 16448255, 16751914);
 
-
 	public static void setupTabEditors() {
 		CreativeModeTabContentsPopulator.mod(UpgradeAquatic.MOD_ID)
 				.tab(FOOD_AND_DRINKS)

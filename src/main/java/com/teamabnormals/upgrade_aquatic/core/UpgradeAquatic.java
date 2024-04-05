@@ -130,7 +130,6 @@ public class UpgradeAquatic {
 		event.registerLayerDefinition(ThrasherModel.LOCATION, ThrasherModel::createBodyLayer);
 		event.registerLayerDefinition(FlareModel.LOCATION, FlareModel::createBodyLayer);
 		event.registerLayerDefinition(SonarWaveModel.LOCATION, SonarWaveModel::createBodyLayer);
-		event.registerLayerDefinition(UluluModel.LOCATION, UluluModel::createBodyLayer);
 		event.registerLayerDefinition(UAGlowSquidModel.LOCATION, UAGlowSquidModel::createBodyLayer);
 		event.registerLayerDefinition(GooseModel.LOCATION, GooseModel::createBodyLayer);
 		event.registerLayerDefinition(BoxJellyfishModel.LOCATION, BoxJellyfishModel::createBodyLayer);
@@ -147,7 +146,6 @@ public class UpgradeAquatic {
 		event.registerEntityRenderer(UAEntityTypes.GREAT_THRASHER.get(), GreatThrasherRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.FLARE.get(), FlareRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.SONAR_WAVE.get(), SonarWaveRenderer::new);
-		event.registerEntityRenderer(UAEntityTypes.ULULU.get(), UluluRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.GOOSE.get(), GooseRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.BOX_JELLYFISH.get(), BoxJellyfishRenderer::new);
 		event.registerEntityRenderer(UAEntityTypes.CASSIOPEA_JELLYFISH.get(), CassiopeaJellyfishRenderer::new);

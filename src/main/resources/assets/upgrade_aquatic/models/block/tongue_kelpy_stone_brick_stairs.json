@@ -1,8 +1,0 @@
-{
-  "parent": "block/stairs",
-  "textures": {
-    "bottom": "upgrade_aquatic:block/tongue_kelpy_stone_bricks",
-    "top": "upgrade_aquatic:block/tongue_kelpy_stone_bricks",
-    "side": "upgrade_aquatic:block/tongue_kelpy_stone_bricks"
-  }
-}

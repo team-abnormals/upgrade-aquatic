@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "upgrade_aquatic:item/tongue_kelp"
-    }
-}

@@ -3,8 +3,8 @@
   "biomes": "#upgrade_aquatic:has_animal/pike",
   "spawners": {
     "type": "upgrade_aquatic:pike",
-    "maxCount": 2,
+    "maxCount": 3,
     "minCount": 1,
-    "weight": 20
+    "weight": 15
   }
 }

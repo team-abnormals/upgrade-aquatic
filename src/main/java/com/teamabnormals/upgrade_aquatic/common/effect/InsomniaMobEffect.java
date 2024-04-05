@@ -6,7 +6,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.StatsCounter;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.InstantenousMobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;

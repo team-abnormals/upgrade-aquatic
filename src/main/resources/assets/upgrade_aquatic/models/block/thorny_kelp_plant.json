@@ -1,6 +1,0 @@
-{
-    "parent": "block/tinted_cross",
-    "textures": {
-        "cross": "upgrade_aquatic:block/thorny_kelp_plant"
-    }
-}

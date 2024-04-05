@@ -26,10 +26,9 @@ public class UABiomeTagsProvider extends BiomeTagsProvider {
 		this.tag(UABiomeTags.HAS_GREAT_THRASHER).add(Biomes.DEEP_FROZEN_OCEAN);
 		this.tag(UABiomeTags.HAS_LIONFISH).add(Biomes.WARM_OCEAN);
 
-		this.tag(UABiomeTags.HAS_PIKE).add(Biomes.RIVER);
-		this.tag(UABiomeTags.HAS_EXTRA_PIKE).addTag(Tags.Biomes.IS_SWAMP);
+		this.tag(UABiomeTags.HAS_PIKE).add(Biomes.RIVER).addTag(Tags.Biomes.IS_SWAMP);
 		this.tag(UABiomeTags.HAS_SQUID).add(Biomes.SWAMP);
-		this.tag(UABiomeTags.HAS_PERCH).add(Biomes.SWAMP);
+		this.tag(UABiomeTags.HAS_PERCH).addTag(Tags.Biomes.IS_SWAMP);
 
 		this.tag(UABiomeTags.HAS_CASSIOPEA_JELLYFISH).add(Biomes.LUKEWARM_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN);
 		this.tag(UABiomeTags.HAS_JELLYFISH).add(Biomes.WARM_OCEAN).addTag(UABiomeTags.HAS_CASSIOPEA_JELLYFISH);

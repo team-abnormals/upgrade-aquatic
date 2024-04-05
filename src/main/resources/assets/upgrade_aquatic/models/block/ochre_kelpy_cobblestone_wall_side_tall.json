@@ -1,6 +1,0 @@
-{
-    "parent": "block/template_wall_side_tall",
-    "textures": {
-        "wall": "upgrade_aquatic:block/ochre_kelpy_cobblestone"
-    }
-}

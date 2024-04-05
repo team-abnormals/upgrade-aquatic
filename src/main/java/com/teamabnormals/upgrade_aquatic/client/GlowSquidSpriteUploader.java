@@ -12,8 +12,6 @@ import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 
-import java.util.stream.Stream;
-
 /**
  * @author Ocelot
  */

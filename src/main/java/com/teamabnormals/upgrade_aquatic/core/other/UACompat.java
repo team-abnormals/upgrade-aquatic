@@ -37,16 +37,7 @@ public class UACompat {
 		DataUtil.registerCompostable(UABlocks.WHITE_SEAROCKET.get(), 0.65F);
 		DataUtil.registerCompostable(UABlocks.PINK_SEAROCKET.get(), 0.65F);
 
-		DataUtil.registerCompostable(UABlocks.TONGUE_KELP.get(), 0.30F);
-		DataUtil.registerCompostable(UABlocks.THORNY_KELP.get(), 0.30F);
-		DataUtil.registerCompostable(UABlocks.OCHRE_KELP.get(), 0.30F);
-		DataUtil.registerCompostable(UABlocks.POLAR_KELP.get(), 0.30F);
-
 		DataUtil.registerCompostable(UABlocks.KELP_BLOCK.get(), 0.50F);
-		DataUtil.registerCompostable(UABlocks.TONGUE_KELP_BLOCK.get(), 0.50F);
-		DataUtil.registerCompostable(UABlocks.THORNY_KELP_BLOCK.get(), 0.50F);
-		DataUtil.registerCompostable(UABlocks.OCHRE_KELP_BLOCK.get(), 0.50F);
-		DataUtil.registerCompostable(UABlocks.POLAR_KELP_BLOCK.get(), 0.50F);
 	}
 
 	public static void registerFlammables() {

@@ -10,7 +10,6 @@ public class UABiomeTags {
 	public static final TagKey<Biome> HAS_LIONFISH = biomeTag("has_animal/lionfish");
 	public static final TagKey<Biome> HAS_PIKE = biomeTag("has_animal/pike");
 	public static final TagKey<Biome> HAS_PERCH = biomeTag("has_animal/perch");
-	public static final TagKey<Biome> HAS_EXTRA_PIKE = biomeTag("has_animal/pike_extra");
 	public static final TagKey<Biome> HAS_SQUID = biomeTag("has_animal/squid");
 
 	public static final TagKey<Biome> HAS_JELLYFISH = biomeTag("has_animal/jellyfish");

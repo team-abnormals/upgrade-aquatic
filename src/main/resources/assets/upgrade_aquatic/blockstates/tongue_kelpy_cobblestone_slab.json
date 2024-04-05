@@ -1,7 +1,0 @@
-{
-    "variants": {
-        "type=bottom": { "model": "upgrade_aquatic:block/tongue_kelpy_cobblestone_slab" },
-        "type=top": { "model": "upgrade_aquatic:block/tongue_kelpy_cobblestone_slab_top" },
-        "type=double": { "model": "upgrade_aquatic:block/tongue_kelpy_cobblestone" }
-    }
-}

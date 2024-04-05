@@ -65,7 +65,7 @@ public class UAClientEvents {
 
 		if (player.getAbilities().instabuild && UAConfig.CLIENT.showUnobtainableDescription.get() && name.getNamespace().equals(UpgradeAquatic.MOD_ID)) {
 			String id = name.getPath();
-			if (id.contains("jelly") || id.contains("tongue_kelp") || id.contains("polar_kelp") || id.contains("ochre_kelp") || id.contains("thorny_kelp"))
+			if (id.contains("jelly"))
 				event.getToolTip().add(Component.translatable("tooltip.upgrade_aquatic.unobtainable").withStyle(ChatFormatting.GRAY));
 		}
 	}
