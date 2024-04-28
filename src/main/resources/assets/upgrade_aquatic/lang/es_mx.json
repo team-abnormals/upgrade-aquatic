@@ -55,7 +55,7 @@
 	"block.upgrade_aquatic.chiseled_chrome_coralstone": "Piedra coral de cromo grabada",
 	"block.upgrade_aquatic.chiseled_coralstone": "Piedra coral grabada",
 	"block.upgrade_aquatic.chiseled_dead_coralstone": "Piedra coral muerta grabada",
-  "block.upgrade_aquatic.chiseled_driftwood_bookshelf": "Estanteríá de deriva",
+  "block.upgrade_aquatic.chiseled_driftwood_bookshelf": "Estantería de deriva",
 	"block.upgrade_aquatic.chiseled_elder_prismarine_coralstone": "Piedra coral de prismarina anciana grabada",
 	"block.upgrade_aquatic.chiseled_finger_coralstone": "Piedra coral de dedo grabada",
 	"block.upgrade_aquatic.chiseled_fire_coralstone": "Piedra coral de fuego grabada",
@@ -419,8 +419,12 @@
 	"item.upgrade_aquatic.squid_bucket": "Cubeta con calamar",
 	"item.upgrade_aquatic.thrasher_spawn_egg": "Generar triturador",
 	"item.upgrade_aquatic.thrasher_tooth": "Diente de triturador",
+	"painting.upgrade_aquatic.monument.author": "five",
+        "painting.upgrade_aquatic.monument.title": "A Monumental View",
   "painting.upgrade_aquatic.sightless.author": "five",
   "painting.upgrade_aquatic.sightless.title": "Sightless",
+	"painting.upgrade_aquatic.utensil.author": "five",
+        "painting.upgrade_aquatic.utensil.title": "Utensil",
 	"subtitles.upgrade_aquatic.bucket.empty_jellyfish": "Medusa liberada",
 	"subtitles.upgrade_aquatic.bucket.fill_jellyfish": "Medusa capturada",
 	"subtitles.upgrade_aquatic.entity.perch.death": "Perca muerta",
@@ -483,5 +487,6 @@
 	"tooltip.upgrade_aquatic.white_jelly_torch": "Antorcha gelatinosa blanca",
 	"tooltip.upgrade_aquatic.yellow_jelly_torch": "Antorcha gelatinosa amarilla",
 	"tooltip.upgrade_aquatic.yielding_jelly_torch": "Produce: ",
-	"tooltip.upgrade_aquatic.yielding_jelly_torch.or": " o "
+	"tooltip.upgrade_aquatic.yielding_jelly_torch.or": " o ",
+	"trim_material.upgrade_aquatic.tooth": "Material de dientes"
 }
