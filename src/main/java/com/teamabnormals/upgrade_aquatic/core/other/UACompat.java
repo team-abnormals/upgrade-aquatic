@@ -1,15 +1,19 @@
 package com.teamabnormals.upgrade_aquatic.core.other;
 
 import com.teamabnormals.blueprint.core.util.DataUtil;
+import com.teamabnormals.upgrade_aquatic.common.dispenser.TridentDispenseBehavior;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UADecoratedPotPatterns;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.DispenserBlock;
 
 public class UACompat {
 
 	public static void registerCompat() {
 		registerCompostables();
 		registerFlammables();
+		registerDispenserBehaviors();
 		UADecoratedPotPatterns.registerDecoratedPotPatterns();
 	}
 
@@ -83,4 +87,7 @@ public class UACompat {
 		DataUtil.registerFlammable(UABlocks.RIVER_BEEHIVE.get(), 5, 20);
 	}
 
+	private static void registerDispenserBehaviors() {
+		DispenserBlock.registerBehavior(Items.TRIDENT, new TridentDispenseBehavior());
+	}
 }
