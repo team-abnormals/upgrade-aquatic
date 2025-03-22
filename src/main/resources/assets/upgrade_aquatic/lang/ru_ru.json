@@ -129,6 +129,17 @@
   "block.upgrade_aquatic.white_jelly_wall_torch": "Настенный белый желейный факел",
   "block.upgrade_aquatic.yellow_jelly_torch": "Настенный жёлтый желейный фонарь",
   "block.upgrade_aquatic.pink_jelly_wall_torch": "Настенный розовый желейный фонарь",
+
+  "tooltip.upgrade_aquatic.yielding_jelly_torch": "Для: ",
+  "tooltip.upgrade_aquatic.yielding_jelly_torch.or": "или ",
+  "tooltip.upgrade_aquatic.blue_jelly_torch": "Синий желейный факел",
+  "tooltip.upgrade_aquatic.green_jelly_torch": "Зелёный желейный факел",
+  "tooltip.upgrade_aquatic.yellow_jelly_torch": "Жёлтый желейный факел",
+  "tooltip.upgrade_aquatic.orange_jelly_torch": "Оранжевый желейный факел",
+  "tooltip.upgrade_aquatic.red_jelly_torch": "Красный желейный факел",
+  "tooltip.upgrade_aquatic.pink_jelly_torch": "Розовый желейный факел",
+  "tooltip.upgrade_aquatic.purple_jelly_torch": "Фиолетовый желейный факел",
+  "tooltip.upgrade_aquatic.white_jelly_torch": "Белый желейный факел",
   
   "block.upgrade_aquatic.embedded_ammonite": "Останки аммонитов",
   
@@ -151,6 +162,7 @@
   "block.upgrade_aquatic.brown_bedroll": "Коричневый спальник",
 
   "block.upgrade_aquatic.pickerelweed": "Понтедерия",
+  "block.upgrade_aquatic.tall_pickerelweed": "Высокая понтедерия",
   
   "block.upgrade_aquatic.white_searocket": "Белая морская горчица",
   "block.upgrade_aquatic.pink_searocket": "Розовая морская горчица",
@@ -276,9 +288,9 @@
   "block.upgrade_aquatic.scute_block": "Щитковый блок",
   "block.upgrade_aquatic.scute_shingles": "Щитковая черепица",
   "block.upgrade_aquatic.scute_shingle_slab": "Плита из щитковой черепицы",
-  "block.upgrade_aquatic.scute_shingle_stairs": "Ступеньки из щитковой черепица",
-  "block.upgrade_aquatic.scute_shingle_wall": "Ограда из щитковой черепица",
-  "block.upgrade_aquatic.chiseled_scute_shingles": "Резная щитковой черепица",
+  "block.upgrade_aquatic.scute_shingle_stairs": "Ступеньки из щитковой черепицы",
+  "block.upgrade_aquatic.scute_shingle_wall": "Ограда из щитковой черепицы",
+  "block.upgrade_aquatic.chiseled_scute_shingles": "Резная щитковая черепица",
   "block.upgrade_aquatic.scute_pavement": "Щитковая брусчатка",
   "block.upgrade_aquatic.scute_pavement_slab": "Плита из щитковой брусчатки",
   "block.upgrade_aquatic.scute_pavement_stairs": "Ступеньки из щитковой брусчатки",
@@ -286,7 +298,9 @@
   
   "block.upgrade_aquatic.glass_door": "Стеклянная дверь",
   "block.upgrade_aquatic.glass_trapdoor": "Стеклянный люк",
-  
+
+  "block.upgrade_aquatic.kelp_block": "Блок ламинарии",
+
   "block.upgrade_aquatic.kelpy_cobblestone": "Ламинарный булыжник", 
   "block.upgrade_aquatic.kelpy_cobblestone_stairs": "Ламинарные булыжные ступеньки",
   "block.upgrade_aquatic.kelpy_cobblestone_slab": "Ламинарная булыжная плита",
@@ -326,10 +340,17 @@
   "block.upgrade_aquatic.driftwood_bookshelf": "Плавниковая книжная полка",
   "block.upgrade_aquatic.driftwood_ladder": "Плавниковая лестница",
   "block.upgrade_aquatic.driftwood_sign": "Плавниковая табличка",
-  "block.upgrade_aquatic.driftwood_wall_sign": "Плавниковая табличка на стене",
+  "block.upgrade_aquatic.driftwood_wall_sign": "Плавниковая настенная табличка",
   "block.upgrade_aquatic.driftwood_chest": "Плавниковый сундук",
   "block.upgrade_aquatic.trapped_driftwood_chest": "Плавниковый сундук-ловушка",
   "block.upgrade_aquatic.driftwood_beehive": "Плавниковый улей",
+  "item.upgrade_aquatic.driftwood_chest_boat": "Плавниковая грузовая лодка",
+  "item.upgrade_aquatic.driftwood_furnace_boat": "Плавниковая быстроходная лодка",
+  "item.upgrade_aquatic.large_driftwood_boat": "Плавниковая большая лодка",
+  "block.upgrade_aquatic.driftwood_boards": "Плавниковый паркет",
+  "block.upgrade_aquatic.chiseled_driftwood_bookshelf": "Плавниковая резная книжная полка",
+  "block.upgrade_aquatic.driftwood_hanging_sign": "Плавниковая подвесная табличка",
+  "block.upgrade_aquatic.driftwood_wall_hanging_sign": "Плавниковая настенная подвесная табличка",
   
   "block.upgrade_aquatic.river_leaves": "Листья речного дерева",
   "block.upgrade_aquatic.river_sapling": "Саженец речного дерева",
@@ -349,11 +370,19 @@
   "block.upgrade_aquatic.river_bookshelf": "Книжная полка из речного дерева",
   "block.upgrade_aquatic.river_ladder": "Лестница из речного дерева",
   "block.upgrade_aquatic.river_sign": "Табличка из речного дерева",
-  "block.upgrade_aquatic.river_wall_sign": "Табличка из речного дерева на стене",
+  "block.upgrade_aquatic.river_wall_sign": "Настенная табличка из речного дерева",
   "block.upgrade_aquatic.river_chest": "Сундук из речного дерева",
   "block.upgrade_aquatic.trapped_river_chest": "Сундук-ловушка из речного дерева",
   "block.upgrade_aquatic.river_beehive": "Улей из речного дерева",
-  
+  "item.upgrade_aquatic.river_chest_boat": "Грузовая лодка из речного дерева",
+  "item.upgrade_aquatic.river_furnace_boat": "Быстроходная лодка из речного дерева",
+  "item.upgrade_aquatic.large_river_boat": "Большая лодка из речного дерева",
+  "block.upgrade_aquatic.river_boards": "Паркет из речного дерева",
+  "block.upgrade_aquatic.river_hanging_sign": "Подвесная табличка из речного дерева",
+  "block.upgrade_aquatic.river_leaf_pile": "Кучка листьев речного дерева",
+  "block.upgrade_aquatic.river_wall_hanging_sign": "Настенная подвесная табличка из речного дерева",
+  "block.upgrade_aquatic.chiseled_river_bookshelf": "Резная книжная полка из речного дерева",
+
   "block.upgrade_aquatic.flowering_rush": "Зонтичный сусак",
   
   "block.upgrade_aquatic.mulberry_vine": "Шелковичная лоза",
@@ -364,9 +393,9 @@
 
   "block.upgrade_aquatic.beachgrass": "Песколюбка",
   "block.upgrade_aquatic.tall_beachgrass": "Высокая песколюбка",
-  "block.upgrade_aquatic.beachgrass_thatch": "Солома песколюбки",
-  "block.upgrade_aquatic.beachgrass_thatch_slab": "Плита из соломы песколюбки",
-  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Ступеньки из соломы песколюбки",
+  "block.upgrade_aquatic.beachgrass_thatch": "Блок песколюбки",
+  "block.upgrade_aquatic.beachgrass_thatch_slab": "Плита из песколюбки",
+  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Ступеньки из песколюбки",
   
   "block.upgrade_aquatic.luminous_prismarine": "Светящийся призмарин",
   "block.upgrade_aquatic.luminous_prismarine_slab": "Плита из светящегося призмарина",
@@ -377,7 +406,8 @@
 
   "item.upgrade_aquatic.prismarine_rod": "Призмариновый стержень",
   "item.upgrade_aquatic.thrasher_tooth": "Зуб острозуба",
-  
+
+  "item.upgrade_aquatic.perch_bucket": "Окунь в ведре",
   "item.upgrade_aquatic.nautilus_bucket": "Наутилус в ведре",
   "item.upgrade_aquatic.pike_bucket": "Щука в ведре",
   "item.upgrade_aquatic.lionfish_bucket": "Крылатка в ведре",
@@ -385,6 +415,7 @@
   "item.upgrade_aquatic.jellyfish_bucket": "Медуза в ведре",
   "item.upgrade_aquatic.glow_squid_bucket": "Светящийся спрут в ведре",
 
+  "item.upgrade_aquatic.perch_spawn_egg": "Яйцо призыва окуня",
   "item.upgrade_aquatic.drowned_villager_spawn_egg": "Яйцо призыва крестьянина-утопленника",
   "item.upgrade_aquatic.nautilus_spawn_egg": "Яйцо призыва наутилуса",
   "item.upgrade_aquatic.pike_spawn_egg": "Яйцо призыва щуки",
@@ -396,6 +427,8 @@
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Яйцо призыва медузы",
 
   "item.upgrade_aquatic.boiled_pickerelweed": "Вареная понтедерия",
+  "item.upgrade_aquatic.perch": "Окунь",
+  "item.upgrade_aquatic.cooked_perch": "Жареный окунь",
   "item.upgrade_aquatic.pike": "Сырая щука",
   "item.upgrade_aquatic.cooked_pike": "Жареная щука",
   "item.upgrade_aquatic.lionfish": "Сырая крылатка",
@@ -436,19 +469,8 @@
   "tooltip.upgrade_aquatic.blue_cassiopea_jellyfish": "Синяя кассиопея",
   "tooltip.upgrade_aquatic.white_cassiopea_jellyfish": "Белая кассиопея",
   "tooltip.upgrade_aquatic.immortal_jellyfish": "Бессмертная медуза",
-  
-  "tooltip.upgrade_aquatic.yielding_jelly_torch": "Для: ",
-  "tooltip.upgrade_aquatic.yielding_jelly_torch.or": "или ",
-  "tooltip.upgrade_aquatic.blue_jelly_torch": "Синий желейный факел",
-  "tooltip.upgrade_aquatic.green_jelly_torch": "Зелёный желейный факел",
-  "tooltip.upgrade_aquatic.yellow_jelly_torch": "Жёлтый желейный факел",
-  "tooltip.upgrade_aquatic.orange_jelly_torch": "Оранжевый желейный факел",
-  "tooltip.upgrade_aquatic.red_jelly_torch": "Красный желейный факел",
-  "tooltip.upgrade_aquatic.pink_jelly_torch": "Розовый желейный факел",
-  "tooltip.upgrade_aquatic.purple_jelly_torch": "Фиолетовый желейный факел",
-  "tooltip.upgrade_aquatic.white_jelly_torch": "Белый желейный факел",
-  
-  
+
+  "entity.upgrade_aquatic.perch": "Окунь",
   "entity.upgrade_aquatic.nautilus": "Наутилус",
   "entity.upgrade_aquatic.pike": "Щука",
   "entity.upgrade_aquatic.lionfish": "Крылатка",
@@ -463,6 +485,7 @@
   "entity.upgrade_aquatic.immortal_jellyfish": "Бессмертная медуза",
 
   "effect.upgrade_aquatic.insomnia": "Бессонница",
+  "effect.upgrade_aquatic.insomnia.desc": "Мгновенный, одноразовый эффект, увеличивающий бессоницу на количество дней, соответствующих с уровнем",
   "item.minecraft.potion.effect.insomnia": "Зелье бессонницы",
   "item.minecraft.potion.effect.insomnia_strong": "Зелье бессонницы",
   "item.minecraft.splash_potion.effect.insomnia": "Взрывное зелье бессонницы",
@@ -473,6 +496,7 @@
   "item.minecraft.tipped_arrow.effect.insomnia_strong": "Стрела бессонницы",
   
   "effect.upgrade_aquatic.restfulness": "Бодрость",
+  "effect.upgrade_aquatic.restfulness.desc": "Мгновенный, одноразовый эффект, уменьшающий бессоницу на количество дней, соответствующих с уровнем",
   "item.minecraft.potion.effect.restfulness": "Зелье бодрости",
   "item.minecraft.potion.effect.restfulness_strong": "Зелье бодрости",
   "item.minecraft.splash_potion.effect.restfulness": "Взрывное зелье бодрости",
@@ -482,7 +506,8 @@
   "item.minecraft.tipped_arrow.effect.restfulness": "Стрела бодрости",
   "item.minecraft.tipped_arrow.effect.restfulness_strong": "Стрела бодрости",
   
-  "effect.upgrade_aquatic.repellence": "Отравляющая аура",
+  "effect.upgrade_aquatic.repellence": "Ядовитость",
+  "effect.upgrade_aquatic.repellence.desc": "При контакте пользователя с мобом, моб приобретает эффект отравления",
   "item.minecraft.potion.effect.repellence": "Зелье ядовитости",
   "item.minecraft.potion.effect.repellence_strong": "Зелье ядовитости",
   "item.minecraft.potion.effect.repellence_long": "Зелье ядовитости",
@@ -496,7 +521,8 @@
   "item.minecraft.tipped_arrow.effect.repellence_strong": "Стрела ядовитости",
   "item.minecraft.tipped_arrow.effect.repellence_long": "Стрела ядовитости",
 
-  "effect.upgrade_aquatic.vibing": "Исцеляющая аура",
+  "effect.upgrade_aquatic.vibing": "Целебность",
+  "effect.upgrade_aquatic.vibing.desc": "При контакте пользователя с мобом, моб приобретает эффект регенерации",
   "item.minecraft.potion.effect.vibing": "Зелье целебности",
   "item.minecraft.potion.effect.vibing_strong": "Зелье целебности",
   "item.minecraft.potion.effect.vibing_long": "Зелье целебности",
@@ -510,38 +536,30 @@
   "item.minecraft.tipped_arrow.effect.vibing_strong": "Стрела целебности",
   "item.minecraft.tipped_arrow.effect.vibing_long": "Стрела целебности",
   
-
   "advancements.adventure.tooth_fairy.title": "Зубная фея",
   "advancements.adventure.tooth_fairy.description": "Добудьте зубы острозуба, древнего ужаса, что скрывается в холодных водах",
-  
   "advancements.adventure.unethical_dentistry.title": "Неэтичная стоматология",
   "advancements.adventure.unethical_dentistry.description": "Поставьте любой блок, сделанный из зубов острозуба",
-  
   "advancements.adventure.kill_great_thrasher.title": "Тут нужна лодка побольше",
   "advancements.adventure.kill_great_thrasher.description": "Убейте великого острозуба",
-  
   "advancements.adventure.sleep_underwater.title": "Поспать с рыбками",
   "advancements.adventure.sleep_underwater.description": "Поспите в спальнике под водой",
-  
   "advancements.nether.sleepless_slave.title": "Бессонный раб",
-  "advancements.nether.sleepless_slave.description": "Создайте засвета, поразив фантома бессонницей",
-  
+  "advancements.nether.sleepless_slave.description": "Используйте зелье бессоницы, чтобы обратить фантома в засвета",
   "advancements.nether.vibe_check.title": "Вайбово",
-  "advancements.nether.vibe_check.description": "Сварите зелье ядовитости из крылатки и смешайте его с маринованным паучим глазом для получения зелья целебности",
-  
+  "advancements.nether.vibe_check.description": "Сварите крылатку в зелье ядовитости и инвертируйте его с помощью маринованого паучего глаза в зелье целебности",
   "advancements.husbandry.eat_pickerelweed.title": "Законно в большинстве штатов",
-  "advancements.husbandry.eat_pickerelweed.description": "Приготовьте и съешьте вареную понтедерию чтобы восстановить количество воздуха",
-  
+  "advancements.husbandry.eat_pickerelweed.description": "Приготовьте и съешьте вареную понтедерию, чтобы насытиться воздухом",
   "advancements.husbandry.collect_all_pike.title": "Мировое щучье турне",
-  "advancements.husbandry.collect_all_pike.description": "Поймайте все виды щук в ведро",
-  
+  "advancements.husbandry.collect_all_pike.description": "Поймайте все вариации щук в ведро",
+
   "subtitles.upgrade_aquatic.thrasher.hurt": "Острозуб ранен",
   "subtitles.upgrade_aquatic.thrasher.ambient": "Острозуб рычит",
   "subtitles.upgrade_aquatic.thrasher.death": "Острозуб погибает",
   "subtitles.upgrade_aquatic.thrasher.thrash": "Острозуб вгрызается",
   "subtitles.upgrade_aquatic.thrasher.flop": "Острозуб плещется",
   "subtitles.upgrade_aquatic.thrasher.sonar_fire": "Острозуб посылает сонар",
-  
+
   "subtitles.upgrade_aquatic.jellyfish.hurt": "Медуза ранена",
   "subtitles.upgrade_aquatic.jellyfish.ambient": "Медуза пульсирует",
   "subtitles.upgrade_aquatic.jellyfish.death": "Медуза погибает",
@@ -550,11 +568,9 @@
   "subtitles.upgrade_aquatic.jellyfish.cooldown_end": "Отсчёт медузы закончился",
   "subtitles.upgrade_aquatic.jellyfish.sting": "Медуза жалит",
   "subtitles.upgrade_aquatic.jellyfish.ghost_vanish": "Призрак медузы испаряется",
-  
   "subtitles.upgrade_aquatic.bucket.empty_jellyfish": "Медуза выпущена",
   "subtitles.upgrade_aquatic.bucket.fill_jellyfish": "Медуза поймана",
-  "trim_material.upgrade_aquatic.tooth": "Зубная",
-  "tooltip.upgrade_aquatic.unobtainable": "Недоступно",
+
   "subtitles.upgrade_aquatic.entity.perch.death": "Окунь погибает",
   "subtitles.upgrade_aquatic.entity.perch.flop": "Окунь плещется",
   "subtitles.upgrade_aquatic.entity.perch.hurt": "Окунь ранен",
@@ -563,35 +579,18 @@
   "subtitles.upgrade_aquatic.entity.pike.flop": "Щука плещется",
   "subtitles.upgrade_aquatic.entity.pike.hurt": "Щука ранена",
   "subtitles.upgrade_aquatic.entity.pike.spit": "Щука плюётся",
+
+  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s был зажален до смерти %2$s",
+
   "painting.upgrade_aquatic.coil.title": "Моток",
   "painting.upgrade_aquatic.monument.title": "Надводный вид",
   "painting.upgrade_aquatic.sightless.title": "Слепость",
   "painting.upgrade_aquatic.utensil.title": "Прибор",
-  "item.upgrade_aquatic.river_chest_boat": "Грузовая лодка из речного дерева",
-  "item.upgrade_aquatic.river_furnace_boat": "Быстроходная лодка из речного дерева",
+
+  "trim_material.upgrade_aquatic.tooth": "Зубная",
+  "tooltip.upgrade_aquatic.unobtainable": "Недоступно",
   "item.upgrade_aquatic.predator_pottery_sherd": "Глиняный черепок «Хищник»‎",
-  "item.upgrade_aquatic.perch": "Окунь",
-  "item.upgrade_aquatic.perch_bucket": "Ведро с окунем",
-  "item.upgrade_aquatic.perch_spawn_egg": "Яйцо призыва окуня",
   "item.upgrade_aquatic.music_disc_atlantis": "Пластинка",
-  "item.upgrade_aquatic.large_driftwood_boat": "Плавниковая большая лодка",
-  "item.upgrade_aquatic.large_river_boat": "Большая лодка из речного дерева",
-  "item.upgrade_aquatic.driftwood_chest_boat": "Плавниковая грузовая лодка",
-  "item.upgrade_aquatic.driftwood_furnace_boat": "Плавниковая быстроходная лодка",
   "item.upgrade_aquatic.disc_fragment_atlantis": "Осколок пластинки",
-  "item.upgrade_aquatic.cooked_perch": "Жареный окунь",
-  "entity.upgrade_aquatic.perch": "Окунь",
-  "death.attack.upgrade_aquatic.jellyfishSting": "%1$s был зажален до смерти %2$s",
-  "item.upgrade_aquatic.disc_fragment_atlantis.desc": "Пластинка - Atlantis",
-  "block.upgrade_aquatic.river_hanging_sign": "Подвесная табличка из речного дерева",
-  "block.upgrade_aquatic.river_leaf_pile": "Кучка листьев речного дерева",
-  "block.upgrade_aquatic.river_wall_hanging_sign": "Настенная подвесная табличка из речного дерева",
-  "block.upgrade_aquatic.driftwood_wall_hanging_sign": "Плавниковая настенная подвесная табличка",
-  "block.upgrade_aquatic.river_boards": "Паркет из речного дерева",
-  "block.upgrade_aquatic.kelp_block": "Блок ламинарии",
-  "block.upgrade_aquatic.driftwood_boards": "Плавниковый паркет",
-  "block.upgrade_aquatic.driftwood_hanging_sign": "Плавниковая подвесная табличка",
-  "block.upgrade_aquatic.chiseled_river_bookshelf": "Резная книжная полка из речного дерева",
-  "block.upgrade_aquatic.chiseled_driftwood_bookshelf": "Плавниковая резная книжная полка",
-  "block.upgrade_aquatic.tall_pickerelweed": "Высокая понтедерия"
+  "item.upgrade_aquatic.disc_fragment_atlantis.desc": "Пластинка - Atlantis"
 }
