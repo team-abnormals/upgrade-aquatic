@@ -273,9 +273,9 @@
   
   "block.upgrade_aquatic.tooth_block": "Зубной блок",
   "block.upgrade_aquatic.tooth_bricks": "Зубные кирпичи",
-  "block.upgrade_aquatic.tooth_brick_slab": "Плита из зубных кирпичей",
-  "block.upgrade_aquatic.tooth_brick_stairs": "Ступеньки из зубных кирпичей",
-  "block.upgrade_aquatic.tooth_brick_wall": "Ограда из зубных кирпичей",
+  "block.upgrade_aquatic.tooth_brick_slab": "Плита из зубного кирпича",
+  "block.upgrade_aquatic.tooth_brick_stairs": "Ступеньки из зубного кирпича",
+  "block.upgrade_aquatic.tooth_brick_wall": "Ограда из зубного кирпича",
   "block.upgrade_aquatic.chiseled_tooth_bricks": "Резные зубные кирпичи",
   "block.upgrade_aquatic.tooth_tiles": "Зубной плитняк",
   "block.upgrade_aquatic.tooth_slab": "Зубная плита",
@@ -307,13 +307,13 @@
   "block.upgrade_aquatic.kelpy_cobblestone_wall": "Ламинарная булыжная ограда",
 
   "block.upgrade_aquatic.kelpy_stone_bricks": "Ламинарные каменные кирпичи",
-  "block.upgrade_aquatic.kelpy_stone_brick_stairs": "Ступеньки из ламинарных каменных кирпичей",
-  "block.upgrade_aquatic.kelpy_stone_brick_slab": "Плита из ламинарных каменных кирпичей",
-  "block.upgrade_aquatic.kelpy_stone_brick_wall": "Ограда из ламинарных каменных кирпичей",
+  "block.upgrade_aquatic.kelpy_stone_brick_stairs": "Ступеньки из ламинарного каменного кирпича",
+  "block.upgrade_aquatic.kelpy_stone_brick_slab": "Плита из ламинарного каменного кирпича",
+  "block.upgrade_aquatic.kelpy_stone_brick_wall": "Ограда из ламинарного каменного кирпича",
   
-  "block.upgrade_aquatic.kelpy_cobblestone_brick_slab": "Плита из ламинарных булыжных кирпичей",
-  "block.upgrade_aquatic.kelpy_cobblestone_brick_stairs": "Ступеньки из ламинарных булыжных кирпичей",
-  "block.upgrade_aquatic.kelpy_cobblestone_brick_wall": "Ограда из ламинарных булыжных кирпичей",
+  "block.upgrade_aquatic.kelpy_cobblestone_brick_slab": "Плита из ламинарного булыжного кирпича",
+  "block.upgrade_aquatic.kelpy_cobblestone_brick_stairs": "Ступеньки из ламинарного булыжного кирпича",
+  "block.upgrade_aquatic.kelpy_cobblestone_brick_wall": "Ограда из ламинарного булыжного кирпича",
   "block.upgrade_aquatic.kelpy_cobblestone_bricks": "Ламинарные булыжные кирпичи",
 	
   "block.upgrade_aquatic.kelpy_cobblestone_tile_slab": "Плита из ламинарной булыжной мозаики",
@@ -427,7 +427,7 @@
   "item.upgrade_aquatic.jellyfish_spawn_egg": "Яйцо призыва медузы",
 
   "item.upgrade_aquatic.boiled_pickerelweed": "Вареная понтедерия",
-  "item.upgrade_aquatic.perch": "Сырой окунь",
+  "item.upgrade_aquatic.perch": "Окунь",
   "item.upgrade_aquatic.cooked_perch": "Жареный окунь",
   "item.upgrade_aquatic.pike": "Сырая щука",
   "item.upgrade_aquatic.cooked_pike": "Жареная щука",
