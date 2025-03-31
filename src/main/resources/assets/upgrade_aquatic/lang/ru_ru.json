@@ -393,9 +393,9 @@
 
   "block.upgrade_aquatic.beachgrass": "Песколюбка",
   "block.upgrade_aquatic.tall_beachgrass": "Высокая песколюбка",
-  "block.upgrade_aquatic.beachgrass_thatch": "Блок песколюбки",
-  "block.upgrade_aquatic.beachgrass_thatch_slab": "Плита из песколюбки",
-  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Ступеньки из песколюбки",
+  "block.upgrade_aquatic.beachgrass_thatch": "Песколюбковая солома",
+  "block.upgrade_aquatic.beachgrass_thatch_slab": "Плита из песколюбковой соломы",
+  "block.upgrade_aquatic.beachgrass_thatch_stairs": "Ступеньки из песколюбковой соломы",
   
   "block.upgrade_aquatic.luminous_prismarine": "Светящийся призмарин",
   "block.upgrade_aquatic.luminous_prismarine_slab": "Плита из светящегося призмарина",
