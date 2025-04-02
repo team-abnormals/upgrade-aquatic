@@ -115,11 +115,13 @@ public class UAEvents {
 	@SubscribeEvent
 	public static void onPlayerSleep(PlayerSleepInBedEvent event) {
 		Player player = event.getEntity();
-		BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
-		if (event.getResultStatus() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
-			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
-				if (!player.level().isClientSide()) {
-					UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer);
+		if (event.getPos() != null) {
+			BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
+			if (event.getResultStatus() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
+				if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
+					if (!player.level().isClientSide()) {
+						UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer);
+					}
 				}
 			}
 		}
