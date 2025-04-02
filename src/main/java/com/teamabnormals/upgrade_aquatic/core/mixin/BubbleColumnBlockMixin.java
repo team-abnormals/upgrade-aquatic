@@ -58,6 +58,5 @@ public abstract class BubbleColumnBlockMixin {
 	private void spawnFallingBlock(ServerLevel world, BlockPos pos, Block block) {
 		FallingBlockEntity fallingblockentity = FallingBlockEntity.fall(world, pos, block.defaultBlockState());
 		fallingblockentity.time = 1;
-		world.addFreshEntity(fallingblockentity);
 	}
 }
