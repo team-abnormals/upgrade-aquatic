@@ -11,12 +11,8 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "items": [
-                      "minecraft:shears"
-                    ]
-                  }
+                  "action": "shears_dig",
+                  "condition": "forge:can_tool_perform_action"
                 }
               ],
               "name": "upgrade_aquatic:beachgrass"
