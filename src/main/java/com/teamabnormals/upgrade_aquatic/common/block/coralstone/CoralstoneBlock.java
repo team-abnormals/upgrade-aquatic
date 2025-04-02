@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class CoralstoneBlock extends Block {
 	@Override
 	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CHISELED_CORALSTONE.get() && state.getBlock() != UABlocks.CORALSTONE.get()) {
+		if (stack.is(Tags.Items.SHEARS) && state.getBlock() != UABlocks.CHISELED_CORALSTONE.get() && state.getBlock() != UABlocks.CORALSTONE.get()) {
 			BlockState newState = this.chiseled ? UABlocks.CHISELED_CORALSTONE.get().defaultBlockState() : UABlocks.CORALSTONE.get().defaultBlockState();
 			world.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.PLAYERS, 1.0F, 0.8F);
 			stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(hand));
