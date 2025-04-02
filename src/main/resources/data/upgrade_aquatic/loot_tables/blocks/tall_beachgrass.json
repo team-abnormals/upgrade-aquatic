@@ -34,12 +34,8 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "items": [
-                      "minecraft:shears"
-                    ]
-                  }
+                  "action": "shears_dig",
+                  "condition": "forge:can_tool_perform_action"
                 }
               ],
               "functions": [
@@ -102,12 +98,8 @@
               "type": "minecraft:item",
               "conditions": [
                 {
-                  "condition": "minecraft:match_tool",
-                  "predicate": {
-                    "items": [
-                      "minecraft:shears"
-                    ]
-                  }
+                  "action": "shears_dig",
+                  "condition": "forge:can_tool_perform_action"
                 }
               ],
               "functions": [
@@ -137,5 +129,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "upgrade_aquatic:blocks/tall_beachgrass"
 }
