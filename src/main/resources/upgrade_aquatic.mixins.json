@@ -1,7 +1,7 @@
 {
   "required": true,
   "package": "com.teamabnormals.upgrade_aquatic.core.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "refmap": "upgrade_aquatic.refmap.json",
   "mixins": [

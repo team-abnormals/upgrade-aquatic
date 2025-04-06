@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[32,)"
+loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/team-abnormals/upgrade-aquatic/issues"
 license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.txt"
 
@@ -10,7 +10,7 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
     itemIcon = "upgrade_aquatic:pike"
     configBackground = "upgrade_aquatic:textures/block/coralstone.png"
     authors = "Team Abnormals"
-    credits = "SmellyModder, bageldotjpg, Cameron, five, Endergized"
+    credits = "SmellyModder, bageldotjpg, Cameron, five, Endergized, PricelessKoala"
     displayURL = "https://www.teamabnormals.com/mods/upgrade-aquatic"
     displayName = "Upgrade Aquatic"
     description = '''
@@ -19,21 +19,21 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
 
 [[dependencies.upgrade_aquatic]]
     modId = "minecraft"
-    mandatory = true
-    versionRange = "[1.20.1,1.20.2)"
+    type = "required"
+    versionRange = "[${mc_version})"
     ordering = "AFTER"
     side = "BOTH"
 
 [[dependencies.upgrade_aquatic]]
-    modId = "forge"
-    mandatory = true
-    versionRange = "[47.1.3,)"
-    ordering = "NONE"
+    modId = "neoforge"
+    type = "required"
+    versionRange = "[[${neoforge},)"
+    ordering = "AFTER"
     side = "BOTH"
 
 [[dependencies.upgrade_aquatic]]
     modId = "blueprint"
-    mandatory = true
-    versionRange = "[7.1.0,)"
+    type = "required"
+    versionRange = "[${blueprint},)"
     ordering = "AFTER"
     side = "BOTH"
