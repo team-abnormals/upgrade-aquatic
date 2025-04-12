@@ -4,7 +4,7 @@ import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
-import com.teamabnormals.upgrade_aquatic.core.other.UADamageTypes;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADamageTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import net.minecraft.ChatFormatting;

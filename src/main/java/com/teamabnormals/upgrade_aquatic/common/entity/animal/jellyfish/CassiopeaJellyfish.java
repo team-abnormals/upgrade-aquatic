@@ -4,7 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorch
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.CassiopeaHideInSeagrassGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.CassiopeaJellyfishFlipGoal;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.jellyfish.JellyfishRandomSwimmingGoal;
-import com.teamabnormals.upgrade_aquatic.core.other.UADamageTypes;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADamageTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;

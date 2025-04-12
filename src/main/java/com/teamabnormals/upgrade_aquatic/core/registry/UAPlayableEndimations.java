@@ -4,7 +4,7 @@ import com.teamabnormals.blueprint.core.endimator.PlayableEndimation;
 import com.teamabnormals.blueprint.core.endimator.PlayableEndimationManager;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public final class UAPlayableEndimations {
@@ -14,6 +14,6 @@ public final class UAPlayableEndimations {
 	public static final PlayableEndimation THRASHER_SONAR_FIRE = register("thrasher/sonar_fire", 30, PlayableEndimation.LoopType.NONE);
 
 	private static PlayableEndimation register(String name, int duration, PlayableEndimation.LoopType loopType) {
-		return PlayableEndimationManager.INSTANCE.registerPlayableEndimation(new PlayableEndimation(new ResourceLocation(UpgradeAquatic.MOD_ID, name), duration, loopType));
+		return PlayableEndimationManager.INSTANCE.registerPlayableEndimation(new PlayableEndimation(ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name), duration, loopType));
 	}
 }

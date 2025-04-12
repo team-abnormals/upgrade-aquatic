@@ -2,7 +2,7 @@ package com.teamabnormals.upgrade_aquatic.core.data.server.tags;
 
 import com.teamabnormals.blueprint.core.other.tags.BlueprintTrimMaterialTags;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.registry.UATrimMaterials;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UATrimMaterials;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

@@ -7,7 +7,7 @@ import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.nbt.CompoundTag;
@@ -34,8 +34,8 @@ public class UADispenseBehaviorRegistry {
 
 		@Override
 		protected ItemStack execute(BlockSource source, ItemStack stack) {
-			BlockPos blockPos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-			Level world = source.getLevel();
+			BlockPos blockPos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
+			Level world = source.level();
 			List<WaterAnimal> entities = world.getEntitiesOfClass(WaterAnimal.class, new AABB(blockPos));
 			if (!entities.isEmpty()) {
 				for (WaterAnimal mob : entities) {
@@ -82,8 +82,8 @@ public class UADispenseBehaviorRegistry {
 
 			public ItemStack execute(BlockSource source, ItemStack stack) {
 				DispensibleContainerItem item = (DispensibleContainerItem) stack.getItem();
-				BlockPos blockpos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
-				Level level = source.getLevel();
+				BlockPos blockpos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
+				Level level = source.level();
 				if (item.emptyContents(null, level, blockpos, null)) {
 					item.checkExtraContent(null, level, stack, blockpos);
 					return new ItemStack(Items.BUCKET);

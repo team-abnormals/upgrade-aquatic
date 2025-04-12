@@ -8,17 +8,21 @@ import net.minecraft.client.resources.TextureAtlasHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ReloadableResourceManager;
 import net.minecraft.server.packs.resources.ResourceManager;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 /**
  * @author Ocelot
  */
+@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class GlowSquidSpriteUploader extends TextureAtlasHolder {
-	public static final ResourceLocation ATLAS_LOCATION = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/atlas/glow_squid.png");
-	public static final ResourceLocation SQUID_SPRITE = new ResourceLocation(UpgradeAquatic.MOD_ID, "glow_squid");
-	public static final ResourceLocation GLOW_SPRITE = new ResourceLocation(UpgradeAquatic.MOD_ID, "glow_squid_emissive");
+	public static final ResourceLocation ATLAS_LOCATION = ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, "textures/atlas/glow_squid.png");
+	public static final ResourceLocation SQUID_SPRITE = ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, "glow_squid");
+	public static final ResourceLocation GLOW_SPRITE = ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, "glow_squid_emissive");
 
 	private static GlowSquidSpriteUploader uploader;
 
@@ -27,18 +31,11 @@ public class GlowSquidSpriteUploader extends TextureAtlasHolder {
 	}
 
 	/**
-	 * Initializes this uploader under the mod bus.
-	 *
-	 * @param bus The bus to register to
+	 * Registers client reload listeners
 	 */
-	public static void init(IEventBus bus) {
-		bus.addListener(EventPriority.NORMAL, false, RegisterColorHandlersEvent.class, event -> {
-			Minecraft minecraft = Minecraft.getInstance();
-			ResourceManager resourceManager = minecraft.getResourceManager();
-			if (resourceManager instanceof ReloadableResourceManager) {
-				((ReloadableResourceManager) resourceManager).registerReloadListener(uploader = new GlowSquidSpriteUploader(minecraft.textureManager));
-			}
-		});
+	@SubscribeEvent(priority = EventPriority.NORMAL)
+	public static void registerReloadListeners(RegisterClientReloadListenersEvent event) {
+		event.registerReloadListener(uploader = new GlowSquidSpriteUploader(Minecraft.getInstance().getTextureManager()));
 	}
 
 	/**

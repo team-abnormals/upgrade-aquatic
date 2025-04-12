@@ -3,7 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core.other;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.common.dispenser.TridentDispenseBehavior;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.upgrade_aquatic.core.registry.UADecoratedPotPatterns;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADecoratedPotPatterns;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.DispenserBlock;

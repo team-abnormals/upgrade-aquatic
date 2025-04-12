@@ -53,26 +53,21 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.TickEvent.Phase;
-import net.minecraftforge.event.TickEvent.PlayerTickEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.EntityMountEvent;
-import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
-import net.minecraftforge.event.village.VillagerTradesEvent;
-import net.minecraftforge.event.village.WandererTradesEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.Optional;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
+@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class UAEvents {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
@@ -100,32 +95,31 @@ public class UAEvents {
 	}
 
 	@SubscribeEvent
-	public static void onEntityUpdate(LivingTickEvent event) {
-		LivingEntity entity = event.getEntity();
-		if (entity instanceof Phantom) {
-			if (((Phantom) entity).getTarget() instanceof ServerPlayer serverPlayer) {
-				StatsCounter statisticsManager = serverPlayer.getStats();
-				if (statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) < 72000) {
-					((Phantom) entity).setTarget(null);
+	public static void onEntityUpdate(EntityTickEvent.Post event) {
+		if(event.getEntity() instanceof LivingEntity entity) {
+			if (entity instanceof Phantom) {
+				if (((Phantom) entity).getTarget() instanceof ServerPlayer serverPlayer) {
+					StatsCounter statisticsManager = serverPlayer.getStats();
+					if (statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)) < 72000) {
+						((Phantom) entity).setTarget(null);
+					}
 				}
 			}
 		}
 	}
 
 	@SubscribeEvent
-	public static void onPlayerSleep(PlayerSleepInBedEvent event) {
+	public static void onPlayerSleep(CanPlayerSleepEvent event) {
 		Player player = event.getEntity();
-		if (event.getPos() != null) {
-			BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
-			if (event.getResultStatus() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
-				if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
-					if (!player.level().isClientSide()) {
-						UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer);
-					}
-				}
-			}
-		}
-	}
+        BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
+        if (event.getProblem() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
+            if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
+                if (!player.level().isClientSide()) {
+                    UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer);
+                }
+            }
+        }
+    }
 
 	@SubscribeEvent
 	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
@@ -135,7 +129,7 @@ public class UAEvents {
 	}
 
 	@SubscribeEvent
-	public static void onInteractEntity(EntityInteract event) {
+	public static void onInteractEntity(PlayerInteractEvent.EntityInteract event) {
 		Entity entity = event.getTarget();
 		Player player = event.getEntity();
 		ItemStack stack = event.getItemStack();
@@ -183,9 +177,9 @@ public class UAEvents {
 	}
 
 	@SubscribeEvent
-	public static void onPlayerTick(PlayerTickEvent event) {
-		Player player = event.player;
-		if (!event.player.level().isClientSide && event.player.level().getGameTime() % 5 == 0 && event.player instanceof ServerPlayer serverPlayer) {
+	public static void onPlayerTick(PlayerTickEvent.Post event) {
+		Player player = event.getEntity();
+		if (!player.level().isClientSide && player.level().getGameTime() % 5 == 0 && player instanceof ServerPlayer serverPlayer) {
 			StatsCounter statisticsManager = serverPlayer.getStats();
 			Object2IntMap<Stat<?>> object2intmap = new Object2IntOpenHashMap<>();
 			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));

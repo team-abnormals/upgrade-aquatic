@@ -1,26 +1,24 @@
-package com.teamabnormals.upgrade_aquatic.core.other;
+package com.teamabnormals.upgrade_aquatic.core.registry.datapack;
 
 import com.google.common.collect.Maps;
 import com.teamabnormals.blueprint.common.world.modification.structure.SimpleStructureRepaletter;
 import com.teamabnormals.blueprint.common.world.modification.structure.StructureRepaletterEntry;
 import com.teamabnormals.blueprint.core.api.conditions.ConfigValueCondition;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
-import com.teamabnormals.blueprint.core.registry.BlueprintHolderSets;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,7 +26,7 @@ import java.util.stream.Stream;
 
 public final class UAStructureRepaletters {
 
-	public static void bootstrap(BootstapContext<StructureRepaletterEntry> context) {
+	public static void bootstrap(BootstrapContext<StructureRepaletterEntry> context) {
 		HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 		ConfigValueCondition config = config(UAConfig.COMMON.kelpyOceanRuins, "kelpy_ocean_ruins");
 
@@ -37,7 +35,7 @@ public final class UAStructureRepaletters {
 	}
 
 	@SafeVarargs
-	private static void basicRepaletter(BootstapContext<StructureRepaletterEntry> context, HolderGetter<Structure> structures, ICondition condition, String name, Block replacesBlock, Block replacesWith, ResourceKey<Structure>... selector) {
+	private static void basicRepaletter(BootstrapContext<StructureRepaletterEntry> context, HolderGetter<Structure> structures, ICondition condition, String name, Block replacesBlock, Block replacesWith, ResourceKey<Structure>... selector) {
 		context.register(
 				repaletterKey(name),
 				new StructureRepaletterEntry(
@@ -46,8 +44,8 @@ public final class UAStructureRepaletters {
 		);
 	}
 
-	public static ConfigValueCondition config(ForgeConfigSpec.ConfigValue<?> value, String key, boolean inverted) {
-		return new ConfigValueCondition(new ResourceLocation(UpgradeAquatic.MOD_ID, "config"), value, key, Maps.newHashMap(), inverted);
+	public static ConfigValueCondition config(NeoForgeConfigSpec.ConfigValue<?> value, String key, boolean inverted) {
+		return new ConfigValueCondition(ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, "config"), value, key, Maps.newHashMap(), inverted);
 	}
 
 	public static ConfigValueCondition config(ForgeConfigSpec.ConfigValue<?> value, String key) {

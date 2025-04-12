@@ -3,18 +3,20 @@ package com.teamabnormals.upgrade_aquatic.core.data.server;
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.UABiomeModifiers;
-import com.teamabnormals.upgrade_aquatic.core.other.UADamageTypes;
-import com.teamabnormals.upgrade_aquatic.core.other.UAStructureRepaletters;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADamageTypes;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAStructureRepaletters;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAConfiguredFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatures;
-import com.teamabnormals.upgrade_aquatic.core.registry.UATrimMaterials;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAWorldCarvers.UAConfiguredWorldCarvers;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAJukeboxSongs;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAPaintingVariants;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UATrimMaterials;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAWorldCarvers.UAConfiguredWorldCarvers;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -28,7 +30,9 @@ public class UADatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProv
 			.add(Registries.PLACED_FEATURE, UAPlacedFeatures::bootstrap)
 			.add(Registries.CONFIGURED_CARVER, UAConfiguredWorldCarvers::bootstrap)
 			.add(Registries.TRIM_MATERIAL, UATrimMaterials::bootstrap)
-			.add(ForgeRegistries.Keys.BIOME_MODIFIERS, UABiomeModifiers::bootstrap);
+			.add(Registries.JUKEBOX_SONG, UAJukeboxSongs::bootstrap)
+			.add(Registries.PAINTING_VARIANT, UAPaintingVariants::bootstrap)
+			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, UABiomeModifiers::bootstrap);
 
 	public UADatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<Provider> provider) {
 		super(output, provider, BUILDER, Set.of(UpgradeAquatic.MOD_ID));

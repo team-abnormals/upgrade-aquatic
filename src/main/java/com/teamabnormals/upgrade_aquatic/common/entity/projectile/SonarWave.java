@@ -16,10 +16,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.network.PlayMessages;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -45,12 +41,12 @@ public class SonarWave extends Entity {
 	public SonarWave(PlayMessages.SpawnEntity spawnEntity, Level world) {
 		this(UAEntityTypes.SONAR_WAVE.get(), world);
 	}
-
+	
 	@Override
-	protected void defineSynchedData() {
-		this.getEntityData().define(OWNER_ID, 0);
+	protected void defineSynchedData(SynchedEntityData.Builder builder) {
+		builder.define(OWNER_ID, 0);
 	}
-
+	
 	@Override
 	public void tick() {
 		super.tick();

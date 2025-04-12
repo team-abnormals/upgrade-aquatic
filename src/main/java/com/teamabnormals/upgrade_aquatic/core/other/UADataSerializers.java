@@ -5,8 +5,8 @@ import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.world.entity.EntityDimensions;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries.Keys;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
 
 public final class UADataSerializers {
 	public static final DeferredRegister<EntityDataSerializer<?>> SERIALIZERS = DeferredRegister.create(Keys.ENTITY_DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);

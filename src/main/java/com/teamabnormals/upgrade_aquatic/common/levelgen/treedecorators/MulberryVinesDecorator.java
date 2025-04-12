@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.levelgen.treedecorators;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.upgrade_aquatic.common.block.MulberryVineBlock;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures;
@@ -13,7 +14,7 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class MulberryVinesDecorator extends TreeDecorator {
-	public static final Codec<MulberryVinesDecorator> CODEC;
+	public static final MapCodec<MulberryVinesDecorator> CODEC;
 	public static final MulberryVinesDecorator INSTANCE = new MulberryVinesDecorator();
 
 	@Override
@@ -37,6 +38,6 @@ public class MulberryVinesDecorator extends TreeDecorator {
 	}
 
 	static {
-		CODEC = Codec.unit(() -> INSTANCE);
+		CODEC = MapCodec.unit(() -> INSTANCE);
 	}
 }

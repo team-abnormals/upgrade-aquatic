@@ -5,7 +5,7 @@ import com.teamabnormals.upgrade_aquatic.core.other.tags.UABiomeTags;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABiomeModifierTypes.AddCarversBiomeModifier;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatures;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAWorldCarvers.UAConfiguredWorldCarvers;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAWorldCarvers.UAConfiguredWorldCarvers;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;

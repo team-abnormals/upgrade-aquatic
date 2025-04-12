@@ -4,7 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.levelgen.feature.*;
 import com.teamabnormals.upgrade_aquatic.common.levelgen.treedecorators.MulberryVinesDecorator;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
@@ -26,27 +26,26 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class UAFeatures {
-	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, UpgradeAquatic.MOD_ID);
-	public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(ForgeRegistries.TREE_DECORATOR_TYPES, UpgradeAquatic.MOD_ID);
+	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, UpgradeAquatic.MOD_ID);
+	public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, UpgradeAquatic.MOD_ID);
 
-	public static final RegistryObject<Feature<NoneFeatureConfiguration>> PRISMARINE_CORAL = FEATURES.register("prismarine_coral", () -> new PrismarineCoralFeature(NoneFeatureConfiguration.CODEC));
-	public static final RegistryObject<Feature<NoneFeatureConfiguration>> PICKERELWEED = FEATURES.register("pickerelweed", () -> new PickerelweedFeature(NoneFeatureConfiguration.CODEC));
-	public static final RegistryObject<Feature<NoneFeatureConfiguration>> SEAROCKET = FEATURES.register("searocket", () -> new SearocketFeature(NoneFeatureConfiguration.CODEC));
-	public static final RegistryObject<Feature<NoneFeatureConfiguration>> FLOWERING_RUSH = FEATURES.register("flowering_rush", () -> new FloweringRushFeature(NoneFeatureConfiguration.CODEC));
-	public static final RegistryObject<Feature<NoneFeatureConfiguration>> DRIFTWOOD = FEATURES.register("driftwood", () -> new DriftwoodFeature(NoneFeatureConfiguration.CODEC));
-	public static final RegistryObject<Feature<NoneFeatureConfiguration>> DUNES = FEATURES.register("dunes", () -> new BeachgrassDunesFeature(NoneFeatureConfiguration.CODEC));
-	public static final RegistryObject<Feature<TreeConfiguration>> RIVER_TREE = FEATURES.register("river_tree", () -> new RiverTreeFeature(TreeConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PRISMARINE_CORAL = FEATURES.register("prismarine_coral", () -> new PrismarineCoralFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> PICKERELWEED = FEATURES.register("pickerelweed", () -> new PickerelweedFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> SEAROCKET = FEATURES.register("searocket", () -> new SearocketFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> FLOWERING_RUSH = FEATURES.register("flowering_rush", () -> new FloweringRushFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> DRIFTWOOD = FEATURES.register("driftwood", () -> new DriftwoodFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> DUNES = FEATURES.register("dunes", () -> new BeachgrassDunesFeature(NoneFeatureConfiguration.CODEC));
+	public static final DeferredHolder<Feature<?>, Feature<TreeConfiguration>> RIVER_TREE = FEATURES.register("river_tree", () -> new RiverTreeFeature(TreeConfiguration.CODEC));
 
-	public static final RegistryObject<TreeDecoratorType<?>> MULBERRY_VINES = TREE_DECORATORS.register("mulberry_vines", () -> new TreeDecoratorType<>(MulberryVinesDecorator.CODEC));
+	public static final DeferredHolder<TreeDecoratorType<?>, TreeDecoratorType<?>> MULBERRY_VINES = TREE_DECORATORS.register("mulberry_vines", () -> new TreeDecoratorType<>(MulberryVinesDecorator.CODEC));
 
 	public static final class Configs {
 		public static final TreeConfiguration RIVER_TREE_CONFIG = new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(UABlocks.RIVER_LOG.get()), new StraightTrunkPlacer(3, 1, 1), BlockStateProvider.simple(UABlocks.RIVER_LEAVES.get()), new BlobFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0), 0), new TwoLayersFeatureSize(0, 0, 0)).ignoreVines().decorators(List.of(new MulberryVinesDecorator())).build();
@@ -63,7 +62,7 @@ public class UAFeatures {
 		public static final ResourceKey<ConfiguredFeature<?, ?>> PATCH_FLOWERING_RUSH = createKey("patch_flowering_rush");
 		public static final ResourceKey<ConfiguredFeature<?, ?>> DRIFTWOOD = createKey("driftwood");
 
-		public static void bootstrap(BootstapContext<ConfiguredFeature<?, ?>> context) {
+		public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
 			register(context, RIVER_TREE, UAFeatures.RIVER_TREE.get(), Configs.RIVER_TREE_CONFIG);
 			register(context, ORE_AMMONITE, Feature.ORE, new OreConfiguration(new BlockMatchTest(Blocks.STONE), UABlocks.EMBEDDED_AMMONITE.get().defaultBlockState(), 3));
 			register(context, BEACHGRASS_DUNES, UAFeatures.DUNES.get(), FeatureConfiguration.NONE);
@@ -76,10 +75,10 @@ public class UAFeatures {
 		}
 
 		public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
-			return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(UpgradeAquatic.MOD_ID, name));
+			return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name));
 		}
 
-		public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
+		public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
 			context.register(key, new ConfiguredFeature<>(feature, config));
 		}
 	}
@@ -101,7 +100,7 @@ public class UAFeatures {
 		public static final ResourceKey<PlacedFeature> DRIFTWOOD_SWAMP = createKey("driftwood_swamp");
 		public static final ResourceKey<PlacedFeature> DRIFTWOOD_EXTRA = createKey("driftwood_extra");
 
-		public static void bootstrap(BootstapContext<PlacedFeature> context) {
+		public static void bootstrap(BootstrapContext<PlacedFeature> context) {
 			register(context, ORE_AMMONITE, UAConfiguredFeatures.ORE_AMMONITE, commonOrePlacement(30, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(73))));
 			register(context, BEACHGRASS_DUNES, UAConfiguredFeatures.BEACHGRASS_DUNES, VegetationPlacements.worldSurfaceSquaredWithCount(10));
 			register(context, RIVER_TREE, UAConfiguredFeatures.RIVER_TREE, VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.5F, 2)));
@@ -128,14 +127,14 @@ public class UAFeatures {
 		}
 
 		public static ResourceKey<PlacedFeature> createKey(String name) {
-			return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(UpgradeAquatic.MOD_ID, name));
+			return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name));
 		}
 
-		public static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> modifiers) {
+		public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> modifiers) {
 			context.register(key, new PlacedFeature(context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(feature), modifiers));
 		}
 
-		public static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... modifiers) {
+		public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... modifiers) {
 			register(context, key, feature, List.of(modifiers));
 		}
 	}
