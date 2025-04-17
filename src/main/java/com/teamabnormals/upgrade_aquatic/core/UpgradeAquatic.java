@@ -53,6 +53,7 @@ public class UpgradeAquatic {
 		UALootConditions.LOOT_CONDITION_TYPES.register(bus);
 		UAFeatures.TREE_DECORATORS.register(bus);
 		UADecoratedPotPatterns.DECORATED_POT_PATTERNS.register(bus);
+		UACriteriaTriggers.TRIGGERS.register(bus);
 
 		this.registerCCCompat(bus);
 

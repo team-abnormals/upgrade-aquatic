@@ -11,6 +11,7 @@ import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
@@ -61,7 +62,6 @@ import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -115,7 +115,7 @@ public class UAEvents {
         if (event.getProblem() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
             if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
                 if (!player.level().isClientSide()) {
-                    UACriteriaTriggers.SLEEP_UNDERWATER.trigger(serverPlayer);
+                    UACriteriaTriggers.SLEEP_UNDERWATER.get().trigger(serverPlayer);
                 }
             }
         }

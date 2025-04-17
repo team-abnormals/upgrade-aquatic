@@ -18,6 +18,7 @@ public class UACompat {
 	}
 
 	public static void registerCompostables() {
+		// TODO: Move to Neoforge datamaps
 		DataUtil.registerCompostable(UABlocks.RIVER_LEAVES.get(), 0.30F);
 		DataUtil.registerCompostable(UABlocks.RIVER_SAPLING.get(), 0.30F);
 		DataUtil.registerCompostable(UAItems.MULBERRY.get(), 0.30F);

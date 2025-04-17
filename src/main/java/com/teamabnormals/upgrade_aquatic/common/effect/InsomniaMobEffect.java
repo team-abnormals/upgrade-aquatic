@@ -1,7 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.effect;
 
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Flare;
-import com.teamabnormals.upgrade_aquatic.core.other.UACriteriaTriggers;
+import com.teamabnormals.upgrade_aquatic.core.registry.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -20,10 +20,11 @@ public class InsomniaMobEffect extends InstantenousMobEffect {
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
 		if (entity instanceof ServerPlayer playerMP) {
 			StatsCounter statisticsManager = playerMP.getStats();
 			statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), (24000 * (amplifier + 1)));
+			return true;
 		} else if (entity instanceof Phantom) {
 			Flare flare = UAEntityTypes.FLARE.get().create(entity.level());
 			flare.moveTo(entity.getX(), entity.getY(), entity.getZ(), entity.getYRot(), entity.getXRot());
@@ -40,12 +41,15 @@ public class InsomniaMobEffect extends InstantenousMobEffect {
 			Player player = entity.getCommandSenderWorld().getNearestPlayer(entity, 11);
 			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
 				if (!entity.level().isClientSide()) {
-					UACriteriaTriggers.CONVERT_PHANTOM.trigger(serverPlayer);
+					UACriteriaTriggers.CONVERT_PHANTOM.get().trigger(serverPlayer);
 				}
 			}
+			return true;
 		} else if (entity instanceof Flare) {
 			entity.hurt(entity.damageSources().magic(), Float.MAX_VALUE);
+			return true;
 		}
+		return false;
 	}
 
 }

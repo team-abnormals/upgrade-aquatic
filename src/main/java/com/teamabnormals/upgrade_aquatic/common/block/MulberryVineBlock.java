@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.teamabnormals.upgrade_aquatic.core.other.UACriteriaTriggers;
+import com.teamabnormals.upgrade_aquatic.core.registry.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -10,12 +10,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -105,7 +103,7 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 			if (player instanceof ServerPlayer && player.isAlive()) {
 				ServerPlayer serverPlayer = (ServerPlayer) player;
 				if (!player.level().isClientSide()) {
-					UACriteriaTriggers.PICK_MULBERRIES.trigger(serverPlayer);
+					UACriteriaTriggers.PICK_MULBERRIES.get().trigger(serverPlayer);
 				}
 			}
 
