@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
 
@@ -39,7 +38,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 
 		boolean standing = rand.nextFloat() < 0.25F;
 		BlockState downState = world.getBlockState(pos.below());
-		if (standing && world.getBlockState(pos).getBlock() == Blocks.WATER && (downState.is(BlockTags.DIRT) || downState.is(Tags.Blocks.SAND))) {
+		if (standing && world.getBlockState(pos).getBlock() == Blocks.WATER && (downState.is(BlockTags.DIRT) || downState.is(BlockTags.SAND))) {
 			Direction upDirection = Direction.UP;
 			if (this.isDirectionOpen(world, pos, upDirection, 3)) {
 				for (int i = 0; i < 3; i++) {
@@ -60,7 +59,7 @@ public class DriftwoodFeature extends Feature<NoneFeatureConfiguration> {
 			int length = rand.nextInt(3) + 3;
 			if (world.getBiome(pos).is(BiomeTags.IS_OCEAN))
 				pos = pos.below();
-			if ((rand.nextFloat() < 0.25F && world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).getBlock() == Blocks.WATER && world.isEmptyBlock(pos.above())) || (!world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.isNearWater(world, pos) && downState.is(BlockTags.DIRT) || downState.is(Tags.Blocks.SAND) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
+			if ((rand.nextFloat() < 0.25F && world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.canFitInOcean(world, pos, direction, length) && world.getBlockState(pos.below()).getBlock() == Blocks.WATER && world.isEmptyBlock(pos.above())) || (!world.getBiome(pos).is(BiomeTags.IS_OCEAN) && this.isNearWater(world, pos) && downState.is(BlockTags.DIRT) || downState.is(BlockTags.SAND) && this.isDirectionOpen(world, pos, direction, length) && this.isGroundForDirectionMostlySuitable(world, pos, direction, length))) {
 				GenerationPiece driftwood = new GenerationPiece((iworld, part) -> {
 					return world.isEmptyBlock(part.pos) || world.getFluidState(part.pos).is(FluidTags.WATER);
 				});

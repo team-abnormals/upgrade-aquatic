@@ -75,13 +75,8 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose pose) {
-		return super.getDimensions(pose).scale(this.getSize());
-	}
-
-	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions size) {
-		return size.height * 0.5F;
+	public EntityDimensions getDefaultDimensions(Pose pose) {
+		return super.getDefaultDimensions(pose).scale(this.getSize());
 	}
 
 	@Override

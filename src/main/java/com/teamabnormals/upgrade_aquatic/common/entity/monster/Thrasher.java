@@ -32,6 +32,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.LookControl;
@@ -68,7 +69,7 @@ public class Thrasher extends Monster implements Endimatable {
 		return entity.getType().is(UAEntityTypeTags.THRASHER_SONAR_TARGETS) && entity.isInWater();
 	};
 	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
-	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, AttributeModifier.Operation.MULTIPLY_BASE));
+	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, Operation.ADD_MULTIPLIED_BASE));
 	private static final EntityDataAccessor<Boolean> MOVING = SynchedEntityData.defineId(Thrasher.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Integer> WATER_TIME = SynchedEntityData.defineId(Thrasher.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> STUN_TIME = SynchedEntityData.defineId(Thrasher.class, EntityDataSerializers.INT);
@@ -187,7 +188,7 @@ public class Thrasher extends Monster implements Endimatable {
 		super.addPassenger(passenger);
 		if (!this.level().isClientSide && passenger instanceof LivingEntity && passenger.getVehicle() == this && this.getPassengers().indexOf(passenger) == 0) {
 			EntityDimensions defaultSize = this.getDefaultSize();
-			this.setCaughtSize(EntityDimensions.fixed(defaultSize.width + passenger.getDimensions(passenger.getPose()).width, defaultSize.height));
+			this.setCaughtSize(EntityDimensions.fixed(defaultSize.width() + passenger.getDimensions(passenger.getPose()).width(), defaultSize.height()));
 		}
 	}
 
@@ -199,7 +200,7 @@ public class Thrasher extends Monster implements Endimatable {
 				Entity indexZeroPassenger = this.getFirstPassenger();
 				EntityDimensions defaultSize = this.getDefaultSize();
 				if (indexZeroPassenger instanceof LivingEntity && passenger.getVehicle() == this) {
-					this.setCaughtSize(EntityDimensions.fixed(defaultSize.width + passenger.getDimensions(passenger.getPose()).width, defaultSize.height));
+					this.setCaughtSize(EntityDimensions.fixed(defaultSize.width() + passenger.getDimensions(passenger.getPose()).width(), defaultSize.height()));
 				} else {
 					this.setCaughtSize(defaultSize);
 				}
@@ -239,11 +240,11 @@ public class Thrasher extends Monster implements Endimatable {
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose pose) {
+	public EntityDimensions getDefaultDimensions(Pose pose) {
 		if (!this.getPassengers().isEmpty()) {
 			return this.getCaughtSize();
 		}
-		return super.getDimensions(pose);
+		return super.getDefaultDimensions(pose);
 	}
 
 	@Override

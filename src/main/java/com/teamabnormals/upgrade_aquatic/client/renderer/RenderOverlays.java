@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.StatsCounter;
 import net.minecraft.tags.FluidTags;
@@ -20,20 +19,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
-import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
-import net.minecraftforge.client.event.RenderGuiOverlayEvent;
-import net.minecraftforge.client.gui.overlay.ForgeGui;
-import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
+import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
+import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
-@Mod.EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT)
 public class RenderOverlays {
 	private static final Minecraft MC = Minecraft.getInstance();
 
 	@SubscribeEvent
-	public static void renderOverlays(RenderGuiOverlayEvent.Post event) {
-		if (event.getOverlay() == VanillaGuiOverlay.VIGNETTE.type()) {
+	public static void renderOverlays(RenderGuiLayerEvent.Post event) {
+		if (event.getName() == VanillaGuiOverlay.VIGNETTE.type()) {
 			int scaledWidth = MC.getWindow().getGuiScaledWidth();
 			int scaledHeight = MC.getWindow().getGuiScaledHeight();
 			LocalPlayer player = MC.player;
@@ -65,21 +63,19 @@ public class RenderOverlays {
 				RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, opacity);
 				Tesselator tessellator = Tesselator.getInstance();
-				BufferBuilder bufferbuilder = tessellator.getBuilder();
-				bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-				bufferbuilder.vertex(0.0D, scaledHeight, -90.0D).uv(0.0F, 1.0F).endVertex();
-				bufferbuilder.vertex(scaledWidth, scaledHeight, -90.0D).uv(1.0F, 1.0F).endVertex();
-				bufferbuilder.vertex(scaledWidth, 0.0D, -90.0D).uv(1.0F, 0.0F).endVertex();
-				bufferbuilder.vertex(0.0D, 0.0D, -90.0D).uv(0.0F, 0.0F).endVertex();
-				tessellator.end();
+				BufferBuilder bufferbuilder = tessellator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+				bufferbuilder.addVertex(0.0F, scaledHeight, -90.0F).setUv(0.0F, 1.0F);
+				bufferbuilder.addVertex(scaledWidth, scaledHeight, -90.0F).setUv(1.0F, 1.0F);
+				bufferbuilder.addVertex(scaledWidth, 0.0F, -90.0F).setUv(1.0F, 0.0F);
+				bufferbuilder.addVertex(0.0F, 0.0F, -90.0F).setUv(0.0F, 0.0F);
 				stack.popPose();
 			}
 		}
 	}
 
 	@SubscribeEvent
-	public static void renderScuteOverAir(RenderGuiOverlayEvent.Pre event) {
-		if (event.getOverlay() == VanillaGuiOverlay.AIR_LEVEL.type() && UAConfig.COMMON.turtleShellRework.get()) {
+	public static void renderScuteOverAir(RenderGuiLayerEvent.Pre event) {
+		if (event.getName().equals(VanillaGuiLayers.AIR_LEVEL) && UAConfig.COMMON.turtleShellRework.get()) {
 			int scaledWidth = MC.getWindow().getGuiScaledWidth();
 			int scaledHeight = MC.getWindow().getGuiScaledHeight();
 			ForgeGui forgeGui = (ForgeGui) MC.gui;
@@ -111,13 +107,11 @@ public class RenderOverlays {
 						int t = top;
 						int t2 = t + 9;
 						Tesselator tessellator = Tesselator.getInstance();
-						BufferBuilder bufferbuilder = tessellator.getBuilder();
-						bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-						bufferbuilder.vertex(l, t2, 0).uv(0, 1).endVertex();
-						bufferbuilder.vertex(l2, t2, 0).uv(1, 1).endVertex();
-						bufferbuilder.vertex(l2, t, 0).uv(1, 0).endVertex();
-						bufferbuilder.vertex(l, t, 0).uv(0, 0).endVertex();
-						tessellator.end();
+						BufferBuilder bufferbuilder = tessellator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+						bufferbuilder.addVertex(l, t2, 0).setUv(0, 1);
+						bufferbuilder.addVertex(l2, t2, 0).setUv(1, 1);
+						bufferbuilder.addVertex(l2, t, 0).setUv(1, 0);
+						bufferbuilder.addVertex(l, t, 0).setUv(0, 0);
 					}
 					RenderSystem.setShaderTexture(0, UpgradeAquatic.location("textures/gui/overlay/scute_bubble.png"));
 					double amount = Mth.clamp(10 - Math.floor((double) durability / maxDurability * 10.0), 1, 10);
@@ -127,13 +121,11 @@ public class RenderOverlays {
 						int t = top;
 						int t2 = t + 9;
 						Tesselator tessellator = Tesselator.getInstance();
-						BufferBuilder bufferbuilder = tessellator.getBuilder();
-						bufferbuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-						bufferbuilder.vertex(l, t2, 0).uv(0, 1).endVertex();
-						bufferbuilder.vertex(l2, t2, 0).uv(1, 1).endVertex();
-						bufferbuilder.vertex(l2, t, 0).uv(1, 0).endVertex();
-						bufferbuilder.vertex(l, t, 0).uv(0, 0).endVertex();
-						tessellator.end();
+						BufferBuilder bufferbuilder = tessellator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+						bufferbuilder.addVertex(l, t2, 0).setUv(0, 1);
+						bufferbuilder.addVertex(l2, t2, 0).setUv(1, 1);
+						bufferbuilder.addVertex(l2, t, 0).setUv(1, 0);
+						bufferbuilder.addVertex(l, t, 0).setUv(0, 0);
 					}
 					forgeGui.rightHeight += 10;
 

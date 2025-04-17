@@ -87,10 +87,6 @@ public class Flare extends FlyingMob {
 		return this.entityData.get(SIZE);
 	}
 
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return sizeIn.height * 0.35F;
-	}
-
 	public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
 		if (SIZE.equals(key)) {
 			this.updatePhantomSize();
@@ -185,13 +181,6 @@ public class Flare extends FlyingMob {
 
 	public boolean canAttackType(EntityType<?> typeIn) {
 		return true;
-	}
-
-	public EntityDimensions getDimensions(Pose poseIn) {
-		int i = this.getPhantomSize();
-		EntityDimensions entitysize = super.getDimensions(poseIn);
-		float f = (entitysize.width() + 0.2F * (float) i) / entitysize.width();
-		return entitysize.scale(f);
 	}
 
 	enum AttackPhase {

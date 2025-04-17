@@ -454,11 +454,6 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return sizeIn.height * 0.6F;
-	}
-
-	@Override
 	public boolean canPickUpLoot() {
 		return this.isInWater() && super.canPickUpLoot();
 	}
@@ -521,18 +516,13 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	@Override
-	public double getPassengersRidingOffset() {
-		return this.getDimensions(this.getPose()).height * 0.075D;
-	}
-
-	@Override
 	public ItemStack getPickedResult(HitResult target) {
 		return new ItemStack(UAItems.PIKE_SPAWN_EGG.get());
 	}
 
 	@Override
-	public EntityDimensions getDimensions(Pose poseIn) {
-		return super.getDimensions(poseIn).scale(this.getPikeType().pikeSize.boxSize);
+	public EntityDimensions getDefaultDimensions(Pose poseIn) {
+		return super.getDefaultDimensions(poseIn).scale(this.getPikeType().pikeSize.boxSize);
 	}
 
 	public boolean isLit() {

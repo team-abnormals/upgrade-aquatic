@@ -8,14 +8,11 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
-
-import java.util.function.Supplier;
 
 public class GlowSquidBucketItem extends SquidBucketItem {
 
-	public GlowSquidBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
-		super(supplier, builder);
+	public GlowSquidBucketItem(Properties builder) {
+		super(builder);
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class ThrasherRenderLayer<T extends Thrasher, M extends ThrasherModel<T>>
 	public void render(PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn, T thrasher, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		int stunnedAnimation = (int) (thrasher.stunAnimation.getProgress(partialTicks) * 240);
 		this.getParentModel().setupAnim(thrasher, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getParentModel().renderToBuffer(poseStack, bufferIn.getBuffer(BlueprintRenderTypes.getUnshadedCutoutEntity(this.getThrasherFrostLayer(thrasher), false)), stunnedAnimation, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		this.getParentModel().renderToBuffer(poseStack, bufferIn.getBuffer(BlueprintRenderTypes.getUnshadedCutoutEntity(this.getThrasherFrostLayer(thrasher), false)), stunnedAnimation, OverlayTexture.NO_OVERLAY);
 	}
 
 	public ResourceLocation getThrasherFrostLayer(Thrasher thrasher) {

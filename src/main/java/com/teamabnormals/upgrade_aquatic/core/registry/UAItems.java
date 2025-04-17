@@ -46,13 +46,13 @@ public class UAItems {
 	public static final DeferredItem<Item> RIVER_FURNACE_BOAT = HELPER.createItem("river_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.RIVER_FURNACE_BOAT : () -> new Item(new Item.Properties()));
 	public static final DeferredItem<Item> LARGE_RIVER_BOAT = HELPER.createItem("large_river_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_RIVER_BOAT : () -> new Item(new Item.Properties()));
 
-	public static final DeferredItem<Item> NAUTILUS_BUCKET = HELPER.createItem("nautilus_bucket", () -> new MobBucketItem(UAEntityTypes.NAUTILUS::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
+	public static final DeferredItem<Item> NAUTILUS_BUCKET = HELPER.createItem("nautilus_bucket", () -> new MobBucketItem(UAEntityTypes.NAUTILUS.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
 	public static final DeferredItem<Item> PIKE_BUCKET = HELPER.createItem("pike_bucket", () -> new PikeBucketItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredItem<Item> LIONFISH_BUCKET = HELPER.createItem("lionfish_bucket", () -> new MobBucketItem(UAEntityTypes.LIONFISH::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
-	public static final DeferredItem<Item> PERCH_BUCKET = HELPER.createItem("perch_bucket", () -> new MobBucketItem(UAEntityTypes.PERCH, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
-	public static final DeferredItem<Item> SQUID_BUCKET = HELPER.createItem("squid_bucket", () -> new SquidBucketItem(() -> Fluids.WATER, new Item.Properties().stacksTo(1)));
-	public static final DeferredItem<Item> GLOW_SQUID_BUCKET = HELPER.createItem("glow_squid_bucket", () -> new GlowSquidBucketItem(() -> Fluids.WATER, new Item.Properties().stacksTo(1)));
-	public static final DeferredItem<Item> JELLYFISH_BUCKET = HELPER.createItem("jellyfish_bucket", () -> new JellyfishBucketItem(() -> Fluids.WATER, new Item.Properties().stacksTo(1)));
+	public static final DeferredItem<Item> LIONFISH_BUCKET = HELPER.createItem("lionfish_bucket", () -> new MobBucketItem(UAEntityTypes.LIONFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
+	public static final DeferredItem<Item> PERCH_BUCKET = HELPER.createItem("perch_bucket", () -> new MobBucketItem(UAEntityTypes.PERCH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
+	public static final DeferredItem<Item> SQUID_BUCKET = HELPER.createItem("squid_bucket", () -> new SquidBucketItem(new Item.Properties().stacksTo(1)));
+	public static final DeferredItem<Item> GLOW_SQUID_BUCKET = HELPER.createItem("glow_squid_bucket", () -> new GlowSquidBucketItem(new Item.Properties().stacksTo(1)));
+	public static final DeferredItem<Item> JELLYFISH_BUCKET = HELPER.createItem("jellyfish_bucket", () -> new JellyfishBucketItem(Fluids.WATER, new Item.Properties().stacksTo(1)));
 
 	public static final DeferredItem<Item> PRISMARINE_ROD = HELPER.createItem("prismarine_rod", () -> new Item(new Item.Properties()));
 	public static final DeferredItem<Item> THRASHER_TOOTH = HELPER.createItem("thrasher_tooth", () -> new Item(new Item.Properties()));
@@ -125,19 +125,19 @@ public class UAItems {
 	}
 
 	public static class UAFoods {
-		public static final FoodProperties MULBERRY = new FoodProperties.Builder().nutrition(3).saturationMod(0.1F).build();
-		public static final FoodProperties MULBERRY_JAM = new FoodProperties.Builder().nutrition(4).saturationMod(0.2F).alwaysEat().build();
-		public static final FoodProperties MULBERRY_BREAD = new FoodProperties.Builder().nutrition(9).saturationMod(0.4F).build();
-		public static final FoodProperties MULBERRY_PIE = new FoodProperties.Builder().nutrition(7).saturationMod(0.6F).build();
+		public static final FoodProperties MULBERRY = new FoodProperties.Builder().nutrition(3).saturationModifier(0.1F).build();
+		public static final FoodProperties MULBERRY_JAM = new FoodProperties.Builder().nutrition(4).saturationModifier(0.2F).alwaysEdible().build();
+		public static final FoodProperties MULBERRY_BREAD = new FoodProperties.Builder().nutrition(9).saturationModifier(0.4F).build();
+		public static final FoodProperties MULBERRY_PIE = new FoodProperties.Builder().nutrition(7).saturationModifier(0.6F).build();
 
-		public static final FoodProperties PICKERELWEED = new FoodProperties.Builder().nutrition(2).saturationMod(0.0F).alwaysEat().build();
+		public static final FoodProperties PICKERELWEED = new FoodProperties.Builder().nutrition(2).saturationModifier(0.0F).alwaysEdible().build();
 
-		public static final FoodProperties PIKE = new FoodProperties.Builder().nutrition(3).saturationMod(0.3F).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).build();
-		public static final FoodProperties COOKED_PIKE = new FoodProperties.Builder().nutrition(8).saturationMod(0.8F).build();
-		public static final FoodProperties LIONFISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.3F).effect(() -> new MobEffectInstance(MobEffects.POISON, 600, 3), 1.0F).effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 300, 2), 1.0F).build();
-		public static final FoodProperties COOKED_LIONFISH = new FoodProperties.Builder().nutrition(6).saturationMod(0.7F).build();
-		public static final FoodProperties PERCH = new FoodProperties.Builder().nutrition(2).saturationMod(0.2F).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).build();
-		public static final FoodProperties COOKED_PERCH = new FoodProperties.Builder().nutrition(5).saturationMod(0.7F).build();
+		public static final FoodProperties PIKE = new FoodProperties.Builder().nutrition(3).saturationModifier(0.3F).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).build();
+		public static final FoodProperties COOKED_PIKE = new FoodProperties.Builder().nutrition(8).saturationModifier(0.8F).build();
+		public static final FoodProperties LIONFISH = new FoodProperties.Builder().nutrition(2).saturationModifier(0.3F).effect(() -> new MobEffectInstance(MobEffects.POISON, 600, 3), 1.0F).effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 300, 2), 1.0F).build();
+		public static final FoodProperties COOKED_LIONFISH = new FoodProperties.Builder().nutrition(6).saturationModifier(0.7F).build();
+		public static final FoodProperties PERCH = new FoodProperties.Builder().nutrition(2).saturationModifier(0.2F).effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).build();
+		public static final FoodProperties COOKED_PERCH = new FoodProperties.Builder().nutrition(5).saturationModifier(0.7F).build();
 	}
 
 	@OnlyIn(Dist.CLIENT)

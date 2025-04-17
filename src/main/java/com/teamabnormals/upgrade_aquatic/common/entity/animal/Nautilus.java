@@ -213,11 +213,6 @@ public class Nautilus extends BucketableWaterAnimal {
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return sizeIn.height * 0.65F;
-	}
-
-	@Override
 	public ItemStack getPickedResult(HitResult target) {
 		return new ItemStack(UAItems.NAUTILUS_SPAWN_EGG.get());
 	}

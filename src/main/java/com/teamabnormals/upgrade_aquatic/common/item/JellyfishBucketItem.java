@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.Abstract
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +29,7 @@ import java.util.function.Supplier;
 
 public class JellyfishBucketItem extends BucketItem {
 
-	public JellyfishBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
+	public JellyfishBucketItem(Fluid supplier, Properties builder) {
 		super(supplier, builder);
 	}
 
@@ -38,7 +39,7 @@ public class JellyfishBucketItem extends BucketItem {
 			CompoundTag compoundTag = stack.getTag();
 			AbstractJellyfish jellyfish;
 			if (compoundTag != null && compoundTag.contains("EntityType")) {
-				EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(new ResourceLocation(compoundTag.getString("EntityType")));
+				EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(compoundTag.getString("EntityType")));
 				if (type == null) return;
 				Entity entity = type.spawn((ServerLevel) level, stack, null, pos, MobSpawnType.BUCKET, true, false);
 				if (!(entity instanceof AbstractJellyfish)) return;

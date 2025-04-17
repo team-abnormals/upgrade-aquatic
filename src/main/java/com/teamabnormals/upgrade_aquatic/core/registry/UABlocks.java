@@ -43,6 +43,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockSetType.PressurePlateSensitivity;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
@@ -64,8 +65,8 @@ public class UABlocks {
 
 	public static final DeferredBlock<Block> EMBEDDED_AMMONITE = HELPER.createBlock("embedded_ammonite", () -> new EmbeddedAmmoniteBlock(Properties.ofFullCopy(Blocks.STONE)));
 
-	public static final DeferredBlock<Block> WHITE_SEAROCKET = HELPER.createBlock("white_searocket", () -> new SearocketBlock(() -> MobEffects.WATER_BREATHING, 9, PropertyUtil.flower()));
-	public static final DeferredBlock<Block> PINK_SEAROCKET = HELPER.createBlock("pink_searocket", () -> new SearocketBlock(() -> MobEffects.WATER_BREATHING, 9, PropertyUtil.flower()));
+	public static final DeferredBlock<Block> WHITE_SEAROCKET = HELPER.createBlock("white_searocket", () -> new SearocketBlock(MobEffects.WATER_BREATHING, 9, PropertyUtil.flower()));
+	public static final DeferredBlock<Block> PINK_SEAROCKET = HELPER.createBlock("pink_searocket", () -> new SearocketBlock(MobEffects.WATER_BREATHING, 9, PropertyUtil.flower()));
 	public static final DeferredBlock<Block> FLOWERING_RUSH = HELPER.createBlock("flowering_rush", () -> new FloweringRushBlock(Properties.ofFullCopy(Blocks.PEONY).sound(SoundType.WET_GRASS)));
 
 	public static final DeferredBlock<Block> PICKERELWEED = HELPER.createBlock("pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED));
@@ -89,11 +90,11 @@ public class UABlocks {
 
 	public static final DeferredBlock<Block> PRISMARINE_ROD_BUNDLE = HELPER.createBlock("prismarine_rod_bundle", () -> new PrismarineRodBlock(Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL)));
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE = HELPER.createBlock("luminous_prismarine", () -> new ConduitFrameBlock(UAProperties.LUMINOUS_PRISMARINE));
-	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_STAIRS = HELPER.createBlock("luminous_prismarine_stairs", () -> new StairBlock(() -> LUMINOUS_PRISMARINE.get().defaultBlockState(), UAProperties.LUMINOUS_PRISMARINE));
+	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_STAIRS = HELPER.createBlock("luminous_prismarine_stairs", () -> new StairBlock(LUMINOUS_PRISMARINE.get().defaultBlockState(), UAProperties.LUMINOUS_PRISMARINE));
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_SLAB = HELPER.createBlock("luminous_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_PRISMARINE));
 
-	public static final DeferredBlock<Block> GLASS_TRAPDOOR = HELPER.createBlock("glass_trapdoor", () -> new TrapDoorBlock(Properties.ofFullCopy(Blocks.GLASS), UAProperties.GLASS_BLOCK_SET));
-	public static final DeferredBlock<Block> GLASS_DOOR = HELPER.createBlock("glass_door", () -> new DoorBlock(Properties.ofFullCopy(Blocks.GLASS), UAProperties.GLASS_BLOCK_SET));
+	public static final DeferredBlock<Block> GLASS_TRAPDOOR = HELPER.createBlock("glass_trapdoor", () -> new TrapDoorBlock(UAProperties.GLASS_BLOCK_SET, Properties.ofFullCopy(Blocks.GLASS)));
+	public static final DeferredBlock<Block> GLASS_DOOR = HELPER.createBlock("glass_door", () -> new DoorBlock(UAProperties.GLASS_BLOCK_SET, Properties.ofFullCopy(Blocks.GLASS)));
 
 	public static final DeferredBlock<Block> BEDROLL = HELPER.createBlock("bedroll", createBedroll(DyeColor.BROWN));
 	public static final DeferredBlock<Block> WHITE_BEDROLL = HELPER.createBlock("white_bedroll", createBedroll(DyeColor.WHITE));
@@ -115,12 +116,12 @@ public class UABlocks {
 
 	public static final DeferredBlock<Block> TOOTH_BLOCK = HELPER.createBlock("tooth_block", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_TILES = HELPER.createBlock("tooth_tiles", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_TILE_STAIRS = HELPER.createBlock("tooth_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_TILE_STAIRS = HELPER.createBlock("tooth_stairs", () -> new StairBlock(TOOTH_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_TILE_SLAB = HELPER.createBlock("tooth_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_TILE_WALL = HELPER.createBlock("tooth_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_BRICKS = HELPER.createBlock("tooth_bricks", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> CHISELED_TOOTH_BRICKS = HELPER.createBlock("chiseled_tooth_bricks", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_BRICK_STAIRS = HELPER.createBlock("tooth_brick_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_BRICK_STAIRS = HELPER.createBlock("tooth_brick_stairs", () -> new StairBlock(TOOTH_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_BRICK_SLAB = HELPER.createBlock("tooth_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_BRICK_WALL = HELPER.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_TRAPDOOR = HELPER.createBlock("tooth_trapdoor", () -> new ToothTrapdoorBlock(Properties.ofFullCopy(Blocks.END_STONE)));
@@ -129,12 +130,12 @@ public class UABlocks {
 
 	public static final DeferredBlock<Block> SCUTE_BLOCK = HELPER.createBlock("scute_block", () -> new ScuteBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> SCUTE_SHINGLES = HELPER.createBlock("scute_shingles", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_SHINGLE_STAIRS = HELPER.createBlock("scute_shingle_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_SHINGLE_STAIRS = HELPER.createBlock("scute_shingle_stairs", () -> new StairBlock(SCUTE_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> SCUTE_SHINGLE_SLAB = HELPER.createBlock("scute_shingle_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> SCUTE_SHINGLE_WALL = HELPER.createBlock("scute_shingle_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> CHISELED_SCUTE_SHINGLES = HELPER.createBlock("chiseled_scute_shingles", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> SCUTE_PAVEMENT = HELPER.createBlock("scute_pavement", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_PAVEMENT_STAIRS = HELPER.createBlock("scute_pavement_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_PAVEMENT_STAIRS = HELPER.createBlock("scute_pavement_stairs", () -> new StairBlock(SCUTE_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> SCUTE_PAVEMENT_SLAB = HELPER.createBlock("scute_pavement_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> SCUTE_PAVEMENT_WALL = HELPER.createBlock("scute_pavement_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 
@@ -360,20 +361,20 @@ public class UABlocks {
 	public static final DeferredBlock<Block> KELP_BLOCK = HELPER.createBlock("kelp_block", () -> new Block(Properties.ofFullCopy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
 
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE = HELPER.createBlock("kelpy_cobblestone", () -> new Block(Properties.ofFullCopy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("kelpy_cobblestone_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("kelpy_cobblestone_stairs", () -> new StairBlock(KELPY_COBBLESTONE.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE_SLAB = HELPER.createBlock("kelpy_cobblestone_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE_WALL = HELPER.createBlock("kelpy_cobblestone_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
 	public static final DeferredBlock<Block> KELPY_STONE_BRICKS = HELPER.createBlock("kelpy_stone_bricks", () -> new Block(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
-	public static final DeferredBlock<Block> KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new StairBlock(() -> KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(Blocks.STONE_BRICKS)));
+	public static final DeferredBlock<Block> KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new StairBlock(KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(Blocks.STONE_BRICKS)));
 	public static final DeferredBlock<Block> KELPY_STONE_BRICK_SLAB = HELPER.createBlock("kelpy_stone_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
 	public static final DeferredBlock<Block> KELPY_STONE_BRICK_WALL = HELPER.createBlock("kelpy_stone_brick_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
 
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICKS = HELPER.createBlock("kelpy_cobblestone_bricks", () -> new Block(Properties.ofFullCopy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_STAIRS = HELPER.createBlock("kelpy_cobblestone_brick_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_STAIRS = HELPER.createBlock("kelpy_cobblestone_brick_stairs", () -> new StairBlock(KELPY_COBBLESTONE_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_SLAB = HELPER.createBlock("kelpy_cobblestone_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_WALL = HELPER.createBlock("kelpy_cobblestone_brick_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILES = HELPER.createBlock("kelpy_cobblestone_tiles", () -> new Block(Properties.ofFullCopy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_STAIRS = HELPER.createBlock("kelpy_cobblestone_tile_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE_TILES.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_STAIRS = HELPER.createBlock("kelpy_cobblestone_tile_stairs", () -> new StairBlock(KELPY_COBBLESTONE_TILES.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_SLAB = HELPER.createBlock("kelpy_cobblestone_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
 	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_WALL = HELPER.createBlock("kelpy_cobblestone_tile_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
 
@@ -382,20 +383,20 @@ public class UABlocks {
 	public static final DeferredBlock<Block> DRIFTWOOD_LOG = HELPER.createBlock("driftwood_log", () -> new LogBlock(STRIPPED_DRIFTWOOD_LOG, UAProperties.DRIFTWOOD.log()));
 	public static final DeferredBlock<Block> DRIFTWOOD = HELPER.createBlock("driftwood", () -> new LogBlock(STRIPPED_DRIFTWOOD, UAProperties.DRIFTWOOD.log()));
 	public static final DeferredBlock<Block> DRIFTWOOD_PLANKS = HELPER.createBlock("driftwood_planks", () -> new Block(UAProperties.DRIFTWOOD.planks()));
-	public static final DeferredBlock<Block> DRIFTWOOD_STAIRS = HELPER.createBlock("driftwood_stairs", () -> new StairBlock(() -> DRIFTWOOD_PLANKS.get().defaultBlockState(), UAProperties.DRIFTWOOD.planks()));
+	public static final DeferredBlock<Block> DRIFTWOOD_STAIRS = HELPER.createBlock("driftwood_stairs", () -> new StairBlock(DRIFTWOOD_PLANKS.get().defaultBlockState(), UAProperties.DRIFTWOOD.planks()));
 	public static final DeferredBlock<Block> DRIFTWOOD_SLAB = HELPER.createBlock("driftwood_slab", () -> new SlabBlock(UAProperties.DRIFTWOOD.planks()));
-	public static final DeferredBlock<Block> DRIFTWOOD_PRESSURE_PLATE = HELPER.createBlock("driftwood_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.DRIFTWOOD.pressurePlate(), UAProperties.DRIFTWOOD_BLOCK_SET));
-	public static final DeferredBlock<Block> DRIFTWOOD_BUTTON = HELPER.createBlock("driftwood_button", () -> new ButtonBlock(UAProperties.DRIFTWOOD.button(), UAProperties.DRIFTWOOD_BLOCK_SET, 30, true));
-	public static final DeferredBlock<Block> DRIFTWOOD_FENCE = HELPER.createFuelBlock("driftwood_fence", () -> new FenceBlock(UAProperties.DRIFTWOOD.planks()), 300);
-	public static final DeferredBlock<Block> DRIFTWOOD_FENCE_GATE = HELPER.createFuelBlock("driftwood_fence_gate", () -> new FenceGateBlock(UAProperties.DRIFTWOOD.planks(), UAProperties.DRIFTWOOD_WOOD_TYPE), 300);
-	public static final DeferredBlock<Block> DRIFTWOOD_DOOR = HELPER.createBlock("driftwood_door", () -> new DoorBlock(UAProperties.DRIFTWOOD.door(), UAProperties.DRIFTWOOD_BLOCK_SET));
-	public static final DeferredBlock<Block> DRIFTWOOD_TRAPDOOR = HELPER.createBlock("driftwood_trapdoor", () -> new TrapDoorBlock(UAProperties.DRIFTWOOD.trapdoor(), UAProperties.DRIFTWOOD_BLOCK_SET));
+	public static final DeferredBlock<Block> DRIFTWOOD_PRESSURE_PLATE = HELPER.createBlock("driftwood_pressure_plate", () -> new PressurePlateBlock(UAProperties.DRIFTWOOD_BLOCK_SET, UAProperties.DRIFTWOOD.pressurePlate()));
+	public static final DeferredBlock<Block> DRIFTWOOD_BUTTON = HELPER.createBlock("driftwood_button", () -> new ButtonBlock(UAProperties.DRIFTWOOD_BLOCK_SET, 30, UAProperties.DRIFTWOOD.button()));
+	public static final DeferredBlock<Block> DRIFTWOOD_FENCE = HELPER.createBlock("driftwood_fence", () -> new FenceBlock(UAProperties.DRIFTWOOD.planks()));
+	public static final DeferredBlock<Block> DRIFTWOOD_FENCE_GATE = HELPER.createBlock("driftwood_fence_gate", () -> new FenceGateBlock(UAProperties.DRIFTWOOD_WOOD_TYPE, UAProperties.DRIFTWOOD.planks()));
+	public static final DeferredBlock<Block> DRIFTWOOD_DOOR = HELPER.createBlock("driftwood_door", () -> new DoorBlock(UAProperties.DRIFTWOOD_BLOCK_SET, UAProperties.DRIFTWOOD.door()));
+	public static final DeferredBlock<Block> DRIFTWOOD_TRAPDOOR = HELPER.createBlock("driftwood_trapdoor", () -> new TrapDoorBlock(UAProperties.DRIFTWOOD_BLOCK_SET, UAProperties.DRIFTWOOD.trapdoor()));
 	public static final Pair<DeferredBlock<BlueprintStandingSignBlock>, DeferredBlock<BlueprintWallSignBlock>> DRIFTWOOD_SIGNS = HELPER.createSignBlock("driftwood", UAProperties.DRIFTWOOD_WOOD_TYPE, UAProperties.DRIFTWOOD.sign());
 	public static final Pair<DeferredBlock<BlueprintCeilingHangingSignBlock>, DeferredBlock<BlueprintWallHangingSignBlock>> DRIFTWOOD_HANGING_SIGNS = HELPER.createHangingSignBlock("driftwood", UAProperties.DRIFTWOOD_WOOD_TYPE, UAProperties.DRIFTWOOD.hangingSign());
-	public static final DeferredBlock<Block> DRIFTWOOD_BOARDS = HELPER.createFuelBlock("driftwood_boards", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.planks()), 300);
-	public static final DeferredBlock<Block> DRIFTWOOD_BOOKSHELF = HELPER.createFuelBlock("driftwood_bookshelf", () -> new Block(UAProperties.DRIFTWOOD.bookshelf()), 300);
-	public static final DeferredBlock<Block> CHISELED_DRIFTWOOD_BOOKSHELF = HELPER.createFuelBlock("chiseled_driftwood_bookshelf", () -> new ChiseledDriftwoodBookShelfBlock(UAProperties.DRIFTWOOD.chiseledBookshelf()), 300);
-	public static final DeferredBlock<Block> DRIFTWOOD_LADDER = HELPER.createFuelBlock("driftwood_ladder", () -> new LadderBlock(UAProperties.DRIFTWOOD.ladder()), 300);
+	public static final DeferredBlock<Block> DRIFTWOOD_BOARDS = HELPER.createBlock("driftwood_boards", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.planks()));
+	public static final DeferredBlock<Block> DRIFTWOOD_BOOKSHELF = HELPER.createBlock("driftwood_bookshelf", () -> new Block(UAProperties.DRIFTWOOD.bookshelf()));
+	public static final DeferredBlock<Block> CHISELED_DRIFTWOOD_BOOKSHELF = HELPER.createBlock("chiseled_driftwood_bookshelf", () -> new ChiseledDriftwoodBookShelfBlock(UAProperties.DRIFTWOOD.chiseledBookshelf()));
+	public static final DeferredBlock<Block> DRIFTWOOD_LADDER = HELPER.createBlock("driftwood_ladder", () -> new LadderBlock(UAProperties.DRIFTWOOD.ladder()));
 	public static final DeferredBlock<Block> DRIFTWOOD_BEEHIVE = HELPER.createBlock("driftwood_beehive", () -> new BlueprintBeehiveBlock(UAProperties.DRIFTWOOD.beehive()));
 	public static final DeferredBlock<BlueprintChestBlock> DRIFTWOOD_CHEST = HELPER.createChestBlock("driftwood", UAProperties.DRIFTWOOD.chest());
 	public static final DeferredBlock<BlueprintTrappedChestBlock> TRAPPED_DRIFTWOOD_CHEST = HELPER.createTrappedChestBlock("driftwood", UAProperties.DRIFTWOOD.chest());
@@ -408,24 +409,24 @@ public class UABlocks {
 	public static final DeferredBlock<Block> RIVER_SAPLING = HELPER.createBlock("river_sapling", () -> new SaplingBlock(new RiverTreeGrower(), UAProperties.RIVER_WOOD.sapling()));
 	public static final DeferredBlock<Block> POTTED_RIVER_SAPLING = HELPER.createBlockNoItem("potted_river_sapling", () -> new FlowerPotBlock(RIVER_SAPLING.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> RIVER_PLANKS = HELPER.createBlock("river_planks", () -> new Block(UAProperties.RIVER_WOOD.planks()));
-	public static final DeferredBlock<Block> RIVER_STAIRS = HELPER.createBlock("river_stairs", () -> new StairBlock(() -> RIVER_PLANKS.get().defaultBlockState(), UAProperties.RIVER_WOOD.planks()));
+	public static final DeferredBlock<Block> RIVER_STAIRS = HELPER.createBlock("river_stairs", () -> new StairBlock(RIVER_PLANKS.get().defaultBlockState(), UAProperties.RIVER_WOOD.planks()));
 	public static final DeferredBlock<Block> RIVER_SLAB = HELPER.createBlock("river_slab", () -> new SlabBlock(UAProperties.RIVER_WOOD.planks()));
-	public static final DeferredBlock<Block> RIVER_PRESSURE_PLATE = HELPER.createBlock("river_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, UAProperties.RIVER_WOOD.pressurePlate(), UAProperties.RIVER_BLOCK_SET));
-	public static final DeferredBlock<Block> RIVER_BUTTON = HELPER.createBlock("river_button", () -> new ButtonBlock(UAProperties.RIVER_WOOD.button(), UAProperties.RIVER_BLOCK_SET, 30, true));
-	public static final DeferredBlock<Block> RIVER_FENCE = HELPER.createFuelBlock("river_fence", () -> new FenceBlock(UAProperties.RIVER_WOOD.planks()), 300);
-	public static final DeferredBlock<Block> RIVER_FENCE_GATE = HELPER.createFuelBlock("river_fence_gate", () -> new FenceGateBlock(UAProperties.RIVER_WOOD.planks(), UAProperties.RIVER_WOOD_TYPE), 300);
-	public static final DeferredBlock<Block> RIVER_DOOR = HELPER.createBlock("river_door", () -> new DoorBlock(UAProperties.RIVER_WOOD.door(), UAProperties.RIVER_BLOCK_SET));
-	public static final DeferredBlock<Block> RIVER_TRAPDOOR = HELPER.createBlock("river_trapdoor", () -> new TrapDoorBlock(UAProperties.RIVER_WOOD.trapdoor(), UAProperties.RIVER_BLOCK_SET));
+	public static final DeferredBlock<Block> RIVER_PRESSURE_PLATE = HELPER.createBlock("river_pressure_plate", () -> new PressurePlateBlock(UAProperties.RIVER_BLOCK_SET, UAProperties.RIVER_WOOD.pressurePlate()));
+	public static final DeferredBlock<Block> RIVER_BUTTON = HELPER.createBlock("river_button", () -> new ButtonBlock(UAProperties.RIVER_BLOCK_SET, 30, UAProperties.RIVER_WOOD.button()));
+	public static final DeferredBlock<Block> RIVER_FENCE = HELPER.createBlock("river_fence", () -> new FenceBlock(UAProperties.RIVER_WOOD.planks()));
+	public static final DeferredBlock<Block> RIVER_FENCE_GATE = HELPER.createBlock("river_fence_gate", () -> new FenceGateBlock(UAProperties.RIVER_WOOD_TYPE, UAProperties.RIVER_WOOD.planks()));
+	public static final DeferredBlock<Block> RIVER_DOOR = HELPER.createBlock("river_door", () -> new DoorBlock(UAProperties.RIVER_BLOCK_SET, UAProperties.RIVER_WOOD.door()));
+	public static final DeferredBlock<Block> RIVER_TRAPDOOR = HELPER.createBlock("river_trapdoor", () -> new TrapDoorBlock(UAProperties.RIVER_BLOCK_SET, UAProperties.RIVER_WOOD.trapdoor()));
 	public static final Pair<DeferredBlock<BlueprintStandingSignBlock>, DeferredBlock<BlueprintWallSignBlock>> RIVER_SIGNS = HELPER.createSignBlock("river", UAProperties.RIVER_WOOD_TYPE, UAProperties.RIVER_WOOD.sign());
 	public static final Pair<DeferredBlock<BlueprintCeilingHangingSignBlock>, DeferredBlock<BlueprintWallHangingSignBlock>> RIVER_HANGING_SIGNS = HELPER.createHangingSignBlock("river", UAProperties.RIVER_WOOD_TYPE, UAProperties.RIVER_WOOD.hangingSign());
-	public static final DeferredBlock<Block> RIVER_BOARDS = HELPER.createFuelBlock("river_boards", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.planks()), 300);
-	public static final DeferredBlock<Block> RIVER_BOOKSHELF = HELPER.createFuelBlock("river_bookshelf", () -> new Block(UAProperties.RIVER_WOOD.bookshelf()), 300);
-	public static final DeferredBlock<Block> CHISELED_RIVER_BOOKSHELF = HELPER.createFuelBlock("chiseled_river_bookshelf", () -> new ChiseledRiverBookShelfBlock(UAProperties.RIVER_WOOD.chiseledBookshelf()), 300);
-	public static final DeferredBlock<Block> RIVER_LADDER = HELPER.createFuelBlock("river_ladder", () -> new LadderBlock(UAProperties.RIVER_WOOD.ladder()), 300);
+	public static final DeferredBlock<Block> RIVER_BOARDS = HELPER.createBlock("river_boards", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.planks()));
+	public static final DeferredBlock<Block> RIVER_BOOKSHELF = HELPER.createBlock("river_bookshelf", () -> new Block(UAProperties.RIVER_WOOD.bookshelf()));
+	public static final DeferredBlock<Block> CHISELED_RIVER_BOOKSHELF = HELPER.createBlock("chiseled_river_bookshelf", () -> new ChiseledRiverBookShelfBlock(UAProperties.RIVER_WOOD.chiseledBookshelf()));
+	public static final DeferredBlock<Block> RIVER_LADDER = HELPER.createBlock("river_ladder", () -> new LadderBlock(UAProperties.RIVER_WOOD.ladder()));
 	public static final DeferredBlock<Block> RIVER_BEEHIVE = HELPER.createBlock("river_beehive", () -> new BlueprintBeehiveBlock(UAProperties.RIVER_WOOD.beehive()));
 	public static final DeferredBlock<Block> RIVER_LEAF_PILE = HELPER.createBlock("river_leaf_pile", () -> new LeafPileBlock(UAProperties.RIVER_WOOD.leafPile()));
 	public static final DeferredBlock<BlueprintChestBlock> RIVER_CHEST = HELPER.createChestBlock("river", UAProperties.RIVER_WOOD.chest());
-	public static final DeferredBlock<BlueprintTrappedChestBlock> TRAPPED_RIVER_CHEST = HELPER.createTrappedChestBlockNamed("river", UAProperties.RIVER_WOOD.chest());
+	public static final DeferredBlock<BlueprintTrappedChestBlock> TRAPPED_RIVER_CHEST = HELPER.createTrappedChestBlock("river", UAProperties.RIVER_WOOD.chest());
 
 	private static Supplier<BedrollBlock> createBedroll(DyeColor color) {
 		return () -> new BedrollBlock(color, BlockBehaviour.Properties.of().mapColor((state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? color.getMapColor() : MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion());
@@ -531,8 +532,8 @@ public class UABlocks {
 	public static final class UAProperties {
 		public static final BlockSetType DRIFTWOOD_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":driftwood"));
 		public static final BlockSetType RIVER_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":river"));
-		public static final BlockSetType TOOTH_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":tooth", true, SoundType.STONE, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-		public static final BlockSetType GLASS_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":glass", true, SoundType.GLASS, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+		public static final BlockSetType TOOTH_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":tooth", true, true, true, PressurePlateSensitivity.EVERYTHING, SoundType.STONE, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
+		public static final BlockSetType GLASS_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":glass", true, true, true, PressurePlateSensitivity.EVERYTHING, SoundType.GLASS, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
 
 		public static final WoodType DRIFTWOOD_WOOD_TYPE = WoodTypeRegistryHelper.registerWoodType(new WoodType(UpgradeAquatic.MOD_ID + ":driftwood", DRIFTWOOD_BLOCK_SET));
 		public static final WoodType RIVER_WOOD_TYPE = WoodTypeRegistryHelper.registerWoodType(new WoodType(UpgradeAquatic.MOD_ID + ":river", RIVER_BLOCK_SET));
@@ -676,8 +677,8 @@ public class UABlocks {
 	});
 
 	public static final Map<Supplier<Block>, Supplier<Block>> ATMOSPHERIC_SAND_FALLABLES = ModList.get().isLoaded("atmospheric") ? Util.make(Maps.newHashMap(), (fallables) -> {
-		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "arid_sand")));
-		fallables.put(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "red_arid_sandstone")), () -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "red_arid_sand")));
+		fallables.put(() -> BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "arid_sandstone")), () -> BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "arid_sand")));
+		fallables.put(() -> BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "red_arid_sandstone")), () -> BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "red_arid_sand")));
 	}) : null;
 
 	public static final Map<Supplier<Block>, Supplier<Block>> GRAVEL_FALLABLES = Util.make(Maps.newHashMap(), (fallables) -> {

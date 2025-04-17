@@ -146,11 +146,6 @@ public class Lionfish extends BucketableWaterAnimal {
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return sizeIn.height * 0.85F;
-	}
-
-	@Override
 	public int getMaxSpawnClusterSize() {
 		return 3;
 	}
@@ -311,9 +306,8 @@ public class Lionfish extends BucketableWaterAnimal {
 		}
 
 		@Override
-		protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
-			double d0 = this.getAttackReachSqr(enemy);
-			if (distToEnemySqr <= d0 && this.getTicksUntilNextAttack() <= 0) {
+		protected void checkAndPerformAttack(LivingEntity enemy) {
+			if (this.canPerformAttack(enemy)) {
 				this.resetAttackCooldown();
 				((Lionfish) this.mob).attack(enemy);
 				((Lionfish) this.mob).setHungry(false);

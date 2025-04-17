@@ -20,7 +20,7 @@ import java.util.Locale;
 public class PikeBucketItem extends MobBucketItem {
 
 	public PikeBucketItem(Properties builder) {
-		super(UAEntityTypes.PIKE::get, () -> Fluids.WATER, () -> SoundEvents.BUCKET_EMPTY_FISH, builder);
+		super(UAEntityTypes.PIKE.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, builder);
 	}
 
 	@Override

@@ -12,15 +12,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MobBucketItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 import javax.annotation.Nullable;
-import java.util.function.Supplier;
 
 public class SquidBucketItem extends MobBucketItem {
 
-	public SquidBucketItem(Supplier<? extends Fluid> supplier, Properties builder) {
-		super(() -> EntityType.SQUID, supplier, () -> SoundEvents.BUCKET_EMPTY_FISH, builder);
+	public SquidBucketItem(Properties builder) {
+		super(EntityType.SQUID, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, builder);
 	}
 
 	@Override
