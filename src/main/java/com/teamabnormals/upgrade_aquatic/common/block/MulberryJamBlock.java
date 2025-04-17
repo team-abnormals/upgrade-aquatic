@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -21,7 +22,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class MulberryJamBlock extends HalfTransparentBlock implements SimpleWaterloggedBlock {
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -45,11 +45,11 @@ public class MulberryJamBlock extends HalfTransparentBlock implements SimpleWate
 	}
 
 	public boolean canStickTo(BlockState state, BlockState other) {
-		if (other.getBlock() == Blocks.SLIME_BLOCK) return false;
-		if (other.getBlock() == Blocks.HONEY_BLOCK) return false;
-		if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("autumnity", "snail_goo_block")))
+		if (other.is(Blocks.SLIME_BLOCK)) return false;
+		if (other.is(Blocks.HONEY_BLOCK)) return false;
+		if (other.is(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("autumnity", "snail_goo_block"))))
 			return false;
-		if (other.getBlock() == ForgeRegistries.BLOCKS.getValue(new ResourceLocation("atmospheric", "aloe_gel_block")))
+		if (other.is(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "aloe_gel_block"))))
 			return false;
 
 		return super.canStickTo(state, other);
@@ -60,9 +60,9 @@ public class MulberryJamBlock extends HalfTransparentBlock implements SimpleWate
 	}
 
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		LevelAccessor iworld = context.getLevel();
+		LevelAccessor level = context.getLevel();
 		BlockPos blockpos = context.getClickedPos();
-		boolean flag = iworld.getFluidState(blockpos).getType() == Fluids.WATER;
+		boolean flag = level.getFluidState(blockpos).getType() == Fluids.WATER;
 		return this.defaultBlockState().setValue(WATERLOGGED, flag);
 	}
 

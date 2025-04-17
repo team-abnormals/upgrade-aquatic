@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -17,12 +18,18 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BeachgrassBlock extends BushBlock implements BonemealableBlock {
+	public static final MapCodec<BeachgrassBlock> CODEC = simpleCodec(BeachgrassBlock::new);
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 
 	public BeachgrassBlock(Properties properties) {
 		super(properties);
 	}
-
+	
+	@Override
+	protected MapCodec<? extends BushBlock> codec() {
+		return CODEC;
+	}
+	
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
 		return state.is(BlockTags.SAND);
@@ -42,7 +49,7 @@ public class BeachgrassBlock extends BushBlock implements BonemealableBlock {
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state) {
 		return true;
 	}
 

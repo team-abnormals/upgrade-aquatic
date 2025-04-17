@@ -16,18 +16,18 @@ import net.minecraft.world.phys.BlockHitResult;
 public class ToothTrapdoorBlock extends TrapDoorBlock {
 
 	public ToothTrapdoorBlock(Properties properties) {
-		super(properties, UAProperties.TOOTH_BLOCK_SET);
+		super(UAProperties.TOOTH_BLOCK_SET, properties);
 	}
-
+	
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 		if (!state.getValue(POWERED)) {
 			state = state.cycle(OPEN);
 			level.setBlock(pos, state, 2);
 			if (state.getValue(WATERLOGGED)) {
 				level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 			}
-
+			
 			this.playSound(player, level, pos, state.getValue(OPEN));
 			level.scheduleTick(pos, this, 20);
 		}

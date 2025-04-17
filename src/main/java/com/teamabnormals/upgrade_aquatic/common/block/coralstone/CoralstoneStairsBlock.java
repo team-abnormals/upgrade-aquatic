@@ -9,7 +9,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
 import java.util.function.Supplier;
@@ -36,7 +38,7 @@ public class CoralstoneStairsBlock extends StairBlock {
 	private final Block[] growableCoralBlocks;
 
 	public CoralstoneStairsBlock(Supplier<BlockState> state, Properties properties, @Nullable Block[] growableCoralBlocks) {
-		super(state, properties);
+		super(state.get(), properties);
 		this.growableCoralBlocks = growableCoralBlocks;
 		this.registerDefaultState(this.stateDefinition.any()
 				.setValue(FACING, Direction.NORTH)
@@ -94,25 +96,24 @@ public class CoralstoneStairsBlock extends StairBlock {
 			}
 		}
 	}
-
+	
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		ItemStack stack = player.getItemInHand(hand);
-		if (stack.getItem() == Items.SHEARS && state.getBlock() != UABlocks.CORALSTONE_STAIRS.get()) {
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		if (stack.is(Tags.Items.TOOLS_SHEAR) && state.getBlock() != UABlocks.CORALSTONE_STAIRS.get()) {
 			BlockState newState = UABlocks.CORALSTONE_STAIRS.get().defaultBlockState()
-					.setValue(FACING, state.getValue(FACING))
-					.setValue(HALF, state.getValue(HALF))
-					.setValue(SHAPE, state.getValue(SHAPE))
-					.setValue(WATERLOGGED, state.getValue(WATERLOGGED)
-					);
-			world.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.PLAYERS, 1.0F, 0.8F);
-			stack.hurtAndBreak(1, player, (entity) -> entity.broadcastBreakEvent(hand));
-			world.setBlock(pos, newState, 2);
-			return InteractionResult.SUCCESS;
+			.setValue(FACING, state.getValue(FACING))
+			.setValue(HALF, state.getValue(HALF))
+			.setValue(SHAPE, state.getValue(SHAPE))
+			.setValue(WATERLOGGED, state.getValue(WATERLOGGED)
+			);
+			level.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.PLAYERS, 1.0F, 0.8F);
+			stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+			level.setBlock(pos, newState, 2);
+			return ItemInteractionResult.SUCCESS;
 		}
-		return InteractionResult.FAIL;
+		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
-
+	
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return super.getStateForPlacement(context).setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()));

@@ -16,11 +16,11 @@ import net.minecraft.world.phys.BlockHitResult;
 public class ToothDoorBlock extends DoorBlock {
 
 	public ToothDoorBlock(Properties builder) {
-		super(builder, UAProperties.TOOTH_BLOCK_SET);
+		super(UAProperties.TOOTH_BLOCK_SET, builder);
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
 		if (!state.getValue(POWERED)) {
 			state = state.cycle(OPEN);
 			level.setBlock(pos, state, 10);

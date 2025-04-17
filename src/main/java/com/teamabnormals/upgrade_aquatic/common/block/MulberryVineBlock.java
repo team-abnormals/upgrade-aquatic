@@ -10,9 +10,12 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,15 +35,16 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.IForgeShearable;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.IShearable;
+import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class MulberryVineBlock extends Block implements IForgeShearable, BonemealableBlock {
+public class MulberryVineBlock extends Block implements IShearable, BonemealableBlock {
 	protected static final VoxelShape SHAPE = Block.box(5.0, 4.0, 5.0, 13.0, 16.0, 13.0);
 
 	public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 4);
@@ -80,7 +84,7 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader arg0, BlockPos arg1, BlockState state, boolean arg3) {
+	public boolean isValidBonemealTarget(LevelReader arg0, BlockPos arg1, BlockState state) {
 		return state.getValue(AGE) < 4;
 	}
 
@@ -90,20 +94,10 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
 		int i = state.getValue(AGE);
 		boolean flag = i == 4;
-		if (!flag && player.getItemInHand(handIn).getItem() == Items.BONE_MEAL) {
-			return InteractionResult.PASS;
-		} else if (player.getItemInHand(handIn).getItem() == Items.SHEARS && state.getValue(DOUBLE)) {
-			player.getItemInHand(handIn).hurtAndBreak(1, player, (onBroken) -> {
-				onBroken.broadcastBreakEvent(handIn);
-			});
-			level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-			if (state.getValue(AGE) == 4) popResource(level, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
-			level.setBlock(pos, state.setValue(DOUBLE, false), 2);
-			return InteractionResult.SUCCESS;
-		} else if (flag) {
+		if (flag) {
 			popResource(level, pos, new ItemStack(UAItems.MULBERRY.get(), state.getValue(DOUBLE) ? 2 : 1));
 			level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 			level.setBlock(pos, state.setValue(AGE, 1), 2);
@@ -117,16 +111,38 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 
 			return InteractionResult.SUCCESS;
 		} else {
-			return super.use(state, level, pos, player, handIn, hit);
+			return super.useWithoutItem(state, level, pos, player, hit);
 		}
 	}
-
+	
+	@Override
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		int age = state.getValue(AGE);
+		boolean flag = age == 4;
+		ItemStack itemStack = player.getItemInHand(hand);
+		if (!flag && itemStack.is(Items.BONE_MEAL)) {
+			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+		} else if (itemStack.is(Tags.Items.TOOLS_SHEAR) && state.getValue(DOUBLE)) {
+			if (level instanceof ServerLevel serverLevel) {
+				itemStack.hurtAndBreak(1, serverLevel, player, onBroken -> {
+				});
+			}
+			level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+			if (state.getValue(AGE) == 4) popResource(level, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
+			level.setBlock(pos, state.setValue(DOUBLE, false), 2);
+			return ItemInteractionResult.SUCCESS;
+		}
+		
+		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+	}
+	
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state) {
 		int i = state.getValue(AGE);
-		if (i < 4 && ForgeHooks.onCropsGrowPre(level, pos, state, true)) {
+		// TODO: Reassess using the CropGrowEvents here. Crops don't use the event for bone-mealing.
+		if (i < 4 && CommonHooks.canCropGrow(level, pos, state, true)) {
 			level.setBlockAndUpdate(pos, state.setValue(AGE, i + 1));
-			ForgeHooks.onCropsGrowPost(level, pos, state);
+			CommonHooks.fireCropGrowPost(level, pos, state);
 		}
 	}
 
@@ -134,9 +150,9 @@ public class MulberryVineBlock extends Block implements IForgeShearable, Bonemea
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
 		super.tick(state, level, pos, rand);
 		int i = state.getValue(AGE);
-		if (i < 4 && level.getRawBrightness(pos.above(), 0) >= 7 && ForgeHooks.onCropsGrowPre(level, pos, state, rand.nextInt(5) == 0)) {
+		if (i < 4 && level.getRawBrightness(pos.above(), 0) >= 7 && CommonHooks.canCropGrow(level, pos, state, rand.nextInt(5) == 0)) {
 			level.setBlock(pos, state.setValue(AGE, i + 1), 2);
-			ForgeHooks.onCropsGrowPost(level, pos, state);
+			CommonHooks.fireCropGrowPost(level, pos, state);
 		}
 	}
 

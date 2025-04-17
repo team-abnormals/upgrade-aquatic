@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.teamabnormals.upgrade_aquatic.common.block.entity.ElderEyeBlockEntity;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlockEntityTypes;
 import net.minecraft.core.BlockPos;
@@ -35,6 +36,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 
 public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+	public static final MapCodec<ElderEyeBlock> CODEC = simpleCodec(ElderEyeBlock::new);
 	public static final IntegerProperty POWER = BlockStateProperties.POWER;
 	public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -51,7 +53,12 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 				.setValue(WATERLOGGED, false)
 		);
 	}
-
+	
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return CODEC;
+	}
+	
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
 		return state.getValue(FACING) == Direction.DOWN ? DOWN_BOX_SIZE : BOX_SIZE;
@@ -95,7 +102,7 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult result) {
 		if (state.getValue(ACTIVE)) {
 			level.playSound(null, pos, SoundEvents.CONDUIT_DEACTIVATE, SoundSource.BLOCKS, 0.3F, 1.0F);
 			level.setBlockAndUpdate(pos, state.setValue(ACTIVE, false).setValue(POWER, 0));

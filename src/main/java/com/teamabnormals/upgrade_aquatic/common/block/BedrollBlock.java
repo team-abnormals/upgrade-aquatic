@@ -26,8 +26,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -94,7 +94,7 @@ public class BedrollBlock extends BedBlock implements SimpleWaterloggedBlock {
 	}
 
 	@Override
-	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
+	public BlockState playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide && player.isCreative()) {
 			BedPart bedpart = state.getValue(PART);
 			if (bedpart == BedPart.FOOT) {
@@ -106,7 +106,7 @@ public class BedrollBlock extends BedBlock implements SimpleWaterloggedBlock {
 				}
 			}
 		}
-		super.playerWillDestroy(worldIn, pos, state, player);
+		return super.playerWillDestroy(worldIn, pos, state, player);
 	}
 
 	private static Direction getDirectionToOther(BedPart part, Direction direction) {

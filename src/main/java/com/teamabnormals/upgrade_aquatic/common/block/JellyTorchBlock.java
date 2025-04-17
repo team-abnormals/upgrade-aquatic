@@ -19,8 +19,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
@@ -29,7 +29,7 @@ public class JellyTorchBlock extends TorchBlock implements SimpleWaterloggedBloc
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
 	public JellyTorchBlock(Properties props, JellyTorchType torchType) {
-		super(props, null);
+		super(null, props);
 		this.torchType = torchType;
 		this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, false));
 	}

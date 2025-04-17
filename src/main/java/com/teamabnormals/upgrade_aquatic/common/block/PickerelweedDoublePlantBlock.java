@@ -31,12 +31,11 @@ import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
@@ -56,12 +55,12 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 		Vec3 vec3 = p_53517_.getOffset(p_53518_, p_53519_);
 		return SHAPE.move(vec3.x, vec3.y, vec3.z);
 	}
-
+	
 	@Override
-	public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-		return new ItemStack(UABlocks.PICKERELWEED.get());
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+		return new ItemStack((UABlocks.PICKERELWEED.get()));
 	}
-
+	
 	@Override
 	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
 		if (!(entity instanceof Pike)) {
@@ -152,7 +151,7 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isValidBonemealTarget(LevelReader worldIn, BlockPos pos, BlockState state) {
 		return true;
 	}
 
@@ -189,7 +188,7 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 	}
 
 	@Override
-	public void playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
+	public BlockState playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide) {
 			if (player.getAbilities().instabuild) {
 				removeBottomHalf(worldIn, pos, state, player);
@@ -198,7 +197,7 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 			}
 		}
 
-		super.playerWillDestroy(worldIn, pos, state, player);
+		return super.playerWillDestroy(worldIn, pos, state, player);
 	}
 
 	@Override
