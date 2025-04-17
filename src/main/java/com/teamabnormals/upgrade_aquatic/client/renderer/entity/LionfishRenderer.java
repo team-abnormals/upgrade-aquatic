@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class LionfishRenderer extends MobRenderer<Lionfish, LionfishModel<Lionfish>> {
@@ -21,12 +21,12 @@ public class LionfishRenderer extends MobRenderer<Lionfish, LionfishModel<Lionfi
 
 	@Override
 	public ResourceLocation getTextureLocation(Lionfish entity) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/lionfish.png");
+		return UpgradeAquatic.location("textures/entity/lionfish.png");
 	}
 
 	@Override
-	protected void setupRotations(Lionfish entityLiving, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.setupRotations(entityLiving, matrixStack, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(Lionfish entityLiving, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks, float scale) {
+		super.setupRotations(entityLiving, matrixStack, ageInTicks, rotationYaw, partialTicks, scale);
 		float f = 4.0F * Mth.sin(0.6F * ageInTicks);
 		matrixStack.mulPose(Axis.YP.rotationDegrees(f));
 		if (!entityLiving.isInWater()) {

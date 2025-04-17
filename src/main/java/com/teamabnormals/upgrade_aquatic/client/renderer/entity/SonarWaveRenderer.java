@@ -30,13 +30,13 @@ public class SonarWaveRenderer extends EntityRenderer<SonarWave> {
 
 		VertexConsumer vertexConsumer = bufferIn.getBuffer(BlueprintRenderTypes.getUnshadedTranslucentEntity(this.getTextureLocation(sonarWave), true));
 		this.sonarWaveModel.setupAnim(sonarWave, 0.0F, 0.0F, partialTicks, sonarWave.getYRot(), sonarWave.getXRot());
-		this.sonarWaveModel.renderToBuffer(poseStack, vertexConsumer, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		this.sonarWaveModel.renderToBuffer(poseStack, vertexConsumer, 240, OverlayTexture.NO_OVERLAY);
 		poseStack.popPose();
 		super.render(sonarWave, entityYaw, partialTicks, poseStack, bufferIn, 240);
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(SonarWave entity) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/sonar.png");
+		return UpgradeAquatic.location("textures/entity/thrasher/sonar.png");
 	}
 }

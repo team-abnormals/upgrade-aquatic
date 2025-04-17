@@ -21,7 +21,7 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class ThrasherModel<E extends Thrasher> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "thrasher"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("thrasher"), "main");
 
 	public ModelPart neck;
 	public ModelPart body;
@@ -74,8 +74,8 @@ public class ThrasherModel<E extends Thrasher> extends EndimatorEntityModel<E> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.neck.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, int color) {
+		this.neck.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, color);
 	}
 
 	@Override

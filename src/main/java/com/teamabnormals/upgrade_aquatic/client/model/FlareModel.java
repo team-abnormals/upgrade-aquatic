@@ -14,8 +14,8 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 /**
  * ModelFlare - SmellyModer
@@ -23,7 +23,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class FlareModel<F extends Flare> extends EntityModel<F> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "flare"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("flare"), "main");
 
 	public ModelPart base;
 	public ModelPart tail;
@@ -63,8 +63,8 @@ public class FlareModel<F extends Flare> extends EntityModel<F> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.base.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, int color) {
+		this.base.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, color);
 	}
 
 	@Override

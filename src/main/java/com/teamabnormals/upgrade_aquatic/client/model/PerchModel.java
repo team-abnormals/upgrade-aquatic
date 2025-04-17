@@ -17,7 +17,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 public class PerchModel<T extends Entity> extends ListModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "perch"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("perch"), "main");
 
 	public ModelPart perch;
 	public ModelPart body;
@@ -64,7 +64,7 @@ public class PerchModel<T extends Entity> extends ListModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack matrixStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
 		perch.render(matrixStack, buffer, packedLight, packedOverlay);
 	}
 

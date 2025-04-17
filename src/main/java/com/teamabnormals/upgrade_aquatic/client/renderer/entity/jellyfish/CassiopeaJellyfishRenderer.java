@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<CassiopeaJellyfish> {
@@ -28,12 +28,12 @@ public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<Cassio
 
 	@Override
 	public ResourceLocation getTextureLocation(CassiopeaJellyfish jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getVariantName() + "_jellyfish.png");
+		return UpgradeAquatic.location("textures/entity/jellyfish/cassiopea/" + jellyfish.getVariantName() + "_jellyfish.png");
 	}
 
 	@Override
 	public ResourceLocation getOverlayTexture(CassiopeaJellyfish jellyfish) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/jellyfish/cassiopea/" + jellyfish.getVariantName() + "_jellyfish_overlay.png");
+		return UpgradeAquatic.location("textures/entity/jellyfish/cassiopea/" + jellyfish.getVariantName() + "_jellyfish_overlay.png");
 	}
 
 	@Override

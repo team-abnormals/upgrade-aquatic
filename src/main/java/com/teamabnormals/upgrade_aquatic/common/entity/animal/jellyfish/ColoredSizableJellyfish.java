@@ -6,6 +6,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.SynchedEntityData.Builder;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
@@ -27,10 +28,10 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(COLOR, 0);
-		this.entityData.define(SIZE, this.getDefaultSize());
+	protected void defineSynchedData(Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(COLOR, 0);
+		builder.define(SIZE, this.getDefaultSize());
 	}
 
 	@Override
@@ -56,8 +57,8 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, SpawnGroupData spawnDataIn, CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, SpawnGroupData spawnDataIn) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn);
 		boolean updateSize = false;
 
 		RandomSource rand = this.getRandom();
@@ -65,9 +66,9 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 		float size = this.getNaturalSizeMap().randomSize(rand);
 		boolean fromBucket = this.fromBucket();
 		if (!(dataTag != null && fromBucket)) {
-			if (spawnDataIn instanceof SpawnData) {
-				size = ((SpawnData) spawnDataIn).size;
-				color = ((SpawnData) spawnDataIn).color;
+			if (spawnDataIn instanceof SpawnData spawnData) {
+				size = spawnData.size;
+				color = spawnData.color;
 			} else {
 				if (!fromBucket) {
 					spawnDataIn = new SpawnData(size, color);

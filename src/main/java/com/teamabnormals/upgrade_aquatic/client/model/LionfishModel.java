@@ -23,7 +23,7 @@ import net.minecraft.world.entity.Entity;
  * Created using Tabula 7.0.0
  */
 public class LionfishModel<T extends Entity> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "lionfish"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("lionfish"), "main");
 
 	public ModelPart body;
 	public ModelPart topfin;
@@ -60,8 +60,8 @@ public class LionfishModel<T extends Entity> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, int color) {
+		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, color);
 	}
 
 	@Override

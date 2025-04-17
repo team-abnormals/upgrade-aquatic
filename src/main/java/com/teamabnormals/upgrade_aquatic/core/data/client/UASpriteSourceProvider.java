@@ -6,8 +6,8 @@ import com.teamabnormals.clayworks.core.data.client.ClayworksSpriteSourceProvide
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UATrimMaterials;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.data.SpriteSourceProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.SpriteSourceProvider;
 
 public final class UASpriteSourceProvider extends SpriteSourceProvider {
 

@@ -21,7 +21,7 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class ImmortalJellyfishModel<E extends ImmortalJellyfish> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "immortal_jellyfish"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("immortal_jellyfish"), "main");
 
 	public EndimatorModelPart body;
 	public EndimatorModelPart innerBody;
@@ -69,9 +69,9 @@ public class ImmortalJellyfishModel<E extends ImmortalJellyfish> extends Endimat
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.innerBody.render(matrixStackIn, bufferIn, 240, packedOverlayIn, red, green, blue, alpha);
-		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, int color) {
+		this.innerBody.render(matrixStackIn, bufferIn, 240, packedOverlayIn, color);
+		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, color);
 	}
 
 	@Override

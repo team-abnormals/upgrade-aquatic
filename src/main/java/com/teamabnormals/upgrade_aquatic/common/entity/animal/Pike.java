@@ -21,6 +21,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.SynchedEntityData.Builder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -134,13 +135,13 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(TYPE, PikeType.AMUR);
-		this.entityData.define(DROP_ITEM, true);
-		this.entityData.define(MOVING, false);
-		this.entityData.define(LIT, false);
-		this.entityData.define(ATTACK_COOLDOWN, 0);
+	protected void defineSynchedData(Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(TYPE, PikeType.AMUR);
+		builder.define(DROP_ITEM, true);
+		builder.define(MOVING, false);
+		builder.define(LIT, false);
+		builder.define(ATTACK_COOLDOWN, 0);
 	}
 
 	@Override
@@ -273,17 +274,15 @@ public class Pike extends BucketableWaterAnimal {
 		}
 	}
 
-	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, SpawnGroupData spawnDataIn, CompoundTag dataTag) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
-		int type = PikeType.getRandom(this.random, this.level().getBiome(this.blockPosition()), reason == MobSpawnType.BUCKET).id;
-		if (dataTag != null && dataTag.contains("BucketVariantTag", 3)) {
+	public void loadFromBucketTag(CompoundTag dataTag) {
+		super.loadFromBucketTag(dataTag);
+		if (dataTag.contains("BucketVariantTag", 3)) {
 			this.setPikeType(PikeType.getTypeById(dataTag.getInt("BucketVariantTag")));
 			this.dropEatingLootCooldown = dataTag.getInt("EatingLootDropCooldown");
 			if (dataTag.contains("PikeHeldItem")) {
 				this.startUsingItem(InteractionHand.MAIN_HAND);
-				this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.of(dataTag.getCompound("PikeHeldItem")));
+				this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(dataTag.getCompound("PikeHeldItem")));
 			}
 			if (dataTag.contains("ShouldDropItem")) {
 				this.setToDropItem(dataTag.getBoolean("ShouldDropItem"));
@@ -291,10 +290,17 @@ public class Pike extends BucketableWaterAnimal {
 			if (dataTag.contains("IsLit")) {
 				this.setLit(dataTag.getBoolean("IsLit"));
 			}
-			return spawnDataIn;
 		}
-		if (spawnDataIn instanceof Pike.PikeData) {
-			type = ((Pike.PikeData) spawnDataIn).typeData;
+	}
+
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, SpawnGroupData spawnDataIn) {
+		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn);
+		int type = PikeType.getRandom(this.random, this.level().getBiome(this.blockPosition()), reason == MobSpawnType.BUCKET).id;
+
+		if (spawnDataIn instanceof Pike.PikeData pikeData) {
+			type = pikeData.typeData;
 		} else {
 			if (!this.fromBucket()) {
 				spawnDataIn = new Pike.PikeData(type);
@@ -324,9 +330,7 @@ public class Pike extends BucketableWaterAnimal {
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);
 		if (itemstack.getItem() == Items.FLINT_AND_STEEL) {
-			itemstack.hurtAndBreak(1, player, (onBroken) -> {
-				onBroken.broadcastBreakEvent(hand);
-			});
+			itemstack.hurtAndBreak(1, player, getSlotForHand(hand));
 			this.playSound(SoundEvents.FLINTANDSTEEL_USE, 1.0F, 1.0F);
 			this.setLit(true);
 			return InteractionResult.SUCCESS;
@@ -400,7 +404,7 @@ public class Pike extends BucketableWaterAnimal {
 			if (!this.level().isClientSide) {
 				ItemEntity itementity = new ItemEntity(this.level(), this.getX() + this.getLookAngle().x, this.getY() + 1.0D, this.getZ() + this.getLookAngle().z, stackIn);
 				itementity.setPickUpDelay(40);
-				itementity.setThrower(this.getUUID());
+				itementity.setThrower(this);
 				this.playSound(UASoundEvents.PIKE_SPIT.get(), 1.0F, 1.0F);
 				this.level().addFreshEntity(itementity);
 				this.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);

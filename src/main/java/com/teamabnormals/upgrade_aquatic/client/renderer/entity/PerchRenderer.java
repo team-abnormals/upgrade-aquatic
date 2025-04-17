@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class PerchRenderer extends MobRenderer<Perch, PerchModel<Perch>> {
-	private static final ResourceLocation PERCH_LOCATION = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/perch.png");
+	private static final ResourceLocation PERCH_LOCATION = UpgradeAquatic.location("textures/entity/perch.png");
 
 	public PerchRenderer(EntityRendererProvider.Context context) {
 		super(context, new PerchModel<>(context.bakeLayer(PerchModel.LOCATION)), 0.3F);
@@ -21,8 +21,8 @@ public class PerchRenderer extends MobRenderer<Perch, PerchModel<Perch>> {
 		return PERCH_LOCATION;
 	}
 
-	protected void setupRotations(Perch entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(Perch entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks, float scale) {
+		super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks, scale);
 		float f = 4.3F * Mth.sin(0.6F * ageInTicks);
 		matrixStackIn.mulPose(Axis.YP.rotationDegrees(f));
 		if (!entityLiving.isInWater()) {

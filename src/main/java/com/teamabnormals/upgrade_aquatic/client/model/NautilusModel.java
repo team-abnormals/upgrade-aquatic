@@ -12,10 +12,9 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 /**
  * ModelNautilus - Anomalocaris101
@@ -23,7 +22,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class NautilusModel<T extends Nautilus> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "nautilus"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("nautilus"), "main");
 	public static final float SCALE = 0.6F;
 
 	public ModelPart shell;
@@ -61,10 +60,10 @@ public class NautilusModel<T extends Nautilus> extends EntityModel<T> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStack, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(PoseStack matrixStack, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, int color) {
 		matrixStack.pushPose();
 		matrixStack.scale(SCALE, SCALE, SCALE);
-		this.shell.render(matrixStack, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+		this.shell.render(matrixStack, bufferIn, packedLightIn, packedOverlayIn, color);
 		matrixStack.popPose();
 	}
 

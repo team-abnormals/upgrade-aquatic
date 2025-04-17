@@ -12,8 +12,8 @@ import net.minecraft.world.item.Item;
 import java.util.function.Supplier;
 
 public class UABoatTypes {
-	public static final BoatloadBoatType DRIFTWOOD = BoatloadBoatType.register(BoatloadBoatType.create(new ResourceLocation(UpgradeAquatic.MOD_ID, "driftwood"), () -> UABlocks.DRIFTWOOD_PLANKS.get().asItem(), () -> UAItems.DRIFTWOOD_BOAT.getFirst().get(), () -> UAItems.DRIFTWOOD_BOAT.getSecond().get(), () -> UAItems.DRIFTWOOD_FURNACE_BOAT.get(), () -> UAItems.LARGE_DRIFTWOOD_BOAT.get()));
-	public static final BoatloadBoatType RIVER = BoatloadBoatType.register(BoatloadBoatType.create(new ResourceLocation(UpgradeAquatic.MOD_ID, "river"), () -> UABlocks.RIVER_PLANKS.get().asItem(), () -> UAItems.RIVER_BOAT.getFirst().get(), () -> UAItems.RIVER_BOAT.getSecond().get(), () -> UAItems.RIVER_FURNACE_BOAT.get(), () -> UAItems.LARGE_RIVER_BOAT.get()));
+	public static final BoatloadBoatType DRIFTWOOD = BoatloadBoatType.register(BoatloadBoatType.create(UpgradeAquatic.location("driftwood"), () -> UABlocks.DRIFTWOOD_PLANKS.get().asItem(), () -> UAItems.DRIFTWOOD_BOAT.getFirst().get(), () -> UAItems.DRIFTWOOD_BOAT.getSecond().get(), () -> UAItems.DRIFTWOOD_FURNACE_BOAT.get(), () -> UAItems.LARGE_DRIFTWOOD_BOAT.get()));
+	public static final BoatloadBoatType RIVER = BoatloadBoatType.register(BoatloadBoatType.create(UpgradeAquatic.location("river"), () -> UABlocks.RIVER_PLANKS.get().asItem(), () -> UAItems.RIVER_BOAT.getFirst().get(), () -> UAItems.RIVER_BOAT.getSecond().get(), () -> UAItems.RIVER_FURNACE_BOAT.get(), () -> UAItems.LARGE_RIVER_BOAT.get()));
 
 	public static final Supplier<Item> DRIFTWOOD_FURNACE_BOAT = () -> new FurnaceBoatItem(DRIFTWOOD);
 	public static final Supplier<Item> LARGE_DRIFTWOOD_BOAT = () -> new LargeBoatItem(DRIFTWOOD);

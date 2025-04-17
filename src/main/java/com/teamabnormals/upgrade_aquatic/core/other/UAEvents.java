@@ -19,6 +19,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.protocol.game.ClientboundAwardStatsPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,17 +54,22 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.village.VillagerTradesEvent;
+import net.neoforged.neoforge.event.village.WandererTradesEvent;
 
 import java.util.Optional;
 
@@ -96,7 +102,7 @@ public class UAEvents {
 
 	@SubscribeEvent
 	public static void onEntityUpdate(EntityTickEvent.Post event) {
-		if(event.getEntity() instanceof LivingEntity entity) {
+		if (event.getEntity() instanceof LivingEntity entity) {
 			if (entity instanceof Phantom) {
 				if (((Phantom) entity).getTarget() instanceof ServerPlayer serverPlayer) {
 					StatsCounter statisticsManager = serverPlayer.getStats();
@@ -111,15 +117,15 @@ public class UAEvents {
 	@SubscribeEvent
 	public static void onPlayerSleep(CanPlayerSleepEvent event) {
 		Player player = event.getEntity();
-        BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
-        if (event.getProblem() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
-            if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
-                if (!player.level().isClientSide()) {
-                    UACriteriaTriggers.SLEEP_UNDERWATER.get().trigger(serverPlayer);
-                }
-            }
-        }
-    }
+		BlockState state = player.getCommandSenderWorld().getBlockState(event.getPos());
+		if (event.getProblem() == null && state.getFluidState().getAmount() == 8 && state.getBlock() instanceof BedrollBlock) {
+			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
+				if (!player.level().isClientSide()) {
+					UACriteriaTriggers.SLEEP_UNDERWATER.get().trigger(serverPlayer);
+				}
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event) {
@@ -218,11 +224,11 @@ public class UAEvents {
 		RandomSource random = player.getRandom();
 
 		if (stack.is(Items.GLOW_INK_SAC)) {
-			ResourceLocation name = ForgeRegistries.BLOCKS.getKey(state.getBlock());
+			ResourceLocation name = BuiltInRegistries.BLOCK.getKey(state.getBlock());
 			String path = name.getPath();
 			if ((path.contains("dead") || path.contains("elder")) && path.contains("coral") && !path.contains("coralstone")) {
-				Block livingCoral = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.getNamespace(), path.replace("dead_", "").replace("elder_", "")));
-				if (livingCoral != null) {
+				Block livingCoral = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(name.getNamespace(), path.replace("dead_", "").replace("elder_", "")));
+				if (livingCoral != Blocks.AIR) {
 					level.setBlockAndUpdate(pos, BlockUtil.transferAllBlockStates(state, livingCoral.defaultBlockState()));
 					level.scheduleTick(pos, livingCoral, 60 + level.getRandom().nextInt(40));
 					level.playSound(player, pos, SoundEvents.SQUID_SQUIRT, SoundSource.BLOCKS, 1.0F, 1.0F);

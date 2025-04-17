@@ -20,6 +20,7 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.SynchedEntityData.Builder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
@@ -46,8 +47,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -117,14 +118,14 @@ public class Thrasher extends Monster implements Endimatable {
 	}
 
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(MOVING, false);
-		this.entityData.define(WATER_TIME, 2500);
-		this.entityData.define(STUN_TIME, 0);
-		this.entityData.define(HITS_TILL_STUN, 0);
-		this.entityData.define(POSSIBLE_DETECTION_POINT, Optional.empty());
-		this.entityData.define(CAUGHT_SIZE, this.getDefaultSize());
+	protected void defineSynchedData(Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(MOVING, false);
+		builder.define(WATER_TIME, 2500);
+		builder.define(STUN_TIME, 0);
+		builder.define(HITS_TILL_STUN, 0);
+		builder.define(POSSIBLE_DETECTION_POINT, Optional.empty());
+		builder.define(CAUGHT_SIZE, this.getDefaultSize());
 	}
 
 	@Override
@@ -134,7 +135,7 @@ public class Thrasher extends Monster implements Endimatable {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn) {
 		this.setAirSupply(this.getMaxAirSupply());
 		if (reason == MobSpawnType.NATURAL && worldIn.getBiome(this.blockPosition()).is(UABiomeTags.HAS_GREAT_THRASHER)) {
 			Random rand = new Random();
@@ -147,7 +148,7 @@ public class Thrasher extends Monster implements Endimatable {
 				}
 			}
 		}
-		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn);
 	}
 
 	@Override
@@ -346,7 +347,7 @@ public class Thrasher extends Monster implements Endimatable {
 
 	@Override
 	public boolean canBreatheUnderwater() {
-		return true;
+		return super.canBreatheUnderwater();
 	}
 
 	@OnlyIn(Dist.CLIENT)

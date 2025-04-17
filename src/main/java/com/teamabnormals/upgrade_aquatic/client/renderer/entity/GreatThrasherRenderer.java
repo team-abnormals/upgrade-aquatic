@@ -8,8 +8,8 @@ import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class GreatThrasherRenderer extends MobRenderer<GreatThrasher, ThrasherModel<GreatThrasher>> {
@@ -21,7 +21,7 @@ public class GreatThrasherRenderer extends MobRenderer<GreatThrasher, ThrasherMo
 
 	@Override
 	public ResourceLocation getTextureLocation(GreatThrasher entity) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher.png");
+		return UpgradeAquatic.location("textures/entity/thrasher/great_thrasher.png");
 	}
 
 	@Override

@@ -47,6 +47,7 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
@@ -61,11 +62,11 @@ import static net.minecraft.world.item.crafting.Ingredient.of;
 public class UABlocks {
 	public static final BlockSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getBlockSubHelper();
 
-	public static final DeferredBlock<Block> EMBEDDED_AMMONITE = HELPER.createBlock("embedded_ammonite", () -> new EmbeddedAmmoniteBlock(Properties.copy(Blocks.STONE)));
+	public static final DeferredBlock<Block> EMBEDDED_AMMONITE = HELPER.createBlock("embedded_ammonite", () -> new EmbeddedAmmoniteBlock(Properties.ofFullCopy(Blocks.STONE)));
 
 	public static final DeferredBlock<Block> WHITE_SEAROCKET = HELPER.createBlock("white_searocket", () -> new SearocketBlock(() -> MobEffects.WATER_BREATHING, 9, PropertyUtil.flower()));
 	public static final DeferredBlock<Block> PINK_SEAROCKET = HELPER.createBlock("pink_searocket", () -> new SearocketBlock(() -> MobEffects.WATER_BREATHING, 9, PropertyUtil.flower()));
-	public static final DeferredBlock<Block> FLOWERING_RUSH = HELPER.createBlock("flowering_rush", () -> new FloweringRushBlock(Properties.copy(Blocks.PEONY).sound(SoundType.WET_GRASS)));
+	public static final DeferredBlock<Block> FLOWERING_RUSH = HELPER.createBlock("flowering_rush", () -> new FloweringRushBlock(Properties.ofFullCopy(Blocks.PEONY).sound(SoundType.WET_GRASS)));
 
 	public static final DeferredBlock<Block> PICKERELWEED = HELPER.createBlock("pickerelweed", () -> new PickerelweedPlantBlock(UAProperties.PICKERELWEED));
 	public static final DeferredBlock<Block> TALL_PICKERELWEED = HELPER.createBlockNoItem("tall_pickerelweed", () -> new PickerelweedDoublePlantBlock(UAProperties.PICKERELWEED));
@@ -76,23 +77,23 @@ public class UABlocks {
 	public static final DeferredBlock<Block> POTTED_PINK_SEAROCKET = HELPER.createBlockNoItem("potted_pink_searocket", () -> new FlowerPotBlock(PINK_SEAROCKET.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> POTTED_PICKERELWEED = HELPER.createBlockNoItem("potted_pickerelweed", () -> new FlowerPotBlock(PICKERELWEED.get(), PropertyUtil.flowerPot()));
 
-	public static final DeferredBlock<Block> BEACHGRASS = HELPER.createBlock("beachgrass", () -> new BeachgrassBlock(Properties.copy(Blocks.FERN).mapColor(MapColor.COLOR_YELLOW)));
-	public static final DeferredBlock<Block> TALL_BEACHGRASS = HELPER.createBlock("tall_beachgrass", () -> new TallBeachgrassBlock(Properties.copy(Blocks.LARGE_FERN).mapColor(MapColor.COLOR_YELLOW)));
+	public static final DeferredBlock<Block> BEACHGRASS = HELPER.createBlock("beachgrass", () -> new BeachgrassBlock(Properties.ofFullCopy(Blocks.FERN).mapColor(MapColor.COLOR_YELLOW)));
+	public static final DeferredBlock<Block> TALL_BEACHGRASS = HELPER.createBlock("tall_beachgrass", () -> new TallBeachgrassBlock(Properties.ofFullCopy(Blocks.LARGE_FERN).mapColor(MapColor.COLOR_YELLOW)));
 	public static final DeferredBlock<Block> BEACHGRASS_THATCH = HELPER.createBlock("beachgrass_thatch", () -> new ThatchBlock(UAProperties.BEACHGRASS_THATCH));
 	public static final DeferredBlock<Block> BEACHGRASS_THATCH_SLAB = HELPER.createBlock("beachgrass_thatch_slab", () -> new ThatchSlabBlock(UAProperties.BEACHGRASS_THATCH));
 	public static final DeferredBlock<Block> BEACHGRASS_THATCH_STAIRS = HELPER.createBlock("beachgrass_thatch_stairs", () -> new ThatchStairBlock(BEACHGRASS_THATCH.get().defaultBlockState(), UAProperties.BEACHGRASS_THATCH));
 
 	public static final DeferredBlock<Block> MULBERRY_VINE = HELPER.createBlockNoItem("mulberry_vine", () -> new MulberryVineBlock(Block.Properties.of().randomTicks().noCollission().sound(SoundType.SWEET_BERRY_BUSH).offsetType(BlockBehaviour.OffsetType.XZ)));
-	public static final DeferredBlock<Block> MULBERRY_JAM_BLOCK = HELPER.createBlock("mulberry_jam_block", () -> new MulberryJamBlock(Block.Properties.copy(Blocks.SLIME_BLOCK)));
+	public static final DeferredBlock<Block> MULBERRY_JAM_BLOCK = HELPER.createBlock("mulberry_jam_block", () -> new MulberryJamBlock(Block.Properties.ofFullCopy(Blocks.SLIME_BLOCK)));
 	public static final DeferredBlock<Block> MULBERRY_PUNNET = HELPER.createBlock("mulberry_punnet", () -> new BlueprintDirectionalBlock(Block.Properties.of().mapColor(MapColor.TERRACOTTA_PINK).instrument(NoteBlockInstrument.BASS).strength(1.5F).sound(SoundType.WOOD)));
 
-	public static final DeferredBlock<Block> PRISMARINE_ROD_BUNDLE = HELPER.createBlock("prismarine_rod_bundle", () -> new PrismarineRodBlock(Properties.copy(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL)));
+	public static final DeferredBlock<Block> PRISMARINE_ROD_BUNDLE = HELPER.createBlock("prismarine_rod_bundle", () -> new PrismarineRodBlock(Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS).sound(SoundType.METAL)));
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE = HELPER.createBlock("luminous_prismarine", () -> new ConduitFrameBlock(UAProperties.LUMINOUS_PRISMARINE));
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_STAIRS = HELPER.createBlock("luminous_prismarine_stairs", () -> new StairBlock(() -> LUMINOUS_PRISMARINE.get().defaultBlockState(), UAProperties.LUMINOUS_PRISMARINE));
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_SLAB = HELPER.createBlock("luminous_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_PRISMARINE));
 
-	public static final DeferredBlock<Block> GLASS_TRAPDOOR = HELPER.createBlock("glass_trapdoor", () -> new TrapDoorBlock(Properties.copy(Blocks.GLASS), UAProperties.GLASS_BLOCK_SET));
-	public static final DeferredBlock<Block> GLASS_DOOR = HELPER.createBlock("glass_door", () -> new DoorBlock(Properties.copy(Blocks.GLASS), UAProperties.GLASS_BLOCK_SET));
+	public static final DeferredBlock<Block> GLASS_TRAPDOOR = HELPER.createBlock("glass_trapdoor", () -> new TrapDoorBlock(Properties.ofFullCopy(Blocks.GLASS), UAProperties.GLASS_BLOCK_SET));
+	public static final DeferredBlock<Block> GLASS_DOOR = HELPER.createBlock("glass_door", () -> new DoorBlock(Properties.ofFullCopy(Blocks.GLASS), UAProperties.GLASS_BLOCK_SET));
 
 	public static final DeferredBlock<Block> BEDROLL = HELPER.createBlock("bedroll", createBedroll(DyeColor.BROWN));
 	public static final DeferredBlock<Block> WHITE_BEDROLL = HELPER.createBlock("white_bedroll", createBedroll(DyeColor.WHITE));
@@ -112,30 +113,30 @@ public class UABlocks {
 	public static final DeferredBlock<Block> RED_BEDROLL = HELPER.createBlock("red_bedroll", createBedroll(DyeColor.RED));
 	public static final DeferredBlock<Block> BLACK_BEDROLL = HELPER.createBlock("black_bedroll", createBedroll(DyeColor.BLACK));
 
-	public static final DeferredBlock<Block> TOOTH_BLOCK = HELPER.createBlock("tooth_block", () -> new Block(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_TILES = HELPER.createBlock("tooth_tiles", () -> new Block(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_TILE_STAIRS = HELPER.createBlock("tooth_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_TILE_SLAB = HELPER.createBlock("tooth_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_TILE_WALL = HELPER.createBlock("tooth_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_BRICKS = HELPER.createBlock("tooth_bricks", () -> new Block(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> CHISELED_TOOTH_BRICKS = HELPER.createBlock("chiseled_tooth_bricks", () -> new Block(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_BRICK_STAIRS = HELPER.createBlock("tooth_brick_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_BRICK_SLAB = HELPER.createBlock("tooth_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_BRICK_WALL = HELPER.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_TRAPDOOR = HELPER.createBlock("tooth_trapdoor", () -> new ToothTrapdoorBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_DOOR = HELPER.createBlock("tooth_door", () -> new ToothDoorBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> TOOTH_LANTERN = HELPER.createBlock("tooth_lantern", () -> new ToothLanternBlock(Properties.copy(Blocks.END_STONE).sound(UASoundEvents.TOOTH_LANTERN).noOcclusion().lightLevel((unknown) -> 15)));
+	public static final DeferredBlock<Block> TOOTH_BLOCK = HELPER.createBlock("tooth_block", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_TILES = HELPER.createBlock("tooth_tiles", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_TILE_STAIRS = HELPER.createBlock("tooth_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_TILE_SLAB = HELPER.createBlock("tooth_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_TILE_WALL = HELPER.createBlock("tooth_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_BRICKS = HELPER.createBlock("tooth_bricks", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> CHISELED_TOOTH_BRICKS = HELPER.createBlock("chiseled_tooth_bricks", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_BRICK_STAIRS = HELPER.createBlock("tooth_brick_stairs", () -> new StairBlock(() -> TOOTH_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_BRICK_SLAB = HELPER.createBlock("tooth_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_BRICK_WALL = HELPER.createBlock("tooth_brick_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_TRAPDOOR = HELPER.createBlock("tooth_trapdoor", () -> new ToothTrapdoorBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_DOOR = HELPER.createBlock("tooth_door", () -> new ToothDoorBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> TOOTH_LANTERN = HELPER.createBlock("tooth_lantern", () -> new ToothLanternBlock(Properties.ofFullCopy(Blocks.END_STONE).sound(UASoundEvents.TOOTH_LANTERN).noOcclusion().lightLevel((unknown) -> 15)));
 
-	public static final DeferredBlock<Block> SCUTE_BLOCK = HELPER.createBlock("scute_block", () -> new ScuteBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_SHINGLES = HELPER.createBlock("scute_shingles", () -> new Block(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_SHINGLE_STAIRS = HELPER.createBlock("scute_shingle_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_SHINGLE_SLAB = HELPER.createBlock("scute_shingle_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_SHINGLE_WALL = HELPER.createBlock("scute_shingle_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> CHISELED_SCUTE_SHINGLES = HELPER.createBlock("chiseled_scute_shingles", () -> new Block(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_PAVEMENT = HELPER.createBlock("scute_pavement", () -> new Block(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_PAVEMENT_STAIRS = HELPER.createBlock("scute_pavement_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_PAVEMENT_SLAB = HELPER.createBlock("scute_pavement_slab", () -> new SlabBlock(Properties.copy(Blocks.END_STONE)));
-	public static final DeferredBlock<Block> SCUTE_PAVEMENT_WALL = HELPER.createBlock("scute_pavement_wall", () -> new WallBlock(Properties.copy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_BLOCK = HELPER.createBlock("scute_block", () -> new ScuteBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_SHINGLES = HELPER.createBlock("scute_shingles", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_SHINGLE_STAIRS = HELPER.createBlock("scute_shingle_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_SHINGLE_SLAB = HELPER.createBlock("scute_shingle_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_SHINGLE_WALL = HELPER.createBlock("scute_shingle_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> CHISELED_SCUTE_SHINGLES = HELPER.createBlock("chiseled_scute_shingles", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_PAVEMENT = HELPER.createBlock("scute_pavement", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_PAVEMENT_STAIRS = HELPER.createBlock("scute_pavement_stairs", () -> new StairBlock(() -> SCUTE_BLOCK.get().defaultBlockState(), Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_PAVEMENT_SLAB = HELPER.createBlock("scute_pavement_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.END_STONE)));
+	public static final DeferredBlock<Block> SCUTE_PAVEMENT_WALL = HELPER.createBlock("scute_pavement_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.END_STONE)));
 
 	public static final DeferredBlock<Block> DEAD_ACAN_CORAL_BLOCK = HELPER.createBlock("dead_acan_coral_block", () -> new Block(UAProperties.DEAD_CORAL_BLOCK));
 	public static final DeferredBlock<Block> DEAD_FINGER_CORAL_BLOCK = HELPER.createBlock("dead_finger_coral_block", () -> new Block(UAProperties.DEAD_CORAL_BLOCK));
@@ -238,23 +239,23 @@ public class UABlocks {
 
 	public static final DeferredBlock<Block> ELDER_EYE = HELPER.createBlockNoItem("elder_eye", () -> new ElderEyeBlock(UAProperties.ELDER_EYE));
 
-	public static final DeferredBlock<Block> PINK_JELLY_WALL_TORCH = HELPER.createBlockNoItem("pink_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PINK));
-	public static final DeferredBlock<Block> PURPLE_JELLY_WALL_TORCH = HELPER.createBlockNoItem("purple_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PURPLE));
-	public static final DeferredBlock<Block> BLUE_JELLY_WALL_TORCH = HELPER.createBlockNoItem("blue_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.BLUE));
-	public static final DeferredBlock<Block> GREEN_JELLY_WALL_TORCH = HELPER.createBlockNoItem("green_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.GREEN));
-	public static final DeferredBlock<Block> YELLOW_JELLY_WALL_TORCH = HELPER.createBlockNoItem("yellow_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.YELLOW));
-	public static final DeferredBlock<Block> ORANGE_JELLY_WALL_TORCH = HELPER.createBlockNoItem("orange_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.ORANGE));
-	public static final DeferredBlock<Block> RED_JELLY_WALL_TORCH = HELPER.createBlockNoItem("red_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.RED));
-	public static final DeferredBlock<Block> WHITE_JELLY_WALL_TORCH = HELPER.createBlockNoItem("white_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.WHITE));
+	public static final DeferredBlock<Block> PINK_JELLY_WALL_TORCH = HELPER.createBlockNoItem("pink_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PINK));
+	public static final DeferredBlock<Block> PURPLE_JELLY_WALL_TORCH = HELPER.createBlockNoItem("purple_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PURPLE));
+	public static final DeferredBlock<Block> BLUE_JELLY_WALL_TORCH = HELPER.createBlockNoItem("blue_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.BLUE));
+	public static final DeferredBlock<Block> GREEN_JELLY_WALL_TORCH = HELPER.createBlockNoItem("green_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.GREEN));
+	public static final DeferredBlock<Block> YELLOW_JELLY_WALL_TORCH = HELPER.createBlockNoItem("yellow_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.YELLOW));
+	public static final DeferredBlock<Block> ORANGE_JELLY_WALL_TORCH = HELPER.createBlockNoItem("orange_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.ORANGE));
+	public static final DeferredBlock<Block> RED_JELLY_WALL_TORCH = HELPER.createBlockNoItem("red_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.RED));
+	public static final DeferredBlock<Block> WHITE_JELLY_WALL_TORCH = HELPER.createBlockNoItem("white_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.WHITE));
 
-	public static final DeferredBlock<Block> PINK_JELLY_TORCH = HELPER.createStandingAndWallBlock("pink_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PINK), PINK_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> PURPLE_JELLY_TORCH = HELPER.createStandingAndWallBlock("purple_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PURPLE), PURPLE_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> BLUE_JELLY_TORCH = HELPER.createStandingAndWallBlock("blue_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.BLUE), BLUE_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> GREEN_JELLY_TORCH = HELPER.createStandingAndWallBlock("green_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.GREEN), GREEN_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> YELLOW_JELLY_TORCH = HELPER.createStandingAndWallBlock("yellow_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.YELLOW), YELLOW_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> ORANGE_JELLY_TORCH = HELPER.createStandingAndWallBlock("orange_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.ORANGE), ORANGE_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> RED_JELLY_TORCH = HELPER.createStandingAndWallBlock("red_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.RED), RED_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> WHITE_JELLY_TORCH = HELPER.createStandingAndWallBlock("white_jelly_torch", () -> new JellyTorchBlock(Properties.copy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.WHITE), WHITE_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> PINK_JELLY_TORCH = HELPER.createStandingAndWallBlock("pink_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PINK), PINK_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> PURPLE_JELLY_TORCH = HELPER.createStandingAndWallBlock("purple_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PURPLE), PURPLE_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> BLUE_JELLY_TORCH = HELPER.createStandingAndWallBlock("blue_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.BLUE), BLUE_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> GREEN_JELLY_TORCH = HELPER.createStandingAndWallBlock("green_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.GREEN), GREEN_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> YELLOW_JELLY_TORCH = HELPER.createStandingAndWallBlock("yellow_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.YELLOW), YELLOW_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> ORANGE_JELLY_TORCH = HELPER.createStandingAndWallBlock("orange_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.ORANGE), ORANGE_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> RED_JELLY_TORCH = HELPER.createStandingAndWallBlock("red_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.RED), RED_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> WHITE_JELLY_TORCH = HELPER.createStandingAndWallBlock("white_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.WHITE), WHITE_JELLY_WALL_TORCH, Direction.DOWN);
 
 	public static final DeferredBlock<Block> CORALSTONE = HELPER.createBlock("coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false));
 	public static final DeferredBlock<Block> BUBBLE_CORALSTONE = HELPER.createBlock("bubble_coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false, new Block[]{Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}));
@@ -356,25 +357,25 @@ public class UABlocks {
 	public static final DeferredBlock<Block> ELDER_PRISMARINE_CORALSTONE_WALL = HELPER.createBlock("elder_prismarine_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
 	public static final DeferredBlock<Block> DEAD_CORALSTONE_WALL = HELPER.createBlock("dead_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
 
-	public static final DeferredBlock<Block> KELP_BLOCK = HELPER.createBlock("kelp_block", () -> new Block(Properties.copy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
+	public static final DeferredBlock<Block> KELP_BLOCK = HELPER.createBlock("kelp_block", () -> new Block(Properties.ofFullCopy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
 
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE = HELPER.createBlock("kelpy_cobblestone", () -> new Block(Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("kelpy_cobblestone_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_SLAB = HELPER.createBlock("kelpy_cobblestone_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_WALL = HELPER.createBlock("kelpy_cobblestone_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_STONE_BRICKS = HELPER.createBlock("kelpy_stone_bricks", () -> new Block(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final DeferredBlock<Block> KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new StairBlock(() -> KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.STONE_BRICKS)));
-	public static final DeferredBlock<Block> KELPY_STONE_BRICK_SLAB = HELPER.createBlock("kelpy_stone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.STONE_BRICKS)));
-	public static final DeferredBlock<Block> KELPY_STONE_BRICK_WALL = HELPER.createBlock("kelpy_stone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.STONE_BRICKS)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE = HELPER.createBlock("kelpy_cobblestone", () -> new Block(Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_STAIRS = HELPER.createBlock("kelpy_cobblestone_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_SLAB = HELPER.createBlock("kelpy_cobblestone_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_WALL = HELPER.createBlock("kelpy_cobblestone_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_STONE_BRICKS = HELPER.createBlock("kelpy_stone_bricks", () -> new Block(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
+	public static final DeferredBlock<Block> KELPY_STONE_BRICK_STAIRS = HELPER.createBlock("kelpy_stone_brick_stairs", () -> new StairBlock(() -> KELPY_STONE_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(Blocks.STONE_BRICKS)));
+	public static final DeferredBlock<Block> KELPY_STONE_BRICK_SLAB = HELPER.createBlock("kelpy_stone_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
+	public static final DeferredBlock<Block> KELPY_STONE_BRICK_WALL = HELPER.createBlock("kelpy_stone_brick_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.STONE_BRICKS)));
 
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICKS = HELPER.createBlock("kelpy_cobblestone_bricks", () -> new Block(Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_STAIRS = HELPER.createBlock("kelpy_cobblestone_brick_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE_BRICKS.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_SLAB = HELPER.createBlock("kelpy_cobblestone_brick_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_WALL = HELPER.createBlock("kelpy_cobblestone_brick_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILES = HELPER.createBlock("kelpy_cobblestone_tiles", () -> new Block(Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_STAIRS = HELPER.createBlock("kelpy_cobblestone_tile_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE_TILES.get().defaultBlockState(), Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_SLAB = HELPER.createBlock("kelpy_cobblestone_tile_slab", () -> new SlabBlock(Properties.copy(Blocks.COBBLESTONE)));
-	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_WALL = HELPER.createBlock("kelpy_cobblestone_tile_wall", () -> new WallBlock(Properties.copy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICKS = HELPER.createBlock("kelpy_cobblestone_bricks", () -> new Block(Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_STAIRS = HELPER.createBlock("kelpy_cobblestone_brick_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE_BRICKS.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_SLAB = HELPER.createBlock("kelpy_cobblestone_brick_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_BRICK_WALL = HELPER.createBlock("kelpy_cobblestone_brick_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILES = HELPER.createBlock("kelpy_cobblestone_tiles", () -> new Block(Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_STAIRS = HELPER.createBlock("kelpy_cobblestone_tile_stairs", () -> new StairBlock(() -> KELPY_COBBLESTONE_TILES.get().defaultBlockState(), Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_SLAB = HELPER.createBlock("kelpy_cobblestone_tile_slab", () -> new SlabBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
+	public static final DeferredBlock<Block> KELPY_COBBLESTONE_TILE_WALL = HELPER.createBlock("kelpy_cobblestone_tile_wall", () -> new WallBlock(Properties.ofFullCopy(Blocks.COBBLESTONE)));
 
 	public static final DeferredBlock<Block> STRIPPED_DRIFTWOOD_LOG = HELPER.createBlock("stripped_driftwood_log", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.log()));
 	public static final DeferredBlock<Block> STRIPPED_DRIFTWOOD = HELPER.createBlock("stripped_driftwood", () -> new RotatedPillarBlock(UAProperties.DRIFTWOOD.log()));
@@ -397,7 +398,7 @@ public class UABlocks {
 	public static final DeferredBlock<Block> DRIFTWOOD_LADDER = HELPER.createFuelBlock("driftwood_ladder", () -> new LadderBlock(UAProperties.DRIFTWOOD.ladder()), 300);
 	public static final DeferredBlock<Block> DRIFTWOOD_BEEHIVE = HELPER.createBlock("driftwood_beehive", () -> new BlueprintBeehiveBlock(UAProperties.DRIFTWOOD.beehive()));
 	public static final DeferredBlock<BlueprintChestBlock> DRIFTWOOD_CHEST = HELPER.createChestBlock("driftwood", UAProperties.DRIFTWOOD.chest());
-	public static final DeferredBlock<BlueprintTrappedChestBlock> TRAPPED_DRIFTWOOD_CHEST = HELPER.createTrappedChestBlockNamed("driftwood", UAProperties.DRIFTWOOD.chest());
+	public static final DeferredBlock<BlueprintTrappedChestBlock> TRAPPED_DRIFTWOOD_CHEST = HELPER.createTrappedChestBlock("driftwood", UAProperties.DRIFTWOOD.chest());
 
 	public static final DeferredBlock<Block> STRIPPED_RIVER_LOG = HELPER.createBlock("stripped_river_log", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.log()));
 	public static final DeferredBlock<Block> STRIPPED_RIVER_WOOD = HELPER.createBlock("stripped_river_wood", () -> new RotatedPillarBlock(UAProperties.RIVER_WOOD.log()));
@@ -545,7 +546,7 @@ public class UABlocks {
 
 		public static final BlockBehaviour.Properties LUMINOUS_PRISMARINE = BlockBehaviour.Properties.of().mapColor(MapColor.DIAMOND).strength(1.5F, 6.0F).lightLevel((unknown) -> (8)).hasPostProcess(PropertyUtil::always).emissiveRendering(PropertyUtil::always);
 
-		public static final BlockBehaviour.Properties CORALSTONE = Properties.copy(Blocks.STONE).randomTicks();
+		public static final BlockBehaviour.Properties CORALSTONE = Properties.ofFullCopy(Blocks.STONE).randomTicks();
 
 		public static final BlockBehaviour.Properties ELDER_EYE = BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).sound(SoundType.METAL).strength(1.0F);
 		public static final BlockBehaviour.Properties PICKERELWEED = BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).randomTicks().noCollission().instabreak().sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY).offsetType(Block.OffsetType.XZ);

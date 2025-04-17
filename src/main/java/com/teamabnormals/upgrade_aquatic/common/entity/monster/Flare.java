@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.SynchedEntityData.Builder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -33,8 +34,8 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -68,9 +69,9 @@ public class Flare extends FlyingMob {
 		return Mob.createMobAttributes().add(Attributes.ATTACK_DAMAGE);
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(SIZE, 0);
+	protected void defineSynchedData(Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(SIZE, 0);
 	}
 
 	public void setPhantomSize(int sizeIn) {
@@ -96,11 +97,6 @@ public class Flare extends FlyingMob {
 		}
 
 		super.onSyncedDataUpdated(key);
-	}
-
-	@Override
-	public MobType getMobType() {
-		return MobType.UNDEFINED;
 	}
 
 	@Override
@@ -131,10 +127,10 @@ public class Flare extends FlyingMob {
 	}
 
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn) {
 		this.orbitPosition = this.blockPosition().above(5);
 		this.setPhantomSize(0);
-		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+		return super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn);
 	}
 
 	/**
@@ -194,7 +190,7 @@ public class Flare extends FlyingMob {
 	public EntityDimensions getDimensions(Pose poseIn) {
 		int i = this.getPhantomSize();
 		EntityDimensions entitysize = super.getDimensions(poseIn);
-		float f = (entitysize.width + 0.2F * (float) i) / entitysize.width;
+		float f = (entitysize.width() + 0.2F * (float) i) / entitysize.width();
 		return entitysize.scale(f);
 	}
 

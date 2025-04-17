@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 
 public class JellyfishEmissiveLayer<T extends AbstractJellyfish, M extends EndimatorEntityModel<T>> extends RenderLayer<T, M> {
@@ -25,6 +26,7 @@ public class JellyfishEmissiveLayer<T extends AbstractJellyfish, M extends Endim
 	public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, T jellyfish, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
 		VertexConsumer ivertexbuilder = bufferIn.getBuffer(BlueprintRenderTypes.getUnshadedTranslucentEntity(this.jellyfishRenderer.getOverlayTexture(jellyfish), true));
 		this.getParentModel().setupAnim(jellyfish, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
-		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, Mth.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingEntityRenderer.getOverlayCoords(jellyfish, 0.0F), 1.0F, 1.0F, 1.0F, 0.7F);
+		int i = FastColor.ARGB32.color(Mth.floor(0.7F * 255.0F), 255, 255, 255);
+		this.getParentModel().renderToBuffer(matrixStackIn, ivertexbuilder, Mth.clamp((packedLightIn + MathUtil.getBrightLightForLight(packedLightIn)) - 20, 50, 240), LivingEntityRenderer.getOverlayCoords(jellyfish, 0.0F), i);
 	}
 }

@@ -8,6 +8,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.SynchedEntityData.Builder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
@@ -109,10 +110,11 @@ public class Lionfish extends BucketableWaterAnimal {
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(HUNGY, true);
-		this.entityData.define(TIME_TILL_HUNGRY, 0);
+	@Override
+	protected void defineSynchedData(Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(HUNGY, true);
+		builder.define(TIME_TILL_HUNGRY, 0);
 	}
 
 	public boolean isHungry() {

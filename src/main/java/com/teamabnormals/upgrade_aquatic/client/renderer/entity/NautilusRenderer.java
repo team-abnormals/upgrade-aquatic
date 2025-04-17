@@ -11,8 +11,8 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class NautilusRenderer extends MobRenderer<Nautilus, NautilusModel<Nautilus>> {
@@ -35,12 +35,12 @@ public class NautilusRenderer extends MobRenderer<Nautilus, NautilusModel<Nautil
 
 	@Override
 	public ResourceLocation getTextureLocation(Nautilus nautilus) {
-		return SKIN_HELPER.getSkinForEntityOrElse(nautilus, new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/nautilus/nautilus.png"));
+		return SKIN_HELPER.getSkinForEntityOrElse(nautilus, UpgradeAquatic.location("textures/entity/nautilus/nautilus.png"));
 	}
 
 	@Override
-	protected void setupRotations(Nautilus nautilus, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.setupRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(Nautilus nautilus, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks, float scale) {
+		super.setupRotations(nautilus, matrixStack, ageInTicks, rotationYaw, partialTicks, scale);
 		float f = 0.3F * Mth.sin(0.6F * ageInTicks);
 		matrixStack.mulPose(Axis.YP.rotationDegrees(f));
 		if (!nautilus.isInWater() && !nautilus.isEyeInFluid(FluidTags.WATER)) {

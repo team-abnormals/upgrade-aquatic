@@ -21,7 +21,7 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class BoxJellyfishModel<E extends BoxJellyfish> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "box_jellyfish"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("box_jellyfish"), "main");
 
 	public EndimatorModelPart body;
 	public EndimatorModelPart tentacleW;
@@ -81,7 +81,7 @@ public class BoxJellyfishModel<E extends BoxJellyfish> extends EndimatorEntityMo
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, int color) {
+		this.body.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, color);
 	}
 }

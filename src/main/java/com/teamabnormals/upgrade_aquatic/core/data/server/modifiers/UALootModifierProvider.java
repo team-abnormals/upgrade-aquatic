@@ -1,14 +1,15 @@
 package com.teamabnormals.upgrade_aquatic.core.data.server.modifiers;
 
-import com.teamabnormals.blueprint.common.loot.modification.LootModifierProvider;
 import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolEntriesModifier;
 import com.teamabnormals.blueprint.common.loot.modification.modifiers.LootPoolsModifier;
+import com.teamabnormals.blueprint.common.remolder.data.RemolderProvider;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.PackOutput.Target;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -21,10 +22,10 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public final class UALootModifierProvider extends LootModifierProvider {
+public final class UALootModifierProvider extends RemolderProvider {
 
 	public UALootModifierProvider(PackOutput output, CompletableFuture<Provider> provider) {
-		super(UpgradeAquatic.MOD_ID, output, provider);
+		super(UpgradeAquatic.MOD_ID, Target.DATA_PACK, output, provider);
 	}
 
 	@Override

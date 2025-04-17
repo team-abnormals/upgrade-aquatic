@@ -4,8 +4,6 @@ import com.teamabnormals.blueprint.client.ClientInfo;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -16,6 +14,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -38,15 +38,11 @@ public class SonarWave extends Entity {
 		this.zo = z;
 	}
 
-	public SonarWave(PlayMessages.SpawnEntity spawnEntity, Level world) {
-		this(UAEntityTypes.SONAR_WAVE.get(), world);
-	}
-	
 	@Override
 	protected void defineSynchedData(SynchedEntityData.Builder builder) {
 		builder.define(OWNER_ID, 0);
 	}
-	
+
 	@Override
 	public void tick() {
 		super.tick();
@@ -185,10 +181,5 @@ public class SonarWave extends Entity {
 			return (Thrasher) owner;
 		}
 		return null;
-	}
-
-	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 }

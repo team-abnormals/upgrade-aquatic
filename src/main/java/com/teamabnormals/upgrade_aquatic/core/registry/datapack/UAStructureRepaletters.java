@@ -8,16 +8,17 @@ import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
+import com.teamabnormals.upgrade_aquatic.core.registry.UAConditions;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.Optional;
@@ -44,16 +45,16 @@ public final class UAStructureRepaletters {
 		);
 	}
 
-	public static ConfigValueCondition config(NeoForgeConfigSpec.ConfigValue<?> value, String key, boolean inverted) {
-		return new ConfigValueCondition(ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, "config"), value, key, Maps.newHashMap(), inverted);
+	public static ConfigValueCondition config(ModConfigSpec.ConfigValue<?> value, String key, boolean inverted) {
+		return new ConfigValueCondition(UAConditions.CONFIG.get(), value, key, Maps.newHashMap(), inverted);
 	}
 
-	public static ConfigValueCondition config(ForgeConfigSpec.ConfigValue<?> value, String key) {
+	public static ConfigValueCondition config(ModConfigSpec.ConfigValue<?> value, String key) {
 		return config(value, key, false);
 	}
 
 	private static ResourceKey<StructureRepaletterEntry> repaletterKey(String name) {
-		return ResourceKey.create(BlueprintDataPackRegistries.STRUCTURE_REPALETTERS, new ResourceLocation(UpgradeAquatic.MOD_ID, name));
+		return ResourceKey.create(BlueprintDataPackRegistries.STRUCTURE_REPALETTERS, UpgradeAquatic.location(name));
 	}
 
 }

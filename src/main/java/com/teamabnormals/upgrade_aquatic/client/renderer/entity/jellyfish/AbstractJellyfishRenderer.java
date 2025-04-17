@@ -16,7 +16,7 @@ public abstract class AbstractJellyfishRenderer<J extends AbstractJellyfish> ext
 	}
 
 	@Override
-	protected void setupRotations(J jellyfish, PoseStack stack, float p_115319_, float p_115320_, float partialTicks) {
+	protected void setupRotations(J jellyfish, PoseStack stack, float p_115319_, float p_115320_, float partialTicks, float scale) {
 		if (isEntityUpsideDown(jellyfish)) {
 			stack.translate(0.0D, jellyfish.getBbHeight() + 0.1F, 0.0D);
 			stack.mulPose(Axis.ZP.rotationDegrees(180.0F));

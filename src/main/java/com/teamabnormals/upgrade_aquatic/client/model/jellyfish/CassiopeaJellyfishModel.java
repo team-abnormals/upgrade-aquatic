@@ -21,7 +21,7 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class CassiopeaJellyfishModel<E extends CassiopeaJellyfish> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "cassiopea_jellyfish"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("cassiopea_jellyfish"), "main");
 
 	public EndimatorModelPart cap;
 	public EndimatorModelPart cross1;
@@ -74,7 +74,7 @@ public class CassiopeaJellyfishModel<E extends CassiopeaJellyfish> extends Endim
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, float red, float green, float blue, float alpha) {
-		this.cap.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, red, green, blue, alpha);
+	public void renderToBuffer(PoseStack matrixStackIn, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, int color) {
+		this.cap.render(matrixStackIn, bufferIn, packedLightIn, packedOverlayIn, color);
 	}
 }

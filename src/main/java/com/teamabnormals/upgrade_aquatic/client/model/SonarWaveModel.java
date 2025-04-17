@@ -14,6 +14,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
+import net.minecraft.util.FastColor.ARGB32;
 import net.minecraft.util.Mth;
 
 /**
@@ -21,7 +23,7 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class SonarWaveModel extends EntityModel<SonarWave> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(UpgradeAquatic.MOD_ID, "sonar_wave"), "main");
+	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("sonar_wave"), "main");
 
 	public ModelPart wave;
 	private SonarWave sonarWave;
@@ -38,12 +40,13 @@ public class SonarWaveModel extends EntityModel<SonarWave> {
 	}
 
 	@Override
-	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int p_103113_, int p_103114_, float r, float g, float b, float a) {
+	public void renderToBuffer(PoseStack stack, VertexConsumer consumer, int p_103113_, int p_103114_, int color) {
 		stack.pushPose();
 		float progress = this.sonarWave.getGrowProgress();
 		float scale = 0.6F + progress;
 		stack.scale(scale, scale, scale);
-		this.wave.render(stack, consumer, p_103113_, p_103114_, r, g, b, a - (0.25F * progress));
+		int i = ARGB32.color(Mth.floor(ARGB32.alpha(color) - (0.25F * progress)), 255, 255, 255);
+		this.wave.render(stack, consumer, p_103113_, p_103114_, i);
 		stack.popPose();
 	}
 

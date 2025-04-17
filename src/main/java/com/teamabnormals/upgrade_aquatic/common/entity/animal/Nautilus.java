@@ -11,6 +11,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.SynchedEntityData.Builder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
@@ -133,10 +134,11 @@ public class Nautilus extends BucketableWaterAnimal {
 		return SoundEvents.FISH_SWIM;
 	}
 
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(MOVING, false);
-		this.entityData.define(FLEEING, false);
+	@Override
+	protected void defineSynchedData(Builder builder) {
+		super.defineSynchedData(builder);
+		builder.define(MOVING, false);
+		builder.define(FLEEING, false);
 	}
 
 	public boolean isFleeing() {

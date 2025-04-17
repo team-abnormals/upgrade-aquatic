@@ -5,7 +5,7 @@ import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.UABlockFamilies;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import static com.teamabnormals.upgrade_aquatic.core.registry.UABlocks.*;
 

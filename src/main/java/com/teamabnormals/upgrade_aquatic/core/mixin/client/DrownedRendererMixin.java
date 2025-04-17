@@ -23,20 +23,20 @@ public class DrownedRendererMixin extends AbstractZombieRenderer<Drowned, Drowne
 	 * @reason Replace the Drowned swimming animation
 	 */
 	@Overwrite
-	protected void setupRotations(Drowned entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks) {
+	protected void setupRotations(Drowned entityLiving, PoseStack matrixStackIn, float ageInTicks, float rotationYaw, float partialTicks, float scale) {
 		if (entityLiving.isVisuallySwimming()) {
 			float swimAnimationTicks = entityLiving.getSwimAmount(partialTicks);
 			if (entityLiving.isInWater()) {
-				super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+				super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks, scale);
 				float rotationPitchChange = entityLiving.isInWater() ? -90.0F - entityLiving.getXRot() : -90.0F;
 				float rotationModifier = Mth.lerp(swimAnimationTicks, 0.0F, rotationPitchChange);
 				matrixStackIn.mulPose(Axis.XP.rotationDegrees(rotationModifier));
 				matrixStackIn.translate(0.0D, -1.0D, 0.3F);
 			} else {
-				super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+				super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks, scale);
 			}
 		} else {
-			super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks);
+			super.setupRotations(entityLiving, matrixStackIn, ageInTicks, rotationYaw, partialTicks, scale);
 			float f = entityLiving.getSwimAmount(partialTicks);
 			if (f > 0.0F) {
 				matrixStackIn.mulPose(Axis.XP.rotationDegrees(Mth.lerp(f, entityLiving.getXRot(), -10.0F - entityLiving.getXRot())));

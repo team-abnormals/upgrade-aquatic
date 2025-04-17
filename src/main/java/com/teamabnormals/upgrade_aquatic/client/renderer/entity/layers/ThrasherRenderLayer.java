@@ -11,13 +11,13 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class ThrasherRenderLayer<T extends Thrasher, M extends ThrasherModel<T>> extends RenderLayer<T, M> {
-	private static final ResourceLocation THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/thrasher_emissive.png");
-	private static final ResourceLocation GREAT_THRASHER_FROST = new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/thrasher/great_thrasher_emissive.png");
+	private static final ResourceLocation THRASHER_FROST = UpgradeAquatic.location("textures/entity/thrasher/thrasher_emissive.png");
+	private static final ResourceLocation GREAT_THRASHER_FROST = UpgradeAquatic.location("textures/entity/thrasher/great_thrasher_emissive.png");
 
 	public ThrasherRenderLayer(RenderLayerParent<T, M> renderer) {
 		super(renderer);

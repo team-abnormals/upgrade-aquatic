@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.mojang.datafixers.util.Pair;
+import com.teamabnormals.blueprint.common.item.BlueprintBoatItem;
 import com.teamabnormals.blueprint.common.item.BlueprintRecordItem;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
@@ -21,6 +22,8 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -36,10 +39,10 @@ import static net.minecraft.world.item.crafting.Ingredient.of;
 public class UAItems {
 	public static final UAItemSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getItemSubHelper();
 
-	public static final Pair<DeferredItem<Item>, DeferredItem<Item>> DRIFTWOOD_BOAT = HELPER.createBoatAndChestBoatItem("driftwood", UABlocks.DRIFTWOOD_PLANKS, false);
+	public static final Pair<DeferredItem<BlueprintBoatItem>, DeferredItem<BlueprintBoatItem>> DRIFTWOOD_BOAT = HELPER.createBoatAndChestBoatItem("driftwood", UABlocks.DRIFTWOOD_PLANKS, false);
 	public static final DeferredItem<Item> DRIFTWOOD_FURNACE_BOAT = HELPER.createItem("driftwood_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.DRIFTWOOD_FURNACE_BOAT : () -> new Item(new Item.Properties()));
 	public static final DeferredItem<Item> LARGE_DRIFTWOOD_BOAT = HELPER.createItem("large_driftwood_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_DRIFTWOOD_BOAT : () -> new Item(new Item.Properties()));
-	public static final Pair<DeferredItem<Item>, DeferredItem<Item>> RIVER_BOAT = HELPER.createBoatAndChestBoatItem("river", UABlocks.RIVER_PLANKS, false);
+	public static final Pair<DeferredItem<BlueprintBoatItem>, DeferredItem<BlueprintBoatItem>> RIVER_BOAT = HELPER.createBoatAndChestBoatItem("river", UABlocks.RIVER_PLANKS, false);
 	public static final DeferredItem<Item> RIVER_FURNACE_BOAT = HELPER.createItem("river_furnace_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.RIVER_FURNACE_BOAT : () -> new Item(new Item.Properties()));
 	public static final DeferredItem<Item> LARGE_RIVER_BOAT = HELPER.createItem("large_river_boat", ModList.get().isLoaded("boatload") ? UABoatTypes.LARGE_RIVER_BOAT : () -> new Item(new Item.Properties()));
 

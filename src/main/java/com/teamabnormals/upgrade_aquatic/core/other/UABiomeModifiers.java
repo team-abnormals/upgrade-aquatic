@@ -8,9 +8,8 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatur
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAWorldCarvers.UAConfiguredWorldCarvers;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.biome.Biome;
@@ -19,10 +18,10 @@ import net.minecraft.world.level.levelgen.GenerationStep.Carving;
 import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.common.world.BiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers.AddFeaturesBiomeModifier;
-import net.minecraftforge.common.world.ForgeBiomeModifiers.AddSpawnsBiomeModifier;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.world.BiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers.AddFeaturesBiomeModifier;
+import net.neoforged.neoforge.common.world.BiomeModifiers.AddSpawnsBiomeModifier;
+import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -31,7 +30,7 @@ import java.util.stream.Stream;
 
 public class UABiomeModifiers {
 
-	public static void bootstrap(BootstapContext<BiomeModifier> context) {
+	public static void bootstrap(BootstrapContext<BiomeModifier> context) {
 		addFeature(context, "beachgrass", UABiomeTags.HAS_BEACHGRASS, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.BEACHGRASS_DUNES);
 		addFeature(context, "searocket", UABiomeTags.HAS_SEAROCKET, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.PATCH_SEAROCKET);
 		addFeature(context, "river_tree", UABiomeTags.HAS_RIVER_TREE, Decoration.VEGETAL_DECORATION, UAPlacedFeatures.RIVER_TREE);
@@ -58,30 +57,30 @@ public class UABiomeModifiers {
 	}
 
 	@SafeVarargs
-	private static void addFeature(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, Decoration step, ResourceKey<PlacedFeature>... features) {
+	private static void addFeature(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, Decoration step, ResourceKey<PlacedFeature>... features) {
 		register(context, "add_feature/" + name, () -> new AddFeaturesBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), featureSet(context, features), step));
 	}
 
-	private static void addSpawn(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, MobSpawnSettings.SpawnerData... spawns) {
+	private static void addSpawn(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, MobSpawnSettings.SpawnerData... spawns) {
 		register(context, "add_spawn/" + name, () -> new AddSpawnsBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), List.of(spawns)));
 	}
 
 	@SafeVarargs
-	private static void addCarver(BootstapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, Carving carving, ResourceKey<ConfiguredWorldCarver<?>>... features) {
+	private static void addCarver(BootstrapContext<BiomeModifier> context, String name, TagKey<Biome> biomes, Carving carving, ResourceKey<ConfiguredWorldCarver<?>>... features) {
 		register(context, "add_carver/" + name, () -> new AddCarversBiomeModifier(context.lookup(Registries.BIOME).getOrThrow(biomes), carverSet(context, features), carving));
 	}
 
-	private static void register(BootstapContext<BiomeModifier> context, String name, Supplier<? extends BiomeModifier> modifier) {
-		context.register(ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(UpgradeAquatic.MOD_ID, name)), modifier.get());
+	private static void register(BootstrapContext<BiomeModifier> context, String name, Supplier<? extends BiomeModifier> modifier) {
+		context.register(ResourceKey.create(Keys.BIOME_MODIFIERS, UpgradeAquatic.location(name)), modifier.get());
 	}
 
 	@SafeVarargs
-	private static HolderSet<PlacedFeature> featureSet(BootstapContext<?> context, ResourceKey<PlacedFeature>... features) {
+	private static HolderSet<PlacedFeature> featureSet(BootstrapContext<?> context, ResourceKey<PlacedFeature>... features) {
 		return HolderSet.direct(Stream.of(features).map(key -> context.lookup(Registries.PLACED_FEATURE).getOrThrow(key)).collect(Collectors.toList()));
 	}
 
 	@SafeVarargs
-	private static HolderSet<ConfiguredWorldCarver<?>> carverSet(BootstapContext<?> context, ResourceKey<ConfiguredWorldCarver<?>>... carvers) {
+	private static HolderSet<ConfiguredWorldCarver<?>> carverSet(BootstrapContext<?> context, ResourceKey<ConfiguredWorldCarver<?>>... carvers) {
 		return HolderSet.direct(Stream.of(carvers).map(key -> context.lookup(Registries.CONFIGURED_CARVER).getOrThrow(key)).collect(Collectors.toList()));
 	}
 }

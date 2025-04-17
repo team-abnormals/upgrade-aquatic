@@ -9,8 +9,8 @@ import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class FlareRenderer extends MobRenderer<Flare, FlareModel<Flare>> {
@@ -22,7 +22,7 @@ public class FlareRenderer extends MobRenderer<Flare, FlareModel<Flare>> {
 
 	@Override
 	public ResourceLocation getTextureLocation(Flare entity) {
-		return new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/entity/flare/flare.png");
+		return UpgradeAquatic.location("textures/entity/flare/flare.png");
 	}
 
 	@Override
@@ -33,8 +33,8 @@ public class FlareRenderer extends MobRenderer<Flare, FlareModel<Flare>> {
 	}
 
 	@Override
-	protected void setupRotations(Flare flare, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks) {
-		super.setupRotations(flare, matrixStack, ageInTicks, rotationYaw, partialTicks);
+	protected void setupRotations(Flare flare, PoseStack matrixStack, float ageInTicks, float rotationYaw, float partialTicks, float scale) {
+		super.setupRotations(flare, matrixStack, ageInTicks, rotationYaw, partialTicks, scale);
 		matrixStack.mulPose(Axis.XP.rotationDegrees(flare.getXRot()));
 	}
 

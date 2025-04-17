@@ -19,7 +19,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
+import net.neoforged.api.distmarker.Dist;
 import net.minecraftforge.client.event.CustomizeGuiOverlayEvent;
 import net.minecraftforge.client.event.RenderGuiOverlayEvent;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
@@ -60,7 +60,7 @@ public class RenderOverlays {
 				PoseStack stack = event.getGuiGraphics().pose();
 
 				stack.pushPose();
-				RenderSystem.setShaderTexture(0, new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/insomnia.png"));
+				RenderSystem.setShaderTexture(0, UpgradeAquatic.location("textures/gui/overlay/insomnia.png"));
 				RenderSystem.enableBlend();
 				RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 				RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, opacity);
@@ -104,7 +104,7 @@ public class RenderOverlays {
 					int durability = turtleHelmet.getDamageValue();
 					int maxDurability = turtleHelmet.getMaxDamage();
 
-					RenderSystem.setShaderTexture(0, new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/scute_bubble_depleted.png"));
+					RenderSystem.setShaderTexture(0, UpgradeAquatic.location("textures/gui/overlay/scute_bubble_depleted.png"));
 					for (int i = 0; i < 10; i++) {
 						int l = left - (i * 8) - 9;
 						int l2 = l + 9;
@@ -119,7 +119,7 @@ public class RenderOverlays {
 						bufferbuilder.vertex(l, t, 0).uv(0, 0).endVertex();
 						tessellator.end();
 					}
-					RenderSystem.setShaderTexture(0, new ResourceLocation(UpgradeAquatic.MOD_ID, "textures/gui/overlay/scute_bubble.png"));
+					RenderSystem.setShaderTexture(0, UpgradeAquatic.location("textures/gui/overlay/scute_bubble.png"));
 					double amount = Mth.clamp(10 - Math.floor((double) durability / maxDurability * 10.0), 1, 10);
 					for (int i = 0; i < amount; i++) {
 						int l = left - (i * 8) - 9;

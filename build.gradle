@@ -47,14 +47,12 @@ dependencies {
     implementation "com.teamabnormals:blueprint:${project.mc_version}-${project.blueprint}"
 
     implementation "com.teamabnormals:boatload:${project.mc_version}-${project.boatload}"
-    implementation "com.teamabnormals:woodworks:${project.mc_version}-${project.woodworks}"
+    implementation "com.teamabnormals:clayworks:${project.mc_version}-${project.clayworks}"
     implementation "com.teamabnormals:gallery:${project.mc_version}-${project.gallery}"
-    //implementation "com.teamabnormals:clayworks:${project.mc_version}-${project.clayworks}"
+    implementation "com.teamabnormals:woodworks:${project.mc_version}-${project.woodworks}"
 
-    compileOnly("mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei}")
-    runtimeOnly("mezz.jei:jei-${project.mc_version}-neoforge:${project.jei}")
-
-    annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    compileOnly "mezz.jei:jei-${project.mc_version}-neoforge-api:${project.jei}"
+    runtimeOnly "mezz.jei:jei-${project.mc_version}-neoforge:${project.jei}"
 }
 
 subsystems {

@@ -14,7 +14,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.GlowSquid;
 
 public class UAGlowSquidRenderer extends SquidRenderer<GlowSquid> {
-	private static final ResourceLocation GLOW_SQUID_LOCATION = new ResourceLocation("textures/entity/squid/glow_squid.png");
+	private static final ResourceLocation GLOW_SQUID_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/squid/glow_squid.png");
 	public final boolean useReplacementRenderer;
 
 	public UAGlowSquidRenderer(EntityRendererProvider.Context context) {
