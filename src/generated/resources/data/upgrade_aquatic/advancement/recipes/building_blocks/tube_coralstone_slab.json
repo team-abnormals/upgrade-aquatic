@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "upgrade_aquatic:tube_coralstone_slab"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tube_coralstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:tube_coralstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tube_coralstone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "upgrade_aquatic:tube_coralstone_slab"
+    ]
+  }
+}

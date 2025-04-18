@@ -9,7 +9,10 @@ import com.teamabnormals.upgrade_aquatic.core.data.server.UADataRemolderProvider
 import com.teamabnormals.upgrade_aquatic.core.data.server.UADatapackBuiltinEntriesProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.UARecipeProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.*;
-import com.teamabnormals.upgrade_aquatic.core.other.*;
+import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
+import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
+import com.teamabnormals.upgrade_aquatic.core.other.UAConstants;
+import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.teamabnormals.upgrade_aquatic.core.registry.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADecoratedPotPatterns;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAWorldCarvers;
@@ -19,8 +22,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
@@ -28,7 +29,6 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.util.ObfuscationReflectionHelper;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
@@ -40,11 +40,11 @@ public class UpgradeAquatic {
 	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(Registries.ITEM, new UAItemSubRegistryHelper(helper)));
 
 	public UpgradeAquatic(IEventBus bus, ModContainer container) {
-		UAItems.HELPER.register(bus);
-		UABlocks.HELPER.register(bus);
-		UAEntityTypes.HELPER.register(bus);
-		UABlockEntityTypes.HELPER.register(bus);
-		UASoundEvents.HELPER.register(bus);
+		UABlocks.BLOCKS.register(bus);
+		UAItems.ITEMS.register(bus);
+		UAEntityTypes.ENTITY_TYPES.register(bus);
+		UABlockEntityTypes.BLOCK_ENTITY_TYPES.register(bus);
+		UASoundEvents.SOUND_EVENTS.register(bus);
 		UAMobEffects.MOB_EFFECTS.register(bus);
 		UAMobEffects.POTIONS.register(bus);
 		UAFeatures.FEATURES.register(bus);
@@ -60,26 +60,19 @@ public class UpgradeAquatic {
 		this.registerCCCompat(bus);
 
 		bus.addListener(this::commonSetup);
-		bus.addListener(this::dataSetup);
 		bus.addListener(this::clientSetup);
+		bus.addListener(this::dataSetup);
 
 		container.registerConfig(ModConfig.Type.COMMON, UAConfig.COMMON_SPEC);
 		container.registerConfig(ModConfig.Type.CLIENT, UAConfig.CLIENT_SPEC);
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
-		event.enqueueWork(() -> {
-			UACompat.registerCompat();
-			UADispenseBehaviorRegistry.registerDispenseBehaviors();
-			ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "f_60445_");
-		});
+		event.enqueueWork(UACompat::register);
 	}
 
 	private void clientSetup(FMLClientSetupEvent event) {
-		event.enqueueWork(() -> {
-			UAItems.registerItemProperties();
-			UAClientCompat.registerClientCompat();
-		});
+		event.enqueueWork(UAClientCompat::register);
 	}
 
 	private void dataSetup(GatherDataEvent event) {

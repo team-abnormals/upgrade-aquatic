@@ -41,7 +41,7 @@ public final class UAAdvancementModifierProvider extends AdvancementModifierProv
 		this.entry("nether/all_potions").selects("nether/all_potions").addModifier(new EffectsChangedModifier("all_effects", false, predicate.build().get()));
 
 		CriteriaModifier.Builder balancedDiet = CriteriaModifier.builder(this.modId);
-		Collection<DeferredHolder<Item, ? extends Item>> items = UAItems.HELPER.getDeferredRegister().getEntries().stream().filter(i -> i.get().getDefaultInstance().getFoodProperties(null) != null).toList();
+		Collection<DeferredHolder<Item, ? extends Item>> items = UAItems.ITEMS.getDeferredRegister().getEntries().stream().filter(i -> i.get().getDefaultInstance().getFoodProperties(null) != null).toList();
 		items.forEach(item -> {
 			balancedDiet.addCriterion(BuiltInRegistries.ITEM.getKey(item.get()).getPath(), ConsumeItemTrigger.TriggerInstance.usedItem(item.get()));
 		});
@@ -69,7 +69,7 @@ public final class UAAdvancementModifierProvider extends AdvancementModifierProv
 
 		CriteriaModifier.Builder tacticalFishing = CriteriaModifier.builder(this.modId);
 		names = new ArrayList<>();
-		for (var object : UAItems.HELPER.getDeferredRegister().getEntries()) {
+		for (var object : UAItems.ITEMS.getDeferredRegister().getEntries()) {
 			Item item = object.get();
 			if (item instanceof MobBucketItem) {
 				String name = BuiltInRegistries.ITEM.getKey(item).getPath();

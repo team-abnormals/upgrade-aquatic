@@ -1,11 +1,17 @@
 package com.teamabnormals.upgrade_aquatic.core.other;
 
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.FoliageColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -18,10 +24,11 @@ public class UAClientCompat {
 	private static final RenderType CUTOUT_MIPPED = RenderType.cutoutMipped();
 	private static final RenderType TRANSLUSCENT = RenderType.translucent();
 
-	public static void registerClientCompat() {
+	public static void register() {
 		UABlocks.setupTabEditors();
 		UAItems.setupTabEditors();
 		registerRenderLayers();
+		registerItemProperties();
 	}
 
 	public static void registerRenderLayers() {
@@ -150,6 +157,32 @@ public class UAClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_PINK_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_WHITE_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_RIVER_SAPLING.get(), CUTOUT);
+	}
+
+	public static void registerItemProperties() {
+		ItemProperties.register(UAItems.JELLYFISH_BUCKET.get(), ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
+			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
+			if (tag.contains("JellyfishDisplayTag")) {
+				return AbstractJellyfish.BucketDisplayInfo.readVariant(tag.getCompound("JellyfishDisplayTag"));
+			}
+			return 0.0F;
+		});
+
+		ItemProperties.register(UAItems.PIKE_BUCKET.get(), ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
+			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
+			if (tag.contains("BucketVariantTag", 3)) {
+				return tag.getInt("BucketVariantTag");
+			}
+			return 2;
+		});
+
+		ItemProperties.register(Items.AXOLOTL_BUCKET, ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
+			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
+			if (tag.contains("Variant")) {
+				return tag.getInt("Variant");
+			}
+			return 0;
+		});
 	}
 
 	@SubscribeEvent

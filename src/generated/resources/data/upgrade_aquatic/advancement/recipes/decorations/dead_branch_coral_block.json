@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dead_branch_coral": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#upgrade_aquatic:dead_branch_corals"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "upgrade_aquatic:dead_branch_coral_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dead_branch_coral"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "upgrade_aquatic:dead_branch_coral_block"
+    ]
+  }
+}

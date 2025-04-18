@@ -57,7 +57,8 @@
               "upgrade_aquatic:flare"
             ]
           }
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ],

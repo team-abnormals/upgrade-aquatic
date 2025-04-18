@@ -9,6 +9,7 @@ import com.teamabnormals.upgrade_aquatic.core.other.tags.UAItemTags;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
@@ -24,6 +25,8 @@ public class UAItemTagsProvider extends BlueprintItemTagsProvider {
 
 	@Override
 	protected void addTags(Provider provider) {
+		provider.lookupOrThrow(Registries.ITEM).listElementIds().forEach(itemResourceKey -> System.out.println("Item: " + itemResourceKey.location()));
+
 		this.copyWoodsetTags();
 		this.copy(UABlockTags.DRIFTWOOD_LOGS, UAItemTags.DRIFTWOOD_LOGS);
 		this.copy(UABlockTags.RIVER_LOGS, UAItemTags.RIVER_LOGS);

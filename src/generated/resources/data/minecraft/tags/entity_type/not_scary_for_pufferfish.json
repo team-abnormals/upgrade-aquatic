@@ -1,0 +1,11 @@
+{
+  "values": [
+    "upgrade_aquatic:nautilus",
+    "upgrade_aquatic:pike",
+    "upgrade_aquatic:perch",
+    "upgrade_aquatic:lionfish",
+    "upgrade_aquatic:thrasher",
+    "upgrade_aquatic:great_thrasher",
+    "#upgrade_aquatic:jellyfish"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_perch": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:perch"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "upgrade_aquatic:cooked_perch"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_perch"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "upgrade_aquatic:cooked_perch"
+    ]
+  }
+}

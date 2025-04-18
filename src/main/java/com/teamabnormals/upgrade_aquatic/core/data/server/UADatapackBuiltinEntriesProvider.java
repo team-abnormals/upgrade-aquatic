@@ -2,7 +2,6 @@ package com.teamabnormals.upgrade_aquatic.core.data.server;
 
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UABiomeModifiers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAConfiguredFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.*;

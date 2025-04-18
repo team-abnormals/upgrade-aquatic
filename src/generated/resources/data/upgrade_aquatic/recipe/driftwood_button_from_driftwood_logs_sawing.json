@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "woodworks"
+        },
+        {
+          "type": "woodworks:config",
+          "value": "sawmill"
+        }
+      ]
+    }
+  ],
+  "type": "woodworks:sawmill",
+  "ingredient": {
+    "tag": "upgrade_aquatic:driftwood_logs"
+  },
+  "result": {
+    "count": 4,
+    "id": "upgrade_aquatic:driftwood_button"
+  }
+}

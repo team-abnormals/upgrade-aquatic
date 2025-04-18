@@ -7,9 +7,7 @@
           "upgrade_aquatic:lionfish": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:lionfish"
-                ]
+                "items": "upgrade_aquatic:lionfish"
               }
             },
             "trigger": "minecraft:fishing_rod_hooked"
@@ -17,9 +15,7 @@
           "upgrade_aquatic:perch": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:perch"
-                ]
+                "items": "upgrade_aquatic:perch"
               }
             },
             "trigger": "minecraft:fishing_rod_hooked"
@@ -27,9 +23,7 @@
           "upgrade_aquatic:pike": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:pike"
-                ]
+                "items": "upgrade_aquatic:pike"
               }
             },
             "trigger": "minecraft:fishing_rod_hooked"
@@ -45,7 +39,8 @@
               "upgrade_aquatic:perch"
             ]
           }
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ],

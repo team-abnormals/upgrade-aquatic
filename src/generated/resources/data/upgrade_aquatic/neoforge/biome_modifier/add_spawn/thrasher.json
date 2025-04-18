@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#upgrade_aquatic:has_spawn/thrasher",
+  "spawners": {
+    "type": "upgrade_aquatic:thrasher",
+    "maxCount": 2,
+    "minCount": 1,
+    "weight": 10
+  }
+}

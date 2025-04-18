@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#upgrade_aquatic:has_spawn/pike",
+  "spawners": {
+    "type": "upgrade_aquatic:pike",
+    "maxCount": 3,
+    "minCount": 1,
+    "weight": 28
+  }
+}

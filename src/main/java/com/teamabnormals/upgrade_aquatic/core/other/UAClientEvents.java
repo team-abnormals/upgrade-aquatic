@@ -30,7 +30,7 @@ public class UAClientEvents {
 		if (event.getEntity() instanceof LocalPlayer clientPlayer) {
 			if (clientPlayer.getVehicle() instanceof Thrasher thrasher) {
 				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "swimAmount");
-				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "f_20932_");
+				ObfuscationReflectionHelper.setPrivateValue(LivingEntity.class, clientPlayer, 1.0F, "swimAmountO");
 				clientPlayer.setXRot(0.0F);
 				clientPlayer.setYRot(thrasher.getYRot() + (90.0F % 360));
 				clientPlayer.yBodyRot = thrasher.yBodyRot + (90.0F % 360);

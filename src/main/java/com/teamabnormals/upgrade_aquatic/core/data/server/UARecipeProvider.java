@@ -205,4 +205,25 @@ public class UARecipeProvider extends BlueprintRecipeProvider {
 	public void conditionalStonecutterRecipe(RecipeOutput consumer, ICondition condition, RecipeCategory category, ItemLike output, ItemLike input, int count) {
 		conditionalRecipe(consumer, SingleItemRecipeBuilder.stonecutting(Ingredient.of(input), category, output, count).unlockedBy(getHasName(input), has(input)), this.getModConversionRecipeName(output, input).withSuffix("_stonecutting"), condition);
 	}
+
+
+	@Override
+	public void smeltingRecipe(RecipeOutput recipeOutput, List<ItemLike> inputs, RecipeCategory category, ItemLike output, float xp, int cookTime, String group) {
+		for (ItemLike item : inputs) {
+			SimpleCookingRecipeBuilder.smelting(Ingredient.of(item), category, output, xp, cookTime)
+					.unlockedBy(getHasName(item), has(item))
+					.group(group)
+					.save(recipeOutput, ResourceLocation.fromNamespaceAndPath(this.getModID(), getItemName(output) + "_from_smelting_" + getItemName(item)));
+		}
+	}
+
+	@Override
+	public void blastingRecipe(RecipeOutput recipeOutput, List<ItemLike> inputs, RecipeCategory category, ItemLike output, float xp, int cookTime, String group) {
+		for (ItemLike item : inputs) {
+			SimpleCookingRecipeBuilder.blasting(Ingredient.of(item), category, output, xp, cookTime)
+					.unlockedBy(getHasName(item), has(item))
+					.group(group)
+					.save(recipeOutput, ResourceLocation.fromNamespaceAndPath(this.getModID(), getItemName(output) + "_from_blasting_" + getItemName(item)));
+		}
+	}
 }

@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#upgrade_aquatic:has_feature/beachgrass",
-  "features": "upgrade_aquatic:beachgrass_dunes",
-  "step": "vegetal_decoration"
-}

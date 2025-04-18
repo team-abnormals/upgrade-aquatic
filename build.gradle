@@ -19,6 +19,7 @@ runs {
     configureEach {
         systemProperty "forge.logging.markers", "REGISTRIES"
         systemProperty "forge.logging.console.level", "debug"
+        systemProperty "blueprint.indev", "true"
     }
     client {
         modSources {

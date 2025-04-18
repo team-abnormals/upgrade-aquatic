@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "upgrade_aquatic:river_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "upgrade_aquatic:river_planks"
+  }
+}

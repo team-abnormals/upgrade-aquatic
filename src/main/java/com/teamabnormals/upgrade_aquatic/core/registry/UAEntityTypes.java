@@ -26,32 +26,32 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class UAEntityTypes {
-	public static final EntitySubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getEntitySubHelper();
+	public static final EntitySubRegistryHelper ENTITY_TYPES = UpgradeAquatic.REGISTRY_HELPER.getEntitySubHelper();
 
-	public static final DeferredHolder<EntityType<?>, EntityType<SonarWave>> SONAR_WAVE = HELPER.createEntity("sonar_wave", SonarWave::new, MobCategory.MISC, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<SonarWave>> SONAR_WAVE = ENTITY_TYPES.createEntity("sonar_wave", SonarWave::new, MobCategory.MISC, builder -> builder
 			.sized(1.0F, 1.0F).clientTrackingRange(4).updateInterval(10));
-	public static final DeferredHolder<EntityType<?>, EntityType<Nautilus>> NAUTILUS = HELPER.createEntity("nautilus", Nautilus::new, MobCategory.WATER_AMBIENT, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<Nautilus>> NAUTILUS = ENTITY_TYPES.createEntity("nautilus", Nautilus::new, MobCategory.WATER_AMBIENT, builder -> builder
 			.sized(0.5F, 0.5F).eyeHeight(0.325F).clientTrackingRange(8));
-	public static final DeferredHolder<EntityType<?>, EntityType<Pike>> PIKE = HELPER.createEntity("pike", Pike::new, MobCategory.WATER_AMBIENT, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<Pike>> PIKE = ENTITY_TYPES.createEntity("pike", Pike::new, MobCategory.WATER_AMBIENT, builder -> builder
 			.sized(0.7F, 0.4F).eyeHeight(0.25F).ridingOffset(0.03F).clientTrackingRange(8));
-	public static final DeferredHolder<EntityType<?>, EntityType<Perch>> PERCH = HELPER.createEntity("perch", Perch::new, MobCategory.WATER_AMBIENT, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<Perch>> PERCH = ENTITY_TYPES.createEntity("perch", Perch::new, MobCategory.WATER_AMBIENT, builder -> builder
 			.sized(0.6F, 0.5F).clientTrackingRange(4));
-	public static final DeferredHolder<EntityType<?>, EntityType<Lionfish>> LIONFISH = HELPER.createEntity("lionfish", Lionfish::new, MobCategory.WATER_AMBIENT, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<Lionfish>> LIONFISH = ENTITY_TYPES.createEntity("lionfish", Lionfish::new, MobCategory.WATER_AMBIENT, builder -> builder
 			.sized(0.6F, 0.5F).eyeHeight(0.425F).clientTrackingRange(4));
-	public static final DeferredHolder<EntityType<?>, EntityType<Thrasher>> THRASHER = HELPER.createEntity("thrasher", Thrasher::new, MobCategory.MONSTER, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<Thrasher>> THRASHER = ENTITY_TYPES.createEntity("thrasher", Thrasher::new, MobCategory.MONSTER, builder -> builder
 			.sized(1.6F, 0.9F).eyeHeight(0.65F).ridingOffset(0.5F).clientTrackingRange(8));
-	public static final DeferredHolder<EntityType<?>, EntityType<GreatThrasher>> GREAT_THRASHER = HELPER.createEntity("great_thrasher", GreatThrasher::new, MobCategory.MONSTER, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<GreatThrasher>> GREAT_THRASHER = ENTITY_TYPES.createEntity("great_thrasher", GreatThrasher::new, MobCategory.MONSTER, builder -> builder
 			.sized(2.8F, 1.575F).eyeHeight(0.65F).ridingOffset(0.875F).clientTrackingRange(8));
-	public static final DeferredHolder<EntityType<?>, EntityType<Flare>> FLARE = HELPER.createEntity("flare", Flare::new, MobCategory.MONSTER, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<Flare>> FLARE = ENTITY_TYPES.createEntity("flare", Flare::new, MobCategory.MONSTER, builder -> builder
 			.sized(0.9F, 0.5F).eyeHeight(0.175F).passengerAttachments(0.3375F).ridingOffset(-0.125F).clientTrackingRange(8));
-	public static final DeferredHolder<EntityType<?>, EntityType<Goose>> GOOSE = HELPER.createEntity("goose", Goose::new, MobCategory.CREATURE, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<Goose>> GOOSE = ENTITY_TYPES.createEntity("goose", Goose::new, MobCategory.CREATURE, builder -> builder
 			.sized(0.5F, 0.9F).eyeHeight(0.644F).passengerAttachments(new Vec3(0.0, 0.7, -0.1)).clientTrackingRange(10));
 
-	public static final DeferredHolder<EntityType<?>, EntityType<BoxJellyfish>> BOX_JELLYFISH = HELPER.createEntity("box_jellyfish", BoxJellyfish::new, MobCategory.WATER_CREATURE, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<BoxJellyfish>> BOX_JELLYFISH = ENTITY_TYPES.createEntity("box_jellyfish", BoxJellyfish::new, MobCategory.WATER_CREATURE, builder -> builder
 			.sized(0.75F, 0.625F).eyeHeight(0.3125F).clientTrackingRange(10));
-	public static final DeferredHolder<EntityType<?>, EntityType<CassiopeaJellyfish>> CASSIOPEA_JELLYFISH = HELPER.createEntity("cassiopea_jellyfish", CassiopeaJellyfish::new, MobCategory.WATER_CREATURE, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<CassiopeaJellyfish>> CASSIOPEA_JELLYFISH = ENTITY_TYPES.createEntity("cassiopea_jellyfish", CassiopeaJellyfish::new, MobCategory.WATER_CREATURE, builder -> builder
 			.sized(0.6875F, 0.25F).eyeHeight(0.125F).clientTrackingRange(10));
-	public static final DeferredHolder<EntityType<?>, EntityType<ImmortalJellyfish>> IMMORTAL_JELLYFISH = HELPER.createEntity("immortal_jellyfish", ImmortalJellyfish::new, MobCategory.WATER_CREATURE, builder -> builder
+	public static final DeferredHolder<EntityType<?>, EntityType<ImmortalJellyfish>> IMMORTAL_JELLYFISH = ENTITY_TYPES.createEntity("immortal_jellyfish", ImmortalJellyfish::new, MobCategory.WATER_CREATURE, builder -> builder
 			.sized(0.625F, 0.5F).eyeHeight(0.4F).clientTrackingRange(10));
 
 	@SubscribeEvent

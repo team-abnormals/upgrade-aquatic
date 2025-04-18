@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#upgrade_aquatic:has_spawn/nautilus",
+  "spawners": {
+    "type": "upgrade_aquatic:nautilus",
+    "maxCount": 4,
+    "minCount": 1,
+    "weight": 50
+  }
+}

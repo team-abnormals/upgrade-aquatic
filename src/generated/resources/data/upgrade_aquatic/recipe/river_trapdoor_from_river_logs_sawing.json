@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "woodworks"
+        },
+        {
+          "type": "woodworks:config",
+          "value": "sawmill"
+        }
+      ]
+    }
+  ],
+  "type": "woodworks:sawmill",
+  "ingredient": {
+    "tag": "upgrade_aquatic:river_logs"
+  },
+  "result": {
+    "count": 2,
+    "id": "upgrade_aquatic:river_trapdoor"
+  }
+}

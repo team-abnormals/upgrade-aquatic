@@ -33,7 +33,7 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 		mineableWithPickaxe.add(EMBEDDED_AMMONITE.get(), PRISMARINE_ROD_BUNDLE.get(), ELDER_EYE.get());
 		mineableWithHoe.add(RIVER_LEAVES.get());
 
-		for (DeferredHolder<Block, ? extends Block> block : HELPER.getDeferredRegister().getEntries()) {
+		for (DeferredHolder<Block, ? extends Block> block : BLOCKS.getDeferredRegister().getEntries()) {
 			String path = block.getId().getPath();
 			if (path.contains("luminous_prismarine") || (path.contains("dead") && path.contains("coral")) || path.contains("coral_block") || path.contains("tooth") || path.contains("scute") || path.contains("coralstone") || path.contains("kelpy_cobblestone") || path.contains("kelpy_stone")) {
 				mineableWithPickaxe.add(block.get());

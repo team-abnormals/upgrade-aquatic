@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#upgrade_aquatic:has_feature/searocket",
+  "features": "upgrade_aquatic:patch_searocket",
+  "step": "vegetal_decoration"
+}

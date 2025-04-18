@@ -6,15 +6,19 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADecoratedPotPatterns;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.fml.util.ObfuscationReflectionHelper;
 
 public class UACompat {
 
-	public static void registerCompat() {
+	public static void register() {
 		registerCompostables();
 		registerFlammables();
 		registerDispenserBehaviors();
 		UADecoratedPotPatterns.registerDecoratedPotPatterns();
+		ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "isRandomlyTicking");
 	}
 
 	public static void registerCompostables() {
@@ -90,5 +94,6 @@ public class UACompat {
 
 	private static void registerDispenserBehaviors() {
 		DispenserBlock.registerBehavior(Items.TRIDENT, new TridentDispenseBehavior());
+		UADispenseBehaviorRegistry.registerDispenseBehaviors();
 	}
 }

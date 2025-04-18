@@ -7,9 +7,7 @@
           "upgrade_aquatic:boiled_pickerelweed": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:boiled_pickerelweed"
-                ]
+                "items": "upgrade_aquatic:boiled_pickerelweed"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -17,9 +15,7 @@
           "upgrade_aquatic:cooked_lionfish": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:cooked_lionfish"
-                ]
+                "items": "upgrade_aquatic:cooked_lionfish"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -27,9 +23,7 @@
           "upgrade_aquatic:cooked_perch": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:cooked_perch"
-                ]
+                "items": "upgrade_aquatic:cooked_perch"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -37,9 +31,7 @@
           "upgrade_aquatic:cooked_pike": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:cooked_pike"
-                ]
+                "items": "upgrade_aquatic:cooked_pike"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -47,9 +39,7 @@
           "upgrade_aquatic:lionfish": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:lionfish"
-                ]
+                "items": "upgrade_aquatic:lionfish"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -57,9 +47,7 @@
           "upgrade_aquatic:mulberry": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:mulberry"
-                ]
+                "items": "upgrade_aquatic:mulberry"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -67,9 +55,7 @@
           "upgrade_aquatic:mulberry_bread": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:mulberry_bread"
-                ]
+                "items": "upgrade_aquatic:mulberry_bread"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -77,9 +63,7 @@
           "upgrade_aquatic:mulberry_jam_bottle": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:mulberry_jam_bottle"
-                ]
+                "items": "upgrade_aquatic:mulberry_jam_bottle"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -87,9 +71,7 @@
           "upgrade_aquatic:mulberry_pie": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:mulberry_pie"
-                ]
+                "items": "upgrade_aquatic:mulberry_pie"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -97,9 +79,7 @@
           "upgrade_aquatic:perch": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:perch"
-                ]
+                "items": "upgrade_aquatic:perch"
               }
             },
             "trigger": "minecraft:consume_item"
@@ -107,14 +87,13 @@
           "upgrade_aquatic:pike": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:pike"
-                ]
+                "items": "upgrade_aquatic:pike"
               }
             },
             "trigger": "minecraft:consume_item"
           }
         },
+        "indexed_requirements": [],
         "requirements": [
           [
             "upgrade_aquatic:boiled_pickerelweed"

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_moss_coralstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:moss_coralstone"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "upgrade_aquatic:moss_coralstone_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_moss_coralstone"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "upgrade_aquatic:moss_coralstone_wall"
+    ]
+  }
+}

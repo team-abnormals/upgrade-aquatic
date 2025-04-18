@@ -1,0 +1,68 @@
+{
+  "molding": "json",
+  "remolder": [
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "conditions": [
+          {
+            "condition": "minecraft:any_of",
+            "terms": [
+              {
+                "condition": "minecraft:location_check",
+                "predicate": {
+                  "biomes": "minecraft:swamp"
+                }
+              },
+              {
+                "condition": "minecraft:location_check",
+                "predicate": {
+                  "biomes": "minecraft:river"
+                }
+              }
+            ]
+          }
+        ],
+        "name": "upgrade_aquatic:pike",
+        "weight": 11
+      }
+    },
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "conditions": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "biomes": "minecraft:swamp"
+            }
+          }
+        ],
+        "name": "upgrade_aquatic:perch",
+        "weight": 18
+      }
+    },
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "conditions": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "biomes": "minecraft:warm_ocean"
+            }
+          }
+        ],
+        "name": "upgrade_aquatic:lionfish",
+        "weight": 5
+      }
+    }
+  ],
+  "selector": "minecraft:loot_table/gameplay/fishing/fish"
+}

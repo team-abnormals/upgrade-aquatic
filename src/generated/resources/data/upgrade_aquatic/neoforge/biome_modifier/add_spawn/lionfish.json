@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#upgrade_aquatic:has_spawn/lionfish",
+  "spawners": {
+    "type": "upgrade_aquatic:lionfish",
+    "maxCount": 1,
+    "minCount": 1,
+    "weight": 15
+  }
+}

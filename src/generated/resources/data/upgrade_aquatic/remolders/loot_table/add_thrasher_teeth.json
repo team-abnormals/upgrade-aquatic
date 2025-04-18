@@ -1,0 +1,40 @@
+{
+  "molding": "json",
+  "remolder": {
+    "type": "add",
+    "target": "pools[]",
+    "value": {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 0.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "upgrade_aquatic:thrasher_tooth"
+        }
+      ],
+      "name": "upgrade_aquatic:thrasher_teeth",
+      "rolls": {
+        "type": "minecraft:uniform",
+        "max": 1.0,
+        "min": 0.0
+      }
+    }
+  },
+  "selector": {
+    "type": "names",
+    "config": [
+      "minecraft:loot_table/chests/underwater_ruin_big",
+      "minecraft:loot_table/chests/buried_treasure"
+    ]
+  }
+}

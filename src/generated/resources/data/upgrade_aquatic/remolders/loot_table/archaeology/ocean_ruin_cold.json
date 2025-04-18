@@ -1,0 +1,22 @@
+{
+  "molding": "json",
+  "remolder": [
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "upgrade_aquatic:disc_fragment_atlantis"
+      }
+    },
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "name": "upgrade_aquatic:predator_pottery_sherd"
+      }
+    }
+  ],
+  "selector": "minecraft:loot_table/archaeology/ocean_ruin_cold"
+}

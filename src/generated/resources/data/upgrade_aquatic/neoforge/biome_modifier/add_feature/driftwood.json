@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#upgrade_aquatic:has_feature/driftwood",
+  "features": "upgrade_aquatic:driftwood_ocean",
+  "step": "vegetal_decoration"
+}

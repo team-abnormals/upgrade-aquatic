@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:scute_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "minecraft:turtle_scute"
+  }
+}

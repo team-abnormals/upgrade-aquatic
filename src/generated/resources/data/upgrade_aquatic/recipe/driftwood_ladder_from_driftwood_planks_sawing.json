@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "woodworks"
+        },
+        {
+          "type": "woodworks:config",
+          "value": "sawmill"
+        },
+        {
+          "type": "woodworks:config",
+          "value": "wooden_ladders"
+        }
+      ]
+    }
+  ],
+  "type": "woodworks:sawmill",
+  "ingredient": {
+    "item": "upgrade_aquatic:driftwood_planks"
+  },
+  "result": {
+    "count": 1,
+    "id": "upgrade_aquatic:driftwood_ladder"
+  }
+}

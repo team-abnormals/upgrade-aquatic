@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "caverns_and_chasms"
+    }
+  ],
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "upgrade_aquatic:kelpy_cobblestone"
+  },
+  "result": {
+    "count": 2,
+    "id": "upgrade_aquatic:kelpy_cobblestone_tile_slab"
+  }
+}

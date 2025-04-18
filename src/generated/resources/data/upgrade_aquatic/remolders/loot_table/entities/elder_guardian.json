@@ -1,0 +1,26 @@
+{
+  "molding": "json",
+  "remolder": {
+    "type": "add",
+    "target": "pools[]",
+    "value": {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "upgrade_aquatic:elder_eye"
+        }
+      ],
+      "name": "upgrade_aquatic:elder_guardian",
+      "rolls": 1.0
+    }
+  },
+  "selector": "minecraft:loot_table/entities/elder_guardian"
+}

@@ -4,7 +4,6 @@ import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.decoration.PaintingVariant;
 
 public class UAPaintingVariants {
@@ -14,10 +13,10 @@ public class UAPaintingVariants {
 	public static final ResourceKey<PaintingVariant> COIL = createKey("coil");
 
 	public static void bootstrap(BootstrapContext<PaintingVariant> context) {
-		register(context, SIGHTLESS, 64, 32);
-		register(context, MONUMENT, 64, 48);
-		register(context, UTENSIL, 16, 16);
-		register(context, COIL, 48, 48);
+		register(context, SIGHTLESS, 4, 2);
+		register(context, MONUMENT, 4, 3);
+		register(context, UTENSIL, 1, 1);
+		register(context, COIL, 3, 4);
 	}
 
 	private static ResourceKey<PaintingVariant> createKey(String name) {

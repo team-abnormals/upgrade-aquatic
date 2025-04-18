@@ -1,0 +1,32 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "blueprint:and",
+      "values": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "woodworks"
+        },
+        {
+          "type": "woodworks:config",
+          "value": "wooden_chests"
+        }
+      ]
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_trapped_chest",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:river_chest"
+    },
+    {
+      "item": "minecraft:tripwire_hook"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "upgrade_aquatic:trapped_river_chest"
+  }
+}

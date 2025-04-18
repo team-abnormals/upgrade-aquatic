@@ -7,9 +7,7 @@
           "upgrade_aquatic:glow_squid_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:glow_squid_bucket"
-                ]
+                "items": "upgrade_aquatic:glow_squid_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -17,9 +15,7 @@
           "upgrade_aquatic:jellyfish_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:jellyfish_bucket"
-                ]
+                "items": "upgrade_aquatic:jellyfish_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -27,9 +23,7 @@
           "upgrade_aquatic:lionfish_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:lionfish_bucket"
-                ]
+                "items": "upgrade_aquatic:lionfish_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -37,9 +31,7 @@
           "upgrade_aquatic:nautilus_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:nautilus_bucket"
-                ]
+                "items": "upgrade_aquatic:nautilus_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -47,9 +39,7 @@
           "upgrade_aquatic:perch_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:perch_bucket"
-                ]
+                "items": "upgrade_aquatic:perch_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -57,9 +47,7 @@
           "upgrade_aquatic:pike_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:pike_bucket"
-                ]
+                "items": "upgrade_aquatic:pike_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -67,9 +55,7 @@
           "upgrade_aquatic:squid_bucket": {
             "conditions": {
               "item": {
-                "items": [
-                  "upgrade_aquatic:squid_bucket"
-                ]
+                "items": "upgrade_aquatic:squid_bucket"
               }
             },
             "trigger": "minecraft:filled_bucket"
@@ -89,7 +75,8 @@
               "upgrade_aquatic:jellyfish_bucket"
             ]
           }
-        ]
+        ],
+        "should_replace_requirements": false
       }
     }
   ],

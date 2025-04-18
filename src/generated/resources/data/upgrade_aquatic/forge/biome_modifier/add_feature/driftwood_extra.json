@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "#upgrade_aquatic:has_feature/driftwood_extra",
-  "features": "upgrade_aquatic:driftwood_extra",
-  "step": "vegetal_decoration"
-}

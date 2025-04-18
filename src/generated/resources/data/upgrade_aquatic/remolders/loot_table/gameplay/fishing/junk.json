@@ -1,0 +1,50 @@
+{
+  "molding": "json",
+  "remolder": [
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "functions": [
+          {
+            "add": false,
+            "count": 5.0,
+            "function": "minecraft:set_count"
+          }
+        ],
+        "name": "upgrade_aquatic:driftwood_log",
+        "weight": 10
+      }
+    },
+    {
+      "type": "add",
+      "target": "pools[0].entries[]",
+      "value": {
+        "type": "minecraft:item",
+        "conditions": [
+          {
+            "condition": "minecraft:any_of",
+            "terms": [
+              {
+                "condition": "minecraft:location_check",
+                "predicate": {
+                  "biomes": "minecraft:swamp"
+                }
+              },
+              {
+                "condition": "minecraft:location_check",
+                "predicate": {
+                  "biomes": "minecraft:river"
+                }
+              }
+            ]
+          }
+        ],
+        "name": "upgrade_aquatic:pickerelweed",
+        "weight": 12
+      }
+    }
+  ],
+  "selector": "minecraft:loot_table/gameplay/fishing/junk"
+}

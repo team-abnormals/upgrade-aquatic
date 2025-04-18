@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_flowering_rush": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:flowering_rush"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "upgrade_aquatic:pink_dye_from_flowering_rush"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_flowering_rush"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "upgrade_aquatic:pink_dye_from_flowering_rush"
+    ]
+  }
+}

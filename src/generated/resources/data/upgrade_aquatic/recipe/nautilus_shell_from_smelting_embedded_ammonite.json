@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "group": "nautilus_shell",
+  "ingredient": {
+    "item": "upgrade_aquatic:embedded_ammonite"
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:nautilus_shell"
+  }
+}

@@ -5,11 +5,12 @@ import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.item.JellyfishSpawnEggItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class UAItemSubRegistryHelper extends ItemSubRegistryHelper {
 
 	public UAItemSubRegistryHelper(RegistryHelper parent) {
-		super(parent);
+		super(parent, (DeferredRegister.Items) parent.getItemSubHelper().getDeferredRegister());
 	}
 
 	public DeferredItem<JellyfishSpawnEggItem> createJellyfishSpawnEggItem(String entityName, int primaryColor, int secondaryColor) {

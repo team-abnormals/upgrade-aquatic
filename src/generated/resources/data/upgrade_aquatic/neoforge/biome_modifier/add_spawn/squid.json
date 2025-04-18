@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#upgrade_aquatic:has_spawn/squid",
+  "spawners": {
+    "type": "minecraft:squid",
+    "maxCount": 4,
+    "minCount": 1,
+    "weight": 2
+  }
+}
