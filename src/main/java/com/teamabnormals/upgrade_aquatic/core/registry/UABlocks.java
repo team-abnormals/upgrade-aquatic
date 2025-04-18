@@ -26,9 +26,9 @@ import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneBlock
 import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneSlabBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneStairsBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneWallBlock;
-import com.teamabnormals.upgrade_aquatic.common.block.grower.RiverTreeGrower;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.UAConstants;
+import com.teamabnormals.upgrade_aquatic.core.other.UATreeGrowers;
 import net.minecraft.Util;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -59,7 +59,6 @@ import java.util.function.Supplier;
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
-@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class UABlocks {
 	public static final BlockSubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getBlockSubHelper();
 
@@ -406,7 +405,7 @@ public class UABlocks {
 	public static final DeferredBlock<Block> RIVER_LOG = HELPER.createBlock("river_log", () -> new LogBlock(STRIPPED_RIVER_LOG, UAProperties.RIVER_WOOD.log()));
 	public static final DeferredBlock<Block> RIVER_WOOD = HELPER.createBlock("river_wood", () -> new LogBlock(STRIPPED_RIVER_WOOD, UAProperties.RIVER_WOOD.log()));
 	public static final DeferredBlock<Block> RIVER_LEAVES = HELPER.createBlock("river_leaves", () -> new LeavesBlock(UAProperties.RIVER_WOOD.leaves()));
-	public static final DeferredBlock<Block> RIVER_SAPLING = HELPER.createBlock("river_sapling", () -> new SaplingBlock(new RiverTreeGrower(), UAProperties.RIVER_WOOD.sapling()));
+	public static final DeferredBlock<Block> RIVER_SAPLING = HELPER.createBlock("river_sapling", () -> new SaplingBlock(UATreeGrowers.RIVER, UAProperties.RIVER_WOOD.sapling()));
 	public static final DeferredBlock<Block> POTTED_RIVER_SAPLING = HELPER.createBlockNoItem("potted_river_sapling", () -> new FlowerPotBlock(RIVER_SAPLING.get(), PropertyUtil.flowerPot()));
 	public static final DeferredBlock<Block> RIVER_PLANKS = HELPER.createBlock("river_planks", () -> new Block(UAProperties.RIVER_WOOD.planks()));
 	public static final DeferredBlock<Block> RIVER_STAIRS = HELPER.createBlock("river_stairs", () -> new StairBlock(RIVER_PLANKS.get().defaultBlockState(), UAProperties.RIVER_WOOD.planks()));

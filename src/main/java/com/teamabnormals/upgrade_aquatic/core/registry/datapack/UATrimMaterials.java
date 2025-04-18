@@ -24,7 +24,7 @@ public class UATrimMaterials {
 	}
 
 	private static ResourceKey<TrimMaterial> createKey(String name) {
-		return ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name));
+		return ResourceKey.create(Registries.TRIM_MATERIAL, UpgradeAquatic.location(name));
 	}
 
 	private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> key, Item item, Style style, Map<Holder<ArmorMaterial>, String> overrides) {

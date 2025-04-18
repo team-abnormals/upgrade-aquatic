@@ -16,7 +16,7 @@ public class UADecoratedPotPatterns {
 	public static final DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> PREDATOR = register("predator_pottery_pattern");
 
 	public static DeferredHolder<DecoratedPotPattern, DecoratedPotPattern> register(String name) {
-		return DECORATED_POT_PATTERNS.register(name, () -> new DecoratedPotPattern(ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name)));
+		return DECORATED_POT_PATTERNS.register(name, () -> new DecoratedPotPattern(UpgradeAquatic.location(name)));
 	}
 
 	public static void registerDecoratedPotPatterns() {

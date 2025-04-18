@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish;
 
 import com.google.common.collect.ImmutableMap;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.util.JellyfishSizeMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -13,6 +14,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
@@ -43,17 +46,19 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 	}
 
 	@Override
-	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		super.addAdditionalSaveDataSharedWithBucket(compoundTag);
-		compoundTag.putInt("JellyColor", this.getColor());
-		compoundTag.putFloat("Size", this.getSize());
+	public void saveToBucketTag(ItemStack stack) {
+		super.saveToBucketTag(stack);
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> {
+			tag.putInt("JellyColor", this.getColor());
+			tag.putFloat("Size", this.getSize());
+		});
 	}
 
 	@Override
-	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		super.readAdditionalSaveDataSharedWithBucket(compoundTag);
-		this.setColor(compoundTag.getInt("JellyColor"));
-		this.setSize(compoundTag.getFloat("Size"), false);
+	public void loadFromBucketTag(CompoundTag tag) {
+		super.loadFromBucketTag(tag);
+		this.setColor(tag.getInt("JellyColor"));
+		this.setSize(tag.getFloat("Size"), false);
 	}
 
 	@Override
@@ -64,17 +69,12 @@ public abstract class ColoredSizableJellyfish extends AbstractJellyfish {
 		RandomSource rand = this.getRandom();
 		int color = rand.nextInt(3);
 		float size = this.getNaturalSizeMap().randomSize(rand);
-		boolean fromBucket = this.fromBucket();
-		if (!(dataTag != null && fromBucket)) {
-			if (spawnDataIn instanceof SpawnData spawnData) {
-				size = spawnData.size;
-				color = spawnData.color;
-			} else {
-				if (!fromBucket) {
-					spawnDataIn = new SpawnData(size, color);
-					updateSize = true;
-				}
-			}
+		if (spawnDataIn instanceof SpawnData spawnData) {
+			size = spawnData.size;
+			color = spawnData.color;
+		} else {
+			spawnDataIn = new SpawnData(size, color);
+			updateSize = true;
 		}
 
 		this.setSize(size, updateSize);

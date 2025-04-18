@@ -10,6 +10,7 @@ import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADamageTypes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.IntArrayTag;
@@ -93,12 +94,12 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 		this.addAdditionalSaveDataSharedWithBucket(compound);
 	}
 
-	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		this.setCooldown(compoundTag.getInt("CooldownTicks"));
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag tag) {
+		this.setCooldown(tag.getInt("CooldownTicks"));
 	}
 
-	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		compoundTag.putInt("CooldownTicks", this.getCooldown());
+	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag tag) {
+		tag.putInt("CooldownTicks", this.getCooldown());
 	}
 
 	@Override
@@ -244,7 +245,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	@SuppressWarnings("deprecation")
 	public void saveToBucketTag(ItemStack bucket) {
 		super.saveToBucketTag(bucket);
-		CompoundTag compoundTag = bucket.getOrCreateTag();
+		CompoundTag compoundTag = bucket.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
 		compoundTag.putString("EntityType", this.level().registryAccess().registryOrThrow(Registries.ENTITY_TYPE).getKey(this.getType()).toString());
 		compoundTag.put("JellyfishDisplayTag", this.getBucketDisplayInfo().write());
 		this.addAdditionalSaveDataSharedWithBucket(compoundTag);

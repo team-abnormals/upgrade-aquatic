@@ -13,7 +13,6 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -96,7 +95,7 @@ public class CoralstoneSlabBlock extends SlabBlock {
 			}
 		}
 	}
-	
+
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (stack.is(Tags.Items.TOOLS_SHEAR) && state.getBlock() != UABlocks.CORALSTONE_SLAB.get()) {
@@ -108,7 +107,7 @@ public class CoralstoneSlabBlock extends SlabBlock {
 		}
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
-	
+
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return super.getStateForPlacement(context).setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()));

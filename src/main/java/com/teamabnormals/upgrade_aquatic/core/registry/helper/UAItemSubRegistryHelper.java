@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.core.registry.util;
+package com.teamabnormals.upgrade_aquatic.core.registry.helper;
 
 import com.teamabnormals.blueprint.core.util.registry.ItemSubRegistryHelper;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 public class UAItemSubRegistryHelper extends ItemSubRegistryHelper {
 
 	public UAItemSubRegistryHelper(RegistryHelper parent) {
-		super(parent, parent.getItemSubHelper().getDeferredRegister());
+		super(parent);
 	}
 
 	public DeferredItem<JellyfishSpawnEggItem> createJellyfishSpawnEggItem(String entityName, int primaryColor, int secondaryColor) {

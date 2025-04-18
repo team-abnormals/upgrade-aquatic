@@ -32,7 +32,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class UAFeatures {
 	public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(Registries.FEATURE, UpgradeAquatic.MOD_ID);
 	public static final DeferredRegister<TreeDecoratorType<?>> TREE_DECORATORS = DeferredRegister.create(Registries.TREE_DECORATOR_TYPE, UpgradeAquatic.MOD_ID);
@@ -75,7 +74,7 @@ public class UAFeatures {
 		}
 
 		public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name) {
-			return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name));
+			return ResourceKey.create(Registries.CONFIGURED_FEATURE, UpgradeAquatic.location(name));
 		}
 
 		public static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
@@ -127,7 +126,7 @@ public class UAFeatures {
 		}
 
 		public static ResourceKey<PlacedFeature> createKey(String name) {
-			return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name));
+			return ResourceKey.create(Registries.PLACED_FEATURE, UpgradeAquatic.location(name));
 		}
 
 		public static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> modifiers) {

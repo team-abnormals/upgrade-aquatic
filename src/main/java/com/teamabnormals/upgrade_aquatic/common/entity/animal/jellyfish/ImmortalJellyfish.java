@@ -49,15 +49,15 @@ public class ImmortalJellyfish extends AbstractJellyfish {
 	}
 
 	@Override
-	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		super.readAdditionalSaveDataSharedWithBucket(compoundTag);
-		this.healCooldown = compoundTag.getInt("HealCooldown");
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag tag) {
+		super.readAdditionalSaveDataSharedWithBucket(tag);
+		this.healCooldown = tag.getInt("HealCooldown");
 	}
 
 	@Override
-	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		super.addAdditionalSaveDataSharedWithBucket(compoundTag);
-		compoundTag.putInt("HealCooldown", this.healCooldown);
+	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag tag) {
+		super.addAdditionalSaveDataSharedWithBucket(tag);
+		tag.putInt("HealCooldown", this.healCooldown);
 	}
 
 	@Override

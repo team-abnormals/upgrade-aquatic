@@ -39,9 +39,9 @@ public class UAEntityTypes {
 	public static final DeferredHolder<EntityType<?>, EntityType<Lionfish>> LIONFISH = HELPER.createEntity("lionfish", Lionfish::new, MobCategory.WATER_AMBIENT, builder -> builder
 			.sized(0.6F, 0.5F).eyeHeight(0.425F).clientTrackingRange(4));
 	public static final DeferredHolder<EntityType<?>, EntityType<Thrasher>> THRASHER = HELPER.createEntity("thrasher", Thrasher::new, MobCategory.MONSTER, builder -> builder
-			.sized(1.6F, 0.9F).clientTrackingRange(8));
+			.sized(1.6F, 0.9F).eyeHeight(0.65F).ridingOffset(0.5F).clientTrackingRange(8));
 	public static final DeferredHolder<EntityType<?>, EntityType<GreatThrasher>> GREAT_THRASHER = HELPER.createEntity("great_thrasher", GreatThrasher::new, MobCategory.MONSTER, builder -> builder
-			.sized(2.8F, 1.575F).clientTrackingRange(8));
+			.sized(2.8F, 1.575F).eyeHeight(0.65F).ridingOffset(0.875F).clientTrackingRange(8));
 	public static final DeferredHolder<EntityType<?>, EntityType<Flare>> FLARE = HELPER.createEntity("flare", Flare::new, MobCategory.MONSTER, builder -> builder
 			.sized(0.9F, 0.5F).eyeHeight(0.175F).passengerAttachments(0.3375F).ridingOffset(-0.125F).clientTrackingRange(8));
 	public static final DeferredHolder<EntityType<?>, EntityType<Goose>> GOOSE = HELPER.createEntity("goose", Goose::new, MobCategory.CREATURE, builder -> builder

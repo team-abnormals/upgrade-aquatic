@@ -33,7 +33,7 @@ public class UAItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(ItemTags.CHEST_BOATS).add(UAItems.DRIFTWOOD_BOAT.getSecond().get(), UAItems.RIVER_BOAT.getSecond().get());
 		this.tag(BlueprintItemTags.FURNACE_BOATS).add(UAItems.DRIFTWOOD_FURNACE_BOAT.get(), UAItems.RIVER_FURNACE_BOAT.get());
 		this.tag(BlueprintItemTags.LARGE_BOATS).add(UAItems.LARGE_DRIFTWOOD_BOAT.get(), UAItems.LARGE_RIVER_BOAT.get());
-		
+
 		this.tag(ItemTags.TRIM_MATERIALS).add(UAItems.THRASHER_TOOTH.get());
 
 		CoralType.values().forEach(coralType -> {

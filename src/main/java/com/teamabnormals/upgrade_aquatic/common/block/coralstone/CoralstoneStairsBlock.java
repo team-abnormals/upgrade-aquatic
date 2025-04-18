@@ -13,7 +13,6 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -96,16 +95,16 @@ public class CoralstoneStairsBlock extends StairBlock {
 			}
 		}
 	}
-	
+
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (stack.is(Tags.Items.TOOLS_SHEAR) && state.getBlock() != UABlocks.CORALSTONE_STAIRS.get()) {
 			BlockState newState = UABlocks.CORALSTONE_STAIRS.get().defaultBlockState()
-			.setValue(FACING, state.getValue(FACING))
-			.setValue(HALF, state.getValue(HALF))
-			.setValue(SHAPE, state.getValue(SHAPE))
-			.setValue(WATERLOGGED, state.getValue(WATERLOGGED)
-			);
+					.setValue(FACING, state.getValue(FACING))
+					.setValue(HALF, state.getValue(HALF))
+					.setValue(SHAPE, state.getValue(SHAPE))
+					.setValue(WATERLOGGED, state.getValue(WATERLOGGED)
+					);
 			level.playSound(null, pos, SoundEvents.MOOSHROOM_SHEAR, SoundSource.PLAYERS, 1.0F, 0.8F);
 			stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
 			level.setBlock(pos, newState, 2);
@@ -113,7 +112,7 @@ public class CoralstoneStairsBlock extends StairBlock {
 		}
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
-	
+
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		return super.getStateForPlacement(context).setValue(POWERED, context.getLevel().hasNeighborSignal(context.getClickedPos()));

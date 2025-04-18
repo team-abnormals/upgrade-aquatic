@@ -3,15 +3,19 @@ package com.teamabnormals.upgrade_aquatic.core.other;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.PikeType;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataSerializer;
 import net.minecraft.world.entity.EntityDimensions;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NeoForgeRegistries.Keys;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public final class UADataSerializers {
-	public static final DeferredRegister<EntityDataSerializer<?>> SERIALIZERS = DeferredRegister.create(Keys.ENTITY_DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
+	public static final DeferredRegister<EntityDataSerializer<?>> SERIALIZERS = DeferredRegister.create(NeoForgeRegistries.ENTITY_DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
 
-	public static final EntityDataSerializer<PikeType> PIKE_TYPE = new EntityDataSerializer<PikeType>() {
+	public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<PikeType>> PIKE_TYPE = SERIALIZERS.register("pike_type", () -> new EntityDataSerializer<PikeType>() {
 		public void write(FriendlyByteBuf buf, PikeType value) {
 			buf.writeEnum(value);
 		}
@@ -20,33 +24,22 @@ public final class UADataSerializers {
 			return buf.readEnum(PikeType.class);
 		}
 
+		@Override
+		public StreamCodec<? super RegistryFriendlyByteBuf, PikeType> codec() {
+			return null;
+		}
+
 		public PikeType copy(PikeType type) {
 			return type;
 		}
-	};
+	});
 
-	//TODO: Move to AC
-	public static final EntityDataSerializer<EntityDimensions> ENTITY_SIZE = new EntityDataSerializer<EntityDimensions>() {
-		@Override
-		public void write(FriendlyByteBuf buf, EntityDimensions value) {
-			buf.writeFloat(value.width);
-			buf.writeFloat(value.height);
-			buf.writeBoolean(value.fixed);
-		}
+	public static final StreamCodec<RegistryFriendlyByteBuf, EntityDimensions> DIRECT_STREAM_CODEC = StreamCodec.composite(
+			ByteBufCodecs.FLOAT, EntityDimensions::width,
+			ByteBufCodecs.FLOAT, EntityDimensions::height,
+			ByteBufCodecs.BOOL, EntityDimensions::fixed,
+			EntityDimensions::new
+	);
 
-		@Override
-		public EntityDimensions read(FriendlyByteBuf buf) {
-			return new EntityDimensions(buf.readFloat(), buf.readFloat(), buf.readBoolean());
-		}
-
-		@Override
-		public EntityDimensions copy(EntityDimensions value) {
-			return value;
-		}
-	};
-
-	static {
-		SERIALIZERS.register("pike_type", () -> PIKE_TYPE);
-		SERIALIZERS.register("entity_size", () -> ENTITY_SIZE);
-	}
+	public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<EntityDimensions>> ENTITY_SIZE = SERIALIZERS.register("entity_size", () -> EntityDataSerializer.forValueType(DIRECT_STREAM_CODEC));
 }

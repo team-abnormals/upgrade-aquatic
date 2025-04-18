@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.data.server.tags;
 
+import com.teamabnormals.blueprint.core.other.tags.BlueprintEntityTypeTags;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.tags.UAEntityTypeTags;
 import net.minecraft.core.HolderLookup.Provider;
@@ -21,10 +22,16 @@ public class UAEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
 	@Override
 	public void addTags(Provider provider) {
+		this.tag(EntityTypeTags.AQUATIC).add(NAUTILUS.get(), PIKE.get(), PERCH.get(), LIONFISH.get(), THRASHER.get(), GREAT_THRASHER.get()).addTag(UAEntityTypeTags.JELLYFISH);
+		this.tag(EntityTypeTags.CAN_BREATHE_UNDER_WATER).add(NAUTILUS.get(), PIKE.get(), PERCH.get(), LIONFISH.get(), THRASHER.get(), GREAT_THRASHER.get()).addTag(UAEntityTypeTags.JELLYFISH);
+		this.tag(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH).add(NAUTILUS.get(), PIKE.get(), PERCH.get(), LIONFISH.get(), THRASHER.get(), GREAT_THRASHER.get()).addTag(UAEntityTypeTags.JELLYFISH);
+
 		this.tag(EntityTypeTags.AXOLOTL_HUNT_TARGETS).add(PIKE.get(), PERCH.get(), LIONFISH.get());
 		this.tag(EntityTypeTags.AXOLOTL_ALWAYS_HOSTILES).add(THRASHER.get(), GREAT_THRASHER.get());
 
 		this.tag(UAEntityTypeTags.JELLYFISH).add(BOX_JELLYFISH.get(), CASSIOPEA_JELLYFISH.get(), IMMORTAL_JELLYFISH.get());
 		this.tag(UAEntityTypeTags.THRASHER_SONAR_TARGETS).add(EntityType.COD, EntityType.SALMON, EntityType.TROPICAL_FISH, EntityType.DOLPHIN, EntityType.AXOLOTL, PERCH.get(), PIKE.get(), NAUTILUS.get()).addTag(UAEntityTypeTags.JELLYFISH);
+
+		this.tag(BlueprintEntityTypeTags.FISHES).add(PIKE.get(), PERCH.get(), LIONFISH.get());
 	}
 }

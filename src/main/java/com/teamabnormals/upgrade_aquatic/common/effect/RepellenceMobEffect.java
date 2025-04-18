@@ -5,7 +5,6 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 
 public class RepellenceMobEffect extends MobEffect {
 
@@ -14,20 +13,18 @@ public class RepellenceMobEffect extends MobEffect {
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		for (LivingEntity livingEntity : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(0.3D))) {
-			if (livingEntity.isAlive() && livingEntity != entity) {
-				if (!(livingEntity instanceof Player && ((Player) livingEntity).isCreative())) {
-					livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 70, amplifier + 1));
-					livingEntity.setLastHurtByMob(entity);
-				}
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+		for (LivingEntity living : entity.level().getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(0.3D))) {
+			if (living.isAlive() && living != entity && !living.hasEffect(MobEffects.POISON)) {
+				living.addEffect(new MobEffectInstance(MobEffects.POISON, 70, amplifier + 1));
+				living.setLastHurtByMob(entity);
 			}
 		}
-	}
-
-	@Override
-	public boolean isDurationEffectTick(int duration, int amplifier) {
 		return true;
 	}
 
+	@Override
+	public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
+		return true;
+	}
 }

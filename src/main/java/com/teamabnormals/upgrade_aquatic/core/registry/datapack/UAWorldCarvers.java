@@ -37,7 +37,7 @@ public class UAWorldCarvers {
 		}
 
 		public static ResourceKey<ConfiguredWorldCarver<?>> createKey(String name) {
-			return ResourceKey.create(Registries.CONFIGURED_CARVER, ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name));
+			return ResourceKey.create(Registries.CONFIGURED_CARVER, UpgradeAquatic.location(name));
 		}
 	}
 }

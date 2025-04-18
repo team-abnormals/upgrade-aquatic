@@ -112,7 +112,7 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 			return super.useWithoutItem(state, level, pos, player, hit);
 		}
 	}
-	
+
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		int age = state.getValue(AGE);
@@ -130,10 +130,10 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 			level.setBlock(pos, state.setValue(DOUBLE, false), 2);
 			return ItemInteractionResult.SUCCESS;
 		}
-		
+
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
-	
+
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state) {
 		int i = state.getValue(AGE);

@@ -1,6 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
-import com.mojang.serialization.MapCodec;
 import com.teamabnormals.blueprint.common.block.BlueprintDirectionalBlock;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import net.minecraft.core.BlockPos;
@@ -11,7 +10,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -25,7 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class PickerelweedBlock extends BlueprintDirectionalBlock implements SimpleWaterloggedBlock {
-	
+
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape[] SHAPES = new VoxelShape[]{
 			Block.box(0.0D, 5.0D, 0.0D, 16.0D, 16.0D, 16.0D),
@@ -84,7 +82,7 @@ public class PickerelweedBlock extends BlueprintDirectionalBlock implements Simp
 			}
 		}
 	}
-	
+
 	@Override
 	protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
 		return false;

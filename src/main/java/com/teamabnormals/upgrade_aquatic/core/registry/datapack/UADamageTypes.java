@@ -24,6 +24,6 @@ public class UADamageTypes {
 	}
 
 	public static ResourceKey<DamageType> createKey(String name) {
-		return ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, name));
+		return ResourceKey.create(Registries.DAMAGE_TYPE, UpgradeAquatic.location(name));
 	}
 }

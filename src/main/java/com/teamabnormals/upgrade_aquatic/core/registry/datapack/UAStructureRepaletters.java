@@ -40,8 +40,10 @@ public final class UAStructureRepaletters {
 		context.register(
 				repaletterKey(name),
 				new StructureRepaletterEntry(
-						BlueprintHolderSets.conditional(HolderSet.direct(Stream.of(selector).map(structures::getOrThrow).collect(Collectors.toList())), condition),
-						Optional.empty(), false, new SimpleStructureRepaletter(replacesBlock, replacesWith))
+						// TODO: conditional holder set?
+						HolderSet.direct(Stream.of(selector).map(structures::getOrThrow).collect(Collectors.toList())),
+						Optional.empty(), false,
+						new SimpleStructureRepaletter(replacesBlock, replacesWith))
 		);
 	}
 

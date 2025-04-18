@@ -7,7 +7,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -53,12 +52,12 @@ public class ElderEyeBlock extends BaseEntityBlock implements SimpleWaterloggedB
 				.setValue(WATERLOGGED, false)
 		);
 	}
-	
+
 	@Override
 	protected MapCodec<? extends BaseEntityBlock> codec() {
 		return CODEC;
 	}
-	
+
 	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter p_220053_2_, BlockPos p_220053_3_, CollisionContext p_220053_4_) {
 		return state.getValue(FACING) == Direction.DOWN ? DOWN_BOX_SIZE : BOX_SIZE;

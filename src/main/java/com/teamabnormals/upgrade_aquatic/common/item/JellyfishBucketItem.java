@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.Abstract
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -20,12 +21,11 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
-import java.util.function.Supplier;
 
 public class JellyfishBucketItem extends BucketItem {
 
@@ -35,21 +35,21 @@ public class JellyfishBucketItem extends BucketItem {
 
 	@Override
 	public void checkExtraContent(@Nullable Player player, Level level, ItemStack stack, BlockPos pos) {
-		if (level instanceof ServerLevel) {
-			CompoundTag compoundTag = stack.getTag();
+		if (level instanceof ServerLevel serverLevel) {
+			CompoundTag compoundTag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
 			AbstractJellyfish jellyfish;
-			if (compoundTag != null && compoundTag.contains("EntityType")) {
-				EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.parse(compoundTag.getString("EntityType")));
-				if (type == null) return;
-				Entity entity = type.spawn((ServerLevel) level, stack, null, pos, MobSpawnType.BUCKET, true, false);
+			if (compoundTag.contains("EntityType")) {
+				Optional<EntityType<?>> type = BuiltInRegistries.ENTITY_TYPE.getOptional(ResourceLocation.parse(compoundTag.getString("EntityType")));
+				if (type.isEmpty()) return;
+				Entity entity = type.get().spawn(serverLevel, stack, null, pos, MobSpawnType.BUCKET, true, false);
 				if (!(entity instanceof AbstractJellyfish)) return;
 				jellyfish = (AbstractJellyfish) entity;
 			} else {
 				List<JellyfishRegistry.JellyfishEntry<?>> jellies = JellyfishRegistry.collectJelliesMatchingRarity(Rarity.COMMON);
-				jellyfish = jellies.get(new Random().nextInt(jellies.size())).jellyfish().get().spawn((ServerLevel) level, stack, null, pos, MobSpawnType.BUCKET, true, false);
+				jellyfish = jellies.get(new Random().nextInt(jellies.size())).jellyfish().get().spawn(serverLevel, stack, null, pos, MobSpawnType.BUCKET, true, false);
 				if (jellyfish == null) return;
 			}
-			jellyfish.loadFromBucketTag(stack.getOrCreateTag());
+			jellyfish.loadFromBucketTag(compoundTag);
 			jellyfish.setFromBucket(true);
 		}
 	}
@@ -62,8 +62,8 @@ public class JellyfishBucketItem extends BucketItem {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-		CompoundTag compoundTag = stack.getTag();
-		if (compoundTag != null && compoundTag.contains("JellyfishDisplayTag")) {
+		CompoundTag compoundTag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
+		if (compoundTag.contains("JellyfishDisplayTag")) {
 			AbstractJellyfish.BucketDisplayInfo.appendHoverText(tooltip, compoundTag.getCompound("JellyfishDisplayTag"));
 		}
 	}

@@ -31,11 +31,6 @@ public class GreatThrasher extends Thrasher {
 	}
 
 	@Override
-	public double getPassengersRidingOffset() {
-		return 0.875F;
-	}
-
-	@Override
 	protected double getStunDamageThreshold() {
 		return 8.0F;
 	}

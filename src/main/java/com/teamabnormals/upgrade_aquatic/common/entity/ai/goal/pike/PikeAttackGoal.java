@@ -29,10 +29,9 @@ public final class PikeAttackGoal extends MeleeAttackGoal {
 	}
 
 	@Override
-	protected void checkAndPerformAttack(LivingEntity enemy, double distToEnemySqr) {
+	protected void checkAndPerformAttack(LivingEntity enemy) {
 		Pike pike = (Pike) this.mob;
-		double attackReach = this.getAttackReachSqr(enemy);
-		if (distToEnemySqr <= attackReach && this.isTimeToAttack()) {
+		if (this.canPerformAttack(enemy)) {
 			this.resetAttackCooldown();
 			if (pike.getTarget() != null) {
 				if (enemy instanceof AbstractFish || enemy instanceof Animal) {
@@ -59,5 +58,4 @@ public final class PikeAttackGoal extends MeleeAttackGoal {
 	public boolean requiresUpdateEveryTick() {
 		return true;
 	}
-
 }

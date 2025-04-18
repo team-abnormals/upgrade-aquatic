@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.phys.AABB;
 
 import java.util.EnumSet;
+import java.util.Optional;
 
 public class ThrasherFindDetectionPointGoal extends Goal {
 	public Thrasher thrasher;
@@ -41,7 +42,7 @@ public class ThrasherFindDetectionPointGoal extends Goal {
 	@Override
 	public void stop() {
 		if (this.foundPos != null && !this.thrasher.isStunned()) {
-			this.thrasher.setPossibleDetectionPoint(this.foundPos);
+			this.thrasher.setPossibleDetectionPoint(Optional.of(this.foundPos));
 		}
 	}
 

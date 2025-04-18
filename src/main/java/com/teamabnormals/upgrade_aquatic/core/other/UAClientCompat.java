@@ -1,12 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.core.other;
 
-import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColors;
-import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -15,8 +11,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-
-import java.util.Arrays;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class UAClientCompat {
@@ -162,7 +156,7 @@ public class UAClientCompat {
 	public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
 		event.register((x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get(), UABlocks.RIVER_LEAF_PILE.get(), UABlocks.MULBERRY_VINE.get());
 	}
-	
+
 	@SubscribeEvent
 	public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
 		event.register((color, items) -> FoliageColor.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get(), UABlocks.RIVER_LEAF_PILE.get());

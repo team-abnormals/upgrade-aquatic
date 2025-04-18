@@ -46,7 +46,7 @@ public class CoralstoneBlock extends Block {
 		this.growableCoralBlocks = growableCoralBlocks;
 		this.registerDefaultState(this.stateDefinition.any().setValue(POWERED, false));
 	}
-	
+
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 		if (stack.is(Tags.Items.TOOLS_SHEAR) && state.getBlock() != UABlocks.CHISELED_CORALSTONE.get() && state.getBlock() != UABlocks.CORALSTONE.get()) {
@@ -58,7 +58,7 @@ public class CoralstoneBlock extends Block {
 		}
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
-	
+
 	@Override
 	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (!worldIn.isAreaLoaded(pos, 3)) return;

@@ -1,6 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.common.levelgen.treedecorators;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.teamabnormals.upgrade_aquatic.common.block.MulberryVineBlock;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;

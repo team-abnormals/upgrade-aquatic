@@ -16,12 +16,15 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.SynchedEntityData.Builder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -67,7 +70,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Pike extends BucketableWaterAnimal {
-	private static final EntityDataAccessor<PikeType> TYPE = SynchedEntityData.defineId(Pike.class, UADataSerializers.PIKE_TYPE);
+	private static final EntityDataAccessor<PikeType> TYPE = SynchedEntityData.defineId(Pike.class, UADataSerializers.PIKE_TYPE.get());
 	private static final EntityDataAccessor<Boolean> DROP_ITEM = SynchedEntityData.defineId(Pike.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> MOVING = SynchedEntityData.defineId(Pike.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> LIT = SynchedEntityData.defineId(Pike.class, EntityDataSerializers.BOOLEAN);
@@ -275,20 +278,20 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	@Override
-	public void loadFromBucketTag(CompoundTag dataTag) {
-		super.loadFromBucketTag(dataTag);
-		if (dataTag.contains("BucketVariantTag", 3)) {
-			this.setPikeType(PikeType.getTypeById(dataTag.getInt("BucketVariantTag")));
-			this.dropEatingLootCooldown = dataTag.getInt("EatingLootDropCooldown");
-			if (dataTag.contains("PikeHeldItem")) {
+	public void loadFromBucketTag(CompoundTag tag) {
+		super.loadFromBucketTag(tag);
+		if (tag.contains("BucketVariantTag", 3)) {
+			this.setPikeType(PikeType.getTypeById(tag.getInt("BucketVariantTag")));
+			this.dropEatingLootCooldown = tag.getInt("EatingLootDropCooldown");
+			if (tag.contains("PikeHeldItem")) {
 				this.startUsingItem(InteractionHand.MAIN_HAND);
-				this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(dataTag.getCompound("PikeHeldItem")));
+				this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(tag.getString("PikeHeldItem")))));
 			}
-			if (dataTag.contains("ShouldDropItem")) {
-				this.setToDropItem(dataTag.getBoolean("ShouldDropItem"));
+			if (tag.contains("ShouldDropItem")) {
+				this.setToDropItem(tag.getBoolean("ShouldDropItem"));
 			}
-			if (dataTag.contains("IsLit")) {
-				this.setLit(dataTag.getBoolean("IsLit"));
+			if (tag.contains("IsLit")) {
+				this.setLit(tag.getBoolean("IsLit"));
 			}
 		}
 	}
@@ -345,12 +348,12 @@ public class Pike extends BucketableWaterAnimal {
 
 			@Override
 			protected boolean canUpdatePath() {
-				return super.canUpdatePath() || this.mob.getFeetBlockState().getBlock() instanceof PickerelweedBlock;
+				return super.canUpdatePath() || this.mob.getBlockStateOn().getBlock() instanceof PickerelweedBlock;
 			}
 
 			@Override
 			public boolean isStableDestination(BlockPos pos) {
-				return super.isStableDestination(pos) || this.mob.getFeetBlockState().getBlock() instanceof PickerelweedBlock;
+				return super.isStableDestination(pos) || this.mob.getBlockStateOn().getBlock() instanceof PickerelweedBlock;
 			}
 
 		};
@@ -370,14 +373,14 @@ public class Pike extends BucketableWaterAnimal {
 	public void saveToBucketTag(ItemStack bucket) {
 		super.saveToBucketTag(bucket);
 
-		CompoundTag compoundnbt = bucket.getOrCreateTag();
+		CompoundTag compoundnbt = bucket.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
 		CompoundTag compoundnbt1 = new CompoundTag();
 
 		compoundnbt.putInt("BucketVariantTag", this.getPikeType().id);
 		compoundnbt.putInt("EatingLootDropCooldown", this.dropEatingLootCooldown);
 
 		if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-			this.getItemBySlot(EquipmentSlot.MAINHAND).save(compoundnbt1);
+			this.getItemBySlot(EquipmentSlot.MAINHAND).save(this.level().registryAccess(), compoundnbt1);
 		}
 
 		compoundnbt.put("PikeHeldItem", compoundnbt1);
@@ -443,8 +446,8 @@ public class Pike extends BucketableWaterAnimal {
 
 	private List<ItemStack> generateFishingLoot() {
 		LootParams.Builder builder = (new LootParams.Builder((ServerLevel) this.level())).withParameter(LootContextParams.ORIGIN, this.position()).withParameter(LootContextParams.TOOL, new ItemStack(Items.FISHING_ROD)).withLuck((float) 1 + 1);
-		builder.withParameter(LootContextParams.KILLER_ENTITY, this).withParameter(LootContextParams.THIS_ENTITY, this);
-		LootTable loottable = this.level().getServer().getLootData().getLootTable(this.getRandom().nextFloat() >= 0.1F ? BuiltInLootTables.FISHING_JUNK : BuiltInLootTables.FISHING_TREASURE);
+		builder.withParameter(LootContextParams.ATTACKING_ENTITY, this).withParameter(LootContextParams.THIS_ENTITY, this);
+		LootTable loottable = this.level().getServer().reloadableRegistries().getLootTable(this.getRandom().nextFloat() >= 0.1F ? BuiltInLootTables.FISHING_JUNK : BuiltInLootTables.FISHING_TREASURE);
 		return loottable.getRandomItems(builder.create(LootContextParamSets.FISHING));
 	}
 
@@ -464,12 +467,12 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	@Override
-	public boolean canTakeItem(ItemStack p_213365_1_) {
-		EquipmentSlot equipmentslottype = Mob.getEquipmentSlotForItem(p_213365_1_);
-		if (!this.getItemBySlot(equipmentslottype).isEmpty()) {
+	public boolean canTakeItem(ItemStack stack) {
+		EquipmentSlot slot = this.getEquipmentSlotForItem(stack);
+		if (!this.getItemBySlot(slot).isEmpty()) {
 			return false;
 		} else {
-			return equipmentslottype == EquipmentSlot.MAINHAND && super.canTakeItem(p_213365_1_);
+			return slot == EquipmentSlot.MAINHAND && super.canTakeItem(stack);
 		}
 	}
 
@@ -500,20 +503,21 @@ public class Pike extends BucketableWaterAnimal {
 		this.setToDropItem(true);
 	}
 
-	@Override
-	public void positionRider(Entity passenger, Entity.MoveFunction function) {
-		if (passenger instanceof AbstractFish || passenger instanceof Animal) {
-			float distance = 0.7F;
-
-			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
-			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
-
-			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY() + this.getPassengersRidingOffset() + this.getFirstPassenger().getMyRidingOffset(), this.getZ() + dz);
-			function.accept(passenger, riderPos.x, riderPos.y, riderPos.z);
-		} else {
-			super.positionRider(passenger);
-		}
-	}
+	// TODO: Reimplement with EntityAttachments
+//	@Override
+//	public void positionRider(Entity passenger, Entity.MoveFunction function) {
+//		if (passenger instanceof AbstractFish || passenger instanceof Animal) {
+//			float distance = 0.7F;
+//
+//			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+//			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+//
+//			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY() + this.getPassengersRidingOffset() + this.getFirstPassenger().getMyRidingOffset(), this.getZ() + dz);
+//			function.accept(passenger, riderPos.x, riderPos.y, riderPos.z);
+//		} else {
+//			super.positionRider(passenger);
+//		}
+//	}
 
 	@Override
 	public ItemStack getPickedResult(HitResult target) {

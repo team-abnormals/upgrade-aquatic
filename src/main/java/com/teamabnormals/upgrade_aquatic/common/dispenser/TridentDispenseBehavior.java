@@ -2,10 +2,8 @@ package com.teamabnormals.upgrade_aquatic.common.dispenser;
 
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.ProjectileDispenseBehavior;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TridentItem;
@@ -14,11 +12,11 @@ import net.minecraft.world.level.block.LevelEvent;
 public class TridentDispenseBehavior extends ProjectileDispenseBehavior {
 
 	private boolean success = true;
-	
+
 	public TridentDispenseBehavior() {
 		super(Items.TRIDENT);
 	}
-	
+
 	public boolean isSuccess() {
 		return this.success;
 	}
@@ -31,7 +29,8 @@ public class TridentDispenseBehavior extends ProjectileDispenseBehavior {
 	public ItemStack execute(BlockSource source, ItemStack stack) {
 		if (!TridentItem.isTooDamagedToUse(stack)) {
 			this.setSuccess(true);
-			stack.hurtAndBreak(1, source.level(), null, item -> {});
+			stack.hurtAndBreak(1, source.level(), null, item -> {
+			});
 			return super.execute(source, stack);
 		} else {
 			this.setSuccess(false);

@@ -10,7 +10,6 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.Set;
 
-@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class UABlockEntityTypes {
 	public static final BlockEntitySubRegistryHelper HELPER = UpgradeAquatic.REGISTRY_HELPER.getBlockEntitySubHelper();
 

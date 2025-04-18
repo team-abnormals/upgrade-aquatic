@@ -20,6 +20,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundAwardStatsPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,10 +29,8 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stat;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.StatsCounter;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -48,9 +47,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.item.crafting.SmeltingRecipe;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -59,6 +59,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
@@ -169,9 +170,9 @@ public class UAEvents {
 			Level level = event.getEntity().level();
 			for (ItemEntity itemEntity : event.getDrops()) {
 				ItemStack stack = itemEntity.getItem();
-				Optional<SmeltingRecipe> optional = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SimpleContainer(stack), level);
+				Optional<RecipeHolder<SmeltingRecipe>> optional = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(stack), level);
 				if (optional.isPresent()) {
-					ItemStack itemstack = optional.get().getResultItem(level.registryAccess());
+					ItemStack itemstack = optional.get().value().getResultItem(level.registryAccess());
 					if (!itemstack.isEmpty()) {
 						ItemStack itemstack1 = itemstack.copy();
 						itemstack1.setCount(stack.getCount() * itemstack.getCount());
@@ -185,19 +186,22 @@ public class UAEvents {
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Post event) {
 		Player player = event.getEntity();
-		if (!player.level().isClientSide && player.level().getGameTime() % 5 == 0 && player instanceof ServerPlayer serverPlayer) {
+		Level level = player.level();
+		if (!level.isClientSide() && level.getGameTime() % 5 == 0 && player instanceof ServerPlayer serverPlayer) {
 			StatsCounter statisticsManager = serverPlayer.getStats();
 			Object2IntMap<Stat<?>> object2intmap = new Object2IntOpenHashMap<>();
 			object2intmap.put(Stats.CUSTOM.get(Stats.TIME_SINCE_REST), statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)));
 			serverPlayer.connection.send(new ClientboundAwardStatsPacket(object2intmap));
 		}
+
 		ItemStack headSlotStack = player.getItemBySlot(EquipmentSlot.HEAD);
-		if (event.phase == Phase.END && player.isEffectiveAi() && !headSlotStack.isEmpty() && headSlotStack.is(Items.TURTLE_HELMET) && UAConfig.COMMON.turtleShellRework.get()) {
-			int timeTillDamage = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) > 0 ? 40 * (1 + EnchantmentHelper.getItemEnchantmentLevel(Enchantments.UNBREAKING, headSlotStack) / 2) : 40;
-			if (player.isEyeInFluid(FluidTags.WATER)) {
+		if (player.isEffectiveAi() && !headSlotStack.isEmpty() && headSlotStack.is(Items.TURTLE_HELMET) && UAConfig.COMMON.turtleShellRework.get()) {
+			int enchLevel = headSlotStack.getEnchantmentLevel(level.registryAccess().registryOrThrow(Registries.ENCHANTMENT).getHolderOrThrow(Enchantments.UNBREAKING));
+			int timeTillDamage = enchLevel > 0 ? 40 * (1 + enchLevel / 2) : 40;
+			if (player.isEyeInFluidType(NeoForgeMod.WATER_TYPE.value())) {
 				player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, 100));
-				if (player.level().getGameTime() % timeTillDamage == 0) {
-					headSlotStack.hurtAndBreak(1, player, (p_213341_0_) -> p_213341_0_.broadcastBreakEvent(EquipmentSlot.HEAD));
+				if (level.getGameTime() % timeTillDamage == 0) {
+					headSlotStack.hurtAndBreak(1, player, EquipmentSlot.HEAD);
 				}
 			}
 		}

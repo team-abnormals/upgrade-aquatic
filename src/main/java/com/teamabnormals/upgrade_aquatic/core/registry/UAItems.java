@@ -2,20 +2,19 @@ package com.teamabnormals.upgrade_aquatic.core.registry;
 
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.item.BlueprintBoatItem;
-import com.teamabnormals.blueprint.common.item.BlueprintRecordItem;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.common.item.*;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAJukeboxSongs;
-import com.teamabnormals.upgrade_aquatic.core.registry.util.UAItemSubRegistryHelper;
+import com.teamabnormals.upgrade_aquatic.core.registry.helper.UAItemSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.integration.boatload.UABoatTypes;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -31,7 +30,6 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.function.Predicate;
 
-import static com.teamabnormals.blueprint.core.util.item.ItemStackUtil.is;
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
@@ -99,7 +97,7 @@ public class UAItems {
 				.addItemsAfter(of(Items.PRISMARINE_SHARD), PRISMARINE_ROD)
 				.addItemsAfter(of(Items.NAUTILUS_SHELL), THRASHER_TOOTH)
 				.addItemsAfter(of(Items.HEART_OF_THE_SEA), DISC_FRAGMENT_ATLANTIS)
-				.addItemsAlphabetically(stack -> stack.is(ItemTags.DECORATED_POT_SHERDS), PREDATOR_POTTERY_SHERD)
+				.addPotterySherdsAlphabetically(PREDATOR_POTTERY_SHERD)
 				.tab(TOOLS_AND_UTILITIES)
 				.addItemsAfter(of(Items.SALMON_BUCKET), PIKE_BUCKET, PERCH_BUCKET, LIONFISH_BUCKET)
 				.addItemsAfter(of(Items.AXOLOTL_BUCKET), NAUTILUS_BUCKET, SQUID_BUCKET, GLOW_SQUID_BUCKET)
@@ -109,19 +107,11 @@ public class UAItems {
 				.addItemsBefore(modLoaded(Items.BAMBOO_RAFT, "boatload"), RIVER_FURNACE_BOAT, LARGE_RIVER_BOAT)
 				.addItemsAfter(of(Items.MUSIC_DISC_5), MUSIC_DISC_ATLANTIS)
 				.tab(SPAWN_EGGS)
-				.addItemsAlphabetically(is(SpawnEggItem.class), NAUTILUS_SPAWN_EGG, PIKE_SPAWN_EGG, LIONFISH_SPAWN_EGG, PERCH_SPAWN_EGG, THRASHER_SPAWN_EGG, GREAT_THRASHER_SPAWN_EGG);
+				.addSpawnEggsAlphabetically(NAUTILUS_SPAWN_EGG, PIKE_SPAWN_EGG, LIONFISH_SPAWN_EGG, PERCH_SPAWN_EGG, THRASHER_SPAWN_EGG, GREAT_THRASHER_SPAWN_EGG);
 	}
 
 	public static Predicate<ItemStack> modLoaded(ItemLike item, String... modids) {
 		return stack -> of(item).test(stack) && BlockSubRegistryHelper.areModsLoaded(modids);
-	}
-
-	public static Predicate<ItemStack> ofID(ResourceLocation location, ItemLike fallback, String... modids) {
-		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) ? of(ForgeRegistries.ITEMS.getValue(location)) : of(fallback)).test(stack);
-	}
-
-	public static Predicate<ItemStack> ofID(ResourceLocation location, String... modids) {
-		return stack -> (BlockSubRegistryHelper.areModsLoaded(modids) && of(ForgeRegistries.ITEMS.getValue(location)).test(stack));
 	}
 
 	public static class UAFoods {
@@ -142,25 +132,25 @@ public class UAItems {
 
 	@OnlyIn(Dist.CLIENT)
 	public static void registerItemProperties() {
-		ItemProperties.register(JELLYFISH_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity, num) -> {
-			CompoundTag tag = stack.getTag();
-			if (tag != null && tag.contains("JellyfishDisplayTag")) {
+		ItemProperties.register(JELLYFISH_BUCKET.get(), ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
+			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
+			if (tag.contains("JellyfishDisplayTag")) {
 				return AbstractJellyfish.BucketDisplayInfo.readVariant(tag.getCompound("JellyfishDisplayTag"));
 			}
 			return 0.0F;
 		});
 
-		ItemProperties.register(PIKE_BUCKET.get(), new ResourceLocation("variant"), (stack, world, entity, num) -> {
-			CompoundTag tag = stack.getTag();
-			if (tag != null && tag.contains("BucketVariantTag", 3)) {
+		ItemProperties.register(PIKE_BUCKET.get(), ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
+			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
+			if (tag.contains("BucketVariantTag", 3)) {
 				return tag.getInt("BucketVariantTag");
 			}
 			return 2;
 		});
 
-		ItemProperties.register(Items.AXOLOTL_BUCKET, new ResourceLocation("variant"), (stack, world, entity, num) -> {
-			CompoundTag tag = stack.getTag();
-			if (tag != null && tag.contains("Variant")) {
+		ItemProperties.register(Items.AXOLOTL_BUCKET, ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
+			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
+			if (tag.contains("Variant")) {
 				return tag.getInt("Variant");
 			}
 			return 0;

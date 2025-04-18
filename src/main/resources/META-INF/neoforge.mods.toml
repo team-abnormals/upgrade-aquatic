@@ -3,9 +3,12 @@ loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/team-abnormals/upgrade-aquatic/issues"
 license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.txt"
 
+[[mixins]]
+    config = "upgrade_aquatic.mixins.json"
+
 [[mods]]
     modId = "upgrade_aquatic"
-    version = "${file.jarVersion}"
+    version = "${mod_version}"
     logoFile = "logo.png"
     itemIcon = "upgrade_aquatic:pike"
     configBackground = "upgrade_aquatic:textures/block/coralstone.png"
@@ -20,7 +23,7 @@ license = "https://github.com/team-abnormals/upgrade-aquatic/blob/main/LICENSE.t
 [[dependencies.upgrade_aquatic]]
     modId = "minecraft"
     type = "required"
-    versionRange = "[${mc_version})"
+    versionRange = "[${mc_version}]"
     ordering = "AFTER"
     side = "BOTH"
 

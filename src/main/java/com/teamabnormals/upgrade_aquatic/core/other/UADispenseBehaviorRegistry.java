@@ -3,22 +3,14 @@ package com.teamabnormals.upgrade_aquatic.core.other;
 import com.teamabnormals.blueprint.core.util.BlockUtil;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.blueprint.core.util.DataUtil.AlternativeDispenseBehavior;
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.GlowSquid;
-import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Bucketable;
-import net.minecraft.world.entity.animal.Squid;
-import net.minecraft.world.entity.animal.WaterAnimal;
 import net.minecraft.world.item.DispensibleContainerItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,46 +22,24 @@ import java.util.List;
 
 public class UADispenseBehaviorRegistry {
 
-	static DispenseItemBehavior bucketFishItemBehavior = new DefaultDispenseItemBehavior() {
+	public static DispenseItemBehavior BUCKET_FISH_ITEM_BEHAVIOR = new DefaultDispenseItemBehavior() {
 
 		@Override
 		protected ItemStack execute(BlockSource source, ItemStack stack) {
-			BlockPos blockPos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
-			Level world = source.level();
-			List<WaterAnimal> entities = world.getEntitiesOfClass(WaterAnimal.class, new AABB(blockPos));
+			BlockPos pos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
+			Level level = source.level();
+			List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos), entity -> entity instanceof Bucketable);
 			if (!entities.isEmpty()) {
-				for (WaterAnimal mob : entities) {
-					if (mob instanceof AbstractFish) {
-						ItemStack bucket = ((AbstractFish) mob).getBucketItemStack();
-						mob.discard();
-						world.playSound(null, blockPos, SoundEvents.BUCKET_FILL_FISH, SoundSource.BLOCKS, 0.5F, 1.0F);
-						return bucket;
+				LivingEntity entity = entities.getFirst();
+				if (entity instanceof Bucketable bucketable) {
+					if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive()) {
+						entity.playSound(bucketable.getPickupSound(), 1.0F, 1.0F);
+						ItemStack newStack = bucketable.getBucketItemStack();
+						bucketable.saveToBucketTag(newStack);
+						entity.discard();
+						return newStack;
 					}
-					if (mob instanceof Bucketable bucketable) {
-						ItemStack bucket = bucketable.getBucketItemStack();
-						if (mob instanceof Pike) {
-							CompoundTag nbt = bucket.getOrCreateTag();
-							CompoundTag compoundnbt1 = new CompoundTag();
-							nbt.putInt("BucketVariantTag", ((Pike) mob).getPikeType().id);
-							if (!mob.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-								mob.getItemBySlot(EquipmentSlot.MAINHAND).save(compoundnbt1);
-							}
-							nbt.put("PikeHeldItem", compoundnbt1);
-							nbt.putBoolean("ShouldDropItem", ((Pike) mob).shouldDropItem());
-						}
-						mob.discard();
-						world.playSound(null, blockPos, SoundEvents.BUCKET_FILL_FISH, SoundSource.BLOCKS, 0.5F, 1.0F);
-						return bucket;
-					}
-					if (mob instanceof Squid) {
-						ItemStack bucket = new ItemStack(mob instanceof GlowSquid ? UAItems.GLOW_SQUID_BUCKET.get() : UAItems.SQUID_BUCKET.get());
-						if (mob.hasCustomName()) {
-							bucket.setHoverName(mob.getCustomName());
-						}
-						mob.discard();
-						world.playSound(null, blockPos, SoundEvents.BUCKET_FILL_FISH, SoundSource.BLOCKS, 0.5F, 1.0F);
-						return bucket;
-					}
+
 				}
 			}
 			return stack;
@@ -98,6 +68,6 @@ public class UADispenseBehaviorRegistry {
 		DispenserBlock.registerBehavior(UAItems.LIONFISH_BUCKET.get(), fishBucketDispenseBehavior);
 		DispenserBlock.registerBehavior(UAItems.SQUID_BUCKET.get(), fishBucketDispenseBehavior);
 		DispenserBlock.registerBehavior(UAItems.GLOW_SQUID_BUCKET.get(), fishBucketDispenseBehavior);
-		DataUtil.registerAlternativeDispenseBehavior(new AlternativeDispenseBehavior(UpgradeAquatic.MOD_ID, Items.WATER_BUCKET, (source, stack) -> !BlockUtil.getEntitiesAtOffsetPos(source, WaterAnimal.class, entity -> entity instanceof AbstractFish || entity instanceof Bucketable || entity instanceof Squid).isEmpty(), bucketFishItemBehavior));
+		DataUtil.registerAlternativeDispenseBehavior(new AlternativeDispenseBehavior(UpgradeAquatic.MOD_ID, Items.WATER_BUCKET, (source, stack) -> !BlockUtil.getEntitiesAtOffsetPos(source, LivingEntity.class, entity -> entity instanceof Bucketable).isEmpty(), BUCKET_FISH_ITEM_BEHAVIOR));
 	}
 }

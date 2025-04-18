@@ -10,7 +10,6 @@ import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
@@ -45,7 +44,7 @@ public class UAParticleTypes {
 		return PARTICLES.register(name, () -> new SimpleParticleType(false));
 	}
 
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SubscribeEvent
 	public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
 		event.registerSpriteSet(PRISMARINE_SHOWER.get(), PrismarineShowerParticle.Factory::new);
 		event.registerSpriteSet(ELDER_PRISMARINE_SHOWER.get(), ElderPrismarineShowerParticle.Factory::new);

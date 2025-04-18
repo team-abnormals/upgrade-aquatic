@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.core.data.server.modifiers;
+package com.teamabnormals.upgrade_aquatic.core.data.server;
 
 import com.teamabnormals.blueprint.common.advancement.modification.AdvancementModifierProvider;
 import com.teamabnormals.blueprint.common.advancement.modification.modifiers.CriteriaModifier;

@@ -24,12 +24,12 @@ public class BeachgrassBlock extends BushBlock implements BonemealableBlock {
 	public BeachgrassBlock(Properties properties) {
 		super(properties);
 	}
-	
+
 	@Override
 	protected MapCodec<? extends BushBlock> codec() {
 		return CODEC;
 	}
-	
+
 	@Override
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
 		return state.is(BlockTags.SAND);

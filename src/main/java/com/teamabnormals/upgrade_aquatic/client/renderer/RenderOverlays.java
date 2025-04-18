@@ -31,7 +31,7 @@ public class RenderOverlays {
 
 	@SubscribeEvent
 	public static void renderOverlays(RenderGuiLayerEvent.Post event) {
-		if (event.getName() == VanillaGuiOverlay.VIGNETTE.type()) {
+		if (event.getName().equals(VanillaGuiLayers.SLEEP_OVERLAY)) {
 			int scaledWidth = MC.getWindow().getGuiScaledWidth();
 			int scaledHeight = MC.getWindow().getGuiScaledHeight();
 			LocalPlayer player = MC.player;
@@ -78,10 +78,9 @@ public class RenderOverlays {
 		if (event.getName().equals(VanillaGuiLayers.AIR_LEVEL) && UAConfig.COMMON.turtleShellRework.get()) {
 			int scaledWidth = MC.getWindow().getGuiScaledWidth();
 			int scaledHeight = MC.getWindow().getGuiScaledHeight();
-			ForgeGui forgeGui = (ForgeGui) MC.gui;
 			LocalPlayer player = MC.player;
 			boolean inWater = player.isEyeInFluid(FluidTags.WATER);
-			if (inWater && forgeGui.shouldDrawSurvivalElements()) {
+			if (inWater && MC.gameMode.canHurtPlayer()) {
 				ItemStack turtleHelmet = ItemStack.EMPTY;
 				for (ItemStack stack : player.getArmorSlots()) {
 					if (stack.getItem() == Items.TURTLE_HELMET) {
@@ -96,7 +95,7 @@ public class RenderOverlays {
 					stack.pushPose();
 					RenderSystem.enableBlend();
 					int left = scaledWidth / 2 + 91;
-					int top = scaledHeight - forgeGui.rightHeight;
+					int top = scaledHeight - MC.gui.rightHeight;
 					int durability = turtleHelmet.getDamageValue();
 					int maxDurability = turtleHelmet.getMaxDamage();
 
@@ -127,7 +126,7 @@ public class RenderOverlays {
 						bufferbuilder.addVertex(l2, t, 0).setUv(1, 0);
 						bufferbuilder.addVertex(l, t, 0).setUv(0, 0);
 					}
-					forgeGui.rightHeight += 10;
+					MC.gui.rightHeight += 10;
 
 					RenderSystem.disableBlend();
 					stack.popPose();

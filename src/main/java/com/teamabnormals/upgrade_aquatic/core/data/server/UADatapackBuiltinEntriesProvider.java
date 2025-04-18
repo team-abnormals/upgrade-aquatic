@@ -2,14 +2,10 @@ package com.teamabnormals.upgrade_aquatic.core.data.server;
 
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.other.UABiomeModifiers;
-import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADamageTypes;
-import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAStructureRepaletters;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UABiomeModifiers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAConfiguredFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatures;
-import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAJukeboxSongs;
-import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAPaintingVariants;
-import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UATrimMaterials;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAWorldCarvers.UAConfiguredWorldCarvers;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.RegistrySetBuilder;

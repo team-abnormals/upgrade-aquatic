@@ -51,15 +51,15 @@ public class BoxJellyfish extends ColoredSizableJellyfish {
 	}
 
 	@Override
-	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		super.addAdditionalSaveDataSharedWithBucket(compoundTag);
-		compoundTag.putInt("HuntingCooldown", this.huntingCooldown);
+	protected void addAdditionalSaveDataSharedWithBucket(CompoundTag tag) {
+		super.addAdditionalSaveDataSharedWithBucket(tag);
+		tag.putInt("HuntingCooldown", this.huntingCooldown);
 	}
 
 	@Override
-	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		super.readAdditionalSaveDataSharedWithBucket(compoundTag);
-		this.huntingCooldown = compoundTag.getInt("HuntingCooldown");
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag tag) {
+		super.readAdditionalSaveDataSharedWithBucket(tag);
+		this.huntingCooldown = tag.getInt("HuntingCooldown");
 	}
 
 	@Override

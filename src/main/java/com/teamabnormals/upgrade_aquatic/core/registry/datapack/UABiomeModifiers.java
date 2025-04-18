@@ -1,4 +1,4 @@
-package com.teamabnormals.upgrade_aquatic.core.other;
+package com.teamabnormals.upgrade_aquatic.core.registry.datapack;
 
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.tags.UABiomeTags;

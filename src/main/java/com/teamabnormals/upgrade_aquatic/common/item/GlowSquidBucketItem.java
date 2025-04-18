@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.item;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -19,7 +20,7 @@ public class GlowSquidBucketItem extends SquidBucketItem {
 	protected void spawn(ServerLevel level, ItemStack stack, BlockPos pos) {
 		Entity entity = EntityType.GLOW_SQUID.spawn(level, stack, null, pos, MobSpawnType.BUCKET, true, false);
 		if (entity instanceof Squid squid) {
-			Bucketable.loadDefaultDataFromBucketTag(squid, stack.getOrCreateTag());
+			Bucketable.loadDefaultDataFromBucketTag(squid, stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag());
 			squid.setPersistenceRequired();
 		}
 	}

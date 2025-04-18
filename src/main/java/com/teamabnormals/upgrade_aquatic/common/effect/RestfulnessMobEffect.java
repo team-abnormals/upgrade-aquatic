@@ -18,10 +18,10 @@ public class RestfulnessMobEffect extends InstantenousMobEffect {
 	}
 
 	@Override
-	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		if (entity instanceof ServerPlayer playerMP) {
-			StatsCounter statisticsManager = playerMP.getStats();
-			statisticsManager.increment(playerMP, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), -(24000 * (amplifier + 1)));
+	public boolean applyEffectTick(LivingEntity entity, int amplifier) {
+		if (entity instanceof ServerPlayer serverPlayer) {
+			StatsCounter statisticsManager = serverPlayer.getStats();
+			statisticsManager.increment(serverPlayer, Stats.CUSTOM.get(Stats.TIME_SINCE_REST), -(24000 * (amplifier + 1)));
 		} else if (entity instanceof Phantom) {
 			entity.hurt(entity.damageSources().magic(), Float.MAX_VALUE);
 		} else if (entity instanceof Flare) {
@@ -39,6 +39,7 @@ public class RestfulnessMobEffect extends InstantenousMobEffect {
 			}
 			entity.discard();
 		}
+		return true;
 	}
 
 }

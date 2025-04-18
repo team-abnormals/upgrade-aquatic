@@ -6,23 +6,20 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.TextureAtlasHolder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ReloadableResourceManager;
-import net.minecraft.server.packs.resources.ResourceManager;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 /**
  * @author Ocelot
  */
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class GlowSquidSpriteUploader extends TextureAtlasHolder {
-	public static final ResourceLocation ATLAS_LOCATION = ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, "textures/atlas/glow_squid.png");
-	public static final ResourceLocation SQUID_SPRITE = ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, "glow_squid");
-	public static final ResourceLocation GLOW_SPRITE = ResourceLocation.fromNamespaceAndPath(UpgradeAquatic.MOD_ID, "glow_squid_emissive");
+	public static final ResourceLocation ATLAS_LOCATION = UpgradeAquatic.location("textures/atlas/glow_squid.png");
+	public static final ResourceLocation SQUID_SPRITE = UpgradeAquatic.location("glow_squid");
+	public static final ResourceLocation GLOW_SPRITE = UpgradeAquatic.location("glow_squid_emissive");
 
 	private static GlowSquidSpriteUploader uploader;
 

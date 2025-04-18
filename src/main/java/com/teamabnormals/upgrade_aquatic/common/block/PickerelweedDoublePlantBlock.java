@@ -55,12 +55,12 @@ public class PickerelweedDoublePlantBlock extends Block implements BonemealableB
 		Vec3 vec3 = p_53517_.getOffset(p_53518_, p_53519_);
 		return SHAPE.move(vec3.x, vec3.y, vec3.z);
 	}
-	
+
 	@Override
 	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
 		return new ItemStack((UABlocks.PICKERELWEED.get()));
 	}
-	
+
 	@Override
 	public void entityInside(BlockState state, Level worldIn, BlockPos pos, Entity entity) {
 		if (!(entity instanceof Pike)) {

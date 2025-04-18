@@ -53,17 +53,17 @@ public class CassiopeaJellyfish extends ColoredSizableJellyfish {
 	}
 
 	@Override
-	public void addAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		super.addAdditionalSaveDataSharedWithBucket(compoundTag);
-		compoundTag.putInt("UpsideDownCooldown", this.upsideDownCooldown);
-		compoundTag.putInt("HideCooldown", this.hideCooldown);
+	public void addAdditionalSaveDataSharedWithBucket(CompoundTag tag) {
+		super.addAdditionalSaveDataSharedWithBucket(tag);
+		tag.putInt("UpsideDownCooldown", this.upsideDownCooldown);
+		tag.putInt("HideCooldown", this.hideCooldown);
 	}
 
 	@Override
-	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag compoundTag) {
-		super.readAdditionalSaveDataSharedWithBucket(compoundTag);
-		this.upsideDownCooldown = compoundTag.getInt("UpsideDownCooldown");
-		this.hideCooldown = compoundTag.getInt("HideCooldown");
+	protected void readAdditionalSaveDataSharedWithBucket(CompoundTag tag) {
+		super.readAdditionalSaveDataSharedWithBucket(tag);
+		this.upsideDownCooldown = tag.getInt("UpsideDownCooldown");
+		this.hideCooldown = tag.getInt("HideCooldown");
 	}
 
 	public boolean hasUpsideDownCooldown() {

@@ -6,6 +6,7 @@ import com.teamabnormals.blueprint.core.endimator.TimedEndimation;
 import com.teamabnormals.blueprint.core.util.NetworkUtil;
 import com.teamabnormals.upgrade_aquatic.common.entity.ai.goal.thrasher.*;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
+import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.teamabnormals.upgrade_aquatic.core.other.tags.UABiomeTags;
 import com.teamabnormals.upgrade_aquatic.core.other.tags.UAEntityTypeTags;
@@ -55,7 +56,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-import java.util.UUID;
 import java.util.function.Predicate;
 
 public class Thrasher extends Monster implements Endimatable {
@@ -68,14 +68,13 @@ public class Thrasher extends Monster implements Endimatable {
 		}
 		return entity.getType().is(UAEntityTypeTags.THRASHER_SONAR_TARGETS) && entity.isInWater();
 	};
-	private static final UUID KNOCKBACK_RESISTANCE_MODIFIER_ID = UUID.fromString("3158fbca-89d7-4c15-b1ee-448cefd023b7");
-	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(KNOCKBACK_RESISTANCE_MODIFIER_ID, "Knockback Resistance", 4.0D, Operation.ADD_MULTIPLIED_BASE));
+	private static final AttributeModifier KNOCKBACK_RESISTANCE_MODIFIER = (new AttributeModifier(UpgradeAquatic.location("thrasher_knockback_resistance"), 4.0D, Operation.ADD_MULTIPLIED_BASE));
 	private static final EntityDataAccessor<Boolean> MOVING = SynchedEntityData.defineId(Thrasher.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Integer> WATER_TIME = SynchedEntityData.defineId(Thrasher.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> STUN_TIME = SynchedEntityData.defineId(Thrasher.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> HITS_TILL_STUN = SynchedEntityData.defineId(Thrasher.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Optional<BlockPos>> POSSIBLE_DETECTION_POINT = SynchedEntityData.defineId(Thrasher.class, EntityDataSerializers.OPTIONAL_BLOCK_POS);
-	private static final EntityDataAccessor<EntityDimensions> CAUGHT_SIZE = SynchedEntityData.defineId(Thrasher.class, UADataSerializers.ENTITY_SIZE);
+	private static final EntityDataAccessor<EntityDimensions> CAUGHT_SIZE = SynchedEntityData.defineId(Thrasher.class, UADataSerializers.ENTITY_SIZE.get());
 	private static final EntityDimensions DEFAULT_SIZE = EntityDimensions.fixed(1.6F, 0.9F);
 	public final TimedEndimation stunAnimation = new TimedEndimation(10, 10);
 	protected int ticksSinceLastSonarFire;
@@ -129,11 +128,6 @@ public class Thrasher extends Monster implements Endimatable {
 		builder.define(CAUGHT_SIZE, this.getDefaultSize());
 	}
 
-	@Override
-	public MobType getMobType() {
-		return MobType.WATER;
-	}
-
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn) {
@@ -164,24 +158,25 @@ public class Thrasher extends Monster implements Endimatable {
 		super.onSyncedDataUpdated(key);
 	}
 
-	@Override
-	public void positionRider(Entity passenger, Entity.MoveFunction function) {
-		if (passenger instanceof LivingEntity) {
-			float distance = this.getMountDistance();
-
-			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
-			double dy = -Math.sin(this.getXRot() * (Math.PI / 180.0D));
-			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
-
-			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY(), this.getZ() + dz);
-
-			double offset = passenger instanceof Player ? this.getPassengersRidingOffset() - 0.2D : this.getPassengersRidingOffset() - 0.5F;
-
-			function.accept(passenger, riderPos.x, this.getY() + dy + offset, riderPos.z);
-		} else {
-			super.positionRider(passenger);
-		}
-	}
+	// TODO: Reimplement with EntityAttachments
+//	@Override
+//	public void positionRider(Entity passenger, Entity.MoveFunction function) {
+//		if (passenger instanceof LivingEntity) {
+//			float distance = this.getMountDistance();
+//
+//			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+//			double dy = -Math.sin(this.getXRot() * (Math.PI / 180.0D));
+//			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+//
+//			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY(), this.getZ() + dz);
+//
+//			double offset = passenger instanceof Player ? this.getPassengersRidingOffset() - 0.2D : this.getPassengersRidingOffset() - 0.5F;
+//
+//			function.accept(passenger, riderPos.x, this.getY() + dy + offset, riderPos.z);
+//		} else {
+//			super.positionRider(passenger);
+//		}
+//	}
 
 	@Override
 	protected void addPassenger(Entity passenger) {
@@ -220,11 +215,6 @@ public class Thrasher extends Monster implements Endimatable {
 	}
 
 	@Override
-	public double getPassengersRidingOffset() {
-		return 0.5F;
-	}
-
-	@Override
 	public boolean shouldRiderFaceForward(Player player) {
 		return true;
 	}
@@ -256,7 +246,7 @@ public class Thrasher extends Monster implements Endimatable {
 	public void onEndimationStart(PlayableEndimation endimation, PlayableEndimation oldEndimation) {
 		if (endimation == UAPlayableEndimations.THRASHER_THRASH) {
 			AttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
-			if (!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
+			if (!knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER.id())) {
 				knockbackResistance.addTransientModifier(KNOCKBACK_RESISTANCE_MODIFIER);
 			}
 		}
@@ -265,10 +255,7 @@ public class Thrasher extends Monster implements Endimatable {
 	@Override
 	public void onEndimationEnd(PlayableEndimation endimation, PlayableEndimation newEndimation) {
 		if (endimation == UAPlayableEndimations.THRASHER_THRASH) {
-			AttributeInstance knockbackResistance = this.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
-			if (knockbackResistance.hasModifier(KNOCKBACK_RESISTANCE_MODIFIER)) {
-				knockbackResistance.removeModifier(KNOCKBACK_RESISTANCE_MODIFIER);
-			}
+			this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).removeModifier(KNOCKBACK_RESISTANCE_MODIFIER.id());
 		}
 	}
 
@@ -305,10 +292,8 @@ public class Thrasher extends Monster implements Endimatable {
 					}
 				}
 			} else {
-				if (entitySource instanceof Player && !((Player) entitySource).isCreative() && !entitySource.isSpectator()) {
-					this.setPossibleDetectionPoint(entitySource.blockPosition().offset(this.getRandom().nextInt(2), this.getRandom().nextInt(2), this.getRandom().nextInt(2)));
-				} else if (!(entitySource instanceof Player)) {
-					this.setPossibleDetectionPoint(entitySource.blockPosition().offset(this.getRandom().nextInt(2), this.getRandom().nextInt(2), this.getRandom().nextInt(2)));
+				if (!(entitySource instanceof Player player) || (!player.isCreative() && !player.isSpectator())) {
+					this.setPossibleDetectionPoint(Optional.of(entitySource.blockPosition().offset(this.getRandom().nextInt(2), this.getRandom().nextInt(2), this.getRandom().nextInt(2))));
 				}
 			}
 		}
@@ -332,11 +317,6 @@ public class Thrasher extends Monster implements Endimatable {
 	}
 
 	@Override
-	protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
-		return 0.65F;
-	}
-
-	@Override
 	public int getMaxHeadXRot() {
 		return 1;
 	}
@@ -344,11 +324,6 @@ public class Thrasher extends Monster implements Endimatable {
 	@Override
 	public int getMaxHeadYRot() {
 		return 1;
-	}
-
-	@Override
-	public boolean canBreatheUnderwater() {
-		return super.canBreatheUnderwater();
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -578,8 +553,8 @@ public class Thrasher extends Monster implements Endimatable {
 		return this.getEntityData().get(POSSIBLE_DETECTION_POINT).orElse(null);
 	}
 
-	public void setPossibleDetectionPoint(@Nullable BlockPos detectionPoint) {
-		this.getEntityData().set(POSSIBLE_DETECTION_POINT, Optional.ofNullable(detectionPoint));
+	public void setPossibleDetectionPoint(Optional<BlockPos> detectionPoint) {
+		this.getEntityData().set(POSSIBLE_DETECTION_POINT, detectionPoint);
 	}
 
 	public EntityDimensions getCaughtSize() {
@@ -626,7 +601,7 @@ public class Thrasher extends Monster implements Endimatable {
 		this.ticksSinceLastSonarFire = compound.getInt("TicksSinceLastSonarFire");
 
 		if (this.getPossibleDetectionPoint() != null) {
-			this.setPossibleDetectionPoint(NbtUtils.readBlockPos(compound.getCompound("DetectionPoint")));
+			this.setPossibleDetectionPoint(NbtUtils.readBlockPos(compound, "DetectionPoint"));
 		}
 	}
 

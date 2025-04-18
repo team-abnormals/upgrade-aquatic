@@ -4,7 +4,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks.UAProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -18,7 +17,7 @@ public class ToothTrapdoorBlock extends TrapDoorBlock {
 	public ToothTrapdoorBlock(Properties properties) {
 		super(UAProperties.TOOTH_BLOCK_SET, properties);
 	}
-	
+
 	@Override
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
 		if (!state.getValue(POWERED)) {
@@ -27,7 +26,7 @@ public class ToothTrapdoorBlock extends TrapDoorBlock {
 			if (state.getValue(WATERLOGGED)) {
 				level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 			}
-			
+
 			this.playSound(player, level, pos, state.getValue(OPEN));
 			level.scheduleTick(pos, this, 20);
 		}
