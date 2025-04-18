@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAConfiguredFeatures;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAFeatures.UAPlacedFeatures;
+import com.teamabnormals.upgrade_aquatic.core.registry.UARegistries;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAWorldCarvers.UAConfiguredWorldCarvers;
 import net.minecraft.core.HolderLookup.Provider;
@@ -19,6 +20,7 @@ import java.util.concurrent.CompletableFuture;
 public class UADatapackProvider extends DatapackBuiltinEntriesProvider {
 
 	public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+			.add(UARegistries.PIKE_VARIANT, UAPikeVariants::bootstrap)
 			.add(Registries.DAMAGE_TYPE, UADamageTypes::bootstrap)
 			.add(BlueprintDataPackRegistries.STRUCTURE_REPALETTERS, UAStructureRepaletters::bootstrap)
 			.add(Registries.CONFIGURED_FEATURE, UAConfiguredFeatures::bootstrap)

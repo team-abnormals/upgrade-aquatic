@@ -1,0 +1,8 @@
+{
+  "asset_id": "upgrade_aquatic:entity/pike/olive_northern",
+  "description": {
+    "translate": "pike_variant.upgrade_aquatic.olive_northern"
+  },
+  "size": 1.7,
+  "weight": 5
+}

@@ -1,0 +1,8 @@
+{
+  "asset_id": "upgrade_aquatic:entity/pike/spotted_mahogany_northern",
+  "description": {
+    "translate": "pike_variant.upgrade_aquatic.spotted_mahogany_northern"
+  },
+  "size": 1.7,
+  "weight": 25
+}

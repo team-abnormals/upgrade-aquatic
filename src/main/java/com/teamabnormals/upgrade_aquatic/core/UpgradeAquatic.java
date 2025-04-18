@@ -54,6 +54,8 @@ public class UpgradeAquatic {
 		UADecoratedPotPatterns.DECORATED_POT_PATTERNS.register(bus);
 		UACriteriaTriggers.TRIGGERS.register(bus);
 
+		bus.addListener(UARegistries::registerRegistries);
+
 		this.registerCCCompat(bus);
 
 		bus.addListener(this::commonSetup);
