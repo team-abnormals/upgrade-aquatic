@@ -1,6 +1,7 @@
 {
   "asset_id": "upgrade_aquatic:entity/pike/golden_southern",
   "description": {
+    "color": "light_purple",
     "translate": "pike_variant.upgrade_aquatic.golden_southern"
   },
   "size": 1.5,

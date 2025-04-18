@@ -1,6 +1,7 @@
 {
   "asset_id": "upgrade_aquatic:entity/pike/spectral",
   "description": {
+    "color": "gold",
     "translate": "pike_variant.upgrade_aquatic.spectral"
   },
   "size": 1.7,

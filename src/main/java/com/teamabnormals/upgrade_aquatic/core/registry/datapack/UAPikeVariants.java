@@ -3,8 +3,8 @@ package com.teamabnormals.upgrade_aquatic.core.registry.datapack;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.PikeVariant;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UARegistries;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -13,7 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
-import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.Tags.Biomes;
 
 import java.util.Optional;
 
@@ -52,12 +52,12 @@ public final class UAPikeVariants {
 		int epic = 5;
 		int legendary = 1;
 
-		register(context, AMUR, small, uncommon, Tags.Biomes.IS_SWAMP);
+		register(context, AMUR, small, uncommon, Biomes.IS_SWAMP);
 		register(context, MUSKELLUNGE, huge, epic, BiomeTags.IS_RIVER);
 
 		register(context, REDFIN_PICKEREL, small, common);
 		register(context, CHAIN_PICKEREL, small, common, BiomeTags.IS_RIVER);
-		register(context, GRASS_PICKEREL, small, common, Tags.Biomes.IS_SWAMP);
+		register(context, GRASS_PICKEREL, small, common, Biomes.IS_SWAMP);
 
 		register(context, BLACK_SOUTHERN, medium, common);
 		register(context, EBONY_SOUTHERN, medium, uncommon);
@@ -65,10 +65,10 @@ public final class UAPikeVariants {
 		register(context, LEMON_SOUTHERN, medium, rare);
 		register(context, GOLDEN_SOUTHERN, medium, epic);
 
-		register(context, BROWN_NORTHERN, large, common, SPOTTED_BROWN_NORTHERN);
-		register(context, MAHOGANY_NORTHERN, large, uncommon, SPOTTED_MAHOGANY_NORTHERN);
-		register(context, JADE_NORTHERN, large, rare, SPOTTED_JADE_NORTHERN);
-		register(context, OLIVE_NORTHERN, large, epic, SPOTTED_OLIVE_NORTHERN);
+		register(context, BROWN_NORTHERN, large, common);
+		register(context, MAHOGANY_NORTHERN, large, uncommon);
+		register(context, JADE_NORTHERN, large, rare);
+		register(context, OLIVE_NORTHERN, large, epic);
 
 		register(context, SPOTTED_BROWN_NORTHERN, large, common);
 		register(context, SPOTTED_MAHOGANY_NORTHERN, large, uncommon);
@@ -85,23 +85,28 @@ public final class UAPikeVariants {
 	}
 
 	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight, TagKey<Biome> biomes) {
-		register(context, key, size, weight, null, context.lookup(Registries.BIOME).getOrThrow(biomes));
-	}
-
-	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight, ResourceKey<PikeVariant> spottedVariant) {
-		register(context, key, size, weight, context.lookup(UARegistries.PIKE_VARIANT).getOrThrow(spottedVariant), null);
+		register(context, key, size, weight, Optional.of(context.lookup(Registries.BIOME).getOrThrow(biomes)));
 	}
 
 	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight) {
-		register(context, key, size, weight, null, null);
+		register(context, key, size, weight, Optional.empty());
 	}
 
-	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight, Holder<PikeVariant> spottedVariant, HolderSet<Biome> biomes) {
+	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight, Optional<HolderSet<Biome>> biomes) {
 		context.register(key, new PikeVariant(
 				key.location().withPrefix("entity/pike/"),
-				Component.translatable(Util.makeDescriptionId("pike_variant", key.location())),
-				size, weight,
-				Optional.ofNullable(biomes)
+				Component.translatable(Util.makeDescriptionId("pike_variant", key.location())).withStyle(getColorForWeight(weight)),
+				size, weight, biomes
 		));
+	}
+
+	public static ChatFormatting getColorForWeight(int weight) {
+		return switch (weight) {
+			case 1 -> ChatFormatting.GOLD;
+			case 5 -> ChatFormatting.LIGHT_PURPLE;
+			case 15 -> ChatFormatting.BLUE;
+			case 25 -> ChatFormatting.GREEN;
+			default -> ChatFormatting.GRAY;
+		};
 	}
 }

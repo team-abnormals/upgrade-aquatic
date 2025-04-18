@@ -2,6 +2,7 @@
   "asset_id": "upgrade_aquatic:entity/pike/chain_pickerel",
   "biomes": "#minecraft:is_river",
   "description": {
+    "color": "gray",
     "translate": "pike_variant.upgrade_aquatic.chain_pickerel"
   },
   "size": 1.2,

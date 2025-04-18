@@ -1,6 +1,7 @@
 {
   "asset_id": "upgrade_aquatic:entity/pike/supercharged",
   "description": {
+    "color": "gold",
     "translate": "pike_variant.upgrade_aquatic.supercharged"
   },
   "size": 1.7,
