@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block.coralstone;
 
+import com.teamabnormals.upgrade_aquatic.core.other.UADataMaps.CoralstoneConversions;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -45,12 +46,12 @@ public class CoralstoneSlabBlock extends SlabBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (!worldIn.isAreaLoaded(pos, 3)) return;
 		Block block = state.getBlock();
 
 		if (this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE_SLAB.get()) {
-			CoralstoneBlock.tickConversion(UABlocks.CORALSTONE_SLAB_CONVERSION_MAP, state, worldIn, pos, random);
+			CoralstoneBlock.tickConversion(CoralstoneConversions::coralstoneSlab, state, worldIn, pos, random);
 		}
 
 		if (this.growableCoralBlocks != null && random.nextFloat() < 0.12F && state.getValue(POWERED)) {

@@ -1,9 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.common.block.coralstone;
 
 import com.teamabnormals.blueprint.core.util.BlockUtil;
+import com.teamabnormals.upgrade_aquatic.core.other.UADataMaps;
+import com.teamabnormals.upgrade_aquatic.core.other.UADataMaps.CoralstoneConversions;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -26,8 +31,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.Tags;
 
 import javax.annotation.Nullable;
-import java.util.Map;
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 @SuppressWarnings("deprecation")
 public class CoralstoneBlock extends Block {
@@ -60,31 +64,31 @@ public class CoralstoneBlock extends Block {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
-		if (!worldIn.isAreaLoaded(pos, 3)) return;
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		if (!level.isAreaLoaded(pos, 3)) return;
 
 		Block block = state.getBlock();
 		if (this.growableCoralBlocks == null && block != UABlocks.DEAD_CORALSTONE.get() && block != UABlocks.DEAD_CHISELED_CORALSTONE.get()) {
-			CoralstoneBlock.tickConversion(this.chiseled ? UABlocks.CHISELED_CORALSTONE_CONVERSION_MAP : UABlocks.CORALSTONE_CONVERSION_MAP, state, worldIn, pos, random);
+			CoralstoneBlock.tickConversion(c -> this.chiseled ? c.chiseledCoralstone() : c.coralstone(), state, level, pos, random);
 		}
 
 		if (this.growableCoralBlocks != null && random.nextFloat() < 0.12F) {
 			Direction randDirection = this.growableCoralBlocks.length > 3 ? Direction.getRandom(random) : Direction.from3DDataValue(random.nextInt(5) + 1);
 			BlockPos growPos = pos.relative(randDirection);
-			FluidState fluidState = worldIn.getBlockState(growPos).getFluidState();
-			boolean isValidPosToGrow = worldIn.getBlockState(growPos).canBeReplaced() && fluidState.getAmount() >= 8 && fluidState.is(FluidTags.WATER);
+			FluidState fluidState = level.getBlockState(growPos).getFluidState();
+			boolean isValidPosToGrow = level.getBlockState(growPos).canBeReplaced() && fluidState.getAmount() >= 8 && fluidState.is(FluidTags.WATER);
 
 			if (isValidPosToGrow && state.getValue(POWERED)) {
 				if (randDirection.get3DDataValue() > 1) {
-					worldIn.setBlock(growPos, growableCoralBlocks[2].defaultBlockState().setValue(CoralWallFanBlock.FACING, randDirection), 2);
+					level.setBlock(growPos, growableCoralBlocks[2].defaultBlockState().setValue(CoralWallFanBlock.FACING, randDirection), 2);
 				} else if (randDirection.get3DDataValue() == 1) {
 					if (random.nextBoolean()) {
-						worldIn.setBlock(growPos, growableCoralBlocks[1].defaultBlockState(), 2);
+						level.setBlock(growPos, growableCoralBlocks[1].defaultBlockState(), 2);
 					} else {
-						worldIn.setBlock(growPos, growableCoralBlocks[0].defaultBlockState(), 2);
+						level.setBlock(growPos, growableCoralBlocks[0].defaultBlockState(), 2);
 					}
 				} else {
-					worldIn.setBlock(growPos, growableCoralBlocks[3].defaultBlockState(), 2);
+					level.setBlock(growPos, growableCoralBlocks[3].defaultBlockState(), 2);
 				}
 			}
 		}
@@ -110,14 +114,15 @@ public class CoralstoneBlock extends Block {
 		builder.add(POWERED);
 	}
 
-	public static void tickConversion(Map<Supplier<Block>, Supplier<Block>> conversionMap, BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+	public static void tickConversion(Function<CoralstoneConversions, Holder<Block>> function, BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		Registry<Block> blocks = level.registryAccess().registryOrThrow(Registries.BLOCK);
 		for (int i = 0; i < 4; i++) {
-			Block randomBlock = world.getBlockState(pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1)).getBlock();
-			conversionMap.forEach((input, output) -> {
-				if (input.get() == randomBlock) {
-					world.setBlock(pos, BlockUtil.transferAllBlockStates(state, output.get().defaultBlockState()), 2);
-				}
-			});
+			Block randomBlock = level.getBlockState(pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 2, random.nextInt(3) - 1)).getBlock();
+			CoralstoneConversions conversions = blocks.getData(UADataMaps.CORALSTONE_CONVERSIONS, blocks.getResourceKey(randomBlock).get());
+			if (conversions != null) {
+				level.setBlock(pos, BlockUtil.transferAllBlockStates(state, function.apply(conversions).value().defaultBlockState()), 2);
+				break;
+			}
 		}
 	}
 }

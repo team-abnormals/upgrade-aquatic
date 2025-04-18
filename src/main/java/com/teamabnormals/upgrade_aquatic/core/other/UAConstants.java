@@ -16,6 +16,11 @@ public class UAConstants {
 	public static final ResourceLocation BAMBOO_CLOSET = ResourceLocation.fromNamespaceAndPath("woodworks", "bamboo_closet");
 	public static final ResourceLocation TRAPPED_BAMBOO_CLOSET = ResourceLocation.fromNamespaceAndPath("woodworks", "trapped_bamboo_closet");
 
+	public static final ResourceLocation ARID_SANDSTONE = ResourceLocation.fromNamespaceAndPath("atmospheric", "arid_sandstone");
+	public static final ResourceLocation RED_ARID_SANDSTONE = ResourceLocation.fromNamespaceAndPath("atmospheric", "red_arid_sandstone");
+	public static final ResourceLocation ARID_SAND = ResourceLocation.fromNamespaceAndPath("atmospheric", "arid_sand");
+	public static final ResourceLocation RED_ARID_SAND = ResourceLocation.fromNamespaceAndPath("atmospheric", "red_arid_sand");
+
 	public static final DeferredRegister.Items CAVERNS_AND_CHASMS_ITEMS = DeferredRegister.Items.createItems(UAConstants.CAVERNS_AND_CHASMS);
 
 	public static DeferredItem<Item> COBBLESTONE_BRICKS = CAVERNS_AND_CHASMS_ITEMS.register("cobblestone_bricks", () -> new Item(new Item.Properties()));

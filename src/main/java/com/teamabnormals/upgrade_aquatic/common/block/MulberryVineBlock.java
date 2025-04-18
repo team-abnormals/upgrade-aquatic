@@ -145,8 +145,13 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-		super.tick(state, level, pos, rand);
+	protected boolean isRandomlyTicking(BlockState state) {
+		return state.getValue(AGE) < 4;
+	}
+
+	@Override
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
+		super.randomTick(state, level, pos, rand);
 		int i = state.getValue(AGE);
 		if (i < 4 && level.getRawBrightness(pos.above(), 0) >= 7 && CommonHooks.canCropGrow(level, pos, state, rand.nextInt(5) == 0)) {
 			level.setBlock(pos, state.setValue(AGE, i + 1), 2);

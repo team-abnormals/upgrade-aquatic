@@ -1,0 +1,20 @@
+{
+  "values": {
+    "upgrade_aquatic:brown_northern": {
+      "chance": 0.2,
+      "spotted_variant": "upgrade_aquatic:spotted_brown_northern"
+    },
+    "upgrade_aquatic:jade_northern": {
+      "chance": 0.2,
+      "spotted_variant": "upgrade_aquatic:spotted_jade_northern"
+    },
+    "upgrade_aquatic:mahogany_northern": {
+      "chance": 0.2,
+      "spotted_variant": "upgrade_aquatic:spotted_mahogany_northern"
+    },
+    "upgrade_aquatic:olive_northern": {
+      "chance": 0.2,
+      "spotted_variant": "upgrade_aquatic:spotted_olive_northern"
+    }
+  }
+}

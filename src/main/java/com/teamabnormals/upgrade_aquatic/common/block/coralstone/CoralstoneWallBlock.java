@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.common.block.coralstone;
 
 import com.teamabnormals.blueprint.core.util.BlockUtil;
+import com.teamabnormals.upgrade_aquatic.core.other.UADataMaps.CoralstoneConversions;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -26,20 +27,11 @@ public class CoralstoneWallBlock extends WallBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (!worldIn.isAreaLoaded(pos, 3)) return;
 
 		if (state.getBlock() != UABlocks.DEAD_CORALSTONE_WALL.get()) {
-			CoralstoneBlock.tickConversion(UABlocks.CORALSTONE_WALL_CONVERSION_MAP, state, worldIn, pos, random);
-		}
-
-		for (int i = 0; i < 4; i++) {
-			BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-			UABlocks.CORALSTONE_WALL_CONVERSION_MAP.forEach((input, output) -> {
-				if (input.get() == worldIn.getBlockState(blockpos).getBlock()) {
-					worldIn.setBlock(pos, BlockUtil.transferAllBlockStates(state, output.get().defaultBlockState()), 2);
-				}
-			});
+			CoralstoneBlock.tickConversion(CoralstoneConversions::coralstoneWall, state, worldIn, pos, random);
 		}
 	}
 

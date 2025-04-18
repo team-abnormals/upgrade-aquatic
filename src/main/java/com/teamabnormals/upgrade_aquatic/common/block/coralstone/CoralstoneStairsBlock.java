@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block.coralstone;
 
+import com.teamabnormals.upgrade_aquatic.core.other.UADataMaps.CoralstoneConversions;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -58,7 +59,7 @@ public class CoralstoneStairsBlock extends StairBlock {
 		if (!worldIn.isAreaLoaded(pos, 3)) return;
 
 		if (this.growableCoralBlocks == null && state.getBlock() != UABlocks.DEAD_CORALSTONE_STAIRS.get()) {
-			CoralstoneBlock.tickConversion(UABlocks.CORALSTONE_STAIRS_CONVERSION_MAP, state, worldIn, pos, random);
+			CoralstoneBlock.tickConversion(CoralstoneConversions::coralstoneStairs, state, worldIn, pos, random);
 		}
 
 		if (this.growableCoralBlocks != null && random.nextFloat() < 0.24F && state.getValue(POWERED)) {

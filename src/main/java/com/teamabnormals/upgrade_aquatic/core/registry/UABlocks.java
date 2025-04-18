@@ -1,6 +1,5 @@
 package com.teamabnormals.upgrade_aquatic.core.registry;
 
-import com.google.common.collect.Maps;
 import com.mojang.datafixers.util.Pair;
 import com.teamabnormals.blueprint.common.block.BlueprintBeehiveBlock;
 import com.teamabnormals.blueprint.common.block.BlueprintDirectionalBlock;
@@ -29,7 +28,6 @@ import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneWallB
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.UAConstants;
 import com.teamabnormals.upgrade_aquatic.core.other.UATreeGrowers;
-import net.minecraft.Util;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -48,10 +46,8 @@ import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -573,113 +569,4 @@ public class UABlocks {
 			return isBoiled ? BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).strength(0.5F, 5).noOcclusion().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY) : BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).noOcclusion().strength(0.5F, 5).sound(SoundType.WET_GRASS).pushReaction(PushReaction.DESTROY);
 		}
 	}
-
-	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(() -> Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CORALSTONE);
-		conversions.put(() -> Blocks.HORN_CORAL_BLOCK, HORN_CORALSTONE);
-		conversions.put(() -> Blocks.TUBE_CORAL_BLOCK, TUBE_CORALSTONE);
-		conversions.put(() -> Blocks.BRAIN_CORAL_BLOCK, BRAIN_CORALSTONE);
-		conversions.put(() -> Blocks.FIRE_CORAL_BLOCK, FIRE_CORALSTONE);
-		conversions.put(ACAN_CORAL_BLOCK, ACAN_CORALSTONE);
-		conversions.put(FINGER_CORAL_BLOCK, FINGER_CORALSTONE);
-		conversions.put(STAR_CORAL_BLOCK, STAR_CORALSTONE);
-		conversions.put(MOSS_CORAL_BLOCK, MOSS_CORALSTONE);
-		conversions.put(PETAL_CORAL_BLOCK, PETAL_CORALSTONE);
-		conversions.put(BRANCH_CORAL_BLOCK, BRANCH_CORALSTONE);
-		conversions.put(ROCK_CORAL_BLOCK, ROCK_CORALSTONE);
-		conversions.put(PILLOW_CORAL_BLOCK, PILLOW_CORALSTONE);
-		conversions.put(SILK_CORAL_BLOCK, SILK_CORALSTONE);
-		conversions.put(CHROME_CORAL_BLOCK, CHROME_CORALSTONE);
-		conversions.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CORALSTONE);
-	});
-
-	public static final Map<Supplier<Block>, Supplier<Block>> CHISELED_CORALSTONE_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(() -> Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CHISELED_CORALSTONE);
-		conversions.put(() -> Blocks.HORN_CORAL_BLOCK, HORN_CHISELED_CORALSTONE);
-		conversions.put(() -> Blocks.TUBE_CORAL_BLOCK, TUBE_CHISELED_CORALSTONE);
-		conversions.put(() -> Blocks.BRAIN_CORAL_BLOCK, BRAIN_CHISELED_CORALSTONE);
-		conversions.put(() -> Blocks.FIRE_CORAL_BLOCK, FIRE_CHISELED_CORALSTONE);
-		conversions.put(ACAN_CORAL_BLOCK, ACAN_CHISELED_CORALSTONE);
-		conversions.put(FINGER_CORAL_BLOCK, FINGER_CHISELED_CORALSTONE);
-		conversions.put(STAR_CORAL_BLOCK, STAR_CHISELED_CORALSTONE);
-		conversions.put(MOSS_CORAL_BLOCK, MOSS_CHISELED_CORALSTONE);
-		conversions.put(PETAL_CORAL_BLOCK, PETAL_CHISELED_CORALSTONE);
-		conversions.put(BRANCH_CORAL_BLOCK, BRANCH_CHISELED_CORALSTONE);
-		conversions.put(ROCK_CORAL_BLOCK, ROCK_CHISELED_CORALSTONE);
-		conversions.put(PILLOW_CORAL_BLOCK, PILLOW_CHISELED_CORALSTONE);
-		conversions.put(SILK_CORAL_BLOCK, SILK_CHISELED_CORALSTONE);
-		conversions.put(CHROME_CORAL_BLOCK, CHROME_CHISELED_CORALSTONE);
-		conversions.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CHISELED_CORALSTONE);
-	});
-
-	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_SLAB_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(() -> Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CORALSTONE_SLAB);
-		conversions.put(() -> Blocks.HORN_CORAL_BLOCK, HORN_CORALSTONE_SLAB);
-		conversions.put(() -> Blocks.TUBE_CORAL_BLOCK, TUBE_CORALSTONE_SLAB);
-		conversions.put(() -> Blocks.BRAIN_CORAL_BLOCK, BRAIN_CORALSTONE_SLAB);
-		conversions.put(() -> Blocks.FIRE_CORAL_BLOCK, FIRE_CORALSTONE_SLAB);
-		conversions.put(ACAN_CORAL_BLOCK, ACAN_CORALSTONE_SLAB);
-		conversions.put(FINGER_CORAL_BLOCK, FINGER_CORALSTONE_SLAB);
-		conversions.put(STAR_CORAL_BLOCK, STAR_CORALSTONE_SLAB);
-		conversions.put(MOSS_CORAL_BLOCK, MOSS_CORALSTONE_SLAB);
-		conversions.put(PETAL_CORAL_BLOCK, PETAL_CORALSTONE_SLAB);
-		conversions.put(BRANCH_CORAL_BLOCK, BRANCH_CORALSTONE_SLAB);
-		conversions.put(ROCK_CORAL_BLOCK, ROCK_CORALSTONE_SLAB);
-		conversions.put(PILLOW_CORAL_BLOCK, PILLOW_CORALSTONE_SLAB);
-		conversions.put(SILK_CORAL_BLOCK, SILK_CORALSTONE_SLAB);
-		conversions.put(CHROME_CORAL_BLOCK, CHROME_CORALSTONE_SLAB);
-		conversions.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CORALSTONE_SLAB);
-	});
-
-	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_STAIRS_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(() -> Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CORALSTONE_STAIRS);
-		conversions.put(() -> Blocks.HORN_CORAL_BLOCK, HORN_CORALSTONE_STAIRS);
-		conversions.put(() -> Blocks.TUBE_CORAL_BLOCK, TUBE_CORALSTONE_STAIRS);
-		conversions.put(() -> Blocks.BRAIN_CORAL_BLOCK, BRAIN_CORALSTONE_STAIRS);
-		conversions.put(() -> Blocks.FIRE_CORAL_BLOCK, FIRE_CORALSTONE_STAIRS);
-		conversions.put(ACAN_CORAL_BLOCK, ACAN_CORALSTONE_STAIRS);
-		conversions.put(FINGER_CORAL_BLOCK, FINGER_CORALSTONE_STAIRS);
-		conversions.put(STAR_CORAL_BLOCK, STAR_CORALSTONE_STAIRS);
-		conversions.put(MOSS_CORAL_BLOCK, MOSS_CORALSTONE_STAIRS);
-		conversions.put(PETAL_CORAL_BLOCK, PETAL_CORALSTONE_STAIRS);
-		conversions.put(BRANCH_CORAL_BLOCK, BRANCH_CORALSTONE_STAIRS);
-		conversions.put(ROCK_CORAL_BLOCK, ROCK_CORALSTONE_STAIRS);
-		conversions.put(PILLOW_CORAL_BLOCK, PILLOW_CORALSTONE_STAIRS);
-		conversions.put(SILK_CORAL_BLOCK, SILK_CORALSTONE_STAIRS);
-		conversions.put(CHROME_CORAL_BLOCK, CHROME_CORALSTONE_STAIRS);
-		conversions.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CORALSTONE_STAIRS);
-	});
-
-	public static final Map<Supplier<Block>, Supplier<Block>> CORALSTONE_WALL_CONVERSION_MAP = Util.make(Maps.newHashMap(), (conversions) -> {
-		conversions.put(() -> Blocks.BUBBLE_CORAL_BLOCK, BUBBLE_CORALSTONE_WALL);
-		conversions.put(() -> Blocks.HORN_CORAL_BLOCK, HORN_CORALSTONE_WALL);
-		conversions.put(() -> Blocks.TUBE_CORAL_BLOCK, TUBE_CORALSTONE_WALL);
-		conversions.put(() -> Blocks.BRAIN_CORAL_BLOCK, BRAIN_CORALSTONE_WALL);
-		conversions.put(() -> Blocks.FIRE_CORAL_BLOCK, FIRE_CORALSTONE_WALL);
-		conversions.put(ACAN_CORAL_BLOCK, ACAN_CORALSTONE_WALL);
-		conversions.put(FINGER_CORAL_BLOCK, FINGER_CORALSTONE_WALL);
-		conversions.put(STAR_CORAL_BLOCK, STAR_CORALSTONE_WALL);
-		conversions.put(MOSS_CORAL_BLOCK, MOSS_CORALSTONE_WALL);
-		conversions.put(PETAL_CORAL_BLOCK, PETAL_CORALSTONE_WALL);
-		conversions.put(BRANCH_CORAL_BLOCK, BRANCH_CORALSTONE_WALL);
-		conversions.put(ROCK_CORAL_BLOCK, ROCK_CORALSTONE_WALL);
-		conversions.put(PILLOW_CORAL_BLOCK, PILLOW_CORALSTONE_WALL);
-		conversions.put(SILK_CORAL_BLOCK, SILK_CORALSTONE_WALL);
-		conversions.put(CHROME_CORAL_BLOCK, CHROME_CORALSTONE_WALL);
-		conversions.put(PRISMARINE_CORAL_BLOCK, PRISMARINE_CORALSTONE_WALL);
-	});
-
-	public static final Map<Supplier<Block>, Supplier<Block>> SAND_FALLABLES = Util.make(Maps.newHashMap(), (fallables) -> {
-		fallables.put(() -> Blocks.SANDSTONE, () -> Blocks.SAND);
-		fallables.put(() -> Blocks.RED_SANDSTONE, () -> Blocks.RED_SAND);
-	});
-
-	public static final Map<Supplier<Block>, Supplier<Block>> ATMOSPHERIC_SAND_FALLABLES = ModList.get().isLoaded("atmospheric") ? Util.make(Maps.newHashMap(), (fallables) -> {
-		fallables.put(() -> BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "arid_sandstone")), () -> BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "arid_sand")));
-		fallables.put(() -> BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "red_arid_sandstone")), () -> BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "red_arid_sand")));
-	}) : null;
-
-	public static final Map<Supplier<Block>, Supplier<Block>> GRAVEL_FALLABLES = Util.make(Maps.newHashMap(), (fallables) -> {
-		fallables.put(() -> Blocks.COBBLESTONE, () -> Blocks.GRAVEL);
-	});
 }

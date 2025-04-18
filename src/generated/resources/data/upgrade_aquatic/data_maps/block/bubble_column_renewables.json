@@ -1,0 +1,13 @@
+{
+  "values": {
+    "minecraft:cobblestone": {
+      "falling_block": "minecraft:gravel"
+    },
+    "minecraft:red_sandstone": {
+      "falling_block": "minecraft:red_sand"
+    },
+    "minecraft:sandstone": {
+      "falling_block": "minecraft:sand"
+    }
+  }
+}

@@ -49,7 +49,7 @@ public class PickerelweedPlantBlock extends Block implements BonemealableBlock, 
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+	public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
 		if (random.nextFloat() <= 0.03F && state.getValue(WATERLOGGED)) {
 			this.performBonemeal(worldIn, random, pos, state);
 		}
