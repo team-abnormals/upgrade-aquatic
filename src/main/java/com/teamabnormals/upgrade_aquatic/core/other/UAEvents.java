@@ -15,7 +15,6 @@ import com.teamabnormals.upgrade_aquatic.core.registry.UACriteriaTriggers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,7 +32,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -45,7 +47,6 @@ import net.minecraft.world.entity.monster.Phantom;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -64,7 +65,6 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityMountEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -133,35 +133,6 @@ public class UAEvents {
 		Entity entity = event.getEntity();
 		BlockPos spawn = event.getNewSpawn();
 		if (spawn != null && entity.getCommandSenderWorld().getBlockState(spawn).getBlock() instanceof BedrollBlock) event.setCanceled(true);
-	}
-
-	@SubscribeEvent
-	public static void onInteractEntity(PlayerInteractEvent.EntityInteract event) {
-		Entity entity = event.getTarget();
-		Player player = event.getEntity();
-		ItemStack stack = event.getItemStack();
-		if (stack.getItem() == Items.WATER_BUCKET && entity.isAlive() && entity instanceof Squid squid) {
-			squid.playSound(SoundEvents.BUCKET_FILL_FISH, 1.0F, 1.0F);
-			ItemStack bucket;
-			if (squid.getType() == EntityType.SQUID) {
-				bucket = new ItemStack(UAItems.SQUID_BUCKET.get());
-			} else if (squid.getType() == EntityType.GLOW_SQUID) {
-				bucket = new ItemStack(UAItems.GLOW_SQUID_BUCKET.get());
-			} else {
-				return;
-			}
-
-			Bucketable.saveDefaultDataToBucketTag(squid, bucket);
-			ItemStack itemstack2 = ItemUtils.createFilledResult(stack, player, bucket, false);
-			player.setItemInHand(event.getHand(), itemstack2);
-			if (!event.getLevel().isClientSide()) {
-				CriteriaTriggers.FILLED_BUCKET.trigger((ServerPlayer) player, bucket);
-			}
-
-			entity.discard();
-			event.setCanceled(true);
-			event.setCancellationResult(InteractionResult.sidedSuccess(event.getLevel().isClientSide()));
-		}
 	}
 
 	@SubscribeEvent

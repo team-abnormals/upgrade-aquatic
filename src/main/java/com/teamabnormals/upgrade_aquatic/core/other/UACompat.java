@@ -64,6 +64,6 @@ public class UACompat {
 
 	private static void registerDispenserBehaviors() {
 		DispenserBlock.registerBehavior(Items.TRIDENT, new TridentDispenseBehavior());
-		UADispenseBehaviorRegistry.registerDispenseBehaviors();
+		UADispenserBehaviors.registerDispenseBehaviors();
 	}
 }

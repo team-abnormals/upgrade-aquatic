@@ -11,10 +11,9 @@ public class BoiledPickerelweedItem extends Item {
 		super(properties);
 	}
 
-	public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
-		ItemStack itemstack = super.finishUsingItem(stack, worldIn, entityLiving);
-		entityLiving.setAirSupply(Math.min(entityLiving.getAirSupply() + 100, 300));
-		return itemstack;
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+		ItemStack newStack = super.finishUsingItem(stack, level, entity);
+		entity.setAirSupply(Math.min(entity.getAirSupply() + 100, 300));
+		return newStack;
 	}
-
 }

@@ -9,10 +9,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
 public class MulberryJamBottleItem extends Item {
@@ -20,20 +17,20 @@ public class MulberryJamBottleItem extends Item {
 		super(properties);
 	}
 
-	public ItemStack finishUsingItem(ItemStack stack, Level worldIn, LivingEntity entityLiving) {
-		super.finishUsingItem(stack, worldIn, entityLiving);
-		if (entityLiving instanceof ServerPlayer serverplayerentity) {
-			CriteriaTriggers.CONSUME_ITEM.trigger(serverplayerentity, stack);
-			serverplayerentity.awardStat(Stats.ITEM_USED.get(this));
+	public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
+		super.finishUsingItem(stack, level, entity);
+		if (entity instanceof ServerPlayer serverPlayer) {
+			CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
+			serverPlayer.awardStat(Stats.ITEM_USED.get(this));
 		}
 
 		if (stack.isEmpty()) {
 			return new ItemStack(Items.GLASS_BOTTLE);
 		} else {
-			if (entityLiving instanceof Player playerentity && !((Player) entityLiving).getAbilities().instabuild) {
+			if (entity instanceof Player player && !player.hasInfiniteMaterials()) {
 				ItemStack itemstack = new ItemStack(Items.GLASS_BOTTLE);
-				if (!playerentity.getInventory().add(itemstack)) {
-					playerentity.drop(itemstack, false);
+				if (!player.getInventory().add(itemstack)) {
+					player.drop(itemstack, false);
 				}
 			}
 
@@ -41,24 +38,28 @@ public class MulberryJamBottleItem extends Item {
 		}
 	}
 
-	public int getUseDuration(ItemStack stack) {
+	@Override
+	public int getUseDuration(ItemStack stack, LivingEntity entity) {
 		return 40;
 	}
 
+	@Override
 	public UseAnim getUseAnimation(ItemStack stack) {
 		return UseAnim.DRINK;
 	}
 
+	@Override
 	public SoundEvent getDrinkingSound() {
 		return SoundEvents.HONEY_DRINK;
 	}
 
+	@Override
 	public SoundEvent getEatingSound() {
 		return SoundEvents.HONEY_DRINK;
 	}
 
-	public InteractionResultHolder<ItemStack> use(Level worldIn, Player playerIn, InteractionHand handIn) {
-		playerIn.startUsingItem(handIn);
-		return InteractionResultHolder.success(playerIn.getItemInHand(handIn));
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		return ItemUtils.startUsingInstantly(level, player, hand);
 	}
 }

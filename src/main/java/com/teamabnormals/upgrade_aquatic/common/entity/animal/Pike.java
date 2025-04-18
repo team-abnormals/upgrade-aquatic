@@ -52,6 +52,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -277,25 +278,6 @@ public class Pike extends BucketableWaterAnimal {
 		}
 	}
 
-	@Override
-	public void loadFromBucketTag(CompoundTag tag) {
-		super.loadFromBucketTag(tag);
-		if (tag.contains("BucketVariantTag", 3)) {
-			this.setPikeType(PikeType.getTypeById(tag.getInt("BucketVariantTag")));
-			this.dropEatingLootCooldown = tag.getInt("EatingLootDropCooldown");
-			if (tag.contains("PikeHeldItem")) {
-				this.startUsingItem(InteractionHand.MAIN_HAND);
-				this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(tag.getString("PikeHeldItem")))));
-			}
-			if (tag.contains("ShouldDropItem")) {
-				this.setToDropItem(tag.getBoolean("ShouldDropItem"));
-			}
-			if (tag.contains("IsLit")) {
-				this.setLit(tag.getBoolean("IsLit"));
-			}
-		}
-	}
-
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, SpawnGroupData spawnDataIn) {
@@ -370,22 +352,40 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	@Override
-	public void saveToBucketTag(ItemStack bucket) {
-		super.saveToBucketTag(bucket);
+	public void saveToBucketTag(ItemStack stack) {
+		super.saveToBucketTag(stack);
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> {
+			tag.putInt("BucketVariantTag", this.getPikeType().id);
+			tag.putInt("EatingLootDropCooldown", this.dropEatingLootCooldown);
+			tag.putBoolean("ShouldDropItem", this.shouldDropItem());
+			tag.putBoolean("IsLit", this.isLit());
 
-		CompoundTag compoundnbt = bucket.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
-		CompoundTag compoundnbt1 = new CompoundTag();
+			CompoundTag heldItemTag = new CompoundTag();
+			if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
+				this.getItemBySlot(EquipmentSlot.MAINHAND).save(this.level().registryAccess(), heldItemTag);
+			}
+			tag.put("PikeHeldItem", heldItemTag);
+		});
+	}
 
-		compoundnbt.putInt("BucketVariantTag", this.getPikeType().id);
-		compoundnbt.putInt("EatingLootDropCooldown", this.dropEatingLootCooldown);
+	@Override
+	public void loadFromBucketTag(CompoundTag tag) {
+		super.loadFromBucketTag(tag);
+		if (tag.contains("BucketVariantTag", 3)) {
+			this.setPikeType(PikeType.getTypeById(tag.getInt("BucketVariantTag")));
+			this.dropEatingLootCooldown = tag.getInt("EatingLootDropCooldown");
+			if (tag.contains("ShouldDropItem")) {
+				this.setToDropItem(tag.getBoolean("ShouldDropItem"));
+			}
+			if (tag.contains("IsLit")) {
+				this.setLit(tag.getBoolean("IsLit"));
+			}
 
-		if (!this.getItemBySlot(EquipmentSlot.MAINHAND).isEmpty()) {
-			this.getItemBySlot(EquipmentSlot.MAINHAND).save(this.level().registryAccess(), compoundnbt1);
+			if (tag.contains("PikeHeldItem")) {
+				this.startUsingItem(InteractionHand.MAIN_HAND);
+				this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(tag.getString("PikeHeldItem")))));
+			}
 		}
-
-		compoundnbt.put("PikeHeldItem", compoundnbt1);
-		compoundnbt.putBoolean("ShouldDropItem", this.shouldDropItem());
-		compoundnbt.putBoolean("IsLit", this.isLit());
 	}
 
 	@Nullable

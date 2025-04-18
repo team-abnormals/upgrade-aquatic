@@ -16,14 +16,6 @@ public final class UADataSerializers {
 	public static final DeferredRegister<EntityDataSerializer<?>> SERIALIZERS = DeferredRegister.create(NeoForgeRegistries.ENTITY_DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
 
 	public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<PikeType>> PIKE_TYPE = SERIALIZERS.register("pike_type", () -> new EntityDataSerializer<PikeType>() {
-		public void write(FriendlyByteBuf buf, PikeType value) {
-			buf.writeEnum(value);
-		}
-
-		public PikeType read(FriendlyByteBuf buf) {
-			return buf.readEnum(PikeType.class);
-		}
-
 		@Override
 		public StreamCodec<? super RegistryFriendlyByteBuf, PikeType> codec() {
 			return null;

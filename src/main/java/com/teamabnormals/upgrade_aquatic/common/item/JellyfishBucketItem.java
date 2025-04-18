@@ -16,6 +16,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.material.Fluid;
@@ -62,9 +63,14 @@ public class JellyfishBucketItem extends BucketItem {
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag tooltipFlag) {
-		CompoundTag compoundTag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
-		if (compoundTag.contains("JellyfishDisplayTag")) {
-			AbstractJellyfish.BucketDisplayInfo.appendHoverText(tooltip, compoundTag.getCompound("JellyfishDisplayTag"));
+		CustomData data = stack.getOrDefault(DataComponents.BUCKET_ENTITY_DATA, CustomData.EMPTY);
+		if (data.isEmpty()) {
+			return;
+		}
+
+		CompoundTag tag = data.copyTag();
+		if (tag.contains("JellyfishDisplayTag")) {
+			AbstractJellyfish.BucketDisplayInfo.appendHoverText(tooltip, tag.getCompound("JellyfishDisplayTag"));
 		}
 	}
 }

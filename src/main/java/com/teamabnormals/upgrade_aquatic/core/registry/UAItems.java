@@ -12,6 +12,7 @@ import com.teamabnormals.upgrade_aquatic.integration.boatload.UABoatTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
@@ -39,8 +40,8 @@ public class UAItems {
 	public static final DeferredItem<Item> PIKE_BUCKET = ITEMS.createItem("pike_bucket", () -> new PikeBucketItem(new Item.Properties().stacksTo(1)));
 	public static final DeferredItem<Item> LIONFISH_BUCKET = ITEMS.createItem("lionfish_bucket", () -> new MobBucketItem(UAEntityTypes.LIONFISH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
 	public static final DeferredItem<Item> PERCH_BUCKET = ITEMS.createItem("perch_bucket", () -> new MobBucketItem(UAEntityTypes.PERCH.get(), Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
-	public static final DeferredItem<Item> SQUID_BUCKET = ITEMS.createItem("squid_bucket", () -> new SquidBucketItem(new Item.Properties().stacksTo(1)));
-	public static final DeferredItem<Item> GLOW_SQUID_BUCKET = ITEMS.createItem("glow_squid_bucket", () -> new GlowSquidBucketItem(new Item.Properties().stacksTo(1)));
+	public static final DeferredItem<Item> SQUID_BUCKET = ITEMS.createItem("squid_bucket", () -> new MobBucketItem(EntityType.SQUID, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
+	public static final DeferredItem<Item> GLOW_SQUID_BUCKET = ITEMS.createItem("glow_squid_bucket", () -> new MobBucketItem(EntityType.GLOW_SQUID, Fluids.WATER, SoundEvents.BUCKET_EMPTY_FISH, new Item.Properties().stacksTo(1)));
 	public static final DeferredItem<Item> JELLYFISH_BUCKET = ITEMS.createItem("jellyfish_bucket", () -> new JellyfishBucketItem(Fluids.WATER, new Item.Properties().stacksTo(1)));
 
 	public static final DeferredItem<Item> PRISMARINE_ROD = ITEMS.createItem("prismarine_rod", () -> new Item(new Item.Properties()));

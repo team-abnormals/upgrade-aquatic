@@ -2,6 +2,7 @@ package com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish;
 
 import com.teamabnormals.blueprint.common.entity.BucketableWaterAnimal;
 import com.teamabnormals.blueprint.core.endimator.Endimatable;
+import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.core.other.JellyfishRegistry;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -40,6 +41,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.HitResult;
@@ -242,13 +244,13 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
-	public void saveToBucketTag(ItemStack bucket) {
-		super.saveToBucketTag(bucket);
-		CompoundTag compoundTag = bucket.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
-		compoundTag.putString("EntityType", this.level().registryAccess().registryOrThrow(Registries.ENTITY_TYPE).getKey(this.getType()).toString());
-		compoundTag.put("JellyfishDisplayTag", this.getBucketDisplayInfo().write());
-		this.addAdditionalSaveDataSharedWithBucket(compoundTag);
+	public void saveToBucketTag(ItemStack stack) {
+		super.saveToBucketTag(stack);
+		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> {
+			tag.putString("EntityType", this.level().registryAccess().registryOrThrow(Registries.ENTITY_TYPE).getKey(this.getType()).toString());
+			tag.put("JellyfishDisplayTag", this.getBucketDisplayInfo().write());
+			this.addAdditionalSaveDataSharedWithBucket(tag);
+		});
 	}
 
 	@Override
@@ -338,7 +340,7 @@ public abstract class AbstractJellyfish extends BucketableWaterAnimal implements
 			if (length <= 0) return;
 			MutableComponent component = Component.translatable("tooltip.upgrade_aquatic.yielding_jelly_torch").withStyle(ChatFormatting.GRAY);
 			while (true) {
-				JellyTorchType torchType = JellyTorchType.getByOrdinal(yieldingTorchTypes[length - 1]);
+				JellyTorchType torchType = JellyTorchBlock.JellyTorchType.getByOrdinal(yieldingTorchTypes[length - 1]);
 				component = component.append((Component.translatable("tooltip.upgrade_aquatic." + torchType.toString().toLowerCase(Locale.ROOT) + "_jelly_torch")).withStyle(torchType.color));
 				if (--length > 0) {
 					component = component.append(Component.translatable("tooltip.upgrade_aquatic.yielding_jelly_torch.or").withStyle(ChatFormatting.GRAY));
