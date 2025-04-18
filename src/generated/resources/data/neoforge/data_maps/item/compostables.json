@@ -1,0 +1,64 @@
+{
+  "values": {
+    "upgrade_aquatic:beachgrass": {
+      "chance": 0.3
+    },
+    "upgrade_aquatic:beachgrass_thatch": {
+      "chance": 0.65
+    },
+    "upgrade_aquatic:beachgrass_thatch_slab": {
+      "chance": 0.65
+    },
+    "upgrade_aquatic:beachgrass_thatch_stairs": {
+      "chance": 0.65
+    },
+    "upgrade_aquatic:boiled_pickerelweed": {
+      "chance": 0.3
+    },
+    "upgrade_aquatic:boiled_pickerelweed_block": {
+      "chance": 0.5
+    },
+    "upgrade_aquatic:flowering_rush": {
+      "chance": 0.65
+    },
+    "upgrade_aquatic:kelp_block": {
+      "chance": 0.5
+    },
+    "upgrade_aquatic:mulberry": {
+      "chance": 0.3
+    },
+    "upgrade_aquatic:mulberry_bread": {
+      "chance": 0.85
+    },
+    "upgrade_aquatic:mulberry_jam_block": {
+      "chance": 1.0
+    },
+    "upgrade_aquatic:mulberry_pie": {
+      "chance": 1.0
+    },
+    "upgrade_aquatic:mulberry_punnet": {
+      "chance": 1.0
+    },
+    "upgrade_aquatic:pickerelweed": {
+      "chance": 0.3
+    },
+    "upgrade_aquatic:pickerelweed_block": {
+      "chance": 0.5
+    },
+    "upgrade_aquatic:pink_searocket": {
+      "chance": 0.65
+    },
+    "upgrade_aquatic:river_leaves": {
+      "chance": 0.3
+    },
+    "upgrade_aquatic:river_sapling": {
+      "chance": 0.3
+    },
+    "upgrade_aquatic:tall_beachgrass": {
+      "chance": 0.65
+    },
+    "upgrade_aquatic:white_searocket": {
+      "chance": 0.65
+    }
+  }
+}

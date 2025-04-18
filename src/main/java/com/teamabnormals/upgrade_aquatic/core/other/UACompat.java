@@ -3,7 +3,6 @@ package com.teamabnormals.upgrade_aquatic.core.other;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import com.teamabnormals.upgrade_aquatic.common.dispenser.TridentDispenseBehavior;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADecoratedPotPatterns;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -14,39 +13,10 @@ import net.neoforged.fml.util.ObfuscationReflectionHelper;
 public class UACompat {
 
 	public static void register() {
-		registerCompostables();
 		registerFlammables();
 		registerDispenserBehaviors();
 		UADecoratedPotPatterns.registerDecoratedPotPatterns();
 		ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "isRandomlyTicking");
-	}
-
-	public static void registerCompostables() {
-		// TODO: Move to Neoforge datamaps
-		DataUtil.registerCompostable(UABlocks.RIVER_LEAVES.get(), 0.30F);
-		DataUtil.registerCompostable(UABlocks.RIVER_SAPLING.get(), 0.30F);
-		DataUtil.registerCompostable(UAItems.MULBERRY.get(), 0.30F);
-		DataUtil.registerCompostable(UAItems.MULBERRY_BREAD.get(), 0.85F);
-		DataUtil.registerCompostable(UAItems.MULBERRY_PIE.get(), 1.0F);
-		DataUtil.registerCompostable(UABlocks.MULBERRY_PUNNET.get(), 1.0F);
-		DataUtil.registerCompostable(UABlocks.MULBERRY_JAM_BLOCK.get(), 1.0F);
-
-		DataUtil.registerCompostable(UABlocks.BEACHGRASS.get(), 0.30F);
-		DataUtil.registerCompostable(UABlocks.TALL_BEACHGRASS.get(), 0.65F);
-		DataUtil.registerCompostable(UABlocks.BEACHGRASS_THATCH.get(), 0.65F);
-		DataUtil.registerCompostable(UABlocks.BEACHGRASS_THATCH_STAIRS.get(), 0.65F);
-		DataUtil.registerCompostable(UABlocks.BEACHGRASS_THATCH_SLAB.get(), 0.65F);
-
-		DataUtil.registerCompostable(UABlocks.PICKERELWEED.get(), 0.30F);
-		DataUtil.registerCompostable(UAItems.BOILED_PICKERELWEED.get(), 0.30F);
-		DataUtil.registerCompostable(UABlocks.PICKERELWEED_BLOCK.get(), 0.50F);
-		DataUtil.registerCompostable(UABlocks.BOILED_PICKERELWEED_BLOCK.get(), 0.50F);
-
-		DataUtil.registerCompostable(UABlocks.FLOWERING_RUSH.get(), 0.65F);
-		DataUtil.registerCompostable(UABlocks.WHITE_SEAROCKET.get(), 0.65F);
-		DataUtil.registerCompostable(UABlocks.PINK_SEAROCKET.get(), 0.65F);
-
-		DataUtil.registerCompostable(UABlocks.KELP_BLOCK.get(), 0.50F);
 	}
 
 	public static void registerFlammables() {

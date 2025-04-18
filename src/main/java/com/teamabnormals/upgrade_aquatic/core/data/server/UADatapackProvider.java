@@ -16,7 +16,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
-public class UADatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProvider {
+public class UADatapackProvider extends DatapackBuiltinEntriesProvider {
 
 	public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
 			.add(Registries.DAMAGE_TYPE, UADamageTypes::bootstrap)
@@ -29,7 +29,7 @@ public class UADatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProv
 			.add(Registries.PAINTING_VARIANT, UAPaintingVariants::bootstrap)
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, UABiomeModifiers::bootstrap);
 
-	public UADatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<Provider> provider) {
+	public UADatapackProvider(PackOutput output, CompletableFuture<Provider> provider) {
 		super(output, provider, BUILDER, Set.of(UpgradeAquatic.MOD_ID));
 	}
 }

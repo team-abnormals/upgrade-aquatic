@@ -4,10 +4,7 @@ import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.client.UABlockStateProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.client.UASpriteSourceProvider;
-import com.teamabnormals.upgrade_aquatic.core.data.server.UAAdvancementModifierProvider;
-import com.teamabnormals.upgrade_aquatic.core.data.server.UADataRemolderProvider;
-import com.teamabnormals.upgrade_aquatic.core.data.server.UADatapackBuiltinEntriesProvider;
-import com.teamabnormals.upgrade_aquatic.core.data.server.UARecipeProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.server.*;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.*;
 import com.teamabnormals.upgrade_aquatic.core.other.UAClientCompat;
 import com.teamabnormals.upgrade_aquatic.core.other.UACompat;
@@ -82,9 +79,9 @@ public class UpgradeAquatic {
 		ExistingFileHelper helper = event.getExistingFileHelper();
 
 		boolean server = event.includeServer();
-		UADatapackBuiltinEntriesProvider datapackEntries = new UADatapackBuiltinEntriesProvider(output, provider);
-		generator.addProvider(server, datapackEntries);
-		provider = datapackEntries.getRegistryProvider();
+		UADatapackProvider datapack = new UADatapackProvider(output, provider);
+		generator.addProvider(server, datapack);
+		provider = datapack.getRegistryProvider();
 
 		UABlockTagsProvider blockTags = new UABlockTagsProvider(output, provider, helper);
 		generator.addProvider(server, blockTags);
@@ -96,6 +93,7 @@ public class UpgradeAquatic {
 		generator.addProvider(server, new UADataRemolderProvider(output, provider));
 		generator.addProvider(server, new UAAdvancementModifierProvider(output, provider));
 		generator.addProvider(server, new UARecipeProvider(output, provider));
+		generator.addProvider(server, new UADataMapProvider(output, provider));
 
 		boolean client = event.includeClient();
 		generator.addProvider(client, new UABlockStateProvider(output, helper));
