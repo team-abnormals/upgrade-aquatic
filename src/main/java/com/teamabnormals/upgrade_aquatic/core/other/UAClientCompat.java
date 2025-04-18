@@ -12,6 +12,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.FoliageColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -161,25 +162,34 @@ public class UAClientCompat {
 
 	public static void registerItemProperties() {
 		ItemProperties.register(UAItems.JELLYFISH_BUCKET.get(), ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
-			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
-			if (tag.contains("JellyfishDisplayTag")) {
-				return AbstractJellyfish.BucketDisplayInfo.readVariant(tag.getCompound("JellyfishDisplayTag"));
+			CustomData data = stack.get(DataComponents.BUCKET_ENTITY_DATA);
+			if (data != null) {
+				CompoundTag tag = data.copyTag();
+				if (tag.contains("JellyfishDisplayTag")) {
+					return AbstractJellyfish.BucketDisplayInfo.readVariant(tag.getCompound("JellyfishDisplayTag"));
+				}
 			}
 			return 0.0F;
 		});
 
 		ItemProperties.register(UAItems.PIKE_BUCKET.get(), ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
-			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
-			if (tag.contains("BucketVariantTag", 3)) {
-				return tag.getInt("BucketVariantTag");
+			CustomData data = stack.get(DataComponents.BUCKET_ENTITY_DATA);
+			if (data != null) {
+				CompoundTag tag = data.copyTag();
+				if (tag.contains("BucketVariantTag", 3)) {
+					return tag.getInt("BucketVariantTag");
+				}
 			}
 			return 2;
 		});
 
 		ItemProperties.register(Items.AXOLOTL_BUCKET, ResourceLocation.withDefaultNamespace("variant"), (stack, world, entity, num) -> {
-			CompoundTag tag = stack.get(DataComponents.BUCKET_ENTITY_DATA).copyTag();
-			if (tag.contains("Variant")) {
-				return tag.getInt("Variant");
+			CustomData data = stack.get(DataComponents.BUCKET_ENTITY_DATA);
+			if (data != null) {
+				CompoundTag tag = data.copyTag();
+				if (tag.contains("Variant")) {
+					return tag.getInt("Variant");
+				}
 			}
 			return 0;
 		});
