@@ -88,7 +88,7 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 
 	@Override
 	public boolean isBonemealSuccess(Level arg0, RandomSource arg1, BlockPos arg2, BlockState state) {
-		return state.getValue(AGE) < 4;
+		return true;
 	}
 
 	@Override
@@ -136,12 +136,8 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state) {
-		int i = state.getValue(AGE);
-		// TODO: Reassess using the CropGrowEvents here. Crops don't use the event for bone-mealing.
-		if (i < 4 && CommonHooks.canCropGrow(level, pos, state, true)) {
-			level.setBlockAndUpdate(pos, state.setValue(AGE, i + 1));
-			CommonHooks.fireCropGrowPost(level, pos, state);
-		}
+		int i = Math.min(4, state.getValue(AGE) + 1);
+		level.setBlockAndUpdate(pos, state.setValue(AGE, i + 1));
 	}
 
 	@Override
