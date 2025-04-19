@@ -13,6 +13,7 @@ import net.minecraft.world.phys.HitResult;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
+import java.util.Optional;
 import java.util.function.BiPredicate;
 
 public class ThrasherFireSonarGoal extends Goal {
@@ -52,7 +53,7 @@ public class ThrasherFireSonarGoal extends Goal {
 		this.sonarTicks = 0;
 		this.turnTicks = 0;
 		this.sonarPhase = null;
-		this.thrasher.setPossibleDetectionPoint(null);
+		this.thrasher.setPossibleDetectionPoint(Optional.empty());
 		((Thrasher.ThrasherLookController) this.thrasher.getLookControl()).setTurningForSonar(false);
 	}
 
@@ -62,12 +63,15 @@ public class ThrasherFireSonarGoal extends Goal {
 
 		if (this.sonarPhase == SonarPhase.TURN) {
 			this.turnTicks++;
-			BlockPos pos = this.thrasher.getPossibleDetectionPoint();
-			((Thrasher.ThrasherLookController) this.thrasher.getLookControl()).setTurningForSonar(true);
-			this.thrasher.getLookControl().setLookAt(pos.getX(), pos.getY(), pos.getZ(), 90.0F, 90.0F);
+			Optional<BlockPos> optional = this.thrasher.getPossibleDetectionPoint();
+			if (optional.isPresent()) {
+				BlockPos pos = optional.get();
+				((Thrasher.ThrasherLookController) this.thrasher.getLookControl()).setTurningForSonar(true);
+				this.thrasher.getLookControl().setLookAt(pos.getX(), pos.getY(), pos.getZ(), 90.0F, 90.0F);
 
-			if (this.turnTicks > 50) {
-				this.sonarPhase = SonarPhase.FIRE;
+				if (this.turnTicks > 50) {
+					this.sonarPhase = SonarPhase.FIRE;
+				}
 			}
 		} else {
 			if (this.sonarTicks == 0 && SonarPhase.shouldContinueExecutingPhase(SonarPhase.FIRE, this.thrasher, this.sonarTicks)) {

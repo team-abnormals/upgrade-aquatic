@@ -1,6 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.other;
 
-import com.teamabnormals.upgrade_aquatic.client.model.DynamicFishBucketModel;
+import com.teamabnormals.blueprint.client.model.DynamicItemModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -200,11 +201,11 @@ public class UAClientCompat {
 
 	@SubscribeEvent
 	public static void registerAdditional(ModelEvent.RegisterAdditional event) {
-		DynamicFishBucketModel.registerDynamicFishBucketModel(event, "pike_bucket");
+		DynamicItemModel.register(event, "pike_bucket");
 	}
 
 	@SubscribeEvent
 	public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
-		DynamicFishBucketModel.putDynamicFishBucketModel(event, UAItems.PIKE_BUCKET.getId(), "pike_bucket", UAPikeVariants.REDFIN_PICKEREL.location().withPrefix("pike_bucket/"));
+		DynamicItemModel.bake(event, UAItems.PIKE_BUCKET.getId(), "pike_bucket", ModelResourceLocation.standalone(UAPikeVariants.REDFIN_PICKEREL.location().withPrefix("item/pike_bucket/")), DynamicItemModel.fishBucket());
 	}
 }

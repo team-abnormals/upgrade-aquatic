@@ -158,25 +158,24 @@ public class Thrasher extends Monster implements Endimatable {
 		super.onSyncedDataUpdated(key);
 	}
 
-	// TODO: Reimplement with EntityAttachments
-//	@Override
-//	public void positionRider(Entity passenger, Entity.MoveFunction function) {
-//		if (passenger instanceof LivingEntity) {
-//			float distance = this.getMountDistance();
-//
-//			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
-//			double dy = -Math.sin(this.getXRot() * (Math.PI / 180.0D));
-//			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
-//
-//			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY(), this.getZ() + dz);
-//
-//			double offset = passenger instanceof Player ? this.getPassengersRidingOffset() - 0.2D : this.getPassengersRidingOffset() - 0.5F;
-//
-//			function.accept(passenger, riderPos.x, this.getY() + dy + offset, riderPos.z);
-//		} else {
-//			super.positionRider(passenger);
-//		}
-//	}
+	@Override
+	public void positionRider(Entity passenger, Entity.MoveFunction function) {
+		if (passenger instanceof LivingEntity) {
+			float distance = this.getMountDistance();
+
+			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+			double dy = -Math.sin(this.getXRot() * (Math.PI / 180.0D));
+			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+
+			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY(), this.getZ() + dz);
+
+			double offset = this.getPassengerRidingPosition(passenger).y() - (passenger instanceof Player ? 0.5F : 0.75F);
+
+			function.accept(passenger, riderPos.x, dy + offset, riderPos.z);
+		} else {
+			super.positionRider(passenger);
+		}
+	}
 
 	@Override
 	protected void addPassenger(Entity passenger) {
@@ -548,9 +547,8 @@ public class Thrasher extends Monster implements Endimatable {
 		this.entityData.set(HITS_TILL_STUN, hits);
 	}
 
-	@Nullable
-	public BlockPos getPossibleDetectionPoint() {
-		return this.getEntityData().get(POSSIBLE_DETECTION_POINT).orElse(null);
+	public Optional<BlockPos> getPossibleDetectionPoint() {
+		return this.getEntityData().get(POSSIBLE_DETECTION_POINT);
 	}
 
 	public void setPossibleDetectionPoint(Optional<BlockPos> detectionPoint) {
@@ -583,9 +581,8 @@ public class Thrasher extends Monster implements Endimatable {
 		compound.putInt("WaterTicks", this.getWaterTime());
 		compound.putInt("StunnedTicks", this.getStunTime());
 		compound.putInt("TicksSinceLastSonarFire", this.getTicksSinceLastSonarFire());
-
-		if (this.getPossibleDetectionPoint() != null) {
-			compound.put("DetectionPoint", NbtUtils.writeBlockPos(this.getPossibleDetectionPoint()));
+		if (this.getPossibleDetectionPoint().isPresent()) {
+			compound.put("DetectionPoint", NbtUtils.writeBlockPos(this.getPossibleDetectionPoint().get()));
 		}
 	}
 
@@ -599,8 +596,7 @@ public class Thrasher extends Monster implements Endimatable {
 		this.setWaterTime(compound.getInt("WaterTicks"));
 		this.setStunned(compound.getInt("StunnedTicks"));
 		this.ticksSinceLastSonarFire = compound.getInt("TicksSinceLastSonarFire");
-
-		if (this.getPossibleDetectionPoint() != null) {
+		if (this.getPossibleDetectionPoint().isPresent()) {
 			this.setPossibleDetectionPoint(NbtUtils.readBlockPos(compound, "DetectionPoint"));
 		}
 	}

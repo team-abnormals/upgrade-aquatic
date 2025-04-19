@@ -518,21 +518,20 @@ public class Pike extends BucketableWaterAnimal implements VariantHolder<Holder<
 		this.setToDropItem(true);
 	}
 
-	// TODO: Reimplement with EntityAttachments
-//	@Override
-//	public void positionRider(Entity passenger, Entity.MoveFunction function) {
-//		if (passenger instanceof AbstractFish || passenger instanceof Animal) {
-//			float distance = 0.7F;
-//
-//			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
-//			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
-//
-//			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY() + this.getPassengersRidingOffset() + this.getFirstPassenger().getMyRidingOffset(), this.getZ() + dz);
-//			function.accept(passenger, riderPos.x, riderPos.y, riderPos.z);
-//		} else {
-//			super.positionRider(passenger);
-//		}
-//	}
+	@Override
+	public void positionRider(Entity passenger, Entity.MoveFunction function) {
+		if (passenger instanceof AbstractFish || passenger instanceof Animal) {
+			float distance = 0.7F;
+
+			double dx = Math.cos((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+			double dz = Math.sin((this.getYRot() + 90) * Math.PI / 180.0D) * distance;
+
+			Vec3 riderPos = new Vec3(this.getX() + dx, this.getY() + (this.getDimensions(this.getPose()).height() * 0.075D) + this.getFirstPassenger().getVehicleAttachmentPoint(this).y(), this.getZ() + dz);
+			function.accept(passenger, riderPos.x, riderPos.y, riderPos.z);
+		} else {
+			super.positionRider(passenger);
+		}
+	}
 
 	@Override
 	public ItemStack getPickedResult(HitResult target) {
