@@ -48,7 +48,7 @@ public class PikeBucketItem extends MobBucketItem {
 
 				if (variant.isPresent()) {
 					PikeVariant pike = variant.get().value();
-					tooltip.add(pike.description().copy().withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
+					tooltip.add(pike.description().copy().withStyle(ChatFormatting.ITALIC));
 				}
 			}
 		}
