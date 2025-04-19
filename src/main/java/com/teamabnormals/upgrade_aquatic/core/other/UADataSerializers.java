@@ -1,8 +1,8 @@
 package com.teamabnormals.upgrade_aquatic.core.other;
 
-import com.teamabnormals.upgrade_aquatic.common.entity.animal.PikeType;
+import com.teamabnormals.upgrade_aquatic.common.entity.animal.PikeVariant;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -15,16 +15,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 public final class UADataSerializers {
 	public static final DeferredRegister<EntityDataSerializer<?>> SERIALIZERS = DeferredRegister.create(NeoForgeRegistries.ENTITY_DATA_SERIALIZERS, UpgradeAquatic.MOD_ID);
 
-	public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<PikeType>> PIKE_TYPE = SERIALIZERS.register("pike_type", () -> new EntityDataSerializer<PikeType>() {
-		@Override
-		public StreamCodec<? super RegistryFriendlyByteBuf, PikeType> codec() {
-			return null;
-		}
-
-		public PikeType copy(PikeType type) {
-			return type;
-		}
-	});
+	public static final DeferredHolder<EntityDataSerializer<?>, EntityDataSerializer<Holder<PikeVariant>>> PIKE_VARIANT = SERIALIZERS.register("pike_variant", () -> EntityDataSerializer.forValueType(PikeVariant.STREAM_CODEC));
 
 	public static final StreamCodec<RegistryFriendlyByteBuf, EntityDimensions> DIRECT_STREAM_CODEC = StreamCodec.composite(
 			ByteBufCodecs.FLOAT, EntityDimensions::width,

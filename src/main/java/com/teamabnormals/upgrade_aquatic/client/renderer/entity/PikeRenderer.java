@@ -6,15 +6,12 @@ import com.teamabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.GlowingPikeRenderLayer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.PikeCarriedItemRenderLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-
-import java.util.Locale;
 
 @OnlyIn(Dist.CLIENT)
 public class PikeRenderer extends MobRenderer<Pike, PikeModel<Pike>> {
@@ -27,7 +24,7 @@ public class PikeRenderer extends MobRenderer<Pike, PikeModel<Pike>> {
 
 	@Override
 	public ResourceLocation getTextureLocation(Pike pike) {
-		return UpgradeAquatic.location(String.format("textures/entity/pike/%s.png", pike.getPikeType().name().toLowerCase(Locale.ROOT)));
+		return pike.getVariant().value().assetId().withPath(assetId -> "textures/" + assetId + ".png");
 	}
 
 	@Override
@@ -43,7 +40,7 @@ public class PikeRenderer extends MobRenderer<Pike, PikeModel<Pike>> {
 
 	@Override
 	protected void scale(Pike pike, PoseStack matrixStack, float partialTickTime) {
-		float scale = pike.getPikeType().pikeSize.renderSize;
+		float scale = pike.getVariant().value().size();
 		matrixStack.scale(scale, scale, scale);
 	}
 

@@ -10,6 +10,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
@@ -39,6 +40,7 @@ public final class UAPikeVariants {
 	public static final ResourceKey<PikeVariant> MUSTARD_SOUTHERN = create("mustard_southern");
 	public static final ResourceKey<PikeVariant> LEMON_SOUTHERN = create("lemon_southern");
 	public static final ResourceKey<PikeVariant> GOLDEN_SOUTHERN = create("golden_southern");
+	public static final ResourceKey<PikeVariant> DEFAULT = REDFIN_PICKEREL;
 
 	public static void bootstrap(BootstrapContext<PikeVariant> context) {
 		float small = 1.2F;
@@ -46,7 +48,7 @@ public final class UAPikeVariants {
 		float large = 1.7F;
 		float huge = 2.3F;
 
-		int common = 55;
+		int common = 33;
 		int uncommon = 25;
 		int rare = 15;
 		int epic = 5;
@@ -70,14 +72,14 @@ public final class UAPikeVariants {
 		register(context, JADE_NORTHERN, large, rare);
 		register(context, OLIVE_NORTHERN, large, epic);
 
-		register(context, SPOTTED_BROWN_NORTHERN, large, common);
-		register(context, SPOTTED_MAHOGANY_NORTHERN, large, uncommon);
-		register(context, SPOTTED_JADE_NORTHERN, large, rare);
-		register(context, SPOTTED_OLIVE_NORTHERN, large, epic);
+		register(context, SPOTTED_BROWN_NORTHERN, large, 0);
+		register(context, SPOTTED_MAHOGANY_NORTHERN, large, 0);
+		register(context, SPOTTED_JADE_NORTHERN, large, 0);
+		register(context, SPOTTED_OLIVE_NORTHERN, large, 0);
 
-		register(context, SPECTRAL, large, legendary);
-		register(context, SUPERCHARGED, large, legendary);
-		register(context, OBSIDIAN, large, legendary);
+		register(context, SPECTRAL, large, legendary, true);
+		register(context, SUPERCHARGED, large, legendary, true);
+		register(context, OBSIDIAN, large, legendary, true);
 	}
 
 	private static ResourceKey<PikeVariant> create(String name) {
@@ -85,18 +87,23 @@ public final class UAPikeVariants {
 	}
 
 	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight, TagKey<Biome> biomes) {
-		register(context, key, size, weight, Optional.of(context.lookup(Registries.BIOME).getOrThrow(biomes)));
+		register(context, key, size, weight, Optional.of(context.lookup(Registries.BIOME).getOrThrow(biomes)), false);
 	}
 
 	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight) {
-		register(context, key, size, weight, Optional.empty());
+		register(context, key, size, weight, Optional.empty(), false);
 	}
 
-	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight, Optional<HolderSet<Biome>> biomes) {
+	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight, boolean glow) {
+		register(context, key, size, weight, Optional.empty(), glow);
+	}
+
+	public static void register(BootstrapContext<PikeVariant> context, ResourceKey<PikeVariant> key, float size, int weight, Optional<HolderSet<Biome>> biomes, boolean glow) {
+		ResourceLocation texture = key.location().withPrefix("entity/pike/");
 		context.register(key, new PikeVariant(
-				key.location().withPrefix("entity/pike/"),
+				texture,
 				Component.translatable(Util.makeDescriptionId("pike_variant", key.location())).withStyle(getColorForWeight(weight)),
-				size, weight, biomes
+				size, weight, biomes, glow ? Optional.of(texture.withSuffix("_glow")) : Optional.empty()
 		));
 	}
 

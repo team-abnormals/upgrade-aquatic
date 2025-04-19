@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.core;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
 import com.teamabnormals.gallery.core.data.client.GalleryItemModelProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.client.UABlockStateProvider;
+import com.teamabnormals.upgrade_aquatic.core.data.client.UAItemModelProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.client.UASpriteSourceProvider;
 import com.teamabnormals.upgrade_aquatic.core.data.server.*;
 import com.teamabnormals.upgrade_aquatic.core.data.server.tags.*;
@@ -100,6 +101,7 @@ public class UpgradeAquatic {
 		boolean client = event.includeClient();
 		generator.addProvider(client, new UABlockStateProvider(output, helper));
 		generator.addProvider(client, new UASpriteSourceProvider(output, provider, helper));
+		generator.addProvider(client, new UAItemModelProvider(output, helper));
 
 		generator.addProvider(client, new GalleryItemModelProvider(MOD_ID, output, helper, provider));
 	}

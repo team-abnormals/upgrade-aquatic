@@ -14,8 +14,12 @@ import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.teamabnormals.upgrade_aquatic.core.other.tags.UABlockTags;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAParticleTypes;
+import com.teamabnormals.upgrade_aquatic.core.registry.UARegistries;
 import com.teamabnormals.upgrade_aquatic.core.registry.UASoundEvents;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAPikeVariants;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,6 +28,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.SynchedEntityData.Builder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -56,6 +61,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -68,10 +74,11 @@ import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
-public class Pike extends BucketableWaterAnimal {
-	private static final EntityDataAccessor<PikeType> TYPE = SynchedEntityData.defineId(Pike.class, UADataSerializers.PIKE_TYPE.get());
+public class Pike extends BucketableWaterAnimal implements VariantHolder<Holder<PikeVariant>> {
+	private static final EntityDataAccessor<Holder<PikeVariant>> VARIANT = SynchedEntityData.defineId(Pike.class, UADataSerializers.PIKE_VARIANT.get());
 	private static final EntityDataAccessor<Boolean> DROP_ITEM = SynchedEntityData.defineId(Pike.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> MOVING = SynchedEntityData.defineId(Pike.class, EntityDataSerializers.BOOLEAN);
 	private static final EntityDataAccessor<Boolean> LIT = SynchedEntityData.defineId(Pike.class, EntityDataSerializers.BOOLEAN);
@@ -96,12 +103,12 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	protected void registerGoals() {
 		super.registerGoals();
-		if (this.getPikeType() != PikeType.SPECTRAL) {
+		if (!this.getVariant().is(UAPikeVariants.SPECTRAL)) {
 			this.goalSelector.addGoal(2, new AvoidEntityGoal<>(this, Pike.class, 8.0F, 1.6D, 1.4D, UAEntityPredicates.IS_SPECTRAL::test) {
 
 				@Override
 				public boolean canUse() {
-					return super.canUse() && this.mob != null && ((Pike) this.mob).getPikeType() != PikeType.SPECTRAL;
+					return super.canUse() && this.mob != null && !((Pike) this.mob).getVariant().is(UAPikeVariants.SPECTRAL);
 				}
 
 			});
@@ -141,7 +148,8 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	protected void defineSynchedData(Builder builder) {
 		super.defineSynchedData(builder);
-		builder.define(TYPE, PikeType.AMUR);
+		Registry<PikeVariant> registry = this.registryAccess().registryOrThrow(UARegistries.PIKE_VARIANT);
+		builder.define(VARIANT, registry.getHolder(UAPikeVariants.DEFAULT).or(registry::getAny).orElseThrow());
 		builder.define(DROP_ITEM, true);
 		builder.define(MOVING, false);
 		builder.define(LIT, false);
@@ -150,7 +158,7 @@ public class Pike extends BucketableWaterAnimal {
 
 	@Override
 	public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
-		if (key.equals(TYPE)) {
+		if (key.equals(VARIANT)) {
 			this.refreshDimensions();
 		}
 	}
@@ -158,7 +166,7 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
-		compound.putInt("PikeType", this.getPikeType().id);
+		this.getVariant().unwrapKey().ifPresent(variant -> compound.putString("BucketVariantTag", variant.location().toString()));
 		compound.putInt("AttackCooldown", this.getAttackCooldown());
 		compound.putInt("EatingLootDropCooldown", this.dropEatingLootCooldown);
 		compound.putBoolean("DoesDropItem", this.shouldDropItem());
@@ -168,7 +176,10 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
-		this.setPikeType(PikeType.getTypeById(Mth.clamp(compound.getInt("PikeType"), 1, 21)));
+		Optional.ofNullable(ResourceLocation.tryParse(compound.getString("BucketVariantTag")))
+				.map(loc -> ResourceKey.create(UARegistries.PIKE_VARIANT, loc))
+				.flatMap(key -> this.registryAccess().registryOrThrow(UARegistries.PIKE_VARIANT).getHolder(key))
+				.ifPresent(this::setVariant);
 		this.dropEatingLootCooldown = compound.getInt("EatingLootDropCooldown");
 		this.setAttackCooldown(compound.getInt("AttackCooldown"));
 		this.setToDropItem(compound.getBoolean("DoesDropItem"));
@@ -193,7 +204,7 @@ public class Pike extends BucketableWaterAnimal {
 			LivingEntity caughtEntity = this.getCaughtEntity();
 			if (caughtEntity != null && (!this.isPickerelweedNearby() || this.isHidingInPickerelweed())) {
 				this.level().playSound(null, this.blockPosition(), UASoundEvents.PIKE_BITE.get(), SoundSource.HOSTILE, 0.8F, 0.90F);
-				if (this.level().isClientSide && caughtEntity.getHealth() <= 1 && this.getPikeType() == PikeType.SPECTRAL) {
+				if (this.level().isClientSide && caughtEntity.getHealth() <= 1 && this.getVariant().is(UAPikeVariants.SPECTRAL)) {
 					for (int i = 0; i < 3; ++i) {
 						this.level().addParticle(UAParticleTypes.SPECTRAL_CONSUME.get(), caughtEntity.getX() + (caughtEntity.getRandom().nextDouble() - 0.5D) * (double) caughtEntity.getBbWidth(), caughtEntity.getY() + caughtEntity.getRandom().nextDouble() * (double) caughtEntity.getBbHeight() - 0.25D, caughtEntity.getZ() + (caughtEntity.getRandom().nextDouble() - 0.5D) * (double) caughtEntity.getBbWidth(), (this.getCaughtEntity().getRandom().nextDouble() - 0.5D) * 2.0D, -caughtEntity.getRandom().nextDouble(), (caughtEntity.getRandom().nextDouble() - 0.5D) * 2.0D);
 					}
@@ -236,7 +247,7 @@ public class Pike extends BucketableWaterAnimal {
 			}
 		}
 
-		if (this.isMoving() && this.isInWater() && this.getPikeType() == PikeType.SUPERCHARGED) {
+		if (this.isMoving() && this.isInWater() && this.getVariant().is(UAPikeVariants.SUPERCHARGED)) {
 			Vec3 vec3d1 = this.getViewVector(0.0F);
 
 			for (int i = 0; i < 2; ++i) {
@@ -244,7 +255,7 @@ public class Pike extends BucketableWaterAnimal {
 			}
 		}
 
-		if (this.getPikeType() == PikeType.OBSIDIAN && this.isLit()) {
+		if (this.getVariant().is(UAPikeVariants.OBSIDIAN) && this.isLit()) {
 			if (this.level().isClientSide) {
 				for (int i = 0; i < 2; i++) {
 					this.level().addParticle(ParticleTypes.PORTAL, this.getX() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth(), this.getY() + this.random.nextDouble() * (double) this.getBbHeight() - 0.25D, this.getZ() + (this.random.nextDouble() - 0.5D) * (double) this.getBbWidth(), (this.random.nextDouble() - 0.5D) * 2.0D, -this.random.nextDouble(), (this.random.nextDouble() - 0.5D) * 2.0D);
@@ -256,7 +267,7 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	public void travel(Vec3 p_213352_1_) {
 		if (this.isEffectiveAi() && this.isInWater()) {
-			float speed = this.getPikeType() == PikeType.SUPERCHARGED ? 0.05F : 0.01F;
+			float speed = this.getVariant().is(UAPikeVariants.SUPERCHARGED) ? 0.05F : 0.01F;
 			this.moveRelative(speed, p_213352_1_);
 			this.move(MoverType.SELF, this.getDeltaMovement());
 			this.setDeltaMovement(this.getDeltaMovement().scale(0.9D));
@@ -280,21 +291,22 @@ public class Pike extends BucketableWaterAnimal {
 
 	@Nullable
 	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, SpawnGroupData spawnDataIn) {
-		spawnDataIn = super.finalizeSpawn(worldIn, difficultyIn, reason, spawnDataIn);
-		int type = PikeType.getRandom(this.random, this.level().getBiome(this.blockPosition()), reason == MobSpawnType.BUCKET).id;
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnGroupData) {
+		spawnGroupData = super.finalizeSpawn(level, difficulty, reason, spawnGroupData);
 
-		if (spawnDataIn instanceof Pike.PikeData pikeData) {
-			type = pikeData.typeData;
+		Holder<Biome> biome = level.getBiome(this.blockPosition());
+		Holder<PikeVariant> variant;
+		if (spawnGroupData instanceof PikeData pikeGroupData) {
+			variant = pikeGroupData.type;
 		} else {
+			variant = PikeVariant.getSpawnVariant(this.registryAccess(), biome, reason == MobSpawnType.BUCKET, this.getRandom());
 			if (!this.fromBucket()) {
-				spawnDataIn = new Pike.PikeData(type);
+				spawnGroupData = new PikeData(variant);
 			}
 		}
 
-		this.setPikeType(PikeType.getTypeById(type));
-
-		if (this.random.nextFloat() <= 0.10F && this.isEffectiveAi()) {
+		this.setVariant(variant);
+		if (this.random.nextFloat() < 0.1F && this.isEffectiveAi()) {
 			List<ItemStack> generatedFishingLoot = this.generateFishingLoot();
 			for (ItemStack itemstack : generatedFishingLoot) {
 				this.setItemSlot(EquipmentSlot.MAINHAND, itemstack);
@@ -303,7 +315,7 @@ public class Pike extends BucketableWaterAnimal {
 		}
 
 		this.refreshDimensions();
-		return spawnDataIn;
+		return spawnGroupData;
 	}
 
 	public static boolean checkPikeSpawnRules(EntityType<? extends Pike> entityType, LevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
@@ -355,7 +367,7 @@ public class Pike extends BucketableWaterAnimal {
 	public void saveToBucketTag(ItemStack stack) {
 		super.saveToBucketTag(stack);
 		CustomData.update(DataComponents.BUCKET_ENTITY_DATA, stack, tag -> {
-			tag.putInt("BucketVariantTag", this.getPikeType().id);
+			this.getVariant().unwrapKey().ifPresent(variant -> tag.putString("BucketVariantTag", variant.location().toString()));
 			tag.putInt("EatingLootDropCooldown", this.dropEatingLootCooldown);
 			tag.putBoolean("ShouldDropItem", this.shouldDropItem());
 			tag.putBoolean("IsLit", this.isLit());
@@ -371,8 +383,11 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	public void loadFromBucketTag(CompoundTag tag) {
 		super.loadFromBucketTag(tag);
-		if (tag.contains("BucketVariantTag", 3)) {
-			this.setPikeType(PikeType.getTypeById(tag.getInt("BucketVariantTag")));
+		if (tag.contains("BucketVariantTag", CompoundTag.TAG_STRING)) {
+			Optional.ofNullable(ResourceLocation.tryParse(tag.getString("BucketVariantTag")))
+					.map(loc -> ResourceKey.create(UARegistries.PIKE_VARIANT, loc))
+					.flatMap(key -> this.registryAccess().registryOrThrow(UARegistries.PIKE_VARIANT).getHolder(key))
+					.ifPresent(this::setVariant);
 			this.dropEatingLootCooldown = tag.getInt("EatingLootDropCooldown");
 			if (tag.contains("ShouldDropItem")) {
 				this.setToDropItem(tag.getBoolean("ShouldDropItem"));
@@ -526,7 +541,7 @@ public class Pike extends BucketableWaterAnimal {
 
 	@Override
 	public EntityDimensions getDefaultDimensions(Pose poseIn) {
-		return super.getDefaultDimensions(poseIn).scale(this.getPikeType().pikeSize.boxSize);
+		return super.getDefaultDimensions(poseIn).scale(this.getVariant().value().size() + 0.2F);
 	}
 
 	public boolean isLit() {
@@ -561,14 +576,6 @@ public class Pike extends BucketableWaterAnimal {
 		this.entityData.set(DROP_ITEM, bool);
 	}
 
-	public PikeType getPikeType() {
-		return this.entityData.get(TYPE);
-	}
-
-	public void setPikeType(PikeType type) {
-		this.entityData.set(TYPE, type);
-	}
-
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return UASoundEvents.PIKE_AMBIENT.get();
@@ -594,6 +601,16 @@ public class Pike extends BucketableWaterAnimal {
 	@Override
 	protected SoundEvent getSwimSound() {
 		return SoundEvents.FISH_SWIM;
+	}
+
+	@Override
+	public void setVariant(Holder<PikeVariant> variant) {
+		this.entityData.set(VARIANT, variant);
+	}
+
+	@Override
+	public Holder<PikeVariant> getVariant() {
+		return this.entityData.get(VARIANT);
 	}
 
 	static class MoveHelperController extends MoveControl {
@@ -623,7 +640,7 @@ public class Pike extends BucketableWaterAnimal {
 				this.pike.setDeltaMovement(this.pike.getDeltaMovement().add(0.0D, (double) this.pike.getSpeed() * d1 * 0.04D, 0.0D));
 				this.pike.setMoving(true);
 			} else {
-				if (this.pike.getPikeType() == PikeType.SUPERCHARGED) {
+				if (this.pike.getVariant().is(UAPikeVariants.SUPERCHARGED)) {
 					this.pike.setSpeed(0.0F);
 				}
 				this.pike.setMoving(false);
@@ -632,10 +649,10 @@ public class Pike extends BucketableWaterAnimal {
 	}
 
 	static class PikeData implements SpawnGroupData {
-		public final int typeData;
+		public final Holder<PikeVariant> type;
 
-		public PikeData(int type) {
-			this.typeData = type;
+		public PikeData(Holder<PikeVariant> type) {
+			this.type = type;
 		}
 	}
 }
