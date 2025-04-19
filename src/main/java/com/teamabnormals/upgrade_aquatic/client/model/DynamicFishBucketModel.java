@@ -1,7 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -21,24 +20,23 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ModelEvent;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @OnlyIn(Dist.CLIENT)
-@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
-public class PikeBucketModel implements BakedModel {
+public class DynamicFishBucketModel implements BakedModel {
 	private final BakedModel model;
 	private final ItemOverrides overrideList;
 
-	public PikeBucketModel(Map<ModelResourceLocation, BakedModel> modelManager) {
-		this.model = modelManager.get(ModelResourceLocation.standalone(UpgradeAquatic.location("item/pike_bucket/redfin_pickerel")));
-		this.overrideList = new Overrides(modelManager);
+	public DynamicFishBucketModel(String folder, ResourceLocation defaultModel, Map<ModelResourceLocation, BakedModel> modelManager) {
+		defaultModel = defaultModel.withPrefix("item/");
+		this.model = modelManager.get(ModelResourceLocation.standalone(defaultModel));
+		this.overrideList = new Overrides(modelManager, folder, defaultModel);
 	}
 
 	@Override
@@ -76,20 +74,20 @@ public class PikeBucketModel implements BakedModel {
 		return this.overrideList;
 	}
 
-	private static class Overrides extends ItemOverrides {
+	public static class Overrides extends ItemOverrides {
 		private final Map<ModelResourceLocation, BakedModel> modelManager;
 		private final BakedModel model;
 		private final Map<ResourceLocation, ModelResourceLocation> locationCache;
 		private final Map<ModelResourceLocation, ModelResourceLocation> modelLocations;
 
-		private Overrides(Map<ModelResourceLocation, BakedModel> modelManager) {
+		private Overrides(Map<ModelResourceLocation, BakedModel> modelManager, String folder, ResourceLocation defaultModel) {
 			this.modelManager = modelManager;
-			this.model = modelManager.get(ModelResourceLocation.standalone(UpgradeAquatic.location("item/pike_bucket/redfin_pickerel")));
+			this.model = modelManager.get(ModelResourceLocation.standalone(defaultModel));
 			this.locationCache = new HashMap<>();
 			this.modelLocations = new HashMap<>();
-			for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/pike_bucket", s -> s.getPath().endsWith(".json")).keySet()) {
+			for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/" + folder, s -> s.getPath().endsWith(".json")).keySet()) {
 				this.modelLocations.put(
-						ModelResourceLocation.inventory(location.withPath(location.getPath().substring("models/item/pike_bucket/".length(), location.getPath().length() - ".json".length()))),
+						ModelResourceLocation.inventory(location.withPath(location.getPath().substring(("models/item/" + folder + "/").length(), location.getPath().length() - ".json".length()))),
 						ModelResourceLocation.standalone(location.withPath(location.getPath().substring("models/".length(), location.getPath().length() - ".json".length())))
 				);
 			}
@@ -97,7 +95,7 @@ public class PikeBucketModel implements BakedModel {
 
 		@Nullable
 		@Override
-		public BakedModel resolve(BakedModel model, ItemStack stack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity entity, int p_173469_) {
+		public BakedModel resolve(BakedModel model, ItemStack stack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity entity, int i) {
 			ClientLevel level = clientLevel;
 			if (level == null) {
 				level = Minecraft.getInstance().level;
@@ -117,16 +115,13 @@ public class PikeBucketModel implements BakedModel {
 		}
 	}
 
-
-	@SubscribeEvent
-	public static void registerAdditional(ModelEvent.RegisterAdditional event) {
-		for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/pike_bucket", s -> s.getPath().endsWith(".json")).keySet()) {
+	public static void registerDynamicFishBucketModel(ModelEvent.RegisterAdditional event, String folder) {
+		for (ResourceLocation location : Minecraft.getInstance().getResourceManager().listResources("models/item/" + folder, s -> s.getPath().endsWith(".json")).keySet()) {
 			event.register(ModelResourceLocation.standalone(location.withPath(location.getPath().substring("models/".length(), location.getPath().length() - ".json".length()))));
 		}
 	}
 
-	@SubscribeEvent
-	public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
-		event.getModels().put(ModelResourceLocation.inventory(UAItems.PIKE_BUCKET.getId()), new PikeBucketModel(event.getModels()));
+	public static void putDynamicFishBucketModel(ModelEvent.ModifyBakingResult event, ResourceLocation model, String folder, ResourceLocation defaultModel) {
+		event.getModels().put(ModelResourceLocation.inventory(model), new DynamicFishBucketModel(folder, defaultModel, event.getModels()));
 	}
 }

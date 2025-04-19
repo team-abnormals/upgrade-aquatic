@@ -1,9 +1,11 @@
 package com.teamabnormals.upgrade_aquatic.core.other;
 
+import com.teamabnormals.upgrade_aquatic.client.model.DynamicFishBucketModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAPikeVariants;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -17,6 +19,7 @@ import net.minecraft.world.level.FoliageColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -192,5 +195,16 @@ public class UAClientCompat {
 	@SubscribeEvent
 	public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
 		event.register((color, items) -> FoliageColor.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get(), UABlocks.RIVER_LEAF_PILE.get());
+	}
+
+
+	@SubscribeEvent
+	public static void registerAdditional(ModelEvent.RegisterAdditional event) {
+		DynamicFishBucketModel.registerDynamicFishBucketModel(event, "pike_bucket");
+	}
+
+	@SubscribeEvent
+	public static void modifyBakingResult(ModelEvent.ModifyBakingResult event) {
+		DynamicFishBucketModel.putDynamicFishBucketModel(event, UAItems.PIKE_BUCKET.getId(), "pike_bucket", UAPikeVariants.REDFIN_PICKEREL.location().withPrefix("pike_bucket/"));
 	}
 }
