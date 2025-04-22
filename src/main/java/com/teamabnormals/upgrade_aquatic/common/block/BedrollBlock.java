@@ -3,8 +3,10 @@ package com.teamabnormals.upgrade_aquatic.common.block;
 import com.teamabnormals.upgrade_aquatic.common.block.entity.BedrollBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +21,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -68,34 +71,35 @@ public class BedrollBlock extends BedBlock implements SimpleWaterloggedBlock {
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-		if (stateIn.getValue(WATERLOGGED)) {
-			worldIn.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(worldIn));
+	public BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+		if (state.getValue(WATERLOGGED)) {
+			level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 		}
-		if (facing == getDirectionToOther(stateIn.getValue(PART), stateIn.getValue(FACING))) {
-			return facingState.is(this) && facingState.getValue(PART) != stateIn.getValue(PART) ? stateIn.setValue(OCCUPIED, facingState.getValue(OCCUPIED)) : Blocks.AIR.defaultBlockState();
+		if (facing == getNeighbourDirection(state.getValue(PART), state.getValue(FACING))) {
+			return facingState.is(this) && facingState.getValue(PART) != state.getValue(PART) ? state.setValue(OCCUPIED, facingState.getValue(OCCUPIED)) : Blocks.AIR.defaultBlockState();
 		} else {
-			return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+			return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
 		}
 	}
 
 	@Override
-	public BlockState playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
-		if (!worldIn.isClientSide && player.isCreative()) {
+	public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+		if (!level.isClientSide && player.isCreative()) {
 			BedPart bedpart = state.getValue(PART);
 			if (bedpart == BedPart.FOOT) {
-				BlockPos blockpos = pos.relative(getDirectionToOther(bedpart, state.getValue(FACING)));
-				BlockState blockstate = worldIn.getBlockState(blockpos);
-				if (blockstate.getBlock() == this && blockstate.getValue(PART) == BedPart.HEAD) {
-					worldIn.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
-					worldIn.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
+				BlockPos blockpos = pos.relative(getNeighbourDirection(bedpart, state.getValue(FACING)));
+				BlockState blockstate = level.getBlockState(blockpos);
+				if (blockstate.is(this) && blockstate.getValue(PART) == BedPart.HEAD) {
+					level.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
+					level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
 				}
 			}
 		}
-		return super.playerWillDestroy(worldIn, pos, state, player);
+
+		return super.playerWillDestroy(level, pos, state, player);
 	}
 
-	private static Direction getDirectionToOther(BedPart part, Direction direction) {
+	private static Direction getNeighbourDirection(BedPart part, Direction direction) {
 		return part == BedPart.FOOT ? direction : direction.getOpposite();
 	}
 

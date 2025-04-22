@@ -40,8 +40,6 @@ public class UAClientCompat {
 
 	public static void registerRenderLayers() {
 		// TODO: Update block model json to include "render_type" instead.
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.GLASS_DOOR.get(), CUTOUT);
-		ItemBlockRenderTypes.setRenderLayer(UABlocks.GLASS_TRAPDOOR.get(), CUTOUT);
 
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.MULBERRY_JAM_BLOCK.get(), TRANSLUSCENT);
 

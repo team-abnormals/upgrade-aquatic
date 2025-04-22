@@ -86,9 +86,6 @@ public class UABlocks {
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_STAIRS = BLOCKS.createBlock("luminous_prismarine_stairs", () -> new StairBlock(LUMINOUS_PRISMARINE.get().defaultBlockState(), UAProperties.LUMINOUS_PRISMARINE));
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_SLAB = BLOCKS.createBlock("luminous_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_PRISMARINE));
 
-	public static final DeferredBlock<Block> GLASS_TRAPDOOR = BLOCKS.createBlock("glass_trapdoor", () -> new TrapDoorBlock(UAProperties.GLASS_BLOCK_SET, Properties.ofFullCopy(Blocks.GLASS)));
-	public static final DeferredBlock<Block> GLASS_DOOR = BLOCKS.createBlock("glass_door", () -> new DoorBlock(UAProperties.GLASS_BLOCK_SET, Properties.ofFullCopy(Blocks.GLASS)));
-
 	public static final DeferredBlock<Block> BEDROLL = BLOCKS.createBlock("bedroll", () -> new BedrollBlock(BlockBehaviour.Properties.of().mapColor((state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? MapColor.COLOR_BROWN : MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion()));
 
 	public static final DeferredBlock<Block> TOOTH_BLOCK = BLOCKS.createBlock("tooth_block", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
@@ -446,8 +443,6 @@ public class UABlocks {
 						DEAD_CORALSTONE, DEAD_CORALSTONE_STAIRS, DEAD_CORALSTONE_SLAB, DEAD_CORALSTONE_WALL, DEAD_CHISELED_CORALSTONE,
 						ELDER_PRISMARINE_CORALSTONE, ELDER_PRISMARINE_CORALSTONE_STAIRS, ELDER_PRISMARINE_CORALSTONE_SLAB, ELDER_PRISMARINE_CORALSTONE_WALL, CHISELED_ELDER_PRISMARINE_CORALSTONE
 				)
-				.tab(COLORED_BLOCKS)
-				.addItemsBefore(of(Blocks.SHULKER_BOX), GLASS_DOOR, GLASS_TRAPDOOR)
 				.tab(FUNCTIONAL_BLOCKS)
 				.addItemsBefore(of(Blocks.SEA_LANTERN), TOOTH_LANTERN)
 				.addItemsBefore(of(Blocks.BAMBOO_SIGN), DRIFTWOOD_SIGNS.getFirst(), DRIFTWOOD_HANGING_SIGNS.getFirst(), RIVER_SIGNS.getFirst(), RIVER_HANGING_SIGNS.getFirst())
@@ -505,7 +500,6 @@ public class UABlocks {
 		public static final BlockSetType DRIFTWOOD_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":driftwood"));
 		public static final BlockSetType RIVER_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":river"));
 		public static final BlockSetType TOOTH_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":tooth", true, true, true, PressurePlateSensitivity.EVERYTHING, SoundType.STONE, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
-		public static final BlockSetType GLASS_BLOCK_SET = BlockSetTypeRegistryHelper.register(new BlockSetType(UpgradeAquatic.MOD_ID + ":glass", true, true, true, PressurePlateSensitivity.EVERYTHING, SoundType.GLASS, SoundEvents.WOODEN_DOOR_CLOSE, SoundEvents.WOODEN_DOOR_OPEN, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundEvents.WOODEN_TRAPDOOR_OPEN, SoundEvents.STONE_PRESSURE_PLATE_CLICK_OFF, SoundEvents.STONE_PRESSURE_PLATE_CLICK_ON, SoundEvents.STONE_BUTTON_CLICK_OFF, SoundEvents.STONE_BUTTON_CLICK_ON));
 
 		public static final WoodType DRIFTWOOD_WOOD_TYPE = WoodTypeRegistryHelper.registerWoodType(new WoodType(UpgradeAquatic.MOD_ID + ":driftwood", DRIFTWOOD_BLOCK_SET));
 		public static final WoodType RIVER_WOOD_TYPE = WoodTypeRegistryHelper.registerWoodType(new WoodType(UpgradeAquatic.MOD_ID + ":river", RIVER_BLOCK_SET));
