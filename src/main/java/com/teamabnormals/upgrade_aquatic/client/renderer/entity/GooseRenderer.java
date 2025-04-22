@@ -3,6 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.renderer.entity;
 import com.teamabnormals.upgrade_aquatic.client.model.GooseModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Goose;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +15,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class GooseRenderer extends MobRenderer<Goose, GooseModel<Goose>> {
 
 	public GooseRenderer(EntityRendererProvider.Context context) {
-		super(context, new GooseModel<>(context.bakeLayer(GooseModel.LOCATION)), 0.25F);
+		super(context, new GooseModel<>(context.bakeLayer(UAModelLayers.GOOSE)), 0.25F);
 	}
 
 	@Override

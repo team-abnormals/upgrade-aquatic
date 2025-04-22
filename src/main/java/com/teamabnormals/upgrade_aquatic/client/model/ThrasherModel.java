@@ -20,8 +20,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class ThrasherModel<E extends Thrasher> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("thrasher"), "main");
-
 	public ModelPart neck;
 	public ModelPart body;
 	public ModelPart top_jaw;

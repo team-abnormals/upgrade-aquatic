@@ -3,9 +3,7 @@ package com.teamabnormals.upgrade_aquatic.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Nautilus;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.model.EntityModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
@@ -22,7 +20,6 @@ import net.neoforged.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class NautilusModel<T extends Nautilus> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("nautilus"), "main");
 	public static final float SCALE = 0.6F;
 
 	public ModelPart shell;

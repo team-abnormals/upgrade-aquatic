@@ -5,6 +5,7 @@ import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.CassiopeaJellyfi
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.layers.JellyfishEmissiveLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.CassiopeaJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -16,7 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class CassiopeaJellyfishRenderer extends AbstractJellyfishRenderer<CassiopeaJellyfish> {
 
 	public CassiopeaJellyfishRenderer(EntityRendererProvider.Context context) {
-		super(context, new CassiopeaJellyfishModel<>(context.bakeLayer(CassiopeaJellyfishModel.LOCATION)), 0.25F);
+		super(context, new CassiopeaJellyfishModel<>(context.bakeLayer(UAModelLayers.CASSIOPEA_JELLYFISH)), 0.25F);
 		this.addLayer(new JellyfishEmissiveLayer<>(this, this));
 	}
 

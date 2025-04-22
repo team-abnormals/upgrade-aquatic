@@ -20,8 +20,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class ImmortalJellyfishModel<E extends ImmortalJellyfish> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("immortal_jellyfish"), "main");
-
 	public EndimatorModelPart body;
 	public EndimatorModelPart innerBody;
 	public EndimatorModelPart tentacleEast;

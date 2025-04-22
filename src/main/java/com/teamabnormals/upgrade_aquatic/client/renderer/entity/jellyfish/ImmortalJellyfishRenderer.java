@@ -4,6 +4,7 @@ import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.ImmortalJellyfis
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.layers.JellyfishEmissiveLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.ImmortalJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ImmortalJellyfishRenderer<I extends ImmortalJellyfish> extends AbstractJellyfishRenderer<I> {
 
 	public ImmortalJellyfishRenderer(EntityRendererProvider.Context context) {
-		super(context, new ImmortalJellyfishModel<>(context.bakeLayer(ImmortalJellyfishModel.LOCATION)), 0.25F);
+		super(context, new ImmortalJellyfishModel<>(context.bakeLayer(UAModelLayers.IMMORTAL_JELLYFISH)), 0.25F);
 		this.addLayer(new JellyfishEmissiveLayer<>(this, this));
 	}
 

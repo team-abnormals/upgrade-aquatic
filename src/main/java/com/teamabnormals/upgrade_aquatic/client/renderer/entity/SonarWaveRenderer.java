@@ -7,6 +7,7 @@ import com.teamabnormals.blueprint.client.BlueprintRenderTypes;
 import com.teamabnormals.upgrade_aquatic.client.model.SonarWaveModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.projectile.SonarWave;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -18,7 +19,7 @@ public class SonarWaveRenderer extends EntityRenderer<SonarWave> {
 
 	public SonarWaveRenderer(EntityRendererProvider.Context context) {
 		super(context);
-		this.sonarWaveModel = new SonarWaveModel(context.bakeLayer(SonarWaveModel.LOCATION));
+		this.sonarWaveModel = new SonarWaveModel(context.bakeLayer(UAModelLayers.SONAR_WAVE));
 		this.shadowRadius = 0.0F;
 	}
 

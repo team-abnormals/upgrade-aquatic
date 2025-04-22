@@ -5,6 +5,7 @@ import com.mojang.math.Axis;
 import com.teamabnormals.upgrade_aquatic.client.model.LionfishModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Lionfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class LionfishRenderer extends MobRenderer<Lionfish, LionfishModel<Lionfish>> {
 
 	public LionfishRenderer(EntityRendererProvider.Context context) {
-		super(context, new LionfishModel<>(context.bakeLayer(LionfishModel.LOCATION)), 0.45F);
+		super(context, new LionfishModel<>(context.bakeLayer(UAModelLayers.LIONFISH)), 0.45F);
 	}
 
 	@Override

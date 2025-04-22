@@ -6,6 +6,7 @@ import com.teamabnormals.upgrade_aquatic.client.model.FlareModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.FlareEyesRenderLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Flare;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class FlareRenderer extends MobRenderer<Flare, FlareModel<Flare>> {
 
 	public FlareRenderer(EntityRendererProvider.Context context) {
-		super(context, new FlareModel<>(context.bakeLayer(FlareModel.LOCATION)), 0.9F);
+		super(context, new FlareModel<>(context.bakeLayer(UAModelLayers.FLARE)), 0.9F);
 		this.addLayer(new FlareEyesRenderLayer<>(this));
 	}
 

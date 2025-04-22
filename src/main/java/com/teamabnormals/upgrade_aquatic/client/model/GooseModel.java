@@ -14,8 +14,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 public class GooseModel<T extends Entity> extends AgeableListModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("goose"), "main");
-
 	private final ModelPart body;
 	private final ModelPart neck;
 	private final ModelPart head;

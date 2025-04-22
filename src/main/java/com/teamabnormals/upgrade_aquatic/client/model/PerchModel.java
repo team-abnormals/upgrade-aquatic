@@ -16,8 +16,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 public class PerchModel<T extends Entity> extends ListModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("perch"), "main");
-
 	public ModelPart perch;
 	public ModelPart body;
 	public ModelPart sidefin1;

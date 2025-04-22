@@ -6,6 +6,7 @@ import com.teamabnormals.upgrade_aquatic.client.model.PikeModel;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.GlowingPikeRenderLayer;
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.layers.PikeCarriedItemRenderLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Pike;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +18,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class PikeRenderer extends MobRenderer<Pike, PikeModel<Pike>> {
 
 	public PikeRenderer(EntityRendererProvider.Context context) {
-		super(context, new PikeModel<>(context.bakeLayer(PikeModel.LOCATION)), 0.6F);
+		super(context, new PikeModel<>(context.bakeLayer(UAModelLayers.PIKE)), 0.6F);
 		this.addLayer(new GlowingPikeRenderLayer<>(this));
 		this.addLayer(new PikeCarriedItemRenderLayer(this, context.getItemInHandRenderer()));
 	}

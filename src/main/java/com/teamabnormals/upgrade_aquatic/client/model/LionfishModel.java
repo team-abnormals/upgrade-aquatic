@@ -22,8 +22,6 @@ import net.minecraft.world.entity.Entity;
  * Created using Tabula 7.0.0
  */
 public class LionfishModel<T extends Entity> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("lionfish"), "main");
-
 	public ModelPart body;
 	public ModelPart topfin;
 	public ModelPart bottomfin;

@@ -10,6 +10,7 @@ import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.Cassio
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.ImmortalJellyfishRenderer;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.world.entity.EntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -19,22 +20,41 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderer
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class UAModelLayers {
-	// TODO: Move ModelLayerLocations here instead of inside each Model class
+	public static final ModelLayerLocation NAUTILUS = register("nautilus");
+	public static final ModelLayerLocation PIKE = register("pike");
+	public static final ModelLayerLocation LIONFISH = register("lionfish");
+	public static final ModelLayerLocation PERCH = register("perch");
+	public static final ModelLayerLocation THRASHER = register("thrasher");
+	public static final ModelLayerLocation FLARE = register("flare");
+	public static final ModelLayerLocation SONAR_WAVE = register("sonar_wave");
+	public static final ModelLayerLocation GLOW_SQUID = register("glow_squid");
+	public static final ModelLayerLocation GOOSE = register("goose");
+	public static final ModelLayerLocation BOX_JELLYFISH = register("box_jellyfish");
+	public static final ModelLayerLocation CASSIOPEA_JELLYFISH = register("cassiopea_jellyfish");
+	public static final ModelLayerLocation IMMORTAL_JELLYFISH = register("immortal_jellyfish");
+
+	public static ModelLayerLocation register(String name) {
+		return register(name, "main");
+	}
+
+	public static ModelLayerLocation register(String name, String layer) {
+		return new ModelLayerLocation(UpgradeAquatic.location(name), layer);
+	}
 
 	@SubscribeEvent
 	public static void registerLayerDefinitions(RegisterLayerDefinitions event) {
-		event.registerLayerDefinition(NautilusModel.LOCATION, NautilusModel::createBodyLayer);
-		event.registerLayerDefinition(PikeModel.LOCATION, PikeModel::createBodyLayer);
-		event.registerLayerDefinition(LionfishModel.LOCATION, LionfishModel::createBodyLayer);
-		event.registerLayerDefinition(PerchModel.LOCATION, PerchModel::createBodyLayer);
-		event.registerLayerDefinition(ThrasherModel.LOCATION, ThrasherModel::createBodyLayer);
-		event.registerLayerDefinition(FlareModel.LOCATION, FlareModel::createBodyLayer);
-		event.registerLayerDefinition(SonarWaveModel.LOCATION, SonarWaveModel::createBodyLayer);
-		event.registerLayerDefinition(UAGlowSquidModel.LOCATION, UAGlowSquidModel::createBodyLayer);
-		event.registerLayerDefinition(GooseModel.LOCATION, GooseModel::createBodyLayer);
-		event.registerLayerDefinition(BoxJellyfishModel.LOCATION, BoxJellyfishModel::createBodyLayer);
-		event.registerLayerDefinition(CassiopeaJellyfishModel.LOCATION, CassiopeaJellyfishModel::createBodyLayer);
-		event.registerLayerDefinition(ImmortalJellyfishModel.LOCATION, ImmortalJellyfishModel::createBodyLayer);
+		event.registerLayerDefinition(NAUTILUS, NautilusModel::createBodyLayer);
+		event.registerLayerDefinition(PIKE, PikeModel::createBodyLayer);
+		event.registerLayerDefinition(LIONFISH, LionfishModel::createBodyLayer);
+		event.registerLayerDefinition(PERCH, PerchModel::createBodyLayer);
+		event.registerLayerDefinition(THRASHER, ThrasherModel::createBodyLayer);
+		event.registerLayerDefinition(FLARE, FlareModel::createBodyLayer);
+		event.registerLayerDefinition(SONAR_WAVE, SonarWaveModel::createBodyLayer);
+		event.registerLayerDefinition(GLOW_SQUID, UAGlowSquidModel::createBodyLayer);
+		event.registerLayerDefinition(GOOSE, GooseModel::createBodyLayer);
+		event.registerLayerDefinition(BOX_JELLYFISH, BoxJellyfishModel::createBodyLayer);
+		event.registerLayerDefinition(CASSIOPEA_JELLYFISH, CassiopeaJellyfishModel::createBodyLayer);
+		event.registerLayerDefinition(IMMORTAL_JELLYFISH, ImmortalJellyfishModel::createBodyLayer);
 	}
 
 	@SubscribeEvent

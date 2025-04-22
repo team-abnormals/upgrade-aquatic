@@ -22,8 +22,6 @@ import net.neoforged.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class FlareModel<F extends Flare> extends EntityModel<F> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("flare"), "main");
-
 	public ModelPart base;
 	public ModelPart tail;
 	public ModelPart left_shoulder;

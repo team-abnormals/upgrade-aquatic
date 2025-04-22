@@ -21,8 +21,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class SonarWaveModel extends EntityModel<SonarWave> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("sonar_wave"), "main");
-
 	public ModelPart wave;
 	private SonarWave sonarWave;
 

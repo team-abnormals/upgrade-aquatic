@@ -20,8 +20,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class BoxJellyfishModel<E extends BoxJellyfish> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("box_jellyfish"), "main");
-
 	public EndimatorModelPart body;
 	public EndimatorModelPart tentacleW;
 	public EndimatorModelPart tentacleS;

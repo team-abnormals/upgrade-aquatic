@@ -5,6 +5,7 @@ import com.teamabnormals.upgrade_aquatic.client.model.jellyfish.BoxJellyfishMode
 import com.teamabnormals.upgrade_aquatic.client.renderer.entity.jellyfish.layers.JellyfishEmissiveLayer;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.BoxJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -16,7 +17,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class BoxJellyfishRenderer extends AbstractJellyfishRenderer<BoxJellyfish> {
 
 	public BoxJellyfishRenderer(EntityRendererProvider.Context context) {
-		super(context, new BoxJellyfishModel<>(context.bakeLayer(BoxJellyfishModel.LOCATION)), 0.5F);
+		super(context, new BoxJellyfishModel<>(context.bakeLayer(UAModelLayers.BOX_JELLYFISH)), 0.5F);
 		this.addLayer(new JellyfishEmissiveLayer<>(this, this));
 	}
 

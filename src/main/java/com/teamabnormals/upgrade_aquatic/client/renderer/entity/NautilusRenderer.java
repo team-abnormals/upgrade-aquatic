@@ -6,6 +6,7 @@ import com.teamabnormals.blueprint.client.EntitySkinHelper;
 import com.teamabnormals.upgrade_aquatic.client.model.NautilusModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.Nautilus;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
+import com.teamabnormals.upgrade_aquatic.core.other.UAModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +31,7 @@ public class NautilusRenderer extends MobRenderer<Nautilus, NautilusModel<Nautil
 	});
 
 	public NautilusRenderer(EntityRendererProvider.Context context) {
-		super(context, new NautilusModel<>(context.bakeLayer(NautilusModel.LOCATION)), 0.25F);
+		super(context, new NautilusModel<>(context.bakeLayer(UAModelLayers.NAUTILUS)), 0.25F);
 	}
 
 	@Override

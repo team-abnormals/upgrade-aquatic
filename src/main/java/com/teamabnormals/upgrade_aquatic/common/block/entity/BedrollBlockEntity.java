@@ -1,12 +1,14 @@
 package com.teamabnormals.upgrade_aquatic.common.block.entity;
 
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlockEntityTypes;
+import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -60,5 +62,11 @@ public class BedrollBlockEntity extends BlockEntity {
 	public void removeComponentsFromTag(CompoundTag tag) {
 		super.removeComponentsFromTag(tag);
 		tag.remove("rgb");
+	}
+
+	public ItemStack getBedrollAsItem() {
+		ItemStack itemstack = UABlocks.BEDROLL.asItem().getDefaultInstance();
+		itemstack.applyComponents(this.collectComponents());
+		return itemstack;
 	}
 }

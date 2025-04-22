@@ -22,8 +22,6 @@ import net.neoforged.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class PikeModel<T extends Pike> extends EntityModel<T> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("pike"), "main");
-
 	public ModelPart body_front;
 	public ModelPart neck;
 	public ModelPart body_back;

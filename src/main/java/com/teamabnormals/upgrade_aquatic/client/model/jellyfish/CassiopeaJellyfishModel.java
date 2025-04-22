@@ -20,8 +20,6 @@ import net.minecraft.util.Mth;
  * Created using Tabula 7.0.0
  */
 public class CassiopeaJellyfishModel<E extends CassiopeaJellyfish> extends EndimatorEntityModel<E> {
-	public static final ModelLayerLocation LOCATION = new ModelLayerLocation(UpgradeAquatic.location("cassiopea_jellyfish"), "main");
-
 	public EndimatorModelPart cap;
 	public EndimatorModelPart cross1;
 	public EndimatorModelPart cross2;
