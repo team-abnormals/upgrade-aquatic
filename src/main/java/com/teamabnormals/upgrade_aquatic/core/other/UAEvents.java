@@ -269,7 +269,7 @@ public class UAEvents {
 		}
 
 		if (UAConfig.COMMON.leatherworkersSellBedrolls.get()) {
-			TradeUtil.addVillagerTrades(event, VillagerProfession.LEATHERWORKER, TradeUtil.APPRENTICE, new BlueprintTrade(1, UABlocks.BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.WHITE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.ORANGE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.MAGENTA_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.LIGHT_BLUE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.YELLOW_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.LIME_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.PINK_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.GRAY_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.LIGHT_GRAY_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.CYAN_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.PURPLE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.BLUE_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.BROWN_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.GREEN_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.RED_BEDROLL.get().asItem(), 1, 8, 10), new BlueprintTrade(1, UABlocks.BLACK_BEDROLL.get().asItem(), 1, 8, 10));
+			TradeUtil.addVillagerTrades(event, VillagerProfession.LEATHERWORKER, TradeUtil.APPRENTICE, new BlueprintTrade(1, UABlocks.BEDROLL.get().asItem(), 1, 8, 10));
 		}
 	}
 }

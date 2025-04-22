@@ -1,7 +1,8 @@
-{   
-	"parent": "upgrade_aquatic:block/bedroll/template_bedroll_head",
-    "textures": {
-        "particle": "upgrade_aquatic:block/bedroll_particles_leather",
-        "bedroll": "upgrade_aquatic:block/bedroll"
-    }
+{
+  "parent": "upgrade_aquatic:block/bedroll/template_bedroll_head",
+  "textures": {
+    "particle": "upgrade_aquatic:block/bedroll_particles",
+    "bedroll": "upgrade_aquatic:block/bedroll",
+    "pillow": "upgrade_aquatic:block/bedroll_pillow"
+  }
 }

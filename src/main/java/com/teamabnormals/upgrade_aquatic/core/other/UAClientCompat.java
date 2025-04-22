@@ -1,6 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.core.other;
 
 import com.teamabnormals.blueprint.client.model.DynamicItemModel;
+import com.teamabnormals.upgrade_aquatic.common.block.entity.BedrollBlockEntity;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.AbstractJellyfish;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
@@ -16,6 +17,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.FoliageColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -162,6 +164,8 @@ public class UAClientCompat {
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_PINK_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_WHITE_SEAROCKET.get(), CUTOUT);
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.POTTED_RIVER_SAPLING.get(), CUTOUT);
+
+		ItemBlockRenderTypes.setRenderLayer(UABlocks.BEDROLL.get(), CUTOUT);
 	}
 
 	public static void registerItemProperties() {
@@ -190,12 +194,19 @@ public class UAClientCompat {
 
 	@SubscribeEvent
 	public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
-		event.register((x, world, pos, u) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get(), UABlocks.RIVER_LEAF_PILE.get(), UABlocks.MULBERRY_VINE.get());
+		event.register((x, level, pos, u) -> level != null && pos != null ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get(), UABlocks.RIVER_LEAF_PILE.get(), UABlocks.MULBERRY_VINE.get());
+		event.register((state, level, pos, tintIndex) -> {
+			if (level != null && pos != null && level.getBlockEntity(pos) instanceof BedrollBlockEntity bedroll) {
+				return bedroll.getRgb();
+			}
+			return DyedItemColor.LEATHER_COLOR;
+		}, UABlocks.BEDROLL.get());
 	}
 
 	@SubscribeEvent
 	public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
 		event.register((color, items) -> FoliageColor.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get(), UABlocks.RIVER_LEAF_PILE.get());
+		event.register((stack, tintIndex) -> tintIndex > 0 ? -1 : DyedItemColor.getOrDefault(stack, -6265536), UABlocks.BEDROLL.asItem());
 	}
 
 

@@ -3,7 +3,6 @@ package com.teamabnormals.upgrade_aquatic.common.block;
 import com.teamabnormals.upgrade_aquatic.common.block.entity.BedrollBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,10 +19,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.api.distmarker.Dist;
@@ -32,15 +29,11 @@ import net.neoforged.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 
 public class BedrollBlock extends BedBlock implements SimpleWaterloggedBlock {
-	public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
-	public static final BooleanProperty OCCUPIED = BlockStateProperties.OCCUPIED;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D);
-	private final DyeColor color;
 
-	public BedrollBlock(DyeColor colorIn, Block.Properties builder) {
-		super(colorIn, builder);
-		this.color = colorIn;
+	public BedrollBlock(Block.Properties builder) {
+		super(DyeColor.WHITE, builder);
 		this.registerDefaultState(this.stateDefinition.any().setValue(PART, BedPart.FOOT).setValue(OCCUPIED, false).setValue(WATERLOGGED, false));
 	}
 
@@ -86,13 +79,6 @@ public class BedrollBlock extends BedBlock implements SimpleWaterloggedBlock {
 		}
 	}
 
-	public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-		if (state.getBlock() != newState.getBlock()) {
-			super.onRemove(state, worldIn, pos, newState, isMoving);
-			worldIn.removeBlockEntity(pos);
-		}
-	}
-
 	@Override
 	public BlockState playerWillDestroy(Level worldIn, BlockPos pos, BlockState state, Player player) {
 		if (!worldIn.isClientSide && player.isCreative()) {
@@ -131,33 +117,28 @@ public class BedrollBlock extends BedBlock implements SimpleWaterloggedBlock {
 		return SHAPE;
 	}
 
-	public PushReaction getPistonPushReaction(BlockState state) {
-		return PushReaction.DESTROY;
-	}
-
+	@Override
 	public RenderShape getRenderShape(BlockState state) {
 		return RenderShape.MODEL;
 	}
 
 	@Override
-	public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-		super.setPlacedBy(worldIn, pos, state, placer, stack);
-		if (!worldIn.isClientSide) {
-			BlockPos blockpos = pos.relative(state.getValue(FACING));
-			worldIn.setBlock(blockpos, state.setValue(PART, BedPart.HEAD), 3);
-			worldIn.blockUpdated(pos, Blocks.AIR);
-			state.updateNeighbourShapes(worldIn, pos, 3);
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(level, pos, state, placer, stack);
+		BlockPos relativePos = pos.relative(state.getValue(FACING));
+		if (!level.isClientSide()) {
+			level.setBlock(relativePos, state.setValue(PART, BedPart.HEAD), 3);
+			level.blockUpdated(pos, Blocks.AIR);
+			state.updateNeighbourShapes(level, pos, 3);
+		}
+
+		if (level.getBlockEntity(relativePos) instanceof BedrollBlockEntity bedroll) {
+			bedroll.applyComponentsFromItemStack(stack);
 		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public DyeColor getColor() {
-		return this.color;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public long getSeed(BlockState state, BlockPos pos) {
-		BlockPos blockpos = pos.relative(state.getValue(FACING), state.getValue(PART) == BedPart.HEAD ? 0 : 1);
-		return Mth.getSeed(blockpos.getX(), pos.getY(), blockpos.getZ());
+		return DyeColor.WHITE;
 	}
 }

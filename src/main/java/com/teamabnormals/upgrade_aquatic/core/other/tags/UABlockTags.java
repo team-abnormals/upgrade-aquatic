@@ -9,7 +9,6 @@ public class UABlockTags {
 	public static final TagKey<Block> DRIFTWOOD_LOGS = blockTag("driftwood_logs");
 	public static final TagKey<Block> RIVER_LOGS = blockTag("river_logs");
 
-	public static final TagKey<Block> BEDROLLS = blockTag("bedrolls");
 	public static final TagKey<Block> PIKE_SPAWNERS = blockTag("pike_spawners");
 	public static final TagKey<Block> PICKERELWEED_PLACEABLE = blockTag("pickerelweed_placeable");
 

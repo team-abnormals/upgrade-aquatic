@@ -49,7 +49,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
@@ -90,23 +89,7 @@ public class UABlocks {
 	public static final DeferredBlock<Block> GLASS_TRAPDOOR = BLOCKS.createBlock("glass_trapdoor", () -> new TrapDoorBlock(UAProperties.GLASS_BLOCK_SET, Properties.ofFullCopy(Blocks.GLASS)));
 	public static final DeferredBlock<Block> GLASS_DOOR = BLOCKS.createBlock("glass_door", () -> new DoorBlock(UAProperties.GLASS_BLOCK_SET, Properties.ofFullCopy(Blocks.GLASS)));
 
-	public static final DeferredBlock<Block> BEDROLL = BLOCKS.createBlock("bedroll", createBedroll(DyeColor.BROWN));
-	public static final DeferredBlock<Block> WHITE_BEDROLL = BLOCKS.createBlock("white_bedroll", createBedroll(DyeColor.WHITE));
-	public static final DeferredBlock<Block> ORANGE_BEDROLL = BLOCKS.createBlock("orange_bedroll", createBedroll(DyeColor.ORANGE));
-	public static final DeferredBlock<Block> MAGENTA_BEDROLL = BLOCKS.createBlock("magenta_bedroll", createBedroll(DyeColor.MAGENTA));
-	public static final DeferredBlock<Block> LIGHT_BLUE_BEDROLL = BLOCKS.createBlock("light_blue_bedroll", createBedroll(DyeColor.LIGHT_BLUE));
-	public static final DeferredBlock<Block> YELLOW_BEDROLL = BLOCKS.createBlock("yellow_bedroll", createBedroll(DyeColor.YELLOW));
-	public static final DeferredBlock<Block> LIME_BEDROLL = BLOCKS.createBlock("lime_bedroll", createBedroll(DyeColor.LIME));
-	public static final DeferredBlock<Block> PINK_BEDROLL = BLOCKS.createBlock("pink_bedroll", createBedroll(DyeColor.PINK));
-	public static final DeferredBlock<Block> GRAY_BEDROLL = BLOCKS.createBlock("gray_bedroll", createBedroll(DyeColor.GRAY));
-	public static final DeferredBlock<Block> LIGHT_GRAY_BEDROLL = BLOCKS.createBlock("light_gray_bedroll", createBedroll(DyeColor.LIGHT_GRAY));
-	public static final DeferredBlock<Block> CYAN_BEDROLL = BLOCKS.createBlock("cyan_bedroll", createBedroll(DyeColor.CYAN));
-	public static final DeferredBlock<Block> PURPLE_BEDROLL = BLOCKS.createBlock("purple_bedroll", createBedroll(DyeColor.PURPLE));
-	public static final DeferredBlock<Block> BLUE_BEDROLL = BLOCKS.createBlock("blue_bedroll", createBedroll(DyeColor.BLUE));
-	public static final DeferredBlock<Block> BROWN_BEDROLL = BLOCKS.createBlock("brown_bedroll", createBedroll(DyeColor.BROWN));
-	public static final DeferredBlock<Block> GREEN_BEDROLL = BLOCKS.createBlock("green_bedroll", createBedroll(DyeColor.GREEN));
-	public static final DeferredBlock<Block> RED_BEDROLL = BLOCKS.createBlock("red_bedroll", createBedroll(DyeColor.RED));
-	public static final DeferredBlock<Block> BLACK_BEDROLL = BLOCKS.createBlock("black_bedroll", createBedroll(DyeColor.BLACK));
+	public static final DeferredBlock<Block> BEDROLL = BLOCKS.createBlock("bedroll", () -> new BedrollBlock(BlockBehaviour.Properties.of().mapColor((state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? MapColor.COLOR_BROWN : MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion()));
 
 	public static final DeferredBlock<Block> TOOTH_BLOCK = BLOCKS.createBlock("tooth_block", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_TILES = BLOCKS.createBlock("tooth_tiles", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
@@ -422,10 +405,6 @@ public class UABlocks {
 	public static final DeferredBlock<BlueprintChestBlock> RIVER_CHEST = BLOCKS.createChestBlock("river", UAProperties.RIVER_WOOD.chest());
 	public static final DeferredBlock<BlueprintTrappedChestBlock> TRAPPED_RIVER_CHEST = BLOCKS.createTrappedChestBlock("river", UAProperties.RIVER_WOOD.chest());
 
-	private static Supplier<BedrollBlock> createBedroll(DyeColor color) {
-		return () -> new BedrollBlock(color, BlockBehaviour.Properties.of().mapColor((state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? color.getMapColor() : MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion());
-	}
-
 	public static void setupTabEditors() {
 		CreativeModeTabContentsPopulator.mod(UpgradeAquatic.MOD_ID)
 				.tab(BUILDING_BLOCKS)
@@ -469,11 +448,10 @@ public class UABlocks {
 				)
 				.tab(COLORED_BLOCKS)
 				.addItemsBefore(of(Blocks.SHULKER_BOX), GLASS_DOOR, GLASS_TRAPDOOR)
-				.addItemsBefore(of(Blocks.CANDLE), BEDROLL, WHITE_BEDROLL, LIGHT_GRAY_BEDROLL, GRAY_BEDROLL, BLACK_BEDROLL, BROWN_BEDROLL, RED_BEDROLL, ORANGE_BEDROLL, YELLOW_BEDROLL, LIME_BEDROLL, GREEN_BEDROLL, CYAN_BEDROLL, LIGHT_BLUE_BEDROLL, BLUE_BEDROLL, PURPLE_BEDROLL, MAGENTA_BEDROLL, PINK_BEDROLL)
 				.tab(FUNCTIONAL_BLOCKS)
 				.addItemsBefore(of(Blocks.SEA_LANTERN), TOOTH_LANTERN)
 				.addItemsBefore(of(Blocks.BAMBOO_SIGN), DRIFTWOOD_SIGNS.getFirst(), DRIFTWOOD_HANGING_SIGNS.getFirst(), RIVER_SIGNS.getFirst(), RIVER_HANGING_SIGNS.getFirst())
-				.addItemsBefore(of(Blocks.CANDLE), BEDROLL, WHITE_BEDROLL, LIGHT_GRAY_BEDROLL, GRAY_BEDROLL, BLACK_BEDROLL, BROWN_BEDROLL, RED_BEDROLL, ORANGE_BEDROLL, YELLOW_BEDROLL, LIME_BEDROLL, GREEN_BEDROLL, CYAN_BEDROLL, LIGHT_BLUE_BEDROLL, BLUE_BEDROLL, PURPLE_BEDROLL, MAGENTA_BEDROLL, PINK_BEDROLL)
+				.addItemsBefore(of(Blocks.CANDLE), BEDROLL)
 				.tab(NATURAL_BLOCKS)
 				.addItemsBefore(of(Blocks.NETHER_GOLD_ORE), EMBEDDED_AMMONITE)
 				.addItemsBefore(of(Blocks.DEAD_BUSH), BEACHGRASS)

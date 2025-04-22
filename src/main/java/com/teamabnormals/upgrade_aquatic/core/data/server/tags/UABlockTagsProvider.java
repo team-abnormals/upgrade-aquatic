@@ -63,7 +63,6 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 
 		this.tag(UABlockTags.DRIFTWOOD_LOGS).add(DRIFTWOOD_LOG.get(), DRIFTWOOD.get(), STRIPPED_DRIFTWOOD_LOG.get(), STRIPPED_DRIFTWOOD.get());
 		this.tag(UABlockTags.RIVER_LOGS).add(RIVER_LOG.get(), RIVER_WOOD.get(), STRIPPED_RIVER_LOG.get(), STRIPPED_RIVER_WOOD.get());
-		this.tag(UABlockTags.BEDROLLS).add(BEDROLL.get(), BLACK_BEDROLL.get(), BLUE_BEDROLL.get(), BROWN_BEDROLL.get(), CYAN_BEDROLL.get(), GRAY_BEDROLL.get(), GREEN_BEDROLL.get(), LIGHT_BLUE_BEDROLL.get(), LIGHT_GRAY_BEDROLL.get(), LIME_BEDROLL.get(), MAGENTA_BEDROLL.get(), ORANGE_BEDROLL.get(), PINK_BEDROLL.get(), PURPLE_BEDROLL.get(), RED_BEDROLL.get(), YELLOW_BEDROLL.get(), WHITE_BEDROLL.get());
 		this.tag(UABlockTags.PIKE_SPAWNERS).add(PICKERELWEED.get(), TALL_PICKERELWEED.get());
 		this.tag(UABlockTags.PICKERELWEED_PLACEABLE).addTag(BlockTags.DIRT).add(Blocks.CLAY, Blocks.FARMLAND);
 

@@ -25,12 +25,9 @@ public class UAItemTagsProvider extends BlueprintItemTagsProvider {
 
 	@Override
 	protected void addTags(Provider provider) {
-		provider.lookupOrThrow(Registries.ITEM).listElementIds().forEach(itemResourceKey -> System.out.println("Item: " + itemResourceKey.location()));
-
 		this.copyWoodsetTags();
 		this.copy(UABlockTags.DRIFTWOOD_LOGS, UAItemTags.DRIFTWOOD_LOGS);
 		this.copy(UABlockTags.RIVER_LOGS, UAItemTags.RIVER_LOGS);
-		this.copy(UABlockTags.BEDROLLS, UAItemTags.BEDROLLS);
 
 		this.tag(ItemTags.BOATS).add(UAItems.DRIFTWOOD_BOAT.getFirst().get(), UAItems.RIVER_BOAT.getFirst().get());
 		this.tag(ItemTags.CHEST_BOATS).add(UAItems.DRIFTWOOD_BOAT.getSecond().get(), UAItems.RIVER_BOAT.getSecond().get());
@@ -38,6 +35,7 @@ public class UAItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(BlueprintItemTags.LARGE_BOATS).add(UAItems.LARGE_DRIFTWOOD_BOAT.get(), UAItems.LARGE_RIVER_BOAT.get());
 
 		this.tag(ItemTags.TRIM_MATERIALS).add(UAItems.THRASHER_TOOTH.get());
+		this.tag(ItemTags.DYEABLE).add(UABlocks.BEDROLL.asItem());
 
 		CoralType.values().forEach(coralType -> {
 			this.tag(coralType.itemTag()).add(coralType.coral().get().asItem(), coralType.fan().get().asItem());

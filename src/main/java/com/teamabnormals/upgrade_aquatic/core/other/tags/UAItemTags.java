@@ -9,8 +9,6 @@ public class UAItemTags {
 	public static final TagKey<Item> DRIFTWOOD_LOGS = itemTag("driftwood_logs");
 	public static final TagKey<Item> RIVER_LOGS = itemTag("river_logs");
 
-	public static final TagKey<Item> BEDROLLS = itemTag("bedrolls");
-
 	public static final TagKey<Item> BUBBLE_CORALS = itemTag("bubble_corals");
 	public static final TagKey<Item> HORN_CORALS = itemTag("horn_corals");
 	public static final TagKey<Item> TUBE_CORALS = itemTag("tube_corals");

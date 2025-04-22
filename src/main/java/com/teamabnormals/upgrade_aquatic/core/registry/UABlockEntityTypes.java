@@ -13,5 +13,5 @@ public class UABlockEntityTypes {
 	public static final BlockEntitySubRegistryHelper BLOCK_ENTITY_TYPES = UpgradeAquatic.REGISTRY_HELPER.getBlockEntitySubHelper();
 
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ElderEyeBlockEntity>> ELDER_EYE = BLOCK_ENTITY_TYPES.createBlockEntity("elder_eye", ElderEyeBlockEntity::new, () -> Set.of(UABlocks.ELDER_EYE.get()));
-	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BedrollBlockEntity>> BEDROLL = BLOCK_ENTITY_TYPES.createBlockEntity("bedroll", BedrollBlockEntity::new, () -> Set.of(UABlocks.BEDROLL.get(), UABlocks.GRAY_BEDROLL.get(), UABlocks.LIGHT_GRAY_BEDROLL.get(), UABlocks.BROWN_BEDROLL.get(), UABlocks.WHITE_BEDROLL.get(), UABlocks.BLACK_BEDROLL.get(), UABlocks.PINK_BEDROLL.get(), UABlocks.RED_BEDROLL.get(), UABlocks.ORANGE_BEDROLL.get(), UABlocks.YELLOW_BEDROLL.get(), UABlocks.LIME_BEDROLL.get(), UABlocks.GREEN_BEDROLL.get(), UABlocks.LIGHT_BLUE_BEDROLL.get(), UABlocks.BLUE_BEDROLL.get(), UABlocks.CYAN_BEDROLL.get(), UABlocks.MAGENTA_BEDROLL.get(), UABlocks.PURPLE_BEDROLL.get()));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BedrollBlockEntity>> BEDROLL = BLOCK_ENTITY_TYPES.createBlockEntity("bedroll", BedrollBlockEntity::new, () -> Set.of(UABlocks.BEDROLL.get()));
 }

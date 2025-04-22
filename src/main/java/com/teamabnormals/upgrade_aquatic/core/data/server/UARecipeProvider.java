@@ -18,7 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -27,7 +26,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -54,7 +52,7 @@ public class UARecipeProvider extends BlueprintRecipeProvider {
 		foodCookingRecipes(consumer, UAItems.LIONFISH.get(), UAItems.COOKED_LIONFISH.get());
 		foodCookingRecipes(consumer, PICKERELWEED.get(), UAItems.BOILED_PICKERELWEED.get());
 
-		bedrollRecipes(consumer);
+		ShapedRecipeBuilder.shaped(DECORATIONS, BEDROLL.get()).define('#', Items.LEATHER).define('X', Items.WHITE_WOOL).pattern("##X").pattern("###").group("bedroll").unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER)).save(consumer);
 
 		oreRecipes(consumer, List.of(EMBEDDED_AMMONITE.get()), MISC, Items.NAUTILUS_SHELL, 1.0F, 200, "nautilus_shell");
 
@@ -179,23 +177,6 @@ public class UARecipeProvider extends BlueprintRecipeProvider {
 
 	public void coralBlockRecipe(RecipeOutput consumer, Block coralBlock, Block coral, TagKey<Item> itemTag) {
 		ShapedRecipeBuilder.shaped(DECORATIONS, coralBlock).define('#', itemTag).pattern("##").pattern("##").unlockedBy(getHasName(coral), has(itemTag)).save(consumer, ResourceLocation.fromNamespaceAndPath(this.getModID(), RecipeBuilder.getDefaultRecipeId(coralBlock).getPath()));
-	}
-
-	protected void bedrollRecipes(RecipeOutput consumer) {
-		List<Item> dyes = List.of(Items.BLACK_DYE, Items.BLUE_DYE, Items.BROWN_DYE, Items.CYAN_DYE, Items.GRAY_DYE, Items.GREEN_DYE, Items.LIGHT_BLUE_DYE, Items.LIGHT_GRAY_DYE, Items.LIME_DYE, Items.MAGENTA_DYE, Items.ORANGE_DYE, Items.PINK_DYE, Items.PURPLE_DYE, Items.RED_DYE, Items.YELLOW_DYE, Items.WHITE_DYE);
-		List<ItemLike> bedrolls = List.of(BLACK_BEDROLL.get(), BLUE_BEDROLL.get(), BROWN_BEDROLL.get(), CYAN_BEDROLL.get(), GRAY_BEDROLL.get(), GREEN_BEDROLL.get(), LIGHT_BLUE_BEDROLL.get(), LIGHT_GRAY_BEDROLL.get(), LIME_BEDROLL.get(), MAGENTA_BEDROLL.get(), ORANGE_BEDROLL.get(), PINK_BEDROLL.get(), PURPLE_BEDROLL.get(), RED_BEDROLL.get(), YELLOW_BEDROLL.get(), WHITE_BEDROLL.get());
-
-		ShapedRecipeBuilder.shaped(DECORATIONS, BEDROLL.get()).define('#', Items.LEATHER).define('X', Items.WHITE_WOOL).pattern("##X").pattern("###").group("bedroll").unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER)).save(consumer);
-		for (int i = 0; i < dyes.size(); ++i) {
-			Item dye = dyes.get(i);
-			ItemLike bedroll = bedrolls.get(i);
-
-			ArrayList<ItemLike> bedrollList = new ArrayList<>(bedrolls);
-			bedrollList.add(BEDROLL.get());
-			bedrollList.remove(bedroll);
-
-			ShapelessRecipeBuilder.shapeless(BUILDING_BLOCKS, bedroll).requires(dye).requires(Ingredient.of(bedrollList.stream().map(ItemStack::new))).group("bedroll").unlockedBy("has_needed_dye", has(dye)).save(consumer, ResourceLocation.fromNamespaceAndPath(this.getModID(), "dye_" + getItemName(bedroll)));
-		}
 	}
 
 	public void conditionalStonecutterRecipe(RecipeOutput consumer, ICondition condition, RecipeCategory category, ItemLike output, ItemLike input) {
