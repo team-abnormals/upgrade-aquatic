@@ -86,7 +86,7 @@ public class UABlocks {
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_STAIRS = BLOCKS.createBlock("luminous_prismarine_stairs", () -> new StairBlock(LUMINOUS_PRISMARINE.get().defaultBlockState(), UAProperties.LUMINOUS_PRISMARINE));
 	public static final DeferredBlock<Block> LUMINOUS_PRISMARINE_SLAB = BLOCKS.createBlock("luminous_prismarine_slab", () -> new SlabBlock(UAProperties.LUMINOUS_PRISMARINE));
 
-	public static final DeferredBlock<Block> BEDROLL = BLOCKS.createBlock("bedroll", () -> new BedrollBlock(BlockBehaviour.Properties.of().mapColor((state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? MapColor.COLOR_BROWN : MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion()));
+	public static final DeferredBlock<Block> BEDROLL = BLOCKS.createBlock("bedroll", () -> new BedrollBlock(BlockBehaviour.Properties.of().mapColor((state) -> state.getValue(BedBlock.PART) == BedPart.FOOT ? MapColor.COLOR_BROWN : MapColor.WOOL).sound(SoundType.WOOL).strength(0.2F, 0.3F).noOcclusion().ignitedByLava().pushReaction(PushReaction.DESTROY)));
 
 	public static final DeferredBlock<Block> TOOTH_BLOCK = BLOCKS.createBlock("tooth_block", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
 	public static final DeferredBlock<Block> TOOTH_TILES = BLOCKS.createBlock("tooth_tiles", () -> new Block(Properties.ofFullCopy(Blocks.END_STONE)));
