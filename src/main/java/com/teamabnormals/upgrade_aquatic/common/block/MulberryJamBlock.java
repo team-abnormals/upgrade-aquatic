@@ -1,5 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.common.block;
 
+import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -31,34 +32,27 @@ public class MulberryJamBlock extends HalfTransparentBlock implements SimpleWate
 		this.registerDefaultState(this.defaultBlockState().setValue(WATERLOGGED, false));
 	}
 
+	@Override
 	public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		return Shapes.empty();
 	}
 
+	@Override
 	public boolean isStickyBlock(BlockState state) {
 		return true;
 	}
 
 	@Override
-	public boolean isSlimeBlock(BlockState state) {
-		return true;
-	}
-
 	public boolean canStickTo(BlockState state, BlockState other) {
-		if (other.is(Blocks.SLIME_BLOCK)) return false;
-		if (other.is(Blocks.HONEY_BLOCK)) return false;
-		if (other.is(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("autumnity", "snail_goo_block"))))
-			return false;
-		if (other.is(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("atmospheric", "aloe_gel_block"))))
-			return false;
-
-		return super.canStickTo(state, other);
+		return (other.is(this) || !other.is(BlueprintBlockTags.ATTACHES_BLOCKS_TO_PISTONS)) && super.canStickTo(state, other);
 	}
 
+	@Override
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
 		entity.makeStuckInBlock(state, new Vec3(0.2D, 0.2D, 0.2D));
 	}
 
+	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		LevelAccessor level = context.getLevel();
 		BlockPos blockpos = context.getClickedPos();
