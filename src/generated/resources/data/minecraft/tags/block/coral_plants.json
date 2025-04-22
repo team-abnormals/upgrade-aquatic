@@ -1,5 +1,4 @@
 {
-  "replace": false,
   "values": [
     "upgrade_aquatic:acan_coral",
     "upgrade_aquatic:finger_coral",
@@ -9,7 +8,7 @@
     "upgrade_aquatic:branch_coral",
     "upgrade_aquatic:rock_coral",
     "upgrade_aquatic:pillow_coral",
-    "upgrade_aquatic:chrome_coral",
-    "upgrade_aquatic:silk_coral"
+    "upgrade_aquatic:silk_coral",
+    "upgrade_aquatic:chrome_coral"
   ]
 }

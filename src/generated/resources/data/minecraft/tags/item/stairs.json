@@ -1,19 +1,16 @@
 {
-  "replace": false,
   "values": [
-    "upgrade_aquatic:kelpy_cobblestone_stairs",
-    "upgrade_aquatic:kelpy_cobblestone_brick_stairs",
-    "upgrade_aquatic:kelpy_cobblestone_tile_stairs",
-    "upgrade_aquatic:kelpy_stone_brick_stairs",
+    "upgrade_aquatic:beachgrass_thatch_stairs",
+    "upgrade_aquatic:luminous_prismarine_stairs",
     "upgrade_aquatic:tooth_stairs",
     "upgrade_aquatic:tooth_brick_stairs",
     "upgrade_aquatic:scute_shingle_stairs",
     "upgrade_aquatic:scute_pavement_stairs",
     "upgrade_aquatic:coralstone_stairs",
     "upgrade_aquatic:bubble_coralstone_stairs",
-    "upgrade_aquatic:brain_coralstone_stairs",
-    "upgrade_aquatic:tube_coralstone_stairs",
     "upgrade_aquatic:horn_coralstone_stairs",
+    "upgrade_aquatic:tube_coralstone_stairs",
+    "upgrade_aquatic:brain_coralstone_stairs",
     "upgrade_aquatic:fire_coralstone_stairs",
     "upgrade_aquatic:acan_coralstone_stairs",
     "upgrade_aquatic:finger_coralstone_stairs",
@@ -25,9 +22,12 @@
     "upgrade_aquatic:pillow_coralstone_stairs",
     "upgrade_aquatic:silk_coralstone_stairs",
     "upgrade_aquatic:chrome_coralstone_stairs",
-    "upgrade_aquatic:elder_prismarine_coralstone_stairs",
     "upgrade_aquatic:prismarine_coralstone_stairs",
+    "upgrade_aquatic:elder_prismarine_coralstone_stairs",
     "upgrade_aquatic:dead_coralstone_stairs",
-    "upgrade_aquatic:beachgrass_thatch_stairs"
+    "upgrade_aquatic:kelpy_cobblestone_stairs",
+    "upgrade_aquatic:kelpy_stone_brick_stairs",
+    "upgrade_aquatic:kelpy_cobblestone_brick_stairs",
+    "upgrade_aquatic:kelpy_cobblestone_tile_stairs"
   ]
 }
