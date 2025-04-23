@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bone_meal",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:thrasher_tooth"
+    }
+  ],
+  "result": {
+    "count": 6,
+    "id": "minecraft:bone_meal"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_luminous_prismarine": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:luminous_prismarine"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "upgrade_aquatic:luminous_prismarine_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_luminous_prismarine"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "upgrade_aquatic:luminous_prismarine_stairs"
+    ]
+  }
+}

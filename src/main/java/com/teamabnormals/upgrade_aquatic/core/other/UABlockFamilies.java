@@ -14,8 +14,14 @@ public class UABlockFamilies {
 	public static final BlockFamily TOOTH_BRICKS_FAMILY = new BlockFamily.Builder(TOOTH_BRICKS.get()).wall(TOOTH_BRICK_WALL.get()).stairs(TOOTH_BRICK_STAIRS.get()).slab(TOOTH_BRICK_SLAB.get()).chiseled(CHISELED_TOOTH_BRICKS.get()).getFamily();
 	public static final BlockFamily TOOTH_TILES_FAMILY = new BlockFamily.Builder(TOOTH_TILES.get()).wall(TOOTH_TILE_WALL.get()).stairs(TOOTH_TILE_STAIRS.get()).slab(TOOTH_TILE_SLAB.get()).getFamily();
 
+	public static final BlockFamily KELPY_COBBLESTONE_FAMILY = new BlockFamily.Builder(KELPY_COBBLESTONE.get()).wall(KELPY_COBBLESTONE_WALL.get()).stairs(KELPY_COBBLESTONE_STAIRS.get()).slab(KELPY_COBBLESTONE_SLAB.get()).getFamily();
+	public static final BlockFamily KELPY_STONE_BRICKS_FAMILY = new BlockFamily.Builder(KELPY_STONE_BRICKS.get()).wall(KELPY_STONE_BRICK_WALL.get()).stairs(KELPY_STONE_BRICK_STAIRS.get()).slab(KELPY_STONE_BRICK_SLAB.get()).getFamily();
+
 	public static final BlockFamily KELPY_COBBLESTONE_BRICKS_FAMILY = new BlockFamily.Builder(KELPY_COBBLESTONE_BRICKS.get()).wall(KELPY_COBBLESTONE_BRICK_WALL.get()).stairs(KELPY_COBBLESTONE_BRICK_STAIRS.get()).slab(KELPY_COBBLESTONE_BRICK_SLAB.get()).getFamily();
 	public static final BlockFamily KELPY_COBBLESTONE_TILES_FAMILY = new BlockFamily.Builder(KELPY_COBBLESTONE_TILES.get()).wall(KELPY_COBBLESTONE_TILE_WALL.get()).stairs(KELPY_COBBLESTONE_TILE_STAIRS.get()).slab(KELPY_COBBLESTONE_TILE_SLAB.get()).getFamily();
+
+	public static final BlockFamily BEACHGRASS_THATCH_FAMILY = new BlockFamily.Builder(BEACHGRASS_THATCH.get()).stairs(BEACHGRASS_THATCH_STAIRS.get()).slab(BEACHGRASS_THATCH_SLAB.get()).getFamily();
+	public static final BlockFamily LUMINOUS_PRISMARINE_FAMILY = new BlockFamily.Builder(LUMINOUS_PRISMARINE.get()).stairs(LUMINOUS_PRISMARINE_STAIRS.get()).slab(LUMINOUS_PRISMARINE_SLAB.get()).getFamily();
 
 	public static final BlockFamily CORALSTONE_FAMILY = new BlockFamily.Builder(CORALSTONE.get()).wall(CORALSTONE_WALL.get()).stairs(CORALSTONE_STAIRS.get()).slab(CORALSTONE_SLAB.get()).chiseled(CHISELED_CORALSTONE.get()).getFamily();
 	public static final BlockFamily BUBBLE_CORALSTONE_FAMILY = new BlockFamily.Builder(BUBBLE_CORALSTONE.get()).wall(BUBBLE_CORALSTONE_WALL.get()).stairs(BUBBLE_CORALSTONE_STAIRS.get()).slab(BUBBLE_CORALSTONE_SLAB.get()).chiseled(BUBBLE_CHISELED_CORALSTONE.get()).getFamily();

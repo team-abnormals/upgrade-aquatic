@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "berry_good"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:mulberry_punnet"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "upgrade_aquatic:mulberry"
+  }
+}

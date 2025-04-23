@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_kelp": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:kelp"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "upgrade_aquatic:kelp_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_kelp"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "upgrade_aquatic:kelp_block"
+    ]
+  }
+}

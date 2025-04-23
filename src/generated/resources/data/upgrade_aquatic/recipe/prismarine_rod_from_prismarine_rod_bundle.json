@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:prismarine_rod_bundle"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "upgrade_aquatic:prismarine_rod"
+  }
+}

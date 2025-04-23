@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    },
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    },
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    },
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    },
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    },
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    },
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    },
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    },
+    {
+      "item": "upgrade_aquatic:disc_fragment_atlantis"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "upgrade_aquatic:music_disc_atlantis"
+  }
+}
