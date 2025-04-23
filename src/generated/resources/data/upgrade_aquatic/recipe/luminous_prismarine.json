@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "I": {
+      "item": "minecraft:glow_ink_sac"
+    },
+    "S": {
+      "item": "minecraft:prismarine_shard"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SIS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "upgrade_aquatic:luminous_prismarine"
+  }
+}

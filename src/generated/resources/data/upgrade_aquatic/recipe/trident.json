@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:prismarine_rod"
+    },
+    "X": {
+      "item": "upgrade_aquatic:thrasher_tooth"
+    }
+  },
+  "pattern": [
+    " XX",
+    " #X",
+    "#  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:trident"
+  }
+}

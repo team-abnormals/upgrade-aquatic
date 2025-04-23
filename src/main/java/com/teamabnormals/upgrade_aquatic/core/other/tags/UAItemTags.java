@@ -43,6 +43,14 @@ public class UAItemTags {
 	public static final TagKey<Item> DEAD_CHROME_CORALS = itemTag("dead_chrome_corals");
 	public static final TagKey<Item> ELDER_PRISMARINE_CORALS = itemTag("elder_prismarine_corals");
 
+	public static final TagKey<Item> FOODS_RAW_PIKE = TagUtil.itemTag("c", "foods/raw_pike");
+	public static final TagKey<Item> FOODS_RAW_PERCH = TagUtil.itemTag("c", "foods/raw_perch");
+	public static final TagKey<Item> FOODS_RAW_LIONFISH = TagUtil.itemTag("c", "foods/raw_lionfish");
+	public static final TagKey<Item> FOODS_COOKED_PIKE = TagUtil.itemTag("c", "foods/cooked_pike");
+	public static final TagKey<Item> FOODS_COOKED_PERCH = TagUtil.itemTag("c", "foods/cooked_perch");
+	public static final TagKey<Item> FOODS_COOKED_LIONFISH = TagUtil.itemTag("c", "foods/cooked_lionfish");
+	public static final TagKey<Item> RODS_PRISMARINE = TagUtil.itemTag("c", "rods/prismarine");
+
 	private static TagKey<Item> itemTag(String name) {
 		return TagUtil.itemTag(UpgradeAquatic.MOD_ID, name);
 	}

@@ -59,5 +59,21 @@ public class UAItemTagsProvider extends BlueprintItemTagsProvider {
 		this.copy(BlockTags.TALL_FLOWERS, ItemTags.TALL_FLOWERS);
 
 		this.tag(Tags.Items.MUSIC_DISCS).add(MUSIC_DISC_ATLANTIS.get());
+
+		this.tag(Tags.Items.FOODS_BERRY).add(MULBERRY.get());
+		
+		this.tag(UAItemTags.FOODS_RAW_PIKE).add(PIKE.get());
+		this.tag(UAItemTags.FOODS_RAW_PERCH).add(PERCH.get());
+		this.tag(UAItemTags.FOODS_RAW_LIONFISH).add(LIONFISH.get());
+		this.tag(Tags.Items.FOODS_RAW_FISH).addTag(UAItemTags.FOODS_RAW_PIKE).addTag(UAItemTags.FOODS_RAW_PERCH).addTag(UAItemTags.FOODS_RAW_LIONFISH);
+
+		this.tag(UAItemTags.FOODS_COOKED_PIKE).add(COOKED_PIKE.get());
+		this.tag(UAItemTags.FOODS_COOKED_PERCH).add(COOKED_PERCH.get());
+		this.tag(UAItemTags.FOODS_COOKED_LIONFISH).add(COOKED_LIONFISH.get());
+		this.tag(Tags.Items.FOODS_COOKED_FISH).addTag(UAItemTags.FOODS_COOKED_PIKE).addTag(UAItemTags.FOODS_COOKED_PERCH).addTag(UAItemTags.FOODS_COOKED_LIONFISH);
+		
+		this.tag(UAItemTags.RODS_PRISMARINE).add(PRISMARINE_ROD.get());
+		this.tag(Tags.Items.RODS).addTag(UAItemTags.RODS_PRISMARINE);
+
 	}
 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_mulberry_jam_bottle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:mulberry_jam_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "upgrade_aquatic:mulberry_jam_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_mulberry_jam_bottle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "upgrade_aquatic:mulberry_jam_block"
+    ]
+  }
+}

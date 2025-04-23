@@ -39,8 +39,6 @@ public class UAClientCompat {
 	}
 
 	public static void registerRenderLayers() {
-		// TODO: Update block model json to include "render_type" instead.
-
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.MULBERRY_JAM_BLOCK.get(), TRANSLUSCENT);
 
 		ItemBlockRenderTypes.setRenderLayer(UABlocks.BEACHGRASS.get(), CUTOUT);

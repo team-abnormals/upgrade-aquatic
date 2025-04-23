@@ -33,5 +33,7 @@ public class UAEntityTypeTagsProvider extends EntityTypeTagsProvider {
 		this.tag(UAEntityTypeTags.THRASHER_SONAR_TARGETS).add(EntityType.COD, EntityType.SALMON, EntityType.TROPICAL_FISH, EntityType.DOLPHIN, EntityType.AXOLOTL, PERCH.get(), PIKE.get(), NAUTILUS.get()).addTag(UAEntityTypeTags.JELLYFISH);
 
 		this.tag(BlueprintEntityTypeTags.FISHES).add(PIKE.get(), PERCH.get(), LIONFISH.get());
+
+		this.tag(UAEntityTypeTags.NOT_BALLOON_ATTACHABLE).add(FLARE.get());
 	}
 }

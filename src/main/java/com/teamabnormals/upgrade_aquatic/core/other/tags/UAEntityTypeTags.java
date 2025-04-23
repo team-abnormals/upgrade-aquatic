@@ -9,6 +9,8 @@ public class UAEntityTypeTags {
 	public static final TagKey<EntityType<?>> JELLYFISH = entityTypeTag("jellyfish");
 	public static final TagKey<EntityType<?>> THRASHER_SONAR_TARGETS = entityTypeTag("thrasher_sonar_targets");
 
+	public static final TagKey<EntityType<?>> NOT_BALLOON_ATTACHABLE = TagUtil.entityTypeTag("endergetic", "not_balloon_attachable");
+
 	public static TagKey<EntityType<?>> entityTypeTag(String name) {
 		return TagUtil.entityTypeTag(UpgradeAquatic.MOD_ID, name);
 	}

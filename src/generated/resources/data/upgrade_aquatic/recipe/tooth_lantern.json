@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "upgrade_aquatic:thrasher_tooth"
+    },
+    "X": {
+      "item": "minecraft:prismarine_crystals"
+    }
+  },
+  "pattern": [
+    "#",
+    "X",
+    "#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "upgrade_aquatic:tooth_lantern"
+  }
+}
