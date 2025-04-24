@@ -19,9 +19,6 @@ import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-import java.util.List;
-import java.util.Optional;
-
 public final class UAStructureRepaletters {
 	public static final ResourceKey<StructureRepaletterEntry> KELPY_OCEAN_RUINS = create("kelpy_ocean_ruins");
 
@@ -30,12 +27,10 @@ public final class UAStructureRepaletters {
 	public static void bootstrap(BootstrapContext<StructureRepaletterEntry> context) {
 		HolderGetter<Structure> structures = context.lookup(Registries.STRUCTURE);
 
-		context.register(KELPY_OCEAN_RUINS, new StructureRepaletterEntry(HolderSet.direct(
-				structures.getOrThrow(BuiltinStructures.OCEAN_RUIN_WARM)
-		), Optional.empty(), false, 100, Optional.empty(), List.of(
+		context.register(KELPY_OCEAN_RUINS, StructureRepaletterEntry.repalette().repaletters(
 				new SimpleStructureRepaletter(Blocks.MOSSY_COBBLESTONE, UABlocks.KELPY_COBBLESTONE.get()),
 				new SimpleStructureRepaletter(Blocks.MOSSY_COBBLESTONE, UABlocks.KELPY_COBBLESTONE.get())
-		)));
+		).select(HolderSet.direct(structures.getOrThrow(BuiltinStructures.OCEAN_RUIN_WARM))));
 	}
 
 	public static ConfigValueCondition config(ModConfigSpec.ConfigValue<?> value, String key, boolean inverted) {
@@ -49,5 +44,4 @@ public final class UAStructureRepaletters {
 	private static ResourceKey<StructureRepaletterEntry> create(String name) {
 		return ResourceKey.create(BlueprintDataPackRegistries.STRUCTURE_REPALETTERS, UpgradeAquatic.location(name));
 	}
-
 }
