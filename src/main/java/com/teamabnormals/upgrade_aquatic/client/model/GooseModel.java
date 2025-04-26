@@ -1,9 +1,7 @@
 package com.teamabnormals.upgrade_aquatic.client.model;
 
 import com.google.common.collect.ImmutableList;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.model.AgeableListModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;

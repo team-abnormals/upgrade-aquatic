@@ -8,8 +8,6 @@ import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorLayerDefinition;
 import com.teamabnormals.blueprint.core.endimator.model.EndimatorPartDefinition;
 import com.teamabnormals.upgrade_aquatic.common.entity.animal.jellyfish.ImmortalJellyfish;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;

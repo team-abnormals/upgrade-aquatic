@@ -4,7 +4,6 @@ import com.teamabnormals.blueprint.common.world.modification.structure.Structure
 import com.teamabnormals.blueprint.core.registry.BlueprintDataPackRegistries;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UABlocks;
-import com.teamabnormals.upgrade_aquatic.core.registry.UAConditionSerializers;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAConditionSerializers.UAConditions;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;

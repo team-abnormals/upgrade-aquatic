@@ -5,8 +5,6 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamabnormals.blueprint.core.endimator.Endimator;
 import com.teamabnormals.blueprint.core.endimator.entity.EndimatorEntityModel;
 import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
-import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
