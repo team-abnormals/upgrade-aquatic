@@ -50,7 +50,7 @@ public class UpgradeAquatic {
 		UAParticleTypes.PARTICLES.register(bus);
 		UADataSerializers.SERIALIZERS.register(bus);
 		UABiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
-		UAConditions.CONDITION_SERIALIZERS.register(bus);
+		UAConditionSerializers.CONDITION_SERIALIZERS.register(bus);
 		UAFeatures.TREE_DECORATORS.register(bus);
 		UADecoratedPotPatterns.DECORATED_POT_PATTERNS.register(bus);
 		UACriteriaTriggers.TRIGGERS.register(bus);

@@ -8,12 +8,12 @@
   "repaletter": [
     {
       "type": "blueprint:simple",
-      "replaces": "minecraft:mossy_cobblestone",
+      "replaces_block": "minecraft:mossy_cobblestone",
       "replaces_with": "upgrade_aquatic:kelpy_cobblestone"
     },
     {
       "type": "blueprint:simple",
-      "replaces": "minecraft:mossy_cobblestone",
+      "replaces_block": "minecraft:mossy_cobblestone",
       "replaces_with": "upgrade_aquatic:kelpy_cobblestone"
     }
   ],

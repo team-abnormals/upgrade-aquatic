@@ -32,8 +32,6 @@ public class UADatapackProvider extends DatapackBuiltinEntriesProvider {
 			.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, UABiomeModifiers::bootstrap);
 
 	public UADatapackProvider(PackOutput output, CompletableFuture<Provider> provider) {
-		super(output, provider, BUILDER, builder -> {
-			builder.accept(UAStructureRepaletters.KELPY_OCEAN_RUINS, UAStructureRepaletters.CONFIG);
-		}, Set.of(UpgradeAquatic.MOD_ID));
+		super(output, provider, BUILDER, UAStructureRepaletters::applyConditions, Set.of(UpgradeAquatic.MOD_ID));
 	}
 }
