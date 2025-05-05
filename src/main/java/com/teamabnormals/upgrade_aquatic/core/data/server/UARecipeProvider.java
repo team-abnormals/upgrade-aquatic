@@ -138,11 +138,11 @@ public class UARecipeProvider extends BlueprintRecipeProvider {
 		doorBuilder(TOOTH_DOOR, Ingredient.of(UAItems.THRASHER_TOOTH)).unlockedBy(getHasName(UAItems.THRASHER_TOOTH), has(UAItems.THRASHER_TOOTH)).save(output);
 		twoByTwoPacker(output, REDSTONE, TOOTH_TRAPDOOR, UAItems.THRASHER_TOOTH);
 
-		ShapelessRecipeBuilder.shapeless(FOOD, UAItems.MULBERRY_JAM_BOTTLE, 4).requires(MULBERRY_JAM_BLOCK).requires(Items.GLASS_BOTTLE, 4).unlockedBy("has_mulberry_jam_block", has(MULBERRY_JAM_BLOCK)).save(output);
+		ShapelessRecipeBuilder.shapeless(FOOD, UAItems.MULBERRY_JAM_BOTTLE, 4).requires(MULBERRY_JAM_BLOCK).requires(Items.GLASS_BOTTLE, 4).unlockedBy("has_mulberry_jam_block", has(MULBERRY_JAM_BLOCK)).save(output, getModConversionRecipeName(UAItems.MULBERRY_JAM_BOTTLE, MULBERRY_JAM_BLOCK));
 		twoByTwoPacker(output, REDSTONE, MULBERRY_JAM_BLOCK, UAItems.MULBERRY_JAM_BOTTLE);
 		ShapelessRecipeBuilder.shapeless(FOOD, UAItems.MULBERRY_BREAD).requires(Items.BREAD).requires(UAItems.MULBERRY_JAM_BOTTLE).unlockedBy("has_mulberry_jam_bottle", has(UAItems.MULBERRY_JAM_BOTTLE)).save(output);
 		ShapelessRecipeBuilder.shapeless(FOOD, UAItems.MULBERRY_PIE).requires(UAItems.MULBERRY).requires(Items.SUGAR).requires(Tags.Items.EGGS).unlockedBy("has_mulberry", has(UAItems.MULBERRY)).save(output);
-		ShapelessRecipeBuilder.shapeless(FOOD, UAItems.MULBERRY_JAM_BOTTLE).requires(UAItems.MULBERRY).requires(Items.SUGAR).requires(Items.GLASS_BOTTLE).unlockedBy("has_mulberry", has(UAItems.MULBERRY)).save(output, getModConversionRecipeName(UAItems.MULBERRY, Items.GLASS_BOTTLE));
+		ShapelessRecipeBuilder.shapeless(FOOD, UAItems.MULBERRY_JAM_BOTTLE).requires(UAItems.MULBERRY).requires(Items.SUGAR).requires(Items.GLASS_BOTTLE).unlockedBy("has_mulberry", has(UAItems.MULBERRY)).save(output);
 
 		ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, Blocks.DARK_PRISMARINE).define('S', Items.PRISMARINE_SHARD).define('I', Items.INK_SAC).pattern("SSS").pattern("SIS").pattern("SSS").unlockedBy("has_prismarine_shard", has(Items.PRISMARINE_SHARD)).save(output);
 		ShapedRecipeBuilder.shaped(BUILDING_BLOCKS, LUMINOUS_PRISMARINE).define('S', Items.PRISMARINE_SHARD).define('I', Items.GLOW_INK_SAC).pattern("SSS").pattern("SIS").pattern("SSS").unlockedBy("has_prismarine_shard", has(Items.PRISMARINE_SHARD)).save(output);

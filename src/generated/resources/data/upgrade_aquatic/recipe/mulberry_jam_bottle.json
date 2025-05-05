@@ -3,23 +3,17 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "upgrade_aquatic:mulberry_jam_block"
+      "item": "upgrade_aquatic:mulberry"
     },
     {
-      "item": "minecraft:glass_bottle"
-    },
-    {
-      "item": "minecraft:glass_bottle"
-    },
-    {
-      "item": "minecraft:glass_bottle"
+      "item": "minecraft:sugar"
     },
     {
       "item": "minecraft:glass_bottle"
     }
   ],
   "result": {
-    "count": 4,
+    "count": 1,
     "id": "upgrade_aquatic:mulberry_jam_bottle"
   }
 }
