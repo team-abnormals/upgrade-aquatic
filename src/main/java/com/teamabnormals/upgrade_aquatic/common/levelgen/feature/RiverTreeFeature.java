@@ -16,31 +16,31 @@ public class RiverTreeFeature extends BlueprintTreeFeature {
 	}
 
 	@Override
-	public void doPlace(FeaturePlaceContext<TreeConfiguration> context) {
+	public void doPlace(FeaturePlaceContext<TreeConfiguration> context, TreeInfo info) {
 		RandomSource random = context.random();
 		BlockPos origin = context.origin();
 		TreeConfiguration config = context.config();
 
 		int trunkHeight = config.trunkPlacer.getTreeHeight(random);
 		for (int y = 0; y < trunkHeight; y++) {
-			this.addLog(origin.above(y));
+			info.addLog(origin.above(y));
 		}
 
 		origin = new BlockPos(origin.getX(), origin.getY() + trunkHeight - random.nextInt(2), origin.getZ());
 
-		this.createLeaves(origin.below(), random, false);
-		this.createLeaves(origin, random, false);
-		this.createLeaves(origin.above(), random, true);
-		this.addFoliage(origin.above());
-		this.addFoliage(origin.above(2));
+		this.createLeaves(info, origin.below(), random, false);
+		this.createLeaves(info, origin, random, false);
+		this.createLeaves(info, origin.above(), random, true);
+		info.addFoliage(origin.above());
+		info.addFoliage(origin.above(2));
 	}
 
-	private void createLeaves(BlockPos newPos, RandomSource rand, boolean small) {
+	private void createLeaves(TreeInfo info, BlockPos newPos, RandomSource rand, boolean small) {
 		int leafSize = 1;
 		for (int i = -leafSize; i <= leafSize; ++i) {
 			for (int j = -leafSize; j <= leafSize; ++j) {
 				if (((Math.abs(i) != leafSize || Math.abs(j) != leafSize) && (!small || rand.nextInt(3) != 0)) || (!small && rand.nextInt(4) == 0)) {
-					this.addFoliage(newPos.offset(i, 0, j));
+					info.addFoliage(newPos.offset(i, 0, j));
 				}
 			}
 		}
