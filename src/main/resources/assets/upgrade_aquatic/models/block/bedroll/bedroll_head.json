@@ -3,6 +3,6 @@
   "textures": {
     "particle": "upgrade_aquatic:block/bedroll_particles",
     "bedroll": "upgrade_aquatic:block/bedroll",
-    "pillow": "upgrade_aquatic:block/bedroll_pillow"
+    "overlay": "upgrade_aquatic:block/bedroll_overlay"
   }
 }

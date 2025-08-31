@@ -1,6 +1,7 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "upgrade_aquatic:item/bedroll"
+        "layer0": "upgrade_aquatic:item/bedroll",
+        "layer1": "upgrade_aquatic:item/bedroll_overlay"
     }
 }
