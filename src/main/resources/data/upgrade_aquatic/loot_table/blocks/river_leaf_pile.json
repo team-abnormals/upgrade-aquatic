@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -11,101 +10,99 @@
             {
               "condition": "minecraft:match_tool",
               "predicate": {
-                "items": [
-                  "minecraft:shears"
-                ]
+                "items": "#c:tools/shear"
               }
             }
           ],
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": true,
               "conditions": [
                 {
-                  "condition": "minecraft:block_state_property",
                   "block": "upgrade_aquatic:river_leaf_pile",
-                  "properties": {
-                    "east": "true"
-                  }
-                }
-              ],
-              "count": 1.0,
-              "add": true
-            },
-            {
-              "function": "minecraft:set_count",
-              "conditions": [
-                {
                   "condition": "minecraft:block_state_property",
-                  "block": "upgrade_aquatic:river_leaf_pile",
-                  "properties": {
-                    "west": "true"
-                  }
-                }
-              ],
-              "count": 1.0,
-              "add": true
-            },
-            {
-              "function": "minecraft:set_count",
-              "conditions": [
-                {
-                  "condition": "minecraft:block_state_property",
-                  "block": "upgrade_aquatic:river_leaf_pile",
-                  "properties": {
-                    "north": "true"
-                  }
-                }
-              ],
-              "count": 1.0,
-              "add": true
-            },
-            {
-              "function": "minecraft:set_count",
-              "conditions": [
-                {
-                  "condition": "minecraft:block_state_property",
-                  "block": "upgrade_aquatic:river_leaf_pile",
-                  "properties": {
-                    "south": "true"
-                  }
-                }
-              ],
-              "count": 1.0,
-              "add": true
-            },
-            {
-              "function": "minecraft:set_count",
-              "conditions": [
-                {
-                  "condition": "minecraft:block_state_property",
-                  "block": "upgrade_aquatic:river_leaf_pile",
-                  "properties": {
-                    "up": "true"
-                  }
-                }
-              ],
-              "count": 1.0,
-              "add": true
-            },
-            {
-              "function": "minecraft:set_count",
-              "conditions": [
-                {
-                  "condition": "minecraft:block_state_property",
-                  "block": "upgrade_aquatic:river_leaf_pile",
                   "properties": {
                     "down": "true"
                   }
                 }
               ],
               "count": 1.0,
-              "add": true
+              "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_count",
+              "add": true,
+              "conditions": [
+                {
+                  "block": "upgrade_aquatic:river_leaf_pile",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "up": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "upgrade_aquatic:river_leaf_pile",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "north": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "upgrade_aquatic:river_leaf_pile",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "south": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "upgrade_aquatic:river_leaf_pile",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "west": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
+              "conditions": [
+                {
+                  "block": "upgrade_aquatic:river_leaf_pile",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "east": "true"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": true,
               "count": -1.0,
-              "add": true
+              "function": "minecraft:set_count"
             },
             {
               "function": "minecraft:explosion_decay"
@@ -113,7 +110,9 @@
           ],
           "name": "upgrade_aquatic:river_leaf_pile"
         }
-      ]
+      ],
+      "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "upgrade_aquatic:blocks/river_leaf_pile"
 }
