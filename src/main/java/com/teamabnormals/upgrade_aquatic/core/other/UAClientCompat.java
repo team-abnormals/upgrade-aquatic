@@ -195,14 +195,14 @@ public class UAClientCompat {
 			if (level != null && pos != null && level.getBlockEntity(pos) instanceof BedrollBlockEntity bedroll) {
 				return bedroll.getRgb();
 			}
-			return DyedItemColor.LEATHER_COLOR;
+			return BedrollBlockEntity.BEDROLL_COLOR;
 		}, UABlocks.BEDROLL.get());
 	}
 
 	@SubscribeEvent
 	public static void registerItemColors(RegisterColorHandlersEvent.Item event) {
 		event.register((color, items) -> FoliageColor.get(0.5D, 1.0D), UABlocks.RIVER_LEAVES.get(), UABlocks.RIVER_LEAF_PILE.get());
-		event.register((stack, tintIndex) -> tintIndex > 0 ? -1 : DyedItemColor.getOrDefault(stack, 0x8C654F), UABlocks.BEDROLL.asItem());
+		event.register((stack, tintIndex) -> tintIndex > 0 ? -1 : DyedItemColor.getOrDefault(stack, BedrollBlockEntity.BEDROLL_COLOR), UABlocks.BEDROLL.asItem());
 	}
 
 

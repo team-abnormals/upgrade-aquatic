@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BedrollBlockEntity extends BlockEntity {
+	public static int BEDROLL_COLOR = 0xD39E85;
 	private int rgb;
 
 	public BedrollBlockEntity(BlockPos pos, BlockState state) {
@@ -43,7 +44,7 @@ public class BedrollBlockEntity extends BlockEntity {
 	@Override
 	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.loadAdditional(tag, registries);
-		this.rgb = tag != null && tag.contains("rgb") ? tag.getInt("rgb") : DyedItemColor.LEATHER_COLOR;
+		this.rgb = tag != null && tag.contains("rgb") ? tag.getInt("rgb") : BEDROLL_COLOR;
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class BedrollBlockEntity extends BlockEntity {
 	@Override
 	protected void applyImplicitComponents(BlockEntity.DataComponentInput componentInput) {
 		super.applyImplicitComponents(componentInput);
-		this.rgb = componentInput.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(DyedItemColor.LEATHER_COLOR, true)).rgb();
+		this.rgb = componentInput.getOrDefault(DataComponents.DYED_COLOR, new DyedItemColor(BEDROLL_COLOR, true)).rgb();
 	}
 
 	@Override
