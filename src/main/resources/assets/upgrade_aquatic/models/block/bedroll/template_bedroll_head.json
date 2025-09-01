@@ -1,28 +1,27 @@
 {
 	"parent": "block/thin_block",
+	"texture_size": [64, 32],
 	"elements": [
 		{
 			"from": [0, 0, 0],
 			"to": [16, 2, 16],
 			"faces": {
-				"north": {"uv": [10, 1.5, 14, 2], "texture": "#bedroll", "tintindex": 0, "cullface": "north"},
-				"east": {"uv": [4.25, 8.5, 8.25, 9], "texture": "#bedroll", "tintindex": 0, "cullface": "east"},
-				"south": {"uv": [9.75, 0, 13.75, 0.5], "texture": "#bedroll", "tintindex": 0, "cullface": "south"},
-				"west": {"uv": [4.25, 9.25, 8.25, 9.75], "texture": "#bedroll", "tintindex": 0, "cullface": "west"},
-				"up": {"uv": [0, 0, 4, 4], "rotation": 180, "texture": "#bedroll", "tintindex": 0},
-				"down": {"uv": [4, 0, 8, 4], "rotation": 180, "texture": "#bedroll", "tintindex": 0, "cullface": "down"}
+				"east": {"uv": [8, 0, 12, 1], "texture": "#bedroll", "cullface": "east", "tintindex": 0},
+				"south": {"uv": [8, 1, 12, 2], "texture": "#bedroll", "cullface": "south", "tintindex": 0},
+				"west": {"uv": [12, 0, 16, 1], "texture": "#bedroll", "cullface": "west", "tintindex": 0},
+				"up": {"uv": [0, 0, 4, 8], "rotation": 180, "texture": "#bedroll", "tintindex": 0},
+				"down": {"uv": [4, 8, 8, 0], "rotation": 180, "texture": "#bedroll", "cullface": "down", "tintindex": 0}
 			}
 		},
 		{
 			"from": [0, 0, 0],
 			"to": [16, 2, 16],
 			"faces": {
-				"north": {"uv": [10, 1.5, 14, 2], "texture": "#overlay", "cullface": "north"},
-				"east": {"uv": [4.25, 8.5, 8.25, 9], "texture": "#overlay", "cullface": "east"},
-				"south": {"uv": [9.75, 0, 13.75, 0.5], "texture": "#overlay", "cullface": "south"},
-				"west": {"uv": [4.25, 9.25, 8.25, 9.75], "texture": "#overlay", "cullface": "west"},
-				"up": {"uv": [0, 0, 4, 4], "rotation": 180, "texture": "#overlay"},
-				"down": {"uv": [4, 0, 8, 4], "rotation": 180, "texture": "#overlay", "cullface": "down"}
+				"east": {"uv": [8, 0, 12, 1], "texture": "#overlay", "cullface": "east"},
+				"south": {"uv": [8, 1, 12, 2], "texture": "#overlay", "cullface": "south"},
+				"west": {"uv": [12, 0, 16, 1], "texture": "#overlay", "cullface": "west"},
+				"up": {"uv": [0, 0, 4, 8], "rotation": 180, "texture": "#overlay"},
+				"down": {"uv": [4, 0, 8, 8], "rotation": 180, "texture": "#overlay", "cullface": "down"}
 			}
 		}
 	]
