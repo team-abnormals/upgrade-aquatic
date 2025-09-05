@@ -1,0 +1,4 @@
+{
+  "type": "minecraft:entity",
+  "random_sequence": "upgrade_aquatic:entities/immortal_jellyfish"
+}

@@ -14,6 +14,7 @@ import com.teamabnormals.upgrade_aquatic.core.other.UADataSerializers;
 import com.teamabnormals.upgrade_aquatic.core.registry.*;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UADecoratedPotPatterns;
 import com.teamabnormals.upgrade_aquatic.core.registry.datapack.UAWorldCarvers;
+import com.teamabnormals.upgrade_aquatic.core.registry.helper.UABlockSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.core.registry.helper.UAItemSubRegistryHelper;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
@@ -35,7 +36,10 @@ import java.util.concurrent.CompletableFuture;
 @Mod(UpgradeAquatic.MOD_ID)
 public class UpgradeAquatic {
 	public static final String MOD_ID = "upgrade_aquatic";
-	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> helper.putSubHelper(Registries.ITEM, new UAItemSubRegistryHelper(helper)));
+	public static final RegistryHelper REGISTRY_HELPER = RegistryHelper.create(MOD_ID, helper -> {
+		helper.putSubHelper(Registries.BLOCK, new UABlockSubRegistryHelper(helper));
+		helper.putSubHelper(Registries.ITEM, new UAItemSubRegistryHelper(helper));
+	});
 
 	public UpgradeAquatic(IEventBus bus, ModContainer container) {
 		UABlocks.BLOCKS.register(bus);
@@ -97,6 +101,7 @@ public class UpgradeAquatic {
 		generator.addProvider(server, new UAAdvancementModifierProvider(output, provider));
 		generator.addProvider(server, new UARecipeProvider(output, provider));
 		generator.addProvider(server, new UADataMapProvider(output, provider));
+		generator.addProvider(server, new UALootTableProvider(output, provider));
 
 		boolean client = event.includeClient();
 		generator.addProvider(client, new UABlockStateProvider(output, helper));

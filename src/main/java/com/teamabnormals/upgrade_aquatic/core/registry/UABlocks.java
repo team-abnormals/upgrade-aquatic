@@ -21,6 +21,7 @@ import com.teamabnormals.blueprint.core.util.PropertyUtil.WoodSetProperties;
 import com.teamabnormals.blueprint.core.util.item.CreativeModeTabContentsPopulator;
 import com.teamabnormals.blueprint.core.util.registry.BlockSubRegistryHelper;
 import com.teamabnormals.upgrade_aquatic.common.block.*;
+import com.teamabnormals.upgrade_aquatic.common.block.JellyTorchBlock.JellyTorchType;
 import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneSlabBlock;
 import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneStairsBlock;
@@ -28,6 +29,7 @@ import com.teamabnormals.upgrade_aquatic.common.block.coralstone.CoralstoneWallB
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.other.UAConstants;
 import com.teamabnormals.upgrade_aquatic.core.other.UATreeGrowers;
+import com.teamabnormals.upgrade_aquatic.core.registry.helper.UABlockSubRegistryHelper;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -48,12 +50,13 @@ import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import static net.minecraft.world.item.CreativeModeTabs.*;
 import static net.minecraft.world.item.crafting.Ingredient.of;
 
 public class UABlocks {
-	public static final BlockSubRegistryHelper BLOCKS = UpgradeAquatic.REGISTRY_HELPER.getBlockSubHelper();
+	public static final UABlockSubRegistryHelper BLOCKS = UpgradeAquatic.REGISTRY_HELPER.getBlockSubHelper();
 
 	public static final DeferredBlock<Block> EMBEDDED_AMMONITE = BLOCKS.createBlock("embedded_ammonite", () -> new EmbeddedAmmoniteBlock(Properties.ofFullCopy(Blocks.STONE)));
 
@@ -160,76 +163,76 @@ public class UABlocks {
 	public static final DeferredBlock<Block> CHROME_CORAL = BLOCKS.createBlock("chrome_coral", () -> new CoralPlantBlock(DEAD_CHROME_CORAL.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY)));
 	public static final DeferredBlock<Block> PRISMARINE_CORAL = BLOCKS.createBlock("prismarine_coral", () -> new CoralPlantBlock(ELDER_PRISMARINE_CORAL.get(), UAProperties.createPrismarineCoral(false)));
 
-	public static final DeferredBlock<Block> DEAD_ACAN_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_acan_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_FINGER_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_finger_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_STAR_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_star_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_MOSS_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_moss_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_PETAL_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_petal_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_BRANCH_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_branch_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_ROCK_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_rock_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_PILLOW_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_pillow_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_SILK_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_silk_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> DEAD_CHROME_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("dead_chrome_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
-	public static final DeferredBlock<Block> ELDER_PRISMARINE_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("elder_prismarine_coral_wall_fan", () -> new BaseCoralWallFanBlock(UAProperties.createPrismarineCoral(true)));
+	public static final DeferredBlock<Block> DEAD_ACAN_CORAL_FAN = BLOCKS.createBlockNoItem("dead_acan_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_FINGER_CORAL_FAN = BLOCKS.createBlockNoItem("dead_finger_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_STAR_CORAL_FAN = BLOCKS.createBlockNoItem("dead_star_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_MOSS_CORAL_FAN = BLOCKS.createBlockNoItem("dead_moss_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_PETAL_CORAL_FAN = BLOCKS.createBlockNoItem("dead_petal_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_BRANCH_CORAL_FAN = BLOCKS.createBlockNoItem("dead_branch_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_ROCK_CORAL_FAN = BLOCKS.createBlockNoItem("dead_rock_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_PILLOW_CORAL_FAN = BLOCKS.createBlockNoItem("dead_pillow_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_SILK_CORAL_FAN = BLOCKS.createBlockNoItem("dead_silk_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> DEAD_CHROME_CORAL_FAN = BLOCKS.createBlockNoItem("dead_chrome_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.DEAD_CORAL));
+	public static final DeferredBlock<Block> ELDER_PRISMARINE_CORAL_FAN = BLOCKS.createBlockNoItem("elder_prismarine_coral_fan", () -> new BaseCoralWallFanBlock(UAProperties.createPrismarineCoral(true)));
 
-	public static final DeferredBlock<Block> ACAN_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("acan_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_ACAN_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_CYAN)));
-	public static final DeferredBlock<Block> FINGER_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("finger_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_FINGER_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_ORANGE)));
-	public static final DeferredBlock<Block> STAR_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("star_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_STAR_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_LIGHT_GREEN)));
-	public static final DeferredBlock<Block> MOSS_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("moss_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_MOSS_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_GREEN)));
-	public static final DeferredBlock<Block> PETAL_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("petal_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_PETAL_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_LIGHT_BLUE)));
-	public static final DeferredBlock<Block> BRANCH_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("branch_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_BRANCH_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY)));
-	public static final DeferredBlock<Block> ROCK_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("rock_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_ROCK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_BROWN)));
-	public static final DeferredBlock<Block> PILLOW_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("pillow_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_PILLOW_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_WHITE)));
-	public static final DeferredBlock<Block> SILK_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("silk_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_SILK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_PURPLE)));
-	public static final DeferredBlock<Block> CHROME_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("chrome_coral_wall_fan", () -> new CoralWallFanBlock(DEAD_CHROME_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY)));
-	public static final DeferredBlock<Block> PRISMARINE_CORAL_WALL_FAN = BLOCKS.createBlockNoItem("prismarine_coral_wall_fan", () -> new CoralWallFanBlock(ELDER_PRISMARINE_CORAL_WALL_FAN.get(), UAProperties.createPrismarineCoral(false)));
+	public static final DeferredBlock<Block> DEAD_ACAN_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_acan_coral_wall_fan", DEAD_ACAN_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_ACAN_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_FINGER_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_finger_coral_wall_fan", DEAD_FINGER_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_FINGER_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_STAR_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_star_coral_wall_fan", DEAD_STAR_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_STAR_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_MOSS_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_moss_coral_wall_fan", DEAD_MOSS_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_MOSS_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_PETAL_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_petal_coral_wall_fan", DEAD_PETAL_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_PETAL_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_BRANCH_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_branch_coral_wall_fan", DEAD_BRANCH_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_BRANCH_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_ROCK_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_rock_coral_wall_fan", DEAD_ROCK_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_ROCK_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_PILLOW_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_pillow_coral_wall_fan", DEAD_PILLOW_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_PILLOW_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_SILK_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_silk_coral_wall_fan", DEAD_SILK_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_SILK_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> DEAD_CHROME_CORAL_WALL_FAN = BLOCKS.createWallBlock("dead_chrome_coral_wall_fan", DEAD_CHROME_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.deadCoralWallFan(() -> DEAD_CHROME_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> ELDER_PRISMARINE_CORAL_WALL_FAN = BLOCKS.createWallBlock("elder_prismarine_coral_wall_fan", ELDER_PRISMARINE_CORAL_FAN, () -> new BaseCoralFanBlock(UAProperties.createPrismarineCoral(true).lootFrom(() -> ELDER_PRISMARINE_CORAL_FAN.get())), Direction.DOWN);
 
-	public static final DeferredBlock<Block> DEAD_ACAN_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_acan_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_ACAN_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_FINGER_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_finger_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_FINGER_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_STAR_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_star_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_STAR_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_MOSS_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_moss_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_MOSS_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_PETAL_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_petal_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_PETAL_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_BRANCH_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_branch_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_BRANCH_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_ROCK_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_rock_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_ROCK_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_PILLOW_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_pillow_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_PILLOW_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_SILK_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_silk_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_SILK_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> DEAD_CHROME_CORAL_FAN = BLOCKS.createStandingAndWallBlock("dead_chrome_coral_fan", () -> new BaseCoralFanBlock(UAProperties.DEAD_CORAL_FAN), DEAD_CHROME_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> ELDER_PRISMARINE_CORAL_FAN = BLOCKS.createStandingAndWallBlock("elder_prismarine_coral_fan", () -> new BaseCoralFanBlock(UAProperties.createPrismarineCoral(true)), ELDER_PRISMARINE_CORAL_WALL_FAN, Direction.DOWN);
+	public static final DeferredBlock<Block> ACAN_CORAL_FAN = BLOCKS.createBlockNoItem("acan_coral_fan", () -> new CoralFanBlock(DEAD_ACAN_CORAL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_CYAN)));
+	public static final DeferredBlock<Block> FINGER_CORAL_FAN = BLOCKS.createBlockNoItem("finger_coral_fan", () -> new CoralFanBlock(DEAD_FINGER_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_ORANGE)));
+	public static final DeferredBlock<Block> STAR_CORAL_FAN = BLOCKS.createBlockNoItem("star_coral_fan", () -> new CoralFanBlock(DEAD_STAR_CORAL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_LIGHT_GREEN)));
+	public static final DeferredBlock<Block> MOSS_CORAL_FAN = BLOCKS.createBlockNoItem("moss_coral_fan", () -> new CoralFanBlock(DEAD_MOSS_CORAL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_GREEN)));
+	public static final DeferredBlock<Block> PETAL_CORAL_FAN = BLOCKS.createBlockNoItem("petal_coral_fan", () -> new CoralFanBlock(DEAD_PETAL_CORAL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_LIGHT_BLUE)));
+	public static final DeferredBlock<Block> BRANCH_CORAL_FAN = BLOCKS.createBlockNoItem("branch_coral_fan", () -> new CoralFanBlock(DEAD_BRANCH_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY)));
+	public static final DeferredBlock<Block> ROCK_CORAL_FAN = BLOCKS.createBlockNoItem("rock_coral_fan", () -> new CoralFanBlock(DEAD_ROCK_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_BROWN)));
+	public static final DeferredBlock<Block> PILLOW_CORAL_FAN = BLOCKS.createBlockNoItem("pillow_coral_fan", () -> new CoralFanBlock(DEAD_PILLOW_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_WHITE)));
+	public static final DeferredBlock<Block> SILK_CORAL_FAN = BLOCKS.createBlockNoItem("silk_coral_fan", () -> new CoralFanBlock(DEAD_SILK_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_PURPLE)));
+	public static final DeferredBlock<Block> CHROME_CORAL_FAN = BLOCKS.createBlockNoItem("chrome_coral_fan", () -> new CoralFanBlock(DEAD_CHROME_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY)));
+	public static final DeferredBlock<Block> PRISMARINE_CORAL_FAN = BLOCKS.createBlockNoItem("prismarine_coral_fan", () -> new CoralFanBlock(ELDER_PRISMARINE_CORAL_FAN.get(), UAProperties.createPrismarineCoral(false)));
 
-	public static final DeferredBlock<Block> ACAN_CORAL_FAN = BLOCKS.createStandingAndWallBlock("acan_coral_fan", () -> new CoralFanBlock(DEAD_ACAN_CORAL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_CYAN)), ACAN_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> FINGER_CORAL_FAN = BLOCKS.createStandingAndWallBlock("finger_coral_fan", () -> new CoralFanBlock(DEAD_FINGER_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_ORANGE)), FINGER_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> STAR_CORAL_FAN = BLOCKS.createStandingAndWallBlock("star_coral_fan", () -> new CoralFanBlock(DEAD_STAR_CORAL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_LIGHT_GREEN)), STAR_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> MOSS_CORAL_FAN = BLOCKS.createStandingAndWallBlock("moss_coral_fan", () -> new CoralFanBlock(DEAD_MOSS_CORAL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_GREEN)), MOSS_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> PETAL_CORAL_FAN = BLOCKS.createStandingAndWallBlock("petal_coral_fan", () -> new CoralFanBlock(DEAD_PETAL_CORAL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_LIGHT_BLUE)), PETAL_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> BRANCH_CORAL_FAN = BLOCKS.createStandingAndWallBlock("branch_coral_fan", () -> new CoralFanBlock(DEAD_BRANCH_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY)), BRANCH_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> ROCK_CORAL_FAN = BLOCKS.createStandingAndWallBlock("rock_coral_fan", () -> new CoralFanBlock(DEAD_ROCK_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_BROWN)), ROCK_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> PILLOW_CORAL_FAN = BLOCKS.createStandingAndWallBlock("pillow_coral_fan", () -> new CoralFanBlock(DEAD_PILLOW_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_WHITE)), PILLOW_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> SILK_CORAL_FAN = BLOCKS.createStandingAndWallBlock("silk_coral_fan", () -> new CoralFanBlock(DEAD_SILK_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_PURPLE)), SILK_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> CHROME_CORAL_FAN = BLOCKS.createStandingAndWallBlock("chrome_coral_fan", () -> new CoralFanBlock(DEAD_CHROME_CORAL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY)), CHROME_CORAL_WALL_FAN, Direction.DOWN);
-	public static final DeferredBlock<Block> PRISMARINE_CORAL_FAN = BLOCKS.createStandingAndWallBlock("prismarine_coral_fan", () -> new CoralFanBlock(ELDER_PRISMARINE_CORAL_FAN.get(), UAProperties.createPrismarineCoral(false)), PRISMARINE_CORAL_WALL_FAN, Direction.DOWN);
+	public static final DeferredBlock<Block> ACAN_CORAL_WALL_FAN = BLOCKS.createWallBlock("acan_coral_wall_fan", ACAN_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_ACAN_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_CYAN).lootFrom(() -> ACAN_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> FINGER_CORAL_WALL_FAN = BLOCKS.createWallBlock("finger_coral_wall_fan", FINGER_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_FINGER_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_ORANGE).lootFrom(() -> FINGER_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> STAR_CORAL_WALL_FAN = BLOCKS.createWallBlock("star_coral_wall_fan", STAR_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_STAR_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_LIGHT_GREEN).lootFrom(() -> STAR_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> MOSS_CORAL_WALL_FAN = BLOCKS.createWallBlock("moss_coral_wall_fan", MOSS_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_MOSS_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_GREEN).lootFrom(() -> MOSS_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> PETAL_CORAL_WALL_FAN = BLOCKS.createWallBlock("petal_coral_wall_fan", PETAL_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_PETAL_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.COLOR_LIGHT_BLUE).lootFrom(() -> PETAL_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> BRANCH_CORAL_WALL_FAN = BLOCKS.createWallBlock("branch_coral_wall_fan", BRANCH_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_BRANCH_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY).lootFrom(() -> BRANCH_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> ROCK_CORAL_WALL_FAN = BLOCKS.createWallBlock("rock_coral_wall_fan", ROCK_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_ROCK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_BROWN).lootFrom(() -> ROCK_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> PILLOW_CORAL_WALL_FAN = BLOCKS.createWallBlock("pillow_coral_wall_fan", PILLOW_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_PILLOW_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_WHITE).lootFrom(() -> PILLOW_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> SILK_CORAL_WALL_FAN = BLOCKS.createWallBlock("silk_coral_wall_fan", SILK_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_SILK_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_PURPLE).lootFrom(() -> SILK_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> CHROME_CORAL_WALL_FAN = BLOCKS.createWallBlock("chrome_coral_wall_fan", CHROME_CORAL_FAN, () -> new CoralWallFanBlock(DEAD_CHROME_CORAL_WALL_FAN.get(), UAProperties.createCoral(MapColor.TERRACOTTA_GRAY).lootFrom(() -> CHROME_CORAL_FAN.get())), Direction.DOWN);
+	public static final DeferredBlock<Block> PRISMARINE_CORAL_WALL_FAN = BLOCKS.createWallBlock("prismarine_coral_wall_fan", PRISMARINE_CORAL_FAN, () -> new CoralWallFanBlock(ELDER_PRISMARINE_CORAL_WALL_FAN.get(), UAProperties.createPrismarineCoral(false).lootFrom(() -> PRISMARINE_CORAL_FAN.get())), Direction.DOWN);
 
 	public static final DeferredBlock<Block> ELDER_PRISMARINE_CORAL_SHOWER = BLOCKS.createBlock("elder_prismarine_coral_shower", () -> new DeadCoralShowerBlock(UAProperties.createPrismarineCoral(true)));
 	public static final DeferredBlock<Block> PRISMARINE_CORAL_SHOWER = BLOCKS.createBlock("prismarine_coral_shower", () -> new CoralShowerBlock(ELDER_PRISMARINE_CORAL_SHOWER.get(), UAProperties.createPrismarineCoral(false)));
 
 	public static final DeferredBlock<Block> ELDER_EYE = BLOCKS.createBlockNoItem("elder_eye", () -> new ElderEyeBlock(UAProperties.ELDER_EYE));
 
-	public static final DeferredBlock<Block> PINK_JELLY_WALL_TORCH = BLOCKS.createBlockNoItem("pink_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PINK));
-	public static final DeferredBlock<Block> PURPLE_JELLY_WALL_TORCH = BLOCKS.createBlockNoItem("purple_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PURPLE));
-	public static final DeferredBlock<Block> BLUE_JELLY_WALL_TORCH = BLOCKS.createBlockNoItem("blue_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.BLUE));
-	public static final DeferredBlock<Block> GREEN_JELLY_WALL_TORCH = BLOCKS.createBlockNoItem("green_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.GREEN));
-	public static final DeferredBlock<Block> YELLOW_JELLY_WALL_TORCH = BLOCKS.createBlockNoItem("yellow_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.YELLOW));
-	public static final DeferredBlock<Block> ORANGE_JELLY_WALL_TORCH = BLOCKS.createBlockNoItem("orange_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.ORANGE));
-	public static final DeferredBlock<Block> RED_JELLY_WALL_TORCH = BLOCKS.createBlockNoItem("red_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.RED));
-	public static final DeferredBlock<Block> WHITE_JELLY_WALL_TORCH = BLOCKS.createBlockNoItem("white_jelly_wall_torch", () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.WHITE));
+	public static final DeferredBlock<Block> PINK_JELLY_TORCH = BLOCKS.createBlockNoItem("pink_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchType.PINK));
+	public static final DeferredBlock<Block> PURPLE_JELLY_TORCH = BLOCKS.createBlockNoItem("purple_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchType.PURPLE));
+	public static final DeferredBlock<Block> BLUE_JELLY_TORCH = BLOCKS.createBlockNoItem("blue_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchType.BLUE));
+	public static final DeferredBlock<Block> GREEN_JELLY_TORCH = BLOCKS.createBlockNoItem("green_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchType.GREEN));
+	public static final DeferredBlock<Block> YELLOW_JELLY_TORCH = BLOCKS.createBlockNoItem("yellow_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchType.YELLOW));
+	public static final DeferredBlock<Block> ORANGE_JELLY_TORCH = BLOCKS.createBlockNoItem("orange_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchType.ORANGE));
+	public static final DeferredBlock<Block> RED_JELLY_TORCH = BLOCKS.createBlockNoItem("red_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchType.RED));
+	public static final DeferredBlock<Block> WHITE_JELLY_TORCH = BLOCKS.createBlockNoItem("white_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchType.WHITE));
 
-	public static final DeferredBlock<Block> PINK_JELLY_TORCH = BLOCKS.createStandingAndWallBlock("pink_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PINK), PINK_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> PURPLE_JELLY_TORCH = BLOCKS.createStandingAndWallBlock("purple_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.PURPLE), PURPLE_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> BLUE_JELLY_TORCH = BLOCKS.createStandingAndWallBlock("blue_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.BLUE), BLUE_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> GREEN_JELLY_TORCH = BLOCKS.createStandingAndWallBlock("green_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.GREEN), GREEN_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> YELLOW_JELLY_TORCH = BLOCKS.createStandingAndWallBlock("yellow_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.YELLOW), YELLOW_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> ORANGE_JELLY_TORCH = BLOCKS.createStandingAndWallBlock("orange_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.ORANGE), ORANGE_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> RED_JELLY_TORCH = BLOCKS.createStandingAndWallBlock("red_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.RED), RED_JELLY_WALL_TORCH, Direction.DOWN);
-	public static final DeferredBlock<Block> WHITE_JELLY_TORCH = BLOCKS.createStandingAndWallBlock("white_jelly_torch", () -> new JellyTorchBlock(Properties.ofFullCopy(Blocks.TORCH).sound(SoundType.METAL), JellyTorchBlock.JellyTorchType.WHITE), WHITE_JELLY_WALL_TORCH, Direction.DOWN);
+	public static final DeferredBlock<Block> PINK_JELLY_WALL_TORCH = BLOCKS.createWallBlock("pink_jelly_wall_torch", PINK_JELLY_TORCH, () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.METAL).lootFrom(() -> PINK_JELLY_TORCH.get()), JellyTorchType.PINK), Direction.DOWN);
+	public static final DeferredBlock<Block> PURPLE_JELLY_WALL_TORCH = BLOCKS.createWallBlock("purple_jelly_wall_torch", PURPLE_JELLY_TORCH, () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.METAL).lootFrom(() -> PURPLE_JELLY_TORCH.get()), JellyTorchType.PURPLE), Direction.DOWN);
+	public static final DeferredBlock<Block> BLUE_JELLY_WALL_TORCH = BLOCKS.createWallBlock("blue_jelly_wall_torch", BLUE_JELLY_TORCH, () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.METAL).lootFrom(() -> BLUE_JELLY_TORCH.get()), JellyTorchType.BLUE), Direction.DOWN);
+	public static final DeferredBlock<Block> GREEN_JELLY_WALL_TORCH = BLOCKS.createWallBlock("green_jelly_wall_torch", GREEN_JELLY_TORCH, () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.METAL).lootFrom(() -> GREEN_JELLY_TORCH.get()), JellyTorchType.GREEN), Direction.DOWN);
+	public static final DeferredBlock<Block> YELLOW_JELLY_WALL_TORCH = BLOCKS.createWallBlock("yellow_jelly_wall_torch", YELLOW_JELLY_TORCH, () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.METAL).lootFrom(() -> YELLOW_JELLY_TORCH.get()), JellyTorchType.YELLOW), Direction.DOWN);
+	public static final DeferredBlock<Block> ORANGE_JELLY_WALL_TORCH = BLOCKS.createWallBlock("orange_jelly_wall_torch", ORANGE_JELLY_TORCH, () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.METAL).lootFrom(() -> ORANGE_JELLY_TORCH.get()), JellyTorchType.ORANGE), Direction.DOWN);
+	public static final DeferredBlock<Block> RED_JELLY_WALL_TORCH = BLOCKS.createWallBlock("red_jelly_wall_torch", RED_JELLY_TORCH, () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.METAL).lootFrom(() -> RED_JELLY_TORCH.get()), JellyTorchType.RED), Direction.DOWN);
+	public static final DeferredBlock<Block> WHITE_JELLY_WALL_TORCH = BLOCKS.createWallBlock("white_jelly_wall_torch", WHITE_JELLY_TORCH, () -> new JellyWallTorchBlock(Properties.ofFullCopy(Blocks.WALL_TORCH).sound(SoundType.METAL).lootFrom(() -> WHITE_JELLY_TORCH.get()), JellyTorchType.WHITE), Direction.DOWN);
 
 	public static final DeferredBlock<Block> CORALSTONE = BLOCKS.createBlock("coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false));
 	public static final DeferredBlock<Block> BUBBLE_CORALSTONE = BLOCKS.createBlock("bubble_coralstone", () -> new CoralstoneBlock(UAProperties.CORALSTONE, false, new Block[]{Blocks.BUBBLE_CORAL, Blocks.BUBBLE_CORAL_FAN, Blocks.BUBBLE_CORAL_WALL_FAN}));
@@ -508,7 +511,10 @@ public class UABlocks {
 
 		public static final BlockBehaviour.Properties DEAD_CORAL_BLOCK = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().strength(1.5F, 6.0F);
 		public static final BlockBehaviour.Properties DEAD_CORAL = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().instabreak();
-		public static final BlockBehaviour.Properties DEAD_CORAL_FAN = BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().instabreak();
+
+		public static BlockBehaviour.Properties deadCoralWallFan(Supplier<? extends Block> deadCoralFan) {
+			return BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).forceSolidOn().instrument(NoteBlockInstrument.BASEDRUM).requiresCorrectToolForDrops().noCollission().instabreak().lootFrom(deadCoralFan);
+		}
 
 		public static final BlockBehaviour.Properties LUMINOUS_PRISMARINE = BlockBehaviour.Properties.of().mapColor(MapColor.DIAMOND).strength(1.5F, 6.0F).lightLevel((unknown) -> (8)).hasPostProcess(PropertyUtil::always).emissiveRendering(PropertyUtil::always);
 

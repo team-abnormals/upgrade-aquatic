@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "upgrade_aquatic:flowering_rush",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
+          "name": "upgrade_aquatic:flowering_rush"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "upgrade_aquatic:blocks/flowering_rush"
+}
