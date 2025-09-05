@@ -1,4 +1,45 @@
 {
   "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "upgrade_aquatic:thrasher_tooth"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance_with_enchanted_bonus",
+          "enchanted_chance": {
+            "type": "minecraft:linear",
+            "base": 0.4,
+            "per_level_above_first": 0.2
+          },
+          "enchantment": "minecraft:looting",
+          "unenchanted_chance": 0.2
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "upgrade_aquatic:thrasher_tooth"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
   "random_sequence": "upgrade_aquatic:entities/thrasher"
 }

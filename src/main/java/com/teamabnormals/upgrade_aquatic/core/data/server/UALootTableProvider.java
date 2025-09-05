@@ -1,7 +1,6 @@
 package com.teamabnormals.upgrade_aquatic.core.data.server;
 
 import com.google.common.collect.ImmutableList;
-import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
@@ -448,9 +447,17 @@ public class UALootTableProvider extends LootTableProvider {
 					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(UAItems.LIONFISH.get()).apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))))
 					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.BONE_MEAL)).when(LootItemRandomChanceCondition.randomChance(0.05F))));
 
-			this.add(UAEntityTypes.THRASHER.get(), LootTable.lootTable());
-			this.add(UAEntityTypes.GREAT_THRASHER.get(), LootTable.lootTable());
-			this.add(UAEntityTypes.NAUTILUS.get(), LootTable.lootTable());
+			this.add(UAEntityTypes.THRASHER.get(), LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(UAItems.THRASHER_TOOTH.get()).apply(SetItemCountFunction.setCount(ConstantValue.exactly(1.0F)))))
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(UAItems.THRASHER_TOOTH.get())).when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.2F, 0.2F))));
+
+			this.add(UAEntityTypes.GREAT_THRASHER.get(), LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(UAItems.THRASHER_TOOTH.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))))
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(UAItems.THRASHER_TOOTH.get())).when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.2F, 0.2F)))
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(UAItems.DISC_FRAGMENT_ATLANTIS)).apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))).apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.registries, UniformGenerator.between(0.0F, 1.0F))).when(LootItemRandomChanceCondition.randomChance(0.33F))));
+
+			this.add(UAEntityTypes.NAUTILUS.get(), LootTable.lootTable()
+					.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(Items.NAUTILUS_SHELL)).when(LootItemRandomChanceWithEnchantedBonusCondition.randomChanceAndLootingBoost(this.registries, 0.5F, 0.15F))));
 
 			this.add(UAEntityTypes.GOOSE.get(), LootTable.lootTable());
 
