@@ -100,8 +100,7 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 			level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
 			level.setBlock(pos, state.setValue(AGE, 1), 2);
 
-			if (player instanceof ServerPlayer && player.isAlive()) {
-				ServerPlayer serverPlayer = (ServerPlayer) player;
+			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
 				if (!player.level().isClientSide()) {
 					UACriteriaTriggers.PICK_MULBERRIES.get().trigger(serverPlayer);
 				}

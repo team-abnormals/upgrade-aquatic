@@ -53,6 +53,7 @@ public class UpgradeAquatic {
 		UAWorldCarvers.WORLD_CARVERS.register(bus);
 		UAParticleTypes.PARTICLES.register(bus);
 		UADataSerializers.SERIALIZERS.register(bus);
+		UAItemSubPredicates.ITEM_SUB_PREDICATES.register(bus);
 		UABiomeModifierTypes.BIOME_MODIFIER_SERIALIZERS.register(bus);
 		UAConditionSerializers.CONDITION_SERIALIZERS.register(bus);
 		UAFeatures.TREE_DECORATORS.register(bus);
@@ -102,6 +103,7 @@ public class UpgradeAquatic {
 		generator.addProvider(server, new UARecipeProvider(output, provider));
 		generator.addProvider(server, new UADataMapProvider(output, provider));
 		generator.addProvider(server, new UALootTableProvider(output, provider));
+		generator.addProvider(server, UAAdvancementProvider.create(output, provider, helper));
 
 		boolean client = event.includeClient();
 		generator.addProvider(client, new UABlockStateProvider(output, helper));

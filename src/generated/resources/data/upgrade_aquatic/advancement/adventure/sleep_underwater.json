@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:adventure/sleep_in_bed",
+  "criteria": {
+    "sleep_underwater": {
+      "trigger": "upgrade_aquatic:sleep_underwater"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.upgrade_aquatic.adventure.sleep_underwater.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "upgrade_aquatic:bedroll"
+    },
+    "title": {
+      "translate": "advancements.upgrade_aquatic.adventure.sleep_underwater.title"
+    }
+  },
+  "requirements": [
+    [
+      "sleep_underwater"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

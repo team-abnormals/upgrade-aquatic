@@ -1,0 +1,399 @@
+{
+  "parent": "minecraft:husbandry/tactical_fishing",
+  "criteria": {
+    "upgrade_aquatic:amur": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:amur"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:black_southern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:black_southern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:brown_northern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:brown_northern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:chain_pickerel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:chain_pickerel"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:ebony_southern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:ebony_southern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:golden_southern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:golden_southern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:grass_pickerel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:grass_pickerel"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:jade_northern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:jade_northern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:lemon_southern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:lemon_southern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:mahogany_northern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:mahogany_northern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:muskellunge": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:muskellunge"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:mustard_southern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:mustard_southern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:obsidian": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:obsidian"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:olive_northern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:olive_northern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:redfin_pickerel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:redfin_pickerel"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:spectral": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:spectral"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:spotted_brown_northern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:spotted_brown_northern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:spotted_jade_northern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:spotted_jade_northern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:spotted_mahogany_northern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:spotted_mahogany_northern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:spotted_olive_northern": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:spotted_olive_northern"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "upgrade_aquatic:supercharged": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:pike_bucket",
+            "predicates": {
+              "upgrade_aquatic:bucket_entity_data": {
+                "BucketVariantTag": "upgrade_aquatic:supercharged"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.upgrade_aquatic.husbandry.collect_all_pike.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "upgrade_aquatic:pike_bucket"
+    },
+    "title": {
+      "translate": "advancements.upgrade_aquatic.husbandry.collect_all_pike.title"
+    }
+  },
+  "requirements": [
+    [
+      "upgrade_aquatic:mustard_southern"
+    ],
+    [
+      "upgrade_aquatic:spotted_olive_northern"
+    ],
+    [
+      "upgrade_aquatic:obsidian"
+    ],
+    [
+      "upgrade_aquatic:spectral"
+    ],
+    [
+      "upgrade_aquatic:grass_pickerel"
+    ],
+    [
+      "upgrade_aquatic:chain_pickerel"
+    ],
+    [
+      "upgrade_aquatic:amur"
+    ],
+    [
+      "upgrade_aquatic:olive_northern"
+    ],
+    [
+      "upgrade_aquatic:jade_northern"
+    ],
+    [
+      "upgrade_aquatic:golden_southern"
+    ],
+    [
+      "upgrade_aquatic:black_southern"
+    ],
+    [
+      "upgrade_aquatic:supercharged"
+    ],
+    [
+      "upgrade_aquatic:lemon_southern"
+    ],
+    [
+      "upgrade_aquatic:spotted_brown_northern"
+    ],
+    [
+      "upgrade_aquatic:muskellunge"
+    ],
+    [
+      "upgrade_aquatic:mahogany_northern"
+    ],
+    [
+      "upgrade_aquatic:spotted_jade_northern"
+    ],
+    [
+      "upgrade_aquatic:redfin_pickerel"
+    ],
+    [
+      "upgrade_aquatic:brown_northern"
+    ],
+    [
+      "upgrade_aquatic:spotted_mahogany_northern"
+    ],
+    [
+      "upgrade_aquatic:ebony_southern"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

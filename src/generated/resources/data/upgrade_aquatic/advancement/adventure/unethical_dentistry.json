@@ -1,0 +1,178 @@
+{
+  "parent": "upgrade_aquatic:adventure/tooth_fairy",
+  "criteria": {
+    "upgrade_aquatic:chiseled_tooth_bricks": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:chiseled_tooth_bricks",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_block": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_block",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_brick_slab": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_brick_slab",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_brick_stairs": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_brick_stairs",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_brick_wall": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_brick_wall",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_bricks": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_bricks",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_door": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_door",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_lantern": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_lantern",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_slab": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_slab",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_stairs": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_stairs",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_tiles": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_tiles",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_trapdoor": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_trapdoor",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    },
+    "upgrade_aquatic:tooth_wall": {
+      "conditions": {
+        "location": [
+          {
+            "block": "upgrade_aquatic:tooth_wall",
+            "condition": "minecraft:block_state_property"
+          }
+        ]
+      },
+      "trigger": "minecraft:placed_block"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.upgrade_aquatic.adventure.unethical_dentistry.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "upgrade_aquatic:tooth_block"
+    },
+    "title": {
+      "translate": "advancements.upgrade_aquatic.adventure.unethical_dentistry.title"
+    }
+  },
+  "requirements": [
+    [
+      "upgrade_aquatic:tooth_block",
+      "upgrade_aquatic:tooth_bricks",
+      "upgrade_aquatic:tooth_brick_stairs",
+      "upgrade_aquatic:tooth_brick_slab",
+      "upgrade_aquatic:tooth_brick_wall",
+      "upgrade_aquatic:tooth_tiles",
+      "upgrade_aquatic:tooth_stairs",
+      "upgrade_aquatic:tooth_slab",
+      "upgrade_aquatic:tooth_wall",
+      "upgrade_aquatic:chiseled_tooth_bricks",
+      "upgrade_aquatic:tooth_door",
+      "upgrade_aquatic:tooth_trapdoor",
+      "upgrade_aquatic:tooth_lantern"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

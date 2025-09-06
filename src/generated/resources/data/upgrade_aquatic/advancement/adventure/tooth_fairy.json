@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:adventure/kill_a_mob",
+  "criteria": {
+    "thrasher_tooth": {
+      "conditions": {
+        "items": [
+          {
+            "items": "upgrade_aquatic:thrasher_tooth"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.upgrade_aquatic.adventure.tooth_fairy.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "upgrade_aquatic:thrasher_tooth"
+    },
+    "title": {
+      "translate": "advancements.upgrade_aquatic.adventure.tooth_fairy.title"
+    }
+  },
+  "requirements": [
+    [
+      "thrasher_tooth"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

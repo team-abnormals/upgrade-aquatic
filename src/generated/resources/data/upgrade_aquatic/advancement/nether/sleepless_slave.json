@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:nether/brew_potion",
+  "criteria": {
+    "convert_phantom": {
+      "trigger": "upgrade_aquatic:convert_phantom"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.upgrade_aquatic.nether.sleepless_slave.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "upgrade_aquatic:insomnia"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:splash_potion"
+    },
+    "title": {
+      "translate": "advancements.upgrade_aquatic.nether.sleepless_slave.title"
+    }
+  },
+  "requirements": [
+    [
+      "convert_phantom"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

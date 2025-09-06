@@ -1,0 +1,31 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "criteria": {
+    "eat_pickerelweed": {
+      "conditions": {
+        "item": {
+          "items": "upgrade_aquatic:boiled_pickerelweed"
+        }
+      },
+      "trigger": "minecraft:consume_item"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.upgrade_aquatic.husbandry.eat_pickerelweed.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "upgrade_aquatic:boiled_pickerelweed"
+    },
+    "title": {
+      "translate": "advancements.upgrade_aquatic.husbandry.eat_pickerelweed.title"
+    }
+  },
+  "requirements": [
+    [
+      "eat_pickerelweed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

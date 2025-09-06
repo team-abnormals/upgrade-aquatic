@@ -1,0 +1,38 @@
+{
+  "parent": "upgrade_aquatic:adventure/tooth_fairy",
+  "criteria": {
+    "great_thrasher": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "upgrade_aquatic:great_thrasher"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.upgrade_aquatic.adventure.kill_great_thrasher.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "upgrade_aquatic:thrasher_tooth"
+    },
+    "title": {
+      "translate": "advancements.upgrade_aquatic.adventure.kill_great_thrasher.title"
+    }
+  },
+  "requirements": [
+    [
+      "great_thrasher"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

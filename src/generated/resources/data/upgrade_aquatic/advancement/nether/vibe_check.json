@@ -1,0 +1,72 @@
+{
+  "parent": "minecraft:nether/brew_potion",
+  "criteria": {
+    "vibing": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "minecraft:potion_contents": {
+                "potion": "upgrade_aquatic:vibing"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "vibing_long": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "minecraft:potion_contents": {
+                "potion": "upgrade_aquatic:vibing_long"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "vibing_strong": {
+      "conditions": {
+        "items": [
+          {
+            "components": {
+              "minecraft:potion_contents": {
+                "potion": "upgrade_aquatic:vibing_strong"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.upgrade_aquatic.nether.vibe_check.description"
+    },
+    "icon": {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "upgrade_aquatic:vibing"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:lingering_potion"
+    },
+    "title": {
+      "translate": "advancements.upgrade_aquatic.nether.vibe_check.title"
+    }
+  },
+  "requirements": [
+    [
+      "vibing",
+      "vibing_long",
+      "vibing_strong"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
