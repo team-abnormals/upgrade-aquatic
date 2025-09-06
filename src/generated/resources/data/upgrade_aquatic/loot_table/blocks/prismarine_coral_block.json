@@ -30,12 +30,36 @@
             },
             {
               "type": "minecraft:item",
-              "conditions": [
+              "functions": [
                 {
-                  "condition": "minecraft:survives_explosion"
+                  "add": false,
+                  "count": {
+                    "type": "minecraft:uniform",
+                    "max": 4.0,
+                    "min": 2.0
+                  },
+                  "function": "minecraft:set_count"
+                },
+                {
+                  "enchantment": "minecraft:fortune",
+                  "formula": "minecraft:uniform_bonus_count",
+                  "function": "minecraft:apply_bonus",
+                  "parameters": {
+                    "bonusMultiplier": 1
+                  }
+                },
+                {
+                  "function": "minecraft:limit_count",
+                  "limit": {
+                    "max": 4.0,
+                    "min": 1.0
+                  }
+                },
+                {
+                  "function": "minecraft:explosion_decay"
                 }
               ],
-              "name": "upgrade_aquatic:elder_prismarine_coral_block"
+              "name": "minecraft:prismarine_shard"
             }
           ]
         }

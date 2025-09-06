@@ -1,4 +1,35 @@
 {
   "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "upgrade_aquatic:mulberry_vine",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "double": "true"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "upgrade_aquatic:mulberry"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
   "random_sequence": "upgrade_aquatic:blocks/mulberry_vine"
 }

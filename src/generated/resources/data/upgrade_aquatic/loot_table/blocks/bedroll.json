@@ -1,4 +1,39 @@
 {
   "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "upgrade_aquatic:bedroll",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "head"
+              }
+            }
+          ],
+          "functions": [
+            {
+              "function": "minecraft:copy_components",
+              "include": [
+                "minecraft:dyed_color"
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "upgrade_aquatic:bedroll"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
   "random_sequence": "upgrade_aquatic:blocks/bedroll"
 }

@@ -1,14 +1,23 @@
 package com.teamabnormals.upgrade_aquatic.core.data.server;
 
 import com.google.common.collect.ImmutableList;
+import com.teamabnormals.upgrade_aquatic.common.block.BedrollBlock;
+import com.teamabnormals.upgrade_aquatic.common.block.MulberryVineBlock;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAEntityTypes;
 import com.teamabnormals.upgrade_aquatic.core.registry.UAItems;
+import net.minecraft.advancements.critereon.BlockPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.LocationPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.HolderLookup.RegistryLookup;
 import net.minecraft.core.WritableRegistry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.data.loot.EntityLootSubProvider;
@@ -18,22 +27,21 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.LootTable.Builder;
-import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
+import net.minecraft.world.level.storage.loot.functions.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -393,18 +401,49 @@ public class UALootTableProvider extends LootTableProvider {
 			this.dropPottedContents(POTTED_PINK_SEAROCKET.get());
 			this.add(FLOWERING_RUSH.get(), block -> this.createSinglePropConditionTable(block, DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
 
-			this.add(BEACHGRASS.get(), noDrop());
-			this.add(TALL_BEACHGRASS.get(), noDrop());
-			this.add(BEDROLL.get(), noDrop());
-			this.add(MULBERRY_VINE.get(), noDrop());
-			this.add(PRISMARINE_CORAL_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, ELDER_PRISMARINE_CORAL_BLOCK));
-			this.dropWhenSilkTouch(PRISMARINE_CORAL.get());
-			this.dropWhenSilkTouch(PRISMARINE_CORAL_FAN.get());
-			this.dropWhenSilkTouch(PRISMARINE_CORAL_SHOWER.get());
+			this.add(BEACHGRASS.get(), this::createBeachgrassDrops);
+			this.add(TALL_BEACHGRASS.get(), block -> this.createTallBeachGrassDrops(block, TALL_BEACHGRASS.get()));
+			this.add(BEDROLL.get(), this::createBedrollTable);
+			this.add(MULBERRY_VINE.get(), this::createMulberryVineTable);
+
+			RegistryLookup<Enchantment> enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+			this.add(PRISMARINE_CORAL_BLOCK.get(), block -> this.createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_SHARD)
+					.apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+					.apply(ApplyBonusCount.addUniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).apply(LimitCount.limitCount(IntRange.range(1, 4))))));
+
+			this.add(PRISMARINE_CORAL.get(), block -> this.createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_SHARD)
+					.apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+					.apply(ApplyBonusCount.addUniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).apply(LimitCount.limitCount(IntRange.range(1, 4))))));
+
+			this.add(PRISMARINE_CORAL_FAN.get(), block -> this.createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_SHARD)
+					.apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+					.apply(ApplyBonusCount.addUniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).apply(LimitCount.limitCount(IntRange.range(1, 4))))));
+
+			this.add(PRISMARINE_CORAL_SHOWER.get(), block -> this.createSilkTouchDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.PRISMARINE_SHARD)
+					.apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+					.apply(ApplyBonusCount.addUniformBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE))).apply(LimitCount.limitCount(IntRange.range(1, 4))))));
+		}
+
+		protected LootTable.Builder createBedrollTable(Block block) {
+			return LootTable.lootTable().withPool(this.applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block).apply(CopyComponentsFunction.copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY).include(DataComponents.DYED_COLOR)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(BedrollBlock.PART, BedPart.HEAD))))));
 		}
 
 		protected Builder createLeafPileDrops(Block block) {
 			return createMultifaceBlockDrops(block, MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.TOOLS_SHEAR)));
+		}
+
+		protected LootTable.Builder createBeachgrassDrops(Block block) {
+			HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+			return this.createShearsDispatchTable(block, this.applyExplosionDecay(block, LootItem.lootTableItem(Items.BEETROOT_SEEDS)
+					.when(LootItemRandomChanceCondition.randomChance(0.125F))
+					.apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 2))));
+		}
+
+		protected LootTable.Builder createTallBeachGrassDrops(Block block, Block sheared) {
+			LootPoolEntryContainer.Builder<?> builder = LootItem.lootTableItem(sheared).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))).when(HAS_SHEARS).otherwise((this.applyExplosionCondition(block, LootItem.lootTableItem(Items.BEETROOT_SEEDS))).when(LootItemRandomChanceCondition.randomChance(0.125F)));
+			return LootTable.lootTable()
+					.withPool(LootPool.lootPool().add(builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))), new BlockPos(0, 1, 0))))
+					.withPool(LootPool.lootPool().add(builder).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER))).when(LocationCheck.checkLocation(LocationPredicate.Builder.location().setBlock(BlockPredicate.Builder.block().of(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER))), new BlockPos(0, -1, 0))));
 		}
 
 		protected LootTable.Builder createCoralstoneSlabTable(Block block, Block deadBlock) {
@@ -417,6 +456,10 @@ public class UALootTableProvider extends LootTableProvider {
 							)
 					)
 			);
+		}
+
+		protected LootTable.Builder createMulberryVineTable(Block block) {
+			return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(this.applyExplosionDecay(block, LootItem.lootTableItem(block).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F)).when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(MulberryVineBlock.DOUBLE, true)))))));
 		}
 
 		@Override
