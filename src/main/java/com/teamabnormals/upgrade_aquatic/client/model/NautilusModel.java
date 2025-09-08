@@ -20,7 +20,6 @@ import net.neoforged.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class NautilusModel<T extends Nautilus> extends EntityModel<T> {
-	public static final float SCALE = 0.6F;
 
 	public ModelPart shell;
 	public ModelPart head;
@@ -45,7 +44,7 @@ public class NautilusModel<T extends Nautilus> extends EntityModel<T> {
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition root = meshdefinition.getRoot();
-		PartDefinition shell = root.addOrReplaceChild("shell", CubeListBuilder.create().texOffs(28, 14).addBox(-3.0F, -6.0F, -6.0F, 6.0F, 6.0F, 12.0F, false), PartPose.offsetAndRotation(0.0F, 30.0F, 0.0F, 0.08726646F, 0.0F, 0.0F));
+		PartDefinition shell = root.addOrReplaceChild("shell", CubeListBuilder.create().texOffs(28, 14).addBox(-3.0F, -6.0F, -6.0F, 6.0F, 6.0F, 12.0F, false), PartPose.offsetAndRotation(0.0F, 20.0F, 0.0F, 0.08726646F, 0.0F, 0.0F));
 		PartDefinition Shell2 = shell.addOrReplaceChild("Shell2", CubeListBuilder.create().texOffs(0, 18).addBox(-3.0F, 0.0F, -3.0F, 6.0F, 6.0F, 8.0F, false), PartPose.offsetAndRotation(0.0F, 0.0F, -3.0F, 0.0F, 0.0F, 0.0F));
 		PartDefinition head = shell.addOrReplaceChild("head", CubeListBuilder.create().texOffs(15, 0).addBox(-2.5F, -2.5F, -2.5F, 5.0F, 5.0F, 5.0F, false), PartPose.offsetAndRotation(0.0F, 3.1F, 4.0F, -0.1308997F, 0.0F, 0.0F));
 		PartDefinition hood = head.addOrReplaceChild("hood", CubeListBuilder.create().texOffs(35, 0).addBox(-3.5F, -0.5F, 0.0F, 7.0F, 1.0F, 7.0F, false), PartPose.offsetAndRotation(0.0F, -3.0F, -3.5F, 0.0F, 0.0F, 0.0F));
@@ -58,10 +57,7 @@ public class NautilusModel<T extends Nautilus> extends EntityModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack matrixStack, VertexConsumer bufferIn, int packedLightIn, int packedOverlayIn, int color) {
-		matrixStack.pushPose();
-		matrixStack.scale(SCALE, SCALE, SCALE);
 		this.shell.render(matrixStack, bufferIn, packedLightIn, packedOverlayIn, color);
-		matrixStack.popPose();
 	}
 
 	@Override

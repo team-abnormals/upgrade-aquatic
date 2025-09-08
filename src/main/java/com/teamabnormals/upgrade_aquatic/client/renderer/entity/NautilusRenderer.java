@@ -31,7 +31,7 @@ public class NautilusRenderer extends MobRenderer<Nautilus, NautilusModel<Nautil
 	});
 
 	public NautilusRenderer(EntityRendererProvider.Context context) {
-		super(context, new NautilusModel<>(context.bakeLayer(UAModelLayers.NAUTILUS)), 0.25F);
+		super(context, new NautilusModel<>(context.bakeLayer(UAModelLayers.NAUTILUS)), 0.5F);
 	}
 
 	@Override

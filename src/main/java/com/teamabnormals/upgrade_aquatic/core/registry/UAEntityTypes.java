@@ -31,7 +31,7 @@ public class UAEntityTypes {
 	public static final DeferredHolder<EntityType<?>, EntityType<SonarWave>> SONAR_WAVE = ENTITY_TYPES.createEntity("sonar_wave", SonarWave::new, MobCategory.MISC, builder -> builder
 			.sized(1.0F, 1.0F).clientTrackingRange(4).updateInterval(10));
 	public static final DeferredHolder<EntityType<?>, EntityType<Nautilus>> NAUTILUS = ENTITY_TYPES.createEntity("nautilus", Nautilus::new, MobCategory.WATER_AMBIENT, builder -> builder
-			.sized(0.5F, 0.5F).eyeHeight(0.325F).clientTrackingRange(8));
+			.sized(0.6F, 0.6F).eyeHeight(0.325F).clientTrackingRange(8));
 	public static final DeferredHolder<EntityType<?>, EntityType<Pike>> PIKE = ENTITY_TYPES.createEntity("pike", Pike::new, MobCategory.WATER_AMBIENT, builder -> builder
 			.sized(0.7F, 0.4F).eyeHeight(0.25F).clientTrackingRange(8));
 	public static final DeferredHolder<EntityType<?>, EntityType<Perch>> PERCH = ENTITY_TYPES.createEntity("perch", Perch::new, MobCategory.WATER_AMBIENT, builder -> builder
