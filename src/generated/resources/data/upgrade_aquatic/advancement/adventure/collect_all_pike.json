@@ -332,67 +332,67 @@
   },
   "requirements": [
     [
-      "upgrade_aquatic:mustard_southern"
-    ],
-    [
-      "upgrade_aquatic:spotted_olive_northern"
-    ],
-    [
-      "upgrade_aquatic:obsidian"
-    ],
-    [
-      "upgrade_aquatic:spectral"
-    ],
-    [
-      "upgrade_aquatic:grass_pickerel"
-    ],
-    [
-      "upgrade_aquatic:chain_pickerel"
-    ],
-    [
       "upgrade_aquatic:amur"
-    ],
-    [
-      "upgrade_aquatic:olive_northern"
-    ],
-    [
-      "upgrade_aquatic:jade_northern"
-    ],
-    [
-      "upgrade_aquatic:golden_southern"
     ],
     [
       "upgrade_aquatic:black_southern"
     ],
     [
-      "upgrade_aquatic:supercharged"
+      "upgrade_aquatic:brown_northern"
+    ],
+    [
+      "upgrade_aquatic:chain_pickerel"
+    ],
+    [
+      "upgrade_aquatic:ebony_southern"
+    ],
+    [
+      "upgrade_aquatic:golden_southern"
+    ],
+    [
+      "upgrade_aquatic:grass_pickerel"
+    ],
+    [
+      "upgrade_aquatic:jade_northern"
     ],
     [
       "upgrade_aquatic:lemon_southern"
     ],
     [
-      "upgrade_aquatic:spotted_brown_northern"
+      "upgrade_aquatic:mahogany_northern"
     ],
     [
       "upgrade_aquatic:muskellunge"
     ],
     [
-      "upgrade_aquatic:mahogany_northern"
+      "upgrade_aquatic:mustard_southern"
     ],
     [
-      "upgrade_aquatic:spotted_jade_northern"
+      "upgrade_aquatic:obsidian"
+    ],
+    [
+      "upgrade_aquatic:olive_northern"
     ],
     [
       "upgrade_aquatic:redfin_pickerel"
     ],
     [
-      "upgrade_aquatic:brown_northern"
+      "upgrade_aquatic:spectral"
+    ],
+    [
+      "upgrade_aquatic:spotted_brown_northern"
+    ],
+    [
+      "upgrade_aquatic:spotted_jade_northern"
     ],
     [
       "upgrade_aquatic:spotted_mahogany_northern"
     ],
     [
-      "upgrade_aquatic:ebony_southern"
+      "upgrade_aquatic:spotted_olive_northern"
+    ],
+    [
+      "upgrade_aquatic:supercharged"
     ]
   ],
   "sends_telemetry_event": true

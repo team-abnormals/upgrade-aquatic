@@ -4,6 +4,7 @@ import com.teamabnormals.blueprint.core.util.TagUtil;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class UAItemTags {
 	public static final TagKey<Item> DRIFTWOOD_LOGS = itemTag("driftwood_logs");
@@ -50,6 +51,11 @@ public class UAItemTags {
 	public static final TagKey<Item> FOODS_COOKED_PERCH = TagUtil.itemTag("c", "foods/cooked_perch");
 	public static final TagKey<Item> FOODS_COOKED_LIONFISH = TagUtil.itemTag("c", "foods/cooked_lionfish");
 	public static final TagKey<Item> RODS_PRISMARINE = TagUtil.itemTag("c", "rods/prismarine");
+
+	public static final TagKey<Item> STORAGE_BLOCKS_PRISMARINE_ROD = TagUtil.itemTag("c", "storage_blocks/prismarine_rod");
+	public static final TagKey<Item> STORAGE_BLOCKS_PICKERELWEED = TagUtil.itemTag("c", "storage_blocks/pickerelweed");
+	public static final TagKey<Item> STORAGE_BLOCKS_KELP = TagUtil.itemTag("c", "storage_blocks/kelp");
+	public static final TagKey<Item> STORAGE_BLOCKS_MULBERRY = TagUtil.itemTag("c", "storage_blocks/mulberry");
 
 	private static TagKey<Item> itemTag(String name) {
 		return TagUtil.itemTag(UpgradeAquatic.MOD_ID, name);

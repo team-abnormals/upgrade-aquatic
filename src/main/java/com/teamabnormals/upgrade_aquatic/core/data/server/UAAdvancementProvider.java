@@ -82,7 +82,7 @@ public class UAAdvancementProvider implements AdvancementGenerator {
 		lingeringPotion.set(DataComponents.BUCKET_ENTITY_DATA, CustomData.of(nbt));
 
 		Advancement.Builder collectAllPike = createAdvancement("collect_all_pike", "husbandry", ResourceLocation.withDefaultNamespace("husbandry/tactical_fishing"), bucket, AdvancementType.CHALLENGE, true, true, false);
-		for (ResourceKey<PikeVariant> variant : provider.lookupOrThrow(UARegistries.PIKE_VARIANT).listElementIds().toList()) {
+		for (ResourceKey<PikeVariant> variant : provider.lookupOrThrow(UARegistries.PIKE_VARIANT).listElementIds().toList().stream().sorted().toList()) {
 			CompoundTag tag = new CompoundTag();
 			tag.putString("BucketVariantTag", variant.location().toString());
 			collectAllPike.addCriterion(variant.location().toString(), InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item()

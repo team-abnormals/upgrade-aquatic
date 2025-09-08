@@ -3,7 +3,6 @@ package com.teamabnormals.upgrade_aquatic.core.data.server.tags;
 import com.teamabnormals.blueprint.core.other.tags.BlueprintBlockTags;
 import com.teamabnormals.upgrade_aquatic.common.block.CoralType;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
-import com.teamabnormals.upgrade_aquatic.core.other.tags.UABlockTags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -19,6 +18,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
+import static com.teamabnormals.upgrade_aquatic.core.other.tags.UABlockTags.*;
 import static com.teamabnormals.upgrade_aquatic.core.registry.UABlocks.*;
 
 public class UABlockTagsProvider extends BlockTagsProvider {
@@ -56,7 +56,7 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlockTags.FLOWER_POTS, is(FlowerPotBlock.class));
 
 		this.tag(BlockTags.PLANKS).add(DRIFTWOOD_PLANKS.get(), RIVER_PLANKS.get());
-		this.tag(BlockTags.LOGS_THAT_BURN).addTag(UABlockTags.DRIFTWOOD_LOGS).addTag(UABlockTags.RIVER_LOGS);
+		this.tag(BlockTags.LOGS_THAT_BURN).addTag(DRIFTWOOD_LOGS).addTag(RIVER_LOGS);
 		this.tag(BlockTags.WOODEN_FENCES).add(DRIFTWOOD_FENCE.get(), RIVER_FENCE.get());
 		this.tag(BlockTags.FENCE_GATES).add(DRIFTWOOD_FENCE_GATE.get(), RIVER_FENCE_GATE.get());
 		this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(DRIFTWOOD_FENCE_GATE.get(), RIVER_FENCE_GATE.get());
@@ -75,10 +75,10 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 
 		this.tag(BlockTags.REPLACEABLE).add(BEACHGRASS.get(), TALL_BEACHGRASS.get());
 
-		this.tag(UABlockTags.DRIFTWOOD_LOGS).add(DRIFTWOOD_LOG.get(), DRIFTWOOD.get(), STRIPPED_DRIFTWOOD_LOG.get(), STRIPPED_DRIFTWOOD.get());
-		this.tag(UABlockTags.RIVER_LOGS).add(RIVER_LOG.get(), RIVER_WOOD.get(), STRIPPED_RIVER_LOG.get(), STRIPPED_RIVER_WOOD.get());
-		this.tag(UABlockTags.PIKE_SPAWNERS).add(PICKERELWEED.get(), TALL_PICKERELWEED.get());
-		this.tag(UABlockTags.PICKERELWEED_PLACEABLE).addTag(BlockTags.DIRT).add(Blocks.CLAY, Blocks.FARMLAND);
+		this.tag(DRIFTWOOD_LOGS).add(DRIFTWOOD_LOG.get(), DRIFTWOOD.get(), STRIPPED_DRIFTWOOD_LOG.get(), STRIPPED_DRIFTWOOD.get());
+		this.tag(RIVER_LOGS).add(RIVER_LOG.get(), RIVER_WOOD.get(), STRIPPED_RIVER_LOG.get(), STRIPPED_RIVER_WOOD.get());
+		this.tag(PIKE_SPAWNERS).add(PICKERELWEED.get(), TALL_PICKERELWEED.get());
+		this.tag(PICKERELWEED_PLACEABLE).addTag(BlockTags.DIRT).add(Blocks.CLAY, Blocks.FARMLAND);
 
 		this.tag(BlueprintBlockTags.WOODEN_BOARDS).add(DRIFTWOOD_BOARDS.get(), RIVER_BOARDS.get());
 		this.tag(BlueprintBlockTags.WOODEN_CHESTS).add(DRIFTWOOD_CHEST.get(), RIVER_CHEST.get());
@@ -90,6 +90,12 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 		this.tag(BlueprintBlockTags.LEAF_PILES).add(RIVER_LEAF_PILE.get());
 
 		this.tag(Tags.Blocks.COBBLESTONES_MOSSY).add(KELPY_COBBLESTONE.get());
+
+		this.tag(Tags.Blocks.STORAGE_BLOCKS).addTag(STORAGE_BLOCKS_PRISMARINE_ROD).addTag(STORAGE_BLOCKS_PICKERELWEED).addTag(STORAGE_BLOCKS_KELP).addTag(STORAGE_BLOCKS_MULBERRY);
+		this.tag(STORAGE_BLOCKS_PRISMARINE_ROD).add(PRISMARINE_ROD_BUNDLE.get());
+		this.tag(STORAGE_BLOCKS_PICKERELWEED).add(PICKERELWEED_BLOCK.get());
+		this.tag(STORAGE_BLOCKS_KELP).add(KELP_BLOCK.get());
+		this.tag(STORAGE_BLOCKS_MULBERRY).add(MULBERRY_PUNNET.get());
 
 		CoralType.values().stream().filter(coralType -> !coralType.vanilla() && coralType != CoralType.PRISMARINE).forEach(coralType -> {
 			this.tag(BlockTags.CORAL_PLANTS).add(coralType.coral().get());
