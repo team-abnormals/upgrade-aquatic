@@ -14,6 +14,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -37,7 +39,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.IShearable;
-import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.ItemAbilities;
 
 import javax.annotation.Nullable;
 
@@ -93,20 +95,18 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 
 	@Override
 	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-		int i = state.getValue(AGE);
-		boolean flag = i == 4;
-		if (flag) {
+		if (state.getValue(AGE) == 4) {
 			popResource(level, pos, new ItemStack(UAItems.MULBERRY.get(), state.getValue(DOUBLE) ? 2 : 1));
 			level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-			level.setBlock(pos, state.setValue(AGE, 1), 2);
+			BlockState newState = state.setValue(AGE, 1);
+			level.setBlock(pos, newState, 2);
+			level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
 
-			if (player instanceof ServerPlayer serverPlayer && player.isAlive()) {
-				if (!player.level().isClientSide()) {
-					UACriteriaTriggers.PICK_MULBERRIES.get().trigger(serverPlayer);
-				}
+			if (player instanceof ServerPlayer serverPlayer) {
+				UACriteriaTriggers.PICK_MULBERRIES.get().trigger(serverPlayer);
 			}
 
-			return InteractionResult.SUCCESS;
+			return InteractionResult.sidedSuccess(level.isClientSide);
 		} else {
 			return super.useWithoutItem(state, level, pos, player, hit);
 		}
@@ -114,20 +114,19 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-		int age = state.getValue(AGE);
-		boolean flag = age == 4;
 		ItemStack itemStack = player.getItemInHand(hand);
-		if (!flag && itemStack.is(Items.BONE_MEAL)) {
+		if (state.getValue(AGE) != 4 && itemStack.is(Items.BONE_MEAL)) {
 			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-		} else if (itemStack.is(Tags.Items.TOOLS_SHEAR) && state.getValue(DOUBLE)) {
-			if (level instanceof ServerLevel serverLevel) {
-				itemStack.hurtAndBreak(1, serverLevel, player, onBroken -> {
-				});
-			}
+		} else if (itemStack.canPerformAction(ItemAbilities.SHEARS_HARVEST) && state.getValue(DOUBLE)) {
+			itemStack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
 			level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-			if (state.getValue(AGE) == 4) popResource(level, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
-			level.setBlock(pos, state.setValue(DOUBLE, false), 2);
-			return ItemInteractionResult.SUCCESS;
+			if (state.getValue(AGE) == 4) {
+				popResource(level, pos, new ItemStack(UAItems.MULBERRY.get(), 1));
+			}
+			BlockState newState = state.setValue(DOUBLE, false);
+			level.setBlock(pos, newState, 2);
+			level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
+			return ItemInteractionResult.sidedSuccess(level.isClientSide());
 		}
 
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
@@ -135,8 +134,7 @@ public class MulberryVineBlock extends Block implements IShearable, Bonemealable
 
 	@Override
 	public void performBonemeal(ServerLevel level, RandomSource rand, BlockPos pos, BlockState state) {
-		int i = Math.min(4, state.getValue(AGE) + 1);
-		level.setBlockAndUpdate(pos, state.setValue(AGE, i + 1));
+		level.setBlock(pos, state.setValue(AGE, Math.min(4, state.getValue(AGE) + 1)), 2);
 	}
 
 	@Override
