@@ -77,7 +77,7 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 
 		this.tag(DRIFTWOOD_LOGS).add(DRIFTWOOD_LOG.get(), DRIFTWOOD.get(), STRIPPED_DRIFTWOOD_LOG.get(), STRIPPED_DRIFTWOOD.get());
 		this.tag(RIVER_LOGS).add(RIVER_LOG.get(), RIVER_WOOD.get(), STRIPPED_RIVER_LOG.get(), STRIPPED_RIVER_WOOD.get());
-		this.tag(PIKE_SPAWNERS).add(PICKERELWEED.get(), TALL_PICKERELWEED.get());
+		this.tag(PIKE_SPAWNABLE_IN).add(PICKERELWEED.get(), TALL_PICKERELWEED.get());
 		this.tag(PICKERELWEED_PLACEABLE).addTag(BlockTags.DIRT).add(Blocks.CLAY, Blocks.FARMLAND);
 
 		this.tag(BlueprintBlockTags.WOODEN_BOARDS).add(DRIFTWOOD_BOARDS.get(), RIVER_BOARDS.get());
@@ -91,11 +91,8 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 
 		this.tag(Tags.Blocks.COBBLESTONES_MOSSY).add(KELPY_COBBLESTONE.get());
 
-		this.tag(Tags.Blocks.STORAGE_BLOCKS).addTag(STORAGE_BLOCKS_PRISMARINE_ROD).addTag(STORAGE_BLOCKS_PICKERELWEED).addTag(STORAGE_BLOCKS_KELP).addTag(STORAGE_BLOCKS_MULBERRY);
-		this.tag(STORAGE_BLOCKS_PRISMARINE_ROD).add(PRISMARINE_ROD_BUNDLE.get());
-		this.tag(STORAGE_BLOCKS_PICKERELWEED).add(PICKERELWEED_BLOCK.get());
+		this.tag(Tags.Blocks.STORAGE_BLOCKS).add(PRISMARINE_ROD_BUNDLE.get(), PICKERELWEED_BLOCK.get(), MULBERRY_PUNNET.get()).addTag(STORAGE_BLOCKS_KELP);
 		this.tag(STORAGE_BLOCKS_KELP).add(KELP_BLOCK.get());
-		this.tag(STORAGE_BLOCKS_MULBERRY).add(MULBERRY_PUNNET.get());
 
 		CoralType.values().stream().filter(coralType -> !coralType.vanilla() && coralType != CoralType.PRISMARINE).forEach(coralType -> {
 			this.tag(BlockTags.CORAL_PLANTS).add(coralType.coral().get());

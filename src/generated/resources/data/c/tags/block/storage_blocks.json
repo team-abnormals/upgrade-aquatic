@@ -1,8 +1,8 @@
 {
   "values": [
-    "#c:storage_blocks/prismarine_rod",
-    "#c:storage_blocks/pickerelweed",
-    "#c:storage_blocks/kelp",
-    "#c:storage_blocks/mulberry"
+    "upgrade_aquatic:prismarine_rod_bundle",
+    "upgrade_aquatic:pickerelweed_block",
+    "upgrade_aquatic:mulberry_punnet",
+    "#c:storage_blocks/kelp"
   ]
 }

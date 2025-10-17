@@ -319,7 +319,7 @@ public class Pike extends BucketableWaterAnimal implements VariantHolder<Holder<
 	}
 
 	public static boolean checkPikeSpawnRules(EntityType<? extends Pike> entityType, LevelAccessor level, MobSpawnType spawnReason, BlockPos pos, RandomSource random) {
-		int count = BlockPos.betweenClosedStream(pos.offset(-4, -6, -4), pos.offset(4, 3, 4)).filter(offsetPos -> level.getBlockState(offsetPos).is(UABlockTags.PIKE_SPAWNERS)).toList().size();
+		int count = BlockPos.betweenClosedStream(pos.offset(-4, -6, -4), pos.offset(4, 3, 4)).filter(offsetPos -> level.getBlockState(offsetPos).is(UABlockTags.PIKE_SPAWNABLE_IN)).toList().size();
 		return random.nextFloat() < (0.05F * count) && WaterAnimal.checkSurfaceWaterAnimalSpawnRules(entityType, level, spawnReason, pos, random);
 	}
 

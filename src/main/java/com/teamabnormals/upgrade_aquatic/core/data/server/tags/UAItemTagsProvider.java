@@ -59,10 +59,7 @@ public class UAItemTagsProvider extends BlueprintItemTagsProvider {
 		this.copy(BlockTags.TALL_FLOWERS, ItemTags.TALL_FLOWERS);
 
 		this.copy(Tags.Blocks.STORAGE_BLOCKS, Tags.Items.STORAGE_BLOCKS);
-		this.copy(UABlockTags.STORAGE_BLOCKS_PRISMARINE_ROD, UAItemTags.STORAGE_BLOCKS_PRISMARINE_ROD);
-		this.copy(UABlockTags.STORAGE_BLOCKS_PICKERELWEED, UAItemTags.STORAGE_BLOCKS_PICKERELWEED);
 		this.copy(UABlockTags.STORAGE_BLOCKS_KELP, UAItemTags.STORAGE_BLOCKS_KELP);
-		this.copy(UABlockTags.STORAGE_BLOCKS_MULBERRY, UAItemTags.STORAGE_BLOCKS_MULBERRY);
 
 		this.tag(Tags.Items.MUSIC_DISCS).add(MUSIC_DISC_ATLANTIS.get());
 		this.tag(Tags.Items.BUCKETS_ENTITY_WATER).add(NAUTILUS_BUCKET.get(), PIKE_BUCKET.get(), LIONFISH_BUCKET.get(), PERCH_BUCKET.get(), SQUID_BUCKET.get(), GLOW_SQUID_BUCKET.get(), JELLYFISH_BUCKET.get());
