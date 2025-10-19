@@ -64,9 +64,9 @@ public class UAItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(Tags.Items.MUSIC_DISCS).add(MUSIC_DISC_ATLANTIS.get());
 		this.tag(Tags.Items.BUCKETS_ENTITY_WATER).add(NAUTILUS_BUCKET.get(), PIKE_BUCKET.get(), LIONFISH_BUCKET.get(), PERCH_BUCKET.get(), SQUID_BUCKET.get(), GLOW_SQUID_BUCKET.get(), JELLYFISH_BUCKET.get());
 
-		this.tag(Tags.Items.FOODS).add(BOILED_PICKERELWEED.get(), MULBERRY_JAM_BOTTLE.get());
+		this.tag(Tags.Items.FOODS).add(BOILED_PICKERELWEED.get(), MULBERRY_JAM_BOTTLE.get()).addTag(UAItemTags.FOODS_PASTRY);
 		this.tag(Tags.Items.FOODS_BERRY).add(MULBERRY.get());
-		this.tag(Tags.Items.FOODS_BREAD).add(MULBERRY_BREAD.get());
+		this.tag(UAItemTags.FOODS_PASTRY).add(MULBERRY_BREAD.get());
 		this.tag(Tags.Items.FOODS_PIE).add(MULBERRY_PIE.get());
 
 		this.tag(UAItemTags.FOODS_RAW_PIKE).add(PIKE.get());
@@ -80,8 +80,10 @@ public class UAItemTagsProvider extends BlueprintItemTagsProvider {
 		this.tag(UAItemTags.FOODS_COOKED_LIONFISH).add(COOKED_LIONFISH.get());
 		this.tag(Tags.Items.FOODS_COOKED_FISH).addTag(UAItemTags.FOODS_COOKED_PIKE).addTag(UAItemTags.FOODS_COOKED_PERCH).addTag(UAItemTags.FOODS_COOKED_LIONFISH);
 
-		this.tag(UAItemTags.RODS_PRISMARINE).add(PRISMARINE_ROD.get());
-		this.tag(Tags.Items.RODS).addTag(UAItemTags.RODS_PRISMARINE);
+		this.tag(Tags.Items.DRINKS).addTag(UAItemTags.DRINKS_JAM);
+		this.tag(UAItemTags.DRINKS_JAM).add(MULBERRY_JAM_BOTTLE.get());
 
+		this.tag(Tags.Items.RODS).addTag(UAItemTags.RODS_PRISMARINE);
+		this.tag(UAItemTags.RODS_PRISMARINE).add(PRISMARINE_ROD.get());
 	}
 }
