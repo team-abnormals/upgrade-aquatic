@@ -16,7 +16,7 @@ public class UAPaintingVariants {
 		register(context, SIGHTLESS, 4, 2);
 		register(context, MONUMENT, 4, 3);
 		register(context, UTENSIL, 1, 1);
-		register(context, COIL, 3, 4);
+		register(context, COIL, 3, 3);
 	}
 
 	private static ResourceKey<PaintingVariant> createKey(String name) {
