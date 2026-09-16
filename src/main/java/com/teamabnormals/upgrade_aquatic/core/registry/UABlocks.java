@@ -315,24 +315,24 @@ public class UABlocks {
 	public static final DeferredBlock<Block> DEAD_CORALSTONE_STAIRS = BLOCKS.createBlock("dead_coralstone_stairs", () -> new CoralstoneStairsBlock(() -> DEAD_CORALSTONE.get().defaultBlockState(), UAProperties.CORALSTONE, null));
 
 	public static final DeferredBlock<Block> CORALSTONE_WALL = BLOCKS.createBlock("coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> BUBBLE_CORALSTONE_WALL = BLOCKS.createBlock("bubble_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> HORN_CORALSTONE_WALL = BLOCKS.createBlock("horn_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> TUBE_CORALSTONE_WALL = BLOCKS.createBlock("tube_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> BRAIN_CORALSTONE_WALL = BLOCKS.createBlock("brain_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> FIRE_CORALSTONE_WALL = BLOCKS.createBlock("fire_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> ACAN_CORALSTONE_WALL = BLOCKS.createBlock("acan_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> FINGER_CORALSTONE_WALL = BLOCKS.createBlock("finger_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> STAR_CORALSTONE_WALL = BLOCKS.createBlock("star_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> MOSS_CORALSTONE_WALL = BLOCKS.createBlock("moss_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> PETAL_CORALSTONE_WALL = BLOCKS.createBlock("petal_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> BRANCH_CORALSTONE_WALL = BLOCKS.createBlock("branch_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> ROCK_CORALSTONE_WALL = BLOCKS.createBlock("rock_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> PILLOW_CORALSTONE_WALL = BLOCKS.createBlock("pillow_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> SILK_CORALSTONE_WALL = BLOCKS.createBlock("silk_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> CHROME_CORALSTONE_WALL = BLOCKS.createBlock("chrome_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> PRISMARINE_CORALSTONE_WALL = BLOCKS.createBlock("prismarine_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> ELDER_PRISMARINE_CORALSTONE_WALL = BLOCKS.createBlock("elder_prismarine_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
-	public static final DeferredBlock<Block> DEAD_CORALSTONE_WALL = BLOCKS.createBlock("dead_coralstone_wall", () -> new WallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> BUBBLE_CORALSTONE_WALL = BLOCKS.createBlock("bubble_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> HORN_CORALSTONE_WALL = BLOCKS.createBlock("horn_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> TUBE_CORALSTONE_WALL = BLOCKS.createBlock("tube_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> BRAIN_CORALSTONE_WALL = BLOCKS.createBlock("brain_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> FIRE_CORALSTONE_WALL = BLOCKS.createBlock("fire_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> ACAN_CORALSTONE_WALL = BLOCKS.createBlock("acan_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> FINGER_CORALSTONE_WALL = BLOCKS.createBlock("finger_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> STAR_CORALSTONE_WALL = BLOCKS.createBlock("star_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> MOSS_CORALSTONE_WALL = BLOCKS.createBlock("moss_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> PETAL_CORALSTONE_WALL = BLOCKS.createBlock("petal_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> BRANCH_CORALSTONE_WALL = BLOCKS.createBlock("branch_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> ROCK_CORALSTONE_WALL = BLOCKS.createBlock("rock_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> PILLOW_CORALSTONE_WALL = BLOCKS.createBlock("pillow_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> SILK_CORALSTONE_WALL = BLOCKS.createBlock("silk_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> CHROME_CORALSTONE_WALL = BLOCKS.createBlock("chrome_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> PRISMARINE_CORALSTONE_WALL = BLOCKS.createBlock("prismarine_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> ELDER_PRISMARINE_CORALSTONE_WALL = BLOCKS.createBlock("elder_prismarine_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
+	public static final DeferredBlock<Block> DEAD_CORALSTONE_WALL = BLOCKS.createBlock("dead_coralstone_wall", () -> new CoralstoneWallBlock(UAProperties.CORALSTONE));
 
 	public static final DeferredBlock<Block> KELP_BLOCK = BLOCKS.createBlock("kelp_block", () -> new Block(Properties.ofFullCopy(Blocks.DRIED_KELP_BLOCK).sound(SoundType.WET_GRASS)));
 
