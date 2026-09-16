@@ -7,13 +7,15 @@ import com.teamabnormals.upgrade_aquatic.common.entity.monster.Thrasher;
 import com.teamabnormals.upgrade_aquatic.core.UAConfig;
 import com.teamabnormals.upgrade_aquatic.core.UpgradeAquatic;
 import net.minecraft.client.CameraType;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.stats.StatsCounter;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -22,123 +24,143 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RenderGuiLayerEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+import net.neoforged.neoforge.common.NeoForgeMod;
 
 @EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT)
 public class RenderOverlays {
 	private static final Minecraft MC = Minecraft.getInstance();
 
 	@SubscribeEvent
-	public static void renderOverlays(RenderGuiLayerEvent.Post event) {
-		if (event.getName().equals(VanillaGuiLayers.SLEEP_OVERLAY)) {
-			int scaledWidth = MC.getWindow().getGuiScaledWidth();
-			int scaledHeight = MC.getWindow().getGuiScaledHeight();
-			LocalPlayer player = MC.player;
-			StatsCounter statisticsManager = player.getStats();
-			int sleepTime = statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
-			int configuredTime = UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get();
-			float opacity = 0;
-			if (sleepTime == 24000 * configuredTime) {
-				opacity = 0.25F;
-			} else if (sleepTime == 24000 * configuredTime + 100) {
-				opacity = 0.45F;
-			} else if (sleepTime == 24000 * configuredTime + 200) {
-				opacity = 0.65F;
-			} else if (sleepTime == 24000 * configuredTime + 300) {
-				opacity = 0.85F;
-			} else if (sleepTime == 24000 * configuredTime + 400) {
-				opacity = 0.90F;
-			} else if (sleepTime >= 24000 * configuredTime + 500) {
-				opacity = 1F;
-			} else if (sleepTime < 24000 * configuredTime) {
-				opacity = 0F;
-			}
-			if (MC.options.getCameraType() == CameraType.FIRST_PERSON && UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get() != 0 && MC.player.getCommandSenderWorld().dimension() == Level.OVERWORLD) {
-				PoseStack stack = event.getGuiGraphics().pose();
+	public static void registerGuiLayers(RegisterGuiLayersEvent event) {
+		event.registerAbove(VanillaGuiLayers.CAMERA_OVERLAYS, UpgradeAquatic.location("insomnia"), RenderOverlays::renderInsomniaOverlay);
+	}
 
-				stack.pushPose();
-				RenderSystem.setShaderTexture(0, UpgradeAquatic.location("textures/gui/overlay/insomnia.png"));
-				RenderSystem.enableBlend();
-				RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-				RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, opacity);
-				Tesselator tessellator = Tesselator.getInstance();
-				BufferBuilder bufferbuilder = tessellator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-				bufferbuilder.addVertex(0.0F, scaledHeight, -90.0F).setUv(0.0F, 1.0F);
-				bufferbuilder.addVertex(scaledWidth, scaledHeight, -90.0F).setUv(1.0F, 1.0F);
-				bufferbuilder.addVertex(scaledWidth, 0.0F, -90.0F).setUv(1.0F, 0.0F);
-				bufferbuilder.addVertex(0.0F, 0.0F, -90.0F).setUv(0.0F, 0.0F);
-				stack.popPose();
-			}
+	private static void renderInsomniaOverlay(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+		if (MC.player == null) {
+			return;
+		}
+
+		int scaledWidth = MC.getWindow().getGuiScaledWidth();
+		int scaledHeight = MC.getWindow().getGuiScaledHeight();
+		LocalPlayer player = MC.player;
+		StatsCounter statisticsManager = player.getStats();
+		int sleepTime = statisticsManager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST));
+		int configuredTime = UAConfig.CLIENT.daysTillRenderInsomniaOverlay.get();
+
+		float opacity = 0.0F;
+		if (sleepTime == 24000 * configuredTime) {
+			opacity = 0.25F;
+		} else if (sleepTime == 24000 * configuredTime + 100) {
+			opacity = 0.45F;
+		} else if (sleepTime == 24000 * configuredTime + 200) {
+			opacity = 0.65F;
+		} else if (sleepTime == 24000 * configuredTime + 300) {
+			opacity = 0.85F;
+		} else if (sleepTime == 24000 * configuredTime + 400) {
+			opacity = 0.90F;
+		} else if (sleepTime >= 24000 * configuredTime + 500) {
+			opacity = 1.0F;
+		}
+
+		if (MC.options.getCameraType() == CameraType.FIRST_PERSON && configuredTime != 0 && player.getCommandSenderWorld().dimension() == Level.OVERWORLD && opacity > 0.0F) {
+			PoseStack poseStack = guiGraphics.pose();
+			poseStack.pushPose();
+
+			RenderSystem.setShaderTexture(0, UpgradeAquatic.location("textures/gui/overlay/insomnia.png"));
+			RenderSystem.enableBlend();
+			RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, opacity);
+
+			Tesselator tesselator = Tesselator.getInstance();
+			BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+			bufferBuilder.addVertex(0.0F, scaledHeight, -90.0F).setUv(0.0F, 1.0F);
+			bufferBuilder.addVertex(scaledWidth, scaledHeight, -90.0F).setUv(1.0F, 1.0F);
+			bufferBuilder.addVertex(scaledWidth, 0.0F, -90.0F).setUv(1.0F, 0.0F);
+			bufferBuilder.addVertex(0.0F, 0.0F, -90.0F).setUv(0.0F, 0.0F);
+
+			MeshData mesh = bufferBuilder.buildOrThrow();
+			BufferUploader.drawWithShader(mesh);
+			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+			RenderSystem.disableBlend();
+
+			poseStack.popPose();
 		}
 	}
 
 	@SubscribeEvent
 	public static void renderScuteOverAir(RenderGuiLayerEvent.Pre event) {
-		if (event.getName().equals(VanillaGuiLayers.AIR_LEVEL) && UAConfig.COMMON.turtleShellRework.get()) {
-			int scaledWidth = MC.getWindow().getGuiScaledWidth();
-			int scaledHeight = MC.getWindow().getGuiScaledHeight();
-			LocalPlayer player = MC.player;
-			boolean inWater = player.isEyeInFluid(FluidTags.WATER);
-			if (inWater && MC.gameMode.canHurtPlayer()) {
-				ItemStack turtleHelmet = ItemStack.EMPTY;
-				for (ItemStack stack : player.getArmorSlots()) {
-					if (stack.getItem() == Items.TURTLE_HELMET) {
-						turtleHelmet = stack;
-					}
-				}
-
-				if (!turtleHelmet.isEmpty()) {
-					event.setCanceled(true);
-
-					PoseStack stack = event.getGuiGraphics().pose();
-					stack.pushPose();
-					RenderSystem.enableBlend();
-					int left = scaledWidth / 2 + 91;
-					int top = scaledHeight - MC.gui.rightHeight;
-					int durability = turtleHelmet.getDamageValue();
-					int maxDurability = turtleHelmet.getMaxDamage();
-
-					RenderSystem.setShaderTexture(0, UpgradeAquatic.location("textures/gui/overlay/scute_bubble_depleted.png"));
-					for (int i = 0; i < 10; i++) {
-						int l = left - (i * 8) - 9;
-						int l2 = l + 9;
-						int t = top;
-						int t2 = t + 9;
-						Tesselator tessellator = Tesselator.getInstance();
-						BufferBuilder bufferbuilder = tessellator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-						bufferbuilder.addVertex(l, t2, 0).setUv(0, 1);
-						bufferbuilder.addVertex(l2, t2, 0).setUv(1, 1);
-						bufferbuilder.addVertex(l2, t, 0).setUv(1, 0);
-						bufferbuilder.addVertex(l, t, 0).setUv(0, 0);
-					}
-					RenderSystem.setShaderTexture(0, UpgradeAquatic.location("textures/gui/overlay/scute_bubble.png"));
-					double amount = Mth.clamp(10 - Math.floor((double) durability / maxDurability * 10.0), 1, 10);
-					for (int i = 0; i < amount; i++) {
-						int l = left - (i * 8) - 9;
-						int l2 = l + 9;
-						int t = top;
-						int t2 = t + 9;
-						Tesselator tessellator = Tesselator.getInstance();
-						BufferBuilder bufferbuilder = tessellator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
-						bufferbuilder.addVertex(l, t2, 0).setUv(0, 1);
-						bufferbuilder.addVertex(l2, t2, 0).setUv(1, 1);
-						bufferbuilder.addVertex(l2, t, 0).setUv(1, 0);
-						bufferbuilder.addVertex(l, t, 0).setUv(0, 0);
-					}
-					MC.gui.rightHeight += 10;
-
-					RenderSystem.disableBlend();
-					stack.popPose();
-				}
-			}
+		if (!event.getName().equals(VanillaGuiLayers.AIR_LEVEL) || !UAConfig.COMMON.turtleShellRework.get() || MC.player == null || MC.gameMode == null) {
+			return;
 		}
 
+		int scaledWidth = MC.getWindow().getGuiScaledWidth();
+		int scaledHeight = MC.getWindow().getGuiScaledHeight();
+		LocalPlayer player = MC.player;
+
+		if (player.isEyeInFluidType(NeoForgeMod.WATER_TYPE.value()) && MC.gameMode.canHurtPlayer()) {
+			ItemStack turtleHelmet = ItemStack.EMPTY;
+
+			for (ItemStack stack : player.getArmorSlots()) {
+				if (stack.getItem() == Items.TURTLE_HELMET) {
+					turtleHelmet = stack;
+					break;
+				}
+			}
+
+			if (!turtleHelmet.isEmpty()) {
+				event.setCanceled(true);
+
+				PoseStack poseStack = event.getGuiGraphics().pose();
+				poseStack.pushPose();
+				RenderSystem.enableBlend();
+
+				int left = scaledWidth / 2 + 91;
+				int top = scaledHeight - MC.gui.rightHeight;
+				int durability = turtleHelmet.getDamageValue();
+				int maxDurability = turtleHelmet.getMaxDamage();
+
+				ResourceLocation depleted = UpgradeAquatic.location("textures/gui/overlay/scute_bubble_depleted.png");
+				for (int i = 0; i < 10; i++) {
+					int x = left - (i * 8) - 9;
+					renderTexture(poseStack, depleted, x, top);
+				}
+
+				ResourceLocation bubble = UpgradeAquatic.location("textures/gui/overlay/scute_bubble.png");
+				int amount = Mth.clamp(10 - (int) Math.floor((double) durability / maxDurability * 10.0), 1, 10);
+				for (int i = 0; i < amount; i++) {
+					int x = left - (i * 8) - 9;
+					renderTexture(poseStack, bubble, x, top);
+				}
+
+				MC.gui.rightHeight += 10;
+				RenderSystem.disableBlend();
+				poseStack.popPose();
+			}
+		}
+	}
+
+	private static void renderTexture(PoseStack poseStack, ResourceLocation texture, int x, int y) {
+		RenderSystem.setShaderTexture(0, texture);
+
+		Tesselator tesselator = Tesselator.getInstance();
+		BufferBuilder bufferBuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+
+		bufferBuilder.addVertex(poseStack.last().pose(), x, y + 9, 0).setUv(0, 1);
+		bufferBuilder.addVertex(poseStack.last().pose(), x + 9, y + 9, 0).setUv(1, 1);
+		bufferBuilder.addVertex(poseStack.last().pose(), x + 9, y, 0).setUv(1, 0);
+		bufferBuilder.addVertex(poseStack.last().pose(), x, y, 0).setUv(0, 0);
+
+		MeshData mesh = bufferBuilder.buildOrThrow();
+		BufferUploader.drawWithShader(mesh);
 	}
 
 	@SubscribeEvent
 	public static void removeMountMessage(CustomizeGuiOverlayEvent.DebugText event) {
-		if (MC.player.isPassenger() && MC.player.getVehicle() instanceof Thrasher && MC.gui.overlayMessageString.getString().equals(I18n.get("mount.onboard", I18n.get("key.keyboard.left.shift")))) {
+		if (MC.player != null && MC.player.isPassenger() && MC.player.getVehicle() instanceof Thrasher && MC.gui.overlayMessageString.getString().equals(I18n.get("mount.onboard", I18n.get("key.keyboard.left.shift")))) {
+
 			MC.gui.setOverlayMessage(Component.literal(""), false);
 		}
 	}

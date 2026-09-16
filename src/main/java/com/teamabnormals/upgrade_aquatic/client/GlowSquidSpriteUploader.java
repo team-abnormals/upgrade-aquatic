@@ -15,7 +15,7 @@ import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 /**
  * @author Ocelot
  */
-@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, value = Dist.CLIENT)
 public class GlowSquidSpriteUploader extends TextureAtlasHolder {
 	public static final ResourceLocation ATLAS_LOCATION = UpgradeAquatic.location("textures/atlas/glow_squid.png");
 	public static final ResourceLocation SQUID_SPRITE = UpgradeAquatic.location("glow_squid");

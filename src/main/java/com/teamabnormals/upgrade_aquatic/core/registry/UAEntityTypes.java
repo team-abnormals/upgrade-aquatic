@@ -24,7 +24,7 @@ import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent.Operation;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
-@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class UAEntityTypes {
 	public static final EntitySubRegistryHelper ENTITY_TYPES = UpgradeAquatic.REGISTRY_HELPER.getEntitySubHelper();
 

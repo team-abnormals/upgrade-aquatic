@@ -14,7 +14,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
-@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = UpgradeAquatic.MOD_ID)
 public class UADataMaps {
 	public static final DataMapType<PikeVariant, SpottedPikeVariant> SPOTTED_PIKE_VARIANTS = DataMapType.builder(UpgradeAquatic.location("spotted_pike_variants"), UARegistries.PIKE_VARIANT, SpottedPikeVariant.CODEC).synced(SpottedPikeVariant.CODEC, false).build();
 
