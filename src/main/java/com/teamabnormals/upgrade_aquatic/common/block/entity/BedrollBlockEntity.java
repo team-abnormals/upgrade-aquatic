@@ -50,7 +50,9 @@ public class BedrollBlockEntity extends BlockEntity {
 	@Override
 	protected void collectImplicitComponents(DataComponentMap.Builder components) {
 		super.collectImplicitComponents(components);
-		components.set(DataComponents.DYED_COLOR, new DyedItemColor(this.rgb, true));
+		if (this.rgb != BEDROLL_COLOR) {
+			components.set(DataComponents.DYED_COLOR, new DyedItemColor(this.rgb, true));
+		}
 	}
 
 	@Override
