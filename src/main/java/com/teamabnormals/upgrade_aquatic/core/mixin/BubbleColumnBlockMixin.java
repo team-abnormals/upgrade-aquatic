@@ -14,15 +14,21 @@ import net.minecraft.world.level.block.BubbleColumnBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BubbleColumnBlock.class)
-public abstract class BubbleColumnBlockMixin {
+public abstract class BubbleColumnBlockMixin extends Block {
 
-	@Inject(at = @At("HEAD"), method = "tick")
-	private void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random, CallbackInfo info) {
+	public BubbleColumnBlockMixin(Properties properties) {
+		super(properties);
+	}
+
+	@Override
+	protected boolean isRandomlyTicking(BlockState state) {
+		return true;
+	}
+
+	@Override
+	protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		if (!state.getValue(BubbleColumnBlock.DRAG_DOWN) && UAConfig.COMMON.renewableSandRequiresMagmaBlocks.get()) {
 			return;
 		}

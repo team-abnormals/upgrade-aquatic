@@ -16,7 +16,6 @@ public class UACompat {
 		registerFlammables();
 		registerDispenserBehaviors();
 		UADecoratedPotPatterns.registerDecoratedPotPatterns();
-		ObfuscationReflectionHelper.setPrivateValue(BlockBehaviour.class, Blocks.BUBBLE_COLUMN, true, "isRandomlyTicking");
 	}
 
 	public static void registerFlammables() {
