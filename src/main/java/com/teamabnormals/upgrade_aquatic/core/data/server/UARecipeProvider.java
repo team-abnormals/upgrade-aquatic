@@ -120,16 +120,19 @@ public class UARecipeProvider extends BlueprintRecipeProvider {
 		stonecutterRecipe(output, BUILDING_BLOCKS, CORALSTONE_SLAB, CORALSTONE, 2);
 		stonecutterRecipe(output, BUILDING_BLOCKS, CORALSTONE_STAIRS, CORALSTONE);
 		stonecutterRecipe(output, DECORATIONS, CORALSTONE_WALL, CORALSTONE);
+		stonecutterRecipe(output, BUILDING_BLOCKS, CHISELED_CORALSTONE, CORALSTONE);
 
 		generateRecipes(output, DEAD_CORALSTONE_FAMILY, FeatureFlags.REGISTRY.allFlags());
 		stonecutterRecipe(output, BUILDING_BLOCKS, DEAD_CORALSTONE_SLAB, DEAD_CORALSTONE, 2);
 		stonecutterRecipe(output, BUILDING_BLOCKS, DEAD_CORALSTONE_STAIRS, DEAD_CORALSTONE);
 		stonecutterRecipe(output, DECORATIONS, DEAD_CORALSTONE_WALL, DEAD_CORALSTONE);
+		stonecutterRecipe(output, BUILDING_BLOCKS, DEAD_CHISELED_CORALSTONE, DEAD_CORALSTONE);
 
 		generateRecipes(output, ELDER_PRISMARINE_CORALSTONE_FAMILY, FeatureFlags.REGISTRY.allFlags());
 		stonecutterRecipe(output, BUILDING_BLOCKS, ELDER_PRISMARINE_CORALSTONE_SLAB, ELDER_PRISMARINE_CORALSTONE, 2);
 		stonecutterRecipe(output, BUILDING_BLOCKS, ELDER_PRISMARINE_CORALSTONE_STAIRS, ELDER_PRISMARINE_CORALSTONE);
 		stonecutterRecipe(output, DECORATIONS, ELDER_PRISMARINE_CORALSTONE_WALL, ELDER_PRISMARINE_CORALSTONE);
+		stonecutterRecipe(output, BUILDING_BLOCKS, CHISELED_ELDER_PRISMARINE_CORALSTONE, ELDER_PRISMARINE_CORALSTONE);
 
 		ShapedRecipeBuilder.shaped(MISC, UAItems.PRISMARINE_ROD).define('#', Items.PRISMARINE_SHARD).pattern("#").pattern("#").unlockedBy("has_prismarine_shard", has(Items.PRISMARINE_SHARD)).save(output);
 		ShapedRecipeBuilder.shaped(COMBAT, Items.TRIDENT).define('#', UAItems.PRISMARINE_ROD).define('X', UAItems.THRASHER_TOOTH).pattern(" XX").pattern(" #X").pattern("#  ").unlockedBy("has_prismarine_rod", has(UAItems.PRISMARINE_ROD)).unlockedBy("has_thrasher_tooth", has(UAItems.THRASHER_TOOTH)).save(output, UpgradeAquatic.location("trident"));
@@ -165,6 +168,7 @@ public class UARecipeProvider extends BlueprintRecipeProvider {
 			stonecutterRecipe(output, BUILDING_BLOCKS, family.get(Variant.SLAB), family.getBaseBlock(), 2);
 			stonecutterRecipe(output, BUILDING_BLOCKS, family.get(Variant.STAIRS), family.getBaseBlock());
 			stonecutterRecipe(output, DECORATIONS, family.get(Variant.WALL), family.getBaseBlock());
+			stonecutterRecipe(output, BUILDING_BLOCKS, family.get(Variant.CHISELED), family.getBaseBlock());
 		});
 
 		storageRecipes(output, MISC, Items.KELP, DECORATIONS, KELP_BLOCK);
