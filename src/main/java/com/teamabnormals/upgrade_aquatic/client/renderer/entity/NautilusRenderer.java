@@ -22,7 +22,6 @@ public class NautilusRenderer extends MobRenderer<Nautilus, NautilusModel<Nautil
 		helper.putSkins("mca", "abnormal", "abnautilus", "abnortilus", "mca");
 		helper.putSkins("five", "five", "epic");
 		helper.putSkins("cell", "neon membrane", "cell membrane", "cell");
-		helper.putSkins("tb", "tb");
 		helper.putSkins("bagel", "bagel", "shy guy", "legobagel");
 		helper.putSkins("sadcat", "sadcat");
 		helper.putSkins("cameron", "cameron", "cam", "cringe");
