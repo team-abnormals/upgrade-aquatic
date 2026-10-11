@@ -12,8 +12,6 @@
     "TridentItemMixin"
   ],
   "client": [
-    "client.DrownedModelMixin",
-    "client.DrownedRendererMixin",
     "client.LocalPlayerMixin"
   ],
   "injectors": {
