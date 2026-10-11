@@ -91,7 +91,7 @@ public class UABlockTagsProvider extends BlockTagsProvider {
 
 		this.tag(Tags.Blocks.COBBLESTONES_MOSSY).add(KELPY_COBBLESTONE.get());
 
-		this.tag(Tags.Blocks.STORAGE_BLOCKS).add(PRISMARINE_ROD_BUNDLE.get(), PICKERELWEED_BLOCK.get(), MULBERRY_PUNNET.get()).addTag(STORAGE_BLOCKS_KELP);
+		this.tag(Tags.Blocks.STORAGE_BLOCKS).add(PRISMARINE_ROD_BUNDLE.get(), PICKERELWEED_BLOCK.get(), BOILED_PICKERELWEED_BLOCK.get(), MULBERRY_PUNNET.get()).addTag(STORAGE_BLOCKS_KELP);
 		this.tag(STORAGE_BLOCKS_KELP).add(KELP_BLOCK.get());
 
 		CoralType.values().stream().filter(coralType -> !coralType.vanilla() && coralType != CoralType.PRISMARINE).forEach(coralType -> {
